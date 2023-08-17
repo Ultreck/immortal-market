@@ -23,7 +23,7 @@ import Input from "@/components/global/Input.jsx";
 import { capitalize, delay } from "@/lib/utils.js";
 import PropTypes from "prop-types";
 
-const CLAN_API_KEY = import.meta.env.CLAN_API_KEY;
+const CLAN_API_KEY = import.meta.env.VITE_CLAN_API_KEY;
 
 const AnalyzeMono = ({ onBack }) => {
   const [selected, setSelected] = useState(null);
