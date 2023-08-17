@@ -1,0 +1,47 @@
+import { IconChartBar, IconHome2, IconWallet } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
+import UserDropdown from "./UserDropdown.jsx";
+import PropTypes from "prop-types";
+
+const DashboardLayout = ({ children }) => {
+  return (
+    <div className="bg-slate-100/70 min-h-screen">
+      <div className="py-7 bg-[#11161b] text-white">
+        <div className="container !max-w-5xl">
+          <div className="flex items-center">
+            <Link to="/" className="text-[1.4rem] flex items-center">
+              <IconChartBar size="28" className="mr-3"/>
+              Stati<b className="ml-[1px]">sense.</b>
+            </Link>
+            <div className="flex items-center space-x-5 md:space-x-10 ml-auto">
+              <div className="hidden md:flex items-center space-x-10">
+                <Link to={ "/" } className="flex items-center">
+                  Home
+                </Link>
+                <Link to={ "/wallet" } className="flex items-center">
+                  Wallet
+                </Link>
+              </div>
+              <div className="md:hidden flex items-center space-x-5">
+                <Link to={ "/" } className="flex items-center">
+                  <IconHome2 size="20"/>
+                </Link>
+                <Link to={ "/wallet" } className="flex items-center">
+                  <IconWallet size="20"/>
+                </Link>
+              </div>
+              <UserDropdown/>
+            </div>
+          </div>
+        </div>
+      </div>
+      { children }
+    </div>
+  );
+};
+
+DashboardLayout.propTypes = {
+  children: PropTypes.any
+};
+
+export default DashboardLayout;
