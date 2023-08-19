@@ -1,9 +1,9 @@
 import products, { categories } from "@/lib/products.js";
-import { useNavigate } from "react-router-dom";
-import { createElement } from "react";
+import { createElement, useState } from "react";
 import classNames from "classnames";
 import Card from "@/components/global/Card.jsx";
 import PropTypes from "prop-types";
+import ProductSummary from "@/components/core/ProductSummary.jsx";
 
 const featured = products.filter(p => p.categories.includes('featured'));
 const highlighted = featured.at(0);
@@ -11,7 +11,13 @@ const top = featured.slice(1, featured.length);
 const bottom = featured.length > 3 ? featured.at(-1) : null;
 
 const Dashboard = () => {
-  const navigate = useNavigate();
+  const [selected, setSelected] = useState(null);
+  const [isSummaryOpen, setIsSummaryOpen] = useState(false);
+
+  const handleProductClick = product => {
+    setSelected(product);
+    setIsSummaryOpen(true);
+  };
 
   return (
     <>
@@ -35,7 +41,7 @@ const Dashboard = () => {
               <FeaturedProductCard
                 product={ highlighted }
                 key={ highlighted.name }
-                onClick={ () => navigate(highlighted.dashboardLink) }
+                onClick={ () => handleProductClick(highlighted) }
               />
             </div>
             <div className="md:col-span-6 grid md:grid-cols-2 gap-4 md:gap-6">
@@ -44,7 +50,7 @@ const Dashboard = () => {
                   <div key={ product.name }>
                     <ProductCard
                       product={ product }
-                      onClick={ () => navigate(product.dashboardLink) }
+                      onClick={ () => handleProductClick(product) }
                     />
                   </div>
                 ))
@@ -55,7 +61,7 @@ const Dashboard = () => {
                     <ProductCard
                       product={ bottom }
                       key={ bottom.name }
-                      onClick={ () => navigate(bottom.dashboardLink) }
+                      onClick={ () => handleProductClick(bottom) }
                     />
                   </div>
                 )
@@ -73,7 +79,7 @@ const Dashboard = () => {
                     <ProductCard
                       product={ product }
                       key={ product.name }
-                      onClick={ () => navigate(product.dashboardLink) }
+                      onClick={ () => handleProductClick(product) }
                     />
                   ))
                 }
@@ -82,27 +88,28 @@ const Dashboard = () => {
           ))
         }
       </div>
+
+      <ProductSummary
+        product={ selected }
+        isOpen={ isSummaryOpen }
+        onClose={ () => setIsSummaryOpen(false) }
+      />
     </>
   );
 };
 
 export default Dashboard;
 
-
 const ProductCard = ({ product, onClick }) => {
   return (
     <Card
       onClick={ onClick }
       className={ classNames(
-        'rounded-2xl px-10 py-8 transition-all h-full relative overflow-hidden',
-        { 'disabled': product.status === 'coming-soon' },
-        { 'hover:-translate-y-1 hover:shadow-md cursor-pointer': product.status === 'active' }
+        'rounded-2xl px-10 py-8 transition-all h-full relative overflow-hidden hover:-translate-y-1 hover:shadow-md cursor-pointer',
       ) }
     >
       <div>
-        <div
-          className={ classNames('rounded-2xl justify-center', product.textColor) }
-        >
+        <div className={ classNames('rounded-2xl justify-center', product.textColor) }>
           { createElement(product.icon, { size: 44 }) }
         </div>
       </div>
