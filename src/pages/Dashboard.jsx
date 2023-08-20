@@ -83,12 +83,17 @@ const Dashboard = () => {
                   )
                 }
                 {
+                  items.length === 3 && (
+                    <ThreeCols items={ items } onClick={ p => handleProductClick(p) }/>
+                  )
+                }
+                {
                   items.length === 4 && (
                     <FourCols items={ items } onClick={ p => handleProductClick(p) }/>
                   )
                 }
                 {
-                  (items.length !== 2 && items.length !== 4) && (
+                  (items.length !== 2 && items.length !== 4 && items.length !== 3) && (
                     <div className={ classNames("grid md:grid-cols-3 gap-4 md:gap-6") }>
                       {
                         items.map(product => (
@@ -137,6 +142,28 @@ const TwoCols = ({ items = [], onClick }) => {
 }
 
 TwoCols.propTypes = {
+  items: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired
+};
+
+const ThreeCols = ({ items = [], onClick }) => {
+  return (
+    <div className={ classNames("grid md:grid-cols-3 gap-4 md:gap-6") }>
+      {
+        items.map(product => (
+          <ProductCard
+            product={ product }
+            key={ product.name }
+            onClick={ () => onClick(product) }
+            style="tall"
+          />
+        ))
+      }
+    </div>
+  )
+}
+
+ThreeCols.propTypes = {
   items: PropTypes.array.isRequired,
   onClick: PropTypes.func.isRequired
 };
@@ -192,6 +219,7 @@ const ProductCard = ({ product, onClick, style = 'normal' }) => {
   const getIconSize = () => {
     if (style === 'normal') return 44;
     if (style === 'wide') return 90;
+    if (style === 'tall') return 48;
   };
 
   return (
@@ -201,7 +229,7 @@ const ProductCard = ({ product, onClick, style = 'normal' }) => {
         'rounded-2xl transition-all h-full relative overflow-hidden hover:-translate-y-1 hover:shadow-md cursor-pointer',
         { 'px-10 py-8 space-y-4': style === 'normal' },
         { 'px-10 py-20 space-y-10': style === 'wide' },
-        { 'px-10 py-20': style === 'vertical' }
+        { 'px-10 py-20 space-y-6': style === 'tall' }
       ) }
     >
       <div>
@@ -214,7 +242,8 @@ const ProductCard = ({ product, onClick, style = 'normal' }) => {
           <h4
             className={ classNames("font-medium",
               { 'text-[1.06rem]': style === 'normal' },
-              { 'text-xl mb-1': style === 'wide' }
+              { 'text-xl mb-1': style === 'wide' },
+              { 'text-[1.06rem]': style === 'tall' }
             ) }
           >
             { product.name }
