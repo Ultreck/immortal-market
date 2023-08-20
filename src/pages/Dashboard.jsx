@@ -42,6 +42,7 @@ const Dashboard = () => {
                 product={ highlighted }
                 key={ highlighted.name }
                 onClick={ () => handleProductClick(highlighted) }
+                gradient
               />
             </div>
             <div className="md:col-span-6 grid md:grid-cols-2 gap-4 md:gap-6">
@@ -70,22 +71,40 @@ const Dashboard = () => {
           </div>
         </div>
         {
-          categories.filter(c => c.id !== 'featured').map(c => (
-            <div key={ c.id }>
-              <h3 className="text-xl font-medium mb-8 px-1 border-b pb-6">{ c.name }</h3>
-              <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+          categories.filter(c => c.id !== 'featured').map(c => {
+            const items = products.filter(p => p.categories.includes(c.id));
+
+            return (
+              <div key={ c.id }>
+                <h3 className="text-xl font-medium mb-8 px-1 border-b pb-6">{ c.name }</h3>
                 {
-                  products.filter(p => p.categories.includes(c.id)).map(product => (
-                    <ProductCard
-                      product={ product }
-                      key={ product.name }
-                      onClick={ () => handleProductClick(product) }
-                    />
-                  ))
+                  items.length === 2 && (
+                    <TwoCols items={ items } onClick={ p => handleProductClick(p) }/>
+                  )
+                }
+                {
+                  items.length === 4 && (
+                    <FourCols items={ items } onClick={ p => handleProductClick(p) }/>
+                  )
+                }
+                {
+                  (items.length !== 2 && items.length !== 4) && (
+                    <div className={ classNames("grid md:grid-cols-3 gap-4 md:gap-6") }>
+                      {
+                        items.map(product => (
+                          <ProductCard
+                            product={ product }
+                            key={ product.name }
+                            onClick={ () => handleProductClick(product) }
+                          />
+                        ))
+                      }
+                    </div>
+                  )
                 }
               </div>
-            </div>
-          ))
+            );
+          })
         }
       </div>
 
@@ -100,22 +119,106 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-const ProductCard = ({ product, onClick }) => {
+const TwoCols = ({ items = [], onClick }) => {
+  return (
+    <div className={ classNames("grid md:grid-cols-2 gap-4 md:gap-6") }>
+      {
+        items.map(product => (
+          <ProductCard
+            product={ product }
+            key={ product.name }
+            onClick={ () => onClick(product) }
+            style="wide"
+          />
+        ))
+      }
+    </div>
+  )
+}
+
+TwoCols.propTypes = {
+  items: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired
+};
+
+const FourCols = ({ items = [], onClick }) => {
+  const highlighted = items[0];
+  const top = [items[1], items[2]];
+  const bottom = items[3];
+
+  return (
+    <div className="grid md:grid-cols-11 gap-4 md:gap-6">
+      <div className="md:col-span-6 grid md:grid-cols-2 gap-4 md:gap-6">
+        {
+          top.slice(0, 2).map(product => (
+            <div key={ product.name }>
+              <ProductCard
+                product={ product }
+                onClick={ () => onClick(product) }
+              />
+            </div>
+          ))
+        }
+        {
+          !!bottom && (
+            <div className="md:col-span-2">
+              <ProductCard
+                product={ bottom }
+                key={ bottom.name }
+                onClick={ () => onClick(bottom) }
+              />
+            </div>
+          )
+        }
+      </div>
+      <div className="md:col-span-5">
+        <FeaturedProductCard
+          product={ highlighted }
+          key={ highlighted.name }
+          onClick={ () => onClick(highlighted) }
+          style="wide"
+        />
+      </div>
+    </div>
+  )
+}
+
+FourCols.propTypes = {
+  items: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired
+};
+
+const ProductCard = ({ product, onClick, style = 'normal' }) => {
+  const getIconSize = () => {
+    if (style === 'normal') return 44;
+    if (style === 'wide') return 90;
+  };
+
   return (
     <Card
       onClick={ onClick }
       className={ classNames(
-        'rounded-2xl px-10 py-8 transition-all h-full relative overflow-hidden hover:-translate-y-1 hover:shadow-md cursor-pointer',
+        'rounded-2xl transition-all h-full relative overflow-hidden hover:-translate-y-1 hover:shadow-md cursor-pointer',
+        { 'px-10 py-8 space-y-4': style === 'normal' },
+        { 'px-10 py-20 space-y-10': style === 'wide' },
+        { 'px-10 py-20': style === 'vertical' }
       ) }
     >
       <div>
         <div className={ classNames('rounded-2xl justify-center', product.textColor) }>
-          { createElement(product.icon, { size: 44 }) }
+          { createElement(product.icon, { size: getIconSize() }) }
         </div>
       </div>
-      <div className="mt-4">
+      <div>
         <div className="flex items-center">
-          <h4 className="font-medium text-[1.06rem]">{ product.name }</h4>
+          <h4
+            className={ classNames("font-medium",
+              { 'text-[1.06rem]': style === 'normal' },
+              { 'text-xl mb-1': style === 'wide' }
+            ) }
+          >
+            { product.name }
+          </h4>
           {
             product.status === 'coming-soon' && (
               <div
@@ -136,10 +239,11 @@ const ProductCard = ({ product, onClick }) => {
 
 ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  style: PropTypes.string
 };
 
-const FeaturedProductCard = ({ product, onClick }) => {
+const FeaturedProductCard = ({ product, onClick, gradient = false }) => {
   return (
     <Card
       onClick={ onClick }
@@ -148,10 +252,14 @@ const FeaturedProductCard = ({ product, onClick }) => {
         product.backgroundColor,
       ) }
     >
-      <img
-        src="/images/bg.png" alt=""
-        className="absolute top-0 scale-125 -rotate-90 left-0 w-full z-[1] h-full object-cover pointer-events-none"
-      />
+      {
+        gradient && (
+          <img
+            src="/images/bg.png" alt=""
+            className="absolute top-0 scale-125 -rotate-90 left-0 w-full z-[1] h-full object-cover pointer-events-none"
+          />
+        )
+      }
       <div className="px-10 py-8 relative z-[2]">
         <div>
           <div className="rounded-2xl justify-center text-white">
@@ -173,5 +281,6 @@ const FeaturedProductCard = ({ product, onClick }) => {
 
 FeaturedProductCard.propTypes = {
   product: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  gradient: PropTypes.bool
 };
