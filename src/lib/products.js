@@ -37,7 +37,7 @@ const general = [
     icon: IconEditCircle,
     homeLink: '/custom-report',
     dashboardLink: '/custom-report',
-    status: 'active',
+    status: 'coming-soon',
     categories: ['general', 'featured']
   },
   {
@@ -49,7 +49,7 @@ const general = [
     icon: IconMessageChatbot,
     homeLink: '/assistant',
     dashboardLink: '/assistant',
-    status: 'active',
+    status: 'coming-soon',
     categories: ['general']
   },
 ];
@@ -64,7 +64,7 @@ const lending = [
     icon: IconFileText,
     homeLink: '/statement',
     dashboardLink: '/statement',
-    status: 'active',
+    status: 'coming-soon',
     categories: ['featured', 'lending']
   },
   {
@@ -115,7 +115,7 @@ const payments = [
     icon: IconClipboardText,
     homeLink: '/invoice',
     dashboardLink: '/invoice',
-    status: 'active',
+    status: 'coming-soon',
     categories: ['payments', 'featured']
   },
   {
@@ -373,7 +373,7 @@ const products = [
     icon: IconBooks,
     homeLink: '/financial-report',
     dashboardLink: '/financial-report',
-    status: 'active',
+    status: 'coming-soon',
     categories: ['featured']
   },
 ];

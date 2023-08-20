@@ -304,6 +304,15 @@ const FeaturedProductCard = ({ product, onClick, gradient = false }) => {
           </p>
         </div>
       </div>
+      {
+        product.status === 'coming-soon' && (
+          <div
+            className="absolute top-0 right-0 z-[2] px-3 py-1 ml-2 leading-none bg-slate-100/20 text-white rounded-bl-lg text-xs inline-flex"
+          >
+            Coming soon
+          </div>
+        )
+      }
     </Card>
   );
 };
