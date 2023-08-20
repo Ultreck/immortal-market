@@ -63,9 +63,9 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                   <IconListDetails size="20"/>
                   <h2 className="font-medium">Features</h2>
                 </div>
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="border p-6 rounded-3xl grid md:grid-cols-3 gap-4">
                   <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-red-500 text-white grid place-items-center">
+                    <div className="w-7 h-7 rounded-full bg-red-100 text-red-800 grid place-items-center">
                       <IconNumber1 size="16"/>
                     </div>
                     <p className="mt-3 leading-tight">
@@ -73,7 +73,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                     </p>
                   </div>
                   <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-blue-500 text-white grid place-items-center">
+                    <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-800 grid place-items-center">
                       <IconNumber2 size="16"/>
                     </div>
                     <p className="mt-3 leading-tight">
@@ -81,7 +81,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                     </p>
                   </div>
                   <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-green-500 text-white grid place-items-center">
+                    <div className="w-7 h-7 rounded-full bg-green-100 text-green-800 grid place-items-center">
                       <IconNumber3 size="16"/>
                     </div>
                     <p className="mt-3 leading-tight">
@@ -89,7 +89,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                     </p>
                   </div>
                   <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-orange-500 text-white grid place-items-center">
+                    <div className="w-7 h-7 rounded-full bg-orange-100 text-orange-800 grid place-items-center">
                       <IconNumber4 size="16"/>
                     </div>
                     <p className="mt-3 leading-tight">
@@ -97,7 +97,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                     </p>
                   </div>
                   <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-teal-500 text-white grid place-items-center">
+                    <div className="w-7 h-7 rounded-full bg-teal-100 text-teal-800 grid place-items-center">
                       <IconNumber5 size="16"/>
                     </div>
                     <p className="mt-3 leading-tight">
@@ -105,7 +105,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                     </p>
                   </div>
                   <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-purple-500 text-white grid place-items-center">
+                    <div className="w-7 h-7 rounded-full bg-purple-100 text-purple-800 grid place-items-center">
                       <IconNumber6 size="16"/>
                     </div>
                     <p className="mt-3 leading-tight">
@@ -119,14 +119,14 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                   <IconHelpCircle size="20"/>
                   <h2 className="font-medium">How it works</h2>
                 </div>
-                <div className="divide-y">
-                  <div className="py-3">
+                <div className="border rounded-3xl divide-y py-1">
+                  <div className="px-6 py-3">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laborum?
                   </div>
-                  <div className="py-3">
+                  <div className="px-6 py-3">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laborum?
                   </div>
-                  <div className="py-3">
+                  <div className="px-6 py-3">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laborum?
                   </div>
                 </div>

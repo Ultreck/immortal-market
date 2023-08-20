@@ -219,7 +219,7 @@ const ProductCard = ({ product, onClick, style = 'normal' }) => {
   const getIconSize = () => {
     if (style === 'normal') return 44;
     if (style === 'wide') return 90;
-    if (style === 'tall') return 48;
+    if (style === 'tall') return 52;
   };
 
   return (
@@ -243,7 +243,7 @@ const ProductCard = ({ product, onClick, style = 'normal' }) => {
             className={ classNames("font-medium",
               { 'text-[1.06rem]': style === 'normal' },
               { 'text-xl mb-1': style === 'wide' },
-              { 'text-[1.06rem]': style === 'tall' }
+              { 'text-lg': style === 'tall' }
             ) }
           >
             { product.name }
@@ -297,7 +297,7 @@ const FeaturedProductCard = ({ product, onClick, gradient = false }) => {
         </div>
         <div className="mt-12">
           <div className="flex items-center">
-            <h4 className="font-medium text-2xl">{ product.name }</h4>
+            <h4 className="font-medium text-[1.3rem]">{ product.name }</h4>
           </div>
           <p className="text-[1.1rem] leading-snug mt-2 opacity-80 max-w-[200px]">
             { product.description }
