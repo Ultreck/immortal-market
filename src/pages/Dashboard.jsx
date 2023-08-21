@@ -71,7 +71,7 @@ const Dashboard = () => {
           </div>
         </div>
         {
-          categories.filter(c => c.id !== 'featured').map(c => {
+          categories.filter(c => c.id !== 'featured').map((c, i) => {
             const items = products.filter(p => p.categories.includes(c.id));
 
             return (
@@ -83,8 +83,13 @@ const Dashboard = () => {
                   )
                 }
                 {
-                  items.length === 3 && (
+                  (items.length === 3 && i % 2 === 0) && (
                     <ThreeCols items={ items } onClick={ p => handleProductClick(p) }/>
+                  )
+                }
+                {
+                  (items.length === 3 && i % 2 !== 0) && (
+                    <ThreeCols2 items={ items } onClick={ p => handleProductClick(p) }/>
                   )
                 }
                 {
@@ -164,6 +169,41 @@ const ThreeCols = ({ items = [], onClick }) => {
 }
 
 ThreeCols.propTypes = {
+  items: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired
+};
+
+const ThreeCols2 = ({ items = [], onClick }) => {
+  const left = items[0];
+  const right = [items[1], items[2]];
+
+  return (
+    <div className="grid md:grid-cols-11 gap-4 md:gap-6">
+      <div className="md:col-span-5">
+        <FeaturedProductCard
+          product={ left }
+          key={ left.name }
+          onClick={ () => onClick(left) }
+          style="wide"
+        />
+      </div>
+      <div className="md:col-span-6 grid md:grid-cols-1 gap-4 md:gap-6">
+        {
+          right.map(product => (
+            <div key={ product.name }>
+              <ProductCard
+                product={ product }
+                onClick={ () => onClick(product) }
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  )
+}
+
+ThreeCols2.propTypes = {
   items: PropTypes.array.isRequired,
   onClick: PropTypes.func.isRequired
 };
