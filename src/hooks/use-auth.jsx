@@ -27,7 +27,10 @@ export const useProvideAuth = () => {
       const { user } = res.data;
       authenticate({ user });
     },
-    onError: () => logout(),
+    onError: () => {
+      setResolved(true);
+      logout();
+    },
   })
 
   const authenticate = (data) => {
