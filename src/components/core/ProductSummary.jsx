@@ -45,7 +45,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
               <Card className="px-6 md:px-8 py-6 -mt-16 flex items-center justify-between">
                 <div>
                   <h6 className="font-medium opacity-50">Going live in</h6>
-                  <div className="text-[1.1rem] mt-[1px]">
+                  <div className="text-[1.05rem] mt-[1px]">
                     1st Sept 2023
                   </div>
                 </div>
