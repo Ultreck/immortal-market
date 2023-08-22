@@ -29,9 +29,9 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
   const timer = useCountdown('09/01/2023');
   const [isFetching, setIsFetching] = useState(false);
   const { mutateAsync: notify, isLoading: isNotifyLoading } = useAddLaunchSubscriber();
-  const { data: { subscriptions } = {}, isLoading: isSubscriptionsLoading } = useGetLaunchSubscriptions();
+  const { data: { subscriptions = [] } = {}, isLoading: isSubscriptionsLoading } = useGetLaunchSubscriptions();
 
-  const isSubscribed = subscriptions.some(s => s.product === product.slug);
+  const isSubscribed = subscriptions.some(s => s.product === product?.slug);
 
   const handleNotify = async () => {
     try {
