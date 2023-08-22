@@ -1,9 +1,10 @@
 import Drawer from "@/components/global/Drawer.jsx";
 import PropTypes from "prop-types";
-import { createElement } from "react";
+import { createElement, useState } from "react";
 import classNames from "classnames";
 import {
   IconBell,
+  IconCheck,
   IconHelpCircle,
   IconListDetails,
   IconNumber1,
@@ -17,9 +18,31 @@ import Button from "@/components/global/Button.jsx";
 import useCountdown from "@/hooks/use-countdown.js";
 import Card from "@/components/global/Card.jsx";
 import IconButton from "@/components/global/IconButton.jsx";
+import { useAddLaunchSubscriber, useGetLaunchSubscriptions } from "@/api/misc.js";
+import { useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@/hooks/use-toast.jsx";
+import Loader from "@/components/global/Loader.jsx";
 
 const ProductSummary = ({ product, isOpen, onClose }) => {
+  const toast = useToast();
+  const qc = useQueryClient();
   const timer = useCountdown('09/01/2023');
+  const [isFetching, setIsFetching] = useState(false);
+  const { mutateAsync: notify, isLoading: isNotifyLoading } = useAddLaunchSubscriber();
+  const { data: { subscriptions } = {}, isLoading: isSubscriptionsLoading } = useGetLaunchSubscriptions();
+
+  const isSubscribed = subscriptions.some(s => s.product === product.slug);
+
+  const handleNotify = async () => {
+    try {
+      await notify({ product: product.slug })
+      setIsFetching(true)
+      await qc.invalidateQueries(['product', 'launch', 'subscriptions']);
+      setIsFetching(false)
+    } catch (e) {
+      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+    }
+  };
 
   return (
     <Drawer isOpen={ isOpen } onClose={ onClose } padding={ false } fullscreen>
@@ -59,14 +82,33 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                       ) : '0:0:0:0'
                     }
                   </div>
-                  <Button
-                    variant="subtle" leftIcon={ <IconBell size="20"/> } className="mt-2 hidden sm:flex" size="sm"
-                  >
-                    Notify me
-                  </Button>
-                  <IconButton
-                    variant="subtle" icon={ <IconBell size="20"/> } className="mt-2 sm:hidden" size="sm"
-                  />
+                  {
+                    (isFetching || isNotifyLoading || isSubscriptionsLoading) ? (
+                      <Loader size="sm"/>
+                    ) : (
+                      <>
+                        {
+                          isSubscribed ? (
+                            <div className="text-teal-600 flex items-center space-x-1 mt-0.5">
+                              <IconCheck size="20"/> <p>Subscribed</p>
+                            </div>
+                          ) : (
+                            <>
+                              <Button
+                                onClick={ handleNotify } size="sm"
+                                variant="subtle" leftIcon={ <IconBell size="20"/> } className="mt-2 hidden sm:flex"
+                              >
+                                Notify me
+                              </Button>
+                              <IconButton
+                                variant="subtle" icon={ <IconBell size="20"/> } className="mt-2 sm:hidden" size="sm"
+                              />
+                            </>
+                          )
+                        }
+                      </>
+                    )
+                  }
                 </div>
               </Card>
             </div>

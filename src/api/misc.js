@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import http from "@/lib/http";
 
 export const useGetBanks = () => {
@@ -16,5 +16,18 @@ export const useGetAccountName = ({ accountNumber, bankCode }) => {
     enabled: accountNumber?.length === 10 && !!bankCode,
     staleTime: Infinity,
     retry: false
+  });
+};
+
+export const useAddLaunchSubscriber = () => {
+  return useMutation(({ product }) => {
+    return http.post('/product/launch/subscribe', { product });
+  });
+};
+
+export const useGetLaunchSubscriptions = () => {
+  return useQuery(['product', 'launch', 'subscriptions'], async () => {
+    const res = await http.get('/product/launch/subscription')
+    return res.data;
   });
 };
