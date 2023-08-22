@@ -7,9 +7,7 @@ import { useMediaQuery } from 'react-responsive'
 import { IconX } from "@tabler/icons-react";
 import PropTypes from "prop-types";
 
-const Drawer = (
-  { isOpen, title, padding = true, onClose, children }
-) => {
+const Drawer = ({ isOpen, title, padding = true, onClose, fullscreen = false, children }) => {
   const isMobile = useMediaQuery({ maxWidth: 640 })
 
   useEffect(() => {
@@ -35,7 +33,7 @@ const Drawer = (
       [isMobile ? 'y' : 'x']: '100%',
       opacity: 0,
     }
-  }
+  };
 
   return (
     <AnimatePresence initial={ false } mode="wait" onExitComplete={ () => null }>
@@ -55,23 +53,26 @@ const Drawer = (
             >
               <div
                 className={ classNames(
-                  "relative inset-x-0 bottom-0 bg-white h-min max-h-full sm:h-full overflow-x-hidden overflow-y-auto",
+                  "relative inset-x-0 bottom-0 bg-white h-min max-h-full sm:h-full overflow-hidden",
                   "rounded-t-[30px] md:rounded-r-[30px] md:rounded-l-[30px] min-h-[50vh] flex flex-col pointer-events-auto",
-                  { 'p-8 md:p-10': padding }
+                  { 'p-8 md:p-10': padding },
+                  { 'h-full': fullscreen }
                 ) }
               >
-                {
-                  !!title && (
-                    <div className="flex items-center justify-between mb-10">
-                      <h3 className="text-xl font-semibold">{ title }</h3>
-                      <IconButton
-                        onClick={ onClose } rounded icon={ <IconX size="20"/> }
-                        size="sm" color="red" variant="outlined"
-                      />
-                    </div>
-                  )
-                }
-                { children }
+                <div className="h-full overflow-x-hidden overflow-y-auto">
+                  {
+                    !!title && (
+                      <div className="flex items-center justify-between mb-10">
+                        <h3 className="text-xl font-semibold">{ title }</h3>
+                        <IconButton
+                          onClick={ onClose } rounded icon={ <IconX size="20"/> }
+                          size="sm" color="red" variant="outlined"
+                        />
+                      </div>
+                    )
+                  }
+                  { children }
+                </div>
               </div>
             </motion.div>
           </div>
@@ -85,6 +86,7 @@ Drawer.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   title: PropTypes.string,
   padding: PropTypes.bool,
+  fullscreen: PropTypes.bool,
   onClose: PropTypes.func,
   children: PropTypes.any
 }

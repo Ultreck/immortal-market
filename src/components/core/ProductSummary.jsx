@@ -16,22 +16,23 @@ import {
 import Button from "@/components/global/Button.jsx";
 import useCountdown from "@/hooks/use-countdown.js";
 import Card from "@/components/global/Card.jsx";
+import IconButton from "@/components/global/IconButton.jsx";
 
 const ProductSummary = ({ product, isOpen, onClose }) => {
   const timer = useCountdown('09/01/2023');
 
   return (
-    <Drawer isOpen={ isOpen } onClose={ onClose } padding={ false }>
+    <Drawer isOpen={ isOpen } onClose={ onClose } padding={ false } fullscreen>
       {
         !!product && (
           <>
-            <div className={ classNames('bg-slate-100 border-b px-8 md:px-12 pt-12 pb-24') }>
+            <div className={ classNames('border-b px-8 md:px-12 pt-12 pb-24 text-white', product.backgroundColor) }>
               <div className="flex items-center">
                 <div className="text-[1.05rem] font-semibold flex items-center">
                   <div
-                    className={ classNames("w-10 h-10 rounded-full mr-3 flex items-center justify-center", product.backgroundColor) }
+                    className={ classNames("w-10 h-10 rounded-full mr-3 flex items-center justify-center bg-white", product.textColor) }
                   >
-                    { createElement(product.icon, { size: 22, className: 'text-white' }) }
+                    { createElement(product.icon, { size: 22 }) }
                   </div>
                   { product.name }
                 </div>
@@ -41,20 +42,32 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
               </p>
             </div>
             <div className="px-8 md:px-12">
-              <Card className="px-6 py-6 -mt-16 flex flex-col items-center justify-center text-center">
-                <h6 className="font-medium opacity-60">Going live in</h6>
-                <div className="mt-2 text-2xl">
-                  {
-                    !timer.expired ? (
-                      <>
-                        { timer.days }d:{ timer.hours }h:{ timer.minutes }m:{ timer.seconds }s
-                      </>
-                    ) : '0:0:0:0'
-                  }
+              <Card className="px-6 md:px-8 py-6 -mt-16 flex items-center justify-between">
+                <div>
+                  <h6 className="font-medium opacity-50">Going live in</h6>
+                  <div className="text-[1.1rem] mt-[1px]">
+                    1st Sept 2023
+                  </div>
                 </div>
-                <Button variant="subtle" leftIcon={ <IconBell size="20"/> } className="mt-4" size="sm">
-                  Notify me
-                </Button>
+                <div className="text-end">
+                  <div className="opacity-80 pe-1">
+                    {
+                      !timer.expired ? (
+                        <>
+                          { timer.days }d:{ timer.hours }h:{ timer.minutes }m:{ timer.seconds }s
+                        </>
+                      ) : '0:0:0:0'
+                    }
+                  </div>
+                  <Button
+                    variant="subtle" leftIcon={ <IconBell size="20"/> } className="mt-2 hidden sm:flex" size="sm"
+                  >
+                    Notify me
+                  </Button>
+                  <IconButton
+                    variant="subtle" icon={ <IconBell size="20"/> } className="mt-2 sm:hidden" size="sm"
+                  />
+                </div>
               </Card>
             </div>
             <div className="px-8 md:px-12 py-10 space-y-10">
@@ -63,7 +76,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                   <IconListDetails size="20"/>
                   <h2 className="font-medium">Features</h2>
                 </div>
-                <div className="border p-6 rounded-3xl grid md:grid-cols-3 gap-4">
+                <div className="border p-6 rounded-3xl grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div className="flex flex-col items-center text-center py-4">
                     <div className="w-7 h-7 rounded-full bg-red-100 text-red-800 grid place-items-center">
                       <IconNumber1 size="16"/>
