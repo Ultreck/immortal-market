@@ -55,11 +55,12 @@ const Drawer = ({ isOpen, title, padding = true, onClose, fullscreen = false, ch
                 className={ classNames(
                   "relative inset-x-0 bottom-0 bg-white h-min max-h-full sm:h-full overflow-hidden",
                   "rounded-t-[30px] md:rounded-r-[30px] md:rounded-l-[30px] min-h-[50vh] flex flex-col pointer-events-auto",
-                  { 'p-8 md:p-10': padding },
                   { 'h-full': fullscreen }
                 ) }
               >
-                <div className="h-full overflow-x-hidden overflow-y-auto">
+                <div className={ classNames("h-full overflow-x-hidden overflow-y-auto",
+                  { 'p-8 md:p-10': padding },
+                ) }>
                   {
                     !!title && (
                       <div className="flex items-center justify-between mb-10">
