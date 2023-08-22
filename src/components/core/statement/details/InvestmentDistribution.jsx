@@ -6,10 +6,11 @@ import PropTypes from "prop-types";
 
 const InvestmentDistribution = ({ data }) => {
   const { highlight } = data?.analytics_data ?? {}
+  const investments = highlight.investments || [];
 
-  const hasRecord = ((Math.max(...highlight.investments.map(i => i.placement || 0)) > 0) || (Math.max(...highlight.investments.map(i => i.taken || 0)) > 0));
+  const hasRecord = ((Math.max(...investments.map(i => i.placement || 0)) > 0) || (Math.max(...investments.map(i => i.taken || 0)) > 0));
 
-  const items = highlight.investments.reduce((acc, current) => {
+  const items = investments.reduce((acc, current) => {
     if (!current.month) return acc;
     if (Object.hasOwn(acc, current.month)) acc[current.month].push(current);
     else acc[current.month] = [current];
