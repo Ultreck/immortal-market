@@ -21,10 +21,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="bg-[#11161b] text-white pt-12 md:pt-16 pb-12 md:pb-14">
+      <div className="bg-[#11161b] text-white pt-12 md:pt-16 pb-12 md:pb-14 relative">
+        <div className="absolute inset-0 bg-cover bg-grid opacity-30"/>
         <div className="container !max-w-5xl">
           <h1
-            className="text-[2rem] md:text-4xl leading-[1.3] font-semibold max-w-[300px] md:max-w-lg flex items-center"
+            className="text-[2rem] md:text-4xl leading-[1.3] font-semibold max-w-[300px] md:max-w-md flex items-center"
           >
             Insights for every business and industry
           </h1>

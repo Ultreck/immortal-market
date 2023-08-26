@@ -20,7 +20,8 @@ const AccountSetting = () => {
 
   return (
     <>
-      <div className="bg-[#11161b] text-white pt-12 md:pt-16 pb-10 md:pb-12">
+      <div className="bg-[#11161b] text-white pt-12 md:pt-16 pb-10 md:pb-12 relative">
+        <div className="absolute inset-0 bg-cover bg-grid opacity-30"/>
         <div className="container !max-w-5xl">
           <h1 className="text-3xl md:text-4xl font-semibold max-w-lg flex items-center">
             Account settings

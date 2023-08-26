@@ -1,6 +1,6 @@
-import { IconChartBar } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import Logo from "@/components/core/shared/Logo.jsx";
 
 const AuthLayout = ({ children }) => {
   return (
@@ -10,8 +10,7 @@ const AuthLayout = ({ children }) => {
       <div className="md:col-span-4">
         <div className="bg-[#11161b] text-white px-8 py-12 md:p-16 overflow-hidden pattern-1 h-full flex flex-col">
           <Link to="/" className="text-[1.6rem] flex items-center mb-10 md:mb-16">
-            <IconChartBar size="32" className="mr-3"/>
-            Stati<b className="ml-[1px]">sense.</b>
+            <Logo light/>
           </Link>
           <p className="text-xl md:text-[1.6rem] text-slate-300 max-w-[260px] !leading-snug">
             Get insights to make better business decisions
