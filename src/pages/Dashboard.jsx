@@ -4,6 +4,10 @@ import classNames from "classnames";
 import Card from "@/components/global/Card.jsx";
 import PropTypes from "prop-types";
 import ProductSummary from "@/components/core/ProductSummary.jsx";
+import Button from "@/components/global/Button.jsx";
+import HelpTrainModel from "@/components/core/HelpTrainModel.jsx";
+import Hover from "@/components/global/Hover.jsx";
+import { IconRobot } from "@tabler/icons-react";
 
 const featured = products.filter(p => p.categories.includes('featured'));
 const highlighted = featured.at(0);
@@ -13,10 +17,16 @@ const bottom = featured.length > 3 ? featured.at(-1) : null;
 const Dashboard = () => {
   const [selected, setSelected] = useState(null);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
+  const [isTrainOpen, setIsTrainOpen] = useState(false);
 
   const handleProductClick = product => {
     setSelected(product);
     setIsSummaryOpen(true);
+  };
+
+  const handleTrainClick = product => {
+    setSelected(product);
+    setIsTrainOpen(true);
   };
 
   return (
@@ -52,7 +62,8 @@ const Dashboard = () => {
                   <div key={ product.name }>
                     <ProductCard
                       product={ product }
-                      onClick={ () => handleProductClick(product) }
+                      onClick={ handleProductClick }
+                      onTrain={ handleTrainClick }
                     />
                   </div>
                 ))
@@ -63,7 +74,8 @@ const Dashboard = () => {
                     <ProductCard
                       product={ bottom }
                       key={ bottom.name }
-                      onClick={ () => handleProductClick(bottom) }
+                      onClick={ handleProductClick }
+                      onTrain={ handleTrainClick }
                     />
                   </div>
                 )
@@ -80,22 +92,34 @@ const Dashboard = () => {
                 <h3 className="text-xl font-medium mb-8 px-1 border-b pb-6">{ c.name }</h3>
                 {
                   items.length === 2 && (
-                    <TwoCols items={ items } onClick={ p => handleProductClick(p) }/>
+                    <TwoCols
+                      items={ items } onClick={ handleProductClick }
+                      onTrain={ handleTrainClick }
+                    />
                   )
                 }
                 {
                   (items.length === 3 && i % 2 === 0) && (
-                    <ThreeCols items={ items } onClick={ p => handleProductClick(p) }/>
+                    <ThreeCols
+                      items={ items } onClick={ handleProductClick }
+                      onTrain={ handleTrainClick }
+                    />
                   )
                 }
                 {
                   (items.length === 3 && i % 2 !== 0) && (
-                    <ThreeCols2 items={ items } onClick={ p => handleProductClick(p) }/>
+                    <ThreeCols2
+                      items={ items } onClick={ handleProductClick }
+                      onTrain={ handleTrainClick }
+                    />
                   )
                 }
                 {
                   items.length === 4 && (
-                    <FourCols items={ items } onClick={ p => handleProductClick(p) }/>
+                    <FourCols
+                      items={ items } onClick={ handleProductClick }
+                      onTrain={ handleTrainClick }
+                    />
                   )
                 }
                 {
@@ -124,13 +148,18 @@ const Dashboard = () => {
         isOpen={ isSummaryOpen }
         onClose={ () => setIsSummaryOpen(false) }
       />
+      <HelpTrainModel
+        isOpen={ isTrainOpen }
+        onClose={ () => setIsTrainOpen(false) }
+        category={ selected?.slug }
+      />
     </>
   );
 };
 
 export default Dashboard;
 
-const TwoCols = ({ items = [], onClick }) => {
+const TwoCols = ({ items = [], onClick, onTrain }) => {
   return (
     <div className={ classNames("grid md:grid-cols-2 gap-4 md:gap-6") }>
       {
@@ -140,6 +169,7 @@ const TwoCols = ({ items = [], onClick }) => {
             key={ product.name }
             onClick={ () => onClick(product) }
             style="wide"
+            onTrain={ () => onTrain?.(bottom) }
           />
         ))
       }
@@ -149,10 +179,11 @@ const TwoCols = ({ items = [], onClick }) => {
 
 TwoCols.propTypes = {
   items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  onTrain: PropTypes.func,
 };
 
-const ThreeCols = ({ items = [], onClick }) => {
+const ThreeCols = ({ items = [], onClick, onTrain }) => {
   return (
     <div className={ classNames("grid md:grid-cols-3 gap-4 md:gap-6") }>
       {
@@ -162,6 +193,7 @@ const ThreeCols = ({ items = [], onClick }) => {
             key={ product.name }
             onClick={ () => onClick(product) }
             style="tall"
+            onTrain={ () => onTrain?.(bottom) }
           />
         ))
       }
@@ -171,10 +203,11 @@ const ThreeCols = ({ items = [], onClick }) => {
 
 ThreeCols.propTypes = {
   items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  onTrain: PropTypes.func,
 };
 
-const ThreeCols2 = ({ items = [], onClick }) => {
+const ThreeCols2 = ({ items = [], onClick, onTrain }) => {
   const left = items[0];
   const right = [items[1], items[2]];
 
@@ -195,6 +228,7 @@ const ThreeCols2 = ({ items = [], onClick }) => {
               <ProductCard
                 product={ product }
                 onClick={ () => onClick(product) }
+                onTrain={ () => onTrain?.(bottom) }
               />
             </div>
           ))
@@ -206,10 +240,11 @@ const ThreeCols2 = ({ items = [], onClick }) => {
 
 ThreeCols2.propTypes = {
   items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  onTrain: PropTypes.func,
 };
 
-const FourCols = ({ items = [], onClick }) => {
+const FourCols = ({ items = [], onClick, onTrain }) => {
   const highlighted = items[0];
   const top = [items[1], items[2]];
   const bottom = items[3];
@@ -234,6 +269,7 @@ const FourCols = ({ items = [], onClick }) => {
                 product={ bottom }
                 key={ bottom.name }
                 onClick={ () => onClick(bottom) }
+                onTrain={ () => onTrain?.(bottom) }
               />
             </div>
           )
@@ -253,10 +289,11 @@ const FourCols = ({ items = [], onClick }) => {
 
 FourCols.propTypes = {
   items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  onTrain: PropTypes.func,
 };
 
-const ProductCard = ({ product, onClick, style = 'normal' }) => {
+const ProductCard = ({ product, onClick, onTrain, style = 'normal' }) => {
   const getIconSize = () => {
     if (style === 'normal') return 44;
     if (style === 'wide') return 90;
@@ -264,52 +301,83 @@ const ProductCard = ({ product, onClick, style = 'normal' }) => {
   };
 
   return (
-    <Card
-      onClick={ onClick }
-      className={ classNames(
-        'rounded-2xl transition-all h-full relative overflow-hidden hover:-translate-y-1 hover:shadow-md cursor-pointer',
-        { 'px-10 py-8 space-y-4': style === 'normal' },
-        { 'px-10 py-20 space-y-10': style === 'wide' },
-        { 'px-10 py-20 space-y-6': style === 'tall' }
-      ) }
-    >
-      <div>
-        <div className={ classNames('rounded-2xl justify-center', product.textColor) }>
-          { createElement(product.icon, { size: getIconSize() }) }
-        </div>
-      </div>
-      <div>
-        <div className="flex items-center">
-          <h4
-            className={ classNames("font-medium",
-              { 'text-[1.06rem]': style === 'normal' },
-              { 'text-xl mb-1': style === 'wide' },
-              { 'text-lg': style === 'tall' }
+    <Hover>
+      {
+        (hovered) => (
+          <Card
+            onClick={ product.type !== 'document' ? onClick : null }
+            className={ classNames(
+              'rounded-2xl transition-all h-full relative overflow-hidden hover:-translate-y-1 hover:shadow-md cursor-pointer',
+              { 'px-10 py-8 space-y-4': style === 'normal' },
+              { 'px-10 py-20 space-y-10': style === 'wide' },
+              { 'px-10 py-20 space-y-6': style === 'tall' }
             ) }
           >
-            { product.name }
-          </h4>
-          {
-            product.status === 'coming-soon' && (
-              <div
-                className="absolute top-0 right-0 px-3 py-1 ml-2 leading-none bg-slate-100 text-slate-500 rounded-bl-lg text-xs inline-flex"
-              >
-                Coming soon
+            <div>
+              <div className={ classNames('rounded-2xl justify-center', product.textColor) }>
+                { createElement(product.icon, { size: getIconSize() }) }
               </div>
-            )
-          }
-        </div>
-        <p className="leading-tight opacity-80 mt-1">
-          { product.description }
-        </p>
-      </div>
-    </Card>
+            </div>
+            <div>
+              <div className="flex items-center">
+                <h4
+                  className={ classNames("font-medium",
+                    { 'text-[1.06rem]': style === 'normal' },
+                    { 'text-xl mb-1': style === 'wide' },
+                    { 'text-lg': style === 'tall' }
+                  ) }
+                >
+                  { product.name }
+                </h4>
+                {
+                  product.status === 'coming-soon' && (
+                    <div
+                      className="absolute top-0 right-0 px-3 py-1 ml-2 leading-none bg-slate-100 text-slate-500 rounded-bl-lg text-xs inline-flex"
+                    >
+                      Coming soon
+                    </div>
+                  )
+                }
+              </div>
+              <p className="leading-tight opacity-80 mt-1">
+                { product.description }
+              </p>
+              {
+                product.type === 'document' && (
+                  <div
+                    className={ classNames('absolute inset-0 inset-x-0 z-[2] p-4 transition-all duration-300', {
+                      'scale-75 opacity-0': !hovered,
+                      'scale-100 opacity-1': hovered,
+                    }) }
+                  >
+                    <div
+                      className="h-full flex flex-col items-center justify-center space-y-2 px-4 py-6 rounded-3xl bg-white/95 backdrop-blur-sm"
+                    >
+                      <Button onClick={ onClick } variant="outlined">
+                        Preview
+                      </Button>
+                      <Button
+                        onClick={ () => onTrain(product) }
+                        variant="outlined" leftIcon={ <IconRobot size="20"/> }
+                      >
+                        Train model
+                      </Button>
+                    </div>
+                  </div>
+                )
+              }
+            </div>
+          </Card>
+        )
+      }
+    </Hover>
   );
 };
 
 ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
+  onTrain: PropTypes.func,
   style: PropTypes.string
 };
 

@@ -9,6 +9,7 @@ const CircleUploadFileInput = (
     onChange,
     label = 'Drag and drop a file or click to select',
     accept,
+    maxSize = 1000000,
     error = 'File not allowed',
   }
 ) => {
@@ -19,9 +20,10 @@ const CircleUploadFileInput = (
       <Dropzone
         accept={ accept }
         onDrop={ acceptedFiles => {
-          if (!acceptedFiles.length) return toast.error('Only pdf files allowed')
+          if (!acceptedFiles.length) return toast.error('File type not supported')
           onChange(acceptedFiles[0])
         } }
+        maxSize={ maxSize }
       >
         {
           ({ getRootProps, getInputProps, isDragAccept, isDragReject }) => (
@@ -57,7 +59,8 @@ CircleUploadFileInput.propTypes = {
   label: PropTypes.string,
   onChange: PropTypes.func,
   accept: PropTypes.object,
-  error: PropTypes.string
+  error: PropTypes.string,
+  maxSize: PropTypes.number
 };
 
 export default CircleUploadFileInput;

@@ -38,7 +38,8 @@ const general = [
     homeLink: '/custom-report',
     dashboardLink: '/custom-report',
     status: 'coming-soon',
-    categories: ['general', 'featured']
+    categories: ['general', 'featured'],
+    type: 'document'
   },
   {
     name: 'Data assistant',
@@ -57,7 +58,7 @@ const general = [
 const lending = [
   {
     name: 'Bank statement',
-    slug: 'bank-statement',
+    slug: 'statement',
     description: `Analyze any bank statement in seconds`,
     backgroundColor: '!bg-sky-700',
     textColor: '!text-sky-700',
@@ -65,7 +66,8 @@ const lending = [
     homeLink: '/statement',
     dashboardLink: '/statement',
     status: 'coming-soon',
-    categories: ['featured', 'lending']
+    categories: ['featured', 'lending'],
+    type: 'document'
   },
   {
     name: 'Credit Portfolio',
@@ -116,7 +118,8 @@ const payments = [
     homeLink: '/invoice',
     dashboardLink: '/invoice',
     status: 'coming-soon',
-    categories: ['payments', 'featured']
+    categories: ['payments', 'featured'],
+    type: 'document'
   },
   {
     name: 'Fraud',
@@ -143,7 +146,8 @@ const identity = [
     homeLink: '/govt-id',
     dashboardLink: '/govt-id',
     status: 'coming-soon',
-    categories: ['identity']
+    categories: ['identity'],
+    type: 'document'
   },
   {
     name: 'Social analytics',
@@ -374,7 +378,8 @@ const products = [
     homeLink: '/financial-report',
     dashboardLink: '/financial-report',
     status: 'coming-soon',
-    categories: ['featured']
+    categories: ['featured'],
+    type: 'document'
   },
 ];
 
