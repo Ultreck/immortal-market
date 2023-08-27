@@ -20,8 +20,13 @@ const CircleUploadFileInput = (
       <Dropzone
         accept={ accept }
         onDrop={ acceptedFiles => {
-          if (!acceptedFiles.length) return toast.error('File type not supported')
-          onChange(acceptedFiles[0])
+          if (acceptedFiles.length) onChange(acceptedFiles[0]);
+        } }
+        onDropRejected={ fileRejections => {
+          const exceedsMaxSize = fileRejections.some(f => f.errors.some(j => j.code === 'file-too-large'));
+          const invalidType = fileRejections.some(f => f.errors.some(j => j.code === 'file-invalid-type'));
+          if (invalidType) return toast.error(`File not allowed`)
+          if (exceedsMaxSize) toast.error(`File size exceeds max of ${ maxSize / 1000000 }mb`)
         } }
         maxSize={ maxSize }
       >
@@ -41,7 +46,9 @@ const CircleUploadFileInput = (
               </div>
               {
                 isDragReject && (
-                  <div className="flex items-center text-center bg-red-100 text-red-600 rounded-2xl w-max mt-4 px-4 py-1">
+                  <div
+                    className="flex items-center text-center bg-red-100 text-red-600 rounded-2xl w-max mt-4 px-4 py-1"
+                  >
                     { error }
                   </div>
                 )
