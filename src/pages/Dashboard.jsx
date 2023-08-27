@@ -52,7 +52,7 @@ const Dashboard = () => {
               <FeaturedProductCard
                 product={ highlighted }
                 key={ highlighted.name }
-                onClick={ () => handleProductClick(highlighted) }
+                onClick={ handleProductClick }
                 gradient
               />
             </div>
@@ -93,7 +93,8 @@ const Dashboard = () => {
                 {
                   items.length === 2 && (
                     <TwoCols
-                      items={ items } onClick={ handleProductClick }
+                      items={ items }
+                      onClick={ handleProductClick }
                       onTrain={ handleTrainClick }
                     />
                   )
@@ -101,7 +102,8 @@ const Dashboard = () => {
                 {
                   (items.length === 3 && i % 2 === 0) && (
                     <ThreeCols
-                      items={ items } onClick={ handleProductClick }
+                      items={ items }
+                      onClick={ handleProductClick }
                       onTrain={ handleTrainClick }
                     />
                   )
@@ -109,7 +111,8 @@ const Dashboard = () => {
                 {
                   (items.length === 3 && i % 2 !== 0) && (
                     <ThreeCols2
-                      items={ items } onClick={ handleProductClick }
+                      items={ items }
+                      onClick={ handleProductClick }
                       onTrain={ handleTrainClick }
                     />
                   )
@@ -117,7 +120,8 @@ const Dashboard = () => {
                 {
                   items.length === 4 && (
                     <FourCols
-                      items={ items } onClick={ handleProductClick }
+                      items={ items }
+                      onClick={ handleProductClick }
                       onTrain={ handleTrainClick }
                     />
                   )
@@ -128,9 +132,9 @@ const Dashboard = () => {
                       {
                         items.map(product => (
                           <ProductCard
-                            product={ product }
                             key={ product.name }
-                            onClick={ () => handleProductClick(product) }
+                            product={ product }
+                            onClick={ handleProductClick }
                           />
                         ))
                       }
@@ -167,9 +171,9 @@ const TwoCols = ({ items = [], onClick, onTrain }) => {
           <ProductCard
             product={ product }
             key={ product.name }
-            onClick={ () => onClick(product) }
+            onClick={ onClick }
+            onTrain={ onTrain }
             style="wide"
-            onTrain={ () => onTrain?.(bottom) }
           />
         ))
       }
@@ -191,9 +195,9 @@ const ThreeCols = ({ items = [], onClick, onTrain }) => {
           <ProductCard
             product={ product }
             key={ product.name }
-            onClick={ () => onClick(product) }
+            onClick={ onClick }
+            onTrain={ onTrain }
             style="tall"
-            onTrain={ () => onTrain?.(bottom) }
           />
         ))
       }
@@ -217,7 +221,7 @@ const ThreeCols2 = ({ items = [], onClick, onTrain }) => {
         <FeaturedProductCard
           product={ left }
           key={ left.name }
-          onClick={ () => onClick(left) }
+          onClick={ onClick }
           style="wide"
         />
       </div>
@@ -227,8 +231,8 @@ const ThreeCols2 = ({ items = [], onClick, onTrain }) => {
             <div key={ product.name }>
               <ProductCard
                 product={ product }
-                onClick={ () => onClick(product) }
-                onTrain={ () => onTrain?.(bottom) }
+                onClick={ onClick }
+                onTrain={ onTrain }
               />
             </div>
           ))
@@ -257,7 +261,7 @@ const FourCols = ({ items = [], onClick, onTrain }) => {
             <div key={ product.name }>
               <ProductCard
                 product={ product }
-                onClick={ () => onClick(product) }
+                onClick={ onClick }
               />
             </div>
           ))
@@ -268,8 +272,8 @@ const FourCols = ({ items = [], onClick, onTrain }) => {
               <ProductCard
                 product={ bottom }
                 key={ bottom.name }
-                onClick={ () => onClick(bottom) }
-                onTrain={ () => onTrain?.(bottom) }
+                onClick={ onClick }
+                onTrain={ onTrain }
               />
             </div>
           )
@@ -279,7 +283,7 @@ const FourCols = ({ items = [], onClick, onTrain }) => {
         <FeaturedProductCard
           product={ highlighted }
           key={ highlighted.name }
-          onClick={ () => onClick(highlighted) }
+          onClick={ onClick }
           style="wide"
         />
       </div>
@@ -305,7 +309,7 @@ const ProductCard = ({ product, onClick, onTrain, style = 'normal' }) => {
       {
         (hovered) => (
           <Card
-            onClick={ product.type !== 'document' ? onClick : null }
+            onClick={ product.type !== 'document' ? () => onClick(product) : null }
             className={ classNames(
               'rounded-2xl transition-all h-full relative overflow-hidden hover:-translate-y-1 hover:shadow-md cursor-pointer',
               { 'px-10 py-8 space-y-4': style === 'normal' },
@@ -353,11 +357,11 @@ const ProductCard = ({ product, onClick, onTrain, style = 'normal' }) => {
                     <div
                       className="h-full flex flex-col items-center justify-center space-y-2 px-4 py-6 rounded-3xl bg-white/95 backdrop-blur-sm"
                     >
-                      <Button onClick={ onClick } variant="outlined">
+                      <Button onClick={ () => onClick(product) } variant="outlined">
                         Preview
                       </Button>
                       <Button
-                        onClick={ () => onTrain(product) }
+                        onClick={ () => onTrain?.(product) }
                         variant="outlined" leftIcon={ <IconRobot size="20"/> }
                       >
                         Train model
@@ -384,7 +388,7 @@ ProductCard.propTypes = {
 const FeaturedProductCard = ({ product, onClick, gradient = false }) => {
   return (
     <Card
-      onClick={ onClick }
+      onClick={ () => onClick(product) }
       className={ classNames(
         'relative rounded-2xl transition-all h-full border-0 !shadow-none text-white hover:-translate-y-1 cursor-pointer flex flex-col justify-center overflow-hidden',
         product.backgroundColor,
