@@ -31,3 +31,9 @@ export const useGetLaunchSubscriptions = () => {
     return res.data;
   });
 };
+
+export const useCreateSampleDocument = () => {
+  return useMutation((fd) => {
+    return http.post('/product/sample', fd);
+  });
+};

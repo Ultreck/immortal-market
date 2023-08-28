@@ -9,28 +9,35 @@ import Select from "@/components/global/Select.jsx";
 import { useForm } from "react-hook-form";
 import products from "@/lib/products.js";
 import TextArea from "@/components/global/TextArea.jsx";
-import { delay } from "@/lib/utils.js";
+import { useCreateSampleDocument } from "@/api/misc.js";
+import { useToast } from "@/hooks/use-toast.jsx";
 
 const HelpTrainModel = ({ isOpen, onClose, category }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const toast = useToast();
   const [file, setFile] = useState(null);
   const [success, setSuccess] = useState(false)
   const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
+  const { mutateAsync: create, isLoading: isCreateLoading } = useCreateSampleDocument()
 
   const handleChange = async (file) => {
     setFile(file)
   };
 
   const onSubmit = async (values) => {
-    console.log({ values });
-    setIsLoading(true);
-    await delay(5000);
-    setIsLoading(false);
-    setSuccess(true);
+    if (!file) return;
+    try {
+      const fd = new FormData();
+      fd.append('category', values.category);
+      fd.append('comment', values.comment);
+      fd.append('file', file);
+      await create(fd);
+      setSuccess(true);
+    } catch (e) {
+      toast.error(e?.response?.data?.message ?? 'Something went wrong, please try again');
+    }
   };
 
   const clear = () => {
-    setIsLoading(false);
     setFile(null);
     setSuccess(false);
     reset();
@@ -75,7 +82,7 @@ const HelpTrainModel = ({ isOpen, onClose, category }) => {
                         <Button
                           onClick={ () => setFile(null) }
                           leftIcon={ <IconArrowLeft size="18"/> } variant="outlined" size="sm"
-                          className="mb-6 self-start" disabled={ isLoading }
+                          className="mb-6 self-start" disabled={ isCreateLoading }
                         >
                           Change file
                         </Button>
@@ -98,16 +105,16 @@ const HelpTrainModel = ({ isOpen, onClose, category }) => {
                                   text: p.name, value: p.slug
                                 }))
                               }
-                              disabled={ isLoading }
+                              disabled={ isCreateLoading }
                             />
                             <TextArea
                               label="What do you need this document to do for you?" bordered
                               { ...register('comment', { required: 'This field is required' }) }
                               error={ errors?.comment?.message }
-                              disabled={ isLoading }
+                              disabled={ isCreateLoading }
                             />
                           </div>
-                          <Button type="submit" className="mt-8" loading={ isLoading }>Submit</Button>
+                          <Button type="submit" className="mt-8" loading={ isCreateLoading }>Submit</Button>
                         </form>
                       </div>
                     </div>
