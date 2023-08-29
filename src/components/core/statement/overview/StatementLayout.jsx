@@ -19,7 +19,7 @@ const links = [
   { name: 'Settings', href: '/statement/settings', icon: <IconSettings2 size="20"/> },
 ];
 
-const product = products.find(p => p.slug === 'bank-statement');
+const product = products.find(p => p.slug === 'statement');
 
 const Logo = ({ className }) => (
   <div className={ className }>
