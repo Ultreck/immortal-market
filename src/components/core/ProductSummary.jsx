@@ -12,7 +12,9 @@ import {
   IconNumber3,
   IconNumber4,
   IconNumber5,
-  IconNumber6
+  IconNumber6,
+  IconNumber7,
+  IconNumber8
 } from "@tabler/icons-react";
 import Button from "@/components/global/Button.jsx";
 import useCountdown from "@/hooks/use-countdown.js";
@@ -61,7 +63,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                 </div>
               </div>
               <p className="mt-6">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid atque culpa cum deleniti.
+                { product.summary || `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid atque culpa cum deleniti.` }
               </p>
             </div>
             <div className="px-8 md:px-12">
@@ -119,54 +121,39 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                   <h2 className="font-medium">Features</h2>
                 </div>
                 <div className="border p-6 rounded-3xl grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-red-100 text-red-800 grid place-items-center">
-                      <IconNumber1 size="16"/>
-                    </div>
-                    <p className="mt-3 leading-tight">
-                      Lorem ipsum dolor sit opew efowe.
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-800 grid place-items-center">
-                      <IconNumber2 size="16"/>
-                    </div>
-                    <p className="mt-3 leading-tight">
-                      Lorem ipsum dolor sit opew efowe.
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-green-100 text-green-800 grid place-items-center">
-                      <IconNumber3 size="16"/>
-                    </div>
-                    <p className="mt-3 leading-tight">
-                      Lorem ipsum dolor sit opew efowe.
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-orange-100 text-orange-800 grid place-items-center">
-                      <IconNumber4 size="16"/>
-                    </div>
-                    <p className="mt-3 leading-tight">
-                      Lorem ipsum dolor sit opew efowe.
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-teal-100 text-teal-800 grid place-items-center">
-                      <IconNumber5 size="16"/>
-                    </div>
-                    <p className="mt-3 leading-tight">
-                      Lorem ipsum dolor sit opew efowe.
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center text-center py-4">
-                    <div className="w-7 h-7 rounded-full bg-purple-100 text-purple-800 grid place-items-center">
-                      <IconNumber6 size="16"/>
-                    </div>
-                    <p className="mt-3 leading-tight">
-                      Lorem ipsum dolor sit opew efowe.
-                    </p>
-                  </div>
+                  {
+                    product.features?.map((p, i) => (
+                      <div key={ p } className="flex flex-col items-center text-center py-4">
+                        <div className={ classNames(
+                          'w-7 h-7 rounded-full grid place-items-center',
+                          [
+                            'bg-red-100 text-red-800',
+                            'bg-blue-100 text-blue-800',
+                            'bg-green-100 text-green-800',
+                            'bg-orange-100 text-orange-800',
+                            'bg-teal-100 text-teal-800',
+                            'bg-purple-100 text-purple-800',
+                            'bg-amber-100 text-amber-800',
+                            'bg-cyan-100 text-cyan-800',
+                          ][i]
+                        ) }>
+                          {
+                            [
+                              <IconNumber1 key={ 1 } size="16"/>,
+                              <IconNumber2 key={ 2 } size="16"/>,
+                              <IconNumber3 key={ 3 } size="16"/>,
+                              <IconNumber4 key={ 4 } size="16"/>,
+                              <IconNumber5 key={ 5 } size="16"/>,
+                              <IconNumber6 key={ 6 } size="16"/>,
+                              <IconNumber7 key={ 6 } size="16"/>,
+                              <IconNumber8 key={ 6 } size="16"/>,
+                            ][i]
+                          }
+                        </div>
+                        <p className="mt-3 leading-tight">{ p }</p>
+                      </div>
+                    )) ?? 'N/A'
+                  }
                 </div>
               </div>
               <div>
@@ -175,15 +162,11 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                   <h2 className="font-medium">How it works</h2>
                 </div>
                 <div className="border rounded-3xl divide-y py-1">
-                  <div className="px-6 py-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laborum?
-                  </div>
-                  <div className="px-6 py-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laborum?
-                  </div>
-                  <div className="px-6 py-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, laborum?
-                  </div>
+                  {
+                    product.flow?.map(f => (
+                      <div key={ f } className="px-6 py-3">{ f }</div>
+                    )) ?? <p className="px-6 py-3">N/A</p>
+                  }
                 </div>
               </div>
               <Button onClick={ onClose } variant="outlined" color="red" className="mt-10">

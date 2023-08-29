@@ -39,7 +39,22 @@ const general = [
     dashboardLink: '/custom-report',
     status: 'coming-soon',
     categories: ['general', 'featured'],
-    type: 'document'
+    type: 'document',
+    summary: 'N/A',
+    features: [
+      `Custom Insights`,
+      `Report Parsing`,
+      `Visual Summaries`,
+      `Predictive Trends`,
+      `Data Mapping`,
+      `Anomaly Detection`,
+    ],
+    flow: [
+      `Upload your custom report.`,
+      `Our extraction and analysis model takes over`,
+      `Engage with result via chat, infographics or API`,
+      `Bambi can also help with decisioning.`,
+    ]
   },
   {
     name: 'Data assistant',
@@ -67,7 +82,22 @@ const lending = [
     dashboardLink: '/statement',
     status: 'coming-soon',
     categories: ['featured', 'lending'],
-    type: 'document'
+    type: 'document',
+    summary: `Analyze customer's financial behavior for lending decisioning in a few seconds. All bank statement formats supported`,
+    features: [
+      `Pattern analysis`,
+      `Decision discovery`,
+      `Every statement format`,
+      `Visualized result.`,
+      `Tap AI Models`,
+      `APIs for integration`,
+    ],
+    flow: [
+      `Upload or connect statement directly from bank`,
+      `Our extraction and analysis model takes over`,
+      `Engage with result via chat, infographics or API`,
+      `Bambi can also help with decisioning.`,
+    ]
   },
   {
     name: 'Credit Portfolio',
@@ -79,7 +109,23 @@ const lending = [
     homeLink: '/credit-portfolio',
     dashboardLink: '/credit-portfolio',
     status: 'coming-soon',
-    categories: ['lending']
+    categories: ['lending'],
+    summary: `Effectively manage your credit portfolio using our AI-powered dashboard, optimizing risk assessment and strategic decision-making`,
+    features: [
+      `Risk Assessment`,
+      `Portfolio Overview`,
+      `Credit Scoring`,
+      `Payment Trends`,
+      `Client Profiles`,
+      `Default Prediction.`,
+      `Performance Analysis`,
+    ],
+    flow: [
+      `The dashboard compiles diverse data sources.`,
+      `Evaluates risks`,
+      `Tracks customer’s behavior over time.`,
+      `Sends alerts about significant changes in customer behavior.`,
+    ]
   },
   {
     name: 'Customer profile',
@@ -91,7 +137,21 @@ const lending = [
     homeLink: '/customer-profile',
     dashboardLink: '/customer-profile',
     status: 'coming-soon',
-    categories: ['investment', 'lending', 'insurance']
+    categories: ['investment', 'lending', 'insurance'],
+    summary: `Unlock customer insights and drive personalized strategies with our AI-powered customer understanding dashboard.`,
+    features: [
+      `Customer Segmentation`,
+      `Behavior Analysis`,
+      `Demographic Insights`,
+      `Purchase Patterns`,
+      `Visualized result`,
+      `APIs for integration`,
+    ],
+    flow: [
+      `Compiles data from various sources`,
+      `Examines historical behavior, generating insights into purchasing patterns and interactions.`,
+      `Engage with the result via chat, infographics or API`,
+    ]
   },
   {
     name: 'Credit Modelling',
@@ -103,7 +163,23 @@ const lending = [
     homeLink: '/credit-modelling',
     dashboardLink: '/credit-modelling',
     status: 'coming-soon',
-    categories: ['lending']
+    categories: ['lending'],
+    summary: `Optimize lending decisions with our AI credit score modeling dashboard, empowering accurate risk assessment and informed credit approvals.`,
+    features: [
+      `Credit Analysis`,
+      `Risk Evaluation`,
+      `Payment History`,
+      `Debt Utilization`,
+      `Financial Health`,
+      `Predictive Power`,
+      `Trend Tracking`,
+    ],
+    flow: [
+      `Data gathering from various sources, to build a comprehensive credit profile.`,
+      `Extracts key features and identifies patterns that contribute to creditworthiness.`,
+      `Calculates credit scores based on analyzed data`,
+      `Continuously updates the credit scoring model with new data.`,
+    ]
   },
 ];
 
@@ -119,7 +195,24 @@ const payments = [
     dashboardLink: '/invoice',
     status: 'coming-soon',
     categories: ['payments', 'featured'],
-    type: 'document'
+    type: 'document',
+    summary: 'N/A',
+    features: [
+      `Receipt Extraction`,
+      `Expense Tracking`,
+      `Item Categorization`,
+      `Accuracy Check`,
+      `Payment Verification`,
+      `Automated Auditing`,
+      `Fraud Detection.`,
+    ],
+    flow: [
+      `Upload documents`,
+      `Our analysis model extracts key information like date, amount, and vendor details`,
+      `Validation of extracted data`,
+      `The dashboard intelligently categorizes items on receipts and invoices.`,
+      `Engage with result via infographics or API`,
+    ]
   },
   {
     name: 'Fraud',
@@ -131,7 +224,24 @@ const payments = [
     homeLink: '/fraud',
     dashboardLink: '/fraud',
     status: 'coming-soon',
-    categories: ['payments']
+    categories: ['payments'],
+    summary: `Protect your business from fraud, swiftly identify suspicious patterns and transactions, enhancing security and minimizing risks`,
+    features: [
+      `Real-time alerts`,
+      `Anomaly detection`,
+      `Pattern recognition`,
+      `Risk assessment`,
+      `Transaction monitoring`,
+      `Behavioral analysis`,
+      `Predictive modeling`,
+    ],
+    flow: [
+      `Collects data from multiple sources, to create a comprehensive view for fraud analysis.`,
+      `Identifies deviations from normal patterns in real-time, flagging potentially fraudulent activities.`,
+      `Examines user actions over time for potential signs of fraud.`,
+      `Spots recurring patterns indicative of fraud schemes`,
+      `Triggers alerts and recommendations when suspicious activities are identified.`,
+    ]
   },
 ];
 
@@ -379,7 +489,23 @@ const products = [
     dashboardLink: '/financial-report',
     status: 'coming-soon',
     categories: ['featured'],
-    type: 'document'
+    type: 'document',
+    summary: `Streamline decision-making and track key metrics through intuitive visualizations for smarter financial strategies`,
+    features: [
+      `Performance Overview`,
+      `Trend Analysis`,
+      `Risk Assessment`,
+      `Forecast Accuracy`,
+      `Profit Insights`,
+      `Cost Tracking`,
+      `Portfolio Health`,
+    ],
+    flow: [
+      `Upload your financial report.`,
+      `Our extraction and analysis model takes over`,
+      `Engage with result via chat, infographics or API`,
+      `Bambi can also help with decisioning.`,
+    ]
   },
 ];
 
