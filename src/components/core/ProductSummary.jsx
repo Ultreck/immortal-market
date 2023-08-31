@@ -7,6 +7,7 @@ import {
   IconCheck,
   IconHelpCircle,
   IconListDetails,
+  IconNumber0,
   IconNumber1,
   IconNumber2,
   IconNumber3,
@@ -14,7 +15,8 @@ import {
   IconNumber5,
   IconNumber6,
   IconNumber7,
-  IconNumber8
+  IconNumber8,
+  IconNumber9
 } from "@tabler/icons-react";
 import Button from "@/components/global/Button.jsx";
 import useCountdown from "@/hooks/use-countdown.js";
@@ -135,6 +137,8 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                             'bg-purple-100 text-purple-800',
                             'bg-amber-100 text-amber-800',
                             'bg-cyan-100 text-cyan-800',
+                            'bg-fuchsia-100 text-fuchsia-800',
+                            'bg-sky-100 text-sky-800',
                           ][i]
                         ) }>
                           {
@@ -145,8 +149,10 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                               <IconNumber4 key={ 4 } size="16"/>,
                               <IconNumber5 key={ 5 } size="16"/>,
                               <IconNumber6 key={ 6 } size="16"/>,
-                              <IconNumber7 key={ 6 } size="16"/>,
-                              <IconNumber8 key={ 6 } size="16"/>,
+                              <IconNumber7 key={ 7 } size="16"/>,
+                              <IconNumber8 key={ 8 } size="16"/>,
+                              <IconNumber9 key={ 9 } size="16"/>,
+                              <IconNumber0 key={ 10 } size="16"/>,
                             ][i]
                           }
                         </div>

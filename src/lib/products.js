@@ -31,7 +31,7 @@ const general = [
   {
     name: 'Custom report',
     slug: 'custom-report',
-    description: `Analyze customs reports in seconds`,
+    description: `Personalized insights for precise analysis.`,
     backgroundColor: '!bg-red-700',
     textColor: '!text-red-700',
     icon: IconEditCircle,
@@ -40,7 +40,7 @@ const general = [
     status: 'coming-soon',
     categories: ['general', 'featured'],
     type: 'document',
-    summary: 'N/A',
+    summary: 'Extracting valuable insights to inform data-driven decisions.',
     features: [
       `Custom Insights`,
       `Report Parsing`,
@@ -59,14 +59,30 @@ const general = [
   {
     name: 'Data assistant',
     slug: 'assistant',
-    description: `An advanced embedded AI assistant`,
+    description: `Support for efficient decision-making processes.`,
     backgroundColor: '!bg-blue-700',
     textColor: '!text-blue-700',
     icon: IconMessageChatbot,
     homeLink: '/assistant',
     dashboardLink: '/assistant',
     status: 'coming-soon',
-    categories: ['general']
+    categories: ['general'],
+    summary: `Unlock data-driven insights with an advanced embedded AI assistant,  information retrieval and decision-making.`,
+    features: [
+      `Data Insights`,
+      `AI Analytics`,
+      `Advanced Search`,
+      `Real-time Trends`,
+      `Predictive Analysis`,
+      `Custom Reports`,
+      `Interactive Visuals`,
+    ],
+    flow: [
+      `Users interact naturally with the app, asking questions or providing data-related requests.`,
+      `Advanced AI processes inquiries, applying complex analytics to retrieve relevant insights from the data.`,
+      `Tanslates AI-generated insights into user-friendly visualizations and reports.`,
+      `Users receive real-time, actionable insights, empowering informed decisions and streamlined data-driven actions.`,
+    ]
   },
 ];
 
@@ -74,7 +90,7 @@ const lending = [
   {
     name: 'Bank statement',
     slug: 'statement',
-    description: `Analyze any bank statement in seconds`,
+    description: `Optimize transactions with AI-driven insights.`,
     backgroundColor: '!bg-sky-700',
     textColor: '!text-sky-700',
     icon: IconFileText,
@@ -102,7 +118,7 @@ const lending = [
   {
     name: 'Credit Portfolio',
     slug: 'credit-portfolio',
-    description: `Maintain your credit portfolio`,
+    description: `Manage risk, enhance performance intelligently`,
     backgroundColor: '!bg-red-700',
     textColor: '!text-red-700',
     icon: IconCreditCard,
@@ -110,6 +126,7 @@ const lending = [
     dashboardLink: '/credit-portfolio',
     status: 'coming-soon',
     categories: ['lending'],
+    type: 'document',
     summary: `Effectively manage your credit portfolio using our AI-powered dashboard, optimizing risk assessment and strategic decision-making`,
     features: [
       `Risk Assessment`,
@@ -130,7 +147,7 @@ const lending = [
   {
     name: 'Customer profile',
     slug: 'customer-profile',
-    description: `Understand your customers`,
+    description: `Understand behaviors through insightful analysis.`,
     backgroundColor: '!bg-yellow-700',
     textColor: '!text-yellow-700',
     icon: IconUserCircle,
@@ -138,6 +155,7 @@ const lending = [
     dashboardLink: '/customer-profile',
     status: 'coming-soon',
     categories: ['investment', 'lending', 'insurance'],
+    type: 'document',
     summary: `Unlock customer insights and drive personalized strategies with our AI-powered customer understanding dashboard.`,
     features: [
       `Customer Segmentation`,
@@ -156,7 +174,7 @@ const lending = [
   {
     name: 'Credit Modelling',
     slug: 'credit-modelling',
-    description: `Model your credit score`,
+    description: `Accurate credit assessment through advanced techniques.`,
     backgroundColor: '!bg-orange-700',
     textColor: '!text-orange-700',
     icon: IconChartHistogram,
@@ -164,6 +182,7 @@ const lending = [
     dashboardLink: '/credit-modelling',
     status: 'coming-soon',
     categories: ['lending'],
+    type: 'document',
     summary: `Optimize lending decisions with our AI credit score modeling dashboard, empowering accurate risk assessment and informed credit approvals.`,
     features: [
       `Credit Analysis`,
@@ -187,7 +206,7 @@ const payments = [
   {
     name: 'Invoices & Receipts',
     slug: 'invoice',
-    description: `Get insights on your invoices`,
+    description: `Streamlined automation for financial tracking.`,
     backgroundColor: '!bg-amber-700',
     textColor: '!text-amber-700',
     icon: IconClipboardText,
@@ -196,7 +215,7 @@ const payments = [
     status: 'coming-soon',
     categories: ['payments', 'featured'],
     type: 'document',
-    summary: 'N/A',
+    summary: 'Comprehensive insights through advanced invoice analysis. Financial tracking and analysis, providing accurate insights from receipts and invoices.',
     features: [
       `Receipt Extraction`,
       `Expense Tracking`,
@@ -217,7 +236,7 @@ const payments = [
   {
     name: 'Fraud',
     slug: 'fraud',
-    description: `Detect fraudulent transactions`,
+    description: `Thwart fraud, ensuring secure transactions.`,
     backgroundColor: '!bg-red-700',
     textColor: '!text-red-700',
     icon: IconMasksTheater,
@@ -249,7 +268,7 @@ const identity = [
   {
     name: 'Government IDs',
     slug: 'govt-id',
-    description: `Analyze government ids in seconds`,
+    description: `Identity verification for reduced fraudulent activities.`,
     backgroundColor: '!bg-teal-700',
     textColor: '!text-teal-700',
     icon: IconId,
@@ -262,38 +281,95 @@ const identity = [
   {
     name: 'Social analytics',
     slug: 'social-analytics',
-    description: `Get insights on your social media`,
+    description: `Extract insights from analyzed social data.`,
     backgroundColor: '!bg-blue-700',
     textColor: '!text-blue-700',
     icon: IconSocial,
     homeLink: '/social-analytics',
     dashboardLink: '/social-analytics',
     status: 'coming-soon',
-    categories: ['identity']
+    categories: ['identity'],
+    summary: `Gain deep social media insights and optimize engagement strategies.`,
+    features: [
+      `Trend Insights`,
+      `Engagement Analysis`,
+      `Sentiment Tracking`,
+      `Influencer insights`,
+      `Demographic Breakdown`,
+      `Content Performance`,
+      `Audience Segmentation`,
+      `Virality Prediction`,
+    ],
+    flow: [
+      `Collects data from various social media platforms,`,
+      `Analyzing patterns in social data.`,
+      `Identifies emerging trends, hashtags, and topics, allowing users to stay ahead of relevant discussions.`,
+      `Measures user engagement metrics.`,
+      `Helps identify influential figures and potential brand collaborators within the social sphere.`,
+    ]
   },
   {
     name: 'Psychometric',
     slug: 'profile',
-    description: `Profile your customers`,
+    description: `Decipher traits to enable precise assessment.`,
     backgroundColor: '!bg-yellow-700',
     textColor: '!text-yellow-700',
     icon: IconBrain,
     homeLink: '/profile',
     dashboardLink: '/profile',
     status: 'coming-soon',
-    categories: ['identity']
+    categories: ['identity'],
+    summary: `Utilize psychometrics to create detailed customer profiles, enabling personalized interactions and tailored experiences.`,
+    features: [
+      `Personality Insights`,
+      `Customer Profiling`,
+      `Behavioral Traits`,
+      `Psychometric Analysis`,
+      `User Characteristics`,
+      `Trait Mapping`,
+      `Personal Preferences`,
+      `Psychological Traits`,
+      `Behavior Patterns`,
+      `Customer Segmentation`,
+    ],
+    flow: [
+      `Design a set of psychometric questions.`,
+      `Customers answer the psychometric questions providing data on their psychological characteristics and preferences.`,
+      `System analyzes the collected responses, using advanced algorithms to extract patterns, correlations, and traits to build a comprehensive customer profile.`,
+      `The dashboard maps customers' responses to specific psychological traits and categorizes`,
+      `Generates actionable insights based on the gathered data.`,
+    ]
   },
   {
     name: 'Alternative data',
     slug: 'alternative-data',
-    description: `Get insights from alternative data`,
+    description: `Unconventional sources offer comprehensive insights.`,
     backgroundColor: '!bg-orange-700',
     textColor: '!text-orange-700',
     icon: IconDatabasePlus,
     homeLink: '/alternative-data',
     dashboardLink: '/alternative-data',
     status: 'coming-soon',
-    categories: ['identity']
+    categories: ['identity'],
+    summary: `Uncover valuable insights from alternative data sources, enhancing informed decision-making.`,
+    features: [
+      `Diverse Sources`,
+      `Unconventional Insights`,
+      `Alternative Analytics`,
+      `Non-traditional Data`,
+      `Varied Perspectives`,
+      `Non-standard Metrics`,
+      `Unorthodox Patterns`,
+      `Unique Signals`,
+      `Unconventional Trends`,
+    ],
+    flow: [
+      `Collects diverse alternative data from a wide range of sources, including social media, news, web scraping, and IoT devices.`,
+      `Data Cleaning: The collected data undergoes Thorough cleaning and preprocessing of collected data.`,
+      `Identify relevant patterns, signals, and metrics within the alternative data, converting raw information into actionable insights.`,
+      `The system contextualizes the extracted insights, correlating them with existing traditional data and market trends for a comprehensive`,
+      `Intuitive visualizations of results.`,
+    ]
   },
 ];
 
@@ -301,38 +377,92 @@ const digital = [
   {
     name: 'Survey',
     slug: 'survey',
-    description: `Generate and analyze surveys`,
+    description: `Analyze data gathered for actionable insights.`,
     backgroundColor: '!bg-blue-700',
     textColor: '!text-blue-700',
     icon: IconUserQuestion,
     homeLink: '/survey',
     dashboardLink: '/survey',
     status: 'coming-soon',
-    categories: ['digital-forms']
+    categories: ['digital-forms'],
+    summary: `Effortlessly create, manage, and derive insights from surveys, understand your user preferences.`,
+    features: [
+      `Automated Surveys`,
+      `Data Insights`,
+      `Custom Questions`,
+      `Visual Analysis`,
+      `Survey Trends`,
+      `Real-time Feedback`,
+      `User Responses`,
+      `Comparative Analysis`,
+      `Predictive Patterns`,
+      `Actionable Feedback`,
+    ],
+    flow: [
+      `Users select survey templates or create custom questionnaires.`,
+      `Generates diverse and relevant questions based on the selected template or user inputs, ensuring a comprehensive survey.`,
+      `survey distribution through various channels such as email, social media, or embedded links.`,
+      `Gathers and organizes respondents answers, aggregating it for analysis.`,
+      `Employs statistical and text analysis techniques to extract insights, trends, and correlations from the collected survey data.`,
+    ]
   },
   {
     name: 'Digital forms',
     slug: 'digital-forms',
-    description: `Generate, fill, approve, analyze`,
+    description: `Simplify data collection through automated processes.`,
     backgroundColor: '!bg-cyan-700',
     textColor: '!text-cyan-700',
     icon: IconForms,
     homeLink: '/digital-forms',
     dashboardLink: '/digital-forms',
     status: 'coming-soon',
-    categories: ['digital-forms']
+    categories: ['digital-forms'],
+    summary: `Improve form processes with our AI dashboard, enabling end-to-end digital form management from creation to analysis.`,
+    features: [
+      `Form Generation`,
+      `Automated Filling`,
+      `Approval Workflow`,
+      `Custom Templates`,
+      `Digital Signatures`,
+      `Collaborative Editing`,
+      `Smart Forms`,
+    ],
+    flow: [
+      `Users create digital forms or choose from templates using the AI dashboard's interface.`,
+      `Data is automatically populated into forms using integrated systems or user inputs.`,
+      `Forms are routed through approval processes, with notifications and collaborative options within the dashboard.`,
+      `Aggregates and analyzes form data, extracting insights and trends.`,
+      `AI-powered analytics provide actionable insights, aiding decision-making and process optimization based on form data.`,
+    ]
   },
   {
     name: 'Polls',
     slug: 'polls',
-    description: `Generate and analyze polls`,
+    description: `Quick and informative insights from data collection.`,
     backgroundColor: '!bg-purple-700',
     textColor: '!text-purple-700',
     icon: IconChecklist,
     homeLink: '/polls',
     dashboardLink: '/polls',
     status: 'coming-soon',
-    categories: ['digital-forms']
+    categories: ['digital-forms'],
+    summary: `Empower informed decision-making by effortlessly creating and analyzing polls.`,
+    features: [
+      `Poll Creation`,
+      `Automated Surveys`,
+      `Real-time Results`,
+      `Data Visualization`,
+      `Comparative Insights`,
+      `User Engagement`,
+      `Actionable Data`,
+    ],
+    flow: [
+      `Users design polls or select templates within the App interface.`,
+      `Poll options are tailored, including multiple-choice, ratings, and open-ended questions.`,
+      `Respondents participate digitally, submitting poll responses directly into the dashboard.`,
+      `Processes and analyzes poll data, extracting insights and patterns.`,
+      `Data and visual summaries are generated based on poll results.`,
+    ]
   },
 ];
 
@@ -340,38 +470,83 @@ const macroeconomics = [
   {
     name: 'Nigeria',
     slug: 'nigeria',
-    description: `Lorem ipsum dolor sit amet`,
+    description: `Tailored solutions for Nigeria's specific market.`,
     backgroundColor: '!bg-green-700',
     textColor: '!text-green-700',
     icon: IconFlag,
     homeLink: '/nigeria',
     dashboardLink: '/nigeria',
     status: 'coming-soon',
-    categories: ['government']
+    categories: ['government'],
+    summary: `A West African nation with diverse cultures, abundant natural resources, and a large population. Its economy is driven by oil exports and a growing tech sector`,
+    features: [
+      `Economic Potential(by sectors)`,
+      `General decision making`,
+      `Data analysis on different sectors`,
+      `Visualized result.`,
+      `AI-driven decision models`,
+      `APIs for integration`,
+    ],
+    flow: [
+      `Provide source of data and methodology`,
+      `Our extraction and analysis model takes over`,
+      `Engage with result via chat, infographics or API`,
+      `Bambi can also help with decisioning.`,
+    ]
   },
   {
     name: 'Africa',
     slug: 'africa',
-    description: `Lorem ipsum dolor sit amet`,
+    description: `Transformative strategies using valuable African data.`,
     backgroundColor: '!bg-red-700',
     textColor: '!text-red-700',
     icon: IconMap,
     homeLink: '/africa',
     dashboardLink: '/africa',
     status: 'coming-soon',
-    categories: ['government']
+    categories: ['government'],
+    summary: `The world's second-largest continent, a vast and diverse continent, encompasses rich cultures, wildlife, and landscapes. It offers immense opportunities for growth, innovation, and sustainable development across its nations.`,
+    features: [
+      `Indicators derived from data sourced from any African nation.`,
+      `insight from data`,
+      `Data analysis on different indicators`,
+      `Visualized result.`,
+      `AI-driven decision models`,
+      `APIs for integration`,
+    ],
+    flow: [
+      `Provide source of data and methodology`,
+      `Our extraction and analysis model takes over`,
+      `Engage with result via chat, infographics or API`,
+      `Bambi can also help with decisioning.`,
+    ]
   },
   {
     name: 'World',
     slug: 'world',
-    description: `Lorem ipsum dolor sit amet`,
+    description: `Navigate worldwide trends for informed decisions.`,
     backgroundColor: '!bg-blue-700',
     textColor: '!text-blue-700',
     icon: IconWorld,
     homeLink: '/world',
     dashboardLink: '/world',
     status: 'coming-soon',
-    categories: ['government']
+    categories: ['government'],
+    summary: `Extraction of data and provision of analysis. The world is a dynamic tapestry of cultures, nations, and ecosystems. Global interconnectivity drives progress in technology, trade, and collaboration. Diverse opportunities arise, inspiring innovation and collective efforts for positive change across borders and societies.`,
+    features: [
+      `Global Data Aggregation.`,
+      `Global Sustainability Insights`,
+      `Cross-Cultural Analysis`,
+      `Geospatial Mapping.`,
+      `AI-driven decision models`,
+      `APIs for integration`,
+    ],
+    flow: [
+      `provide source of data and methodology`,
+      `Our extraction and analysis model takes over`,
+      `Engage with result via chat, infographics or API`,
+      `Bambi can also help with decisioning.`,
+    ]
   },
 ];
 
@@ -379,26 +554,62 @@ const investments = [
   {
     name: 'Investment Portfolio',
     slug: 'investment-portfolio',
-    description: `Track your investments`,
+    description: `Optimize performance through strategic analysis.`,
     backgroundColor: '!bg-sky-700',
     textColor: '!text-sky-700',
     icon: IconBriefcase,
     homeLink: '/investment-portfolio',
     dashboardLink: '/investment-portfolio',
     status: 'coming-soon',
-    categories: ['investment']
+    categories: ['investment'],
+    summary: `Monitor and manage your investment portfolio, get  real-time insights for informed decisions.`,
+    features: [
+      `Portfolio Overview`,
+      `Real-time Tracking`,
+      `Asset Performance`,
+      `Diversification Insights`,
+      `Investment Trends`,
+      `Risk Analysis`,
+      `APIs for integration`,
+      `ROI Tracking`,
+    ],
+    flow: [
+      `Connect and sync your investment accounts.`,
+      `Receive live updates on asset performance, market changes, and portfolio value.`,
+      `Engage with results via chat, infographics or API`,
+      `Bambi can also help with decisioning.`,
+    ]
   },
   {
     name: 'Saving portfolio',
     slug: 'saving-portfolio',
-    description: `Monitor your savings`,
+    description: `Effective management of personal savings portfolio.`,
     backgroundColor: '!bg-indigo-700',
     textColor: '!text-indigo-700',
     icon: IconReportMoney,
     homeLink: '/saving-portfolio',
     dashboardLink: '/saving-portfolio',
     status: 'coming-soon',
-    categories: ['investment']
+    categories: ['investment'],
+    summary: `Monitor and achieve your savings goals, get  real-time insights for financial success.`,
+    features: [
+      `Savings Overview`,
+      `Goal Tracking`,
+      `Transaction History`,
+      `Budget Insights`,
+      `Account Integration`,
+      `Financial Trends`,
+      `Custom Alerts`,
+      `Goal Achievements`,
+      `Expense Analysis`,
+      `Real-time Updates`,
+    ],
+    flow: [
+      `Connect your accounts to the dashboard, consolidating your savings data.`,
+      `Define savings goals and timelines, customizing targets to suit your financial aspirations.`,
+      `Monitor your savings journey through visualized updates, transaction history, and goal achievements.`,
+      `Receive actionable insights and recommendations to optimize your saving strategies, ensuring financial success.`,
+    ]
   },
 ];
 
@@ -406,38 +617,84 @@ const markets = [
   {
     name: 'Capital',
     slug: 'capital',
-    description: `Get insights on your trades`,
+    description: `Strategic approaches to resource management.`,
     backgroundColor: '!bg-blue-700',
     textColor: '!text-blue-700',
     icon: IconCashBanknote,
     homeLink: '/capital',
     dashboardLink: '/capital',
     status: 'coming-soon',
-    categories: ['markets']
+    categories: ['markets'],
+    summary: `Investment funds deployed for trading, investment, and operational needs in financial domains.`,
+    features: [
+      `Monetization Tactics`,
+      `Credit Assessment`,
+      `Compatibility with diverse data formats`,
+      `Visualized report presentation`,
+      `AI-driven decision models`,
+      `APIs for integration`,
+    ],
+    flow: [
+      `Upload or connect transaction statement directly from the bank`,
+      `Our extraction and analysis system takes command`,
+      `Interact with outcomes via chat, visual summaries, or APIs`,
+      `Bambi also aids in decision-making.`,
+    ]
   },
   {
     name: 'Money',
     slug: 'money',
-    description: `Get insights on your trades`,
+    description: `...`,
     backgroundColor: '!bg-green-700',
     textColor: '!text-green-700',
     icon: IconCurrencyNaira,
     homeLink: '/money',
     dashboardLink: '/money',
     status: 'coming-soon',
-    categories: ['markets']
+    categories: ['markets'],
+    summary: `Funds allocated for trading, investment, and operational requirements in financial sectors.`,
+    features: [
+      `Transaction Tracking`,
+      `Credit Evaluation`,
+      `Portfolio Tracking and Reporting`,
+      `Liquidity Analysis`,
+      `Visualization of reports`,
+      `AI-powered decision models`,
+      `APIs ready for integration`,
+    ],
+    flow: [
+      `Upload or link transaction statements from the banks`,
+      `Our extraction and analysis system assumes control`,
+      `Engage with results via chat, visual summaries, or APIs`,
+      `Bambi also contributes to decision-making.`,
+    ]
   },
   {
     name: 'Commodities',
     slug: 'commodities',
-    description: `Get insights on your trades`,
+    description: `Decode commodity market trends for advantage.`,
     backgroundColor: '!bg-red-700',
     textColor: '!text-red-700',
     icon: IconBasketFilled,
     homeLink: '/commodities',
     dashboardLink: '/commodities',
     status: 'coming-soon',
-    categories: ['markets']
+    categories: ['markets'],
+    summary: `Insight on Resources allocated for trading, raw materials or primary agricultural products traded on exchanges, including metals, energy resources, agricultural goods, and more.`,
+    features: [
+      `Market Sentiment Data`,
+      `User Portfolios and Watchlists`,
+      `Compatibility with diverse data formats`,
+      `Visualized report presentation`,
+      `AI-driven decision models`,
+      `Integration-ready APIs`,
+    ],
+    flow: [
+      `Upload or link transaction statements directly`,
+      `Our extraction and analysis model takes over`,
+      `Engage with result via chat, infographics or API`,
+      `Bambi can also help with decisioning.`,
+    ]
   },
 ];
 
@@ -445,26 +702,56 @@ const insurance = [
   {
     name: 'Hospital distribution',
     slug: 'hospital-distribution',
-    description: `Manage hospital distributions`,
+    description: `Improve financial operations in healthcare distribution.`,
     backgroundColor: '!bg-purple-700',
     textColor: '!text-purple-700',
     icon: IconBuildingHospital,
     homeLink: '/hospital-distribution',
     dashboardLink: '/hospital-distribution',
     status: 'coming-soon',
-    categories: ['insurance']
+    categories: ['insurance'],
+    summary: `Efficiently deliver crucial supplies, medications, and equipment to medical centers, ensuring optimal patient care and operational efficacy within healthcare facilities.`,
+    features: [
+      `Precise supply management`,
+      `Real-time delivery tracking`,
+      `Multi-format compatibility`,
+      `Visualized reporting`,
+      `AI-driven decision models`,
+      `APIs for integration`,
+    ],
+    flow: [
+      'Directly upload data or from data source',
+      'Our extraction and analysis system takes control',
+      'Interact with results via chat, visual summaries, or APIs',
+      'Bambi also aids in decision-making.',
+    ]
   },
   {
     name: 'Risk assessment',
     slug: 'risk-assessment',
-    description: `Perform risk assessments`,
+    description: `Informed decisions through comprehensive risk analysis.`,
     backgroundColor: '!bg-orange-700',
     textColor: '!text-orange-700',
     icon: IconAssembly,
     homeLink: '/risk-assessment',
     dashboardLink: '/risk-assessment',
     status: 'coming-soon',
-    categories: ['insurance']
+    categories: ['insurance'],
+    summary: `RA Optimization Evaluating potential hazards and uncertainties to determine insurance coverage suitability and optimize Health Maintenance Organization operations.`,
+    features: [
+      `Accurate resource oversight`,
+      `Live delivery monitoring`,
+      `Versatile data format support`,
+      `Graphical representation of reports`,
+      `AI-powered decision models`,
+      `Integration-ready APIs`,
+    ],
+    flow: [
+      `Upload data directly or from source`,
+      `Our extraction and analysis mechanism assumes control`,
+      `Engage with outcomes via chat, visual summaries, or APIs`,
+      `Bambi also contributes to decision-making.`,
+    ]
   },
 ];
 
@@ -481,7 +768,7 @@ const products = [
   {
     name: 'Financial report',
     slug: 'financial-report',
-    description: `Analyze financial reports in seconds`,
+    description: `Accurate reports for insights and decision-making.`,
     backgroundColor: '!bg-indigo-700',
     textColor: '!text-indigo-700',
     icon: IconBooks,
@@ -523,3 +810,5 @@ export const categories = [
 ];
 
 export default products;
+
+console.log(products.map(p => p.name).join(', '))
