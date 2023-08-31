@@ -76,9 +76,13 @@ const Register = () => {
             value={ agreed } onChange={ e => setAgreed(e.target.checked) } className="mt-6"
             disabled={ isSignupLoading }
           >
-            I agree to Statisense&apos;s
-            <Link to="/" className="text-primary-600"> terms and conditions</Link> and
-            <Link to="/" className="text-primary-600"> privacy policy</Link>
+            I agree to Statisense&apos;s { ' ' }
+            <Link to="https://statisense.co/terms?t=terms" target="_blank" className="text-primary-600">
+              terms and conditions
+            </Link> and { ' ' }
+            <Link to="https://statisense.co/terms?t=privacy" target="_blank" className="text-primary-600">
+              privacy policy
+            </Link>
           </Checkbox>
           <Button type="submit" className="mt-10" size="lg" loading={ isSignupLoading }>
             Register
