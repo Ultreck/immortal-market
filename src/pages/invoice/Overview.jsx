@@ -45,7 +45,7 @@ const InvoicesOverview = () => {
                   <p className="text-sm text-ellipsis whitespace-nowrap overflow-hidden mt-2">New invoice</p>
                 </div>
                 <Link
-                  to={ '/invoices/invoices' }
+                  to={ '/invoice/invoices' }
                   className="px-8 py-4 flex flex-col items-center justify-center hover:bg-slate-50 cursor-pointer"
                 >
                   <div className="text-xl md:text-3xl font-semibold text-gray-800">
@@ -73,7 +73,7 @@ const InvoicesOverview = () => {
                   <p className="text-sm text-ellipsis whitespace-nowrap overflow-hidden mt-2">New receipt</p>
                 </div>
                 <Link
-                  to={ '/invoices/receipts' }
+                  to={ '/invoice/receipts' }
                   className="px-8 py-4 flex flex-col items-center justify-center hover:bg-slate-50 cursor-pointer"
                 >
                   <div className="text-xl md:text-3xl font-semibold text-gray-800">
