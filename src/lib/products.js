@@ -276,7 +276,26 @@ const identity = [
     dashboardLink: '/govt-id',
     status: 'coming-soon',
     categories: ['identity'],
-    type: 'document'
+    type: 'document',
+    summary: `Enhance identity verification and compliance with our AI dashboard, providing insights through Government ID analysis.`,
+    features: [
+      `ID Verification`,
+      `Document Analysis`,
+      `Security Checks`,
+      `Fraud Detection`,
+      `Biometric Match`,
+      `Data Extraction`,
+      `Compliance Tracking`,
+      `User Profiling`,
+      `Authentication Insights`,
+      `Regulatory Compliance`,
+    ],
+    flow: [
+      `Securely acquires government data from authorized sources or users.`,
+      `Process and extract relevant information from the government data.`,
+      `Conducts in-depth analysis, including identity verification, data validation, and compliance checks.`,
+      `Users receive actionable insights, ensuring data integrity and informed decision-making in compliance with government regulations.`,
+    ]
   },
   {
     name: 'Social analytics',
@@ -644,7 +663,7 @@ const markets = [
   {
     name: 'Money',
     slug: 'money',
-    description: `...`,
+    description: `Efficiently manage and optimize financial resources.`,
     backgroundColor: '!bg-green-700',
     textColor: '!text-green-700',
     icon: IconCurrencyNaira,
@@ -810,5 +829,3 @@ export const categories = [
 ];
 
 export default products;
-
-console.log(products.map(p => p.name).join(', '))
