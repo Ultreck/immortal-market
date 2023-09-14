@@ -1,77 +1,61 @@
-import { createElement, useState } from 'react';
+import { createElement } from 'react';
 import classNames from "classnames";
-import Checkbox from "@/components/global/Checkbox.jsx";
 import Button from "@/components/global/Button.jsx";
-import { useToast } from "@/hooks/use-toast.jsx";
 import Card from "@/components/global/Card.jsx";
 import PropTypes from "prop-types";
+import { IconArrowRight, IconCheck } from "@tabler/icons-react";
 
-const ProductOnboarding = ({ product, onSubmit, isLoading }) => {
-  const toast = useToast();
-  const [accepted, setAccepted] = useState(false);
-
-  const handleContinue = () => {
-    if (!accepted) return toast.error('Kindly accept terms and conditions before proceeding');
-    onSubmit();
-  };
-
+const ProductOnboarding = ({ product, onStart, isLoading }) => {
   return (
-    <div className="bg-slate-50 px-6">
-      <div className="max-w-[600px] mx-auto py-12">
-        <div className="flex items-center">
-          <div
-            className={ classNames('w-16 h-16 rounded-3xl flex items-center justify-center text-white', product.backgroundColor) }
-          >
-            { createElement(product.icon, { size: 36 }) }
-          </div>
-          <div className="ml-4">
-            <p className="font-semibold text-lg">{ product.name }</p>
-            <p>{ product.description }</p>
+    <div className="bg-slate-50">
+      <div
+        className={ classNames("fixed z-[1] bottom-0 w-1/4 h-full rounded-tr-[300px] opacity-5", product.backgroundColor) }
+      />
+      <div className="container !max-w-6xl relative z-[2]">
+        <div className="h-screen grid grid-cols-12 gap-16 items-center py-12">
+          <Card className="col-span-7 overflow-hidden">
+            <img src={ `/images/${ product.slug }.png` } alt="Financial report"/>
+          </Card>
+          <div className="col-span-5">
+            <div className="flex items-center">
+              <div
+                className={ classNames('w-10 h-10 rounded-3xl flex items-center justify-center text-white', product.backgroundColor) }
+              >
+                { createElement(product.icon, { size: 24 }) }
+              </div>
+              <div className="ml-4 flex items-center">
+                <p className="font-semibold text-lg">{ product.name }</p>
+                {
+                  product.status === 'coming-soon' && (
+                    <div className="px-2 py-0.5 rounded-full text-xs bg-gray-500 text-white w-max ml-3">
+                      Coming soon
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+            <p className="mt-6 max-w-lg text-[1.04rem]">{ product.summary }</p>
+            <ul className="mt-8 space-y-1">
+              {
+                product.features.map(f => (
+                  <li key={ f } className="flex items-center">
+                    <IconCheck size="20" className="mr-3"/>{ f }
+                  </li>
+                ))
+              }
+            </ul>
+            {
+              (!!onStart && product.status !== 'coming-soon') && (
+                <Button
+                  onClick={ onStart } className="mt-8" loading={ isLoading }
+                  rightIcon={ <IconArrowRight size="20"/> }
+                >
+                  Start
+                </Button>
+              )
+            }
           </div>
         </div>
-        <Card className="p-8 md:p-12 mt-10">
-          <h2 className="mb-6 font-medium">
-            Kindly accept the terms and conditions before proceeding
-          </h2>
-          <div className="space-y-4">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus accusantium alias amet
-              consequatur et illum inventore modi nostrum nulla quia rem, repellat repellendus sapiente sequi
-              suscipit vel voluptatem! Ad asperiores cupiditate dolorum ducimus eius eligendi, est harum
-              impedit
-              iste maiores modi odit, officia, pariatur quae ullam vel voluptatum? Accusantium eum
-              exercitationem modi non odit quas, reprehenderit? Animi dolor ducimus ea molestias
-              necessitatibus
-              pariatur quas repellendus? Et illo iusto modi nostrum. Corporis dicta distinctio illum
-              laboriosam
-              libero natus quidem voluptatum.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus accusantium alias amet
-              consequatur et illum inventore modi nostrum nulla quia rem, repellat repellendus sapiente sequi
-              suscipit vel voluptatem! Ad asperiores cupiditate dolorum ducimus eius eligendi, est harum
-              impedit
-              iste maiores modi odit, officia, pariatur quae ullam vel voluptatum? Accusantium eum
-              exercitationem modi non odit quas, reprehenderit? Animi dolor ducimus ea molestias
-              necessitatibus
-              pariatur quas repellendus? Et illo iusto modi nostrum. Corporis dicta distinctio illum
-              laboriosam
-              libero natus quidem voluptatum.
-            </p>
-          </div>
-          <Checkbox
-            value={ accepted } onChange={ e => setAccepted(e.target.checked) }
-            disabled={ isLoading } className="mt-6"
-          >
-            I agree to the terms and conditions
-          </Checkbox>
-          <Button
-            onClick={ handleContinue } className="mt-10"
-            loading={ isLoading }
-          >
-            Continue
-          </Button>
-        </Card>
       </div>
     </div>
   );
@@ -79,7 +63,7 @@ const ProductOnboarding = ({ product, onSubmit, isLoading }) => {
 
 ProductOnboarding.propTypes = {
   product: PropTypes.object,
-  onSubmit: PropTypes.func.isRequired,
+  onStart: PropTypes.func,
   isLoading: PropTypes.bool
 }
 

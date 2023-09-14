@@ -69,19 +69,17 @@ const CustomReportLayout = () => {
         ) : (
           <>
             {
-              settings ? (
-                <>
-                  <AppDashboardLayout logo={ Logo } links={ links }>
-                    <DashboardContent>
-                      <Outlet/>
-                    </DashboardContent>
-                  </AppDashboardLayout>
-                </>
+              (settings && product.status !== 'coming-soon') ? (
+                <AppDashboardLayout logo={ Logo } links={ links }>
+                  <DashboardContent>
+                    <Outlet/>
+                  </DashboardContent>
+                </AppDashboardLayout>
               ) : (
                 <ProductOnboarding
                   product={ product }
-                  onSubmit={ start }
                   isLoading={ isCreateSettingsLoading || isFetching }
+                  onStart={ start }
                 />
               )
             }

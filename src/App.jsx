@@ -8,7 +8,7 @@ import RequireNoAuth from "./components/core/shared/RequireNoAuth.jsx";
 import AuthLayout from "./components/core/auth/AuthLayout.jsx";
 import Verification from "./pages/Verification.jsx";
 import RequireAuthUnverified from "./components/core/shared/RequireAuthUnverified.jsx";
-import StatementLayout from "./components/core/statement/overview/StatementLayout.jsx";
+import StatementLayout from "./components/core/statement/StatementLayout.jsx";
 import RequireAuthBusiness from "./components/core/shared/RequireAuthBusiness.jsx";
 import StatementOverview from "./pages/statement/Overview.jsx";
 import SetupBusiness from "./pages/SetupBusiness.jsx";

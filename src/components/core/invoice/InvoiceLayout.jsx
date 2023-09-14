@@ -68,7 +68,7 @@ const InvoiceLayout = () => {
         ) : (
           <>
             {
-              settings ? (
+              (settings && product.status !== 'coming-soon') ? (
                 <AppDashboardLayout logo={ Logo } links={ links }>
                   <DashboardContent>
                     <Outlet/>
@@ -78,7 +78,7 @@ const InvoiceLayout = () => {
                 <ProductOnboarding
                   product={ product }
                   isLoading={ isCreateSettingsLoading || isFetching }
-                  onSubmit={ start }
+                  onStart={ start }
                 />
               )
             }

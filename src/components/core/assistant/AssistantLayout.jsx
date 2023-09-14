@@ -5,6 +5,7 @@ import products from "@/lib/products.js";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { Outlet } from "react-router-dom";
+import ProductOnboarding from "@/components/core/shared/ProductOnboarding.jsx";
 
 const links = [
   { name: 'Overview', href: '/assistant', icon: <IconLayout2 size="20"/> },
@@ -32,9 +33,19 @@ Logo.propTypes = {
 
 const AssistantLayout = () => {
   return (
-    <AppDashboardLayout logo={ Logo } links={ links }>
-      <Outlet/>
-    </AppDashboardLayout>
+    <>
+      {
+        product.status === 'coming-soon' ? (
+          <ProductOnboarding
+            product={ product }
+          />
+        ) : (
+          <AppDashboardLayout logo={ Logo } links={ links }>
+            <Outlet/>
+          </AppDashboardLayout>
+        )
+      }
+    </>
   );
 };
 

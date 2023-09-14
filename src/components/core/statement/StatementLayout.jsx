@@ -68,7 +68,7 @@ const StatementLayout = () => {
         ) : (
           <>
             {
-              settings ? (
+              (settings && product.status !== 'coming-soon') ? (
                 <AppDashboardLayout logo={ Logo } links={ links }>
                   <DashboardContent>
                     <Outlet/>
@@ -77,8 +77,8 @@ const StatementLayout = () => {
               ) : (
                 <ProductOnboarding
                   product={ product }
-                  onSubmit={ start }
                   isLoading={ isCreateSettingsLoading || isFetching }
+                  onStart={ start }
                 />
               )
             }
