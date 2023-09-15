@@ -1,13 +1,11 @@
-import { IconChevronDown, IconLogout, IconUserCog } from "@tabler/icons-react";
+import { IconChevronDown, IconLogout } from "@tabler/icons-react";
 import classNames from "classnames";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/use-auth.jsx";
 import SimpleDropdown from "@/components/global/SimpleDropdown.jsx";
 import PropTypes from "prop-types";
 
 const UserDropdown = ({ className }) => {
   const { user, logout } = useAuth();
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
@@ -27,7 +25,6 @@ const UserDropdown = ({ className }) => {
         </div>
       }
       items={ [
-        { text: 'Account settings', icon: <IconUserCog size="18"/>, onClick: () => navigate('/account') },
         { text: 'Logout', icon: <IconLogout size="18"/>, onClick: handleLogout },
       ] }
     />

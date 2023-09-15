@@ -19,9 +19,6 @@ const DashboardLayout = ({ children }) => {
                 <Link to={ "/" } className="flex items-center">
                   Home
                 </Link>
-                <Link to={ "/wallet" } className="flex items-center">
-                  Wallet
-                </Link>
               </div>
               <div className="md:hidden flex items-center space-x-5">
                 <Link to={ "/" } className="flex items-center">
