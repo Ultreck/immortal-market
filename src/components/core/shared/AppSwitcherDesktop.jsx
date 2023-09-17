@@ -45,7 +45,7 @@ const AppSwitcherDesktop = () => {
                     {
                       products.slice(0, 5).map((product) => (
                         <Link
-                          key={ product.name } to={ product.dashboardLink }
+                          key={ product.name } to={ product.link }
                           className="flex flex-col items-center rounded-2xl text-center px-2 py-4 transition duration-150 ease-in-out hover:bg-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
                           <div

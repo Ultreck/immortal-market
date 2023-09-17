@@ -9,11 +9,6 @@ import HelpTrainModel from "@/components/core/HelpTrainModel.jsx";
 import Hover from "@/components/global/Hover.jsx";
 import { IconRobot } from "@tabler/icons-react";
 
-const featured = products.filter(p => p.categories.includes('featured'));
-const highlighted = featured.at(0);
-const top = featured.slice(1, featured.length);
-const bottom = featured.length > 3 ? featured.at(-1) : null;
-
 const Dashboard = () => {
   const [selected, setSelected] = useState(null);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
@@ -45,44 +40,6 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="container py-12 md:py-16 !max-w-5xl min-h-screen flex flex-col space-y-10">
-        <div>
-          <h3 className="text-xl font-medium mb-8 px-1 border-b pb-6">Featured</h3>
-          <div className="grid md:grid-cols-11 gap-4 md:gap-6">
-            <div className="md:col-span-5">
-              <FeaturedProductCard
-                product={ highlighted }
-                key={ highlighted.name }
-                onClick={ handleProductClick }
-                gradient
-              />
-            </div>
-            <div className="md:col-span-6 grid md:grid-cols-2 gap-4 md:gap-6">
-              {
-                top.slice(0, 2).map(product => (
-                  <div key={ product.name }>
-                    <ProductCard
-                      product={ product }
-                      onClick={ handleProductClick }
-                      onTrain={ handleTrainClick }
-                    />
-                  </div>
-                ))
-              }
-              {
-                !!bottom && (
-                  <div className="md:col-span-2">
-                    <ProductCard
-                      product={ bottom }
-                      key={ bottom.name }
-                      onClick={ handleProductClick }
-                      onTrain={ handleTrainClick }
-                    />
-                  </div>
-                )
-              }
-            </div>
-          </div>
-        </div>
         {
           categories.filter(c => c.id !== 'featured').map((c, i) => {
             const items = products.filter(p => p.categories.includes(c.id));
@@ -118,7 +75,7 @@ const Dashboard = () => {
                   )
                 }
                 {
-                  items.length === 4 && (
+                  (items.length === 4 && i % 2 !== 0) && (
                     <FourCols
                       items={ items }
                       onClick={ handleProductClick }
@@ -127,7 +84,25 @@ const Dashboard = () => {
                   )
                 }
                 {
-                  (items.length !== 2 && items.length !== 4 && items.length !== 3) && (
+                  (items.length === 4 && i % 2 === 0) && (
+                    <FourCols2
+                      items={ items }
+                      onClick={ handleProductClick }
+                      onTrain={ handleTrainClick }
+                    />
+                  )
+                }
+                {
+                  items.length === 5 && (
+                    <FiveCols
+                      items={ items }
+                      onClick={ handleProductClick }
+                      onTrain={ handleTrainClick }
+                    />
+                  )
+                }
+                {
+                  (![2, 3, 4, 5].includes(items.length)) && (
                     <div className={ classNames("grid md:grid-cols-3 gap-4 md:gap-6") }>
                       {
                         items.map(product => (
@@ -135,6 +110,7 @@ const Dashboard = () => {
                             key={ product.name }
                             product={ product }
                             onClick={ handleProductClick }
+                            onTrain={ handleTrainClick }
                           />
                         ))
                       }
@@ -222,6 +198,7 @@ const ThreeCols2 = ({ items = [], onClick, onTrain }) => {
           product={ left }
           key={ left.name }
           onClick={ onClick }
+          onTrain={ onTrain }
           style="wide"
         />
       </div>
@@ -262,6 +239,7 @@ const FourCols = ({ items = [], onClick, onTrain }) => {
               <ProductCard
                 product={ product }
                 onClick={ onClick }
+                onTrain={ onTrain }
               />
             </div>
           ))
@@ -284,6 +262,7 @@ const FourCols = ({ items = [], onClick, onTrain }) => {
           product={ highlighted }
           key={ highlighted.name }
           onClick={ onClick }
+          onTrain={ onTrain }
           style="wide"
         />
       </div>
@@ -296,6 +275,97 @@ FourCols.propTypes = {
   onClick: PropTypes.func.isRequired,
   onTrain: PropTypes.func,
 };
+
+const FourCols2 = ({ items = [], onClick, onTrain }) => {
+  const highlighted = items[0];
+  const top = [items[1], items[2]];
+  const bottom = items[3];
+
+  return (
+    <div className="grid md:grid-cols-11 gap-4 md:gap-6">
+      <div className="md:col-span-5">
+        <FeaturedProductCard
+          product={ highlighted }
+          key={ highlighted.name }
+          onClick={ onClick }
+          onTrain={ onTrain }
+          style="wide"
+        />
+      </div>
+      <div className="md:col-span-6 grid md:grid-cols-2 gap-4 md:gap-6">
+        {
+          top.slice(0, 2).map(product => (
+            <div key={ product.name }>
+              <ProductCard
+                product={ product }
+                onClick={ onClick }
+                onTrain={ onTrain }
+              />
+            </div>
+          ))
+        }
+        {
+          !!bottom && (
+            <div className="md:col-span-2">
+              <ProductCard
+                product={ bottom }
+                key={ bottom.name }
+                onClick={ onClick }
+                onTrain={ onTrain }
+              />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  )
+}
+
+FourCols2.propTypes = {
+  items: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onTrain: PropTypes.func,
+};
+
+const FiveCols = ({ items = [], onClick, onTrain }) => {
+  return (
+    <div className="space-y-4 md:space-y-6">
+      <div className={ classNames("grid md:grid-cols-2 gap-4 md:gap-6") }>
+        {
+          items.slice(0, 2).map(product => (
+            <FeaturedProductCard
+              product={ product }
+              key={ product.name }
+              onClick={ onClick }
+              onTrain={ onTrain }
+              style="wide"
+            />
+          ))
+        }
+      </div>
+      <div className={ classNames("grid md:grid-cols-3 gap-4 md:gap-6") }>
+        {
+          items.slice(2, 5).map(product => (
+            <ProductCard
+              product={ product }
+              key={ product.name }
+              onClick={ onClick }
+              onTrain={ onTrain }
+              style="tall"
+            />
+          ))
+        }
+      </div>
+    </div>
+  )
+}
+
+FiveCols.propTypes = {
+  items: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onTrain: PropTypes.func,
+};
+
 
 const ProductCard = ({ product, onClick, onTrain, style = 'normal' }) => {
   const getIconSize = () => {
@@ -385,53 +455,83 @@ ProductCard.propTypes = {
   style: PropTypes.string
 };
 
-const FeaturedProductCard = ({ product, onClick, gradient = false }) => {
+const FeaturedProductCard = ({ product, onClick, onTrain, gradient = false }) => {
   return (
-    <Card
-      onClick={ () => onClick(product) }
-      className={ classNames(
-        'relative rounded-2xl transition-all h-full border-0 !shadow-none text-white hover:-translate-y-1 cursor-pointer flex flex-col justify-center overflow-hidden',
-        product.backgroundColor,
-      ) }
-    >
+    <Hover className="h-full">
       {
-        gradient && (
-          <img
-            src="/images/bg.png" alt=""
-            className="absolute top-0 scale-125 -rotate-90 left-0 w-full z-[1] h-full object-cover pointer-events-none"
-          />
-        )
-      }
-      <div className="px-10 py-8 relative z-[2]">
-        <div>
-          <div className="rounded-2xl justify-center text-white">
-            { createElement(product.icon, { size: 100 }) }
-          </div>
-        </div>
-        <div className="mt-12">
-          <div className="flex items-center">
-            <h4 className="font-medium text-[1.3rem]">{ product.name }</h4>
-          </div>
-          <p className="text-[1.1rem] leading-snug mt-2 opacity-80 max-w-[200px]">
-            { product.description }
-          </p>
-        </div>
-      </div>
-      {
-        product.status === 'coming-soon' && (
-          <div
-            className="absolute top-0 right-0 z-[2] px-3 py-1 ml-2 leading-none bg-slate-100/20 text-white rounded-bl-lg text-xs inline-flex"
+        (hovered) => (
+          <Card
+            onClick={ product.type === 'document' ? null : () => onClick(product) }
+            className={ classNames(
+              'relative rounded-2xl transition-all h-full border-0 !shadow-none text-white hover:-translate-y-1 cursor-pointer flex flex-col justify-center overflow-hidden',
+              product.backgroundColor,
+            ) }
           >
-            Coming soon
-          </div>
+            {
+              gradient && (
+                <img
+                  src="/images/bg.png" alt=""
+                  className="absolute top-0 scale-125 -rotate-90 left-0 w-full z-[1] h-full object-cover pointer-events-none"
+                />
+              )
+            }
+            <div className="px-10 py-8 relative z-[2]">
+              <div>
+                <div className="rounded-2xl justify-center text-white">
+                  { createElement(product.icon, { size: 100 }) }
+                </div>
+              </div>
+              <div className="mt-12">
+                <div className="flex items-center">
+                  <h4 className="font-medium text-[1.3rem]">{ product.name }</h4>
+                </div>
+                <p className="text-[1.1rem] leading-snug mt-2 opacity-80 max-w-[200px]">
+                  { product.description }
+                </p>
+              </div>
+            </div>
+            {
+              product.type === 'document' && (
+                <div
+                  className={ classNames('absolute inset-0 h-full inset-x-0 z-[2] transition-all duration-300', {
+                    'opacity-0': !hovered, 'opacity-1': hovered,
+                  }) }
+                >
+                  <div
+                    className="h-full flex flex-col items-center justify-center space-y-2 px-4 py-6 rounded-3xl bg-black/20"
+                  >
+                    <Button onClick={ () => onClick(product) } color="white">
+                      Preview
+                    </Button>
+                    <Button
+                      onClick={ () => onTrain?.(product) }
+                      color="white" leftIcon={ <IconRobot size="20"/> }
+                    >
+                      Train model
+                    </Button>
+                  </div>
+                </div>
+              )
+            }
+            {
+              product.status === 'coming-soon' && (
+                <div
+                  className="absolute top-0 right-0 z-[2] px-3 py-1 ml-2 leading-none bg-slate-100/20 text-white rounded-bl-lg text-xs inline-flex"
+                >
+                  Coming soon
+                </div>
+              )
+            }
+          </Card>
         )
       }
-    </Card>
+    </Hover>
   );
 };
 
 FeaturedProductCard.propTypes = {
   product: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
+  onTrain: PropTypes.func,
   gradient: PropTypes.bool
 };

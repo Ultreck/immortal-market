@@ -14,7 +14,7 @@ const ProductOnboarding = ({ product, onStart, isLoading }) => {
       <div className="container !max-w-6xl relative z-[2]">
         <div className="h-screen grid grid-cols-12 gap-16 items-center py-12">
           <Card className="col-span-7 overflow-hidden">
-            <img src={ `/images/${ product.slug }.png` } alt="Financial report"/>
+            <img src={ `/images/${ product.slug }.png` } alt={ product.name }/>
           </Card>
           <div className="col-span-5">
             <div className="flex items-center">
