@@ -26,19 +26,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="bg-[#11161b] text-white pt-12 md:pt-16 pb-12 md:pb-14 relative">
-        <div className="absolute inset-0 bg-cover bg-grid opacity-30"/>
-        <div className="container !max-w-5xl">
-          <h1
-            className="text-[2rem] md:text-4xl leading-[1.3] font-semibold max-w-[300px] md:max-w-md flex items-center"
-          >
-            Insights for every business and industry
-          </h1>
-          <p className="mt-3 md:mt-4 opacity-75">
-            Select a product below to continue
-          </p>
-        </div>
-      </div>
       <div className="container py-12 md:py-16 !max-w-5xl min-h-screen flex flex-col space-y-10">
         {
           categories.filter(c => c.id !== 'featured').map((c, i) => {
@@ -57,7 +44,7 @@ const Dashboard = () => {
                   )
                 }
                 {
-                  (items.length === 3 && i % 2 === 0) && (
+                  (items.length === 3 && i % 2 !== 0) && (
                     <ThreeCols
                       items={ items }
                       onClick={ handleProductClick }
@@ -66,7 +53,7 @@ const Dashboard = () => {
                   )
                 }
                 {
-                  (items.length === 3 && i % 2 !== 0) && (
+                  (items.length === 3 && i % 2 === 0) && (
                     <ThreeCols2
                       items={ items }
                       onClick={ handleProductClick }
@@ -235,37 +222,34 @@ const FourCols = ({ items = [], onClick, onTrain }) => {
       <div className="md:col-span-6 grid md:grid-cols-2 gap-4 md:gap-6">
         {
           top.slice(0, 2).map(product => (
-            <div key={ product.name }>
-              <ProductCard
-                product={ product }
-                onClick={ onClick }
-                onTrain={ onTrain }
-              />
-            </div>
+            <ProductCard
+              key={ product.name }
+              product={ product }
+              onClick={ onClick }
+              onTrain={ onTrain }
+            />
           ))
         }
         {
           !!bottom && (
-            <div className="md:col-span-2">
-              <ProductCard
-                product={ bottom }
-                key={ bottom.name }
-                onClick={ onClick }
-                onTrain={ onTrain }
-              />
-            </div>
+            <ProductCard
+              className="md:col-span-2"
+              product={ bottom }
+              key={ bottom.name }
+              onClick={ onClick }
+              onTrain={ onTrain }
+            />
           )
         }
       </div>
-      <div className="md:col-span-5">
-        <FeaturedProductCard
-          product={ highlighted }
-          key={ highlighted.name }
-          onClick={ onClick }
-          onTrain={ onTrain }
-          style="wide"
-        />
-      </div>
+      <FeaturedProductCard
+        className="md:col-span-5"
+        product={ highlighted }
+        key={ highlighted.name }
+        onClick={ onClick }
+        onTrain={ onTrain }
+        style="wide"
+      />
     </div>
   )
 }
@@ -295,25 +279,23 @@ const FourCols2 = ({ items = [], onClick, onTrain }) => {
       <div className="md:col-span-6 grid md:grid-cols-2 gap-4 md:gap-6">
         {
           top.slice(0, 2).map(product => (
-            <div key={ product.name }>
-              <ProductCard
-                product={ product }
-                onClick={ onClick }
-                onTrain={ onTrain }
-              />
-            </div>
+            <ProductCard
+              key={ product.name }
+              product={ product }
+              onClick={ onClick }
+              onTrain={ onTrain }
+            />
           ))
         }
         {
           !!bottom && (
-            <div className="md:col-span-2">
-              <ProductCard
-                product={ bottom }
-                key={ bottom.name }
-                onClick={ onClick }
-                onTrain={ onTrain }
-              />
-            </div>
+            <ProductCard
+              className="md:col-span-2"
+              product={ bottom }
+              key={ bottom.name }
+              onClick={ onClick }
+              onTrain={ onTrain }
+            />
           )
         }
       </div>
@@ -329,10 +311,10 @@ FourCols2.propTypes = {
 
 const FiveCols = ({ items = [], onClick, onTrain }) => {
   return (
-    <div className="space-y-4 md:space-y-6">
-      <div className={ classNames("grid md:grid-cols-2 gap-4 md:gap-6") }>
+    <div className="grid md:grid-cols-11 gap-4 md:gap-6">
+      <div className="md:col-span-5">
         {
-          items.slice(0, 2).map(product => (
+          [items[0]].map(product => (
             <FeaturedProductCard
               product={ product }
               key={ product.name }
@@ -343,15 +325,14 @@ const FiveCols = ({ items = [], onClick, onTrain }) => {
           ))
         }
       </div>
-      <div className={ classNames("grid md:grid-cols-3 gap-4 md:gap-6") }>
+      <div className="md:col-span-6 grid md:grid-cols-2 gap-4 md:gap-6">
         {
-          items.slice(2, 5).map(product => (
+          items.slice(1, 5).map(product => (
             <ProductCard
               product={ product }
               key={ product.name }
               onClick={ onClick }
               onTrain={ onTrain }
-              style="tall"
             />
           ))
         }
@@ -367,7 +348,7 @@ FiveCols.propTypes = {
 };
 
 
-const ProductCard = ({ product, onClick, onTrain, style = 'normal' }) => {
+const ProductCard = ({ product, onClick, onTrain, style = 'normal', className }) => {
   const getIconSize = () => {
     if (style === 'normal') return 44;
     if (style === 'wide') return 90;
@@ -375,7 +356,7 @@ const ProductCard = ({ product, onClick, onTrain, style = 'normal' }) => {
   };
 
   return (
-    <Hover>
+    <Hover className={ className }>
       {
         (hovered) => (
           <Card
@@ -452,12 +433,13 @@ ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   onTrain: PropTypes.func,
-  style: PropTypes.string
+  style: PropTypes.string,
+  className: PropTypes.string
 };
 
-const FeaturedProductCard = ({ product, onClick, onTrain, gradient = false }) => {
+const FeaturedProductCard = ({ product, onClick, onTrain, gradient = false, className }) => {
   return (
-    <Hover className="h-full">
+    <Hover className={ classNames('h-full', className) }>
       {
         (hovered) => (
           <Card
@@ -533,5 +515,6 @@ FeaturedProductCard.propTypes = {
   product: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   onTrain: PropTypes.func,
-  gradient: PropTypes.bool
+  gradient: PropTypes.bool,
+  className: PropTypes.string
 };

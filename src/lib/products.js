@@ -148,8 +148,8 @@ const document = [
     name: 'Analyze any document',
     slug: 'documents',
     description: `Personalized insights for precise analysis.`,
-    backgroundColor: '!bg-red-700',
-    textColor: '!text-red-700',
+    backgroundColor: '!bg-red-800',
+    textColor: '!text-red-800',
     icon: IconEditCircle,
     link: '/documents',
     status: 'coming-soon',
@@ -247,8 +247,8 @@ const markets = [
     name: 'Capital',
     slug: 'capital',
     description: `Strategic approaches to resource management.`,
-    backgroundColor: '!bg-blue-700',
-    textColor: '!text-blue-700',
+    backgroundColor: '!bg-blue-800',
+    textColor: '!text-blue-800',
     icon: IconCashBanknote,
     homeLink: '/capital',
     link: '/capital',
@@ -568,11 +568,11 @@ const products = [
 ];
 
 export const categories = [
-  { id: 'banking', name: "Banking" },
-  { id: 'document', name: "Document" },
-  { id: 'accounting', name: "Accounting" },
-  { id: 'identity', name: "Identity" },
-  { id: 'markets', name: "Markets" },
+  { id: 'banking', name: "AI for Banking" },
+  { id: 'document', name: "AI for Document" },
+  { id: 'accounting', name: "AI for Accounting" },
+  { id: 'identity', name: "AI for Identity" },
+  { id: 'markets', name: "AI for Markets" },
 ];
 
 export default products;
