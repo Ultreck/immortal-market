@@ -1,30 +1,32 @@
-import { IconBooks, IconLayout } from "@tabler/icons-react";
+import { IconFileAnalytics, IconFileInvoice, IconLayout, IconMessageChatbot, IconReceipt } from "@tabler/icons-react";
 import { createElement, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Loader from "@/components/global/Loader.jsx";
 import AppDashboardLayout from "@/components/core/shared/AppDashboardLayout.jsx";
-import DashboardContent from "@/components/core/shared/DashboardContent.jsx";
 import ProductOnboarding from "@/components/core/shared/ProductOnboarding.jsx";
-import products from "@/lib/products.js";
-import classNames from "classnames";
-import PropTypes from "prop-types";
 import { useToast } from "@/hooks/use-toast.jsx";
 import { useGetUserBusiness } from "@/api/business.js";
-import { useCreateCustomReportSettings, useGetCustomReportSettings } from "@/api/custom-report.js";
+import classNames from "classnames";
+import { useCreateInvoicesSettings, useGetInvoicesSettings } from "@/api/invoice.js";
+import { categories } from "@/lib/products.js";
+import PropTypes from "prop-types";
 import { Outlet } from "react-router-dom";
 
-const links = [
-  { name: 'Overview', href: '/custom-report', icon: <IconLayout size="20"/> },
-  { name: 'Reports', href: '/custom-report/reports', icon: <IconBooks size="20"/> },
-];
+const product = categories.find(p => p.slug === 'documents');
 
-const product = products.find(p => p.slug === 'custom-report');
+const links = [
+  { name: 'Overview', href: `/${ product.slug }/overview`, icon: <IconLayout size="20"/> },
+  { name: 'Custom', href: `/${ product.slug }/custom`, icon: <IconFileAnalytics size="20"/> },
+  { name: 'Receipts', href: `/${ product.slug }/receipts`, icon: <IconReceipt size="20"/> },
+  { name: 'Invoices', href: `/${ product.slug }/invoices`, icon: <IconFileInvoice size="20"/> },
+  { name: 'Conversation', href: `/${ product.slug }/conversation`, icon: <IconMessageChatbot size="20"/> },
+];
 
 const Logo = ({ className }) => (
   <div className={ className }>
     <div className="text-[1.05rem] font-medium flex items-center">
       <div
-        className={ classNames("w-10 h-10 rounded-full mr-3 flex items-center justify-center", product.backgroundColor) }
+        className={ classNames("w-10 h-10 rounded-full mr-3 flex items-center justify-center", product.colors.bg) }
       >
         { createElement(product.icon, { size: 22, className: `text-white` }) }
       </div>
@@ -37,21 +39,19 @@ Logo.propTypes = {
   className: PropTypes.string
 };
 
-const CustomReportLayout = () => {
+const DocumentLayout = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const [isFetching, setIsFetching] = useState(false);
   const { data: business } = useGetUserBusiness();
-  const { data: { settings } = {}, isLoading: isSettingsLoading } = useGetCustomReportSettings(business._id);
-  const {
-    mutateAsync: createSettings, isLoading: isCreateSettingsLoading
-  } = useCreateCustomReportSettings(business._id);
+  const { data: { settings } = {}, isLoading: isSettingsLoading, } = useGetInvoicesSettings(business._id);
+  const { mutateAsync: createSettings, isLoading: isCreateSettingsLoading } = useCreateInvoicesSettings(business._id);
 
   const start = async () => {
     try {
       await createSettings(null);
       setIsFetching(true)
-      await qc.invalidateQueries(['custom-report', 'settings']);
+      await qc.invalidateQueries(['invoices', 'settings']);
       setIsFetching(false)
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
@@ -69,11 +69,9 @@ const CustomReportLayout = () => {
         ) : (
           <>
             {
-              (settings && product.status !== 'coming-soon') ? (
+              (settings && product.status === 'active') ? (
                 <AppDashboardLayout logo={ Logo } links={ links }>
-                  <DashboardContent>
-                    <Outlet/>
-                  </DashboardContent>
+                  <Outlet/>
                 </AppDashboardLayout>
               ) : (
                 <ProductOnboarding
@@ -90,4 +88,4 @@ const CustomReportLayout = () => {
   );
 };
 
-export default CustomReportLayout;
+export default DocumentLayout;

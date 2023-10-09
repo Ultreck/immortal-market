@@ -19,12 +19,12 @@ const useCountdown = (targetDate) => {
 };
 
 const getReturnValues = (countDown) => {
-  const days = Math.floor(countDown / (1000 * 60 * 60 * 24));
+  const days = Math.floor(countDown / (1000 * 60 * 60 * 24)) || 0;
   const hours = Math.floor(
     (countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
-  const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
+  ) || 0;
+  const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60)) || 0;
+  const seconds = Math.floor((countDown % (1000 * 60)) / 1000) || 0;
 
   const expired = days + hours + minutes + seconds <= 0
   return { days, hours, minutes, seconds, expired };

@@ -1,7 +1,7 @@
-import Button from "@/components/global/Button";
-import Modal from "@/components/global/Modal";
-import { useDeleteConversation } from "@/api/conversations";
-import { useToast } from "@/hooks/use-toast";
+import Button from "@/components/global/Button.jsx";
+import Modal from "@/components/global/Modal.jsx";
+import { useDeleteConversation } from "@/api/conversations.js";
+import { useToast } from "@/hooks/use-toast.jsx";
 import { useQueryClient } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 

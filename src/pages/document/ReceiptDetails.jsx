@@ -11,7 +11,8 @@ import Card from "@/components/global/Card.jsx";
 import Image from "@/components/core/shared/Image.jsx";
 import Modal from "@/components/global/Modal.jsx";
 import Button from "@/components/global/Button.jsx";
-import ReceiptSummary from "@/components/core/invoice/ReceiptSummary.jsx";
+import ReceiptSummary from "@/components/core/document/receipts/ReceiptSummary.jsx";
+import DashboardContent from "@/components/core/shared/DashboardContent.jsx";
 
 const ReceiptDetails = () => {
   const { id } = useParams();
@@ -35,7 +36,7 @@ const ReceiptDetails = () => {
   };
 
   return (
-    <>
+    <DashboardContent>
       {
         isReceiptLoading ? (
           <>
@@ -111,7 +112,7 @@ const ReceiptDetails = () => {
           </Button>
         </div>
       </Modal>
-    </>
+    </DashboardContent>
   );
 };
 

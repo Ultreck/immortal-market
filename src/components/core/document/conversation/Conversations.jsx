@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { IconCheck, IconMessageCircle, IconMessagePlus } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useCreateConversation, useGetConversations } from "@/api/conversations";
-import { useToast } from "@/hooks/use-toast";
-import Button from "@/components/global/Button";
+import { useCreateConversation, useGetConversations } from "@/api/conversations.js";
+import { useToast } from "@/hooks/use-toast.jsx";
+import Button from "@/components/global/Button.jsx";
 import classNames from "classnames";
-import Modal from "@/components/global/Modal";
+import Modal from "@/components/global/Modal.jsx";
 import PropTypes from "prop-types";
 
 const Conversations = ({ onClick, selected }) => {

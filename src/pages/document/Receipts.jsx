@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { format } from "date-fns";
-import NewReceipt from "@/components/core/invoice/NewReceipt.jsx";
+import NewReceipt from "@/components/core/document/receipts/NewReceipt.jsx";
 import { IconExclamationCircle, IconPlus } from "@tabler/icons-react";
 import { formatCurrency } from "@/lib/utils.js";
 import DashboardTitle from "@/components/core/shared/DashboardTitle.jsx";
@@ -9,6 +9,7 @@ import { useGetReceipts } from "@/api/invoice.js";
 import { useGetUserBusiness } from "@/api/business.js";
 import { useNavigate } from "react-router-dom";
 import Card from "@/components/global/Card.jsx";
+import DashboardContent from "@/components/core/shared/DashboardContent.jsx";
 
 const Receipts = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Receipts = () => {
   const [isNewOpen, setIsNewOpen] = useState(false);
 
   return (
-    <>
+    <DashboardContent>
       <div className="flex items-center justify-between mb-10">
         <DashboardTitle text="Receipts" className="!m-0"/>
         <Button
@@ -101,7 +102,7 @@ const Receipts = () => {
         isOpen={ isNewOpen }
         onClose={ () => setIsNewOpen(false) }
       />
-    </>
+    </DashboardContent>
   );
 };
 

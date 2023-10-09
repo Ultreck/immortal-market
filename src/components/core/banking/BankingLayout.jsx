@@ -22,18 +22,18 @@ import { useCreateStatementSettings, useGetStatementSettings } from "@/api/state
 import { Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const links = [
-  { name: 'Overview', href: '/banking/overview', icon: <IconLayout size="20"/> },
-  { name: 'Statement insights', href: '/banking/statement', icon: <IconFileText size="20"/> },
-  { name: 'Customer insights', href: '/banking/customer', icon: <IconUserCircle size="20"/> },
-  { name: 'Portfolio insights', href: '/banking/portfolio', icon: <IconBriefcase size="20"/> },
-  { name: 'Treasury insights', href: '/banking/treasury', icon: <IconReportMoney size="20"/> },
-  { name: 'Credit modelling', href: '/banking/credit', icon: <IconChartHistogram size="20"/> },
-  { name: 'Subscription', href: '/banking/subscription', icon: <IconCreditCard size="20"/> },
-  { name: 'Settings', href: '/banking/settings', icon: <IconSettings2 size="20"/> },
-];
-
 const product = categories.find(p => p.id === 'banking');
+
+const links = [
+  { name: 'Overview', href: `/${ product.slug }/overview`, icon: <IconLayout size="20"/> },
+  { name: 'Statement insights', href: `/${ product.slug }/statement`, icon: <IconFileText size="20"/> },
+  { name: 'Customer insights', href: `/${ product.slug }/customer`, icon: <IconUserCircle size="20"/> },
+  { name: 'Portfolio insights', href: `/${ product.slug }/portfolio`, icon: <IconBriefcase size="20"/> },
+  { name: 'Treasury insights', href: `/${ product.slug }/treasury`, icon: <IconReportMoney size="20"/> },
+  { name: 'Credit modelling', href: `/${ product.slug }/credit`, icon: <IconChartHistogram size="20"/> },
+  { name: 'Subscription', href: `/${ product.slug }/subscription`, icon: <IconCreditCard size="20"/> },
+  { name: 'Settings', href: `/${ product.slug }/settings`, icon: <IconSettings2 size="20"/> },
+];
 
 const Logo = ({ className }) => (
   <div className={ className }>
@@ -82,7 +82,7 @@ const BankingLayout = () => {
         ) : (
           <>
             {
-              settings ? (
+              (settings && product.status === 'active') ? (
                 <AppDashboardLayout logo={ Logo } links={ links }>
                   <DashboardContent>
                     <Outlet/>

@@ -27,11 +27,12 @@ import { useAddLaunchSubscriber, useGetLaunchSubscriptions } from "@/api/misc.js
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast.jsx";
 import Loader from "@/components/global/Loader.jsx";
+import { format } from "date-fns";
 
 const ProductSummary = ({ product, isOpen, onClose }) => {
   const toast = useToast();
   const qc = useQueryClient();
-  const timer = useCountdown('09/01/2023');
+  const timer = useCountdown(product?.date);
   const [isFetching, setIsFetching] = useState(false);
   const { mutateAsync: notify, isLoading: isNotifyLoading } = useAddLaunchSubscriber();
   const { data: { subscriptions = [] } = {}, isLoading: isSubscriptionsLoading } = useGetLaunchSubscriptions();
@@ -69,7 +70,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                 />
               </div>
               <p className="mt-6">
-                { product.summary || `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid atque culpa cum deleniti.` }
+                { product.summary || `N/A` }
               </p>
             </div>
             <div className="px-8 md:px-12">
@@ -77,7 +78,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                 <div>
                   <h6 className="font-medium opacity-50">Going live in</h6>
                   <div className="text-[1.05rem] mt-[1px]">
-                    1st Sept 2023
+                    { product?.date ? format(new Date(product.date), 'do MMM, yyyy') : '--' }
                   </div>
                 </div>
                 <div className="text-end">
@@ -179,14 +180,6 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                   }
                 </div>
               </div>
-              <Card
-                className="flex items-center px-6 py-4 shadow-none border-0 !bg-red-500 text-white"
-              >
-                <p className="flex-1 pr-4">
-                  Upload your custom documents to help improve our models
-                </p>
-                <Button variant="outlined" color="white" size="sm">Upload</Button>
-              </Card>
             </div>
           </>
         )

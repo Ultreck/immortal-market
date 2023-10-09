@@ -5,23 +5,24 @@ import { format } from "date-fns";
 import { useQueryClient } from "@tanstack/react-query";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import IconButton from "@/components/global/IconButton";
-import Input from "@/components/global/Input";
-import TextArea from "@/components/global/TextArea";
-import Button from "@/components/global/Button";
-import { useUpdateReceipt } from "@/api/invoice";
-import { useGetUserBusiness } from "@/api/business";
-import { useToast } from "@/hooks/use-toast";
-import Select from "@/components/global/Select";
+import IconButton from "@/components/global/IconButton.jsx";
+import Input from "@/components/global/Input.jsx";
+import TextArea from "@/components/global/TextArea.jsx";
+import Button from "@/components/global/Button.jsx";
+import { useUpdateInvoice } from "@/api/invoice.js";
+import { useGetUserBusiness } from "@/api/business.js";
+import { useToast } from "@/hooks/use-toast.jsx";
+import Select from "@/components/global/Select.jsx";
 import PropTypes from "prop-types";
 
 const schema = yup.object({
-  number: yup.string().required('Receipt number is required'),
+  number: yup.string().required('Invoice number is required'),
   vendorName: yup.string().required('Vendor name is required'),
   vendorAddress: yup.string().required('Vendor address is required'),
   receiverName: yup.string().required('Receiver name is required'),
   receiverAddress: yup.string().required('Receiver address is required'),
-  date: yup.string().required('Receipt date is required'),
+  date: yup.string().required('Invoice date is required'),
+  dueDate: yup.string().required('Invoice due date is required'),
   tax: yup.number().min(0).optional(),
   discount: yup.number().min(0).optional(),
   shipping: yup.number().min(0).optional(),
@@ -37,28 +38,29 @@ const schema = yup.object({
   ).required()
 });
 
-const EditReceipt = ({ receipt, onBack }) => {
+const EditInvoice = ({ invoice, onBack }) => {
   const toast = useToast();
   const qc = useQueryClient();
   const { data: business } = useGetUserBusiness();
-  const { mutateAsync: update, isLoading: isUpdateLoading } = useUpdateReceipt(business._id, receipt._id);
+  const { mutateAsync: update, isLoading: isUpdateLoading } = useUpdateInvoice(business._id, invoice._id);
   const { register, handleSubmit, formState: { errors }, control, watch, setValue } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      number: receipt.number,
-      poNumber: receipt.poNumber,
-      currency: receipt.currency,
-      vendorName: receipt.vendorName,
-      vendorAddress: receipt.vendorAddress,
-      receiverName: receipt.receiverName,
-      receiverAddress: receipt.receiverAddress,
-      date: format(new Date(receipt.date), 'yyyy-MM-dd'),
-      subtotal: receipt.subtotal,
-      tax: receipt.tax,
-      discount: receipt.discount,
-      shipping: receipt.shipping,
-      total: receipt.total,
-      items: receipt.items
+      number: invoice.number,
+      poNumber: invoice.poNumber,
+      currency: invoice.currency,
+      vendorName: invoice.vendorName,
+      vendorAddress: invoice.vendorAddress,
+      receiverName: invoice.receiverName,
+      receiverAddress: invoice.receiverAddress,
+      date: format(new Date(invoice.date), 'yyyy-MM-dd'),
+      dueDate: format(new Date(invoice.dueDate), 'yyyy-MM-dd'),
+      subtotal: invoice.subtotal,
+      tax: invoice.tax,
+      discount: invoice.discount,
+      shipping: invoice.shipping,
+      total: invoice.total,
+      items: invoice.items
     }
   });
   const { append, fields, remove } = useFieldArray({ control, name: 'items' })
@@ -67,9 +69,9 @@ const EditReceipt = ({ receipt, onBack }) => {
     try {
       await update(values);
       onBack();
-      await qc.invalidateQueries(['receipts', receipt._id]);
-      await qc.invalidateQueries(['receipts']);
-      toast.success('Receipt updated');
+      await qc.invalidateQueries(['invoices', invoice._id]);
+      await qc.invalidateQueries(['invoices']);
+      toast.success('Invoice updated');
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }
@@ -98,12 +100,12 @@ const EditReceipt = ({ receipt, onBack }) => {
           onClick={ onBack } color="black" rounded
           icon={ <IconChevronLeft size="20"/> } size="sm" variant="outlined"
         />
-        <h3 className="font-medium">Edit receipt</h3>
+        <h3 className="font-medium">Edit invoice</h3>
       </div>
       <form onSubmit={ handleSubmit(onSubmit) }>
         <div className="space-y-2">
           <Input
-            label="Receipt number" bordered
+            label="Invoice number" bordered
             { ...register('number') }
             error={ errors?.number?.message }
             disabled={ isUpdateLoading }
@@ -145,80 +147,91 @@ const EditReceipt = ({ receipt, onBack }) => {
             error={ errors?.receiverAddress?.message }
             disabled={ isUpdateLoading }
           />
-          <Input
-            type="date"
-            label="Receipt date" bordered
-            { ...register('date') }
-            error={ errors?.date?.message }
-            disabled={ isUpdateLoading }
-          />
-          <div className="border border-gray-300 rounded-xl overflow-hidden pt-4">
-            <h4 className="font-medium mb-4 px-6">Line items</h4>
-            <div className="divide-y divide-gray-300">
-              {
-                fields.map((item, i) => (
-                  <div key={ item.id } className="space-y-2 py-4 px-6">
-                    <div className="flex items-center justify-between">
-                      <p className="text-md font-medium">Item #{ i + 1 }</p>
-                      <Button
-                        onClick={ () => remove(i) }
-                        size="xs" variant="outlined" color="red"
-                        leftIcon={ <IconX size="16" className="-mr-1"/> }
-                      >
-                        Remove
-                      </Button>
-                    </div>
-                    <Input
-                      label="Description" bordered
-                      { ...register(`items[${ i }].description`) }
-                      error={ errors?.items?.[i]?.description?.message }
-                      disabled={ isUpdateLoading }
-                    />
-                    <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-2">
+            <Input
+              type="date"
+              label="Invoice date" bordered
+              { ...register('date') }
+              error={ errors?.date?.message }
+              disabled={ isUpdateLoading }
+            />
+            <Input
+              type="date"
+              label="Due date" bordered
+              { ...register('dueDate') }
+              error={ errors?.dueDate?.message }
+              disabled={ isUpdateLoading }
+            />
+          </div>
+          <div>
+            <div className="border border-gray-300 rounded-xl overflow-hidden pt-4">
+              <h4 className="font-medium mb-4 px-6">Line items</h4>
+              <div className="divide-y divide-gray-300">
+                {
+                  fields.map((item, i) => (
+                    <div key={ item.id } className="space-y-2 py-4 px-6">
+                      <div className="flex items-center justify-between">
+                        <p className="text-md font-medium">Item #{ i + 1 }</p>
+                        <Button
+                          onClick={ () => remove(i) }
+                          size="xs" variant="outlined" color="red"
+                          leftIcon={ <IconX size="16" className="-mr-1"/> }
+                        >
+                          Remove
+                        </Button>
+                      </div>
                       <Input
-                        type="number" label="Quantity" bordered step="any"
-                        { ...register(`items[${ i }].quantity`, {
-                          onChange: () => {
-                            const _item = watch().items[i];
-                            setValue(`items[${ i }].total`, _item.quantity * _item.price)
-                            updateSubtotal()
-                          },
-                          setValueAs: v => v ? +v : null
-                        }) }
-                        error={ errors?.items?.[i]?.quantity?.message }
+                        label="Description" bordered
+                        { ...register(`items[${ i }].description`) }
+                        error={ errors?.items?.[i]?.description?.message }
                         disabled={ isUpdateLoading }
                       />
-                      <Input
-                        type="number" label="Price" bordered step="any"
-                        { ...register(`items[${ i }].price`, {
-                          onChange: () => {
-                            const _item = watch().items[i];
-                            setValue(`items[${ i }].total`, _item.quantity * _item.price)
-                            updateSubtotal()
-                          },
-                          setValueAs: v => v ? +v : null
-                        }) }
-                        error={ errors?.items?.[i]?.price?.message }
-                        disabled={ isUpdateLoading }
-                      />
-                      <Input
-                        label="Total" bordered step="any" readOnly
-                        { ...register(`items[${ i }].total`, {
-                          setValueAs: v => v ? +v : null
-                        }) }
-                      />
+                      <div className="grid grid-cols-3 gap-3">
+                        <Input
+                          type="number" label="Quantity" bordered step="any"
+                          { ...register(`items[${ i }].quantity`, {
+                            onChange: () => {
+                              const _item = watch().items[i];
+                              setValue(`items[${ i }].total`, _item.quantity * _item.price)
+                              updateSubtotal()
+                            },
+                            setValueAs: v => v ? +v : null
+                          }) }
+                          error={ errors?.items?.[i]?.quantity?.message }
+                          disabled={ isUpdateLoading }
+                        />
+                        <Input
+                          type="number" label="Price" bordered step="any"
+                          { ...register(`items[${ i }].price`, {
+                            onChange: () => {
+                              const _item = watch().items[i];
+                              setValue(`items[${ i }].total`, _item.quantity * _item.price)
+                              updateSubtotal()
+                            },
+                            setValueAs: v => v ? +v : null
+                          }) }
+                          error={ errors?.items?.[i]?.price?.message }
+                          disabled={ isUpdateLoading }
+                        />
+                        <Input
+                          label="Total" bordered step="any" readOnly
+                          { ...register(`items[${ i }].total`, {
+                            setValueAs: v => v ? +v : null
+                          }) }
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))
-              }
+                  ))
+                }
+              </div>
+              <button
+                type="button" disabled={ isUpdateLoading }
+                onClick={ () => append({ description: '', quantity: 1, price: null, total: null }) }
+                className="border-t border-gray-300 py-3 hover:bg-slate-50 w-full flex items-center justify-center text-center disabled:opacity-50 diabled:pointer-events-none"
+              >
+                <IconPlus size="20" className="mr-4"/>Add new item
+              </button>
             </div>
-            <button
-              type="button" disabled={ isUpdateLoading }
-              onClick={ () => append({ description: '', quantity: 1, price: null, total: null }) }
-              className="border-t border-gray-300 py-3 hover:bg-slate-50 w-full flex items-center justify-center text-center disabled:opacity-50 diabled:pointer-events-none"
-            >
-              <IconPlus size="20" className="mr-4"/>Add new item
-            </button>
           </div>
           <div className="grid grid-cols-2 gap-2">
             <Input
@@ -261,9 +274,9 @@ const EditReceipt = ({ receipt, onBack }) => {
   );
 };
 
-EditReceipt.propTypes = {
-  receipt: PropTypes.object.isRequired,
+EditInvoice.propTypes = {
+  invoice: PropTypes.object.isRequired,
   onBack: PropTypes.func.isRequired
 };
 
-export default EditReceipt;
+export default EditInvoice;

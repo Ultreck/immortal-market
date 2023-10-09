@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import ChatWindow from "@/components/core/assistant/ChatWindow.jsx";
-import Conversations from "@/components/core/assistant/Conversations.jsx";
+import ChatWindow from "@/components/core/document/conversation/ChatWindow.jsx";
+import Conversations from "@/components/core/document/conversation/Conversations.jsx";
 
 const AssistantConversations = () => {
   const [id, setId] = useState(null);

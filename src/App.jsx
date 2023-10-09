@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -15,21 +15,14 @@ import SetupBusiness from "./pages/SetupBusiness.jsx";
 import Statement from "./pages/banking/Statement.jsx";
 import BankingSettings from "./pages/banking/Settings.jsx";
 import StatementDetails from "./pages/banking/StatementDetails.jsx";
-import InvoiceLayout from "./components/core/invoice/InvoiceLayout.jsx";
-import InvoicesOverview from "./pages/invoice/Overview.jsx";
-import Receipts from "./pages/invoice/Receipts.jsx";
-import ReceiptDetails from "./pages/invoice/ReceiptDetails.jsx";
-import Invoices from "./pages/invoice/Invoices.jsx";
-import InvoiceDetails from "./pages/invoice/InvoiceDetails.jsx";
-import CustomReportLayout from "./components/core/custom-report/CustomReportLayout.jsx";
-import CustomReportOverview from "./pages/custom-report/Overview.jsx";
-import CustomReports from "./pages/custom-report/Reports.jsx";
-import AssistantConversations from "./pages/assistant/Conversations.jsx";
-import AssistantLayout from "./components/core/assistant/AssistantLayout.jsx";
-import AssistantOverview from "./pages/assistant/Overview.jsx";
-import FinancialReportLayout from "./components/core/financial-report/FinancialReportLayout.jsx";
-import FinancialReportOverview from "./pages/financial-report/Overview.jsx";
-import FinancialReports from "./pages/financial-report/Reports.jsx";
+import DocumentLayout from "./components/core/document/DocumentLayout.jsx";
+import DocumentOverview from "./pages/document/Overview.jsx";
+import Receipts from "./pages/document/Receipts.jsx";
+import ReceiptDetails from "./pages/document/ReceiptDetails.jsx";
+import Invoices from "./pages/document/Invoices.jsx";
+import InvoiceDetails from "./pages/document/InvoiceDetails.jsx";
+import CustomDocuments from "./pages/document/CustomDocuments.jsx";
+import AssistantConversations from "./pages/document/Conversations.jsx";
 import AccountSetting from "./pages/AccountSetting.jsx";
 import Wallet from "./pages/Wallet.jsx";
 
@@ -114,58 +107,28 @@ const App = () => (
           </RequireAuthBusiness>
         }
       >
+        <Route path="" element={ <Navigate to="/banking/overview" replace/> }/>
         <Route path="overview" element={ <BankingOverview/> }/>
         <Route path="statement" element={ <Statement/> }/>
         <Route path="statement/:id" element={ <StatementDetails/> }/>
         <Route path="settings" element={ <BankingSettings/> }/>
       </Route>
       <Route
-        path="/invoice"
+        path="/documents"
         element={
           <RequireAuthBusiness>
-            <InvoiceLayout/>
+            <DocumentLayout/>
           </RequireAuthBusiness>
         }
       >
-        <Route path="" element={ <InvoicesOverview/> }/>
+        <Route path="" element={ <Navigate to="/documents/overview" replace/> }/>
+        <Route path="overview" element={ <DocumentOverview/> }/>
         <Route path="receipts" element={ <Receipts/> }/>
         <Route path="receipts/:id" element={ <ReceiptDetails/> }/>
         <Route path="invoices" element={ <Invoices/> }/>
         <Route path="invoices/:id" element={ <InvoiceDetails/> }/>
-      </Route>
-      <Route
-        path="/custom-report"
-        element={
-          <RequireAuthBusiness>
-            <CustomReportLayout/>
-          </RequireAuthBusiness>
-        }
-      >
-        <Route path="" element={ <CustomReportOverview/> }/>
-        <Route path="reports" element={ <CustomReports/> }/>
-        <Route path="conversations" element={ <AssistantConversations/> }/>
-      </Route>
-      <Route
-        path="/assistant"
-        element={
-          <RequireAuthBusiness>
-            <AssistantLayout/>
-          </RequireAuthBusiness>
-        }
-      >
-        <Route path="" element={ <AssistantOverview/> }/>
-        <Route path="conversations" element={ <AssistantConversations/> }/>
-      </Route>
-      <Route
-        path="/financial-report"
-        element={
-          <RequireAuthBusiness>
-            <FinancialReportLayout/>
-          </RequireAuthBusiness>
-        }
-      >
-        <Route path="" element={ <FinancialReportOverview/> }/>
-        <Route path="reports" element={ <FinancialReports/> }/>
+        <Route path="custom" element={ <CustomDocuments/> }/>
+        <Route path="conversation" element={ <AssistantConversations/> }/>
       </Route>
     </Routes>
   </>

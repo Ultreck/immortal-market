@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Drawer from "@/components/global/Drawer";
-import CircleUploadFileInput from "@/components/core/shared/CircleUploadFileInput";
-import { delay } from "@/lib/utils";
+import Drawer from "@/components/global/Drawer.jsx";
+import CircleUploadFileInput from "@/components/core/shared/CircleUploadFileInput.jsx";
+import { delay } from "@/lib/utils.js";
 import { GridLoader } from "react-spinners";
 import PropTypes from "prop-types";
 

@@ -140,6 +140,12 @@ const Dashboard = () => {
 
 export default Dashboard;
 
+const defaultPropTypes = {
+  items: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onTrain: PropTypes.func,
+};
+
 const TwoCols = ({ items = [], onClick, onTrain }) => {
   return (
     <div className={ classNames("grid md:grid-cols-2 gap-4 md:gap-6") }>
@@ -158,11 +164,7 @@ const TwoCols = ({ items = [], onClick, onTrain }) => {
   )
 }
 
-TwoCols.propTypes = {
-  items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onTrain: PropTypes.func,
-};
+TwoCols.propTypes = defaultPropTypes;
 
 const ThreeCols = ({ items = [], onClick, onTrain }) => {
   return (
@@ -182,11 +184,7 @@ const ThreeCols = ({ items = [], onClick, onTrain }) => {
   )
 }
 
-ThreeCols.propTypes = {
-  items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onTrain: PropTypes.func,
-};
+ThreeCols.propTypes = defaultPropTypes;
 
 const ThreeCols2 = ({ items = [], onClick, onTrain }) => {
   const left = items[0];
@@ -220,11 +218,7 @@ const ThreeCols2 = ({ items = [], onClick, onTrain }) => {
   )
 }
 
-ThreeCols2.propTypes = {
-  items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onTrain: PropTypes.func,
-};
+ThreeCols2.propTypes = defaultPropTypes;
 
 const FourCols = ({ items = [], onClick, onTrain }) => {
   const highlighted = items[0];
@@ -268,11 +262,7 @@ const FourCols = ({ items = [], onClick, onTrain }) => {
   )
 }
 
-FourCols.propTypes = {
-  items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onTrain: PropTypes.func,
-};
+FourCols.propTypes = defaultPropTypes;
 
 const FourCols2 = ({ items = [], onClick, onTrain }) => {
   const highlighted = items[0];
@@ -317,11 +307,7 @@ const FourCols2 = ({ items = [], onClick, onTrain }) => {
   )
 }
 
-FourCols2.propTypes = {
-  items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onTrain: PropTypes.func,
-};
+FourCols2.propTypes = defaultPropTypes;
 
 const FiveCols = ({ items = [], onClick, onTrain }) => {
   return (
@@ -355,12 +341,7 @@ const FiveCols = ({ items = [], onClick, onTrain }) => {
   )
 }
 
-FiveCols.propTypes = {
-  items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onTrain: PropTypes.func,
-};
-
+FiveCols.propTypes = defaultPropTypes;
 
 const ProductCard = ({ product, onClick, onTrain, style = 'normal', className }) => {
   const getIconSize = () => {

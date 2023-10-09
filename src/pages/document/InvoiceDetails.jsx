@@ -11,7 +11,8 @@ import Card from "@/components/global/Card.jsx";
 import Modal from "@/components/global/Modal.jsx";
 import Button from "@/components/global/Button.jsx";
 import Image from "@/components/core/shared/Image.jsx";
-import InvoiceSummary from "@/components/core/invoice/InvoiceSummary.jsx";
+import InvoiceSummary from "@/components/core/document/invoices/InvoiceSummary.jsx";
+import DashboardContent from "@/components/core/shared/DashboardContent.jsx";
 
 const InvoiceDetails = () => {
   const toast = useToast();
@@ -35,7 +36,7 @@ const InvoiceDetails = () => {
   };
 
   return (
-    <>
+    <DashboardContent>
       {
         isInvoiceLoading ? (
           <>
@@ -111,7 +112,7 @@ const InvoiceDetails = () => {
           </Button>
         </div>
       </Modal>
-    </>
+    </DashboardContent>
   );
 };
 

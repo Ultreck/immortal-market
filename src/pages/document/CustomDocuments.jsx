@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { format } from "date-fns";
-import NewCustomReport from "@/components/core/custom-report/NewCustomReport.jsx";
+import NewCustomReport from "@/components/core/document/custom/NewCustomReport.jsx";
 import DashboardTitle from "@/components/core/shared/DashboardTitle.jsx";
 import Button from "@/components/global/Button.jsx";
 import { IconFileTypeCsv, IconFileTypeDoc, IconFileTypePdf, IconFileTypeXls, IconPlus } from "@tabler/icons-react";
 import Card from "@/components/global/Card.jsx";
+import DashboardContent from "@/components/core/shared/DashboardContent.jsx";
 
 const items = [
   {
@@ -34,14 +35,14 @@ const items = [
   },
 ];
 
-const CustomReports = () => {
+const CustomDocuments = () => {
   const [isNewReportOpen, setIsNewReportOpen] = useState(false);
 
   return (
-    <>
+    <DashboardContent>
       <div>
         <div className="flex justify-between items-center mb-8 md:mb-10">
-          <DashboardTitle text="Reports" className="!mb-0"/>
+          <DashboardTitle text="Custom documents" className="!mb-0"/>
           <Button
             onClick={ () => setIsNewReportOpen(true) }
             variant="outlined" leftIcon={ <IconPlus size="20"/> }
@@ -77,8 +78,8 @@ const CustomReports = () => {
         isOpen={ isNewReportOpen }
         onClose={ () => setIsNewReportOpen(false) }
       />
-    </>
+    </DashboardContent>
   );
 };
 
-export default CustomReports;
+export default CustomDocuments;

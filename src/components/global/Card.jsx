@@ -18,6 +18,6 @@ Card.propTypes = {
   className: PropTypes.string,
   children: PropTypes.any.isRequired,
   hover: PropTypes.bool
-}
+};
 
 export default Card;

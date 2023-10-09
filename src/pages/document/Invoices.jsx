@@ -7,8 +7,9 @@ import DashboardTitle from "@/components/core/shared/DashboardTitle.jsx";
 import Button from "@/components/global/Button.jsx";
 import { IconExclamationCircle, IconPlus } from "@tabler/icons-react";
 import Card from "@/components/global/Card.jsx";
-import NewInvoice from "@/components/core/invoice/NewInvoice.jsx";
+import NewInvoice from "@/components/core/document/invoices/NewInvoice.jsx";
 import { formatCurrency } from "@/lib/utils.js";
+import DashboardContent from "@/components/core/shared/DashboardContent.jsx";
 
 const Invoices = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Invoices = () => {
   const [isNewOpen, setIsNewOpen] = useState(false);
 
   return (
-    <>
+    <DashboardContent>
       <div className="flex items-center justify-between mb-10">
         <DashboardTitle text="Invoices" className="!m-0"/>
         <Button
@@ -109,7 +110,7 @@ const Invoices = () => {
         isOpen={ isNewOpen }
         onClose={ () => setIsNewOpen(false) }
       />
-    </>
+    </DashboardContent>
   );
 };
 

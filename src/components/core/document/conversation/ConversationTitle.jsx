@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { IconCheck, IconPencilMinus, IconX } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
-import IconButton from "@/components/global/IconButton";
-import { useUpdateConversation } from "@/api/conversations";
-import { useToast } from "@/hooks/use-toast";
-import Button from "@/components/global/Button";
+import IconButton from "@/components/global/IconButton.jsx";
+import { useUpdateConversation } from "@/api/conversations.js";
+import { useToast } from "@/hooks/use-toast.jsx";
+import Button from "@/components/global/Button.jsx";
 import PropTypes from "prop-types";
 
 const ConversationTitle = ({ conversation }) => {

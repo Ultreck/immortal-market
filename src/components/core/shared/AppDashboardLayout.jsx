@@ -135,6 +135,6 @@ AppDashboardLayout.propTypes = {
     })
   ),
   children: PropTypes.any
-}
+};
 
 export default AppDashboardLayout;
