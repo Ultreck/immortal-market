@@ -7,7 +7,8 @@ import ProductSummary from "@/components/core/ProductSummary.jsx";
 import Button from "@/components/global/Button.jsx";
 import HelpTrainModel from "@/components/core/HelpTrainModel.jsx";
 import Hover from "@/components/global/Hover.jsx";
-import { IconRobot } from "@tabler/icons-react";
+import { IconArrowRight, IconRobot } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [selected, setSelected] = useState(null);
@@ -33,7 +34,20 @@ const Dashboard = () => {
 
             return (
               <div key={ c.id }>
-                <h3 className="text-xl font-medium mb-8 px-1 border-b pb-6">{ c.name }</h3>
+                <div className="flex items-center justify-between mb-8 px-1 border-b pb-6">
+                  <h3 className="text-xl font-medium">
+                    { c.name }
+                  </h3>
+                  {
+                    (c.status === 'active' && !!c.path) && (
+                      <Link to={ c.path }>
+                        <Button variant="outlined" color="black" rightIcon={ <IconArrowRight size="16"/> }>
+                          View dashboard
+                        </Button>
+                      </Link>
+                    )
+                  }
+                </div>
                 {
                   items.length === 2 && (
                     <TwoCols
@@ -408,12 +422,12 @@ const ProductCard = ({ product, onClick, onTrain, style = 'normal', className })
                     <div
                       className="h-full flex flex-col items-center justify-center space-y-2 px-4 py-6 rounded-3xl bg-white/95 backdrop-blur-sm"
                     >
-                      <Button onClick={ () => onClick(product) } variant="outlined">
+                      <Button onClick={ () => onClick(product) } variant="outlined" color="black">
                         Preview
                       </Button>
                       <Button
                         onClick={ () => onTrain?.(product) }
-                        variant="outlined" leftIcon={ <IconRobot size="20"/> }
+                        variant="outlined" leftIcon={ <IconRobot size="20"/> } color="black"
                       >
                         Train model
                       </Button>

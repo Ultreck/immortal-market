@@ -81,7 +81,7 @@ const classes = {
 const Button = forwardRef((
   {
     variant = 'filled',
-    color = 'black',
+    color = 'primary',
     size = 'md',
     type = 'button',
     disabled = false,

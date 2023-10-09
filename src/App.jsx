@@ -8,13 +8,13 @@ import RequireNoAuth from "./components/core/shared/RequireNoAuth.jsx";
 import AuthLayout from "./components/core/auth/AuthLayout.jsx";
 import Verification from "./pages/Verification.jsx";
 import RequireAuthUnverified from "./components/core/shared/RequireAuthUnverified.jsx";
-import StatementLayout from "./components/core/statement/StatementLayout.jsx";
+import BankingLayout from "./components/core/banking/BankingLayout.jsx";
 import RequireAuthBusiness from "./components/core/shared/RequireAuthBusiness.jsx";
-import StatementOverview from "./pages/statement/Overview.jsx";
+import BankingOverview from "./pages/banking/Overview.jsx";
 import SetupBusiness from "./pages/SetupBusiness.jsx";
-import StatementAnalysis from "./pages/statement/Analysis.jsx";
-import StatementSettings from "./pages/statement/Settings.jsx";
-import StatementDetails from "./pages/statement/StatementDetails.jsx";
+import Statement from "./pages/banking/Statement.jsx";
+import BankingSettings from "./pages/banking/Settings.jsx";
+import StatementDetails from "./pages/banking/StatementDetails.jsx";
 import InvoiceLayout from "./components/core/invoice/InvoiceLayout.jsx";
 import InvoicesOverview from "./pages/invoice/Overview.jsx";
 import Receipts from "./pages/invoice/Receipts.jsx";
@@ -107,17 +107,17 @@ const App = () => (
         }
       />
       <Route
-        path="/statement"
+        path="/banking"
         element={
           <RequireAuthBusiness>
-            <StatementLayout/>
+            <BankingLayout/>
           </RequireAuthBusiness>
         }
       >
-        <Route path="" element={ <StatementOverview/> }/>
-        <Route path="analysis" element={ <StatementAnalysis/> }/>
-        <Route path="analysis/:id" element={ <StatementDetails/> }/>
-        <Route path="settings" element={ <StatementSettings/> }/>
+        <Route path="overview" element={ <BankingOverview/> }/>
+        <Route path="statement" element={ <Statement/> }/>
+        <Route path="statement/:id" element={ <StatementDetails/> }/>
+        <Route path="settings" element={ <BankingSettings/> }/>
       </Route>
       <Route
         path="/invoice"

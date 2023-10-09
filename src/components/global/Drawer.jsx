@@ -58,7 +58,7 @@ const Drawer = ({ isOpen, title, padding = true, onClose, fullscreen = false, ch
                   { 'h-full': fullscreen }
                 ) }
               >
-                <div className={ classNames("h-full overflow-x-hidden overflow-y-auto",
+                <div className={ classNames("h-full overflow-x-hidden overflow-y-auto flex flex-col",
                   { 'p-8 md:p-10': padding },
                 ) }>
                   {
@@ -90,6 +90,6 @@ Drawer.propTypes = {
   fullscreen: PropTypes.bool,
   onClose: PropTypes.func,
   children: PropTypes.any
-}
+};
 
 export default Drawer;

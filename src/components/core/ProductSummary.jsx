@@ -16,7 +16,8 @@ import {
   IconNumber6,
   IconNumber7,
   IconNumber8,
-  IconNumber9
+  IconNumber9,
+  IconX
 } from "@tabler/icons-react";
 import Button from "@/components/global/Button.jsx";
 import useCountdown from "@/hooks/use-countdown.js";
@@ -54,7 +55,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
         !!product && (
           <>
             <div className={ classNames('border-b px-8 md:px-12 pt-12 pb-24 text-white', product.backgroundColor) }>
-              <div className="flex items-center">
+              <div className="flex items-center justify-between">
                 <div className="text-[1.05rem] font-semibold flex items-center">
                   <div
                     className={ classNames("w-10 h-10 rounded-full mr-3 flex items-center justify-center bg-white", product.textColor) }
@@ -63,6 +64,9 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                   </div>
                   { product.name }
                 </div>
+                <IconButton
+                  onClick={ onClose } icon={ <IconX size="20"/> } variant="outlined" color="white" size="sm" rounded
+                />
               </div>
               <p className="mt-6">
                 { product.summary || `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid atque culpa cum deleniti.` }
@@ -99,7 +103,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                           ) : (
                             <>
                               <Button
-                                onClick={ handleNotify } size="sm"
+                                onClick={ handleNotify } size="sm" color="black"
                                 variant="subtle" leftIcon={ <IconBell size="20"/> } className="mt-2 hidden sm:flex"
                               >
                                 Notify me
@@ -175,9 +179,14 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                   }
                 </div>
               </div>
-              <Button onClick={ onClose } variant="outlined" color="red" className="mt-10">
-                Close
-              </Button>
+              <Card
+                className="flex items-center px-6 py-4 shadow-none border-0 !bg-red-500 text-white"
+              >
+                <p className="flex-1 pr-4">
+                  Upload your custom documents to help improve our models
+                </p>
+                <Button variant="outlined" color="white" size="sm">Upload</Button>
+              </Card>
             </div>
           </>
         )

@@ -1,11 +1,8 @@
 import { useRef, useState } from 'react';
-import Dropzone from "react-dropzone";
-import classNames from "classnames";
-import { IconArrowLeft, IconCheck, IconCircleCheckFilled, IconCloudUpload, IconPdf } from "@tabler/icons-react";
+import { IconArrowLeft, IconCheck, IconCircleCheckFilled, IconPdf } from "@tabler/icons-react";
 import { GridLoader } from "react-spinners";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { useToast } from "@/hooks/use-toast.jsx";
 import { useGetUserBusiness } from "@/api/business.js";
 import IconButton from "@/components/global/IconButton.jsx";
 import { Link } from "react-router-dom";
@@ -15,9 +12,9 @@ import Select from "@/components/global/Select.jsx";
 import { useAnalyzeStatement, useCreateStatement } from "@/api/statement.js";
 import { useGetBanks } from "@/api/misc.js";
 import PropTypes from "prop-types";
+import CircleUploadFileInput from "@/components/core/shared/CircleUploadFileInput.jsx";
 
 const AnalyzePdf = ({ onBack }) => {
-  const toast = useToast();
   const qc = useQueryClient();
   const { data: business } = useGetUserBusiness();
   const [file, setFile] = useState(null);
@@ -29,6 +26,10 @@ const AnalyzePdf = ({ onBack }) => {
   const [success, setSuccess] = useState(false);
   const response = useRef(null);
   const { data: banks = [], isLoading: isBanksLoading } = useGetBanks();
+
+  const handleFileChange = f => {
+    setFile(f);
+  };
 
   const handleAnalyze = async (values) => {
     setLoading('Analyzing..')
@@ -81,38 +82,13 @@ const AnalyzePdf = ({ onBack }) => {
               />
               <h2 className="font-medium ml-4">Analyze PDF</h2>
             </div>
-            <div className="h-full flex flex-col justify-center items-center text-center py-16">
-              <Dropzone
-                onDrop={ acceptedFiles => {
-                  if (!acceptedFiles.length) return toast.error('Only pdf files allowed')
-                  setFile(acceptedFiles[0])
-                } }
+            <div className="flex flex-col justify-center items-center text-center my-auto">
+              <CircleUploadFileInput
                 accept={ { 'application/pdf': ['.pdf'] } }
-              >
-                { ({ getRootProps, getInputProps, isDragAccept, isDragReject }) => (
-                  <>
-                    <div
-                      { ...getRootProps() }
-                      className={ classNames(
-                        "w-48 h-48 border-2 border-gray-300 border-dashed rounded-full cursor-pointer hover:bg-gray-50 flex items-center justify-center relative before:absolute before:inset-0 before:border-2 before:border-slate-200 before:rounded-full before:animate-ping",
-                        { 'border-red-500 text-red-500 before:border-0 before:!animate-none': isDragReject },
-                        { 'border-green-500 text-green-500 before:border-0 before:!animate-none': isDragAccept },
-                      ) }
-                    >
-                      <input { ...getInputProps() } />
-                      <IconCloudUpload size="75" className="opacity-30"/>
-                    </div>
-                    {
-                      isDragReject && (
-                        <div className="flex items-center bg-red-100 text-red-600 rounded-2xl w-max mt-4 px-4 py-1">
-                          Only pdf files allowed
-                        </div>
-                      )
-                    }
-                  </>
-                ) }
-              </Dropzone>
-              <p className="mt-10 max-w-[200px]">Drag and drop a pdf file or click to select</p>
+                label="Drag and drop a pdf file or click to select"
+                onChange={ handleFileChange }
+                error="Only pdf files allowed"
+              />
             </div>
           </>
         ) : (
@@ -127,7 +103,7 @@ const AnalyzePdf = ({ onBack }) => {
                   <p className="max-w-xs mt-2">
                     Click the button below to view analysis results
                   </p>
-                  <Link to={ `/statement/analysis/${ response.current._id }` }>
+                  <Link to={ `/banking/statement/${ response.current._id }` }>
                     <Button variant="outlined" className="mt-8">
                       View result
                     </Button>

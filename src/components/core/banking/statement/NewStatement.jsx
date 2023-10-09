@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { IconBuildingBank, IconChevronRight, IconCodeDots, IconPdf } from "@tabler/icons-react";
+import { IconBuildingBank, IconChevronRight, IconPdf, IconWorld } from "@tabler/icons-react";
 import Drawer from "@/components/global/Drawer.jsx";
 import AnalyzePdf from "./AnalyzePdf.jsx";
 import AnalyzeMono from "./AnalyzeMono.jsx";
 import AnalyzeMbs from "./AnalyzeMbs.jsx";
 import PropTypes from "prop-types";
 
-const NewAnalysis = ({ isOpen, onClose }) => {
+const NewStatement = ({ isOpen, onClose }) => {
   const [view, setView] = useState('options');
 
   const handleClose = () => {
@@ -31,9 +31,9 @@ const NewAnalysis = ({ isOpen, onClose }) => {
                   </div>
                 </div>
                 <div>
-                  <h4>Pdf</h4>
-                  <p className="text-sm opacity-75">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, sequi.
+                  <h4 className="font-medium">Upload bank statement file</h4>
+                  <p className="opacity-70 leading-tight mt-1">
+                    Manually upload your statement as a pdf file here
                   </p>
                 </div>
                 <div>
@@ -46,13 +46,13 @@ const NewAnalysis = ({ isOpen, onClose }) => {
               >
                 <div>
                   <div className="w-12 md:w-16">
-                    <IconCodeDots className="text-cyan-600" size="28"/>
+                    <IconWorld className="text-cyan-600" size="28"/>
                   </div>
                 </div>
                 <div>
-                  <h4>Mono</h4>
-                  <p className="text-sm opacity-75">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, sequi.
+                  <h4 className="font-medium">Use internet banking</h4>
+                  <p className="opacity-70 leading-tight mt-1">
+                    Use your internet or mobile banking credentials to get statement.
                   </p>
                 </div>
                 <div>
@@ -69,9 +69,9 @@ const NewAnalysis = ({ isOpen, onClose }) => {
                   </div>
                 </div>
                 <div>
-                  <h4>Mbs</h4>
-                  <p className="text-sm opacity-75">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, sequi.
+                  <h4 className="font-medium">Receive PIN from your bank</h4>
+                  <p className="opacity-70 leading-tight mt-1">
+                    Provide a ticket id and password sent by your bank to authorize us to get your statement
                   </p>
                 </div>
                 <div>
@@ -101,9 +101,9 @@ const NewAnalysis = ({ isOpen, onClose }) => {
   );
 };
 
-NewAnalysis.propTypes = {
+NewStatement.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired
 };
 
-export default NewAnalysis;
+export default NewStatement;

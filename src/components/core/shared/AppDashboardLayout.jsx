@@ -6,7 +6,7 @@ import SimpleDropdown from "@/components/global/SimpleDropdown.jsx";
 import AppSwitcherMobile from "./AppSwitcherMobile.jsx";
 import UserDropdown from "./UserDropdown.jsx";
 import { useAuth } from "@/hooks/use-auth.jsx";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const AppDashboardLayout = ({ logo, links = [], children }) => {
@@ -31,16 +31,16 @@ const AppDashboardLayout = ({ logo, links = [], children }) => {
           <div className="flex flex-col space-y-2">
             {
               links.map(item => (
-                <Link
+                <NavLink
                   key={ item.href } to={ item.href }
-                  className={ classNames(
+                  className={ ({ isActive }) => classNames(
                     'flex items-center px-6 py-3 rounded-3xl',
-                    location.pathname === item.href ? `bg-slate-100 font-bold` : 'hover:bg-slate-100 opacity-90'
+                    (isActive) ? `bg-slate-100 font-bold` : 'hover:bg-slate-100 opacity-90'
                   ) }
                 >
                   <div className="mr-4">{ item.icon }</div>
                   { item.name }
-                </Link>
+                </NavLink>
               ))
             }
           </div>

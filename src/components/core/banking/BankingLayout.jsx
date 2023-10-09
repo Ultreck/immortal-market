@@ -1,7 +1,16 @@
-import products from "@/lib/products.js";
+import { categories } from "@/lib/products.js";
 import { createElement, useState } from "react";
 import classNames from "classnames";
-import { IconFileText, IconLayout, IconSettings2 } from "@tabler/icons-react";
+import {
+  IconBriefcase,
+  IconChartHistogram,
+  IconCreditCard,
+  IconFileText,
+  IconLayout,
+  IconReportMoney,
+  IconSettings2,
+  IconUserCircle
+} from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
 import Loader from "@/components/global/Loader.jsx";
 import AppDashboardLayout from "@/components/core/shared/AppDashboardLayout.jsx";
@@ -14,18 +23,23 @@ import { Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const links = [
-  { name: 'Overview', href: '/statement', icon: <IconLayout size="20"/> },
-  { name: 'Analysis', href: '/statement/analysis', icon: <IconFileText size="20"/> },
-  { name: 'Settings', href: '/statement/settings', icon: <IconSettings2 size="20"/> },
+  { name: 'Overview', href: '/banking/overview', icon: <IconLayout size="20"/> },
+  { name: 'Statement insights', href: '/banking/statement', icon: <IconFileText size="20"/> },
+  { name: 'Customer insights', href: '/banking/customer', icon: <IconUserCircle size="20"/> },
+  { name: 'Portfolio insights', href: '/banking/portfolio', icon: <IconBriefcase size="20"/> },
+  { name: 'Treasury insights', href: '/banking/treasury', icon: <IconReportMoney size="20"/> },
+  { name: 'Credit modelling', href: '/banking/credit', icon: <IconChartHistogram size="20"/> },
+  { name: 'Subscription', href: '/banking/subscription', icon: <IconCreditCard size="20"/> },
+  { name: 'Settings', href: '/banking/settings', icon: <IconSettings2 size="20"/> },
 ];
 
-const product = products.find(p => p.slug === 'borrower-insights');
+const product = categories.find(p => p.id === 'banking');
 
 const Logo = ({ className }) => (
   <div className={ className }>
     <div className="text-[1.05rem] font-medium flex items-center">
       <div
-        className={ classNames("w-10 h-10 rounded-full mr-3 flex items-center justify-center", product.backgroundColor) }
+        className={ classNames("w-10 h-10 rounded-full mr-3 flex items-center justify-center", product.colors.bg) }
       >
         { createElement(product.icon, { size: 22, className: `text-white` }) }
       </div>
@@ -38,7 +52,7 @@ Logo.propTypes = {
   className: PropTypes.string
 };
 
-const StatementLayout = () => {
+const BankingLayout = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const [isFetching, setIsFetching] = useState(false);
@@ -68,7 +82,7 @@ const StatementLayout = () => {
         ) : (
           <>
             {
-              (settings && product.status !== 'coming-soon') ? (
+              settings ? (
                 <AppDashboardLayout logo={ Logo } links={ links }>
                   <DashboardContent>
                     <Outlet/>
@@ -89,4 +103,4 @@ const StatementLayout = () => {
   );
 };
 
-export default StatementLayout;
+export default BankingLayout;

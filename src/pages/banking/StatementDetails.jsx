@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { format } from "date-fns";
-import OtherHighlights from "@/components/core/statement/details/OtherHighlights.jsx";
+import OtherHighlights from "@/components/core/banking/details/OtherHighlights.jsx";
 import { Link, useParams } from "react-router-dom";
 import IconButton from "@/components/global/IconButton.jsx";
 import {
@@ -14,27 +14,27 @@ import {
 import Button from "@/components/global/Button.jsx";
 import SimpleDropdown from "@/components/global/SimpleDropdown.jsx";
 import Card from "@/components/global/Card.jsx";
-import AccountActivityChart from "@/components/core/statement/details/AccountActivityChart.jsx";
-import AnalyticsScoreChart from "@/components/core/statement/details/AnalyticsScoreChart.jsx";
-import CashFlowHighlights from "@/components/core/statement/details/CashFlowHighlights.jsx";
-import NetMonthlyEarnings from "@/components/core/statement/details/NetMonthlyEarnings.jsx";
-import SalaryHighlights from "@/components/core/statement/details/SalaryHighlights.jsx";
-import StatementOwnership from "@/components/core/statement/details/StatementOwnership.jsx";
-import TransactionPatterns from "@/components/core/statement/details/TransactionPatterns.jsx";
-import DerivedData from "@/components/core/statement/details/DerivedData.jsx";
-import SweepingDetails from "@/components/core/statement/details/SweepingDetails.jsx";
-import SweepingSummary from "@/components/core/statement/details/SweepingSummary.jsx";
-import BorrowingHighlights from "@/components/core/statement/details/BorrowingHighlights.jsx";
-import MonthlySummary from "@/components/core/statement/details/MonthlySummary.jsx";
-import BehaviorAnalysis from "@/components/core/statement/details/BehaviorAnalysis.jsx";
-import SixMonthsLoanHistory from "@/components/core/statement/details/SixMonthsLoanHistory.jsx";
-import SalaryDistribution from "@/components/core/statement/details/SalaryDistribution.jsx";
-import InvestmentDistribution from "@/components/core/statement/details/InvestmentDistribution.jsx";
-import AccountOwnership from "@/components/core/statement/details/AccountOwnership.jsx";
-import MonthlyDepositWithdrawal from "@/components/core/statement/details/MonthlyDepositWithdrawal.jsx";
-import CashFlowDistribution from "@/components/core/statement/details/CashFlowDistribution.jsx";
-import WeeklyTransactions from "@/components/core/statement/details/WeeklyTransactions.jsx";
-import StatementDetailsChat from "@/components/core/statement/details/StatementDetailsChat.jsx";
+import AccountActivityChart from "@/components/core/banking/details/AccountActivityChart.jsx";
+import AnalyticsScoreChart from "@/components/core/banking/details/AnalyticsScoreChart.jsx";
+import CashFlowHighlights from "@/components/core/banking/details/CashFlowHighlights.jsx";
+import NetMonthlyEarnings from "@/components/core/banking/details/NetMonthlyEarnings.jsx";
+import SalaryHighlights from "@/components/core/banking/details/SalaryHighlights.jsx";
+import StatementOwnership from "@/components/core/banking/details/StatementOwnership.jsx";
+import TransactionPatterns from "@/components/core/banking/details/TransactionPatterns.jsx";
+import DerivedData from "@/components/core/banking/details/DerivedData.jsx";
+import SweepingDetails from "@/components/core/banking/details/SweepingDetails.jsx";
+import SweepingSummary from "@/components/core/banking/details/SweepingSummary.jsx";
+import BorrowingHighlights from "@/components/core/banking/details/BorrowingHighlights.jsx";
+import MonthlySummary from "@/components/core/banking/details/MonthlySummary.jsx";
+import BehaviorAnalysis from "@/components/core/banking/details/BehaviorAnalysis.jsx";
+import SixMonthsLoanHistory from "@/components/core/banking/details/SixMonthsLoanHistory.jsx";
+import SalaryDistribution from "@/components/core/banking/details/SalaryDistribution.jsx";
+import InvestmentDistribution from "@/components/core/banking/details/InvestmentDistribution.jsx";
+import AccountOwnership from "@/components/core/banking/details/AccountOwnership.jsx";
+import MonthlyDepositWithdrawal from "@/components/core/banking/details/MonthlyDepositWithdrawal.jsx";
+import CashFlowDistribution from "@/components/core/banking/details/CashFlowDistribution.jsx";
+import WeeklyTransactions from "@/components/core/banking/details/WeeklyTransactions.jsx";
+import StatementDetailsChat from "@/components/core/banking/details/StatementDetailsChat.jsx";
 import { useGetUserBusiness } from "@/api/business.js";
 import { useGetStatement, useGetTransactionDetails } from "@/api/statement.js";
 
@@ -53,17 +53,17 @@ const StatementDetails = () => {
         (isTransactionsLoading || isStatementLoading) ? (
           <>
             <div className="flex justify-between items-center">
-              <div className="bg-slate-200 rounded-3xl w-[180px] py-4"/>
-              <div className="bg-slate-200 rounded-3xl w-[150px] py-4"/>
+              <div className="bg-slate-200 animate-pulse rounded-3xl w-[180px] py-4"/>
+              <div className="bg-slate-200 animate-pulse rounded-3xl w-[150px] py-4"/>
             </div>
             <div className="flex flex-col md:flex-row justify-center items-center gap-6 mt-8">
-              <div className="col-span-3 min-h-[200px] w-full flex-1 bg-slate-200 rounded-3xl"/>
-              <div className="col-span-2 bg-slate-200 rounded-full w-[200px] h-[200px]"/>
-              <div className="col-span-2 bg-slate-200 rounded-full w-[200px] h-[200px]"/>
+              <div className="col-span-3 min-h-[200px] w-full flex-1 bg-slate-200 animate-pulse rounded-3xl"/>
+              <div className="col-span-2 bg-slate-200 animate-pulse rounded-full w-[200px] h-[200px]"/>
+              <div className="col-span-2 bg-slate-200 animate-pulse rounded-full w-[200px] h-[200px]"/>
             </div>
             <div className="grid md:grid-cols-12 gap-8 mt-8">
-              <div className="md:col-span-8 min-h-[200px] bg-slate-200 rounded-3xl"/>
-              <div className="md:col-span-4 min-h-[200px] bg-slate-200 rounded-3xl"/>
+              <div className="md:col-span-8 min-h-[200px] bg-slate-200 animate-pulse rounded-3xl"/>
+              <div className="md:col-span-4 min-h-[200px] bg-slate-200 animate-pulse rounded-3xl"/>
             </div>
           </>
         ) : (
@@ -73,7 +73,7 @@ const StatementDetails = () => {
                 <>
                   <div className="flex items-center justify-between mb-10">
                     <div className="flex items-center space-x-3">
-                      <Link to={ "/statement/analysis" }>
+                      <Link to={ "/banking/statement" }>
                         <IconButton
                           variant="subtle" color="black" size="sm" rounded icon={ <IconChevronLeft size="20"/> }
                         />

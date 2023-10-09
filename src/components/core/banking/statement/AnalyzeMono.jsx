@@ -405,7 +405,7 @@ const AnalyzeMonoLogin = ({ institution, onBack }) => {
                     <p className="max-w-xs mt-2">
                       Click the button below to view analysis results
                     </p>
-                    <Link to={ `/statement/analysis/${ response.current._id }` }>
+                    <Link to={ `/banking/statement/${ response.current._id }` }>
                       <Button variant="outlined" className="mt-8">
                         View result
                       </Button>

@@ -2,6 +2,7 @@ import {
   IconBasketFilled,
   IconBooks,
   IconBrain,
+  IconBuildingBank,
   IconCashBanknote,
   IconChartHistogram,
   IconClipboardText,
@@ -9,6 +10,7 @@ import {
   IconCurrencyNaira,
   IconDatabasePlus,
   IconEditCircle,
+  IconFiles,
   IconFileText,
   IconForms,
   IconId,
@@ -568,11 +570,31 @@ const products = [
 ];
 
 export const categories = [
-  { id: 'banking', name: "AI for Banking" },
-  { id: 'document', name: "AI for Document" },
-  { id: 'accounting', name: "AI for Accounting" },
-  { id: 'identity', name: "AI for Identity" },
-  { id: 'markets', name: "AI for Markets" },
+  {
+    id: 'banking',
+    name: "Banking",
+    icon: IconBuildingBank,
+    colors: {
+      bg: '!bg-sky-700',
+      color: '!text-sky-700',
+    },
+    path: '/banking/overview',
+    status: 'active',
+  },
+  {
+    id: 'document',
+    name: "Document",
+    icon: IconFiles,
+    colors: {
+      bg: '!bg-teal-700',
+      color: '!text-teal-700',
+    },
+    path: '/document/overview',
+    status: 'pending',
+  },
+  { id: 'accounting', name: "Accounting" },
+  { id: 'identity', name: "Identity" },
+  { id: 'markets', name: "Markets" },
 ];
 
 export default products;
