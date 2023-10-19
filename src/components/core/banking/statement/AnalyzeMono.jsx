@@ -10,9 +10,9 @@ import {
   useCommitMonoSession,
   useCreateMonoSession,
   useCreateStatement,
+  useGetBankingSettings,
   useGetMonoInstitutions,
   useGetMonoTransactions,
-  useGetStatementSettings,
   useLoginMono
 } from "@/api/statement.js";
 import IconButton from "@/components/global/IconButton.jsx";
@@ -28,15 +28,18 @@ const CLAN_API_KEY = import.meta.env.VITE_CLAN_API_KEY;
 const AnalyzeMono = ({ onBack }) => {
   const [selected, setSelected] = useState(null);
   const { data: business } = useGetUserBusiness();
-  const { data: { settings } = {} } = useGetStatementSettings(business._id);
-  const { data, isLoading } = useGetMonoInstitutions({ key: settings.monoSecKey, app: settings.monoApp });
+  const { data: { settings } = {} } = useGetBankingSettings(business._id);
+  const { data, isLoading } = useGetMonoInstitutions({
+    key: settings.statement.monoSecKey,
+    app: settings.statement.monoApp
+  });
 
   const institutions = data?.reduce?.((acc, curr) => {
     if (acc.find(i => i._id === curr._id)) return acc;
     return [...acc, curr];
   }, []) ?? [];
 
-  const hasCredentials = settings.monoApp || settings.monoSecretKey;
+  const hasCredentials = settings.statement.monoApp || settings.statement.monoSecretKey;
 
   return (
     <>
@@ -119,9 +122,9 @@ const AnalyzeMonoLogin = ({ institution, onBack }) => {
   const [accountIndex, setAccountIndex] = useState(null);
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const { data: business } = useGetUserBusiness();
-  const { data: { settings } = {} } = useGetStatementSettings(business._id);
-  const monoSecKey = settings.monoSecretKey;
-  const monoApp = settings.monoApp;
+  const { data: { settings } = {} } = useGetBankingSettings(business._id);
+  const monoSecKey = settings.statement.monoSecretKey;
+  const monoApp = settings.statement.monoApp;
   const { mutateAsync: createSession, isLoading: isCreateSessionLoading } = useCreateMonoSession({ key: monoSecKey });
   const { mutateAsync: login, isLoading: isLoginLoading } = useLoginMono({ key: monoSecKey });
   const { mutateAsync: commitSession, isLoading: isCommitSessionLoading } = useCommitMonoSession({ key: monoSecKey });
@@ -216,7 +219,8 @@ const AnalyzeMonoLogin = ({ institution, onBack }) => {
       });
       response.current = statement;
       setView('success');
-      await qc.invalidateQueries(['statements'])
+      await qc.invalidateQueries(['statements']);
+      await qc.invalidateQueries(['banking', 'overview']);
     } catch (e) {
       setError(e?.response?.data?.message ?? 'Something went wrong, please try again');
     }

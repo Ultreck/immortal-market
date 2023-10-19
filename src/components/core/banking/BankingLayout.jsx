@@ -18,7 +18,7 @@ import DashboardContent from "@/components/core/shared/DashboardContent.jsx";
 import ProductOnboarding from "@/components/core/shared/ProductOnboarding.jsx";
 import { useToast } from "@/hooks/use-toast.jsx";
 import { useGetUserBusiness } from "@/api/business.js";
-import { useCreateStatementSettings, useGetStatementSettings } from "@/api/statement.js";
+import { useCreateBankingSettings, useGetBankingSettings } from "@/api/statement.js";
 import { Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -57,8 +57,8 @@ const BankingLayout = () => {
   const qc = useQueryClient();
   const [isFetching, setIsFetching] = useState(false);
   const { data: business } = useGetUserBusiness();
-  const { data: { settings } = {}, isLoading: isSettingsLoading } = useGetStatementSettings(business._id);
-  const { mutateAsync: createSettings, isLoading: isCreateSettingsLoading } = useCreateStatementSettings(business._id);
+  const { data: { settings } = {}, isLoading: isSettingsLoading } = useGetBankingSettings(business._id);
+  const { mutateAsync: createSettings, isLoading: isCreateSettingsLoading } = useCreateBankingSettings(business._id);
 
   const start = async () => {
     try {

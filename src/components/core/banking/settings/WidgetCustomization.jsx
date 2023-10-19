@@ -4,7 +4,7 @@ import Button from "@/components/global/Button";
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGetUserBusiness } from "@/api/business";
-import { useGetStatementSettings, useUpdateStatementSettings } from "@/api/statement";
+import { useGetBankingSettings, useUpdateBankingSettings } from "@/api/statement";
 import { useForm } from "react-hook-form";
 import Card from "@/components/global/Card";
 
@@ -20,18 +20,18 @@ const WidgetCustomization = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const { data: business } = useGetUserBusiness();
-  const { data: { settings } } = useGetStatementSettings(business._id);
-  const { mutateAsync: updateSettings, isLoading: isUpdateSettingsLoading } = useUpdateStatementSettings(business._id);
+  const { data: { settings } } = useGetBankingSettings(business._id);
+  const { mutateAsync: updateSettings, isLoading: isUpdateSettingsLoading } = useUpdateBankingSettings(business._id);
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      widgetDisplayName: settings.widgetDisplayName,
-      widgetThemeColor: settings.widgetThemeColor,
+      widgetDisplayName: settings.statement?.widgetDisplayName,
+      widgetThemeColor: settings.statement?.widgetThemeColor,
     }
   });
 
   const onSubmit = async (values) => {
     try {
-      await updateSettings(values);
+      await updateSettings({ statement: { ...(settings?.statement || {}), ...values } });
       toast.success('Settings updated');
       await qc.invalidateQueries(['statement', 'settings']);
     } catch (e) {

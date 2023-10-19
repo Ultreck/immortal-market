@@ -10,7 +10,7 @@ import {
   useAnalyzeStatement,
   useCheckMbsStatus,
   useCreateStatement,
-  useGetStatementSettings,
+  useGetBankingSettings,
   useInitializeMbs,
   useRetrieveMbsPdf,
   useSubmitMbsTicket
@@ -23,6 +23,7 @@ import { format } from "date-fns";
 import { delay } from "@/lib/utils.js";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 const AnalyzeMbs = ({ onBack }) => {
   const [view, setView] = useState('form');
@@ -58,7 +59,7 @@ export default AnalyzeMbs;
 const InitializeForm = ({ onTicket, onBack }) => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const { data: business } = useGetUserBusiness();
-  const { data: { settings } = {} } = useGetStatementSettings(business._id);
+  const { data: { settings } = {} } = useGetBankingSettings(business._id);
   const { mutateAsync: initialize, isLoading: isInitializeLoading } = useInitializeMbs(business._id)
   const { mutateAsync: getFeedback, isLoading: isFeedbackLoading } = useCheckMbsStatus(business._id)
   const {
@@ -70,7 +71,7 @@ const InitializeForm = ({ onTicket, onBack }) => {
   const [error, setError] = useState('');
   const result = useRef(null);
 
-  const hasCredentials = settings.mbsUsername || settings.mbsClientId || settings.mbsClientSecret;
+  const hasCredentials = settings.statement.mbsUsername || settings.statement.mbsClientId || settings.statement.mbsClientSecret;
 
   const onSubmit = async (values) => {
     setError('');
@@ -243,6 +244,7 @@ InitializeForm.propTypes = {
 };
 
 const TicketForm = ({ data, onBack }) => {
+  const qc = useQueryClient();
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const { data: business } = useGetUserBusiness();
   const { mutateAsync: confirm, isLoading: isConfirmLoading } = useSubmitMbsTicket(business._id);
@@ -307,6 +309,8 @@ const TicketForm = ({ data, onBack }) => {
       });
       response.current = statement;
       setSuccess(true);
+      await qc.invalidateQueries(['statements']);
+      await qc.invalidateQueries(['banking', 'overview']);
     } catch (e) {
       setError(e?.response?.data?.message || e?.response?.data?.error || 'Something went wrong, please try again');
     }
