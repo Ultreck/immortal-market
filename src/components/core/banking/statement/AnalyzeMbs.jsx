@@ -60,8 +60,8 @@ const InitializeForm = ({ onTicket, onBack }) => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const { data: business } = useGetUserBusiness();
   const { data: { settings } = {} } = useGetBankingSettings(business._id);
-  const { mutateAsync: initialize, isLoading: isInitializeLoading } = useInitializeMbs(business._id)
-  const { mutateAsync: getFeedback, isLoading: isFeedbackLoading } = useCheckMbsStatus(business._id)
+  const { mutateAsync: initialize, isPending: isInitializeLoading } = useInitializeMbs(business._id)
+  const { mutateAsync: getFeedback, isPending: isFeedbackLoading } = useCheckMbsStatus(business._id)
   const {
     data: { account_name: accountName } = {}, isInitialLoading: isGetAccountNameLoading, error: resolveError
   } = useGetAccountName({
@@ -247,8 +247,8 @@ const TicketForm = ({ data, onBack }) => {
   const qc = useQueryClient();
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const { data: business } = useGetUserBusiness();
-  const { mutateAsync: confirm, isLoading: isConfirmLoading } = useSubmitMbsTicket(business._id);
-  const { mutateAsync: retrieve, isLoading: isRetrieveLoading } = useRetrieveMbsPdf(business._id);
+  const { mutateAsync: confirm, isPending: isConfirmLoading } = useSubmitMbsTicket(business._id);
+  const { mutateAsync: retrieve, isPending: isRetrieveLoading } = useRetrieveMbsPdf(business._id);
   const { mutateAsync: analyze } = useAnalyzeStatement();
   const [analyzing, setAnalyzing] = useState(false);
   const { data: banks = [] } = useGetBanks();
@@ -309,8 +309,12 @@ const TicketForm = ({ data, onBack }) => {
       });
       response.current = statement;
       setSuccess(true);
-      await qc.invalidateQueries(['statements']);
-      await qc.invalidateQueries(['banking', 'overview']);
+      await qc.invalidateQueries({
+        queryKey: ['statements']
+      });
+      await qc.invalidateQueries({
+        queryKey: ['banking', 'overview']
+      });
     } catch (e) {
       setError(e?.response?.data?.message || e?.response?.data?.error || 'Something went wrong, please try again');
     }

@@ -15,7 +15,7 @@ const Register = () => {
   const { authenticate } = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [agreed, setAgreed] = useState(false);
-  const { mutateAsync: signup, isLoading: isSignupLoading } = useSignupMutation();
+  const { mutateAsync: signup, isPending: isSignupLoading } = useSignupMutation();
   const { mutateAsync: send } = useSendEmailVerificationOtp();
 
   const submit = async (values) => {

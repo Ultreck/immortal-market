@@ -41,7 +41,7 @@ const EditReceipt = ({ receipt, onBack }) => {
   const toast = useToast();
   const qc = useQueryClient();
   const { data: business } = useGetUserBusiness();
-  const { mutateAsync: update, isLoading: isUpdateLoading } = useUpdateReceipt(business._id, receipt._id);
+  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateReceipt(business._id, receipt._id);
   const { register, handleSubmit, formState: { errors }, control, watch, setValue } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -67,8 +67,12 @@ const EditReceipt = ({ receipt, onBack }) => {
     try {
       await update(values);
       onBack();
-      await qc.invalidateQueries(['receipts', receipt._id]);
-      await qc.invalidateQueries(['receipts']);
+      await qc.invalidateQueries({
+        queryKey: ['receipts', receipt._id]
+      });
+      await qc.invalidateQueries({
+        queryKey: ['receipts']
+      });
       toast.success('Receipt updated');
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');

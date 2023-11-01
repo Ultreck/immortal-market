@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useGetProfile } from "@/api/auth.js";
 import { useMount } from "react-use";
 import PropTypes from "prop-types";
@@ -22,16 +22,21 @@ export const useProvideAuth = () => {
   const [user, setUser] = useState(null);
   const [authenticated, setAuthenticated] = useState(false);
   const [resolved, setResolved] = useState(false);
-  const { refetch } = useGetProfile({
-    onSuccess: (res) => {
-      const { user } = res.data;
-      authenticate({ user });
-    },
-    onError: () => {
+  const { refetch, data, error } = useGetProfile();
+
+  useEffect(() => {
+    if (error) {
       setResolved(true);
       logout();
-    },
-  })
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (data) {
+      const { user } = data.data;
+      authenticate({ user });
+    }
+  }, [data]);
 
   const authenticate = (data) => {
     setUser(data.user);

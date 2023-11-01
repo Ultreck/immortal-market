@@ -42,7 +42,7 @@ const EditInvoice = ({ invoice, onBack }) => {
   const toast = useToast();
   const qc = useQueryClient();
   const { data: business } = useGetUserBusiness();
-  const { mutateAsync: update, isLoading: isUpdateLoading } = useUpdateInvoice(business._id, invoice._id);
+  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateInvoice(business._id, invoice._id);
   const { register, handleSubmit, formState: { errors }, control, watch, setValue } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -69,8 +69,12 @@ const EditInvoice = ({ invoice, onBack }) => {
     try {
       await update(values);
       onBack();
-      await qc.invalidateQueries(['invoices', invoice._id]);
-      await qc.invalidateQueries(['invoices']);
+      await qc.invalidateQueries({
+        queryKey: ['invoices', invoice._id]
+      });
+      await qc.invalidateQueries({
+        queryKey: ['invoices']
+      });
       toast.success('Invoice updated');
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');

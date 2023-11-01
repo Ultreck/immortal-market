@@ -18,7 +18,7 @@ const NewReceipt = ({ isOpen, onClose }) => {
   const [success, setSuccess] = useState(false);
   const [isFetching, setIsFetching] = useState(false)
   const { data: business } = useGetUserBusiness();
-  const { mutateAsync: createReceipt, isLoading: isCreateReceiptLoading } = useCreateReceipt(business._id);
+  const { mutateAsync: createReceipt, isPending: isCreateReceiptLoading } = useCreateReceipt(business._id);
 
   const onChange = async (file) => {
     try {
@@ -26,8 +26,12 @@ const NewReceipt = ({ isOpen, onClose }) => {
       fd.append('file', file);
       const res = await createReceipt(fd);
       setIsFetching(true)
-      await qc.invalidateQueries(['receipts']);
-      await qc.invalidateQueries(['invoices', 'overview']);
+      await qc.invalidateQueries({
+        queryKey: ['receipts']
+      });
+      await qc.invalidateQueries({
+        queryKey: ['invoices', 'overview']
+      });
       setIsFetching(false)
       response.current = res.data.receipt;
       setSuccess(true);

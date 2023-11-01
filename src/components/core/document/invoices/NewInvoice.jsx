@@ -18,7 +18,7 @@ const NewInvoice = ({ isOpen, onClose }) => {
   const [success, setSuccess] = useState(false);
   const [isFetching, setIsFetching] = useState(false)
   const { data: business } = useGetUserBusiness();
-  const { mutateAsync: createInvoice, isLoading: isCreateInvoiceLoading } = useCreateInvoice(business._id);
+  const { mutateAsync: createInvoice, isPending: isCreateInvoiceLoading } = useCreateInvoice(business._id);
 
   const onChange = async (file) => {
     try {
@@ -26,8 +26,12 @@ const NewInvoice = ({ isOpen, onClose }) => {
       fd.append('file', file);
       const res = await createInvoice(fd);
       setIsFetching(true)
-      await qc.invalidateQueries(['invoices']);
-      await qc.invalidateQueries(['invoices', 'overview']);
+      await qc.invalidateQueries({
+        queryKey: ['invoices']
+      });
+      await qc.invalidateQueries({
+        queryKey: ['invoices', 'overview']
+      });
       setIsFetching(false)
       response.current = res.data.invoice;
       setSuccess(true);

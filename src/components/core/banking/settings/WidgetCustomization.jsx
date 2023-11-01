@@ -21,7 +21,7 @@ const WidgetCustomization = () => {
   const qc = useQueryClient();
   const { data: business } = useGetUserBusiness();
   const { data: { settings } } = useGetBankingSettings(business._id);
-  const { mutateAsync: updateSettings, isLoading: isUpdateSettingsLoading } = useUpdateBankingSettings(business._id);
+  const { mutateAsync: updateSettings, isPending: isUpdateSettingsLoading } = useUpdateBankingSettings(business._id);
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       widgetDisplayName: settings.statement?.widgetDisplayName,
@@ -33,7 +33,9 @@ const WidgetCustomization = () => {
     try {
       await updateSettings({ statement: { ...(settings?.statement || {}), ...values } });
       toast.success('Settings updated');
-      await qc.invalidateQueries(['statement', 'settings']);
+      await qc.invalidateQueries({
+        queryKey: ['statement', 'settings']
+      });
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }

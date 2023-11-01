@@ -12,7 +12,7 @@ const Login = () => {
   const toast = useToast();
   const { authenticate } = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { mutateAsync: login, isLoading: isLoginLoading } = useLoginMutation();
+  const { mutateAsync: login, isPending: isLoginLoading } = useLoginMutation();
 
   const submit = async (values) => {
     try {

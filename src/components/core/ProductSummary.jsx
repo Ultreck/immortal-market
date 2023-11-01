@@ -34,7 +34,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
   const qc = useQueryClient();
   const timer = useCountdown(product?.date);
   const [isFetching, setIsFetching] = useState(false);
-  const { mutateAsync: notify, isLoading: isNotifyLoading } = useAddLaunchSubscriber();
+  const { mutateAsync: notify, isPending: isNotifyLoading } = useAddLaunchSubscriber();
   const { data: { subscriptions = [] } = {}, isLoading: isSubscriptionsLoading } = useGetLaunchSubscriptions();
 
   const isSubscribed = subscriptions.some(s => s.product === product?.slug);
@@ -43,7 +43,9 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
     try {
       await notify({ product: product.slug })
       setIsFetching(true)
-      await qc.invalidateQueries(['product', 'launch', 'subscriptions']);
+      await qc.invalidateQueries({
+        queryKey: ['product', 'launch', 'subscriptions']
+      });
       setIsFetching(false)
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');

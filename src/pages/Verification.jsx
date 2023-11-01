@@ -10,8 +10,8 @@ const Verification = () => {
   const toast = useToast();
   const { user, reloadUser, logout } = useAuth();
   const input = useRef(null);
-  const { mutateAsync: send, isLoading: isSendLoading } = useSendEmailVerificationOtp();
-  const { mutateAsync: confirm, isLoading: isConfirmLoading } = useConfirmEmailVerificationOtp();
+  const { mutateAsync: send, isPending: isSendLoading } = useSendEmailVerificationOtp();
+  const { mutateAsync: confirm, isPending: isConfirmLoading } = useConfirmEmailVerificationOtp();
 
   const handlePinDone = async otp => {
     try {

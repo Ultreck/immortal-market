@@ -58,8 +58,12 @@ const AnalyzePdf = ({ onBack }) => {
       });
       response.current = statement;
       setSuccess(true);
-      await qc.invalidateQueries(['statements']);
-      await qc.invalidateQueries(['banking', 'overview']);
+      await qc.invalidateQueries({
+        queryKey: ['statements']
+      });
+      await qc.invalidateQueries({
+        queryKey: ['banking', 'overview']
+      });
     } catch (e) {
       setError(e?.response?.data?.error ?? e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }

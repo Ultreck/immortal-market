@@ -13,14 +13,16 @@ const CreateBusiness = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { mutateAsync: create, isLoading: isCreateLoading } = useCreateBusinessMutation();
+  const { mutateAsync: create, isPending: isCreateLoading } = useCreateBusinessMutation();
   const [isFetching, setIsFetching] = useState(false);
 
   const submit = async (values) => {
     try {
       await create(values);
       setIsFetching(true);
-      await qc.invalidateQueries(['business']);
+      await qc.invalidateQueries({
+        queryKey: ['business']
+      });
       setIsFetching(false);
     } catch (e) {
       toast.error(e?.response?.data?.message ?? 'Something went wrong, please try again');

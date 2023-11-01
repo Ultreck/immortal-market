@@ -12,7 +12,7 @@ const Conversations = ({ onClick, selected }) => {
   const toast = useToast();
   const qc = useQueryClient();
   const { data: { conversations = [] } = {}, isLoading: isConversationsLoading } = useGetConversations();
-  const { mutateAsync: create, isLoading: isCreateLoading } = useCreateConversation();
+  const { mutateAsync: create, isPending: isCreateLoading } = useCreateConversation();
   const [isUpgradeOpen, setIsUpgradeOpen] = useState(false);
 
   const handleCreate = async () => {
@@ -20,7 +20,9 @@ const Conversations = ({ onClick, selected }) => {
     try {
       const res = await create(null);
       onClick(res.data.conversation._id);
-      await qc.invalidateQueries(['conversations']);
+      await qc.invalidateQueries({
+        queryKey: ['conversations']
+      });
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }

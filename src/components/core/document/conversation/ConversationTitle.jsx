@@ -12,7 +12,7 @@ const ConversationTitle = ({ conversation }) => {
   const qc = useQueryClient();
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(conversation.title || '');
-  const { mutateAsync: update, isLoading: isUpdateLoading } = useUpdateConversation();
+  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateConversation();
 
   useEffect(() => setEditing(false), [conversation.title]);
 
@@ -22,8 +22,12 @@ const ConversationTitle = ({ conversation }) => {
       await update({ id: conversation._id, data: { title } });
       setEditing(false);
       await Promise.all([
-        qc.invalidateQueries(['conversation', conversation._id]),
-        qc.invalidateQueries(['conversations'])
+        qc.invalidateQueries({
+          queryKey: ['conversation', conversation._id]
+        }),
+        qc.invalidateQueries({
+          queryKey: ['conversations']
+        })
       ]);
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');

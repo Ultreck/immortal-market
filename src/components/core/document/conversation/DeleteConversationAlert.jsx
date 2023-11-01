@@ -8,12 +8,14 @@ import PropTypes from "prop-types";
 const DeleteConversationAlert = ({ isOpen, onClose, onDone, conversation }) => {
   const toast = useToast();
   const qc = useQueryClient();
-  const { mutateAsync: deleteConversation, isLoading: isDeleteLoading } = useDeleteConversation();
+  const { mutateAsync: deleteConversation, isPending: isDeleteLoading } = useDeleteConversation();
 
   const handleDelete = async () => {
     try {
       await deleteConversation(conversation._id);
-      await qc.invalidateQueries(['conversations']);
+      await qc.invalidateQueries({
+        queryKey: ['conversations']
+      });
       onClose()
       onDone()
     } catch (e) {

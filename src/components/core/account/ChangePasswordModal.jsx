@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 const ChangePasswordModal = ({ isOpen, onClose }) => {
   const toast = useToast();
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
-  const { mutateAsync: change, isLoading: isChangeLoading } = useChangePassword();
+  const { mutateAsync: change, isPending: isChangeLoading } = useChangePassword();
 
   const onSubmit = async (values) => {
     try {

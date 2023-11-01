@@ -22,14 +22,18 @@ const ReceiptDetails = () => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const { data: business } = useGetUserBusiness();
   const { data: { receipt } = {}, isLoading: isReceiptLoading } = useGetReceipt(business._id, id);
-  const { mutateAsync: deleteReceipt, isLoading: isDeleteLoading } = useDeleteReceipt(business._id, id);
+  const { mutateAsync: deleteReceipt, isPending: isDeleteLoading } = useDeleteReceipt(business._id, id);
 
   const handleDelete = async () => {
     try {
       await deleteReceipt(null);
       navigate('/invoice/receipts', { replace: true });
-      await qc.invalidateQueries(['receipts'])
-      await qc.invalidateQueries(['invoices', 'overview'])
+      await qc.invalidateQueries({
+        queryKey: ['receipts']
+      })
+      await qc.invalidateQueries({
+        queryKey: ['invoices', 'overview']
+      })
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }

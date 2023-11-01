@@ -125,9 +125,9 @@ const AnalyzeMonoLogin = ({ institution, onBack }) => {
   const { data: { settings } = {} } = useGetBankingSettings(business._id);
   const monoSecKey = settings.statement.monoSecretKey;
   const monoApp = settings.statement.monoApp;
-  const { mutateAsync: createSession, isLoading: isCreateSessionLoading } = useCreateMonoSession({ key: monoSecKey });
-  const { mutateAsync: login, isLoading: isLoginLoading } = useLoginMono({ key: monoSecKey });
-  const { mutateAsync: commitSession, isLoading: isCommitSessionLoading } = useCommitMonoSession({ key: monoSecKey });
+  const { mutateAsync: createSession, isPending: isCreateSessionLoading } = useCreateMonoSession({ key: monoSecKey });
+  const { mutateAsync: login, isPending: isLoginLoading } = useLoginMono({ key: monoSecKey });
+  const { mutateAsync: commitSession, isPending: isCommitSessionLoading } = useCommitMonoSession({ key: monoSecKey });
   const { mutateAsync: getTransactions } = useGetMonoTransactions({ key: monoSecKey });
   const { mutateAsync: createStatement } = useCreateStatement(business._id);
   const { mutateAsync: analyzeJson } = useAnalyzeJson();
@@ -219,8 +219,12 @@ const AnalyzeMonoLogin = ({ institution, onBack }) => {
       });
       response.current = statement;
       setView('success');
-      await qc.invalidateQueries(['statements']);
-      await qc.invalidateQueries(['banking', 'overview']);
+      await qc.invalidateQueries({
+        queryKey: ['statements']
+      });
+      await qc.invalidateQueries({
+        queryKey: ['banking', 'overview']
+      });
     } catch (e) {
       setError(e?.response?.data?.message ?? 'Something went wrong, please try again');
     }

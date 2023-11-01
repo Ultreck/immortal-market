@@ -58,13 +58,15 @@ const BankingLayout = () => {
   const [isFetching, setIsFetching] = useState(false);
   const { data: business } = useGetUserBusiness();
   const { data: { settings } = {}, isLoading: isSettingsLoading } = useGetBankingSettings(business._id);
-  const { mutateAsync: createSettings, isLoading: isCreateSettingsLoading } = useCreateBankingSettings(business._id);
+  const { mutateAsync: createSettings, isPending: isCreateSettingsLoading } = useCreateBankingSettings(business._id);
 
   const start = async () => {
     try {
       await createSettings(null);
       setIsFetching(true)
-      await qc.invalidateQueries(['statement', 'settings']);
+      await qc.invalidateQueries({
+        queryKey: ['statement', 'settings']
+      });
       setIsFetching(false)
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');

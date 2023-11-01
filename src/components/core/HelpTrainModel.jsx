@@ -17,7 +17,7 @@ const HelpTrainModel = ({ isOpen, onClose, category }) => {
   const [file, setFile] = useState(null);
   const [success, setSuccess] = useState(false)
   const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
-  const { mutateAsync: create, isLoading: isCreateLoading } = useCreateSampleDocument()
+  const { mutateAsync: create, isPending: isCreateLoading } = useCreateSampleDocument()
 
   const handleChange = async (file) => {
     setFile(file)
