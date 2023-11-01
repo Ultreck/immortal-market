@@ -22,7 +22,7 @@ const banking = [
   {
     name: 'Borrower insights',
     slug: 'borrower-insights',
-    date: '10/31/2023',
+    date: '1/2/2024',
     description: `Optimize transactions with AI-driven insights.`,
     backgroundColor: '!bg-sky-700',
     textColor: '!text-sky-700',
@@ -50,7 +50,7 @@ const banking = [
   {
     name: 'Customer insights',
     slug: 'customer-insights',
-    date: '10/31/2023',
+    date: '1/2/2024',
     description: `Understand behaviors through insightful analysis.`,
     backgroundColor: '!bg-yellow-700',
     textColor: '!text-yellow-700',
@@ -77,7 +77,7 @@ const banking = [
   {
     name: 'Portfolio insights',
     slug: 'portfolio-insights',
-    date: '10/31/2023',
+    date: '1/2/2024',
     description: `Manage risk, enhance performance intelligently`,
     backgroundColor: '!bg-red-700',
     textColor: '!text-red-700',
@@ -106,7 +106,7 @@ const banking = [
   {
     name: 'Treasury insights',
     slug: 'treasury-insights',
-    date: '10/31/2023',
+    date: '1/2/2024',
     description: `Unlock actionable treasury insights`,
     backgroundColor: '!bg-teal-700',
     textColor: '!text-teal-700',
@@ -139,7 +139,7 @@ const banking = [
   {
     name: 'Credit modelling',
     slug: 'credit-modelling',
-    date: '10/31/2023',
+    date: '1/2/2024',
     description: `Accurate credit assessment through advanced techniques.`,
     backgroundColor: '!bg-orange-700',
     textColor: '!text-orange-700',
@@ -171,7 +171,7 @@ const document = [
   {
     name: 'Analyze any document',
     slug: 'documents',
-    date: '10/31/2023',
+    date: '1/2/2024',
     description: `Personalized insights for precise analysis.`,
     backgroundColor: '!bg-red-800',
     textColor: '!text-red-800',
@@ -199,7 +199,7 @@ const document = [
   {
     name: 'Generate conversation',
     slug: 'conversation',
-    date: '10/31/2023',
+    date: '1/2/2024',
     description: `Support for efficient decision-making processes.`,
     backgroundColor: '!bg-blue-700',
     textColor: '!text-blue-700',
@@ -227,7 +227,7 @@ const document = [
   {
     name: 'Generate infographics',
     slug: 'infographics',
-    date: '10/31/2023',
+    date: '1/2/2024',
     description: `Transform data into visuals with our infographic dashboard`,
     backgroundColor: '!bg-red-700',
     textColor: '!text-red-700',
@@ -257,7 +257,7 @@ const document = [
   {
     name: 'Generate forms',
     slug: 'forms',
-    date: '10/31/2023',
+    date: '1/2/2024',
     description: `Simplify data collection through automated processes.`,
     backgroundColor: '!bg-teal-700',
     textColor: '!text-teal-700',
@@ -289,7 +289,7 @@ const identity = [
   {
     name: 'Government IDs',
     slug: 'govt-id',
-    date: '11/30/2023',
+    date: '1/2/2024',
     description: `Identity verification for reduced fraudulent activities.`,
     backgroundColor: '!bg-teal-700',
     textColor: '!text-teal-700',
@@ -321,7 +321,7 @@ const identity = [
   {
     name: 'Social analytics',
     slug: 'social-analytics',
-    date: '11/30/2023',
+    date: '1/2/2024',
     description: `Extract insights from analyzed social data.`,
     backgroundColor: '!bg-blue-700',
     textColor: '!text-blue-700',
@@ -351,7 +351,7 @@ const identity = [
   {
     name: 'Psychometric',
     slug: 'psychometric',
-    date: '11/30/2023',
+    date: '1/2/2024',
     description: `Decipher traits to enable precise assessment.`,
     backgroundColor: '!bg-yellow-700',
     textColor: '!text-yellow-700',
@@ -383,7 +383,7 @@ const identity = [
   {
     name: 'Alternative data',
     slug: 'alternative-data',
-    date: '11/30/2023',
+    date: '1/2/2024',
     description: `Unconventional sources offer comprehensive insights.`,
     backgroundColor: '!bg-orange-700',
     textColor: '!text-orange-700',
@@ -417,7 +417,7 @@ const accounting = [
   {
     name: 'Cash-flow insights',
     slug: 'cash-flow',
-    date: '11/30/2023',
+    date: '1/2/2024',
     description: `Unlock cash-flow insights for informed financial decisions.`,
     backgroundColor: '!bg-sky-700',
     textColor: '!text-sky-700',
@@ -449,7 +449,7 @@ const accounting = [
   {
     name: 'Financial report',
     slug: 'financial-report',
-    date: '11/30/2023',
+    date: '1/2/2024',
     description: `Accurate reports for insights and decision-making.`,
     backgroundColor: '!bg-indigo-700',
     textColor: '!text-indigo-700',
@@ -478,7 +478,7 @@ const accounting = [
   {
     name: 'Invoices & Receipts',
     slug: 'invoice',
-    date: '11/30/2023',
+    date: '1/2/2024',
     description: `Streamlined automation for financial tracking.`,
     backgroundColor: '!bg-amber-700',
     textColor: '!text-amber-700',
@@ -508,7 +508,7 @@ const accounting = [
   {
     name: 'Fraud',
     slug: 'fraud',
-    date: '11/30/2023',
+    date: '1/2/2024',
     description: `Thwart fraud, ensuring secure transactions.`,
     backgroundColor: '!bg-red-700',
     textColor: '!text-red-700',
@@ -555,7 +555,7 @@ export const categories = [
       color: '!text-sky-700',
     },
     path: '/banking',
-    status: 'active',
+    status: 'pending',
   },
   {
     id: 'document',
