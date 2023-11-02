@@ -19,8 +19,9 @@ const RequireAuthUnverified = ({ children }) => {
   if ((resolved && authenticated && !user?.emailVerified)) return children
 
   return (
-    <div className="h-screen w-full flex justify-center items-center">
+    <div className="h-screen w-full flex flex-col justify-center items-center text-center">
       <Loader/>
+      <p className="mt-4">Just a moment..</p>
     </div>
   )
 };
