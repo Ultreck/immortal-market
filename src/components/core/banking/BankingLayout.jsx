@@ -1,6 +1,6 @@
-import { categories } from "@/lib/products.js";
-import { createElement, useState } from "react";
-import classNames from "classnames";
+import { categories } from '@/lib/products.js';
+import { createElement, useState } from 'react';
+import classNames from 'classnames';
 import {
   IconBriefcase,
   IconChartHistogram,
@@ -9,47 +9,45 @@ import {
   IconLayout,
   IconReportMoney,
   IconSettings2,
-  IconUserCircle
-} from "@tabler/icons-react";
-import { useQueryClient } from "@tanstack/react-query";
-import Loader from "@/components/global/Loader.jsx";
-import AppDashboardLayout from "@/components/core/shared/AppDashboardLayout.jsx";
-import DashboardContent from "@/components/core/shared/DashboardContent.jsx";
-import ProductOnboarding from "@/components/core/shared/ProductOnboarding.jsx";
-import { useToast } from "@/hooks/use-toast.jsx";
-import { useGetUserBusiness } from "@/api/business.js";
-import { useCreateBankingSettings, useGetBankingSettings } from "@/api/statement.js";
-import { Outlet } from "react-router-dom";
-import PropTypes from "prop-types";
+  IconUserCircle,
+} from '@tabler/icons-react';
+import { useQueryClient } from '@tanstack/react-query';
+import Loader from '@/components/global/Loader.jsx';
+import AppDashboardLayout from '@/components/core/shared/AppDashboardLayout.jsx';
+import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
+import ProductOnboarding from '@/components/core/shared/ProductOnboarding.jsx';
+import { useToast } from '@/hooks/use-toast.jsx';
+import { useGetUserBusiness } from '@/api/business.js';
+import { useCreateBankingSettings, useGetBankingSettings } from '@/api/statement.js';
+import { Outlet } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const product = categories.find(p => p.id === 'banking');
+const product = categories.find((p) => p.id === 'banking');
 
 const links = [
-  { name: 'Overview', href: `/${ product.slug }/overview`, icon: <IconLayout size="20"/> },
-  { name: 'Statement insights', href: `/${ product.slug }/statement`, icon: <IconFileText size="20"/> },
-  { name: 'Customer insights', href: `/${ product.slug }/customer`, icon: <IconUserCircle size="20"/> },
-  { name: 'Portfolio insights', href: `/${ product.slug }/portfolio`, icon: <IconBriefcase size="20"/> },
-  { name: 'Treasury insights', href: `/${ product.slug }/treasury`, icon: <IconReportMoney size="20"/> },
-  { name: 'Credit modelling', href: `/${ product.slug }/credit`, icon: <IconChartHistogram size="20"/> },
-  { name: 'Subscription', href: `/${ product.slug }/subscription`, icon: <IconCreditCard size="20"/> },
-  { name: 'Settings', href: `/${ product.slug }/settings`, icon: <IconSettings2 size="20"/> },
+  { name: 'Overview', href: `/${product.slug}/overview`, icon: <IconLayout size="20" /> },
+  { name: 'Statement insights', href: `/${product.slug}/statement`, icon: <IconFileText size="20" /> },
+  { name: 'Customer insights', href: `/${product.slug}/customer`, icon: <IconUserCircle size="20" /> },
+  { name: 'Portfolio insights', href: `/${product.slug}/portfolio`, icon: <IconBriefcase size="20" /> },
+  { name: 'Treasury insights', href: `/${product.slug}/treasury`, icon: <IconReportMoney size="20" /> },
+  { name: 'Credit modelling', href: `/${product.slug}/credit`, icon: <IconChartHistogram size="20" /> },
+  { name: 'Subscription', href: `/${product.slug}/subscription`, icon: <IconCreditCard size="20" /> },
+  { name: 'Settings', href: `/${product.slug}/settings`, icon: <IconSettings2 size="20" /> },
 ];
 
 const Logo = ({ className }) => (
-  <div className={ className }>
+  <div className={className}>
     <div className="text-[1.05rem] font-medium flex items-center">
-      <div
-        className={ classNames("w-10 h-10 rounded-full mr-3 flex items-center justify-center", product.colors.bg) }
-      >
-        { createElement(product.icon, { size: 22, className: `text-white` }) }
+      <div className={classNames('w-10 h-10 rounded-full mr-3 flex items-center justify-center', product.colors.bg)}>
+        {createElement(product.icon, { size: 22, className: `text-white` })}
       </div>
-      { product.name }
+      {product.name}
     </div>
   </div>
 );
 
 Logo.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 const BankingLayout = () => {
@@ -63,11 +61,11 @@ const BankingLayout = () => {
   const start = async () => {
     try {
       await createSettings(null);
-      setIsFetching(true)
+      setIsFetching(true);
       await qc.invalidateQueries({
-        queryKey: ['statement', 'settings']
+        queryKey: ['statement', 'settings'],
       });
-      setIsFetching(false)
+      setIsFetching(false);
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }
@@ -75,32 +73,24 @@ const BankingLayout = () => {
 
   return (
     <>
-      {
-        isSettingsLoading ? (
-          <div className="h-screen w-full flex flex-col justify-center items-center text-center">
-            <Loader/>
-            <p className="mt-6">Just a moment..</p>
-          </div>
-        ) : (
-          <>
-            {
-              (settings && product.status === 'active') ? (
-                <AppDashboardLayout logo={ Logo } links={ links }>
-                  <DashboardContent>
-                    <Outlet/>
-                  </DashboardContent>
-                </AppDashboardLayout>
-              ) : (
-                <ProductOnboarding
-                  product={ product }
-                  isLoading={ isCreateSettingsLoading || isFetching }
-                  onStart={ start }
-                />
-              )
-            }
-          </>
-        )
-      }
+      {isSettingsLoading ? (
+        <div className="h-screen w-full flex flex-col justify-center items-center text-center">
+          <Loader />
+          <p className="mt-6">Just a moment..</p>
+        </div>
+      ) : (
+        <>
+          {settings && product.status === 'active' ? (
+            <AppDashboardLayout logo={Logo} links={links}>
+              <DashboardContent>
+                <Outlet />
+              </DashboardContent>
+            </AppDashboardLayout>
+          ) : (
+            <ProductOnboarding product={product} isLoading={isCreateSettingsLoading || isFetching} onStart={start} />
+          )}
+        </>
+      )}
     </>
   );
 };

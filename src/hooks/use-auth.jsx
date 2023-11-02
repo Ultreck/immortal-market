@@ -1,20 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useGetProfile } from "@/api/auth.js";
-import { useMount } from "react-use";
-import PropTypes from "prop-types";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useGetProfile } from '@/api/auth.js';
+import { useMount } from 'react-use';
+import PropTypes from 'prop-types';
 
 const authContext = createContext({
   user: null,
-  updateUser: () => {
-  },
-  authenticate: () => {
-  },
-  reloadUser: () => {
-  },
+  updateUser: () => {},
+  authenticate: () => {},
+  reloadUser: () => {},
   resolved: false,
   authenticated: false,
-  logout: () => {
-  }
+  logout: () => {},
 });
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -51,7 +47,7 @@ export const useProvideAuth = () => {
   };
 
   const updateUser = (user) => {
-    setUser(old => ({ ...old, ...user }));
+    setUser((old) => ({ ...old, ...user }));
   };
 
   const reloadUser = async () => {
@@ -74,17 +70,17 @@ export const useProvideAuth = () => {
     authenticate,
     resolved,
     authenticated,
-    logout
+    logout,
   };
 };
 
 export const AuthProvider = ({ children }) => {
   const auth = useProvideAuth();
-  return <authContext.Provider value={ auth }>{ children }</authContext.Provider>;
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 };
 
 AuthProvider.propTypes = {
-  children: PropTypes.any
+  children: PropTypes.any,
 };
 
 // eslint-disable-next-line react-refresh/only-export-components

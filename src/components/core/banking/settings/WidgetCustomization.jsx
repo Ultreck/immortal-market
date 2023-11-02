@@ -1,12 +1,12 @@
-import Input from "@/components/global/Input";
-import Select from "@/components/global/Select";
-import Button from "@/components/global/Button";
-import { useToast } from "@/hooks/use-toast";
-import { useQueryClient } from "@tanstack/react-query";
-import { useGetUserBusiness } from "@/api/business";
-import { useGetBankingSettings, useUpdateBankingSettings } from "@/api/statement";
-import { useForm } from "react-hook-form";
-import Card from "@/components/global/Card";
+import Input from '@/components/global/Input';
+import Select from '@/components/global/Select';
+import Button from '@/components/global/Button';
+import { useToast } from '@/hooks/use-toast';
+import { useQueryClient } from '@tanstack/react-query';
+import { useGetUserBusiness } from '@/api/business';
+import { useGetBankingSettings, useUpdateBankingSettings } from '@/api/statement';
+import { useForm } from 'react-hook-form';
+import Card from '@/components/global/Card';
 
 const colors = [
   { text: 'Purple', value: '#0000' },
@@ -20,13 +20,19 @@ const WidgetCustomization = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const { data: business } = useGetUserBusiness();
-  const { data: { settings } } = useGetBankingSettings(business._id);
+  const {
+    data: { settings },
+  } = useGetBankingSettings(business._id);
   const { mutateAsync: updateSettings, isPending: isUpdateSettingsLoading } = useUpdateBankingSettings(business._id);
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       widgetDisplayName: settings.statement?.widgetDisplayName,
       widgetThemeColor: settings.statement?.widgetThemeColor,
-    }
+    },
   });
 
   const onSubmit = async (values) => {
@@ -34,7 +40,7 @@ const WidgetCustomization = () => {
       await updateSettings({ statement: { ...(settings?.statement || {}), ...values } });
       toast.success('Settings updated');
       await qc.invalidateQueries({
-        queryKey: ['statement', 'settings']
+        queryKey: ['statement', 'settings'],
       });
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
@@ -47,20 +53,24 @@ const WidgetCustomization = () => {
       <p className="mt-2 text-[.95rem] opacity-80">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut itaque quasi temporibus?
       </p>
-      <form onSubmit={ handleSubmit(onSubmit) }>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-8 space-y-3">
           <Input
-            label="Display name" bordered
-            { ...register('widgetDisplayName', { required: 'This field is required ' }) }
-            error={ errors?.widgetDisplayName?.message }
+            label="Display name"
+            bordered
+            {...register('widgetDisplayName', { required: 'This field is required ' })}
+            error={errors?.widgetDisplayName?.message}
           />
           <Select
-            label="Theme color" options={ colors } bordered placeholder="Choose a color"
-            { ...register('widgetThemeColor', { required: 'This field is required ' }) }
-            error={ errors?.widgetThemeColor?.message }
+            label="Theme color"
+            options={colors}
+            bordered
+            placeholder="Choose a color"
+            {...register('widgetThemeColor', { required: 'This field is required ' })}
+            error={errors?.widgetThemeColor?.message}
           />
         </div>
-        <Button variant="subtle" type="submit" loading={ isUpdateSettingsLoading } className="mt-8">
+        <Button variant="subtle" type="submit" loading={isUpdateSettingsLoading} className="mt-8">
           Save
         </Button>
       </form>

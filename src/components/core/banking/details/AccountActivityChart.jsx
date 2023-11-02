@@ -1,5 +1,5 @@
-import { Cell, Pie, PieChart } from "recharts";
-import PropTypes from "prop-types";
+import { Cell, Pie, PieChart } from 'recharts';
+import PropTypes from 'prop-types';
 
 const AccountActivityChart = ({ data }) => {
   const { highlight } = data?.analytics_data ?? {};
@@ -19,27 +19,23 @@ const AccountActivityChart = ({ data }) => {
   return (
     <>
       <div className="flex items-center justify-center relative">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-center"
-        >
-          <p className="text-2xl">
-            { account_activity }%
-          </p>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-center">
+          <p className="text-2xl">{account_activity}%</p>
           <p className="text-[.95rem] leading-none mt-1">Account activity</p>
         </div>
-        <PieChart width={ 190 } height={ 190 }>
+        <PieChart width={190} height={190}>
           <Pie
-            isAnimationActive={ false }
-            data={ chartData }
-            innerRadius={ 80 }
-            outerRadius={ 90 }
+            isAnimationActive={false}
+            data={chartData}
+            innerRadius={80}
+            outerRadius={90}
             fill="#8884d8"
-            paddingAngle={ 5 }
+            paddingAngle={5}
             dataKey="value"
           >
-            { chartData.map((entry, index) => (
-              <Cell key={ `cell-${ index }` } fill={ COLORS[index % COLORS.length] }/>
-            )) }
+            {chartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
           </Pie>
         </PieChart>
       </div>
@@ -48,7 +44,7 @@ const AccountActivityChart = ({ data }) => {
 };
 
 AccountActivityChart.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
 };
 
 export default AccountActivityChart;

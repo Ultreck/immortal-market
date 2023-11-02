@@ -1,31 +1,30 @@
-import { createElement, Fragment } from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import { IconChevronRight, IconGridDots, IconHome2, IconLayoutGrid } from "@tabler/icons-react";
-import products from "@/lib/products.js";
-import classNames from "classnames";
-import { Link } from "react-router-dom";
+import { createElement, Fragment } from 'react';
+import { Popover, Transition } from '@headlessui/react';
+import { IconChevronRight, IconGridDots, IconHome2, IconLayoutGrid } from '@tabler/icons-react';
+import products from '@/lib/products.js';
+import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 const AppSwitcherDesktop = () => {
   return (
     <>
       <Popover className="relative">
-        { ({ open }) => (
+        {({ open }) => (
           <>
             <Popover.Button
               as="div"
-              className={ classNames(
-                'flex items-center rounded-3xl hover:bg-slate-100 cursor-pointer pl-6 pr-4 py-3',
-                { 'bg-slate-100': open }
-              ) }
+              className={classNames('flex items-center rounded-3xl hover:bg-slate-100 cursor-pointer pl-6 pr-4 py-3', {
+                'bg-slate-100': open,
+              })}
             >
-              <IconGridDots size="23"/>
+              <IconGridDots size="23" />
               <p className="px-5 flex-1">Apps</p>
               <div>
-                <IconChevronRight size="18"/>
+                <IconChevronRight size="18" />
               </div>
             </Popover.Button>
             <Transition
-              as={ Fragment }
+              as={Fragment}
               enter="transition ease-out duration-200"
               enterFrom="opacity-0 -translate-y-1"
               enterTo="opacity-100 -translate-y-0"
@@ -33,47 +32,43 @@ const AppSwitcherDesktop = () => {
               leaveFrom="opacity-100 -translate-y-0"
               leaveTo="opacity-0 -translate-y-1"
             >
-              <Popover.Panel
-                className="absolute bottom-0 left-[calc(100%_+_15px)] z-10 mt-3 w-screen max-w-xs px-4 sm:px-0 lg:max-w-[360px]"
-              >
+              <Popover.Panel className="absolute bottom-0 left-[calc(100%_+_15px)] z-10 mt-3 w-screen max-w-xs px-4 sm:px-0 lg:max-w-[360px]">
                 <div className="overflow-hidden rounded-2xl shadow-md ring-1 ring-black ring-opacity-5 bg-white">
                   <div className="border-b py-2 text-center flex items-center justify-center">
-                    <IconHome2 size="18" className="mr-3"/>
+                    <IconHome2 size="18" className="mr-3" />
                     <h4 className="font-semibold">Apps</h4>
                   </div>
                   <div className="relative grid gap-2 px-4 py-4 grid-cols-3">
-                    {
-                      products.slice(0, 5).map((product) => (
-                        <Link
-                          key={ product.name } to={ product.link }
-                          className="flex flex-col items-center rounded-2xl text-center px-2 py-4 transition duration-150 ease-in-out hover:bg-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                    {products.slice(0, 5).map((product) => (
+                      <Link
+                        key={product.name}
+                        to={product.link}
+                        className="flex flex-col items-center rounded-2xl text-center px-2 py-4 transition duration-150 ease-in-out hover:bg-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                      >
+                        <div
+                          className={classNames(
+                            'w-10 h-10 rounded-full flex items-center justify-center text-white',
+                            product.backgroundColor
+                          )}
                         >
-                          <div
-                            className={ classNames('w-10 h-10 rounded-full flex items-center justify-center text-white', product.backgroundColor) }
-                          >
-                            { createElement(product.icon) }
-                          </div>
-                          <div className="mt-2">
-                            <p className="text-sm text-gray-900">
-                              { product.name }
-                            </p>
-                          </div>
-                        </Link>
-                      ))
-                    }
+                          {createElement(product.icon)}
+                        </div>
+                        <div className="mt-2">
+                          <p className="text-sm text-gray-900">{product.name}</p>
+                        </div>
+                      </Link>
+                    ))}
                     <Link
-                      to={ "/" }
+                      to={'/'}
                       className="flex flex-col items-center rounded-2xl text-center px-2 py-4 transition duration-150 ease-in-out hover:bg-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                     >
                       <div
-                        className={ classNames('w-10 h-10 rounded-full flex items-center justify-center text-slate-600') }
+                        className={classNames('w-10 h-10 rounded-full flex items-center justify-center text-slate-600')}
                       >
-                        { createElement(IconLayoutGrid) }
+                        {createElement(IconLayoutGrid)}
                       </div>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-900">
-                          View all
-                        </p>
+                        <p className="text-sm text-gray-900">View all</p>
                       </div>
                     </Link>
                   </div>
@@ -81,7 +76,7 @@ const AppSwitcherDesktop = () => {
               </Popover.Panel>
             </Transition>
           </>
-        ) }
+        )}
       </Popover>
     </>
   );

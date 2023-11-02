@@ -1,19 +1,19 @@
 export const delay = (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
 export const formatCurrency = (value, currency = 'ngn') => {
   if (isNaN(value)) return value;
   if (currency.toLowerCase() === 'ngn') {
-    return new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(+value)
+    return new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(+value);
   }
   if (currency.toLowerCase() === 'usd') {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(+value)
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(+value);
   }
   return value;
 };
 
-export const getModeArray = array => {
+export const getModeArray = (array) => {
   if (array.length === 0) return null;
   let modeMap = {};
   let maxCount = 1;

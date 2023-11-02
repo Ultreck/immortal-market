@@ -15,8 +15,8 @@ import {
   IconMessageChatbot,
   IconReportMoney,
   IconSocial,
-  IconUserCircle
-} from "@tabler/icons-react";
+  IconUserCircle,
+} from '@tabler/icons-react';
 
 const banking = [
   {
@@ -72,7 +72,7 @@ const banking = [
       `Compiles data from various sources`,
       `Examines historical behavior, generating insights into purchasing patterns and interactions.`,
       `Engage with the result via chat, infographics or API`,
-    ]
+    ],
   },
   {
     name: 'Portfolio insights',
@@ -101,7 +101,7 @@ const banking = [
       `Evaluates risks`,
       `Tracks customer’s behavior over time.`,
       `Sends alerts about significant changes in customer behavior.`,
-    ]
+    ],
   },
   {
     name: 'Treasury insights',
@@ -134,7 +134,7 @@ const banking = [
       `Predicts future cash flows based on historical data analysis.`,
       `Suggests strategies to maximize returns and minimize risks.`,
       `Monitors changes and ensures adherence to financial regulations.`,
-    ]
+    ],
   },
   {
     name: 'Credit modelling',
@@ -163,7 +163,7 @@ const banking = [
       `Extracts key features and identifies patterns that contribute to creditworthiness.`,
       `Calculates credit scores based on analyzed data`,
       `Continuously updates the credit scoring model with new data.`,
-    ]
+    ],
   },
 ];
 
@@ -194,7 +194,7 @@ const document = [
       `Our extraction and analysis model takes over`,
       `Engage with result via chat, infographics or API`,
       `Bambi can also help with decisioning.`,
-    ]
+    ],
   },
   {
     name: 'Generate conversation',
@@ -222,7 +222,7 @@ const document = [
       `Advanced AI processes inquiries, applying complex analytics to retrieve relevant insights from the data.`,
       `Tanslates AI-generated insights into user-friendly visualizations and reports.`,
       `Users receive real-time, actionable insights, empowering informed decisions and streamlined data-driven actions.`,
-    ]
+    ],
   },
   {
     name: 'Generate infographics',
@@ -252,7 +252,7 @@ const document = [
       `Users choose infographic templates or styles.`,
       `AI arranges data visually within the selected design.`,
       `Users tweak colors, fonts, and additional visual elements.`,
-    ]
+    ],
   },
   {
     name: 'Generate forms',
@@ -281,7 +281,7 @@ const document = [
       `Forms are routed through approval processes, with notifications and collaborative options within the dashboard.`,
       `Aggregates and analyzes form data, extracting insights and trends.`,
       `AI-powered analytics provide actionable insights, aiding decision-making and process optimization based on form data.`,
-    ]
+    ],
   },
 ];
 
@@ -316,7 +316,7 @@ const identity = [
       `Process and extract relevant information from the government data.`,
       `Conducts in-depth analysis, including identity verification, data validation, and compliance checks.`,
       `Users receive actionable insights, ensuring data integrity and informed decision-making in compliance with government regulations.`,
-    ]
+    ],
   },
   {
     name: 'Social analytics',
@@ -346,7 +346,7 @@ const identity = [
       `Identifies emerging trends, hashtags, and topics, allowing users to stay ahead of relevant discussions.`,
       `Measures user engagement metrics.`,
       `Helps identify influential figures and potential brand collaborators within the social sphere.`,
-    ]
+    ],
   },
   {
     name: 'Psychometric',
@@ -378,7 +378,7 @@ const identity = [
       `System analyzes the collected responses, using advanced algorithms to extract patterns, correlations, and traits to build a comprehensive customer profile.`,
       `The dashboard maps customers' responses to specific psychological traits and categorizes`,
       `Generates actionable insights based on the gathered data.`,
-    ]
+    ],
   },
   {
     name: 'Alternative data',
@@ -409,7 +409,7 @@ const identity = [
       `Identify relevant patterns, signals, and metrics within the alternative data, converting raw information into actionable insights.`,
       `The system contextualizes the extracted insights, correlating them with existing traditional data and market trends for a comprehensive`,
       `Intuitive visualizations of results.`,
-    ]
+    ],
   },
 ];
 
@@ -444,7 +444,7 @@ const accounting = [
       `Utilizes advanced models to forecast future cash flows.`,
       `Tracks and alerts on cash flow changes instantly.`,
       `Generates tailored reports with actionable cash-flow insights.`,
-    ]
+    ],
   },
   {
     name: 'Financial report',
@@ -473,7 +473,7 @@ const accounting = [
       `Our extraction and analysis model takes over`,
       `Engage with result via chat, infographics or API`,
       `Bambi can also help with decisioning.`,
-    ]
+    ],
   },
   {
     name: 'Invoices & Receipts',
@@ -487,7 +487,8 @@ const accounting = [
     status: 'coming-soon',
     categories: ['accounting'],
     type: 'document',
-    summary: 'Comprehensive insights through advanced invoice analysis. Financial tracking and analysis, providing accurate insights from receipts and invoices.',
+    summary:
+      'Comprehensive insights through advanced invoice analysis. Financial tracking and analysis, providing accurate insights from receipts and invoices.',
     features: [
       `Receipt Extraction`,
       `Expense Tracking`,
@@ -503,7 +504,7 @@ const accounting = [
       `Validation of extracted data`,
       `The dashboard intelligently categorizes items on receipts and invoices.`,
       `Engage with result via infographics or API`,
-    ]
+    ],
   },
   {
     name: 'Fraud',
@@ -532,23 +533,19 @@ const accounting = [
       `Examines user actions over time for potential signs of fraud.`,
       `Spots recurring patterns indicative of fraud schemes`,
       `Triggers alerts and recommendations when suspicious activities are identified.`,
-    ]
+    ],
   },
 ];
 
-const products = [
-  ...document,
-  ...banking,
-  ...identity,
-  ...accounting
-];
+const products = [...document, ...banking, ...identity, ...accounting];
 
 export const categories = [
   {
     id: 'banking',
-    name: "Banking",
+    name: 'Banking',
     slug: 'banking',
-    summary: 'Our data-driven solutions for the banking sector encompass a wide range of services. We provide in-depth analyses of customer behavior, risk assessment, and market trends. This empowers banks to offer tailored financial products and services, optimize operational efficiency, and ensure compliance with regulatory standards. Additionally, we assist in developing strategies for customer retention and acquisition, enabling banks to stay competitive in a rapidly evolving financial landscape.',
+    summary:
+      'Our data-driven solutions for the banking sector encompass a wide range of services. We provide in-depth analyses of customer behavior, risk assessment, and market trends. This empowers banks to offer tailored financial products and services, optimize operational efficiency, and ensure compliance with regulatory standards. Additionally, we assist in developing strategies for customer retention and acquisition, enabling banks to stay competitive in a rapidly evolving financial landscape.',
     icon: IconBuildingBank,
     colors: {
       bg: '!bg-sky-700',
@@ -559,7 +556,7 @@ export const categories = [
   },
   {
     id: 'document',
-    name: "Documents",
+    name: 'Documents',
     slug: 'documents',
     summary: `Our document processing solutions utilize advanced algorithms and natural language processing to extract valuable insights from various types of documents. Whether it's contracts, reports, or invoices, our technology can rapidly analyze and extract key information, enabling businesses to make informed decisions. This capability enhances operational efficiency, reduces manual data entry, and ensures compliance with document-related requirements. Additionally, our data-driven approach empowers businesses to derive actionable intelligence from their documents, driving strategic decision-making and operational excellence.`,
     icon: IconFiles,
@@ -570,8 +567,8 @@ export const categories = [
     path: '/documents',
     status: 'pending',
   },
-  { id: 'accounting', name: "Accounting" },
-  { id: 'identity', name: "Identity" },
+  { id: 'accounting', name: 'Accounting' },
+  { id: 'identity', name: 'Identity' },
 ];
 
 export default products;

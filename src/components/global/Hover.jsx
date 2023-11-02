@@ -1,22 +1,18 @@
 import { useState } from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const Hover = ({ children, className }) => {
   const [hovered, setHovered] = useState(false);
   return (
-    <div
-      className={ className }
-      onMouseEnter={ () => setHovered(true) }
-      onMouseLeave={ () => setHovered(false) }
-    >
-      { children(hovered) }
+    <div className={className} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      {children(hovered)}
     </div>
   );
 };
 
 Hover.propTypes = {
   children: PropTypes.any,
-  className: PropTypes.string
-}
+  className: PropTypes.string,
+};
 
 export default Hover;

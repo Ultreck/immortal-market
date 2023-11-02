@@ -1,5 +1,5 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 const Progress = ({ width = 0, className }) => {
   let color = 'bg-gray-600';
@@ -9,10 +9,10 @@ const Progress = ({ width = 0, className }) => {
   if (width > 60) color = 'bg-green-600';
 
   return (
-    <div className={ classNames('w-full bg-gray-200 rounded-full h-2', className) }>
+    <div className={classNames('w-full bg-gray-200 rounded-full h-2', className)}>
       <div
-        className={ classNames('bg-blue-600 h-full rounded-full', color) }
-        style={ { width: `${ Math.min(width, 100) }%` } }
+        className={classNames('bg-blue-600 h-full rounded-full', color)}
+        style={{ width: `${Math.min(width, 100)}%` }}
       />
     </div>
   );
@@ -20,7 +20,7 @@ const Progress = ({ width = 0, className }) => {
 
 Progress.propTypes = {
   width: PropTypes.number,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Progress;

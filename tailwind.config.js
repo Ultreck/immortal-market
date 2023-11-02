@@ -1,13 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontSize: {
-        'md': '.9rem',
+        md: '.9rem',
       },
       colors: {
         heading: '#071952',
@@ -24,20 +21,20 @@ export default {
           900: '#001020',
         },
         accent: {
-          '50': '#fffaeb',
-          '100': '#fef1c7',
-          '200': '#fee289',
-          '300': '#fdca40',
-          '400': '#fcb823',
-          '500': '#f79609',
-          '600': '#da6f05',
-          '700': '#b54d08',
-          '800': '#933b0d',
-          '900': '#79310e',
+          50: '#fffaeb',
+          100: '#fef1c7',
+          200: '#fee289',
+          300: '#fdca40',
+          400: '#fcb823',
+          500: '#f79609',
+          600: '#da6f05',
+          700: '#b54d08',
+          800: '#933b0d',
+          900: '#79310e',
         },
       },
       ringWidth: {
-        '3': '3px',
+        3: '3px',
       },
     },
     container: {
@@ -49,5 +46,4 @@ export default {
     },
   },
   plugins: [],
-}
-
+};
