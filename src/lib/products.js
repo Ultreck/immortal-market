@@ -552,7 +552,7 @@ export const categories = [
       color: '!text-sky-700',
     },
     path: '/banking',
-    status: 'active',
+    status: 'pending',
   },
   {
     id: 'document',
