@@ -60,6 +60,13 @@ const Register = () => {
               />
             </div>
             <Input
+              label="Username"
+              bordered
+              {...register('username', { required: 'Username is required' })}
+              error={errors?.username?.message}
+              disabled={isSignupLoading}
+            />
+            <Input
               label="Email address"
               bordered
               {...register('email', { required: 'Email address is required' })}
