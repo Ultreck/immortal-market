@@ -62,7 +62,17 @@ const Register = () => {
             <Input
               label="Username"
               bordered
-              {...register('username', { required: 'Username is required' })}
+              {...register('username', {
+                required: 'Username is required',
+                minLength: {
+                  value: 3,
+                  message: 'Username must be at least 3 characters',
+                },
+                pattern: {
+                  value: /^[a-zA-Z0-9_]+$/,
+                  message: 'Username can only contain letters, numbers, and underscores',
+                },
+              })}
               error={errors?.username?.message}
               disabled={isSignupLoading}
             />
@@ -83,6 +93,7 @@ const Register = () => {
             <Select
               label="Country"
               bordered
+              placeholder="Select country"
               options={[{ text: 'Nigeria', value: 'NG' }]}
               {...register('country', { required: 'This field is required' })}
               error={errors?.country?.message}
