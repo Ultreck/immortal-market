@@ -12,7 +12,7 @@ const PasswordInput = forwardRef(({ id, label, error, disabled, bordered = false
     <div className="flex flex-col">
       <label
         className={classNames(
-          'pt-5 px-5 rounded-xl w-full transition duration-300 focus-within:ring-2 ring-offset-[3px] ring-primary-800 ring-opacity-60 relative',
+          'pt-5 px-5 rounded-xl w-full transition duration-300 focus-within:ring-3 ring-primary-600/20 relative',
           { 'opacity-60 pointer-events-none': disabled },
           { 'bg-transparent border border-zinc-300': bordered },
           { 'bg-slate-200': !bordered }
@@ -29,7 +29,7 @@ const PasswordInput = forwardRef(({ id, label, error, disabled, bordered = false
         {!!label && (
           <span
             className={classNames(
-              'text-sm inline-flex opacity-80 transition-all absolute px-5 left-0 top-1/2 -translate-y-1/2 peer-focus:top-4 peer-[:not(:placeholder-shown)]:top-4'
+              'text-sm inline-flex opacity-80 transition-all duration-300 absolute px-5 left-0 top-1/2 -translate-y-1/2 peer-focus:top-4 peer-[:not(:placeholder-shown)]:top-4'
             )}
           >
             {label} {props.value}
