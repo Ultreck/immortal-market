@@ -2,15 +2,20 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { useGetProfile } from '@/api/auth.js';
 import { useMount } from 'react-use';
 import PropTypes from 'prop-types';
+import { clearCookie, getCrossSubdomainCookie, setCrossSubdomainCookie } from '@/lib/utils.js';
 
 const authContext = createContext({
   user: null,
-  updateUser: () => {},
-  authenticate: () => {},
-  reloadUser: () => {},
+  updateUser: () => {
+  },
+  authenticate: () => {
+  },
+  reloadUser: () => {
+  },
   resolved: false,
   authenticated: false,
-  logout: () => {},
+  logout: () => {
+  },
 });
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -21,10 +26,7 @@ export const useProvideAuth = () => {
   const { refetch, data, error } = useGetProfile();
 
   useEffect(() => {
-    if (error) {
-      setResolved(true);
-      logout();
-    }
+    if (error) logout();
   }, [error]);
 
   useEffect(() => {
@@ -38,12 +40,15 @@ export const useProvideAuth = () => {
     setUser(data.user);
     setAuthenticated(true);
     setResolved(true);
-    if (data.token) localStorage.setItem('token', data.token);
+    if (data.token) {
+      setCrossSubdomainCookie('token', data.token, 30);
+    }
   };
 
   const logout = () => {
-    localStorage.clear();
     sessionStorage.clear();
+    setResolved(true);
+    clearCookie('token');
   };
 
   const updateUser = (user) => {
@@ -55,12 +60,9 @@ export const useProvideAuth = () => {
   };
 
   useMount(() => {
-    const token = localStorage.getItem('token');
-    if (!authenticated && token) reloadUser();
-    else {
-      localStorage.clear();
-      setResolved(true);
-    }
+    const token = getCrossSubdomainCookie('token');
+    if (!token) return logout();
+    if (!resolved && !authenticated) reloadUser();
   });
 
   return {
@@ -76,7 +78,7 @@ export const useProvideAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const auth = useProvideAuth();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+  return <authContext.Provider value={ auth }>{ children }</authContext.Provider>;
 };
 
 AuthProvider.propTypes = {
