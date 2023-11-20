@@ -272,7 +272,7 @@ const ProductCard = ({ product, onClick, onTrain, style = 'normal', className })
                 </div>
               )}
             </div>
-            <p className="leading-tight opacity-80 mt-1">{product.description}</p>
+            <p className="text-md leading-tight opacity-80 mt-1">{product.description}</p>
             {product.type === 'document' && (
               <div
                 className={classNames('absolute inset-0 inset-x-0 z-[2] p-4 transition-all duration-300', {
@@ -336,7 +336,7 @@ const FeaturedProductCard = ({ product, onClick, onTrain, gradient = false, clas
               <div className="flex items-center">
                 <h4 className="font-medium text-[1.3rem]">{product.name}</h4>
               </div>
-              <p className="text-[1.1rem] leading-snug mt-2 opacity-80 max-w-[200px]">{product.description}</p>
+              <p className="leading-snug mt-2 opacity-80 max-w-[200px]">{product.description}</p>
             </div>
           </div>
           {product.type === 'document' && (
