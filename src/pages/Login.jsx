@@ -38,11 +38,16 @@ const Login = () => {
         <form onSubmit={handleSubmit(submit)}>
           <div className="space-y-4">
             <Input
-              label="Email address"
+              label="Username or email address"
               bordered
-              type="email"
-              {...register('email', { required: 'Email address is required' })}
-              error={errors?.email?.message}
+              {...register('username', {
+                required: 'Username or email address is required',
+                pattern: {
+                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$|^[a-zA-Z0-9_]+$/,
+                  message: 'Username or email address is invalid',
+                },
+              })}
+              error={errors?.username?.message}
               disabled={isLoginLoading}
             />
             <PasswordInput
