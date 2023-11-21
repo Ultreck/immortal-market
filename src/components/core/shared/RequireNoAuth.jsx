@@ -11,8 +11,11 @@ const RequireNoAuth = ({ children }) => {
 
   useEffect(() => {
     if (resolved && authenticated && user) {
-      if (user.emailVerified) navigate(params.get('from') ?? '/', { replace: true });
-      else navigate('/verification');
+      if (user.emailVerified) {
+        const from = params.get('from');
+        if (from.startsWith('http')) window.location.href = from;
+        else navigate(from ?? '/', { replace: true });
+      } else navigate('/verification');
     }
   }, [resolved, authenticated, user, navigate, params]);
 
