@@ -10,7 +10,7 @@ import classNames from 'classnames';
 
 const tabs = [
   { key: 'profile', name: 'Profile' },
-  { key: 'business', name: 'Business settings' },
+  // { key: 'business', name: 'Business settings' },
   { key: 'security', name: 'Security' },
 ];
 
