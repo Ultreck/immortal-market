@@ -13,7 +13,7 @@ const RequireNoAuth = ({ children }) => {
     if (resolved && authenticated && user) {
       if (user.emailVerified) {
         const from = params.get('from');
-        if (from.startsWith('http')) window.location.href = from;
+        if (from?.startsWith('http')) window.location.href = from;
         else navigate(from ?? '/', { replace: true });
       } else navigate('/verification');
     }
