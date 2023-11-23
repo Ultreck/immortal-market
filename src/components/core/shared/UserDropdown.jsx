@@ -1,10 +1,13 @@
-import { IconChevronDown, IconLogout } from '@tabler/icons-react';
+import { IconChevronDown, IconLogout, IconUser } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import SimpleDropdown from '@/components/global/SimpleDropdown.jsx';
 import PropTypes from 'prop-types';
+import Image from '@/components/core/shared/Image.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const UserDropdown = ({ className }) => {
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
 
   const handleLogout = () => {
@@ -16,16 +19,23 @@ const UserDropdown = ({ className }) => {
     <SimpleDropdown
       trigger={
         <div className={classNames('flex items-center', className)}>
-          <img
-            src={`https://ui-avatars.com/api/?name=${user.firstName} ${user.lastName}`}
-            className="w-8 h-8 rounded-full"
+          <Image
+            src={user.image || `https://ui-avatars.com/api/?name=${user.firstName} ${user.lastName}`}
+            className="w-10 h-10 rounded-full"
             alt={`${user.firstName} ${user.lastName}`}
           />
-          <p className="ml-2 hidden md:block">{user.firstName}</p>
+          <p className="ml-2.5 hidden md:block">{user.firstName}</p>
           <IconChevronDown size="18" className="ml-3" />
         </div>
       }
-      items={[{ text: 'Logout', icon: <IconLogout size="18" />, onClick: handleLogout }]}
+      items={[
+        { text: 'Account', icon: <IconUser size="18" />, onClick: () => navigate('/account') },
+        {
+          text: 'Logout',
+          icon: <IconLogout size="18" />,
+          onClick: handleLogout,
+        },
+      ]}
     />
   );
 };

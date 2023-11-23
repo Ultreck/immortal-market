@@ -65,3 +65,12 @@ export const clearCookie = (name) => {
   const domain = window.location.hostname.includes('statisense.co') ? '; domain=.statisense.co' : '';
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/${domain}`;
 };
+
+export const imageFileToBase64 = (file) => {
+  if (!file) return;
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => resolve(reader.result), false);
+    reader.readAsDataURL(file);
+  });
+};

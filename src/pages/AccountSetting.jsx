@@ -7,10 +7,10 @@ import { useGetUserBusiness } from '@/api/business.js';
 import Card from '@/components/global/Card.jsx';
 import { Tab } from '@headlessui/react';
 import classNames from 'classnames';
+import Image from '@/components/core/shared/Image.jsx';
 
 const tabs = [
   { key: 'profile', name: 'Profile' },
-  // { key: 'business', name: 'Business settings' },
   { key: 'security', name: 'Security' },
 ];
 
@@ -42,8 +42,8 @@ const AccountSetting = () => {
                 <div className="md:col-span-4">
                   <Card className="overflow-hidden">
                     <div className="flex flex-col px-8 md:px-10 pt-10 pb-8">
-                      <img
-                        src={`https://ui-avatars.com/api/?name=${user.firstName} ${user.lastName}`}
+                      <Image
+                        src={user.image || `https://ui-avatars.com/api/?name=${user.firstName} ${user.lastName}`}
                         className="w-16 h-16 rounded-full"
                         alt={`${user.firstName} ${user.lastName}`}
                       />
@@ -77,10 +77,10 @@ const AccountSetting = () => {
                       <ProfileSettings />
                     </Tab.Panel>
                     <Tab.Panel>
-                      <BusinessSettings />
+                      <SecuritySettings />
                     </Tab.Panel>
                     <Tab.Panel>
-                      <SecuritySettings />
+                      <BusinessSettings />
                     </Tab.Panel>
                     <Tab.Panel>
                       <PaymentSettings />

@@ -9,10 +9,11 @@ const Select = forwardRef(
       <div className="flex flex-col">
         <label
           className={classNames(
-            'pt-5 px-5 rounded-xl w-full transition duration-300 focus-within:ring-3 ring-primary-600/20 relative',
+            'px-5 rounded-xl w-full transition duration-300 focus-within:ring-3 ring-primary-600/20 relative',
             { 'opacity-60 pointer-events-none': disabled },
             { 'bg-transparent border border-zinc-300': bordered },
-            { 'bg-slate-200': !bordered }
+            { 'bg-slate-200': !bordered },
+            { 'pt-5': !!label }
           )}
         >
           <select
