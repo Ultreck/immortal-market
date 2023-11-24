@@ -34,7 +34,9 @@ const ProfileSettings = () => {
           </div>
           <div className="grid md:grid-cols-[1.5fr_3fr] gap-3">
             <div>Middle name</div>
-            <div className="font-medium">{user.middleName}</div>
+            <div className="font-medium">
+              {user.middleName || <span className="text-sm italic opacity-50 font-normal">Not provided</span>}
+            </div>
           </div>
           <div className="grid md:grid-cols-[1.5fr_3fr] gap-3">
             <div>Last name</div>
@@ -46,7 +48,9 @@ const ProfileSettings = () => {
           </div>
           <div className="grid md:grid-cols-[1.5fr_3fr] gap-3">
             <div>Bio</div>
-            <div className="font-medium">{user.bio || '--'}</div>
+            <div className="font-medium">
+              {user.bio || <span className="text-sm italic opacity-50 font-normal">Not provided</span>}
+            </div>
           </div>
           <div className="grid md:grid-cols-[1.5fr_3fr] gap-3">
             <div>Email address</div>
