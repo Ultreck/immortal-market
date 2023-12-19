@@ -13,7 +13,7 @@ import {
   IconPlus,
 } from '@tabler/icons-react';
 import { useGetUserBusiness } from '@/api/business.js';
-import { useGetInvoicesOverview } from '@/api/invoice.js';
+import { useGetInvoicesOverview } from '@/api/document.js';
 import { formatCurrency } from '@/lib/utils.js';
 import { Link } from 'react-router-dom';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
@@ -88,7 +88,7 @@ const DocumentOverview = () => {
               <div className="space-y-6 flex flex-col">
                 <Card className="flex-1 grid grid-cols-3 overflow-hidden">
                   <div className="px-8 py-4 flex flex-col items-center text-center">
-                    <div className="text-xl md:text-3xl font-semibold text-gray-800">{data.invoicesCount || 0}</div>
+                    <div className="text-xl md:text-3xl font-semibold text-gray-800">{data.totalInvoices || 0}</div>
                     <div className="flex items-center mt-1">
                       <p className="text-sm text-ellipsis whitespace-nowrap overflow-hidden">Invoice(s)</p>
                     </div>
@@ -115,7 +115,7 @@ const DocumentOverview = () => {
                 </Card>
                 <Card className="flex-1 grid grid-cols-3 overflow-hidden">
                   <div className="px-8 py-4 flex flex-col items-center text-center">
-                    <div className="text-xl md:text-3xl font-semibold text-gray-800">{data.receiptsCount || 0}</div>
+                    <div className="text-xl md:text-3xl font-semibold text-gray-800">{data.totalReceipts || 0}</div>
                     <div className="flex items-center mt-1">
                       <p className="text-sm text-ellipsis whitespace-nowrap overflow-hidden">Receipt(s)</p>
                     </div>

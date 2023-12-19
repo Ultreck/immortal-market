@@ -2,7 +2,7 @@ import { useToast } from '@/hooks/use-toast.jsx';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useGetUserBusiness } from '@/api/business.js';
-import { useDeleteReceipt, useGetReceipt } from '@/api/invoice.js';
+import { useDeleteReceipt, useGetReceipt } from '@/api/document.js';
 import IconButton from '@/components/global/IconButton.jsx';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { IconChevronLeft, IconDotsVertical, IconTrash } from '@tabler/icons-react';
@@ -27,7 +27,7 @@ const ReceiptDetails = () => {
   const handleDelete = async () => {
     try {
       await deleteReceipt(null);
-      navigate('/invoice/receipts', { replace: true });
+      navigate('/documents/receipts', { replace: true });
       await qc.invalidateQueries({
         queryKey: ['receipts'],
       });
@@ -56,7 +56,7 @@ const ReceiptDetails = () => {
             <>
               <div className="flex items-center justify-between mb-10">
                 <div className="flex items-center space-x-3">
-                  <Link to={'/invoice/receipts'}>
+                  <Link to={'/documents/receipts'}>
                     <IconButton variant="subtle" color="black" size="sm" rounded icon={<IconChevronLeft size="20" />} />
                   </Link>
                   <h3 className="text-xl font-medium">

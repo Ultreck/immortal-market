@@ -1,11 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import http from '@/lib/http';
 
-export const useGetInvoicesSettings = (business) => {
+export const useGetDocumentSettings = (business) => {
   return useQuery({
-    queryKey: ['invoices', 'settings'],
+    queryKey: ['document', 'settings'],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/invoice/settings`);
+      const res = await http.get(`/business/${business}/document/settings`);
       return res.data;
     },
     enabled: !!business,
@@ -13,10 +13,10 @@ export const useGetInvoicesSettings = (business) => {
   });
 };
 
-export const useCreateInvoicesSettings = (business) => {
+export const useCreateDocumentSettings = (business) => {
   return useMutation({
     mutationFn: (body = {}) => {
-      return http.post(`/business/${business}/invoice/settings`, body);
+      return http.post(`/business/${business}/document/settings`, body);
     },
   });
 };
@@ -24,7 +24,7 @@ export const useCreateInvoicesSettings = (business) => {
 export const useCreateInvoice = (business) => {
   return useMutation({
     mutationFn: (fd) => {
-      return http.post(`/business/${business}/invoice`, fd);
+      return http.post(`/business/${business}/document/invoices`, fd);
     },
   });
 };
@@ -33,7 +33,7 @@ export const useGetInvoices = (business) => {
   return useQuery({
     queryKey: ['invoices'],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/invoice`);
+      const res = await http.get(`/business/${business}/document/invoices`);
       return res.data;
     },
   });
@@ -43,7 +43,7 @@ export const useGetInvoice = (business, id) => {
   return useQuery({
     queryKey: ['invoices', id],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/invoice/${id}`);
+      const res = await http.get(`/business/${business}/document/invoices/${id}`);
       return res.data;
     },
     enabled: !!business && !!id,
@@ -53,7 +53,7 @@ export const useGetInvoice = (business, id) => {
 export const useUpdateInvoice = (business, id) => {
   return useMutation({
     mutationFn: (data) => {
-      return http.patch(`/business/${business}/invoice/${id}`, data);
+      return http.patch(`/business/${business}/document/invoices/${id}`, data);
     },
   });
 };
@@ -61,7 +61,7 @@ export const useUpdateInvoice = (business, id) => {
 export const useDeleteInvoice = (business, id) => {
   return useMutation({
     mutationFn: () => {
-      return http.delete(`/business/${business}/invoice/${id}`);
+      return http.delete(`/business/${business}/document/invoices/${id}`);
     },
   });
 };
@@ -69,7 +69,7 @@ export const useDeleteInvoice = (business, id) => {
 export const useCreateReceipt = (business) => {
   return useMutation({
     mutationFn: (fd) => {
-      return http.post(`/business/${business}/receipt`, fd);
+      return http.post(`/business/${business}/document/receipts`, fd);
     },
   });
 };
@@ -78,7 +78,7 @@ export const useGetReceipts = (business) => {
   return useQuery({
     queryKey: ['receipts'],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/receipt`);
+      const res = await http.get(`/business/${business}/document/receipts`);
       return res.data;
     },
   });
@@ -88,7 +88,7 @@ export const useGetReceipt = (business, id) => {
   return useQuery({
     queryKey: ['receipts', id],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/receipt/${id}`);
+      const res = await http.get(`/business/${business}/document/receipts/${id}`);
       return res.data;
     },
     enabled: !!business && !!id,
@@ -98,7 +98,7 @@ export const useGetReceipt = (business, id) => {
 export const useUpdateReceipt = (business, id) => {
   return useMutation({
     mutationFn: (data) => {
-      return http.patch(`/business/${business}/receipt/${id}`, data);
+      return http.patch(`/business/${business}/document/receipts/${id}`, data);
     },
   });
 };
@@ -106,7 +106,7 @@ export const useUpdateReceipt = (business, id) => {
 export const useDeleteReceipt = (business, id) => {
   return useMutation({
     mutationFn: () => {
-      return http.delete(`/business/${business}/receipt/${id}`);
+      return http.delete(`/business/${business}/document/receipts/${id}`);
     },
   });
 };
@@ -115,7 +115,7 @@ export const useGetInvoicesOverview = (business) => {
   return useQuery({
     queryKey: ['invoices', 'overview'],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/invoice/overview`);
+      const res = await http.get(`/business/${business}/document/overview`);
       return res.data;
     },
   });

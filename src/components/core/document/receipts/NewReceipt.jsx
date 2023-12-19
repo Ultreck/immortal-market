@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import Drawer from '@/components/global/Drawer.jsx';
 import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInput.jsx';
-import { useCreateReceipt } from '@/api/invoice.js';
+import { useCreateReceipt } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
 import { GridLoader } from 'react-spinners';
 import { useQueryClient } from '@tanstack/react-query';
@@ -78,7 +78,7 @@ const NewReceipt = ({ isOpen, onClose }) => {
               <h6 className="text-xl mt-8 font-semibold max-w-xs">Receipt added</h6>
               <p className="max-w-xs mt-1.5">Click the button below to view receipt</p>
               <div className="flex flex-col mt-8 space-y-3">
-                <Link to={`/invoice/receipts/${response.current._id}`}>
+                <Link to={`/documents/receipts/${response.current._id}`}>
                   <Button variant="outlined">View result</Button>
                 </Link>
                 <Button onClick={reset} variant="text">

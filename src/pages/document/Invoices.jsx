@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { useGetUserBusiness } from '@/api/business.js';
-import { useGetInvoices } from '@/api/invoice.js';
+import { useGetInvoices } from '@/api/document.js';
 import { useState } from 'react';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
 import Button from '@/components/global/Button.jsx';
@@ -58,7 +58,7 @@ const Invoices = () => {
                   {invoices.map((invoice) => (
                     <tr
                       key={invoice._id}
-                      onClick={() => navigate(`/invoice/invoices/${invoice._id}`)}
+                      onClick={() => navigate(`/documents/invoices/${invoice._id}`)}
                       className="hover:bg-gray-50 cursor-pointer select-none"
                     >
                       <td scope="row" className="px-6 py-4 whitespace-nowrap">

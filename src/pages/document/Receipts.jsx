@@ -5,7 +5,7 @@ import { IconExclamationCircle, IconPlus } from '@tabler/icons-react';
 import { formatCurrency } from '@/lib/utils.js';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
 import Button from '@/components/global/Button.jsx';
-import { useGetReceipts } from '@/api/invoice.js';
+import { useGetReceipts } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
 import { useNavigate } from 'react-router-dom';
 import Card from '@/components/global/Card.jsx';
@@ -55,7 +55,7 @@ const Receipts = () => {
                   {receipts.map((receipt) => (
                     <tr
                       key={receipt._id}
-                      onClick={() => navigate(`/invoice/receipts/${receipt._id}`)}
+                      onClick={() => navigate(`/documents/receipts/${receipt._id}`)}
                       className="hover:bg-gray-50 cursor-pointer select-none"
                     >
                       <td scope="row" className="px-6 py-4 whitespace-nowrap">

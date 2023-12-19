@@ -35,7 +35,7 @@ const items = [
   },
 ];
 
-const CustomDocuments = () => {
+const Custom = () => {
   const [isNewReportOpen, setIsNewReportOpen] = useState(false);
 
   return (
@@ -70,4 +70,4 @@ const CustomDocuments = () => {
   );
 };
 
-export default CustomDocuments;
+export default Custom;

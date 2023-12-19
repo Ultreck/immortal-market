@@ -9,7 +9,7 @@ import IconButton from '@/components/global/IconButton.jsx';
 import Input from '@/components/global/Input.jsx';
 import TextArea from '@/components/global/TextArea.jsx';
 import Button from '@/components/global/Button.jsx';
-import { useUpdateInvoice } from '@/api/invoice.js';
+import { useUpdateInvoice } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import Select from '@/components/global/Select.jsx';

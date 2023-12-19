@@ -565,7 +565,7 @@ export const categories = [
       color: '!text-teal-700',
     },
     path: '/documents',
-    status: 'pending',
+    status: 'active',
   },
   { id: 'accounting', name: 'Accounting' },
   { id: 'identity', name: 'Identity' },

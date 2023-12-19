@@ -21,8 +21,7 @@ import Receipts from './pages/document/Receipts.jsx';
 import ReceiptDetails from './pages/document/ReceiptDetails.jsx';
 import Invoices from './pages/document/Invoices.jsx';
 import InvoiceDetails from './pages/document/InvoiceDetails.jsx';
-import CustomDocuments from './pages/document/CustomDocuments.jsx';
-import AssistantConversations from './pages/document/Conversations.jsx';
+import Custom from './pages/document/Custom.jsx';
 import AccountSetting from './pages/AccountSetting.jsx';
 import Wallet from './pages/Wallet.jsx';
 
@@ -127,8 +126,7 @@ const App = () => (
         <Route path="receipts/:id" element={<ReceiptDetails />} />
         <Route path="invoices" element={<Invoices />} />
         <Route path="invoices/:id" element={<InvoiceDetails />} />
-        <Route path="custom" element={<CustomDocuments />} />
-        <Route path="conversation" element={<AssistantConversations />} />
+        <Route path="custom" element={<Custom />} />
       </Route>
     </Routes>
   </>

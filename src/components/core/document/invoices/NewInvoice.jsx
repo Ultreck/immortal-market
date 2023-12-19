@@ -3,7 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 import Drawer from '@/components/global/Drawer.jsx';
 import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInput.jsx';
-import { useCreateInvoice } from '@/api/invoice.js';
+import { useCreateInvoice } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
 import { GridLoader } from 'react-spinners';
 import { useToast } from '@/hooks/use-toast.jsx';
@@ -78,7 +78,7 @@ const NewInvoice = ({ isOpen, onClose }) => {
               <h6 className="text-xl mt-8 font-semibold max-w-xs">Invoice added</h6>
               <p className="max-w-xs mt-1.5">Click the button below to view invoice</p>
               <div className="flex flex-col mt-8 space-y-3">
-                <Link to={`/invoice/invoices/${response.current._id}`}>
+                <Link to={`/documents/invoices/${response.current._id}`}>
                   <Button variant="outlined">View result</Button>
                 </Link>
                 <Button onClick={reset} variant="text">

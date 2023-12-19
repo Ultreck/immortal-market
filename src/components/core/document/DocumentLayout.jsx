@@ -7,10 +7,10 @@ import ProductOnboarding from '@/components/core/shared/ProductOnboarding.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useGetUserBusiness } from '@/api/business.js';
 import classNames from 'classnames';
-import { useCreateInvoicesSettings, useGetInvoicesSettings } from '@/api/invoice.js';
 import { categories } from '@/lib/products.js';
 import PropTypes from 'prop-types';
 import { Outlet } from 'react-router-dom';
+import { useCreateDocumentSettings, useGetDocumentSettings } from '@/api/document.js';
 
 const product = categories.find((p) => p.slug === 'documents');
 
@@ -42,15 +42,15 @@ const DocumentLayout = () => {
   const qc = useQueryClient();
   const [isFetching, setIsFetching] = useState(false);
   const { data: business } = useGetUserBusiness();
-  const { data: { settings } = {}, isLoading: isSettingsLoading } = useGetInvoicesSettings(business._id);
-  const { mutateAsync: createSettings, isPending: isCreateSettingsLoading } = useCreateInvoicesSettings(business._id);
+  const { data: { settings } = {}, isLoading: isSettingsLoading } = useGetDocumentSettings(business._id);
+  const { mutateAsync: createSettings, isPending: isCreateSettingsLoading } = useCreateDocumentSettings(business._id);
 
   const start = async () => {
     try {
       await createSettings(null);
       setIsFetching(true);
       await qc.invalidateQueries({
-        queryKey: ['invoices', 'settings'],
+        queryKey: ['document', 'settings'],
       });
       setIsFetching(false);
     } catch (e) {
