@@ -111,11 +111,29 @@ export const useDeleteReceipt = (business, id) => {
   });
 };
 
-export const useGetInvoicesOverview = (business) => {
+export const useGetDocumentOverview = (business) => {
   return useQuery({
     queryKey: ['invoices', 'overview'],
     queryFn: async () => {
       const res = await http.get(`/business/${business}/document/overview`);
+      return res.data;
+    },
+  });
+};
+
+export const useAddCustomDocument = (business) => {
+  return useMutation({
+    mutationFn: (data) => {
+      return http.post(`/business/${business}/document/custom`, data);
+    },
+  });
+};
+
+export const useGetCustomDocuments = (business) => {
+  return useQuery({
+    queryKey: ['documents', 'custom'],
+    queryFn: async () => {
+      const res = await http.get(`/business/${business}/document/custom`);
       return res.data;
     },
   });

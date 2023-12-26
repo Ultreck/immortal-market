@@ -13,7 +13,7 @@ import {
   IconPlus,
 } from '@tabler/icons-react';
 import { useGetUserBusiness } from '@/api/business.js';
-import { useGetInvoicesOverview } from '@/api/document.js';
+import { useGetDocumentOverview } from '@/api/document.js';
 import { formatCurrency } from '@/lib/utils.js';
 import { Link } from 'react-router-dom';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
@@ -48,7 +48,7 @@ const items = [
 
 const DocumentOverview = () => {
   const { data: business } = useGetUserBusiness();
-  const { data, isLoading: isOverviewLoading } = useGetInvoicesOverview(business._id);
+  const { data, isLoading: isOverviewLoading } = useGetDocumentOverview(business._id);
   const [isNewInvoiceOpen, setIsNewInvoiceOpen] = useState(false);
   const [isNewReceiptOpen, setIsNewReceiptOpen] = useState(false);
 
