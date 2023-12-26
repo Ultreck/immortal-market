@@ -10,34 +10,6 @@ import { useGetCustomDocuments } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
 import NoData from '@/components/global/NoData.jsx';
 
-const items = [
-  {
-    type: '.doc',
-    title: 'Q1 2023 progress report for our company',
-    createdAt: '01/01/2023',
-  },
-  {
-    type: '.xls',
-    title: 'Q1 2023 progress report for our company 2',
-    createdAt: '01/01/2023',
-  },
-  {
-    type: '.pdf',
-    title: 'Q1 2023 progress report for our company 3',
-    createdAt: '01/01/2023',
-  },
-  {
-    type: '.csv',
-    title: 'Q1 2023 progress report for our company 4',
-    createdAt: '01/01/2023',
-  },
-  {
-    type: '.pdf',
-    title: 'Q1 2023 progress report for our company 5',
-    createdAt: '01/01/2023',
-  },
-];
-
 const Custom = () => {
   const [isNewReportOpen, setIsNewReportOpen] = useState(false);
   const { data: business } = useGetUserBusiness();
