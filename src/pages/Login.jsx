@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import { useLoginMutation } from '@/api/auth.js';
 import { useForm } from 'react-hook-form';
+import GoogleLoginButton from '@/components/core/shared/GoogleLoginButton.jsx';
 
 const Login = () => {
   const toast = useToast();
@@ -34,6 +35,9 @@ const Login = () => {
         <div className="mb-10">
           <h1 className="text-3xl font-semibold">Login</h1>
           <p className="mt-3">Enter your credentials below to sign in to your account</p>
+        </div>
+        <div className="mb-8">
+          <GoogleLoginButton />
         </div>
         <form onSubmit={handleSubmit(submit)}>
           <div className="space-y-4">
@@ -64,7 +68,7 @@ const Login = () => {
           <Button type="submit" className="mt-10" size="lg" loading={isLoginLoading}>
             Login
           </Button>
-          <p className="mt-4">
+          <p className="my-4">
             New to Statisense?
             <Link to="/register" className="ml-2 text-primary-600 italic">
               Sign up here

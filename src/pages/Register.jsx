@@ -9,6 +9,7 @@ import Checkbox from '@/components/global/Checkbox.jsx';
 import { Link } from 'react-router-dom';
 import Button from '@/components/global/Button.jsx';
 import { useSendEmailVerificationOtp, useSignupMutation } from '@/api/auth.js';
+import GoogleLoginButton from '@/components/core/shared/GoogleLoginButton.jsx';
 
 const Register = () => {
   const toast = useToast();
@@ -40,6 +41,9 @@ const Register = () => {
         <div className="mb-10">
           <h1 className="text-3xl font-semibold">Create an account</h1>
           <p className="mt-2">Kindly fill in all fields below correctly</p>
+        </div>
+        <div className="mb-8">
+          <GoogleLoginButton />
         </div>
         <form onSubmit={handleSubmit(submit)}>
           <div className="space-y-4">
@@ -124,7 +128,7 @@ const Register = () => {
           <Button type="submit" className="mt-10" size="lg" loading={isSignupLoading}>
             Register
           </Button>
-          <p className="mt-4">
+          <p className="my-4">
             Already have an account?
             <Link to="/login" className="ml-2 text-primary-600 italic">
               Login here

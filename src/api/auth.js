@@ -51,3 +51,11 @@ export const useChangePassword = () => {
     },
   });
 };
+
+export const useLoginGoogle = () => {
+  return useMutation({
+    mutationFn: ({ token }) => {
+      return http.post('/auth/login/google', { token });
+    },
+  });
+};
