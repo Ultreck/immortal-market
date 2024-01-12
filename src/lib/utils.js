@@ -51,7 +51,7 @@ export const setCrossSubdomainCookie = (name, value, days) => {
   const secure = location.protocol === 'https:' ? '; Secure' : '';
   const sameSite = secure ? '; SameSite=None' : '';
   const domain = window.location.hostname.includes('statisense.co') ? '; domain=.statisense.co' : '';
-  document.cookie = `${name}=${value}${expires}; path=/${secure}${sameSite}${domain}`;
+  document.cookie = `${name}=${value}${expires}; path=/${sameSite}${secure}${domain}`;
 };
 
 export const getCrossSubdomainCookie = (name) => {
