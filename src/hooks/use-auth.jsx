@@ -3,19 +3,16 @@ import { useGetProfile } from '@/api/auth.js';
 import { useMount } from 'react-use';
 import PropTypes from 'prop-types';
 import { clearCookie, getCrossSubdomainCookie, setCrossSubdomainCookie } from '@/lib/utils.js';
+import { googleLogout } from '@react-oauth/google';
 
 const authContext = createContext({
   user: null,
-  updateUser: () => {
-  },
-  authenticate: () => {
-  },
-  reloadUser: () => {
-  },
+  updateUser: () => {},
+  authenticate: () => {},
+  reloadUser: () => {},
   resolved: false,
   authenticated: false,
-  logout: () => {
-  },
+  logout: () => {},
 });
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -49,6 +46,7 @@ export const useProvideAuth = () => {
     sessionStorage.clear();
     setResolved(true);
     clearCookie('token');
+    googleLogout();
   };
 
   const updateUser = (user) => {
@@ -78,7 +76,7 @@ export const useProvideAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const auth = useProvideAuth();
-  return <authContext.Provider value={ auth }>{ children }</authContext.Provider>;
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 };
 
 AuthProvider.propTypes = {
