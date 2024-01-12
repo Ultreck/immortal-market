@@ -26,14 +26,7 @@ const GoogleLoginButton = () => {
   return (
     <div className="flex items-center">
       <div className={isPending ? 'disabled' : ''}>
-        <GoogleLogin
-          size="large"
-          shape="circle"
-          text="continue_with"
-          onSuccess={onSuccess}
-          onError={onError}
-          width="100%"
-        />
+        <GoogleLogin size="large" shape="circle" text="continue_with" onSuccess={onSuccess} onError={onError} />
       </div>
       {isPending && (
         <div className="ml-2">
