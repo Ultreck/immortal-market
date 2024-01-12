@@ -44,6 +44,7 @@ const Login = () => {
             <Input
               label="Username or email address"
               bordered
+              autoComplete="true"
               {...register('username', {
                 required: 'Username or email address is required',
                 pattern: {
@@ -57,6 +58,7 @@ const Login = () => {
             <PasswordInput
               label="Password"
               bordered
+              autoComplete="true"
               {...register('password', { required: 'Password is required' })}
               error={errors?.password?.message}
               disabled={isLoginLoading}
