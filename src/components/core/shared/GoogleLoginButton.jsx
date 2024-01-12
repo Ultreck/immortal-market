@@ -2,11 +2,12 @@ import { GoogleLogin } from '@react-oauth/google';
 import { useLoginGoogle } from '@/api/auth.js';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
+import { IconLoader } from '@tabler/icons-react';
 
 const GoogleLoginButton = () => {
   const toast = useToast();
   const { authenticate } = useAuth();
-  const { mutateAsync: login } = useLoginGoogle();
+  const { mutateAsync: login, isPending } = useLoginGoogle();
 
   const onSuccess = async (credentialResponse) => {
     try {
@@ -22,7 +23,25 @@ const GoogleLoginButton = () => {
     toast.error('Login Failed');
   };
 
-  return <GoogleLogin size="large" shape="circle" text="continue_with" onSuccess={onSuccess} onError={onError} />;
+  return (
+    <div className="flex items-center">
+      <div className={isPending ? 'disabled' : ''}>
+        <GoogleLogin
+          size="large"
+          shape="circle"
+          text="continue_with"
+          onSuccess={onSuccess}
+          onError={onError}
+          width="100%"
+        />
+      </div>
+      {isPending && (
+        <div className="ml-2">
+          <IconLoader size="20" className="animate-spin" />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default GoogleLoginButton;
