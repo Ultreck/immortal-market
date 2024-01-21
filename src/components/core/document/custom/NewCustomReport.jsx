@@ -76,6 +76,7 @@ const NewCustomReport = ({ isOpen, onClose }) => {
               label="Drag and drop a document or click to select"
               onChange={handleFileChange}
               error="Only documents allowed"
+              maxSize={2000000}
             />
           </div>
         ) : (

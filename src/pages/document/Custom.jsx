@@ -1,19 +1,28 @@
-import { useState } from 'react';
-import { format } from 'date-fns';
+import { useMemo, useState } from 'react';
 import NewCustomReport from '@/components/core/document/custom/NewCustomReport.jsx';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
 import Button from '@/components/global/Button.jsx';
-import { IconFileTypeCsv, IconFileTypeDoc, IconFileTypePdf, IconFileTypeXls, IconPlus } from '@tabler/icons-react';
-import Card from '@/components/global/Card.jsx';
+import { IconPlus } from '@tabler/icons-react';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
 import { useGetCustomDocuments } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
 import NoData from '@/components/global/NoData.jsx';
+import CustomDocumentCard from '@/components/core/document/custom/CustomDocumentCard.jsx';
+import CustomDocumentDetailsModal from '@/components/core/document/custom/CustomDocumentDetailsModal.jsx';
 
 const Custom = () => {
+  const [id, setId] = useState(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isNewReportOpen, setIsNewReportOpen] = useState(false);
   const { data: business } = useGetUserBusiness();
   const { data: { documents = [] } = {}, isLoading } = useGetCustomDocuments(business._id);
+
+  const current = useMemo(() => documents.find((document) => document._id === id), [documents, id]);
+
+  const handleClick = (document) => {
+    setId(document._id);
+    setIsDetailsOpen(true);
+  };
 
   return (
     <DashboardContent>
@@ -37,19 +46,8 @@ const Custom = () => {
           <>
             {documents.length ? (
               <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-                {documents.map((doc) => (
-                  <Card key={doc._id} className="flex items-center px-8 py-6" hover>
-                    <div className="mt-1">
-                      {doc.type === 'doc' && <IconFileTypeDoc className="text-blue-700" size="36" />}
-                      {doc.type === 'pdf' && <IconFileTypePdf className="text-red-700" size="36" />}
-                      {doc.type === 'csv' && <IconFileTypeCsv className="text-teal-700" size="36" />}
-                      {doc.type === 'xlsx' && <IconFileTypeXls className="text-cyan-700" size="36" />}
-                    </div>
-                    <div className="ml-3">
-                      <p>{doc.name}</p>
-                      <p className="opacity-80 text-sm mt-1">{format(new Date(doc.createdAt), 'do MMM, yyyy')}</p>
-                    </div>
-                  </Card>
+                {documents.map((document) => (
+                  <CustomDocumentCard key={document._id} document={document} onClick={() => handleClick(document)} />
                 ))}
               </div>
             ) : (
@@ -60,6 +58,7 @@ const Custom = () => {
       </div>
 
       <NewCustomReport isOpen={isNewReportOpen} onClose={() => setIsNewReportOpen(false)} />
+      <CustomDocumentDetailsModal onClose={() => setIsDetailsOpen(false)} isOpen={isDetailsOpen} document={current} />
     </DashboardContent>
   );
 };

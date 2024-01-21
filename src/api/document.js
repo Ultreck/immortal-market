@@ -124,7 +124,7 @@ export const useGetDocumentOverview = (business) => {
 export const useAddCustomDocument = (business) => {
   return useMutation({
     mutationFn: (data) => {
-      return http.post(`/business/${business}/document/custom`, data);
+      return http.post(`/business/${business}/document/customs`, data);
     },
   });
 };
@@ -133,7 +133,16 @@ export const useGetCustomDocuments = (business) => {
   return useQuery({
     queryKey: ['documents', 'custom'],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/document/custom`);
+      const res = await http.get(`/business/${business}/document/customs`);
+      return res.data;
+    },
+  });
+};
+
+export const useGenerateCustomReport = () => {
+  return useMutation({
+    mutationFn: async ({ business, document }) => {
+      const res = await http.post(`/business/${business}/document/customs/${document}/report`);
       return res.data;
     },
   });
