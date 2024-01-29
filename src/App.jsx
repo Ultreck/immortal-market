@@ -24,6 +24,7 @@ import InvoiceDetails from './pages/document/InvoiceDetails.jsx';
 import Custom from './pages/document/Custom.jsx';
 import AccountSetting from './pages/AccountSetting.jsx';
 import Wallet from './pages/Wallet.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
 
 const App = () => (
   <>
@@ -34,6 +35,16 @@ const App = () => (
           <RequireNoAuth>
             <AuthLayout>
               <Login />
+            </AuthLayout>
+          </RequireNoAuth>
+        }
+      />
+      <Route
+        path="/forgot-password"
+        element={
+          <RequireNoAuth>
+            <AuthLayout>
+              <ResetPassword />
             </AuthLayout>
           </RequireNoAuth>
         }

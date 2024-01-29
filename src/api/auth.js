@@ -59,3 +59,19 @@ export const useLoginGoogle = () => {
     },
   });
 };
+
+export const useSendOtpMutation = () => {
+  return useMutation({
+    mutationFn: (body) => {
+      return http.post('/auth/password/reset/send', body);
+    },
+  });
+};
+
+export const useResetPasswordMutation = () => {
+  return useMutation({
+    mutationFn: ({ email, otp, password }) => {
+      return http.post('/auth/password/reset/verify', { email, otp, password });
+    },
+  });
+};

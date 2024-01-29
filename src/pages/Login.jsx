@@ -64,9 +64,14 @@ const Login = () => {
               disabled={isLoginLoading}
             />
           </div>
-          <Checkbox className="mt-6" disabled={isLoginLoading} {...register('remember')}>
-            Remember me
-          </Checkbox>
+          <div className="flex items-center justify-between mt-6">
+            <Checkbox disabled={isLoginLoading} {...register('remember')}>
+              Remember me
+            </Checkbox>
+            <Link to="/forgot-password" className="opacity-80">
+              Forgot password?
+            </Link>
+          </div>
           <Button type="submit" className="mt-10" size="lg" loading={isLoginLoading}>
             Login
           </Button>
