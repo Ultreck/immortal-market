@@ -11,7 +11,7 @@ const SetupBusiness = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex flex-col items-center justify-center my-auto">
+        <div className="h-full flex flex-col items-center justify-center my-auto">
           <Loader />
           <p className="mt-5">One moment, please..</p>
         </div>
