@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="container py-12 md:py-16 !max-w-5xl min-h-screen flex flex-col space-y-10">
+      <div className="container py-8 md:py-10 !max-w-5xl min-h-screen flex flex-col space-y-10">
         {categories
           .filter((c) => c.id !== 'featured')
           .map((c, i) => {

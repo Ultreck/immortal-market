@@ -1,24 +1,23 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import Loader from '@/components/global/Loader.jsx';
 import PropTypes from 'prop-types';
 
+const ACCOUNTS_URL = import.meta.env.VITE_ACCOUNTS_URL;
+
 const RequireAuth = ({ children }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
   const [params] = useSearchParams();
 
   const { authenticated, resolved, user } = useAuth();
 
   useEffect(() => {
-    const from = params.get('from');
     if (resolved && !authenticated) {
-      navigate(`/login?from=${from || location.pathname}`, { replace: true });
+      location.replace(`${ACCOUNTS_URL}/login?from=${location.href}`);
     } else if (resolved && authenticated && user && !user.emailVerified) {
-      navigate(`/verification?from=${from || location.pathname}`);
+      location.href = `${ACCOUNTS_URL}/verification?from=${location.href}`;
     }
-  }, [resolved, authenticated, user, navigate, location.pathname, params]);
+  }, [resolved, authenticated, user, params]);
 
   if (resolved && authenticated && user?.emailVerified) return children;
 

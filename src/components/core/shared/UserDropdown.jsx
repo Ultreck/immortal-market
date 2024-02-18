@@ -4,10 +4,10 @@ import { useAuth } from '@/hooks/use-auth.jsx';
 import SimpleDropdown from '@/components/global/SimpleDropdown.jsx';
 import PropTypes from 'prop-types';
 import Image from '@/components/core/shared/Image.jsx';
-import { useNavigate } from 'react-router-dom';
+
+const ACCOUNTS_URL = import.meta.env.VITE_ACCOUNTS_URL;
 
 const UserDropdown = ({ className }) => {
-  const navigate = useNavigate();
   const { user, logout } = useAuth();
 
   const handleLogout = () => {
@@ -29,7 +29,11 @@ const UserDropdown = ({ className }) => {
         </div>
       }
       items={[
-        { text: 'Account', icon: <IconUser size="18" />, onClick: () => navigate('/account') },
+        {
+          text: 'Account',
+          icon: <IconUser size="18" />,
+          onClick: () => (location.href = `${ACCOUNTS_URL}/accounts`),
+        },
         {
           text: 'Logout',
           icon: <IconLogout size="18" />,

@@ -16,7 +16,7 @@ const SetupBusiness = () => {
           <p className="mt-5">One moment, please..</p>
         </div>
       ) : (
-        <div className="container py-20">
+        <div className="container py-12">
           <div className="w-full max-w-xl mx-auto rounded-xl">
             {business ? (
               <>

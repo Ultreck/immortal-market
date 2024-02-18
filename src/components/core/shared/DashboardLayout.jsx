@@ -6,7 +6,7 @@ import Logo from '@/components/core/shared/Logo.jsx';
 const DashboardLayout = ({ children }) => {
   return (
     <div className="bg-slate-100/70 min-h-screen">
-      <div className="py-10 bg-[#11161b] text-white relative">
+      <div className="py-6 bg-[#11161b] text-white relative">
         <div className="absolute inset-0 bg-cover bg-grid opacity-30 z-[1]" />
         <div className="container !max-w-5xl relative z-[2]">
           <div className="flex items-center">

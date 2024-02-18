@@ -1,13 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Login from './pages/Login.jsx';
-import Register from './pages/Register.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import DashboardLayout from './components/core/shared/DashboardLayout.jsx';
 import RequireAuth from './components/core/shared/RequireAuth.jsx';
-import RequireNoAuth from './components/core/shared/RequireNoAuth.jsx';
-import AuthLayout from './components/core/auth/AuthLayout.jsx';
-import Verification from './pages/Verification.jsx';
-import RequireAuthUnverified from './components/core/shared/RequireAuthUnverified.jsx';
 import BankingLayout from './components/core/banking/BankingLayout.jsx';
 import RequireAuthBusiness from './components/core/shared/RequireAuthBusiness.jsx';
 import BankingOverview from './pages/banking/Overview.jsx';
@@ -22,60 +16,18 @@ import ReceiptDetails from './pages/document/ReceiptDetails.jsx';
 import Invoices from './pages/document/Invoices.jsx';
 import InvoiceDetails from './pages/document/InvoiceDetails.jsx';
 import Custom from './pages/document/Custom.jsx';
-import AccountSetting from './pages/AccountSetting.jsx';
 import Wallet from './pages/Wallet.jsx';
-import ResetPassword from './pages/ResetPassword.jsx';
 
 const App = () => (
   <>
     <Routes>
       <Route
-        path="/login"
-        element={
-          <RequireNoAuth>
-            <AuthLayout>
-              <Login />
-            </AuthLayout>
-          </RequireNoAuth>
-        }
-      />
-      <Route
-        path="/forgot-password"
-        element={
-          <RequireNoAuth>
-            <AuthLayout>
-              <ResetPassword />
-            </AuthLayout>
-          </RequireNoAuth>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <RequireNoAuth>
-            <AuthLayout>
-              <Register />
-            </AuthLayout>
-          </RequireNoAuth>
-        }
-      />
-      <Route
-        path="/verification"
-        element={
-          <RequireAuthUnverified>
-            <AuthLayout>
-              <Verification />
-            </AuthLayout>
-          </RequireAuthUnverified>
-        }
-      />
-      <Route
         path="/business"
         element={
           <RequireAuth>
-            <AuthLayout>
+            <DashboardLayout>
               <SetupBusiness />
-            </AuthLayout>
+            </DashboardLayout>
           </RequireAuth>
         }
       />
@@ -85,16 +37,6 @@ const App = () => (
           <RequireAuth>
             <DashboardLayout>
               <Dashboard />
-            </DashboardLayout>
-          </RequireAuth>
-        }
-      />
-      <Route
-        path="/account"
-        element={
-          <RequireAuth>
-            <DashboardLayout>
-              <AccountSetting />
             </DashboardLayout>
           </RequireAuth>
         }
