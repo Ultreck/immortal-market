@@ -14,11 +14,6 @@ const AppDashboardLayout = ({ logo, links = [], children }) => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
-  const handleLogout = () => {
-    logout();
-    window.location.reload();
-  };
-
   return (
     <div className="h-screen w-full md:grid md:grid-cols-[310px_1fr]">
       <div className="h-screen border-r border-slate-200 hidden md:flex flex-col">
@@ -77,7 +72,7 @@ const AppDashboardLayout = ({ logo, links = [], children }) => {
                 icon: <IconUserCog size="18" />,
                 onClick: () => navigate('/account'),
               },
-              { text: 'Logout', icon: <IconLogout size="18" />, onClick: handleLogout },
+              { text: 'Logout', icon: <IconLogout size="18" />, onClick: () => logout() },
             ]}
           />
         </div>

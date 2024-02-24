@@ -2,8 +2,9 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { useGetProfile } from '@/api/auth.js';
 import { useMount } from 'react-use';
 import PropTypes from 'prop-types';
-import { clearCookie, getCrossSubdomainCookie, setCrossSubdomainCookie } from '@/lib/utils.js';
-import { googleLogout } from '@react-oauth/google';
+import { getCrossSubdomainCookie, setCrossSubdomainCookie } from '@/lib/utils.js';
+
+const ACCOUNT_URL = import.meta.env.VITE_ACCOUNT_URL;
 
 const authContext = createContext({
   user: null,
@@ -13,6 +14,7 @@ const authContext = createContext({
   resolved: false,
   authenticated: false,
   logout: () => {},
+  error: null,
 });
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -21,10 +23,6 @@ export const useProvideAuth = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [resolved, setResolved] = useState(false);
   const { refetch, data, error } = useGetProfile();
-
-  useEffect(() => {
-    if (error) logout();
-  }, [error]);
 
   useEffect(() => {
     if (data) {
@@ -44,9 +42,7 @@ export const useProvideAuth = () => {
 
   const logout = () => {
     sessionStorage.clear();
-    setResolved(true);
-    clearCookie('token');
-    googleLogout();
+    window.location.href = `${ACCOUNT_URL}/logout`;
   };
 
   const updateUser = (user) => {
@@ -59,7 +55,7 @@ export const useProvideAuth = () => {
 
   useMount(() => {
     const token = getCrossSubdomainCookie('token');
-    if (!token) return logout();
+    if (!token) return setResolved(true);
     if (!resolved && !authenticated) reloadUser();
   });
 
@@ -71,6 +67,7 @@ export const useProvideAuth = () => {
     resolved,
     authenticated,
     logout,
+    error,
   };
 };
 

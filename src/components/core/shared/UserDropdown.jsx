@@ -5,15 +5,10 @@ import SimpleDropdown from '@/components/global/SimpleDropdown.jsx';
 import PropTypes from 'prop-types';
 import Image from '@/components/core/shared/Image.jsx';
 
-const ACCOUNTS_URL = import.meta.env.VITE_ACCOUNTS_URL;
+const ACCOUNT_URL = import.meta.env.VITE_ACCOUNT_URL;
 
 const UserDropdown = ({ className }) => {
   const { user, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    window.location.reload();
-  };
 
   return (
     <SimpleDropdown
@@ -32,12 +27,12 @@ const UserDropdown = ({ className }) => {
         {
           text: 'Account',
           icon: <IconUser size="18" />,
-          onClick: () => (location.href = `${ACCOUNTS_URL}/accounts`),
+          onClick: () => (location.href = `${ACCOUNT_URL}/accounts`),
         },
         {
           text: 'Logout',
           icon: <IconLogout size="18" />,
-          onClick: handleLogout,
+          onClick: () => logout(),
         },
       ]}
     />

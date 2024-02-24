@@ -5,7 +5,7 @@ import Loader from '@/components/global/Loader.jsx';
 import { useGetUserBusiness } from '@/api/business.js';
 import PropTypes from 'prop-types';
 
-const ACCOUNTS_URL = import.meta.env.VITE_ACCOUNTS_URL;
+const ACCOUNT_URL = import.meta.env.VITE_ACCOUNT_URL;
 
 const RequireAuthBusiness = ({ children }) => {
   const navigate = useNavigate();
@@ -14,10 +14,10 @@ const RequireAuthBusiness = ({ children }) => {
 
   useEffect(() => {
     if (resolved && !authenticated) {
-      location.replace(`${ACCOUNTS_URL}/login?from=${location.href}`);
+      location.replace(`${ACCOUNT_URL}/login?from=${location.href}`);
     }
     if (resolved && authenticated && user) {
-      if (!user.emailVerified) location.replace(`${ACCOUNTS_URL}/verification?from=${location.href}`);
+      if (!user.emailVerified) location.replace(`${ACCOUNT_URL}/verification?from=${location.href}`);
       else if (!isBusinessLoading && !business) navigate('/business', { replace: true });
     }
   }, [resolved, authenticated, user, business, isBusinessLoading, navigate]);
