@@ -44,7 +44,11 @@ const CustomDocumentDetailsModal = ({ isOpen, onClose, document }) => {
               </div>
               <div className="ml-4">
                 <p className="mt-2">Your report has been generated. Click the button below to view</p>
-                <a href={`http://localhost:5174/report/${document._id}`} target="_blank" rel="noreferrer">
+                <a
+                  href={`https://dev.infographics.statisense.co/report/${document._id}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Button color="green" className="mt-4" size="sm">
                     View report
                   </Button>
