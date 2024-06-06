@@ -7,6 +7,7 @@ import ResizeScreenHeight from './components/ResizeScreenHeight.jsx';
 import { AuthProvider } from './hooks/use-auth.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastProvider } from './hooks/use-toast.jsx';
+import { NextUIProvider } from '@nextui-org/react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -14,8 +15,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <QueryProvider>
         <AuthProvider>
           <ToastProvider>
-            <App />
-            <ResizeScreenHeight />
+            <NextUIProvider>
+              <App />
+              <ResizeScreenHeight />
+            </NextUIProvider>
           </ToastProvider>
         </AuthProvider>
       </QueryProvider>

@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Dashboard from './pages/Dashboard.jsx';
-import DashboardLayout from './components/core/shared/DashboardLayout.jsx';
+import OldDashboard from './pages/OldDashboard.jsx';
+import OldDashboardLayout from './components/core/shared/OldDashboardLayout.jsx';
 import RequireAuth from './components/core/shared/RequireAuth.jsx';
 import BankingLayout from './components/core/banking/BankingLayout.jsx';
 import RequireAuthBusiness from './components/core/shared/RequireAuthBusiness.jsx';
@@ -17,6 +17,8 @@ import Invoices from './pages/document/Invoices.jsx';
 import InvoiceDetails from './pages/document/InvoiceDetails.jsx';
 import Custom from './pages/document/Custom.jsx';
 import Wallet from './pages/Wallet.jsx';
+import DashboardLayout from '@/components/core/shared/DashboardLayout.jsx';
+import Dashboard from '@/pages/Dashboard.jsx';
 
 const App = () => (
   <>
@@ -25,9 +27,9 @@ const App = () => (
         path="/business"
         element={
           <RequireAuth>
-            <DashboardLayout>
+            <OldDashboardLayout>
               <SetupBusiness />
-            </DashboardLayout>
+            </OldDashboardLayout>
           </RequireAuth>
         }
       />
@@ -42,12 +44,22 @@ const App = () => (
         }
       />
       <Route
+        path="/old"
+        element={
+          <RequireAuth>
+            <OldDashboardLayout>
+              <OldDashboard />
+            </OldDashboardLayout>
+          </RequireAuth>
+        }
+      />
+      <Route
         path="/wallet"
         element={
           <RequireAuth>
-            <DashboardLayout>
+            <OldDashboardLayout>
               <Wallet />
-            </DashboardLayout>
+            </OldDashboardLayout>
           </RequireAuth>
         }
       />

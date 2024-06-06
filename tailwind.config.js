@@ -1,6 +1,8 @@
+import { nextui } from '@nextui-org/react';
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontSize: {
@@ -8,18 +10,6 @@ export default {
       },
       colors: {
         heading: '#071952',
-        primary: {
-          50: '#dbf7ff',
-          100: '#aee1ff',
-          200: '#7ecbff',
-          300: '#4db6ff',
-          400: '#22a1fe',
-          500: '#0e88e5',
-          600: '#006ab3',
-          700: '#004c81',
-          800: '#002d50',
-          900: '#001020',
-        },
         accent: {
           50: '#fffaeb',
           100: '#fef1c7',
@@ -45,5 +35,6 @@ export default {
       },
     },
   },
-  plugins: [],
+  darkMode: 'class',
+  plugins: [nextui()],
 };
