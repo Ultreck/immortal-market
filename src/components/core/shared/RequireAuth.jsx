@@ -15,7 +15,7 @@ const RequireAuth = ({ children }) => {
   useEffect(() => {
     if (resolved && !authenticated) {
       location.replace(`${ACCOUNT_URL}/login?from=${location.href}`);
-    } else if (resolved && authenticated && user && !user.emailVerified) {
+    } else if (resolved && authenticated && user && !user.verification?.email) {
       location.href = `${ACCOUNT_URL}/verification?from=${location.href}`;
     }
   }, [resolved, authenticated, user, params]);
@@ -36,7 +36,7 @@ const RequireAuth = ({ children }) => {
     }
   }
 
-  if (resolved && authenticated && user?.emailVerified) return children;
+  if (resolved && authenticated && user?.verification.email) return children;
 
   return (
     <div className="h-screen w-full flex flex-col justify-center items-center text-center">

@@ -17,12 +17,12 @@ const RequireAuthBusiness = ({ children }) => {
       location.replace(`${ACCOUNT_URL}/login?from=${location.href}`);
     }
     if (resolved && authenticated && user) {
-      if (!user.emailVerified) location.replace(`${ACCOUNT_URL}/verification?from=${location.href}`);
+      if (!user.verification?.email) location.replace(`${ACCOUNT_URL}/verification?from=${location.href}`);
       else if (!isBusinessLoading && !business) navigate('/business', { replace: true });
     }
   }, [resolved, authenticated, user, business, isBusinessLoading, navigate]);
 
-  if (resolved && authenticated && user?.emailVerified && !!business) return children;
+  if (resolved && authenticated && user?.verification.email && !!business) return children;
 
   return (
     <div className="h-screen w-full flex flex-col justify-center items-center text-center">
