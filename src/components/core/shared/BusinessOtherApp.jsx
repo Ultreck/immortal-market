@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useLayout } from '../../../hooks/use-layout';
 
-const AppSwitcherDesktop = () => {
+const BusinessOtherApps = () => {
   const {sidebarMinimized} = useLayout()
 
 
@@ -18,15 +18,15 @@ const AppSwitcherDesktop = () => {
             <Popover.Button
               as="div"
               className={classNames('flex items-center  hover:bg-slate-100 cursor-pointer  py-3',
-                  sidebarMinimized ? "px-4 rounded-full" : "pl-6 rounded-3xl pr-4",
+                  sidebarMinimized ? "px-4 rounded-full" : "pl-4 rounded-3xl pr-4",
               {
                 'bg-slate-100': open,
               })}
             >
-              <IconGridDots size="23" />
+              <IconGridDots size="22" />
               {
                 !sidebarMinimized &&
-                   <p className="px-5 flex-1">Apps</p>
+                   <p className="px-5 flex-1">Other Apps</p>
               }
               <div>
                 {
@@ -54,7 +54,7 @@ const AppSwitcherDesktop = () => {
                     {products.slice(0, 5).map((product) => (
                       <Link
                         key={product.name}
-                        to={product.link}
+                        to={'#'}
                         className="flex flex-col items-center rounded-2xl text-center px-2 py-4 transition duration-150 ease-in-out hover:bg-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       >
                         <div
@@ -71,7 +71,7 @@ const AppSwitcherDesktop = () => {
                       </Link>
                     ))}
                     <Link
-                      to={'/'}
+                      to={'#'}
                       className="flex flex-col items-center rounded-2xl text-center px-2 py-4 transition duration-150 ease-in-out hover:bg-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                     >
                       <div
@@ -94,4 +94,4 @@ const AppSwitcherDesktop = () => {
   );
 };
 
-export default AppSwitcherDesktop;
+export default BusinessOtherApps;

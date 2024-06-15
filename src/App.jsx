@@ -19,6 +19,9 @@ import Custom from './pages/document/Custom.jsx';
 import Wallet from './pages/Wallet.jsx';
 import DashboardLayout from '@/components/core/shared/DashboardLayout.jsx';
 import Dashboard from '@/pages/Dashboard.jsx';
+import BusinessLayout from './components/core/business/BusinessLayout.jsx';
+import BusinessOverview from './pages/business/Overview.jsx';
+import BusinessProject from './pages/business/Project.jsx';
 
 const App = () => (
   <>
@@ -53,6 +56,30 @@ const App = () => (
           </RequireAuth>
         }
       />
+
+
+      <Route
+        path="/business"
+        element={
+            <BusinessLayout />
+        }
+      >
+        <Route path="" element={<Navigate to="/business/overview" replace />} />
+        <Route path="overview" element={<BusinessOverview/>} />
+        <Route path="projects" element={<BusinessProject/>} />
+        <Route path="templates" element={<div>Hello layout test</div>} />
+        <Route path="invitations" element={<div>Hello layout test</div>} />
+        <Route path="messages" element={<div>Hello layout test</div>} />
+
+        <Route path="free-plan" element={<div>Hello layout test</div>} />
+        <Route path="preferences" element={<div>Hello layout test</div>} />
+        <Route path="my-account" element={<div>Hello layout test</div>} />
+
+      </Route>
+
+
+
+
       <Route
         path="/wallet"
         element={
@@ -66,9 +93,9 @@ const App = () => (
       <Route
         path="/banking"
         element={
-          <RequireAuthBusiness>
+          // <RequireAuthBusiness>
             <BankingLayout />
-          </RequireAuthBusiness>
+          // </RequireAuthBusiness>
         }
       >
         <Route path="" element={<Navigate to="/banking/overview" replace />} />

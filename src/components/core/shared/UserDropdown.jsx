@@ -15,11 +15,11 @@ const UserDropdown = ({ className }) => {
       trigger={
         <div className={classNames('flex items-center', className)}>
           <Image
-            src={user.image || `https://ui-avatars.com/api/?name=${user.firstName} ${user.lastName}`}
+            src={user?.image || `https://ui-avatars.com/api/?name=${user?.firstName} ${user?.lastName}`}
             className="w-10 h-10 rounded-full"
-            alt={`${user.firstName} ${user.lastName}`}
+            alt={`${user?.firstName} ${user?.lastName}`}
           />
-          <p className="ml-2.5 hidden md:block">{user.firstName}</p>
+          <p className="ml-2.5 hidden md:block">{user?.firstName}</p>
           <IconChevronDown size="18" className="ml-3" />
         </div>
       }
