@@ -15,11 +15,11 @@ import {
   useGetMonoTransactions,
   useLoginMono,
 } from '@/api/statement.js';
-import IconButton from '@/components/global/IconButton.jsx';
+import IconButton from '@/components/ui/IconButton.jsx';
 import { Link } from 'react-router-dom';
-import Button from '@/components/global/Button.jsx';
-import Tabs from '@/components/global/Tabs.jsx';
-import Input from '@/components/global/Input.jsx';
+import Button from '@/components/ui/Button.jsx';
+import Tabs from '@/components/ui/Tabs.jsx';
+import Input from '@/components/ui/Input.jsx';
 import { capitalize, delay } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 

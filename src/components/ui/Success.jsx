@@ -1,5 +1,5 @@
 import { RiCheckboxCircleFill } from 'react-icons/ri';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 import PropTypes from 'prop-types';
 
 const Success = ({ text, subtext, buttonText = 'Close', onButtonClick, ...props }) => {

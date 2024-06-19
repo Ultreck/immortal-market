@@ -1,12 +1,12 @@
-import Input from '@/components/global/Input';
-import Select from '@/components/global/Select';
-import Button from '@/components/global/Button';
+import Input from '@/components/ui/Input';
+import Select from '@/components/ui/Select';
+import Button from '@/components/ui/Button';
 import { useToast } from '@/hooks/use-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import { useGetUserBusiness } from '@/api/business';
 import { useGetBankingSettings, useUpdateBankingSettings } from '@/api/statement';
 import { useForm } from 'react-hook-form';
-import Card from '@/components/global/Card';
+import Card from '@/components/ui/Card';
 
 const colors = [
   { text: 'Purple', value: '#0000' },

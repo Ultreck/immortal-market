@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast.jsx';
-import Input from '@/components/global/Input.jsx';
-import Select from '@/components/global/Select.jsx';
-import TextArea from '@/components/global/TextArea.jsx';
-import Button from '@/components/global/Button.jsx';
+import Input from '@/components/ui/Input.jsx';
+import Select from '@/components/ui/Select.jsx';
+import TextArea from '@/components/ui/TextArea.jsx';
+import Button from '@/components/ui/Button.jsx';
 import { useCreateBusinessMutation } from '@/api/business.js';
 import { industries, sizes } from '@/lib/options.js';
 

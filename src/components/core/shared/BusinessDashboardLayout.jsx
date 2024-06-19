@@ -6,24 +6,19 @@ import classNames from 'classnames';
 // import SimpleDropdown from '@/components/global/SimpleDropdown.jsx';
 // import AppSwitcherMobile from './AppSwitcherMobile.jsx';
 // import UserDropdown from './UserDropdown.jsx';
-import { useAuth } from '@/hooks/use-auth.jsx';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Button } from '@nextui-org/react';
-import {  TbPlus, TbUserPlus } from 'react-icons/tb';
-import { useLayout } from '../../../hooks/use-layout.jsx';
+import { Button, Tooltip } from '@nextui-org/react';
+import { TbPlus, TbUserPlus } from 'react-icons/tb';
+import { useLayout } from '@/hooks/use-layout.jsx';
 import { motion } from 'framer-motion';
-import {  VscThreeBars } from 'react-icons/vsc';
-import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { VscThreeBars } from 'react-icons/vsc';
+import { MdKeyboardDoubleArrowLeft } from 'react-icons/md';
 import BusinessButtonPopup from './BusinessAppButtonSwitch.jsx';
 import BusinessOtherApps from './BusinessOtherApp.jsx';
-import { Tooltip } from "@nextui-org/react";
-
 
 const BusinessDashboardLayout = ({ logo, miniLogo, links = [], lowerLink = [], children }) => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const { user, logout } = useAuth();
   const sidebarRef = useRef();
   const {
     sidebarOpen,
@@ -51,61 +46,69 @@ const BusinessDashboardLayout = ({ logo, miniLogo, links = [], lowerLink = [], c
         variants={sidebar_animation}
         initial={{ x: isTablet ? -350 : 0 }}
         animate={sidebarMinimized && sidebarOpen ? 'minimize' : !sidebarMinimized && sidebarOpen ? 'open' : 'closed'}
-        className={ classNames(
-            " group lg:z-[30] z-[60] fixed top-0 left-0 h-screen !bg-white scrollbar-hide", 
-            isTablet ? "max-w-[21.4rem]  w-[21.4rem]" : "max-w-[17.3rem]  w-[17.3rem]"
+        className={classNames(
+          ' group lg:z-[30] z-[60] fixed top-0 left-0 h-screen !bg-white scrollbar-hide',
+          isTablet ? 'max-w-[21.4rem]  w-[21.4rem]' : 'max-w-[17.3rem]  w-[17.3rem]'
         )}
       >
         <div className="h-screen border-r border-slate-300  flex flex-col  ">
           {sidebarMinimized ? (
             <div className="pt-[1.2rem] pb-[2.2rem] relative">
               <Link to={'/'} className="flex items-center justify-center">
-          
                 {createElement(miniLogo, { className: 'px-1 ' })}
               </Link>
-              <MdKeyboardDoubleArrowLeft   onClick={minimizeSidebar}  size={21} className='absolute rotate-180 -right-4 bg-slate-100  rounded-xl top-1/4  font-bold hover:bg-blue-200 cursor-pointer '  />
+              <MdKeyboardDoubleArrowLeft
+                onClick={minimizeSidebar}
+                size={21}
+                className="absolute rotate-180 -right-4 bg-slate-100  rounded-xl top-1/4  font-bold hover:bg-blue-200 cursor-pointer "
+              />
             </div>
           ) : (
             <div className="px-3 pt-4 pb-[1.95rem] ">
-                { isTablet  && sidebarOpen ?
-                <div className='flex  items-center px-1 gap-3'>
-                    <div className='hover:bg-blue-200 cursor-pointer' onClick={onOverlayClicked}>
-                            
-                      <TbPlus size={20} strokeWidth={2.7} className=' rotate-45' />
-                    </div>
-                    <Link to={'/'}>{createElement(logo, { className: '' })}</Link>
-                </div> :   <div className='flex justify-between  items-center gap-3'>
-                    <Link to={'/'}>{createElement(logo, { className: 'px-2 ' })}</Link>
-                    
-                    {
-                        !isTablet &&
-                    <MdKeyboardDoubleArrowLeft   onClick={minimizeSidebar}  size={21} className=' font-bold hover:bg-blue-200 cursor-pointer '  />
-                    }
+              {isTablet && sidebarOpen ? (
+                <div className="flex  items-center px-1 gap-3">
+                  <div className="hover:bg-blue-200 cursor-pointer" onClick={onOverlayClicked}>
+                    <TbPlus size={20} strokeWidth={2.7} className=" rotate-45" />
+                  </div>
+                  <Link to={'/'}>{createElement(logo, { className: '' })}</Link>
                 </div>
-                }
+              ) : (
+                <div className="flex justify-between  items-center gap-3">
+                  <Link to={'/'}>{createElement(logo, { className: 'px-2 ' })}</Link>
+
+                  {!isTablet && (
+                    <MdKeyboardDoubleArrowLeft
+                      onClick={minimizeSidebar}
+                      size={21}
+                      className=" font-bold hover:bg-blue-200 cursor-pointer "
+                    />
+                  )}
+                </div>
+              )}
             </div>
           )}
           <div className={classNames('px-3   py-1 text-center', sidebarMinimized ? 'mb-4' : 'mb-3')}>
             <BusinessButtonPopup>
-                <Button
+              <Button
                 isIconOnly={sidebarMinimized}
                 size="lg"
                 className={classNames(
-                    '!bg-sky-600  text-white',
-                    sidebarMinimized ? 'rounded-full' : 'flex items-center rounded-3xl w-full'
+                  '!bg-sky-600  text-white',
+                  sidebarMinimized ? 'rounded-full' : 'flex items-center rounded-3xl w-full'
                 )}
-                >
+              >
                 <TbPlus size={18} strokeWidth={2.8} />
-                <span className={classNames('text-[0.99rem] font-semibold tracking-wide', sidebarMinimized && `hidden`)}>
-                    Create
+                <span
+                  className={classNames('text-[0.99rem] font-semibold tracking-wide', sidebarMinimized && `hidden`)}
+                >
+                  Create
                 </span>
-                </Button>
+              </Button>
             </BusinessButtonPopup>
           </div>
           <div className="flex-1  overflow-y-auto px-3">
             <div className="flex flex-col space-y-1">
               {links.map((item) => (
-
                 <NavLink
                   key={item.href}
                   to={item.href}
@@ -116,50 +119,47 @@ const BusinessDashboardLayout = ({ logo, miniLogo, links = [], lowerLink = [], c
                     )
                   }
                 >
-                    {
-                        sidebarMinimized ? 
-                        <Tooltip
-                            showArrow={true}
-                            classNames={{
-                                content: "bg-gray-900 text-white ",
-                                arrow: "bg-gray-900",
-                            }}
-    
-                            placement="right"
-                            content={item.name}
-                        >
-                            <div className="mr-4">{item.icon}</div>
-                        </Tooltip> : 
-                        <div className="mr-4">{item.icon}</div>
-                    }
-                    {!sidebarMinimized && item.name}
+                  {sidebarMinimized ? (
+                    <Tooltip
+                      showArrow={true}
+                      classNames={{
+                        content: 'bg-gray-900 text-white ',
+                        arrow: 'bg-gray-900',
+                      }}
+                      placement="right"
+                      content={item.name}
+                    >
+                      <div className="mr-4">{item.icon}</div>
+                    </Tooltip>
+                  ) : (
+                    <div className="mr-4">{item.icon}</div>
+                  )}
+                  {!sidebarMinimized && item.name}
                 </NavLink>
               ))}
             </div>
           </div>
 
-
-
-
           <div className={classNames('px-3   py-1 text-center', sidebarMinimized ? 'mb-4' : 'mb-3')}>
             <BusinessButtonPopup>
-                <Button
+              <Button
                 isIconOnly={sidebarMinimized}
                 size="lg"
                 variant="bordered"
                 className={classNames(
-                    'border-sky-600 border-1  text-gray-600',
-                    sidebarMinimized ? 'rounded-full' : 'flex items-center rounded-xl w-full'
+                  'border-sky-600 border-1  text-gray-600',
+                  sidebarMinimized ? 'rounded-full' : 'flex items-center rounded-xl w-full'
                 )}
-                >
+              >
                 <TbUserPlus size={18} strokeWidth={2.8} />
-                <span className={classNames('text-[0.99rem] font-semibold tracking-wide', sidebarMinimized && `hidden`)}>
-                    Invite Someone
+                <span
+                  className={classNames('text-[0.99rem] font-semibold tracking-wide', sidebarMinimized && `hidden`)}
+                >
+                  Invite Someone
                 </span>
-                </Button>
+              </Button>
             </BusinessButtonPopup>
           </div>
-
 
           <div className="overflow-y-auto px-3 border-y py-2">
             <div className="flex flex-col space-y-1">
@@ -174,30 +174,29 @@ const BusinessDashboardLayout = ({ logo, miniLogo, links = [], lowerLink = [], c
                     )
                   }
                 >
-                    {
-                        sidebarMinimized ? 
-                        <Tooltip
-                            showArrow={true}
-                            classNames={{
-                                content: "bg-gray-900 text-white ",
-                                arrow: "bg-gray-900",
-                            }}
-    
-                            placement="right"
-                            content={item.name}
-                        >
-                            <div className="mr-4">{item.icon}</div>
-                        </Tooltip> : 
-                        <div className="mr-4">{item.icon}</div>
-                    }
-                
+                  {sidebarMinimized ? (
+                    <Tooltip
+                      showArrow={true}
+                      classNames={{
+                        content: 'bg-gray-900 text-white ',
+                        arrow: 'bg-gray-900',
+                      }}
+                      placement="right"
+                      content={item.name}
+                    >
+                      <div className="mr-4">{item.icon}</div>
+                    </Tooltip>
+                  ) : (
+                    <div className="mr-4">{item.icon}</div>
+                  )}
+
                   {!sidebarMinimized && item.name}
                 </NavLink>
               ))}
             </div>
           </div>
           <div className="px-3 py-2">
-            <BusinessOtherApps  />
+            <BusinessOtherApps />
           </div>
           <hr />
           {/* <div className="px-3 py-2">
@@ -259,7 +258,7 @@ const BusinessDashboardLayout = ({ logo, miniLogo, links = [], lowerLink = [], c
         <div className="lg:hidden fixed top-0 left-0 w-full bg-gradient-to-b from-slate-100 z-50 ">
           <div className="container !max-w-5xl pt-6 pb-10 space-x-4 flex items-center lg:justify-end">
             <div className="lg:hidden mr-auto flex gap-3 items-center ">
-              <VscThreeBars size={24} onClick={toggleSideBar} className='hover:bg-blue-200 p-1 cursor-pointer' />
+              <VscThreeBars size={24} onClick={toggleSideBar} className="hover:bg-blue-200 p-1 cursor-pointer" />
               {createElement(logo, { className: '' })}
             </div>
             {/* <AppSwitcherMobile />
@@ -323,4 +322,3 @@ BusinessDashboardLayout.propTypes = {
 };
 
 export default BusinessDashboardLayout;
-

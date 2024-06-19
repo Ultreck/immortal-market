@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react';
 import NewCustomReport from '@/components/core/document/custom/NewCustomReport.jsx';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 import { IconPlus } from '@tabler/icons-react';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
 import { useGetCustomDocuments } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
-import NoData from '@/components/global/NoData.jsx';
+import NoData from '@/components/ui/NoData.jsx';
 import CustomDocumentCard from '@/components/core/document/custom/CustomDocumentCard.jsx';
 import CustomDocumentDetailsModal from '@/components/core/document/custom/CustomDocumentDetailsModal.jsx';
 

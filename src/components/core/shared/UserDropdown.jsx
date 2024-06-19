@@ -1,7 +1,7 @@
 import { IconChevronDown, IconLogout, IconUser } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { useAuth } from '@/hooks/use-auth.jsx';
-import SimpleDropdown from '@/components/global/SimpleDropdown.jsx';
+import SimpleDropdown from '@/components/ui/SimpleDropdown.jsx';
 import PropTypes from 'prop-types';
 import Image from '@/components/core/shared/Image.jsx';
 
@@ -27,7 +27,7 @@ const UserDropdown = ({ className }) => {
         {
           text: 'Account',
           icon: <IconUser size="18" />,
-          onClick: () => (location.href = `${ACCOUNT_URL}/accounts`),
+          onClick: () => (location.href = `${ACCOUNT_URL}/settings`),
         },
         {
           text: 'Logout',

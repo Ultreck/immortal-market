@@ -2,7 +2,7 @@ import NewReceipt from '@/components/core/document/receipts/NewReceipt.jsx';
 import NewInvoice from '@/components/core/document/invoices/NewInvoice.jsx';
 import { useState } from 'react';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
-import Card from '@/components/global/Card.jsx';
+import Card from '@/components/ui/Card.jsx';
 import {
   IconArrowRight,
   IconFilePlus,

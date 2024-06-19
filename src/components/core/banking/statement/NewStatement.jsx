@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IconBuildingBank, IconChevronRight, IconPdf, IconWorld } from '@tabler/icons-react';
-import Drawer from '@/components/global/Drawer.jsx';
+import Drawer from '@/components/ui/Drawer.jsx';
 import AnalyzePdf from './AnalyzePdf.jsx';
 import AnalyzeMono from './AnalyzeMono.jsx';
 import AnalyzeMbs from './AnalyzeMbs.jsx';

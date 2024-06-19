@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IconExclamationCircle } from '@tabler/icons-react';
-import Card from '@/components/global/Card.jsx';
+import Card from '@/components/ui/Card.jsx';
 import classNames from 'classnames';
 import { formatCurrency } from '@/lib/utils.js';
 import { format } from 'date-fns';

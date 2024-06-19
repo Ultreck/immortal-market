@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import classNames from 'classnames';
-import Button from '@/components/global/Button.jsx';
-import Card from '@/components/global/Card.jsx';
+import Button from '@/components/ui/Button.jsx';
+import Card from '@/components/ui/Card.jsx';
 import PropTypes from 'prop-types';
 import { IconArrowRight } from '@tabler/icons-react';
 

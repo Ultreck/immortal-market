@@ -5,14 +5,14 @@ import { format } from 'date-fns';
 import { useQueryClient } from '@tanstack/react-query';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import IconButton from '@/components/global/IconButton.jsx';
-import Input from '@/components/global/Input.jsx';
-import TextArea from '@/components/global/TextArea.jsx';
-import Button from '@/components/global/Button.jsx';
+import IconButton from '@/components/ui/IconButton.jsx';
+import Input from '@/components/ui/Input.jsx';
+import TextArea from '@/components/ui/TextArea.jsx';
+import Button from '@/components/ui/Button.jsx';
 import { useUpdateReceipt } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
-import Select from '@/components/global/Select.jsx';
+import Select from '@/components/ui/Select.jsx';
 import PropTypes from 'prop-types';
 
 const schema = yup.object({

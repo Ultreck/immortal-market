@@ -1,6 +1,6 @@
 import { IconCheck, IconX } from '@tabler/icons-react';
-import Progress from '@/components/global/Progress';
-import Card from '@/components/global/Card';
+import Progress from '@/components/ui/Progress';
+import Card from '@/components/ui/Card';
 import PropTypes from 'prop-types';
 
 const BehaviorAnalysis = ({ data }) => {

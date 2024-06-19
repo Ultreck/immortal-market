@@ -1,12 +1,12 @@
 import products, { categories } from '@/lib/products.js';
 import { createElement, useState } from 'react';
 import classNames from 'classnames';
-import Card from '@/components/global/Card.jsx';
+import Card from '@/components/ui/Card.jsx';
 import PropTypes from 'prop-types';
 import ProductSummary from '@/components/core/ProductSummary.jsx';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 import HelpTrainModel from '@/components/core/HelpTrainModel.jsx';
-import Hover from '@/components/global/Hover.jsx';
+import Hover from '@/components/ui/Hover.jsx';
 import { IconArrowRight, IconRobot } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
 

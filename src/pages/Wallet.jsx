@@ -1,5 +1,5 @@
-import Card from '@/components/global/Card.jsx';
-import Button from '@/components/global/Button.jsx';
+import Card from '@/components/ui/Card.jsx';
+import Button from '@/components/ui/Button.jsx';
 import { IconLayoutList, IconPlus } from '@tabler/icons-react';
 import { formatCurrency } from '@/lib/utils.js';
 

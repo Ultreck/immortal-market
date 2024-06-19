@@ -1,6 +1,6 @@
 import { IconFileTypeCsv, IconFileTypeDoc, IconFileTypePdf, IconFileTypeXls } from '@tabler/icons-react';
 import { format } from 'date-fns';
-import Card from '@/components/global/Card.jsx';
+import Card from '@/components/ui/Card.jsx';
 import PropTypes from 'prop-types';
 
 const CustomDocumentCard = ({ document, onClick }) => {

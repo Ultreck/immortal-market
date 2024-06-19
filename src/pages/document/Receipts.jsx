@@ -4,11 +4,11 @@ import NewReceipt from '@/components/core/document/receipts/NewReceipt.jsx';
 import { IconExclamationCircle, IconPlus } from '@tabler/icons-react';
 import { formatCurrency } from '@/lib/utils.js';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 import { useGetReceipts } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
 import { useNavigate } from 'react-router-dom';
-import Card from '@/components/global/Card.jsx';
+import Card from '@/components/ui/Card.jsx';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
 
 const Receipts = () => {

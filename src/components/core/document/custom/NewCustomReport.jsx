@@ -1,13 +1,13 @@
-import Drawer from '@/components/global/Drawer.jsx';
+import Drawer from '@/components/ui/Drawer.jsx';
 import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInput.jsx';
 import { GridLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { useAddCustomDocument } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
 import { IconArrowLeft, IconCheck, IconCircleCheckFilled, IconPdf } from '@tabler/icons-react';
-import Button from '@/components/global/Button.jsx';
-import Input from '@/components/global/Input.jsx';
-import Select from '@/components/global/Select.jsx';
+import Button from '@/components/ui/Button.jsx';
+import Input from '@/components/ui/Input.jsx';
+import Select from '@/components/ui/Select.jsx';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';

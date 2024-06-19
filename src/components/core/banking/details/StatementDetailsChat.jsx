@@ -1,10 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
-import Drawer from '@/components/global/Drawer.jsx';
-import IconButton from '@/components/global/IconButton.jsx';
+import Drawer from '@/components/ui/Drawer.jsx';
+import IconButton from '@/components/ui/IconButton.jsx';
 import { IconRobot, IconSend, IconSparkles, IconUser } from '@tabler/icons-react';
 import { io } from 'socket.io-client';
 import { useIsomorphicLayoutEffect, useMount, useUnmount } from 'react-use';
-import Loader from '@/components/global/Loader.jsx';
+import Loader from '@/components/ui/Loader.jsx';
 import { formatCurrency, getModeArray, shuffle } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 

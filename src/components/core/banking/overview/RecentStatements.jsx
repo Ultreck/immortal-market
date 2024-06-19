@@ -1,9 +1,9 @@
 import { IconArrowRight, IconFileText } from '@tabler/icons-react';
 import { useGetUserBusiness } from '@/api/business.js';
 import { useGetStatements } from '@/api/statement.js';
-import Card from '@/components/global/Card.jsx';
+import Card from '@/components/ui/Card.jsx';
 import { Link } from 'react-router-dom';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 
 const RecentStatements = () => {
   const { data: business, isLoading: isBusinessLoading } = useGetUserBusiness();

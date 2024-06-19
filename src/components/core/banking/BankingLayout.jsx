@@ -12,7 +12,7 @@ import {
   IconUserCircle,
 } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
-import Loader from '@/components/global/Loader.jsx';
+import Loader from '@/components/ui/Loader.jsx';
 import AppDashboardLayout from '@/components/core/shared/AppDashboardLayout.jsx';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
 import ProductOnboarding from '@/components/core/shared/ProductOnboarding.jsx';

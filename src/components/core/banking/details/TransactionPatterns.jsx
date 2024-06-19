@@ -1,6 +1,6 @@
 import { differenceInDays } from 'date-fns';
 import { formatCurrency } from '@/lib/utils';
-import Card from '@/components/global/Card';
+import Card from '@/components/ui/Card';
 import PropTypes from 'prop-types';
 
 const TransactionPatterns = ({ data }) => {

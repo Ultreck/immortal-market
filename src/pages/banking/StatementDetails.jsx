@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 import OtherHighlights from '@/components/core/banking/details/OtherHighlights.jsx';
 import { Link, useParams } from 'react-router-dom';
-import IconButton from '@/components/global/IconButton.jsx';
+import IconButton from '@/components/ui/IconButton.jsx';
 import {
   IconChevronLeft,
   IconDotsVertical,
@@ -11,9 +11,9 @@ import {
   IconSparkles,
   IconTrash,
 } from '@tabler/icons-react';
-import Button from '@/components/global/Button.jsx';
-import SimpleDropdown from '@/components/global/SimpleDropdown.jsx';
-import Card from '@/components/global/Card.jsx';
+import Button from '@/components/ui/Button.jsx';
+import SimpleDropdown from '@/components/ui/SimpleDropdown.jsx';
+import Card from '@/components/ui/Card.jsx';
 import AccountActivityChart from '@/components/core/banking/details/AccountActivityChart.jsx';
 import AnalyticsScoreChart from '@/components/core/banking/details/AnalyticsScoreChart.jsx';
 import CashFlowHighlights from '@/components/core/banking/details/CashFlowHighlights.jsx';

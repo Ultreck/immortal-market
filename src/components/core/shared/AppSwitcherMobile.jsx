@@ -1,7 +1,7 @@
 import { createElement, Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { IconGridDots, IconHome2, IconLayoutGrid } from '@tabler/icons-react';
-import IconButton from '@/components/global/IconButton.jsx';
+import IconButton from '@/components/ui/IconButton.jsx';
 import products from '@/lib/products.js';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';

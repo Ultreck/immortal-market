@@ -1,7 +1,7 @@
 import { IconFileAnalytics, IconFileInvoice, IconLayout, IconMessageChatbot, IconReceipt } from '@tabler/icons-react';
 import { createElement, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import Loader from '@/components/global/Loader.jsx';
+import Loader from '@/components/ui/Loader.jsx';
 import AppDashboardLayout from '@/components/core/shared/AppDashboardLayout.jsx';
 import ProductOnboarding from '@/components/core/shared/ProductOnboarding.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';

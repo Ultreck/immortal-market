@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
-import IconButton from '@/components/global/IconButton.jsx';
+import IconButton from '@/components/ui/IconButton.jsx';
 import { IconArrowLeft, IconCircleCheckFilled, IconUserCheck } from '@tabler/icons-react';
 import { useForm } from 'react-hook-form';
-import Input from '@/components/global/Input.jsx';
-import Select from '@/components/global/Select.jsx';
+import Input from '@/components/ui/Input.jsx';
+import Select from '@/components/ui/Select.jsx';
 import mbsBanks from '@/lib/mbs-banks.js';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 import {
   useAnalyzeStatement,
   useCheckMbsStatus,

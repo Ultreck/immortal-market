@@ -1,14 +1,14 @@
-import Drawer from '@/components/global/Drawer.jsx';
+import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInput.jsx';
-import IconButton from '@/components/global/IconButton.jsx';
+import IconButton from '@/components/ui/IconButton.jsx';
 import { IconArrowLeft, IconCheck, IconCircleCheckFilled, IconPdf, IconX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
-import Button from '@/components/global/Button.jsx';
-import Select from '@/components/global/Select.jsx';
+import Button from '@/components/ui/Button.jsx';
+import Select from '@/components/ui/Select.jsx';
 import { useForm } from 'react-hook-form';
 import products from '@/lib/products.js';
-import TextArea from '@/components/global/TextArea.jsx';
+import TextArea from '@/components/ui/TextArea.jsx';
 import { useCreateSampleDocument } from '@/api/misc.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 

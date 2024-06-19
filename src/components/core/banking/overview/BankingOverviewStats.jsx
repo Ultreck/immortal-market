@@ -1,5 +1,5 @@
 import { useGetUserBusiness } from '@/api/business.js';
-import Card from '@/components/global/Card.jsx';
+import Card from '@/components/ui/Card.jsx';
 import { useGetStatementOverview } from '@/api/statement.js';
 import { formatCurrency } from '@/lib/utils.js';
 

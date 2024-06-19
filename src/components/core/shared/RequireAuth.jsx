@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/use-auth.jsx';
-import Loader from '@/components/global/Loader.jsx';
 import PropTypes from 'prop-types';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 import { TbNetworkOff } from 'react-icons/tb';
+import { Spinner } from '@nextui-org/react';
 
 const ACCOUNT_URL = import.meta.env.VITE_ACCOUNT_URL;
 
@@ -40,7 +40,7 @@ const RequireAuth = ({ children }) => {
 
   return (
     <div className="h-screen w-full flex flex-col justify-center items-center text-center">
-      <Loader />
+      <Spinner size="lg" />
       <p className="mt-6">Just a moment..</p>
     </div>
   );

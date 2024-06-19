@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Drawer from '@/components/global/Drawer.jsx';
+import Drawer from '@/components/ui/Drawer.jsx';
 import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInput.jsx';
 import { useCreateReceipt } from '@/api/document.js';
 import { useGetUserBusiness } from '@/api/business.js';
@@ -7,7 +7,7 @@ import { GridLoader } from 'react-spinners';
 import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 

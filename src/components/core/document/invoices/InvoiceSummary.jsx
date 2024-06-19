@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { IconPencil } from '@tabler/icons-react';
 import { format } from 'date-fns';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 import { formatCurrency } from '@/lib/utils.js';
-import Card from '@/components/global/Card.jsx';
+import Card from '@/components/ui/Card.jsx';
 import EditInvoice from '@/components/core/document/invoices/EditInvoice.jsx';
 import PropTypes from 'prop-types';
 

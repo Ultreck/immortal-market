@@ -7,13 +7,21 @@
   outline: transparent !important;
 }
 
-input:-webkit-autofill {
-  -webkit-background-clip: text;
+::selection {
+  @apply bg-cyan-600 text-white;
 }
 
 html,
 body {
-  @apply min-h-screen w-full;
+  @apply w-full text-[14px] light:bg-[rgb(237,243,251)];
+}
+
+:root {
+  --swiper-navigation-color: #fff;
+}
+
+input:-webkit-autofill {
+  -webkit-background-clip: text;
 }
 
 :root {
@@ -23,7 +31,11 @@ body {
 }
 
 .container {
-  @apply max-w-[1200px] mx-auto px-4;
+  @apply mx-auto max-w-[1200px] px-4;
+}
+
+.card-shadow {
+  @apply rounded-2xl border shadow dark:border-0 dark:shadow-none;
 }
 
 .disabled {

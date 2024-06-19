@@ -1,8 +1,8 @@
 import { createElement } from 'react';
 import classNames from 'classnames';
 import { IconChevronRight, IconLogout, IconUserCog } from '@tabler/icons-react';
-import AppSwitcherDesktop from './AppSwitcherDesktop.jsx';
-import SimpleDropdown from '@/components/global/SimpleDropdown.jsx';
+import ProductsDropdown from './ProductsDropdown.jsx';
+import SimpleDropdown from '@/components/ui/SimpleDropdown.jsx';
 import AppSwitcherMobile from './AppSwitcherMobile.jsx';
 import UserDropdown from './UserDropdown.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
@@ -40,7 +40,7 @@ const AppDashboardLayout = ({ logo, links = [], children }) => {
           </div>
         </div>
         <div className="px-7 py-2">
-          <AppSwitcherDesktop />
+          <ProductsDropdown />
         </div>
         <hr />
         <div className="px-8 py-2">

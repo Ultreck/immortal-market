@@ -1,9 +1,9 @@
-import Drawer from '@/components/global/Drawer.jsx';
+import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import { useGetUserBusiness } from '@/api/business.js';
 import { useGenerateCustomReport } from '@/api/document.js';
-import Button from '@/components/global/Button.jsx';
-import Card from '@/components/global/Card.jsx';
+import Button from '@/components/ui/Button.jsx';
+import Card from '@/components/ui/Card.jsx';
 import { IconFileCheck } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
 

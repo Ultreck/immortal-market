@@ -541,20 +541,6 @@ const products = [...document, ...banking, ...identity, ...accounting];
 
 export const categories = [
   {
-    id: 'business',
-    name: 'Business',
-    slug: 'business',
-    summary:
-      'Our data-driven solutions for the business sector encompass a wide range of services. We provide in-depth analyses of customer behavior, risk assessment, and market trends. This empowers banks to offer tailored financial products and services, optimize operational efficiency, and ensure compliance with regulatory standards. Additionally, we assist in developing strategies for customer retention and acquisition, enabling banks to stay competitive in a rapidly evolving financial landscape.',
-    icon: IconBuildingBank,
-    colors: {
-      bg: '!bg-sky-700',
-      color: '!text-sky-700',
-    },
-    path: '/business',
-    status: 'active',
-  },
-  {
     id: 'banking',
     name: 'Banking',
     slug: 'banking',

@@ -1,5 +1,5 @@
 import { formatCurrency } from '@/lib/utils';
-import Card from '@/components/global/Card';
+import Card from '@/components/ui/Card';
 import PropTypes from 'prop-types';
 
 const OtherHighlights = ({ data }) => {

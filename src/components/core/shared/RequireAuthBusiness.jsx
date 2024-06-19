@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/use-auth.jsx';
-import Loader from '@/components/global/Loader.jsx';
 import { useGetUserBusiness } from '@/api/business.js';
 import PropTypes from 'prop-types';
+import { Spinner } from '@nextui-org/react';
 
 const ACCOUNT_URL = import.meta.env.VITE_ACCOUNT_URL;
 
@@ -26,7 +26,7 @@ const RequireAuthBusiness = ({ children }) => {
 
   return (
     <div className="h-screen w-full flex flex-col justify-center items-center text-center">
-      <Loader />
+      <Spinner size="lg" />
       <p className="mt-6">Just a moment..</p>
     </div>
   );

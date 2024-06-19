@@ -1,7 +1,7 @@
 import { IconCircleFilled, IconFolderExclamation } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { formatCurrency } from '@/lib/utils';
-import Card from '@/components/global/Card';
+import Card from '@/components/ui/Card';
 import PropTypes from 'prop-types';
 
 const SalaryDistribution = ({ data }) => {

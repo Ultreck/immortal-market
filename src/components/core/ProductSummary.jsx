@@ -1,4 +1,4 @@
-import Drawer from '@/components/global/Drawer.jsx';
+import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import { createElement, useState } from 'react';
 import classNames from 'classnames';
@@ -19,14 +19,14 @@ import {
   IconNumber9,
   IconX,
 } from '@tabler/icons-react';
-import Button from '@/components/global/Button.jsx';
+import Button from '@/components/ui/Button.jsx';
 import useCountdown from '@/hooks/use-countdown.js';
-import Card from '@/components/global/Card.jsx';
-import IconButton from '@/components/global/IconButton.jsx';
+import Card from '@/components/ui/Card.jsx';
+import IconButton from '@/components/ui/IconButton.jsx';
 import { useAddLaunchSubscriber, useGetLaunchSubscriptions } from '@/api/misc.js';
 import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast.jsx';
-import Loader from '@/components/global/Loader.jsx';
+import Loader from '@/components/ui/Loader.jsx';
 import { format } from 'date-fns';
 
 const ProductSummary = ({ product, isOpen, onClose }) => {

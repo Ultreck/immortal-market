@@ -1,5 +1,5 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
-import Card from '@/components/global/Card';
+import Card from '@/components/ui/Card';
 import PropTypes from 'prop-types';
 
 const COLORS = ['#0369a1', '#0f766e', '#FF8042', '#dc2626', '#be123c', '#7e22ce', '#FFBB28', '#FF8042'];

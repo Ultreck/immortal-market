@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-const Logo = ({ light = false, ...props }) => {
-  const fill = light ? 'white' : '#006DB8';
+const Logo = ({ light = false, width = 160, ...props }) => {
+  const fill = light ? 'white' : '#071952';
 
   return (
-    <svg width="162" viewBox="0 0 944 238" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg width={width} viewBox="0 0 944 238" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <circle cx="118.5" cy="119" r="118.5" fill={light ? 'white' : '#006DB8'} />
       <path
         fillRule="evenodd"
@@ -34,6 +34,7 @@ const Logo = ({ light = false, ...props }) => {
 
 Logo.propTypes = {
   light: PropTypes.bool,
+  width: PropTypes.number,
 };
 
 export default Logo;
