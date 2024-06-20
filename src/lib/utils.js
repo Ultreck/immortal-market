@@ -87,3 +87,17 @@ export const imageFileToBase64 = (file) => {
     reader.readAsDataURL(file);
   });
 };
+
+export const getPercentagesMax = (numbers) => {
+  if (numbers.length === 0) return [];
+  const maxNumber = Math.max(...numbers);
+  return numbers.map((number) => Math.ceil((number / maxNumber) * 100));
+};
+
+export const getRandomNumber = (n) => Math.floor(Math.random() * n);
+
+export const getPercentages = (numbers) => {
+  const total = numbers.reduce((acc, num) => acc + num, 0);
+  return numbers.map((num) => Math.ceil((num / total) * 100));
+};
+
