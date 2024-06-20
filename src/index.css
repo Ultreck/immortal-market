@@ -13,7 +13,7 @@
 
 html,
 body {
-  @apply w-full text-[14px] light:bg-[rgb(237,243,251)];
+  @apply w-full text-[14px] light:bg-[rgb(237,243,251)] min-h-screen;
 }
 
 :root {

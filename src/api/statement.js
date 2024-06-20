@@ -13,7 +13,7 @@ export const useAnalyzeStatement = () => {
 export const useCreateStatement = (business) => {
   return useMutation({
     mutationFn: (body) => {
-      return http.post(`/business/${business}/banking/statement`, body);
+      return http.post(`/businesses/${business}/banking/statement`, body);
     },
   });
 };
@@ -22,7 +22,7 @@ export const useGetStatements = (business) => {
   return useQuery({
     queryKey: ['statements'],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/banking/statement`);
+      const res = await http.get(`/businesses/${business}/banking/statement`);
       return res.data;
     },
     enabled: !!business,
@@ -33,7 +33,7 @@ export const useGetStatement = (business, id) => {
   return useQuery({
     queryKey: ['statements', id],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/banking/statement/${id}`);
+      const res = await http.get(`/businesses/${business}/banking/statement/${id}`);
       return res.data;
     },
     enabled: !!business && !!id,
@@ -55,7 +55,7 @@ export const useGetStatementOverview = (business) => {
   return useQuery({
     queryKey: ['banking', 'overview'],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/banking/overview`);
+      const res = await http.get(`/businesses/${business}/banking/overview`);
       return res.data;
     },
     enabled: !!business,
@@ -149,7 +149,7 @@ export const useGetBankingSettings = (business) => {
   return useQuery({
     queryKey: ['statement', 'settings'],
     queryFn: async () => {
-      const res = await http.get(`/business/${business}/banking/settings`);
+      const res = await http.get(`/businesses/${business}/banking/settings`);
       return res.data;
     },
     enabled: !!business,
@@ -159,7 +159,7 @@ export const useGetBankingSettings = (business) => {
 export const useCreateBankingSettings = (business) => {
   return useMutation({
     mutationFn: (body = {}) => {
-      return http.post(`/business/${business}/banking/settings`, body);
+      return http.post(`/businesses/${business}/banking/settings`, body);
     },
   });
 };
@@ -167,7 +167,7 @@ export const useCreateBankingSettings = (business) => {
 export const useUpdateBankingSettings = (business) => {
   return useMutation({
     mutationFn: (body) => {
-      return http.patch(`/business/${business}/banking/settings`, body);
+      return http.patch(`/businesses/${business}/banking/settings`, body);
     },
   });
 };
@@ -175,7 +175,7 @@ export const useUpdateBankingSettings = (business) => {
 export const useInitializeMbs = (business) => {
   return useMutation({
     mutationFn: ({ ...body }) => {
-      return http.post(`/business/${business}/banking/statement/analysis/mbs/initialize`, body);
+      return http.post(`/businesses/${business}/banking/statement/analysis/mbs/initialize`, body);
     },
   });
 };
@@ -183,7 +183,7 @@ export const useInitializeMbs = (business) => {
 export const useCheckMbsStatus = (business) => {
   return useMutation({
     mutationFn: (requestId) => {
-      return http.post(`/business/${business}/banking/statement/analysis/mbs/status`, { requestId });
+      return http.post(`/businesses/${business}/banking/statement/analysis/mbs/status`, { requestId });
     },
   });
 };
@@ -191,7 +191,7 @@ export const useCheckMbsStatus = (business) => {
 export const useSubmitMbsTicket = (business) => {
   return useMutation({
     mutationFn: ({ ticketNo, password }) => {
-      return http.post(`/business/${business}/banking/statement/analysis/mbs/submit`, { ticketNo, password });
+      return http.post(`/businesses/${business}/banking/statement/analysis/mbs/submit`, { ticketNo, password });
     },
   });
 };
@@ -199,7 +199,7 @@ export const useSubmitMbsTicket = (business) => {
 export const useRetrieveMbsPdf = (business) => {
   return useMutation({
     mutationFn: ({ ticketNo }) => {
-      return http.post(`/business/${business}/banking/statement/analysis/mbs/retrieve`, { ticketNo });
+      return http.post(`/businesses/${business}/banking/statement/analysis/mbs/retrieve`, { ticketNo });
     },
   });
 };

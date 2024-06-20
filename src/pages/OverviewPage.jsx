@@ -2,7 +2,7 @@ import OverviewStats from '@/components/core/overview/OverviewStats.jsx';
 import RecentReport from '@/components/core/overview/RecentReport.jsx';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
 
-const BusinessOverview = () => {
+const OverviewPage = () => {
   return (
     <div className="container py-10">
       <DashboardTitle text="Overview" />
@@ -14,4 +14,4 @@ const BusinessOverview = () => {
   );
 };
 
-export default BusinessOverview;
+export default OverviewPage;

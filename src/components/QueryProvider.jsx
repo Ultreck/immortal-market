@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 
 const qc = new QueryClient({
@@ -7,6 +7,13 @@ const qc = new QueryClient({
       staleTime: 1000 * 60 * 2,
     },
   },
+  mutationCache: new MutationCache({
+    onSuccess: (_data, _variables, _context, mutation) => {
+      qc.invalidateQueries({
+        queryKey: mutation.options.mutationKey,
+      });
+    },
+  }),
 });
 
 const QueryProvider = ({ children }) => {

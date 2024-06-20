@@ -5,6 +5,12 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
+export const getImageLink = (path, timestamp = false) => {
+  if (!path) return null;
+  const bucket = import.meta.env.VITE_S3_BUCKET_NAME;
+  return `https://${bucket}.s3.amazonaws.com/${path}${timestamp ? `?timestamp=${Date.now()}` : ''}`;
+};
+
 export const delay = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
@@ -53,7 +59,7 @@ export const shuffle = (array) => {
   return array;
 };
 
-export const setCrossSubdomainCookie = (name, value, days) => {
+export const setCrossSubdomainCookie = (name, value, days = 1) => {
   const expires = days ? `; expires=${new Date(new Date().getTime() + days * 24 * 60 * 60 * 1000).toUTCString()}` : '';
   const secure = location.protocol === 'https:' ? '; Secure' : '';
   const sameSite = secure ? '; SameSite=None' : '';

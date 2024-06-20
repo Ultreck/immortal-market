@@ -18,11 +18,13 @@ import InvoiceDetails from './pages/document/InvoiceDetails.jsx';
 import Custom from './pages/document/Custom.jsx';
 import Wallet from './pages/Wallet.jsx';
 import DashboardLayout from '@/components/core/layout/DashboardLayout.jsx';
-import BusinessOverview from './pages/OverviewPage.jsx';
-import BusinessProject from './pages/ProjectPage.jsx';
+import OverviewPage from '@/pages/OverviewPage.jsx';
+import ProjectPage from '@/pages/ProjectPage.jsx';
+import TeamPage from '@/pages/TeamPage.jsx';
 import { useEffect } from 'react';
 import { useDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
+import InvitationPage from '@/pages/InvitationPage.jsx';
 
 const App = () => {
   const { isDarkMode } = useDarkMode();
@@ -51,13 +53,22 @@ const App = () => {
           }
         >
           <Route path="" element={<Navigate to="/overview" replace />} />
-          <Route path="overview" element={<BusinessOverview />} />
-          <Route path="projects" element={<BusinessProject />} />
+          <Route path="overview" element={<OverviewPage />} />
+          <Route path="projects" element={<ProjectPage />} />
           <Route path="templates" element={<></>} />
-          <Route path="team" element={<></>} />
+          <Route path="team" element={<TeamPage />} />
           <Route path="upgrade" element={<></>} />
           <Route path="settings" element={<></>} />
         </Route>
+
+        <Route
+          path="/invitation/:id"
+          element={
+            <RequireAuth>
+              <InvitationPage />
+            </RequireAuth>
+          }
+        />
 
         <Route
           path="/business"

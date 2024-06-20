@@ -4,9 +4,10 @@ import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
 import { IconFileInvoice } from '@tabler/icons-react';
-import { TbCrown, TbLayout, TbLayoutList, TbSettings2, TbUser, TbUsers } from 'react-icons/tb';
+import { TbCrown, TbLayout, TbLayoutList, TbSettings2, TbUsers } from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
+import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
 
 const ACCOUNT_URL = import.meta.env.VITE_ACCOUNT_URL;
 
@@ -44,7 +45,6 @@ const Sidebar = () => {
         {[
           { name: 'Upgrade', href: `/upgrade`, icon: <TbCrown className="text-orange-500" size="20" /> },
           { name: 'Settings', href: `/settings`, icon: <TbSettings2 size="20" /> },
-          { name: 'My Account', href: `${ACCOUNT_URL}/settings`, icon: <TbUser size="20" /> },
         ].map((item) => (
           <NavLink
             key={item.href}
@@ -61,6 +61,7 @@ const Sidebar = () => {
           </NavLink>
         ))}
         <ProductsDropdown />
+        <AuthDropdown />
       </div>
     </div>
   );

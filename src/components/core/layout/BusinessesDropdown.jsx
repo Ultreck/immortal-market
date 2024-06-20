@@ -9,8 +9,11 @@ import {
 } from '@nextui-org/react';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
+import useBusiness from '@/hooks/use-business.js';
 
 const BusinessesDropdown = ({ className }) => {
+  const { businesses, business, id, setCurrent } = useBusiness();
+
   return (
     <div className={className}>
       <Dropdown classNames={{ content: 'shadow border border-default-200 w-[300px]' }} placement="right-start">
@@ -18,36 +21,35 @@ const BusinessesDropdown = ({ className }) => {
           <Card className="card-shadow cursor-pointer">
             <CardBody className="px-7 py-5 flex flex-row items-center justify-between">
               <div>
-                <h2 className="text-lg font-medium leading-none">Awesome business</h2>
-                <p className="leading-none mt-2">info@ab.com</p>
+                <h2 className="text-lg font-medium leading-none">{business.name}</h2>
+                <p className="leading-none mt-2">{business.email}</p>
               </div>
               <RiArrowRightSLine size="20" />
             </CardBody>
           </Card>
         </DropdownTrigger>
-        <DropdownMenu variant="faded" aria-label="Dropdown menu with description">
+        <DropdownMenu
+          variant="faded"
+          aria-label="Dropdown menu with description"
+          selectionMode="single"
+          selectedKeys={[id]}
+          onSelectionChange={(value) => setCurrent(Array.from(value)[0])}
+        >
           <DropdownSection classNames={{ base: 'p-1', heading: 'px-2' }}>
-            <DropdownItem
-              key="new"
-              description="First business description"
-              classNames={{ title: 'text-base', description: 'text-sm', wrapper: 'px-2 py-1', base: 'rounded-xl' }}
-            >
-              Business 2
-            </DropdownItem>
-            <DropdownItem
-              key="copy"
-              description="Second business description"
-              classNames={{ title: 'text-base', description: 'text-sm', wrapper: 'px-2 py-1', base: 'rounded-xl' }}
-            >
-              Business 3
-            </DropdownItem>
-            <DropdownItem
-              key="edit"
-              description="Third business description"
-              classNames={{ title: 'text-base', description: 'text-sm', wrapper: 'px-2 py-1', base: 'rounded-xl' }}
-            >
-              Business 4
-            </DropdownItem>
+            {businesses.map((business) => (
+              <DropdownItem
+                key={business._id}
+                description={business.email}
+                classNames={{
+                  title: 'text-base',
+                  description: 'text-sm',
+                  wrapper: 'px-2 py-1',
+                  base: 'rounded-xl',
+                }}
+              >
+                {business.name}
+              </DropdownItem>
+            ))}
           </DropdownSection>
         </DropdownMenu>
       </Dropdown>

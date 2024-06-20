@@ -1,15 +1,14 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 import { shallow } from 'zustand/shallow';
 
-const useGlobalStore = createWithEqualityFn(
+const useBusinessStore = createWithEqualityFn(
   (set) => ({
     data: {
-      isCreateProjectModalOpen: false,
-      redirect: null,
+      current: null,
     },
     updateData: (payload) => set((state) => ({ data: { ...state.data, ...payload } })),
   }),
   shallow
 );
 
-export default useGlobalStore;
+export default useBusinessStore;

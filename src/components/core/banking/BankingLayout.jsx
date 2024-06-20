@@ -17,10 +17,10 @@ import AppDashboardLayout from '@/components/core/shared/AppDashboardLayout.jsx'
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
 import ProductOnboarding from '@/components/core/shared/ProductOnboarding.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
-import { useGetUserBusiness } from '@/api/business.js';
 import { useCreateBankingSettings, useGetBankingSettings } from '@/api/statement.js';
 import { Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import useBusiness from '@/hooks/use-business.js';
 
 const product = categories.find((p) => p.id === 'banking');
 
@@ -54,9 +54,11 @@ const BankingLayout = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const [isFetching, setIsFetching] = useState(false);
-  const { data: business } = useGetUserBusiness();
+  const { business, isLoading: isBusinessLoading } = useBusiness();
   const { data: { settings } = {}, isLoading: isSettingsLoading } = useGetBankingSettings(business._id);
   const { mutateAsync: createSettings, isPending: isCreateSettingsLoading } = useCreateBankingSettings(business._id);
+
+  console.log({ business, isBusinessLoading, isSettingsLoading, isCreateSettingsLoading });
 
   const start = async () => {
     try {
