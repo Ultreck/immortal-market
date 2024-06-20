@@ -1,14 +1,12 @@
-import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
-import RecentProjects from '@/components/core/project/RecentProjects.jsx';
-import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
+import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
+
+import OverViewTable from '@/components/core/overview/OverviewTable';
 
 const ProjectPage = () => {
   return (
-    <div className="container py-10">
-      <DashboardTitle className="text-2xl font-semibold" text="Projects" after={<CreateDropdown />} />
-      <div className="flex flex-col gap-5">
-        <RecentProjects />
-      </div>
+    <div className="container py-10 space-y-12">
+      <DashboardHeader text={'Projects'} page={'Projects'} />
+      <OverViewTable/>
     </div>
   );
 };

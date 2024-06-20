@@ -1,57 +1,3 @@
-
- 
-export const file_source = [
-  {
-    "_id": 1,
-    "image": "/images/excel.png",
-    "name": "Files",
-    "type": "file"
-  },
-  {
-    "_id": 2,
-    "image": "/images/cloud.png",
-    "name": "Cloud Storage/Drive",
-    "type": "DB"
-  },
-  {
-    "_id": 3,
-    "image": "/images/mongo.png",
-    "name": "Mongo DB",
-    "type": "DB"
-  },
-  {
-    "_id": 4,
-    "image": "/images/mysql.png",
-    "name": "MySQL DB",
-    "type": "DB"
-  },
-  {
-    "_id": 5,
-    "image": "/images/azure.png",
-    "name": "Azure",
-    "type": "DB"
-  },
-  {
-    "_id": 6,
-    "image": "/images/oracle.png",
-    "name": "Oracle DB",
-    "type": "DB"
-  },
-  {
-    "_id": 7,
-    "image": "/images/posgres.png",
-    "name": "Posgres DB",
-    "type": "DB"
-  },
-  {
-    "_id": 8,
-    "image": "/images/filedoct.png",
-    "name": "Other Files",
-    "type": "file"
-  },
-]
-
-
 export const data = [{
     "_id": 1,
     "date": "9/2/2024",
@@ -278,6 +224,8 @@ export const data = [{
   export const PENDING_APPROVAL = [
     {
       "staff": "KOLAWOLE PELEMO",
+       "avatar":
+        'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
       "department": "LEGAL",
       "type": "PROFILE IMAGE",
       "date": "03/03/2024",
@@ -285,6 +233,8 @@ export const data = [{
     },
     {
       "staff": "SUNDAY ANUOLUWAPO",
+       "avatar":
+        'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
       "department": "AEROMEDICAL",
       "type": "LEAVE",
       "date": "03/02/2024",
@@ -292,6 +242,8 @@ export const data = [{
     },
     {
       "staff": "JOHNSON SULAIMON",
+      "avatar":
+        'https://images.unsplash.com/photo-1530785602389-07594beb8b73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bmlnZXJpYW4lMjBnaXJsfGVufDB8fDB8fHww',
       "department": "HUMAN RESOURCES",
       "type": "BIO DATA",
       "date": "06/12/2023",
@@ -299,6 +251,7 @@ export const data = [{
     },
     {
       "staff": "CHINEDU OGBONAYA",
+      "avatar":'https://media.istockphoto.com/id/517302398/photo/portrait-of-nigerian-man-with-beard-looking-at-camera.jpg?s=612x612&w=0&k=20&c=BC5pdsmTWzmFO3mIlA7TQAIECnJ7Kpd-daL6G4RJqT4=',
       "department": "ICT",
       "type": "ACADEMICS",
       "date": "17/10/2023",
@@ -306,6 +259,8 @@ export const data = [{
     },
     {
       "staff": "GLADYS PIUS",
+      "avatar":
+        'https://images.unsplash.com/photo-1602342323893-b11f757957c9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmlnZXJpYW4lMjBnaXJsfGVufDB8fDB8fHww',
       "department": "OPERATIONS",
       "type": "PROFILE LEAVE RETURN",
       "date": "12/08/2023",
@@ -313,6 +268,8 @@ export const data = [{
     },
     {
       "staff": "ABDULLAHI MUSA",
+       "avatar":
+        'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
       "department": "AUDIT",
       "type": "EXPENSES",
       "date": "13/06/2023",
@@ -323,6 +280,8 @@ export const data = [{
   export const DECLINED_APPROVAL = [
     {
       "staff": "BISI ALATISE",
+      "avatar":
+        'https://images.unsplash.com/photo-1602342323893-b11f757957c9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmlnZXJpYW4lMjBnaXJsfGVufDB8fDB8fHww',
       "department": "LEGAL",
       "type": "PROFILE IMAGE",
       "date": "07/03/2024",
@@ -330,6 +289,8 @@ export const data = [{
     },
     {
       "staff": "KOLO MOHAMMED",
+       "avatar":
+        'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
       "department": "AEROMEDICAL",
       "type": "LEAVE",
       "date": "01/02/2024",
@@ -337,6 +298,7 @@ export const data = [{
     },
     {
       "staff": "NWAFOR CALEB",
+      "avatar":'https://media.istockphoto.com/id/517302398/photo/portrait-of-nigerian-man-with-beard-looking-at-camera.jpg?s=612x612&w=0&k=20&c=BC5pdsmTWzmFO3mIlA7TQAIECnJ7Kpd-daL6G4RJqT4=',
       "department": "HUMAN RESOURCES",
       "type": "BIO DATA",
       "date": "01/12/2023",
@@ -344,6 +306,8 @@ export const data = [{
     },
     {
       "staff": "MICHAEL EDOCHIE",
+      "avatar":
+        'https://images.unsplash.com/photo-1530785602389-07594beb8b73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bmlnZXJpYW4lMjBnaXJsfGVufDB8fDB8fHww',
       "department": "ICT",
       "type": "ACADEMICS",
       "date": "03/10/2023",
@@ -351,6 +315,7 @@ export const data = [{
     },
     {
       "staff": "OGENE BENEDICT",
+      "avatar":'https://media.istockphoto.com/id/517302398/photo/portrait-of-nigerian-man-with-beard-looking-at-camera.jpg?s=612x612&w=0&k=20&c=BC5pdsmTWzmFO3mIlA7TQAIECnJ7Kpd-daL6G4RJqT4=',
       "department": "OPERATIONS",
       "type": "TRAINING",
       "date": "19/08/2023",
@@ -358,6 +323,8 @@ export const data = [{
     },
     {
       "staff": "ABDULLAHI MUSA",
+      "avatar":
+        'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
       "department": "AUDIT",
       "type": "EXPENSES",
       "date": "23/06/2023",
@@ -368,6 +335,8 @@ export const data = [{
   export const APPROVED_APPROVAL = [
     {
       "staff": "BADUS YUSUF",
+        "avatar":
+        'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
       "department": "LEGAL",
       "type": "PROFILE IMAGE",
       "date": "03/02/2024",
@@ -375,6 +344,8 @@ export const data = [{
     },
     {
       "staff": "ALAKIJA SUKAIMON",
+      "avatar":
+        'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
       "department": "AEROMEDICAL",
       "type": "LEAVE",
       "date": "01/02/2024",
@@ -382,6 +353,7 @@ export const data = [{
     },
     {
       "staff": "JOHN MUHAMMAD",
+      "avatar":'https://media.istockphoto.com/id/517302398/photo/portrait-of-nigerian-man-with-beard-looking-at-camera.jpg?s=612x612&w=0&k=20&c=BC5pdsmTWzmFO3mIlA7TQAIECnJ7Kpd-daL6G4RJqT4=',
       "department": "HUMAN RESOURCES",
       "type": "BIO DATA",
       "date": "06/11/2023",
@@ -389,6 +361,8 @@ export const data = [{
     },
     {
       "staff": "CHISOM DICKSON",
+      "avatar":
+        'https://images.unsplash.com/photo-1530785602389-07594beb8b73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bmlnZXJpYW4lMjBnaXJsfGVufDB8fDB8fHww',
       "department": "ICT",
       "type": "ACADEMICS",
       "date": "07/10/2023",
@@ -396,6 +370,8 @@ export const data = [{
     },
     {
       "staff": "GLADYS PIUS",
+        "avatar":
+        'https://images.unsplash.com/photo-1602342323893-b11f757957c9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmlnZXJpYW4lMjBnaXJsfGVufDB8fDB8fHww',
       "department": "OPERATIONS",
       "type": "PROFILE LEAVE RETURN",
       "date": "15/07/2023",
@@ -403,6 +379,8 @@ export const data = [{
     },
     {
       "staff": "ABDULLAHI MUSA",
+      "avatar":
+        'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
       "department": "AUDIT",
       "type": "EXPENSES",
       "date": "11/05/2023",
@@ -534,88 +512,75 @@ export const APPROVED_REQUEST = [
 
 
 
+  const columns = [
+    { name: 'ID', uid: 'id', sortable: true },
+    { name: 'ASSIGNED STAFF', uid: 'assigned staff' },
+    { name: 'REQUEST ID', uid: 'request id' },
+    { name: 'REQUEST TYPE', uid: 'request type' },
+    { name: 'REQUEST DATE', uid: 'request date' },
+    { name: 'REQUEST ANSWER', uid: 'request answer' },
+
+    { name: 'NAME', uid: 'name', sortable: true },
+    { name: 'AGE', uid: 'age', sortable: true },
+    { name: 'ROLE', uid: 'role', sortable: true },
+
+
+    { name: 'TEAM', uid: 'team' },
+    { name: 'EMAIL', uid: 'email' },
+    // { name: 'STATUS', uid: 'status', sortable: true },
+    { name: 'BUDGET', uid: 'budget' },
+    { name: 'DUE', uid: 'due' },
+      { name: 'ACTIONS', uid: 'actions' },
+  ]
   
   const statusOptions = [
-      { name: 'Completed', uid: 'completed' },
-      { name: 'Rejected', uid: 'rejected' },
-      { name: 'Pending', uid: 'pending' },
-      { name: 'Cancelled', uid: 'cancelled' },
-    ]
-
-
-    const columns = [
-      { name: 'ID', uid: 'id', sortable: true },
-      { name: 'PROJECT ID', uid: 'project id' },
-      { name: 'PROJECT', uid: 'project' },
-      { name: 'LOCATION', uid: 'location', sortable: true },
-      { name: 'DATE', uid: 'date', sortable: true },
-      { name: 'CO-TRAINEES', uid: 'co-trainees' },
-    ]
-
-    
+    { name: 'Completed', uid: 'completed' },
+    { name: 'Rejected', uid: 'rejected' },
+    { name: 'Pending', uid: 'pending' },
+    { name: 'Cancelled', uid: 'cancelled' },
+  ]
   
- 
-    
-
-
-
   const users = [
     {
       id: 1,
-      project: 'Add Fluid Layout Featuring A Vertical Menu With Icons Only',
-      location: 'local',
+      name: 'Seun Twaio',
+      role: 'CEO',
+      team: 'Management',
+      status: 'completed',
+      age: '29',
+      avatar:
+        'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+      email: 'tony.reichert@example.com',
+      budget: '$1,200',
+      timeline: 'paid',
+      requestID: 'rq1223',
       date: '22/05/2024',
-      coTrainees: ["https://huma.demo.frontendmatter.com/assets/images/256_luke-porter-261779-unsplash.jpg", "https://huma.demo.frontendmatter.com/assets/images/256_michael-dam-258165-unsplash.jpg", "https://huma.demo.frontendmatter.com/assets/images/256_rsz_1andy-lee-642320-unsplash.jpg"],
-      status:  'closed',
-      trainingImg:null,
+      ticketSub: 'internent',
+      lastReply: '22/05/2024',
+      priority: 'low',
+      type: "Academics Project Discussion. Academics Project Discussion",
+      answers: 1,
     },
     {
       id: 2,
-      project: 'Add Initial Documentation Covering Basic Features',
-      location: 'international',
-      date: '23/05/2024',
-      coTrainees: [ "https://huma.demo.frontendmatter.com/assets/images/256_michael-dam-258165-unsplash.jpg","https://huma.demo.frontendmatter.com/assets/images/256_luke-porter-261779-unsplash.jpg"],
-      trainingImg:null,
-      status:  'closed',
+      name: 'Ola Joseph',
+      role: 'Tech Lead',
+      team: 'Development',
+      status: 'rejected',
+      age: '25',
+      avatar:
+        'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
+      email: 'zoey.lang@example.com',
+      budget: '$200',
+      timeline: 'paid',
+      requestID: 'rq1224',
+      date: '22/05/2024',
+      ticketSub: 'internent',
+      lastReply: '22/05/2024',
+      priority: 'high',
+      type: "Academics Project Discussion. Academics Project Discussion",
+      answers: 1,
     },
-    {
-      id: 3,
-      project: 'Refactor HTML Markup To Be More SEO Friendly',
-      location: 'online',
-      date: '24/05/2024',
-      coTrainees: [ "LD", "LL"],
-      trainingImg:null,
-      status:  'in progress',
-    },
-    {
-      id: 4,
-      project: 'Add Layout Options',
-      location: 'local',
-      date: '24/05/2024',
-      coTrainees: ["https://huma.demo.frontendmatter.com/assets/images/256_rsz_1andy-lee-642320-unsplash.jpg", "https://huma.demo.frontendmatter.com/assets/images/256_michael-dam-258165-unsplash.jpg", "https://huma.demo.frontendmatter.com/assets/images/256_luke-porter-261779-unsplash.jpg" ],
-      trainingImg:
-        'https://www.syskit.com/wp-content/uploads/2023/05/Power-BI-Dashboard.png',
-        status:  'in progress',
-    },
-    {
-      id: 5,
-      project: 'Artificial Intelligent Bootcamp',
-      location: 'online',
-      date: '24/05/2024',
-      coTrainees: ["https://huma.demo.frontendmatter.com/assets/images/256_rsz_1andy-lee-642320-unsplash.jpg", "https://huma.demo.frontendmatter.com/assets/images/256_michael-dam-258165-unsplash.jpg", "https://huma.demo.frontendmatter.com/assets/images/256_luke-porter-261779-unsplash.jpg" ],
-      trainingImg:null,
-        status:  'in progress',
-    },
-    {
-      id: 6,
-      project: 'Artificial Intelligent Bootcamp 2',
-      location: 'internatinal',
-      date: '27/05/2024',
-      coTrainees: ["https://huma.demo.frontendmatter.com/assets/images/256_rsz_1andy-lee-642320-unsplash.jpg", "https://huma.demo.frontendmatter.com/assets/images/256_michael-dam-258165-unsplash.jpg", "https://huma.demo.frontendmatter.com/assets/images/256_luke-porter-261779-unsplash.jpg" ],
-      trainingImg:null,
-        status:  'open',
-    },
-
   ]
   
 
@@ -626,16 +591,11 @@ export const APPROVED_REQUEST = [
     { label: 'High', value: 'high' },
     { label: 'Medium', value: 'medium' },
   ]
-  
-  const assignStaffs = [
-    { label: 'John Femi', value: 'john femi' },
-    { label: 'Ola Wisdom', value: 'ola wisdom' },
-    { label: 'Twaio', value: 'twaio' },
-  ]
+
   const clients = [
     { label: 'Clan Africa', value: 'clan africa' },
     { label: 'Statisense', value: 'statisense' },
   ]
   
-  export { columns, users, statusOptions, priority, assignStaffs, clients,  }
+  export { columns, users, statusOptions, priority, clients }
   

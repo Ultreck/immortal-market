@@ -1,15 +1,13 @@
-import OverviewStats from '@/components/core/overview/OverviewStats.jsx';
-import RecentReport from '@/components/core/overview/RecentReport.jsx';
-import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
+import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
+import DashboardStatGrid from '@/components/core/overview/DashboardStatGrid';
+import OverViewTable from '@/components/core/overview/OverviewTable';
 
 const OverviewPage = () => {
   return (
-    <div className="container py-10">
-      <DashboardTitle text="Overview" />
-      <div className="space-y-12">
-        <OverviewStats />
-        <RecentReport />
-      </div>
+    <div className="container py-10 space-y-12">
+      <DashboardHeader text={'Welcome Femi'} page={'Dashboard'} />
+      <DashboardStatGrid />
+      <OverViewTable/>
     </div>
   );
 };
