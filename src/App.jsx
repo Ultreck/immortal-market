@@ -25,6 +25,7 @@ import { useEffect } from 'react';
 import { useDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
 import InvitationPage from '@/pages/InvitationPage.jsx';
+import BusinessTemplate from './pages/business/Template.jsx';
 
 const App = () => {
   const { isDarkMode } = useDarkMode();
@@ -55,7 +56,7 @@ const App = () => {
           <Route path="" element={<Navigate to="/overview" replace />} />
           <Route path="overview" element={<OverviewPage />} />
           <Route path="projects" element={<ProjectPage />} />
-          <Route path="templates" element={<></>} />
+          <Route path="templates" element={<BusinessTemplate/>} />
           <Route path="team" element={<TeamPage />} />
           <Route path="upgrade" element={<></>} />
           <Route path="settings" element={<></>} />

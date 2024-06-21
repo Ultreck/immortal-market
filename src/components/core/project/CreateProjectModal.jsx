@@ -6,6 +6,8 @@ import ProjectStep from './ProjectStep.jsx';
 import ConnectDBData from './ConnectDBData.jsx';
 import DBcredential from './DBcredential.jsx';
 import PreviewData from './PreviewData.jsx';
+import GenerateReport from './GenerateReport.jsx';
+import UploadStaging from './UploadStaging.jsx';
 
 
 const CreateProjectModal = () => {
@@ -36,8 +38,8 @@ const CreateProjectModal = () => {
             {step === 'Connect Data' && <ConnectDBData sourceType={sourceType} />}
             {step === 'Enter Credential' && <DBcredential />}
             {step === 'Preview Data' && <PreviewData/>}
-            {step === 'Generate Report' && <div>Tables</div>}
-            {step === 'Report Staging' && <div>Tables</div>}
+            {step === 'Generate Report' && <GenerateReport/>}
+            {step === 'Report Staging' && <UploadStaging/>}
           </div>
         </div>
       </div>

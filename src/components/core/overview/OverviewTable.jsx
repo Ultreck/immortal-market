@@ -108,7 +108,7 @@ export default function OverViewTable({handleOpenDrawer}) {
 
   const renderCell = React.useCallback((user, columnKey) => {
     const cellValue = user[columnKey]
-    console.log(columnKey, user)
+    // console.log(columnKey, user)
 
     switch (columnKey) {
       case 'assigned staff':

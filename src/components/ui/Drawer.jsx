@@ -7,7 +7,7 @@ import { TbX } from 'react-icons/tb';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
-const Drawer = ({ isOpen, title, padding = true, onClose, children, width = 600 }) => {
+const Drawer = ({ isOpen, title, padding = true, round = true, onClose, children, width = 600 }) => {
   const isMobile = useMediaQuery({ maxWidth: 640 });
 
   useEffect(() => {
@@ -56,8 +56,8 @@ const Drawer = ({ isOpen, title, padding = true, onClose, children, width = 600 
                 <div
                   className={cn(
                     'relative inset-x-0 bottom-0 h-min max-h-full overflow-y-auto overflow-x-hidden bg-white dark:bg-default-50 sm:h-full',
-                    'pointer-events-auto flex min-h-[50vh] flex-col rounded-t-3xl md:rounded-l-3xl md:rounded-r-none',
-                    { 'p-8 md:p-10': padding }
+                    'pointer-events-auto flex min-h-[50vh] flex-col ',
+                    { 'p-8 md:p-10': padding, 'rounded-t-3xl md:rounded-l-3xl md:rounded-r-none': round }
                   )}
                 >
                   {!!title && (
@@ -87,6 +87,7 @@ Drawer.propTypes = {
   padding: PropTypes.bool,
   children: PropTypes.node.isRequired,
   width: PropTypes.number,
+  round: PropTypes.bool
 };
 
 export default Drawer;
