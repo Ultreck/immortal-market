@@ -20,7 +20,7 @@ const [activeIndex, setActiveIndex] = useState(data[0])
       <div className='flex flex-col gap-2 -translate-x-5'>
         {
           payload.map((entry, index) => (
-            <div className='flex border rounded p-2 gap-2 items-center' key={`item-${index}`}>
+            <div className='flex border dark:border-[#333] rounded p-2 gap-2 items-center' key={`item-${index}`}>
                 <div className={
                     classNames('w-2 h-2 rounded-full', 
                     entry.value === 'United States' && 'bg-[#03bcc2]',
@@ -28,7 +28,7 @@ const [activeIndex, setActiveIndex] = useState(data[0])
                     entry.value === 'Germany' && 'bg-[#f8fafd]'
                 )}></div>
 
-                <span className='text-gray-500'> {entry.value}</span>
+                <span className='text-gray-500 dark:text-gray-400'> {entry.value}</span>
                
             </div>
           ))

@@ -6,7 +6,7 @@ import RigthBar from "./RigthBar";
 function DashboardHeader ({page, text}) {
 
   return (
-    <div className="flex flex-col border-b pb-5">
+    <div className="flex flex-col border-b dark:border-b-[#18181b] pb-5">
         <div className="flex justify-between gap-2  flex-wrap">
             <HeaderBreadCrumb currentPage={page} text={text}/>
 

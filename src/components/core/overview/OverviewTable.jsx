@@ -239,10 +239,10 @@ const EmptyState = ()=>{
   return (
     <div className='bg-white dark:bg-[#18181b] border dark:border-none rounded-lg mt-8 py-2'>
 
-      <div className=' border-b flex justify-between p-2 flex-wrap gap-1'>
+      <div className=' border-b dark:border-b-[#2e2e31] flex justify-between p-2 flex-wrap gap-1'>
         <div>
           <Input
-            isClearable
+            isClearable 
             value={filterValue}
             onClear={() => onClear()}
             onValueChange={onSearchChange}

@@ -38,7 +38,7 @@ const OverviewChart = () => {
   return (
     <div className="flex flex-col gap-4">
           <Card className="DoughnutChart rounded-lg shadow-md">
-            <div className="border-b border-gray-200">
+            <div className="border-b border-gray-200 dark:border-b-[#343436]">
               <nav
                 className="-mb-px flex gap-6 justify-center mt-4"
                 aria-label="Tabs"
