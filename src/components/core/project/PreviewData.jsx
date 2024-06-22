@@ -1,6 +1,7 @@
 import { Button, Input, Radio, RadioGroup, cn } from "@nextui-org/react"
-import Title from "./Title"
+
 import { useState } from "react"
+import Title from "../shared/Title"
 
 
 const sampledataRaw = [

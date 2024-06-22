@@ -20,7 +20,6 @@ import Wallet from './pages/Wallet.jsx';
 import DashboardLayout from '@/components/core/layout/DashboardLayout.jsx';
 import OverviewPage from '@/pages/OverviewPage.jsx';
 import ProjectPage from '@/pages/ProjectPage.jsx';
-import TeamPage from '@/pages/TeamPage.jsx';
 import { useEffect } from 'react';
 import { useDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
@@ -59,7 +58,7 @@ const App = () => {
           <Route path="overview" element={<OverviewPage />} />
           <Route path="projects" element={<ProjectPage />} />
           <Route path="templates" element={<BusinessTemplate />} />
-          <Route path="team" element={<TeamPage />} />
+          <Route path="team" element={<InvitationPage />} />
           <Route path="reports" element={<ReportPage />} />
           <Route path="templates" element={<></>} />
           <Route path="team" element={<></>} />

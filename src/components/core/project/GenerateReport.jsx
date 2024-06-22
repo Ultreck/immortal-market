@@ -1,6 +1,7 @@
 import { Button,  Checkbox,  Radio, RadioGroup, } from '@nextui-org/react';
 import { IoIosArrowDown } from "react-icons/io";
-import Title from './Title';
+import Title from '../shared/Title';
+
 
 const GenerateReport = () => {
   return (

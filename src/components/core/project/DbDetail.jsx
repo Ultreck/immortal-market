@@ -1,7 +1,7 @@
 import { Button, Input } from '@nextui-org/react';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
-import Title from './Title';
+import Title from '../shared/Title';
 
 const DbDetails = () => {
     const [isOpenPassword, setisOpenPassword] = useState(false)

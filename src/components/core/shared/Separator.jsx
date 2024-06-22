@@ -7,8 +7,8 @@ export default function Separator({separatorText}) {
   return (
     <Fragment>
         <div className="flex items-center space-x-2 w-full mt-10">
-            <div className="page-separator__text whitespace-nowrap">{separatorText}</div>
-          <span className="w-full h-1 border-t border-slate-300 mt-[0.4rem]"></span>
+            <div className="whitespace-nowrap dark:text-gray-500">{separatorText}</div>
+          <span className="w-full h-1 border-t border-slate-300 dark:border-slate-800 mt-[0.4rem]"></span>
           </div>
     </Fragment>
   )

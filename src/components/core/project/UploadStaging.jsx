@@ -1,5 +1,6 @@
+import Title from "../shared/Title";
 
-import Title from './Title';
+
 
 
 const steps = [

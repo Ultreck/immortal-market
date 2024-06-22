@@ -1,7 +1,8 @@
 import { file_source } from '@/lib/business.js';
 import { Image } from '@nextui-org/react';
-import Title from './Title';
+
 import PropTypes from "prop-types"
+import Title from '../shared/Title';
 
 const ProjectSource = ({setSourceType}) => {
   return (

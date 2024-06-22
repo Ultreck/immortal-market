@@ -1,5 +1,5 @@
 import { Avatar, Button, Checkbox, Input, Textarea } from '@nextui-org/react';
-import Title from './Title';
+import Title from '../shared/Title';
 import { TbFile, TbPlus } from 'react-icons/tb';
 import UploadModal from './UploadModal';
 import { useState } from 'react';
