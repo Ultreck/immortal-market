@@ -25,6 +25,7 @@ import { useEffect } from 'react';
 import { useDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
 import InvitationPage from '@/pages/InvitationPage.jsx';
+import DemoPage from '@/pages/DemoPage.jsx';
 import BusinessTemplate from './pages/business/Template.jsx';
 
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
           <Route path="templates" element={<BusinessTemplate/>} />
           <Route path="team" element={<TeamPage />} />
           <Route path="upgrade" element={<></>} />
+          <Route path="demo" element={<DemoPage />} />
           <Route path="settings" element={<></>} />
         </Route>
 

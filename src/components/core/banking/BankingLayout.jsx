@@ -54,11 +54,9 @@ const BankingLayout = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const [isFetching, setIsFetching] = useState(false);
-  const { business, isLoading: isBusinessLoading } = useBusiness();
+  const { business } = useBusiness();
   const { data: { settings } = {}, isLoading: isSettingsLoading } = useGetBankingSettings(business._id);
   const { mutateAsync: createSettings, isPending: isCreateSettingsLoading } = useCreateBankingSettings(business._id);
-
-  console.log({ business, isBusinessLoading, isSettingsLoading, isCreateSettingsLoading });
 
   const start = async () => {
     try {
