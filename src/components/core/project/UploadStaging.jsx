@@ -16,9 +16,6 @@ const steps = [
 const UploadStaging = () => {
 
 
-
-
-
   return (
     <div className="flex flex-col gap-10 px-7 md:px-12  py-10 h-[100vh] overflow-auto">
       <Title title={'Preparing your data'} />
