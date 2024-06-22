@@ -8,7 +8,7 @@ import { TbChartPie } from 'react-icons/tb';
 const Element = ({ element }) => {
   return (
     <>
-      {element.type === 'text' && (
+      {element.type === 'heading' && (
         <Draggable handle=".handle" bounds="parent" defaultClassName="absolute z-1">
           <h1
             contentEditable="true"
