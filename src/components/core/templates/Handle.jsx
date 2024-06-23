@@ -6,13 +6,13 @@ const Handle = ({ placement = 'outside' }) => {
   return (
     <div
       className={cn(
-        'absolute hidden group-hover:flex pb-1',
+        'absolute flex pl-1 w-max',
         { 'top-2 right-2': placement === 'inside' },
-        { 'bottom-[calc(100%)] right-0 w-full justify-center': placement === 'outside' }
+        { 'top-0 left-full justify-center h-full pt-0 pl-2': placement === 'outside' }
       )}
     >
-      <div className="handle bg-default-200 w-max h-max px-[0.5] py-1 rounded-full cursor-grab rotate-[90deg]">
-        <RiDraggable size="12" />
+      <div className="handle bg-gray-300 text-black w-max h-max px-[1px] py-1 rounded-full cursor-grab">
+        <RiDraggable size="16" />
       </div>
     </div>
   );

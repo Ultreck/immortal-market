@@ -22,7 +22,7 @@ const DraggableElement = ({ id, type, icon, name }) => {
       </div>
       {isDragging && (
         <div
-          className="absolute z-[1] top-0 left-0 border border-default-200 flex items-center space-x-2 px-4 py-2 w-full rounded-xl"
+          className="absolute z-[1] top-0 left-0 border border-default-200 bg-background flex items-center space-x-2 px-4 py-2 w-full rounded-xl"
           style={{
             ...style,
           }}
@@ -58,7 +58,6 @@ const Sidebar = () => {
   ];
   return (
     <div>
-      <h2 className="text-lg font-medium mb-5">Templates</h2>
       <div className="w-[200px] flex flex-col space-y-2">
         {elements.map((element) => (
           <DraggableElement key={element.id} {...element} />

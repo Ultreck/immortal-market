@@ -1,29 +1,58 @@
 import Element from './Element';
 import { useDroppable } from '@dnd-kit/core';
 import PropTypes from 'prop-types';
-import { Card } from '@nextui-org/react';
+import { useEffect, useRef, useState } from 'react';
+import { useOnClickOutside } from 'usehooks-ts';
+import { mergeRefs } from '@/lib/utils.js';
+
+const getElementWidthWithoutPadding = (element) => {
+  if (!element) return 0;
+  const computedStyle = getComputedStyle(element);
+  return element.clientWidth - parseFloat(computedStyle.paddingLeft) - parseFloat(computedStyle.paddingRight);
+};
 
 const Canvas = ({ elements }) => {
-  // const [selected, setSelected] = useState(null);
+  const root = useRef();
+  const [id, setId] = useState(null);
+  const [width, setWidth] = useState(0);
   const { setNodeRef } = useDroppable({
     id: 'canvas',
   });
 
-  // const handleSelect = (element) => {
-  //   setSelected(element);
-  // };
+  const handleSelect = (id) => setId(id);
+
+  useOnClickOutside(root, () => setId(null));
+
+  const handleCardClick = (e) => {
+    if (e.target === root.current) setId(null);
+  };
+
+  useEffect(() => {
+    const width = getElementWidthWithoutPadding(root.current);
+    setWidth(width);
+  }, [root.current]);
 
   return (
-    <Card ref={setNodeRef} className="card-shadow h-[600px] w-[600px] border border-default-200 rounded relative p-10">
+    <div
+      onClick={handleCardClick}
+      ref={mergeRefs(setNodeRef, root)}
+      className="card-shadow bg-white text-black h-[600px] w-[600px] !rounded-none relative p-10"
+    >
       {elements.map((element, index) => (
-        <Element key={index} element={element} />
+        <Element
+          key={index}
+          element={element}
+          selected={element.id === id}
+          onClick={() => handleSelect(element.id)}
+          width={width}
+        />
       ))}
-    </Card>
+    </div>
   );
 };
 
 Canvas.propTypes = {
-  elements: PropTypes.arrayOf(PropTypes.shape({})),
+  elements: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Canvas;

@@ -101,3 +101,12 @@ export const getPercentages = (numbers) => {
   return numbers.map((num) => Math.ceil((num / total) * 100));
 };
 
+export const mergeRefs = (...refs) => {
+  return (value) => {
+    refs.forEach((ref) => {
+      if (ref) {
+        typeof ref === 'function' ? ref(value) : (ref.current = value);
+      }
+    });
+  };
+};
