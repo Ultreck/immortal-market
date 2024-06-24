@@ -4,12 +4,28 @@ import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import { TbChartPie } from 'react-icons/tb';
 import { cn } from '@/lib/utils.js';
-import React from 'react';
 import Handle from '@/components/core/templates/Handle.jsx';
+
+const propTypes = {
+  element: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+  }),
+  selected: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  width: PropTypes.number,
+};
 
 const Heading = ({ element, selected, onClick }) => {
   return (
-    <Draggable handle=".handle" bounds="parent" defaultClassName="absolute z-1">
+    <Draggable
+      handle=".handle"
+      bounds="parent"
+      defaultClassName="absolute z-1"
+      defaultPosition={{ x: element.x, y: element.y }}
+    >
       <h1
         contentEditable="true"
         onClick={onClick}
@@ -26,9 +42,16 @@ const Heading = ({ element, selected, onClick }) => {
   );
 };
 
+Heading.propTypes = propTypes;
+
 const Text = ({ element, selected, onClick }) => {
   return (
-    <Draggable handle=".handle" bounds="parent" defaultClassName="absolute z-1">
+    <Draggable
+      handle=".handle"
+      bounds="parent"
+      defaultClassName="absolute z-1"
+      defaultPosition={{ x: element.x, y: element.y }}
+    >
       <p
         contentEditable="true"
         onClick={onClick}
@@ -45,9 +68,16 @@ const Text = ({ element, selected, onClick }) => {
   );
 };
 
+Text.propTypes = propTypes;
+
 const Chart = ({ element, selected, onClick, width }) => {
   return (
-    <Draggable handle=".handle" bounds="parent" defaultClassName="absolute">
+    <Draggable
+      handle=".handle"
+      bounds="parent"
+      defaultClassName="absolute"
+      defaultPosition={{ x: element.x, y: element.y }}
+    >
       <ResizableBox
         onClick={onClick}
         width={200}
@@ -101,6 +131,8 @@ const Chart = ({ element, selected, onClick, width }) => {
     </Draggable>
   );
 };
+
+Chart.propTypes = propTypes;
 
 const Element = ({ element, selected, width, onClick }) => {
   return (

@@ -15,9 +15,7 @@ const Canvas = ({ elements }) => {
   const root = useRef();
   const [id, setId] = useState(null);
   const [width, setWidth] = useState(0);
-  const { setNodeRef } = useDroppable({
-    id: 'canvas',
-  });
+  const { setNodeRef } = useDroppable({ id: 'canvas' });
 
   const handleSelect = (id) => setId(id);
 
@@ -30,7 +28,7 @@ const Canvas = ({ elements }) => {
   useEffect(() => {
     const width = getElementWidthWithoutPadding(root.current);
     setWidth(width);
-  }, [root.current]);
+  }, []);
 
   return (
     <div
