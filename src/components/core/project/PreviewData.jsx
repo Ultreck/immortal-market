@@ -83,11 +83,11 @@ const unLink = (id)=>{
           sampledata?.map(dt => (
           <div key={dt._id} className="border dark:border-gray-700  flex justify-between p-6 flex-wrap rounded relative">
 
-              <div className={cn("bg-[#fafafa]/90 absolute z-10 top-0 left-0 w-full h-full  items-center justify-center", editingIndex === dt?._id ? 'flex' : 'hidden')} >
+              <div className={cn("bg-[#fafafa]/90 dark:bg-[#18181b]/90 absolute z-10 top-0 left-0 w-full h-full  items-center justify-center", editingIndex === dt?._id ? 'flex' : 'hidden')} >
 
                 <div className="flex gap-6">
                   <Button onClick={()=>unLink(dt?._id)} variant="shadow" color="primary" className="rounded">{dt?.linked ? 'Unlink' : 'Link'}</Button>
-                  <Button onClick={()=>setEditingIndex(null)} variant="bordered" color="danger" className="rounded">Cancel</Button>
+                  <Button onClick={()=>setEditingIndex(null)} variant="bordered" color="danger" className="rounded-md">Cancel</Button>
                 </div>
 
               </div>

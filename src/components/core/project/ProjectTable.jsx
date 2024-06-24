@@ -12,10 +12,6 @@ import {
   User,
   Pagination,
   Input,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
   AvatarGroup,
   Tooltip,
   Avatar,
@@ -23,7 +19,7 @@ import {
 import { columns, data, statusOptions } from './data'
 import { TbSearch } from 'react-icons/tb'
 import Empty from '../../icons/empty'
-import { IconDotsVertical } from '@tabler/icons-react'
+
 
 import { RiFileExcel2Line } from "react-icons/ri";
 import { TbFileTypeCsv, TbFileTypePdf } from "react-icons/tb";
@@ -93,12 +89,12 @@ const fileTypeMap = {
 const INITIAL_VISIBLE_COLUMNS = [
   'user',
   'project',
-  'file type',
+  'filetype',
   'team',
 ]
 
 
-export default function ProjectTable({handleOpenDrawer}) {
+export default function ProjectTable() {
   const [filterValue, setFilterValue] = React.useState('')
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]))
   const [visibleColumns, setVisibleColumns] = React.useState(
@@ -205,7 +201,7 @@ export default function ProjectTable({handleOpenDrawer}) {
           </div>
         )
      
-      case 'file type':
+      case 'filetype':
         return (
           <div className="relative flex  items-center gap-2 min-w-20">
             {fileTypeMap[user?.fileType]}

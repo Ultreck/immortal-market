@@ -76,7 +76,7 @@ const MessagingModal = () => {
                 <Header
                   onClose={onClose}
                   setshowchatContainer={closeConversation}
-                  selectedUserData={selectedChat }
+                  selectedUserData={selectedChat}
                 />
                 <Body mate={selectedChat }  />
                 <Form mate={selectedChat }   />

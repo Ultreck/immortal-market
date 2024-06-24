@@ -6,7 +6,7 @@
     { name: 'ID', uid: 'id', sortable: true },
     { name: 'USER', uid: 'user' },
     { name: 'PROJECT', uid: 'project' },
-    { name: 'FILE TYPE', uid: 'file type' },
+    { name: 'FILE TYPE', uid: 'filetype' },
     { name: 'TEAM', uid: 'team' },
     { name: 'ACTIONS', uid: 'actions' },
   ]

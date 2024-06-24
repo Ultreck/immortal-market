@@ -19,7 +19,6 @@ const ChatSidebar = ({
 
   const  setCurrent = (data)=>{
     selectAChat(data)
-    selectedUserData(data)
   }
 
   return (

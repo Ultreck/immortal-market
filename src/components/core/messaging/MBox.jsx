@@ -56,7 +56,7 @@ const MBox = ({
     }`
       : isOwn
       ? "bg-gray-100 text-gray-700"
-      : "bg-gray-300",
+      : "bg-gray-300 dark:bg-gray-700",
     data?.FILE_NAME
       ? "rounded-md p-0"
       : isOwn

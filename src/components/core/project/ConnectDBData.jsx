@@ -1,4 +1,4 @@
-import { Avatar, Button, Checkbox, Input, Textarea } from '@nextui-org/react';
+import { Avatar, Button, Checkbox, Input, Select, SelectItem, Textarea } from '@nextui-org/react';
 import Title from '../shared/Title';
 import { TbFile, TbPlus } from 'react-icons/tb';
 import UploadModal from './UploadModal';
@@ -7,12 +7,22 @@ import DbDetails from './DbDetail';
 import PropTypes from 'prop-types';
 import UploadFile from './UploadFile';
 
+
+const fileType = [
+  {
+    key: 'csv', name: 'CSV'
+  },
+  {
+    key: 'db', name: 'DB'
+  },
+]
+
 const ConnectDBData = ({ sourceType }) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <div className="flex flex-col gap-10 px-7 md:px-12  py-10">
       <Title
-        title={sourceType === 'DB' ? 'Connect your database' : 'Upload your fils'}
+        title={sourceType === 'DB' ? 'Connect your database' : 'Upload your files'}
         sub={'select from multiple sources'}
       />
 
@@ -85,7 +95,7 @@ const ConnectDBData = ({ sourceType }) => {
                 size="lg"
                 variant="bordered"
                 classNames={{
-                  inputWrapper: '!rounded border-gray-400/60 shadow-none ',
+                  inputWrapper: '!rounded-lg border-gray-400/60 shadow-none ',
                 }}
               ></Input>
             </div>
@@ -99,22 +109,28 @@ const ConnectDBData = ({ sourceType }) => {
                 size="lg"
                 variant="bordered"
                 classNames={{
-                  inputWrapper: '!rounded border-gray-400/60 shadow-none',
+                  inputWrapper: '!rounded-lg border-gray-400/60 shadow-none',
                 }}
               ></Textarea>
             </div>
           </div>
+        
           <div className="flex flex-col sm:flex-row gap-2  sm:gap-10 justify-between ">
             <div className=" text-base font-medium w-32 text-gray-600 dark:text-gray-300">Select File type</div>
             <div className="flex-1">
-              <Input
-                allowClear={true}
-                size="lg"
+               <Select 
                 variant="bordered"
+                size="lg"
                 classNames={{
-                  inputWrapper: '!rounded border-gray-400/60 shadow-none',
+                  trigger: '!rounded-lg border-gray-400/60 shadow-none'
                 }}
-              ></Input>
+              >
+                {fileType.map((ft) => (
+                  <SelectItem key={ft.key}>
+                    {ft.name}
+                  </SelectItem>
+                ))}
+              </Select>
             </div>
           </div>
         </div>

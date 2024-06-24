@@ -12,7 +12,7 @@ const ProjectSource = ({setSourceType}) => {
         <div className="grid grid-cols-3 gap-4  ">
           {file_source?.map((data) => (
             <div
-              key={data.id}
+              key={data._id}
               className="   p-3 rounded shadow-sm  flex flex-col  gap-3 hover:scale-105 hover:border hover:border-sky-500  bg-white dark:bg-[#18181b]  transition-all duration-500 cursor-pointer h-32 items-center justify-center" 
               onClick={()=>setSourceType(data?.type)}
             >

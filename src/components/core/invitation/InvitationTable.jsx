@@ -305,7 +305,7 @@ const EmptyState = ()=>{
         <TableHeader columns={headerColumns}>
           {(column) => (
             <TableColumn
-              key={column.uid}
+              key={column?.uid}
               align={column.uid === 'actions' ? 'start' : 'start'}
               allowsSorting={column.sortable}
             >
@@ -315,7 +315,7 @@ const EmptyState = ()=>{
         </TableHeader>
         <TableBody emptyContent={<EmptyState/>} items={sortedItems}>
           {(item) => (
-            <TableRow  key={item.id}>
+            <TableRow  key={item?.id}>
               {(columnKey) => (
                 <TableCell  >{renderCell(item, columnKey)}</TableCell>
               )}

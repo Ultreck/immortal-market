@@ -20,7 +20,7 @@ const DBcredential = () => {
                 size="lg"
                 variant="bordered"
                 classNames={{
-                  inputWrapper: '!rounded border-gray-400/60 shadow-none ',
+                  inputWrapper: 'rounded-lg border-gray-400/60 shadow-none ',
                 }}
               ></Input>
             </div>
@@ -33,7 +33,7 @@ const DBcredential = () => {
                 size="lg"
                 variant="bordered"
                 classNames={{
-                  inputWrapper: '!rounded border-gray-400/60 shadow-none ',
+                  inputWrapper: 'rounded-lg border-gray-400/60 shadow-none ',
                 }}
               ></Input>
             </div>
@@ -46,7 +46,7 @@ const DBcredential = () => {
                 size="lg"
                 variant="bordered"
                 classNames={{
-                  inputWrapper: '!rounded border-gray-400/60 shadow-none ',
+                  inputWrapper: 'rounded-lg border-gray-400/60 shadow-none ',
                 }}
               ></Input>
             </div>
@@ -61,7 +61,7 @@ const DBcredential = () => {
                 size="lg"
                 variant="bordered"
                 classNames={{
-                  inputWrapper: '!rounded border-gray-400/60 shadow-none ',
+                  inputWrapper: 'rounded-lg border-gray-400/60 shadow-none ',
                 }}
               ></Input>
             </div>
