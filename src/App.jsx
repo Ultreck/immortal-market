@@ -27,6 +27,7 @@ import InvitationPage from '@/pages/InvitationPage.jsx';
 import DemoPage from '@/pages/DemoPage.jsx';
 import BusinessTemplate from './pages/business/Template.jsx';
 import ReportPage from './pages/ReportPage.jsx';
+import TeamPage from '@/pages/TeamPage.jsx';
 
 const App = () => {
   const { isDarkMode } = useDarkMode();
@@ -54,11 +55,11 @@ const App = () => {
             </RequireAuthBusiness>
           }
         >
-          <Route path="" element={<Navigate to="/overview" replace />} />
-          <Route path="overview" element={<OverviewPage />} />
+          <Route path="" element={<OverviewPage />} />
+          <Route path="/overview" element={<Navigate to="/" replace />} />
           <Route path="projects" element={<ProjectPage />} />
           <Route path="templates" element={<BusinessTemplate />} />
-          <Route path="team" element={<InvitationPage />} />
+          <Route path="team" element={<TeamPage />} />
           <Route path="reports" element={<ReportPage />} />
           <Route path="templates" element={<></>} />
           <Route path="team" element={<></>} />
