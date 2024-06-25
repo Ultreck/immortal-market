@@ -3,9 +3,10 @@ import DashboardStatGrid from '@/components/core/overview/DashboardStatGrid';
 import OverViewTable from '@/components/core/overview/OverviewTable';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
 import { Avatar, AvatarGroup, Tooltip } from '@nextui-org/react';
-import { TbPlus } from 'react-icons/tb';
+import { TbMessage, TbPlus } from 'react-icons/tb';
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
+import useGlobalStore from '@/store/global.js';
 
 const users = [
   {
@@ -20,6 +21,7 @@ const users = [
 
 const OverviewPage = () => {
   const { user } = useAuth();
+  const updateData = useGlobalStore((state) => state.updateData);
 
   return (
     <>
@@ -31,6 +33,7 @@ const OverviewPage = () => {
         ]}
         after={
           <div className="flex items-center space-x-6">
+  
             <div className="relative flex gap-1 items-center">
               <AvatarGroup>
                 {users?.map((tr) => (
@@ -41,6 +44,14 @@ const OverviewPage = () => {
               </AvatarGroup>
               <Avatar size="md" className="cursor-pointer" icon={<TbPlus strokeWidth={3} size={20} color="gray" />} />
             </div>
+
+            <button
+              onClick={() => updateData({ isChatModalOpen: true })}
+              className='flex items-center px-3 justify-center py-3 rounded-full text-base hover:bg-default-100 opacity-90'
+            >
+                <TbMessage size="30" />
+            </button>
+            
             <CreateDropdown />
           </div>
         }

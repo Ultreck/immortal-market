@@ -27,6 +27,9 @@ import DemoPage from '@/pages/DemoPage.jsx';
 import BusinessTemplate from './pages/business/Template.jsx';
 import ReportPage from './pages/ReportPage.jsx';
 import TeamPage from '@/pages/TeamPage.jsx';
+import ProjectDashboardPage from './pages/ProjectDashboard.jsx';
+import FindDataPage from './pages/FindDataPage.jsx';
+import PlanPage from './pages/PlanPage.jsx';
 
 const App = () => {
   const { isDarkMode } = useDarkMode();
@@ -58,6 +61,9 @@ const App = () => {
           <Route path="/overview" element={<Navigate to="/" replace />} />
           <Route path="projects" element={<ProjectPage />} />
           <Route path="templates" element={<BusinessTemplate />} />
+          <Route path="dashboards" element={<ProjectDashboardPage />} />
+          <Route path="finddata" element={<FindDataPage />} />
+          <Route path="plans" element={<PlanPage />} />
           <Route path="team" element={<TeamPage />} />
           <Route path="reports" element={<ReportPage />} />
           <Route path="templates" element={<></>} />
