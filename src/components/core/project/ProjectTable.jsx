@@ -1,387 +1,270 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
 import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  Button,
-  User,
-  Pagination,
-  Input,
-  AvatarGroup,
-  Tooltip,
   Avatar,
-} from '@nextui-org/react'
-import { columns, data, statusOptions } from './data'
-import { TbSearch } from 'react-icons/tb'
-import Empty from '../../icons/empty'
+  AvatarGroup,
+  Card,
+  CardBody,
+  Chip,
+  Input,
+  Pagination,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  Tooltip,
+} from '@nextui-org/react';
+import { TbBrandMongodb, TbFileTypeCsv, TbFileTypePdf, TbFileZip, TbSearch, TbSql } from 'react-icons/tb';
+import { RiFileExcel2Line } from 'react-icons/ri';
 
+const data = [
+  {
+    id: 1,
+    name: 'Laza Bogdan',
+    avatar:
+      'https://media.istockphoto.com/id/517302398/photo/portrait-of-nigerian-man-with-beard-looking-at-camera.jpg?s=612x612&w=0&k=20&c=BC5pdsmTWzmFO3mIlA7TQAIECnJ7Kpd-daL6G4RJqT4=',
+    timeline: '2 days ago',
+    team: [
+      'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+      'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
+    ],
+    fileType: 'Excel',
+    project: 'Using Angular HttpClientModules instead of HttpModule',
+    projectType: ['Banking', 'Investment'],
+  },
+  {
+    id: 2,
+    name: 'Adam Curtis',
+    avatar:
+      'https://media.istockphoto.com/id/517302398/photo/portrait-of-nigerian-man-with-beard-looking-at-camera.jpg?s=612x612&w=0&k=20&c=BC5pdsmTWzmFO3mIlA7TQAIECnJ7Kpd-daL6G4RJqT4=',
+    timeline: '2 days ago',
+    team: [
+      'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+      'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
+    ],
+    fileType: 'Pdf',
+    project: 'Overall investment planning for 3rd quarter',
+    projectType: ['Banking'],
+  },
+  {
+    id: 3,
+    name: 'Adam Curtis',
+    avatar:
+      'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
+    timeline: '2 days ago',
+    team: [
+      'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+      'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
+    ],
+    fileType: 'SQL',
+    project: 'Overall investment planning for 3rd quarter',
+    projectType: ['Banking'],
+  },
+  {
+    id: 4,
+    name: 'Adam Curtis',
+    avatar:
+      'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+    timeline: '2 days ago',
+    team: [
+      'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+      'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
+    ],
+    fileType: 'Mongo',
+    project: 'Overall investment planning for 3rd quarter',
+    projectType: ['Banking', 'Investment'],
+  },
+  {
+    id: 5,
+    name: 'Adam Curtis',
+    avatar:
+      'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+    timeline: '2 days ago',
+    team: [
+      'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+      'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
+    ],
+    fileType: 'Zip',
+    project: 'Overall investment planning for 3rd quarter',
+    projectType: ['Banking', 'Investment'],
+  },
+  {
+    id: 6,
+    name: 'Adam Curtis',
+    avatar:
+      'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+    timeline: '2 days ago',
+    team: [
+      'https://media.istockphoto.com/id/172316242/photo/traditional-wear.jpg?s=612x612&w=0&k=20&c=yJJUq71Vrc83JZ7b4CH3DYTy3l7GuDvZ6VfTT4NCT6M=',
+      'https://media.istockphoto.com/id/1162121648/photo/portrait-of-a-young-african-student.jpg?s=612x612&w=0&k=20&c=rTl-nR5EUAckz0lxabcCosCs2OWcmzQsl2oFWRxdWuA=',
+    ],
+    fileType: 'Csv',
+    project: 'Overall investment planning for 3rd quarter',
+    projectType: ['Banking', 'Investment'],
+  },
+];
 
-import { RiFileExcel2Line } from "react-icons/ri";
-import { TbFileTypeCsv, TbFileTypePdf } from "react-icons/tb";
-import { MdOutlineFolderZip } from "react-icons/md";
-
-const statusColorMap = {
-    completed: 'success',
-    pending: 'warning',
-    cancelled: 'warning',
-    rejected: 'danger',
-}
-
-const ExcelView = ()=>{
-    return (
-        <div className="w-12 h-12 rounded-full flex items-center justify-center bg-green-700 text-white text-xl md:text-3xl font-semibold">
-                <RiFileExcel2Line
-                size="20"
-                className="bg-gradient-to-r from-green-700 to--600 bg-clip-text text-white"
-                />
-            </div>
-    )
-}
-const CsvView = ()=>{
-    return (
-        <div className="w-12 h-12 rounded-full flex items-center justify-center border-2 border-green-700 text-white text-xl md:text-3xl font-semibold">
-        <TbFileTypeCsv
-        size="20"
-        className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-green-700"
-        />
-    </div>
-    )
-}
-const PDFView = ()=>{
-    return (
-        <div className="w-12 h-12 rounded-full flex items-center justify-center bg-red-500 text-white text-xl md:text-3xl font-semibold">
-        <TbFileTypePdf
-        size="20"
-        className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-white"
-        />
-    </div>
-    )
-}
-const ZipView = ()=>{
-    return (
-        <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[#0f86c5] text-white text-xl md:text-3xl font-semibold">
-        <MdOutlineFolderZip
-        size="20"
-        className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-white"
-        />
-    </div>
-    )
-}
-
-
-
-const fileTypeMap = {
-    Excel: <ExcelView/>,
-    Csv: <CsvView/>,
-    Pdf: <PDFView/>,
-    Zip: <ZipView/>,
-}
-
-
-
-
-
-const INITIAL_VISIBLE_COLUMNS = [
-  'user',
-  'project',
-  'filetype',
-  'team',
-]
-
-
-export default function ProjectTable() {
-  const [filterValue, setFilterValue] = React.useState('')
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set([]))
-  const [visibleColumns, setVisibleColumns] = React.useState(
-    new Set(INITIAL_VISIBLE_COLUMNS)
-  )
-
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-  const handlePreview = () => {
-    setIsDrawerOpen(true)
-  }
-  const [statusFilter, setStatusFilter] = React.useState('all')
-  const [rowsPerPage, setRowsPerPage] = React.useState(5)
-  const [sortDescriptor, setSortDescriptor] = React.useState({
-    column: 'age',
-    direction: 'ascending',
-  })
-  const [page, setPage] = React.useState(1)
-
-  const pages = Math.ceil(data.length / rowsPerPage)
-
-  const hasSearchFilter = Boolean(filterValue)
-
-  const headerColumns = React.useMemo(() => {
-    if (visibleColumns === 'all') return columns
-
-    return columns.filter((column) =>
-      Array.from(visibleColumns).includes(column.uid)
-    )
-  }, [visibleColumns])
-
-  const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...data]
-
-    if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
-        user.project.toLowerCase().includes(filterValue.toLowerCase())
-      )
-    }
-    if (
-      statusFilter !== 'all' &&
-      Array.from(statusFilter).length !== statusOptions.length
-    ) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.status)
-      )
-    }
-
-    return filteredUsers
-  }, [data, filterValue, statusFilter])
-
-  const items = React.useMemo(() => {
-    const start = (page - 1) * rowsPerPage
-    const end = start + rowsPerPage
-
-    return filteredItems.slice(start, end)
-  }, [page, filteredItems, rowsPerPage])
-
-  const sortedItems = React.useMemo(() => {
-    return [...items].sort((a, b) => {
-      const first = a[sortDescriptor.column]
-      const second = b[sortDescriptor.column]
-      const cmp = first < second ? -1 : first > second ? 1 : 0
-
-      return sortDescriptor.direction === 'descending' ? -cmp : cmp
-    })
-  }, [sortDescriptor, items])
-
-  const renderCell = React.useCallback((user, columnKey) => {
-    const cellValue = user[columnKey]
-    // console.log(columnKey, user)
-
-    switch (columnKey) {
-      case 'user':
-        return (
-          <div className=' flex gap-2 items-start -mt-7'>
-            <User
-              avatarProps={{ radius: 'full', size: 'md', src: user.avatar }}
-              classNames={{
-                description: 'text-default-500',
-              }}
-            >
-            </User>
-              <div className='flex flex-col'>
-                <span className='text-default-500 font-semibold'>{user.name}</span>
-                <span className='text-gray-400 text-xs'>{user?.timeline}</span>
-              </div>
-          </div>
-        )
-      case 'project':
-        return (
-          <div className='flex flex-col gap-3'>
-            <p className='font-semibold text-md capitalize text-default-600/80  '>
-              {user.project}
-            </p>
-            <div className='flex gap-2'>
-                {
-                    user?.projectType?.map((dt, ind) =>(
-                        <div key={ind}  className='border w-32 rounded-full px-2 py-1 flex items-center justify-center'>
-                                {dt}
-                        </div>
-                    ))
-                }
-            </div>
-          </div>
-        )
-     
-      case 'filetype':
-        return (
-          <div className="relative flex  items-center gap-2 min-w-20">
-            {fileTypeMap[user?.fileType]}
-          </div>
-        )
-      case 'team':
-        return (
-          <div className="relative flex justify-end items-center gap-2 group min-w-20">
-            <div className=' group-hover:hidden'>
-            <AvatarGroup>
-              {user?.team?.map((tr) => (
-                <Tooltip
-                  key={tr}
-                  showArrow={true}
-                  placement="bottom"
-                  content="name"
-                  className='group-hover:hidden'
-                >
-                  {tr?.length > 6 ? (
-                    <Avatar size="md" src={tr} name={tr} />
-                  ) : (
-                    <Avatar
-                      size="md"
-                      name={tr}
-                      classNames={{
-                        base: "bg-white border font-bold",
-                      }}
-                    />
-                  )}
-                </Tooltip>
-              ))}
-            </AvatarGroup>
-            </div>
-            <div className='hidden group-hover:block'>
-                <Button className='rounded-md' variant="bordered">View</Button>
-            </div>
-          </div>
-        )
-
-      default:
-        return cellValue
-    }
-  }, [])
-
-  const bottomContent = React.useMemo(() => {
-    return (
-      <div className='py-2 px-2 flex justify-between items-center'>
-        {
-          data?.length > 0 &&
-
-          <Pagination
-            showControls
-            classNames={{
-              cursor: 'bg-foreground text-background',
-            }}
-            color='default'
-            isDisabled={hasSearchFilter}
-            page={page}
-            total={pages}
-            variant='light'
-            onChange={setPage}
-          />
-        }
+const ExcelView = () => {
+  return (
+    <Chip color="success" className="px-1">
+      <div className="flex flex-row items-center space-x-1">
+        <RiFileExcel2Line size="16" />
+        <span>XLSX</span>
       </div>
-    )
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter])
+    </Chip>
+  );
+};
 
-  const classNames = React.useMemo(
-    () => ({
-      wrapper: ['max-h[382px]', 'max-w3xl', 'bg-white'],
-      th: ['bg-transparent', 'text-default-500', 'border-b', 'border-divider'],
-      td: [
-        'border-b py-2',
-        'border-divider',
-        // first
-        'group-data-[first=true]:first:before:rounded-none',
-        'group-data-[first=true]:last:before:rounded-none',
-        // middle
-        'group-data-[middle=true]:before:rounded-none',
-        // last
-        'group-data-[last=true]:first:before:rounded-none',
-        'group-data-[last=true]:last:before:rounded-none',
-      ],
-    }),
-    []
-  )
+const CsvView = () => {
+  return (
+    <Chip color="secondary" className="px-1">
+      <div className="flex flex-row items-center space-x-1">
+        <TbFileTypeCsv size="16" />
+        <span>CSV</span>
+      </div>
+    </Chip>
+  );
+};
 
+const PDFView = () => {
+  return (
+    <Chip color="danger" className="px-1">
+      <div className="flex flex-row items-center space-x-1">
+        <TbFileTypePdf size="16" />
+        <span>PDF</span>
+      </div>
+    </Chip>
+  );
+};
 
-  const onSearchChange = React.useCallback((value) => {
-    if (value) {
-      setFilterValue(value);
-      setPage(1);
-    } else {
-      setFilterValue("");
-    }
-  }, []);
+const MongoView = () => {
+  return (
+    <Chip color="warning" className="px-1">
+      <div className="flex flex-row items-center space-x-1">
+        <TbBrandMongodb size="16" />
+        <span>Mongo</span>
+      </div>
+    </Chip>
+  );
+};
 
-  const onClear = React.useCallback(()=>{
-    setFilterValue("")
-    setPage(1)
-  },[])
+const SQLView = () => {
+  return (
+    <Chip color="warning" className="px-1">
+      <div className="flex flex-row items-center space-x-1">
+        <TbSql size="16" />
+        <span>SQL</span>
+      </div>
+    </Chip>
+  );
+};
 
+const ZipView = () => {
+  return (
+    <Chip color="default" className="px-1">
+      <div className="flex flex-row items-center space-x-1">
+        <TbFileZip size="16" />
+        <span>Zip</span>
+      </div>
+    </Chip>
+  );
+};
 
+const fileTypesMap = {
+  Excel: <ExcelView />,
+  Csv: <CsvView />,
+  Pdf: <PDFView />,
+  Zip: <ZipView />,
+  Mongo: <MongoView />,
+  SQL: <SQLView />,
+};
 
-
-
-const EmptyState = ()=>{
-    return (
-        <div className='flex flex-col items-center gap-4 justify-center max-h-60 py-10'>
-          <Empty />
-          <div className='text-lg font-thin'>No projects</div>
-        </div>
-    )
-}
-
-
-
-
-
-
+const ProjectTable = () => {
+  const handleClick = (item) => {
+    console.log({ item });
+  };
 
   return (
-    <div className='bg-white dark:bg-[#18181b] border dark:border-none rounded-lg mt-8 py-2'>
-
-      <div className=' border-b dark:border-b-[#2e2e31] flex justify-between p-2 py-5 flex-wrap gap-1'>
-        <div>
+    <Card className="card-shadow">
+      <CardBody className="px-0 py-8">
+        <div className="px-8 mb-8">
           <Input
-            isClearable 
-            value={filterValue}
-            onClear={() => onClear()}
-            onValueChange={onSearchChange}
-          variant="bordered" 
-          placeholder='search Project' 
-          startContent={<TbSearch/>}  />
+            type="text"
+            name="query"
+            id="query"
+            size="sm"
+            classNames={{ input: 'text-base', base: 'transition-all duration-300 w-[260px]', inputWrapper: 'h-11' }}
+            startContent={<TbSearch size="24" className="mx-1 opacity-30" />}
+            placeholder="Search.."
+            radius="full"
+            variant="bordered"
+          />
         </div>
-        <Button variant="faded" className='rounded'>Ask A Question</Button>
-      </div>
+        <Table
+          classNames={{
+            td: 'py-4 px-4 cursor-pointer first:rounded-l-lg last:rounded-r-lg group-hover:bg-default-100',
+            th: 'text-md px-4',
+            base: 'px-8',
+            tr: 'group',
+          }}
+          removeWrapper
+        >
+          <TableHeader
+            columns={[
+              { name: 'NAME', uid: 'name' },
+              { name: 'SOURCE', uid: 'source' },
+              { name: 'COLLABORATORS', uid: 'collaborators' },
+            ]}
+          >
+            {(column) => (
+              <TableColumn key={column.uid} align={column.uid === 'actions' ? 'center' : 'start'}>
+                {column.name}
+              </TableColumn>
+            )}
+          </TableHeader>
+          <TableBody items={data}>
+            {(item) => (
+              <TableRow key={item.id} onClick={() => handleClick(item)} className="group">
+                <TableCell>
+                  <div className="flex flex-col space-y-2">
+                    <p>{item.project}</p>
+                    <div className="flex gap-2">
+                      {item.projectType?.map((dt, ind) => (
+                        <Chip key={ind} color="success" variant="flat" size="sm" className="text-sm px-2">
+                          {dt}
+                        </Chip>
+                      ))}
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="relative flex  items-center gap-2 min-w-20">{fileTypesMap[item.fileType]}</div>
+                </TableCell>
+                <TableCell>
+                  <AvatarGroup>
+                    {item.team.map((image) => (
+                      <Tooltip
+                        key={image}
+                        showArrow={true}
+                        placement="bottom"
+                        content="John Doe"
+                        classNames={{ content: 'whitespace-nowrap' }}
+                      >
+                        <Avatar size="md" src={image} name={image} />
+                      </Tooltip>
+                    ))}
+                  </AvatarGroup>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+        <div className="mt-8 px-8">
+          <Pagination showControls total={2} initialPage={1} color="default" variant="bordered" />
+        </div>
+      </CardBody>
+    </Card>
+  );
+};
 
-      <Table
-        
-        aria-label='Example table with custom cells, pagination and sorting'
-        isHeaderSticky
-        bottomContent={bottomContent}
-        bottomContentPlacement='outside'
-        classNames={{
-          wrapper: 'max-h-[382px] rounded-md flex  items-center justify-center my-2',
-          thead:'hidden',
-          td: 'mb-6 ',
-          tr: 'group'
-          
-          
-        }}
-        className={classNames}
-        selectedKeys={selectedKeys}
-        sortDescriptor={sortDescriptor}
-        topContentPlacement='outside'
-        onSelectionChange={setSelectedKeys}
-        onSortChange={setSortDescriptor}
-      >
-        <TableHeader columns={headerColumns} className='!hidden'>
-          {(column) => (
-            <TableColumn
-              key={column.uid}
-              align={column.uid === 'actions' ? 'center' : 'start'}
-              allowsSorting={column.sortable}
-            >
-              {column.name}
-             </TableColumn>
-          )}
-        </TableHeader>
-        <TableBody emptyContent={<EmptyState/>} items={sortedItems}>
-          {(item) => (
-            <TableRow  key={item.id}>
-              {(columnKey) => (
-                <TableCell  >{renderCell(item, columnKey)}</TableCell>
-              )}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
-  )
-}
+export default ProjectTable;

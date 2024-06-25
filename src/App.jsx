@@ -23,7 +23,6 @@ import ProjectPage from '@/pages/ProjectPage.jsx';
 import { useEffect } from 'react';
 import { useDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
-import InvitationPage from '@/pages/InvitationPage.jsx';
 import DemoPage from '@/pages/DemoPage.jsx';
 import BusinessTemplate from './pages/business/Template.jsx';
 import ReportPage from './pages/ReportPage.jsx';
@@ -67,15 +66,6 @@ const App = () => {
           <Route path="demo" element={<DemoPage />} />
           <Route path="settings" element={<></>} />
         </Route>
-
-        <Route
-          path="/invitation/:id"
-          element={
-            <RequireAuth>
-              <InvitationPage />
-            </RequireAuth>
-          }
-        />
 
         <Route
           path="/business"

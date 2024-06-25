@@ -1,5 +1,3 @@
-
-
 const Empty = () => {
   return (
     <svg
@@ -144,4 +142,3 @@ const Empty = () => {
 };
 
 export default Empty;
-

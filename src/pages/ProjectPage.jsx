@@ -1,13 +1,22 @@
-import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
-
 import ProjectTable from '@/components/core/project/ProjectTable';
+import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
+import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 
 const ProjectPage = () => {
   return (
-    <div className="container py-10 space-y-12">
-      <DashboardHeader text={'Projects'} page={'Projects'} />
-      <ProjectTable/>
-    </div>
+    <>
+      <DashboardTitle
+        text="Projects"
+        breadcrumbs={[
+          { text: 'Home', href: '/' },
+          { text: 'Projects', href: '/projects' },
+        ]}
+        after={<CreateDropdown />}
+      />
+      <div className="container py-8">
+        <ProjectTable />
+      </div>
+    </>
   );
 };
 

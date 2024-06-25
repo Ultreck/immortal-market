@@ -19,7 +19,7 @@ const DashboardTitle = ({ text, breadcrumbs = [], className, after, ...props }) 
                 <Breadcrumbs
                   radius="full"
                   variant="bordered"
-                  className="mt-2"
+                  className="mt-3"
                   classNames={{ list: 'px-3 py-1 shadow-none' }}
                 >
                   {breadcrumbs.map(({ text, href }, index) => (
