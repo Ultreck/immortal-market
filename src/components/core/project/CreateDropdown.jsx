@@ -10,7 +10,7 @@ const CreateDropdown = ({ className }) => {
     <div className={className}>
       <Dropdown classNames={{ content: 'shadow border border-default-200 w-[320px]' }} placement="right-start">
         <DropdownTrigger>
-          <Button color="primary" radius="full" className="w-full" size="lg" startContent={<RiAddLine size="20" />}>
+          <Button color="primary" radius="full" className="w-full text-base" startContent={<RiAddLine size="20" />}>
             Create
           </Button>
         </DropdownTrigger>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Logo = ({ light = false, width = 160, ...props }) => {
+const Logo = ({ light = false, width = 150, ...props }) => {
   const fill = light ? 'white' : '#071952';
 
   return (

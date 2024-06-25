@@ -12,14 +12,14 @@ const DashboardTitle = ({ text, breadcrumbs = [], className, after, ...props }) 
         <div className="pt-8 pb-6">
           <div className={cn('w-full flex items-center justify-between', className)}>
             <div>
-              <h2 {...props} className="font-semibold text-[1.7rem] leading-none">
+              <h2 {...props} className="font-semibold text-[1.6rem] leading-none">
                 {text}
               </h2>
               {!!breadcrumbs.length && (
                 <Breadcrumbs
                   radius="full"
                   variant="bordered"
-                  className="mt-3"
+                  className="mt-4"
                   classNames={{ list: 'px-3 py-1 shadow-none' }}
                 >
                   {breadcrumbs.map(({ text, href }, index) => (

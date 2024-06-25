@@ -1,27 +1,30 @@
-import Logo from '@/components/core/shared/Logo.jsx';
-// import BusinessesDropdown from '@/components/core/layout/BusinessesDropdown.jsx';
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
 import { IconFileInvoice } from '@tabler/icons-react';
-import { TbCrown, TbDashboard, TbDatabase, TbLayout, TbLayoutList,  TbSettings2, TbTableOptions, TbUsers } from 'react-icons/tb';
+import {
+  TbCrown,
+  TbDashboard,
+  TbDatabase,
+  TbLayout,
+  TbLayoutList,
+  TbSettings2,
+  TbTableOptions,
+  TbUsers,
+} from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
-
+import Logo from '@/components/core/shared/Logo.jsx';
 
 const Sidebar = () => {
   const { isDarkMode } = useDarkMode();
 
-
   return (
-    <div className="py-8 px-8 border-r border-default-200 dark:border-default-100/70 flex flex-col w-[280px]">
-      {/* w-[340px] */}
+    <div className="py-6 px-8 border-r border-default-200 dark:border-default-100/70 flex flex-col align-stretch w-[280px]">
       <Logo light={isDarkMode} />
-      {/* I commentted it for now to create spacer */}
-      {/* <BusinessesDropdown className="mt-8" />   */}
-      {/* mt-6 */}
-      <CreateDropdown className="mt-10" />
+      <AuthDropdown className="mt-6" />
+      <CreateDropdown className="mt-6" />
       <div className="flex flex-col space-y-2 mt-6">
         {[
           { name: 'Overview', href: '/', icon: <TbLayout size="20" /> },
@@ -36,7 +39,7 @@ const Sidebar = () => {
             to={item.href}
             className={({ isActive }) =>
               cn(
-                'flex items-center px-6 py-3 rounded-full text-base',
+                'flex items-center px-6 py-2.5 rounded-full text-base',
                 isActive ? `bg-default-100 font-bold` : 'hover:bg-default-100 opacity-90'
               )
             }
@@ -45,15 +48,6 @@ const Sidebar = () => {
             {item.name}
           </NavLink>
         ))}
-        {/* <button
-          onClick={() => updateData({ isChatModalOpen: true })}
-          className={cn('flex items-center px-6 py-3 rounded-full text-base hover:bg-default-100 opacity-90')}
-        >
-          <div className="mr-4">
-            <TbMessage size="20" />
-          </div>
-          Messaging
-        </button> */}
       </div>
       <div className="flex flex-col space-y-2 mt-auto">
         {[
@@ -66,7 +60,7 @@ const Sidebar = () => {
             to={item.href}
             className={({ isActive }) =>
               cn(
-                'flex items-center px-6 py-3 rounded-full text-base',
+                'flex items-center px-6 py-2.5 rounded-full text-base',
                 isActive ? `bg-default-100 font-bold` : 'hover:bg-default-100 opacity-90'
               )
             }
@@ -76,7 +70,6 @@ const Sidebar = () => {
           </NavLink>
         ))}
         <ProductsDropdown />
-        <AuthDropdown />
       </div>
     </div>
   );

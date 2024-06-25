@@ -15,7 +15,7 @@ const ProductsDropdown = ({ mini = false }) => {
         <PopoverTrigger>
           <div
             className={cn(
-              'flex items-center hover:bg-default-100 cursor-pointer py-3',
+              'flex items-center hover:bg-default-100 cursor-pointer py-2',
               mini ? 'px-4 rounded-full' : 'pl-6 rounded-3xl pr-4'
             )}
           >
