@@ -1,4 +1,3 @@
-import React from 'react';
 import TenSquares from './charts/10Squares';
 import TenCircles from './charts/10Circles';
 import PercentageAlone from './charts/PercentageAlone';
@@ -8,6 +7,7 @@ import NewVerticalBar from './charts/NewVerticalBar';
 import CircleIcons from './charts/CircleIcons';
 import Infographics from './charts/Infographics';
 import MultipleBars from './charts/MultipleBars';
+
 register();
 
 const data = [
@@ -23,23 +23,17 @@ const data = [
 
 const ReportBody = () => {
   return (
-    <div className="mt-10">
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <PercentageAlone />
-              <Card className="space-y-6 w-full bg-default-50 px-8 py-6 h-[200px] mt-5"></Card>
-              <Card className="space-y-6 w-full bg-default-50 px-8 py-6 h-[200px] mt-5"></Card>
-            </div>
-            <div className="space-y-4">
-              <TenSquares percentage={65} />
-              <TenCircles percentage={35} />
-            </div>
+    <>
+      <div className="grid grid-cols-2 gap-6">
+        <div className="space-y-6">
+          <PercentageAlone />
+          <div className="space-y-6">
+            <TenSquares percentage={65} />
+            <TenCircles percentage={35} />
           </div>
-        <MultipleBars />
+          <MultipleBars />
         </div>
-        <div>
+        <div className="space-y-6">
           <Card className="space-y-6 w-full bg-default-50 px-8 py-6">
             <p className="text-4xl font-bold">Top 25 result</p>
             <div className="w-full">
@@ -60,9 +54,8 @@ const ReportBody = () => {
           <Infographics />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default ReportBody;
-

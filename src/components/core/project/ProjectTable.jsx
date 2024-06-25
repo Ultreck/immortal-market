@@ -16,6 +16,7 @@ import {
 } from '@nextui-org/react';
 import { TbBrandMongodb, TbFileTypeCsv, TbFileTypePdf, TbFileZip, TbSearch, TbSql } from 'react-icons/tb';
 import { RiFileExcel2Line } from 'react-icons/ri';
+import NoData from '@/components/ui/NoData.jsx';
 
 const data = [
   {
@@ -185,85 +186,95 @@ const ProjectTable = () => {
   };
 
   return (
-    <Card className="card-shadow">
-      <CardBody className="px-0 py-8">
-        <div className="px-8 mb-8">
-          <Input
-            type="text"
-            name="query"
-            id="query"
-            size="sm"
-            classNames={{ input: 'text-base', base: 'transition-all duration-300 w-[260px]', inputWrapper: 'h-11' }}
-            startContent={<TbSearch size="24" className="mx-1 opacity-30" />}
-            placeholder="Search.."
-            radius="full"
-            variant="bordered"
-          />
-        </div>
-        <Table
-          classNames={{
-            td: 'py-4 px-4 cursor-pointer first:rounded-l-lg last:rounded-r-lg group-hover:bg-default-100',
-            th: 'text-md px-4',
-            base: 'px-8',
-            tr: 'group',
-          }}
-          removeWrapper
-        >
-          <TableHeader
-            columns={[
-              { name: 'NAME', uid: 'name' },
-              { name: 'SOURCE', uid: 'source' },
-              { name: 'COLLABORATORS', uid: 'collaborators' },
-            ]}
-          >
-            {(column) => (
-              <TableColumn key={column.uid} align={column.uid === 'actions' ? 'center' : 'start'}>
-                {column.name}
-              </TableColumn>
-            )}
-          </TableHeader>
-          <TableBody items={data}>
-            {(item) => (
-              <TableRow key={item.id} onClick={() => handleClick(item)} className="group">
-                <TableCell>
-                  <div className="flex flex-col space-y-2">
-                    <p>{item.project}</p>
-                    <div className="flex gap-2">
-                      {item.projectType?.map((dt, ind) => (
-                        <Chip key={ind} color="success" variant="flat" size="sm" className="text-sm px-2">
-                          {dt}
-                        </Chip>
-                      ))}
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className="relative flex  items-center gap-2 min-w-20">{fileTypesMap[item.fileType]}</div>
-                </TableCell>
-                <TableCell>
-                  <AvatarGroup>
-                    {item.team.map((image) => (
-                      <Tooltip
-                        key={image}
-                        showArrow={true}
-                        placement="bottom"
-                        content="John Doe"
-                        classNames={{ content: 'whitespace-nowrap' }}
-                      >
-                        <Avatar size="md" src={image} name={image} />
-                      </Tooltip>
-                    ))}
-                  </AvatarGroup>
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-        <div className="mt-8 px-8">
-          <Pagination showControls total={2} initialPage={1} color="default" variant="bordered" />
-        </div>
-      </CardBody>
-    </Card>
+    <>
+      {data.length > 0 ? (
+        <Card className="card-shadow">
+          <CardBody className="px-0 py-8">
+            <div className="px-8 mb-8">
+              <Input
+                type="text"
+                name="query"
+                id="query"
+                size="sm"
+                classNames={{
+                  input: 'text-base',
+                  base: 'transition-all duration-300 w-[260px]',
+                  inputWrapper: 'h-11',
+                }}
+                startContent={<TbSearch size="24" className="mx-1 opacity-30" />}
+                placeholder="Search.."
+                radius="full"
+                variant="bordered"
+              />
+            </div>
+            <Table
+              classNames={{
+                td: 'py-4 px-4 text-base cursor-pointer first:rounded-l-xl last:rounded-r-xl group-hover:bg-default-100',
+                th: 'text-md px-4 first:rounded-l-xl last:rounded-r-xl',
+                base: 'px-8',
+                tr: 'group',
+              }}
+              removeWrapper
+            >
+              <TableHeader
+                columns={[
+                  { name: 'NAME', uid: 'name' },
+                  { name: 'SOURCE', uid: 'source' },
+                  { name: 'COLLABORATORS', uid: 'collaborators' },
+                ]}
+              >
+                {(column) => (
+                  <TableColumn key={column.uid} align={column.uid === 'actions' ? 'center' : 'start'}>
+                    {column.name}
+                  </TableColumn>
+                )}
+              </TableHeader>
+              <TableBody items={data}>
+                {(item) => (
+                  <TableRow key={item.id} onClick={() => handleClick(item)} className="group">
+                    <TableCell>
+                      <div className="flex flex-col space-y-2">
+                        <p>{item.project}</p>
+                        <div className="flex gap-2">
+                          {item.projectType?.map((dt, ind) => (
+                            <Chip key={ind} color="success" variant="flat" size="sm" className="text-sm px-2">
+                              {dt}
+                            </Chip>
+                          ))}
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="relative flex  items-center gap-2 min-w-20">{fileTypesMap[item.fileType]}</div>
+                    </TableCell>
+                    <TableCell>
+                      <AvatarGroup>
+                        {item.team.map((image) => (
+                          <Tooltip
+                            key={image}
+                            showArrow={true}
+                            placement="bottom"
+                            content="John Doe"
+                            classNames={{ content: 'whitespace-nowrap' }}
+                          >
+                            <Avatar size="md" src={image} name={image} />
+                          </Tooltip>
+                        ))}
+                      </AvatarGroup>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <div className="mt-8 px-8">
+              <Pagination showControls total={2} initialPage={1} color="default" variant="bordered" />
+            </div>
+          </CardBody>
+        </Card>
+      ) : (
+        <NoData text="No data available" />
+      )}
+    </>
   );
 };
 

@@ -45,7 +45,14 @@ const TeamMembers = () => {
               variant="bordered"
             />
           </div>
-          <Table classNames={{ td: 'py-4 px-4', th: 'text-md px-4', base: 'px-8' }} removeWrapper>
+          <Table
+            classNames={{
+              td: 'py-4 px-4 first:rounded-l-xl last:rounded-r-xl',
+              th: 'text-md px-4 first:rounded-l-xl last:rounded-r-xl',
+              base: 'px-8',
+            }}
+            removeWrapper
+          >
             <TableHeader
               columns={[
                 { name: 'NAME', uid: 'name' },

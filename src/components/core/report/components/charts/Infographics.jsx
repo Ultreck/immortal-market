@@ -1,5 +1,4 @@
 import { Card } from '@nextui-org/react';
-import React from 'react';
 import Infographic from '../../../shared/Infographic';
 
 const data = {
@@ -63,7 +62,7 @@ const data = {
 
 const Infographics = () => {
   return (
-    <Card className="space-y-6 w-full bg-default-50 px-8 py-6 mt-10">
+    <Card className="space-y-6 w-full bg-default-50 px-8 py-6">
       <p className="text-4xl font-bold">What did they do?</p>
       <div>
         <Infographic type="htd" data={data} />

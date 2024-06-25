@@ -33,7 +33,14 @@ const PendingInvitations = () => {
             <>
               <h3 className="text-xl font-semibold mb-6">Pending Invitations</h3>
               <Card className="card-shadow p-6">
-                <Table aria-label="Team table" classNames={{ td: 'py-4 px-4', th: 'text-md px-4' }} removeWrapper>
+                <Table
+                  aria-label="Team table"
+                  classNames={{
+                    td: 'py-4 px-4 first:rounded-l-xl last:rounded-r-xl',
+                    th: 'text-md px-4 first:rounded-l-xl last:rounded-r-xl',
+                  }}
+                  removeWrapper
+                >
                   <TableHeader
                     columns={[
                       { name: 'EMAIL', uid: 'email' },
