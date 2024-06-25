@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import Card from '@/components/ui/Card.jsx';
 import PropTypes from 'prop-types';
 import ProductSummary from '@/components/core/ProductSummary.jsx';
-import Button from '@/components/ui/Button.jsx';
 import HelpTrainModel from '@/components/core/HelpTrainModel.jsx';
-import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import Hover from '@/components/ui/Hover.jsx';
 import { IconRobot } from '@tabler/icons-react';
-
+import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
+import { Button } from '@nextui-org/react';
+import { TbPlus } from 'react-icons/tb';
 
 const BusinessTemplate = () => {
   const [selected, setSelected] = useState(null);
@@ -28,8 +28,25 @@ const BusinessTemplate = () => {
 
   return (
     <>
-      <div className="container py-8 md:py-10 !max-w-5xl min-h-screen flex flex-col space-y-10">
-          <DashboardHeader text={'Templates'} page={'template'} />
+      <DashboardTitle
+        text="Templates"
+        breadcrumbs={[
+          { text: 'Home', href: '/' },
+          { text: 'Templates', href: '/templates' },
+        ]}
+        after={
+          <Button
+            variant="solid"
+            radius="full"
+            className="text-base px-6"
+            color="primary"
+            startContent={<TbPlus size="20" />}
+          >
+            Create Template
+          </Button>
+        }
+      />
+      <div className="container py-8 md:py-10 min-h-screen flex flex-col space-y-10">
         {categories
           .filter((c) => c.id !== 'featured')
           .map((c, i) => {
@@ -37,10 +54,8 @@ const BusinessTemplate = () => {
 
             return (
               <div key={c.id}>
-                
-
                 {items.length === 2 && (
-                  <TwoCols  items={items} onClick={handleProductClick} onTrain={handleTrainClick} />
+                  <TwoCols items={items} onClick={handleProductClick} onTrain={handleTrainClick} />
                 )}
                 {items.length === 3 && i % 2 !== 0 && (
                   <ThreeCols items={items} onClick={handleProductClick} onTrain={handleTrainClick} />

@@ -9,10 +9,10 @@ const DashboardTitle = ({ text, breadcrumbs = [], className, after, ...props }) 
   return (
     <div>
       <div className="container">
-        <div className="py-6">
+        <div className="pt-8 pb-6">
           <div className={cn('w-full flex items-center justify-between', className)}>
             <div>
-              <h2 {...props} className="font-semibold text-2xl">
+              <h2 {...props} className="font-semibold text-[1.7rem] leading-none">
                 {text}
               </h2>
               {!!breadcrumbs.length && (

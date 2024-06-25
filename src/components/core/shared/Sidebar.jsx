@@ -21,7 +21,7 @@ const Sidebar = () => {
       <CreateDropdown className="mt-6" />
       <div className="flex flex-col space-y-2 mt-6">
         {[
-          { name: 'Overview', href: '/overview', icon: <TbLayout size="20" /> },
+          { name: 'Overview', href: '/', icon: <TbLayout size="20" /> },
           { name: 'Projects', href: '/projects', icon: <TbLayoutList size="20" /> },
           { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
           { name: 'Team', href: '/team', icon: <TbUsers size="20" /> },
