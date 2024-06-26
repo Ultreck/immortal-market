@@ -56,7 +56,7 @@ const Drawer = ({ isOpen, title, padding = true, round = true, onClose, children
                 <div
                   className={cn(
                     'relative inset-x-0 bottom-0 h-min max-h-full overflow-y-auto overflow-x-hidden bg-white dark:bg-default-50 sm:h-full',
-                    'pointer-events-auto flex min-h-[50vh] flex-col ',
+                    'pointer-events-auto flex min-h-[50vh] flex-col',
                     { 'p-8 md:p-10': padding, 'rounded-t-3xl md:rounded-l-3xl md:rounded-r-none': round }
                   )}
                 >
@@ -87,7 +87,7 @@ Drawer.propTypes = {
   padding: PropTypes.bool,
   children: PropTypes.node.isRequired,
   width: PropTypes.number,
-  round: PropTypes.bool
+  round: PropTypes.bool,
 };
 
 export default Drawer;

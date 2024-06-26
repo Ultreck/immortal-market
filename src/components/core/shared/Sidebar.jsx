@@ -2,16 +2,7 @@ import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
 import { IconFileInvoice } from '@tabler/icons-react';
-import {
-  TbCrown,
-  TbDashboard,
-  TbDatabase,
-  TbLayout,
-  TbLayoutList,
-  TbSettings2,
-  TbTableOptions,
-  TbUsers,
-} from 'react-icons/tb';
+import { TbCrown, TbDatabaseSearch, TbLayout, TbLayout2, TbLayoutList, TbSettings2, TbUsers } from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
@@ -29,10 +20,9 @@ const Sidebar = () => {
         {[
           { name: 'Overview', href: '/', icon: <TbLayout size="20" /> },
           { name: 'Projects', href: '/projects', icon: <TbLayoutList size="20" /> },
+          { name: 'Dashboards', href: '/dashboards', icon: <TbLayout2 size="20" /> },
           { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
-          { name: 'Team', href: '/team', icon: <TbUsers size="20" /> },
-          { name: 'Dashboards', href: '/dashboards', icon: <TbDashboard size="20" /> },
-          { name: 'Find Data', href: '/finddata', icon: <TbDatabase size="20" /> },
+          { name: 'Find Data', href: '/finddata', icon: <TbDatabaseSearch size="20" /> },
         ].map((item) => (
           <NavLink
             key={item.href}
@@ -51,8 +41,8 @@ const Sidebar = () => {
       </div>
       <div className="flex flex-col space-y-2 mt-auto">
         {[
-          { name: 'Upgrade', href: `/upgrade`, icon: <TbCrown className="text-orange-500" size="20" /> },
-          { name: 'Plan', href: `/plans`, icon: <TbTableOptions size="20" /> },
+          { name: 'Upgrade', href: `/plans`, icon: <TbCrown className="text-orange-500" size="20" /> },
+          { name: 'Team', href: '/team', icon: <TbUsers size="20" /> },
           { name: 'Settings', href: `/settings`, icon: <TbSettings2 size="20" /> },
         ].map((item) => (
           <NavLink

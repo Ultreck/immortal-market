@@ -20,7 +20,10 @@ const AuthDropdown = ({ className }) => {
       >
         <DropdownTrigger className="w-full">
           <div
-            className={cn('bg-default-100/60 pl-6 pr-4 py-4 rounded-2xl flex items-center justify-between', className)}
+            className={cn(
+              'bg-default-200 dark:bg-default-100/60 pl-6 pr-4 py-4 rounded-2xl flex items-center justify-between cursor-pointer',
+              className
+            )}
           >
             <User
               className={cn('transition-transform')}

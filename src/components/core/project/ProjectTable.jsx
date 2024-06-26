@@ -215,6 +215,7 @@ const ProjectTable = () => {
                 tr: 'group',
               }}
               removeWrapper
+              aria-label="Projects Table"
             >
               <TableHeader
                 columns={[

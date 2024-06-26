@@ -32,7 +32,7 @@ import FindDataPage from './pages/FindDataPage.jsx';
 import PlanPage from './pages/PlanPage.jsx';
 
 const App = () => {
-  const { isDarkMode } = useDarkMode();
+  const { isDarkMode } = useDarkMode({ defaultValue: true });
 
   useEffect(() => {
     if (isDarkMode) {
@@ -68,7 +68,6 @@ const App = () => {
           <Route path="reports" element={<ReportPage />} />
           <Route path="templates" element={<></>} />
           <Route path="team" element={<></>} />
-          <Route path="upgrade" element={<></>} />
           <Route path="demo" element={<DemoPage />} />
           <Route path="settings" element={<></>} />
         </Route>
