@@ -34,14 +34,14 @@ const DndFileInput = ({
             <div
               {...getRootProps()}
               className={cn(
-                'w-full h-48 border-2 border-dashed border-default-300 dark:border-default-200 rounded-2xl cursor-pointer hover:bg-default-100/50 flex flex-col items-center justify-center relative',
+                'w-full py-6 border-2 border-dashed border-default-300 dark:border-default-200 rounded-2xl cursor-pointer hover:bg-default-100/50 flex flex-col items-center justify-center relative',
                 { 'border-red-500 text-red-500 before:border-0 before:!animate-none': isDragReject },
                 { 'border-green-500 text-green-500 before:border-0 before:!animate-none': isDragAccept },
                 className
               )}
             >
               <input {...getInputProps()} />
-              <IconCloudUpload size="64" className="opacity-30" />
+              <IconCloudUpload size="48" className="opacity-30" />
               <p className="mt-4 max-w-[300px] opacity-80 text-center leading-tight">{label}</p>
             </div>
             {isDragReject && (

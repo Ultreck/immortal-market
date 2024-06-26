@@ -1,133 +1,126 @@
-import { Button,  Checkbox,  Radio, RadioGroup, } from '@nextui-org/react';
-import { IoIosArrowDown } from "react-icons/io";
+import { Accordion, AccordionItem, Button, Checkbox, Radio, RadioGroup } from '@nextui-org/react';
 import Title from '../shared/Title';
+import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import PropTypes from 'prop-types';
 
+const items = [
+  'Disbursement by Month',
+  'Paid by Month',
+  'Percentage paid to disbursed',
+  'Paid per month',
+  'Disbursement by Month',
+  'Paid by Month',
+  'Percentage paid to disbursed',
+  'Paid per month',
+  'Disbursement by Month',
+  'Paid by Month',
+  'Percentage paid to disbursed',
+  'Paid per month',
+];
 
-const GenerateReport = () => {
+const GenerateReport = ({ onNext, onPrev }) => {
+  const handleSubmit = () => {
+    onNext();
+  };
+
   return (
-    <div className="flex flex-col gap-10 px-7 md:px-12  py-10 max-h-[100vh] overflow-auto">
-      <Title title={'Generate your report'} />
+    <>
+      <Title title="Generate your report" sub="Select datapoints below for your report" className="mb-10" />
       <RadioGroup
         orientation="horizontal"
         className="gap-10"
         classNames={{
-          wrapper: 'gap-x-12 gap-y-4',
+          wrapper: 'gap-x-10',
         }}
       >
         <Radio color="default" value="file 1">
-          {' '}
-          <span className="text-gray-700 dark:text-gray-300">Let AI generate</span>
+          Let AI generate
         </Radio>
         <Radio color="default" value="file 2">
-          <span className="text-gray-700 dark:text-gray-300">Generate yourself</span>
+          Generate yourself
         </Radio>
       </RadioGroup>
-
-      <div className="flex flex-col border dark:border-none shadow-xl bg-white rounded-md  dark:bg-zinc-800 max-w-[90%]">
-        <div className="flex flex-col p-6 gap-5 border-b-2 border-gray-300 dark:border-black/40">
-            <div className='text-xl'>Summary</div>
-            <div className='flex  gap-20 md:gap-32 flex-wrap'>
-                <div className='flex flex-col  gap-2'>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Disbursment by Month</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Paid by Month</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Percentage paid to disbursed</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Disbursment by Month</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Paid by Month</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Percentage paid to disbursed</span>
-                        </label>
-                   
-                   
-
-                </div>
-                <div className='flex flex-col  gap-2'>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Disbursment by Month</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Paid by Month</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Percentage paid to disbursed</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Disbursment by Month</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Paid by Month</span>
-                        </label>
-                        <label className='flex gap-2 items-center' >
-                        <Checkbox  color="default" /> <span className=' text-gray-500 dark:text-white/70'>Percentage paid to disbursed</span>
-                        </label>
-
-                </div>
+      <div className="mt-6">
+        <Accordion variant="bordered" defaultExpandedKeys={['summary']}>
+          <AccordionItem
+            key="summary"
+            aria-label="Summary"
+            title="Summary (10/20)"
+            className="py-0"
+            classNames={{ heading: 'px-4', title: 'text-base font-medium', content: 'px-4 pb-6' }}
+          >
+            <div className="grid grid-cols-2 gap-3">
+              {items.map((item) => (
+                <Checkbox key={item}>{item}</Checkbox>
+              ))}
             </div>
-        </div>
-
-        <div>
-          <div className="space-y-4 mt-5 p-3">
-            <details className="group [&_summary::-webkit-details-marker]:hidden" open>
-              <summary className="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900 dark:bg-zinc-700/30 dark:text-white">
-                <h2 className=" text-xl">Disbursement</h2>
-
-                <IoIosArrowDown  className="size-5 shrink-0 transition duration-300 group-open:-rotate-180" />
-              </summary>
-
-              <p className="mt-4 px-4 leading-relaxed text-gray-700 dark:text-gray-200">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in,
-                recusandae laboriosam neque aliquid libero nesciunt voluptate dicta quo officiis explicabo consequuntur
-                distinctio corporis earum similique!
-              </p>
-            </details>
-
-            <details className="group [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900 dark:bg-zinc-700/30 dark:text-white">
-                <h2 className=" text-xl">Repayment</h2>
-
-                <IoIosArrowDown  className="size-5 shrink-0 transition duration-300 group-open:-rotate-180" />
-              </summary>
-
-              <p className="mt-4 px-4 leading-relaxed text-gray-700 dark:text-gray-200">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in,
-                recusandae laboriosam neque aliquid libero nesciunt voluptate dicta quo officiis explicabo consequuntur
-                distinctio corporis earum similique!
-              </p>
-            </details>
-            <details className="group [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900 dark:bg-zinc-700/30 dark:text-white">
-                <h2 className=" text-xl">Disbursement date</h2>
-
-                <IoIosArrowDown  className="size-5 shrink-0 transition duration-300 group-open:-rotate-180" />
-              </summary>
-
-              <p className="mt-4 px-4 leading-relaxed text-gray-700 dark:text-gray-200">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in,
-                recusandae laboriosam neque aliquid libero nesciunt voluptate dicta quo officiis explicabo consequuntur
-                distinctio corporis earum similique!
-              </p>
-            </details>
-          </div>
-        </div>
-
-      
-        <div className="flex p-4 py-10 gap-4 border-t border-gray-300 dark:border-black/40 bg-[#f4f4f5] dark:bg-zinc-800/50">
-          <Button color="primary">Continue</Button>
-          <Button color="danger">Cancel</Button>
-        </div>
+          </AccordionItem>
+          <AccordionItem
+            key="disbursement"
+            aria-label="Disbursement"
+            title="Disbursement (10/20)"
+            classNames={{ heading: 'px-4', title: 'text-base font-medium', content: 'px-4 pb-6' }}
+          >
+            <div className="grid grid-cols-2 gap-3">
+              {items.map((item) => (
+                <Checkbox key={item}>{item}</Checkbox>
+              ))}
+            </div>
+          </AccordionItem>
+          <AccordionItem
+            key="repayment"
+            aria-label="Repayment"
+            title="Repayment (10/20)"
+            classNames={{ heading: 'px-4', title: 'text-base font-medium', content: 'px-4 pb-6' }}
+          >
+            <div className="grid grid-cols-2 gap-3">
+              {items.map((item) => (
+                <Checkbox key={item}>{item}</Checkbox>
+              ))}
+            </div>
+          </AccordionItem>
+          <AccordionItem
+            key="disbursement-date"
+            aria-label="Disbursement date"
+            title="Disbursement date (10/20)"
+            classNames={{ heading: 'px-4', title: 'text-base font-medium', content: 'px-4 pb-6' }}
+          >
+            <div className="grid grid-cols-2 gap-3">
+              {items.map((item) => (
+                <Checkbox key={item}>{item}</Checkbox>
+              ))}
+            </div>
+          </AccordionItem>
+        </Accordion>
       </div>
-    </div>
+      <div className="mt-10 space-x-4 flex items-center">
+        <Button
+          onClick={onPrev}
+          color="default"
+          variant="bordered"
+          radius="full"
+          className="text-base px-6"
+          startContent={<TbChevronLeft size="20" />}
+        >
+          Back
+        </Button>
+        <Button
+          onClick={handleSubmit}
+          color="primary"
+          radius="full"
+          className="text-base px-6"
+          endContent={<TbChevronRight size="20" />}
+        >
+          Continue
+        </Button>
+      </div>
+    </>
   );
 };
 
-export default GenerateReport;
+GenerateReport.propTypes = {
+  onNext: PropTypes.func,
+  onPrev: PropTypes.func,
+};
 
+export default GenerateReport;

@@ -3,9 +3,9 @@ import ProjectSource from './ProjectSource.jsx';
 import Drawer from '@/components/ui/Drawer.jsx';
 import useGlobalStore from '@/store/global.js';
 import SelectFiles from './SelectFiles.jsx';
-import PreviewData from './PreviewData.jsx';
+import PreviewFiles from './PreviewFiles.jsx';
 import GenerateReport from './GenerateReport.jsx';
-import UploadStaging from './UploadStaging.jsx';
+import PreparingData from './PreparingData.jsx';
 import { TbDatabase, TbEye, TbPassword, TbPlugConnected, TbReport, TbUpload } from 'react-icons/tb';
 import Stepper from '@/components/ui/Stepper.jsx';
 import ConnectSql from '@/components/core/project/ConnectSql.jsx';
@@ -34,7 +34,7 @@ const CreateProjectModal = () => {
       key: 'preview-data',
       title: 'Preview Data',
       icon: <TbEye size="16" />,
-      element: PreviewData,
+      element: PreviewFiles,
     },
     {
       key: 'generate-report',
@@ -46,7 +46,7 @@ const CreateProjectModal = () => {
       key: 'report-staging',
       title: 'Report Staging',
       icon: <TbUpload size="16" />,
-      element: UploadStaging,
+      element: PreparingData,
     },
   ];
   const [step, setStep] = useState(steps[0].key);
@@ -83,7 +83,7 @@ const CreateProjectModal = () => {
           />
         </div>
         {!!current && (
-          <div className="flex flex-col overflow-y-auto p-12">
+          <div className="flex flex-col overflow-y-auto px-12 py-10">
             {createElement(current.element, { onNext: gotoNextStep, onPrev: gotoPreviousStep })}
           </div>
         )}
