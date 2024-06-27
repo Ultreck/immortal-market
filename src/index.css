@@ -34,7 +34,7 @@ input:-webkit-autofill {
 }
 
 .card-shadow {
-  @apply rounded-2xl border shadow dark:border-0 dark:shadow-none;
+  @apply rounded-2xl border border-gray-200 shadow dark:border-0 dark:shadow-none;
 }
 
 .disabled {
