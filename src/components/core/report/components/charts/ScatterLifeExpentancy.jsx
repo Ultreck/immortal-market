@@ -196,7 +196,7 @@ const ScatterLifeExpectancyChart = () => {
   }, []);
 
   return (
-    <Card>
+    <Card className='w-full bg-white space-y-6 px-8 py-6 mt-10'>
       <div ref={chartRef} style={{ width: '100%', height: '600px' }} />
     </Card>
   );

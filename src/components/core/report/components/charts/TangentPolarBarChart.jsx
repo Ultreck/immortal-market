@@ -13,11 +13,6 @@ const TangentialPolarBarChart = () => {
         chart = echarts.init(chartRef.current);
 
         const option = {
-          title: [
-            {
-              text: 'Tangential Polar Bar Label Position (middle)',
-            },
-          ],
           polar: {
             radius: [30, '80%'],
           },
@@ -57,7 +52,7 @@ const TangentialPolarBarChart = () => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <Card>
+    <Card className='w-full bg-white space-y-6 px-8 py-6 mt-10'>
       <div ref={chartRef} style={{ width: '100%', height: '400px' }} />
     </Card>
   );

@@ -11,14 +11,15 @@ const data = [
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 const SemiCircle = ({ title, caption }) => {
   return (
-    <Card>
+    <Card className="w-full bg-white space-y-6 px-8 py-6 mt-10">
+      <p className="font-bold text-5xl text-black">How many things we do? </p>
       <div className="flex">
         <div>
-          <PieChart width={300} height={400}>
+          <PieChart width={300} height={150}>
             <Pie
               data={data}
               cx={120}
-              cy={200}
+              cy={130}
               startAngle={180}
               endAngle={0}
               innerRadius={80}
@@ -33,10 +34,9 @@ const SemiCircle = ({ title, caption }) => {
             </Pie>
           </PieChart>
         </div>
-        <div className="my-auto space-y-5">
-          <p className="font-bold text-7xl">How many things we do? </p>
-          <p>Alot of business can not do the needful so we must find a good way to do it.</p>
-        </div>
+      </div>
+      <div className="my-auto space-y-5 text-black">
+        <p>Alot of business can not do the needful so we must find a good way to do it.</p>
       </div>
     </Card>
   );

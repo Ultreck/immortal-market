@@ -7,6 +7,17 @@ import NewVerticalBar from './charts/NewVerticalBar';
 import CircleIcons from './charts/CircleIcons';
 import Infographics from './charts/Infographics';
 import MultipleBars from './charts/MultipleBars';
+import RosePieChart from './charts/RosePieChart';
+import FunnelChart from './charts/FunnelChart';
+import TreeMap from './charts/TreeMap';
+import ScatterLifeExpectancyChart from './charts/ScatterLifeExpentancy';
+import LifeExpectancyChart from './charts/LifeExpentanceChart';
+import VerticalStackedBar from './charts/StackedBar';
+import SimpleGuageChart from './charts/SimpleGuageChart';
+import SpeedometerGauge from './charts/Speedometer';
+import GaugeChart from './charts/GuageChart';
+import TangentialPolarBarChart from './charts/TangentPolarBarChart';
+import SemiCircle from './charts/SemiCircle';
 
 register();
 
@@ -32,6 +43,8 @@ const ReportBody = () => {
             <TenCircles percentage={35} />
           </div>
           <MultipleBars />
+          <SpeedometerGauge />
+          <TangentialPolarBarChart />
         </div>
         <div className="space-y-6">
           <Card className="space-y-6 w-full bg-default-50 px-8 py-6">
@@ -52,10 +65,19 @@ const ReportBody = () => {
             </div>
           </Card>
           <Infographics />
+          <SimpleGuageChart />
+          <GaugeChart />
+          <SemiCircle />
         </div>
+        <FunnelChart />
+        <RosePieChart />
       </div>
+      <TreeMap />
+      <ScatterLifeExpectancyChart />
+      <LifeExpectancyChart />
     </>
   );
 };
 
 export default ReportBody;
+

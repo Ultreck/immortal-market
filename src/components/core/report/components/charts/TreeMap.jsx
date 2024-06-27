@@ -190,8 +190,8 @@ const CustomizedContent = ({ root, depth, x, y, width, height, index, colors, na
 
 const TreeMap = () => {
   return (
-    <Card className="h-[700px] space-y-10">
-      <p className="text-5xl font-bold">How many things we do?</p>
+    <Card className="h-[700px] space-y-10 w-full bg-white px-8 py-6 mt-10">
+      <p className="text-5xl font-bold text-black">How many things we do?</p>
       <ResponsiveContainer width="100%" height="80%">
         <Treemap
           width={400}
@@ -204,7 +204,7 @@ const TreeMap = () => {
         />
       </ResponsiveContainer>
       <div>
-        <p>Alot of business can not do the needful so we must find a good way to do it.</p>
+        <p className='text-black'>Alot of business can not do the needful so we must find a good way to do it.</p>
       </div>
     </Card>
   );

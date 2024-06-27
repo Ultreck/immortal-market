@@ -27,9 +27,9 @@ const FunnelChart = () => {
               saveAsImage: {},
             },
           },
-          legend: {
-            data: ['Show', 'Click', 'Visit', 'Inquiry', 'Order'],
-          },
+          // legend: {
+          //   data: ['Show', 'Click', 'Visit', 'Inquiry', 'Order'],
+          // },
           series: [
             {
               name: 'Funnel',
@@ -90,8 +90,8 @@ const FunnelChart = () => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <Card>
-      <div ref={chartRef} style={{ width: '100%', height: '700px' }} />
+    <Card className='bg-white space-y-6 w-full px-8 py-6'>
+      <div ref={chartRef} style={{ width: '100%', height: '600px' }} />
     </Card>
   );
 };
