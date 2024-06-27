@@ -3,7 +3,7 @@ import { Button, Checkbox, Input, Select, SelectItem } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
-const ConnectSql = ({ onNext, onPrev }) => {
+const ProjectSourceSQL = ({ onNext, onPrev }) => {
   const handleSubmit = () => {
     onNext();
   };
@@ -27,13 +27,15 @@ const ConnectSql = ({ onNext, onPrev }) => {
             ))}
           </Select>
         </div>
-        <div className="grid grid-cols-1 gap-2">
-          <p>Connection string</p>
-          <Input placeholder="Enter connection string" size="lg" variant="bordered" classNames={{ input: 'px-2' }} />
-        </div>
-        <div className="grid grid-cols-1 gap-2">
-          <p>Database name</p>
-          <Input placeholder="Enter database name" size="lg" variant="bordered" classNames={{ input: 'px-2' }} />
+        <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-2">
+            <p>Host</p>
+            <Input placeholder="Enter host" size="lg" variant="bordered" classNames={{ input: 'px-2' }} />
+          </div>
+          <div className="grid grid-cols-1 gap-2">
+            <p>Database name</p>
+            <Input placeholder="Enter database name" size="lg" variant="bordered" classNames={{ input: 'px-2' }} />
+          </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-1 gap-2">
@@ -81,9 +83,9 @@ const ConnectSql = ({ onNext, onPrev }) => {
   );
 };
 
-ConnectSql.propTypes = {
+ProjectSourceSQL.propTypes = {
   onNext: PropTypes.func,
   onPrev: PropTypes.func,
 };
 
-export default ConnectSql;
+export default ProjectSourceSQL;

@@ -38,7 +38,7 @@ input:-webkit-autofill {
 }
 
 .disabled {
-  @apply opacity-60 pointer-events-none;
+  @apply opacity-50 pointer-events-none;
 }
 
 .pattern-1 {

@@ -1,14 +1,12 @@
 import { createElement, useState } from 'react';
-import ProjectSource from './ProjectSource.jsx';
+import ProjectSource from './create/ProjectSource.jsx';
 import Drawer from '@/components/ui/Drawer.jsx';
 import useGlobalStore from '@/store/global.js';
-import SelectFiles from './SelectFiles.jsx';
 import PreviewFiles from './PreviewFiles.jsx';
 import GenerateReport from './GenerateReport.jsx';
 import PreparingData from './PreparingData.jsx';
-import { TbDatabase, TbEye, TbPassword, TbPlugConnected, TbReport, TbUpload } from 'react-icons/tb';
+import { TbDatabase, TbEye, TbReport, TbUpload } from 'react-icons/tb';
 import Stepper from '@/components/ui/Stepper.jsx';
-import ConnectSql from '@/components/core/project/ConnectSql.jsx';
 
 const CreateProjectModal = () => {
   const steps = [
@@ -17,18 +15,6 @@ const CreateProjectModal = () => {
       title: 'Data Source',
       icon: <TbDatabase size="16" />,
       element: ProjectSource,
-    },
-    {
-      key: 'project-details',
-      title: 'Project Details',
-      icon: <TbPlugConnected size="16" />,
-      element: SelectFiles,
-    },
-    {
-      key: 'sql',
-      title: 'Connect to SQL',
-      icon: <TbPassword size="16" />,
-      element: ConnectSql,
     },
     {
       key: 'preview-data',

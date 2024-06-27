@@ -1,10 +1,10 @@
 import { Button, Checkbox, Input, Select, SelectItem, Textarea } from '@nextui-org/react';
-import Title from '../shared/Title';
+import Title from '../../shared/Title.jsx';
 import PropTypes from 'prop-types';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 
-const SelectFiles = ({ onNext, onPrev }) => {
+const ProjectSourceFiles = ({ onNext, onPrev }) => {
   const handleSubmit = () => {
     onNext();
   };
@@ -74,9 +74,9 @@ const SelectFiles = ({ onNext, onPrev }) => {
   );
 };
 
-SelectFiles.propTypes = {
+ProjectSourceFiles.propTypes = {
   onNext: PropTypes.func,
   onPrev: PropTypes.func,
 };
 
-export default SelectFiles;
+export default ProjectSourceFiles;

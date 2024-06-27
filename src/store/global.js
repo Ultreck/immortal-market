@@ -5,7 +5,6 @@ const useGlobalStore = createWithEqualityFn(
   (set) => ({
     data: {
       isCreateProjectModalOpen: false,
-      redirect: null,
     },
     updateData: (payload) => set((state) => ({ data: { ...state.data, ...payload } })),
   }),
