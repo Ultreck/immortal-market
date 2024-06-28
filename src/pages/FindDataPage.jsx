@@ -8,10 +8,10 @@ const FindDataPage = () => {
   return (
     <>
       <DashboardTitle
-        text="Find Data"
+        text="Fieldforce"
         breadcrumbs={[
           { text: 'Home', href: '/' },
-          { text: 'Find Data', href: '/finddata' },
+          { text: 'Fieldforce', href: '/fieldforce' },
         ]}
         after={<CreateDropdown />}
       />

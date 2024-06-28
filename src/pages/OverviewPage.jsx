@@ -6,7 +6,8 @@ import { TbMessage, TbPlus } from 'react-icons/tb';
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import useGlobalStore from '@/store/global.js';
-import ProjectTable from '@/components/core/project/ProjectTable';
+// import ProjectTable from '@/components/core/project/ProjectTable';
+import OverViewTable from '@/components/core/overview/OverviewTable';
 
 const users = [
   {
@@ -59,7 +60,7 @@ const OverviewPage = () => {
       <div className="container py-10 space-y-12">
         <DashboardStatGrid />
         <Separator separatorText={'PROJECTS'} />
-        <ProjectTable />
+        <OverViewTable />
       </div>
     </>
   );

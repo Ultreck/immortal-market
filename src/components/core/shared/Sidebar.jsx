@@ -22,7 +22,7 @@ const Sidebar = () => {
           { name: 'Projects', href: '/projects', icon: <TbLayoutList size="20" /> },
           { name: 'Dashboards', href: '/dashboards', icon: <TbLayout2 size="20" /> },
           { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
-          { name: 'Find Data', href: '/finddata', icon: <TbDatabaseSearch size="20" /> },
+          { name: 'Fieldforce', href: '/fieldforce', icon: <TbDatabaseSearch size="20" /> },
         ].map((item) => (
           <NavLink
             key={item.href}
