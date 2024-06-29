@@ -1,8 +1,11 @@
 import { Button, Card } from '@nextui-org/react'
 import TagIcon from '/images/tag.png'
+import useGlobalStore from '@/store/global.js';
 
 
 const FreemiumPlan = () => {
+  const updateData = useGlobalStore((state) => state.updateData);
+
   return (
     <Card
     hover
@@ -14,13 +17,14 @@ const FreemiumPlan = () => {
     aria-disabled={false}
     className="px-6 py-8 flex flex-col  relative space-y-3 "
     >
-    <p className='text-2xl dark:text-white/80'>Freemium Plan</p>
-    <p className='text-sm text-gray-500 tracking-widest'>7 days more</p>
+    <p className='text-2xl dark:text-white/80'>Dashboard View</p>
+    <p className='text-sm text-gray-500 tracking-widest'>Get efficient data insigths</p>
     <div className='mr-auto'>
-        <Button color="primary" radius="full" variant="ghost" className="w-full mt-1" size="sm" >
-                Try Now
+        <Button color="primary" radius="full" variant="ghost" className="w-full mt-1" size="md" onClick={() => updateData({ isDashboardModalOpen: true })} >
+                Create
         </Button>
     </div>
+  
 
 
     <div className="w-36 h-36 rounded-full flex items-center justify-center text-white text-xl md:text-3xl font-semibold absolute right-0 bottom-0">
