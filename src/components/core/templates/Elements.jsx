@@ -1,9 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
+import { mergeRefs } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { RiCircleLine, RiFontFamily, RiHeading2, RiPieChart2Line } from 'react-icons/ri';
-import { Tab, Tabs } from '@nextui-org/react';
-import { useState } from 'react';
-import { mergeRefs } from '@/lib/utils.js';
 
 const DraggableElement = ({ element }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging, setActivatorNodeRef } = useDraggable({
@@ -50,55 +48,45 @@ DraggableElement.propTypes = {
   }),
 };
 
-const Sidebar = () => {
-  const [tab, setTab] = useState('elements');
+const items = [
+  {
+    id: 'heading',
+    type: 'heading',
+    name: 'Heading',
+    icon: <RiHeading2 size="20" />,
+    data: { type: 'heading', text: 'Heading', width: 400, height: 36 },
+  },
+  {
+    id: 'text',
+    type: 'text',
+    name: 'Text',
+    icon: <RiFontFamily size="20" />,
+    data: { type: 'text', text: 'Text', width: 300, height: 20 },
+  },
+  {
+    id: 'chart',
+    type: 'chart',
+    name: 'Chart',
+    icon: <RiPieChart2Line size="20" />,
+    data: { type: 'chart', text: 'Chart', width: 400, height: 400 },
+  },
+  {
+    id: 'logo',
+    type: 'logo',
+    name: 'Logo',
+    icon: <RiCircleLine size="20" />,
+    data: { type: 'logo', text: 'Logo', width: 120, height: 0 },
+  },
+];
 
-  const elements = [
-    {
-      id: 'heading',
-      type: 'heading',
-      name: 'Heading',
-      icon: <RiHeading2 size="20" />,
-      data: { type: 'heading', text: 'Heading', width: 400, height: 36 },
-    },
-    {
-      id: 'text',
-      type: 'text',
-      name: 'Text',
-      icon: <RiFontFamily size="20" />,
-      data: { type: 'text', text: 'Text', width: 300, height: 20 },
-    },
-    {
-      id: 'chart',
-      type: 'chart',
-      name: 'Chart',
-      icon: <RiPieChart2Line size="20" />,
-      data: { type: 'chart', text: 'Chart', width: 400, height: 400 },
-    },
-    {
-      id: 'logo',
-      type: 'logo',
-      name: 'Logo',
-      icon: <RiCircleLine size="20" />,
-      data: { type: 'logo', text: 'Logo', width: 120, height: 0 },
-    },
-  ];
-
+const Elements = () => {
   return (
-    <div className="h-full border-r border-default-200 dark:border-default-100">
-      <div className="px-8 py-6">
-        <Tabs aria-label="Template tabs" className="mb-6" radius="full" selectedKey={tab} onSelectionChange={setTab}>
-          <Tab key="elements" title="Elements" className="text-base" />
-          <Tab key="layers" title="Layers" className="text-base" isDisabled />
-        </Tabs>
-        <div className="grid grid-cols-2 gap-4">
-          {elements.map((element) => (
-            <DraggableElement key={element.id} element={element} />
-          ))}
-        </div>
-      </div>
+    <div className="grid grid-cols-2 gap-4">
+      {items.map((element) => (
+        <DraggableElement key={element.id} element={element} />
+      ))}
     </div>
   );
 };
 
-export default Sidebar;
+export default Elements;

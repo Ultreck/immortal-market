@@ -1,8 +1,7 @@
 import { cn } from '@/lib/utils';
 import PropTypes from 'prop-types';
-import { RiEmotionSadFill } from 'react-icons/ri';
 
-const NoData = ({ icon = <RiEmotionSadFill size="24" />, text, className }) => {
+const NoData = ({ icon, text, className }) => {
   return (
     <div
       className={cn(
@@ -10,7 +9,7 @@ const NoData = ({ icon = <RiEmotionSadFill size="24" />, text, className }) => {
         className
       )}
     >
-      <span>{!!icon && icon}</span>
+      {!!icon && <span>icon</span>}
       <p className="max-w-sm">{text || 'No data'}</p>
     </div>
   );

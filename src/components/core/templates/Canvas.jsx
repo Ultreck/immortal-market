@@ -1,9 +1,12 @@
-import Element from './Element';
 import { useDroppable } from '@dnd-kit/core';
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import { mergeRefs } from '@/lib/utils.js';
+import Heading from '@/components/core/templates/elements/Heading.jsx';
+import Text from '@/components/core/templates/elements/Text.jsx';
+import Chart from '@/components/core/templates/elements/Chart.jsx';
+import Logo from '@/components/core/templates/elements/Logo.jsx';
 
 const getElementWidthWithoutPadding = (element) => {
   if (!element) return 0;
@@ -11,18 +14,17 @@ const getElementWidthWithoutPadding = (element) => {
   return element.clientWidth - parseFloat(computedStyle.paddingLeft) - parseFloat(computedStyle.paddingRight);
 };
 
-const Canvas = ({ elements, onChange }) => {
+const Canvas = ({ elements, current, onChange, onSelect }) => {
   const root = useRef();
-  const [id, setId] = useState(null);
   const [width, setWidth] = useState(0);
   const { setNodeRef } = useDroppable({ id: 'canvas' });
 
-  const handleSelect = (id) => setId(id);
+  const handleSelect = (id) => onSelect(id);
 
-  useOnClickOutside(root, () => setId(null));
+  useOnClickOutside(root, () => onSelect(null));
 
   const handleCardClick = (e) => {
-    if (e.target === root.current) setId(null);
+    if (e.target === root.current) onSelect(null);
   };
 
   useEffect(() => {
@@ -36,17 +38,53 @@ const Canvas = ({ elements, onChange }) => {
       ref={mergeRefs(setNodeRef, root)}
       className="bg-white text-black border border-default-200 h-[600px] w-[600px] rounded-lg relative overflow-hidden"
     >
-      {elements.map((element, index) => (
-        <Element
-          root={root}
-          key={index}
-          element={element}
-          active={element.id === id}
-          onClick={() => handleSelect(element.id)}
-          onChange={onChange}
-          width={width}
-        />
-      ))}
+      {elements.map((element) => {
+        const active = element.id === current;
+        return (
+          <Fragment key={element.id}>
+            {element.type === 'heading' && (
+              <Heading
+                root={root}
+                element={element}
+                active={active}
+                onClick={() => handleSelect(element.id)}
+                onChange={onChange}
+                width={width}
+              />
+            )}
+            {element.type === 'text' && (
+              <Text
+                root={root}
+                element={element}
+                active={active}
+                onClick={() => handleSelect(element.id)}
+                onChange={onChange}
+                width={width}
+              />
+            )}
+            {element.type === 'chart' && (
+              <Chart
+                root={root}
+                element={element}
+                active={active}
+                onClick={() => handleSelect(element.id)}
+                onChange={onChange}
+                width={width}
+              />
+            )}
+            {element.type === 'logo' && (
+              <Logo
+                root={root}
+                element={element}
+                active={active}
+                onClick={() => handleSelect(element.id)}
+                onChange={onChange}
+                width={width}
+              />
+            )}
+          </Fragment>
+        );
+      })}
     </div>
   );
 };
@@ -54,6 +92,8 @@ const Canvas = ({ elements, onChange }) => {
 Canvas.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  current: PropTypes.string,
 };
 
 export default Canvas;
