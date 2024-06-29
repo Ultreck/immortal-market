@@ -23,7 +23,7 @@ import ProjectPage from '@/pages/ProjectPage.jsx';
 import { useEffect } from 'react';
 import { useDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
-import DemoPage from '@/pages/DemoPage.jsx';
+import CreateTemplatePage from '@/pages/CreateTemplatePage.jsx';
 import BusinessTemplate from './pages/business/Template.jsx';
 import ReportPage from './pages/ReportPage.jsx';
 import TeamPage from '@/pages/TeamPage.jsx';
@@ -68,7 +68,7 @@ const App = () => {
           <Route path="reports" element={<ReportPage />} />
           <Route path="templates" element={<></>} />
           <Route path="team" element={<></>} />
-          <Route path="demo" element={<DemoPage />} />
+          <Route path="demo" element={<CreateTemplatePage />} />
           <Route path="settings" element={<></>} />
         </Route>
 

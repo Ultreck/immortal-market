@@ -11,7 +11,7 @@ const getElementWidthWithoutPadding = (element) => {
   return element.clientWidth - parseFloat(computedStyle.paddingLeft) - parseFloat(computedStyle.paddingRight);
 };
 
-const Canvas = ({ elements }) => {
+const Canvas = ({ elements, onChange }) => {
   const root = useRef();
   const [id, setId] = useState(null);
   const [width, setWidth] = useState(0);
@@ -34,14 +34,16 @@ const Canvas = ({ elements }) => {
     <div
       onClick={handleCardClick}
       ref={mergeRefs(setNodeRef, root)}
-      className="card-shadow bg-white text-black h-[600px] w-[600px] !rounded-none relative p-10"
+      className="bg-white text-black border border-default-200 h-[600px] w-[600px] rounded-lg relative overflow-hidden"
     >
       {elements.map((element, index) => (
         <Element
+          root={root}
           key={index}
           element={element}
-          selected={element.id === id}
+          active={element.id === id}
           onClick={() => handleSelect(element.id)}
+          onChange={onChange}
           width={width}
         />
       ))}
@@ -51,6 +53,7 @@ const Canvas = ({ elements }) => {
 
 Canvas.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Canvas;

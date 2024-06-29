@@ -1,11 +1,11 @@
 import TemplateBuilder from '@/components/core/templates/TemplateBuilder.jsx';
 
-const DemoPage = () => {
+const CreateTemplatePage = () => {
   return (
-    <div className="container py-10">
+    <div>
       <TemplateBuilder />
     </div>
   );
 };
 
-export default DemoPage;
+export default CreateTemplatePage;

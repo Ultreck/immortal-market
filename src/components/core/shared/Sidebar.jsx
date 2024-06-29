@@ -12,7 +12,7 @@ const Sidebar = () => {
   const { isDarkMode } = useDarkMode();
 
   return (
-    <div className="py-6 px-8 border-r border-default-200 dark:border-default-100/70 flex flex-col align-stretch w-[280px]">
+    <div className="py-6 px-8 border-r border-default-200 dark:border-default-100 flex flex-col align-stretch w-[280px]">
       <Logo light={isDarkMode} />
       <AuthDropdown className="mt-6" />
       <CreateDropdown className="mt-6" />
