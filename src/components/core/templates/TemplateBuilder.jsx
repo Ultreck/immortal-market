@@ -5,6 +5,7 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { Tab, Tabs } from '@nextui-org/react';
 import Elements from '@/components/core/templates/Elements.jsx';
 import Layers from '@/components/core/templates/Layers.jsx';
+import Tools from '@/components/core/templates/tools/Tools.jsx';
 
 const TemplateBuilder = () => {
   const canvas = useRef();
@@ -12,6 +13,8 @@ const TemplateBuilder = () => {
   const [tab, setTab] = useState('elements');
   const [elements, setElements] = useState([]);
   const sensors = useSensors(useSensor(MouseSensor));
+
+  const selected = elements.find((el) => el.id === id);
 
   const handleSelect = (v) => setId(v);
 
@@ -28,6 +31,7 @@ const TemplateBuilder = () => {
         ...active.data.current,
       };
       setElements((prevElements) => [...prevElements, el]);
+      handleSelect(el.id);
     }
   };
 
@@ -62,6 +66,13 @@ const TemplateBuilder = () => {
             />
           </div>
         </div>
+
+        <Tools
+          element={selected}
+          onChange={(element) => {
+            setElements((prevElements) => prevElements.map((el) => (el.id === element.id ? element : el)));
+          }}
+        />
       </div>
     </DndContext>
   );

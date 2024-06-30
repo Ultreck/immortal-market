@@ -31,9 +31,8 @@ const Heading = ({ element, root, active, width, onClick, onChange }) => {
       <div className="overflow-hidden relative w-full h-full pl-6">
         <div className="absolute left-0 top-0 bottom-0 w-2 bg-red-500 rounded-2xl"></div>
         <textarea
-          className={cn(
-            'text-3xl bg-transparent w-full h-full resize-none leading-tight font-semibold overflow-hidden'
-          )}
+          className={cn('bg-transparent w-full h-full resize-none leading-tight overflow-hidden')}
+          style={element.style}
           rows="1"
           value={element.text}
           ref={input}
@@ -56,6 +55,7 @@ Heading.propTypes = {
     text: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    style: PropTypes.object,
   }),
   active: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,

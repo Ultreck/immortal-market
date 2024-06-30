@@ -48,15 +48,9 @@ const Layers = ({ elements, current, onSelect }) => {
 Layers.propTypes = {
   elements: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired,
-      data: PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
-      }),
+      id: PropTypes.number.isRequired,
+      type: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
     })
   ),
   onSelect: PropTypes.func.isRequired,

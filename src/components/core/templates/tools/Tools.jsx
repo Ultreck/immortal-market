@@ -1,0 +1,32 @@
+import { AnimatePresence, motion } from 'framer-motion';
+import Bold from '@/components/core/templates/tools/Bold.jsx';
+import Italic from '@/components/core/templates/tools/Italic.jsx';
+import PropTypes from 'prop-types';
+
+const Tools = ({ element, onChange }) => {
+  return (
+    <AnimatePresence>
+      {!!element && (
+        <motion.div
+          initial={{ opacity: 0, x: '100%' }}
+          animate={{ opacity: 1, x: 4 }}
+          exit={{ opacity: 0, x: '100%' }}
+          className="fixed top-1/2 -translate-y-1/2 right-4 w-16 rounded-2xl bg-default-100 flex flex-col items-center py-4 space-y-2"
+        >
+          {element.tools.map((tool) => {
+            if (tool === 'bold') return <Bold key={tool} element={element} onChange={onChange} />;
+            if (tool === 'italic') return <Italic key={tool} element={element} onChange={onChange} />;
+            return <></>;
+          })}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+Tools.propTypes = {
+  element: PropTypes.object,
+  onChange: PropTypes.func.isRequired,
+};
+
+export default Tools;
