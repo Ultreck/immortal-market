@@ -18,6 +18,8 @@ import SpeedometerGauge from './charts/Speedometer';
 import GaugeChart from './charts/GuageChart';
 import TangentialPolarBarChart from './charts/TangentPolarBarChart';
 import SemiCircle from './charts/SemiCircle';
+import NewPieChart from './charts/NewPieChart';
+import DoughNuts from './charts/DoughNuts';
 
 register();
 
@@ -45,6 +47,8 @@ const ReportBody = () => {
           <MultipleBars />
           <SpeedometerGauge />
           <TangentialPolarBarChart />
+          <VerticalStackedBar />
+          <NewPieChart />
         </div>
         <div className="space-y-6">
           <Card className="space-y-6 w-full bg-default-50 px-8 py-6">
@@ -68,6 +72,7 @@ const ReportBody = () => {
           <SimpleGuageChart />
           <GaugeChart />
           <SemiCircle />
+          <DoughNuts />
         </div>
         <FunnelChart />
         <RosePieChart />
