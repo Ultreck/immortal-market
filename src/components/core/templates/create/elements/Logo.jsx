@@ -1,5 +1,5 @@
 import Logo from '@/components/core/shared/Logo.jsx';
-import ElementWrapper from '@/components/core/templates/ElementWrapper.jsx';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import { useMount } from 'react-use';

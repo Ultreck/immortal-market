@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
-import ElementWrapper from '@/components/core/templates/ElementWrapper.jsx';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const Text = ({ element, root, active, width, onClick, onChange }) => {
+const Heading = ({ element, root, active, width, onClick, onChange }) => {
   const input = useRef(null);
   const [minHeight, setMinHeight] = useState(element.height);
 
@@ -28,9 +28,11 @@ const Text = ({ element, root, active, width, onClick, onChange }) => {
       onEditStart={() => updateInputHeight()}
       active={active}
     >
-      <div className="overflow-hidden relative w-full h-full">
+      <div className="overflow-hidden relative w-full h-full pl-6">
+        <div className="absolute left-0 top-0 bottom-0 w-2 bg-red-500 rounded-2xl"></div>
         <textarea
-          className={cn('text-base bg-transparent w-full h-full resize-none leading-tight overflow-hidden')}
+          className={cn('bg-transparent w-full h-full resize-none leading-tight overflow-hidden')}
+          style={element.style}
           rows="1"
           value={element.text}
           ref={input}
@@ -44,7 +46,7 @@ const Text = ({ element, root, active, width, onClick, onChange }) => {
   );
 };
 
-Text.propTypes = {
+Heading.propTypes = {
   element: PropTypes.shape({
     id: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
@@ -53,6 +55,7 @@ Text.propTypes = {
     text: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    style: PropTypes.object,
   }),
   active: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
@@ -61,4 +64,4 @@ Text.propTypes = {
   root: PropTypes.any.isRequired,
 };
 
-export default Text;
+export default Heading;

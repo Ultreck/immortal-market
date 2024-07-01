@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils.js';
 import { ResizableBox } from 'react-resizable';
-import { getResizeHandles } from '@/components/core/templates/ResizeHandles.jsx';
-import DraggableElement from '@/components/core/templates/DraggableElement.jsx';
+import { getResizeHandles } from '@/components/core/templates/create/ResizeHandles.jsx';
+import DraggableElement from '@/components/core/templates/create/DraggableElement.jsx';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 

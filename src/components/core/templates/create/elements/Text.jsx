@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
-import ElementWrapper from '@/components/core/templates/ElementWrapper.jsx';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const Heading = ({ element, root, active, width, onClick, onChange }) => {
+const Text = ({ element, root, active, width, onClick, onChange }) => {
   const input = useRef(null);
   const [minHeight, setMinHeight] = useState(element.height);
 
@@ -28,8 +28,7 @@ const Heading = ({ element, root, active, width, onClick, onChange }) => {
       onEditStart={() => updateInputHeight()}
       active={active}
     >
-      <div className="overflow-hidden relative w-full h-full pl-6">
-        <div className="absolute left-0 top-0 bottom-0 w-2 bg-red-500 rounded-2xl"></div>
+      <div className="overflow-hidden relative w-full h-full">
         <textarea
           className={cn('bg-transparent w-full h-full resize-none leading-tight overflow-hidden')}
           style={element.style}
@@ -46,7 +45,7 @@ const Heading = ({ element, root, active, width, onClick, onChange }) => {
   );
 };
 
-Heading.propTypes = {
+Text.propTypes = {
   element: PropTypes.shape({
     id: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
@@ -64,4 +63,4 @@ Heading.propTypes = {
   root: PropTypes.any.isRequired,
 };
 
-export default Heading;
+export default Text;

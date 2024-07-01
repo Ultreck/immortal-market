@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import TemplateBarChart from '@/components/core/templates/elements/charts/TemplateBarChart.jsx';
-import ElementWrapper from '@/components/core/templates/ElementWrapper.jsx';
+import TemplateBarChart from '@/components/core/templates/create/elements/charts/TemplateBarChart.jsx';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
 const Chart = ({ element, root, active, width, onClick, onChange }) => {
   return (

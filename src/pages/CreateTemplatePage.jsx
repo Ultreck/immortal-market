@@ -1,4 +1,4 @@
-import TemplateBuilder from '@/components/core/templates/TemplateBuilder.jsx';
+import TemplateBuilder from '@/components/core/templates/create/TemplateBuilder.jsx';
 
 const CreateTemplatePage = () => {
   return (

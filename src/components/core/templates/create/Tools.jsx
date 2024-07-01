@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import Bold from '@/components/core/templates/tools/Bold.jsx';
-import Italic from '@/components/core/templates/tools/Italic.jsx';
+import Bold from '@/components/core/templates/create/tools/Bold.jsx';
+import Italic from '@/components/core/templates/create/tools/Italic.jsx';
 import PropTypes from 'prop-types';
+import Underline from '@/components/core/templates/create/tools/Underline.jsx';
 
 const Tools = ({ element, onChange }) => {
   return (
@@ -16,6 +17,7 @@ const Tools = ({ element, onChange }) => {
           {element.tools.map((tool) => {
             if (tool === 'bold') return <Bold key={tool} element={element} onChange={onChange} />;
             if (tool === 'italic') return <Italic key={tool} element={element} onChange={onChange} />;
+            if (tool === 'underline') return <Underline key={tool} element={element} onChange={onChange} />;
             return <></>;
           })}
         </motion.div>

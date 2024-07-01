@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import { mergeRefs } from '@/lib/utils.js';
-import Heading from '@/components/core/templates/elements/Heading.jsx';
-import Text from '@/components/core/templates/elements/Text.jsx';
-import Chart from '@/components/core/templates/elements/Chart.jsx';
-import Logo from '@/components/core/templates/elements/Logo.jsx';
+import Heading from '@/components/core/templates/create/elements/Heading.jsx';
+import Text from '@/components/core/templates/create/elements/Text.jsx';
+import Chart from '@/components/core/templates/create/elements/Chart.jsx';
+import Logo from '@/components/core/templates/create/elements/Logo.jsx';
 
 const getElementWidthWithoutPadding = (element) => {
   if (!element) return 0;

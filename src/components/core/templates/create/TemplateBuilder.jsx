@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
-import Canvas from './Canvas';
+import Canvas from './Canvas.jsx';
 import { DndContext, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { Tab, Tabs } from '@nextui-org/react';
-import Elements from '@/components/core/templates/Elements.jsx';
-import Layers from '@/components/core/templates/Layers.jsx';
-import Tools from '@/components/core/templates/tools/Tools.jsx';
+import Elements from '@/components/core/templates/create/Elements.jsx';
+import Layers from '@/components/core/templates/create/Layers.jsx';
+import Tools from '@/components/core/templates/create/Tools.jsx';
 
 const TemplateBuilder = () => {
   const canvas = useRef();

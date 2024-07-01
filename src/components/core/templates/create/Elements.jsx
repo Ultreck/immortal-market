@@ -60,7 +60,7 @@ const items = [
       width: 400,
       height: 36,
       style: { fontSize: 28, fontWeight: 'bold' },
-      tools: ['bold', 'italic'],
+      tools: ['bold', 'italic', 'underline'],
     },
   },
   {
@@ -74,7 +74,7 @@ const items = [
       width: 300,
       height: 20,
       style: { fontSize: 16, fontWeight: 'normal' },
-      tools: ['bold', 'italic'],
+      tools: ['bold', 'italic', 'underline'],
     },
   },
   {
