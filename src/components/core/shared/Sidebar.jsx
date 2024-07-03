@@ -1,15 +1,15 @@
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
-import { useDarkMode } from 'usehooks-ts';
+import { useTernaryDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
 import { IconFileInvoice } from '@tabler/icons-react';
-import { TbCrown, TbDatabaseSearch, TbLayout,  TbLayoutList, TbSettings2, TbUsers } from 'react-icons/tb';
+import { TbCrown, TbDatabaseSearch, TbLayout, TbLayoutList, TbSettings2, TbUsers } from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
 import Logo from '@/components/core/shared/Logo.jsx';
 
 const Sidebar = () => {
-  const { isDarkMode } = useDarkMode();
+  const { isDarkMode } = useTernaryDarkMode();
 
   return (
     <div className="py-6 px-8 border-r border-default-200 dark:border-default-100 flex flex-col align-stretch w-[280px]">

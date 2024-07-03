@@ -13,7 +13,7 @@
 
 html,
 body {
-  @apply w-full text-[14px] light:bg-[rgb(237,243,251)] min-h-screen;
+  @apply w-full text-[14px] min-h-screen;
 }
 
 :root {
@@ -34,7 +34,7 @@ input:-webkit-autofill {
 }
 
 .card-shadow {
-  @apply rounded-2xl border border-gray-300 shadow-lg dark:border-0 dark:shadow-none;
+  @apply rounded-2xl border border-default-200 shadow dark:border-0 dark:shadow-none;
 }
 
 .disabled {

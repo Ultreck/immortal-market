@@ -33,7 +33,7 @@ const TemplatesPage = () => {
             .fill(0)
             .map((_, i) => (
               <div key={i}>
-                <div className="rounded-2xl bg-default-50 h-[240px] flex justify-center items-center">
+                <div className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
                   <HiPhoto size="52" className="opacity-40" />
                 </div>
                 <div className="mt-4 px-2">

@@ -21,7 +21,7 @@ import DashboardLayout from '@/components/core/layout/DashboardLayout.jsx';
 import OverviewPage from '@/pages/OverviewPage.jsx';
 import ProjectPage from '@/pages/ProjectPage.jsx';
 import { useEffect } from 'react';
-import { useDarkMode } from 'usehooks-ts';
+import { useTernaryDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
 import CreateTemplatePage from '@/pages/CreateTemplatePage.jsx';
 import TemplatesPage from './pages/TemplatesPage.jsx';
@@ -30,9 +30,12 @@ import TeamPage from '@/pages/TeamPage.jsx';
 import ProjectDashboardPage from './pages/ProjectDashboard.jsx';
 import FindDataPage from './pages/FindDataPage.jsx';
 import PlanPage from './pages/PlanPage.jsx';
+import SettingsLayout from '@/pages/settings/SettingsLayout.jsx';
+import BusinessSettingsPage from '@/pages/settings/BusinessSettingsPage.jsx';
+import AppearanceSettingsPage from '@/pages/settings/AppearanceSettingsPage.jsx';
 
 const App = () => {
-  const { isDarkMode } = useDarkMode({ defaultValue: true });
+  const { isDarkMode } = useTernaryDarkMode();
 
   useEffect(() => {
     if (isDarkMode) {
@@ -67,7 +70,13 @@ const App = () => {
           <Route path="plans" element={<PlanPage />} />
           <Route path="team" element={<TeamPage />} />
           <Route path="reports" element={<ReportPage />} />
-          <Route path="settings" element={<></>} />
+          <Route path="settings" element={<SettingsLayout />}>
+            <Route path="" element={<Navigate to="/settings/business" replace />} />
+            <Route path="business" element={<BusinessSettingsPage />} />
+            <Route path="appearance" element={<AppearanceSettingsPage />} />
+            <Route path="notifications" element={<></>} />
+            <Route path="security" element={<></>} />
+          </Route>
         </Route>
 
         <Route
