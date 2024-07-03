@@ -34,9 +34,9 @@ const Heading = ({ element, root, active, width, onClick, onChange }) => {
       active={active}
     >
       <div className="overflow-hidden relative w-full h-full pl-6">
-        <div className="absolute left-0 top-0 bottom-0 w-2 bg-red-500 rounded-2xl"></div>
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[90%] bottom-0 w-2 bg-gray-800 rounded-2xl"></div>
         <textarea
-          className={cn('bg-transparent w-full h-full resize-none leading-tight overflow-hidden')}
+          className={cn('bg-transparent w-full h-full resize-none leading-[1.2] overflow-hidden')}
           style={element.style}
           rows="1"
           value={element.text}

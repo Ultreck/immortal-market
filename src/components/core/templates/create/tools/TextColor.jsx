@@ -3,6 +3,7 @@ import { TbColorPicker } from 'react-icons/tb';
 import { HexColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
 import { HiCheck } from 'react-icons/hi2';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const colors = [
   '#000000',
@@ -41,11 +42,17 @@ const TextColor = ({ element, onChange }) => {
                 style={{ backgroundColor: color }}
                 onClick={() => onChange({ ...element, style: { ...element.style, color } })}
               >
-                {element.style.color === color && (
-                  <div className="absolute inset-0 rounded-full bg-white/50 dark:bg-black/50 flex items-center justify-center">
-                    <HiCheck size={16} />
-                  </div>
-                )}
+                <AnimatePresence mode="wait">
+                  {element.style.color === color && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="absolute inset-0 rounded-full bg-white/50 dark:bg-black/50 flex items-center justify-center"
+                    >
+                      <HiCheck size={16} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </div>

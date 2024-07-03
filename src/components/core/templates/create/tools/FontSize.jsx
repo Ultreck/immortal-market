@@ -18,7 +18,6 @@ const FontSize = ({ element, onChange }) => {
             <Button
               isIconOnly
               variant="flat"
-              size="sm"
               className="text-base"
               onClick={() => {
                 onChange({ ...element, style: { ...element.style, fontSize: element.style.fontSize - 1 } });
@@ -29,7 +28,7 @@ const FontSize = ({ element, onChange }) => {
             <Autocomplete
               type="number"
               isClearable={false}
-              classNames={{ base: 'w-[80px]' }}
+              classNames={{ base: 'w-[80px] text-base' }}
               allowsEmptyCollection={false}
               inputValue={`${element.style.fontSize}`}
               onInputChange={(v) => {
@@ -49,7 +48,6 @@ const FontSize = ({ element, onChange }) => {
             <Button
               isIconOnly
               variant="flat"
-              size="sm"
               className="text-base"
               onClick={() => {
                 onChange({ ...element, style: { ...element.style, fontSize: element.style.fontSize + 1 } });
