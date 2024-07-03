@@ -1,7 +1,6 @@
 import { useDroppable } from '@dnd-kit/core';
 import PropTypes from 'prop-types';
 import { Fragment, useEffect, useRef, useState } from 'react';
-import { useOnClickOutside } from 'usehooks-ts';
 import { mergeRefs } from '@/lib/utils.js';
 import Heading from '@/components/core/templates/create/elements/Heading.jsx';
 import Text from '@/components/core/templates/create/elements/Text.jsx';
@@ -20,8 +19,6 @@ const Canvas = ({ elements, current, onChange, onSelect }) => {
   const { setNodeRef } = useDroppable({ id: 'canvas' });
 
   const handleSelect = (id) => onSelect(id);
-
-  useOnClickOutside(root, () => onSelect(null));
 
   const handleCardClick = (e) => {
     if (e.target === root.current) onSelect(null);

@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
 const Heading = ({ element, root, active, width, onClick, onChange }) => {
@@ -12,6 +12,11 @@ const Heading = ({ element, root, active, width, onClick, onChange }) => {
     input.current.style.height = `${input.current.scrollHeight}px`;
     setMinHeight(input.current.scrollHeight);
   };
+
+  useEffect(() => {
+    updateInputHeight();
+    onChange({ ...element, height: input.current.scrollHeight });
+  }, [element, onChange]);
 
   return (
     <ElementWrapper

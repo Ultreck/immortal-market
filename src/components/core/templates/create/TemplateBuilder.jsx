@@ -9,6 +9,7 @@ import Tools from '@/components/core/templates/create/Tools.jsx';
 
 const TemplateBuilder = () => {
   const canvas = useRef();
+  const parent = useRef();
   const [id, setId] = useState(null);
   const [tab, setTab] = useState('elements');
   const [elements, setElements] = useState([]);
@@ -35,6 +36,10 @@ const TemplateBuilder = () => {
     }
   };
 
+  const handleParentClick = (e) => {
+    if (e.target === parent.current && id) handleSelect(null);
+  };
+
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
       <div className="grid grid-cols-[280px_1fr] gap-0 h-screen overflow-hidden">
@@ -54,7 +59,7 @@ const TemplateBuilder = () => {
             {tab === 'layers' && <Layers elements={elements} onSelect={handleSelect} current={id} />}
           </div>
         </div>
-        <div className="h-full flex flex-col">
+        <div ref={parent} className="h-full flex flex-col" onClick={handleParentClick}>
           <div ref={canvas} className="my-auto mx-auto">
             <Canvas
               current={id}
@@ -64,15 +69,14 @@ const TemplateBuilder = () => {
                 setElements((prevElements) => prevElements.map((el) => (el.id === element.id ? element : el)));
               }}
             />
+            <Tools
+              element={selected}
+              onChange={(element) => {
+                setElements((prevElements) => prevElements.map((el) => (el.id === element.id ? element : el)));
+              }}
+            />
           </div>
         </div>
-
-        <Tools
-          element={selected}
-          onChange={(element) => {
-            setElements((prevElements) => prevElements.map((el) => (el.id === element.id ? element : el)));
-          }}
-        />
       </div>
     </DndContext>
   );

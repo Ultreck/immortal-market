@@ -24,7 +24,7 @@ import { useEffect } from 'react';
 import { useDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
 import CreateTemplatePage from '@/pages/CreateTemplatePage.jsx';
-import BusinessTemplate from './pages/business/Template.jsx';
+import TemplatesPage from './pages/TemplatesPage.jsx';
 import ReportPage from './pages/ReportPage.jsx';
 import TeamPage from '@/pages/TeamPage.jsx';
 import ProjectDashboardPage from './pages/ProjectDashboard.jsx';
@@ -60,15 +60,13 @@ const App = () => {
           <Route path="" element={<OverviewPage />} />
           <Route path="/overview" element={<Navigate to="/" replace />} />
           <Route path="projects" element={<ProjectPage />} />
-          <Route path="templates" element={<BusinessTemplate />} />
+          <Route path="templates" element={<TemplatesPage />} />
+          <Route path="templates/create" element={<CreateTemplatePage />} />
           <Route path="dashboards" element={<ProjectDashboardPage />} />
           <Route path="fieldforce" element={<FindDataPage />} />
           <Route path="plans" element={<PlanPage />} />
           <Route path="team" element={<TeamPage />} />
           <Route path="reports" element={<ReportPage />} />
-          <Route path="templates" element={<></>} />
-          <Route path="team" element={<></>} />
-          <Route path="demo" element={<CreateTemplatePage />} />
           <Route path="settings" element={<></>} />
         </Route>
 

@@ -10,7 +10,7 @@ const Underline = ({ element, onChange }) => {
       aria-label="Underline/unbold text"
       onClick={() => {
         const style = { ...element.style };
-        style.textDecoration = style.textDecoration === 'underline' ? 'normal' : 'underline';
+        style.textDecoration = style.textDecoration === 'underline' ? 'none' : 'underline';
         onChange({ ...element, style });
       }}
     >

@@ -59,8 +59,8 @@ const items = [
       text: 'Heading',
       width: 400,
       height: 36,
-      style: { fontSize: 28, fontWeight: 'bold' },
-      tools: ['bold', 'italic', 'underline'],
+      style: { fontSize: 28, fontWeight: 'bold', color: '#000000' },
+      tools: ['bold', 'italic', 'underline', 'font-size', 'text-color'],
     },
   },
   {
@@ -73,8 +73,8 @@ const items = [
       text: 'Text',
       width: 300,
       height: 20,
-      style: { fontSize: 16, fontWeight: 'normal' },
-      tools: ['bold', 'italic', 'underline'],
+      style: { fontSize: 16, fontWeight: 'normal', color: '#000000' },
+      tools: ['bold', 'italic', 'underline', 'font-size', 'text-color'],
     },
   },
   {
