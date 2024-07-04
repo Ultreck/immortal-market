@@ -1,7 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
 import { mergeRefs } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import { RiCircleLine, RiFontFamily, RiHeading2, RiPieChart2Line } from 'react-icons/ri';
+import { elementIcons } from '@/lib/elementIcons';
 
 const DraggableElement = ({ element }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging, setActivatorNodeRef } = useDraggable({
@@ -53,7 +53,7 @@ const items = [
     id: 'heading',
     type: 'heading',
     name: 'Heading',
-    icon: <RiHeading2 size="20" />,
+    icon: <elementIcons.heading size={20} />,
     data: {
       type: 'heading',
       text: 'Heading',
@@ -67,7 +67,7 @@ const items = [
     id: 'text',
     type: 'text',
     name: 'Text',
-    icon: <RiFontFamily size="20" />,
+    icon: <elementIcons.text size={20} />,
     data: {
       type: 'text',
       text: 'Text',
@@ -81,15 +81,43 @@ const items = [
     id: 'chart',
     type: 'chart',
     name: 'Chart',
-    icon: <RiPieChart2Line size="20" />,
+    icon: <elementIcons.chart size={20} />,
     data: { type: 'chart', text: 'Chart', width: 400, height: 400 },
   },
   {
     id: 'logo',
     type: 'logo',
     name: 'Logo',
-    icon: <RiCircleLine size="20" />,
+    icon: <elementIcons.logo size={20} />,
     data: { type: 'logo', text: 'Logo', width: 120, height: 0 },
+  },
+  {
+    id: 'circle',
+    type: 'circle',
+    name: 'Circle',
+    icon: <elementIcons.circle size={20} />,
+    data: {
+      backgroundColor: '#000000',
+      type: 'circle',
+      text: 'Circle',
+      width: 120,
+      height: 120,
+      tools: ['background-color'],
+    },
+  },
+  {
+    id: 'rectangle',
+    type: 'rectangle',
+    name: 'Rectangle',
+    icon: <elementIcons.rectangle size={20} />,
+    data: {
+      backgroundColor: '#000000',
+      type: 'rectangle',
+      text: 'Rectangle',
+      width: 100,
+      height: 270,
+      tools: ['background-color'],
+    },
   },
 ];
 
@@ -104,3 +132,4 @@ const Elements = () => {
 };
 
 export default Elements;
+
