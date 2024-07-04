@@ -7,7 +7,7 @@ const StartProjectCard = () => {
     <Card className="card-shadow px-8 py-6 flex flex-col justify-center">
       <h4 className="text-xl font-semibold">Start a project</h4>
       <p className="text-md mt-1 opacity-80">A lot of the business cannot do the needful so we are here for you!</p>
-      <div className="flex flex-wrap gap-3 md:gap-4 mt-8 mb-1">
+      <div className="flex flex-wrap gap-x-4 gap-y-3 mt-8 mb-1">
         <Chip
           size="lg"
           variant="flat"

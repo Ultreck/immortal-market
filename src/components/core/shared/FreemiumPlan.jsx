@@ -17,7 +17,7 @@ const FreemiumPlan = () => {
       className="card-shadow px-8 py-6 flex-1"
     >
       <h4 className="text-xl font-semibold">Dashboard View</h4>
-      <p className="text-md mt-1 opacity-70">Get efficient data insigths</p>
+      <p className="text-md mt-1 mb-6 opacity-70">Get efficient data insigths</p>
       <div className="mt-auto">
         <Button
           color="primary"
