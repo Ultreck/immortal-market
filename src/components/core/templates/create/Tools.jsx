@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Underline from '@/components/core/templates/create/tools/Underline.jsx';
 import FontSize from '@/components/core/templates/create/tools/FontSize.jsx';
 import TextColor from '@/components/core/templates/create/tools/TextColor.jsx';
+import BackgroundColor from './tools/BackgroundColor';
 
 const Tools = ({ element, onChange }) => {
   return (
@@ -22,6 +23,8 @@ const Tools = ({ element, onChange }) => {
             if (tool === 'underline') return <Underline key={tool} element={element} onChange={onChange} />;
             if (tool === 'font-size') return <FontSize key={tool} element={element} onChange={onChange} />;
             if (tool === 'text-color') return <TextColor key={tool} element={element} onChange={onChange} />;
+            if (tool === 'background-color')
+              return <BackgroundColor key={tool} element={element} onChange={onChange} />;
             return <></>;
           })}
         </motion.div>
@@ -36,3 +39,4 @@ Tools.propTypes = {
 };
 
 export default Tools;
+

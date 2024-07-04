@@ -6,6 +6,8 @@ import Heading from '@/components/core/templates/create/elements/Heading.jsx';
 import Text from '@/components/core/templates/create/elements/Text.jsx';
 import Chart from '@/components/core/templates/create/elements/Chart.jsx';
 import Logo from '@/components/core/templates/create/elements/Logo.jsx';
+import Circle from './elements/Circle';
+import Rectangle from './elements/Rectangle';
 
 const getElementWidthWithoutPadding = (element) => {
   if (!element) return 0;
@@ -79,6 +81,26 @@ const Canvas = ({ elements, current, onChange, onSelect }) => {
                 width={width}
               />
             )}
+            {element.type === 'circle' && (
+              <Circle
+                root={root}
+                element={element}
+                active={active}
+                onClick={() => handleSelect(element.id)}
+                onChange={onChange}
+                width={width}
+              />
+            )}
+            {element.type === 'rectangle' && (
+              <Rectangle
+                root={root}
+                element={element}
+                active={active}
+                onClick={() => handleSelect(element.id)}
+                onChange={onChange}
+                width={width}
+              />
+            )}
           </Fragment>
         );
       })}
@@ -90,7 +112,8 @@ Canvas.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
-  current: PropTypes.string,
+  current: PropTypes.number,
 };
 
 export default Canvas;
+
