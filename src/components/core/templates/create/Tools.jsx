@@ -24,10 +24,12 @@ const Tools = ({ element, onChange }) => {
             if (tool === 'underline') return <Underline key={tool} element={element} onChange={onChange} />;
             if (tool === 'font-size') return <FontSize key={tool} element={element} onChange={onChange} />;
             if (tool === 'text-color') return <TextColor key={tool} element={element} onChange={onChange} />;
-            if (tool === 'background-color')
+            if (tool === 'background-color') {
               return <BackgroundColor key={tool} element={element} onChange={onChange} />;
-            if (tool === 'chart-selector')
+            }
+            if (tool === 'chart-selector') {
               return <ChartSelector key={tool} element={element} onChange={onChange} />;
+            }
             return <></>;
           })}
         </motion.div>
@@ -42,4 +44,3 @@ Tools.propTypes = {
 };
 
 export default Tools;
-
