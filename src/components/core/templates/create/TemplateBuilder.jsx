@@ -6,6 +6,7 @@ import { Tab, Tabs } from '@nextui-org/react';
 import Elements from '@/components/core/templates/create/Elements.jsx';
 import Layers from '@/components/core/templates/create/Layers.jsx';
 import Tools from '@/components/core/templates/create/Tools.jsx';
+import { useKey } from 'react-use';
 
 const TemplateBuilder = () => {
   const canvas = useRef();
@@ -40,6 +41,17 @@ const TemplateBuilder = () => {
     if (e.target === parent.current && id) handleSelect(null);
   };
 
+  const handleDelete = (elementId) => {
+    setElements((prevElements) => prevElements.filter((item) => item.id !== elementId));
+    setId(null);
+  };
+
+  const handleDeleteKeyPress = () => {
+    setElements((prevElements) => prevElements.filter((item) => item.id !== id));
+  };
+
+  useKey('Backspace', handleDeleteKeyPress, undefined, [id]);
+
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
       <div className="grid grid-cols-[280px_1fr] gap-0 h-screen overflow-hidden">
@@ -56,7 +68,9 @@ const TemplateBuilder = () => {
               <Tab key="layers" title="Layers" className="text-base" />
             </Tabs>
             {tab === 'elements' && <Elements />}
-            {tab === 'layers' && <Layers elements={elements} onSelect={handleSelect} current={id} />}
+            {tab === 'layers' && (
+              <Layers elements={elements} onSelect={handleSelect} current={id} onDelete={handleDelete} />
+            )}
           </div>
         </div>
         <div ref={parent} className="h-full flex flex-col" onClick={handleParentClick}>
@@ -83,3 +97,4 @@ const TemplateBuilder = () => {
 };
 
 export default TemplateBuilder;
+

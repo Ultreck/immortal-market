@@ -1,22 +1,17 @@
 import PropTypes from 'prop-types';
-import { RiCircleLine, RiFontFamily, RiHeading2, RiPieChart2Line } from 'react-icons/ri';
+import { RiCloseFill } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
 import NoData from '@/components/ui/NoData.jsx';
+import { elementIcons } from '../../../../lib/elementIcons';
 
-const icons = {
-  heading: <RiHeading2 size="20" />,
-  text: <RiFontFamily size="20" />,
-  chart: <RiPieChart2Line size="20" />,
-  logo: <RiCircleLine size="20" />,
-};
-
-const Layers = ({ elements, current, onSelect }) => {
+const Layers = ({ elements, current, onSelect, onDelete }) => {
   return (
     <>
       {elements.length > 0 ? (
         <div className="space-y-1">
           {elements.map((element) => {
             const active = element.id === current;
+            const IconComponent = elementIcons[element.type];
             return (
               <div
                 key={element.id}
@@ -26,13 +21,18 @@ const Layers = ({ elements, current, onSelect }) => {
               >
                 <div
                   className={cn(
-                    'relative rounded-xl px-4 py-4 flex items-center space-x-2 cursor-pointer',
+                    'relative rounded-xl px-4 py-4 flex items-center space-x-2 cursor-pointer justify-between',
                     'bg-default-200/60 hover:bg-default-200 dark:bg-default-50/80 dark:hover:bg-default-100'
                   )}
                   onClick={() => onSelect(element.id)}
                 >
-                  <span className="opacity-60">{icons[element.type]}</span>
-                  <span className="truncate">{element.text}</span>
+                  <div className="flex items-center space-x-2">
+                    <span className="opacity-60">
+                      <IconComponent size={20} />
+                    </span>
+                    <span className="truncate">{element.text}</span>
+                  </div>
+                  <RiCloseFill color="white" className="block" onClick={() => onDelete(element.id)} />
                 </div>
               </div>
             );
@@ -54,7 +54,9 @@ Layers.propTypes = {
     })
   ),
   onSelect: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   current: PropTypes.string,
 };
 
 export default Layers;
+
