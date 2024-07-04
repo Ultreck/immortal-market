@@ -1,79 +1,100 @@
-import { Card } from "@nextui-org/react"
-import {IconPlus } from "@tabler/icons-react"
-import { RiFileExcel2Line } from "react-icons/ri";
-import { TbFileTypeCsv, TbFileTypePdf } from "react-icons/tb";
-import { MdOutlineFolderZip } from "react-icons/md";
-import OracleIcon from '/images/oracleImg.png'
-import SQLServerIcon from '/images/sqlserver.png'
-import SQLIcon from '/images/sql.png'
-
-
-
+import { Card, Chip } from '@nextui-org/react';
+import { RiFileExcel2Line } from 'react-icons/ri';
+import { TbBrandMongodb, TbFileTypeCsv, TbFileTypePdf, TbFileZip, TbPlus, TbSql } from 'react-icons/tb';
 
 const StartProjectCard = () => {
   return (
-    <Card
-    hover
-    role="button"
-    tabIndex={0}
-    aria-label="Upload a new document"
-    aria-describedby="Upload a new document"
-    aria-hidden={false}
-    aria-disabled={false}
-    className="px-6 py-6 flex flex-col  justify-center cursor-pointer"
-    >
-        <p className="text-ellipsis whitespace-nowrap overflow-hidden text-2xl  font-medium dark:text-white/90">
-            Start a project
-        </p>
-        <p className="text-sm mt-0.5 opacity-80 mb-10 dark:text-white/80">A lot of the business can not do the needful so we are here for you!</p>
-
-        <div className="flex flex-wrap gap-3 md:gap-6 items-center justify-center ">
-            <div className="w-20 h-20 rounded-full flex items-center justify-center bg-green-700 text-white text-xl md:text-3xl font-semibold">
-                <RiFileExcel2Line
-                size="36"
-                className="bg-gradient-to-r from-green-700 to--600 bg-clip-text text-white"
-                />
-            </div>
-
-            <div className="w-20 h-20 rounded-full flex items-center justify-center border-2 border-green-700 text-white text-xl md:text-3xl font-semibold">
-                <TbFileTypeCsv
-                size="36"
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-green-700"
-                />
-            </div>
-            <div className="w-20 h-20 rounded-full flex items-center justify-center bg-red-500 text-white text-xl md:text-3xl font-semibold">
-                <TbFileTypePdf
-                size="36"
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-white"
-                />
-            </div>
-            <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[#0f86c5] text-white text-xl md:text-3xl font-semibold">
-                <MdOutlineFolderZip
-                size="36"
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-white"
-                />
-            </div>
-            <div className="w-20 h-20 rounded-full flex items-center justify-center bg-red-900 text-white text-xl md:text-3xl font-semibold">
-                <img src={OracleIcon} alt=""  className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-blue-600" />
-            </div>
-            <div className=" min-w-20 min-h-20 rounded-full">
-                <img src={SQLIcon} alt="" style={{width: '90px'}}   className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-blue-600 bg-red-800  " />
-            </div>
-            <div className="w-20 h-20 rounded-full flex items-center justify-center  text-white text-xl md:text-3xl font-semibold">
-                <img src={SQLServerIcon} alt=""  className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-blue-600 rounded-full" />
-            </div>
-           
-            <div className="w-20 h-20 rounded-full flex items-center justify-center bg-blue-50 text-white text-xl md:text-3xl font-semibold border border-gray-500">
-                <IconPlus
-                size="36"
-                className="text-gray-500"
-                />
-            </div>
-        </div>
-
-       
+    <Card className="card-shadow px-8 py-6 flex flex-col justify-center">
+      <h4 className="text-xl font-semibold">Start a project</h4>
+      <p className="text-md mt-1 opacity-80">A lot of the business cannot do the needful so we are here for you!</p>
+      <div className="flex flex-wrap gap-3 md:gap-4 mt-8 mb-1">
+        <Chip
+          size="lg"
+          variant="flat"
+          color="success"
+          onClick={() => null}
+          className="px-2 py-2 h-auto cursor-pointer hover:scale-105 transition-transform"
+        >
+          <div className="flex flex-row items-center space-x-1">
+            <RiFileExcel2Line size="16" />
+            <span>XLSX</span>
+          </div>
+        </Chip>
+        <Chip
+          size="lg"
+          variant="flat"
+          color="secondary"
+          onClick={() => null}
+          className="px-2 py-2 h-auto cursor-pointer hover:scale-105 transition-transform"
+        >
+          <div className="flex flex-row items-center space-x-1">
+            <TbFileTypeCsv size="16" />
+            <span>CSV</span>
+          </div>
+        </Chip>
+        <Chip
+          size="lg"
+          variant="flat"
+          color="danger"
+          onClick={() => null}
+          className="px-2 py-2 h-auto cursor-pointer hover:scale-105 transition-transform"
+        >
+          <div className="flex flex-row items-center space-x-1">
+            <TbFileTypePdf size="16" />
+            <span>PDF</span>
+          </div>
+        </Chip>
+        <Chip
+          size="lg"
+          variant="flat"
+          color="warning"
+          onClick={() => null}
+          className="px-2 py-2 h-auto cursor-pointer hover:scale-105 transition-transform"
+        >
+          <div className="flex flex-row items-center space-x-1">
+            <TbBrandMongodb size="16" />
+            <span>Mongo</span>
+          </div>
+        </Chip>
+        <Chip
+          size="lg"
+          variant="flat"
+          color="warning"
+          onClick={() => null}
+          className="px-2 py-2 h-auto cursor-pointer hover:scale-105 transition-transform"
+        >
+          <div className="flex flex-row items-center space-x-1">
+            <TbSql size="16" />
+            <span>SQL</span>
+          </div>
+        </Chip>
+        <Chip
+          size="lg"
+          variant="flat"
+          color="default"
+          onClick={() => null}
+          className="px-2 py-2 h-auto cursor-pointer hover:scale-105 transition-transform"
+        >
+          <div className="flex flex-row items-center space-x-1">
+            <TbFileZip size="16" />
+            <span>Zip</span>
+          </div>
+        </Chip>
+        <Chip
+          size="lg"
+          variant="flat"
+          color="default"
+          onClick={() => null}
+          className="px-2 py-2 h-auto cursor-pointer hover:scale-105 transition-transform"
+        >
+          <div className="flex flex-row items-center space-x-1">
+            <TbPlus size="16" />
+            <span>Others</span>
+          </div>
+        </Chip>
+      </div>
     </Card>
-  )
-}
+  );
+};
 
-export default StartProjectCard
+export default StartProjectCard;

@@ -1,24 +1,26 @@
-import { Button } from "@nextui-org/react"
-import TeamImage from "../../icons/team"
-
+import { Button, Card } from '@nextui-org/react';
+import { HiUsers } from 'react-icons/hi2';
 
 const EngageView = () => {
   return (
-    <div className="border dark:border-zinc-800 flex flex-col p-4 md:p-6 bg-white rounded-xl  dark:bg-[#18181b] gap-10 relative overflow-hidden">
-        <div className="text-[#52658c] tracking-wider text-4xl font-bold">Engage us to gather <br />your business data</div>
+    <Card className="card-shadow px-12 py-10 rounded-xl gap-10 relative overflow-hidden">
+      <div className="text-4xl font-semibold">
+        Engage us to gather <br />
+        your business data
+      </div>
+      <ul className="flex flex-col gap-2 ml-4 list-disc">
+        <li>Select from multiple projects</li>
+        <li>Build your dashboard from template</li>
+        <li>Get notified realtime.</li>
+      </ul>
+      <Button className="mr-auto" color="primary" size="lg" radius="full">
+        Start Now
+      </Button>
+      <div className="absolute -bottom-1/4 -right-0 hidden sm:block ">
+        <HiUsers size="260" className="text-warning-100" />
+      </div>
+    </Card>
+  );
+};
 
-        <ul style={{listStyleType:"circle"}} className="flex flex-col gap-2 tracking-wider ml-4">
-            <li>Select from multiple projects</li>
-            <li>Build your dashboard from template</li>
-            <li>Get notified realtime.</li>
-        </ul>
-        <Button className="mr-auto w-40" color="primary" size="lg"    >Start Now</Button>
-
-        <div className="absolute  -right-[16.7rem] top-[4.2rem] hidden sm:block ">
-         <TeamImage big={true}  />
-        </div>
-    </div>
-  )
-}
-
-export default EngageView
+export default EngageView;

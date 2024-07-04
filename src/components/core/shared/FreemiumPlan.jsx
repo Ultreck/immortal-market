@@ -1,39 +1,38 @@
-import { Button, Card } from '@nextui-org/react'
-import TagIcon from '/images/tag.png'
+import { Button, Card } from '@nextui-org/react';
 import useGlobalStore from '@/store/global.js';
-
+import { HiChartPie } from 'react-icons/hi2';
 
 const FreemiumPlan = () => {
   const updateData = useGlobalStore((state) => state.updateData);
 
   return (
     <Card
-    hover
-    role="button"
-    tabIndex={0}
-    aria-label="Upload a new document"
-    aria-describedby="Upload a new document"
-    aria-hidden={false}
-    aria-disabled={false}
-    className="px-6 py-8 flex flex-col  relative space-y-3 "
+      hover
+      role="button"
+      tabIndex={0}
+      aria-label="Upload a new document"
+      aria-describedby="Upload a new document"
+      aria-hidden={false}
+      aria-disabled={false}
+      className="card-shadow px-8 py-6 flex-1"
     >
-    <p className='text-2xl dark:text-white/80'>Dashboard View</p>
-    <p className='text-sm text-gray-500 tracking-widest'>Get efficient data insigths</p>
-    <div className='mr-auto'>
-        <Button color="primary" radius="full" variant="ghost" className="w-full mt-1" size="md" onClick={() => updateData({ isDashboardModalOpen: true })} >
-                Create
+      <h4 className="text-xl font-semibold">Dashboard View</h4>
+      <p className="text-md mt-1 opacity-70">Get efficient data insigths</p>
+      <div className="mt-auto">
+        <Button
+          color="primary"
+          radius="full"
+          variant="ghost"
+          className="text-base"
+          onClick={() => updateData({ isDashboardModalOpen: true })}
+        >
+          Create
         </Button>
-    </div>
-  
+      </div>
 
-
-    <div className="w-36 h-36 rounded-full flex items-center justify-center text-white text-xl md:text-3xl font-semibold absolute right-0 bottom-0">
-        <img src={TagIcon} alt="" className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text" />
-      
-    </div>
-   
+      <HiChartPie size="120" className="absolute right-0 bottom-0 opacity-20 rotate-90" />
     </Card>
-  )
-}
+  );
+};
 
-export default FreemiumPlan
+export default FreemiumPlan;

@@ -1,4 +1,3 @@
-
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import EngageView from '../components/core/finddata/EngageView';
@@ -15,11 +14,11 @@ const FindDataPage = () => {
         ]}
         after={<CreateDropdown />}
       />
-      <div className="container py-8">
-            <div className='flex flex-col space-y-16'>
-                <EngageView/>
-                <OptionsView/>
-            </div>
+      <div className="container py-10">
+        <div className="flex flex-col space-y-12">
+          <EngageView />
+          <OptionsView />
+        </div>
       </div>
     </>
   );

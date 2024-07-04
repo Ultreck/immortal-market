@@ -33,7 +33,7 @@ const DashboardTitle = ({ text, breadcrumbs = [], className, after, ...props }) 
             {after}
           </div>
         </div>
-        <Divider />
+        <Divider className="bg-default-200 dark:bg-default-100" />
       </div>
     </div>
   );
