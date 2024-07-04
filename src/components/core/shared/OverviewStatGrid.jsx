@@ -6,7 +6,7 @@ import { DollarIcon } from '../../icons/dollar';
 const OverviewStatGrid = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <Card className="card-shadow py-5 flex flex-col gap-4 items-center">
+      <Card className="card-shadow py-6 flex flex-col gap-4 items-center">
         <ClockIcon />
         <div className="flex gap-4 items-center">
           <h4 className="text-4xl font-bold tracking-wider text-gray-700 dark:text-gray-300 ">3.6k</h4>
@@ -19,7 +19,7 @@ const OverviewStatGrid = () => {
           </div>
         </div>
       </Card>
-      <Card className="card-shadow py-5 flex flex-col gap-4 items-center">
+      <Card className="card-shadow py-6 flex flex-col gap-4 items-center">
         <DollarIcon />
         <div className="flex gap-4 items-center">
           <h4 className="text-4xl font-bold tracking-wider text-gray-700 dark:text-gray-300 ">$12.3k</h4>

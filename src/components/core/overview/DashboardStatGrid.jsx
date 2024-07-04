@@ -8,10 +8,10 @@ const DashboardStatGrid = () => {
     <div className="grid md:grid-cols-2 gap-6 md:gap-6">
       <div className="space-y-6 flex flex-col">
         <OverviewStatGrid />
-        <OverviewChart />
+        <StartProjectCard />
       </div>
       <div className="space-y-6 flex flex-col">
-        <StartProjectCard />
+        <OverviewChart />
         <FreemiumPlan />
       </div>
     </div>

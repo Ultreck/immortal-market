@@ -33,14 +33,14 @@ const DoughnutChart = ({ data }) => {
   };
 
   return (
-    <ResponsiveContainer width="100%" height={190}>
+    <ResponsiveContainer width="100%" height={200}>
       <PieChart>
         <Pie
           data={data}
           cx="50%"
           cy="50%"
           innerRadius={50}
-          outerRadius={64}
+          outerRadius={68}
           paddingAngle={0}
           dataKey="value"
           onClick={onPieClick}
