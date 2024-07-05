@@ -2,7 +2,7 @@ import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
 import { IconFileInvoice } from '@tabler/icons-react';
-import { TbCrown, TbDatabaseSearch, TbLayout, TbLayoutList, TbSettings2, TbUsers } from 'react-icons/tb';
+import { TbCrown, TbInputAi, TbLayout, TbLayoutList, TbSettings2, TbTableExport, TbUsers } from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
@@ -20,9 +20,9 @@ const Sidebar = () => {
         {[
           { name: 'Overview', href: '/', icon: <TbLayout size="20" /> },
           { name: 'Projects', href: '/projects', icon: <TbLayoutList size="20" /> },
-          // { name: 'Dashboards', href: '/dashboards', icon: <TbLayout2 size="20" /> },
           { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
-          { name: 'Fieldforce', href: '/fieldforce', icon: <TbDatabaseSearch size="20" /> },
+          { name: 'Ai Assistant', href: '/assistant', icon: <TbInputAi size="20" /> },
+          { name: 'Outsource', href: '/outsource', icon: <TbTableExport size="20" /> },
         ].map((item) => (
           <NavLink
             key={item.href}

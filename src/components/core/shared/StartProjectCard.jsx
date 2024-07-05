@@ -64,7 +64,7 @@ const StartProjectCard = () => {
           onClick={() => null}
           radius="full"
           className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
-          title="SQL"
+          title="Link"
         >
           <div className="flex flex-row items-center space-x-1 text-cyan-500">
             <TbLink size="28" />

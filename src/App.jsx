@@ -28,11 +28,12 @@ import TemplatesPage from './pages/TemplatesPage.jsx';
 import ReportPage from './pages/ReportPage.jsx';
 import TeamPage from '@/pages/TeamPage.jsx';
 import ProjectDashboardPage from './pages/ProjectDashboard.jsx';
-import FindDataPage from './pages/FindDataPage.jsx';
+import OutsourcePage from './pages/OutsourcePage.jsx';
 import PlanPage from './pages/PlanPage.jsx';
 import SettingsLayout from '@/pages/settings/SettingsLayout.jsx';
 import BusinessSettingsPage from '@/pages/settings/BusinessSettingsPage.jsx';
 import AppearanceSettingsPage from '@/pages/settings/AppearanceSettingsPage.jsx';
+import AiAssistantPage from '@/pages/AiAssistantPage.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -66,10 +67,11 @@ const App = () => {
           <Route path="templates" element={<TemplatesPage />} />
           <Route path="templates/create" element={<CreateTemplatePage />} />
           <Route path="dashboards" element={<ProjectDashboardPage />} />
-          <Route path="fieldforce" element={<FindDataPage />} />
+          <Route path="outsource" element={<OutsourcePage />} />
           <Route path="plans" element={<PlanPage />} />
           <Route path="team" element={<TeamPage />} />
           <Route path="reports" element={<ReportPage />} />
+          <Route path="assistant" element={<AiAssistantPage />} />
           <Route path="settings" element={<SettingsLayout />}>
             <Route path="" element={<Navigate to="/settings/business" replace />} />
             <Route path="business" element={<BusinessSettingsPage />} />
