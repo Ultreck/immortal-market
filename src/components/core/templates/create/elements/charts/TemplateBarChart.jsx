@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Bar, BarChart, CartesianGrid, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const data = [
@@ -45,28 +46,58 @@ const data = [
   },
 ];
 
-const TemplateBarChart = () => (
-  <ResponsiveContainer width="100%" height="100%">
-    <BarChart
-      width={500}
-      height={300}
-      data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-      <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
-    </BarChart>
-  </ResponsiveContainer>
-);
+const TemplateBarChart = ({ element }) => {
+  const firstObject = data[0];
+  const keys = Object.keys(firstObject);
+  const firstKey = keys[0];
+  const secondKey = keys[1];
+
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart
+        width={500}
+        height={300}
+        data={element.chartSettings.data || data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey={element.chartSettings.xAxis || firstKey} />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar
+          dataKey={element.chartSettings.yAxis || secondKey}
+          fill="#8884d8"
+          activeBar={<Rectangle fill="pink" stroke="blue" />}
+        />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+
+TemplateBarChart.propTypes = {
+  element: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    style: PropTypes.object,
+    chartSettings: PropTypes.object.isRequired,
+  }),
+  active: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  width: PropTypes.number,
+  root: PropTypes.any.isRequired,
+};
 
 export default TemplateBarChart;
+

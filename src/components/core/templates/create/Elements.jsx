@@ -82,7 +82,19 @@ const items = [
     type: 'chart',
     name: 'Chart',
     icon: <elementIcons.chart size={20} />,
-    data: { type: 'chart', text: 'Chart', width: 400, height: 400 },
+    data: {
+      type: 'chart',
+      text: 'Chart',
+      width: 400,
+      height: 400,
+      chartSettings: {
+        chartType: 'bar',
+        xAxis: null,
+        yAxis: null,
+        data: null,
+      },
+      tools: ['chart-selector'],
+    },
   },
   {
     id: 'logo',

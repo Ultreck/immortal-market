@@ -110,3 +110,12 @@ export const mergeRefs = (...refs) => {
     });
   };
 };
+
+export const getKeysFromJson = (jsonString) => {
+  try {
+    const parsedValue = JSON.parse(jsonString);
+    return Array.isArray(parsedValue) ? Object.keys(parsedValue[0]) : [];
+  } catch (error) {
+    return [];
+  }
+};
