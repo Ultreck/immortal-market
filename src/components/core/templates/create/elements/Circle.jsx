@@ -1,22 +1,13 @@
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { useMount } from 'react-use';
 
-const Circle = ({ element, root, active, width, onClick, onChange }) => {
+const Circle = ({ element, active, width, onClick, onChange }) => {
   const circle = useRef(null);
-
-  useMount(() => {
-    if (element.height <= 0) {
-      onChange({ ...element, height: circle.current.scrollHeight });
-    }
-  });
-
 
   return (
     <ElementWrapper
       element={element}
-      root={root}
       onClick={onClick}
       onChange={onChange}
       onResize={(size) => {
@@ -56,4 +47,3 @@ Circle.propTypes = {
 };
 
 export default Circle;
-

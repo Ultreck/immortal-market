@@ -18,8 +18,6 @@ const TemplateBuilder = () => {
 
   const selected = elements.find((el) => el.id === id);
 
-  const handleSelect = (v) => setId(v);
-
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent } = event;
     if (over && over.id === 'canvas') {
@@ -37,6 +35,8 @@ const TemplateBuilder = () => {
     }
   };
 
+  const handleSelect = (v) => setId(v);
+
   const handleParentClick = (e) => {
     if (e.target === parent.current && id) handleSelect(null);
   };
@@ -46,11 +46,7 @@ const TemplateBuilder = () => {
     setId(null);
   };
 
-  const handleDeleteKeyPress = () => {
-    setElements((prevElements) => prevElements.filter((item) => item.id !== id));
-  };
-
-  useKey('Backspace', handleDeleteKeyPress, undefined, [id]);
+  useKey('Delete', () => handleDelete(id), undefined, [id]);
 
   const handleChange = useCallback((element) => {
     setElements((prevElements) => prevElements.map((el) => (el.id === element.id ? element : el)));
@@ -89,4 +85,3 @@ const TemplateBuilder = () => {
 };
 
 export default TemplateBuilder;
-

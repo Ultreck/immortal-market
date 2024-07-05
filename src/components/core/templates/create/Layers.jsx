@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import { RiCloseFill } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
 import NoData from '@/components/ui/NoData.jsx';
-import { elementIcons } from '../../../../lib/elementIcons';
+import { createElement } from 'react';
+import _elements from '@/lib/elements.js';
+import { Button } from '@nextui-org/react';
 
 const Layers = ({ elements, current, onSelect, onDelete }) => {
   return (
@@ -11,7 +13,8 @@ const Layers = ({ elements, current, onSelect, onDelete }) => {
         <div className="space-y-1">
           {elements.map((element) => {
             const active = element.id === current;
-            const IconComponent = elementIcons[element.type];
+            const icon = _elements.find((e) => e.type === element.type).icon;
+
             return (
               <div
                 key={element.id}
@@ -21,18 +24,18 @@ const Layers = ({ elements, current, onSelect, onDelete }) => {
               >
                 <div
                   className={cn(
-                    'relative rounded-xl px-4 py-4 flex items-center space-x-2 cursor-pointer justify-between',
+                    'relative rounded-xl px-4 py-1 flex items-center space-x-2 cursor-pointer justify-between',
                     'bg-default-200/60 hover:bg-default-200 dark:bg-default-50/80 dark:hover:bg-default-100'
                   )}
                   onClick={() => onSelect(element.id)}
                 >
                   <div className="flex items-center space-x-2">
-                    <span className="opacity-60">
-                      <IconComponent size={20} />
-                    </span>
+                    <span className="opacity-60">{createElement(icon, { size: 20 })}</span>
                     <span className="truncate">{element.text}</span>
                   </div>
-                  <RiCloseFill color="white" className="block" onClick={() => onDelete(element.id)} />
+                  <Button isIconOnly variant="light">
+                    <RiCloseFill size={20} className="block" onClick={() => onDelete(element.id)} />
+                  </Button>
                 </div>
               </div>
             );
@@ -59,4 +62,3 @@ Layers.propTypes = {
 };
 
 export default Layers;
-

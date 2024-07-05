@@ -1,7 +1,18 @@
 import { useDraggable } from '@dnd-kit/core';
 import { mergeRefs } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import { elementIcons } from '@/lib/elementIcons';
+import { createElement } from 'react';
+import elements from '@/lib/elements.js';
+
+const Elements = () => {
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {elements.map((element) => (
+        <DraggableElement key={element.id} element={element} />
+      ))}
+    </div>
+  );
+};
 
 const DraggableElement = ({ element }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging, setActivatorNodeRef } = useDraggable({
@@ -18,15 +29,15 @@ const DraggableElement = ({ element }) => {
       {...attributes}
     >
       <div className="cursor-grab flex flex-col items-center justify-center pointer-events-none">
-        <span>{element.icon}</span>
+        <span>{createElement(element.icon, { size: 20 })}</span>
         <span className="mt-1">{element.name}</span>
       </div>
       {isDragging && (
         <div
-          className="absolute z-[1] top-0 left-0 bg-default-200/60 dark:bg-default-50/80 flex items-center space-x-2 px-4 py-2 w-full rounded-xl"
+          className="absolute z-[1] top-0 left-0 bg-default-200/60 dark:bg-default-50/80 flex items-center space-x-2 px-4 py-2 w-min rounded-xl"
           style={{ ...style }}
         >
-          {element.icon}
+          {createElement(element.icon, { size: 20 })}
           <span>{element.name}</span>
         </div>
       )}
@@ -38,7 +49,7 @@ DraggableElement.propTypes = {
   element: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    icon: PropTypes.element.isRequired,
+    icon: PropTypes.any.isRequired,
     data: PropTypes.shape({
       type: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
@@ -48,100 +59,4 @@ DraggableElement.propTypes = {
   }),
 };
 
-const items = [
-  {
-    id: 'heading',
-    type: 'heading',
-    name: 'Heading',
-    icon: <elementIcons.heading size={20} />,
-    data: {
-      type: 'heading',
-      text: 'Heading',
-      width: 400,
-      height: 36,
-      style: { fontSize: 28, fontWeight: 'bold', color: '#000000' },
-      tools: ['bold', 'italic', 'underline', 'font-size', 'text-color'],
-    },
-  },
-  {
-    id: 'text',
-    type: 'text',
-    name: 'Text',
-    icon: <elementIcons.text size={20} />,
-    data: {
-      type: 'text',
-      text: 'Text',
-      width: 300,
-      height: 20,
-      style: { fontSize: 16, fontWeight: 'normal', color: '#000000' },
-      tools: ['bold', 'italic', 'underline', 'font-size', 'text-color'],
-    },
-  },
-  {
-    id: 'chart',
-    type: 'chart',
-    name: 'Chart',
-    icon: <elementIcons.chart size={20} />,
-    data: {
-      type: 'chart',
-      text: 'Chart',
-      width: 400,
-      height: 400,
-      chartSettings: {
-        chartType: 'bar',
-        xAxis: null,
-        yAxis: null,
-        data: null,
-      },
-      tools: ['chart-selector'],
-    },
-  },
-  {
-    id: 'logo',
-    type: 'logo',
-    name: 'Logo',
-    icon: <elementIcons.logo size={20} />,
-    data: { type: 'logo', text: 'Logo', width: 120, height: 0 },
-  },
-  {
-    id: 'circle',
-    type: 'circle',
-    name: 'Circle',
-    icon: <elementIcons.circle size={20} />,
-    data: {
-      backgroundColor: '#000000',
-      type: 'circle',
-      text: 'Circle',
-      width: 120,
-      height: 120,
-      tools: ['background-color'],
-    },
-  },
-  {
-    id: 'rectangle',
-    type: 'rectangle',
-    name: 'Rectangle',
-    icon: <elementIcons.rectangle size={20} />,
-    data: {
-      backgroundColor: '#000000',
-      type: 'rectangle',
-      text: 'Rectangle',
-      width: 100,
-      height: 270,
-      tools: ['background-color'],
-    },
-  },
-];
-
-const Elements = () => {
-  return (
-    <div className="grid grid-cols-2 gap-4">
-      {items.map((element) => (
-        <DraggableElement key={element.id} element={element} />
-      ))}
-    </div>
-  );
-};
-
 export default Elements;
-
