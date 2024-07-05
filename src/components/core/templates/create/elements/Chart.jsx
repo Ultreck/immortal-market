@@ -16,7 +16,7 @@ const Chart = ({ element, root, active, width, onClick, onChange }) => {
       active={active}
       resizeHandles={['se', 'e', 's']}
     >
-      <TemplateBarChart />
+      <TemplateBarChart element={element} />
     </ElementWrapper>
   );
 };
@@ -36,3 +36,4 @@ Chart.propTypes = {
 };
 
 export default Chart;
+
