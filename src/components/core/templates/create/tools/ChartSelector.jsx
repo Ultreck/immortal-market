@@ -58,12 +58,20 @@ const ChartSelector = ({ element, onChange }) => {
   const onSubmit = async (values) => {
     onChange({
       ...element,
-      chartSettings: {
-        ...element.chartSettings,
-        data: JSON.parse(values.chartJson),
-        xAxis: values.xAxis,
-        yAxis: values.yAxis,
-      },
+      chartSettings:
+        element.chartSettings.chartType === 'pie'
+          ? {
+              ...element.chartSettings,
+              data: JSON.parse(values.chartJson),
+              nameKey: values.nameKey,
+              dataKey: values.dataKey,
+            }
+          : {
+              ...element.chartSettings,
+              data: JSON.parse(values.chartJson),
+              xAxis: values["x-axis"],
+              yAxis: values["y-axis"],
+            },
     });
   };
   const handleChartJsonChange = (event) => {
@@ -72,6 +80,8 @@ const ChartSelector = ({ element, onChange }) => {
     setAxisOptions(getKeysFromJson(value));
   };
 
+  const input1 = element.chartSettings.chartType === 'pie' ? 'nameKey' : 'x-axis';
+  const input2 = element.chartSettings.chartType === 'pie' ? 'dataKey' : 'y-axis';
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
@@ -125,11 +135,11 @@ const ChartSelector = ({ element, onChange }) => {
                   onChange={handleChartJsonChange}
                 />
                 <Select
-                  label="X axis"
+                  label={input1}
                   bordered
-                  placeholder="Select x-axis"
-                  {...register('xAxis', { required: 'Please select x-Axis' })}
-                  error={errors?.xAxis?.message}
+                  placeholder={`Select ${input1}`}
+                  {...register(input1, { required: `Please select ${input1}` })}
+                  error={errors?.[input1]?.message}
                   options={axisOptions.map((p) => ({
                     text: p,
                     value: p,
@@ -137,11 +147,11 @@ const ChartSelector = ({ element, onChange }) => {
                   disabled={!axisOptions.length}
                 />
                 <Select
-                  label="Y axis"
+                  label={input2}
                   bordered
-                  placeholder="Select y-axis"
-                  {...register('yAxis', { required: 'Please select y-Axis' })}
-                  error={errors?.yAxis?.message}
+                  placeholder={`Select ${input2}`}
+                  {...register(input2, { required: `Please select ${input2}` })}
+                  error={errors?.[input2]?.message}
                   options={axisOptions.map((p) => ({
                     text: p,
                     value: p,

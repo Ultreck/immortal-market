@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import TemplateBarChart from '@/components/core/templates/create/elements/charts/TemplateBarChart.jsx';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import TemplateLineChart from './charts/TemplateLineChart';
+import TemplatePieChart from './charts/TemplatePieChart';
 
 const Chart = ({ element, root, active, width, onClick, onChange }) => {
   return (
@@ -16,7 +18,9 @@ const Chart = ({ element, root, active, width, onClick, onChange }) => {
       active={active}
       resizeHandles={['se', 'e', 's']}
     >
-      <TemplateBarChart element={element} />
+      {element.chartSettings.chartType === 'bar' && <TemplateBarChart element={element} />}
+      {element.chartSettings.chartType === 'line' && <TemplateLineChart element={element} />}
+      {element.chartSettings.chartType === 'pie' && <TemplatePieChart element={element} />}
     </ElementWrapper>
   );
 };
@@ -27,6 +31,7 @@ Chart.propTypes = {
     type: PropTypes.string.isRequired,
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
+    chartSettings: PropTypes.object.isRequired,
   }),
   active: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
@@ -36,4 +41,3 @@ Chart.propTypes = {
 };
 
 export default Chart;
-
