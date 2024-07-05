@@ -1,7 +1,8 @@
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { useDeepCompareEffect } from 'react-use';
 
 const Text = ({ element, root, active, width, onClick, onChange }) => {
   const input = useRef(null);
@@ -13,7 +14,7 @@ const Text = ({ element, root, active, width, onClick, onChange }) => {
     setMinHeight(input.current.scrollHeight);
   };
 
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     updateInputHeight();
     onChange({ ...element, height: input.current.scrollHeight });
   }, [element, onChange]);

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Canvas from './Canvas.jsx';
 import { DndContext, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
@@ -40,6 +40,10 @@ const TemplateBuilder = () => {
     if (e.target === parent.current && id) handleSelect(null);
   };
 
+  const handleChange = useCallback((element) => {
+    setElements((prevElements) => prevElements.map((el) => (el.id === element.id ? element : el)));
+  }, []);
+
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
       <div className="grid grid-cols-[280px_1fr] gap-0 h-screen overflow-hidden">
@@ -61,20 +65,8 @@ const TemplateBuilder = () => {
         </div>
         <div ref={parent} className="h-full flex flex-col" onClick={handleParentClick}>
           <div ref={canvas} className="my-auto mx-auto">
-            <Canvas
-              current={id}
-              elements={elements}
-              onSelect={handleSelect}
-              onChange={(element) => {
-                setElements((prevElements) => prevElements.map((el) => (el.id === element.id ? element : el)));
-              }}
-            />
-            <Tools
-              element={selected}
-              onChange={(element) => {
-                setElements((prevElements) => prevElements.map((el) => (el.id === element.id ? element : el)));
-              }}
-            />
+            <Canvas current={id} elements={elements} onSelect={handleSelect} onChange={handleChange} />
+            <Tools element={selected} onChange={handleChange} />
           </div>
         </div>
       </div>
