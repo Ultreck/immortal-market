@@ -92,6 +92,8 @@ const items = [
         xAxis: null,
         yAxis: null,
         data: null,
+        nameKey: null,
+        dataKey: null,
       },
       tools: ['chart-selector'],
     },
