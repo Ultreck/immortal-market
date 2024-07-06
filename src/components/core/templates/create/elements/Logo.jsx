@@ -16,7 +16,7 @@ const SsLogo = ({ element, root, active, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
-      root={root}
+      constraints={root}
       onClick={onClick}
       onChange={onChange}
       onResize={(size) => {

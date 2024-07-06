@@ -34,7 +34,13 @@ const elements = [
     type: 'chart',
     name: 'Chart',
     icon: RiPieChart2Line,
-    data: { type: 'chart', text: 'Chart', width: 400, height: 400 },
+    data: {
+      type: 'chart',
+      text: 'Chart',
+      width: 400,
+      height: 400,
+      tools: ['chart-picker'],
+    },
   },
   {
     id: 'logo',
@@ -49,7 +55,7 @@ const elements = [
     name: 'Circle',
     icon: RiCircleFill,
     data: {
-      backgroundColor: '#000000',
+      style: { backgroundColor: '#ccc' },
       type: 'circle',
       text: 'Circle',
       width: 120,

@@ -116,4 +116,3 @@ Canvas.propTypes = {
 };
 
 export default Canvas;
-

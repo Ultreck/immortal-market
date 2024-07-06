@@ -119,3 +119,12 @@ export const getKeysFromJson = (jsonString) => {
     return [];
   }
 };
+
+export const isValidJsonArray = (jsonString) => {
+  try {
+    const parsedValue = JSON.parse(jsonString);
+    return Array.isArray(parsedValue);
+  } catch (e) {
+    return false;
+  }
+};

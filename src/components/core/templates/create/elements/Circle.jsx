@@ -21,7 +21,7 @@ const Circle = ({ element, active, width, onClick, onChange }) => {
     >
       <div ref={circle} className="!h-max">
         <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="30" cy="30" r="30" fill={element.backgroundColor} />
+          <circle cx="30" cy="30" r="30" fill={element.style.backgroundColor} />
         </svg>
       </div>
     </ElementWrapper>
@@ -37,7 +37,7 @@ Circle.propTypes = {
     text: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
+    style: PropTypes.object,
   }),
   active: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,

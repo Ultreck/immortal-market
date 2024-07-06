@@ -6,7 +6,7 @@ import Underline from '@/components/core/templates/create/tools/Underline.jsx';
 import FontSize from '@/components/core/templates/create/tools/FontSize.jsx';
 import TextColor from '@/components/core/templates/create/tools/TextColor.jsx';
 import BackgroundColor from './tools/BackgroundColor';
-import ChartSelector from './tools/ChartSelector';
+import ChartPicker from './tools/ChartPicker.jsx';
 
 const Tools = ({ element, onChange }) => {
   return (
@@ -27,8 +27,8 @@ const Tools = ({ element, onChange }) => {
             if (tool === 'background-color') {
               return <BackgroundColor key={tool} element={element} onChange={onChange} />;
             }
-            if (tool === 'chart-selector') {
-              return <ChartSelector key={tool} element={element} onChange={onChange} />;
+            if (tool === 'chart-picker') {
+              return <ChartPicker key={tool} element={element} onChange={onChange} />;
             }
             return <></>;
           })}

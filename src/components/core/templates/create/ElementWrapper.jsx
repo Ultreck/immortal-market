@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 const ElementWrapper = ({
   element,
-  root,
+  constraints,
   onClick,
   children,
   onEditStart,
@@ -31,7 +31,7 @@ const ElementWrapper = ({
   return (
     <DraggableElement
       position={{ x: element.x, y: element.y }}
-      constraints={root}
+      constraints={constraints}
       onClick={onClick}
       onDragEnd={(event, info) => {
         onChange({ ...element, x: info.point.x, y: info.point.y });
@@ -75,7 +75,7 @@ ElementWrapper.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
   }),
-  root: PropTypes.any.isRequired,
+  constraints: PropTypes.any.isRequired,
   onClick: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,

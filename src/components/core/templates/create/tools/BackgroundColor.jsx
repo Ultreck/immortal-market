@@ -32,7 +32,7 @@ const BackgroundColor = ({ element, onChange }) => {
         <div className="px-4 py-6 w-full">
           <HexColorPicker
             color={element.backgroundColor}
-            onChange={(color) => onChange({ ...element, backgroundColor: color })}
+            onChange={(color) => onChange({ ...element, style: { ...element.style, backgroundColor: color } })}
           />
           <div className="grid grid-cols-6 gap-y-3 gap-x-3 mt-6">
             {colors.map((color, index) => (
@@ -40,7 +40,7 @@ const BackgroundColor = ({ element, onChange }) => {
                 key={index}
                 className="w-[25px] h-[25px] rounded-full hover:scale-105 transition-transform cursor-pointer relative"
                 style={{ backgroundColor: color }}
-                onClick={() => onChange({ ...element, backgroundColor: color })}
+                onClick={() => onChange({ ...element, style: { ...element.style, backgroundColor: color } })}
               >
                 <AnimatePresence mode="wait">
                   {element.backgroundColor === color && (
@@ -78,4 +78,3 @@ BackgroundColor.propTypes = {
 };
 
 export default BackgroundColor;
-

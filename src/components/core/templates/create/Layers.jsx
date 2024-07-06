@@ -24,7 +24,7 @@ const Layers = ({ elements, current, onSelect, onDelete }) => {
               >
                 <div
                   className={cn(
-                    'relative rounded-xl px-4 py-1 flex items-center space-x-2 cursor-pointer justify-between',
+                    'relative rounded-xl px-4 py-2 flex items-center space-x-2 cursor-pointer justify-between',
                     'bg-default-200/60 hover:bg-default-200 dark:bg-default-50/80 dark:hover:bg-default-100'
                   )}
                   onClick={() => onSelect(element.id)}
@@ -33,7 +33,7 @@ const Layers = ({ elements, current, onSelect, onDelete }) => {
                     <span className="opacity-60">{createElement(icon, { size: 20 })}</span>
                     <span className="truncate">{element.text}</span>
                   </div>
-                  <Button isIconOnly variant="light">
+                  <Button isIconOnly variant="light" size="sm" radius="full">
                     <RiCloseFill size={20} className="block" onClick={() => onDelete(element.id)} />
                   </Button>
                 </div>
