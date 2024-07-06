@@ -16,7 +16,7 @@ const Tools = ({ element, onChange }) => {
           initial={{ opacity: 0, x: '100%' }}
           animate={{ opacity: 1, x: 4 }}
           exit={{ opacity: 0, x: '100%' }}
-          className="fixed top-1/3 right-4 rounded-2xl bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
+          className="fixed top-1/3 right-4 rounded-2xl bg-default-200/60 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
         >
           {element.tools.map((tool) => {
             if (tool === 'bold') return <Bold key={tool} element={element} onChange={onChange} />;

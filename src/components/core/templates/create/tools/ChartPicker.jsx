@@ -1,6 +1,5 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Textarea } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import { BiLineChart } from 'react-icons/bi';
 import { createElement, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { capitalize, cn, getKeysFromJson, isValidJsonArray } from '@/lib/utils.js';
@@ -26,6 +25,10 @@ const ChartType = ({ element, onChange, onNext }) => {
     });
   };
 
+  const handleNext = () => {
+    if (element.chart?.type) onNext();
+  };
+
   return (
     <>
       <h2 className="text-lg font-semibold mb-6">Select chart type</h2>
@@ -34,17 +37,23 @@ const ChartType = ({ element, onChange, onNext }) => {
           <div
             key={index}
             className={cn('py-6 bg-default-100 flex flex-col items-center justify-center rounded-xl cursor-pointer', {
-              'bg-primary-500': element.chart?.type === chart.name,
+              'bg-primary-500 text-white': element.chart?.type === chart.name,
               'hover:bg-default-200': element.chart?.type !== chart.name,
             })}
             onClick={() => handleSelectChart(chart)}
           >
-            {createElement(chart.icon, { size: 20 })}
-            <span className="mt-1 capitalize">{chart.name}</span>
+            {createElement(chart.icon, { size: 24 })}
+            <span className="mt-1 capitalize text-base">{chart.name}</span>
           </div>
         ))}
       </div>
-      <Button variant="bordered" onClick={onNext} className="mt-6 text-base" radius="full">
+      <Button
+        variant="bordered"
+        onClick={handleNext}
+        className="mt-6 text-base"
+        radius="full"
+        isDisabled={!element.chart?.type}
+      >
         Next
       </Button>
     </>
@@ -53,7 +62,7 @@ const ChartType = ({ element, onChange, onNext }) => {
 
 const ChartData = ({ element, onChange, onBack }) => {
   const { handleSubmit, watch, control } = useForm({
-    defaultValues: { json: JSON.stringify(element?.chart?.data || [], null, 2) },
+    defaultValues: { json: element?.chart?.data ? JSON.stringify(element.chart.data, null, 2) : '' },
   });
   const chart = types.find((type) => type.name === element.chart.type);
   const keys = getKeysFromJson(watch().json);
@@ -141,7 +150,7 @@ const ChartPicker = ({ element, onChange }) => {
     <Popover placement="left" showArrow offset={10} classNames={{ content: 'w-[400px]' }}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <BiLineChart size="20" />
+          <TbChartPie size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent>
