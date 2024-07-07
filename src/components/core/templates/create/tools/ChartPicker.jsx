@@ -153,8 +153,8 @@ const ChartPicker = ({ element, onChange }) => {
           <TbChartPie size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent>
-        <div className="px-6 py-6 w-full">
+      <PopoverContent className="p-0 shadow border border-default-200">
+        <div className="px-8 py-6 w-full">
           {view === 'type' && <ChartType element={element} onChange={onChange} onNext={() => setView('data')} />}
           {view === 'data' && <ChartData element={element} onChange={onChange} onBack={() => setView('type')} />}
         </div>

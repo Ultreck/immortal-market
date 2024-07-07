@@ -12,7 +12,7 @@ const FontSize = ({ element, onChange }) => {
           <TbTextSize size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-4 py-2 w-full">
           <div className="gap-2 w-full flex items-center">
             <Button

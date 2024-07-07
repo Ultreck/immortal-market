@@ -28,7 +28,7 @@ const BackgroundColor = ({ element, onChange }) => {
           <FaFillDrip size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-4 py-6 w-full">
           <HexColorPicker
             color={element.backgroundColor}
