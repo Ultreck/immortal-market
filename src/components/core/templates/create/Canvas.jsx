@@ -1,13 +1,14 @@
 import { useDroppable } from '@dnd-kit/core';
-import PropTypes from 'prop-types';
-import { Fragment, useEffect, useRef, useState } from 'react';
-import { mergeRefs } from '@/lib/utils.js';
+import { Fragment, useEffect, useState } from 'react';
+import { cn } from '@/lib/utils.js';
 import Heading from '@/components/core/templates/create/elements/Heading.jsx';
 import Text from '@/components/core/templates/create/elements/Text.jsx';
 import Chart from '@/components/core/templates/create/elements/Chart.jsx';
 import Logo from '@/components/core/templates/create/elements/Logo.jsx';
 import Circle from './elements/Circle';
 import Rectangle from './elements/Rectangle';
+import useTemplateStore from '@/store/template.js';
+import { useKey } from 'react-use';
 
 const getElementWidthWithoutPadding = (element) => {
   if (!element) return 0;
@@ -15,89 +16,106 @@ const getElementWidthWithoutPadding = (element) => {
   return element.clientWidth - parseFloat(computedStyle.paddingLeft) - parseFloat(computedStyle.paddingRight);
 };
 
-const Canvas = ({ elements, current, onChange, onSelect }) => {
-  const root = useRef();
+const Canvas = () => {
   const [width, setWidth] = useState(0);
-  const { setNodeRef } = useDroppable({ id: 'canvas' });
+  const { setNodeRef, node } = useDroppable({ id: 'canvas' });
+  const style = useTemplateStore((state) => state.template.style);
+  const elements = useTemplateStore((state) => state.template.elements);
+  const selected = useTemplateStore((state) => state.template.selected);
+  const isCanvasSelected = useTemplateStore((state) => state.template.isCanvasSelected);
+  const selectElement = useTemplateStore((state) => state.selectElement);
+  const selectCanvas = useTemplateStore((state) => state.selectCanvas);
+  const updateElement = useTemplateStore((state) => state.updateElement);
+  const deleteElement = useTemplateStore((state) => state.deleteElement);
 
-  const handleSelect = (id) => onSelect(id);
+  useKey('Delete', () => handleDeleteElement(selected), undefined, [selected]);
 
-  const handleCardClick = (e) => {
-    if (e.target === root.current) onSelect(null);
+  const handleSelectElement = (id) => selectElement(id);
+
+  const handleUpdateElement = (element) => updateElement(element);
+
+  const handleDeleteElement = (id) => deleteElement(id);
+
+  const handleCanvasClick = (e) => {
+    if (e.target === node.current) selectCanvas();
   };
 
   useEffect(() => {
-    const width = getElementWidthWithoutPadding(root.current);
+    const width = getElementWidthWithoutPadding(node.current);
     setWidth(width);
-  }, []);
+  }, [node]);
 
   return (
     <div
-      onClick={handleCardClick}
-      ref={mergeRefs(setNodeRef, root)}
-      className="bg-white text-black border border-default-200 h-[600px] w-[600px] rounded-lg relative overflow-hidden"
+      onClick={handleCanvasClick}
+      ref={setNodeRef}
+      className={cn(
+        'bg-white border-3 border-transparent text-black border-default-200 rounded-lg relative overflow-hidden',
+        { 'border-primary-500': isCanvasSelected }
+      )}
+      style={{ ...style }}
     >
       {elements.map((element) => {
-        const active = element.id === current;
+        const active = element.id === selected;
         return (
           <Fragment key={element.id}>
             {element.type === 'heading' && (
               <Heading
-                root={root}
+                root={node}
                 element={element}
                 active={active}
-                onClick={() => handleSelect(element.id)}
-                onChange={onChange}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
                 width={width}
               />
             )}
             {element.type === 'text' && (
               <Text
-                root={root}
+                root={node}
                 element={element}
                 active={active}
-                onClick={() => handleSelect(element.id)}
-                onChange={onChange}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
                 width={width}
               />
             )}
             {element.type === 'chart' && (
               <Chart
-                root={root}
+                root={node}
                 element={element}
                 active={active}
-                onClick={() => handleSelect(element.id)}
-                onChange={onChange}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
                 width={width}
               />
             )}
             {element.type === 'logo' && (
               <Logo
-                root={root}
+                root={node}
                 element={element}
                 active={active}
-                onClick={() => handleSelect(element.id)}
-                onChange={onChange}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
                 width={width}
               />
             )}
             {element.type === 'circle' && (
               <Circle
-                root={root}
+                root={node}
                 element={element}
                 active={active}
-                onClick={() => handleSelect(element.id)}
-                onChange={onChange}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
                 width={width}
               />
             )}
             {element.type === 'rectangle' && (
               <Rectangle
-                root={root}
+                root={node}
                 element={element}
                 active={active}
-                onClick={() => handleSelect(element.id)}
-                onChange={onChange}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
                 width={width}
               />
             )}
@@ -108,11 +126,6 @@ const Canvas = ({ elements, current, onChange, onSelect }) => {
   );
 };
 
-Canvas.propTypes = {
-  elements: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSelect: PropTypes.func.isRequired,
-  current: PropTypes.number,
-};
+Canvas.propTypes = {};
 
 export default Canvas;

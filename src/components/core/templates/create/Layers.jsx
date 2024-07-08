@@ -1,18 +1,23 @@
-import PropTypes from 'prop-types';
 import { RiCloseFill } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
 import NoData from '@/components/ui/NoData.jsx';
 import { createElement } from 'react';
 import _elements from '@/lib/elements.js';
 import { Button } from '@nextui-org/react';
+import useTemplateStore from '@/store/template.js';
 
-const Layers = ({ elements, current, onSelect, onDelete }) => {
+const Layers = () => {
+  const elements = useTemplateStore((state) => state.template.elements);
+  const selected = useTemplateStore((state) => state.template.selected);
+  const selectElement = useTemplateStore((state) => state.selectElement);
+  const deleteElement = useTemplateStore((state) => state.deleteElement);
+
   return (
     <>
       {elements.length > 0 ? (
         <div className="space-y-1">
           {elements.map((element) => {
-            const active = element.id === current;
+            const active = element.id === selected;
             const icon = _elements.find((e) => e.type === element.type).icon;
 
             return (
@@ -27,14 +32,14 @@ const Layers = ({ elements, current, onSelect, onDelete }) => {
                     'relative rounded-xl px-4 py-2 flex items-center space-x-2 cursor-pointer justify-between',
                     'bg-default-200/60 hover:bg-default-200 dark:bg-default-50/80 dark:hover:bg-default-100'
                   )}
-                  onClick={() => onSelect(element.id)}
+                  onClick={() => selectElement(element.id)}
                 >
                   <div className="flex items-center space-x-2">
                     <span className="opacity-60">{createElement(icon, { size: 20 })}</span>
                     <span className="truncate">{element.text}</span>
                   </div>
                   <Button isIconOnly variant="light" size="sm" radius="full">
-                    <RiCloseFill size={20} className="block" onClick={() => onDelete(element.id)} />
+                    <RiCloseFill size={20} className="block" onClick={() => deleteElement(element.id)} />
                   </Button>
                 </div>
               </div>
@@ -48,17 +53,6 @@ const Layers = ({ elements, current, onSelect, onDelete }) => {
   );
 };
 
-Layers.propTypes = {
-  elements: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-    })
-  ),
-  onSelect: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  current: PropTypes.string,
-};
+Layers.propTypes = {};
 
 export default Layers;

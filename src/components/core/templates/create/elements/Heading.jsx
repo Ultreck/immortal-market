@@ -17,7 +17,7 @@ const Heading = ({ element, root, active, width, onClick, onChange }) => {
   useDeepCompareEffect(() => {
     updateInputHeight();
     onChange({ ...element, height: input.current.scrollHeight });
-  }, [element, onChange]);
+  }, [element]);
 
   return (
     <ElementWrapper

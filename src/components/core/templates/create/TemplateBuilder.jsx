@@ -1,22 +1,21 @@
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Canvas from './Canvas.jsx';
 import { DndContext, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { Tab, Tabs } from '@nextui-org/react';
 import Elements from '@/components/core/templates/create/Elements.jsx';
 import Layers from '@/components/core/templates/create/Layers.jsx';
-import Tools from '@/components/core/templates/create/Tools.jsx';
-import { useKey } from 'react-use';
+import ElementTools from '@/components/core/templates/create/tools/ElementTools.jsx';
+import CanvasTools from '@/components/core/templates/create/tools/CanvasTools.jsx';
+import useTemplateStore from '@/store/template.js';
 
 const TemplateBuilder = () => {
   const canvas = useRef();
   const parent = useRef();
-  const [id, setId] = useState(null);
   const [tab, setTab] = useState('elements');
-  const [elements, setElements] = useState([]);
   const sensors = useSensors(useSensor(MouseSensor));
-
-  const selected = elements.find((el) => el.id === id);
+  const addElement = useTemplateStore((state) => state.addElement);
+  const selectCanvas = useTemplateStore((state) => state.selectCanvas);
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent } = event;
@@ -30,27 +29,13 @@ const TemplateBuilder = () => {
         id: Date.now(),
         ...active.data.current,
       };
-      setElements((prevElements) => [...prevElements, el]);
-      handleSelect(el.id);
+      addElement(el);
     }
   };
 
-  const handleSelect = (v) => setId(v);
-
   const handleParentClick = (e) => {
-    if (e.target === parent.current && id) handleSelect(null);
+    if (e.target === parent.current) selectCanvas(false);
   };
-
-  const handleDelete = (elementId) => {
-    setElements((prevElements) => prevElements.filter((item) => item.id !== elementId));
-    setId(null);
-  };
-
-  useKey('Delete', () => handleDelete(id), undefined, [id]);
-
-  const handleChange = useCallback((element) => {
-    setElements((prevElements) => prevElements.map((el) => (el.id === element.id ? element : el)));
-  }, []);
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
@@ -68,15 +53,14 @@ const TemplateBuilder = () => {
               <Tab key="layers" title="Layers" className="text-base" />
             </Tabs>
             {tab === 'elements' && <Elements />}
-            {tab === 'layers' && (
-              <Layers elements={elements} onSelect={handleSelect} current={id} onDelete={handleDelete} />
-            )}
+            {tab === 'layers' && <Layers />}
           </div>
         </div>
         <div ref={parent} className="h-full flex flex-col" onClick={handleParentClick}>
           <div ref={canvas} className="my-auto mx-auto">
-            <Canvas current={id} elements={elements} onSelect={handleSelect} onChange={handleChange} />
-            <Tools element={selected} onChange={handleChange} />
+            <Canvas />
+            <ElementTools />
+            <CanvasTools />
           </div>
         </div>
       </div>
