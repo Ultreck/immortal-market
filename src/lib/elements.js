@@ -1,4 +1,15 @@
-import { RiCircleFill, RiCircleLine, RiFontFamily, RiHeading2, RiPieChart2Line, RiRectangleFill } from 'react-icons/ri';
+import {
+  RiCircleFill,
+  RiCircleLine,
+  RiFontFamily,
+  RiHeading2,
+  RiPieChart2Line,
+  RiRectangleFill,
+  RiTriangleFill,
+} from 'react-icons/ri';
+import { ImArrowDown, ImArrowLeft, ImArrowRight, ImArrowUp } from 'react-icons/im';
+import { FaArrowsAltV } from "react-icons/fa";
+import { MdOutlineRectangle } from "react-icons/md";
 
 const elements = [
   {
@@ -74,7 +85,7 @@ const elements = [
     name: 'Rectangle',
     icon: RiRectangleFill,
     data: {
-      style: { backgroundColor: '#ccc' },
+      style: { backgroundColor: '#ccc', rotate: '30' },
       type: 'rectangle',
       text: 'Rectangle',
       width: 100,
@@ -83,6 +94,105 @@ const elements = [
     },
     group: 'shape',
   },
+  {
+    id: 'triangle',
+    type: 'triangle',
+    name: 'Triangle',
+    icon: RiTriangleFill,
+    data: {
+      style: { backgroundColor: '#ccc' },
+      type: 'triangle',
+      text: 'Triangle',
+      width: 200,
+      height: 200,
+      tools: ['background-color'],
+    },
+  },
+  {
+    id: 'diagonalRectangle',
+    type: 'diagonalRectangle',
+    name: 'Diagonal',
+    icon: MdOutlineRectangle,
+    data: {
+      style: { backgroundColor: '#ccc' },
+      type: 'diagonalRectangle',
+      text: 'DiagonalRectangle',
+      width: 200,
+      height: 200,
+      tools: ['background-color'],
+    },
+  },
+  {
+    id: 'arrow',
+    type: 'arrow',
+    name: 'Arrow',
+    icon: ImArrowUp,
+    data: {
+      style: { backgroundColor: '#ccc' },
+      type: 'arrow',
+      text: 'Arrow',
+      width: 200,
+      height: 200,
+      tools: ['background-color'],
+    },
+  },
+  {
+    id: 'arrowRight',
+    type: 'arrowRight',
+    name: 'ArrowRight',
+    icon: ImArrowRight,
+    data: {
+      style: { backgroundColor: '#ccc' },
+      type: 'arrowRight',
+      text: 'Arrow Right',
+      width: 200,
+      height: 200,
+      tools: ['background-color'],
+    },
+  },
+  {
+    id: 'arrowDown',
+    type: 'arrowDown',
+    name: 'ArrowDown',
+    icon: ImArrowDown,
+    data: {
+      style: { backgroundColor: '#ccc' },
+      type: 'arrowDown',
+      text: 'Arrow Down',
+      width: 200,
+      height: 200,
+      tools: ['background-color'],
+    },
+  },
+  {
+    id: 'arrowLeft',
+    type: 'arrowLeft',
+    name: 'ArrowLeft',
+    icon: ImArrowLeft,
+    data: {
+      style: { backgroundColor: '#ccc' },
+      type: 'arrowLeft',
+      text: 'Arrow Left',
+      width: 200,
+      height: 200,
+      tools: ['background-color'],
+    },
+  },
+  {
+    id: 'doublearrow',
+    type: 'doublearrow',
+    name: 'Doublearrow',
+    icon: FaArrowsAltV,
+    data: {
+      style: { backgroundColor: '#ccc' },
+      type: 'doublearrow',
+      text: 'Doublearrow',
+      width: 200,
+      height: 200,
+      tools: ['background-color'],
+    },
+  },
 ];
 
 export default elements;
+

@@ -9,6 +9,13 @@ import Circle from './elements/Circle';
 import Rectangle from './elements/Rectangle';
 import useTemplateStore from '@/store/template.js';
 import { useKey } from 'react-use';
+import Triangle from './elements/Triangle';
+import DiagonalRectangle from './elements/DiagonalRectangle';
+import Arrow from './elements/Arrow';
+import DoubleArrow from './elements/DoubleArrow';
+import ArrowRight from './elements/ArrowRight';
+import ArrowDown from './elements/ArrowDown';
+import ArrowLeft from './elements/ArrowLeft';
 
 const getElementWidthWithoutPadding = (element) => {
   if (!element) return 0;
@@ -119,6 +126,76 @@ const Canvas = () => {
                 width={width}
               />
             )}
+            {element.type === 'triangle' && (
+              <Triangle
+                root={node}
+                element={element}
+                active={active}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
+                width={width}
+              />
+            )}
+            {element.type === 'diagonalRectangle' && (
+              <DiagonalRectangle
+                root={node}
+                element={element}
+                active={active}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
+                width={width}
+              />
+            )}
+            {element.type === 'arrow' && (
+              <Arrow
+                root={node}
+                element={element}
+                active={active}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
+                width={width}
+              />
+            )}
+            {element.type === 'arrowRight' && (
+              <ArrowRight
+                root={node}
+                element={element}
+                active={active}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
+                width={width}
+              />
+            )}
+            {element.type === 'arrowDown' && (
+              <ArrowDown
+                root={node}
+                element={element}
+                active={active}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
+                width={width}
+              />
+            )}
+            {element.type === 'arrowLeft' && (
+              <ArrowLeft
+                root={node}
+                element={element}
+                active={active}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
+                width={width}
+              />
+            )}
+            {element.type === 'doublearrow' && (
+              <DoubleArrow
+                root={node}
+                element={element}
+                active={active}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
+                width={width}
+              />
+            )}
           </Fragment>
         );
       })}
@@ -129,3 +206,4 @@ const Canvas = () => {
 Canvas.propTypes = {};
 
 export default Canvas;
+
