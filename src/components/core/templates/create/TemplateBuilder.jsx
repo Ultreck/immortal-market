@@ -7,9 +7,9 @@ import Layers from '@/components/core/templates/create/Layers.jsx';
 import ElementTools from '@/components/core/templates/create/tools/ElementTools.jsx';
 import CanvasTools from '@/components/core/templates/create/tools/CanvasTools.jsx';
 import useTemplateStore from '@/store/template.js';
-import { IoShapes } from 'react-icons/io5';
 import { TbLayoutList } from 'react-icons/tb';
 import { cn } from '@/lib/utils.js';
+import { RiShapesFill } from 'react-icons/ri';
 
 const TemplateBuilder = () => {
   const canvas = useRef();
@@ -46,7 +46,7 @@ const TemplateBuilder = () => {
           <div className="grid grid-cols-[130px_1fr] h-full">
             <div className="px-6 py-5 h-full space-y-3">
               {[
-                { icon: IoShapes, title: 'Elements', key: 'elements' },
+                { icon: RiShapesFill, title: 'Elements', key: 'elements' },
                 { icon: TbLayoutList, title: 'Layers', key: 'layers' },
               ].map((element) => {
                 const active = tab === element.key;

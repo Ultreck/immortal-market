@@ -11,8 +11,8 @@ import useTemplateStore from '@/store/template.js';
 import { useKey } from 'react-use';
 import Triangle from './elements/Triangle';
 import DiagonalRectangle from './elements/DiagonalRectangle';
-import Arrow from './elements/Arrow';
-import DoubleArrow from './elements/DoubleArrow';
+import ArrowUp from './elements/ArrowUp.jsx';
+import ArrowUpDown from './elements/ArrowUpDown.jsx';
 import ArrowRight from './elements/ArrowRight';
 import ArrowDown from './elements/ArrowDown';
 import ArrowLeft from './elements/ArrowLeft';
@@ -136,7 +136,7 @@ const Canvas = () => {
                 width={width}
               />
             )}
-            {element.type === 'diagonalRectangle' && (
+            {element.type === 'diagonal-rectangle' && (
               <DiagonalRectangle
                 root={node}
                 element={element}
@@ -146,8 +146,8 @@ const Canvas = () => {
                 width={width}
               />
             )}
-            {element.type === 'arrow' && (
-              <Arrow
+            {element.type === 'arrow-up' && (
+              <ArrowUp
                 root={node}
                 element={element}
                 active={active}
@@ -156,17 +156,7 @@ const Canvas = () => {
                 width={width}
               />
             )}
-            {element.type === 'arrowRight' && (
-              <ArrowRight
-                root={node}
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'arrowDown' && (
+            {element.type === 'arrow-down' && (
               <ArrowDown
                 root={node}
                 element={element}
@@ -176,7 +166,17 @@ const Canvas = () => {
                 width={width}
               />
             )}
-            {element.type === 'arrowLeft' && (
+            {element.type === 'arrow-right' && (
+              <ArrowRight
+                root={node}
+                element={element}
+                active={active}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
+                width={width}
+              />
+            )}
+            {element.type === 'arrow-left' && (
               <ArrowLeft
                 root={node}
                 element={element}
@@ -186,8 +186,8 @@ const Canvas = () => {
                 width={width}
               />
             )}
-            {element.type === 'doublearrow' && (
-              <DoubleArrow
+            {element.type === 'arrow-up-down' && (
+              <ArrowUpDown
                 root={node}
                 element={element}
                 active={active}
@@ -206,4 +206,3 @@ const Canvas = () => {
 Canvas.propTypes = {};
 
 export default Canvas;
-

@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
 const ArrowRight = ({ element, active, width, onClick, onChange }) => {
-  const arrowRight = useRef(null);
-
   return (
     <ElementWrapper
       element={element}
@@ -17,7 +14,7 @@ const ArrowRight = ({ element, active, width, onClick, onChange }) => {
       active={active}
       resizeHandles={['se']}
     >
-      <div ref={arrowRight} className="!h-max">
+      <div className="!h-max">
         <svg
           id="arrowRight"
           viewBox={`0 0 ${element.width} ${element.height}`}
@@ -53,4 +50,3 @@ ArrowRight.propTypes = {
 };
 
 export default ArrowRight;
-

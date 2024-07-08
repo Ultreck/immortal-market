@@ -51,7 +51,7 @@ DraggableElement.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
   }).isRequired,
-  constraints: PropTypes.any.isRequired,
+  constraints: PropTypes.any,
   onClick: PropTypes.func.isRequired,
   onDragEnd: PropTypes.func.isRequired,
   classNames: PropTypes.shape({

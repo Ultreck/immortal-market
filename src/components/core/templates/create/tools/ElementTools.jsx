@@ -26,16 +26,26 @@ const ElementTools = () => {
           className="fixed top-1/3 right-4 rounded-2xl bg-default-200/60 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
         >
           {element.tools.map((tool) => {
-            if (tool === 'bold') return <Bold key={tool} element={element} onChange={handleUpdateElement} />;
-            if (tool === 'italic') return <Italic key={tool} element={element} onChange={handleUpdateElement} />;
-            if (tool === 'underline') return <Underline key={tool} element={element} onChange={handleUpdateElement} />;
-            if (tool === 'font-size') return <FontSize key={tool} element={element} onChange={handleUpdateElement} />;
-            if (tool === 'text-color') return <TextColor key={tool} element={element} onChange={handleUpdateElement} />;
+            if (tool === 'bold') {
+              return <Bold key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+            }
+            if (tool === 'italic') {
+              return <Italic key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+            }
+            if (tool === 'underline') {
+              return <Underline key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+            }
+            if (tool === 'font-size') {
+              return <FontSize key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+            }
+            if (tool === 'text-color') {
+              return <TextColor key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+            }
             if (tool === 'background-color') {
-              return <BackgroundColor key={tool} element={element} onChange={handleUpdateElement} />;
+              return <BackgroundColor key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
             }
             if (tool === 'chart-picker') {
-              return <ChartPicker key={tool} element={element} onChange={handleUpdateElement} />;
+              return <ChartPicker key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
             }
             return <></>;
           })}

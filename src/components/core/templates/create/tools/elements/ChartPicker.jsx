@@ -173,7 +173,7 @@ const propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     style: PropTypes.object,
-    chart: PropTypes.object.isRequired,
+    chart: PropTypes.object,
   }),
   onChange: PropTypes.func.isRequired,
 };

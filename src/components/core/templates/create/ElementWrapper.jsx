@@ -75,7 +75,7 @@ ElementWrapper.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
   }),
-  constraints: PropTypes.any.isRequired,
+  constraints: PropTypes.any,
   onClick: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,

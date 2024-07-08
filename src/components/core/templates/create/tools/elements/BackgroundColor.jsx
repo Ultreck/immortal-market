@@ -31,7 +31,7 @@ const BackgroundColor = ({ element, onChange }) => {
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-4 py-6 w-full">
           <HexColorPicker
-            color={element.backgroundColor}
+            color={element.style.backgroundColor}
             onChange={(color) => onChange({ ...element, style: { ...element.style, backgroundColor: color } })}
           />
           <div className="grid grid-cols-6 gap-y-3 gap-x-3 mt-6">
@@ -43,7 +43,7 @@ const BackgroundColor = ({ element, onChange }) => {
                 onClick={() => onChange({ ...element, style: { ...element.style, backgroundColor: color } })}
               >
                 <AnimatePresence mode="wait">
-                  {element.backgroundColor === color && (
+                  {element.style.backgroundColor === color && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -72,7 +72,6 @@ BackgroundColor.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     style: PropTypes.object,
-    backgroundColor: PropTypes.string.isRequired,
   }),
   onChange: PropTypes.func.isRequired,
 };

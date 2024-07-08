@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const Arrow = ({ element, active, width, onClick, onChange }) => {
-  const arrow = useRef(null);
-
+const ArrowUp = ({ element, active, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -17,7 +14,7 @@ const Arrow = ({ element, active, width, onClick, onChange }) => {
       active={active}
       resizeHandles={['se']}
     >
-      <div ref={arrow} className="!h-max">
+      <div className="!h-max">
         <svg
           id="arrow"
           viewBox={`0 0 ${element.width} ${element.height}`}
@@ -26,7 +23,6 @@ const Arrow = ({ element, active, width, onClick, onChange }) => {
           style={{ transform: `rotate(${element.style.rotate}deg)` }}
         >
           <polygon
-            // points={`100,0 150,80 125,80 125,170 75,170 75,80 50,80`}
             points={`${element.width / 2},0 ${element.width},80 ${element.width / 1.4},80 ${element.width / 1.4},${element.height} ${element.width - element.width / 1.4},${element.height} ${element.width - element.width / 1.4},80 0,80`}
             fill={element.style.backgroundColor}
           />
@@ -36,7 +32,7 @@ const Arrow = ({ element, active, width, onClick, onChange }) => {
   );
 };
 
-Arrow.propTypes = {
+ArrowUp.propTypes = {
   element: PropTypes.shape({
     id: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
@@ -54,5 +50,4 @@ Arrow.propTypes = {
   root: PropTypes.any.isRequired,
 };
 
-export default Arrow;
-
+export default ArrowUp;

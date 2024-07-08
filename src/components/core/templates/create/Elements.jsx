@@ -50,14 +50,14 @@ const DraggableElement = ({ element }) => {
 
   return (
     <div
-      className="relative bg-default-200/60 hover:bg-default-200 dark:bg-default-100/80 dark:hover:bg-default-100 rounded-xl px-4 py-4"
+      className="relative bg-default-200/60 hover:bg-default-200 dark:bg-default-100/80 dark:hover:bg-default-100 rounded-xl px-4 py-5"
       ref={mergeRefs(setNodeRef, setActivatorNodeRef)}
       {...listeners}
       {...attributes}
     >
-      <div className="cursor-grab flex flex-col items-center justify-center pointer-events-none">
+      <div className="cursor-grab flex flex-col items-center justify-center pointer-events-none text-center h-full">
         <span>{createElement(element.icon, { size: 20 })}</span>
-        <span className="mt-1">{element.name}</span>
+        <span className="text-md leading-tight mt-2">{element.name}</span>
       </div>
       <DragOverlay zIndex={1} dropAnimation={null}>
         {isDragging && (
