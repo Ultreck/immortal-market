@@ -14,6 +14,7 @@ const elements = [
       style: { fontSize: 28, fontWeight: 'bold', color: '#000000' },
       tools: ['bold', 'italic', 'underline', 'font-size', 'text-color'],
     },
+    group: 'text',
   },
   {
     id: 'text',
@@ -28,6 +29,7 @@ const elements = [
       style: { fontSize: 16, fontWeight: 'normal', color: '#000000' },
       tools: ['bold', 'italic', 'underline', 'font-size', 'text-color'],
     },
+    group: 'text',
   },
   {
     id: 'chart',
@@ -41,6 +43,7 @@ const elements = [
       height: 400,
       tools: ['chart-picker'],
     },
+    group: 'visual',
   },
   {
     id: 'logo',
@@ -48,6 +51,7 @@ const elements = [
     name: 'Logo',
     icon: RiCircleLine,
     data: { type: 'logo', text: 'Logo', width: 120, height: 0 },
+    group: 'visual',
   },
   {
     id: 'circle',
@@ -62,6 +66,7 @@ const elements = [
       height: 120,
       tools: ['background-color'],
     },
+    group: 'shape',
   },
   {
     id: 'rectangle',
@@ -74,8 +79,9 @@ const elements = [
       text: 'Rectangle',
       width: 100,
       height: 100,
-      tools: ['background-color'],
+      tools: ['background-color', 'background-image'],
     },
+    group: 'shape',
   },
 ];
 

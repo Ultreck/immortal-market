@@ -26,7 +26,7 @@ const CanvasDimensions = () => {
                 variant="flat"
                 className="text-base"
                 onClick={() => {
-                  const value = width - 10;
+                  const value = style.width - 10;
                   setWidth(value);
                   updateTemplate({ style: { ...style, width: value } });
                 }}
@@ -46,7 +46,9 @@ const CanvasDimensions = () => {
                 variant="flat"
                 className="text-base"
                 onClick={() => {
-                  updateTemplate({ style: { ...style, width: style.width + 10 } });
+                  const value = style.width + 10;
+                  setWidth(value);
+                  updateTemplate({ style: { ...style, width: value } });
                 }}
               >
                 <TbPlus size="20" />
@@ -61,7 +63,9 @@ const CanvasDimensions = () => {
                 variant="flat"
                 className="text-base"
                 onClick={() => {
-                  updateTemplate({ style: { ...style, height: style.height - 1 } });
+                  const value = style.height - 10;
+                  setHeight(value);
+                  updateTemplate({ style: { ...style, height: value } });
                 }}
               >
                 <TbMinus size="20" />
@@ -79,7 +83,9 @@ const CanvasDimensions = () => {
                 variant="flat"
                 className="text-base"
                 onClick={() => {
-                  updateTemplate({ style: { ...style, height: style.height + 1 } });
+                  const value = style.height + 10;
+                  setHeight(value);
+                  updateTemplate({ style: { ...style, height: value } });
                 }}
               >
                 <TbPlus size="20" />

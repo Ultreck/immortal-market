@@ -1,6 +1,5 @@
 import { RiCloseFill } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
-import NoData from '@/components/ui/NoData.jsx';
 import { createElement } from 'react';
 import _elements from '@/lib/elements.js';
 import { Button } from '@nextui-org/react';
@@ -13,7 +12,7 @@ const Layers = () => {
   const deleteElement = useTemplateStore((state) => state.deleteElement);
 
   return (
-    <>
+    <div className="px-4 py-4">
       {elements.length > 0 ? (
         <div className="space-y-1">
           {elements.map((element) => {
@@ -30,7 +29,7 @@ const Layers = () => {
                 <div
                   className={cn(
                     'relative rounded-xl px-4 py-2 flex items-center space-x-2 cursor-pointer justify-between',
-                    'bg-default-200/60 hover:bg-default-200 dark:bg-default-50/80 dark:hover:bg-default-100'
+                    'bg-default-200/60 hover:bg-default-200 dark:bg-default-100/50 dark:hover:bg-default-100'
                   )}
                   onClick={() => selectElement(element.id)}
                 >
@@ -47,9 +46,13 @@ const Layers = () => {
           })}
         </div>
       ) : (
-        <NoData text="No elements. Add some elements to the canvas" />
+        <div className="py-20">
+          <p className="text-center text-sm opacity-80 max-w-[200px] mx-auto">
+            No elements. Add some elements to the canvas
+          </p>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 
