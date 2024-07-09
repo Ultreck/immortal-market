@@ -43,7 +43,7 @@ const TemplateBuilder = () => {
     <DndContext sensors={sensors} onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
       <div className="grid grid-cols-[440px_1fr] gap-0 h-screen overflow-hidden">
         <div className="h-full border-r border-default-200 dark:border-default-100">
-          <div className="grid grid-cols-[130px_1fr] h-full">
+          <div className="grid grid-cols-[130px_1fr] h-screen overflow-y-auto">
             <div className="px-6 py-5 h-full space-y-3">
               {[
                 { icon: RiShapesFill, title: 'Elements', key: 'elements' },

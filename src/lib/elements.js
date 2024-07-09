@@ -9,17 +9,35 @@ import {
   TbCircleFilled,
   TbCursorText,
   TbHeading,
+  TbImageInPicture,
   TbRectangleFilled,
   TbSquareRotatedFilled,
   TbTriangleFilled,
 } from 'react-icons/tb';
+
+export const icons = {
+  heading: TbHeading,
+  text: TbCursorText,
+  chart: TbChartPieFilled,
+  logo: TbCapsuleHorizontalFilled,
+  circle: TbCircleFilled,
+  rectangle: TbRectangleFilled,
+  triangle: TbTriangleFilled,
+  'diagonal-rectangle': TbSquareRotatedFilled,
+  'arrow-up': TbArrowBigUpFilled,
+  'arrow-right': TbArrowBigRightFilled,
+  'arrow-down': TbArrowBigDownFilled,
+  'arrow-left': TbArrowBigLeftFilled,
+  'arrow-up-down': FaArrowsAltV,
+  image: TbImageInPicture,
+};
 
 const elements = [
   {
     id: 'heading',
     type: 'heading',
     name: 'Heading',
-    icon: TbHeading,
+    icon: icons['heading'],
     data: {
       type: 'heading',
       text: 'Heading',
@@ -34,7 +52,7 @@ const elements = [
     id: 'text',
     type: 'text',
     name: 'Text',
-    icon: TbCursorText,
+    icon: icons['text'],
     data: {
       type: 'text',
       text: 'Text',
@@ -49,7 +67,7 @@ const elements = [
     id: 'chart',
     type: 'chart',
     name: 'Chart',
-    icon: TbChartPieFilled,
+    icon: icons['chart'],
     data: {
       type: 'chart',
       text: 'Chart',
@@ -63,7 +81,7 @@ const elements = [
     id: 'logo',
     type: 'logo',
     name: 'Logo',
-    icon: TbCapsuleHorizontalFilled,
+    icon: icons['logo'],
     data: { type: 'logo', text: 'Logo', width: 120, height: 0 },
     group: 'visual',
   },
@@ -71,7 +89,7 @@ const elements = [
     id: 'circle',
     type: 'circle',
     name: 'Circle',
-    icon: TbCircleFilled,
+    icon: icons['circle'],
     data: {
       style: { backgroundColor: '#ccc' },
       type: 'circle',
@@ -86,7 +104,7 @@ const elements = [
     id: 'rectangle',
     type: 'rectangle',
     name: 'Rectangle',
-    icon: TbRectangleFilled,
+    icon: icons['rectangle'],
     data: {
       style: { backgroundColor: '#ccc', rotate: '30' },
       type: 'rectangle',
@@ -101,7 +119,7 @@ const elements = [
     id: 'triangle',
     type: 'triangle',
     name: 'Triangle',
-    icon: TbTriangleFilled,
+    icon: icons['triangle'],
     data: {
       style: { backgroundColor: '#ccc' },
       type: 'triangle',
@@ -116,7 +134,7 @@ const elements = [
     id: 'diagonal-rectangle',
     type: 'diagonal-rectangle',
     name: 'Diagonal Rectangle',
-    icon: TbSquareRotatedFilled,
+    icon: icons['diagonal-rectangle'],
     data: {
       style: { backgroundColor: '#ccc' },
       type: 'diagonal-rectangle',
@@ -131,7 +149,7 @@ const elements = [
     id: 'arrow-up',
     type: 'arrow-up',
     name: 'Arrow Up',
-    icon: TbArrowBigUpFilled,
+    icon: icons['arrow-up'],
     data: {
       style: { backgroundColor: '#ccc' },
       type: 'arrow-up',
@@ -146,7 +164,7 @@ const elements = [
     id: 'arrow-right',
     type: 'arrow-right',
     name: 'Arrow Right',
-    icon: TbArrowBigRightFilled,
+    icon: icons['arrow-right'],
     data: {
       style: { backgroundColor: '#ccc' },
       type: 'arrow-right',
@@ -161,7 +179,7 @@ const elements = [
     id: 'arrow-down',
     type: 'arrow-down',
     name: 'Arrow Down',
-    icon: TbArrowBigDownFilled,
+    icon: icons['arrow-down'],
     data: {
       style: { backgroundColor: '#ccc' },
       type: 'arrow-down',
@@ -176,7 +194,7 @@ const elements = [
     id: 'arrow-left',
     type: 'arrow-left',
     name: 'Arrow Left',
-    icon: TbArrowBigLeftFilled,
+    icon: icons['arrow-left'],
     data: {
       style: { backgroundColor: '#ccc' },
       type: 'arrow-left',
@@ -191,7 +209,7 @@ const elements = [
     id: 'arrow-up-down',
     type: 'arrow-up-down',
     name: 'Arrow UpDown',
-    icon: FaArrowsAltV,
+    icon: icons['arrow-up-down'],
     data: {
       style: { backgroundColor: '#ccc' },
       type: 'arrow-up-down',

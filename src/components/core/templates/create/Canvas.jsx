@@ -16,6 +16,7 @@ import ArrowUpDown from './elements/ArrowUpDown.jsx';
 import ArrowRight from './elements/ArrowRight';
 import ArrowDown from './elements/ArrowDown';
 import ArrowLeft from './elements/ArrowLeft';
+import Image from './elements/Image';
 
 const getElementWidthWithoutPadding = (element) => {
   if (!element) return 0;
@@ -188,6 +189,16 @@ const Canvas = () => {
             )}
             {element.type === 'arrow-up-down' && (
               <ArrowUpDown
+                root={node}
+                element={element}
+                active={active}
+                onClick={() => handleSelectElement(element.id)}
+                onChange={handleUpdateElement}
+                width={width}
+              />
+            )}
+            {element.type === 'image' && (
+              <Image
                 root={node}
                 element={element}
                 active={active}

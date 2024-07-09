@@ -1,7 +1,7 @@
 import { RiCloseFill } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
 import { createElement } from 'react';
-import _elements from '@/lib/elements.js';
+import { icons } from '@/lib/elements.js';
 import { Button } from '@nextui-org/react';
 import useTemplateStore from '@/store/template.js';
 
@@ -17,7 +17,7 @@ const Layers = () => {
         <div className="space-y-1">
           {elements.map((element) => {
             const active = element.id === selected;
-            const icon = _elements.find((e) => e.type === element.type).icon;
+            const icon = icons[element.type];
 
             return (
               <div
