@@ -7,6 +7,7 @@ import TextColor from '@/components/core/templates/create/tools/elements/TextCol
 import BackgroundColor from './elements/BackgroundColor.jsx';
 import ChartPicker from './elements/ChartPicker.jsx';
 import useTemplateStore from '@/store/template.js';
+import TextAlign from './elements/TextAlign.jsx';
 
 const ElementTools = () => {
   const updateElement = useTemplateStore((state) => state.updateElement);
@@ -46,6 +47,9 @@ const ElementTools = () => {
             }
             if (tool === 'chart-picker') {
               return <ChartPicker key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+            }
+            if (tool === 'text-align') {
+              return <TextAlign key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
             }
             return <></>;
           })}
