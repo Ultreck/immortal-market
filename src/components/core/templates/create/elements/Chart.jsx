@@ -6,6 +6,8 @@ import TemplatePieChart from './charts/TemplatePieChart';
 import { HiChartPie } from 'react-icons/hi2';
 
 const Chart = ({ element, root, active, width, onClick, onChange }) => {
+  const hasKeys = Object.keys(element.chart.keys).every((key) => !!element.chart.keys[key]);
+  
   return (
     <ElementWrapper
       element={element}
@@ -19,11 +21,9 @@ const Chart = ({ element, root, active, width, onClick, onChange }) => {
       active={active}
       resizeHandles={['se', 'e', 's']}
     >
-      {element.chart?.type &&
-      element.chart.data &&
-      Object.keys(element.chart.keys).every((key) => !!element.chart.keys[key]) ? (
+      {element.chart?.type && element.chart.data && hasKeys ? (
         <>
-          {element.chart.type === 'bar' && <TemplateBarChart element={element} />}
+          {element.chart.type === 'bar' && <TemplateBarChart element={element} height={element.height} />}
           {element.chart.type === 'line' && <TemplateLineChart element={element} />}
           {element.chart.type === 'pie' && <TemplatePieChart element={element} />}
         </>
@@ -48,6 +48,8 @@ Chart.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
     chart: PropTypes.object,
+    width: PropTypes.number,
+    height: PropTypes.number,
   }),
   active: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,

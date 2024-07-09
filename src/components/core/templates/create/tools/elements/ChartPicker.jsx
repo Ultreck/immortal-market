@@ -60,9 +60,34 @@ const ChartType = ({ element, onChange, onNext }) => {
   );
 };
 
+const data = [
+  {
+    browser: 'chrome',
+    visitors: 187,
+  },
+  {
+    browser: 'safari',
+    visitors: 200,
+  },
+  {
+    browser: 'firefox',
+    visitors: 275,
+  },
+  {
+    browser: 'edge',
+    visitors: 173,
+  },
+  {
+    browser: 'other',
+    visitors: 90,
+  },
+];
+
 const ChartData = ({ element, onChange, onBack }) => {
   const { handleSubmit, watch, control } = useForm({
-    defaultValues: { json: element?.chart?.data ? JSON.stringify(element.chart.data, null, 2) : '' },
+    defaultValues: {
+      json: element?.chart?.data ? JSON.stringify(element.chart.data, null, 2) : JSON.stringify(data, null, 2),
+    },
   });
   const chart = types.find((type) => type.name === element.chart.type);
   const keys = getKeysFromJson(watch().json);

@@ -1,13 +1,20 @@
 import { nextui } from '@nextui-org/react';
+import tailwindAnimate from 'tailwindcss-animate';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: ['class'],
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'],
+  prefix: '',
   theme: {
-    extend: {
-      fontSize: {
-        md: '.9rem',
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
       },
+    },
+    extend: {
       colors: {
         heading: '#071952',
         accent: {
@@ -23,18 +30,27 @@ export default {
           900: '#79310e',
         },
       },
+      fontSize: {
+        md: '.9rem',
+      },
       ringWidth: {
         3: '3px',
       },
-    },
-    container: {
-      center: true,
-      padding: {
-        DEFAULT: '1rem',
-        sm: '2rem',
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
-  darkMode: 'class',
-  plugins: [nextui()],
+  plugins: [tailwindAnimate, nextui()],
 };
