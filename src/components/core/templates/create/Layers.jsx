@@ -1,57 +1,41 @@
-import { RiCloseFill } from 'react-icons/ri';
-import { cn } from '@/lib/utils.js';
-import { createElement } from 'react';
-import { icons } from '@/lib/elements.js';
-import { Button } from '@nextui-org/react';
 import useTemplateStore from '@/store/template.js';
+import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import LayerElement from './LayerElement';
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 const Layers = () => {
   const elements = useTemplateStore((state) => state.template.elements);
-  const selected = useTemplateStore((state) => state.template.selected);
-  const selectElement = useTemplateStore((state) => state.selectElement);
-  const deleteElement = useTemplateStore((state) => state.deleteElement);
+  const setElements = useTemplateStore((state) => state.setElements);
 
+  const sensors = useSensors(useSensor(PointerSensor));
+  function handleDragEnd(event) {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      const oldIndex = elements.findIndex((obj) => obj.id === active.id);
+      const newIndex = elements.findIndex((obj) => obj.id === over.id);
+      setElements(arrayMove(elements, oldIndex, newIndex));
+    }
+  }
   return (
     <div className="px-4 py-4">
-      {elements.length > 0 ? (
-        <div className="space-y-1">
-          {elements.map((element) => {
-            const active = element.id === selected;
-            const icon = icons[element.type];
-
-            return (
-              <div
-                key={element.id}
-                className={cn('transition-all duration-200 border-2 border-transparent rounded-2xl p-1 select-none', {
-                  'border-primary-500 dark:border-primary-400': active,
-                })}
-              >
-                <div
-                  className={cn(
-                    'relative rounded-xl px-4 py-2 flex items-center space-x-2 cursor-pointer justify-between',
-                    'bg-default-200/60 hover:bg-default-200 dark:bg-default-100/50 dark:hover:bg-default-100'
-                  )}
-                  onClick={() => selectElement(element.id)}
-                >
-                  <div className="flex items-center space-x-2">
-                    <span className="opacity-60">{createElement(icon, { size: 20 })}</span>
-                    <span className="truncate">{element.text}</span>
-                  </div>
-                  <Button isIconOnly variant="light" size="sm" radius="full">
-                    <RiCloseFill size={20} className="block" onClick={() => deleteElement(element.id)} />
-                  </Button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="py-20">
-          <p className="text-center text-sm opacity-80 max-w-[200px] mx-auto">
-            No elements. Add some elements to the canvas
-          </p>
-        </div>
-      )}
+      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+        <SortableContext items={elements} strategy={verticalListSortingStrategy}>
+          {elements.length > 0 ? (
+            <div className="space-y-1">
+              {elements.map((element) => (
+                <LayerElement key={element.id} element={element} />
+              ))}
+            </div>
+          ) : (
+            <div className="py-20">
+              <p className="text-center text-sm opacity-80 max-w-[200px] mx-auto">
+                No elements. Add some elements to the canvas
+              </p>
+            </div>
+          )}
+        </SortableContext>
+      </DndContext>
     </div>
   );
 };
@@ -59,3 +43,4 @@ const Layers = () => {
 Layers.propTypes = {};
 
 export default Layers;
+
