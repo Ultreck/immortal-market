@@ -1,6 +1,6 @@
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import { FaFillDrip } from 'react-icons/fa';
-import { HexColorPicker } from 'react-colorful';
+import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
 import { HiCheck } from 'react-icons/hi2';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -30,7 +30,7 @@ const BackgroundColor = ({ element, onChange }) => {
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-4 py-6 w-full">
-          <HexColorPicker
+          <HexAlphaColorPicker
             color={element.style.backgroundColor}
             onChange={(color) => onChange({ ...element, style: { ...element.style, backgroundColor: color } })}
           />
