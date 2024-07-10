@@ -98,148 +98,147 @@ const Canvas = () => {
   }, [node]);
 
   return (
-    <div
-      onClick={handleCanvasClick}
-      ref={setNodeRef}
-      className={cn(
-        'bg-white border-3 border-transparent text-black border-default-200 rounded-lg relative overflow-hidden canvas',
-        { 'border-primary-500': isCanvasSelected }
-      )}
-      style={{ ...style }}
-    >
-      {elements.map((element) => {
-        const active = element.id === selected;
-        return (
-          <Fragment key={element.id}>
-            {element.type === 'heading' && (
-              <Heading
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'text' && (
-              <Text
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'chart' && (
-              <Chart
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'logo' && (
-              <Logo
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'circle' && (
-              <Circle
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'rectangle' && (
-              <Rectangle
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'triangle' && (
-              <Triangle
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'diagonal-rectangle' && (
-              <DiagonalRectangle
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'arrow-up' && (
-              <ArrowUp
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'arrow-down' && (
-              <ArrowDown
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'arrow-right' && (
-              <ArrowRight
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'arrow-left' && (
-              <ArrowLeft
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'arrow-up-down' && (
-              <ArrowUpDown
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-            {element.type === 'image' && (
-              <Image
-                element={element}
-                active={active}
-                onClick={() => handleSelectElement(element.id)}
-                onChange={handleUpdateElement}
-                width={width}
-              />
-            )}
-          </Fragment>
-        );
-      })}
+    <div className={cn('relative border-3 border-transparent rounded-xl', { 'border-primary-500': isCanvasSelected })}>
+      <div
+        onClick={handleCanvasClick}
+        ref={setNodeRef}
+        className={cn('bg-white text-black border border-default-200 rounded-lg relative overflow-hidden canvas')}
+        style={{ ...style }}
+      >
+        {elements.map((element) => {
+          const active = element.id === selected;
+          return (
+            <Fragment key={element.id}>
+              {element.type === 'heading' && (
+                <Heading
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'text' && (
+                <Text
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'chart' && (
+                <Chart
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'logo' && (
+                <Logo
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'circle' && (
+                <Circle
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'rectangle' && (
+                <Rectangle
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'triangle' && (
+                <Triangle
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'diagonal-rectangle' && (
+                <DiagonalRectangle
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'arrow-up' && (
+                <ArrowUp
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'arrow-down' && (
+                <ArrowDown
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'arrow-right' && (
+                <ArrowRight
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'arrow-left' && (
+                <ArrowLeft
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'arrow-up-down' && (
+                <ArrowUpDown
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+              {element.type === 'image' && (
+                <Image
+                  element={element}
+                  active={active}
+                  onClick={() => handleSelectElement(element.id)}
+                  onChange={handleUpdateElement}
+                  width={width}
+                />
+              )}
+            </Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 };
