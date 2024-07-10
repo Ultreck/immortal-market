@@ -24,6 +24,11 @@ const getElementWidthWithoutPadding = (element) => {
   return element.clientWidth - parseFloat(computedStyle.paddingLeft) - parseFloat(computedStyle.paddingRight);
 };
 
+const isValidElement = (element) => {
+  const validKeys = ['type', 'id', 'x', 'y', 'width', 'height'];
+  return validKeys.every((key) => Object.keys(element).includes(key));
+};
+
 const Canvas = () => {
   const [width, setWidth] = useState(0);
   const { setNodeRef, node } = useDroppable({ id: 'canvas' });
@@ -35,6 +40,45 @@ const Canvas = () => {
   const selectCanvas = useTemplateStore((state) => state.selectCanvas);
   const updateElement = useTemplateStore((state) => state.updateElement);
   const deleteElement = useTemplateStore((state) => state.deleteElement);
+  const addElement = useTemplateStore((state) => state.addElement);
+
+  useEffect(() => {
+    const handleCopy = (e) => {
+      if (selected) {
+        const element = elements.find((element) => element.id === selected);
+        e.clipboardData.setData('text/plain', JSON.stringify(element));
+        e.preventDefault();
+      }
+    };
+    const handleCut = (e) => {
+      if (selected) {
+        const element = elements.find((element) => element.id === selected);
+        e.clipboardData.setData('text/plain', JSON.stringify(element));
+        deleteElement(selected);
+        e.preventDefault();
+      }
+    };
+    const handlePaste = (e) => {
+      try {
+        const text = e.clipboardData.getData('text/plain');
+        const element = JSON.parse(text);
+        if (isValidElement(element)) {
+          addElement({ ...element, id: Date.now(), x: element.x + 10, y: element.y + 10 });
+          e.preventDefault();
+        }
+      } catch (e) {
+        /* empty */
+      }
+    };
+    window.addEventListener('cut', handleCut);
+    window.addEventListener('paste', handlePaste);
+    window.addEventListener('copy', handleCopy);
+    return () => {
+      window.removeEventListener('paste', handlePaste);
+      window.removeEventListener('copy', handleCopy);
+      window.removeEventListener('cut', handleCut);
+    };
+  }, [addElement, deleteElement, elements, selected]);
 
   useKey('Delete', () => handleDeleteElement(selected), undefined, [selected]);
 
@@ -58,7 +102,7 @@ const Canvas = () => {
       onClick={handleCanvasClick}
       ref={setNodeRef}
       className={cn(
-        'bg-white border-3 border-transparent text-black border-default-200 rounded-lg relative overflow-hidden',
+        'bg-white border-3 border-transparent text-black border-default-200 rounded-lg relative overflow-hidden canvas',
         { 'border-primary-500': isCanvasSelected }
       )}
       style={{ ...style }}
@@ -69,7 +113,6 @@ const Canvas = () => {
           <Fragment key={element.id}>
             {element.type === 'heading' && (
               <Heading
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -79,7 +122,6 @@ const Canvas = () => {
             )}
             {element.type === 'text' && (
               <Text
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -89,7 +131,6 @@ const Canvas = () => {
             )}
             {element.type === 'chart' && (
               <Chart
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -99,7 +140,6 @@ const Canvas = () => {
             )}
             {element.type === 'logo' && (
               <Logo
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -109,7 +149,6 @@ const Canvas = () => {
             )}
             {element.type === 'circle' && (
               <Circle
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -119,7 +158,6 @@ const Canvas = () => {
             )}
             {element.type === 'rectangle' && (
               <Rectangle
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -129,7 +167,6 @@ const Canvas = () => {
             )}
             {element.type === 'triangle' && (
               <Triangle
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -139,7 +176,6 @@ const Canvas = () => {
             )}
             {element.type === 'diagonal-rectangle' && (
               <DiagonalRectangle
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -149,7 +185,6 @@ const Canvas = () => {
             )}
             {element.type === 'arrow-up' && (
               <ArrowUp
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -159,7 +194,6 @@ const Canvas = () => {
             )}
             {element.type === 'arrow-down' && (
               <ArrowDown
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -169,7 +203,6 @@ const Canvas = () => {
             )}
             {element.type === 'arrow-right' && (
               <ArrowRight
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -179,7 +212,6 @@ const Canvas = () => {
             )}
             {element.type === 'arrow-left' && (
               <ArrowLeft
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -189,7 +221,6 @@ const Canvas = () => {
             )}
             {element.type === 'arrow-up-down' && (
               <ArrowUpDown
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -199,7 +230,6 @@ const Canvas = () => {
             )}
             {element.type === 'image' && (
               <Image
-                root={node}
                 element={element}
                 active={active}
                 onClick={() => handleSelectElement(element.id)}
@@ -213,7 +243,5 @@ const Canvas = () => {
     </div>
   );
 };
-
-Canvas.propTypes = {};
 
 export default Canvas;

@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 
 const ElementWrapper = ({
   element,
-  constraints,
   onClick,
   children,
   onEditStart,
@@ -17,6 +16,7 @@ const ElementWrapper = ({
   onChange,
   onResize,
   resizeHandles = ['e'],
+  constrained = false,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -31,10 +31,9 @@ const ElementWrapper = ({
   return (
     <DraggableElement
       position={{ x: element.x, y: element.y }}
-      constraints={constraints}
       onClick={onClick}
-      onDragEnd={(event, info) => {
-        onChange({ ...element, x: info.point.x, y: info.point.y });
+      onDrag={(position) => {
+        onChange({ ...element, x: position.x, y: position.y });
       }}
       classNames={{
         base: cn(
@@ -46,6 +45,7 @@ const ElementWrapper = ({
       }}
       onControlDblClick={() => setIsEditing(true)}
       isDisabled={isEditing}
+      constrained={constrained}
     >
       <ResizableBox
         onClick={onClick}
@@ -75,7 +75,6 @@ ElementWrapper.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
   }),
-  constraints: PropTypes.any,
   onClick: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -85,6 +84,7 @@ ElementWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   onEditStart: PropTypes.func,
   resizeHandles: PropTypes.arrayOf(PropTypes.string),
+  constrained: PropTypes.bool,
 };
 
 export default ElementWrapper;

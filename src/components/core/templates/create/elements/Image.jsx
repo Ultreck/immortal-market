@@ -2,11 +2,10 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import PropTypes from 'prop-types';
 import { Image } from '@nextui-org/react';
 
-const CanvasImage = ({ element, root, active, width, onClick, onChange }) => {
+const CanvasImage = ({ element, active, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
-      constraints={root}
       onClick={onClick}
       onChange={onChange}
       onResize={(size) => {
@@ -44,7 +43,6 @@ CanvasImage.propTypes = {
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
-  root: PropTypes.any.isRequired,
 };
 
 export default CanvasImage;

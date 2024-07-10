@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import { useMount } from 'react-use';
 
-const SsLogo = ({ element, root, active, width, onClick, onChange }) => {
+const SsLogo = ({ element, active, width, onClick, onChange }) => {
   const el = useRef(null);
 
   useMount(() => {
@@ -16,7 +16,6 @@ const SsLogo = ({ element, root, active, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
-      constraints={root}
       onClick={onClick}
       onChange={onChange}
       onResize={(size) => {
@@ -28,6 +27,7 @@ const SsLogo = ({ element, root, active, width, onClick, onChange }) => {
       active={active}
       resizeHandles={['e']}
       lockAspectRatio
+      constrained
     >
       <div ref={el} className="!h-max">
         <Logo width={element.width} />
@@ -50,7 +50,6 @@ SsLogo.propTypes = {
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
-  root: PropTypes.any.isRequired,
 };
 
 export default SsLogo;

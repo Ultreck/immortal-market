@@ -46,7 +46,6 @@ ArrowRight.propTypes = {
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
-  root: PropTypes.any.isRequired,
 };
 
 export default ArrowRight;

@@ -1,48 +1,44 @@
-import { motion, useDragControls } from 'framer-motion';
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
+import Draggable from 'react-draggable';
+import { useRef } from 'react';
 
 const DraggableElement = ({
   position,
-  constraints,
   onClick,
-  onDragEnd,
+  onDrag,
   classNames,
   children,
   onControlDblClick,
   isDisabled,
-  ...props
+  constrained = false,
 }) => {
-  const dragControls = useDragControls();
-
-  const startDrag = (event) => {
-    dragControls.start(event);
-  };
+  const ref = useRef(null);
 
   return (
-    <motion.div
-      drag
-      initial={{ x: position.x, y: position.y }}
-      dragConstraints={constraints}
-      dragMomentum={false}
-      dragControls={dragControls}
-      dragListener={false}
-      onClick={onClick}
-      onDragEnd={onDragEnd}
-      className={cn('relative', classNames.base)}
-      {...props}
+    <Draggable
+      handle=".handle"
+      bounds={constrained ? 'parent' : null}
+      position={{ x: position.x, y: position.y }}
+      grid={[10, 10]}
+      scale={1}
+      onDrag={(e, ui) => {
+        onDrag({ x: ui.x, y: ui.y });
+      }}
+      nodeRef={ref}
     >
-      <div
-        onPointerDown={startDrag}
-        onDoubleClick={onControlDblClick}
-        className={cn(
-          'absolute z-[1] top-0 left-0 w-full h-full',
-          { 'pointer-events-none': isDisabled },
-          classNames.control
-        )}
-      />
-      {children}
-    </motion.div>
+      <div ref={ref} className={cn('relative', classNames.base)} onClick={onClick}>
+        <div
+          onDoubleClick={onControlDblClick}
+          className={cn(
+            'handle absolute z-[1] top-0 left-0 w-full h-full',
+            { 'pointer-events-none': isDisabled },
+            classNames.control
+          )}
+        />
+        {children}
+      </div>
+    </Draggable>
   );
 };
 
@@ -51,9 +47,8 @@ DraggableElement.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
   }).isRequired,
-  constraints: PropTypes.any,
   onClick: PropTypes.func.isRequired,
-  onDragEnd: PropTypes.func.isRequired,
+  onDrag: PropTypes.func.isRequired,
   classNames: PropTypes.shape({
     base: PropTypes.string.isRequired,
     control: PropTypes.string,
@@ -61,6 +56,7 @@ DraggableElement.propTypes = {
   children: PropTypes.element.isRequired,
   onControlDblClick: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool.isRequired,
+  constrained: PropTypes.bool,
 };
 
 export default DraggableElement;

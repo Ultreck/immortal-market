@@ -5,13 +5,12 @@ import TemplateLineChart from './charts/TemplateLineChart';
 import TemplatePieChart from './charts/TemplatePieChart';
 import { HiChartPie } from 'react-icons/hi2';
 
-const Chart = ({ element, root, active, width, onClick, onChange }) => {
+const Chart = ({ element, active, width, onClick, onChange }) => {
   const hasKeys = Object.keys(element.chart?.keys || {}).every((key) => !!element.chart.keys[key]);
 
   return (
     <ElementWrapper
       element={element}
-      constraints={root}
       onClick={onClick}
       onChange={onChange}
       onResize={(size) => {
@@ -20,6 +19,7 @@ const Chart = ({ element, root, active, width, onClick, onChange }) => {
       maxWidth={width}
       active={active}
       resizeHandles={['se', 'e', 's']}
+      constrained
     >
       {element.chart?.type && element.chart.data && hasKeys ? (
         <>
@@ -54,7 +54,6 @@ Chart.propTypes = {
   active: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   width: PropTypes.number,
-  root: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

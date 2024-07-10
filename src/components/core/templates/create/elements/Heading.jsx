@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { useDeepCompareEffect } from 'react-use';
 
-const Heading = ({ element, root, active, width, onClick, onChange }) => {
+const Heading = ({ element, active, width, onClick, onChange }) => {
   const input = useRef(null);
   const [minHeight, setMinHeight] = useState(element.height);
 
@@ -22,7 +22,6 @@ const Heading = ({ element, root, active, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
-      constraints={root}
       onClick={onClick}
       onChange={onChange}
       onResize={(size) => {
@@ -33,6 +32,7 @@ const Heading = ({ element, root, active, width, onClick, onChange }) => {
       maxWidth={width}
       onEditStart={() => updateInputHeight()}
       active={active}
+      constrained
     >
       <div className="overflow-hidden relative w-full h-full pl-6">
         <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[90%] bottom-0 w-2 bg-gray-800 rounded-2xl"></div>
@@ -67,7 +67,6 @@ Heading.propTypes = {
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
-  root: PropTypes.any.isRequired,
 };
 
 export default Heading;

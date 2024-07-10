@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { useDeepCompareEffect } from 'react-use';
 
-const Text = ({ element, root, active, width, onClick, onChange }) => {
+const Text = ({ element, active, width, onClick, onChange }) => {
   const input = useRef(null);
   const [minHeight, setMinHeight] = useState(element.height);
 
@@ -22,7 +22,6 @@ const Text = ({ element, root, active, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
-      constraints={root}
       onClick={onClick}
       onChange={onChange}
       onResize={(size) => {
@@ -33,6 +32,7 @@ const Text = ({ element, root, active, width, onClick, onChange }) => {
       maxWidth={width}
       onEditStart={() => updateInputHeight()}
       active={active}
+      constrained
     >
       <div className="overflow-hidden relative w-full h-full">
         <textarea
@@ -66,7 +66,6 @@ Text.propTypes = {
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
-  root: PropTypes.any.isRequired,
 };
 
 export default Text;
