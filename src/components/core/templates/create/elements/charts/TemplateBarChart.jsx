@@ -21,7 +21,6 @@ const colors = [
 
 const TemplateBarChart = ({ element, height = 300 }) => {
   const config = element.chart.data.reduce((acc, item, i) => {
-    console.log(item);
     acc[item[element.chart.keys.x]] = {
       label: capitalize(item[element.chart.keys.x]),
       color: colors[i],
