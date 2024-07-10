@@ -58,6 +58,7 @@ const ElementWrapper = ({
         onResize={(e, { size }) => {
           onResize(size);
         }}
+        draggableOpts={{ grid: [10, 10] }}
       >
         {children}
       </ResizableBox>
