@@ -65,7 +65,7 @@ const TemplateBuilder = () => {
                 );
               })}
             </div>
-            <div className="pr-8 py-6">
+            <div className="pr-8 py-6 overflow-hidden">
               <div className="border rounded-2xl border-default-200 dark:border-default-100 bg-default-50">
                 {tab === 'elements' && <Elements />}
                 {tab === 'layers' && <Layers />}

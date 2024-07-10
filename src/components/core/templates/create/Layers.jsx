@@ -1,25 +1,39 @@
 import useTemplateStore from '@/store/template.js';
-import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { closestCenter, DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import LayerElement from './LayerElement';
-import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { useState } from 'react';
+import LayerItem from '@/components/core/templates/create/LayerItem.jsx';
 
 const Layers = () => {
+  const [element, setElement] = useState(null);
   const elements = useTemplateStore((state) => state.template.elements);
-  const setElements = useTemplateStore((state) => state.setElements);
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
 
   const sensors = useSensors(useSensor(PointerSensor));
-  function handleDragEnd(event) {
-    const { active, over } = event;
 
+  const handleDragStart = (event) => {
+    setElement(elements.find((obj) => obj.id === event.active.id));
+  };
+
+  const handleDragEnd = (event) => {
+    setElement(null);
+    const { active, over } = event;
     if (active.id !== over.id) {
       const oldIndex = elements.findIndex((obj) => obj.id === active.id);
       const newIndex = elements.findIndex((obj) => obj.id === over.id);
-      setElements(arrayMove(elements, oldIndex, newIndex));
+      updateTemplate({ elements: arrayMove(elements, oldIndex, newIndex) });
     }
-  }
+  };
+
   return (
     <div className="px-4 py-4">
-      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+      <DndContext
+        sensors={sensors}
+        onDragEnd={handleDragEnd}
+        onDragStart={handleDragStart}
+        collisionDetection={closestCenter}
+      >
         <SortableContext items={elements} strategy={verticalListSortingStrategy}>
           {elements.length > 0 ? (
             <div className="space-y-1">
@@ -34,13 +48,11 @@ const Layers = () => {
               </p>
             </div>
           )}
+          <DragOverlay>{element ? <LayerItem element={element} /> : null}</DragOverlay>
         </SortableContext>
       </DndContext>
     </div>
   );
 };
 
-Layers.propTypes = {};
-
 export default Layers;
-

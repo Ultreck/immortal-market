@@ -40,14 +40,6 @@ const useTemplateStore = createWithEqualityFn(
         },
       }));
     },
-    setElements: (elements) => {
-      set((state) => ({
-        template: {
-          ...state.template,
-          elements: elements,
-        },
-      }));
-    },
     deleteElement: (id) => {
       set((state) => ({
         template: {
