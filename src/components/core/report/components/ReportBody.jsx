@@ -18,8 +18,17 @@ import SpeedometerGauge from './charts/Speedometer';
 import GaugeChart from './charts/GuageChart';
 import TangentialPolarBarChart from './charts/TangentPolarBarChart';
 import SemiCircle from './charts/SemiCircle';
-import NewPieChart from './charts/NewPieChart';
 import DoughNuts from './charts/DoughNuts';
+import NewPieChart from './charts/NewPieChart';
+import VennDiagramChart from './charts/VennDiagramChart';
+import TwoCircleVennDiagram from './charts/2Circles';
+import AgeDistribution from './charts/AgeDistribution';
+import MultiSquare from './charts/Multisquare';
+import SeasonalChart from './charts/SeasonalChart';
+import PyramidChart from './charts/PyramidChart';
+import ComposedCharts from './charts/ComposedChart';
+import AreaCharts from './charts/AreaChart';
+import CandyBarChart from './charts/CandyBar';
 
 register();
 
@@ -77,6 +86,15 @@ const ReportBody = () => {
         <FunnelChart />
         <RosePieChart />
       </div>
+      <CandyBarChart />
+      <AreaCharts />
+      <VennDiagramChart />
+      <TwoCircleVennDiagram />
+      <AgeDistribution />
+      <MultiSquare />
+      <SeasonalChart />
+      <PyramidChart />
+      <ComposedCharts />
       <TreeMap />
       <ScatterLifeExpectancyChart />
       <LifeExpectancyChart />
