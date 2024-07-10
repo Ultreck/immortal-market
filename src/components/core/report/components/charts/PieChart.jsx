@@ -8,32 +8,34 @@ const PieChart = ({ title, caption, data }) => {
   const pieChartRef = useRef();
 
   useEffect(() => {
-    google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      const _data = google.visualization.arrayToDataTable([
-        ['Label', 'Value'],
-        ...data.map((i) => [i.label, +i.value]),
-      ]);
-      const options = {
-        legend: 'none',
-        pieSliceText: 'label',
-        slices: {
-          1: { offset: 0.06 },
-          3: { offset: 0.06 },
-        },
-        backgroundColor: 'transparent',
-        chartArea: {
-          left: 20,
-          top: 20,
-          bottom: 20,
-          width: '100%',
-          height: '100%',
-        },
-      };
-      const chart = new google.visualization.PieChart(pieChartRef.current);
-      chart.draw(_data, options);
+    if(google) {
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+  
+      function drawChart() {
+        const _data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ...data.map((i) => [i.label, +i.value]),
+        ]);
+        const options = {
+          legend: 'none',
+          pieSliceText: 'label',
+          slices: {
+            1: { offset: 0.06 },
+            3: { offset: 0.06 },
+          },
+          backgroundColor: 'transparent',
+          chartArea: {
+            left: 20,
+            top: 20,
+            bottom: 20,
+            width: '100%',
+            height: '100%',
+          },
+        };
+        const chart = new google.visualization.PieChart(pieChartRef.current);
+        chart.draw(_data, options);
+    }
     }
   }, [data]);
 
