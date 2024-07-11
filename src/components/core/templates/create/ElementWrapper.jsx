@@ -31,7 +31,7 @@ const ElementWrapper = ({
   return (
     <DraggableElement
       position={{ x: element.x, y: element.y }}
-      onClick={onClick}
+      onClick={(e) => onClick(element.id, e)}
       onDrag={(position) => {
         onChange({ ...element, x: position.x, y: position.y });
       }}
@@ -48,7 +48,6 @@ const ElementWrapper = ({
       constrained={constrained}
     >
       <ResizableBox
-        onClick={onClick}
         width={element.width}
         height={element.height}
         minConstraints={[100, minHeight ?? 0]}

@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import { useRef } from 'react';
+import StationaryClickDetector from '@/components/ui/StationaryClickDetector.jsx';
 
 const DraggableElement = ({
   position,
@@ -22,21 +23,21 @@ const DraggableElement = ({
       position={{ x: position.x, y: position.y }}
       grid={[10, 10]}
       scale={1}
-      onDrag={(e, ui) => {
-        onDrag({ x: ui.x, y: ui.y });
-      }}
+      onDrag={(e, ui) => onDrag({ x: ui.x, y: ui.y })}
       nodeRef={ref}
     >
-      <div ref={ref} className={cn('relative', classNames.base)} onClick={onClick}>
-        <div
-          onDoubleClick={onControlDblClick}
-          className={cn(
-            'handle absolute z-[1] top-0 left-0 w-full h-full',
-            { 'pointer-events-none': isDisabled },
-            classNames.control
-          )}
-        />
-        {children}
+      <div ref={ref} className={cn('relative', classNames.base)}>
+        <StationaryClickDetector onStationaryClick={onClick}>
+          <div
+            onDoubleClick={onControlDblClick}
+            className={cn(
+              'handle absolute z-[1] top-0 left-0 w-full h-full',
+              { 'pointer-events-none': isDisabled },
+              classNames.control
+            )}
+          />
+          {children}
+        </StationaryClickDetector>
       </div>
     </Draggable>
   );
