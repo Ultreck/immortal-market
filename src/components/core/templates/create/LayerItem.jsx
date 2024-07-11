@@ -7,12 +7,12 @@ import { RiCloseFill } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 
 const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
-  const selected = useTemplateStore((state) => state.template.selected);
-  const selectElement = useTemplateStore((state) => state.selectElement);
-  const deleteElement = useTemplateStore((state) => state.deleteElement);
+  const selection = useTemplateStore((state) => state.template.selection);
+  const selectElements = useTemplateStore((state) => state.selectElements);
+  const deleteElements = useTemplateStore((state) => state.deleteElements);
 
   const icon = icons[element.type];
-  const active = element.id === selected;
+  const active = selection.includes(element.id);
 
   return (
     <div
@@ -25,7 +25,7 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
       <div
         onClick={() => {
           alert(element.id);
-          return selectElement(element.id);
+          return selectElements([element.id]);
         }}
         className={cn(
           'relative rounded-xl px-4 py-2 flex items-center space-x-2 cursor-pointer justify-between',
@@ -37,7 +37,7 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
           <span className="truncate">{element.text}</span>
         </div>
         <Button isIconOnly variant="light" size="sm" radius="full">
-          <RiCloseFill size={20} className="block" onClick={() => deleteElement(element.id)} />
+          <RiCloseFill size={20} className="block" onClick={() => deleteElements([element.id])} />
         </Button>
       </div>
     </div>

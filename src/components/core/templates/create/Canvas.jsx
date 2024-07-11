@@ -34,36 +34,36 @@ const Canvas = () => {
   const { setNodeRef, node } = useDroppable({ id: 'canvas' });
   const style = useTemplateStore((state) => state.template.style);
   const elements = useTemplateStore((state) => state.template.elements);
-  const selected = useTemplateStore((state) => state.template.selected);
+  const selection = useTemplateStore((state) => state.template.selection);
   const isCanvasSelected = useTemplateStore((state) => state.template.isCanvasSelected);
-  const selectElement = useTemplateStore((state) => state.selectElement);
+  const selectElements = useTemplateStore((state) => state.selectElements);
   const selectCanvas = useTemplateStore((state) => state.selectCanvas);
   const updateElement = useTemplateStore((state) => state.updateElement);
-  const deleteElement = useTemplateStore((state) => state.deleteElement);
+  const deleteElements = useTemplateStore((state) => state.deleteElements);
   const addElement = useTemplateStore((state) => state.addElement);
 
   useEffect(() => {
     const handleCopy = (e) => {
-      if (selected) {
-        const element = elements.find((element) => element.id === selected);
-        e.clipboardData.setData('text/plain', JSON.stringify(element));
+      if (selection.length) {
+        const _elements = elements.filter((element) => selection.includes(element.id));
+        e.clipboardData.setData('text/plain', JSON.stringify(_elements));
         e.preventDefault();
       }
     };
     const handleCut = (e) => {
-      if (selected) {
-        const element = elements.find((element) => element.id === selected);
-        e.clipboardData.setData('text/plain', JSON.stringify(element));
-        deleteElement(selected);
+      if (selection.length) {
+        const _elements = elements.filter((element) => selection.includes(element.id));
+        e.clipboardData.setData('text/plain', JSON.stringify(_elements));
+        deleteElements(selection);
         e.preventDefault();
       }
     };
     const handlePaste = (e) => {
       try {
         const text = e.clipboardData.getData('text/plain');
-        const element = JSON.parse(text);
-        if (isValidElement(element)) {
-          addElement({ ...element, id: Date.now(), x: element.x + 10, y: element.y + 10 });
+        const _element = JSON.parse(text);
+        if (elements.every((e) => isValidElement(e))) {
+          addElement({ ..._element, id: Date.now(), x: _element.x + 10, y: _element.y + 10 });
           e.preventDefault();
         }
       } catch (e) {
@@ -78,15 +78,23 @@ const Canvas = () => {
       window.removeEventListener('copy', handleCopy);
       window.removeEventListener('cut', handleCut);
     };
-  }, [addElement, deleteElement, elements, selected]);
+  }, [addElement, deleteElements, elements, selection]);
 
-  useKey('Delete', () => handleDeleteElement(selected), undefined, [selected]);
+  useKey('Delete', () => handleDeleteElements(selection), undefined, [selection]);
 
-  const handleSelectElement = (id) => selectElement(id);
+  const handleSelectElement = (id) => selectElements([id]);
+
+  const handleAddToSelection = (id) => {
+    if (selection.includes(id)) {
+      selectElements(selection.filter((elementId) => elementId !== id));
+    } else {
+      selectElements([...selection, id]);
+    }
+  };
 
   const handleUpdateElement = (element) => updateElement(element);
 
-  const handleDeleteElement = (id) => deleteElement(id);
+  const handleDeleteElements = (ids) => deleteElements(ids);
 
   const handleCanvasClick = (e) => {
     if (e.target === node.current) selectCanvas();
@@ -106,14 +114,17 @@ const Canvas = () => {
         style={{ ...style }}
       >
         {elements.map((element) => {
-          const active = element.id === selected;
+          const active = selection.includes(element.id);
           return (
             <Fragment key={element.id}>
               {element.type === 'heading' && (
                 <Heading
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -122,7 +133,10 @@ const Canvas = () => {
                 <Text
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -131,7 +145,10 @@ const Canvas = () => {
                 <Chart
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -140,7 +157,10 @@ const Canvas = () => {
                 <Logo
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -149,7 +169,10 @@ const Canvas = () => {
                 <Circle
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -158,7 +181,10 @@ const Canvas = () => {
                 <Rectangle
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -167,7 +193,10 @@ const Canvas = () => {
                 <Triangle
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -176,7 +205,10 @@ const Canvas = () => {
                 <DiagonalRectangle
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -185,7 +217,10 @@ const Canvas = () => {
                 <ArrowUp
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -194,7 +229,10 @@ const Canvas = () => {
                 <ArrowDown
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -203,7 +241,10 @@ const Canvas = () => {
                 <ArrowRight
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -212,7 +253,10 @@ const Canvas = () => {
                 <ArrowLeft
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -221,7 +265,10 @@ const Canvas = () => {
                 <ArrowUpDown
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />
@@ -230,7 +277,10 @@ const Canvas = () => {
                 <Image
                   element={element}
                   active={active}
-                  onClick={() => handleSelectElement(element.id)}
+                  onClick={(e) => {
+                    if (e.shiftKey) handleAddToSelection(element.id);
+                    else handleSelectElement(element.id);
+                  }}
                   onChange={handleUpdateElement}
                   width={width}
                 />

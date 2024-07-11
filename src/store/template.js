@@ -6,7 +6,7 @@ const useTemplateStore = createWithEqualityFn(
     template: {
       id: Date.now(),
       elements: [],
-      selected: null,
+      selection: [],
       isCanvasSelected: false,
       style: {
         backgroundColor: '#ffffff',
@@ -17,9 +17,13 @@ const useTemplateStore = createWithEqualityFn(
     updateTemplate: (data) => {
       set((state) => ({ template: { ...state.template, ...data } }));
     },
-    selectElement: (id) => {
+    selectElements: (ids) => {
       set((state) => ({
-        template: { ...state.template, selected: id, isCanvasSelected: false },
+        template: {
+          ...state.template,
+          selection: ids,
+          isCanvasSelected: false,
+        },
       }));
     },
     updateElement: (element) => {
@@ -35,23 +39,23 @@ const useTemplateStore = createWithEqualityFn(
         template: {
           ...state.template,
           elements: [...state.template.elements, element],
-          selected: element.id,
+          selection: [element.id],
           isCanvasSelected: false,
         },
       }));
     },
-    deleteElement: (id) => {
+    deleteElements: (ids) => {
       set((state) => ({
         template: {
           ...state.template,
-          elements: state.template.elements.filter((item) => item.id !== id),
-          selected: null,
+          elements: state.template.elements.filter((item) => !ids.includes(item.id)),
+          selection: [],
         },
       }));
     },
     selectCanvas: (value = true) => {
       set((state) => ({
-        template: { ...state.template, isCanvasSelected: value, selected: null },
+        template: { ...state.template, isCanvasSelected: value, selection: [] },
       }));
     },
   }),

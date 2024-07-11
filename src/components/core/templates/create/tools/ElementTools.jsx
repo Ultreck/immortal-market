@@ -11,7 +11,7 @@ import TextAlign from './elements/TextAlign.jsx';
 
 const ElementTools = () => {
   const updateElement = useTemplateStore((state) => state.updateElement);
-  const element = useTemplateStore(({ template }) => template.elements.find((el) => el.id === template.selected));
+  const element = useTemplateStore(({ template }) => template.elements.find((el) => el.id === template.selection[0]));
 
   const handleUpdateElement = (element) => {
     updateElement(element);
