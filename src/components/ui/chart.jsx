@@ -46,6 +46,7 @@ const ChartContainer = React.forwardRef(({ id, className, children, config, ...p
 ChartContainer.displayName = 'Chart';
 
 const ChartStyle = ({ id, config }) => {
+  // eslint-disable-next-line no-unused-vars
   const colorConfig = Object.entries(config).filter(([_, config]) => config.theme || config.color);
 
   if (!colorConfig.length) {
