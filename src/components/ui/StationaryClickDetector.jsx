@@ -25,13 +25,7 @@ const StationaryClickDetector = ({ onStationaryClick, children, threshold = 5 })
   );
 
   return (
-    <div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseDown={handleMouseDown}
-      onClick={handleClick}
-      style={{ cursor: 'pointer' }}
-    >
+    <div ref={ref} onMouseMove={handleMouseMove} onMouseDown={handleMouseDown} onClick={handleClick}>
       {children}
     </div>
   );
