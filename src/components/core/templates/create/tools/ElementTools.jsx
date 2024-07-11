@@ -18,7 +18,7 @@ const ElementTools = () => {
 
   const tools = useMemo(() => {
     if (!selection.length) return [];
-    let _tools = _elements.map((el) => el.tools);
+    let _tools = _elements.map((el) => el.tools || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
     if (_tools.includes('chart-picker') && selection.length > 1) {
       return _tools.filter((tool) => tool !== 'chart-picker');

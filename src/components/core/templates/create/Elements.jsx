@@ -40,6 +40,7 @@ const Elements = () => {
       width: 400,
       height: 300,
       src,
+      tools: [],
     },
   }));
 
