@@ -26,20 +26,24 @@ const useTemplateStore = createWithEqualityFn(
         },
       }));
     },
-    updateElement: (element) => {
+    updateElements: (elements) => {
       set((state) => ({
         template: {
           ...state.template,
-          elements: state.template.elements.map((el) => (el.id === element.id ? element : el)),
+          elements: state.template.elements.map((el) => {
+            const exists = elements.find((el2) => el2.id === el.id);
+            if (exists) return elements.find((el2) => el2.id === el.id);
+            return el;
+          }),
         },
       }));
     },
-    addElement: (element) => {
+    addElements: (elements) => {
       set((state) => ({
         template: {
           ...state.template,
-          elements: [...state.template.elements, element],
-          selection: [element.id],
+          elements: [...state.template.elements, ...elements],
+          selection: elements.map((el) => el.id),
           isCanvasSelected: false,
         },
       }));

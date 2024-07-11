@@ -38,9 +38,9 @@ const Canvas = () => {
   const isCanvasSelected = useTemplateStore((state) => state.template.isCanvasSelected);
   const selectElements = useTemplateStore((state) => state.selectElements);
   const selectCanvas = useTemplateStore((state) => state.selectCanvas);
-  const updateElement = useTemplateStore((state) => state.updateElement);
+  const updateElements = useTemplateStore((state) => state.updateElements);
   const deleteElements = useTemplateStore((state) => state.deleteElements);
-  const addElement = useTemplateStore((state) => state.addElement);
+  const addElements = useTemplateStore((state) => state.addElements);
 
   useEffect(() => {
     const handleCopy = (e) => {
@@ -61,9 +61,9 @@ const Canvas = () => {
     const handlePaste = (e) => {
       try {
         const text = e.clipboardData.getData('text/plain');
-        const _element = JSON.parse(text);
-        if (elements.every((e) => isValidElement(e))) {
-          addElement({ ..._element, id: Date.now(), x: _element.x + 10, y: _element.y + 10 });
+        const _elements = JSON.parse(text);
+        if (_elements.every((el) => isValidElement(el))) {
+          addElements(_elements.map((el) => ({ ...el, id: crypto.randomUUID(), x: el.x + 10, y: el.y + 10 })));
           e.preventDefault();
         }
       } catch (e) {
@@ -78,7 +78,7 @@ const Canvas = () => {
       window.removeEventListener('copy', handleCopy);
       window.removeEventListener('cut', handleCut);
     };
-  }, [addElement, deleteElements, elements, selection]);
+  }, [addElements, deleteElements, elements, selection]);
 
   useKey('Delete', () => handleDeleteElements(selection), undefined, [selection]);
 
@@ -92,7 +92,7 @@ const Canvas = () => {
     }
   };
 
-  const handleUpdateElement = (element) => updateElement(element);
+  const handleUpdateElement = (element) => updateElements([element]);
 
   const handleDeleteElements = (ids) => deleteElements(ids);
 

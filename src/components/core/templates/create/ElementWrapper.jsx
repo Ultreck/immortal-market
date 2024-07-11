@@ -68,7 +68,7 @@ const ElementWrapper = ({
 
 ElementWrapper.propTypes = {
   element: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,

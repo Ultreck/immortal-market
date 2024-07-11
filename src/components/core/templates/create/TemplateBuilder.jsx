@@ -8,7 +8,7 @@ import ElementTools from '@/components/core/templates/create/tools/ElementTools.
 import CanvasTools from '@/components/core/templates/create/tools/CanvasTools.jsx';
 import useTemplateStore from '@/store/template.js';
 import { TbLayoutList } from 'react-icons/tb';
-import { cn } from '@/lib/utils.js';
+import { cn, roundToNearestTen } from '@/lib/utils.js';
 import { RiShapesFill } from 'react-icons/ri';
 
 const TemplateBuilder = () => {
@@ -16,22 +16,22 @@ const TemplateBuilder = () => {
   const parent = useRef();
   const [tab, setTab] = useState('elements');
   const sensors = useSensors(useSensor(MouseSensor));
-  const addElement = useTemplateStore((state) => state.addElement);
+  const addElements = useTemplateStore((state) => state.addElements);
   const selectCanvas = useTemplateStore((state) => state.selectCanvas);
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent } = event;
     if (over && over.id === 'canvas') {
       const canvasRect = canvas.current.getBoundingClientRect();
-      const x = activatorEvent.x + delta.x - canvasRect.left;
-      const y = activatorEvent.y + delta.y - canvasRect.top;
+      const x = roundToNearestTen(activatorEvent.x + delta.x - canvasRect.left);
+      const y = roundToNearestTen(activatorEvent.y + delta.y - canvasRect.top);
       const el = {
         x,
         y,
-        id: Date.now(),
+        id: crypto.randomUUID(),
         ...active.data.current,
       };
-      addElement(el);
+      addElements([el]);
     }
   };
 
@@ -65,7 +65,7 @@ const TemplateBuilder = () => {
                 );
               })}
             </div>
-            <div className="pr-8 py-6 overflow-hidden">
+            <div className="pr-8 py-6 overflow-x-hidden">
               <div className="border rounded-2xl border-default-200 dark:border-default-100 bg-default-50">
                 {tab === 'elements' && <Elements />}
                 {tab === 'layers' && <Layers />}

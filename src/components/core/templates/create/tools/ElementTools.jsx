@@ -8,48 +8,61 @@ import BackgroundColor from './elements/BackgroundColor.jsx';
 import ChartPicker from './elements/ChartPicker.jsx';
 import useTemplateStore from '@/store/template.js';
 import TextAlign from './elements/TextAlign.jsx';
+import { useMemo } from 'react';
 
 const ElementTools = () => {
-  const updateElement = useTemplateStore((state) => state.updateElement);
-  const element = useTemplateStore(({ template }) => template.elements.find((el) => el.id === template.selection[0]));
+  const elements = useTemplateStore((state) => state.template.elements);
+  const selection = useTemplateStore((state) => state.template.selection);
+  const updateElements = useTemplateStore((state) => state.updateElements);
+  const _elements = selection.map((id) => elements.find((el) => el.id === id));
 
-  const handleUpdateElement = (element) => {
-    updateElement(element);
+  const tools = useMemo(() => {
+    if (!selection.length) return [];
+    let _tools = _elements.map((el) => el.tools);
+    _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
+    if (_tools.includes('chart-picker') && selection.length > 1) {
+      return _tools.filter((tool) => tool !== 'chart-picker');
+    }
+    return _tools;
+  }, [_elements, selection.length]);
+
+  const handleUpdateElements = (elements) => {
+    updateElements(elements);
   };
 
   return (
     <AnimatePresence>
-      {!!element && element.tools?.length > 0 && (
+      {tools.length > 0 && (
         <motion.div
           initial={{ opacity: 0, x: '100%' }}
           animate={{ opacity: 1, x: 4 }}
           exit={{ opacity: 0, x: '100%' }}
           className="fixed top-1/3 right-4 rounded-2xl bg-default-200/60 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
         >
-          {element.tools.map((tool) => {
+          {tools.map((tool) => {
             if (tool === 'bold') {
-              return <Bold key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+              return <Bold key={tool} elements={_elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'italic') {
-              return <Italic key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+              return <Italic key={tool} elements={_elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'underline') {
-              return <Underline key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+              return <Underline key={tool} elements={_elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'font-size') {
-              return <FontSize key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+              return <FontSize key={tool} elements={_elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'text-color') {
-              return <TextColor key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+              return <TextColor key={tool} elements={_elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'background-color') {
-              return <BackgroundColor key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
-            }
-            if (tool === 'chart-picker') {
-              return <ChartPicker key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+              return <BackgroundColor key={tool} elements={_elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'text-align') {
-              return <TextAlign key={`${element.id}-${tool}`} element={element} onChange={handleUpdateElement} />;
+              return <TextAlign key={tool} elements={_elements} onChange={handleUpdateElements} />;
+            }
+            if (tool === 'chart-picker' && selection.length === 1) {
+              return <ChartPicker key={tool} element={_elements[0]} onChange={(el) => handleUpdateElements([el])} />;
             }
             return <></>;
           })}

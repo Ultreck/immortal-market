@@ -82,7 +82,13 @@ const elements = [
     type: 'logo',
     name: 'Logo',
     icon: icons['logo'],
-    data: { type: 'logo', text: 'Logo', width: 120, height: 0 },
+    data: {
+      type: 'logo',
+      text: 'Logo',
+      width: 120,
+      height: 0,
+      tools: [],
+    },
     group: 'visual',
   },
   {

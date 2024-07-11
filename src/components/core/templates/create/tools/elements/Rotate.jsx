@@ -65,7 +65,7 @@ const Rotate = ({ element, onChange }) => {
 
 Rotate.propTypes = {
   element: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
@@ -78,4 +78,3 @@ Rotate.propTypes = {
 };
 
 export default Rotate;
-

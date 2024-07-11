@@ -3,25 +3,34 @@ import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/rea
 import { createElement } from 'react';
 import { TbAlignCenter, TbAlignJustified, TbAlignLeft, TbAlignRight } from 'react-icons/tb';
 
-const TextAlign = ({ element, onChange }) => {
-  const options = [
-    {
-      value: 'left',
-      icon: TbAlignLeft,
-    },
-    {
-      value: 'right',
-      icon: TbAlignRight,
-    },
-    {
-      value: 'center',
-      icon: TbAlignCenter,
-    },
-    {
-      value: 'justify',
-      icon: TbAlignJustified,
-    },
-  ];
+const options = [
+  {
+    value: 'left',
+    icon: TbAlignLeft,
+  },
+  {
+    value: 'right',
+    icon: TbAlignRight,
+  },
+  {
+    value: 'center',
+    icon: TbAlignCenter,
+  },
+  {
+    value: 'justify',
+    icon: TbAlignJustified,
+  },
+];
+
+const TextAlign = ({ elements, onChange }) => {
+  const values = elements.map((e) => e.style.textAlign);
+  const same = values.every((v) => v === values[0]);
+  const value = same ? values[0] : '';
+
+  const handleChange = (v) => {
+    if (!v) return;
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, textAlign: v } })));
+  };
 
   return (
     <Popover placement="left" showArrow offset={10}>
@@ -35,13 +44,11 @@ const TextAlign = ({ element, onChange }) => {
           <div className="gap-2 w-full flex items-center">
             {options.map((option) => (
               <Button
-                variant={element.style.textAlign === option.value ? 'solid' : 'text'}
+                variant={value === option.value ? 'solid' : 'text'}
                 key={option.value}
                 isIconOnly
                 className="text-base"
-                onClick={() => {
-                  onChange({ ...element, style: { ...element.style, textAlign: option.value } });
-                }}
+                onClick={() => handleChange(option.value)}
               >
                 {createElement(option.icon, { size: 20 })}
               </Button>
@@ -54,16 +61,18 @@ const TextAlign = ({ element, onChange }) => {
 };
 
 TextAlign.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-  }),
+  elements: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+      style: PropTypes.object,
+    })
+  ),
   onChange: PropTypes.func.isRequired,
 };
 

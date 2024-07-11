@@ -32,7 +32,7 @@ const TemplateBarChart = ({ element, height = 300 }) => {
     <>
       <ChartContainer config={config} style={{ height, width: '100%' }}>
         <BarChart accessibilityLayer data={chartData}>
-          <CartesianGrid vertical={false} />
+          <CartesianGrid vertical={false} horizontal={false} />
           <XAxis
             dataKey="browser"
             tickLine={false}
@@ -66,7 +66,7 @@ const TemplateBarChart = ({ element, height = 300 }) => {
 
 TemplateBarChart.propTypes = {
   element: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,

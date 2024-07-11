@@ -128,3 +128,5 @@ export const isValidJsonArray = (jsonString) => {
     return false;
   }
 };
+
+export const roundToNearestTen = (num) => Math.round(num / 10) * 10;

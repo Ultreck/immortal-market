@@ -20,7 +20,16 @@ const colors = [
   '#2b3793',
 ];
 
-const BackgroundColor = ({ element, onChange }) => {
+const BackgroundColor = ({ elements, onChange }) => {
+  const values = elements.map((e) => e.style.backgroundColor);
+  const same = values.every((v) => v === values[0]);
+  const value = same ? values[0] : '';
+
+  const handleChange = (v) => {
+    if (!v) return;
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, backgroundColor: v } })));
+  };
+
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
@@ -30,20 +39,17 @@ const BackgroundColor = ({ element, onChange }) => {
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-4 py-6 w-full">
-          <HexAlphaColorPicker
-            color={element.style.backgroundColor}
-            onChange={(color) => onChange({ ...element, style: { ...element.style, backgroundColor: color } })}
-          />
+          <HexAlphaColorPicker color={value} onChange={(color) => handleChange(color)} />
           <div className="grid grid-cols-6 gap-y-3 gap-x-3 mt-6">
             {colors.map((color, index) => (
               <div
                 key={index}
                 className="w-[25px] h-[25px] rounded-full hover:scale-105 transition-transform cursor-pointer relative"
                 style={{ backgroundColor: color }}
-                onClick={() => onChange({ ...element, style: { ...element.style, backgroundColor: color } })}
+                onClick={() => handleChange(color)}
               >
                 <AnimatePresence mode="wait">
-                  {element.style.backgroundColor === color && (
+                  {value === color && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -63,16 +69,18 @@ const BackgroundColor = ({ element, onChange }) => {
 };
 
 BackgroundColor.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-  }),
+  elements: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+      style: PropTypes.object,
+    })
+  ),
   onChange: PropTypes.func.isRequired,
 };
 

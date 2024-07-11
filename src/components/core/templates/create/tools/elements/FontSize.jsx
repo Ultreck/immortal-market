@@ -2,8 +2,17 @@ import { Autocomplete, AutocompleteItem, Button, Popover, PopoverContent, Popove
 import PropTypes from 'prop-types';
 import { TbMinus, TbPlus, TbTextSize } from 'react-icons/tb';
 
-const FontSize = ({ element, onChange }) => {
-  const sizes = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 60];
+const sizes = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 60];
+
+const FontSize = ({ elements, onChange }) => {
+  const values = elements.map((e) => e.style.fontSize);
+  const same = values.every((v) => v === values[0]);
+  const value = same ? `${values[0]}` : '';
+
+  const handleChange = (v) => {
+    if (v === '') return;
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, fontSize: +v } })));
+  };
 
   return (
     <Popover placement="left" showArrow offset={10}>
@@ -19,8 +28,10 @@ const FontSize = ({ element, onChange }) => {
               isIconOnly
               variant="flat"
               className="text-base"
+              isDisabled={!value}
               onClick={() => {
-                onChange({ ...element, style: { ...element.style, fontSize: element.style.fontSize - 1 } });
+                if (!value) return;
+                handleChange(Math.max(1, +value - 1));
               }}
             >
               <TbMinus size="20" />
@@ -30,13 +41,13 @@ const FontSize = ({ element, onChange }) => {
               isClearable={false}
               classNames={{ base: 'w-[80px] text-base' }}
               allowsEmptyCollection={false}
-              inputValue={`${element.style.fontSize}`}
+              inputValue={value}
               onInputChange={(v) => {
                 if (+v <= 0) return;
-                onChange({ ...element, style: { ...element.style, fontSize: +v } });
+                handleChange(+v);
               }}
               onSelectionChange={(v) => {
-                onChange({ ...element, style: { ...element.style, fontSize: +v } });
+                handleChange(+v);
               }}
             >
               {sizes.map((n) => (
@@ -49,8 +60,10 @@ const FontSize = ({ element, onChange }) => {
               isIconOnly
               variant="flat"
               className="text-base"
+              isDisabled={!value}
               onClick={() => {
-                onChange({ ...element, style: { ...element.style, fontSize: element.style.fontSize + 1 } });
+                if (!value) return;
+                handleChange(Math.max(1, +value + 1));
               }}
             >
               <TbPlus size="20" />
@@ -63,16 +76,18 @@ const FontSize = ({ element, onChange }) => {
 };
 
 FontSize.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-  }),
+  elements: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+      style: PropTypes.object,
+    })
+  ),
   onChange: PropTypes.func.isRequired,
 };
 
