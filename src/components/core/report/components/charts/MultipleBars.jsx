@@ -6,7 +6,7 @@ const MultipleBars = () => {
   const data = [
     { date: '2023-06-01', value1: 100, value2: 180 },
     { date: '2023-06-02', value1: 90, value2: 300 },
-    { date: '2023-06-03', value1: 70, value2: 110 },
+    { date: '2023-06-03', value1: 170, value2: 110 },
     { date: '2023-06-04', value1: 100, value2: 350 },
     { date: '2023-06-05', value1: 250, value2: 105 },
   ];
@@ -25,21 +25,21 @@ const MultipleBars = () => {
               <motion.div
                 className="bg-blue-500"
                 style={{
-                  width: `${(item.value1 / maxValue) * 400}px`,
+                  width: `${(item.value1 / maxValue) * 800}px`,
                   height: '2.5rem',
                 }}
                 initial={{ width: 0 }}
-                animate={{ width: `${(item.value1 / maxValue) * 400}px` }}
+                animate={{ width: `${(item.value1 / maxValue) * 800}px` }}
                 transition={{ duration: 0.5 }}
               />
               <motion.div
                 className="bg-red-500"
                 style={{
-                  width: `${(item.value2 / maxValue) * 400}px`,
+                  width: `${(item.value2 / maxValue) * 800}px`,
                   height: '2.5rem',
                 }}
                 initial={{ width: 0 }}
-                animate={{ width: `${(item.value2 / maxValue) * 400}px` }}
+                animate={{ width: `${(item.value2 / maxValue) * 800}px` }}
                 transition={{ duration: 0.5 }}
               />
             </div>

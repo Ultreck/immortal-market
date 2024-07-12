@@ -101,6 +101,7 @@ const VerticalStackedBar = () => {
         height={300}
         data={data}
         className='space'
+        defaultShowTooltip
       >
         <Legend />
         <Bar dataKey="pv" stackId="a" fill="#8884d8" />

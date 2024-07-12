@@ -53,7 +53,6 @@ const ReportBody = () => {
             <TenSquares percentage={65} />
             <TenCircles percentage={35} />
           </div>
-          <MultipleBars />
           <SpeedometerGauge />
           <TangentialPolarBarChart />
           <VerticalStackedBar />
@@ -86,6 +85,7 @@ const ReportBody = () => {
         <FunnelChart />
         <RosePieChart />
       </div>
+      <MultipleBars />
       <CandyBarChart />
       <AreaCharts />
       <VennDiagramChart />

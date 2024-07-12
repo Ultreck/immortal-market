@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { getPercentagesMax } from '../../../../../lib/utils';
-import { Card } from '@nextui-org/react';
+import { Button, Card, Tooltip } from '@nextui-org/react';
 
 const colors = [
   '#0d47a1',
@@ -26,23 +26,38 @@ const NewVerticalBar = ({ title, data }) => {
         {data.map((item, index) => (
           <div key={index} className="flex flex-col justify-start">
             <div className="h-[300px] flex flex-col justify-end">
-              <motion.div
-                initial={{ height: 0, translateY: 20 }}
-                animate={{
-                  height: `${percentages[index]}%`,
-                  width: '100%',
-                  backgroundColor: colors[index],
-                  translateY: 0,
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 25,
-                  duration: 1,
-                  delay: index * 0.1,
-                }}
-                className="w-1 h-full relative rounded-t"
-              ></motion.div>
+              <Tooltip
+                key={index}
+                size="lg"
+                content={
+                  <div className="px-1 py-2">
+                    <div className="font-bold">Custom Content</div>
+                    <div className="">This is {percentages[index]}% </div>
+                    <Button size="sm" className="mt-10 bg-white text-black">
+                      View
+                    </Button>
+                  </div>
+                }
+                placement="top"
+              >
+                <motion.div
+                  initial={{ height: 0, translateY: 20 }}
+                  animate={{
+                    height: `${percentages[index]}%`,
+                    width: '100%',
+                    backgroundColor: colors[index],
+                    translateY: 0,
+                  }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 25,
+                    duration: 1,
+                    delay: index * 0.1,
+                  }}
+                  className="w-1 h-full relative rounded-t"
+                ></motion.div>
+              </Tooltip>
             </div>
           </div>
         ))}
@@ -64,4 +79,3 @@ NewVerticalBar.propTypes = {
 };
 
 export default NewVerticalBar;
-
