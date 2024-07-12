@@ -1,15 +1,15 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
-import { useGetUserBusiness } from '@/api/business.js';
 import { useGenerateCustomReport } from '@/api/document.js';
 import Button from '@/components/ui/Button.jsx';
 import Card from '@/components/ui/Card.jsx';
 import { IconFileCheck } from '@tabler/icons-react';
 import { useQueryClient } from '@tanstack/react-query';
+import useBusiness from '@/hooks/use-business.js';
 
 const CustomDocumentDetailsModal = ({ isOpen, onClose, document }) => {
   const qc = useQueryClient();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { mutateAsync: generate, isPending } = useGenerateCustomReport();
 
   const q = qc.getQueryState(['documents', 'custom']);

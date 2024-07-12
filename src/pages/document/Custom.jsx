@@ -5,16 +5,16 @@ import Button from '@/components/ui/Button.jsx';
 import { IconPlus } from '@tabler/icons-react';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
 import { useGetCustomDocuments } from '@/api/document.js';
-import { useGetUserBusiness } from '@/api/business.js';
 import NoData from '@/components/ui/NoData.jsx';
 import CustomDocumentCard from '@/components/core/document/custom/CustomDocumentCard.jsx';
 import CustomDocumentDetailsModal from '@/components/core/document/custom/CustomDocumentDetailsModal.jsx';
+import useBusiness from '@/hooks/use-business.js';
 
 const Custom = () => {
   const [id, setId] = useState(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isNewReportOpen, setIsNewReportOpen] = useState(false);
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data: { documents = [] } = {}, isLoading } = useGetCustomDocuments(business._id);
 
   const current = useMemo(() => documents.find((document) => document._id === id), [documents, id]);

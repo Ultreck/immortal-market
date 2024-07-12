@@ -10,10 +10,10 @@ import Input from '@/components/ui/Input.jsx';
 import TextArea from '@/components/ui/TextArea.jsx';
 import Button from '@/components/ui/Button.jsx';
 import { useUpdateInvoice } from '@/api/document.js';
-import { useGetUserBusiness } from '@/api/business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import Select from '@/components/ui/Select.jsx';
 import PropTypes from 'prop-types';
+import useBusiness from '@/hooks/use-business.js';
 
 const schema = yup.object({
   number: yup.string().required('Invoice number is required'),
@@ -44,7 +44,7 @@ const schema = yup.object({
 const EditInvoice = ({ invoice, onBack }) => {
   const toast = useToast();
   const qc = useQueryClient();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateInvoice(business._id, invoice._id);
   const {
     register,

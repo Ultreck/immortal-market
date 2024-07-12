@@ -1,7 +1,6 @@
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useGetUserBusiness } from '@/api/business.js';
 import { useDeleteInvoice, useGetInvoice } from '@/api/document.js';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import IconButton from '@/components/ui/IconButton.jsx';
@@ -13,6 +12,7 @@ import Button from '@/components/ui/Button.jsx';
 import Image from '@/components/core/shared/Image.jsx';
 import InvoiceSummary from '@/components/core/document/invoices/InvoiceSummary.jsx';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
+import useBusiness from '@/hooks/use-business.js';
 
 const InvoiceDetails = () => {
   const toast = useToast();
@@ -20,7 +20,7 @@ const InvoiceDetails = () => {
   const qc = useQueryClient();
   const navigate = useNavigate();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data: { invoice } = {}, isLoading: isInvoiceLoading } = useGetInvoice(business._id, id);
   const { mutateAsync: deleteInvoice, isPending: isDeleteLoading } = useDeleteInvoice(business._id, id);
 

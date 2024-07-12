@@ -5,14 +5,14 @@ import classNames from 'classnames';
 import { formatCurrency } from '@/lib/utils.js';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
-import { useGetUserBusiness } from '@/api/business.js';
 import { useGetStatements } from '@/api/statement.js';
 import NewStatement from '@/components/core/banking/statement/NewStatement.jsx';
+import useBusiness from '@/hooks/use-business.js';
 
 const StatementHistory = () => {
   const navigate = useNavigate();
   const [isAnalyzeOpen, setIsAnalyzeOpen] = useState(false);
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data: { statements = [] } = {}, isLoading: isStatementsLoading } = useGetStatements(business._id);
 
   return (

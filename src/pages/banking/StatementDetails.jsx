@@ -35,12 +35,12 @@ import MonthlyDepositWithdrawal from '@/components/core/banking/details/MonthlyD
 import CashFlowDistribution from '@/components/core/banking/details/CashFlowDistribution.jsx';
 import WeeklyTransactions from '@/components/core/banking/details/WeeklyTransactions.jsx';
 import StatementDetailsChat from '@/components/core/banking/details/StatementDetailsChat.jsx';
-import { useGetUserBusiness } from '@/api/business.js';
 import { useGetStatement, useGetTransactionDetails } from '@/api/statement.js';
+import useBusiness from '@/hooks/use-business.js';
 
 const StatementDetails = () => {
   const { id } = useParams();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const [isChatOpen, setIsChatOpen] = useState(false);
   const { data: { statement } = {}, isLoading: isStatementLoading } = useGetStatement(business._id, id);
   const { data, isLoading: isTransactionsLoading } = useGetTransactionDetails(statement?.transactionId);

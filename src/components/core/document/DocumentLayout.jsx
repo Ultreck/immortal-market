@@ -5,12 +5,12 @@ import Loader from '@/components/ui/Loader.jsx';
 import AppDashboardLayout from '@/components/core/shared/AppDashboardLayout.jsx';
 import ProductOnboarding from '@/components/core/shared/ProductOnboarding.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
-import { useGetUserBusiness } from '@/api/business.js';
 import classNames from 'classnames';
 import { categories } from '@/lib/products.js';
 import PropTypes from 'prop-types';
 import { Outlet } from 'react-router-dom';
 import { useCreateDocumentSettings, useGetDocumentSettings } from '@/api/document.js';
+import useBusiness from '@/hooks/use-business.js';
 
 const product = categories.find((p) => p.slug === 'documents');
 
@@ -41,7 +41,7 @@ const DocumentLayout = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const [isFetching, setIsFetching] = useState(false);
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data: { settings } = {}, isLoading: isSettingsLoading } = useGetDocumentSettings(business._id);
   const { mutateAsync: createSettings, isPending: isCreateSettingsLoading } = useCreateDocumentSettings(business._id);
 

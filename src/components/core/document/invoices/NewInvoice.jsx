@@ -4,12 +4,12 @@ import { IconCircleCheckFilled } from '@tabler/icons-react';
 import Drawer from '@/components/ui/Drawer.jsx';
 import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInput.jsx';
 import { useCreateInvoice } from '@/api/document.js';
-import { useGetUserBusiness } from '@/api/business.js';
 import { GridLoader } from 'react-spinners';
 import { useToast } from '@/hooks/use-toast.jsx';
 import Button from '@/components/ui/Button.jsx';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import useBusiness from '@/hooks/use-business.js';
 
 const NewInvoice = ({ isOpen, onClose }) => {
   const toast = useToast();
@@ -17,7 +17,7 @@ const NewInvoice = ({ isOpen, onClose }) => {
   const response = useRef(null);
   const [success, setSuccess] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { mutateAsync: createInvoice, isPending: isCreateInvoiceLoading } = useCreateInvoice(business._id);
 
   const onChange = async (file) => {

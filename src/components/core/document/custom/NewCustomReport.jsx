@@ -3,7 +3,6 @@ import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInpu
 import { GridLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { useAddCustomDocument } from '@/api/document.js';
-import { useGetUserBusiness } from '@/api/business.js';
 import { IconArrowLeft, IconCheck, IconCircleCheckFilled, IconPdf } from '@tabler/icons-react';
 import Button from '@/components/ui/Button.jsx';
 import Input from '@/components/ui/Input.jsx';
@@ -11,6 +10,7 @@ import Select from '@/components/ui/Select.jsx';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
+import useBusiness from '@/hooks/use-business.js';
 
 const NewCustomReport = ({ isOpen, onClose }) => {
   const qc = useQueryClient();
@@ -23,7 +23,7 @@ const NewCustomReport = ({ isOpen, onClose }) => {
     formState: { errors },
     setValue,
   } = useForm();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { mutateAsync: add, isPending: isAddLoading } = useAddCustomDocument(business._id);
 
   const handleFileChange = async (file = null) => {

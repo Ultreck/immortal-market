@@ -3,7 +3,6 @@ import { IconArrowLeft, IconCheck, IconCircleCheckFilled, IconPdf } from '@table
 import { GridLoader } from 'react-spinners';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import { useGetUserBusiness } from '@/api/business.js';
 import IconButton from '@/components/ui/IconButton.jsx';
 import { Link } from 'react-router-dom';
 import Button from '@/components/ui/Button.jsx';
@@ -13,10 +12,11 @@ import { useAnalyzeStatement, useCreateStatement } from '@/api/statement.js';
 import { useGetBanks } from '@/api/misc.js';
 import PropTypes from 'prop-types';
 import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInput.jsx';
+import useBusiness from '@/hooks/use-business.js';
 
 const AnalyzePdf = ({ onBack }) => {
   const qc = useQueryClient();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const [file, setFile] = useState(null);
   const {
     register,

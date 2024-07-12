@@ -2,15 +2,15 @@ import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import { useForm } from 'react-hook-form';
 import { useGetBankingSettings, useUpdateBankingSettings } from '@/api/statement';
-import { useGetUserBusiness } from '@/api/business';
 import { useToast } from '@/hooks/use-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import Card from '@/components/ui/Card';
+import useBusiness from '@/hooks/use-business.js';
 
 const MbsCredentials = () => {
   const toast = useToast();
   const qc = useQueryClient();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const {
     data: { settings },
   } = useGetBankingSettings(business._id);

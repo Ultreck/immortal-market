@@ -6,14 +6,14 @@ import { formatCurrency } from '@/lib/utils.js';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
 import Button from '@/components/ui/Button.jsx';
 import { useGetReceipts } from '@/api/document.js';
-import { useGetUserBusiness } from '@/api/business.js';
 import { useNavigate } from 'react-router-dom';
 import Card from '@/components/ui/Card.jsx';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
+import useBusiness from '@/hooks/use-business.js';
 
 const Receipts = () => {
   const navigate = useNavigate();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data: { receipts = [] } = {}, isLoading: isReceiptsLoading } = useGetReceipts(business._id);
   const [isNewOpen, setIsNewOpen] = useState(false);
 

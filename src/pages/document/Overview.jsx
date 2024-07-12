@@ -12,11 +12,11 @@ import {
   IconFileTypeXls,
   IconPlus,
 } from '@tabler/icons-react';
-import { useGetUserBusiness } from '@/api/business.js';
 import { useGetDocumentOverview } from '@/api/document.js';
 import { formatCurrency } from '@/lib/utils.js';
 import { Link } from 'react-router-dom';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
+import useBusiness from '@/hooks/use-business.js';
 
 const items = [
   {
@@ -47,7 +47,7 @@ const items = [
 ];
 
 const DocumentOverview = () => {
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data, isLoading: isOverviewLoading } = useGetDocumentOverview(business._id);
   const [isNewInvoiceOpen, setIsNewInvoiceOpen] = useState(false);
   const [isNewReceiptOpen, setIsNewReceiptOpen] = useState(false);

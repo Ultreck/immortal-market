@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import Drawer from '@/components/ui/Drawer.jsx';
 import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInput.jsx';
 import { useCreateReceipt } from '@/api/document.js';
-import { useGetUserBusiness } from '@/api/business.js';
 import { GridLoader } from 'react-spinners';
 import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast.jsx';
@@ -10,6 +9,7 @@ import { IconCircleCheckFilled } from '@tabler/icons-react';
 import Button from '@/components/ui/Button.jsx';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import useBusiness from '@/hooks/use-business.js';
 
 const NewReceipt = ({ isOpen, onClose }) => {
   const toast = useToast();
@@ -17,7 +17,7 @@ const NewReceipt = ({ isOpen, onClose }) => {
   const response = useRef(null);
   const [success, setSuccess] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { mutateAsync: createReceipt, isPending: isCreateReceiptLoading } = useCreateReceipt(business._id);
 
   const onChange = async (file) => {

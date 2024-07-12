@@ -1,10 +1,10 @@
-import { useGetUserBusiness } from '@/api/business.js';
 import Card from '@/components/ui/Card.jsx';
 import { useGetStatementOverview } from '@/api/statement.js';
 import { formatCurrency } from '@/lib/utils.js';
+import useBusiness from '@/hooks/use-business.js';
 
 const StatementStats = () => {
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data = {}, isLoading: isOverviewLoading } = useGetStatementOverview(business._id);
 
   return (

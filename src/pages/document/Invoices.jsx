@@ -1,6 +1,5 @@
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
-import { useGetUserBusiness } from '@/api/business.js';
 import { useGetInvoices } from '@/api/document.js';
 import { useState } from 'react';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
@@ -10,10 +9,11 @@ import Card from '@/components/ui/Card.jsx';
 import NewInvoice from '@/components/core/document/invoices/NewInvoice.jsx';
 import { formatCurrency } from '@/lib/utils.js';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
+import useBusiness from '@/hooks/use-business.js';
 
 const Invoices = () => {
   const navigate = useNavigate();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data: { invoices = [] } = {}, isLoading: isInvoicesLoading } = useGetInvoices(business._id);
   const [isNewOpen, setIsNewOpen] = useState(false);
 

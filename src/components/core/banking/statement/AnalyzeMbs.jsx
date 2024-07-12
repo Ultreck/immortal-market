@@ -15,7 +15,6 @@ import {
   useRetrieveMbsPdf,
   useSubmitMbsTicket,
 } from '@/api/statement.js';
-import { useGetUserBusiness } from '@/api/business.js';
 import classNames from 'classnames';
 import { useGetAccountName, useGetBanks } from '@/api/misc.js';
 import { BeatLoader, GridLoader } from 'react-spinners';
@@ -24,6 +23,7 @@ import { delay } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import useBusiness from '@/hooks/use-business.js';
 
 const AnalyzeMbs = ({ onBack }) => {
   const [view, setView] = useState('form');
@@ -55,7 +55,7 @@ const InitializeForm = ({ onTicket, onBack }) => {
     formState: { errors },
     watch,
   } = useForm();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data: { settings } = {} } = useGetBankingSettings(business._id);
   const { mutateAsync: initialize, isPending: isInitializeLoading } = useInitializeMbs(business._id);
   const { mutateAsync: getFeedback, isPending: isFeedbackLoading } = useCheckMbsStatus(business._id);
@@ -260,7 +260,7 @@ const TicketForm = ({ data, onBack }) => {
     formState: { errors },
     watch,
   } = useForm();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { mutateAsync: confirm, isPending: isConfirmLoading } = useSubmitMbsTicket(business._id);
   const { mutateAsync: retrieve, isPending: isRetrieveLoading } = useRetrieveMbsPdf(business._id);
   const { mutateAsync: analyze } = useAnalyzeStatement();

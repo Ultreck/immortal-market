@@ -1,10 +1,10 @@
-import { useGetUserBusiness } from '@/api/business.js';
 import { useGetStatementOverview } from '@/api/statement.js';
 import { formatCurrency } from '@/lib/utils.js';
 import { Card, Skeleton } from '@nextui-org/react';
+import useBusiness from '@/hooks/use-business.js';
 
 const OverviewStats = () => {
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data = {}, isLoading: isOverviewLoading } = useGetStatementOverview(business._id);
 
   return (

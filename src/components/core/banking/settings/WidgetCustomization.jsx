@@ -3,10 +3,10 @@ import Select from '@/components/ui/Select';
 import Button from '@/components/ui/Button';
 import { useToast } from '@/hooks/use-toast';
 import { useQueryClient } from '@tanstack/react-query';
-import { useGetUserBusiness } from '@/api/business';
 import { useGetBankingSettings, useUpdateBankingSettings } from '@/api/statement';
 import { useForm } from 'react-hook-form';
 import Card from '@/components/ui/Card';
+import useBusiness from '@/hooks/use-business.js';
 
 const colors = [
   { text: 'Purple', value: '#0000' },
@@ -19,7 +19,7 @@ const colors = [
 const WidgetCustomization = () => {
   const toast = useToast();
   const qc = useQueryClient();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const {
     data: { settings },
   } = useGetBankingSettings(business._id);

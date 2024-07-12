@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import { GridLoader } from 'react-spinners';
 import { useQueryClient } from '@tanstack/react-query';
-import { useGetUserBusiness } from '@/api/business.js';
 import {
   useAnalyzeJson,
   useCommitMonoSession,
@@ -22,12 +21,13 @@ import Tabs from '@/components/ui/Tabs.jsx';
 import Input from '@/components/ui/Input.jsx';
 import { capitalize, delay } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
+import useBusiness from '@/hooks/use-business.js';
 
 const CLAN_API_KEY = import.meta.env.VITE_CLAN_API_KEY;
 
 const AnalyzeMono = ({ onBack }) => {
   const [selected, setSelected] = useState(null);
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data: { settings } = {} } = useGetBankingSettings(business._id);
   const { data, isLoading } = useGetMonoInstitutions({
     key: settings.statement.monoSecKey,
@@ -121,7 +121,7 @@ const AnalyzeMonoLogin = ({ institution, onBack }) => {
     formState: { errors },
     watch,
   } = useForm();
-  const { data: business } = useGetUserBusiness();
+  const { business } = useBusiness();
   const { data: { settings } = {} } = useGetBankingSettings(business._id);
   const monoSecKey = settings.statement.monoSecretKey;
   const monoApp = settings.statement.monoApp;
