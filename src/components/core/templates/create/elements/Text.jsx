@@ -33,6 +33,7 @@ const Text = ({ element, active, width, onClick, onChange }) => {
       onEditStart={() => updateInputHeight()}
       active={active}
       constrained
+      className="max-w-full"
     >
       <div className="overflow-hidden relative w-full h-full">
         <textarea

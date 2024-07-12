@@ -33,6 +33,7 @@ const Heading = ({ element, active, width, onClick, onChange }) => {
       onEditStart={() => updateInputHeight()}
       active={active}
       constrained
+      className="max-w-full"
     >
       <div className="overflow-hidden relative w-full h-full pl-6">
         <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[90%] bottom-0 w-2 bg-gray-800 rounded-2xl"></div>

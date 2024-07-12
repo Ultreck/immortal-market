@@ -17,6 +17,7 @@ const ElementWrapper = ({
   onResize,
   resizeHandles = ['e'],
   constrained = false,
+  className,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -37,10 +38,11 @@ const ElementWrapper = ({
       }}
       classNames={{
         base: cn(
-          'w-max max-w-full border-2 border-transparent absolute group select-none rounded',
+          'w-max border-2 border-transparent absolute group select-none rounded',
           { 'border-primary-500': active },
           { 'border-purple-500': isEditing },
-          { 'hover:border-gray-200': !active }
+          { 'hover:border-gray-200': !active },
+          className
         ),
       }}
       onControlDblClick={() => setIsEditing(true)}
@@ -85,6 +87,7 @@ ElementWrapper.propTypes = {
   onEditStart: PropTypes.func,
   resizeHandles: PropTypes.arrayOf(PropTypes.string),
   constrained: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default ElementWrapper;
