@@ -1,5 +1,4 @@
-
-import { Card } from '@nextui-org/react';
+import { Button, Card, Tooltip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 
 const TenSquares = ({ percentage = 35 }) => {
@@ -9,20 +8,33 @@ const TenSquares = ({ percentage = 35 }) => {
   for (let i = 0; i < 10; i++) {
     const squareIndex = i + 1;
     const isColored = squareIndex <= Math.floor(percentage / 10);
-
     squares.push(
-      <motion.div
+      <Tooltip
         key={i}
-        className={`w-8 h-8 mx-2 mb-4 ${isColored ? 'bg-blue-800' : 'bg-gray-500'}`}
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5, delay: i * 0.1 }}
-      />
+        size='lg'
+        content={
+          <div className="px-1 py-2">
+            <div className="font-bold">Custom Content</div>
+            <div className="">This is square {squareIndex} </div>
+
+            <Button size='sm' className='mt-10 bg-white text-black'>View</Button>
+          </div>
+        }
+        placement="top"
+      >
+        <motion.div
+          key={i}
+          className={`w-8 h-8 mx-2 mb-4 ${isColored ? 'bg-blue-800' : 'bg-gray-500'}`}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5, delay: i * 0.1 }}
+        />
+      </Tooltip>
     );
   }
 
   return (
-    <Card className='space-y-6 w-full bg-default-50 px-8 py-6' >
+    <Card className="space-y-6 w-full bg-default-50 px-8 py-6">
       <p className="mt-4 text-6xl font-bold text-blue-800">{`${coloredSquares}/10`}</p>
       <div className="grid grid-cols-5">{squares}</div>
       <p>Alot of business can not do the needful so we must find a good way to do it.</p>
