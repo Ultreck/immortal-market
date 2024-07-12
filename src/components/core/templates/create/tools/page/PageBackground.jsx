@@ -20,7 +20,7 @@ const colors = [
   '#2b3793',
 ];
 
-const CanvasBackground = ({ page, onChange }) => {
+const PageBackground = ({ page, onChange }) => {
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
@@ -64,9 +64,9 @@ const CanvasBackground = ({ page, onChange }) => {
   );
 };
 
-CanvasBackground.propTypes = {
+PageBackground.propTypes = {
   page: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-export default CanvasBackground;
+export default PageBackground;

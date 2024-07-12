@@ -3,7 +3,7 @@ import { TbDimensions, TbMinus, TbPlus } from 'react-icons/tb';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const CanvasDimensions = ({ page, onChange }) => {
+const PageDimensions = ({ page, onChange }) => {
   const [width, setWidth] = useState(page.width);
   const [height, setHeight] = useState(page.height);
 
@@ -96,9 +96,9 @@ const CanvasDimensions = ({ page, onChange }) => {
   );
 };
 
-CanvasDimensions.propTypes = {
+PageDimensions.propTypes = {
   page: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-export default CanvasDimensions;
+export default PageDimensions;

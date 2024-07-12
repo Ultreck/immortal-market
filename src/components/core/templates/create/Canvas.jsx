@@ -18,8 +18,9 @@ import ArrowDown from './elements/ArrowDown';
 import ArrowLeft from './elements/ArrowLeft';
 import Image from './elements/Image';
 import ElementTools from '@/components/core/templates/create/tools/ElementTools.jsx';
-import CanvasTools from '@/components/core/templates/create/tools/CanvasTools.jsx';
+import PageTools from '@/components/core/templates/create/tools/PageTools.jsx';
 import TemplatePagination from '@/components/core/templates/create/TemplatePagination.jsx';
+import { motion } from 'framer-motion';
 
 const isValidElement = (element) => {
   const validKeys = ['type', 'id', 'x', 'y', 'width', 'height'];
@@ -142,13 +143,15 @@ const Canvas = () => {
 
   return (
     <div>
-      <div
+      <motion.div
+        layout
         className={cn('relative border-3 border-transparent rounded-xl', { 'border-primary-500': isCanvasSelected })}
       >
         <div className="absolute bottom-[calc(100%_+_20px)] left-0 w-full">
           <TemplatePagination />
         </div>
-        <div
+        <motion.div
+          layout
           onClick={handleCanvasClick}
           ref={setNodeRef}
           className={cn('bg-white text-black border border-default-200 rounded-lg relative overflow-hidden canvas')}
@@ -287,11 +290,11 @@ const Canvas = () => {
               </Fragment>
             );
           })}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <ElementTools />
-      <CanvasTools isOpen={isCanvasSelected} />
+      <PageTools isOpen={isCanvasSelected} />
     </div>
   );
 };
