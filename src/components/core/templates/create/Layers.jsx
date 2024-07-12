@@ -7,22 +7,22 @@ import LayerItem from '@/components/core/templates/create/LayerItem.jsx';
 
 const Layers = () => {
   const [element, setElement] = useState(null);
-  const elements = useTemplateStore((state) => state.template.elements);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.page));
+  const updatePage = useTemplateStore((state) => state.updatePage);
 
   const sensors = useSensors(useSensor(PointerSensor));
 
   const handleDragStart = (event) => {
-    setElement(elements.find((obj) => obj.id === event.active.id));
+    setElement(page.elements.find((obj) => obj.id === event.active.id));
   };
 
   const handleDragEnd = (event) => {
     setElement(null);
     const { active, over } = event;
     if (active.id !== over.id) {
-      const oldIndex = elements.findIndex((obj) => obj.id === active.id);
-      const newIndex = elements.findIndex((obj) => obj.id === over.id);
-      updateTemplate({ elements: arrayMove(elements, oldIndex, newIndex) });
+      const oldIndex = page.elements.findIndex((obj) => obj.id === active.id);
+      const newIndex = page.elements.findIndex((obj) => obj.id === over.id);
+      updatePage({ elements: arrayMove(page.elements, oldIndex, newIndex) });
     }
   };
 
@@ -34,10 +34,10 @@ const Layers = () => {
         onDragStart={handleDragStart}
         collisionDetection={closestCenter}
       >
-        <SortableContext items={elements} strategy={verticalListSortingStrategy}>
-          {elements.length > 0 ? (
+        <SortableContext items={page.elements} strategy={verticalListSortingStrategy}>
+          {page.elements.length > 0 ? (
             <div className="space-y-1">
-              {elements.map((element) => (
+              {page.elements.map((element) => (
                 <LayerElement key={element.id} element={element} />
               ))}
             </div>

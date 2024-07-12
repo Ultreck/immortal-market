@@ -17,12 +17,9 @@ import ArrowRight from './elements/ArrowRight';
 import ArrowDown from './elements/ArrowDown';
 import ArrowLeft from './elements/ArrowLeft';
 import Image from './elements/Image';
-
-const getElementWidthWithoutPadding = (element) => {
-  if (!element) return 0;
-  const computedStyle = getComputedStyle(element);
-  return element.clientWidth - parseFloat(computedStyle.paddingLeft) - parseFloat(computedStyle.paddingRight);
-};
+import ElementTools from '@/components/core/templates/create/tools/ElementTools.jsx';
+import CanvasTools from '@/components/core/templates/create/tools/CanvasTools.jsx';
+import TemplatePagination from '@/components/core/templates/create/TemplatePagination.jsx';
 
 const isValidElement = (element) => {
   const validKeys = ['type', 'id', 'x', 'y', 'width', 'height'];
@@ -30,14 +27,11 @@ const isValidElement = (element) => {
 };
 
 const Canvas = () => {
-  const [width, setWidth] = useState(0);
   const { setNodeRef, node } = useDroppable({ id: 'canvas' });
-  const style = useTemplateStore((state) => state.template.style);
-  const elements = useTemplateStore((state) => state.template.elements);
+  const [isCanvasSelected, setIsCanvasSelected] = useState(false);
+  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.page));
   const selection = useTemplateStore((state) => state.template.selection);
-  const isCanvasSelected = useTemplateStore((state) => state.template.isCanvasSelected);
   const selectElements = useTemplateStore((state) => state.selectElements);
-  const selectCanvas = useTemplateStore((state) => state.selectCanvas);
   const updateElements = useTemplateStore((state) => state.updateElements);
   const deleteElements = useTemplateStore((state) => state.deleteElements);
   const addElements = useTemplateStore((state) => state.addElements);
@@ -45,14 +39,14 @@ const Canvas = () => {
   useEffect(() => {
     const handleCopy = (e) => {
       if (selection.length) {
-        const _elements = elements.filter((element) => selection.includes(element.id));
+        const _elements = page.elements.filter((element) => selection.includes(element.id));
         e.clipboardData.setData('text/plain', JSON.stringify(_elements));
         e.preventDefault();
       }
     };
     const handleCut = (e) => {
       if (selection.length) {
-        const _elements = elements.filter((element) => selection.includes(element.id));
+        const _elements = page.elements.filter((element) => selection.includes(element.id));
         e.clipboardData.setData('text/plain', JSON.stringify(_elements));
         deleteElements(selection);
         e.preventDefault();
@@ -78,7 +72,7 @@ const Canvas = () => {
       window.removeEventListener('copy', handleCopy);
       window.removeEventListener('cut', handleCut);
     };
-  }, [addElements, deleteElements, elements, selection]);
+  }, [addElements, deleteElements, page.elements, selection]);
 
   useKey('Delete', () => handleDeleteElements(selection), undefined, [selection]);
 
@@ -100,9 +94,9 @@ const Canvas = () => {
       if (selection.length > 1) {
         let _elements = selection.map((id) => {
           if (id === element.id) return element;
-          return elements.find((el) => el.id === id);
+          return page.elements.find((el) => el.id === id);
         });
-        const original = elements.find((el) => el.id === element.id);
+        const original = page.elements.find((el) => el.id === element.id);
         const diff = {
           x: element.x - original.x,
           y: element.y - original.y,
@@ -122,13 +116,16 @@ const Canvas = () => {
         updateElements([element]);
       }
     },
-    [elements, selection, updateElements]
+    [page.elements, selection, updateElements]
   );
 
   const handleDeleteElements = (ids) => deleteElements(ids);
 
   const handleCanvasClick = (e) => {
-    if (e.target === node.current) selectCanvas();
+    if (e.target === node.current) {
+      selectElements([]);
+      setIsCanvasSelected(true);
+    }
   };
 
   const handleElementClick = useCallback(
@@ -140,152 +137,161 @@ const Canvas = () => {
   );
 
   useEffect(() => {
-    const width = getElementWidthWithoutPadding(node.current);
-    setWidth(width);
-  }, [node]);
+    if (selection.length && isCanvasSelected) setIsCanvasSelected(false);
+  }, [isCanvasSelected, selection.length]);
 
   return (
-    <div className={cn('relative border-3 border-transparent rounded-xl', { 'border-primary-500': isCanvasSelected })}>
+    <div>
       <div
-        onClick={handleCanvasClick}
-        ref={setNodeRef}
-        className={cn('bg-white text-black border border-default-200 rounded-lg relative overflow-hidden canvas')}
-        style={{ ...style }}
+        className={cn('relative border-3 border-transparent rounded-xl', { 'border-primary-500': isCanvasSelected })}
       >
-        {elements.map((element) => {
-          const active = selection.includes(element.id);
-          return (
-            <Fragment key={element.id}>
-              {element.type === 'heading' && (
-                <Heading
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'text' && (
-                <Text
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'chart' && (
-                <Chart
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'logo' && (
-                <Logo
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'circle' && (
-                <Circle
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'rectangle' && (
-                <Rectangle
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'triangle' && (
-                <Triangle
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'diagonal-rectangle' && (
-                <DiagonalRectangle
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'arrow-up' && (
-                <ArrowUp
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'arrow-down' && (
-                <ArrowDown
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'arrow-right' && (
-                <ArrowRight
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'arrow-left' && (
-                <ArrowLeft
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'arrow-up-down' && (
-                <ArrowUpDown
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-              {element.type === 'image' && (
-                <Image
-                  element={element}
-                  active={active}
-                  onClick={handleElementClick}
-                  onChange={handleUpdateElement}
-                  width={width}
-                />
-              )}
-            </Fragment>
-          );
-        })}
+        <div className="absolute bottom-[calc(100%_+_20px)] left-0 w-full">
+          <TemplatePagination />
+        </div>
+        <div
+          onClick={handleCanvasClick}
+          ref={setNodeRef}
+          className={cn('bg-white text-black border border-default-200 rounded-lg relative overflow-hidden canvas')}
+          style={{ width: page.width, height: page.height, backgroundColor: page.style.backgroundColor }}
+        >
+          {page.elements.map((element) => {
+            const active = selection.includes(element.id);
+            return (
+              <Fragment key={element.id}>
+                {element.type === 'heading' && (
+                  <Heading
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'text' && (
+                  <Text
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'chart' && (
+                  <Chart
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'logo' && (
+                  <Logo
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'circle' && (
+                  <Circle
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'rectangle' && (
+                  <Rectangle
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'triangle' && (
+                  <Triangle
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'diagonal-rectangle' && (
+                  <DiagonalRectangle
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'arrow-up' && (
+                  <ArrowUp
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'arrow-down' && (
+                  <ArrowDown
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'arrow-right' && (
+                  <ArrowRight
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'arrow-left' && (
+                  <ArrowLeft
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'arrow-up-down' && (
+                  <ArrowUpDown
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+                {element.type === 'image' && (
+                  <Image
+                    element={element}
+                    active={active}
+                    onClick={handleElementClick}
+                    onChange={handleUpdateElement}
+                    width={page.width}
+                  />
+                )}
+              </Fragment>
+            );
+          })}
+        </div>
       </div>
+
+      <ElementTools />
+      <CanvasTools isOpen={isCanvasSelected} />
     </div>
   );
 };

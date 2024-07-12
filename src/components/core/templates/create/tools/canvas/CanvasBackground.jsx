@@ -3,7 +3,7 @@ import { FaFillDrip } from 'react-icons/fa';
 import { HexColorPicker } from 'react-colorful';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HiCheck } from 'react-icons/hi2';
-import useTemplateStore from '@/store/template.js';
+import PropTypes from 'prop-types';
 
 const colors = [
   '#000000',
@@ -20,10 +20,7 @@ const colors = [
   '#2b3793',
 ];
 
-const CanvasBackground = () => {
-  const style = useTemplateStore((state) => state.template.style);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-
+const CanvasBackground = ({ page, onChange }) => {
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
@@ -34,8 +31,10 @@ const CanvasBackground = () => {
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-4 py-6 w-full">
           <HexColorPicker
-            color={style.backgroundColor}
-            onChange={(color) => updateTemplate({ style: { ...style, backgroundColor: color } })}
+            color={page.style.backgroundColor}
+            onChange={(color) => {
+              onChange({ style: { ...page.style, backgroundColor: color } });
+            }}
           />
           <div className="grid grid-cols-6 gap-y-3 gap-x-3 mt-6">
             {colors.map((color, index) => (
@@ -43,10 +42,10 @@ const CanvasBackground = () => {
                 key={index}
                 className="w-[25px] h-[25px] rounded-full hover:scale-105 transition-transform cursor-pointer relative"
                 style={{ backgroundColor: color }}
-                onClick={() => updateTemplate({ style: { ...style, backgroundColor: color } })}
+                onClick={() => onChange({ style: { ...page.style, backgroundColor: color } })}
               >
                 <AnimatePresence mode="wait">
-                  {style.backgroundColor === color && (
+                  {page.style.backgroundColor === color && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -63,6 +62,11 @@ const CanvasBackground = () => {
       </PopoverContent>
     </Popover>
   );
+};
+
+CanvasBackground.propTypes = {
+  page: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default CanvasBackground;

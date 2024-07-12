@@ -1,18 +1,25 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 import { shallow } from 'zustand/shallow';
 
+const pages = [
+  {
+    id: crypto.randomUUID(),
+    width: 600,
+    height: 600,
+    style: {
+      backgroundColor: '#ffffff',
+    },
+    elements: [],
+  },
+];
+
 const useTemplateStore = createWithEqualityFn(
   (set) => ({
     template: {
       id: Date.now(),
-      elements: [],
+      pages,
+      page: pages[0].id,
       selection: [],
-      isCanvasSelected: false,
-      style: {
-        backgroundColor: '#ffffff',
-        width: 600,
-        height: 600,
-      },
     },
     updateTemplate: (data) => {
       set((state) => ({ template: { ...state.template, ...data } }));
@@ -22,44 +29,106 @@ const useTemplateStore = createWithEqualityFn(
         template: {
           ...state.template,
           selection: ids,
-          isCanvasSelected: false,
         },
       }));
     },
     updateElements: (elements) => {
-      set((state) => ({
-        template: {
-          ...state.template,
-          elements: state.template.elements.map((el) => {
-            const exists = elements.find((el2) => el2.id === el.id);
-            if (exists) return elements.find((el2) => el2.id === el.id);
-            return el;
-          }),
-        },
-      }));
+      set((state) => {
+        return {
+          template: {
+            ...state.template,
+            pages: state.template.pages.map((page) => {
+              if (page.id === state.template.page) {
+                return {
+                  ...page,
+                  elements: page.elements.map((el) => {
+                    const exists = elements.find((el2) => el2.id === el.id);
+                    if (exists) return elements.find((el2) => el2.id === el.id);
+                    return el;
+                  }),
+                };
+              }
+              return page;
+            }),
+          },
+        };
+      });
     },
     addElements: (elements) => {
-      set((state) => ({
-        template: {
-          ...state.template,
-          elements: [...state.template.elements, ...elements],
-          selection: elements.map((el) => el.id),
-          isCanvasSelected: false,
-        },
-      }));
+      set((state) => {
+        return {
+          template: {
+            ...state.template,
+            pages: state.template.pages.map((page) => {
+              if (page.id === state.template.page) {
+                return { ...page, elements: [...page.elements, ...elements] };
+              }
+              return page;
+            }),
+            selection: elements.map((el) => el.id),
+          },
+        };
+      });
     },
     deleteElements: (ids) => {
       set((state) => ({
         template: {
           ...state.template,
-          elements: state.template.elements.filter((item) => !ids.includes(item.id)),
+          pages: state.template.pages.map((page) => {
+            if (page.id === state.template.page) {
+              return {
+                ...page,
+                elements: page.elements.filter((item) => !ids.includes(item.id)),
+              };
+            }
+            return page;
+          }),
           selection: [],
         },
       }));
     },
-    selectCanvas: (value = true) => {
+    addPage: () => {
+      const page = {
+        id: crypto.randomUUID(),
+        width: 600,
+        height: 600,
+        style: { backgroundColor: '#ffffff' },
+        elements: [],
+      };
       set((state) => ({
-        template: { ...state.template, isCanvasSelected: value, selection: [] },
+        template: {
+          ...state.template,
+          pages: [...state.template.pages, page],
+          page: page.id,
+          selection: [],
+        },
+      }));
+    },
+    deletePage: (id) => {
+      set((state) => {
+        if (state.template.pages.length === 1) return;
+        const _pages = state.template.pages.filter((page) => page.id !== id);
+        return {
+          template: {
+            ...state.template,
+            pages: _pages,
+            page: _pages.at(-1).id,
+            selection: [],
+          },
+        };
+      });
+    },
+    updatePage: (data) => {
+      set((state) => ({
+        template: {
+          ...state.template,
+          pages: state.template.pages.map((page) => {
+            if (page.id === state.template.page) {
+              return { ...page, ...data };
+            }
+            return page;
+          }),
+        },
       }));
     },
   }),

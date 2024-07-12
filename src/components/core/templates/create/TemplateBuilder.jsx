@@ -4,8 +4,6 @@ import { DndContext, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import Elements from '@/components/core/templates/create/Elements.jsx';
 import Layers from '@/components/core/templates/create/Layers.jsx';
-import ElementTools from '@/components/core/templates/create/tools/ElementTools.jsx';
-import CanvasTools from '@/components/core/templates/create/tools/CanvasTools.jsx';
 import useTemplateStore from '@/store/template.js';
 import { TbLayoutList } from 'react-icons/tb';
 import { cn, roundToNearestTen } from '@/lib/utils.js';
@@ -17,7 +15,7 @@ const TemplateBuilder = () => {
   const [tab, setTab] = useState('elements');
   const sensors = useSensors(useSensor(MouseSensor));
   const addElements = useTemplateStore((state) => state.addElements);
-  const selectCanvas = useTemplateStore((state) => state.selectCanvas);
+  const selectElements = useTemplateStore((state) => state.selectElements);
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent } = event;
@@ -36,7 +34,7 @@ const TemplateBuilder = () => {
   };
 
   const handleParentClick = (e) => {
-    if (e.target === parent.current) selectCanvas(false);
+    if (e.target === parent.current) selectElements([]);
   };
 
   return (
@@ -76,8 +74,6 @@ const TemplateBuilder = () => {
         <div ref={parent} className="h-full flex flex-col" onClick={handleParentClick}>
           <div ref={canvas} className="my-auto mx-auto">
             <Canvas />
-            <ElementTools />
-            <CanvasTools />
           </div>
         </div>
       </div>

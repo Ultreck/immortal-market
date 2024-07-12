@@ -1,13 +1,11 @@
 import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import { TbDimensions, TbMinus, TbPlus } from 'react-icons/tb';
-import useTemplateStore from '@/store/template.js';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const CanvasDimensions = () => {
-  const style = useTemplateStore((state) => state.template.style);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const [width, setWidth] = useState(style.width);
-  const [height, setHeight] = useState(style.height);
+const CanvasDimensions = ({ page, onChange }) => {
+  const [width, setWidth] = useState(page.width);
+  const [height, setHeight] = useState(page.height);
 
   return (
     <Popover placement="left" showArrow offset={10}>
@@ -26,9 +24,9 @@ const CanvasDimensions = () => {
                 variant="flat"
                 className="text-base"
                 onClick={() => {
-                  const value = style.width - 10;
+                  const value = page.width - 10;
                   setWidth(value);
-                  updateTemplate({ style: { ...style, width: value } });
+                  onChange({ width: value });
                 }}
               >
                 <TbMinus size="20" />
@@ -39,16 +37,16 @@ const CanvasDimensions = () => {
                 classNames={{ input: 'appearance-auto' }}
                 value={width}
                 onChange={(e) => setWidth(+e.target.value)}
-                onBlur={() => updateTemplate({ style: { ...style, width } })}
+                onBlur={() => onChange({ width })}
               />
               <Button
                 isIconOnly
                 variant="flat"
                 className="text-base"
                 onClick={() => {
-                  const value = style.width + 10;
+                  const value = page.width + 10;
                   setWidth(value);
-                  updateTemplate({ style: { ...style, width: value } });
+                  onChange({ width: value });
                 }}
               >
                 <TbPlus size="20" />
@@ -63,9 +61,9 @@ const CanvasDimensions = () => {
                 variant="flat"
                 className="text-base"
                 onClick={() => {
-                  const value = style.height - 10;
+                  const value = page.height - 10;
                   setHeight(value);
-                  updateTemplate({ style: { ...style, height: value } });
+                  onChange({ height: value });
                 }}
               >
                 <TbMinus size="20" />
@@ -76,16 +74,16 @@ const CanvasDimensions = () => {
                 classNames={{ input: 'appearance-auto' }}
                 value={height}
                 onChange={(e) => setHeight(+e.target.value)}
-                onBlur={() => updateTemplate({ style: { ...style, height } })}
+                onBlur={() => onChange({ height })}
               />
               <Button
                 isIconOnly
                 variant="flat"
                 className="text-base"
                 onClick={() => {
-                  const value = style.height + 10;
+                  const value = page.height + 10;
                   setHeight(value);
-                  updateTemplate({ style: { ...style, height: value } });
+                  onChange({ height: value });
                 }}
               >
                 <TbPlus size="20" />
@@ -96,6 +94,11 @@ const CanvasDimensions = () => {
       </PopoverContent>
     </Popover>
   );
+};
+
+CanvasDimensions.propTypes = {
+  page: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default CanvasDimensions;

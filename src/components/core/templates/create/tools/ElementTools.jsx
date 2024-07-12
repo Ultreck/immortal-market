@@ -11,7 +11,8 @@ import TextAlign from './elements/TextAlign.jsx';
 import { useMemo } from 'react';
 
 const ElementTools = () => {
-  const elements = useTemplateStore((state) => state.template.elements);
+  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.page));
+  const elements = page.elements;
   const selection = useTemplateStore((state) => state.template.selection);
   const updateElements = useTemplateStore((state) => state.updateElements);
   const _elements = selection.map((id) => elements.find((el) => el.id === id));
