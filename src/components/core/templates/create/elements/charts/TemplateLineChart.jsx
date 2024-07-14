@@ -1,28 +1,52 @@
 import PropTypes from 'prop-types';
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, LabelList, Line, LineChart, XAxis } from 'recharts';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
+import { capitalize } from '@/lib/utils.js';
+
+const colors = [
+  '#2673D9',
+  '#1D9085',
+  '#264A5A',
+  '#E66B5B',
+  '#E8C22C',
+  '#F6881F',
+  '#2BA385',
+  '#E6A333',
+  '#AB52D9',
+  '#D93566',
+];
 
 const TemplateLineChart = ({ element }) => {
+  const config = {
+    [element.chart.keys.y]: {
+      label: capitalize(element.chart.keys.y),
+      color: colors[0],
+    },
+  };
+
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart
-        width={500}
-        height={300}
-        data={element.chart.data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey={element.chart.keys.x} />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line dataKey={element.chart.keys.y} stroke="#8884d8" />
+    <ChartContainer config={config} style={{ height: element.height, width: element.width }}>
+      <LineChart accessibilityLayer data={element.chart.data} margin={{ top: 20, left: 12, right: 12 }}>
+        <CartesianGrid vertical={false} />
+        <XAxis
+          dataKey={element.chart.keys.x}
+          tickLine={false}
+          axisLine={false}
+          tickMargin={8}
+          tickFormatter={(value) => capitalize(value)}
+        />
+        <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+        <Line
+          dataKey={element.chart.keys.y}
+          type="natural"
+          strokeWidth={2}
+          activeDot={{ r: 6 }}
+          isAnimationActive={false}
+        >
+          <LabelList position="top" offset={12} fontSize={12} />
+        </Line>
       </LineChart>
-    </ResponsiveContainer>
+    </ChartContainer>
   );
 };
 

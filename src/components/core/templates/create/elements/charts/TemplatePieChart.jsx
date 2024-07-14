@@ -1,40 +1,55 @@
 import PropTypes from 'prop-types';
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
+import { LabelList, Pie, PieChart } from 'recharts';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
+import { capitalize } from '@/lib/utils.js';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const colors = [
+  '#E66B5B',
+  '#1D9085',
+  '#264A5A',
+  '#E8C22C',
+  '#F6881F',
+  '#2673D9',
+  '#2BA385',
+  '#E6A333',
+  '#AB52D9',
+  '#D93566',
+];
 
 const TemplatePieChart = ({ element }) => {
+  const data = element.chart.data.map((item, i) => ({
+    ...item,
+    fill: colors[i],
+  }));
+  const config = element.chart.data.reduce((acc, item, i) => {
+    acc[item[element.chart.keys.name]] = {
+      label: capitalize(item[element.chart.keys.name]),
+      color: colors[i],
+    };
+    return acc;
+  }, {});
+
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart
-        width={500}
-        height={300}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
+    <ChartContainer config={config} style={{ height: element.height, width: element.width }}>
+      <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+        <ChartTooltip content={<ChartTooltipContent hideLabel />} />
         <Pie
-          data={element.chart.data}
-          nameKey={element.chart.keys.name}
+          data={data}
           dataKey={element.chart.keys.data}
-          cx="50%"
-          cy="50%"
-          innerRadius={0}
-          outerRadius={80}
-          fill="#8884d8"
+          nameKey={element.chart.keys.name}
           label
+          isAnimationActive={false}
         >
-          {element.chart.data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
+          <LabelList
+            dataKey={element.chart.keys.name}
+            className="fill-background"
+            stroke="none"
+            fontSize={12}
+            formatter={(value) => capitalize(value)}
+          />
         </Pie>
-        <Tooltip />
-        <Legend />
       </PieChart>
-    </ResponsiveContainer>
+    </ChartContainer>
   );
 };
 
@@ -50,6 +65,7 @@ TemplatePieChart.propTypes = {
     style: PropTypes.object,
     chart: PropTypes.object.isRequired,
   }),
+  height: PropTypes.number,
 };
 
 export default TemplatePieChart;

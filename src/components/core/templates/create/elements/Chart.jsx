@@ -6,7 +6,8 @@ import TemplatePieChart from './charts/TemplatePieChart';
 import { HiChartPie } from 'react-icons/hi2';
 
 const Chart = ({ element, active, width, onClick, onChange }) => {
-  const hasKeys = Object.keys(element.chart?.keys || {}).every((key) => !!element.chart.keys[key]);
+  const keys = Object.keys(element.chart?.keys || {});
+  const hasKeys = keys.length > 0 && keys.every((key) => !!element.chart.keys[key]);
 
   return (
     <ElementWrapper
