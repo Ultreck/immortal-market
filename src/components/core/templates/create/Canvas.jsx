@@ -123,7 +123,7 @@ const Canvas = () => {
   const handleDeleteElements = (ids) => deleteElements(ids);
 
   const handleCanvasClick = (e) => {
-    if (e.target === node.current) {
+    if (e.target === node.current && !e.shiftKey) {
       selectElements([]);
       setIsCanvasSelected(true);
     }
