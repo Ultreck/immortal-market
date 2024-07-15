@@ -66,35 +66,37 @@ const Sidebar = () => {
       >
         {mini ? <TbChevronRight size="20" /> : <TbChevronLeft size="20" />}
       </Button>
-      <div className={cn('w-[280px] h-full overflow-hidden', { 'pointer-events-none': mini })}>
-        <div
-          className={cn('py-6 px-8 flex flex-col align-stretch w-[280px] relative h-full', {
-            'items-start': mini,
-          })}
-        >
-          {mini ? <LogoIcon light={isDarkMode} /> : <Logo light={isDarkMode} />}
-          <AuthDropdown className={cn('mt-6', { 'mt-6': mini })} mini={mini} />
-          <CreateDropdown className="mt-6" mini={mini} />
-          <div className="flex flex-col space-y-2 mt-6 -ml-1">
-            {[
-              { name: 'Overview', href: '/', icon: <TbLayout size="20" /> },
-              { name: 'Projects', href: '/projects', icon: <TbLayoutList size="20" /> },
-              { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
-              { name: 'Ai Assistant', href: '/assistant', icon: <TbInputAi size="20" /> },
-              { name: 'Outsource', href: '/outsource', icon: <TbTableExport size="20" /> },
-            ].map((item) => (
-              <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
-            ))}
-          </div>
-          <div className="flex flex-col space-y-2 mt-auto -ml-1">
-            {[
-              { name: 'Upgrade', href: `/plans`, icon: <TbCrown className="text-orange-500" size="20" /> },
-              { name: 'Team', href: '/team', icon: <TbUsers size="20" /> },
-              { name: 'Settings', href: `/settings`, icon: <TbSettings2 size="20" /> },
-            ].map((item) => (
-              <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
-            ))}
-            <ProductsDropdown mini={mini} />
+      <div className={cn('w-[280px] h-full overflow-hidden', { 'w-[90px]': mini })}>
+        <div className={cn('w-[280px] h-full overflow-hidden')}>
+          <div
+            className={cn('py-6 px-8 flex flex-col align-stretch w-[280px] relative h-full', {
+              'items-start': mini,
+            })}
+          >
+            {mini ? <LogoIcon light={isDarkMode} /> : <Logo light={isDarkMode} />}
+            <AuthDropdown className={cn('mt-6', { 'mt-6': mini })} mini={mini} />
+            <CreateDropdown className="mt-6" mini={mini} />
+            <div className={cn('flex flex-col space-y-2 mt-6', { '-ml-1': mini })}>
+              {[
+                { name: 'Overview', href: '/', icon: <TbLayout size="20" /> },
+                { name: 'Projects', href: '/projects', icon: <TbLayoutList size="20" /> },
+                { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
+                { name: 'Ai Assistant', href: '/assistant', icon: <TbInputAi size="20" /> },
+                { name: 'Outsource', href: '/outsource', icon: <TbTableExport size="20" /> },
+              ].map((item) => (
+                <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
+              ))}
+            </div>
+            <div className={cn('flex flex-col space-y-2 mt-auto', { '-ml-1': mini })}>
+              {[
+                { name: 'Upgrade', href: `/plans`, icon: <TbCrown className="text-orange-500" size="20" /> },
+                { name: 'Team', href: '/team', icon: <TbUsers size="20" /> },
+                { name: 'Settings', href: `/settings`, icon: <TbSettings2 size="20" /> },
+              ].map((item) => (
+                <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
+              ))}
+              <ProductsDropdown mini={mini} />
+            </div>
           </div>
         </div>
       </div>
