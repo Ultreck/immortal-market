@@ -11,12 +11,14 @@ const ElementWrapper = ({
   children,
   onEditStart,
   active,
+  highlighted,
   maxWidth,
   minHeight,
   onChange,
   onResize,
   resizeHandles = ['e'],
   constrained = false,
+  editable = false,
   className,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -38,14 +40,17 @@ const ElementWrapper = ({
       }}
       classNames={{
         base: cn(
-          'w-max border-2 border-transparent absolute group select-none rounded',
+          'w-max border-2 border-transparent absolute group select-none',
+          { 'hover:border-gray-200': !active && !highlighted },
+          { 'border-gray-200': highlighted },
           { 'border-primary-500': active },
           { 'border-purple-500': isEditing },
-          { 'hover:border-gray-200': !active },
           className
         ),
       }}
-      onControlDblClick={() => setIsEditing(true)}
+      onControlDblClick={() => {
+        if (editable) setIsEditing(true);
+      }}
       isDisabled={isEditing}
       constrained={constrained}
     >
@@ -88,6 +93,8 @@ ElementWrapper.propTypes = {
   resizeHandles: PropTypes.arrayOf(PropTypes.string),
   constrained: PropTypes.bool,
   className: PropTypes.string,
+  highlighted: PropTypes.bool,
+  editable: PropTypes.bool,
 };
 
 export default ElementWrapper;

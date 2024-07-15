@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { elementPropTypes } from '@/lib/elements.js';
 
-const Rectangle = ({ element, active, width, onClick, onChange }) => {
+const Rectangle = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -12,6 +12,7 @@ const Rectangle = ({ element, active, width, onClick, onChange }) => {
       }}
       maxWidth={width}
       active={active}
+      highlighted={highlighted}
       resizeHandles={['se', 'e', 's']}
     >
       <div className="!h-max">
@@ -23,21 +24,6 @@ const Rectangle = ({ element, active, width, onClick, onChange }) => {
   );
 };
 
-Rectangle.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-  }),
-  active: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  width: PropTypes.number,
-};
+Rectangle.propTypes = elementPropTypes;
 
 export default Rectangle;

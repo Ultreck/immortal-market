@@ -1,8 +1,8 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import PropTypes from 'prop-types';
 import { Image } from '@nextui-org/react';
+import { elementPropTypes } from '@/lib/elements.js';
 
-const CanvasImage = ({ element, active, width, onClick, onChange }) => {
+const CanvasImage = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -13,6 +13,7 @@ const CanvasImage = ({ element, active, width, onClick, onChange }) => {
       }}
       maxWidth={width}
       active={active}
+      highlighted={highlighted}
       resizeHandles={['e', 's', 'se']}
       lockAspectRatio
     >
@@ -28,21 +29,6 @@ const CanvasImage = ({ element, active, width, onClick, onChange }) => {
   );
 };
 
-CanvasImage.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    src: PropTypes.string.isRequired,
-  }),
-  active: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  width: PropTypes.number,
-};
+CanvasImage.propTypes = elementPropTypes;
 
 export default CanvasImage;

@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
 import TemplateBarChart from '@/components/core/templates/create/elements/charts/TemplateBarChart.jsx';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import TemplateLineChart from './charts/TemplateLineChart';
 import TemplatePieChart from './charts/TemplatePieChart';
 import { HiChartPie } from 'react-icons/hi2';
+import { elementPropTypes } from '@/lib/elements.js';
 
-const Chart = ({ element, active, width, onClick, onChange }) => {
+const Chart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const keys = Object.keys(element.chart?.keys || {});
   const hasKeys = keys.length > 0 && keys.every((key) => !!element.chart.keys[key]);
 
@@ -19,6 +19,7 @@ const Chart = ({ element, active, width, onClick, onChange }) => {
       }}
       maxWidth={width}
       active={active}
+      highlighted={highlighted}
       resizeHandles={['se', 'e', 's']}
       constrained
     >
@@ -42,20 +43,6 @@ const Chart = ({ element, active, width, onClick, onChange }) => {
   );
 };
 
-Chart.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    chart: PropTypes.object,
-    width: PropTypes.number,
-    height: PropTypes.number,
-  }),
-  active: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  width: PropTypes.number,
-  onChange: PropTypes.func.isRequired,
-};
+Chart.propTypes = elementPropTypes;
 
 export default Chart;

@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { elementPropTypes } from '@/lib/elements.js';
 
-const DiagonalRectangle = ({ element, active, width, onClick, onChange }) => {
+const DiagonalRectangle = ({ element, active, highlighted, width, onClick, onChange }) => {
   const triangle = useRef(null);
 
   return (
@@ -15,6 +15,7 @@ const DiagonalRectangle = ({ element, active, width, onClick, onChange }) => {
       }}
       maxWidth={width}
       active={active}
+      highlighted={highlighted}
       resizeHandles={['se', 'e', 's']}
     >
       <div ref={triangle} className="!h-max">
@@ -34,21 +35,6 @@ const DiagonalRectangle = ({ element, active, width, onClick, onChange }) => {
   );
 };
 
-DiagonalRectangle.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-  }),
-  active: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  width: PropTypes.number,
-};
+DiagonalRectangle.propTypes = elementPropTypes;
 
 export default DiagonalRectangle;

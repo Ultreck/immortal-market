@@ -1,10 +1,10 @@
 import Logo from '@/components/core/shared/Logo.jsx';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import { useMount } from 'react-use';
+import { elementPropTypes } from '@/lib/elements.js';
 
-const SsLogo = ({ element, active, width, onClick, onChange }) => {
+const SsLogo = ({ element, active, highlighted, width, onClick, onChange }) => {
   const el = useRef(null);
 
   useMount(() => {
@@ -25,6 +25,7 @@ const SsLogo = ({ element, active, width, onClick, onChange }) => {
       }}
       maxWidth={width}
       active={active}
+      highlighted={highlighted}
       resizeHandles={['e']}
       lockAspectRatio
       constrained
@@ -36,20 +37,6 @@ const SsLogo = ({ element, active, width, onClick, onChange }) => {
   );
 };
 
-SsLogo.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-  }),
-  active: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  width: PropTypes.number,
-};
+SsLogo.propTypes = elementPropTypes;
 
 export default SsLogo;

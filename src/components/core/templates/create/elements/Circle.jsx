@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { elementPropTypes } from '@/lib/elements.js';
 
-const Circle = ({ element, active, width, onClick, onChange }) => {
+const Circle = ({ element, active, highlighted, width, onClick, onChange }) => {
   const circle = useRef(null);
 
   return (
@@ -17,6 +17,7 @@ const Circle = ({ element, active, width, onClick, onChange }) => {
       }}
       maxWidth={width}
       active={active}
+      highlighted={highlighted}
       resizeHandles={['e']}
     >
       <div ref={circle} className="!h-max">
@@ -28,21 +29,6 @@ const Circle = ({ element, active, width, onClick, onChange }) => {
   );
 };
 
-Circle.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-  }),
-  active: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  width: PropTypes.number,
-};
+Circle.propTypes = elementPropTypes;
 
 export default Circle;

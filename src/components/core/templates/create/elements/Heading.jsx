@@ -1,10 +1,10 @@
 import { cn } from '@/lib/utils.js';
-import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { useDeepCompareEffect } from 'react-use';
+import { elementPropTypes } from '@/lib/elements.js';
 
-const Heading = ({ element, active, width, onClick, onChange }) => {
+const Heading = ({ element, active, highlighted, width, onClick, onChange }) => {
   const input = useRef(null);
   const [minHeight, setMinHeight] = useState(element.height);
 
@@ -30,8 +30,10 @@ const Heading = ({ element, active, width, onClick, onChange }) => {
       }}
       minHeight={minHeight}
       maxWidth={width}
+      editable
       onEditStart={() => updateInputHeight()}
       active={active}
+      highlighted={highlighted}
       constrained
       className="max-w-full"
     >
@@ -53,21 +55,6 @@ const Heading = ({ element, active, width, onClick, onChange }) => {
   );
 };
 
-Heading.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-  }),
-  active: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  width: PropTypes.number,
-};
+Heading.propTypes = elementPropTypes;
 
 export default Heading;
