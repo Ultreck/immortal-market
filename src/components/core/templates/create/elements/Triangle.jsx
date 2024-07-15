@@ -26,6 +26,9 @@ const Triangle = ({ element, active, highlighted, width, onClick, onChange }) =>
           height={element.height}
         >
           <polygon
+            style={{
+              opacity: element.style.opacity,
+            }}
             points={`0,${element.height} ${element.width / 2},0 ${element.width},${element.height}`}
             fill={element.style.backgroundColor}
           />
@@ -38,3 +41,4 @@ const Triangle = ({ element, active, highlighted, width, onClick, onChange }) =>
 Triangle.propTypes = elementPropTypes;
 
 export default Triangle;
+

@@ -24,6 +24,9 @@ const ArrowDown = ({ element, active, highlighted, width, onClick, onChange }) =
           style={{ transform: `rotate(${element.style.rotate}deg)` }}
         >
           <polygon
+            style={{
+              opacity: element.style.opacity,
+            }}
             points={`${element.width / 3},0 ${element.width - element.width / 3},0 ${element.width - element.width / 3},${element.height * 0.7} ${element.width},${element.height * 0.7} ${element.width / 2},${element.height} 0,${element.height * 0.7} ${element.width / 3},${element.height * 0.7}`}
             fill={element.style.backgroundColor}
           />
@@ -36,3 +39,4 @@ const ArrowDown = ({ element, active, highlighted, width, onClick, onChange }) =
 ArrowDown.propTypes = elementPropTypes;
 
 export default ArrowDown;
+

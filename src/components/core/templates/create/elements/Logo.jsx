@@ -30,7 +30,7 @@ const SsLogo = ({ element, active, highlighted, width, onClick, onChange }) => {
       lockAspectRatio
       constrained
     >
-      <div ref={el} className="!h-max">
+      <div ref={el} className="!h-max" style={{ opacity: element.style.opacity }}>
         <Logo width={element.width} />
       </div>
     </ElementWrapper>

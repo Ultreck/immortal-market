@@ -34,7 +34,7 @@ const TemplateBarChart = ({ element, height = 300 }) => {
   }, {});
 
   return (
-    <ChartContainer config={config} style={{ height, width: '100%' }}>
+    <ChartContainer config={config} style={{ height, width: '100%', opacity: element.style.opacity }}>
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} horizontal={false} />
         <XAxis
@@ -68,3 +68,4 @@ TemplateBarChart.propTypes = {
 };
 
 export default TemplateBarChart;
+

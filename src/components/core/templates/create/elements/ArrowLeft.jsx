@@ -23,6 +23,9 @@ const ArrowLeft = ({ element, active, highlighted, width, onClick, onChange }) =
           height={element.height}
         >
           <polygon
+            style={{
+              opacity: element.style.opacity,
+            }}
             points={`${element.width * 0.3},0 ${element.width * 0.3},${element.height / 3} ${element.width},${element.height / 3} ${element.width},${element.height - element.height / 3} ${element.width * 0.3},${element.height - element.height / 3} ${element.width * 0.3},${element.height} 0,${element.height / 2}`}
             fill={element.style.backgroundColor}
           />
@@ -35,3 +38,4 @@ const ArrowLeft = ({ element, active, highlighted, width, onClick, onChange }) =
 ArrowLeft.propTypes = elementPropTypes;
 
 export default ArrowLeft;
+

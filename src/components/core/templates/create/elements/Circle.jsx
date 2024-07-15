@@ -21,9 +21,17 @@ const Circle = ({ element, active, highlighted, width, onClick, onChange }) => {
       resizeHandles={['e']}
     >
       <div ref={circle} className="!h-max">
-        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="30" cy="30" r="30" fill={element.style.backgroundColor} />
-        </svg>
+        <div
+          className=" rounded-full"
+          style={{
+            width: `${element.width}px`,
+            height: `${element.width}px`,
+            backgroundColor: element.style.backgroundColor,
+            borderWidth: element.style.borderWidth,
+            borderColor: element.style.borderColor,
+            opacity: element.style.opacity,
+          }}
+        ></div>
       </div>
     </ElementWrapper>
   );
@@ -32,3 +40,4 @@ const Circle = ({ element, active, highlighted, width, onClick, onChange }) => {
 Circle.propTypes = elementPropTypes;
 
 export default Circle;
+

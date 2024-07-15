@@ -24,6 +24,9 @@ const ArrowUp = ({ element, active, highlighted, width, onClick, onChange }) => 
           style={{ transform: `rotate(${element.style.rotate}deg)` }}
         >
           <polygon
+            style={{
+              opacity: element.style.opacity,
+            }}
             points={`${element.width / 2},0 ${element.width},80 ${element.width / 1.4},80 ${element.width / 1.4},${element.height} ${element.width - element.width / 1.4},${element.height} ${element.width - element.width / 1.4},80 0,80`}
             fill={element.style.backgroundColor}
           />
@@ -36,3 +39,4 @@ const ArrowUp = ({ element, active, highlighted, width, onClick, onChange }) => 
 ArrowUp.propTypes = elementPropTypes;
 
 export default ArrowUp;
+

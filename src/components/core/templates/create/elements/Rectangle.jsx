@@ -16,9 +16,17 @@ const Rectangle = ({ element, active, highlighted, width, onClick, onChange }) =
       resizeHandles={['se', 'e', 's']}
     >
       <div className="!h-max">
-        <svg viewBox={`0 0 ${element.width} ${element.height}`} xmlns="http://www.w3.org/2000/svg">
-          <rect width={element.width} height={element.height} fill={element.style.backgroundColor} />
-        </svg>
+      <div
+          style={{
+            width: `${element.width}px`,
+            height: `${element.height}px`,
+            backgroundColor: element.style.backgroundColor,
+            borderWidth: element.style.borderWidth,
+            borderColor: element.style.borderColor,
+            opacity: element.style.opacity,
+            borderRadius: element.style.borderRadius,
+          }}
+        ></div>
       </div>
     </ElementWrapper>
   );

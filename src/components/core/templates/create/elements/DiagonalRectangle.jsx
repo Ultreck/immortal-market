@@ -26,6 +26,9 @@ const DiagonalRectangle = ({ element, active, highlighted, width, onClick, onCha
           height={element.height}
         >
           <polygon
+            style={{
+              opacity: element.style.opacity,
+            }}
             points={`${element.width / 2},0 ${element.width},${element.height / 2} ${element.width / 2},${element.height} 0,${element.height / 2}`}
             fill={element.style.backgroundColor}
           />
@@ -38,3 +41,4 @@ const DiagonalRectangle = ({ element, active, highlighted, width, onClick, onCha
 DiagonalRectangle.propTypes = elementPropTypes;
 
 export default DiagonalRectangle;
+

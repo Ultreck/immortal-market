@@ -39,6 +39,7 @@ const TemplatePieChart = ({ element }) => {
           nameKey={element.chart.keys.name}
           label
           isAnimationActive={false}
+          style={{ opacity: element.style.opacity }}
         >
           <LabelList
             dataKey={element.chart.keys.name}

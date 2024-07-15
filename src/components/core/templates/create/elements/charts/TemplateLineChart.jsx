@@ -26,7 +26,14 @@ const TemplateLineChart = ({ element }) => {
 
   return (
     <ChartContainer config={config} style={{ height: element.height, width: element.width }}>
-      <LineChart accessibilityLayer data={element.chart.data} margin={{ top: 20, left: 12, right: 12 }}>
+      <LineChart
+        accessibilityLayer
+        data={element.chart.data}
+        margin={{ top: 20, left: 12, right: 12 }}
+        style={{
+          opacity: element.style.opacity,
+        }}
+      >
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey={element.chart.keys.x}

@@ -9,6 +9,9 @@ import ChartPicker from './elements/ChartPicker.jsx';
 import useTemplateStore from '@/store/template.js';
 import TextAlign from './elements/TextAlign.jsx';
 import { useMemo } from 'react';
+import Border from './elements/Border.jsx';
+import Opacity from './elements/Opacity.jsx';
+import BorderRadius from './elements/BorderRadius.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -65,6 +68,15 @@ const ElementTools = () => {
             }
             if (tool === 'chart-picker' && selectedElements.length === 1) {
               return <ChartPicker key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+            }
+            if (tool === 'border') {
+              return <Border key={tool} elements={elements} onChange={handleUpdateElements} />;
+            }
+            if (tool === 'opacity') {
+              return <Opacity key={tool} elements={elements} onChange={handleUpdateElements} />;
+            }
+            if (tool === 'border-radius') {
+              return <BorderRadius key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             return <></>;
           })}
