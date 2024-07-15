@@ -1,18 +1,24 @@
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/react';
+import { Button, cn, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/react';
 import { RiAddLine, RiBarChart2Line, RiFileAddLine, RiUser6Line } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 import useGlobalStore from '@/store/global.js';
 
-const CreateDropdown = ({ className }) => {
+const CreateDropdown = ({ className, mini = false }) => {
   const updateData = useGlobalStore((state) => state.updateData);
 
   return (
     <div className={className}>
       <Dropdown classNames={{ content: 'shadow border border-default-200 w-[320px]' }} placement="right-start">
         <DropdownTrigger>
-          <Button color="primary" radius="full" className="w-full text-base" startContent={<RiAddLine size="20" />}>
-            Create
-          </Button>
+          {mini ? (
+            <Button color="primary" radius="full" isIconOnly className={cn(className)}>
+              <RiAddLine size="20" />
+            </Button>
+          ) : (
+            <Button color="primary" radius="full" className="w-full text-base" startContent={<RiAddLine size="20" />}>
+              Create
+            </Button>
+          )}
         </DropdownTrigger>
         <DropdownMenu
           variant="faded"
@@ -55,6 +61,7 @@ const CreateDropdown = ({ className }) => {
 
 CreateDropdown.propTypes = {
   className: PropTypes.string,
+  mini: PropTypes.bool,
 };
 
 export default CreateDropdown;

@@ -2,64 +2,101 @@ import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
 import { IconFileInvoice } from '@tabler/icons-react';
-import { TbCrown, TbInputAi, TbLayout, TbLayoutList, TbSettings2, TbTableExport, TbUsers } from 'react-icons/tb';
+import {
+  TbChevronLeft,
+  TbChevronRight,
+  TbCrown,
+  TbInputAi,
+  TbLayout,
+  TbLayoutList,
+  TbSettings2,
+  TbTableExport,
+  TbUsers,
+} from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
 import Logo from '@/components/core/shared/Logo.jsx';
+import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
+import PropTypes from 'prop-types';
+import { Button } from '@nextui-org/react';
+import { useState } from 'react';
+
+const NavItem = ({ icon, title, href, mini = false }) => {
+  return (
+    <NavLink
+      to={href}
+      className={({ isActive }) =>
+        cn(
+          'flex items-center px-6 py-2.5 rounded-full text-base',
+          isActive ? `bg-default-100 font-bold` : 'hover:bg-default-100 opacity-90',
+          { 'w-12 h-12 p-0 justify-center': mini }
+        )
+      }
+    >
+      <div className={cn({ 'mr-4': !mini })}>{icon}</div>
+      {!mini && <span>{title}</span>}
+    </NavLink>
+  );
+};
+
+NavItem.propTypes = {
+  icon: PropTypes.element.isRequired,
+  title: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  mini: PropTypes.bool,
+};
 
 const Sidebar = () => {
   const { isDarkMode } = useTernaryDarkMode();
+  const [mini, setMini] = useState(true);
 
   return (
-    <div className="py-6 px-8 border-r border-default-200 dark:border-default-100 flex flex-col align-stretch w-[280px]">
-      <Logo light={isDarkMode} />
-      <AuthDropdown className="mt-6" />
-      <CreateDropdown className="mt-6" />
-      <div className="flex flex-col space-y-2 mt-6">
-        {[
-          { name: 'Overview', href: '/', icon: <TbLayout size="20" /> },
-          { name: 'Projects', href: '/projects', icon: <TbLayoutList size="20" /> },
-          { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
-          { name: 'Ai Assistant', href: '/assistant', icon: <TbInputAi size="20" /> },
-          { name: 'Outsource', href: '/outsource', icon: <TbTableExport size="20" /> },
-        ].map((item) => (
-          <NavLink
-            key={item.href}
-            to={item.href}
-            className={({ isActive }) =>
-              cn(
-                'flex items-center px-6 py-2.5 rounded-full text-base',
-                isActive ? `bg-default-100 font-bold` : 'hover:bg-default-100 opacity-90'
-              )
-            }
-          >
-            <div className="mr-4">{item.icon}</div>
-            {item.name}
-          </NavLink>
-        ))}
-      </div>
-      <div className="flex flex-col space-y-2 mt-auto">
-        {[
-          { name: 'Upgrade', href: `/plans`, icon: <TbCrown className="text-orange-500" size="20" /> },
-          { name: 'Team', href: '/team', icon: <TbUsers size="20" /> },
-          { name: 'Settings', href: `/settings`, icon: <TbSettings2 size="20" /> },
-        ].map((item) => (
-          <NavLink
-            key={item.href}
-            to={item.href}
-            className={({ isActive }) =>
-              cn(
-                'flex items-center px-6 py-2.5 rounded-full text-base',
-                isActive ? `bg-default-100 font-bold` : 'hover:bg-default-100 opacity-90'
-              )
-            }
-          >
-            <div className="mr-4">{item.icon}</div>
-            {item.name}
-          </NavLink>
-        ))}
-        <ProductsDropdown />
+    <div
+      className={cn('w-[280px] border-r border-default-200 dark:border-default-100 relative group transition-width', {
+        'w-[90px]': mini,
+      })}
+    >
+      <Button
+        size="sm"
+        isIconOnly
+        radius="full"
+        className="absolute top-1/2 -right-4 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+        onClick={() => setMini(!mini)}
+      >
+        {mini ? <TbChevronRight size="20" /> : <TbChevronLeft size="20" />}
+      </Button>
+      <div className={cn('w-[280px] h-full overflow-hidden', { 'pointer-events-none': mini })}>
+        <div
+          className={cn('py-6 px-8 flex flex-col align-stretch w-[280px] relative h-full', {
+            'items-start': mini,
+          })}
+        >
+          {mini ? <LogoIcon light={isDarkMode} /> : <Logo light={isDarkMode} />}
+          <AuthDropdown className={cn('mt-6', { 'mt-6': mini })} mini={mini} />
+          <CreateDropdown className="mt-6" mini={mini} />
+          <div className="flex flex-col space-y-2 mt-6 -ml-1">
+            {[
+              { name: 'Overview', href: '/', icon: <TbLayout size="20" /> },
+              { name: 'Projects', href: '/projects', icon: <TbLayoutList size="20" /> },
+              { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
+              { name: 'Ai Assistant', href: '/assistant', icon: <TbInputAi size="20" /> },
+              { name: 'Outsource', href: '/outsource', icon: <TbTableExport size="20" /> },
+            ].map((item) => (
+              <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
+            ))}
+          </div>
+          <div className="flex flex-col space-y-2 mt-auto -ml-1">
+            {[
+              { name: 'Upgrade', href: `/plans`, icon: <TbCrown className="text-orange-500" size="20" /> },
+              { name: 'Team', href: '/team', icon: <TbUsers size="20" /> },
+              { name: 'Settings', href: `/settings`, icon: <TbSettings2 size="20" /> },
+            ].map((item) => (
+              <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
+            ))}
+            <ProductsDropdown mini={mini} />
+          </div>
+        </div>
       </div>
     </div>
   );

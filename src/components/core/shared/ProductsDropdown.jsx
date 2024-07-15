@@ -16,7 +16,7 @@ const ProductsDropdown = ({ mini = false }) => {
           <div
             className={cn(
               'flex items-center hover:bg-default-100 cursor-pointer py-2',
-              mini ? 'px-4 rounded-full' : 'pl-6 rounded-3xl pr-4'
+              mini ? 'w-12 h-12 p-0 justify-center rounded-full' : 'pl-6 rounded-3xl pr-4'
             )}
           >
             <TbGridDots size="20" />
