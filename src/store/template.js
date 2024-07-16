@@ -4,8 +4,8 @@ import { shallow } from 'zustand/shallow';
 const pages = [
   {
     id: crypto.randomUUID(),
-    width: 800,
-    height: 800,
+    width: 600,
+    height: 600,
     style: {
       backgroundColor: '#ffffff',
     },
@@ -103,8 +103,8 @@ const useTemplateStore = createWithEqualityFn(
     addPage: () => {
       const page = {
         id: crypto.randomUUID(),
-        width: 800,
-        height: 800,
+        width: 600,
+        height: 600,
         style: { backgroundColor: '#ffffff' },
         elements: [],
       };
