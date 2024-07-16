@@ -25,7 +25,7 @@ const DynamicSortingChart = () => {
             inverse: true,
             animationDuration: 300,
             animationDurationUpdate: 300,
-            max: 2, // only the largest 3 bars will be displayed
+            max: 3,
           },
           series: [
             {
@@ -86,8 +86,8 @@ const DynamicSortingChart = () => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <Card>
-      <div ref={chartRef} style={{ width: '100%', height: '400px' }} />
+    <Card className="px-8 py-6 bg-white mt-10">
+      <div ref={chartRef} style={{ width: '100%', height: '700px' }} />
     </Card>
   );
 };

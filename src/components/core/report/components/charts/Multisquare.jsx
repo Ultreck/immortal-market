@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Card } from '@nextui-org/react';
+import { Button, Card, Tooltip } from '@nextui-org/react';
 
 const data = [
   { setting: 'School', n: 58 },
@@ -15,20 +15,46 @@ const data = [
 
 const MultiSquare = () => {
   return (
-    <Card className='w-full bg-white space-y-6 px-8 py-6 mt-10'>
+    <Card className="w-full bg-white space-y-6 px-8 py-6 mt-10">
       <div className="space-y-4">
         {data.map((item, index) => (
           <div key={index} className="flex items-center space-x-4">
             <div className="w-64 text-black">{item.setting}</div>
             <div className="grid grid-38 gap-2">
               {Array.from({ length: 108 }).map((_, i) => (
-                <motion.div
+                <Tooltip
                   key={i}
-                  className={`w-4 h-4 ${i < item.n ? 'bg-blue-500' : 'bg-gray-200'}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2, delay: i * 0.01 }}
-                />
+                  size="lg"
+                  content={
+                    <div className="px-2 py-4 w-[150px]">
+                      <div className="font-bold text-5xl">
+                        {' '}
+                        {i + 1} <span className='text-xs'>/{item.setting}</span>
+                      </div>
+                      <div className="mt-5">
+                        <p className="text-xs">
+                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci, autem.
+                        </p>
+                        <p className="text-xs mt-3">
+                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci, autem.
+                        </p>
+                      </div>
+
+                      <Button size="sm" className="mt-10 bg-white text-black">
+                        View
+                      </Button>
+                    </div>
+                  }
+                  placement="top"
+                >
+                  <motion.div
+                    key={i}
+                    className={`w-4 h-4 ${i < item.n ? 'bg-blue-500' : 'bg-gray-200'}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2, delay: i * 0.01 }}
+                  />
+                </Tooltip>
               ))}
             </div>
           </div>
@@ -39,3 +65,4 @@ const MultiSquare = () => {
 };
 
 export default MultiSquare;
+
