@@ -22,7 +22,7 @@ const Layers = () => {
     if (active.id !== over.id) {
       const oldIndex = page.elements.findIndex((obj) => obj.id === active.id);
       const newIndex = page.elements.findIndex((obj) => obj.id === over.id);
-      updatePage({ elements: arrayMove(page.elements, oldIndex, newIndex) });
+      updatePage({ elements: arrayMove(page.elements, oldIndex, newIndex) }, page.id);
     }
   };
 
