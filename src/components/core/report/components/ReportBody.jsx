@@ -29,6 +29,10 @@ import PyramidChart from './charts/PyramidChart';
 import ComposedCharts from './charts/ComposedChart';
 import AreaCharts from './charts/AreaChart';
 import CandyBarChart from './charts/CandyBar';
+import THreeCircles from './charts/3Circles';
+import DynamicSortingChart from './charts/DynamicSortingChart';
+import AltPieChart from './charts/AltPieChart';
+import GenderStats from './charts/GenderStat';
 
 register();
 
@@ -57,6 +61,7 @@ const ReportBody = () => {
           <TangentialPolarBarChart />
           <VerticalStackedBar />
           <NewPieChart />
+          <AltPieChart/>
         </div>
         <div className="space-y-6">
           <Card className="space-y-6 w-full bg-default-50 px-8 py-6">
@@ -85,6 +90,9 @@ const ReportBody = () => {
         <FunnelChart />
         <RosePieChart />
       </div>
+      <GenderStats />
+      <DynamicSortingChart />
+      <THreeCircles />
       <MultipleBars />
       <CandyBarChart />
       <AreaCharts />
