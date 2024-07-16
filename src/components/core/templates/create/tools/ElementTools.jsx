@@ -11,24 +11,25 @@ import TextAlign from './elements/TextAlign.jsx';
 import { useMemo } from 'react';
 
 const ElementTools = () => {
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.page));
-  const elements = page.elements;
-  const selection = useTemplateStore((state) => state.template.selection);
+  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
   const updateElements = useTemplateStore((state) => state.updateElements);
-  const _elements = selection.map((id) => elements.find((el) => el.id === id));
+  const page = useTemplateStore(({ template }) => {
+    return template.pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
+  });
+  const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id));
 
   const tools = useMemo(() => {
-    if (!selection.length) return [];
-    let _tools = _elements.map((el) => el.tools || []);
+    if (!page) return [];
+    let _tools = elements.map((el) => el.tools || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
-    if (_tools.includes('chart-picker') && selection.length > 1) {
+    if (_tools.includes('chart-picker') && selectedElements.length > 1) {
       return _tools.filter((tool) => tool !== 'chart-picker');
     }
     return _tools;
-  }, [_elements, selection.length]);
+  }, [elements, page, selectedElements.length]);
 
   const handleUpdateElements = (elements) => {
-    updateElements(elements);
+    updateElements(elements, page.id);
   };
 
   return (
@@ -36,34 +37,34 @@ const ElementTools = () => {
       {tools.length > 0 && (
         <motion.div
           initial={{ opacity: 0, x: '100%' }}
-          animate={{ opacity: 1, x: 4 }}
+          animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: '100%' }}
           className="fixed top-1/3 right-4 rounded-2xl bg-default-200/60 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
         >
           {tools.map((tool) => {
             if (tool === 'bold') {
-              return <Bold key={tool} elements={_elements} onChange={handleUpdateElements} />;
+              return <Bold key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'italic') {
-              return <Italic key={tool} elements={_elements} onChange={handleUpdateElements} />;
+              return <Italic key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'underline') {
-              return <Underline key={tool} elements={_elements} onChange={handleUpdateElements} />;
+              return <Underline key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'font-size') {
-              return <FontSize key={tool} elements={_elements} onChange={handleUpdateElements} />;
+              return <FontSize key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'text-color') {
-              return <TextColor key={tool} elements={_elements} onChange={handleUpdateElements} />;
+              return <TextColor key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'background-color') {
-              return <BackgroundColor key={tool} elements={_elements} onChange={handleUpdateElements} />;
+              return <BackgroundColor key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'text-align') {
-              return <TextAlign key={tool} elements={_elements} onChange={handleUpdateElements} />;
+              return <TextAlign key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
-            if (tool === 'chart-picker' && selection.length === 1) {
-              return <ChartPicker key={tool} element={_elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+            if (tool === 'chart-picker' && selectedElements.length === 1) {
+              return <ChartPicker key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
             }
             return <></>;
           })}
@@ -72,7 +73,5 @@ const ElementTools = () => {
     </AnimatePresence>
   );
 };
-
-ElementTools.propTypes = {};
 
 export default ElementTools;

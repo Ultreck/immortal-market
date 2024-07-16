@@ -1,11 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import PageDimensions from '@/components/core/templates/create/tools/page/PageDimensions.jsx';
 import PageBackground from '@/components/core/templates/create/tools/page/PageBackground.jsx';
-import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
 
-const PageTools = ({ isOpen }) => {
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.page));
+const PageTools = () => {
+  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.selectedPage));
   const updatePage = useTemplateStore((state) => state.updatePage);
 
   const handleUpdatePage = (data) => {
@@ -14,10 +13,10 @@ const PageTools = ({ isOpen }) => {
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {!!page && (
         <motion.div
           initial={{ opacity: 0, x: '100%' }}
-          animate={{ opacity: 1, x: 4 }}
+          animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: '100%' }}
           className="fixed top-1/3 right-4 rounded-2xl bg-default-200/60 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
         >
@@ -27,10 +26,6 @@ const PageTools = ({ isOpen }) => {
       )}
     </AnimatePresence>
   );
-};
-
-PageTools.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
 };
 
 export default PageTools;

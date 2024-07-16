@@ -7,12 +7,12 @@ import { RiCloseFill } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 
 const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
-  const selection = useTemplateStore((state) => state.template.selection);
+  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
   const selectElements = useTemplateStore((state) => state.selectElements);
   const deleteElements = useTemplateStore((state) => state.deleteElements);
 
   const icon = icons[element.type];
-  const active = selection.includes(element.id);
+  const active = selectedElements.includes(element.id);
 
   return (
     <div

@@ -9,32 +9,46 @@ import { TbLayoutList } from 'react-icons/tb';
 import { cn, roundToNearestTen } from '@/lib/utils.js';
 import { RiShapesFill } from 'react-icons/ri';
 
+function getElementDistanceFromTop(element) {
+  let distance = 0;
+
+  while (element) {
+    distance += element.offsetTop;
+    element = element.offsetParent;
+  }
+
+  return distance;
+}
+
 const TemplateBuilder = () => {
   const canvas = useRef();
   const parent = useRef();
   const [tab, setTab] = useState('elements');
   const sensors = useSensors(useSensor(MouseSensor));
   const addElements = useTemplateStore((state) => state.addElements);
-  const selectElements = useTemplateStore((state) => state.selectElements);
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent } = event;
-    if (over && over.id === 'canvas') {
-      const canvasRect = canvas.current.getBoundingClientRect();
+    if (over && over.id.startsWith('canvas')) {
+      const node = document.getElementById(over.id);
+      const page = over.id.replace('canvas-', '');
+      const canvasRect = node.getBoundingClientRect();
+      const distanceFromTop = getElementDistanceFromTop(node);
       const x = roundToNearestTen(activatorEvent.x + delta.x - canvasRect.left);
-      const y = roundToNearestTen(activatorEvent.y + delta.y - canvasRect.top);
+      const y = roundToNearestTen(activatorEvent.y + delta.y - distanceFromTop);
       const el = {
         x,
         y,
         id: crypto.randomUUID(),
         ...active.data.current,
       };
-      addElements([el]);
+      addElements([el], page);
     }
   };
 
   const handleParentClick = (e) => {
-    if (e.target === parent.current) selectElements([]);
+    if (e.target === parent.current) updateTemplate({ selectedElements: [], selectedPage: null });
   };
 
   return (
@@ -71,8 +85,8 @@ const TemplateBuilder = () => {
             </div>
           </div>
         </div>
-        <div ref={parent} className="h-full flex flex-col" onClick={handleParentClick}>
-          <div ref={canvas} className="my-auto mx-auto">
+        <div ref={parent} className="h-full overflow-y-auto" onClick={handleParentClick}>
+          <div ref={canvas} className="mx-auto w-max py-10">
             <Canvas />
           </div>
         </div>

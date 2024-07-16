@@ -4,8 +4,8 @@ import { shallow } from 'zustand/shallow';
 const pages = [
   {
     id: crypto.randomUUID(),
-    width: 600,
-    height: 600,
+    width: 800,
+    height: 800,
     style: {
       backgroundColor: '#ffffff',
     },
@@ -19,7 +19,9 @@ const useTemplateStore = createWithEqualityFn(
       id: Date.now(),
       pages,
       page: pages[0].id,
-      selection: [],
+      selectedElements: [],
+      selectedPage: null,
+      activePage: null,
     },
     updateTemplate: (data) => {
       set((state) => ({ template: { ...state.template, ...data } }));
@@ -28,17 +30,34 @@ const useTemplateStore = createWithEqualityFn(
       set((state) => ({
         template: {
           ...state.template,
-          selection: ids,
+          selectedElements: ids,
+          selectedPage: null,
         },
       }));
     },
-    updateElements: (elements) => {
+    addElements: (elements, pageId) => {
       set((state) => {
         return {
           template: {
             ...state.template,
             pages: state.template.pages.map((page) => {
-              if (page.id === state.template.page) {
+              if (page.id === pageId) {
+                return { ...page, elements: [...page.elements, ...elements] };
+              }
+              return page;
+            }),
+            selectedElements: elements.map((el) => el.id),
+          },
+        };
+      });
+    },
+    updateElements: (elements, pageId) => {
+      set((state) => {
+        return {
+          template: {
+            ...state.template,
+            pages: state.template.pages.map((page) => {
+              if (page.id === pageId) {
                 return {
                   ...page,
                   elements: page.elements.map((el) => {
@@ -54,28 +73,12 @@ const useTemplateStore = createWithEqualityFn(
         };
       });
     },
-    addElements: (elements) => {
-      set((state) => {
-        return {
-          template: {
-            ...state.template,
-            pages: state.template.pages.map((page) => {
-              if (page.id === state.template.page) {
-                return { ...page, elements: [...page.elements, ...elements] };
-              }
-              return page;
-            }),
-            selection: elements.map((el) => el.id),
-          },
-        };
-      });
-    },
-    deleteElements: (ids) => {
+    deleteElements: (ids, pageId) => {
       set((state) => ({
         template: {
           ...state.template,
           pages: state.template.pages.map((page) => {
-            if (page.id === state.template.page) {
+            if (page.id === pageId) {
               return {
                 ...page,
                 elements: page.elements.filter((item) => !ids.includes(item.id)),
@@ -83,15 +86,24 @@ const useTemplateStore = createWithEqualityFn(
             }
             return page;
           }),
-          selection: [],
+          selectedElements: [],
+        },
+      }));
+    },
+    selectPage: (id) => {
+      set((state) => ({
+        template: {
+          ...state.template,
+          selectedPage: id,
+          selectedElements: [],
         },
       }));
     },
     addPage: () => {
       const page = {
         id: crypto.randomUUID(),
-        width: 600,
-        height: 600,
+        width: 800,
+        height: 800,
         style: { backgroundColor: '#ffffff' },
         elements: [],
       };
@@ -100,23 +112,9 @@ const useTemplateStore = createWithEqualityFn(
           ...state.template,
           pages: [...state.template.pages, page],
           page: page.id,
-          selection: [],
+          selectedElements: [],
         },
       }));
-    },
-    deletePage: (id) => {
-      set((state) => {
-        if (state.template.pages.length === 1) return;
-        const _pages = state.template.pages.filter((page) => page.id !== id);
-        return {
-          template: {
-            ...state.template,
-            pages: _pages,
-            page: _pages.at(-1).id,
-            selection: [],
-          },
-        };
-      });
     },
     updatePage: (data) => {
       set((state) => ({
@@ -130,6 +128,20 @@ const useTemplateStore = createWithEqualityFn(
           }),
         },
       }));
+    },
+    deletePage: (id) => {
+      set((state) => {
+        if (state.template.pages.length === 1) return;
+        const _pages = state.template.pages.filter((page) => page.id !== id);
+        return {
+          template: {
+            ...state.template,
+            pages: _pages,
+            page: _pages.at(-1).id,
+            selectedElements: [],
+          },
+        };
+      });
     },
   }),
   shallow

@@ -19,7 +19,7 @@ const TemplatePagination = ({ className }) => {
 
   const handleChangePage = (index) => {
     const page = pages[index - 1];
-    updateTemplate({ page: page.id, selection: [] });
+    updateTemplate({ page: page.id, selectedElements: [] });
   };
 
   const handleDeletePage = () => {
