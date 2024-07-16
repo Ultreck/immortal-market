@@ -14,7 +14,7 @@ import ArrowLeft from '@/components/core/templates/create/elements/ArrowLeft.jsx
 import ArrowUpDown from '@/components/core/templates/create/elements/ArrowUpDown.jsx';
 import Image from '@/components/core/templates/create/elements/Image.jsx';
 import { useDroppable } from '@dnd-kit/core';
-import { createElement, Fragment, useCallback, useState } from 'react';
+import { createElement, Fragment, useCallback, useRef, useState } from 'react';
 import { cn, mergeRefs } from '@/lib/utils.js';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
@@ -40,6 +40,7 @@ const components = {
 };
 
 const TemplatePage = ({ id }) => {
+  const selectionBoxRef = useRef(null);
   const [selectionBox, setSelectionBox] = useState(null);
   const [highlightedElements, setHighlightedElements] = useState([]);
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -171,7 +172,7 @@ const TemplatePage = ({ id }) => {
       if (selectionBox.startX === selectionBox.endX && selectionBox.startY === selectionBox.endY) {
         setSelectionBox(null);
         setHighlightedElements([]);
-        if (e.target === node.current && !e.shiftKey && !selected) {
+        if ((e.target === node.current || e.target === selectionBoxRef.current) && !e.shiftKey && !selected) {
           selectPage(page.id);
         }
         return;
@@ -245,6 +246,7 @@ const TemplatePage = ({ id }) => {
           })}
           {!!selectionBox && (
             <div
+              ref={selectionBoxRef}
               style={{
                 position: 'absolute',
                 left: Math.min(selectionBox.startX, selectionBox.endX),
