@@ -7,7 +7,7 @@ import LayerItem from '@/components/core/templates/create/LayerItem.jsx';
 
 const Layers = () => {
   const [element, setElement] = useState(null);
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.page));
+  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.activePage));
   const updatePage = useTemplateStore((state) => state.updatePage);
 
   const sensors = useSensors(useSensor(PointerSensor));

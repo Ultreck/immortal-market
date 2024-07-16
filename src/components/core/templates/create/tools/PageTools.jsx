@@ -8,7 +8,7 @@ const PageTools = () => {
   const updatePage = useTemplateStore((state) => state.updatePage);
 
   const handleUpdatePage = (data) => {
-    updatePage(data);
+    updatePage(data, page.id);
   };
 
   return (

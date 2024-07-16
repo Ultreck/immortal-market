@@ -18,7 +18,6 @@ const useTemplateStore = createWithEqualityFn(
     template: {
       id: Date.now(),
       pages,
-      page: pages[0].id,
       selectedElements: [],
       selectedPage: null,
       activePage: null,
@@ -112,17 +111,17 @@ const useTemplateStore = createWithEqualityFn(
         template: {
           ...state.template,
           pages: [...state.template.pages, page],
-          page: page.id,
           selectedElements: [],
+          selectedPage: page.id,
         },
       }));
     },
-    updatePage: (data) => {
+    updatePage: (data, pageId) => {
       set((state) => ({
         template: {
           ...state.template,
           pages: state.template.pages.map((page) => {
-            if (page.id === state.template.page) {
+            if (page.id === pageId) {
               return { ...page, ...data };
             }
             return page;
@@ -138,8 +137,8 @@ const useTemplateStore = createWithEqualityFn(
           template: {
             ...state.template,
             pages: _pages,
-            page: _pages.at(-1).id,
             selectedElements: [],
+            selectedPage: null,
           },
         };
       });
