@@ -11,25 +11,23 @@ const Circle = ({ element, active, highlighted, width, onClick, onChange }) => {
       onClick={onClick}
       onChange={onChange}
       onResize={(size) => {
-        circle.current.style.width = `${size.width}px`;
-        circle.current.style.height = `${circle.current.scrollHeight}px`;
-        onChange({ ...element, width: size.width, height: circle.current.scrollHeight });
+        onChange({ ...element, width: size.width, height: size.height });
       }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
-      resizeHandles={['e']}
+      resizeHandles={['e', 's', 'se']}
     >
       <div ref={circle} className="!h-max">
         <div
-          className=" rounded-full"
           style={{
             width: `${element.width}px`,
-            height: `${element.width}px`,
+            height: `${element.height}px`,
             backgroundColor: element.style.backgroundColor,
             borderWidth: element.style.borderWidth,
             borderColor: element.style.borderColor,
             opacity: element.style.opacity,
+            borderRadius: '50%',
           }}
         ></div>
       </div>
@@ -40,4 +38,3 @@ const Circle = ({ element, active, highlighted, width, onClick, onChange }) => {
 Circle.propTypes = elementPropTypes;
 
 export default Circle;
-

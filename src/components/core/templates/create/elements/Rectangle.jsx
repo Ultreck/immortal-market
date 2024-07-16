@@ -16,7 +16,7 @@ const Rectangle = ({ element, active, highlighted, width, onClick, onChange }) =
       resizeHandles={['se', 'e', 's']}
     >
       <div className="!h-max">
-      <div
+        <div
           style={{
             width: `${element.width}px`,
             height: `${element.height}px`,

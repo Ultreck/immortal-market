@@ -1,6 +1,6 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import { AiOutlineRadiusBottomleft } from "react-icons/ai";
+import { TbBorderRadius } from 'react-icons/tb';
 
 const BorderRadius = ({ elements, onChange }) => {
   const values = elements.map((e) => e.style.borderRadius);
@@ -16,23 +16,19 @@ const BorderRadius = ({ elements, onChange }) => {
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <AiOutlineRadiusBottomleft size="20" />
+          <TbBorderRadius size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 shadow py-6 gap-y-4 border border-default-200">
-        <div className="px-4 w-full">
-          <Slider
-            color="foreground"
-            size="sm"
-            onChange={(opacity) => handleChange(opacity)}
-            label="Border Radius"
-            step={1}
-            maxValue={100}
-            minValue={0}
-            defaultValue={value}
-            className="w-36"
-          />
-        </div>
+      <PopoverContent className="px-6 py-4 shadow border border-default-200 w-[200px]">
+        <Slider
+          color="foreground"
+          onChange={(opacity) => handleChange(opacity)}
+          label="Border Radius"
+          step={1}
+          maxValue={100}
+          minValue={0}
+          defaultValue={value}
+        />
       </PopoverContent>
     </Popover>
   );
@@ -55,4 +51,3 @@ BorderRadius.propTypes = {
 };
 
 export default BorderRadius;
-

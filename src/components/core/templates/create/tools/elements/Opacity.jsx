@@ -1,6 +1,6 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import { MdOutlineOpacity } from 'react-icons/md';
+import { BsTransparency } from 'react-icons/bs';
 
 const Opacity = ({ elements, onChange }) => {
   const values = elements.map((e) => e.style.opacity);
@@ -16,23 +16,19 @@ const Opacity = ({ elements, onChange }) => {
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <MdOutlineOpacity size="20" />
+          <BsTransparency size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 shadow py-6 gap-y-4 border border-default-200">
-        <div className="px-4 w-full">
-          <Slider
-            color="foreground"
-            size="sm"
-            onChange={(opacity) => handleChange(opacity)}
-            label="Opacity"
-            step={0.1}
-            maxValue={1}
-            minValue={0}
-            defaultValue={value}
-            className="w-36"
-          />
-        </div>
+      <PopoverContent className="px-6 py-4 shadow border border-default-200 w-[200px]">
+        <Slider
+          color="foreground"
+          onChange={(opacity) => handleChange(opacity)}
+          label="Opacity"
+          step={0.1}
+          maxValue={1}
+          minValue={0}
+          defaultValue={value}
+        />
       </PopoverContent>
     </Popover>
   );
@@ -55,4 +51,3 @@ Opacity.propTypes = {
 };
 
 export default Opacity;
-

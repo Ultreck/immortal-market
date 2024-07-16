@@ -1,9 +1,9 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@nextui-org/react';
-import { FaBorderStyle } from 'react-icons/fa';
 import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
 import { HiCheck } from 'react-icons/hi2';
 import { AnimatePresence, motion } from 'framer-motion';
+import { TbBorderStyle } from 'react-icons/tb';
 
 const colors = [
   '#000000',
@@ -23,10 +23,10 @@ const colors = [
 const Border = ({ elements, onChange }) => {
   const borderColorValues = elements.map((e) => e.style.borderColor);
   const same = borderColorValues.every((v) => v === borderColorValues[0]);
-  const borderColorvalue = same ? borderColorValues[0] : '';
+  const borderColorValue = same ? borderColorValues[0] : '';
   const borderWidthValues = elements.map((e) => e.style.borderWidth);
   const sameWidth = borderWidthValues.every((v) => v === borderWidthValues[0]);
-  const borderWidthvalue = sameWidth ? borderWidthValues[0] : '';
+  const borderWidthValue = sameWidth ? borderWidthValues[0] : '';
 
   const handleChange = (v) => {
     if (!v) return;
@@ -41,26 +41,22 @@ const Border = ({ elements, onChange }) => {
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <FaBorderStyle size="20" />
+          <TbBorderStyle size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 shadow py-6 gap-y-4 border border-default-200">
-        <div className="px-4 w-full">
-          <Slider
-            color="foreground"
-            size="sm"
-            onChange={(width) => handleWidthChange(width)}
-            label="Border-width"
-            step={1}
-            maxValue={50}
-            minValue={0}
-            defaultValue={borderWidthvalue}
-            className="max-w-md"
-          />
-        </div>
-        <div className="px-4 w-full">
-          <p className="mb-2">Border-color</p>
-          <HexAlphaColorPicker color={borderColorvalue} onChange={(color) => handleChange(color)} />
+      <PopoverContent className="px-8 py-6 shadow border border-default-200 space-y-4">
+        <Slider
+          color="foreground"
+          onChange={(width) => handleWidthChange(width)}
+          label="Border width"
+          step={1}
+          maxValue={50}
+          minValue={0}
+          defaultValue={borderWidthValue}
+        />
+        <div>
+          <p className="mb-2">Border color</p>
+          <HexAlphaColorPicker color={borderColorValue} onChange={(color) => handleChange(color)} />
           <div className="grid grid-cols-6 gap-y-3 gap-x-3 mt-6">
             {colors.map((color, index) => (
               <div
@@ -70,7 +66,7 @@ const Border = ({ elements, onChange }) => {
                 onClick={() => handleChange(color)}
               >
                 <AnimatePresence mode="wait">
-                  {borderColorvalue === color && (
+                  {borderColorValue === color && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -106,4 +102,3 @@ Border.propTypes = {
 };
 
 export default Border;
-

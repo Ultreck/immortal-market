@@ -47,6 +47,7 @@ const useTemplateStore = createWithEqualityFn(
               return page;
             }),
             selectedElements: elements.map((el) => el.id),
+            selectedPage: null,
           },
         };
       });
