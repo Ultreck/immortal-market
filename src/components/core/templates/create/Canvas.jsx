@@ -73,24 +73,24 @@ const Canvas = () => {
   );
 
   return (
-    <div>
-      <div className="space-y-8 flex flex-col items-center">
+    <>
+      <div className="space-y-6 flex flex-col items-center">
         {pages.map((page) => {
           return <TemplatePage key={page.id} id={page.id} />;
         })}
-      </div>
-      <div
-        onClick={addPage}
-        tabIndex={0}
-        className="flex items-center border border-default-200 rounded-2xl px-6 py-4 space-x-4 mt-10 hover:bg-default-200/60 dark:hover:bg-default-100/60 cursor-pointer"
-      >
-        <TbPlus className="text-2xl" />
-        <span>Add page</span>
+        <div
+          onClick={addPage}
+          tabIndex={0}
+          className="w-full flex items-center border border-default-200 rounded-2xl px-6 py-4 space-x-4 hover:bg-default-200/60 dark:hover:bg-default-100/60 cursor-pointer"
+        >
+          <TbPlus className="text-2xl" />
+          <span>Add page</span>
+        </div>
       </div>
 
       <ElementTools />
       <PageTools />
-    </div>
+    </>
   );
 };
 
