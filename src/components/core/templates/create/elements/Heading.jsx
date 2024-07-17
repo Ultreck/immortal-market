@@ -38,7 +38,10 @@ const Heading = ({ element, active, highlighted, width, onClick, onChange }) => 
       className="max-w-full"
     >
       <div className="overflow-hidden relative w-full h-full pl-6">
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[90%] bottom-0 w-2 bg-gray-800 rounded-2xl"></div>
+        <div
+          className="absolute left-0 top-1/2 -translate-y-1/2 h-[80%] bottom-0 w-2 bg-gray-800 rounded-2xl"
+          style={{ backgroundColor: element.style.color }}
+        />
         <textarea
           className={cn('bg-transparent w-full h-full resize-none leading-[1.2] overflow-hidden')}
           style={element.style}
