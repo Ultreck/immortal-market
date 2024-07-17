@@ -12,6 +12,7 @@ import {
   TbImageInPicture,
   TbRectangleFilled,
   TbSquareRotatedFilled,
+  TbTable,
   TbTriangleFilled,
 } from 'react-icons/tb';
 import PropTypes from 'prop-types';
@@ -31,6 +32,7 @@ export const icons = {
   'arrow-left': TbArrowBigLeftFilled,
   'arrow-up-down': FaArrowsAltV,
   image: TbImageInPicture,
+  table: TbTable,
 };
 
 const elements = [
@@ -76,6 +78,21 @@ const elements = [
       height: 400,
       style: { opacity: 1 },
       tools: ['chart-picker', 'opacity'],
+    },
+    group: 'visual',
+  },
+  {
+    id: 'table',
+    type: 'table',
+    name: 'Table',
+    icon: icons['table'],
+    data: {
+      type: 'table',
+      text: 'Table',
+      width: 400,
+      height: 400,
+      style: { opacity: 1 },
+      tools: ['table', 'opacity'],
     },
     group: 'visual',
   },

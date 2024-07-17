@@ -21,6 +21,7 @@ import PropTypes from 'prop-types';
 import { useIntersectionObserver } from 'usehooks-ts';
 import { Button } from '@nextui-org/react';
 import { TbTrash } from 'react-icons/tb';
+import Table from '@/components/core/templates/create/elements/Table.jsx';
 
 const components = {
   heading: Heading,
@@ -37,6 +38,7 @@ const components = {
   'arrow-left': ArrowLeft,
   'arrow-up-down': ArrowUpDown,
   image: Image,
+  table: Table,
 };
 
 const TemplatePage = ({ id }) => {

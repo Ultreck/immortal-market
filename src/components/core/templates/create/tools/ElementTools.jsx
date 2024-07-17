@@ -12,6 +12,7 @@ import { useMemo } from 'react';
 import Border from './elements/Border.jsx';
 import Opacity from './elements/Opacity.jsx';
 import BorderRadius from './elements/BorderRadius.jsx';
+import TableConfig from '@/components/core/templates/create/tools/elements/TableConfig.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -25,8 +26,9 @@ const ElementTools = () => {
     if (!page) return [];
     let _tools = elements.map((el) => el.tools || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
-    if (_tools.includes('chart-picker') && selectedElements.length > 1) {
-      return _tools.filter((tool) => tool !== 'chart-picker');
+    const singles = ['chart-picker', 'table'];
+    if (_tools.some((tool) => singles.includes(tool)) && selectedElements.length > 1) {
+      return _tools.filter((tool) => !singles.includes(tool));
     }
     return _tools;
   }, [elements, page, selectedElements.length]);
@@ -68,6 +70,9 @@ const ElementTools = () => {
             }
             if (tool === 'chart-picker' && selectedElements.length === 1) {
               return <ChartPicker key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+            }
+            if (tool === 'table' && selectedElements.length === 1) {
+              return <TableConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
             }
             if (tool === 'border') {
               return <Border key={tool} elements={elements} onChange={handleUpdateElements} />;
