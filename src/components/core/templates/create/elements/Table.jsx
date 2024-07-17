@@ -17,11 +17,16 @@ const Content = ({ element }) => {
             .fill(null)
             .map((_, index) => {
               const header = headers[index];
+              const style = {};
+              if (index !== 0) {
+                style.borderLeftWidth = element.style.borderWidth;
+                style.borderLeftColor = element.style.borderColor;
+              }
               return (
                 <th
                   key={`header-${index}`}
                   className={cn('text-left px-3 py-1 border-gray-400 font-semibold', { 'border-l': index !== 0 })}
-                  style={element.style}
+                  style={style}
                 >
                   {header}
                 </th>
@@ -36,13 +41,18 @@ const Content = ({ element }) => {
               .fill(null)
               .map((_, index) => {
                 const cell = row[index];
+                const style = { borderTopWidth: element.style.borderWidth, borderTopColor: element.style.borderColor };
+                if (index !== 0) {
+                  style.borderLeftWidth = element.style.borderWidth;
+                  style.borderLeftColor = element.style.borderColor;
+                }
                 return (
                   <td
                     key={`cell-${index}`}
                     className={cn('text-left border-gray-400 border-t px-3 py-1', {
                       'border-l': index !== 0,
                     })}
-                    style={element.style}
+                    style={style}
                   >
                     {cell}
                   </td>
@@ -65,7 +75,6 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
         onChange({ ...element, width: size.width, height: size.height });
       }}
       maxWidth={width}
-      editable
       active={active}
       highlighted={highlighted}
       constrained
