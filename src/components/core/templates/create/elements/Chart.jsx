@@ -6,8 +6,8 @@ import { HiChartPie } from 'react-icons/hi2';
 import { elementPropTypes } from '@/lib/elements.js';
 
 const Chart = ({ element, active, highlighted, width, onClick, onChange }) => {
-  const keys = Object.keys(element.chart?.keys || {});
-  const hasKeys = keys.length > 0 && keys.every((key) => !!element.chart.keys[key]);
+  const keys = Object.keys(element.config?.keys || {});
+  const hasKeys = keys.length > 0 && keys.every((key) => !!element.config.keys[key]);
 
   return (
     <ElementWrapper
@@ -23,11 +23,11 @@ const Chart = ({ element, active, highlighted, width, onClick, onChange }) => {
       resizeHandles={['se', 'e', 's']}
       constrained
     >
-      {element.chart?.type && element.chart.data && hasKeys ? (
+      {element.config?.type && element.config.data && hasKeys ? (
         <>
-          {element.chart.type === 'bar' && <TemplateBarChart element={element} height={element.height} />}
-          {element.chart.type === 'line' && <TemplateLineChart element={element} />}
-          {element.chart.type === 'pie' && <TemplatePieChart element={element} />}
+          {element.config.type === 'bar' && <TemplateBarChart element={element} height={element.height} />}
+          {element.config.type === 'line' && <TemplateLineChart element={element} />}
+          {element.config.type === 'pie' && <TemplatePieChart element={element} />}
         </>
       ) : (
         <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">

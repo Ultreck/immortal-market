@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
 import { Button, Popover, PopoverContent, PopoverTrigger, Textarea, useDisclosure } from '@nextui-org/react';
-import { TbTableImport } from 'react-icons/tb';
+import { TbBrackets } from 'react-icons/tb';
 import { Controller, useForm } from 'react-hook-form';
 import { isValidJsonArray } from '@/lib/utils.js';
 
 const data = [
-  ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-  ['', 'Cell 1', 'Cell 2', 'Cell 3'],
-  ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
+  { key: 'Heading 1', value: 'Heading 2' },
+  { key: 'Key 1', value: 'Value 1' },
+  { key: 'Key 2', value: 'Value 2' },
+  { key: 'Key 3', value: 'Value 3' },
 ];
 
-const TableConfig = ({ element, onChange }) => {
+const KeyValueConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -36,7 +37,7 @@ const TableConfig = ({ element, onChange }) => {
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbTableImport size="20" />
+          <TbBrackets size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
@@ -76,7 +77,7 @@ const TableConfig = ({ element, onChange }) => {
   );
 };
 
-TableConfig.propTypes = {
+KeyValueConfig.propTypes = {
   element: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -91,4 +92,4 @@ TableConfig.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default TableConfig;
+export default KeyValueConfig;

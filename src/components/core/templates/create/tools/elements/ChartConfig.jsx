@@ -1,4 +1,13 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Textarea } from '@nextui-org/react';
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Select,
+  SelectItem,
+  Textarea,
+  useDisclosure,
+} from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import { createElement, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -16,17 +25,17 @@ const ChartType = ({ element, onChange, onNext }) => {
   const handleSelectChart = (chart) => {
     onChange({
       ...element,
-      chart: {
-        ...element.chart,
+      config: {
+        ...element.config,
         type: chart.name,
-        data: element.chart?.data || null,
+        data: element.config?.data || null,
         keys: {},
       },
     });
   };
 
   const handleNext = () => {
-    if (element.chart?.type) onNext();
+    if (element.config?.type) onNext();
   };
 
   return (
@@ -37,8 +46,8 @@ const ChartType = ({ element, onChange, onNext }) => {
           <div
             key={index}
             className={cn('py-6 bg-default-100 flex flex-col items-center justify-center rounded-xl cursor-pointer', {
-              'bg-primary-500 text-white': element.chart?.type === chart.name,
-              'hover:bg-default-200': element.chart?.type !== chart.name,
+              'bg-primary-500 text-white': element.config?.type === chart.name,
+              'hover:bg-default-200': element.config?.type !== chart.name,
             })}
             onClick={() => handleSelectChart(chart)}
           >
@@ -52,7 +61,7 @@ const ChartType = ({ element, onChange, onNext }) => {
         onClick={handleNext}
         className="mt-6 text-base"
         radius="full"
-        isDisabled={!element.chart?.type}
+        isDisabled={!element.config?.type}
       >
         Next
       </Button>
@@ -83,19 +92,20 @@ const data = [
   },
 ];
 
-const ChartData = ({ element, onChange, onBack }) => {
+const ChartData = ({ element, onChange, onBack, onClose }) => {
   const { handleSubmit, watch, control } = useForm({
     defaultValues: {
-      json: element?.chart?.data ? JSON.stringify(element.chart.data, null, 2) : JSON.stringify(data, null, 2),
+      json: element?.config?.data ? JSON.stringify(element.config.data, null, 2) : JSON.stringify(data, null, 2),
     },
   });
-  const chart = types.find((type) => type.name === element.chart.type);
+  const chart = types.find((type) => type.name === element.config.type);
   const keys = getKeysFromJson(watch().json);
 
   const onSubmit = async (values) => {
     const { json, ...rest } = values;
     const data = JSON.parse(json);
-    onChange({ ...element, chart: { ...element.chart, keys: rest, data } });
+    onChange({ ...element, config: { ...element.config, keys: rest, data } });
+    onClose();
   };
 
   return (
@@ -168,11 +178,19 @@ const ChartData = ({ element, onChange, onBack }) => {
   );
 };
 
-const ChartPicker = ({ element, onChange }) => {
+const ChartConfig = ({ element, onChange }) => {
   const [view, setView] = useState('type');
+  const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
 
   return (
-    <Popover placement="left" showArrow offset={10} classNames={{ content: 'w-[400px]' }}>
+    <Popover
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      placement="left"
+      showArrow
+      offset={10}
+      classNames={{ content: 'w-[400px]' }}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <TbChartPie size="20" />
@@ -181,7 +199,9 @@ const ChartPicker = ({ element, onChange }) => {
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-8 py-6 w-full">
           {view === 'type' && <ChartType element={element} onChange={onChange} onNext={() => setView('data')} />}
-          {view === 'data' && <ChartData element={element} onChange={onChange} onBack={() => setView('type')} />}
+          {view === 'data' && (
+            <ChartData element={element} onChange={onChange} onBack={() => setView('type')} onClose={onOpenChange} />
+          )}
         </div>
       </PopoverContent>
     </Popover>
@@ -198,13 +218,13 @@ const propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     style: PropTypes.object,
-    chart: PropTypes.object,
+    config: PropTypes.object,
   }),
   onChange: PropTypes.func.isRequired,
 };
 
-ChartPicker.propTypes = propTypes;
+ChartConfig.propTypes = propTypes;
 ChartType.propTypes = { ...propTypes, onNext: PropTypes.func };
-ChartData.propTypes = { ...propTypes, onBack: PropTypes.func };
+ChartData.propTypes = { ...propTypes, onBack: PropTypes.func, onClose: PropTypes.func };
 
-export default ChartPicker;
+export default ChartConfig;

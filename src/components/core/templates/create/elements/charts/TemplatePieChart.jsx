@@ -17,13 +17,13 @@ const colors = [
 ];
 
 const TemplatePieChart = ({ element }) => {
-  const data = element.chart.data.map((item, i) => ({
+  const data = element.config.data.map((item, i) => ({
     ...item,
     fill: colors[i],
   }));
-  const config = element.chart.data.reduce((acc, item, i) => {
-    acc[item[element.chart.keys.name]] = {
-      label: capitalize(item[element.chart.keys.name]),
+  const config = element.config.data.reduce((acc, item, i) => {
+    acc[item[element.config.keys.name]] = {
+      label: capitalize(item[element.config.keys.name]),
       color: colors[i],
     };
     return acc;
@@ -35,14 +35,14 @@ const TemplatePieChart = ({ element }) => {
         <ChartTooltip content={<ChartTooltipContent hideLabel />} />
         <Pie
           data={data}
-          dataKey={element.chart.keys.data}
-          nameKey={element.chart.keys.name}
+          dataKey={element.config.keys.data}
+          nameKey={element.config.keys.name}
           label
           isAnimationActive={false}
           style={{ opacity: element.style.opacity }}
         >
           <LabelList
-            dataKey={element.chart.keys.name}
+            dataKey={element.config.keys.name}
             className="fill-background"
             stroke="none"
             fontSize={12}
@@ -64,7 +64,7 @@ TemplatePieChart.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     style: PropTypes.object,
-    chart: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired,
   }),
   height: PropTypes.number,
 };

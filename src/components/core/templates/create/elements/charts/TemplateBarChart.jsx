@@ -25,9 +25,9 @@ const colors = [
 ];
 
 const TemplateBarChart = ({ element, height = 300 }) => {
-  const config = element.chart.data.reduce((acc, item, i) => {
-    acc[item[element.chart.keys.x]] = {
-      label: capitalize(item[element.chart.keys.x]),
+  const config = element.config.data.reduce((acc, item, i) => {
+    acc[item[element.config.keys.x]] = {
+      label: capitalize(item[element.config.keys.x]),
       color: colors[i],
     };
     return acc;
@@ -38,7 +38,7 @@ const TemplateBarChart = ({ element, height = 300 }) => {
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} horizontal={false} />
         <XAxis
-          dataKey={element.chart.keys.x}
+          dataKey={element.config.keys.x}
           tickLine={false}
           tickMargin={10}
           axisLine={false}
@@ -46,7 +46,7 @@ const TemplateBarChart = ({ element, height = 300 }) => {
           interval={0}
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-        <Bar dataKey={element.chart.keys.y} radius={8} isAnimationActive={false} />
+        <Bar dataKey={element.config.keys.y} radius={8} isAnimationActive={false} />
       </BarChart>
     </ChartContainer>
   );
@@ -62,10 +62,9 @@ TemplateBarChart.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     style: PropTypes.object,
-    chart: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired,
   }),
   height: PropTypes.number,
 };
 
 export default TemplateBarChart;
-

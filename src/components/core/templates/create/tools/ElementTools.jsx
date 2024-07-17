@@ -5,7 +5,7 @@ import Underline from '@/components/core/templates/create/tools/elements/Underli
 import FontSize from '@/components/core/templates/create/tools/elements/FontSize.jsx';
 import TextColor from '@/components/core/templates/create/tools/elements/TextColor.jsx';
 import BackgroundColor from './elements/BackgroundColor.jsx';
-import ChartPicker from './elements/ChartPicker.jsx';
+import ChartConfig from './elements/ChartConfig.jsx';
 import useTemplateStore from '@/store/template.js';
 import TextAlign from './elements/TextAlign.jsx';
 import { useMemo } from 'react';
@@ -13,6 +13,7 @@ import Border from './elements/Border.jsx';
 import Opacity from './elements/Opacity.jsx';
 import BorderRadius from './elements/BorderRadius.jsx';
 import TableConfig from '@/components/core/templates/create/tools/elements/TableConfig.jsx';
+import KeyValueConfig from '@/components/core/templates/create/tools/elements/KeyValueConfig.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -26,7 +27,7 @@ const ElementTools = () => {
     if (!page) return [];
     let _tools = elements.map((el) => el.tools || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
-    const singles = ['chart-picker', 'table'];
+    const singles = ['chart', 'table', 'key-value'];
     if (_tools.some((tool) => singles.includes(tool)) && selectedElements.length > 1) {
       return _tools.filter((tool) => !singles.includes(tool));
     }
@@ -68,11 +69,14 @@ const ElementTools = () => {
             if (tool === 'text-align') {
               return <TextAlign key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
-            if (tool === 'chart-picker' && selectedElements.length === 1) {
-              return <ChartPicker key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+            if (tool === 'chart' && selectedElements.length === 1) {
+              return <ChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
             }
             if (tool === 'table' && selectedElements.length === 1) {
               return <TableConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+            }
+            if (tool === 'key-value' && selectedElements.length === 1) {
+              return <KeyValueConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
             }
             if (tool === 'border') {
               return <Border key={tool} elements={elements} onChange={handleUpdateElements} />;

@@ -22,6 +22,7 @@ import { useIntersectionObserver } from 'usehooks-ts';
 import { Button } from '@nextui-org/react';
 import { TbTrash } from 'react-icons/tb';
 import Table from '@/components/core/templates/create/elements/Table.jsx';
+import KeyValue from '@/components/core/templates/create/tools/elements/KeyValue.jsx';
 
 const components = {
   heading: Heading,
@@ -39,6 +40,7 @@ const components = {
   'arrow-up-down': ArrowUpDown,
   image: Image,
   table: Table,
+  'key-value': KeyValue,
 };
 
 const TemplatePage = ({ id }) => {

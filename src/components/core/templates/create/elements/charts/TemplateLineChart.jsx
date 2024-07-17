@@ -18,8 +18,8 @@ const colors = [
 
 const TemplateLineChart = ({ element }) => {
   const config = {
-    [element.chart.keys.y]: {
-      label: capitalize(element.chart.keys.y),
+    [element.config.keys.y]: {
+      label: capitalize(element.config.keys.y),
       color: colors[0],
     },
   };
@@ -28,7 +28,7 @@ const TemplateLineChart = ({ element }) => {
     <ChartContainer config={config} style={{ height: element.height, width: element.width }}>
       <LineChart
         accessibilityLayer
-        data={element.chart.data}
+        data={element.config.data}
         margin={{ top: 20, left: 12, right: 12 }}
         style={{
           opacity: element.style.opacity,
@@ -36,7 +36,7 @@ const TemplateLineChart = ({ element }) => {
       >
         <CartesianGrid vertical={false} />
         <XAxis
-          dataKey={element.chart.keys.x}
+          dataKey={element.config.keys.x}
           tickLine={false}
           axisLine={false}
           tickMargin={8}
@@ -44,7 +44,7 @@ const TemplateLineChart = ({ element }) => {
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
         <Line
-          dataKey={element.chart.keys.y}
+          dataKey={element.config.keys.y}
           type="natural"
           strokeWidth={2}
           activeDot={{ r: 6 }}
@@ -67,7 +67,7 @@ TemplateLineChart.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     style: PropTypes.object,
-    chart: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired,
   }),
 };
 

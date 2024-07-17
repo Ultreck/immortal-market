@@ -4,10 +4,41 @@ import { cn } from '@/lib/utils.js';
 import { TbTableOff } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
+const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      onResize={(size) => {
+        onChange({ ...element, width: size.width, height: size.height });
+      }}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      constrained
+      resizeHandles={['se', 'e', 's']}
+    >
+      <div className="overflow-hidden relative w-full h-full">
+        {element.config?.data ? (
+          <Content element={element} />
+        ) : (
+          <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">
+            <p className="text-lg font-bold">
+              <TbTableOff size={40} className="opacity-60" />
+            </p>
+            <p className="mt-4 text-sm max-w-xs">Select the table tool to configure your table.</p>
+          </div>
+        )}
+      </div>
+    </ElementWrapper>
+  );
+};
+
 const Content = ({ element }) => {
-  const headers = element.table.data[0];
-  const rows = element.table.data.slice(1);
-  const max = Math.max(...element.table.data.map((row) => row.length));
+  const headers = element.config.data[0];
+  const rows = element.config.data.slice(1);
+  const max = Math.max(...element.config.data.map((row) => row.length));
 
   return (
     <table className="w-full h-full table-auto border-separate border border-gray-400 rounded-lg" style={element.style}>
@@ -65,41 +96,10 @@ const Content = ({ element }) => {
   );
 };
 
-const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      onResize={(size) => {
-        onChange({ ...element, width: size.width, height: size.height });
-      }}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      constrained
-      resizeHandles={['se', 'e', 's']}
-    >
-      <div className="overflow-hidden relative w-full h-full">
-        {element.table?.data ? (
-          <Content element={element} />
-        ) : (
-          <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">
-            <p className="text-lg font-bold">
-              <TbTableOff size={40} className="opacity-60" />
-            </p>
-            <p className="mt-4 text-sm max-w-xs">Select the table tool to configure your table.</p>
-          </div>
-        )}
-      </div>
-    </ElementWrapper>
-  );
-};
-
 Table.propTypes = elementPropTypes;
 Content.propTypes = {
   element: PropTypes.shape({
-    table: PropTypes.shape({
+    config: PropTypes.shape({
       data: PropTypes.array.isRequired,
     }),
     style: PropTypes.object,
