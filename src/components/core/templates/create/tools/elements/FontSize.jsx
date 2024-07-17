@@ -37,6 +37,7 @@ const FontSize = ({ elements, onChange }) => {
               <TbMinus size="20" />
             </Button>
             <Autocomplete
+              aria-label="Font size"
               type="number"
               isClearable={false}
               classNames={{ base: 'w-[80px] text-base' }}
@@ -51,7 +52,7 @@ const FontSize = ({ elements, onChange }) => {
               }}
             >
               {sizes.map((n) => (
-                <AutocompleteItem key={n} value={n}>
+                <AutocompleteItem key={n} value={n} textValue={n.toString()}>
                   {n}
                 </AutocompleteItem>
               ))}
