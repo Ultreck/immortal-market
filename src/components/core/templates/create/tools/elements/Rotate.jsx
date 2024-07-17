@@ -1,11 +1,16 @@
-import { Autocomplete, AutocompleteItem, Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import { TbMinus, TbPlus } from 'react-icons/tb';
 import { RxRotateCounterClockwise } from 'react-icons/rx';
 
-const Rotate = ({ element, onChange }) => {
-  const sizes = [30, 60, 90, 120, 180, 270, 360];
+const Rotate = ({ elements, onChange }) => {
+  const values = elements.map((e) => e.style.rotate);
+  const same = values.every((v) => v === values[0]);
+  const value = same ? values[0] : '';
 
+  const handleChange = (v) => {
+    if (!v) return;
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, rotate: v } })));
+  };
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
@@ -13,68 +18,36 @@ const Rotate = ({ element, onChange }) => {
           <RxRotateCounterClockwise size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 shadow border border-default-200">
-        <div className="px-4 py-2 w-full">
-          <div className="gap-2 w-full flex items-center">
-            <Button
-              isIconOnly
-              variant="flat"
-              className="text-base"
-              onClick={() => {
-                onChange({ ...element, style: { ...element.style, rotate: element.style.rotate - 1 } });
-              }}
-            >
-              <TbMinus size="20" />
-            </Button>
-            <Autocomplete
-              type="number"
-              isClearable={false}
-              classNames={{ base: 'w-[80px] text-base' }}
-              allowsEmptyCollection={false}
-              inputValue={`${element.style.rotate}`}
-              onInputChange={(v) => {
-                if (+v <= 0) return;
-                onChange({ ...element, style: { ...element.style, rotate: +v } });
-              }}
-              onSelectionChange={(v) => {
-                onChange({ ...element, style: { ...element.style, rotate: +v } });
-              }}
-            >
-              {sizes.map((n) => (
-                <AutocompleteItem key={n} value={n}>
-                  {n}
-                </AutocompleteItem>
-              ))}
-            </Autocomplete>
-            <Button
-              isIconOnly
-              variant="flat"
-              className="text-base"
-              onClick={() => {
-                onChange({ ...element, style: { ...element.style, rotate: element.style.rotate + 1 } });
-              }}
-            >
-              <TbPlus size="20" />
-            </Button>
-          </div>
-        </div>
+      <PopoverContent className="px-6 py-4 shadow border border-default-200 w-[200px]">
+        <Slider
+          color="foreground"
+          onChange={(rotation) => handleChange(rotation)}
+          label="Rotate"
+          step={10}
+          maxValue={360}
+          minValue={0}
+          defaultValue={value}
+        />
       </PopoverContent>
     </Popover>
   );
 };
 
 Rotate.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-  }),
+  elements: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+      style: PropTypes.object,
+    })
+  ),
   onChange: PropTypes.func.isRequired,
 };
 
 export default Rotate;
+

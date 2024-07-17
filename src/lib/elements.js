@@ -16,6 +16,7 @@ import {
   TbTable,
   TbTriangleFilled,
 } from 'react-icons/tb';
+import { IoRemoveOutline } from 'react-icons/io5';
 import PropTypes from 'prop-types';
 
 export const icons = {
@@ -35,6 +36,7 @@ export const icons = {
   image: TbImageInPicture,
   table: TbTable,
   'key-value': TbBrackets,
+  line: IoRemoveOutline,
 };
 
 const elements = [
@@ -289,6 +291,31 @@ const elements = [
     },
     group: 'shape',
   },
+  {
+    id: 'line',
+    type: 'line',
+    name: 'Line',
+    icon: icons['line'],
+    data: {
+      style: {
+        backgroundColor: '#ccc',
+        rotate: '0',
+        borderWidth: 0,
+        borderColor: '#000000',
+        opacity: 1,
+        borderRadius: 0,
+        strokeWidth: 2,
+      },
+      lineEnd: null,
+      lineStart: null,
+      type: 'line',
+      text: 'Line',
+      width: 100,
+      height: 30,
+      tools: ['background-color', 'opacity', 'line'],
+    },
+    group: 'shape',
+  },
 ];
 
 export default elements;
@@ -312,3 +339,4 @@ export const elementPropTypes = {
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
 };
+

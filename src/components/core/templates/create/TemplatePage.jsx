@@ -13,6 +13,7 @@ import ArrowRight from '@/components/core/templates/create/elements/ArrowRight.j
 import ArrowLeft from '@/components/core/templates/create/elements/ArrowLeft.jsx';
 import ArrowUpDown from '@/components/core/templates/create/elements/ArrowUpDown.jsx';
 import Image from '@/components/core/templates/create/elements/Image.jsx';
+import Line from '@/components/core/templates/create/elements/Line';
 import { useDroppable } from '@dnd-kit/core';
 import { createElement, Fragment, useCallback, useRef, useState } from 'react';
 import { cn, mergeRefs } from '@/lib/utils.js';
@@ -41,6 +42,7 @@ const components = {
   image: Image,
   table: Table,
   'key-value': KeyValue,
+  line: Line,
 };
 
 const TemplatePage = ({ id }) => {

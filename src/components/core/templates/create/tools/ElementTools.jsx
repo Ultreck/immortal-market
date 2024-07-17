@@ -14,6 +14,7 @@ import Opacity from './elements/Opacity.jsx';
 import BorderRadius from './elements/BorderRadius.jsx';
 import TableConfig from '@/components/core/templates/create/tools/elements/TableConfig.jsx';
 import KeyValueConfig from '@/components/core/templates/create/tools/elements/KeyValueConfig.jsx';
+import Line from './elements/Line.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -86,6 +87,9 @@ const ElementTools = () => {
             }
             if (tool === 'border-radius') {
               return <BorderRadius key={tool} elements={elements} onChange={handleUpdateElements} />;
+            }
+            if (tool === 'line') {
+              return <Line key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             return <></>;
           })}
