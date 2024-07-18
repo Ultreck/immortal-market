@@ -1,6 +1,5 @@
 import CreateProjectModal from '@/components/core/project/CreateProjectModal.jsx';
 import MessagingModal from '../../pages/business/Messaging';
-import InviteModal from './invitation/InviteModal';
 import DashboardModal from './overview/dashboardModal';
 
 const GlobalModals = () => {
@@ -8,7 +7,6 @@ const GlobalModals = () => {
     <>
       <CreateProjectModal />
       <MessagingModal />
-      <InviteModal />
       <DashboardModal />
     </>
   );
