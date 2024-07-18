@@ -35,14 +35,14 @@ import GenderStats from './charts/GenderStat';
 register();
 
 const data = [
-  { id: 1, label: 'Bubble 1', value: 30, color: '#FF6384', icon: 'fa-solid fa-user' },
-  { id: 2, label: 'Bubble 2', value: 50, color: '#36A2EB' },
-  { id: 3, label: 'Bubble 3', value: 20, color: '#FFCE56' },
-  { id: 4, label: 'Bubble 4', value: 40, color: '#9966FF' },
-  { id: 5, label: 'Bubble 5', value: 60, color: '#4BC0C0' },
-  { id: 5, label: 'Bubble 5', value: 10, color: '#4BC0C0' },
-  { id: 5, label: 'Bubble 5', value: 70, color: '#4BC0C0' },
-  { id: 5, label: 'Bubble 5', value: 15, color: '#4BC0C0' },
+  { id: 1, label: 'Bubble 1', value: 30, color: '#FF6384', icon: 'fa fa-user' },
+  { id: 2, label: 'Bubble 2', value: 50, color: '#36A2EB', icon: 'fa fa-house' },
+  { id: 3, label: 'Bubble 3', value: 20, color: '#FFCE56', icon: 'fa fa-check' },
+  { id: 4, label: 'Bubble 4', value: 40, color: '#9966FF', icon: 'fa fa-bell' },
+  { id: 5, label: 'Bubble 5', value: 60, color: '#4BC0C0', icon: 'fa fa-star' },
+  { id: 5, label: 'Bubble 5', value: 10, color: '#4BC0C0', icon: 'fa fa-music' },
+  { id: 5, label: 'Bubble 5', value: 70, color: '#4BC0C0', icon: 'fa fa-gamepad' },
+  { id: 5, label: 'Bubble 5', value: 15, color: '#4BC0C0', icon: 'fa fa-film' },
 ];
 
 const ReportBody = () => {
@@ -88,6 +88,7 @@ const ReportBody = () => {
         <FunnelChart />
         <RosePieChart />
       </div>
+      <CircleIcons data={data} />
       <GenderStats />
       <DynamicSortingChart />
       <THreeCircles />

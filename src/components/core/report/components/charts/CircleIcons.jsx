@@ -7,9 +7,9 @@ const CircleIcons = ({ title, caption, data }) => {
   const percentages = getPercentages(data.map((item) => +item.value));
 
   return (
-    <Card className="space-y-6 w-full bg-default-300 px-8 py-6">
+    <Card className="space-y-6 w-full bg-default-300 px-20 py-16 mt-10">
       <p className='text-black'>Alot of business can not do the needful so we must find a good way to do it.</p>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} layout className="flex items-center pt-16 pb-14">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} layout className="flex items-center pt-40 pb-36">
         {data
           .sort((a, b) => +b.value - +a.value)
           .map((circle, index) => (
@@ -20,7 +20,8 @@ const CircleIcons = ({ title, caption, data }) => {
               style={{ flex: 10 - index }}
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: index * 0.2, duration: 0.5, ease: 'easeOut' }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              whileHover={{ scale: 1.5 }}
             >
               <motion.div
                 className="w-full aspect-square flex justify-center items-center rounded-full"
