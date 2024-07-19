@@ -20,8 +20,6 @@ import TangentialPolarBarChart from './charts/TangentPolarBarChart';
 import SemiCircle from './charts/SemiCircle';
 import DoughNuts from './charts/DoughNuts';
 import NewPieChart from './charts/NewPieChart';
-import VennDiagramChart from './charts/VennDiagramChart';
-import TwoCircleVennDiagram from './charts/2Circles';
 import AgeDistribution from './charts/AgeDistribution';
 import MultiSquare from './charts/Multisquare';
 import SeasonalChart from './charts/SeasonalChart';
@@ -61,7 +59,7 @@ const ReportBody = () => {
           <TangentialPolarBarChart />
           <VerticalStackedBar />
           <NewPieChart />
-          <AltPieChart/>
+          <AltPieChart />
         </div>
         <div className="space-y-6">
           <Card className="space-y-6 w-full bg-default-50 px-8 py-6">
@@ -96,8 +94,8 @@ const ReportBody = () => {
       <MultipleBars />
       <CandyBarChart />
       <AreaCharts />
-      <VennDiagramChart />
-      <TwoCircleVennDiagram />
+      {/*<VennDiagramChart />*/}
+      {/*<TwoCircleVennDiagram />*/}
       <AgeDistribution />
       <MultiSquare />
       <SeasonalChart />
@@ -111,4 +109,3 @@ const ReportBody = () => {
 };
 
 export default ReportBody;
-
