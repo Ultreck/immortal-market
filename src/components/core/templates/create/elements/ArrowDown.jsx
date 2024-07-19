@@ -1,7 +1,7 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { elementPropTypes } from '@/lib/elements.js';
 
-const ArrowDown = ({ element, active, highlighted, width, onClick, onChange }) => {
+const ArrowDown = ({ element, active, highlighted, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -20,7 +20,6 @@ const ArrowDown = ({ element, active, highlighted, width, onClick, onChange }) =
           viewBox={`0 0 ${element.width} ${element.height}`}
           width={element.width}
           height={element.height}
-          style={{ transform: `rotate(${element.style.rotate}deg)` }}
         >
           <polygon
             style={{

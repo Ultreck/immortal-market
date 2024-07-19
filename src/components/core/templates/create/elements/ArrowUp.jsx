@@ -21,7 +21,6 @@ const ArrowUp = ({ element, active, highlighted, width, onClick, onChange }) => 
           viewBox={`0 0 ${element.width} ${element.height}`}
           width={element.width}
           height={element.height}
-          style={{ transform: `rotate(${element.style.rotate}deg)` }}
         >
           <polygon
             style={{
@@ -39,4 +38,3 @@ const ArrowUp = ({ element, active, highlighted, width, onClick, onChange }) => 
 ArrowUp.propTypes = elementPropTypes;
 
 export default ArrowUp;
-

@@ -14,16 +14,9 @@ const Line = ({ element, active, highlighted, width, onClick, onChange }) => {
       active={active}
       highlighted={highlighted}
       resizeHandles={['e']}
-      className={`rotate-[${element.style.rotate}deg]`}
     >
       <div className="!h-max">
-        <svg
-          id="line"
-          viewBox={`0 0 ${element.width} ${element.height}`}
-          width={element.width}
-          height={element.height}
-          style={{ transform: `rotate(${element.style.rotate}deg)` }}
-        >
+        <svg id="line" viewBox={`0 0 ${element.width} ${element.height}`} width={element.width} height={element.height}>
           {element.lineEnd === 'arrow' && (
             <defs>
               <marker id="lineEnd" orient="auto" markerWidth="3" markerHeight="4" refX="0.1" refY="2">
