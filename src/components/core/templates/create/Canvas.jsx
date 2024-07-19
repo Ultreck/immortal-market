@@ -37,21 +37,53 @@ const Canvas = () => {
         e.preventDefault();
       }
     };
+
     const handlePaste = (e) => {
       try {
-        const text = e.clipboardData.getData('text/plain');
-        const _elements = JSON.parse(text);
-        if (_elements.every((el) => isValidElement(el))) {
-          addElements(
-            _elements.map((el) => ({ ...el, id: crypto.randomUUID(), x: el.x + 10, y: el.y + 10 })),
-            activePage
-          );
-          e.preventDefault();
+        for (const item of e.clipboardData.items) {
+          if (item.type === 'text/plain') {
+            item.getAsString((text) => {
+              const _elements = JSON.parse(text);
+              if (_elements.every((el) => isValidElement(el))) {
+                addElements(
+                  _elements.map((el) => ({ ...el, id: crypto.randomUUID(), x: el.x + 10, y: el.y + 10 })),
+                  activePage
+                );
+                e.preventDefault();
+              }
+            });
+          }
+          if (item.type.startsWith('image/')) {
+            const file = item.getAsFile();
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              const imageDataUrl = event.target.result;
+              addElements(
+                [
+                  {
+                    type: 'image',
+                    text: 'Image',
+                    src: imageDataUrl,
+                    width: 400,
+                    height: 300,
+                    id: crypto.randomUUID(),
+                    x: 10,
+                    y: 10,
+                  },
+                ],
+                activePage
+              );
+            };
+            reader.readAsDataURL(file);
+            e.preventDefault();
+            return;
+          }
         }
-      } catch (e) {
-        /* empty */
+      } catch (error) {
+        console.error('Error handling paste event:', error);
       }
     };
+
     window.addEventListener('cut', handleCut);
     window.addEventListener('paste', handlePaste);
     window.addEventListener('copy', handleCopy);
