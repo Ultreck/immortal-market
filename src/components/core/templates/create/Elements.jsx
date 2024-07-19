@@ -40,7 +40,13 @@ const Elements = () => {
       width: 400,
       height: 300,
       src,
-      tools: [],
+      style: {
+        borderWidth: 0,
+        borderColor: '#000',
+        opacity: 1,
+        borderRadius: 0,
+      },
+      tools: ['border', 'border-radius', 'opacity'],
     },
   }));
 

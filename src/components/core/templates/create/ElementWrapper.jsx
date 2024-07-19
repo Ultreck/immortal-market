@@ -12,8 +12,10 @@ const ElementWrapper = ({
   onEditStart,
   active,
   highlighted,
-  maxWidth,
-  minHeight,
+  maxWidth = Infinity,
+  minWidth = 10,
+  minHeight = 10,
+  maxHeight = Infinity,
   onChange,
   onResize,
   resizeHandles = ['e'],
@@ -39,14 +41,8 @@ const ElementWrapper = ({
         onChange({ ...element, x: position.x, y: position.y });
       }}
       classNames={{
-        base: cn(
-          'w-max border-2 border-transparent absolute group select-none',
-          { 'hover:border-gray-200': !active && !highlighted },
-          { 'border-gray-200': highlighted },
-          { 'border-primary-500': active },
-          { 'border-purple-500': isEditing },
-          className
-        ),
+        handle: `handle-${element.id}`,
+        base: cn('w-max border-2 border-transparent absolute group select-none', className),
       }}
       onControlDblClick={() => {
         if (editable) setIsEditing(true);
@@ -54,19 +50,26 @@ const ElementWrapper = ({
       isDisabled={isEditing}
       constrained={constrained}
     >
+      <div
+        className={cn(
+          'absolute inset-0 border-2 border-transparent z-[10] pointer-events-none',
+          { 'group-hover:border-gray-200': !active && !highlighted },
+          { 'border-gray-200': highlighted },
+          { 'border-primary-500': active },
+          { 'border-purple-500': isEditing }
+        )}
+      />
       <ResizableBox
         width={element.width}
         height={element.height}
-        minConstraints={[100, minHeight ?? 0]}
-        maxConstraints={[maxWidth, Infinity]}
+        minConstraints={[minWidth, minHeight]}
+        maxConstraints={[maxWidth, maxHeight]}
         resizeHandles={resizeHandles}
         handle={(axis, ref) => getResizeHandles({ axis, ref, active })}
-        onResize={(e, { size }) => {
-          onResize(size);
-        }}
+        onResize={(e, { size }) => onResize(size)}
         draggableOpts={{ grid: [10, 10] }}
       >
-        {children}
+        {typeof children === 'function' ? children({ isEditing }) : children}
       </ResizableBox>
     </DraggableElement>
   );
@@ -86,9 +89,11 @@ ElementWrapper.propTypes = {
   active: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   maxWidth: PropTypes.number,
+  minWidth: PropTypes.number,
+  maxHeight: PropTypes.number,
   minHeight: PropTypes.number,
   onResize: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.any.isRequired,
   onEditStart: PropTypes.func,
   resizeHandles: PropTypes.arrayOf(PropTypes.string),
   constrained: PropTypes.bool,

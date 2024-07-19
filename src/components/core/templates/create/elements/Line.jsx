@@ -102,4 +102,3 @@ const Line = ({ element, active, highlighted, width, onClick, onChange }) => {
 Line.propTypes = elementPropTypes;
 
 export default Line;
-

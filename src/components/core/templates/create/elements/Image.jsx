@@ -23,6 +23,7 @@ const CanvasImage = ({ element, active, highlighted, width, onClick, onChange })
           alt={element.text}
           className="w-full h-full object-cover pointer-events-none rounded-none z-[0]"
           removeWrapper
+          style={element.style}
         />
       </div>
     </ElementWrapper>

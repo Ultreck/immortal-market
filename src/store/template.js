@@ -14,7 +14,7 @@ const pages = [
 ];
 
 const useTemplateStore = createWithEqualityFn(
-  (set) => ({
+  (set, get) => ({
     template: {
       id: Date.now(),
       pages,
@@ -33,6 +33,13 @@ const useTemplateStore = createWithEqualityFn(
           selectedPage: null,
         },
       }));
+    },
+    getElement(id) {
+      const flat = get().template.pages.flatMap((page) => page.elements);
+      return flat.find((el) => el.id === id);
+    },
+    getElementPage(elementId) {
+      return get().template.pages.find((page) => page.elements.find((el) => el.id === elementId));
     },
     addElements: (elements, pageId) => {
       set((state) => {

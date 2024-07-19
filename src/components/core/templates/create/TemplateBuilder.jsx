@@ -25,24 +25,43 @@ const TemplateBuilder = () => {
   const parent = useRef();
   const [tab, setTab] = useState('elements');
   const sensors = useSensors(useSensor(MouseSensor));
+  const getElement = useTemplateStore((state) => state.getElement);
+  const getElementPage = useTemplateStore((state) => state.getElementPage);
   const addElements = useTemplateStore((state) => state.addElements);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const updateElements = useTemplateStore((state) => state.updateElements);
 
   const handleDragEnd = (event) => {
-    const { active, over, delta, activatorEvent } = event;
-    if (over && over.id.startsWith('canvas')) {
-      const node = document.getElementById(over.id);
-      const page = over.id.replace('canvas-', '');
+    const { active, over, delta, activatorEvent, collisions } = event;
+    if (over && over.id.startsWith('frame-') && active.data.current.type === 'image') {
+      const id = over.id.replace('frame-', '');
+      const element = getElement(id);
+      const page = getElementPage(id);
+      if (element && page) {
+        const el = {
+          ...element,
+          children: [
+            {
+              ...active.data.current,
+              x: 0,
+              y: 0,
+              width: element.width,
+              height: element.height,
+              id: crypto.randomUUID(),
+            },
+          ],
+        };
+        updateElements([el], page.id);
+      }
+    } else if (over && collisions.some((i) => i.id.startsWith('canvas'))) {
+      const id = collisions.find((i) => i.id.startsWith('canvas')).id;
+      const node = document.getElementById(id);
+      const page = id.replace('canvas-', '');
       const canvasRect = node.getBoundingClientRect();
       const distanceFromTop = getElementDistanceFromTop(node);
       const x = roundToNearestTen(activatorEvent.x + delta.x - canvasRect.left);
       const y = roundToNearestTen(activatorEvent.y + delta.y - distanceFromTop);
-      const el = {
-        x,
-        y,
-        id: crypto.randomUUID(),
-        ...active.data.current,
-      };
+      const el = { ...active.data.current, x, y, id: crypto.randomUUID() };
       addElements([el], page);
     }
   };

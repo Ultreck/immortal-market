@@ -10,7 +10,6 @@ const ArrowLeft = ({ element, active, highlighted, width, onClick, onChange }) =
       onResize={(size) => {
         onChange({ ...element, width: size.width, height: size.height });
       }}
-      maxWidth={width}
       active={active}
       highlighted={highlighted}
       resizeHandles={['se']}
@@ -38,4 +37,3 @@ const ArrowLeft = ({ element, active, highlighted, width, onClick, onChange }) =
 ArrowLeft.propTypes = elementPropTypes;
 
 export default ArrowLeft;
-

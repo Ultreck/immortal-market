@@ -8,17 +8,17 @@ const DraggableElement = ({
   position,
   onClick,
   onDrag,
-  classNames,
+  classNames = {},
   children,
   onControlDblClick,
-  isDisabled,
+  isDisabled = false,
   constrained = false,
 }) => {
   const ref = useRef(null);
 
   return (
     <Draggable
-      handle=".handle"
+      handle={`.${classNames.handle}`}
       bounds={constrained ? 'parent' : null}
       position={{ x: position.x, y: position.y }}
       grid={[10, 10]}
@@ -31,9 +31,10 @@ const DraggableElement = ({
           <div
             onDoubleClick={onControlDblClick}
             className={cn(
-              'handle absolute z-[1] top-0 left-0 w-full h-full',
+              'absolute z-[10] top-0 left-0 w-full h-full',
               { 'pointer-events-none': isDisabled },
-              classNames.control
+              classNames.control,
+              classNames.handle
             )}
           />
           {children}
@@ -53,10 +54,11 @@ DraggableElement.propTypes = {
   classNames: PropTypes.shape({
     base: PropTypes.string.isRequired,
     control: PropTypes.string,
+    handle: PropTypes.string,
   }),
-  children: PropTypes.element.isRequired,
+  children: PropTypes.any.isRequired,
   onControlDblClick: PropTypes.func.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool,
   constrained: PropTypes.bool,
 };
 

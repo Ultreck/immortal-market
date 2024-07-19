@@ -8,6 +8,7 @@ import {
   TbCapsuleHorizontalFilled,
   TbChartPieFilled,
   TbCircleFilled,
+  TbContainer,
   TbCursorText,
   TbHeading,
   TbImageInPicture,
@@ -37,6 +38,7 @@ export const icons = {
   table: TbTable,
   'key-value': TbBrackets,
   line: IoRemoveOutline,
+  'frame-rectangle': TbContainer,
 };
 
 const elements = [
@@ -299,7 +301,6 @@ const elements = [
     data: {
       style: {
         backgroundColor: '#ccc',
-        rotate: '0',
         borderWidth: 0,
         borderColor: '#000000',
         opacity: 1,
@@ -311,10 +312,32 @@ const elements = [
       type: 'line',
       text: 'Line',
       width: 100,
-      height: 30,
+      height: 4,
       tools: ['background-color', 'opacity', 'line'],
     },
     group: 'shape',
+  },
+  {
+    id: 'frame-rectangle',
+    type: 'frame-rectangle',
+    name: 'Frame',
+    icon: icons['frame-rectangle'],
+    data: {
+      style: {
+        backgroundColor: '#ccc',
+        borderWidth: 0,
+        borderColor: '#000000',
+        opacity: 1,
+        borderRadius: 0,
+      },
+      type: 'frame-rectangle',
+      text: 'Frame',
+      width: 300,
+      height: 300,
+      tools: ['opacity', 'border-radius'],
+      children: [],
+    },
+    group: 'frame',
   },
 ];
 
@@ -334,9 +357,8 @@ export const elementPropTypes = {
     config: PropTypes.object,
   }),
   active: PropTypes.bool.isRequired,
-  highlighted: PropTypes.bool.isRequired,
+  highlighted: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
 };
-
