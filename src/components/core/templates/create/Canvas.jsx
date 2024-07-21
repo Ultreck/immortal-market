@@ -5,6 +5,7 @@ import TemplatePage from '@/components/core/templates/create/TemplatePage.jsx';
 import ElementTools from '@/components/core/templates/create/tools/ElementTools.jsx';
 import PageTools from '@/components/core/templates/create/tools/PageTools.jsx';
 import { TbPlus } from 'react-icons/tb';
+import elements from '@/lib/elements.js';
 
 const isValidElement = (element) => {
   const validKeys = ['type', 'id', 'x', 'y', 'width', 'height'];
@@ -15,8 +16,10 @@ const Canvas = () => {
   const pages = useTemplateStore(({ template }) => template.pages);
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
   const deleteElements = useTemplateStore((state) => state.deleteElements);
+  const getElement = useTemplateStore((state) => state.getElement);
   const addElements = useTemplateStore((state) => state.addElements);
   const activePage = useTemplateStore((state) => state.template.activePage);
+  const updateElements = useTemplateStore((state) => state.updateElements);
   const addPage = useTemplateStore(({ addPage }) => addPage);
 
   useEffect(() => {
@@ -37,42 +40,66 @@ const Canvas = () => {
         e.preventDefault();
       }
     };
-
     const handlePaste = (e) => {
       try {
         for (const item of e.clipboardData.items) {
           if (item.type === 'text/plain') {
             item.getAsString((text) => {
-              const _elements = JSON.parse(text);
-              if (_elements.every((el) => isValidElement(el))) {
-                addElements(
-                  _elements.map((el) => ({ ...el, id: crypto.randomUUID(), x: el.x + 10, y: el.y + 10 })),
-                  activePage
-                );
-                e.preventDefault();
+              try {
+                const _elements = JSON.parse(text);
+                if (_elements.every((el) => isValidElement(el))) {
+                  addElements(
+                    _elements.map((el) => ({ ...el, id: crypto.randomUUID(), x: el.x + 10, y: el.y + 10 })),
+                    activePage
+                  );
+                } else {
+                  const el = elements.find((el) => el.id === 'text');
+                  const payload = { ...el.data, text, x: 10, y: 10, id: crypto.randomUUID() };
+                  addElements([payload], activePage);
+                }
+              } catch (e) {
+                const el = elements.find((el) => el.id === 'text');
+                const payload = { ...el.data, text, x: 10, y: 10, id: crypto.randomUUID() };
+                addElements([payload], activePage);
               }
+              e.preventDefault();
             });
           }
           if (item.type.startsWith('image/')) {
             const file = item.getAsFile();
             const reader = new FileReader();
             reader.onload = (event) => {
-              const imageDataUrl = event.target.result;
-              addElements(
-                [
-                  {
-                    type: 'image',
-                    text: 'Image',
-                    src: imageDataUrl,
-                    width: 400,
-                    height: 300,
-                    id: crypto.randomUUID(),
-                    x: 10,
-                    y: 10,
-                  },
-                ],
-                activePage
-              );
+              const url = event.target.result;
+              const selected = getElement(selectedElements[0]);
+              const payload = {
+                type: 'image',
+                text: 'Image',
+                src: url,
+                width: 400,
+                height: 300,
+                id: crypto.randomUUID(),
+                x: 0,
+                y: 0,
+              };
+              if (selected.type.startsWith('frame')) {
+                updateElements(
+                  [
+                    {
+                      ...selected,
+                      children: [
+                        {
+                          ...payload,
+                          width: selected.width,
+                          height: selected.height,
+                        },
+                      ],
+                    },
+                  ],
+                  activePage
+                );
+              } else {
+                addElements([payload], activePage);
+              }
             };
             reader.readAsDataURL(file);
             e.preventDefault();
@@ -92,7 +119,7 @@ const Canvas = () => {
       window.removeEventListener('copy', handleCopy);
       window.removeEventListener('cut', handleCut);
     };
-  }, [activePage, addElements, deleteElements, pages, selectedElements]);
+  }, [activePage, addElements, deleteElements, getElement, pages, selectedElements, updateElements]);
 
   useKey(
     'Delete',
