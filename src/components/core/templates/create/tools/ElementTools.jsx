@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Bold from '@/components/core/templates/create/tools/elements/Bold.jsx';
 import Italic from '@/components/core/templates/create/tools/elements/Italic.jsx';
 import Underline from '@/components/core/templates/create/tools/elements/Underline.jsx';
-import FontSize from '@/components/core/templates/create/tools/elements/FontSize.jsx';
 import TextColor from '@/components/core/templates/create/tools/elements/TextColor.jsx';
 import BackgroundColor from './elements/BackgroundColor.jsx';
 import ChartConfig from './elements/ChartConfig.jsx';
@@ -15,6 +14,7 @@ import BorderRadius from './elements/BorderRadius.jsx';
 import TableConfig from '@/components/core/templates/create/tools/elements/TableConfig.jsx';
 import KeyValueConfig from '@/components/core/templates/create/tools/elements/KeyValueConfig.jsx';
 import Line from './elements/Line.jsx';
+import Font from './elements/Font.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -58,8 +58,8 @@ const ElementTools = () => {
             if (tool === 'underline') {
               return <Underline key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
-            if (tool === 'font-size') {
-              return <FontSize key={tool} elements={elements} onChange={handleUpdateElements} />;
+            if (tool === 'font') {
+              return <Font key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'text-color') {
               return <TextColor key={tool} elements={elements} onChange={handleUpdateElements} />;
