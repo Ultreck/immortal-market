@@ -70,7 +70,6 @@ const Canvas = () => {
             const reader = new FileReader();
             reader.onload = (event) => {
               const url = event.target.result;
-              const selected = getElement(selectedElements[0]);
               const payload = {
                 type: 'image',
                 text: 'Image',
@@ -81,7 +80,8 @@ const Canvas = () => {
                 x: 0,
                 y: 0,
               };
-              if (selected.type.startsWith('frame')) {
+              const selected = selectedElements.length > 0 ? getElement(selectedElements[0]) : null;
+              if (selected && selected.type.startsWith('frame')) {
                 updateElements(
                   [
                     {
