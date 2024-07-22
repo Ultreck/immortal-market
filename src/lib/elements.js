@@ -8,11 +8,11 @@ import {
   TbCapsuleHorizontalFilled,
   TbChartPieFilled,
   TbCircleFilled,
-  TbContainer,
   TbCursorText,
   TbHeading,
   TbImageInPicture,
   TbRectangleFilled,
+  TbSquareDot,
   TbSquareRotatedFilled,
   TbTable,
   TbTriangleFilled,
@@ -38,7 +38,7 @@ export const icons = {
   table: TbTable,
   'key-value': TbBrackets,
   line: IoRemoveOutline,
-  'frame-rectangle': TbContainer,
+  'frame-rectangle': TbSquareDot,
 };
 
 const elements = [
