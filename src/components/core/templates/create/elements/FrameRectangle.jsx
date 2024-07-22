@@ -1,6 +1,6 @@
 import { elementPropTypes } from '@/lib/elements.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { createElement, Fragment, useState } from 'react';
+import { createElement, Fragment, useEffect, useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import components from '@/lib/components.js';
 import { cn } from '@/lib/utils.js';
@@ -9,6 +9,10 @@ import { TbImageInPicture } from 'react-icons/tb';
 const FrameRectangle = ({ element, active, highlighted, width, onClick, onChange }) => {
   const { setNodeRef, isOver, active: _active } = useDroppable({ id: `frame-${element.id}` });
   const [selectedElements, setSelectedElements] = useState([]);
+
+  useEffect(() => {
+    if (!active) setSelectedElements([]);
+  }, [active]);
 
   return (
     <ElementWrapper
