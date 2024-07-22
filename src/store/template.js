@@ -1,23 +1,21 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 import { shallow } from 'zustand/shallow';
 
-const pages = [
-  {
-    id: crypto.randomUUID(),
-    width: 600,
-    height: 600,
-    style: {
-      backgroundColor: '#ffffff',
-    },
-    elements: [],
-  },
-];
-
 const useTemplateStore = createWithEqualityFn(
   (set, get) => ({
     template: {
       id: Date.now(),
-      pages,
+      pages: [
+        {
+          id: crypto.randomUUID(),
+          width: 600,
+          height: 600,
+          style: {
+            backgroundColor: '#ffffff',
+          },
+          elements: [],
+        },
+      ],
       selectedElements: [],
       selectedPage: null,
       activePage: null,
@@ -106,22 +104,31 @@ const useTemplateStore = createWithEqualityFn(
         },
       }));
     },
-    addPage: () => {
-      const page = {
+    addPage: (payload, after) => {
+      const page = payload || {
         id: crypto.randomUUID(),
         width: 600,
         height: 600,
         style: { backgroundColor: '#ffffff' },
         elements: [],
       };
-      set((state) => ({
-        template: {
-          ...state.template,
-          pages: [...state.template.pages, page],
-          selectedElements: [],
-          selectedPage: page.id,
-        },
-      }));
+      set((state) => {
+        let pages = [...state.template.pages, page];
+        if (after) {
+          const index = state.template.pages.findIndex((item) => item.id === after);
+          if (index !== -1) {
+            pages = [...state.template.pages.slice(0, index + 1), page, ...state.template.pages.slice(index + 1)];
+          }
+        }
+        return {
+          template: {
+            ...state.template,
+            pages: pages,
+            selectedElements: [],
+            selectedPage: page.id,
+          },
+        };
+      });
     },
     updatePage: (data, pageId) => {
       set((state) => ({

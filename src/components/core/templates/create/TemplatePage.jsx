@@ -5,8 +5,8 @@ import { cn, mergeRefs } from '@/lib/utils.js';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useIntersectionObserver } from 'usehooks-ts';
-import { Button } from '@nextui-org/react';
-import { TbTrash } from 'react-icons/tb';
+import { Button, Tooltip } from '@nextui-org/react';
+import { TbCopyPlus, TbSquarePlus, TbTrash } from 'react-icons/tb';
 import components from '@/lib/components.js';
 
 const TemplatePage = ({ id }) => {
@@ -17,6 +17,7 @@ const TemplatePage = ({ id }) => {
   const updateElements = useTemplateStore((state) => state.updateElements);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const selectPage = useTemplateStore((state) => state.selectPage);
+  const addPage = useTemplateStore((state) => state.addPage);
   const selectElements = useTemplateStore((state) => state.selectElements);
   const deletePage = useTemplateStore((state) => state.deletePage);
   const selected = useTemplateStore((state) => state.template.selectedPage === id);
@@ -168,15 +169,38 @@ const TemplatePage = ({ id }) => {
     }
   };
 
+  const handleDuplicatePage = () => {
+    const payload = {
+      ...page,
+      id: crypto.randomUUID(),
+      elements: page.elements.map((el) => ({ ...el, id: crypto.randomUUID() })),
+    };
+    addPage(payload, page.id);
+  };
+
   return (
     <div className="relative">
       <div className="flex items-center justify-between mb-2 px-1.5">
         <h2 className="font-semibold">Page {index + 1}</h2>
-        {pages.length > 1 && (
-          <Button variant="light" isIconOnly onClick={() => deletePage(page.id)} size="sm">
-            <TbTrash size="18" />
-          </Button>
-        )}
+        <div className="flex items-center space-x-1">
+          <Tooltip content="Duplicate page" showArrow>
+            <Button variant="light" isIconOnly onClick={handleDuplicatePage} size="sm">
+              <TbCopyPlus size="18" />
+            </Button>
+          </Tooltip>
+          {pages.length > 1 && (
+            <Tooltip content="Delete page" showArrow>
+              <Button variant="light" isIconOnly onClick={() => deletePage(page.id)} size="sm">
+                <TbTrash size="18" />
+              </Button>
+            </Tooltip>
+          )}
+          <Tooltip content="Add page" showArrow>
+            <Button variant="light" isIconOnly onClick={() => addPage(null, page.id)} size="sm">
+              <TbSquarePlus size="18" />
+            </Button>
+          </Tooltip>
+        </div>
       </div>
       <motion.div
         layout

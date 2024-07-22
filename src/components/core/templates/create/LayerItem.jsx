@@ -23,10 +23,7 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
       {...props}
     >
       <div
-        onClick={() => {
-          alert(element.id);
-          return selectElements([element.id]);
-        }}
+        onClick={() => selectElements([element.id])}
         className={cn(
           'relative rounded-xl px-4 py-2 flex items-center space-x-2 cursor-pointer justify-between',
           'bg-default-200/60 hover:bg-default-200 dark:bg-default-100/50 dark:hover:bg-default-100'

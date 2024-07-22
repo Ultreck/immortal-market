@@ -16,7 +16,9 @@ const Heading = ({ element, active, highlighted, width, onClick, onChange }) => 
 
   useDeepCompareEffect(() => {
     updateInputHeight();
-    onChange({ ...element, height: input.current.scrollHeight });
+    if (element.height !== input.current.scrollHeight) {
+      onChange({ ...element, height: input.current.scrollHeight });
+    }
   }, [element]);
 
   return (
