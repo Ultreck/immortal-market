@@ -7,6 +7,7 @@ import PageTools from '@/components/core/templates/create/tools/PageTools.jsx';
 import { TbPlus } from 'react-icons/tb';
 import elements from '@/lib/elements.js';
 
+
 const isValidElement = (element) => {
   const validKeys = ['type', 'id', 'x', 'y', 'width', 'height'];
   return validKeys.every((key) => Object.keys(element).includes(key));
@@ -21,6 +22,7 @@ const Canvas = () => {
   const activePage = useTemplateStore((state) => state.template.activePage);
   const updateElements = useTemplateStore((state) => state.updateElements);
   const addPage = useTemplateStore((state) => state.addPage);
+  const zoom = useTemplateStore((state) => state.template.zoom);
 
   useEffect(() => {
     const handleCopy = (e) => {
@@ -132,25 +134,27 @@ const Canvas = () => {
   );
 
   return (
-    <>
-      <div className="space-y-6 flex flex-col items-center">
-        {pages.map((page) => {
-          return <TemplatePage key={page.id} id={page.id} />;
-        })}
+    <div>
+      <div style={{ transform: `scale(${zoom})` }}>
+        <div className="space-y-6 flex flex-col items-center">
+          {pages.map((page) => {
+            return <TemplatePage key={page.id} id={page.id} />;
+          })}
+        </div>
         <div
           onClick={() => addPage()}
           tabIndex={0}
-          className="w-full flex items-center border border-default-200 rounded-2xl px-6 py-4 space-x-4 hover:bg-default-200/60 dark:hover:bg-default-100/60 cursor-pointer"
+          className=" flex items-center mx-10 border border-default-200 rounded-2xl px-6 py-4 space-x-4 mt-10 hover:bg-default-200/60 dark:hover:bg-default-100/60 cursor-pointer"
         >
           <TbPlus className="text-2xl" />
           <span>Add page</span>
         </div>
       </div>
-
       <ElementTools />
       <PageTools />
-    </>
+    </div>
   );
 };
 
 export default Canvas;
+
