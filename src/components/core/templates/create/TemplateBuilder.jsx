@@ -9,16 +9,14 @@ import { TbLayoutList } from 'react-icons/tb';
 import { cn, roundToNearestTen } from '@/lib/utils.js';
 import { RiShapesFill } from 'react-icons/ri';
 
-function getElementDistanceFromTop(element) {
+const getElementDistanceFromTop = (element) => {
   let distance = 0;
-
   while (element) {
     distance += element.offsetTop;
     element = element.offsetParent;
   }
-
   return distance;
-}
+};
 
 const TemplateBuilder = () => {
   const canvas = useRef();

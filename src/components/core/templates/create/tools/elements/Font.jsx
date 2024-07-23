@@ -47,10 +47,12 @@ const Font = ({ elements, onChange }) => {
     if (v === '') return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, fontSize: +v } })));
   };
+
   const handleLetterSpacingChange = (v) => {
     if (v === '') return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, letterSpacing: +v } })));
   };
+
   const handleLineHeightChange = (v) => {
     if (v === '') return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, lineHeight: +v } })));
@@ -61,10 +63,16 @@ const Font = ({ elements, onChange }) => {
     if (event.target.value === '') return;
     onChange(elements.map((element) => ({ ...element, style: { ...element.style, fontFamily: event.target.value } })));
   };
+
   const handleVerticalAlignChange = (event) => {
     setAlignValue(event.target.value);
     if (event.target.value === '') return;
-    onChange(elements.map((element) => ({ ...element, style: { ...element.style, verticalAlign: event.target.value } })));
+    onChange(
+      elements.map((element) => ({
+        ...element,
+        style: { ...element.style, verticalAlign: event.target.value },
+      }))
+    );
   };
 
   return (
@@ -138,4 +146,3 @@ Font.propTypes = {
 };
 
 export default Font;
-
