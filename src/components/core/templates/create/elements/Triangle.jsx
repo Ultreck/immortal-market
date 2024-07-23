@@ -1,9 +1,7 @@
-import { useRef } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { elementPropTypes } from '@/lib/elements.js';
 
 const Triangle = ({ element, active, highlighted, width, onClick, onChange }) => {
-  const triangle = useRef(null);
 
   return (
     <ElementWrapper
@@ -18,7 +16,7 @@ const Triangle = ({ element, active, highlighted, width, onClick, onChange }) =>
       highlighted={highlighted}
       resizeHandles={['se', 'e', 's']}
     >
-      <div ref={triangle} className="!h-max">
+      <div className="!h-max">
         <svg
           id="triangle"
           viewBox={`0 0 ${element.width} ${element.height}`}

@@ -16,6 +16,11 @@ import Table from '@/components/core/templates/create/elements/Table.jsx';
 import KeyValue from '@/components/core/templates/create/tools/elements/KeyValue.jsx';
 import Line from '@/components/core/templates/create/elements/Line.jsx';
 import FrameRectangle from '@/components/core/templates/create/elements/FrameRectangle.jsx';
+import FrameTriangle from '@/components/core/templates/create/elements/FrameTriangle.jsx';
+import FrameCircle from '@/components/core/templates/create/elements/FrameCircle';
+import FrameStar from '@/components/core/templates/create/elements/FrameStar';
+import FrameDiamond from '@/components/core/templates/create/elements/FrameDiamond';
+import FrameHeart from '@/components/core/templates/create/elements/FrameHeart';
 
 export default {
   heading: Heading,
@@ -36,4 +41,9 @@ export default {
   'key-value': KeyValue,
   line: Line,
   'frame-rectangle': FrameRectangle,
+  'frame-triangle': FrameTriangle,
+  'frame-circle': FrameCircle,
+  'frame-star': FrameStar,
+  'frame-heart': FrameHeart,
+  'frame-diamond': FrameDiamond,
 };
