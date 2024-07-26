@@ -1,8 +1,7 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { elementPropTypes } from '@/lib/elements.js';
+import { elementPropTypes } from '@/lib/elements.jsx';
 
 const Triangle = ({ element, active, highlighted, width, onClick, onChange }) => {
-
   return (
     <ElementWrapper
       element={element}
@@ -39,4 +38,3 @@ const Triangle = ({ element, active, highlighted, width, onClick, onChange }) =>
 Triangle.propTypes = elementPropTypes;
 
 export default Triangle;
-

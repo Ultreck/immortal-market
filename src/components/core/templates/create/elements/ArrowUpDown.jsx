@@ -1,5 +1,5 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { elementPropTypes } from '@/lib/elements.js';
+import { elementPropTypes } from '@/lib/elements.jsx';
 
 const ArrowUpDown = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -38,4 +38,3 @@ const ArrowUpDown = ({ element, active, highlighted, width, onClick, onChange })
 ArrowUpDown.propTypes = elementPropTypes;
 
 export default ArrowUpDown;
-

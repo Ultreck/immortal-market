@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils.js';
 import { useRef, useState } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { useDeepCompareEffect } from 'react-use';
-import { elementPropTypes } from '@/lib/elements.js';
+import { elementPropTypes } from '@/lib/elements.jsx';
 
 const Heading = ({ element, active, highlighted, width, onClick, onChange }) => {
   const input = useRef(null);

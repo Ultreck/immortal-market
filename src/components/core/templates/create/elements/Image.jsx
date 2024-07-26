@@ -1,6 +1,6 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { Image } from '@nextui-org/react';
-import { elementPropTypes } from '@/lib/elements.js';
+import { elementPropTypes } from '@/lib/elements.jsx';
 
 const CanvasImage = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (

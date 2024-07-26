@@ -1,52 +1,53 @@
-import { FaArrowsAltV } from 'react-icons/fa';
 import {
-  TbArrowBigDownFilled,
-  TbArrowBigLeftFilled,
-  TbArrowBigRightFilled,
-  TbArrowBigUpFilled,
+  TbArrowBigDown,
+  TbArrowBigLeft,
+  TbArrowBigRight,
+  TbArrowBigUp,
   TbBrackets,
-  TbCapsuleHorizontalFilled,
-  TbChartPieFilled,
-  TbCircleFilled,
+  TbCapsuleHorizontal,
+  TbChartPie,
+  TbCircle,
+  TbCircleDot,
   TbCursorText,
-  TbDiamondsFilled,
+  TbDiamond,
   TbHeading,
   TbHeart,
   TbImageInPicture,
-  TbRectangleFilled,
+  TbLine,
+  TbRectangle,
   TbSquareDot,
-  TbSquareRotatedFilled,
-  TbStarFilled,
+  TbSquareRotated,
+  TbStar,
   TbTable,
-  TbTriangleFilled,
+  TbTriangle,
 } from 'react-icons/tb';
-import { IoRemoveOutline } from 'react-icons/io5';
 import PropTypes from 'prop-types';
+import { FaArrowsUpDown } from 'react-icons/fa6';
 
 export const icons = {
   heading: TbHeading,
   text: TbCursorText,
-  chart: TbChartPieFilled,
-  logo: TbCapsuleHorizontalFilled,
-  circle: TbCircleFilled,
-  rectangle: TbRectangleFilled,
-  triangle: TbTriangleFilled,
-  'diagonal-rectangle': TbSquareRotatedFilled,
-  'arrow-up': TbArrowBigUpFilled,
-  'arrow-right': TbArrowBigRightFilled,
-  'arrow-down': TbArrowBigDownFilled,
-  'arrow-left': TbArrowBigLeftFilled,
-  'arrow-up-down': FaArrowsAltV,
+  chart: TbChartPie,
+  logo: TbCapsuleHorizontal,
+  circle: TbCircle,
+  rectangle: TbRectangle,
+  triangle: TbTriangle,
+  'diagonal-rectangle': TbSquareRotated,
+  'arrow-up': TbArrowBigUp,
+  'arrow-right': TbArrowBigRight,
+  'arrow-down': TbArrowBigDown,
+  'arrow-left': TbArrowBigLeft,
+  'arrow-up-down': FaArrowsUpDown,
   image: TbImageInPicture,
   table: TbTable,
   'key-value': TbBrackets,
-  line: IoRemoveOutline,
+  line: TbLine,
   'frame-rectangle': TbSquareDot,
-  'frame-triangle': TbTriangleFilled,
-  'frame-circle': TbCircleFilled,
-  'frame-star': TbStarFilled,
+  'frame-triangle': TbTriangle,
+  'frame-circle': TbCircleDot,
+  'frame-star': TbStar,
   'frame-heart': TbHeart,
-  'frame-diamond': TbDiamondsFilled,
+  'frame-diamond': TbDiamond,
 };
 
 const elements = [
@@ -74,6 +75,22 @@ const elements = [
       tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity'],
     },
     group: 'text',
+    preview: (
+      <h1
+        style={{
+          fontSize: '28px',
+          fontWeight: 'bold',
+          textAlign: 'left',
+          opacity: 1,
+          fontFamily: 'Roboto',
+          letterSpacing: 0,
+          lineHeight: 1,
+          verticalAlign: 'baseline',
+        }}
+      >
+        Heading
+      </h1>
+    ),
   },
   {
     id: 'text',
@@ -99,6 +116,22 @@ const elements = [
       tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'text-align', 'opacity'],
     },
     group: 'text',
+    preview: (
+      <p
+        style={{
+          fontSize: '16px',
+          fontWeight: 'normal',
+          textAlign: 'left',
+          opacity: 1,
+          fontFamily: 'Roboto',
+          letterSpacing: 0,
+          lineHeight: 1,
+          verticalAlign: 'baseline',
+        }}
+      >
+        Paragraph
+      </p>
+    ),
   },
   {
     id: 'chart',
@@ -500,4 +533,3 @@ export const elementPropTypes = {
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
 };
-

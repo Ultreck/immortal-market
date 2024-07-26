@@ -27,31 +27,29 @@ const Layers = () => {
   };
 
   return (
-    <div className="px-4 py-4">
-      <DndContext
-        sensors={sensors}
-        onDragEnd={handleDragEnd}
-        onDragStart={handleDragStart}
-        collisionDetection={closestCenter}
-      >
-        <SortableContext items={page.elements} strategy={verticalListSortingStrategy}>
-          {page.elements.length > 0 ? (
-            <div className="space-y-1">
-              {page.elements.map((element) => (
-                <LayerElement key={element.id} element={element} />
-              ))}
-            </div>
-          ) : (
-            <div className="py-20">
-              <p className="text-center text-sm opacity-80 max-w-[200px] mx-auto">
-                No elements. Add some elements to the canvas
-              </p>
-            </div>
-          )}
-          <DragOverlay>{element ? <LayerItem element={element} /> : null}</DragOverlay>
-        </SortableContext>
-      </DndContext>
-    </div>
+    <DndContext
+      sensors={sensors}
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+      collisionDetection={closestCenter}
+    >
+      <SortableContext items={page.elements} strategy={verticalListSortingStrategy}>
+        {page.elements.length > 0 ? (
+          <div className="space-y-1">
+            {page.elements.map((element) => (
+              <LayerElement key={element.id} element={element} />
+            ))}
+          </div>
+        ) : (
+          <div className="py-20">
+            <p className="text-center text-sm opacity-80 max-w-[200px] mx-auto">
+              No elements. Add some elements to the canvas
+            </p>
+          </div>
+        )}
+        <DragOverlay>{element ? <LayerItem element={element} /> : null}</DragOverlay>
+      </SortableContext>
+    </DndContext>
   );
 };
 

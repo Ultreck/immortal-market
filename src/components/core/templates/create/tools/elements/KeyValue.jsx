@@ -1,6 +1,6 @@
 import { TbBracketsOff } from 'react-icons/tb';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { elementPropTypes } from '@/lib/elements.js';
+import { elementPropTypes } from '@/lib/elements.jsx';
 import PropTypes from 'prop-types';
 
 const KeyValue = ({ element, active, highlighted, width, onClick, onChange }) => {

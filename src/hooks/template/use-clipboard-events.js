@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import elements from '@/lib/elements.js';
+import elements from '@/lib/elements.jsx';
 import useTemplateStore from '@/store/template.js';
 
 const isValidElement = (element) => {

@@ -65,7 +65,6 @@ const App = () => {
           <Route path="/overview" element={<Navigate to="/" replace />} />
           <Route path="projects" element={<ProjectPage />} />
           <Route path="templates" element={<TemplatesPage />} />
-          <Route path="templates/create" element={<CreateTemplatePage />} />
           <Route path="dashboards" element={<ProjectDashboardPage />} />
           <Route path="outsource" element={<OutsourcePage />} />
           <Route path="plans" element={<PlanPage />} />
@@ -80,6 +79,15 @@ const App = () => {
             <Route path="security" element={<></>} />
           </Route>
         </Route>
+
+        <Route
+          path="templates/create"
+          element={
+            <RequireAuthBusiness>
+              <CreateTemplatePage />
+            </RequireAuthBusiness>
+          }
+        />
 
         <Route
           path="/business"

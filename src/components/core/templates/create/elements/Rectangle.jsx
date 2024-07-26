@@ -1,5 +1,5 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { elementPropTypes } from '@/lib/elements.js';
+import { elementPropTypes } from '@/lib/elements.jsx';
 
 const Rectangle = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (

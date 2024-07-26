@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { elementPropTypes } from '@/lib/elements.js';
+import { elementPropTypes } from '@/lib/elements.jsx';
 
 const DiagonalRectangle = ({ element, active, highlighted, width, onClick, onChange }) => {
   const triangle = useRef(null);
@@ -41,4 +41,3 @@ const DiagonalRectangle = ({ element, active, highlighted, width, onClick, onCha
 DiagonalRectangle.propTypes = elementPropTypes;
 
 export default DiagonalRectangle;
-

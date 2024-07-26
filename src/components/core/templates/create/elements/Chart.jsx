@@ -3,7 +3,7 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import TemplateLineChart from './charts/TemplateLineChart';
 import TemplatePieChart from './charts/TemplatePieChart';
 import { HiChartPie } from 'react-icons/hi2';
-import { elementPropTypes } from '@/lib/elements.js';
+import { elementPropTypes } from '@/lib/elements.jsx';
 
 const Chart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const keys = Object.keys(element.config?.keys || {});

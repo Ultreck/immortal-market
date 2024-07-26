@@ -14,27 +14,29 @@ const Canvas = () => {
   useDelete();
 
   return (
-    <>
-      <div
-        className="space-y-6 flex flex-col items-center w-max mx-auto"
-        style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}
-      >
-        {pages.map((page) => {
-          return <TemplatePage key={page.id} id={page.id} />;
-        })}
+    <div className="flex-1 overflow-y-auto">
+      <div className="mx-auto w-max py-10">
         <div
-          onClick={() => addPage()}
-          tabIndex={0}
-          className="w-full flex items-center mx-10 border border-default-200 rounded-2xl px-6 py-4 space-x-4 mt-10 hover:bg-default-200/60 dark:hover:bg-default-100/60 cursor-pointer"
+          className="space-y-6 flex flex-col items-center w-max mx-auto"
+          style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}
         >
-          <TbPlus className="text-2xl" />
-          <span>Add page</span>
+          {pages.map((page) => {
+            return <TemplatePage key={page.id} id={page.id} />;
+          })}
+          <div
+            tabIndex={0}
+            onClick={() => addPage()}
+            className="w-full flex items-center mx-10 border border-default-200 rounded-2xl px-6 py-4 space-x-4 mt-10 hover:bg-default-200/60 dark:hover:bg-default-100/60 cursor-pointer"
+          >
+            <TbPlus className="text-2xl" />
+            <span>Add page</span>
+          </div>
         </div>
       </div>
 
       <ElementTools />
       <PageTools />
-    </>
+    </div>
   );
 };
 

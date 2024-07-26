@@ -1,6 +1,6 @@
 import { createElement, forwardRef } from 'react';
 import useTemplateStore from '@/store/template.js';
-import { icons } from '@/lib/elements.js';
+import { icons } from '@/lib/elements.jsx';
 import { cn } from '@/lib/utils.js';
 import { Button } from '@nextui-org/react';
 import { RiCloseFill } from 'react-icons/ri';
