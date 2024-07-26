@@ -202,10 +202,7 @@ const TemplatePage = ({ id }) => {
           </Tooltip>
         </div>
       </div>
-      <motion.div
-        layout
-        className={cn('relative border-2 border-transparent p-0.5 w-max', { 'border-primary-500': selected })}
-      >
+      <div className={cn('relative border-2 border-transparent p-0.5 w-max', { 'border-primary-500': selected })}>
         <motion.div
           layout
           ref={mergeRefs(setNodeRef, intersectionRef)}
@@ -253,7 +250,7 @@ const TemplatePage = ({ id }) => {
             />
           )}
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 };
@@ -263,4 +260,3 @@ TemplatePage.propTypes = {
 };
 
 export default TemplatePage;
-

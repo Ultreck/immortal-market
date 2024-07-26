@@ -74,7 +74,7 @@ const InviteMemberModal = ({ isOpen, onClose }) => {
                 errorMessage={error?.message}
                 isInvalid={!!error?.message}
                 classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                disableEmptySelection={false}
+                disableEmptySelection={true}
               >
                 {roles.map((role) => (
                   <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>

@@ -3,7 +3,16 @@ import { createWithEqualityFn } from 'zustand/traditional';
 
 const useCreateProjectStore = createWithEqualityFn(
   (set) => ({
-    data: {},
+    data: {
+      source: '',
+      type: null,
+      files: [],
+      extracted: [],
+      review: {
+        types: {},
+        headers: {},
+      },
+    },
     updateData: (payload) => set((state) => ({ data: { ...state.data, ...payload } })),
   }),
   shallow

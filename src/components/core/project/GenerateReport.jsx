@@ -7,15 +7,10 @@ const items = [
   'Disbursement by Month',
   'Paid by Month',
   'Percentage paid to disbursed',
-  'Paid per month',
-  'Disbursement by Month',
-  'Paid by Month',
-  'Percentage paid to disbursed',
-  'Paid per month',
-  'Disbursement by Month',
-  'Paid by Month',
-  'Percentage paid to disbursed',
-  'Paid per month',
+  'Percentage paid since last month',
+  'Paid since last month',
+  'Disbursement since last month',
+  'Percentage disbursed',
 ];
 
 const GenerateReport = ({ onNext, onPrev }) => {
@@ -110,6 +105,7 @@ const GenerateReport = ({ onNext, onPrev }) => {
           radius="full"
           className="text-base px-6"
           endContent={<TbChevronRight size="20" />}
+          isDisabled
         >
           Continue
         </Button>

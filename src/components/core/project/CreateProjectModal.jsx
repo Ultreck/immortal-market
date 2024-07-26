@@ -1,40 +1,41 @@
 import { createElement, useState } from 'react';
-import ProjectSource from './create/ProjectSource.jsx';
+import SelectSource from './create/SelectSource.jsx';
 import Drawer from '@/components/ui/Drawer.jsx';
 import useGlobalStore from '@/store/global.js';
-import PreviewFiles from './PreviewFiles.jsx';
+import PreviewFiles from './create/PreviewFiles.jsx';
 import GenerateReport from './GenerateReport.jsx';
 import PreparingData from './PreparingData.jsx';
 import { TbDatabase, TbEye, TbReport, TbUpload } from 'react-icons/tb';
 import Stepper from '@/components/ui/Stepper.jsx';
 
+const steps = [
+  {
+    key: 'data-source',
+    title: 'Data Source',
+    icon: <TbDatabase size="16" />,
+    element: SelectSource,
+  },
+  {
+    key: 'preview-data',
+    title: 'Preview Data',
+    icon: <TbEye size="16" />,
+    element: PreviewFiles,
+  },
+  {
+    key: 'generate-report',
+    title: 'Generate Report',
+    icon: <TbReport size="16" />,
+    element: GenerateReport,
+  },
+  {
+    key: 'report-staging',
+    title: 'Report Staging',
+    icon: <TbUpload size="16" />,
+    element: PreparingData,
+  },
+];
+
 const CreateProjectModal = () => {
-  const steps = [
-    {
-      key: 'data-source',
-      title: 'Data Source',
-      icon: <TbDatabase size="16" />,
-      element: ProjectSource,
-    },
-    {
-      key: 'preview-data',
-      title: 'Preview Data',
-      icon: <TbEye size="16" />,
-      element: PreviewFiles,
-    },
-    {
-      key: 'generate-report',
-      title: 'Generate Report',
-      icon: <TbReport size="16" />,
-      element: GenerateReport,
-    },
-    {
-      key: 'report-staging',
-      title: 'Report Staging',
-      icon: <TbUpload size="16" />,
-      element: PreparingData,
-    },
-  ];
   const [step, setStep] = useState(steps[0].key);
   const isCreateProjectModalOpen = useGlobalStore((state) => state.data.isCreateProjectModalOpen);
   const updateData = useGlobalStore((state) => state.updateData);
@@ -52,6 +53,7 @@ const CreateProjectModal = () => {
   };
 
   const current = steps.find((s) => s.key === step);
+
   return (
     <Drawer
       isOpen={isCreateProjectModalOpen}

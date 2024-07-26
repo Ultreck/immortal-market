@@ -8,7 +8,7 @@ import useTemplateStore from '@/store/template.js';
 import { TbLayoutList } from 'react-icons/tb';
 import { cn, roundToNearestTen } from '@/lib/utils.js';
 import { RiShapesFill } from 'react-icons/ri';
-import { Slider } from '@nextui-org/react';
+import StatusBar from '@/components/core/templates/create/StatusBar.jsx';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;
@@ -29,7 +29,6 @@ const TemplateBuilder = () => {
   const addElements = useTemplateStore((state) => state.addElements);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const updateElements = useTemplateStore((state) => state.updateElements);
-  const zoom = useTemplateStore((state) => state.template.zoom);
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent, collisions } = event;
@@ -104,27 +103,13 @@ const TemplateBuilder = () => {
             </div>
           </div>
         </div>
-        <div
-          ref={parent}
-          className="h-full grid grid-cols-1 grid-rows-[1fr_.1fr] overflow-y-scroll"
-          onClick={handleParentClick}
-        >
-          <div ref={canvas} className="mx-auto overflow-y-scroll w-full py-10">
-            <Canvas />
+        <div ref={parent} className="flex flex-col overflow-hidden relative" onClick={handleParentClick}>
+          <div className="flex-1 overflow-y-auto">
+            <div ref={canvas} className="mx-auto w-max py-10">
+              <Canvas />
+            </div>
           </div>
-          <div className="border-t-1  flex flex-col items-center py-4 space-y-2 px-4">
-            <Slider
-              color="foreground"
-              className="w-40"
-              onChange={(zoom) => updateTemplate({ zoom: zoom })}
-              label="Zoom"
-              step={0.1}
-              maxValue={2}
-              minValue={0.1}
-              size="sm"
-              defaultValue={zoom}
-            />
-          </div>
+          <StatusBar />
         </div>
       </div>
     </DndContext>
@@ -132,4 +117,3 @@ const TemplateBuilder = () => {
 };
 
 export default TemplateBuilder;
-

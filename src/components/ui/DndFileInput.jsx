@@ -11,6 +11,7 @@ const DndFileInput = ({
   maxSize = 1000000,
   error = 'File not allowed',
   className,
+  isDisabled = false,
 }) => {
   const toast = useToast();
 
@@ -19,15 +20,19 @@ const DndFileInput = ({
       <Dropzone
         accept={accept}
         onDrop={(acceptedFiles) => {
-          if (acceptedFiles.length) onChange(acceptedFiles[0]);
+          if (acceptedFiles.length) onChange(acceptedFiles);
         }}
         onDropRejected={(fileRejections) => {
           const exceedsMaxSize = fileRejections.some((f) => f.errors.some((j) => j.code === 'file-too-large'));
           const invalidType = fileRejections.some((f) => f.errors.some((j) => j.code === 'file-invalid-type'));
-          if (invalidType) return toast.error(`File not allowed`);
-          if (exceedsMaxSize) toast.error(`File size exceeds max of ${maxSize / 1000000}mb`);
+          if (invalidType) return toast.error(`One or more files are not of the correct type`);
+          if (exceedsMaxSize) {
+            return toast.error(`One or more files exceeds the maximum file size of ${maxSize / 1000000}mb`);
+          }
         }}
         maxSize={maxSize}
+        disabled={isDisabled}
+        multiple={true}
       >
         {({ getRootProps, getInputProps, isDragAccept, isDragReject }) => (
           <>
@@ -37,6 +42,7 @@ const DndFileInput = ({
                 'w-full py-6 border-2 border-dashed border-default-300 dark:border-default-200 rounded-2xl cursor-pointer hover:bg-default-100/50 flex flex-col items-center justify-center relative',
                 { 'border-red-500 text-red-500 before:border-0 before:!animate-none': isDragReject },
                 { 'border-green-500 text-green-500 before:border-0 before:!animate-none': isDragAccept },
+                { 'opacity-50 pointer-events-none': isDisabled },
                 className
               )}
             >
@@ -63,6 +69,7 @@ DndFileInput.propTypes = {
   error: PropTypes.string,
   maxSize: PropTypes.number,
   className: PropTypes.string,
+  isDisabled: PropTypes.bool,
 };
 
 export default DndFileInput;

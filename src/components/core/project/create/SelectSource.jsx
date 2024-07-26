@@ -5,9 +5,9 @@ import { RiFileUploadLine } from 'react-icons/ri';
 import { TbBrandGoogleDrive, TbBrandMongodb, TbBrandMysql, TbLink } from 'react-icons/tb';
 import useCreateProjectStore from '@/store/create-project.js';
 import { useState } from 'react';
-import ProjectSourceFiles from '@/components/core/project/create/ProjectSourceFiles.jsx';
+import UploadFiles from '@/components/core/project/create/UploadFiles.jsx';
 import { cn } from '@/lib/utils.js';
-import ProjectSourceSQL from '@/components/core/project/create/ProjectSourceSQL.jsx';
+import ConnectSql from '@/components/core/project/create/ConnectSql.jsx';
 
 const sources = [
   {
@@ -62,7 +62,7 @@ const sources = [
   },
 ];
 
-const ProjectSource = ({ onNext }) => {
+const SelectSource = ({ onNext }) => {
   const { data, updateData } = useCreateProjectStore();
   const [view, setView] = useState(data.source || 'options');
 
@@ -94,14 +94,14 @@ const ProjectSource = ({ onNext }) => {
           </div>
         </>
       )}
-      {view === 'files' && <ProjectSourceFiles onPrev={() => setView('options')} onNext={onNext} />}
-      {view === 'sql' && <ProjectSourceSQL onPrev={() => setView('options')} onNext={onNext} />}
+      {view === 'files' && <UploadFiles onPrev={() => setView('options')} onNext={onNext} />}
+      {view === 'sql' && <ConnectSql onPrev={() => setView('options')} onNext={onNext} />}
     </>
   );
 };
 
-ProjectSource.propTypes = {
+SelectSource.propTypes = {
   onNext: PropTypes.func,
 };
 
-export default ProjectSource;
+export default SelectSource;

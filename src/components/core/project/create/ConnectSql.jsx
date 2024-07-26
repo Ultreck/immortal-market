@@ -3,7 +3,7 @@ import { Button, Checkbox, Input, Select, SelectItem } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
-const ProjectSourceSQL = ({ onNext, onPrev }) => {
+const ConnectSql = ({ onNext, onPrev }) => {
   const handleSubmit = () => {
     onNext();
   };
@@ -83,9 +83,9 @@ const ProjectSourceSQL = ({ onNext, onPrev }) => {
   );
 };
 
-ProjectSourceSQL.propTypes = {
+ConnectSql.propTypes = {
   onNext: PropTypes.func,
   onPrev: PropTypes.func,
 };
 
-export default ProjectSourceSQL;
+export default ConnectSql;
