@@ -2,8 +2,7 @@ import { DragOverlay, useDraggable } from '@dnd-kit/core';
 import { capitalize, cn, mergeRefs } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { createElement } from 'react';
-import elements, { icons } from '@/lib/elements.jsx';
-import { Image } from '@nextui-org/react';
+import elements from '@/lib/elements.jsx';
 
 const Elements = () => {
   const groups = elements.reduce((acc, element) => {
@@ -19,36 +18,6 @@ const Elements = () => {
     }
     return acc;
   }, []);
-
-  const images = [
-    'https://picsum.photos/id/1005/400/300',
-    'https://picsum.photos/id/1006/400/300',
-    'https://picsum.photos/id/1008/400/300',
-    'https://picsum.photos/id/1009/400/300',
-    'https://picsum.photos/id/1010/400/300',
-    'https://picsum.photos/id/1011/400/300',
-    'https://picsum.photos/id/1012/400/300',
-    'https://picsum.photos/id/1013/400/300',
-  ].map((src) => ({
-    id: src,
-    type: 'image',
-    name: 'Image',
-    icon: icons['image'],
-    data: {
-      type: 'image',
-      text: 'Image',
-      width: 400,
-      height: 300,
-      src,
-      style: {
-        borderWidth: 0,
-        borderColor: '#000',
-        opacity: 1,
-        borderRadius: 0,
-      },
-      tools: ['border', 'border-radius', 'opacity'],
-    },
-  }));
 
   return (
     <div className="space-y-8">
@@ -88,33 +57,11 @@ const Elements = () => {
           </div>
         </div>
       ))}
-      <div>
-        <h2 className="text-lg font-semibold mb-6">Image</h2>
-        <div className="grid grid-cols-2 gap-4">
-          {images.map((image) => (
-            <DraggableElement
-              key={image.id}
-              element={image}
-              className="overflow-hidden"
-              content={
-                <Image
-                  src={image.data.src}
-                  alt={image.data.text}
-                  className="w-full h-full object-cover rounded-2xl cursor-grab aspect-square"
-                />
-              }
-              dragging={
-                <Image src={image.data.src} alt={image.data.text} className="w-full h-full object-cover rounded-2xl" />
-              }
-            />
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
 
-const DraggableElement = ({ element, content, dragging, className }) => {
+export const DraggableElement = ({ element, content, dragging, className }) => {
   const { attributes, listeners, setNodeRef, isDragging, setActivatorNodeRef } = useDraggable({
     id: element.id,
     data: element.data,

@@ -1,10 +1,47 @@
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
-import { Button } from '@nextui-org/react';
+import { Button, Skeleton } from '@nextui-org/react';
 import { TbPlus } from 'react-icons/tb';
 import { HiPhoto } from 'react-icons/hi2';
-import { Link } from 'react-router-dom';
+import { useCreateTemplateMutation, useGetTemplates } from '@/api/business.js';
+import useBusiness from '@/hooks/use-business.js';
+import { useToast } from '@/hooks/use-toast.jsx';
+import { Link, useNavigate } from 'react-router-dom';
+import NoData from '@/components/ui/NoData.jsx';
 
 const TemplatesPage = () => {
+  const toast = useToast();
+  const { id } = useBusiness();
+  const navigate = useNavigate();
+  const { data: { templates = [] } = {}, isLoading: isTemplatesLoading } = useGetTemplates(id);
+  const { mutateAsync: createTemplate, isPending: isCreateTemplateLoading } = useCreateTemplateMutation(id);
+
+  const handleCreateTemplate = async () => {
+    try {
+      const template = {
+        name: 'Untitled',
+        description: '',
+        data: {
+          pages: [
+            {
+              id: crypto.randomUUID(),
+              width: 600,
+              height: 600,
+              style: {
+                backgroundColor: '#ffffff',
+              },
+              elements: [],
+            },
+          ],
+        },
+      };
+      const res = await createTemplate(template);
+      navigate(`/templates/${res.data.template._id}/edit`);
+      toast.success('Template created successfully');
+    } catch (e) {
+      toast.error(e?.response?.data?.message || e.message);
+    }
+  };
+
   return (
     <>
       <DashboardTitle
@@ -14,35 +51,47 @@ const TemplatesPage = () => {
           { text: 'Templates', href: '/templates' },
         ]}
         after={
-          <Link to="/templates/create">
-            <Button
-              variant="solid"
-              radius="full"
-              className="text-base px-6"
-              color="primary"
-              startContent={<TbPlus size="20" />}
-            >
-              Create Template
-            </Button>
-          </Link>
+          <Button
+            onClick={handleCreateTemplate}
+            variant="solid"
+            radius="full"
+            className="text-base px-6"
+            color="primary"
+            startContent={<TbPlus size="20" />}
+            isLoading={isCreateTemplateLoading}
+          >
+            Create Template
+          </Button>
         }
       />
       <div className="container py-8 md:py-10 min-h-screen flex flex-col space-y-10">
-        <div className="grid grid-cols-4 gap-4 md:gap-8">
-          {Array(12)
-            .fill(0)
-            .map((_, i) => (
-              <div key={i}>
-                <div className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
-                  <HiPhoto size="52" className="opacity-40" />
-                </div>
-                <div className="mt-4 px-2">
-                  <h4 className="font-medium text-lg leading-tight">Template 1</h4>
-                  <p className="leading-tight mt-1 opacity-80">Template 1 description</p>
-                </div>
+        {isTemplatesLoading ? (
+          <div className="grid grid-cols-4 gap-4 md:gap-8">
+            <Skeleton className="aspect-square w-full rounded-2xl" />
+            <Skeleton className="aspect-square w-full rounded-2xl" />
+            <Skeleton className="aspect-square w-full rounded-2xl" />
+            <Skeleton className="aspect-square w-full rounded-2xl" />
+          </div>
+        ) : (
+          <>
+            {templates.length > 0 ? (
+              <div className="grid grid-cols-4 gap-4 md:gap-8">
+                {templates.map((template, i) => (
+                  <Link key={i} to={`/templates/${template._id}/edit`}>
+                    <div className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
+                      <HiPhoto size="52" className="opacity-40" />
+                    </div>
+                    <div className="mt-4 px-2">
+                      <h4 className="font-medium text-lg leading-tight">{template.name}</h4>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            ))}
-        </div>
+            ) : (
+              <NoData text="No templates created yet" />
+            )}
+          </>
+        )}
       </div>
     </>
   );

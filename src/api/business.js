@@ -67,3 +67,62 @@ export const useRespondToInvitationMutation = (id) => {
     },
   });
 };
+
+export const useGetUploads = (business) => {
+  return useQuery({
+    queryKey: ['business', business, 'uploads'],
+    queryFn: async () => {
+      const res = await http.get(`/businesses/${business}/uploads`);
+      return res.data;
+    },
+  });
+};
+
+export const useCreateUploadMutation = (business) => {
+  return useMutation({
+    mutationKey: ['business', business, 'uploads'],
+    mutationFn: (files) => {
+      const fd = new FormData();
+      files.forEach((file) => fd.append('files', file));
+      return http.post(`/businesses/${business}/uploads`, fd);
+    },
+  });
+};
+
+export const useCreateTemplateMutation = (business) => {
+  return useMutation({
+    mutationKey: ['business', business, 'templates'],
+    mutationFn: (body) => {
+      return http.post(`/businesses/${business}/templates`, body);
+    },
+  });
+};
+
+export const useGetTemplates = (business) => {
+  return useQuery({
+    queryKey: ['business', business, 'templates'],
+    queryFn: async () => {
+      const res = await http.get(`/businesses/${business}/templates`);
+      return res.data;
+    },
+  });
+};
+
+export const useGetTemplate = (business, id) => {
+  return useQuery({
+    queryKey: ['business', business, 'templates', id],
+    queryFn: async () => {
+      const res = await http.get(`/businesses/${business}/templates/${id}`);
+      return res.data;
+    },
+  });
+};
+
+export const useUpdateTemplateMutation = (business, id) => {
+  return useMutation({
+    mutationKey: ['business', business, 'templates', id],
+    mutationFn: (data) => {
+      return http.patch(`/businesses/${business}/templates/${id}`, data);
+    },
+  });
+};

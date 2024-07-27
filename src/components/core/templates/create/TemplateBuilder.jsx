@@ -6,6 +6,7 @@ import useTemplateStore from '@/store/template.js';
 import { roundToNearestTen } from '@/lib/utils.js';
 import StatusBar from '@/components/core/templates/create/StatusBar.jsx';
 import Sidebar from '@/components/core/templates/create/Sidebar.jsx';
+import Header from '@/components/core/templates/create/Header.jsx';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;
@@ -69,6 +70,7 @@ const TemplateBuilder = () => {
       <div className="grid grid-cols-[420px_1fr] gap-0 h-screen overflow-hidden ">
         <Sidebar />
         <div ref={parent} className="flex flex-col overflow-hidden relative" onClick={handleParentClick}>
+          <Header />
           <Canvas />
           <StatusBar />
         </div>

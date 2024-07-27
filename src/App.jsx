@@ -81,7 +81,7 @@ const App = () => {
         </Route>
 
         <Route
-          path="templates/create"
+          path="templates/:id/edit"
           element={
             <RequireAuthBusiness>
               <CreateTemplatePage />
