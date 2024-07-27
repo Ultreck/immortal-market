@@ -12,6 +12,7 @@ import {
   TbDiamond,
   TbHeading,
   TbHeart,
+  TbIcons,
   TbImageInPicture,
   TbLine,
   TbRectangle,
@@ -48,6 +49,7 @@ export const icons = {
   'frame-star': TbStar,
   'frame-heart': TbHeart,
   'frame-diamond': TbDiamond,
+  icon: TbIcons,
 };
 
 const elements = [
@@ -509,6 +511,21 @@ const elements = [
       children: [],
     },
     group: 'frame',
+  },
+  {
+    id: 'icon',
+    type: 'icon',
+    name: 'Icon',
+    icon: icons['icon'],
+    data: {
+      type: 'icon',
+      text: 'Icon',
+      width: 60,
+      height: 60,
+      style: { opacity: 1 },
+      tools: ['icon', 'opacity'],
+    },
+    group: 'placeholders',
   },
 ];
 

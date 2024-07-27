@@ -21,6 +21,7 @@ import FrameCircle from '@/components/core/templates/create/elements/FrameCircle
 import FrameStar from '@/components/core/templates/create/elements/FrameStar';
 import FrameDiamond from '@/components/core/templates/create/elements/FrameDiamond';
 import FrameHeart from '@/components/core/templates/create/elements/FrameHeart';
+import SsIcon from '@/components/core/templates/create/elements/SsIcon';
 
 export default {
   heading: Heading,
@@ -46,4 +47,5 @@ export default {
   'frame-star': FrameStar,
   'frame-heart': FrameHeart,
   'frame-diamond': FrameDiamond,
+  icon: SsIcon
 };

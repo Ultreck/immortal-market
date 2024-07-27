@@ -15,6 +15,7 @@ import TableConfig from '@/components/core/templates/create/tools/elements/Table
 import KeyValueConfig from '@/components/core/templates/create/tools/elements/KeyValueConfig.jsx';
 import Line from './elements/Line.jsx';
 import Font from './elements/Font.jsx';
+import IconConfig from './elements/IconConfig.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -28,7 +29,7 @@ const ElementTools = () => {
     if (!page) return [];
     let _tools = elements.map((el) => el.tools || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
-    const singles = ['chart', 'table', 'key-value'];
+    const singles = ['chart', 'table', 'key-value', 'icon'];
     if (_tools.some((tool) => singles.includes(tool)) && selectedElements.length > 1) {
       return _tools.filter((tool) => !singles.includes(tool));
     }
@@ -72,6 +73,9 @@ const ElementTools = () => {
             }
             if (tool === 'chart' && selectedElements.length === 1) {
               return <ChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+            }
+            if (tool === 'icon' && selectedElements.length === 1) {
+              return <IconConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
             }
             if (tool === 'table' && selectedElements.length === 1) {
               return <TableConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
