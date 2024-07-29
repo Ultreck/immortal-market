@@ -74,8 +74,8 @@ const elements = [
         lineHeight: 1,
         verticalAlign: 'baseline',
       },
-      tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity'],
     },
+    tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity'],
     group: 'text',
     preview: (
       <h1
@@ -115,8 +115,8 @@ const elements = [
         lineHeight: 1,
         verticalAlign: 'baseline',
       },
-      tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'text-align', 'opacity'],
     },
+    tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'text-align', 'opacity'],
     group: 'text',
     preview: (
       <p
@@ -146,8 +146,8 @@ const elements = [
       width: 400,
       height: 400,
       style: { opacity: 1 },
-      tools: ['chart', 'opacity'],
     },
+    tools: ['chart', 'opacity'],
     group: 'visual',
   },
   {
@@ -168,8 +168,8 @@ const elements = [
         color: '#000',
         opacity: 1,
       },
-      tools: ['table', 'opacity', 'font-size', 'text-color', 'border', 'background-color'],
     },
+    tools: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color'],
     group: 'visual',
   },
   {
@@ -190,8 +190,8 @@ const elements = [
         color: '#000',
         opacity: 1,
       },
-      tools: ['key-value', 'opacity', 'font-size', 'text-color', 'border', 'background-color'],
     },
+    tools: ['key-value', 'opacity', 'font', 'text-color', 'border', 'background-color'],
     group: 'visual',
   },
   {
@@ -205,8 +205,8 @@ const elements = [
       width: 120,
       height: 0,
       style: { opacity: 1 },
-      tools: ['opacity'],
     },
+    tools: ['opacity'],
     group: 'visual',
   },
   {
@@ -225,8 +225,8 @@ const elements = [
       text: 'Circle',
       width: 120,
       height: 120,
-      tools: ['background-color', 'border', 'opacity'],
     },
+    tools: ['background-color', 'border', 'opacity'],
     group: 'shape',
   },
   {
@@ -247,8 +247,8 @@ const elements = [
       text: 'Rectangle',
       width: 100,
       height: 100,
-      tools: ['background-color', 'border', 'opacity', 'border-radius'],
     },
+    tools: ['background-color', 'border', 'opacity', 'border-radius'],
     group: 'shape',
   },
   {
@@ -262,8 +262,8 @@ const elements = [
       text: 'Triangle',
       width: 200,
       height: 200,
-      tools: ['background-color', 'opacity'],
     },
+    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -277,8 +277,8 @@ const elements = [
       text: 'Diagonal Rectangle',
       width: 200,
       height: 200,
-      tools: ['background-color', 'opacity'],
     },
+    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -292,8 +292,8 @@ const elements = [
       text: 'Arrow Up',
       width: 200,
       height: 200,
-      tools: ['background-color', 'opacity'],
     },
+    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -307,8 +307,8 @@ const elements = [
       text: 'Arrow Right',
       width: 200,
       height: 200,
-      tools: ['background-color', 'opacity'],
     },
+    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -322,8 +322,8 @@ const elements = [
       text: 'Arrow Down',
       width: 200,
       height: 200,
-      tools: ['background-color', 'opacity'],
     },
+    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -337,8 +337,8 @@ const elements = [
       text: 'Arrow Left',
       width: 200,
       height: 200,
-      tools: ['background-color', 'opacity'],
     },
+    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -352,8 +352,8 @@ const elements = [
       text: 'Arrow UpDown',
       width: 200,
       height: 200,
-      tools: ['background-color', 'opacity'],
     },
+    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -376,8 +376,8 @@ const elements = [
       text: 'Line',
       width: 100,
       height: 4,
-      tools: ['background-color', 'opacity', 'line'],
     },
+    tools: ['background-color', 'opacity', 'line'],
     group: 'shape',
   },
   {
@@ -397,9 +397,9 @@ const elements = [
       text: 'Frame',
       width: 300,
       height: 300,
-      tools: ['opacity', 'border-radius'],
       children: [],
     },
+    tools: ['opacity', 'border-radius'],
     group: 'frame',
   },
   {
@@ -419,9 +419,9 @@ const elements = [
       text: 'Frame',
       width: 300,
       height: 300,
-      tools: ['opacity'],
       children: [],
     },
+    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -441,9 +441,9 @@ const elements = [
       text: 'Frame',
       width: 300,
       height: 300,
-      tools: ['opacity'],
       children: [],
     },
+    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -463,9 +463,9 @@ const elements = [
       text: 'Frame',
       width: 300,
       height: 300,
-      tools: ['opacity'],
       children: [],
     },
+    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -485,9 +485,9 @@ const elements = [
       text: 'Frame',
       width: 300,
       height: 300,
-      tools: ['opacity'],
       children: [],
     },
+    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -507,9 +507,9 @@ const elements = [
       text: 'Frame',
       width: 300,
       height: 300,
-      tools: ['opacity'],
       children: [],
     },
+    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -523,8 +523,8 @@ const elements = [
       width: 60,
       height: 60,
       style: { opacity: 1 },
-      tools: ['icon', 'opacity'],
     },
+    tools: ['icon', 'opacity'],
     group: 'placeholders',
   },
 ];
@@ -549,4 +549,10 @@ export const elementPropTypes = {
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   width: PropTypes.number,
+};
+
+export const getElementTools = (id) => {
+  const element = elements.find((el) => el.id === id);
+  if (!element) throw new Error(`Element with id ${id} not found`);
+  return element?.tools || [];
 };

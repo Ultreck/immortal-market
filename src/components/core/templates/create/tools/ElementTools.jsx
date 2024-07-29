@@ -16,6 +16,7 @@ import KeyValueConfig from '@/components/core/templates/create/tools/elements/Ke
 import Line from './elements/Line.jsx';
 import Font from './elements/Font.jsx';
 import IconConfig from './elements/IconConfig.jsx';
+import { getElementTools } from '@/lib/elements.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -27,7 +28,7 @@ const ElementTools = () => {
 
   const tools = useMemo(() => {
     if (!page) return [];
-    let _tools = elements.map((el) => el.tools || []);
+    let _tools = elements.map((el) => getElementTools(el.type) || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
     const singles = ['chart', 'table', 'key-value', 'icon'];
     if (_tools.some((tool) => singles.includes(tool)) && selectedElements.length > 1) {
@@ -95,7 +96,7 @@ const ElementTools = () => {
             if (tool === 'line') {
               return <Line key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
-            return <></>;
+            throw new Error(`Unknown tool ${tool}`);
           })}
         </motion.div>
       )}
