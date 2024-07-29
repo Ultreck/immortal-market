@@ -14,7 +14,7 @@ const Canvas = () => {
   useDelete();
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto" id="scrollable">
       <div className="mx-auto w-max py-10">
         <div
           className="space-y-6 flex flex-col items-center w-max mx-auto"
@@ -41,4 +41,3 @@ const Canvas = () => {
 };
 
 export default Canvas;
-

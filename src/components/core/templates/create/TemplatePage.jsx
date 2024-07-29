@@ -1,6 +1,6 @@
 import useTemplateStore from '@/store/template.js';
 import { useDroppable } from '@dnd-kit/core';
-import { createElement, Fragment, useCallback, useRef, useState } from 'react';
+import { createElement, Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { cn, mergeRefs } from '@/lib/utils.js';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
@@ -8,6 +8,7 @@ import { useIntersectionObserver } from 'usehooks-ts';
 import { Button, Tooltip } from '@nextui-org/react';
 import { TbCopyPlus, TbSquarePlus, TbTrash } from 'react-icons/tb';
 import components from '@/lib/components.js';
+import ContextMenu from './ContextMenu';
 
 const TemplatePage = ({ id }) => {
   const selectionBoxRef = useRef(null);
@@ -25,6 +26,19 @@ const TemplatePage = ({ id }) => {
   const pages = useTemplateStore(({ template }) => template.pages);
   const index = pages.findIndex((p) => p.id === id);
   const { setNodeRef, node } = useDroppable({ id: `canvas-${page.id}` });
+  const [contextMenu, setContextMenu] = useState({ isOpen: false, position: { x: 0, y: 0 } });
+  const zoom = useTemplateStore((state) => state.template.zoom);
+
+  useEffect(() => {
+    const handleClick = () => setContextMenu({ isOpen: false, position: { x: 0, y: 0 } });
+    window.addEventListener('click', handleClick);
+    window.addEventListener('auxclick', handleClick);
+    return () => {
+      window.removeEventListener('click', handleClick);
+      window.removeEventListener('auxclick', handleClick);
+    };
+  }, [contextMenu.isOpen]);
+
   const { ref: intersectionRef } = useIntersectionObserver({
     root: document.getElementById('main'),
     initialIsIntersecting: false,
@@ -98,7 +112,7 @@ const TemplatePage = ({ id }) => {
   );
 
   const handleMouseDown = (event) => {
-    if (event.target === node.current) {
+    if (event.nativeEvent.button === 0 && event.target === node.current) {
       const { clientX, clientY } = event;
       const rect = node.current.getBoundingClientRect();
       setSelectionBox({
@@ -178,6 +192,34 @@ const TemplatePage = ({ id }) => {
     addPage(payload, page.id);
   };
 
+  const getElementUnderCursor = useCallback(
+    (event) => {
+      const canvasRect = node.current.getBoundingClientRect();
+      const x = (event.clientX - canvasRect.left) / zoom;
+      const y = (event.clientY - canvasRect.top) / zoom;
+      const pages = [...page.elements].reverse();
+      return pages.find((el) => x >= el.x && x <= el.x + el.width && y >= el.y && y <= el.y + el.height);
+    },
+    [node, page.elements, zoom]
+  );
+
+  const handleContextMenu = useCallback(
+    (e) => {
+      if (e.type === 'contextmenu') {
+        const targetElement = getElementUnderCursor(e);
+        if (!targetElement) {
+          setContextMenu({ isOpen: false, position: { x: 0, y: 0 } });
+          selectElements([]);
+          return;
+        }
+        if (!selectedElements.includes(targetElement.id)) selectElements([targetElement.id]);
+        setContextMenu({ isOpen: true, position: { x: e.clientX, y: e.clientY } });
+        e.preventDefault();
+      }
+    },
+    [getElementUnderCursor, selectElements, selectedElements]
+  );
+
   return (
     <div className="relative">
       <div className="flex items-center justify-between mb-2 px-1.5">
@@ -212,6 +254,7 @@ const TemplatePage = ({ id }) => {
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
+          onContextMenu={handleContextMenu}
         >
           {page.elements.map((element) => {
             const active = selectedElements.includes(element.id);
@@ -251,6 +294,14 @@ const TemplatePage = ({ id }) => {
           )}
         </motion.div>
       </div>
+
+      <ContextMenu
+        position={contextMenu.position}
+        isOpen={contextMenu.isOpen}
+        onClose={() => {
+          setContextMenu({ isOpen: false, position: { x: 0, y: 0 } });
+        }}
+      />
     </div>
   );
 };

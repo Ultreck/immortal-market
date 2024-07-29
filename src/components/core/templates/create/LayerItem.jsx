@@ -10,6 +10,7 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
   const selectElements = useTemplateStore((state) => state.selectElements);
   const deleteElements = useTemplateStore((state) => state.deleteElements);
+  const activePage = useTemplateStore((state) => state.template.activePage);
 
   const icon = icons[element.type];
   const active = selectedElements.includes(element.id);
@@ -34,7 +35,7 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
           <span className="truncate">{element.text}</span>
         </div>
         <Button isIconOnly variant="light" size="sm" radius="full">
-          <RiCloseFill size={20} className="block" onClick={() => deleteElements([element.id])} />
+          <RiCloseFill size={20} className="block" onClick={() => deleteElements([element.id], activePage)} />
         </Button>
       </div>
     </div>

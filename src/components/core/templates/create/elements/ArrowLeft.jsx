@@ -1,7 +1,7 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { elementPropTypes } from '@/lib/elements.jsx';
 
-const ArrowLeft = ({ element, active, highlighted, width, onClick, onChange }) => {
+const ArrowLeft = ({ element, active, highlighted, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}

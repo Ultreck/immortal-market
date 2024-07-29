@@ -25,6 +25,7 @@ const DraggableElement = ({
       scale={1}
       onDrag={(e, ui) => onDrag({ x: ui.x, y: ui.y })}
       nodeRef={ref}
+      onContextMenu
     >
       <div ref={ref} className={cn('relative', classNames.base)}>
         <StationaryClickDetector onStationaryClick={onClick}>

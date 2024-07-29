@@ -13,7 +13,7 @@ import ArrowLeft from '@/components/core/templates/create/elements/ArrowLeft.jsx
 import ArrowUpDown from '@/components/core/templates/create/elements/ArrowUpDown.jsx';
 import Image from '@/components/core/templates/create/elements/Image.jsx';
 import Table from '@/components/core/templates/create/elements/Table.jsx';
-import KeyValue from '@/components/core/templates/create/tools/elements/KeyValue.jsx';
+import KeyValue from '@/components/core/templates/create/elements/KeyValue.jsx';
 import Line from '@/components/core/templates/create/elements/Line.jsx';
 import FrameRectangle from '@/components/core/templates/create/elements/FrameRectangle.jsx';
 import FrameTriangle from '@/components/core/templates/create/elements/FrameTriangle.jsx';
@@ -47,5 +47,5 @@ export default {
   'frame-star': FrameStar,
   'frame-heart': FrameHeart,
   'frame-diamond': FrameDiamond,
-  icon: SsIcon
+  icon: SsIcon,
 };

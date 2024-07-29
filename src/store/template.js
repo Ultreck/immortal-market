@@ -155,6 +155,7 @@ const useTemplateStore = createWithEqualityFn(
             pages: _pages,
             selectedElements: [],
             selectedPage: null,
+            activePage: state.template.activePage === id ? null : state.template.activePage,
           },
         };
       });
