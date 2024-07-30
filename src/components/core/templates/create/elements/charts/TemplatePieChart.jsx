@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
 import { LabelList, Pie, PieChart } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { elementPropTypes } from '@/lib/elements.jsx';
 
 const colors = [
   '#E66B5B',
@@ -16,7 +17,7 @@ const colors = [
   '#D93566',
 ];
 
-const TemplatePieChart = ({ element }) => {
+const TemplatePieChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const data = element.config.data.map((item, i) => ({
     ...item,
     fill: colors[i],
@@ -30,43 +31,47 @@ const TemplatePieChart = ({ element }) => {
   }, {});
 
   return (
-    <ChartContainer config={config} style={{ height: element.height, width: element.width }}>
-      <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-        <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-        <Pie
-          data={data}
-          dataKey={element.config.keys.data}
-          nameKey={element.config.keys.name}
-          label
-          isAnimationActive={false}
-          style={{ opacity: element.style.opacity }}
-        >
-          <LabelList
-            dataKey={element.config.keys.name}
-            className="fill-background"
-            stroke="none"
-            fontSize={12}
-            formatter={(value) => capitalize(value)}
-          />
-        </Pie>
-      </PieChart>
-    </ChartContainer>
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      onResize={(size) => {
+        onChange({ ...element, width: size.width, height: size.height });
+      }}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      resizeHandles={['se', 'e', 's']}
+      constrained
+    >
+      <ChartContainer
+        config={config}
+        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      >
+        <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+          <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+          <Pie
+            data={data}
+            dataKey={element.config.keys.data}
+            nameKey={element.config.keys.name}
+            label
+            isAnimationActive={false}
+            style={{ opacity: element.style.opacity }}
+          >
+            <LabelList
+              dataKey={element.config.keys.name}
+              className="fill-background"
+              stroke="none"
+              fontSize={12}
+              formatter={(value) => capitalize(value)}
+            />
+          </Pie>
+        </PieChart>
+      </ChartContainer>
+    </ElementWrapper>
   );
 };
 
-TemplatePieChart.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-    config: PropTypes.object.isRequired,
-  }),
-  height: PropTypes.number,
-};
+TemplatePieChart.propTypes = elementPropTypes;
 
 export default TemplatePieChart;

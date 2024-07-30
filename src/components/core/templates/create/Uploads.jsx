@@ -46,7 +46,6 @@ const Uploads = () => {
         opacity: 1,
         borderRadius: 0,
       },
-      tools: ['border', 'border-radius', 'opacity'],
     },
   }));
 

@@ -5,6 +5,8 @@ import {
   TbArrowBigUp,
   TbBrackets,
   TbCapsuleHorizontal,
+  TbChartBar,
+  TbChartLine,
   TbChartPie,
   TbCircle,
   TbCircleDot,
@@ -28,7 +30,6 @@ import { FaArrowsUpDown } from 'react-icons/fa6';
 export const icons = {
   heading: TbHeading,
   text: TbCursorText,
-  chart: TbChartPie,
   logo: TbCapsuleHorizontal,
   circle: TbCircle,
   rectangle: TbRectangle,
@@ -50,6 +51,9 @@ export const icons = {
   'frame-heart': TbHeart,
   'frame-diamond': TbDiamond,
   icon: TbIcons,
+  'chart-bar': TbChartBar,
+  'chart-line': TbChartLine,
+  'chart-pie': TbChartPie,
 };
 
 const elements = [
@@ -75,7 +79,6 @@ const elements = [
         verticalAlign: 'baseline',
       },
     },
-    tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity'],
     group: 'text',
     preview: (
       <h1
@@ -116,7 +119,6 @@ const elements = [
         verticalAlign: 'baseline',
       },
     },
-    tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'text-align', 'opacity'],
     group: 'text',
     preview: (
       <p
@@ -134,62 +136,6 @@ const elements = [
         Paragraph
       </p>
     ),
-  },
-  {
-    id: 'text',
-    type: 'text',
-    name: 'Text',
-    icon: icons['text'],
-    data: {
-      type: 'text',
-      text: 'Text',
-      width: 200,
-      height: 12,
-      style: {
-        fontSize: 10,
-        fontWeight: 'normal',
-        color: '#000000',
-        textAlign: 'left',
-        opacity: 1,
-        fontFamily: 'Roboto',
-        letterSpacing: 0,
-        lineHeight: 1,
-        verticalAlign: 'baseline',
-      },
-    },
-    tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'text-align', 'opacity'],
-    group: 'text',
-    preview: (
-      <p
-        style={{
-          fontSize: '10px',
-          fontWeight: 'normal',
-          textAlign: 'left',
-          opacity: 1,
-          fontFamily: 'Roboto',
-          letterSpacing: 0,
-          lineHeight: 1,
-          verticalAlign: 'baseline',
-        }}
-      >
-        Sub Paragraph
-      </p>
-    ),
-  },
-  {
-    id: 'chart',
-    type: 'chart',
-    name: 'Chart',
-    icon: icons['chart'],
-    data: {
-      type: 'chart',
-      text: 'Chart',
-      width: 400,
-      height: 400,
-      style: { opacity: 1 },
-    },
-    tools: ['chart', 'opacity'],
-    group: 'visual',
   },
   {
     id: 'table',
@@ -210,7 +156,6 @@ const elements = [
         opacity: 1,
       },
     },
-    tools: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color'],
     group: 'visual',
   },
   {
@@ -232,7 +177,6 @@ const elements = [
         opacity: 1,
       },
     },
-    tools: ['key-value', 'opacity', 'font', 'text-color', 'border', 'background-color'],
     group: 'visual',
   },
   {
@@ -247,7 +191,6 @@ const elements = [
       height: 0,
       style: { opacity: 1 },
     },
-    tools: ['opacity'],
     group: 'visual',
   },
   {
@@ -267,7 +210,6 @@ const elements = [
       width: 120,
       height: 120,
     },
-    tools: ['background-color', 'border', 'opacity'],
     group: 'shape',
   },
   {
@@ -289,7 +231,6 @@ const elements = [
       width: 100,
       height: 100,
     },
-    tools: ['background-color', 'border', 'opacity', 'border-radius'],
     group: 'shape',
   },
   {
@@ -304,7 +245,6 @@ const elements = [
       width: 200,
       height: 200,
     },
-    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -319,7 +259,6 @@ const elements = [
       width: 200,
       height: 200,
     },
-    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -334,7 +273,6 @@ const elements = [
       width: 200,
       height: 200,
     },
-    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -349,7 +287,6 @@ const elements = [
       width: 200,
       height: 200,
     },
-    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -364,7 +301,6 @@ const elements = [
       width: 200,
       height: 200,
     },
-    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -379,7 +315,6 @@ const elements = [
       width: 200,
       height: 200,
     },
-    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -394,7 +329,6 @@ const elements = [
       width: 200,
       height: 200,
     },
-    tools: ['background-color', 'opacity'],
     group: 'shape',
   },
   {
@@ -418,7 +352,6 @@ const elements = [
       width: 100,
       height: 4,
     },
-    tools: ['background-color', 'opacity', 'line'],
     group: 'shape',
   },
   {
@@ -440,7 +373,6 @@ const elements = [
       height: 300,
       children: [],
     },
-    tools: ['opacity', 'border-radius'],
     group: 'frame',
   },
   {
@@ -462,7 +394,6 @@ const elements = [
       height: 300,
       children: [],
     },
-    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -484,7 +415,6 @@ const elements = [
       height: 300,
       children: [],
     },
-    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -506,7 +436,6 @@ const elements = [
       height: 300,
       children: [],
     },
-    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -528,7 +457,6 @@ const elements = [
       height: 300,
       children: [],
     },
-    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -550,7 +478,6 @@ const elements = [
       height: 300,
       children: [],
     },
-    tools: ['opacity'],
     group: 'frame',
   },
   {
@@ -565,12 +492,41 @@ const elements = [
       height: 60,
       style: { opacity: 1 },
     },
-    tools: ['icon', 'opacity'],
     group: 'placeholders',
   },
 ];
 
 export default elements;
+
+export const tools = {
+  heading: ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity'],
+  text: ['bold', 'italic', 'underline', 'font', 'text-color', 'text-align', 'opacity'],
+  table: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color'],
+  'key-value': ['key-value', 'opacity', 'font', 'text-color', 'border', 'background-color'],
+  logo: ['opacity'],
+  circle: ['background-color', 'border', 'opacity'],
+  rectangle: ['background-color', 'border', 'opacity', 'border-radius'],
+  triangle: ['background-color', 'opacity'],
+  'diagonal-rectangle': ['background-color', 'opacity'],
+  'arrow-up': ['background-color', 'opacity'],
+  'arrow-right': ['background-color', 'opacity'],
+  'arrow-down': ['background-color', 'opacity'],
+  'arrow-left': ['background-color', 'opacity'],
+  'arrow-up-down': ['background-color', 'opacity'],
+  image: ['border', 'border-radius', 'opacity'],
+  line: ['background-color', 'opacity', 'line'],
+  'frame-rectangle': ['opacity', 'border-radius'],
+  'frame-triangle': ['opacity'],
+  'frame-circle': ['opacity'],
+  'frame-star': ['opacity'],
+  'frame-heart': ['opacity'],
+  'frame-diamond': ['opacity'],
+  icon: ['icon', 'opacity'],
+  chart: ['chart', 'opacity'],
+  'chart-bar': ['chart', 'opacity'],
+  'chart-line': ['chart', 'opacity'],
+  'chart-pie': ['chart', 'opacity'],
+};
 
 export const elementPropTypes = {
   element: PropTypes.shape({
@@ -592,8 +548,12 @@ export const elementPropTypes = {
   width: PropTypes.number,
 };
 
-export const getElementTools = (id) => {
-  const element = elements.find((el) => el.id === id);
-  if (!element) throw new Error(`Element with id ${id} not found`);
-  return element?.tools || [];
+export const getElementTools = (type) => {
+  if (!tools[type]) throw new Error(`No tools found for type ${type}`);
+  return tools[type];
+};
+
+export const getElementIcon = (type) => {
+  if (!icons[type]) throw new Error(`No icon found for type ${type}`);
+  return icons[type];
 };

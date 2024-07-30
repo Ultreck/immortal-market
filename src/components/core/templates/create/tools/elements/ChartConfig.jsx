@@ -9,96 +9,46 @@ import {
   useDisclosure,
 } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import { createElement, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { capitalize, cn, getKeysFromJson, isValidJsonArray } from '@/lib/utils.js';
-import { IoIosArrowRoundBack } from 'react-icons/io';
-import { TbChartBar, TbChartLine, TbChartPie } from 'react-icons/tb';
+import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils.js';
+import { TbChartPie } from 'react-icons/tb';
 
-const types = [
-  { name: 'bar', icon: TbChartBar, keys: ['x', 'y'] },
-  { name: 'line', icon: TbChartLine, keys: ['x', 'y'] },
-  { name: 'pie', icon: TbChartPie, keys: ['name', 'data'] },
-];
-
-const ChartType = ({ element, onChange, onNext }) => {
-  const handleSelectChart = (chart) => {
-    onChange({
-      ...element,
-      config: {
-        ...element.config,
-        type: chart.name,
-        data: element.config?.data || null,
-        keys: {},
-      },
-    });
-  };
-
-  const handleNext = () => {
-    if (element.config?.type) onNext();
-  };
+const ChartConfig = ({ element, onChange }) => {
+  const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
 
   return (
-    <>
-      <h2 className="text-lg font-semibold mb-6">Select chart type</h2>
-      <div className="grid grid-cols-3 gap-y-3 gap-x-3">
-        {types.map((chart, index) => (
-          <div
-            key={index}
-            className={cn('py-6 bg-default-100 flex flex-col items-center justify-center rounded-xl cursor-pointer', {
-              'bg-primary-500 text-white': element.config?.type === chart.name,
-              'hover:bg-default-200': element.config?.type !== chart.name,
-            })}
-            onClick={() => handleSelectChart(chart)}
-          >
-            {createElement(chart.icon, { size: 24 })}
-            <span className="mt-1 capitalize text-base">{chart.name}</span>
-          </div>
-        ))}
-      </div>
-      <Button
-        variant="bordered"
-        onClick={handleNext}
-        className="mt-6 text-base"
-        radius="full"
-        isDisabled={!element.config?.type}
-      >
-        Next
-      </Button>
-    </>
+    <Popover
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      placement="left"
+      showArrow
+      offset={10}
+      classNames={{ content: 'w-[400px]' }}
+    >
+      <PopoverTrigger>
+        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+          <TbChartPie size="20" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="p-0 shadow border border-default-200">
+        <div className="px-8 py-6 w-full">
+          <ChartData element={element} onChange={onChange} onClose={onOpenChange} />
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 };
 
-const data = [
-  {
-    browser: 'chrome',
-    visitors: 187,
-  },
-  {
-    browser: 'safari',
-    visitors: 200,
-  },
-  {
-    browser: 'firefox',
-    visitors: 275,
-  },
-  {
-    browser: 'edge',
-    visitors: 173,
-  },
-  {
-    browser: 'other',
-    visitors: 90,
-  },
-];
-
-const ChartData = ({ element, onChange, onBack, onClose }) => {
+const ChartData = ({ element, onChange, onClose }) => {
   const { handleSubmit, watch, control } = useForm({
     defaultValues: {
-      json: element?.config?.data ? JSON.stringify(element.config.data, null, 2) : JSON.stringify(data, null, 2),
+      json: JSON.stringify(element.config.data, null, 2),
+      ...Object.keys(element.config.keys).reduce((acc, key) => {
+        acc[key] = element.config.keys[key];
+        return acc;
+      }, {}),
     },
   });
-  const chart = types.find((type) => type.name === element.config.type);
   const keys = getKeysFromJson(watch().json);
 
   const onSubmit = async (values) => {
@@ -110,7 +60,6 @@ const ChartData = ({ element, onChange, onBack, onClose }) => {
 
   return (
     <>
-      <IoIosArrowRoundBack size={30} className="mb-3 cursor-pointer" onClick={onBack} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-6">
           <Controller
@@ -136,7 +85,7 @@ const ChartData = ({ element, onChange, onBack, onClose }) => {
             }}
           />
           <div className="grid grid-cols-2 gap-2">
-            {chart.keys.map((name) => {
+            {Object.keys(element.config.keys).map((name) => {
               return (
                 <Controller
                   key={name}
@@ -178,36 +127,6 @@ const ChartData = ({ element, onChange, onBack, onClose }) => {
   );
 };
 
-const ChartConfig = ({ element, onChange }) => {
-  const [view, setView] = useState('type');
-  const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
-
-  return (
-    <Popover
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-      placement="left"
-      showArrow
-      offset={10}
-      classNames={{ content: 'w-[400px]' }}
-    >
-      <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbChartPie size="20" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="p-0 shadow border border-default-200">
-        <div className="px-8 py-6 w-full">
-          {view === 'type' && <ChartType element={element} onChange={onChange} onNext={() => setView('data')} />}
-          {view === 'data' && (
-            <ChartData element={element} onChange={onChange} onBack={() => setView('type')} onClose={onOpenChange} />
-          )}
-        </div>
-      </PopoverContent>
-    </Popover>
-  );
-};
-
 const propTypes = {
   element: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -224,7 +143,6 @@ const propTypes = {
 };
 
 ChartConfig.propTypes = propTypes;
-ChartType.propTypes = { ...propTypes, onNext: PropTypes.func };
 ChartData.propTypes = { ...propTypes, onBack: PropTypes.func, onClose: PropTypes.func };
 
 export default ChartConfig;

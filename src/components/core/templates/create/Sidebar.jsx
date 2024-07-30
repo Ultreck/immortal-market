@@ -7,7 +7,7 @@ import Layers from '@/components/core/templates/create/Layers.jsx';
 import { Link } from 'react-router-dom';
 import Uploads from '@/components/core/templates/create/Uploads.jsx';
 import Build from '@/components/core/templates/Build.jsx';
-import Charts from '../Charts';
+import Charts from '@/components/core/templates/create/Charts.jsx';
 
 const Sidebar = () => {
   const [tab, setTab] = useState('components');
@@ -39,6 +39,7 @@ const Sidebar = () => {
               const active = tab === element.key;
               return (
                 <div
+                  tabIndex={0}
                   key={element.key}
                   className={cn('flex flex-col items-center justify-center py-4 rounded-2xl w-full', {
                     'bg-primary-500 text-white dark:bg-primary-100': active,

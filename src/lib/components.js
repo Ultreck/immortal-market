@@ -1,6 +1,5 @@
 import Heading from '@/components/core/templates/create/elements/Heading.jsx';
 import Text from '@/components/core/templates/create/elements/Text.jsx';
-import Chart from '@/components/core/templates/create/elements/Chart.jsx';
 import Logo from '@/components/core/templates/create/elements/Logo.jsx';
 import Circle from '@/components/core/templates/create/elements/Circle.jsx';
 import Rectangle from '@/components/core/templates/create/elements/Rectangle.jsx';
@@ -22,11 +21,13 @@ import FrameStar from '@/components/core/templates/create/elements/FrameStar';
 import FrameDiamond from '@/components/core/templates/create/elements/FrameDiamond';
 import FrameHeart from '@/components/core/templates/create/elements/FrameHeart';
 import SsIcon from '@/components/core/templates/create/elements/SsIcon';
+import TemplateBarChart from '@/components/core/templates/create/elements/charts/TemplateBarChart.jsx';
+import TemplateLineChart from '@/components/core/templates/create/elements/charts/TemplateLineChart.jsx';
+import TemplatePieChart from '@/components/core/templates/create/elements/charts/TemplatePieChart.jsx';
 
 export default {
   heading: Heading,
   text: Text,
-  chart: Chart,
   logo: Logo,
   circle: Circle,
   rectangle: Rectangle,
@@ -48,4 +49,7 @@ export default {
   'frame-heart': FrameHeart,
   'frame-diamond': FrameDiamond,
   icon: SsIcon,
+  'chart-bar': TemplateBarChart,
+  'chart-line': TemplateLineChart,
+  'chart-pie': TemplatePieChart,
 };

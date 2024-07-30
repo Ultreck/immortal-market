@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
 import { CartesianGrid, LabelList, Line, LineChart, XAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { elementPropTypes } from '@/lib/elements.jsx';
 
 const colors = [
   '#2673D9',
@@ -16,7 +17,7 @@ const colors = [
   '#D93566',
 ];
 
-const TemplateLineChart = ({ element }) => {
+const TemplateLineChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const config = {
     [element.config.keys.y]: {
       label: capitalize(element.config.keys.y),
@@ -25,50 +26,55 @@ const TemplateLineChart = ({ element }) => {
   };
 
   return (
-    <ChartContainer config={config} style={{ height: element.height, width: element.width }}>
-      <LineChart
-        accessibilityLayer
-        data={element.config.data}
-        margin={{ top: 20, left: 12, right: 12 }}
-        style={{
-          opacity: element.style.opacity,
-        }}
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      onResize={(size) => {
+        onChange({ ...element, width: size.width, height: size.height });
+      }}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      resizeHandles={['se', 'e', 's']}
+      constrained
+    >
+      <ChartContainer
+        config={config}
+        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
       >
-        <CartesianGrid vertical={false} />
-        <XAxis
-          dataKey={element.config.keys.x}
-          tickLine={false}
-          axisLine={false}
-          tickMargin={8}
-          tickFormatter={(value) => capitalize(value)}
-        />
-        <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-        <Line
-          dataKey={element.config.keys.y}
-          type="natural"
-          strokeWidth={2}
-          activeDot={{ r: 6 }}
-          isAnimationActive={false}
+        <LineChart
+          accessibilityLayer
+          data={element.config.data}
+          margin={{ top: 20, left: 12, right: 12 }}
+          style={{
+            opacity: element.style.opacity,
+          }}
         >
-          <LabelList position="top" offset={12} fontSize={12} />
-        </Line>
-      </LineChart>
-    </ChartContainer>
+          <CartesianGrid vertical={false} />
+          <XAxis
+            dataKey={element.config.keys.x}
+            tickLine={false}
+            axisLine={false}
+            tickMargin={8}
+            tickFormatter={(value) => capitalize(value)}
+          />
+          <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+          <Line
+            dataKey={element.config.keys.y}
+            type="natural"
+            strokeWidth={2}
+            activeDot={{ r: 6 }}
+            isAnimationActive={false}
+          >
+            <LabelList position="top" offset={12} fontSize={12} />
+          </Line>
+        </LineChart>
+      </ChartContainer>
+    </ElementWrapper>
   );
 };
 
-TemplateLineChart.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    style: PropTypes.object,
-    config: PropTypes.object.isRequired,
-  }),
-};
+TemplateLineChart.propTypes = elementPropTypes;
 
 export default TemplateLineChart;
