@@ -83,7 +83,7 @@ const Font = ({ elements, onChange }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
-        <div className="px-4 py-2 w-full gap-y-4 flex flex-col">
+        <div className="px-6 py-6 w-full gap-y-4 flex flex-col">
           <NumberValueTool value={value} handleChange={handleChange} valuesArray={sizes} title="Font Size" />
           <NumberValueTool
             value={LetterSpacingValue}

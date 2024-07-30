@@ -5,16 +5,23 @@ import PageTools from '@/components/core/templates/create/tools/PageTools.jsx';
 import { TbPlus } from 'react-icons/tb';
 import useClipboardEvents from '@/hooks/template/use-clipboard-events.js';
 import useDelete from '@/hooks/template/use-delete.js';
+import { useRef } from 'react';
 
 const Canvas = () => {
+  const root = useRef();
   const pages = useTemplateStore((state) => state.template.pages);
   const addPage = useTemplateStore((state) => state.addPage);
   const zoom = useTemplateStore((state) => state.template.zoom);
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   useClipboardEvents();
   useDelete();
 
+  const handleParentClick = (e) => {
+    if (e.target === root.current) updateTemplate({ selectedElements: [], selectedPage: null });
+  };
+
   return (
-    <div className="flex-1 overflow-y-auto" id="scrollable">
+    <div className="flex-1 overflow-y-auto" ref={root} onClick={handleParentClick} id="scrollable">
       <div className="mx-auto w-max py-10">
         <div
           className="space-y-6 flex flex-col items-center w-max mx-auto"

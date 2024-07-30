@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import Canvas from './Canvas.jsx';
 import { DndContext, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
@@ -6,7 +5,6 @@ import useTemplateStore from '@/store/template.js';
 import { roundToNearestTen } from '@/lib/utils.js';
 import StatusBar from '@/components/core/templates/create/StatusBar.jsx';
 import Sidebar from '@/components/core/templates/create/Sidebar.jsx';
-import Header from '@/components/core/templates/create/Header.jsx';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;
@@ -18,12 +16,10 @@ const getElementDistanceFromTop = (element) => {
 };
 
 const TemplateBuilder = () => {
-  const parent = useRef();
   const sensors = useSensors(useSensor(MouseSensor));
   const getElement = useTemplateStore((state) => state.getElement);
   const getElementPage = useTemplateStore((state) => state.getElementPage);
   const addElements = useTemplateStore((state) => state.addElements);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const updateElements = useTemplateStore((state) => state.updateElements);
 
   const handleDragEnd = (event) => {
@@ -61,16 +57,11 @@ const TemplateBuilder = () => {
     }
   };
 
-  const handleParentClick = (e) => {
-    if (e.target === parent.current) updateTemplate({ selectedElements: [], selectedPage: null });
-  };
-
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
       <div className="grid grid-cols-[420px_1fr] gap-0 h-screen overflow-hidden ">
         <Sidebar />
-        <div ref={parent} className="flex flex-col overflow-hidden relative" onClick={handleParentClick}>
-          <Header />
+        <div className="flex flex-col overflow-hidden relative">
           <Canvas />
           <StatusBar />
         </div>

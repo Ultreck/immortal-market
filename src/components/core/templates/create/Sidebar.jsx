@@ -1,18 +1,19 @@
 import { createElement, useState } from 'react';
 import { RiShapesFill } from 'react-icons/ri';
-import { TbChevronLeft, TbLayoutList, TbPhoto } from 'react-icons/tb';
+import { TbChartInfographic, TbChartPie, TbChevronLeft, TbLayoutList, TbPhoto, TbTools } from 'react-icons/tb';
 import { cn } from '@/lib/utils.js';
-import Elements from '@/components/core/templates/create/Elements.jsx';
+import Components from '@/components/core/templates/create/Components.jsx';
 import Layers from '@/components/core/templates/create/Layers.jsx';
 import { Link } from 'react-router-dom';
 import Uploads from '@/components/core/templates/create/Uploads.jsx';
+import Build from '@/components/core/templates/Build.jsx';
 
 const Sidebar = () => {
-  const [tab, setTab] = useState('elements');
+  const [tab, setTab] = useState('components');
 
   return (
     <div className="h-full border-r border-default-200 dark:border-default-100 bg-[#f4f5f6] dark:bg-default-50/50">
-      <div className="grid grid-cols-[115px_1fr] h-screen overflow-y-auto">
+      <div className="grid grid-cols-[120px_1fr] h-screen overflow-y-auto">
         <div className="px-4 py-6 h-full border-r border-default-200 dark:border-default-100 flex flex-col items-center">
           <div className="space-y-3 w-full">
             <Link to="/templates">
@@ -27,7 +28,10 @@ const Sidebar = () => {
               </div>
             </Link>
             {[
-              { icon: RiShapesFill, title: 'Elements', key: 'elements' },
+              { icon: TbTools, title: 'Build', key: 'build' },
+              { icon: TbChartPie, title: 'Charts', key: 'charts' },
+              { icon: TbChartInfographic, title: 'Infographics', key: 'infographics' },
+              { icon: RiShapesFill, title: 'Components', key: 'components' },
               { icon: TbPhoto, title: 'Uploads', key: 'uploads' },
               { icon: TbLayoutList, title: 'Layers', key: 'layers' },
             ].map((element) => {
@@ -49,7 +53,8 @@ const Sidebar = () => {
           </div>
         </div>
         <div className="px-8 py-8 overflow-x-hidden">
-          {tab === 'elements' && <Elements />}
+          {tab === 'build' && <Build />}
+          {tab === 'components' && <Components />}
           {tab === 'layers' && <Layers />}
           {tab === 'uploads' && <Uploads />}
         </div>
