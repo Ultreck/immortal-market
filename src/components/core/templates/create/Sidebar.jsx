@@ -7,6 +7,7 @@ import Layers from '@/components/core/templates/create/Layers.jsx';
 import { Link } from 'react-router-dom';
 import Uploads from '@/components/core/templates/create/Uploads.jsx';
 import Build from '@/components/core/templates/Build.jsx';
+import Charts from '../Charts';
 
 const Sidebar = () => {
   const [tab, setTab] = useState('components');
@@ -57,6 +58,7 @@ const Sidebar = () => {
           {tab === 'components' && <Components />}
           {tab === 'layers' && <Layers />}
           {tab === 'uploads' && <Uploads />}
+          {tab === 'charts' && <Charts />}
         </div>
       </div>
     </div>

@@ -136,6 +136,47 @@ const elements = [
     ),
   },
   {
+    id: 'text',
+    type: 'text',
+    name: 'Text',
+    icon: icons['text'],
+    data: {
+      type: 'text',
+      text: 'Text',
+      width: 200,
+      height: 12,
+      style: {
+        fontSize: 10,
+        fontWeight: 'normal',
+        color: '#000000',
+        textAlign: 'left',
+        opacity: 1,
+        fontFamily: 'Roboto',
+        letterSpacing: 0,
+        lineHeight: 1,
+        verticalAlign: 'baseline',
+      },
+    },
+    tools: ['bold', 'italic', 'underline', 'font', 'text-color', 'text-align', 'opacity'],
+    group: 'text',
+    preview: (
+      <p
+        style={{
+          fontSize: '10px',
+          fontWeight: 'normal',
+          textAlign: 'left',
+          opacity: 1,
+          fontFamily: 'Roboto',
+          letterSpacing: 0,
+          lineHeight: 1,
+          verticalAlign: 'baseline',
+        }}
+      >
+        Sub Paragraph
+      </p>
+    ),
+  },
+  {
     id: 'chart',
     type: 'chart',
     name: 'Chart',
