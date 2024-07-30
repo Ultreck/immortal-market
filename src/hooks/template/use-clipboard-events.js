@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import elements from '@/lib/elements.jsx';
 import useTemplateStore from '@/store/template.js';
 
 const isValidElement = (element) => {
@@ -39,6 +38,26 @@ const useClipboardEvents = () => {
         for (const item of e.clipboardData.items) {
           if (item.type === 'text/plain') {
             item.getAsString((text) => {
+              const payload = {
+                type: 'heading',
+                text,
+                x: 10,
+                y: 10,
+                width: 300,
+                height: 20,
+                id: crypto.randomUUID(),
+                style: {
+                  fontSize: 16,
+                  fontWeight: 'normal',
+                  color: '#000000',
+                  textAlign: 'left',
+                  opacity: 1,
+                  fontFamily: 'Roboto',
+                  letterSpacing: 0,
+                  lineHeight: 1,
+                  verticalAlign: 'baseline',
+                },
+              };
               try {
                 const _elements = JSON.parse(text);
                 if (_elements.every((el) => isValidElement(el))) {
@@ -47,13 +66,9 @@ const useClipboardEvents = () => {
                     activePage
                   );
                 } else {
-                  const el = elements.find((el) => el.id === 'text');
-                  const payload = { ...el.data, text, x: 10, y: 10, id: crypto.randomUUID() };
                   addElements([payload], activePage);
                 }
               } catch (e) {
-                const el = elements.find((el) => el.id === 'text');
-                const payload = { ...el.data, text, x: 10, y: 10, id: crypto.randomUUID() };
                 addElements([payload], activePage);
               }
               e.preventDefault();

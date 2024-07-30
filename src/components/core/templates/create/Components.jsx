@@ -2,13 +2,13 @@ import { DragOverlay, useDraggable } from '@dnd-kit/core';
 import { capitalize, cn, mergeRefs } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { createElement, useState } from 'react';
-import elements from '@/lib/elements.jsx';
+import elements, { getElementIcon } from '@/lib/elements.jsx';
 import { Tab, Tabs } from '@nextui-org/react';
 
 const Components = () => {
   const [tab, setTab] = useState('design');
 
-  const groups = elements.reduce((acc, element) => {
+  const groups = elements[tab].reduce((acc, element) => {
     if (!element.group) return acc;
     const group = acc.find((group) => group.key === element.group);
     if (group) {
@@ -26,6 +26,7 @@ const Components = () => {
   return (
     <>
       <Tabs
+        variant="bordered"
         aria-label="Options"
         color="primary"
         radius="full"
@@ -57,7 +58,7 @@ const Components = () => {
                   content={
                     element.preview || (
                       <div className="cursor-grab flex flex-col items-center justify-center pointer-events-none text-center h-full">
-                        <span>{createElement(element.icon, { size: 20 })}</span>
+                        <span>{createElement(getElementIcon(element.type), { size: 20 })}</span>
                         <span className="text-sm leading-tight mt-2">{element.name}</span>
                       </div>
                     )
@@ -67,7 +68,7 @@ const Components = () => {
                       <div className="px-6 py-6 text-default-100">{element.preview}</div>
                     ) : (
                       <div className="bg-default-200/60 dark:bg-default-50/80 flex items-center space-x-2 px-4 py-2 w-max rounded-2xl">
-                        {createElement(element.icon, { size: 20 })}
+                        {createElement(getElementIcon(element.type), { size: 20 })}
                         <span className="text-sm">{element.name}</span>
                       </div>
                     )
@@ -102,7 +103,6 @@ DraggableElement.propTypes = {
   element: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    icon: PropTypes.any.isRequired,
     data: PropTypes.shape({
       type: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
