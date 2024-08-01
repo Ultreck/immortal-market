@@ -2,9 +2,9 @@ import { cn } from '@/lib/utils.js';
 import { useRef, useState } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { useDeepCompareEffect } from 'react-use';
-import { elementPropTypes } from '@/lib/elements.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
+const Heading = ({ element, active, highlighted, width, onClick, onChange }) => {
   const input = useRef(null);
   const [minHeight, setMinHeight] = useState(element.height);
 
@@ -39,9 +39,13 @@ const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
       constrained
       className="max-w-full"
     >
-      <div className="overflow-hidden relative w-full h-full">
+      <div className="overflow-hidden relative w-full h-full pl-6">
+        <div
+          className="absolute left-0 top-1/2 -translate-y-1/2 h-[80%] bottom-0 w-2 bg-gray-800 rounded-2xl"
+          style={{ backgroundColor: element.style.color }}
+        />
         <textarea
-          className={cn('bg-transparent w-full h-full resize-none leading-tight overflow-hidden')}
+          className={cn('bg-transparent w-full h-full resize-none leading-[1.2] overflow-hidden')}
           style={element.style}
           rows="1"
           value={element.text}
@@ -56,6 +60,6 @@ const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
   );
 };
 
-Text.propTypes = elementPropTypes;
+Heading.propTypes = ElementPropTypes;
 
-export default Text;
+export default Heading;

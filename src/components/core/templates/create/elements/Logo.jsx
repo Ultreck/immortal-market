@@ -2,7 +2,7 @@ import Logo from '@/components/core/shared/Logo.jsx';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { useRef } from 'react';
 import { useMount } from 'react-use';
-import { elementPropTypes } from '@/lib/elements.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
 const SsLogo = ({ element, active, highlighted, width, onClick, onChange }) => {
   const el = useRef(null);
@@ -37,6 +37,6 @@ const SsLogo = ({ element, active, highlighted, width, onClick, onChange }) => {
   );
 };
 
-SsLogo.propTypes = elementPropTypes;
+SsLogo.propTypes = ElementPropTypes;
 
 export default SsLogo;

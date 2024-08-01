@@ -2,7 +2,7 @@ import { CartesianGrid, LabelList, Line, LineChart, XAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { elementPropTypes } from '@/lib/elements.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
 const colors = [
   '#2673D9',
@@ -75,6 +75,6 @@ const TemplateLineChart = ({ element, active, highlighted, width, onClick, onCha
   );
 };
 
-TemplateLineChart.propTypes = elementPropTypes;
+TemplateLineChart.propTypes = ElementPropTypes;
 
 export default TemplateLineChart;

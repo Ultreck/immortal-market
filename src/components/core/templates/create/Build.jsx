@@ -9,12 +9,10 @@ const Build = () => {
     <div>
       <Tabs
         aria-label="Options"
+        variant="bordered"
         color="primary"
         radius="full"
-        size="lg"
-        classNames={{
-          tab: 'text-base px-4',
-        }}
+        classNames={{ tab: 'text-base px-4' }}
         selectedKey={tab}
         onSelectionChange={setTab}
       >
@@ -25,12 +23,14 @@ const Build = () => {
         type="text"
         name="query"
         id="query"
-        size="sm"
-        classNames={{ input: 'text-base', base: 'transition-all duration-300 w-full mt-4', inputWrapper: 'h-11' }}
+        classNames={{
+          input: 'text-base',
+          base: 'transition-all duration-300 w-full mt-4',
+          inputWrapper: 'h-14 bg-white/[.1] group-hover:bg-white/15 focus-within:!bg-white/15',
+        }}
         startContent={<TbSearch size="24" className="mx-1 opacity-30" />}
         placeholder="Search.."
         radius="full"
-        variant="bordered"
       />
     </div>
   );

@@ -1,9 +1,9 @@
-import { elementPropTypes } from '@/lib/elements';
 import ElementWrapper from '../ElementWrapper';
 import { TbIcons } from 'react-icons/tb';
 import { iconTypes } from '@/lib/icon-types';
 import { createElement, useRef } from 'react';
 import { useMount } from 'react-use';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
 const SsIcon = ({ element, active, highlighted, width, onClick, onChange }) => {
   const el = useRef(null);
@@ -43,6 +43,6 @@ const SsIcon = ({ element, active, highlighted, width, onClick, onChange }) => {
   );
 };
 
-SsIcon.propTypes = elementPropTypes;
+SsIcon.propTypes = ElementPropTypes;
 
 export default SsIcon;

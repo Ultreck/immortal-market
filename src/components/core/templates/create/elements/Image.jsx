@@ -1,6 +1,6 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { Image } from '@nextui-org/react';
-import { elementPropTypes } from '@/lib/elements.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
 const CanvasImage = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -19,7 +19,7 @@ const CanvasImage = ({ element, active, highlighted, width, onClick, onChange })
     >
       <div className="h-full w-full">
         <Image
-          src={element.src}
+          src={element.config.src}
           alt={element.text}
           className="w-full h-full object-cover pointer-events-none rounded-none z-[0]"
           removeWrapper
@@ -30,6 +30,6 @@ const CanvasImage = ({ element, active, highlighted, width, onClick, onChange })
   );
 };
 
-CanvasImage.propTypes = elementPropTypes;
+CanvasImage.propTypes = ElementPropTypes;
 
 export default CanvasImage;

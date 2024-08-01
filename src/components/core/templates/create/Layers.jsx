@@ -4,6 +4,7 @@ import LayerElement from './LayerElement';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useState } from 'react';
 import LayerItem from '@/components/core/templates/create/LayerItem.jsx';
+import NoData from '@/components/ui/NoData.jsx';
 
 const Layers = () => {
   const [element, setElement] = useState(null);
@@ -41,11 +42,7 @@ const Layers = () => {
             ))}
           </div>
         ) : (
-          <div className="py-20">
-            <p className="text-center text-sm opacity-80 max-w-[200px] mx-auto">
-              No elements. Add some elements to the canvas
-            </p>
-          </div>
+          <NoData text="No elements. Add some elements to the canvas" />
         )}
         <DragOverlay>{element ? <LayerItem element={element} /> : null}</DragOverlay>
       </SortableContext>

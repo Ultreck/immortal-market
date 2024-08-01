@@ -18,7 +18,7 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
   return (
     <div
       ref={ref}
-      className={cn('border-2 border-transparent rounded-2xl p-1 select-none', className, {
+      className={cn('border-2 border-transparent rounded-3xl p-1 select-none', className, {
         'border-primary-500 dark:border-primary-400': active,
       })}
       {...props}
@@ -26,8 +26,8 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
       <div
         onClick={() => selectElements([element.id])}
         className={cn(
-          'relative rounded-xl px-4 py-2 flex items-center space-x-2 cursor-pointer justify-between',
-          'bg-default-200/60 hover:bg-default-200 dark:bg-default-100/50 dark:hover:bg-default-100'
+          'relative rounded-2xl px-4 py-2.5 flex items-center space-x-2 cursor-pointer justify-between',
+          'bg-default-200/60 hover:bg-default-200 dark:bg-white/10 dark:hover:bg-white/15'
         )}
       >
         <div className="flex items-center space-x-2 overflow-hidden">

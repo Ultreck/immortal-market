@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 import { useIntersectionObserver } from 'usehooks-ts';
 import { Button, Tooltip } from '@nextui-org/react';
 import { TbCopyPlus, TbSquarePlus, TbTrash } from 'react-icons/tb';
-import components from '@/lib/components.js';
 import ContextMenu from './ContextMenu';
+import { components } from '@/lib/elements.jsx';
 
 const TemplatePage = ({ id }) => {
   const selectionBoxRef = useRef(null);

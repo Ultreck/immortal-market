@@ -1,8 +1,8 @@
-import { elementPropTypes } from '@/lib/elements.jsx';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { cn } from '@/lib/utils.js';
 import { TbTableOff } from 'react-icons/tb';
 import PropTypes from 'prop-types';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
 const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -96,7 +96,7 @@ const Content = ({ element }) => {
   );
 };
 
-Table.propTypes = elementPropTypes;
+Table.propTypes = ElementPropTypes;
 Content.propTypes = {
   element: PropTypes.shape({
     config: PropTypes.shape({

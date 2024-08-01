@@ -1,27 +1,260 @@
-import { DragOverlay, useDraggable } from '@dnd-kit/core';
-import { capitalize, cn, mergeRefs } from '@/lib/utils.js';
-import PropTypes from 'prop-types';
-import { createElement, useState } from 'react';
-import elements, { getElementIcon } from '@/lib/elements.jsx';
+import { useState } from 'react';
 import { Tab, Tabs } from '@nextui-org/react';
+import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
+
+const texts = [
+  {
+    id: 'heading',
+    type: 'heading',
+    name: 'Heading',
+    data: {
+      type: 'heading',
+      text: 'Heading',
+      width: 400,
+      height: 36,
+      style: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: '#000000',
+        textAlign: 'left',
+        opacity: 1,
+        fontFamily: 'Roboto',
+        letterSpacing: 0,
+        lineHeight: 1,
+        verticalAlign: 'baseline',
+      },
+    },
+    group: 'text',
+    category: 'design',
+    preview: (
+      <h1
+        style={{
+          fontSize: '28px',
+          fontWeight: 'bold',
+          textAlign: 'left',
+          opacity: 1,
+          fontFamily: 'Roboto',
+          letterSpacing: 0,
+          lineHeight: 1,
+          verticalAlign: 'baseline',
+        }}
+      >
+        Heading
+      </h1>
+    ),
+  },
+  {
+    id: 'text',
+    type: 'text',
+    name: 'Text',
+    data: {
+      type: 'text',
+      text: 'Text',
+      width: 300,
+      height: 20,
+      style: {
+        fontSize: 16,
+        fontWeight: 'normal',
+        color: '#000000',
+        textAlign: 'left',
+        opacity: 1,
+        fontFamily: 'Roboto',
+        letterSpacing: 0,
+        lineHeight: 1,
+        verticalAlign: 'baseline',
+      },
+    },
+    group: 'text',
+    category: 'design',
+    preview: (
+      <p
+        style={{
+          fontSize: '16px',
+          fontWeight: 'normal',
+          textAlign: 'left',
+          opacity: 1,
+          fontFamily: 'Roboto',
+          letterSpacing: 0,
+          lineHeight: 1,
+          verticalAlign: 'baseline',
+        }}
+      >
+        Paragraph
+      </p>
+    ),
+  },
+];
+
+const shapes = [
+  ...([
+    'rectangle',
+    'circle',
+    'triangle',
+    'rhombus',
+    'arrow-left',
+    'arrow-right',
+    'arrow-up',
+    'arrow-down',
+    'arrow-up-down',
+  ].map((type) => ({
+    id: `shape-${type}`,
+    type: `shape-${type}`,
+    name: `Shape ${type}`,
+    data: {
+      style: {
+        backgroundColor: '#eee',
+        borderWidth: 0,
+        borderColor: '#000000',
+        opacity: 1,
+        borderRadius: 0,
+      },
+      type: `shape-${type}`,
+      text: `Shape ${type}`,
+      width: 120,
+      height: 120,
+    },
+    group: 'shape',
+    category: 'design',
+  })) || []),
+  {
+    id: 'line',
+    type: 'line',
+    name: 'Line',
+    data: {
+      style: {
+        backgroundColor: '#eee',
+        borderWidth: 0,
+        borderColor: '#000000',
+        opacity: 1,
+        borderRadius: 0,
+        strokeWidth: 2,
+      },
+      lineEnd: null,
+      lineStart: null,
+      type: 'line',
+      text: 'Line',
+      width: 100,
+      height: 4,
+    },
+    group: 'shape',
+    category: 'design',
+  },
+];
+
+const frames = [
+  ...([
+    'rectangle',
+    'triangle',
+    'circle',
+    'star',
+    'heart',
+    'rhombus',
+    'arrow-left',
+    'arrow-right',
+    'arrow-up',
+    'arrow-down',
+    'arrow-up-down',
+  ].map((type) => ({
+    id: `frame-${type}`,
+    type: `frame-${type}`,
+    name: `Frame ${type}`,
+    data: {
+      style: {
+        backgroundColor: '#eee',
+        borderWidth: 0,
+        borderColor: '#000000',
+        opacity: 1,
+        borderRadius: 0,
+      },
+      type: `frame-${type}`,
+      text: `Frame ${type}`,
+      width: 300,
+      height: 300,
+      children: [],
+    },
+    group: 'frame',
+    category: 'design',
+  })) || []),
+];
+
+const data = [
+  {
+    id: 'table',
+    type: 'table',
+    name: 'Table',
+    data: {
+      type: 'table',
+      text: 'Table',
+      width: 400,
+      height: 200,
+      style: {
+        fontSize: 14,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#888',
+        color: '#000',
+        opacity: 1,
+      },
+    },
+    group: 'visual',
+    category: 'data',
+  },
+  {
+    id: 'key-value',
+    type: 'key-value',
+    name: 'Key Value',
+    data: {
+      type: 'key-value',
+      text: 'Key Value',
+      width: 400,
+      height: 200,
+      style: {
+        fontSize: 14,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#888',
+        color: '#000',
+        opacity: 1,
+      },
+    },
+    group: 'visual',
+    category: 'data',
+  },
+];
+
+const icons = [
+  // {
+  //   id: 'icon-arrow-up',
+  //   type: 'icon-arrow-up',
+  //   name: 'Arrow Up',
+  //   data: {
+  //     type: 'icon-arrow-up',
+  //     text: 'Arrow Up',
+  //     width: 200,
+  //     height: 200,
+  //     style: { opacity: 1 },
+  //   },
+  //   group: 'placeholders',
+  //   category: 'design',
+  // },
+  {
+    id: 'icon',
+    type: 'icon',
+    name: 'Icon',
+    data: {
+      type: 'icon',
+      text: 'Icon',
+      width: 60,
+      height: 60,
+      style: { opacity: 1 },
+    },
+    group: 'placeholders',
+    category: 'design',
+  },
+];
 
 const Components = () => {
   const [tab, setTab] = useState('design');
-
-  const groups = elements[tab].reduce((acc, element) => {
-    if (!element.group) return acc;
-    const group = acc.find((group) => group.key === element.group);
-    if (group) {
-      group.elements.push(element);
-    } else {
-      acc.push({
-        key: element.group,
-        title: capitalize(element.group),
-        elements: [element],
-      });
-    }
-    return acc;
-  }, []);
 
   return (
     <>
@@ -30,7 +263,6 @@ const Components = () => {
         aria-label="Options"
         color="primary"
         radius="full"
-        size="lg"
         classNames={{
           base: 'mb-6',
           tab: 'text-base px-4',
@@ -41,78 +273,61 @@ const Components = () => {
         <Tab key="design" title="Design" className="text-base" />
         <Tab key="data" title="Data" className="text-base" />
       </Tabs>
-      <div className="space-y-8">
-        {groups.map((group) => (
-          <div key={group.key}>
-            <h2 className="text-lg font-semibold mb-6">{capitalize(group.title)}</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {group.elements.map((element) => (
-                <DraggableElement
-                  key={element.id}
-                  element={element}
-                  className={cn(
-                    'relative bg-default-200 dark:bg-default-50 border border-default-300 dark:border-default-100 hover:bg-default-200 dark:hover:bg-default-100 rounded-2xl px-4 py-5',
-                    { 'col-span-2 bg-transparent dark:bg-transparent text-default-700 px-6 py-4': element.preview },
-                    { 'border-0': !element.preview }
-                  )}
-                  content={
-                    element.preview || (
-                      <div className="cursor-grab flex flex-col items-center justify-center pointer-events-none text-center h-full">
-                        <span>{createElement(getElementIcon(element.type), { size: 20 })}</span>
-                        <span className="text-sm leading-tight mt-2">{element.name}</span>
-                      </div>
-                    )
-                  }
-                  dragging={
-                    element.preview ? (
-                      <div className="px-6 py-6 text-default-100">{element.preview}</div>
-                    ) : (
-                      <div className="bg-default-200/60 dark:bg-default-50/80 flex items-center space-x-2 px-4 py-2 w-max rounded-2xl">
-                        {createElement(getElementIcon(element.type), { size: 20 })}
-                        <span className="text-sm">{element.name}</span>
-                      </div>
-                    )
-                  }
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+      {tab === 'design' && <DesignElements />}
+      {tab === 'data' && <DataElements />}
     </>
   );
 };
 
-export const DraggableElement = ({ element, content, dragging, className }) => {
-  const { attributes, listeners, setNodeRef, isDragging, setActivatorNodeRef } = useDraggable({
-    id: element.id,
-    data: element.data,
-  });
-
+const DesignElements = () => {
   return (
-    <div className={className} ref={mergeRefs(setNodeRef, setActivatorNodeRef)} {...listeners} {...attributes}>
-      {content}
-      <DragOverlay zIndex={1} dropAnimation={null}>
-        {isDragging && dragging}
-      </DragOverlay>
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Text</h2>
+        <div className="space-y-4">
+          {texts.map((element) => (
+            <DraggableElementWrapper key={element.id} element={element} />
+          ))}
+        </div>
+      </div>
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Shapes</h2>
+        <div className="grid grid-cols-2 gap-4">
+          {shapes.map((element) => (
+            <DraggableElementWrapper key={element.id} element={element} />
+          ))}
+        </div>
+      </div>
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Frames</h2>
+        <div className="grid grid-cols-2 gap-4">
+          {frames.map((element) => (
+            <DraggableElementWrapper key={element.id} element={element} />
+          ))}
+        </div>
+      </div>
+      <div>
+        <h2 className="text-lg font-semibold mb-4">Icons</h2>
+        <div className="grid grid-cols-2 gap-4">
+          {icons.map((element) => (
+            <DraggableElementWrapper key={element.id} element={element} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-DraggableElement.propTypes = {
-  element: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    data: PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-    }),
-  }),
-  content: PropTypes.any,
-  dragging: PropTypes.any,
-  className: PropTypes.string,
+const DataElements = () => {
+  return (
+    <div className="space-y-8">
+      <div className="grid grid-cols-2 gap-4">
+        {data.map((element) => (
+          <DraggableElementWrapper key={element.id} element={element} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Components;

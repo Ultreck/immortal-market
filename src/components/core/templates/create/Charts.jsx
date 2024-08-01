@@ -1,9 +1,8 @@
 import { Tab, Tabs } from '@nextui-org/react';
-import { createElement, useState } from 'react';
-import { TbChartBar, TbChartLine, TbChartPie } from 'react-icons/tb';
-import { DraggableElement } from '@/components/core/templates/create/Components.jsx';
-import { cn } from '@/lib/utils.js';
+import { useState } from 'react';
 import NoData from '@/components/ui/NoData.jsx';
+import { RiBarChart2Line, RiLineChartLine, RiPieChartLine } from 'react-icons/ri';
+import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -15,7 +14,6 @@ const Charts = () => {
         aria-label="Options"
         color="primary"
         radius="full"
-        size="lg"
         classNames={{
           base: 'mb-6',
           tab: 'text-base px-4',
@@ -36,9 +34,9 @@ const StandardCharts = () => {
   const elements = [
     {
       id: 'chart-bar',
-      type: 'chart',
+      type: 'chart-bar',
       name: 'Bar Chart',
-      icon: TbChartBar,
+      icon: RiBarChart2Line,
       data: {
         type: 'chart-bar',
         text: 'Bar Chart',
@@ -59,9 +57,9 @@ const StandardCharts = () => {
     },
     {
       id: 'chart-line',
-      type: 'chart',
+      type: 'chart-line',
       name: 'Line Chart',
-      icon: TbChartLine,
+      icon: RiLineChartLine,
       data: {
         type: 'chart-line',
         text: 'Line Chart',
@@ -82,9 +80,9 @@ const StandardCharts = () => {
     },
     {
       id: 'chart-pie',
-      type: 'chart',
+      type: 'chart-pie',
       name: 'Pie Chart',
-      icon: TbChartPie,
+      icon: RiPieChartLine,
       data: {
         type: 'chart-pie',
         text: 'Pie Chart',
@@ -110,29 +108,7 @@ const StandardCharts = () => {
   return (
     <div className="grid grid-cols-2 gap-4">
       {elements.map((element) => {
-        return (
-          <DraggableElement
-            key={element.id}
-            element={element}
-            className={cn(
-              'relative bg-default-200 dark:bg-default-50 border border-default-300 dark:border-default-100 hover:bg-default-200 dark:hover:bg-default-100 rounded-2xl px-4 py-5',
-              { 'col-span-2 bg-transparent dark:bg-transparent text-default-700 px-6 py-4': element.preview },
-              { 'border-0': !element.preview }
-            )}
-            content={
-              <div className="cursor-grab flex flex-col items-center justify-center pointer-events-none text-center h-full">
-                <span>{createElement(element.icon, { size: 24 })}</span>
-                <span className="text-sm leading-tight mt-2">{element.name}</span>
-              </div>
-            }
-            dragging={
-              <div className="bg-default-200/60 dark:bg-default-50/80 flex items-center space-x-2 px-4 py-2 w-max rounded-2xl">
-                {createElement(element.icon, { size: 20 })}
-                <span className="text-sm">{element.name}</span>
-              </div>
-            }
-          />
-        );
+        return <DraggableElementWrapper key={element.id} element={element} />;
       })}
     </div>
   );

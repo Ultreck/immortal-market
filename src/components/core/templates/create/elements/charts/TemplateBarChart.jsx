@@ -2,7 +2,7 @@ import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { elementPropTypes } from '@/lib/elements.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
 const chartData = [
   { browser: 'chrome', visitors: 187, fill: 'var(--color-chrome)' },
@@ -70,6 +70,6 @@ const TemplateBarChart = ({ element, active, highlighted, width, onClick, onChan
   );
 };
 
-TemplateBarChart.propTypes = elementPropTypes;
+TemplateBarChart.propTypes = ElementPropTypes;
 
 export default TemplateBarChart;

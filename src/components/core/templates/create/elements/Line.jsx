@@ -1,5 +1,5 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { elementPropTypes } from '@/lib/elements.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
 const Line = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -92,6 +92,6 @@ const Line = ({ element, active, highlighted, width, onClick, onChange }) => {
   );
 };
 
-Line.propTypes = elementPropTypes;
+Line.propTypes = ElementPropTypes;
 
 export default Line;

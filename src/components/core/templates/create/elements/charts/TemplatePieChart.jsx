@@ -2,7 +2,7 @@ import { LabelList, Pie, PieChart } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { elementPropTypes } from '@/lib/elements.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
 const colors = [
   '#E66B5B',
@@ -72,6 +72,6 @@ const TemplatePieChart = ({ element, active, highlighted, width, onClick, onChan
   );
 };
 
-TemplatePieChart.propTypes = elementPropTypes;
+TemplatePieChart.propTypes = ElementPropTypes;
 
 export default TemplatePieChart;

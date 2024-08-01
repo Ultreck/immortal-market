@@ -3,11 +3,11 @@ import useBusiness from '@/hooks/use-business.js';
 import { Image, Skeleton } from '@nextui-org/react';
 import { getImageLink } from '@/lib/utils.js';
 import { icons } from '@/lib/elements.jsx';
-import { DraggableElement } from '@/components/core/templates/create/Components.jsx';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import DraggableElement from '@/components/core/templates/create/sidebar/DraggableElement.jsx';
 
 const Uploads = () => {
   const toast = useToast();
@@ -39,12 +39,14 @@ const Uploads = () => {
       text: 'Image',
       width: 400,
       height: 300,
-      src: getImageLink(upload.file),
       style: {
         borderWidth: 0,
         borderColor: '#000',
         opacity: 1,
         borderRadius: 0,
+      },
+      config: {
+        src: getImageLink(upload.file),
       },
     },
   }));
@@ -53,7 +55,7 @@ const Uploads = () => {
     <div>
       <DndFileInput label="Drop images or click to select" onChange={handleChange} className="mb-8" />
       {isUploadsLoading ? (
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-4">
           <Skeleton className="aspect-square w-full rounded-2xl" />
           <Skeleton className="aspect-square w-full rounded-2xl" />
           <Skeleton className="aspect-square w-full rounded-2xl" />
@@ -62,7 +64,7 @@ const Uploads = () => {
       ) : (
         <>
           {elements.length > 0 ? (
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4">
               {(isCreateUploadLoading || isFetching) && files.length > 0 && (
                 <>
                   {files.map((_, i) => (
@@ -77,14 +79,14 @@ const Uploads = () => {
                   className="overflow-hidden"
                   content={
                     <Image
-                      src={element.data.src}
+                      src={element.data.config.src}
                       alt={element.data.text}
                       className="w-full h-full object-cover rounded-2xl cursor-grab aspect-square"
                     />
                   }
                   dragging={
                     <Image
-                      src={element.data.src}
+                      src={element.data.config.src}
                       alt={element.data.text}
                       className="w-full h-full object-cover rounded-2xl aspect-square"
                     />

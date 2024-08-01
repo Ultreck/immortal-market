@@ -82,12 +82,21 @@ const useClipboardEvents = () => {
               const payload = {
                 type: 'image',
                 text: 'Image',
-                src: url,
                 width: 400,
                 height: 300,
                 id: crypto.randomUUID(),
                 x: 0,
                 y: 0,
+                style: {
+                  backgroundColor: '#eee',
+                  borderWidth: 0,
+                  borderColor: '#000000',
+                  opacity: 1,
+                  borderRadius: 0,
+                },
+                config: {
+                  src: url,
+                },
               };
               const selected = selectedElements.length > 0 ? getElement(selectedElements[0]) : null;
               if (selected && selected.type.startsWith('frame')) {
