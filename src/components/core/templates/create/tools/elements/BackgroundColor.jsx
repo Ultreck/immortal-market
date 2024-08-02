@@ -20,6 +20,16 @@ const colors = [
   '#2b3793',
 ];
 
+const gradientBackgrounds = [
+  'linear-gradient(to right, #fc466b, #3f5efb)',
+  'linear-gradient(180deg, rgba(22,179,181,1) 0%, rgba(0,153,255,1) 100%)',
+  'linear-gradient(to right, #00b09b, #96c93d)',
+  'linear-gradient(to right, #396afc, #2948ff)',
+  'linear-gradient(to right, #b24592, #f15f79)',
+  'linear-gradient(to right, #ffb347, #ffcc33)',
+  'linear-gradient(to right, #ff512f, #dd2476)',
+];
+
 const BackgroundColor = ({ elements, onChange }) => {
   const values = elements.map((e) => e.style.backgroundColor);
   const same = values.every((v) => v === values[0]);
@@ -27,7 +37,7 @@ const BackgroundColor = ({ elements, onChange }) => {
 
   const handleChange = (v) => {
     if (!v) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, backgroundColor: v } })));
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, background: v, backgroundColor: v } })));
   };
 
   return (
@@ -46,6 +56,29 @@ const BackgroundColor = ({ elements, onChange }) => {
                 key={index}
                 className="w-[25px] h-[25px] rounded-full hover:scale-105 transition-transform cursor-pointer relative"
                 style={{ backgroundColor: color }}
+                onClick={() => handleChange(color)}
+              >
+                <AnimatePresence mode="wait">
+                  {value === color && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="absolute inset-0 rounded-full bg-white/50 dark:bg-black/50 flex items-center justify-center"
+                    >
+                      <HiCheck size={16} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 mb-2">Gradients</p>
+          <div className="grid grid-cols-6 gap-y-3 gap-x-3">
+            {gradientBackgrounds.map((color, index) => (
+              <div
+                key={index}
+                className="w-[25px] h-[25px] rounded-full hover:scale-105 transition-transform cursor-pointer relative"
+                style={{ background: color }}
                 onClick={() => handleChange(color)}
               >
                 <AnimatePresence mode="wait">
@@ -85,3 +118,4 @@ BackgroundColor.propTypes = {
 };
 
 export default BackgroundColor;
+
