@@ -8,6 +8,7 @@ const ZoomSlider = () => {
   return (
     <div className="flex items-center space-x-3">
       <Slider
+        aria-label="zoom"
         color="foreground"
         className="w-40"
         value={scale * 100}
@@ -28,3 +29,4 @@ const ZoomSlider = () => {
 };
 
 export default ZoomSlider;
+

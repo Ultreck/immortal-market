@@ -17,6 +17,7 @@ import Line from './elements/Line.jsx';
 import Font from './elements/Font.jsx';
 import IconConfig from './elements/IconConfig.jsx';
 import { getElementTools } from '@/lib/elements.jsx';
+import Animation from './elements/Animation.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -95,6 +96,9 @@ const ElementTools = () => {
             }
             if (tool === 'line') {
               return <Line key={tool} elements={elements} onChange={handleUpdateElements} />;
+            }
+            if (tool === 'animation') {
+              return <Animation key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             throw new Error(`Unknown tool ${tool}`);
           })}

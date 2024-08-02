@@ -31,7 +31,7 @@ const SsIcon = ({ element, active, highlighted, width, onClick, onChange }) => {
       constrained
     >
       {element.config?.name ? (
-        <div ref={el} className="!h-max" style={{ opacity: element.style.opacity }}>
+        <div ref={el} className="!h-max" style={{ ...element.style }}>
           {createElement(iconTypes.find((icon) => icon.name === element.config.name)?.icon, { size: element.width })}
         </div>
       ) : (
