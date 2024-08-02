@@ -16,7 +16,7 @@ const ZoomSlider = () => {
         minValue={20}
         showOutline
         classNames={{
-          thumb: 'before:hidden after:hidden',
+          thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
           track: 'border-s-default-300',
           filler: 'bg-gradient-to-r from-default-300 to-default-400',
         }}
