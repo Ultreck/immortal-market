@@ -4,6 +4,7 @@ import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
 import { HiCheck } from 'react-icons/hi2';
 import { AnimatePresence, motion } from 'framer-motion';
+import EyeDropTool from './EyeDropTool.jsx';
 
 const colors = [
   '#000000',
@@ -95,6 +96,7 @@ const BackgroundColor = ({ elements, onChange }) => {
               </div>
             ))}
           </div>
+          <EyeDropTool value={value} onChange={handleChange} />
         </div>
       </PopoverContent>
     </Popover>
@@ -118,4 +120,3 @@ BackgroundColor.propTypes = {
 };
 
 export default BackgroundColor;
-
