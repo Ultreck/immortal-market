@@ -6,10 +6,10 @@ export const getResizeHandles = ({ axis, ref, active }) => {
       <div
         ref={ref}
         className={cn('absolute rounded-full bg-white shadow border border-gray-400 z-[10] w-[14px] h-[14px]', {
-          '-right-[8px] -top-[8px] cursor-ne-resize': axis === 'ne',
-          '-left-[8px] -top-[8px] cursor-nw-resize': axis === 'nw',
-          '-left-[8px] -bottom-[8px] cursor-sw-resize': axis === 'sw',
-          '-right-[8px] -bottom-[8px] cursor-se-resize': axis === 'se',
+          '-right-[6px] -top-[6px] cursor-ne-resize': axis === 'ne',
+          '-left-[6px] -top-[6px] cursor-nw-resize': axis === 'nw',
+          '-left-[6px] -bottom-[6px] cursor-sw-resize': axis === 'sw',
+          '-right-[6px] -bottom-[6px] cursor-se-resize': axis === 'se',
           hidden: !active,
         })}
       />
