@@ -13,6 +13,7 @@ const DraggableElement = ({
   onControlDblClick,
   isDisabled = false,
   constrained = false,
+  scale = 1,
 }) => {
   const ref = useRef(null);
 
@@ -21,8 +22,8 @@ const DraggableElement = ({
       handle={`.${classNames.handle}`}
       bounds={constrained ? 'parent' : null}
       position={{ x: position.x, y: position.y }}
-      grid={[10, 10]}
-      scale={1}
+      grid={[5, 5]}
+      scale={scale}
       onDrag={(e, ui) => onDrag({ x: ui.x, y: ui.y })}
       nodeRef={ref}
       onContextMenu
@@ -61,6 +62,7 @@ DraggableElement.propTypes = {
   onControlDblClick: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool,
   constrained: PropTypes.bool,
+  scale: PropTypes.number,
 };
 
 export default DraggableElement;

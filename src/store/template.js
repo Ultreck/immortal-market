@@ -20,7 +20,7 @@ const useTemplateStore = createWithEqualityFn(
       selectedElements: [],
       selectedPage: null,
       activePage: null,
-      zoom: 1,
+      scale: 1,
     },
     updateTemplate: (data) => {
       set((state) => ({ template: { ...state.template, ...data } }));

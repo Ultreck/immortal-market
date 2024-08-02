@@ -4,6 +4,7 @@ import { getResizeHandles } from '@/components/core/templates/create/ResizeHandl
 import DraggableElement from '@/components/core/templates/create/DraggableElement.jsx';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import useTemplateStore from '@/store/template.js';
 
 const ElementWrapper = ({
   element,
@@ -23,6 +24,7 @@ const ElementWrapper = ({
   editable = false,
   className,
 }) => {
+  const scale = useTemplateStore((state) => state.template.scale);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -49,6 +51,7 @@ const ElementWrapper = ({
       }}
       isDisabled={isEditing}
       constrained={constrained}
+      scale={scale}
     >
       <div
         className={cn(
@@ -67,7 +70,7 @@ const ElementWrapper = ({
         resizeHandles={resizeHandles}
         handle={(axis, ref) => getResizeHandles({ axis, ref, active })}
         onResize={(e, { size }) => onResize(size)}
-        draggableOpts={{ grid: [10, 10] }}
+        draggableOpts={{ grid: [5, 5], scale }}
       >
         {typeof children === 'function' ? children({ isEditing }) : children}
       </ResizableBox>
@@ -100,6 +103,7 @@ ElementWrapper.propTypes = {
   className: PropTypes.string,
   highlighted: PropTypes.bool,
   editable: PropTypes.bool,
+  scale: PropTypes.number,
 };
 
 export default ElementWrapper;

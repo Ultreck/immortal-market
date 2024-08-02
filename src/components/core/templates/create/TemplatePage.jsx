@@ -27,7 +27,7 @@ const TemplatePage = ({ id }) => {
   const index = pages.findIndex((p) => p.id === id);
   const { setNodeRef, node } = useDroppable({ id: `canvas-${page.id}` });
   const [contextMenu, setContextMenu] = useState({ isOpen: false, position: { x: 0, y: 0 } });
-  const zoom = useTemplateStore((state) => state.template.zoom);
+  const scale = useTemplateStore((state) => state.template.scale);
 
   useEffect(() => {
     const handleClick = () => setContextMenu({ isOpen: false, position: { x: 0, y: 0 } });
@@ -195,12 +195,12 @@ const TemplatePage = ({ id }) => {
   const getElementUnderCursor = useCallback(
     (event) => {
       const canvasRect = node.current.getBoundingClientRect();
-      const x = (event.clientX - canvasRect.left) / zoom;
-      const y = (event.clientY - canvasRect.top) / zoom;
+      const x = (event.clientX - canvasRect.left) / scale;
+      const y = (event.clientY - canvasRect.top) / scale;
       const pages = [...page.elements].reverse();
       return pages.find((el) => x >= el.x && x <= el.x + el.width && y >= el.y && y <= el.y + el.height);
     },
-    [node, page.elements, zoom]
+    [node, page.elements, scale]
   );
 
   const handleContextMenu = useCallback(
@@ -222,7 +222,7 @@ const TemplatePage = ({ id }) => {
 
   return (
     <div className="relative">
-      <div className="flex items-center justify-between mb-2 px-1.5">
+      <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
         <h2 className="font-semibold">Page {index + 1}</h2>
         <div className="flex items-center space-x-1">
           <Tooltip content="Duplicate page" showArrow>
@@ -245,39 +245,48 @@ const TemplatePage = ({ id }) => {
         </div>
       </div>
       <div className={cn('relative border-2 border-transparent p-0.5 w-max', { 'border-primary-500': selected })}>
-        <motion.div
-          layout
-          ref={mergeRefs(setNodeRef, intersectionRef)}
-          id={`canvas-${page.id}`}
-          className={cn('bg-white text-black border border-default-200 relative overflow-hidden canvas')}
-          style={{ width: page.width, height: page.height, backgroundColor: page.style.backgroundColor }}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onContextMenu={handleContextMenu}
-        >
-          {page.elements.map((element) => {
-            const active = selectedElements.includes(element.id);
-            const highlighted = highlightedElements.includes(element.id);
-            return (
-              <Fragment key={element.id}>
-                {components[element.type] ? (
-                  createElement(components[element.type], {
-                    element,
-                    active,
-                    highlighted,
-                    onClick: handleElementClick,
-                    onChange: handleUpdateElement,
-                    width: page.width,
-                  })
-                ) : (
-                  <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
-                    Unknown element type: {element.type}
-                  </div>
-                )}
-              </Fragment>
-            );
-          })}
+        <motion.div style={{ width: page.width * scale, height: page.height * scale }}>
+          <div
+            style={{
+              transform: `scale(${scale})`,
+              width: page.width,
+              height: page.height,
+              backgroundColor: page.style.backgroundColor,
+            }}
+            ref={mergeRefs(setNodeRef, intersectionRef)}
+            id={`canvas-${page.id}`}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onContextMenu={handleContextMenu}
+            className={cn(
+              'bg-white text-black border border-default-200 relative overflow-hidden origin-top-left canvas'
+            )}
+          >
+            {page.elements.map((element) => {
+              const active = selectedElements.includes(element.id);
+              const highlighted = highlightedElements.includes(element.id);
+              return (
+                <Fragment key={element.id}>
+                  {components[element.type] ? (
+                    createElement(components[element.type], {
+                      element,
+                      active,
+                      highlighted,
+                      onClick: handleElementClick,
+                      onChange: handleUpdateElement,
+                      width: page.width,
+                      scale,
+                    })
+                  ) : (
+                    <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
+                      Unknown element type: {element.type}
+                    </div>
+                  )}
+                </Fragment>
+              );
+            })}
+          </div>
           {!!selectionBox && (
             <div
               ref={selectionBoxRef}

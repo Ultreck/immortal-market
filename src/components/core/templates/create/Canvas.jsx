@@ -6,14 +6,15 @@ import { TbPlus } from 'react-icons/tb';
 import useClipboardEvents from '@/hooks/template/use-clipboard-events.js';
 import useDelete from '@/hooks/template/use-delete.js';
 import { useRef } from 'react';
+import useMousewheelScale from '@/hooks/template/use-mousewheel-scale.js';
 
 const Canvas = () => {
-  const root = useRef();
+  const root = useRef(null);
   const pages = useTemplateStore((state) => state.template.pages);
   const addPage = useTemplateStore((state) => state.addPage);
-  const zoom = useTemplateStore((state) => state.template.zoom);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   useClipboardEvents();
+  useMousewheelScale(root);
   useDelete();
 
   const handleParentClick = (e) => {
@@ -22,11 +23,8 @@ const Canvas = () => {
 
   return (
     <div className="flex-1 overflow-y-auto" ref={root} onClick={handleParentClick} id="scrollable">
-      <div className="mx-auto w-max py-10">
-        <div
-          className="space-y-6 flex flex-col items-center w-max mx-auto"
-          style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}
-        >
+      <div className="mx-auto w-max py-10 px-10">
+        <div className="space-y-6 flex flex-col items-center w-max mx-auto">
           {pages.map((page) => {
             return <TemplatePage key={page.id} id={page.id} />;
           })}

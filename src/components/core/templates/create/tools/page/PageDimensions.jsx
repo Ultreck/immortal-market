@@ -8,7 +8,7 @@ const PageDimensions = ({ page, onChange }) => {
   const [height, setHeight] = useState(page.height);
 
   const options = [
-    { text: 'Default', value: 'default', width: 600, height: 600 },
+    { text: 'Default', value: 'default', width: 1920, height: 1920 },
     { text: 'Presentation 16:9', value: 'presentation-16:9', width: 1920, height: 1080 },
     { text: 'Presentation 4:3', value: 'presentation-4:3', width: 1024, height: 768 },
     { text: 'Letter', value: 'letter', width: 794, height: 1123 },
