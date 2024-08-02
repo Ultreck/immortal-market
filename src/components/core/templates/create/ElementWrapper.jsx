@@ -44,7 +44,7 @@ const ElementWrapper = ({
       }}
       classNames={{
         handle: `handle-${element.id}`,
-        base: cn('w-max border-2 border-transparent absolute group select-none', className),
+        base: cn('w-max border-2 border-transparent absolute group select-none pointer-events-auto', className),
       }}
       onControlDblClick={() => {
         if (editable) setIsEditing(true);

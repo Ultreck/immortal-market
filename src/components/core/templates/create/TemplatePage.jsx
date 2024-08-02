@@ -245,7 +245,17 @@ const TemplatePage = ({ id }) => {
         </div>
       </div>
       <div className={cn('relative border-2 border-transparent p-0.5 w-max', { 'border-primary-500': selected })}>
-        <motion.div style={{ width: page.width * scale, height: page.height * scale }}>
+        <motion.div
+          style={{ width: page.width * scale, height: page.height * scale }}
+          ref={mergeRefs(setNodeRef, intersectionRef)}
+          id={`canvas-${page.id}`}
+          draggable={false}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onContextMenu={handleContextMenu}
+          className={cn('bg-white text-black border border-default-200 relative overflow-hidden canvas')}
+        >
           <div
             style={{
               transform: `scale(${scale})`,
@@ -253,15 +263,7 @@ const TemplatePage = ({ id }) => {
               height: page.height,
               backgroundColor: page.style.backgroundColor,
             }}
-            ref={mergeRefs(setNodeRef, intersectionRef)}
-            id={`canvas-${page.id}`}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onContextMenu={handleContextMenu}
-            className={cn(
-              'bg-white text-black border border-default-200 relative overflow-hidden origin-top-left canvas'
-            )}
+            className="origin-top-left pointer-events-none"
           >
             {page.elements.map((element) => {
               const active = selectedElements.includes(element.id);
