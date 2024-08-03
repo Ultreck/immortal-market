@@ -33,6 +33,7 @@ import SsIcon from '@/components/core/templates/create/elements/SsIcon.jsx';
 import TemplateBarChart from '@/components/core/templates/create/elements/charts/TemplateBarChart.jsx';
 import TemplateLineChart from '@/components/core/templates/create/elements/charts/TemplateLineChart.jsx';
 import TemplatePieChart from '@/components/core/templates/create/elements/charts/TemplatePieChart.jsx';
+import Template10Circle from '@/components/core/templates/create/elements/charts/Template10Circle.jsx';
 import GenericShape from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
 import GenericFrameShape from '@/components/core/templates/create/elements/frames/GenericFrameShape.jsx';
 
@@ -68,6 +69,8 @@ export const icons = {
   'chart-bar': TbChartBar,
   'chart-line': TbChartLine,
   'chart-pie': TbChartPieFilled,
+  'chart-10-circle': TbCapsuleHorizontalFilled,
+  'chart-10-square': TbCapsuleHorizontalFilled,
 };
 
 export const tools = {
@@ -102,6 +105,8 @@ export const tools = {
   'chart-bar': ['chart', 'opacity', 'animation'],
   'chart-line': ['chart', 'opacity', 'animation'],
   'chart-pie': ['chart', 'opacity', 'animation'],
+  'chart-10-circle': ['advanced-chart', 'opacity'],
+  'chart-10-square': ['advanced-chart', 'opacity'],
 };
 
 export const components = {
@@ -136,6 +141,8 @@ export const components = {
   'chart-bar': TemplateBarChart,
   'chart-line': TemplateLineChart,
   'chart-pie': TemplatePieChart,
+  'chart-10-circle': Template10Circle,
+  'chart-10-square': Template10Circle,
 };
 
 export const getElementTools = (type) => {

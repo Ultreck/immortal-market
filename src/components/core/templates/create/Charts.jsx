@@ -1,8 +1,10 @@
 import { Tab, Tabs } from '@nextui-org/react';
 import { useState } from 'react';
-import NoData from '@/components/ui/NoData.jsx';
 import { RiBarChart2Line, RiLineChartLine, RiPieChartLine } from 'react-icons/ri';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
+import Advanced10Circle from './elements/charts/advanced/Advanced10Circle';
+import { TbCircleFilled } from 'react-icons/tb';
+import { color } from 'framer-motion';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -115,7 +117,38 @@ const StandardCharts = () => {
 };
 
 const AdvancedCharts = () => {
-  return <NoData text="Coming soon.." />;
+  const elements = [
+    {
+      id: 'chart-10-circle',
+      type: 'chart-10-circle',
+      name: '10 Circles',
+      icon: RiPieChartLine,
+      data: {
+        type: 'chart-10-circle',
+        text: '10 Circles',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          percentage: 65,
+          shape: 'circle',
+          color: '#008000'
+        },
+      },
+      preview: <Advanced10Circle element={{ config: { percentage: 65, shape: 'circle', color: '#008000' } }} />,
+    },
+  ];
+  return (
+    <>
+      <div className="grid grid-cols-1 gap-4">
+        {elements.map((element) => {
+          return <DraggableElementWrapper key={element.id} element={element} />;
+        })}
+      </div>
+      {/* <NoData text="Coming soon.." /> */}
+    </>
+  );
 };
 
 export default Charts;
+
