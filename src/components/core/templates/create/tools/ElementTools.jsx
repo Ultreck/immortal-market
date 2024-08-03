@@ -38,7 +38,7 @@ const ElementTools = () => {
   }, [elements, page, selectedElements.length]);
 
   const handleUpdateElements = (elements) => {
-    updateElements(elements, page.id);
+    updateElements(elements, page.id, true);
   };
 
   return (

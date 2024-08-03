@@ -25,6 +25,7 @@ const ElementWrapper = ({
   className,
 }) => {
   const scale = useTemplateStore((state) => state.template.scale);
+  const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -52,6 +53,7 @@ const ElementWrapper = ({
       isDisabled={isEditing}
       constrained={constrained}
       scale={scale}
+      onDragStart={() => addUndoHistory()}
     >
       <div
         className={cn(
@@ -71,6 +73,8 @@ const ElementWrapper = ({
         handle={(axis, ref) => getResizeHandles({ axis, ref, active })}
         onResize={(e, { size }) => onResize(size)}
         draggableOpts={{ grid: [5, 5], scale }}
+        transformScale={scale}
+        onResizeStart={() => addUndoHistory()}
       >
         {typeof children === 'function' ? children({ isEditing }) : children}
       </ResizableBox>

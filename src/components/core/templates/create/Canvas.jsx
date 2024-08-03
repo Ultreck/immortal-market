@@ -7,6 +7,7 @@ import useClipboardEvents from '@/hooks/template/use-clipboard-events.js';
 import useDelete from '@/hooks/template/use-delete.js';
 import { useRef } from 'react';
 import useMousewheelScale from '@/hooks/template/use-mousewheel-scale.js';
+import useHistory from '@/hooks/template/use-history.js';
 
 const Canvas = () => {
   const root = useRef(null);
@@ -16,6 +17,7 @@ const Canvas = () => {
   useClipboardEvents();
   useMousewheelScale(root);
   useDelete();
+  useHistory();
 
   const handleParentClick = (e) => {
     if (e.target === root.current) updateTemplate({ selectedElements: [], selectedPage: null });

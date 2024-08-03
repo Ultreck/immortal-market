@@ -42,7 +42,7 @@ const TemplateBuilder = () => {
             },
           ],
         };
-        updateElements([el], page.id);
+        updateElements([el], page.id, true);
       }
     } else if (over && collisions.some((i) => i.id.startsWith('canvas'))) {
       const id = collisions.find((i) => i.id.startsWith('canvas')).id;

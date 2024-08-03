@@ -21,6 +21,19 @@ const useTemplateStore = createWithEqualityFn(
       selectedPage: null,
       activePage: null,
       scale: 1,
+      undoHistory: [],
+      redoHistory: [],
+    },
+    addUndoHistory: () => {
+      set((state) => {
+        return {
+          template: {
+            ...state.template,
+            undoHistory: [...state.template.undoHistory, state.template.pages],
+            redoHistory: [],
+          },
+        };
+      });
     },
     updateTemplate: (data) => {
       set((state) => ({ template: { ...state.template, ...data } }));
@@ -42,23 +55,23 @@ const useTemplateStore = createWithEqualityFn(
       return get().template.pages.find((page) => page.elements.find((el) => el.id === elementId));
     },
     addElements: (elements, pageId) => {
-      set((state) => {
-        return {
-          template: {
-            ...state.template,
-            pages: state.template.pages.map((page) => {
-              if (page.id === pageId) {
-                return { ...page, elements: [...page.elements, ...elements] };
-              }
-              return page;
-            }),
-            selectedElements: elements.map((el) => el.id),
-            selectedPage: null,
-          },
-        };
-      });
+      get().addUndoHistory();
+      set((state) => ({
+        template: {
+          ...state.template,
+          pages: state.template.pages.map((page) => {
+            if (page.id === pageId) {
+              return { ...page, elements: [...page.elements, ...elements] };
+            }
+            return page;
+          }),
+          selectedElements: elements.map((el) => el.id),
+          selectedPage: null,
+        },
+      }));
     },
-    updateElements: (elements, pageId) => {
+    updateElements: (elements, pageId, addToUndoHistory = false) => {
+      if (addToUndoHistory) get().addUndoHistory();
       set((state) => {
         return {
           template: {
@@ -81,6 +94,7 @@ const useTemplateStore = createWithEqualityFn(
       });
     },
     deleteElements: (ids, pageId) => {
+      get().addUndoHistory();
       set((state) => ({
         template: {
           ...state.template,
@@ -107,6 +121,7 @@ const useTemplateStore = createWithEqualityFn(
       }));
     },
     addPage: (payload, after) => {
+      get().addUndoHistory();
       const page = payload || {
         id: crypto.randomUUID(),
         width: 600,
@@ -132,7 +147,8 @@ const useTemplateStore = createWithEqualityFn(
         };
       });
     },
-    updatePage: (data, pageId) => {
+    updatePage: (data, pageId, addToUndoHistory = false) => {
+      if (addToUndoHistory) get().addUndoHistory();
       set((state) => ({
         template: {
           ...state.template,
@@ -146,6 +162,7 @@ const useTemplateStore = createWithEqualityFn(
       }));
     },
     deletePage: (id) => {
+      get().addUndoHistory();
       set((state) => {
         if (state.template.pages.length === 1) return;
         const _pages = state.template.pages.filter((page) => page.id !== id);

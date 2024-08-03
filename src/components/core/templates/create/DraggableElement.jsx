@@ -11,6 +11,8 @@ const DraggableElement = ({
   classNames = {},
   children,
   onControlDblClick,
+  onDragEnd,
+  onDragStart,
   isDisabled = false,
   constrained = false,
   scale = 1,
@@ -25,6 +27,8 @@ const DraggableElement = ({
       grid={[5, 5]}
       scale={scale}
       onDrag={(e, ui) => onDrag({ x: ui.x, y: ui.y })}
+      onStop={onDragEnd}
+      onStart={onDragStart}
       nodeRef={ref}
       onContextMenu
     >
@@ -53,6 +57,8 @@ DraggableElement.propTypes = {
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   onDrag: PropTypes.func.isRequired,
+  onDragEnd: PropTypes.func,
+  onDragStart: PropTypes.func,
   classNames: PropTypes.shape({
     base: PropTypes.string.isRequired,
     control: PropTypes.string,
