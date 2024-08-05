@@ -56,7 +56,6 @@ const Sidebar = () => {
                     onClick={() => setTab(element.key)}
                   >
                     {createElement(element.icon, { size: '24' })}
-                    {/*<p className="text-sm mt-0.5">{element.title}</p>*/}
                   </div>
                 </Tooltip>
               );

@@ -3,29 +3,48 @@ import { createElement } from 'react';
 import { getElementIcon } from '@/lib/elements.jsx';
 import DraggableElement from '@/components/core/templates/create/sidebar/DraggableElement.jsx';
 import PropTypes from 'prop-types';
+import useTemplateStore from '@/store/template.js';
 
 const DraggableElementWrapper = ({ element }) => {
+  const addElements = useTemplateStore((state) => state.addElements);
+  const activePage = useTemplateStore((state) => state.template.activePage);
+
+  const handleClick = () => {
+    addElements(
+      [
+        {
+          id: crypto.randomUUID(),
+          ...element.data,
+          x: 10,
+          y: 10,
+        },
+      ],
+      activePage
+    );
+  };
+
   return (
     <DraggableElement
       element={element}
       className={cn('relative')}
       content={
-        element.preview ? (
-          <div className="bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 rounded-2xl px-6 py-4">
-            {element.preview}
-          </div>
-        ) : (
-          <div
-            className={cn(
-              'relative rounded-2xl px-4 py-5 flex flex-col items-center justify-center text-center h-full',
-              'bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15',
-              'cursor-grab'
-            )}
-          >
-            <span>{createElement(getElementIcon(element.type), { size: 40 })}</span>
-            {/*<span className="text-md leading-tight mt-2">{element.name}</span>*/}
-          </div>
-        )
+        <div className="relative" onClick={handleClick}>
+          {element.preview ? (
+            <div className="bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 rounded-2xl px-6 py-4">
+              {element.preview}
+            </div>
+          ) : (
+            <div
+              className={cn(
+                'relative rounded-2xl px-4 py-4 flex flex-col items-center justify-center text-center h-full',
+                'bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15',
+                'cursor-grab'
+              )}
+            >
+              <span>{createElement(getElementIcon(element.type), { size: 40 })}</span>
+            </div>
+          )}
+        </div>
       }
       dragging={
         element.preview ? (
@@ -47,6 +66,7 @@ DraggableElementWrapper.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     preview: PropTypes.any,
+    data: PropTypes.any,
   }),
 };
 

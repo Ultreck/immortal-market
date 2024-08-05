@@ -35,6 +35,8 @@ import BusinessSettingsPage from '@/pages/settings/BusinessSettingsPage.jsx';
 import AppearanceSettingsPage from '@/pages/settings/AppearanceSettingsPage.jsx';
 import AiAssistantPage from '@/pages/AiAssistantPage.jsx';
 
+import 'swiper/css/bundle';
+
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
 

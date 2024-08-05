@@ -27,6 +27,24 @@ input:-webkit-autofill {
 :root {
   --vh: 0;
   --swiper-navigation-color: #fff;
+  --swiper-navigation-size: 10px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  @apply w-7 h-7 bg-gray-500 rounded-full;
+}
+
+.swiper-button-prev {
+  @apply left-0 -mt-4;
+}
+
+.swiper-button-next {
+  @apply right-0 -mt-4;
+}
+
+.swiper-button-disabled {
+  @apply opacity-10 pointer-events-none;
 }
 
 .container {
