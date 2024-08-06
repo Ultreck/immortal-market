@@ -19,7 +19,6 @@ const BubbleChart = ({ data }) => {
     return { x, y };
   };
 
-  console.log({ maxValue, sortedData });
   return (
     <div>
       <div className="relative flex justify-center items-center mx-auto">
@@ -35,7 +34,7 @@ const BubbleChart = ({ data }) => {
               style={{
                 width: `${item.value * 3}px`,
                 height: `${item.value * 3}px`,
-                background: item.color
+                background: item.color,
               }}
             >
               {item.label}

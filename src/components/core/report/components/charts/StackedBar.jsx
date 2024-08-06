@@ -1,6 +1,6 @@
 import { Button, Card } from '@nextui-org/react';
-import React, { act } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { Bar, BarChart, Legend, Tooltip } from 'recharts';
 
 const data = [
   {
@@ -49,7 +49,6 @@ const data = [
 
 export const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
-    console.log({ active, payload, label });
     return (
       <Card className="px-8 py-6 w-56 text-sm">
         <p className="text-lg font-bold">DATA</p>
@@ -85,4 +84,3 @@ const VerticalStackedBar = () => {
 };
 
 export default VerticalStackedBar;
-

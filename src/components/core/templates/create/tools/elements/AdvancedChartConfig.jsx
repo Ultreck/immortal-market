@@ -9,10 +9,10 @@ import {
   SelectItem,
   useDisclosure,
 } from '@nextui-org/react';
-import React from 'react';
 import { HexAlphaColorPicker } from 'react-colorful';
 import { Controller, useForm } from 'react-hook-form';
 import { TbChartPie } from 'react-icons/tb';
+import PropTypes from 'prop-types';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -23,7 +23,6 @@ const AdvancedChartConfig = ({ element, onChange }) => {
   });
 
   const onSubmit = async (values) => {
-    console.log({ values });
     onChange({ ...element, config: { ...element.config, percentage: values.percentage, shape: values.shapes } });
   };
 
@@ -117,5 +116,15 @@ const AdvancedChartConfig = ({ element, onChange }) => {
   );
 };
 
-export default AdvancedChartConfig;
+AdvancedChartConfig.propTypes = {
+  element: PropTypes.shape({
+    config: PropTypes.shape({
+      percentage: PropTypes.number,
+      shape: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  }).isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
+export default AdvancedChartConfig;
