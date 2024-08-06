@@ -1,8 +1,9 @@
 import { Tab, Tabs } from '@nextui-org/react';
 import { useState } from 'react';
-import { RiBarChart2Line, RiLineChartLine, RiPieChartLine } from 'react-icons/ri';
+import { RiBarChart2Line, RiBarChartHorizontalFill, RiLineChartLine, RiPieChartLine } from 'react-icons/ri';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import Advanced10Circle from './elements/charts/advanced/Advanced10Circle';
+import AdvancedTenShapes from './elements/charts/advanced/AdvancedTenShapes.jsx';
+import { TbChartAreaLine, TbChartDonut4 } from 'react-icons/tb';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -103,6 +104,77 @@ const StandardCharts = () => {
         },
       },
     },
+    {
+      id: 'chart-doughnut',
+      type: 'chart-doughnut',
+      name: 'Doughnut Chart',
+      icon: TbChartDonut4,
+      data: {
+        type: 'chart-doughnut',
+        text: 'Doughnut Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', data: 4000 },
+            { name: 'Page B', data: 3000 },
+            { name: 'Page C', data: 2000 },
+            { name: 'Page D', data: 2780 },
+            { name: 'Page E', data: 1890 },
+            { name: 'Page F', data: 2390 },
+            { name: 'Page G', data: 3490 },
+          ],
+          keys: { name: 'name', data: 'data' },
+        },
+      },
+    },
+    {
+      id: 'chart-bar-horizontal',
+      type: 'chart-bar-horizontal',
+      name: 'Horizontal Bar Chart',
+      icon: RiBarChartHorizontalFill,
+      data: {
+        type: 'chart-bar-horizontal',
+        text: 'Bar Chart',
+        width: 500,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { browser: 'chrome', visitors: 187 },
+            { browser: 'safari', visitors: 200 },
+            { browser: 'firefox', visitors: 275 },
+            { browser: 'edge', visitors: 173 },
+            { browser: 'other', visitors: 90 },
+          ],
+          keys: { x: 'browser', y: 'visitors' },
+        },
+      },
+    },
+    {
+      id: 'chart-area',
+      type: 'chart-area',
+      name: 'Area Chart',
+      icon: TbChartAreaLine,
+      data: {
+        type: 'chart-area',
+        text: 'Area Chart',
+        width: 500,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { browser: 'chrome', visitors: 187 },
+            { browser: 'safari', visitors: 200 },
+            { browser: 'firefox', visitors: 275 },
+            { browser: 'edge', visitors: 173 },
+            { browser: 'other', visitors: 90 },
+          ],
+          keys: { x: 'browser', y: 'visitors' },
+        },
+      },
+    },
   ];
 
   return (
@@ -117,12 +189,12 @@ const StandardCharts = () => {
 const AdvancedCharts = () => {
   const elements = [
     {
-      id: 'chart-10-circle',
-      type: 'chart-10-circle',
+      id: 'chart-10-shapes',
+      type: 'chart-10-shapes',
       name: '10 Circles',
       icon: RiPieChartLine,
       data: {
-        type: 'chart-10-circle',
+        type: 'chart-10-shapes',
         text: '10 Circles',
         width: 400,
         height: 300,
@@ -130,10 +202,10 @@ const AdvancedCharts = () => {
         config: {
           percentage: 65,
           shape: 'circle',
-          color: '#008000',
+          color: '#3a5179',
         },
       },
-      preview: <Advanced10Circle element={{ config: { percentage: 65, shape: 'circle', color: '#008000' } }} />,
+      preview: <AdvancedTenShapes element={{ config: { percentage: 65, shape: 'circle', color: '#3a5179' } }} />,
     },
   ];
 

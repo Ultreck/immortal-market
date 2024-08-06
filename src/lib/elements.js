@@ -5,7 +5,9 @@ import {
   TbArrowBigUpFilled,
   TbBrackets,
   TbCapsuleHorizontalFilled,
+  TbChartAreaLine,
   TbChartBar,
+  TbChartDonut4,
   TbChartLine,
   TbChartPieFilled,
   TbCircleFilled,
@@ -30,12 +32,16 @@ import Table from '@/components/core/templates/create/elements/Table.jsx';
 import KeyValue from '@/components/core/templates/create/elements/KeyValue.jsx';
 import Line from '@/components/core/templates/create/elements/Line.jsx';
 import SsIcon from '@/components/core/templates/create/elements/SsIcon.jsx';
-import TemplateBarChart from '@/components/core/templates/create/elements/charts/TemplateBarChart.jsx';
-import TemplateLineChart from '@/components/core/templates/create/elements/charts/TemplateLineChart.jsx';
-import TemplatePieChart from '@/components/core/templates/create/elements/charts/TemplatePieChart.jsx';
-import Template10Circle from '@/components/core/templates/create/elements/charts/Template10Circle.jsx';
+import StandardBarChart from '@/components/core/templates/create/elements/charts/StandardBarChart.jsx';
+import StandardLineChart from '@/components/core/templates/create/elements/charts/StandardLineChart.jsx';
+import StandardPieChart from '@/components/core/templates/create/elements/charts/StandardPieChart.jsx';
 import GenericShape from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
 import GenericFrameShape from '@/components/core/templates/create/elements/frames/GenericFrameShape.jsx';
+import StandardDoughnutChart from '@/components/core/templates/create/elements/charts/StandardDoughnutChart.jsx';
+import { RiBarChartHorizontalFill } from 'react-icons/ri';
+import StandardBarChartHorizontal from '@/components/core/templates/create/elements/charts/StandardBarChartHorizontal.jsx';
+import StandardAreaChart from '@/components/core/templates/create/elements/charts/StandardAreaChart.jsx';
+import AdvancedCharts from '@/components/core/templates/create/elements/charts/advanced/AdvancedCharts.jsx';
 
 export const icons = {
   heading: TbHeading,
@@ -69,8 +75,11 @@ export const icons = {
   'chart-bar': TbChartBar,
   'chart-line': TbChartLine,
   'chart-pie': TbChartPieFilled,
-  'chart-10-circle': TbCapsuleHorizontalFilled,
+  'chart-10-shapes': TbCapsuleHorizontalFilled,
   'chart-10-square': TbCapsuleHorizontalFilled,
+  'chart-doughnut': TbChartDonut4,
+  'chart-bar-horizontal': RiBarChartHorizontalFill,
+  'chart-area': TbChartAreaLine,
 };
 
 export const tools = {
@@ -105,8 +114,11 @@ export const tools = {
   'chart-bar': ['chart', 'opacity', 'animation'],
   'chart-line': ['chart', 'opacity', 'animation'],
   'chart-pie': ['chart', 'opacity', 'animation'],
-  'chart-10-circle': ['advanced-chart', 'opacity'],
+  'chart-doughnut': ['chart', 'opacity', 'animation'],
+  'chart-10-shapes': ['advanced-chart', 'opacity'],
   'chart-10-square': ['advanced-chart', 'opacity'],
+  'chart-bar-horizontal': ['chart', 'opacity'],
+  'chart-area': ['chart', 'opacity'],
 };
 
 export const components = {
@@ -138,11 +150,13 @@ export const components = {
   table: Table,
   'key-value': KeyValue,
   icon: SsIcon,
-  'chart-bar': TemplateBarChart,
-  'chart-line': TemplateLineChart,
-  'chart-pie': TemplatePieChart,
-  'chart-10-circle': Template10Circle,
-  'chart-10-square': Template10Circle,
+  'chart-bar': StandardBarChart,
+  'chart-line': StandardLineChart,
+  'chart-pie': StandardPieChart,
+  'chart-10-shapes': AdvancedCharts,
+  'chart-doughnut': StandardDoughnutChart,
+  'chart-bar-horizontal': StandardBarChartHorizontal,
+  'chart-area': StandardAreaChart,
 };
 
 export const getElementTools = (type) => {

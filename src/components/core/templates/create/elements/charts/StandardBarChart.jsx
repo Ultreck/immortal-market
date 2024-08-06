@@ -4,14 +4,6 @@ import { capitalize } from '@/lib/utils.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const chartData = [
-  { browser: 'chrome', visitors: 187, fill: 'var(--color-chrome)' },
-  { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-  { browser: 'firefox', visitors: 275, fill: 'var(--color-firefox)' },
-  { browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-  { browser: 'other', visitors: 90, fill: 'var(--color-other)' },
-];
-
 const colors = [
   '#E66B5B',
   '#1D9085',
@@ -25,7 +17,7 @@ const colors = [
   '#D93566',
 ];
 
-const TemplateBarChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardBarChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const config = element.config.data.reduce((acc, item, i) => {
     acc[item[element.config.keys.x]] = {
       label: capitalize(item[element.config.keys.x]),
@@ -33,6 +25,11 @@ const TemplateBarChart = ({ element, active, highlighted, width, onClick, onChan
     };
     return acc;
   }, {});
+
+  const chartData = element.config.data.map((item, index) => ({
+    ...item,
+    fill: colors[index % colors.length],
+  }));
 
   return (
     <ElementWrapper
@@ -65,6 +62,6 @@ const TemplateBarChart = ({ element, active, highlighted, width, onClick, onChan
   );
 };
 
-TemplateBarChart.propTypes = ElementPropTypes;
+StandardBarChart.propTypes = ElementPropTypes;
 
-export default TemplateBarChart;
+export default StandardBarChart;

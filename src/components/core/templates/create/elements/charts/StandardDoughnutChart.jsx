@@ -17,7 +17,7 @@ const colors = [
   '#D93566',
 ];
 
-const TemplatePieChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardDoughnutChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const data = element.config.data.map((item, i) => ({
     ...item,
     fill: colors[i],
@@ -35,9 +35,14 @@ const TemplatePieChart = ({ element, active, highlighted, width, onClick, onChan
       element={element}
       onClick={onClick}
       onChange={onChange}
+      onResize={(size) => {
+        onChange({ ...element, width: size.width, height: size.height });
+      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
+      resizeHandles={['se', 'e', 's']}
+      constrained
     >
       <ChartContainer
         config={config}
@@ -49,9 +54,12 @@ const TemplatePieChart = ({ element, active, highlighted, width, onClick, onChan
             data={data}
             dataKey={element.config.keys.data}
             nameKey={element.config.keys.name}
-            label
+            // label
             isAnimationActive={false}
             style={{ opacity: element.style.opacity }}
+            cx="50%"
+            cy="50%"
+            innerRadius={70}
           >
             <LabelList
               dataKey={element.config.keys.name}
@@ -67,6 +75,6 @@ const TemplatePieChart = ({ element, active, highlighted, width, onClick, onChan
   );
 };
 
-TemplatePieChart.propTypes = ElementPropTypes;
+StandardDoughnutChart.propTypes = ElementPropTypes;
 
-export default TemplatePieChart;
+export default StandardDoughnutChart;

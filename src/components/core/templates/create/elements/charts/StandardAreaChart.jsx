@@ -1,4 +1,4 @@
-import { CartesianGrid, LabelList, Line, LineChart, XAxis } from 'recharts';
+import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
@@ -17,7 +17,7 @@ const colors = [
   '#D93566',
 ];
 
-const TemplateLineChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardAreaChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const config = {
     [element.config.keys.y]: {
       label: capitalize(element.config.keys.y),
@@ -30,18 +30,22 @@ const TemplateLineChart = ({ element, active, highlighted, width, onClick, onCha
       element={element}
       onClick={onClick}
       onChange={onChange}
+      onResize={(size) => {
+        onChange({ ...element, width: size.width, height: size.height });
+      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
+      resizeHandles={['se', 'e', 's']}
+      constrained
     >
       <ChartContainer
         config={config}
         style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
       >
-        <LineChart
+        <AreaChart
           accessibilityLayer
           data={element.config.data}
-          margin={{ top: 20, left: 12, right: 12 }}
           style={{
             opacity: element.style.opacity,
           }}
@@ -55,21 +59,13 @@ const TemplateLineChart = ({ element, active, highlighted, width, onClick, onCha
             tickFormatter={(value) => capitalize(value)}
           />
           <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-          <Line
-            dataKey={element.config.keys.y}
-            type="natural"
-            strokeWidth={2}
-            activeDot={{ r: 6 }}
-            isAnimationActive={false}
-          >
-            <LabelList position="top" offset={12} fontSize={12} />
-          </Line>
-        </LineChart>
+          <Area dataKey={element.config.keys.y} type="natural" fillOpacity={0.4} />
+        </AreaChart>
       </ChartContainer>
     </ElementWrapper>
   );
 };
 
-TemplateLineChart.propTypes = ElementPropTypes;
+StandardAreaChart.propTypes = ElementPropTypes;
 
-export default TemplateLineChart;
+export default StandardAreaChart;
