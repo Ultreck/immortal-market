@@ -20,13 +20,9 @@ const GenericShape = ({ element, active, highlighted, width, onClick, onChange }
       element={element}
       onClick={onClick}
       onChange={onChange}
-      onResize={(size) => {
-        onChange({ ...element, width: size.width, height: size.height });
-      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
-      resizeHandles={['se', 'e', 's']}
     >
       <div className="h-full" style={{ ...element.style, clipPath: paths[element.type] }} />
     </ElementWrapper>

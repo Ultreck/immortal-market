@@ -9,6 +9,7 @@ export const ElementPropTypes = {
     text: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    rotate: PropTypes.number.isRequired,
     style: PropTypes.object,
     src: PropTypes.string,
     config: PropTypes.object,

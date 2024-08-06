@@ -2,7 +2,7 @@ import { useCreateUploadMutation, useGetUploads } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { Image, Skeleton } from '@nextui-org/react';
 import { getImageLink } from '@/lib/utils.js';
-import { icons } from '@/lib/elements.jsx';
+import { icons } from '@/lib/elements.js';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useState } from 'react';

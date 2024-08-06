@@ -9,14 +9,9 @@ const KeyValue = ({ element, active, highlighted, width, onClick, onChange }) =>
       element={element}
       onClick={onClick}
       onChange={onChange}
-      onResize={(size) => {
-        onChange({ ...element, width: size.width, height: size.height });
-      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
-      constrained
-      resizeHandles={['se', 'e', 's']}
     >
       <div className="overflow-hidden relative w-full h-full">
         {element.config?.data ? (

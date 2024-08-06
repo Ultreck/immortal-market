@@ -39,14 +39,9 @@ const TemplateBarChart = ({ element, active, highlighted, width, onClick, onChan
       element={element}
       onClick={onClick}
       onChange={onChange}
-      onResize={(size) => {
-        onChange({ ...element, width: size.width, height: size.height });
-      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
-      resizeHandles={['se', 'e', 's']}
-      constrained
     >
       <ChartContainer
         config={config}

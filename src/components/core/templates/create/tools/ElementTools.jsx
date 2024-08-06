@@ -16,7 +16,7 @@ import KeyValueConfig from '@/components/core/templates/create/tools/elements/Ke
 import Line from './elements/Line.jsx';
 import Font from './elements/Font.jsx';
 import IconConfig from './elements/IconConfig.jsx';
-import { getElementTools } from '@/lib/elements.jsx';
+import { getElementTools } from '@/lib/elements.js';
 import Animation from './elements/Animation.jsx';
 import AdvancedChartConfig from './elements/AdvancedChartConfig.jsx';
 
@@ -102,7 +102,9 @@ const ElementTools = () => {
               return <Animation key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             if (tool === 'advanced-chart') {
-              return <AdvancedChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+              return (
+                <AdvancedChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
+              );
             }
             throw new Error(`Unknown tool ${tool}`);
           })}

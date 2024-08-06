@@ -1,7 +1,7 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { createElement, Fragment, useEffect, useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
-import { components } from '@/lib/elements.jsx';
+import { components } from '@/lib/elements.js';
 import { cn } from '@/lib/utils.js';
 import { TbImageInPicture } from 'react-icons/tb';
 import { ElementPropTypes } from '@/lib/prop-types.js';
@@ -39,13 +39,9 @@ const GenericFrameShape = ({ element, active, highlighted, width, onClick, onCha
       element={element}
       onClick={onClick}
       onChange={onChange}
-      onResize={(size) => {
-        onChange({ ...element, width: size.width, height: size.height });
-      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
-      resizeHandles={['se', 'e', 's']}
       editable
     >
       {({ isEditing }) => (

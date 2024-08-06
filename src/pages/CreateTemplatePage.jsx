@@ -16,12 +16,34 @@ const CreateTemplatePage = () => {
   useEffect(() => {
     if (template) {
       const { _id, name, description, data } = template;
+      const pages = data.pages.map((page) => ({
+        ...page,
+        elements: page.elements.map((el) => {
+          if (el.type.startsWith('frame-')) {
+            return {
+              ...el,
+              rotate: 0,
+              children: el.children.map((el) => {
+                if (el.type === 'image' && !el.config?.src && el.src) {
+                  return { ...el, rotate: 0, config: { src: el.src } };
+                }
+                return { ...el, rotate: 0 };
+              }),
+            };
+          }
+          if (el.type === 'image' && !el.config?.src && el.src) {
+            return { ...el, rotate: 0, config: { src: el.src } };
+          }
+          return { ...el, rotate: 0 };
+        }),
+      }));
       updateTemplate({
         selectedElements: [],
         selectedPage: null,
         activePage: null,
         zoom: 1,
         ...data,
+        pages,
         name,
         description,
         id: _id,

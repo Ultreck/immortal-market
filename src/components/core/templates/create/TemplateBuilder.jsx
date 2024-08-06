@@ -1,5 +1,5 @@
 import Canvas from './Canvas.jsx';
-import { DndContext, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, MouseSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import useTemplateStore from '@/store/template.js';
 import { roundToNearestTen } from '@/lib/utils.js';
@@ -16,7 +16,10 @@ const getElementDistanceFromTop = (element) => {
 };
 
 const TemplateBuilder = () => {
-  const sensors = useSensors(useSensor(MouseSensor));
+  const sensors = useSensors(
+    useSensor(MouseSensor),
+    useSensor(PointerSensor, { activationConstraint: { distance: 0.01 } })
+  );
   const getElement = useTemplateStore((state) => state.getElement);
   const getElementPage = useTemplateStore((state) => state.getElementPage);
   const addElements = useTemplateStore((state) => state.addElements);
@@ -36,6 +39,7 @@ const TemplateBuilder = () => {
               ...active.data.current,
               x: 0,
               y: 0,
+              rotate: 0,
               width: element.width,
               height: element.height,
               id: crypto.randomUUID(),

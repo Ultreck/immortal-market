@@ -30,14 +30,9 @@ const TemplateLineChart = ({ element, active, highlighted, width, onClick, onCha
       element={element}
       onClick={onClick}
       onChange={onChange}
-      onResize={(size) => {
-        onChange({ ...element, width: size.width, height: size.height });
-      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
-      resizeHandles={['se', 'e', 's']}
-      constrained
     >
       <ChartContainer
         config={config}

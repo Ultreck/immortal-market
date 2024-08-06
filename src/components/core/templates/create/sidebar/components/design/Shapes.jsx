@@ -56,7 +56,7 @@ const shapes = [
       type: 'line',
       text: 'Line',
       width: 100,
-      height: 4,
+      height: 8,
     },
     group: 'shape',
     category: 'design',

@@ -18,17 +18,14 @@ const SsIcon = ({ element, active, highlighted, width, onClick, onChange }) => {
     <ElementWrapper
       element={element}
       onClick={onClick}
-      onChange={onChange}
-      onResize={(size) => {
-        el.current.style.width = `${size.width}px`;
+      onChange={(values) => {
+        el.current.style.width = `${values.width}px`;
         el.current.style.height = `${el.current.scrollHeight}px`;
-        onChange({ ...element, width: size.width, height: el.current.scrollHeight });
+        return onChange({ ...element, ...values, height: el.current.scrollHeight });
       }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
-      resizeHandles={['e']}
-      constrained
     >
       {element.config?.name ? (
         <div ref={el} className="!h-max" style={{ ...element.style }}>

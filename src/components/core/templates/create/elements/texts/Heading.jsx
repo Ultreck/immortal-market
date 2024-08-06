@@ -26,18 +26,14 @@ const Heading = ({ element, active, highlighted, width, onClick, onChange }) => 
       element={element}
       onClick={onClick}
       onChange={onChange}
-      onResize={(size) => {
-        updateInputHeight();
-        onChange({ ...element, width: size.width, height: input.current.scrollHeight });
-      }}
       minHeight={minHeight}
       maxWidth={width}
       editable
       onEditStart={() => updateInputHeight()}
       active={active}
       highlighted={highlighted}
-      constrained
       className="max-w-full"
+      resizeHandles={['e']}
     >
       <div className="overflow-hidden relative w-full h-full pl-6">
         <div

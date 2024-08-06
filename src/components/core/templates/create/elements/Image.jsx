@@ -8,13 +8,9 @@ const CanvasImage = ({ element, active, highlighted, width, onClick, onChange })
       element={element}
       onClick={onClick}
       onChange={onChange}
-      onResize={(size) => {
-        onChange({ ...element, width: size.width, height: size.height });
-      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
-      resizeHandles={['e', 's', 'se']}
       lockAspectRatio
     >
       <div className="h-full w-full">

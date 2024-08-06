@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils.js';
 import { createElement } from 'react';
-import { getElementIcon } from '@/lib/elements.jsx';
+import { getElementIcon } from '@/lib/elements.js';
 import DraggableElement from '@/components/core/templates/create/sidebar/DraggableElement.jsx';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
@@ -17,6 +17,7 @@ const DraggableElementWrapper = ({ element }) => {
           ...element.data,
           x: 10,
           y: 10,
+          rotate: 0,
         },
       ],
       activePage

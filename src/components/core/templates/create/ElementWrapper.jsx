@@ -1,10 +1,8 @@
 import { cn } from '@/lib/utils.js';
-import { ResizableBox } from 'react-resizable';
-import { getResizeHandles } from '@/components/core/templates/create/ResizeHandles.jsx';
-import DraggableElement from '@/components/core/templates/create/DraggableElement.jsx';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
+import DragResizeRotate from '@/components/ui/DragResizeRotate.jsx';
 
 const ElementWrapper = ({
   element,
@@ -18,8 +16,7 @@ const ElementWrapper = ({
   minHeight = 10,
   maxHeight = Infinity,
   onChange,
-  onResize,
-  resizeHandles = ['e'],
+  resizeHandles,
   constrained = false,
   editable = false,
   className,
@@ -37,48 +34,39 @@ const ElementWrapper = ({
   }, [isEditing, onEditStart]);
 
   return (
-    <DraggableElement
-      position={{ x: element.x, y: element.y }}
+    <DragResizeRotate
+      values={{ x: element.x, y: element.y, width: element.width, height: element.height, rotate: element.rotate }}
+      onChange={(values) => onChange({ ...element, ...values })}
+      resizable={active}
+      rotatable={active}
+      draggable={!isEditing}
+      className={cn('w-max border-2 border-transparent absolute group select-none pointer-events-auto', className)}
       onClick={(e) => onClick(element.id, e)}
-      onDrag={(position) => {
-        onChange({ ...element, x: position.x, y: position.y });
-      }}
-      classNames={{
-        handle: `handle-${element.id}`,
-        base: cn('w-max border-2 border-transparent absolute group select-none pointer-events-auto', className),
-      }}
-      onControlDblClick={() => {
+      onDragDblClick={() => {
         if (editable) setIsEditing(true);
       }}
-      isDisabled={isEditing}
+      handles={resizeHandles}
       constrained={constrained}
       scale={scale}
       onDragStart={() => addUndoHistory()}
+      onResizeStart={() => addUndoHistory()}
+      onRotateStart={() => addUndoHistory()}
+      maxWidth={maxWidth}
+      maxHeight={maxHeight}
+      minWidth={minWidth}
+      minHeight={minHeight}
     >
       <div
         className={cn(
-          'absolute inset-0 border-2 border-transparent z-[10] pointer-events-none',
+          'absolute inset-[-1px] border border-transparent z-[10] pointer-events-none',
           { 'group-hover:border-gray-200': !active && !highlighted },
           { 'border-gray-200': highlighted },
           { 'border-primary-500': active },
           { 'border-purple-500': isEditing }
         )}
       />
-      <ResizableBox
-        width={element.width}
-        height={element.height}
-        minConstraints={[minWidth, minHeight]}
-        maxConstraints={[maxWidth, maxHeight]}
-        resizeHandles={resizeHandles}
-        handle={(axis, ref) => getResizeHandles({ axis, ref, active })}
-        onResize={(e, { size }) => onResize(size)}
-        draggableOpts={{ grid: [5, 5], scale }}
-        transformScale={scale}
-        onResizeStart={() => addUndoHistory()}
-      >
-        {typeof children === 'function' ? children({ isEditing }) : children}
-      </ResizableBox>
-    </DraggableElement>
+      {typeof children === 'function' ? children({ isEditing }) : children}
+    </DragResizeRotate>
   );
 };
 
@@ -91,6 +79,7 @@ ElementWrapper.propTypes = {
     text: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    rotate: PropTypes.number.isRequired,
   }),
   onClick: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
@@ -99,7 +88,6 @@ ElementWrapper.propTypes = {
   minWidth: PropTypes.number,
   maxHeight: PropTypes.number,
   minHeight: PropTypes.number,
-  onResize: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired,
   onEditStart: PropTypes.func,
   resizeHandles: PropTypes.arrayOf(PropTypes.string),
@@ -107,7 +95,6 @@ ElementWrapper.propTypes = {
   className: PropTypes.string,
   highlighted: PropTypes.bool,
   editable: PropTypes.bool,
-  scale: PropTypes.number,
 };
 
 export default ElementWrapper;
