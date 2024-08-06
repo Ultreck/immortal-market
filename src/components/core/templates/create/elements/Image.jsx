@@ -2,18 +2,17 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { Image } from '@nextui-org/react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const CanvasImage = ({ element, active, highlighted, width, onClick, onChange }) => {
+const CanvasImage = ({ element, active, highlighted, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
       onClick={onClick}
       onChange={onChange}
-      maxWidth={width}
       active={active}
       highlighted={highlighted}
       lockAspectRatio
     >
-      <div className="h-full w-full">
+      <div className="h-full w-full" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
         <Image
           src={element.config.src}
           alt={element.text}

@@ -35,7 +35,10 @@ const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
       className="max-w-full"
       resizeHandles={['e']}
     >
-      <div className="overflow-hidden relative w-full h-full">
+      <div
+        className="overflow-hidden relative w-full h-full"
+        style={{ filter: `drop-shadow(${element.style.shadow})` }}
+      >
         <textarea
           className={cn('bg-transparent w-full h-full resize-none leading-tight overflow-hidden')}
           style={element.style}

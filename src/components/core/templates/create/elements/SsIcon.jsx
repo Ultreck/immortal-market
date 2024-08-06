@@ -28,7 +28,7 @@ const SsIcon = ({ element, active, highlighted, width, onClick, onChange }) => {
       highlighted={highlighted}
     >
       {element.config?.name ? (
-        <div ref={el} className="!h-max" style={{ ...element.style }}>
+        <div ref={el} className="!h-max" style={{ ...element.style, filter: `drop-shadow(${element.style.shadow})` }}>
           {createElement(iconTypes.find((icon) => icon.name === element.config.name)?.icon, { size: element.width })}
         </div>
       ) : (

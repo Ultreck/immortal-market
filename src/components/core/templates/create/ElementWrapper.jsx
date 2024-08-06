@@ -80,6 +80,7 @@ ElementWrapper.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     rotate: PropTypes.number.isRequired,
+    style: PropTypes.object,
   }),
   onClick: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,

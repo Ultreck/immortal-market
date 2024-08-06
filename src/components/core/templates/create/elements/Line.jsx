@@ -15,7 +15,7 @@ const Line = ({ element, active, highlighted, width, onClick, onChange }) => {
       highlighted={highlighted}
       resizeHandles={['e']}
     >
-      <div className="!h-max">
+      <div className="!h-max" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
         <svg id="line" viewBox={`0 0 ${element.width} ${element.height}`} width={element.width} height={element.height}>
           {element.lineEnd === 'arrow' && (
             <defs>

@@ -1,10 +1,7 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { createElement, Fragment, useEffect, useState } from 'react';
-import { useDroppable } from '@dnd-kit/core';
-import { components } from '@/lib/elements.js';
 import { cn } from '@/lib/utils.js';
-import { TbImageInPicture } from 'react-icons/tb';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import FrameContents from '@/pages/FrameContents.jsx';
 
 // prettier-ignore
 const styles = {
@@ -27,13 +24,6 @@ const styles = {
 };
 
 const GenericFrameShape = ({ element, active, highlighted, width, onClick, onChange }) => {
-  const { setNodeRef, isOver, active: _active } = useDroppable({ id: `frame-${element.id}` });
-  const [selectedElements, setSelectedElements] = useState([]);
-
-  useEffect(() => {
-    if (!active) setSelectedElements([]);
-  }, [active]);
-
   return (
     <ElementWrapper
       element={element}
@@ -45,58 +35,18 @@ const GenericFrameShape = ({ element, active, highlighted, width, onClick, onCha
       editable
     >
       {({ isEditing }) => (
-        <div
-          ref={setNodeRef}
-          style={{
-            ...element.style,
-            width: `${element.width}px`,
-            height: `${element.height}px`,
-            ...(!isEditing ? styles[element.type] : {}),
-          }}
-          className={cn('overflow-hidden relative', { 'overflow-visible': isEditing })}
-        >
-          {isEditing && (
-            <div className="absolute inset-0 z-[9] pointer-events-none bg-white/50" style={styles[element.type]}></div>
-          )}
-          {isOver && _active.data.current.type === 'image' && (
-            <div className="absolute inset-0 bg-white text-black flex items-center justify-center z-[1] border-3 border-gray-400 border-dashed rounded-2xl">
-              <img src={_active.data.current.src} className="w-full h-full object-cover" alt="image to drop" />
-            </div>
-          )}
-          {element.children.length > 0 ? (
-            <>
-              {element?.children?.map((el) => {
-                const active = selectedElements.includes(el.id);
-                return (
-                  <Fragment key={el.id}>
-                    {components[el.type] ? (
-                      createElement(components[el.type], {
-                        element: el,
-                        active,
-                        onClick: () => {
-                          setSelectedElements((old) => [...old, el.id]);
-                        },
-                        onChange: (e) => {
-                          onChange({
-                            ...element,
-                            children: element.children.map((el) => (el.id === el.id ? e : el)),
-                          });
-                        },
-                      })
-                    ) : (
-                      <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
-                        Unknown element type: {el.type}
-                      </div>
-                    )}
-                  </Fragment>
-                );
-              })}
-            </>
-          ) : (
-            <div className="w-full h-full text-gray-500 flex items-center justify-center">
-              <TbImageInPicture size={32} />
-            </div>
-          )}
+        <div className="w-full h-full" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
+          <FrameContents
+            element={element}
+            active={active}
+            isEditing={isEditing}
+            style={{ ...(!isEditing ? styles[element.type] : {}) }}
+            overlay={
+              <div className="absolute inset-0 z-[9] pointer-events-none bg-white/50" style={styles[element.type]} />
+            }
+            className={cn('overflow-hidden relative', { 'overflow-visible': isEditing })}
+            onChange={onChange}
+          />
         </div>
       )}
     </ElementWrapper>

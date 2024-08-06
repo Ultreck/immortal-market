@@ -24,7 +24,15 @@ const GenericShape = ({ element, active, highlighted, width, onClick, onChange }
       active={active}
       highlighted={highlighted}
     >
-      <div className="h-full" style={{ ...element.style, clipPath: paths[element.type] }} />
+      <div className="w-full h-full" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
+        <div
+          className="h-full"
+          style={{
+            ...element.style,
+            clipPath: paths[element.type],
+          }}
+        />
+      </div>
     </ElementWrapper>
   );
 };

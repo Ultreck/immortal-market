@@ -27,6 +27,7 @@ const DraggableResizableRotatable = ({
   maxHeight = Infinity,
   minWidth = 20,
   minHeight = 10,
+  style = {},
 }) => {
   const root = useRef(null);
   const [{ x, y, width, height, rotate }, api] = useSpring(
@@ -56,6 +57,7 @@ const DraggableResizableRotatable = ({
 
   const bindDrag = useDrag(
     (state) => {
+      if (state.tap) return;
       if (state.first) onDragStart?.();
       api.set({ x: state.offset[0], y: state.offset[1] });
       handleChange();
@@ -77,6 +79,7 @@ const DraggableResizableRotatable = ({
 
   const bingResize = useDrag(
     (state) => {
+      if (state.tap) return;
       if (state.first) onResizeStart?.();
       const name = state.target.dataset.name;
       const [ox, oy] = state.offset;
@@ -128,8 +131,8 @@ const DraggableResizableRotatable = ({
 
   const bindRotate = useDrag(
     (state) => {
+      if (state.tap) return;
       if (state.first) onRotateStart?.();
-      if (!state.dragging) return;
       const rect = root.current.getBoundingClientRect();
       const [cx, cy] = state.xy;
       const centerX = rect.left + width.get() / 2;
@@ -156,6 +159,7 @@ const DraggableResizableRotatable = ({
         width,
         height,
         rotate,
+        ...style,
       }}
       onClick={onClick}
     >
@@ -272,6 +276,7 @@ DraggableResizableRotatable.propTypes = {
   maxHeight: PropTypes.number,
   minWidth: PropTypes.number,
   minHeight: PropTypes.number,
+  style: PropTypes.object,
 };
 
 export default DraggableResizableRotatable;

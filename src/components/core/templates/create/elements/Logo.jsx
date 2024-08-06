@@ -27,7 +27,11 @@ const SsLogo = ({ element, active, highlighted, width, onClick, onChange }) => {
       highlighted={highlighted}
       resizeHandles={['e']}
     >
-      <div ref={el} className="!h-max" style={{ opacity: element.style.opacity }}>
+      <div
+        ref={el}
+        className="!h-max"
+        style={{ opacity: element.style.opacity, filter: `drop-shadow(${element.style.shadow})` }}
+      >
         <Logo width={element.width} />
       </div>
     </ElementWrapper>

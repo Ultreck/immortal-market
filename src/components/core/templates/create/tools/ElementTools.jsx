@@ -19,6 +19,7 @@ import IconConfig from './elements/IconConfig.jsx';
 import { getElementTools } from '@/lib/elements.js';
 import Animation from './elements/Animation.jsx';
 import AdvancedChartConfig from './elements/AdvancedChartConfig.jsx';
+import Shadow from './elements/Shadow.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -105,6 +106,9 @@ const ElementTools = () => {
               return (
                 <AdvancedChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
               );
+            }
+            if (tool === 'shadow') {
+              return <Shadow key={tool} elements={elements} onChange={handleUpdateElements} />;
             }
             throw new Error(`Unknown tool ${tool}`);
           })}
