@@ -27,14 +27,15 @@ const TemplateBuilder = () => {
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent, collisions } = event;
-    if (over && over.id.startsWith('frame-') && active.data.current.type === 'image') {
-      const id = over.id.replace('frame-', '');
+    if (over && over.id.startsWith('frame/') && active.data.current.type === 'image') {
+      const [, n, id] = over.id.split('/');
       const element = getElement(id);
       const page = getElementPage(id);
       if (element && page) {
         const el = {
           ...element,
           children: [
+            ...element.children,
             {
               ...active.data.current,
               x: 0,
@@ -43,6 +44,7 @@ const TemplateBuilder = () => {
               width: element.width,
               height: element.height,
               id: crypto.randomUUID(),
+              frame: +n,
             },
           ],
         };

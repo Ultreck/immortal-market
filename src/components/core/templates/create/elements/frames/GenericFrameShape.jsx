@@ -37,6 +37,7 @@ const GenericFrameShape = ({ element, active, highlighted, width, onClick, onCha
       {({ isEditing }) => (
         <div className="w-full h-full" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
           <FrameContents
+            id={`frame/0/${element.id}`}
             element={element}
             active={active}
             isEditing={isEditing}

@@ -38,10 +38,11 @@ import StandardPieChart from '@/components/core/templates/create/elements/charts
 import GenericShape from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
 import GenericFrameShape from '@/components/core/templates/create/elements/frames/GenericFrameShape.jsx';
 import StandardDoughnutChart from '@/components/core/templates/create/elements/charts/StandardDoughnutChart.jsx';
-import { RiBarChartHorizontalFill } from 'react-icons/ri';
+import { RiBarChartHorizontalFill, RiCheckboxMultipleBlankFill } from 'react-icons/ri';
 import StandardBarChartHorizontal from '@/components/core/templates/create/elements/charts/StandardBarChartHorizontal.jsx';
 import StandardAreaChart from '@/components/core/templates/create/elements/charts/StandardAreaChart.jsx';
 import AdvancedCharts from '@/components/core/templates/create/elements/charts/advanced/AdvancedCharts.jsx';
+import FrameTabs from '@/components/core/templates/create/elements/frames/FrameTabs.jsx';
 
 export const icons = {
   heading: TbHeading,
@@ -66,6 +67,7 @@ export const icons = {
   'frame-arrow-up': TbArrowBigUpFilled,
   'frame-arrow-down': TbArrowBigDownFilled,
   'frame-arrow-up-down': FaArrowsUpDown,
+  'frame-tabs': RiCheckboxMultipleBlankFill,
   logo: TbCapsuleHorizontalFilled,
   line: TbLine,
   image: TbImageInPicture,
@@ -105,6 +107,7 @@ export const tools = {
   'frame-arrow-up': ['opacity', 'animation', 'shadow'],
   'frame-arrow-down': ['opacity', 'animation', 'shadow'],
   'frame-arrow-up-down': ['opacity', 'animation', 'shadow'],
+  'frame-tabs': ['opacity', 'animation', 'shadow'],
   logo: ['opacity', 'animation', 'shadow'],
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
   icon: ['icon', 'opacity', 'animation', 'shadow'],
@@ -144,6 +147,7 @@ export const components = {
   'frame-arrow-up': GenericFrameShape,
   'frame-arrow-down': GenericFrameShape,
   'frame-arrow-up-down': GenericFrameShape,
+  'frame-tabs': FrameTabs,
   logo: Logo,
   line: Line,
   image: Image,

@@ -5,8 +5,10 @@ import { TbImageInPicture } from 'react-icons/tb';
 import { useDroppable } from '@dnd-kit/core';
 import PropTypes from 'prop-types';
 
-const FrameContents = ({ element, active, isEditing, onChange, overlay, style = {} }) => {
-  const { setNodeRef, isOver, active: _active } = useDroppable({ id: `frame-${element.id}` });
+const FrameContents = ({ id, element, active, isEditing, onChange, overlay, style = {} }) => {
+  const { setNodeRef, isOver, active: _active } = useDroppable({ id });
+  const index = id.split('/')[1];
+  const elements = element.children.filter((el) => +el.frame === +index);
   const [selectedElements, setSelectedElements] = useState([]);
 
   useEffect(() => {
@@ -25,9 +27,9 @@ const FrameContents = ({ element, active, isEditing, onChange, overlay, style = 
           <img src={_active.data.current.config.src} className="w-full h-full object-cover" alt="image to drop" />
         </div>
       )}
-      {element.children.length > 0 ? (
+      {elements.length > 0 ? (
         <>
-          {element?.children?.map((el) => {
+          {elements.map((el) => {
             const active = selectedElements.includes(el.id);
             return (
               <Fragment key={el.id}>
@@ -41,7 +43,7 @@ const FrameContents = ({ element, active, isEditing, onChange, overlay, style = 
                     onChange: (e) => {
                       onChange({
                         ...element,
-                        children: element.children.map((el) => (el.id === el.id ? e : el)),
+                        children: element.children.map((_el) => (_el.id === el.id ? e : _el)),
                       });
                     },
                   })
@@ -55,7 +57,7 @@ const FrameContents = ({ element, active, isEditing, onChange, overlay, style = 
           })}
         </>
       ) : (
-        <div className="w-full h-full text-gray-500 flex items-center justify-center">
+        <div className="w-full h-full text-gray-500 flex items-center justify-center border-2 border-gray-300 border-dashed">
           <TbImageInPicture size={32} />
         </div>
       )}
@@ -64,12 +66,13 @@ const FrameContents = ({ element, active, isEditing, onChange, overlay, style = 
 };
 
 FrameContents.propTypes = {
+  id: PropTypes.string.isRequired,
   element: PropTypes.object.isRequired,
   active: PropTypes.bool.isRequired,
   isEditing: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
-  overlay: PropTypes.any.isRequired,
-  style: PropTypes.object.isRequired,
+  overlay: PropTypes.any,
+  style: PropTypes.object,
 };
 
 export default FrameContents;

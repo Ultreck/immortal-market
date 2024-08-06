@@ -6,6 +6,22 @@ import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 const frames = [
+  {
+    id: 'frame-tabs',
+    type: 'frame-tabs',
+    name: 'Frame tabs',
+    data: {
+      type: 'frame-tabs',
+      text: 'Frame tabs',
+      width: 300,
+      height: 300,
+      children: [],
+      style: {
+        animationDuration: '1s',
+        opacity: 1,
+      },
+    },
+  },
   ...([
     'rectangle',
     'triangle',
