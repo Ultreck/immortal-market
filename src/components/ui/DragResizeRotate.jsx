@@ -156,7 +156,6 @@ const DraggableResizableRotatable = ({
         width,
         height,
         rotate,
-        // scale,
       }}
       onClick={onClick}
     >
@@ -233,10 +232,10 @@ const DraggableResizableRotatable = ({
         {!!rotatable && (
           <div
             data-name="rotate"
-            className="absolute top-[calc(100%_+_20px)] left-1/2 -translate-x-1/2 cursor-grab w-6 h-6 border border-gray-500 rounded-full flex items-center justify-center"
+            className="absolute top-[calc(100%_+_20px)] left-1/2 -translate-x-1/2 cursor-grab w-7 h-7 bg-white border border-gray-400 text-gray-700 rounded-full flex items-center justify-center"
             {...bindRotate()}
           >
-            <TbRotate2 />
+            <TbRotate2 size="16" />
           </div>
         )}
       </>
