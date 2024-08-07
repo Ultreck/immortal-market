@@ -5,6 +5,7 @@ import {
   TbArrowBigUpFilled,
   TbBrackets,
   TbCapsuleHorizontalFilled,
+  TbCarouselHorizontalFilled,
   TbChartAreaLine,
   TbChartBar,
   TbChartDonut4,
@@ -43,6 +44,7 @@ import StandardBarChartHorizontal from '@/components/core/templates/create/eleme
 import StandardAreaChart from '@/components/core/templates/create/elements/charts/StandardAreaChart.jsx';
 import AdvancedCharts from '@/components/core/templates/create/elements/charts/advanced/AdvancedCharts.jsx';
 import FrameTabs from '@/components/core/templates/create/elements/frames/FrameTabs.jsx';
+import FrameCarousel from '@/components/core/templates/create/elements/frames/FrameCarousel.jsx';
 
 export const icons = {
   heading: TbHeading,
@@ -68,6 +70,7 @@ export const icons = {
   'frame-arrow-down': TbArrowBigDownFilled,
   'frame-arrow-up-down': FaArrowsUpDown,
   'frame-tabs': RiCheckboxMultipleBlankFill,
+  'frame-carousel': TbCarouselHorizontalFilled,
   logo: TbCapsuleHorizontalFilled,
   line: TbLine,
   image: TbImageInPicture,
@@ -108,6 +111,7 @@ export const tools = {
   'frame-arrow-down': ['opacity', 'animation', 'shadow'],
   'frame-arrow-up-down': ['opacity', 'animation', 'shadow'],
   'frame-tabs': ['opacity', 'animation', 'shadow'],
+  'frame-carousel': ['opacity', 'animation', 'shadow'],
   logo: ['opacity', 'animation', 'shadow'],
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
   icon: ['icon', 'opacity', 'animation', 'shadow'],
@@ -148,6 +152,7 @@ export const components = {
   'frame-arrow-down': GenericFrameShape,
   'frame-arrow-up-down': GenericFrameShape,
   'frame-tabs': FrameTabs,
+  'frame-carousel': FrameCarousel,
   logo: Logo,
   line: Line,
   image: Image,
