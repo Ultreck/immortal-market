@@ -49,4 +49,3 @@ const TenCircles = ({ percentage = 65 }) => {
 };
 
 export default TenCircles;
-

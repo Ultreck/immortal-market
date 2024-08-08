@@ -4,13 +4,6 @@ import { capitalize } from '@/lib/utils.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const chartConfig = {
-  visitors: {
-    label: 'visitors',
-    color: 'hsl(var(--chart-2))',
-  },
-};
-
 const colors = [
   '#E66B5B',
   '#1D9085',
@@ -30,6 +23,14 @@ const StandardBarChartHorizontal = ({ element, active, highlighted, width, onCli
     fill: colors[index % colors.length],
   }));
 
+  const config = element.config.data.reduce((acc, item, i) => {
+    acc[item[element.config.keys.x]] = {
+      label: capitalize(item[element.config.keys.x]),
+      color: colors[i],
+    };
+    return acc;
+  }, {});
+
   return (
     <ElementWrapper
       element={element}
@@ -40,7 +41,7 @@ const StandardBarChartHorizontal = ({ element, active, highlighted, width, onCli
       highlighted={highlighted}
     >
       <ChartContainer
-        config={chartConfig}
+        config={config}
         style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
       >
         <BarChart accessibilityLayer data={chartData} layout="vertical">

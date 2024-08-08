@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
@@ -44,19 +44,39 @@ const StandardBarChart = ({ element, active, highlighted, width, onClick, onChan
         config={config}
         style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
       >
-        <BarChart accessibilityLayer data={chartData}>
-          <CartesianGrid vertical={false} horizontal={false} />
-          <XAxis
-            dataKey={element.config.keys.x}
-            tickLine={false}
-            tickMargin={10}
-            axisLine={false}
-            tickFormatter={(value) => capitalize(value)}
-            interval={0}
-          />
-          <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-          <Bar dataKey={element.config.keys.y} radius={8} isAnimationActive={false} />
-        </BarChart>
+        {element.config.orientation === 'horizontal' ? (
+          <BarChart accessibilityLayer data={chartData} layout="vertical">
+            <XAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
+            <YAxis
+              dataKey={element.config.keys.x}
+              type="category"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(value) => capitalize(value)}
+              hide={element.config.showXYaxis}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+            <Bar dataKey={element.config.keys.y} fill="var(--color-visitors)" radius={8} />
+          </BarChart>
+        ) : (
+          <BarChart accessibilityLayer data={chartData}>
+            <CartesianGrid vertical={false} horizontal={false} />
+            <XAxis
+              dataKey={element.config.keys.x}
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(value) => capitalize(value)}
+              interval={0}
+              hide={element.config.showXYaxis}
+            />
+            <YAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
+
+            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+            <Bar dataKey={element.config.keys.y} radius={8} />
+          </BarChart>
+        )}
       </ChartContainer>
     </ElementWrapper>
   );

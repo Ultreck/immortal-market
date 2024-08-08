@@ -4,6 +4,7 @@ import { RiBarChart2Line, RiBarChartHorizontalFill, RiLineChartLine, RiPieChartL
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import AdvancedTenShapes from './elements/charts/advanced/AdvancedTenShapes.jsx';
 import { TbChartAreaLine, TbChartDonut4 } from 'react-icons/tb';
+import StandardStackedBar from './elements/charts/StandardStackedBar.jsx';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -52,6 +53,9 @@ const StandardCharts = () => {
             { browser: 'edge', visitors: 173 },
             { browser: 'other', visitors: 90 },
           ],
+          orientation: 'vertical',
+          showXYaxis: false,
+          showLegend: false,
           keys: { x: 'browser', y: 'visitors' },
         },
       },
@@ -175,6 +179,31 @@ const StandardCharts = () => {
         },
       },
     },
+    {
+      id: 'chart-stacked-bar',
+      type: 'chart-stacked-bar',
+      name: 'Stacked Bar Chart',
+      icon: RiBarChart2Line,
+      data: {
+        type: 'chart-stacked-bar',
+        text: 'Stacked Bar Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { month: 'Jan', desktop: 187, mobile: 200 },
+            { month: 'Feb', desktop: 275, mobile: 173 },
+            { month: 'Mar', desktop: 200, mobile: 90 },
+            { month: 'Apr', desktop: 275, mobile: 173 },
+            { month: 'May', desktop: 187, mobile: 90 },
+            { month: 'Jun', desktop: 239, mobile: 200 },
+            { month: 'Jul', desktop: 349, mobile: 275 },
+          ],
+          keys: { x: 'month', y: ['desktop', 'mobile'] },
+        },
+      },
+    }
   ];
 
   return (
@@ -203,9 +232,29 @@ const AdvancedCharts = () => {
           percentage: 65,
           shape: 'circle',
           color: '#3a5179',
+          shapeCount: 10,
+          showCount: true,
+          countFormat: 'fraction',
+          titlePosition: 'top',
+          title: '10 Circles',
         },
       },
-      preview: <AdvancedTenShapes element={{ config: { percentage: 65, shape: 'circle', color: '#3a5179' } }} />,
+      preview: (
+        <AdvancedTenShapes
+          element={{
+            config: {
+              percentage: 65,
+              shape: 'circle',
+              color: '#3a5179',
+              shapeCount: 10,
+              showCount: true,
+              countFormat: 'fraction',
+              titlePosition: 'top',
+              title: '10 Circles',
+            },
+          }}
+        />
+      ),
     },
   ];
 
@@ -221,3 +270,4 @@ const AdvancedCharts = () => {
 };
 
 export default Charts;
+
