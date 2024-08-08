@@ -19,7 +19,6 @@ import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
 import Logo from '@/components/core/shared/Logo.jsx';
 import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
 import PropTypes from 'prop-types';
-import { Button } from '@nextui-org/react';
 import { useState } from 'react';
 
 const NavItem = ({ icon, title, href, mini = false }) => {
@@ -49,7 +48,7 @@ NavItem.propTypes = {
 
 const Sidebar = () => {
   const { isDarkMode } = useTernaryDarkMode();
-  const [mini, setMini] = useState(true);
+  const [mini, setMini] = useState(false);
 
   return (
     <div
@@ -57,21 +56,31 @@ const Sidebar = () => {
         'w-[90px]': mini,
       })}
     >
-      <Button
-        size="sm"
-        isIconOnly
-        radius="full"
-        className="absolute top-1/2 -right-4 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+      <button
+        className="absolute top-1/2 left-full -translate-y-1/2 z-10"
+        type="button"
+        aria-label="Hide"
         onClick={() => setMini(!mini)}
       >
-        {mini ? <TbChevronRight size="20" /> : <TbChevronLeft size="20" />}
-      </Button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 13 96"
+          width="14"
+          height="100%"
+          fill="none"
+          className="IrLwCg"
+        >
+          <path className="fill-default-100" d="M0,0 h1 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32 H0 z"></path>
+          <path className="fill-default-100" d="M0.5,0 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32"></path>
+        </svg>
+        <div className="absolute top-1/2 -translate-y-1/2 left-0">
+          {mini ? <TbChevronRight size="14" /> : <TbChevronLeft size="14" />}
+        </div>
+      </button>
       <div className={cn('w-[280px] h-full overflow-hidden', { 'w-[90px]': mini })}>
         <div className={cn('w-[280px] h-full overflow-hidden')}>
           <div
-            className={cn('py-6 px-8 flex flex-col align-stretch w-[280px] relative h-full', {
-              'items-start': mini,
-            })}
+            className={cn('py-6 px-8 flex flex-col align-stretch w-[280px] relative h-full', { 'items-start': mini })}
           >
             {mini ? <LogoIcon light={isDarkMode} /> : <Logo light={isDarkMode} />}
             <AuthDropdown className={cn('mt-6', { 'mt-6': mini })} mini={mini} />
