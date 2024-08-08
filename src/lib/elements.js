@@ -39,12 +39,13 @@ import StandardPieChart from '@/components/core/templates/create/elements/charts
 import GenericShape from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
 import GenericFrameShape from '@/components/core/templates/create/elements/frames/GenericFrameShape.jsx';
 import StandardDoughnutChart from '@/components/core/templates/create/elements/charts/StandardDoughnutChart.jsx';
-import { RiBarChartHorizontalFill, RiCheckboxMultipleBlankFill } from 'react-icons/ri';
+import { RiBarChart2Line, RiBarChartHorizontalFill, RiCheckboxMultipleBlankFill } from 'react-icons/ri';
 import StandardBarChartHorizontal from '@/components/core/templates/create/elements/charts/StandardBarChartHorizontal.jsx';
 import StandardAreaChart from '@/components/core/templates/create/elements/charts/StandardAreaChart.jsx';
 import AdvancedCharts from '@/components/core/templates/create/elements/charts/advanced/AdvancedCharts.jsx';
 import FrameTabs from '@/components/core/templates/create/elements/frames/FrameTabs.jsx';
 import FrameCarousel from '@/components/core/templates/create/elements/frames/FrameCarousel.jsx';
+import StandardStackedBar from '@/components/core/templates/create/elements/charts/StandardStackedBar';
 
 export const icons = {
   heading: TbHeading,
@@ -85,6 +86,7 @@ export const icons = {
   'chart-doughnut': TbChartDonut4,
   'chart-bar-horizontal': RiBarChartHorizontalFill,
   'chart-area': TbChartAreaLine,
+  'chart-stacked-bar': RiBarChart2Line,
 };
 
 export const tools = {
@@ -126,6 +128,7 @@ export const tools = {
   'chart-10-square': ['advanced-chart', 'opacity'],
   'chart-bar-horizontal': ['chart', 'opacity'],
   'chart-area': ['chart', 'opacity'],
+  'chart-stacked-bar': ['chart', 'opacity'],
 };
 
 export const components = {
@@ -166,6 +169,7 @@ export const components = {
   'chart-doughnut': StandardDoughnutChart,
   'chart-bar-horizontal': StandardBarChartHorizontal,
   'chart-area': StandardAreaChart,
+  'chart-stacked-bar': StandardStackedBar,
 };
 
 export const getElementTools = (type) => {
