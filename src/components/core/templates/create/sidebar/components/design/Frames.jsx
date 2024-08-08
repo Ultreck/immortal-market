@@ -76,6 +76,7 @@ const Frames = () => {
       <h2 className="text-lg font-semibold mb-4">Frames</h2>
       <div className="relative">
         <BasicCarousel
+          classNames={{ next: 'right-0', prev: 'left-0' }}
           slides={Array(Math.ceil(frames.length / 6))
             .fill(null)
             .map((_, index) => {

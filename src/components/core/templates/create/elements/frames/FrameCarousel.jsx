@@ -2,6 +2,7 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import FrameContents from '@/pages/FrameContents.jsx';
 import BasicCarousel from '@/components/ui/BasicCarousel.jsx';
+import { cn } from '@/lib/utils.js';
 
 const FrameCarousel = ({ element, active, highlighted, width, onClick, onChange }) => {
   const slides = Array(2).fill(null);
@@ -19,7 +20,7 @@ const FrameCarousel = ({ element, active, highlighted, width, onClick, onChange 
     >
       {({ isEditing }) => (
         <BasicCarousel
-          className="w-full h-full light"
+          classNames={{ base: cn('w-full h-full light', { 'overflow-hidden': !isEditing }) }}
           slides={slides.map((s, i) => {
             return {
               id: i,
