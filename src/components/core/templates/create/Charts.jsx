@@ -80,6 +80,7 @@ const StandardCharts = () => {
             { browser: 'other', visitors: 90 },
           ],
           keys: { x: 'browser', y: 'visitors' },
+          type: 'multiple',
         },
       },
     },

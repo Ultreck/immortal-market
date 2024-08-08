@@ -120,6 +120,38 @@ const ChartData = ({ element, onChange, onClose }) => {
               );
             })}
           </div>
+          {element.type === 'chart-line' && (
+            <div>
+              <Controller
+                name="type"
+                control={control}
+                rules={{ required: `type is required` }}
+                render={({ field, fieldState: { error } }) => (
+                  <Select
+                    name={field.name}
+                    label="Type"
+                    variant="bordered"
+                    labelPlacement="outside"
+                    placeholder="Select one"
+                    size="lg"
+                    selectedKeys={element.config.type ? [element.config.type] : []}
+                    onChange={(e) => onChange({ ...element, config: { ...element.config, type: e.target.value } })}
+                    errorMessage={error?.message}
+                    isInvalid={!!error?.message}
+                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                    disableEmptySelection={true}
+                  >
+                    <SelectItem key="line" classNames={{ title: 'text-base px-2' }}>
+                      Line
+                    </SelectItem>
+                    <SelectItem key="multiple" classNames={{ title: 'text-base px-2' }}>
+                      Multiple
+                    </SelectItem>
+                  </Select>
+                )}
+              />
+            </div>
+          )}
           {element.type === 'chart-bar' && (
             <>
               <div className="">

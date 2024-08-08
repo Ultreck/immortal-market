@@ -17,6 +17,26 @@ const colors = [
   '#D93566',
 ];
 
+const chartData = [
+  { month: 'January', desktop: 186, mobile: 80 },
+  { month: 'February', desktop: 305, mobile: 200 },
+  { month: 'March', desktop: 237, mobile: 120 },
+  { month: 'April', desktop: 73, mobile: 190 },
+  { month: 'May', desktop: 209, mobile: 130 },
+  { month: 'June', desktop: 214, mobile: 140 },
+];
+
+const chartConfig = {
+  desktop: {
+    label: 'Desktop',
+    color: '#2673D9',
+  },
+  mobile: {
+    label: 'Mobile',
+    color: '#ff0000',
+  },
+};
+
 const StandardLineChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const config = {
     [element.config.keys.y]: {
@@ -34,38 +54,63 @@ const StandardLineChart = ({ element, active, highlighted, width, onClick, onCha
       active={active}
       highlighted={highlighted}
     >
-      <ChartContainer
-        config={config}
-        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
-      >
-        <LineChart
-          accessibilityLayer
-          data={element.config.data}
-          margin={{ top: 20, left: 12, right: 12 }}
-          style={{
-            opacity: element.style.opacity,
-          }}
+      {element.config.type === 'line' && (
+        <ChartContainer
+          config={config}
+          style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
         >
-          <CartesianGrid vertical={false} />
-          <XAxis
-            dataKey={element.config.keys.x}
-            tickLine={false}
-            axisLine={false}
-            tickMargin={8}
-            tickFormatter={(value) => capitalize(value)}
-          />
-          <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-          <Line
-            dataKey={element.config.keys.y}
-            type="natural"
-            strokeWidth={2}
-            activeDot={{ r: 6 }}
-            isAnimationActive={false}
+          <LineChart
+            accessibilityLayer
+            data={element.config.data}
+            margin={{ top: 20, left: 12, right: 12 }}
+            style={{
+              opacity: element.style.opacity,
+            }}
           >
-            <LabelList position="top" offset={12} fontSize={12} />
-          </Line>
-        </LineChart>
-      </ChartContainer>
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey={element.config.keys.x}
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={(value) => capitalize(value)}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+            <Line
+              dataKey={element.config.keys.y}
+              type="natural"
+              strokeWidth={2}
+              activeDot={{ r: 6 }}
+              isAnimationActive={false}
+            >
+              <LabelList position="top" offset={12} fontSize={12} />
+            </Line>
+          </LineChart>
+        </ChartContainer>
+      )}
+      {element.config.type === 'multiple' && (
+        <ChartContainer
+          config={chartConfig}
+          style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+        >
+            <LineChart
+              accessibilityLayer
+              data={chartData}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="month"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickFormatter={(value) => value.slice(0, 3)}
+              />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <Line dataKey="desktop" type="monotone" fill="var(--color-desktop)" stroke="var(--color-desktop)" strokeWidth={2} dot={false} />
+              <Line dataKey="mobile" type="monotone" fill="var(--color-mobile)" stroke="var(--color-mobile)" strokeWidth={2} dot={false} />
+            </LineChart>
+        </ChartContainer>
+      )}
     </ElementWrapper>
   );
 };
@@ -73,3 +118,4 @@ const StandardLineChart = ({ element, active, highlighted, width, onClick, onCha
 StandardLineChart.propTypes = ElementPropTypes;
 
 export default StandardLineChart;
+
