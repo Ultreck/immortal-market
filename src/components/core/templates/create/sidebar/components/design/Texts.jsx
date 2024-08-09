@@ -26,20 +26,22 @@ const texts = [
     group: 'text',
     category: 'design',
     preview: (
-      <h1
-        style={{
-          fontSize: '28px',
-          fontWeight: 'bold',
-          textAlign: 'left',
-          opacity: 1,
-          fontFamily: 'Roboto',
-          letterSpacing: 0,
-          lineHeight: 1,
-          verticalAlign: 'baseline',
-        }}
-      >
-        Heading
-      </h1>
+      <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-6 py-4">
+        <h1
+          style={{
+            fontSize: '28px',
+            fontWeight: 'bold',
+            textAlign: 'left',
+            opacity: 1,
+            fontFamily: 'Roboto',
+            letterSpacing: 0,
+            lineHeight: 1,
+            verticalAlign: 'baseline',
+          }}
+        >
+          Heading
+        </h1>
+      </div>
     ),
   },
   {
@@ -67,20 +69,22 @@ const texts = [
     group: 'text',
     category: 'design',
     preview: (
-      <p
-        style={{
-          fontSize: '16px',
-          fontWeight: 'normal',
-          textAlign: 'left',
-          opacity: 1,
-          fontFamily: 'Roboto',
-          letterSpacing: 0,
-          lineHeight: 1,
-          verticalAlign: 'baseline',
-        }}
-      >
-        Paragraph
-      </p>
+      <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-6 py-4">
+        <p
+          style={{
+            fontSize: '16px',
+            fontWeight: 'normal',
+            textAlign: 'left',
+            opacity: 1,
+            fontFamily: 'Roboto',
+            letterSpacing: 0,
+            lineHeight: 1,
+            verticalAlign: 'baseline',
+          }}
+        >
+          Paragraph
+        </p>
+      </div>
     ),
   },
 ];

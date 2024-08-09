@@ -1,5 +1,8 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import BasicCarousel from '@/components/ui/BasicCarousel.jsx';
+import shapes from '@/lib/templates/shapes.js';
+import { RiCheckboxMultipleBlankFill } from 'react-icons/ri';
+import { TbCarouselHorizontalFilled } from 'react-icons/tb';
 
 const frames = [
   {
@@ -17,6 +20,11 @@ const frames = [
         opacity: 1,
       },
     },
+    preview: (
+      <div className="text-black/10 dark:text-white/50 hover:text-black/15 dark:hover:text-white/60 aspect-square">
+        <RiCheckboxMultipleBlankFill className="w-full h-full" />
+      </div>
+    ),
   },
   {
     id: 'frame-carousel',
@@ -33,37 +41,13 @@ const frames = [
         opacity: 1,
       },
     },
+    preview: (
+      <div className="text-black/10 dark:text-white/50 hover:text-black/15 dark:hover:text-white/60 aspect-square">
+        <TbCarouselHorizontalFilled className="w-full h-full" />
+      </div>
+    ),
   },
-  ...([
-    'rectangle',
-    'triangle',
-    'circle',
-    'heart',
-    'rhombus',
-    'arrow-left',
-    'arrow-right',
-    'arrow-up',
-    'arrow-down',
-    'arrow-up-down',
-    'four-pointed-star',
-    'five-pointed-star',
-    'six-pointed-star',
-    'eight-pointed-star',
-    'parallelogram',
-    'trapeziod',
-    'pentagon',
-    'hexagon',
-    'heptagon',
-    'octagon',
-    'chevron-left',
-    'chevron-right',
-    'close',
-    'message',
-    'cross',
-    'book-mark',
-    'arrow-concave',
-    'rabbet',
-  ].map((type) => ({
+  ...(Object.keys(shapes).map((type) => ({
     id: `frame-${type}`,
     type: `frame-${type}`,
     name: `Frame ${type}`,
@@ -82,8 +66,12 @@ const frames = [
       height: 300,
       children: [],
     },
-    group: 'frame',
-    category: 'design',
+    preview: (
+      <div
+        className="bg-black/10 dark:bg-white/50 hover:bg-black/15 dark:hover:bg-white/60 aspect-square px-6 py-4"
+        style={{ ...shapes[type.replace('shape-', '')] }}
+      />
+    ),
   })) || []),
 ];
 
@@ -100,7 +88,7 @@ const Frames = () => {
               return {
                 id: index,
                 content: (
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-6">
                     {frames.slice(index * 6, index * 6 + 6).map((element) => (
                       <DraggableElementWrapper key={element.id} element={element} />
                     ))}

@@ -1,36 +1,10 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import BasicCarousel from '@/components/ui/BasicCarousel.jsx';
+import shapes from '@/lib/templates/shapes.js';
+import { TbLine } from 'react-icons/tb';
 
-const shapes = [
-  ...([
-    'rectangle',
-    'circle',
-    'triangle',
-    'rhombus',
-    'arrow-left',
-    'arrow-right',
-    'arrow-up',
-    'arrow-down',
-    'arrow-up-down',
-    'four-pointed-star',
-    'five-pointed-star',
-    'six-pointed-star',
-    'eight-pointed-star',
-    'parallelogram',
-    'trapeziod',
-    'pentagon',
-    'hexagon',
-    'heptagon',
-    'octagon',
-    'chevron-left',
-    'chevron-right',
-    'close',
-    'message',
-    'cross',
-    'book-mark',
-    'arrow-concave',
-    'rabbet',
-  ].map((type) => ({
+const items = [
+  ...(Object.keys(shapes).map((type) => ({
     id: `shape-${type}`,
     type: `shape-${type}`,
     name: `Shape ${type}`,
@@ -48,8 +22,12 @@ const shapes = [
       width: 120,
       height: 120,
     },
-    group: 'shape',
-    category: 'design',
+    preview: (
+      <div
+        className="bg-black/10 dark:bg-white/50 hover:bg-black/15 dark:hover:bg-white/60 aspect-square px-6 py-4"
+        style={{ ...shapes[type.replace('shape-', '')] }}
+      />
+    ),
   })) || []),
   {
     id: 'line',
@@ -72,26 +50,29 @@ const shapes = [
       width: 100,
       height: 8,
     },
-    group: 'shape',
-    category: 'design',
+    preview: (
+      <div className="text-black/10 dark:text-white/50 hover:text-black/15 dark:hover:text-white/60 aspect-square">
+        <TbLine className="w-full h-full" />
+      </div>
+    ),
   },
 ];
 
-const Shapes = () => {
+const ShapesSlider = () => {
   return (
     <div>
       <h2 className="text-lg font-semibold mb-4">Shapes</h2>
       <div className="relative">
         <BasicCarousel
           classNames={{ next: 'right-0', prev: 'left-0' }}
-          slides={Array(Math.ceil(shapes.length / 6))
+          slides={Array(Math.ceil(items.length / 6))
             .fill(null)
             .map((_, index) => {
               return {
                 id: index,
                 content: (
-                  <div className="grid grid-cols-3 gap-3">
-                    {shapes.slice(index * 6, index * 6 + 6).map((element) => (
+                  <div className="grid grid-cols-3 gap-6">
+                    {items.slice(index * 6, index * 6 + 6).map((element) => (
                       <DraggableElementWrapper key={element.id} element={element} />
                     ))}
                   </div>
@@ -104,4 +85,4 @@ const Shapes = () => {
   );
 };
 
-export default Shapes;
+export default ShapesSlider;

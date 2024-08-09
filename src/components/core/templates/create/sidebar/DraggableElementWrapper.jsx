@@ -30,11 +30,7 @@ const DraggableElementWrapper = ({ element }) => {
       className={cn('relative')}
       content={
         <div className="relative" onClick={handleClick}>
-          {element.preview ? (
-            <div className="bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 rounded-2xl px-6 py-4">
-              {element.preview}
-            </div>
-          ) : (
+          {element.preview || (
             <div
               className={cn(
                 'relative rounded-2xl px-4 py-4 flex flex-col items-center justify-center text-center h-full',
