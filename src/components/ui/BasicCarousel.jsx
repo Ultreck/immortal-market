@@ -68,7 +68,7 @@ const BasicCarousel = ({ slides, classNames = {} }) => {
 BasicCarousel.propTypes = {
   slides: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
       content: PropTypes.any.isRequired,
     })
   ).isRequired,
