@@ -15,7 +15,16 @@ const FrameTabs = ({ element, active, highlighted, width, onClick, onChange }) =
     <ElementWrapper
       element={element}
       onClick={onClick}
-      onChange={onChange}
+      onChange={(args) => {
+        if (args.width !== element.width || args.height !== element.height) {
+          args.children = args.children.map((el) => {
+            const w = args.width - element.width;
+            const h = args.height - element.height;
+            return { ...el, width: el.width + w, height: el.height + h };
+          });
+        }
+        onChange(args);
+      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
