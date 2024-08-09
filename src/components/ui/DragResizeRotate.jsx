@@ -36,7 +36,7 @@ const DraggableResizableRotatable = ({
       y: values.y,
       width: values.width,
       height: values.height,
-      rotate: values.rotate,
+      rotate: values.rotate || 0,
     }),
     [values]
   );

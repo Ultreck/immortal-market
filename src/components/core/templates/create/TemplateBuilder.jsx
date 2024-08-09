@@ -58,7 +58,7 @@ const TemplateBuilder = () => {
       const distanceFromTop = getElementDistanceFromTop(node);
       const x = Math.max(roundToNearestTen(activatorEvent.x + delta.x - canvasRect.left), 0);
       const y = Math.max(roundToNearestTen(activatorEvent.y + delta.y - distanceFromTop), 0);
-      const el = { ...active.data.current, x, y, id: crypto.randomUUID() };
+      const el = { ...active.data.current, x, y, rotate: 0, id: crypto.randomUUID() };
       addElements([el], page);
     }
   };
