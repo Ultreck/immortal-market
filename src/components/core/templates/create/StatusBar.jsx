@@ -1,12 +1,22 @@
 import PageIndicator from '@/components/core/templates/create/PageIndicator.jsx';
 import ZoomSlider from '@/components/core/templates/create/ZoomSlider.jsx';
-import { Button } from '@nextui-org/react';
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownSection,
+  DropdownTrigger,
+  useDisclosure,
+} from '@nextui-org/react';
 import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
 import { useUpdateTemplateMutation } from '@/api/business.js';
 import { useCallback } from 'react';
 import { useKey } from 'react-use';
+import { TbDotsVertical, TbTrash } from 'react-icons/tb';
+import DeleteModal from '@/components/core/templates/create/DeleteModal.jsx';
 
 const StatusBar = () => {
   const toast = useToast();
@@ -14,6 +24,7 @@ const StatusBar = () => {
   const name = useTemplateStore((state) => state.template.name);
   const template = useTemplateStore((state) => state.template);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateTemplateMutation(id, template.id);
+  const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
 
   const handleSave = useCallback(async () => {
     try {
@@ -39,18 +50,58 @@ const StatusBar = () => {
       <div className="flex items-center space-x-8 ml-auto">
         <PageIndicator />
         <ZoomSlider />
-        <Button
-          variant="solid"
-          color="success"
-          className="text-base px-4"
-          radius="full"
-          size="sm"
-          isLoading={isUpdateLoading}
-          onClick={handleSave}
-        >
-          Save
-        </Button>
+        <div className="flex items-center space-x-4">
+          <Button
+            variant="solid"
+            color="success"
+            className="text-base px-4"
+            radius="full"
+            size="sm"
+            isLoading={isUpdateLoading}
+            onClick={handleSave}
+          >
+            Save
+          </Button>
+          <Dropdown placement="bottom" size="lg">
+            <DropdownTrigger>
+              <Button isIconOnly variant="light" className="text-base" radius="full">
+                <TbDotsVertical size="18" />
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              onAction={(key) => {
+                if (key === 'delete') onDeleteOpen();
+              }}
+            >
+              <DropdownSection>
+                {[
+                  {
+                    key: 'delete',
+                    label: 'Delete project',
+                    icon: <TbTrash size="16" />,
+                  },
+                ].map((action) => (
+                  <DropdownItem
+                    key={action.key}
+                    className="text-base"
+                    startContent={action.icon}
+                    classNames={{
+                      title: 'text-base',
+                      description: 'text-sm',
+                      wrapper: 'px-2 py-1',
+                      base: 'rounded-xl',
+                    }}
+                  >
+                    {action.label}
+                  </DropdownItem>
+                ))}
+              </DropdownSection>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
       </div>
+
+      <DeleteModal id={template.id} isOpen={isDeleteOpen} onClose={onDeleteClose} />
     </div>
   );
 };

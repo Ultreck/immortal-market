@@ -77,14 +77,16 @@ const TemplatesPage = () => {
             {templates.length > 0 ? (
               <div className="grid grid-cols-4 gap-4 md:gap-8">
                 {templates.map((template, i) => (
-                  <Link key={i} to={`/templates/${template._id}/edit`}>
-                    <div className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
-                      <HiPhoto size="52" className="opacity-40" />
-                    </div>
-                    <div className="mt-4 px-2">
+                  <div key={i}>
+                    <Link key={i} to={`/templates/${template._id}/edit`}>
+                      <div className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
+                        <HiPhoto size="52" className="opacity-40" />
+                      </div>
+                    </Link>
+                    <div className="mt-4 px-2 flex items-center justify-between">
                       <h4 className="font-medium text-lg leading-tight">{template.name}</h4>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
             ) : (

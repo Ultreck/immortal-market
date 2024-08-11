@@ -1,17 +1,27 @@
 import TemplateBuilder from '@/components/core/templates/create/TemplateBuilder.jsx';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetTemplate } from '@/api/business.js';
 import { useEffect } from 'react';
 import useTemplateStore from '@/store/template.js';
 import { Spinner } from '@nextui-org/react';
 import useBusiness from '@/hooks/use-business.js';
+import { useToast } from '@/hooks/use-toast.jsx';
 
 const CreateTemplatePage = () => {
+  const toast = useToast();
   const { id } = useParams();
+  const navigate = useNavigate();
   const { id: businessId } = useBusiness();
   const name = useTemplateStore((state) => state.template.name);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const { data: { template } = {}, isLoading: isTemplatesLoading } = useGetTemplate(businessId, id);
+  const { data: { success = false, template } = {}, isLoading: isTemplatesLoading } = useGetTemplate(businessId, id);
+
+  useEffect(() => {
+    if (success && !template) {
+      toast.error('Template not found');
+      navigate(`/templates/`);
+    }
+  }, [success, template, navigate, toast]);
 
   useEffect(() => {
     if (template) {

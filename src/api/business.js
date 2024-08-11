@@ -98,6 +98,14 @@ export const useCreateTemplateMutation = (business) => {
   });
 };
 
+export const useDeleteTemplateMutation = (business) => {
+  return useMutation({
+    mutationFn: ({ id }) => {
+      return http.delete(`/businesses/${business}/templates/${id}`);
+    },
+  });
+}
+
 export const useGetTemplates = (business) => {
   return useQuery({
     queryKey: ['business', business, 'templates'],
