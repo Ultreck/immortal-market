@@ -72,7 +72,6 @@ const StandardBarChart = ({ element, active, highlighted, width, onClick, onChan
               hide={element.config.showXYaxis}
             />
             <YAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
-
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
             <Bar dataKey={element.config.keys.y} radius={8} />
           </BarChart>

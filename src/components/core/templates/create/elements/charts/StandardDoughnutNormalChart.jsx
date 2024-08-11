@@ -1,9 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import { Card } from '@nextui-org/react';
 
-const AltPieChart = () => {
+const StandardDoughnutNormalChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const chartRef = useRef(null);
+
+  const updatedData = element.config.data.reduce((acc, item) => {
+    acc.push({ name: item.name, value: item.data });
+    return acc;
+  }, []);
 
   useEffect(() => {
     const chartDom = chartRef.current;
@@ -40,29 +44,21 @@ const AltPieChart = () => {
           labelLine: {
             show: false,
           },
-          data: [
-            { value: 1048, name: 'Search Engine' },
-            { value: 735, name: 'Direct' },
-            { value: 580, name: 'Email' },
-            { value: 484, name: 'Union Ads' },
-            { value: 300, name: 'Video Ads' },
-          ],
+          data: updatedData,
         },
       ],
     };
-
+    
     myChart.setOption(option);
     return () => {
       myChart.dispose();
     };
-  }, []);
+  }, [element]);
 
   return (
-    <Card className="w-full bg-white space-y-6 px-8 py-6 mt-10">
-      <div ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
-    </Card>
+    <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }}></div>
   );
 };
 
-export default AltPieChart;
+export default StandardDoughnutNormalChart;
 

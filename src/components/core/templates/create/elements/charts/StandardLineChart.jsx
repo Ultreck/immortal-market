@@ -93,22 +93,33 @@ const StandardLineChart = ({ element, active, highlighted, width, onClick, onCha
           config={chartConfig}
           style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
         >
-            <LineChart
-              accessibilityLayer
-              data={chartData}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-              <Line dataKey="desktop" type="monotone" fill="var(--color-desktop)" stroke="var(--color-desktop)" strokeWidth={2} dot={false} />
-              <Line dataKey="mobile" type="monotone" fill="var(--color-mobile)" stroke="var(--color-mobile)" strokeWidth={2} dot={false} />
-            </LineChart>
+          <LineChart accessibilityLayer data={chartData}>
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <Line
+              dataKey="desktop"
+              type="monotone"
+              fill="var(--color-desktop)"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={false}
+            />
+            <Line
+              dataKey="mobile"
+              type="monotone"
+              fill="var(--color-mobile)"
+              stroke="var(--color-mobile)"
+              strokeWidth={2}
+              dot={false}
+            />
+          </LineChart>
         </ChartContainer>
       )}
     </ElementWrapper>
@@ -118,4 +129,3 @@ const StandardLineChart = ({ element, active, highlighted, width, onClick, onCha
 StandardLineChart.propTypes = ElementPropTypes;
 
 export default StandardLineChart;
-

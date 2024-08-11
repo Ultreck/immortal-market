@@ -5,14 +5,16 @@ import {
   TbChartAreaLine,
   TbChartBar,
   TbChartDonut4,
+  TbChartHistogram,
   TbChartLine,
   TbChartPieFilled,
+  TbChartPpf,
   TbIcons,
   TbImageInPicture,
   TbLine,
   TbTableFilled,
 } from 'react-icons/tb';
-import { RiBarChart2Line, RiBarChartHorizontalFill, RiCheckboxMultipleBlankFill } from 'react-icons/ri';
+import { RiBarChart2Line, RiBarChartHorizontalFill, RiBarChartLine, RiCheckboxMultipleBlankFill } from 'react-icons/ri';
 import Heading from '@/components/core/templates/create/elements/texts/Heading.jsx';
 import Text from '@/components/core/templates/create/elements/texts/Text.jsx';
 import Logo from '@/components/core/templates/create/elements/Logo.jsx';
@@ -34,6 +36,9 @@ import FrameTabs from '@/components/core/templates/create/elements/frames/FrameT
 import FrameCarousel from '@/components/core/templates/create/elements/frames/FrameCarousel.jsx';
 import StandardStackedBar from '@/components/core/templates/create/elements/charts/StandardStackedBar';
 import shapes from '@/lib/templates/shapes.js';
+import StandardLineBarChart from '@/components/core/templates/create/elements/charts/StandartLineBarChart';
+import StandartAreaLineChart from '@/components/core/templates/create/elements/charts/StandartAreaLineChart';
+import AdvancedGenderStats from '@/components/core/templates/create/elements/charts/advanced/AdvancedGenderStats';
 
 export const icons = {
   'frame-tabs': RiCheckboxMultipleBlankFill,
@@ -53,6 +58,8 @@ export const icons = {
   'chart-bar-horizontal': RiBarChartHorizontalFill,
   'chart-area': TbChartAreaLine,
   'chart-stacked-bar': RiBarChart2Line,
+  'chart-line-bar': TbChartHistogram,
+  'chart-line-area': TbChartPpf
 };
 
 export const tools = {
@@ -84,6 +91,9 @@ export const tools = {
   'chart-bar-horizontal': ['chart', 'opacity'],
   'chart-area': ['chart', 'opacity'],
   'chart-stacked-bar': ['chart', 'opacity'],
+  'chart-line-bar': ['chart', 'opacity'],
+  'chart-line-area': ['chart', 'opacity'],
+  'chart-gender-stats': ['advanced-chart', 'opacity'],
 };
 
 export const components = {
@@ -113,6 +123,9 @@ export const components = {
   'chart-bar-horizontal': StandardBarChartHorizontal,
   'chart-area': StandardAreaChart,
   'chart-stacked-bar': StandardStackedBar,
+  'chart-line-bar': StandardLineBarChart,
+  'chart-line-area': StandartAreaLineChart,
+  'chart-gender-stats': AdvancedCharts,
 };
 
 export const getElementTools = (type) => {

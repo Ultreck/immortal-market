@@ -3,6 +3,8 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { capitalize } from '@/lib/utils.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import StandardDoughnutNormalChart from './StandardDoughnutNormalChart';
+import StandardRosePieChart from './StandardRosePieChart';
 
 const colors = [
   '#E66B5B',
@@ -48,28 +50,31 @@ const StandardDoughnutChart = ({ element, active, highlighted, width, onClick, o
         config={config}
         style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
       >
-        <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-          <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-          <Pie
-            data={data}
-            dataKey={element.config.keys.data}
-            nameKey={element.config.keys.name}
-            // label
-            isAnimationActive={false}
-            style={{ opacity: element.style.opacity }}
-            cx="50%"
-            cy="50%"
-            innerRadius={70}
-          >
-            <LabelList
-              dataKey={element.config.keys.name}
-              className="fill-background"
-              stroke="none"
-              fontSize={12}
-              formatter={(value) => capitalize(value)}
-            />
-          </Pie>
-        </PieChart>
+        {element.config.type === 'normal' && (
+          <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+            <Pie
+              data={data}
+              dataKey={element.config.keys.data}
+              nameKey={element.config.keys.name}
+              isAnimationActive={false}
+              style={{ opacity: element.style.opacity }}
+              cx="50%"
+              cy="50%"
+              innerRadius={90}
+            >
+              <LabelList
+                dataKey={element.config.keys.name}
+                className="fill-background"
+                stroke="none"
+                fontSize={12}
+                formatter={(value) => capitalize(value)}
+              />
+            </Pie>
+          </PieChart>
+        )}
+        {element.config.type === 'standard' && <StandardDoughnutNormalChart element={element} />}
+        {element.config.type === 'crazy' && <StandardRosePieChart element={element} />}
       </ChartContainer>
     </ElementWrapper>
   );
@@ -78,3 +83,4 @@ const StandardDoughnutChart = ({ element, active, highlighted, width, onClick, o
 StandardDoughnutChart.propTypes = ElementPropTypes;
 
 export default StandardDoughnutChart;
+

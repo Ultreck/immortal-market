@@ -1,10 +1,17 @@
 import { Tab, Tabs } from '@nextui-org/react';
 import { useState } from 'react';
-import { RiBarChart2Line, RiBarChartHorizontalFill, RiLineChartLine, RiPieChartLine } from 'react-icons/ri';
+import {
+  RiBarChart2Line,
+  RiBarChartHorizontalFill,
+  RiBarChartLine,
+  RiLineChartLine,
+  RiPieChartLine,
+} from 'react-icons/ri';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import AdvancedTenShapes from './elements/charts/advanced/AdvancedTenShapes.jsx';
-import { TbChartAreaLine, TbChartDonut4 } from 'react-icons/tb';
+import { TbChartAreaLine, TbChartDonut4, TbChartHistogram, TbChartPpf } from 'react-icons/tb';
 import StandardStackedBar from './elements/charts/StandardStackedBar.jsx';
+import AdvancedGenderStats from './elements/charts/advanced/AdvancedGenderStats.jsx';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -117,20 +124,21 @@ const StandardCharts = () => {
       data: {
         type: 'chart-doughnut',
         text: 'Doughnut Chart',
-        width: 400,
-        height: 300,
+        width: 500,
+        height: 500,
         style: { opacity: 1 },
         config: {
           data: [
-            { name: 'Page A', data: 4000 },
-            { name: 'Page B', data: 3000 },
-            { name: 'Page C', data: 2000 },
-            { name: 'Page D', data: 2780 },
-            { name: 'Page E', data: 1890 },
-            { name: 'Page F', data: 2390 },
-            { name: 'Page G', data: 3490 },
+            { name: 'Page A', value: 4000 },
+            { name: 'Page B', value: 3000 },
+            { name: 'Page C', value: 2000 },
+            { name: 'Page D', value: 2780 },
+            { name: 'Page E', value: 1890 },
+            { name: 'Page F', value: 2390 },
+            { name: 'Page G', value: 3490 },
           ],
           keys: { name: 'name', data: 'data' },
+          type: 'normal',
         },
       },
     },
@@ -177,6 +185,7 @@ const StandardCharts = () => {
             { browser: 'other', visitors: 90 },
           ],
           keys: { x: 'browser', y: 'visitors' },
+          type: 'line',
         },
       },
     },
@@ -204,7 +213,121 @@ const StandardCharts = () => {
           keys: { x: 'month', y: ['desktop', 'mobile'] },
         },
       },
-    }
+    },
+    {
+      id: 'chart-line-bar',
+      type: 'chart-line-bar',
+      name: 'Line Bar Chart',
+      icon: TbChartHistogram,
+      data: {
+        type: 'chart-line-bar',
+        text: 'Line Bar Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            {
+              name: 'Page A',
+              uv: 590,
+              pv: 800,
+              amt: 1400,
+            },
+            {
+              name: 'Page B',
+              uv: 868,
+              pv: 967,
+              amt: 1506,
+            },
+            {
+              name: 'Page C',
+              uv: 1397,
+              pv: 1098,
+              amt: 989,
+            },
+            {
+              name: 'Page D',
+              uv: 1480,
+              pv: 1200,
+              amt: 1228,
+            },
+            {
+              name: 'Page E',
+              uv: 1520,
+              pv: 1108,
+              amt: 1100,
+            },
+            {
+              name: 'Page F',
+              uv: 1400,
+              pv: 680,
+              amt: 1700,
+            },
+          ],
+          keys: { x: 'name', y: 'pv' },
+          showXYaxis: true,
+          showLegend: true,
+          orientation: 'horizontal',
+        },
+      },
+    },
+    {
+      id: 'chart-line-area',
+      type: 'chart-line-area',
+      name: 'Line Area Chart',
+      icon: TbChartPpf,
+      data: {
+        type: 'chart-line-area',
+        text: 'Line area Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            {
+              name: 'Page A',
+              uv: 590,
+              pv: 800,
+              amt: 1400,
+            },
+            {
+              name: 'Page B',
+              uv: 868,
+              pv: 967,
+              amt: 1506,
+            },
+            {
+              name: 'Page C',
+              uv: 1397,
+              pv: 1098,
+              amt: 989,
+            },
+            {
+              name: 'Page D',
+              uv: 1480,
+              pv: 1200,
+              amt: 1228,
+            },
+            {
+              name: 'Page E',
+              uv: 1520,
+              pv: 1108,
+              amt: 1100,
+            },
+            {
+              name: 'Page F',
+              uv: 1400,
+              pv: 680,
+              amt: 1700,
+            },
+          ],
+          keys: { x: 'name', y: 'pv' },
+          showXYaxis: true,
+          showLegend: true,
+          orientation: 'horizontal',
+        },
+      },
+    },
   ];
 
   return (
@@ -252,6 +375,43 @@ const AdvancedCharts = () => {
               countFormat: 'fraction',
               titlePosition: 'top',
               title: '10 Circles',
+            },
+          }}
+        />
+      ),
+    },
+    {
+      id: 'chart-gender-stats',
+      type: 'chart-gender-stats',
+      name: 'Gender Stats',
+      icon: RiPieChartLine,
+      data: {
+        type: 'chart-gender-stats',
+        text: 'Gender Stats',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          percentage: 65,
+          shape: 'male',
+          color: '#3a5179',
+          shapeCount: 10,
+          countFormat: 'fraction',
+          titlePosition: 'top',
+          title: '10 Circles',
+        },
+      },
+      preview: (
+        <AdvancedGenderStats
+          element={{
+            config: {
+              percentage: 65,
+              shape: 'male',
+              color: '#3a5179',
+              shapeCount: 10,
+              countFormat: 'fraction',
+              titlePosition: 'top',
+              title: '',
             },
           }}
         />

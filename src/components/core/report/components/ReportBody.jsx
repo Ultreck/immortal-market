@@ -58,7 +58,7 @@ const ReportBody = () => {
           <SpeedometerGauge />
           <TangentialPolarBarChart />
           <VerticalStackedBar />
-          <NewPieChart />
+          {/* <NewPieChart /> */}
           <AltPieChart />
         </div>
         <div className="space-y-6">
