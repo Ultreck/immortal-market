@@ -15,6 +15,12 @@ const frames = [
       width: 300,
       height: 300,
       children: [],
+      config: {
+        tabs: [
+          { id: 0, title: 'Tab 1' },
+          { id: 1, title: 'Tab 2' },
+        ],
+      },
       style: {
         animationDuration: '1s',
         opacity: 1,
@@ -36,6 +42,9 @@ const frames = [
       width: 300,
       height: 300,
       children: [],
+      config: {
+        slides: 2,
+      },
       style: {
         animationDuration: '1s',
         opacity: 1,

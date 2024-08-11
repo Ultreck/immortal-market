@@ -5,10 +5,6 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import FrameContents from '@/pages/FrameContents.jsx';
 
 const FrameTabs = ({ element, active, highlighted, width, onClick, onChange }) => {
-  const tabs = [
-    { id: 0, title: 'One' },
-    { id: 1, title: 'Two' },
-  ];
   const [selected, setSelected] = useState(0);
 
   return (
@@ -41,7 +37,7 @@ const FrameTabs = ({ element, active, highlighted, width, onClick, onChange }) =
           selectedKey={selected}
           onSelectionChange={setSelected}
         >
-          {tabs.map((t) => {
+          {element.config.tabs.map((t) => {
             return (
               <Tab key={t.id} title={t.title}>
                 <FrameContents

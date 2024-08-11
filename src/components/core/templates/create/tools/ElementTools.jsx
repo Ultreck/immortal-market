@@ -20,6 +20,8 @@ import { getElementTools } from '@/lib/elements.js';
 import Animation from './elements/Animation.jsx';
 import AdvancedChartConfig from './elements/AdvancedChartConfig.jsx';
 import Shadow from './elements/Shadow.jsx';
+import TabsTool from './elements/TabsTool.jsx';
+import CarouselTool from './elements/CarouselTool.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -33,7 +35,7 @@ const ElementTools = () => {
     if (!page) return [];
     let _tools = elements.map((el) => getElementTools(el.type) || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
-    const singles = ['chart', 'table', 'key-value', 'icon'];
+    const singles = ['chart', 'table', 'key-value', 'icon', 'tabs', 'carousel'];
     if (_tools.some((tool) => singles.includes(tool)) && selectedElements.length > 1) {
       return _tools.filter((tool) => !singles.includes(tool));
     }
@@ -109,6 +111,12 @@ const ElementTools = () => {
             }
             if (tool === 'shadow') {
               return <Shadow key={tool} elements={elements} onChange={handleUpdateElements} />;
+            }
+            if (tool === 'tabs' && selectedElements.length === 1) {
+              return <TabsTool key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+            }
+            if (tool === 'carousel' && selectedElements.length === 1) {
+              return <CarouselTool key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
             }
             throw new Error(`Unknown tool ${tool}`);
           })}

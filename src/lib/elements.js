@@ -79,8 +79,8 @@ export const tools = {
     acc[`frame-${type}`] = ['opacity', 'border-radius', 'animation', 'shadow'];
     return acc;
   }, {}),
-  'frame-tabs': ['opacity', 'animation', 'shadow'],
-  'frame-carousel': ['opacity', 'animation', 'shadow'],
+  'frame-tabs': ['opacity', 'animation', 'shadow', 'tabs'],
+  'frame-carousel': ['opacity', 'animation', 'shadow', 'carousel'],
   logo: ['opacity', 'animation', 'shadow'],
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
   icon: ['icon', 'opacity', 'animation', 'shadow'],

@@ -5,8 +5,6 @@ import BasicCarousel from '@/components/ui/BasicCarousel.jsx';
 import { cn } from '@/lib/utils.js';
 
 const FrameCarousel = ({ element, active, highlighted, width, onClick, onChange }) => {
-  const slides = Array(2).fill(null);
-
   return (
     <ElementWrapper
       element={element}
@@ -30,23 +28,25 @@ const FrameCarousel = ({ element, active, highlighted, width, onClick, onChange 
       {({ isEditing }) => (
         <BasicCarousel
           classNames={{ base: cn('w-full h-full light', { 'overflow-hidden': !isEditing }) }}
-          slides={slides.map((s, i) => {
-            return {
-              id: i,
-              content: (
-                <FrameContents
-                  key={i}
-                  id={`frame/${i}/${element.id}`}
-                  element={element}
-                  onChange={onChange}
-                  isEditing={isEditing}
-                  active={active}
-                  highlighted={highlighted}
-                  overlay={<div className="absolute inset-0 z-[9] pointer-events-none bg-white/50" />}
-                />
-              ),
-            };
-          })}
+          slides={Array(element.config.slides)
+            .fill(null)
+            .map((s, i) => {
+              return {
+                id: i,
+                content: (
+                  <FrameContents
+                    key={i}
+                    id={`frame/${i}/${element.id}`}
+                    element={element}
+                    onChange={onChange}
+                    isEditing={isEditing}
+                    active={active}
+                    highlighted={highlighted}
+                    overlay={<div className="absolute inset-0 z-[9] pointer-events-none bg-white/50" />}
+                  />
+                ),
+              };
+            })}
         />
       )}
     </ElementWrapper>
