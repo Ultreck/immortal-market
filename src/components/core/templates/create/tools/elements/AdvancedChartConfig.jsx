@@ -52,24 +52,34 @@ const AdvancedChartConfig = ({ element, onChange }) => {
         <div className="px-8 py-6 w-full h-[500px] overflow-y-auto">
           <div className="grid grid-cols-1 gap-2">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="grid grid-cols-2 gap-10">
-                <div>
-                  <p>Pls enter Percentage</p>
-                  <Input
-                    placeholder="Enter Percentage"
-                    size="lg"
-                    variant="bordered"
-                    className="w-full mt-2"
-                    onChange={(e) =>
-                      onChange({ ...element, config: { ...element.config, percentage: e.target.value } })
-                    }
-                    value={element.config.percentage}
-                  />
-                </div>
+              <div>
+                <Slider
+                  label="Percentage"
+                  step={10}
+                  maxValue={100}
+                  minValue={10}
+                  marks={[
+                    { value: 10, label: '10' },
+                    { value: 20, label: '20' },
+                    { value: 30, label: '30' },
+                    { value: 40, label: '40' },
+                    { value: 50, label: '50' },
+                    { value: 60, label: '60' },
+                    { value: 70, label: '70' },
+                    { value: 80, label: '80' },
+                    { value: 90, label: '90' },
+                    { value: 100, label: '100' },
+                  ]}
+                  className="max-w-md"
+                  onChange={(e) => onChange({ ...element, config: { ...element.config, percentage: e } })}
+                  value={element.config.percentage}
+                />
+              </div>
 
-                <div className="">
+              {element.type === 'chart-10-shapes' && (
+                <div className="mt-20">
                   <Select
-                    name='shapes'
+                    name="shapes"
                     label={capitalize('shapes')}
                     variant="bordered"
                     labelPlacement="outside"
@@ -80,16 +90,44 @@ const AdvancedChartConfig = ({ element, onChange }) => {
                     classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
                     disableEmptySelection={true}
                   >
-                    {['circle', 'square', 'triangle', 'star', 'hexagon', 'pentagon', 'hexagonpyramid', 'octagon'].map((key) => (
+                    {['circle', 'square', 'triangle', 'star', 'hexagon', 'pentagon', 'hexagonpyramid', 'octagon'].map(
+                      (key) => (
+                        <SelectItem key={key} classNames={{ title: 'text-base px-2' }}>
+                          {key}
+                        </SelectItem>
+                      )
+                    )}
+                  </Select>
+                </div>
+              )}
+
+              {element.type === 'chart-gender-stats' && (
+                <div className="mt-20">
+                  <Select
+                    name="shapes"
+                    label={capitalize('shapes')}
+                    variant="bordered"
+                    labelPlacement="outside"
+                    placeholder="Select one"
+                    size="lg"
+                    selectedKeys={element.config.shape ? [element.config.shape] : []}
+                    onChange={(e) => onChange({ ...element, config: { ...element.config, shape: e.target.value } })}
+                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                    disableEmptySelection={true}
+                  >
+                    {['male', 'female', 'both'].map((key) => (
                       <SelectItem key={key} classNames={{ title: 'text-base px-2' }}>
                         {key}
                       </SelectItem>
                     ))}
                   </Select>
                 </div>
+              )}
+
+              <div className="grid grid-cols-2 gap-10 mt-10">
                 <div className="">
                   <Select
-                    name='countFormat'
+                    name="countFormat"
                     label="Count Format"
                     variant="bordered"
                     labelPlacement="outside"
@@ -112,7 +150,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
                 </div>
                 <div className="">
                   <Select
-                    name='titlePosition'
+                    name="titlePosition"
                     label="Title Position"
                     variant="bordered"
                     labelPlacement="outside"
@@ -169,9 +207,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
               <div className="mt-16">
                 <Checkbox
                   isSelected={element.config.showCount}
-                  onValueChange={(v) =>
-                    onChange({ ...element, config: { ...element.config, showCount: v } })
-                  }
+                  onValueChange={(v) => onChange({ ...element, config: { ...element.config, showCount: v } })}
                 >
                   Show Count
                 </Checkbox>

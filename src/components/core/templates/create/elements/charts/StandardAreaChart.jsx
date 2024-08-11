@@ -17,6 +17,26 @@ const colors = [
   '#D93566',
 ];
 
+const chartData = [
+  { month: 'January', desktop: 186, mobile: 80 },
+  { month: 'February', desktop: 305, mobile: 200 },
+  { month: 'March', desktop: 237, mobile: 120 },
+  { month: 'April', desktop: 73, mobile: 190 },
+  { month: 'May', desktop: 209, mobile: 130 },
+  { month: 'June', desktop: 214, mobile: 140 },
+];
+
+const chartConfig = {
+  desktop: {
+    label: 'Desktop',
+    color: '#2673D9',
+  },
+  mobile: {
+    label: 'Mobile',
+    color: '#ff0000',
+  },
+};
+
 const StandardAreaChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const config = {
     [element.config.keys.y]: {
@@ -39,29 +59,71 @@ const StandardAreaChart = ({ element, active, highlighted, width, onClick, onCha
       resizeHandles={['se', 'e', 's']}
       constrained
     >
-      <ChartContainer
-        config={config}
-        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
-      >
-        <AreaChart
-          accessibilityLayer
-          data={element.config.data}
-          style={{
-            opacity: element.style.opacity,
-          }}
+      {element.config.type === 'line' && (
+        <ChartContainer
+          config={config}
+          style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
         >
-          <CartesianGrid vertical={false} />
-          <XAxis
-            dataKey={element.config.keys.x}
-            tickLine={false}
-            axisLine={false}
-            tickMargin={8}
-            tickFormatter={(value) => capitalize(value)}
-          />
-          <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-          <Area dataKey={element.config.keys.y} type="natural" fillOpacity={0.4} />
-        </AreaChart>
-      </ChartContainer>
+          <AreaChart
+            accessibilityLayer
+            data={element.config.data}
+            style={{
+              opacity: element.style.opacity,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey={element.config.keys.x}
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={(value) => capitalize(value)}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+            <Area dataKey={element.config.keys.y} type="natural" fillOpacity={0.4} />
+          </AreaChart>
+        </ChartContainer>
+      )}
+      {element.config.type === 'multiple' && (
+        <ChartContainer
+          config={chartConfig}
+          style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+        >
+          <AreaChart
+            accessibilityLayer
+            data={chartData}
+            style={{
+              opacity: element.style.opacity,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <Area
+              dataKey="desktop"
+              type="monotone"
+              fill="var(--color-desktop)"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={false}
+            />
+            <Area
+              dataKey="mobile"
+              type="monotone"
+              fill="var(--color-mobile)"
+              stroke="var(--color-mobile)"
+              strokeWidth={2}
+              dot={false}
+            />
+          </AreaChart>
+        </ChartContainer>
+      )}
     </ElementWrapper>
   );
 };
@@ -69,3 +131,4 @@ const StandardAreaChart = ({ element, active, highlighted, width, onClick, onCha
 StandardAreaChart.propTypes = ElementPropTypes;
 
 export default StandardAreaChart;
+
