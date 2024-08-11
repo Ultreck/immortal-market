@@ -62,3 +62,24 @@ export const useGetSvgCodeFromUrl = (url) => {
     staleTime: Infinity,
   });
 };
+
+export const useGetFreepikImages = (term) => {
+  const http = axios.create({
+    baseURL: `https://api.freepik.com/v1/resources`,
+    headers: {
+      'x-freepik-api-key': 'FPSXefab1e55aacb472a8b3648827fda7f68',
+      'Accept-Language': '<accept-language>',
+    },
+  });
+  return useQuery({
+    queryKey: ['freepikImages', term],
+    queryFn: async () => {
+      const res = await http.get(
+        `?term=${term}&filters%5Bcontent_type%5D%5Bphoto%5D=1&filters%5Blicense%5D%5Bfreemium%5D=1`
+      );
+      return res.data;
+    },
+    enabled: !!term,
+  });
+};
+
