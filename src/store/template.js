@@ -5,10 +5,11 @@ const useTemplateStore = createWithEqualityFn(
   (set, get) => ({
     template: {
       id: null,
-      name: null,
+      title: null,
       pages: [
         {
           id: crypto.randomUUID(),
+          title: 'Untitled',
           width: 600,
           height: 600,
           style: {
@@ -124,6 +125,7 @@ const useTemplateStore = createWithEqualityFn(
       get().addUndoHistory();
       const page = payload || {
         id: crypto.randomUUID(),
+        title: 'Untitled',
         width: 600,
         height: 600,
         style: { backgroundColor: '#ffffff' },

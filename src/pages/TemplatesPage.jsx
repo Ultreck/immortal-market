@@ -18,12 +18,13 @@ const TemplatesPage = () => {
   const handleCreateTemplate = async () => {
     try {
       const template = {
-        name: 'Untitled',
+        title: 'Untitled',
         description: '',
         data: {
           pages: [
             {
               id: crypto.randomUUID(),
+              title: 'Untitled',
               width: 600,
               height: 600,
               style: {
@@ -36,7 +37,6 @@ const TemplatesPage = () => {
       };
       const res = await createTemplate(template);
       navigate(`/templates/${res.data.template._id}/edit`);
-      toast.success('Template created successfully');
     } catch (e) {
       toast.error(e?.response?.data?.message || e.message);
     }
@@ -84,7 +84,7 @@ const TemplatesPage = () => {
                       </div>
                     </Link>
                     <div className="mt-4 px-2 flex items-center justify-between">
-                      <h4 className="font-medium text-lg leading-tight">{template.name}</h4>
+                      <h4 className="font-medium text-lg leading-tight">{template.title}</h4>
                     </div>
                   </div>
                 ))}

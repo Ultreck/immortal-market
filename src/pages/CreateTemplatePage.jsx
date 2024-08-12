@@ -12,7 +12,7 @@ const CreateTemplatePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { id: businessId } = useBusiness();
-  const name = useTemplateStore((state) => state.template.name);
+  const title = useTemplateStore((state) => state.template.title);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const { data: { success = false, template } = {}, isLoading: isTemplatesLoading } = useGetTemplate(businessId, id);
 
@@ -25,7 +25,7 @@ const CreateTemplatePage = () => {
 
   useEffect(() => {
     if (template) {
-      const { _id, name, description, data } = template;
+      const { _id, title, description, data } = template;
       const pages = data.pages.map((page) => ({
         ...page,
         elements: page.elements.map((el) => {
@@ -54,7 +54,7 @@ const CreateTemplatePage = () => {
         zoom: 1,
         ...data,
         pages,
-        name,
+        title,
         description,
         id: _id,
       });
@@ -68,7 +68,7 @@ const CreateTemplatePage = () => {
           <Spinner size="lg" />
         </div>
       ) : (
-        <>{!!name && <TemplateBuilder />}</>
+        <>{!!title && <TemplateBuilder />}</>
       )}
     </>
   );

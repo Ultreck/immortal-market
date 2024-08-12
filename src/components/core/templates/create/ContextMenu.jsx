@@ -1,9 +1,11 @@
 import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
-import { TbArrowDown, TbArrowUp, TbClipboardCopy, TbCopyPlus, TbTrash } from 'react-icons/tb';
-import { Listbox, ListboxItem } from '@nextui-org/react';
+import { TbArrowDown, TbArrowUp, TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbTrash } from 'react-icons/tb';
+import { Listbox, ListboxItem, useDisclosure } from '@nextui-org/react';
+
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
+import LinkTool from './tools/elements/Link';
 
 const ContextMenu = ({ position, isOpen, onClose }) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -12,6 +14,8 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
   const addElements = useTemplateStore((state) => state.addElements);
   const updatePage = useTemplateStore((state) => state.updatePage);
   const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
+  const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id));
+  const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
 
   useEffect(() => {
     if (isOpen) {
@@ -53,44 +57,59 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
 
   return (
     <>
-      {isOpen &&
-        createPortal(
-          <div
-            className="w-[260px] border-small px-2 py-2 rounded-2xl border-default-200 dark:border-default-100 bg-default-50 fixed"
-            style={{ top: `${position.y}px`, left: `${position.x}px` }}
-            onContextMenu={(e) => e.preventDefault()}
-          >
-            <Listbox
-              aria-label="Actions"
-              onAction={(key) => {
-                if (key === 'copy') handleCopy();
-                if (key === 'duplicate') handleDuplicate();
-                if (key === 'delete') handleDelete();
-                if (key === 'move-top') handleMoveToTop();
-                if (key === 'move-bottom') handleMoveToBottom();
-                onClose();
-              }}
-              itemClasses={{ title: 'text-base' }}
+      {isOpen && (
+        <>
+          {createPortal(
+            <div
+              className="w-[260px] border-small px-2 py-2 rounded-2xl border-default-200 dark:border-default-100 bg-default-50 fixed"
+              style={{ top: `${position.y}px`, left: `${position.x}px` }}
+              onContextMenu={(e) => e.preventDefault()}
             >
-              <ListboxItem key="copy" startContent={<TbClipboardCopy size="18" />}>
-                Copy
-              </ListboxItem>
-              <ListboxItem key="duplicate" startContent={<TbCopyPlus size="18" />}>
-                Duplicate
-              </ListboxItem>
-              <ListboxItem key="move-top" startContent={<TbArrowUp size="18" />}>
-                Move to top
-              </ListboxItem>
-              <ListboxItem key="move-bottom" startContent={<TbArrowDown size="18" />} showDivider>
-                Move to bottom
-              </ListboxItem>
-              <ListboxItem key="delete" startContent={<TbTrash size="18" />} color="danger">
-                Delete
-              </ListboxItem>
-            </Listbox>
-          </div>,
-          document.body
-        )}
+              <Listbox
+                aria-label="Actions"
+                onAction={(key) => {
+                  if (key === 'copy') handleCopy();
+                  if (key === 'duplicate') handleDuplicate();
+                  if (key === 'delete') handleDelete();
+                  if (key === 'move-top') handleMoveToTop();
+                  if (key === 'move-bottom') handleMoveToBottom();
+                  if (key === 'link') onLinkToolOpen();
+                  onClose();
+                }}
+                itemClasses={{ title: 'text-base' }}
+              >
+                <ListboxItem key="copy" startContent={<TbClipboardCopy size="18" />}>
+                  Copy
+                </ListboxItem>
+                <ListboxItem key="duplicate" startContent={<TbCopyPlus size="18" />}>
+                  Duplicate
+                </ListboxItem>
+                <ListboxItem key="move-top" startContent={<TbArrowUp size="18" />}>
+                  Move to top
+                </ListboxItem>
+                <ListboxItem key="move-bottom" startContent={<TbArrowDown size="18" />}>
+                  Move to bottom
+                </ListboxItem>
+                {elements.every((el) => el.href) ? (
+                  <ListboxItem key="link" startContent={<TbLinkPlus size="18" />} showDivider>
+                    Edit link
+                  </ListboxItem>
+                ) : (
+                  <ListboxItem key="link" startContent={<TbLink size="18" />} showDivider>
+                    Link
+                  </ListboxItem>
+                )}
+                <ListboxItem key="delete" startContent={<TbTrash size="18" />} color="danger">
+                  Delete
+                </ListboxItem>
+              </Listbox>
+            </div>,
+            document.body
+          )}
+        </>
+      )}
+
+      <LinkTool elements={elements} isOpen={isLinkToolOpen} onClose={onLinkToolClose} />
     </>
   );
 };
