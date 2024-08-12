@@ -6,6 +6,7 @@ import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
 import { useUpdateTemplateMutation } from '@/api/business.js';
 import { useCallback } from 'react';
+import { useKey } from 'react-use';
 
 const StatusBar = () => {
   const toast = useToast();
@@ -23,6 +24,14 @@ const StatusBar = () => {
       toast.error(e?.response?.data?.message || e.message);
     }
   }, [template, update, toast]);
+
+  useKey(
+    (e) => e.key.toLowerCase() === 's' && e.ctrlKey && !e.shiftKey,
+    async (e) => {
+      e.preventDefault();
+      await handleSave();
+    }
+  );
 
   return (
     <div className="h-[50px] w-full dark:bg-default-50/50 border-t border-default-200 dark:border-default-100 flex items-center justify-between px-12">
