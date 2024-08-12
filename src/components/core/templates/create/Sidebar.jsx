@@ -16,6 +16,7 @@ import Uploads from '@/components/core/templates/create/Uploads.jsx';
 import Build from '@/components/core/templates/create/Build.jsx';
 import Charts from '@/components/core/templates/create/Charts.jsx';
 import { Tooltip } from '@nextui-org/react';
+import Infographics from '@/components/core/templates/create/Infographics.jsx';
 
 const Sidebar = () => {
   const [tab, setTab] = useState('components');
@@ -64,10 +65,11 @@ const Sidebar = () => {
         </div>
         <div className="px-8 py-6 overflow-x-hidden">
           {tab === 'build' && <Build />}
+          {tab === 'charts' && <Charts />}
+          {tab === 'infographics' && <Infographics />}
           {tab === 'components' && <Components />}
           {tab === 'layers' && <Layers />}
           {tab === 'uploads' && <Uploads />}
-          {tab === 'charts' && <Charts />}
         </div>
       </div>
     </div>

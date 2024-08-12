@@ -33,6 +33,7 @@ const DndFileInput = ({
         maxSize={maxSize}
         disabled={isDisabled}
         multiple={true}
+        maxFiles={10}
       >
         {({ getRootProps, getInputProps, isDragAccept, isDragReject }) => (
           <>
@@ -48,13 +49,12 @@ const DndFileInput = ({
             >
               <input {...getInputProps()} />
               <IconCloudUpload size="48" className="opacity-30" />
-              <p className="mt-4 max-w-[300px] opacity-80 text-center leading-tight">{label}</p>
+              {isDragReject ? (
+                <div className="mt-4 max-w-[300px] opacity-80 text-center leading-tight text-red-500">{error}</div>
+              ) : (
+                <p className="mt-4 max-w-[300px] opacity-80 text-center leading-tight">{label}</p>
+              )}
             </div>
-            {isDragReject && (
-              <div className="flex items-center text-center bg-red-100 text-red-600 rounded-2xl w-max mt-4 px-4 py-1">
-                {error}
-              </div>
-            )}
           </>
         )}
       </Dropzone>

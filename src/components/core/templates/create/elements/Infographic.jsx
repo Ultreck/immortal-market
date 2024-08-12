@@ -1,15 +1,15 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { Image } from '@nextui-org/react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import { Image } from '@nextui-org/react';
 
-const CanvasImage = ({ element, active, highlighted, onClick, onChange }) => {
+const Infographic = ({ element, active, highlighted, onClick, onChange }) => {
   return (
     <ElementWrapper element={element} onClick={onClick} onChange={onChange} active={active} highlighted={highlighted}>
-      <div className="h-full w-full" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
+      <div className="h-full w-full" style={element.style}>
         <Image
           src={element.config.src}
           alt={element.text}
-          className="w-full h-full object-cover pointer-events-none rounded-none z-[0]"
+          className="w-full h-full object-contain pointer-events-none rounded-none z-[0]"
           removeWrapper
           style={element.style}
         />
@@ -18,6 +18,6 @@ const CanvasImage = ({ element, active, highlighted, onClick, onChange }) => {
   );
 };
 
-CanvasImage.propTypes = ElementPropTypes;
+Infographic.propTypes = ElementPropTypes;
 
-export default CanvasImage;
+export default Infographic;

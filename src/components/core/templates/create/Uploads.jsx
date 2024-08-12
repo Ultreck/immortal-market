@@ -2,12 +2,11 @@ import { useCreateUploadMutation, useGetUploads } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { Image, Skeleton } from '@nextui-org/react';
 import { getImageLink } from '@/lib/utils.js';
-import { icons } from '@/lib/elements.js';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import DraggableElement from '@/components/core/templates/create/sidebar/DraggableElement.jsx';
+import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 
 const Uploads = () => {
   const toast = useToast();
@@ -33,7 +32,6 @@ const Uploads = () => {
     id: upload._id,
     type: 'image',
     name: 'Image',
-    icon: icons['image'],
     data: {
       type: 'image',
       text: 'Image',
@@ -49,6 +47,13 @@ const Uploads = () => {
         src: getImageLink(upload.file),
       },
     },
+    preview: (
+      <Image
+        src={getImageLink(upload.file)}
+        alt="Image"
+        className="w-full h-full object-cover rounded-2xl cursor-grab aspect-square"
+      />
+    ),
   }));
 
   return (
@@ -73,25 +78,7 @@ const Uploads = () => {
                 </>
               )}
               {elements.map((element) => (
-                <DraggableElement
-                  key={element.id}
-                  element={element}
-                  className="overflow-hidden"
-                  content={
-                    <Image
-                      src={element.data.config.src}
-                      alt={element.data.text}
-                      className="w-full h-full object-cover rounded-2xl cursor-grab aspect-square"
-                    />
-                  }
-                  dragging={
-                    <Image
-                      src={element.data.config.src}
-                      alt={element.data.text}
-                      className="w-full h-full object-cover rounded-2xl aspect-square"
-                    />
-                  }
-                />
+                <DraggableElementWrapper key={element.id} element={element} />
               ))}
             </div>
           ) : (
