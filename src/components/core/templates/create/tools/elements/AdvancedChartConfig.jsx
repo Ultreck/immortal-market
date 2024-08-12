@@ -27,11 +27,11 @@ const AdvancedChartConfig = ({ element, onChange }) => {
       showCount: element.config.showCount || false,
       countFormat: element.config.countFormat || 'fraction',
       titlePosition: element.config.titlePosition || 'top',
-      json: JSON.stringify(element.config.data, null, 2),
-      ...Object.keys(element.config.keys).reduce((acc, key) => {
-        acc[key] = element.config.keys[key];
-        return acc;
-      }, {}),
+      // json: JSON.stringify(element.config.data, null, 2),
+      // ...Object.keys(element.config.keys).reduce((acc, key) => {
+      //   acc[key] = element.config.keys[key];
+      //   return acc;
+      // }, {}),
     },
   });
 

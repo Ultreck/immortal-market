@@ -137,7 +137,7 @@ export const components = {
   'chart-gender-stats': AdvancedCharts,
   'chart-pyramid': AdvancedCharts,
   'chart-funnel': AdvancedFunnelChart,
-  'chart-stackedbar-advanced': AdvancedStackedBar
+  'chart-stackedbar-advanced': AdvancedCharts
 };
 
 export const getElementTools = (type) => {

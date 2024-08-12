@@ -445,11 +445,11 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-stackedbar-advanced',
-      type: 'chart-stacked-bar',
+      type: 'chart-stackedbar-advanced',
       name: 'Stacked Bar Chart',
       icon: RiBarChart2Line,
       data: {
-        type: 'chart-stacked-bar',
+        type: 'chart-stackedbar-advanced',
         text: 'Stacked Bar Chart',
         width: 400,
         height: 300,
@@ -485,7 +485,7 @@ const AdvancedCharts = () => {
           }}
         />
       ),
-    }
+    },
     // {
     //   id: 'chart-pyramid',
     //   type: 'chart-pyramid',

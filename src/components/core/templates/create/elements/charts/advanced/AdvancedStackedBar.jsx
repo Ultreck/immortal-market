@@ -72,7 +72,7 @@ export const CustomTooltip = ({ active, payload, label }) => {
 
         <div>
           <Button className="mt-10 bg-white text-black" size="sm">
-            View
+            Viewmore
           </Button>
         </div>
       </Card>
@@ -82,9 +82,9 @@ export const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-const AdvancedStackedBar = ({ element, active, highlighted, width, onClick, onChange }) => {
-  console.log({element});
-  
+const AdvancedStackedBar = ({ element, onChange }) => {
+  console.log({ element, onChange });
+
   return (
     <ChartContainer
       config={chartConfig}
