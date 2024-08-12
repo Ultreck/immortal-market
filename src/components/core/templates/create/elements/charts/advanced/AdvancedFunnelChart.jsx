@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@nextui-org/react';
+import ElementWrapper from '../../../ElementWrapper';
 
-const FunnelChart = () => {
+const AdvancedFunnelChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -13,20 +14,20 @@ const FunnelChart = () => {
         chart = echarts.init(chartRef.current);
 
         const option = {
-          title: {
-            text: 'Funnel',
-          },
-          tooltip: {
-            trigger: 'item',
-            formatter: '{a} <br/>{b} : {c}%',
-          },
-          toolbox: {
-            feature: {
-              dataView: { readOnly: false },
-              restore: {},
-              saveAsImage: {},
-            },
-          },
+          //   title: {
+          //     text: 'Funnel',
+          //   },
+          //   tooltip: {
+          //     trigger: 'item',
+          //     formatter: '{a} <br/>{b} : {c}%',
+          //   },
+          //   toolbox: {
+          //     feature: {
+          //       dataView: { readOnly: false },
+          //       restore: {},
+          //       saveAsImage: {},
+          //     },
+          //   },
           series: [
             {
               name: 'Funnel',
@@ -61,13 +62,7 @@ const FunnelChart = () => {
                   fontSize: 20,
                 },
               },
-              data: [
-                { value: 60, name: 'Visit' },
-                { value: 40, name: 'Inquiry' },
-                { value: 20, name: 'Order' },
-                { value: 80, name: 'Click' },
-                { value: 100, name: 'Show' },
-              ],
+              data: element.config.data,
             },
           ],
         };
@@ -77,20 +72,34 @@ const FunnelChart = () => {
     };
 
     initChart();
-
-    // Cleanup function
     return () => {
       if (chart) {
         chart.dispose();
       }
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, [element]);
 
   return (
-    <Card className="bg-white space-y-6 w-full px-8 py-6">
-      <div ref={chartRef} style={{ width: '100%', height: '600px' }} />
-    </Card>
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      onResize={(size) => {
+        onChange({ ...element, width: size.width, height: size.height });
+      }}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      resizeHandles={['se', 'e', 's']}
+      constrained
+    >
+      <div
+        ref={chartRef}
+        style={{ width: element.width, height: element.height, opacity: element.style.opacity }}
+      ></div>
+    </ElementWrapper>
   );
 };
 
-export default FunnelChart;
+export default AdvancedFunnelChart;
+

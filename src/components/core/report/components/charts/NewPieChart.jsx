@@ -2,14 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@nextui-org/react';
 
-const NewPieChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+const NewPieChart = () => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const updatedData = element.config.data.reduce((acc, item) => {
-      acc.push({ name: item.name, value: item.data });
-      return acc;
-    }, []);
     const chart = echarts.init(chartRef.current, 'light');
 
     const option = {
@@ -30,7 +26,13 @@ const NewPieChart = ({ element, active, highlighted, width, onClick, onChange })
           name: 'Access From',
           type: 'pie',
           radius: '50%',
-          data: updatedData,
+          data: [
+            { value: 1048, name: 'Search Engine' },
+            { value: 735, name: 'Direct' },
+            { value: 580, name: 'Email' },
+            { value: 484, name: 'Union Ads' },
+            { value: 300, name: 'Video Ads' },
+          ],
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
@@ -50,11 +52,10 @@ const NewPieChart = ({ element, active, highlighted, width, onClick, onChange })
   }, []);
 
   return (
-    <Card className="w-full bg-white space-y-6 px-8 py-6 mt-10">
-      <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }} />
+    <Card className='w-full bg-white space-y-6 px-8 py-6 mt-10'>
+      <div ref={chartRef} style={{ width: '100%', height: '400px' }} />
     </Card>
   );
 };
 
 export default NewPieChart;
-

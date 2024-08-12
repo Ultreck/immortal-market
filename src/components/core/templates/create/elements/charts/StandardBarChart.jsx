@@ -39,6 +39,7 @@ const StandardBarChart = ({ element, active, highlighted, width, onClick, onChan
       maxWidth={width}
       active={active}
       highlighted={highlighted}
+      editable
     >
       <ChartContainer
         config={config}

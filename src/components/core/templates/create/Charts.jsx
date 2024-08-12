@@ -12,6 +12,9 @@ import AdvancedTenShapes from './elements/charts/advanced/AdvancedTenShapes.jsx'
 import { TbChartAreaLine, TbChartDonut4, TbChartHistogram, TbChartPpf } from 'react-icons/tb';
 import StandardStackedBar from './elements/charts/StandardStackedBar.jsx';
 import AdvancedGenderStats from './elements/charts/advanced/AdvancedGenderStats.jsx';
+import AdvancedPyramidChart from './elements/charts/advanced/AdvancedPyramidChart.jsx';
+import { IconChartFunnel } from '@tabler/icons-react';
+import AdvancedStackedBar from './elements/charts/advanced/AdvancedStackedBar.jsx';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -328,6 +331,29 @@ const StandardCharts = () => {
         },
       },
     },
+    {
+      id: 'chart-funnel',
+      type: 'chart-funnel',
+      name: 'Funnel Chart',
+      icon: IconChartFunnel,
+      data: {
+        type: 'chart-funnel',
+        text: 'Funnel Chart',
+        width: 400,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { value: 60, name: 'Visit' },
+            { value: 40, name: 'Inquiry' },
+            { value: 20, name: 'Order' },
+            { value: 80, name: 'Click' },
+            { value: 100, name: 'Show' },
+          ],
+          keys: { name: 'name', data: 'data' },
+        },
+      },
+    }
   ];
 
   return (
@@ -417,6 +443,95 @@ const AdvancedCharts = () => {
         />
       ),
     },
+    {
+      id: 'chart-stackedbar-advanced',
+      type: 'chart-stackedbar-advanced',
+      name: 'Stacked Bar Chart',
+      icon: RiBarChart2Line,
+      data: {
+        type: 'chart-stackedbar-advanced',
+        text: 'Stacked Bar Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { month: 'Jan', desktop: 187, mobile: 200 },
+            { month: 'Feb', desktop: 275, mobile: 173 },
+            { month: 'Mar', desktop: 200, mobile: 90 },
+            { month: 'Apr', desktop: 275, mobile: 173 },
+            { month: 'May', desktop: 187, mobile: 90 },
+            { month: 'Jun', desktop: 239, mobile: 200 },
+            { month: 'Jul', desktop: 349, mobile: 275 },
+          ],
+          keys: { x: 'month', y: ['desktop', 'mobile'] },
+        },
+      },
+      preview: (
+        <AdvancedStackedBar
+          element={{
+            config: {
+              data: [
+                { month: 'Jan', desktop: 187, mobile: 200 },
+                { month: 'Feb', desktop: 275, mobile: 173 },
+                { month: 'Mar', desktop: 200, mobile: 90 },
+                { month: 'Apr', desktop: 275, mobile: 173 },
+                { month: 'May', desktop: 187, mobile: 90 },
+                { month: 'Jun', desktop: 239, mobile: 200 },
+                { month: 'Jul', desktop: 349, mobile: 275 },
+              ],
+              keys: { x: 'month', y: ['desktop', 'mobile'] },
+            },
+          }}
+        />
+      ),
+    },
+    // {
+    //   id: 'chart-pyramid',
+    //   type: 'chart-pyramid',
+    //   name: 'Pyramid Chart',
+    //   icon: IconChartFunnel,
+    //   data: {
+    //     type: 'chart-pyramid',
+    //     text: 'Pyramid Chart',
+    //     width: 400,
+    //     height: 300,
+    //     style: { opacity: 1 },
+    //     config: {
+    //       data: [
+    //         { range: 'Above ₦2.5m', percentage: 10.3 },
+    //         { range: '₦1.1m - ₦2.5m', percentage: 30.3 },
+    //         { range: '₦501k - ₦1m', percentage: 50.6 },
+    //         { range: '₦251k - ₦500k', percentage: 70.3 },
+    //         { range: 'Less than 250k', percentage: 99.4 },
+    //       ],
+    //       faceDirection: 'up',
+    //       stackCount: 5,
+    //       gradientColor: ['#3a5179', '#a8c5e5'],
+    //       titlePosition: 'top',
+    //       title: 'Income Distribution',
+    //     },
+    //   },
+    //   preview: (
+    //     <AdvancedPyramidChart
+    //       element={{
+    //         config: {
+    //           data: [
+    //             { name: 'Page A', value: 4000 },
+    //             { name: 'Page B', value: 3000 },
+    //             { name: 'Page C', value: 2000 },
+    //             { name: 'Page D', value: 2780 },
+    //             { name: 'Page E', value: 1890 },
+    //             { name: 'Page F', value: 2390 },
+    //             { name: 'Page G', value: 3490 },
+    //           ],
+    //           keys: { name: 'name', data: 'data' },
+    //           type: 'normal',
+    //         },
+    //       }}
+    //     />
+    //   ),
+    // },
   ];
 
   return (
