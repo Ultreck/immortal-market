@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Image, Skeleton } from '@nextui-org/react';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
-import useGetInfographics, { useAddInfographics } from '@/api/template.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useQueryClient } from '@tanstack/react-query';
 import { getImageLink } from '@/lib/utils.js';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
+import { useAddInfographics, useGetInfographics } from '@/api/business.js';
 
 const Infographics = () => {
   const toast = useToast();
@@ -84,7 +84,7 @@ const Infographics = () => {
               )}
               {elements.map((element) => (
                 <DraggableElementWrapper key={element.id} element={element} />
-              ))}{' '}
+              ))}
             </div>
           )}
         </>
