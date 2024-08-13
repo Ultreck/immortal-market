@@ -65,6 +65,7 @@ export const icons = {
   'chart-pyramid': IconChartFunnel,
   'chart-funnel': IconChartFunnel,
   'chart-stackedbar-advanced': RiBarChart2Line,
+  'chart-custom-bar': RiBarChart2Line
 };
 
 export const tools = {
@@ -100,9 +101,9 @@ export const tools = {
   'chart-line-area': ['chart', 'opacity'],
   'chart-gender-stats': ['advanced-chart', 'opacity'],
   'chart-pyramid': ['advanced-chart', 'opacity'],
-  'chart-funnel': ['advanced-chart', 'opacity'],
+  'chart-funnel' : ['advanced-chart', 'opacity'],
   'chart-stackedbar-advanced': ['advanced-chart', 'opacity'],
-  infographic: ['opacity'],
+  'chart-custom-bar': ['advanced-chart', 'opacity']
 };
 
 export const components = {
@@ -136,9 +137,9 @@ export const components = {
   'chart-line-area': StandartAreaLineChart,
   'chart-gender-stats': AdvancedCharts,
   'chart-pyramid': AdvancedCharts,
-  'chart-funnel': AdvancedFunnelChart,
+  'chart-funnel': AdvancedCharts,
   'chart-stackedbar-advanced': AdvancedCharts,
-  infographic: Infographic,
+  'chart-custom-bar': AdvancedCharts
 };
 
 export const getElementTools = (type) => {

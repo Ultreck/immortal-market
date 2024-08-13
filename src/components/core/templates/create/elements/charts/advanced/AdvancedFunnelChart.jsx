@@ -92,6 +92,7 @@ const AdvancedFunnelChart = ({ element, active, highlighted, width, onClick, onC
       highlighted={highlighted}
       resizeHandles={['se', 'e', 's']}
       constrained
+      editable
     >
       <div
         ref={chartRef}

@@ -50,6 +50,7 @@ const ChartData = ({ element, onChange, onClose }) => {
       }, {}),
     },
   });
+  
   const keys = getKeysFromJson(watch().json);
 
   const onSubmit = async (values) => {
