@@ -1,6 +1,6 @@
 import TemplateBuilder from '@/components/core/templates/create/TemplateBuilder.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetTemplate } from '@/api/business.js';
+import { useGetDesign } from '@/api/business.js';
 import { useEffect } from 'react';
 import useTemplateStore from '@/store/template.js';
 import { Spinner } from '@nextui-org/react';
@@ -14,18 +14,18 @@ const CreateTemplatePage = () => {
   const { id: businessId } = useBusiness();
   const title = useTemplateStore((state) => state.template.title);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const { data: { success = false, template } = {}, isLoading: isTemplatesLoading } = useGetTemplate(businessId, id);
+  const { data: { success = false, design } = {}, isLoading: isTemplatesLoading } = useGetDesign(businessId, id);
 
   useEffect(() => {
-    if (success && !template) {
-      toast.error('Template not found');
+    if (success && !design) {
+      toast.error('Design not found');
       navigate(`/templates/`);
     }
-  }, [success, template, navigate, toast]);
+  }, [success, design, navigate, toast]);
 
   useEffect(() => {
-    if (template) {
-      const { _id, title, description, data } = template;
+    if (design) {
+      const { _id, title, description, data } = design;
       const pages = data.pages.map((page) => ({
         ...page,
         elements: page.elements.map((el) => {
@@ -59,17 +59,17 @@ const CreateTemplatePage = () => {
         id: _id,
       });
     }
-  }, [template, updateTemplate]);
+  }, [design, updateTemplate]);
 
   return (
     <>
-      {isTemplatesLoading ? (
+      { isTemplatesLoading ? (
         <div className="h-screen flex items-center justify-center">
           <Spinner size="lg" />
         </div>
       ) : (
-        <>{!!title && <TemplateBuilder />}</>
-      )}
+        <>{ !!title && <TemplateBuilder /> }</>
+      ) }
     </>
   );
 };

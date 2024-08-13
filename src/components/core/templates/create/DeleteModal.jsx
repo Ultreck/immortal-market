@@ -1,5 +1,5 @@
 import { Button, Modal, ModalBody, ModalContent } from '@nextui-org/react';
-import { useDeleteTemplateMutation } from '@/api/business.js';
+import { useDeleteDesign } from '@/api/business.js';
 import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast.jsx';
 import PropTypes from 'prop-types';
@@ -11,7 +11,7 @@ const DeleteModal = ({ id, isOpen, onClose }) => {
   const qc = useQueryClient();
   const navigate = useNavigate();
   const { id: business } = useBusiness();
-  const { mutateAsync: deleteTemplate, isPending: isDeleteLoading } = useDeleteTemplateMutation(business);
+  const { mutateAsync: deleteTemplate, isPending: isDeleteLoading } = useDeleteDesign(business);
 
   const handleDelete = async () => {
     try {

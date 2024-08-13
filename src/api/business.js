@@ -89,48 +89,48 @@ export const useCreateUploadMutation = (business) => {
   });
 };
 
-export const useCreateTemplateMutation = (business) => {
+export const useCreateDesign = (business) => {
   return useMutation({
-    mutationKey: ['business', business, 'templates'],
+    mutationKey: ['business', business, 'designs'],
     mutationFn: (body) => {
-      return http.post(`/businesses/${business}/templates`, body);
+      return http.post(`/businesses/${business}/designs`, body);
     },
   });
 };
 
-export const useDeleteTemplateMutation = (business) => {
+export const useDeleteDesign = (business) => {
   return useMutation({
     mutationFn: ({ id }) => {
-      return http.delete(`/businesses/${business}/templates/${id}`);
+      return http.delete(`/businesses/${business}/designs/${id}`);
     },
   });
-}
+};
 
-export const useGetTemplates = (business) => {
+export const useGetDesigns = (business) => {
   return useQuery({
-    queryKey: ['business', business, 'templates'],
+    queryKey: ['business', business, 'designs'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/templates`);
+      const res = await http.get(`/businesses/${business}/designs`);
       return res.data;
     },
   });
 };
 
-export const useGetTemplate = (business, id) => {
+export const useGetDesign = (business, id) => {
   return useQuery({
-    queryKey: ['business', business, 'templates', id],
+    queryKey: ['business', business, 'designs', id],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/templates/${id}`);
+      const res = await http.get(`/businesses/${business}/designs/${id}`);
       return res.data;
     },
   });
 };
 
-export const useUpdateTemplateMutation = (business, id) => {
+export const useUpdateDesign = (business, id) => {
   return useMutation({
-    mutationKey: ['business', business, 'templates', id],
+    mutationKey: ['business', business, 'designs', id],
     mutationFn: (data) => {
-      return http.patch(`/businesses/${business}/templates/${id}`, data);
+      return http.patch(`/businesses/${business}/designs/${id}`, data);
     },
   });
 };

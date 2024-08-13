@@ -12,7 +12,7 @@ import {
 import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
-import { useUpdateTemplateMutation } from '@/api/business.js';
+import { useUpdateDesign } from '@/api/business.js';
 import { useCallback } from 'react';
 import { useKey } from 'react-use';
 import { TbDotsVertical, TbTrash } from 'react-icons/tb';
@@ -23,7 +23,7 @@ const StatusBar = () => {
   const { id } = useBusiness();
   const title = useTemplateStore((state) => state.template.title);
   const template = useTemplateStore((state) => state.template);
-  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateTemplateMutation(id, template.id);
+  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(id, template.id);
   const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
 
   const handleSave = useCallback(async () => {

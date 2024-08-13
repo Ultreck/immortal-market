@@ -1,25 +1,34 @@
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
-import { Button, Skeleton } from '@nextui-org/react';
-import { TbPlus } from 'react-icons/tb';
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownSection,
+  DropdownTrigger,
+  Skeleton,
+} from '@nextui-org/react';
 import { HiPhoto } from 'react-icons/hi2';
-import { useCreateTemplateMutation, useGetTemplates } from '@/api/business.js';
+import { useCreateDesign, useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import NoData from '@/components/ui/NoData.jsx';
+import { RiAddLine, RiLayout2Line, RiLayoutRowLine } from 'react-icons/ri';
 
 const TemplatesPage = () => {
   const toast = useToast();
   const { id } = useBusiness();
   const navigate = useNavigate();
-  const { data: { templates = [] } = {}, isLoading: isTemplatesLoading } = useGetTemplates(id);
-  const { mutateAsync: createTemplate, isPending: isCreateTemplateLoading } = useCreateTemplateMutation(id);
+  const { data: { designs = [] } = {}, isLoading: isTemplatesLoading } = useGetDesigns(id);
+  const { mutateAsync: create, isPending: isCreateTemplateLoading } = useCreateDesign(id);
 
-  const handleCreateTemplate = async () => {
+  const handleCreateDesign = async (type) => {
     try {
       const template = {
         title: 'Untitled',
         description: '',
+        type,
         data: {
           pages: [
             {
@@ -35,8 +44,8 @@ const TemplatesPage = () => {
           ],
         },
       };
-      const res = await createTemplate(template);
-      navigate(`/templates/${res.data.template._id}/edit`);
+      const res = await create(template);
+      navigate(`/templates/${ res.data.template._id }/edit`);
     } catch (e) {
       toast.error(e?.response?.data?.message || e.message);
     }
@@ -46,26 +55,67 @@ const TemplatesPage = () => {
     <>
       <DashboardTitle
         text="Templates"
-        breadcrumbs={[
+        breadcrumbs={ [
           { text: 'Home', href: '/' },
           { text: 'Templates', href: '/templates' },
-        ]}
+        ] }
         after={
-          <Button
-            onClick={handleCreateTemplate}
-            variant="solid"
-            radius="full"
-            className="text-base px-6"
-            color="primary"
-            startContent={<TbPlus size="20" />}
-            isLoading={isCreateTemplateLoading}
-          >
-            Create Template
-          </Button>
+          <>
+            <Dropdown classNames={ { content: 'shadow border border-default-200 w-[320px]' } } placement="bottom-end">
+              <DropdownTrigger>
+                <Button
+                  color="primary"
+                  radius="full"
+                  className="text-base"
+                  startContent={ <RiAddLine size="20" /> }
+                  isLoading={ isCreateTemplateLoading }
+                >
+                  Create
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                variant="faded"
+                aria-label="Dropdown menu with description"
+                onAction={ async (key) => {
+                  if (key === 'project') await handleCreateDesign('project');
+                  if (key === 'template') await handleCreateDesign('template');
+                } }
+              >
+                <DropdownSection classNames={ { base: 'p-1', heading: 'px-2' } }>
+                  <DropdownItem
+                    key="project"
+                    description="Design a report, infographic, etc"
+                    classNames={ {
+                      title: 'text-base',
+                      description: 'text-sm',
+                      wrapper: 'px-2 py-1',
+                      base: 'rounded-xl',
+                    } }
+                    startContent={ <RiLayoutRowLine size="20" className="ml-1" /> }
+                  >
+                    Project
+                  </DropdownItem>
+                  <DropdownItem
+                    key="template"
+                    description="Publish a template to all users"
+                    classNames={ {
+                      title: 'text-base',
+                      description: 'text-sm',
+                      wrapper: 'px-2 py-1',
+                      base: 'rounded-xl',
+                    } }
+                    startContent={ <RiLayout2Line size="20" className="ml-1" /> }
+                  >
+                    Template
+                  </DropdownItem>
+                </DropdownSection>
+              </DropdownMenu>
+            </Dropdown>
+          </>
         }
       />
       <div className="container py-8 md:py-10 min-h-screen flex flex-col space-y-10">
-        {isTemplatesLoading ? (
+        { isTemplatesLoading ? (
           <div className="grid grid-cols-4 gap-4 md:gap-8">
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
@@ -74,26 +124,27 @@ const TemplatesPage = () => {
           </div>
         ) : (
           <>
-            {templates.length > 0 ? (
+            { designs.length > 0 ? (
               <div className="grid grid-cols-4 gap-4 md:gap-8">
-                {templates.map((template, i) => (
-                  <div key={i}>
-                    <Link key={i} to={`/templates/${template._id}/edit`}>
-                      <div className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
+                { designs.map((template, i) => (
+                  <div key={ i }>
+                    <Link key={ i } to={ `/templates/${ template._id }/edit` }>
+                      <div
+                        className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
                         <HiPhoto size="52" className="opacity-40" />
                       </div>
                     </Link>
                     <div className="mt-4 px-2 flex items-center justify-between">
-                      <h4 className="font-medium text-lg leading-tight">{template.title}</h4>
+                      <h4 className="font-medium text-lg leading-tight">{ template.title }</h4>
                     </div>
                   </div>
-                ))}
+                )) }
               </div>
             ) : (
               <NoData text="No templates created yet" />
-            )}
+            ) }
           </>
-        )}
+        ) }
       </div>
     </>
   );
