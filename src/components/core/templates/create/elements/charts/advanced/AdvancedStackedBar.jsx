@@ -83,14 +83,12 @@ export const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const AdvancedStackedBar = ({ element, onChange }) => {
-  console.log({ element, onChange });
-
   return (
     <ChartContainer
       config={chartConfig}
-      // style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{ height: element.height, width: element.width, opacity: '1' }}
     >
-      <BarChart width={420} height={300} data={data} className="space" defaultShowTooltip>
+      <BarChart data={element.config.data} className="space" defaultShowTooltip>
         <Legend />
         <Tooltip content={<CustomTooltip />} />
         <Bar dataKey="pv" stackId="a" fill="#2673D9" radius={[0, 0, 4, 4]} />
