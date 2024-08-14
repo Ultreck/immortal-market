@@ -34,7 +34,7 @@ import SettingsLayout from '@/pages/settings/SettingsLayout.jsx';
 import BusinessSettingsPage from '@/pages/settings/BusinessSettingsPage.jsx';
 import AppearanceSettingsPage from '@/pages/settings/AppearanceSettingsPage.jsx';
 import AiAssistantPage from '@/pages/AiAssistantPage.jsx';
-
+import InvitationPage from '@/pages/InvitationPage.jsx';
 import 'swiper/css/bundle';
 
 const App = () => {
@@ -88,6 +88,15 @@ const App = () => {
             <RequireAuthBusiness>
               <CreateTemplatePage />
             </RequireAuthBusiness>
+          }
+        />
+
+        <Route
+          path="/invitation/:id"
+          element={
+            <RequireAuth>
+              <InvitationPage />
+            </RequireAuth>
           }
         />
 
