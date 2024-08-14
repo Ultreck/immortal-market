@@ -130,3 +130,23 @@ export const isValidJsonArray = (jsonString) => {
 };
 
 export const roundToNearestTen = (num) => Math.round(num / 10) * 10;
+
+export const objectToFormData = (obj, formData = new FormData(), namespace = '') => {
+  Object.keys(obj).forEach((key) => {
+    const formKey = namespace ? `${namespace}[${key}]` : key;
+    const value = obj[key];
+
+    if (value instanceof File) {
+      formData.append(formKey, value);
+    } else if (Array.isArray(value)) {
+      value.forEach((item, index) => {
+        objectToFormData({ [`${formKey}[${index}]`]: item }, formData);
+      });
+    } else if (typeof value === 'object' && value !== null) {
+      formData.append(formKey, JSON.stringify(value));
+    } else {
+      formData.append(formKey, value);
+    }
+  });
+  return formData;
+};

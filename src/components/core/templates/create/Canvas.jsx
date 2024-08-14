@@ -27,9 +27,9 @@ const Canvas = () => {
     <div className="flex-1 overflow-y-auto py-10 px-10" ref={root} onClick={handleParentClick} id="scrollable">
       <div className="mx-auto w-max">
         <div className="space-y-6 flex flex-col items-center w-max mx-auto">
-          {pages.map((page) => {
-            return <TemplatePage key={page.id} id={page.id} />;
-          })}
+          {pages.map((page) => (
+            <TemplatePage key={page.id} id={page.id} />
+          ))}
           <div
             tabIndex={0}
             onClick={() => addPage()}

@@ -6,22 +6,24 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
+  Image,
   Skeleton,
 } from '@nextui-org/react';
-import { HiPhoto } from 'react-icons/hi2';
 import { useCreateDesign, useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import NoData from '@/components/ui/NoData.jsx';
 import { RiAddLine, RiLayout2Line, RiLayoutRowLine } from 'react-icons/ri';
+import { getImageLink } from '@/lib/utils.js';
+import { TbPhotoCircle } from 'react-icons/tb';
 
 const TemplatesPage = () => {
   const toast = useToast();
-  const { id } = useBusiness();
+  const { id: business } = useBusiness();
   const navigate = useNavigate();
-  const { data: { designs = [] } = {}, isLoading: isTemplatesLoading } = useGetDesigns(id);
-  const { mutateAsync: create, isPending: isCreateTemplateLoading } = useCreateDesign(id);
+  const { data: { designs = [] } = {}, isLoading: isTemplatesLoading } = useGetDesigns({ business });
+  const { mutateAsync: create, isPending: isCreateTemplateLoading } = useCreateDesign(business);
 
   const handleCreateDesign = async (type) => {
     try {
@@ -126,15 +128,24 @@ const TemplatesPage = () => {
           <>
             {designs.length > 0 ? (
               <div className="grid grid-cols-4 gap-4 md:gap-8">
-                {designs.map((template, i) => (
+                {designs.map((design, i) => (
                   <div key={i}>
-                    <Link key={i} to={`/templates/${template._id}/edit`}>
-                      <div className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
-                        <HiPhoto size="52" className="opacity-40" />
-                      </div>
+                    <Link key={i} to={`/templates/${design._id}/edit`}>
+                      {design.thumbnail ? (
+                        <Image
+                          src={getImageLink(design.thumbnail)}
+                          alt={design.title}
+                          removeWrapper
+                          className="object-cover aspect-square"
+                        />
+                      ) : (
+                        <div className="rounded-2xl bg-default-200 dark:bg-default-50 aspect-square flex justify-center items-center">
+                          <TbPhotoCircle size="48" className="opacity-50" />
+                        </div>
+                      )}
                     </Link>
                     <div className="mt-4 px-2 flex items-center justify-between">
-                      <h4 className="font-medium text-lg leading-tight">{template.title}</h4>
+                      <h4 className="font-medium text-lg leading-tight">{design.title}</h4>
                     </div>
                   </div>
                 ))}

@@ -60,9 +60,9 @@ const Templates = () => {
         <div className="grid grid-cols-2 gap-4 mt-6">
           {designs.map((design) => (
             <div key={design._id}>
-              {design.preview ? (
+              {design.thumbnail ? (
                 <Image
-                  src={getImageLink(design.preview)}
+                  src={getImageLink(design.thumbnail)}
                   alt={design.title}
                   removeWrapper
                   className="w-full h-full object-cover rounded-2xl aspect-square"

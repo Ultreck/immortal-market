@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import http from '@/lib/http.js';
+import { objectToFormData } from '@/lib/utils.js';
 
 export const useGetUserBusiness = ({ enabled = true } = {}) => {
   return useQuery({
@@ -140,13 +141,7 @@ export const useUpdateDesign = (business, id) => {
   return useMutation({
     mutationKey: ['business', business, 'designs', id],
     mutationFn: (data) => {
-      const fd = new FormData();
-      Object.keys(data).forEach((key) => {
-        if (typeof data[key] === 'object') fd.append(key, JSON.stringify(data[key]));
-        else if (typeof data[key] === 'boolean') fd.append(key, data[key].toString());
-        else if (typeof data[key] === 'number') fd.append(key, data[key].toString());
-        else fd.append(key, data[key]);
-      });
+      const fd = objectToFormData(data);
       return http.patch(`/businesses/${business}/designs/${id}`, fd);
     },
   });
