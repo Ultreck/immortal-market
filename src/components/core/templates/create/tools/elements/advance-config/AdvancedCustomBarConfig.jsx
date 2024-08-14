@@ -1,5 +1,5 @@
 import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils';
-import { Button, Checkbox, Select, SelectItem, Switch, Textarea } from '@nextui-org/react';
+import { Button, Checkbox, Input, Select, SelectItem, Switch, Textarea } from '@nextui-org/react';
 import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
@@ -164,6 +164,22 @@ const AdvancedCustomBarConfig = ({ element, onChange }) => {
               Show Icon
             </Checkbox>
           </div>
+          <div>
+            <Checkbox
+              isSelected={element.config.tooltipToEachBar}
+              onValueChange={(v) => onChange({ ...element, config: { ...element.config, tooltipToEachBar: v } })}
+            >
+              Tooltip To Each Bar
+            </Checkbox>
+          </div>
+          <div>
+            <Checkbox
+              isSelected={element.config.tooltipToCard}
+              onValueChange={(v) => onChange({ ...element, config: { ...element.config, tooltipToCard: v } })}
+            >
+              Tooltip To Card
+            </Checkbox>
+          </div>
         </div>
 
         <div className="mt-6">
@@ -207,6 +223,37 @@ const AdvancedCustomBarConfig = ({ element, onChange }) => {
             />
           </div>
         )}
+
+        <div className="mt-6">
+          <div className="mt-6">
+            <Textarea
+              placeholder="No of Bars to Show"
+              label="No of Bars to Show"
+              size="lg"
+              variant="bordered"
+              className="w-full mt-2"
+              onChange={(e) =>
+                onChange({
+                  ...element,
+                  config: {
+                    ...element.config,
+                    numberOfBarsToShow: +(e.target.value),
+                  },
+                })
+              }
+              value={element.config.numberOfBarsToShow}
+              minRows={1}
+            />
+          </div>
+          {/* <Input
+            type="number"
+            label="Number of Bars to Show"
+            value={element.config.numberOfBarsToShow}
+            onChange={(e) => onChange({ ...element.config, numberOfBarsToShow: parseInt(e.target.value) })}
+            min={1}
+            max={element.config.data.length}
+          /> */}
+        </div>
       </div>
       <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
         Apply
