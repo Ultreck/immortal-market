@@ -45,7 +45,7 @@ const TemplatesPage = () => {
         },
       };
       const res = await create(template);
-      navigate(`/templates/${ res.data.template._id }/edit`);
+      navigate(`/templates/${res.data.design._id}/edit`);
     } catch (e) {
       toast.error(e?.response?.data?.message || e.message);
     }
@@ -55,20 +55,20 @@ const TemplatesPage = () => {
     <>
       <DashboardTitle
         text="Templates"
-        breadcrumbs={ [
+        breadcrumbs={[
           { text: 'Home', href: '/' },
           { text: 'Templates', href: '/templates' },
-        ] }
+        ]}
         after={
           <>
-            <Dropdown classNames={ { content: 'shadow border border-default-200 w-[320px]' } } placement="bottom-end">
+            <Dropdown classNames={{ content: 'shadow border border-default-200 w-[320px]' }} placement="bottom-end">
               <DropdownTrigger>
                 <Button
                   color="primary"
                   radius="full"
                   className="text-base"
-                  startContent={ <RiAddLine size="20" /> }
-                  isLoading={ isCreateTemplateLoading }
+                  startContent={<RiAddLine size="20" />}
+                  isLoading={isCreateTemplateLoading}
                 >
                   Create
                 </Button>
@@ -76,35 +76,35 @@ const TemplatesPage = () => {
               <DropdownMenu
                 variant="faded"
                 aria-label="Dropdown menu with description"
-                onAction={ async (key) => {
+                onAction={async (key) => {
                   if (key === 'project') await handleCreateDesign('project');
                   if (key === 'template') await handleCreateDesign('template');
-                } }
+                }}
               >
-                <DropdownSection classNames={ { base: 'p-1', heading: 'px-2' } }>
+                <DropdownSection classNames={{ base: 'p-1', heading: 'px-2' }}>
                   <DropdownItem
                     key="project"
                     description="Design a report, infographic, etc"
-                    classNames={ {
+                    classNames={{
                       title: 'text-base',
                       description: 'text-sm',
                       wrapper: 'px-2 py-1',
                       base: 'rounded-xl',
-                    } }
-                    startContent={ <RiLayoutRowLine size="20" className="ml-1" /> }
+                    }}
+                    startContent={<RiLayoutRowLine size="20" className="ml-1" />}
                   >
                     Project
                   </DropdownItem>
                   <DropdownItem
                     key="template"
                     description="Publish a template to all users"
-                    classNames={ {
+                    classNames={{
                       title: 'text-base',
                       description: 'text-sm',
                       wrapper: 'px-2 py-1',
                       base: 'rounded-xl',
-                    } }
-                    startContent={ <RiLayout2Line size="20" className="ml-1" /> }
+                    }}
+                    startContent={<RiLayout2Line size="20" className="ml-1" />}
                   >
                     Template
                   </DropdownItem>
@@ -115,7 +115,7 @@ const TemplatesPage = () => {
         }
       />
       <div className="container py-8 md:py-10 min-h-screen flex flex-col space-y-10">
-        { isTemplatesLoading ? (
+        {isTemplatesLoading ? (
           <div className="grid grid-cols-4 gap-4 md:gap-8">
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
@@ -124,27 +124,26 @@ const TemplatesPage = () => {
           </div>
         ) : (
           <>
-            { designs.length > 0 ? (
+            {designs.length > 0 ? (
               <div className="grid grid-cols-4 gap-4 md:gap-8">
-                { designs.map((template, i) => (
-                  <div key={ i }>
-                    <Link key={ i } to={ `/templates/${ template._id }/edit` }>
-                      <div
-                        className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
+                {designs.map((template, i) => (
+                  <div key={i}>
+                    <Link key={i} to={`/templates/${template._id}/edit`}>
+                      <div className="rounded-2xl bg-default-200 dark:bg-default-50 h-[240px] flex justify-center items-center">
                         <HiPhoto size="52" className="opacity-40" />
                       </div>
                     </Link>
                     <div className="mt-4 px-2 flex items-center justify-between">
-                      <h4 className="font-medium text-lg leading-tight">{ template.title }</h4>
+                      <h4 className="font-medium text-lg leading-tight">{template.title}</h4>
                     </div>
                   </div>
-                )) }
+                ))}
               </div>
             ) : (
               <NoData text="No templates created yet" />
-            ) }
+            )}
           </>
-        ) }
+        )}
       </div>
     </>
   );

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Input, Tab, Tabs } from '@nextui-org/react';
-import { TbSearch } from 'react-icons/tb';
+import { Image, Input, Skeleton, Tab, Tabs } from '@nextui-org/react';
+import { TbPhotoCircle, TbSearch } from 'react-icons/tb';
 import useTemplateStore from '@/store/template.js';
+import { useGetDesignsTemplates } from '@/api/business.js';
+import { getImageLink } from '@/lib/utils.js';
 
 const Build = () => {
   const [tab, setTab] = React.useState('templates');
@@ -27,6 +29,11 @@ const Build = () => {
 };
 
 const Templates = () => {
+  const { data: { designs = [] } = {}, isLoading: isDeignsLoading } = useGetDesignsTemplates({
+    status: 'published',
+    type: 'template',
+  });
+
   return (
     <div>
       <Input
@@ -42,6 +49,33 @@ const Templates = () => {
         placeholder="Search.."
         radius="full"
       />
+      {isDeignsLoading ? (
+        <div className="grid grid-cols-2 gap-4 mt-6">
+          <Skeleton className="w-full h-full aspect-square rounded-2xl" />
+          <Skeleton className="w-full h-full aspect-square rounded-2xl" />
+          <Skeleton className="w-full h-full aspect-square rounded-2xl" />
+          <Skeleton className="w-full h-full aspect-square rounded-2xl" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-4 mt-6">
+          {designs.map((design) => (
+            <div key={design._id}>
+              {design.preview ? (
+                <Image
+                  src={getImageLink(design.preview)}
+                  alt={design.title}
+                  removeWrapper
+                  className="w-full h-full object-cover rounded-2xl aspect-square"
+                />
+              ) : (
+                <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-2xl px-6 py-4 flex items-center justify-center aspect-square">
+                  <TbPhotoCircle size="32" className="opacity-50" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

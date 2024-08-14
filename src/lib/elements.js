@@ -38,9 +38,8 @@ import StandardStackedBar from '@/components/core/templates/create/elements/char
 import shapes from '@/lib/templates/shapes.js';
 import StandardLineBarChart from '@/components/core/templates/create/elements/charts/StandartLineBarChart';
 import StandartAreaLineChart from '@/components/core/templates/create/elements/charts/StandartAreaLineChart';
-import { IconChartFunnel } from '@tabler/icons-react';
-import AdvancedFunnelChart from '@/components/core/templates/create/elements/charts/advanced/AdvancedFunnelChart';
 import Infographic from '@/components/core/templates/create/elements/Infographic.jsx';
+import { IconChartFunnel } from '@tabler/icons-react';
 
 export const icons = {
   'frame-tabs': RiCheckboxMultipleBlankFill,
@@ -65,7 +64,7 @@ export const icons = {
   'chart-pyramid': IconChartFunnel,
   'chart-funnel': IconChartFunnel,
   'chart-stackedbar-advanced': RiBarChart2Line,
-  'chart-custom-bar': RiBarChart2Line
+  'chart-custom-bar': RiBarChart2Line,
 };
 
 export const tools = {
@@ -101,9 +100,10 @@ export const tools = {
   'chart-line-area': ['chart', 'opacity'],
   'chart-gender-stats': ['advanced-chart', 'opacity'],
   'chart-pyramid': ['advanced-chart', 'opacity'],
-  'chart-funnel' : ['advanced-chart', 'opacity'],
+  'chart-funnel': ['advanced-chart', 'opacity'],
   'chart-stackedbar-advanced': ['advanced-chart', 'opacity'],
-  'chart-custom-bar': ['advanced-chart', 'opacity']
+  'chart-custom-bar': ['advanced-chart', 'opacity'],
+  infographic: ['opacity'],
 };
 
 export const components = {
@@ -139,7 +139,8 @@ export const components = {
   'chart-pyramid': AdvancedCharts,
   'chart-funnel': AdvancedCharts,
   'chart-stackedbar-advanced': AdvancedCharts,
-  'chart-custom-bar': AdvancedCharts
+  'chart-custom-bar': AdvancedCharts,
+  infographic: Infographic,
 };
 
 export const getElementTools = (type) => {

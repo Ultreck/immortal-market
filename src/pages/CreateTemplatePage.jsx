@@ -25,7 +25,7 @@ const CreateTemplatePage = () => {
 
   useEffect(() => {
     if (design) {
-      const { _id, title, description, data } = design;
+      const { _id, title, description, status, type, data } = design;
       const pages = data.pages.map((page) => ({
         ...page,
         elements: page.elements.map((el) => {
@@ -53,6 +53,8 @@ const CreateTemplatePage = () => {
         activePage: null,
         zoom: 1,
         ...data,
+        status,
+        type,
         pages,
         title,
         description,
@@ -63,13 +65,13 @@ const CreateTemplatePage = () => {
 
   return (
     <>
-      { isTemplatesLoading ? (
+      {isTemplatesLoading ? (
         <div className="h-screen flex items-center justify-center">
           <Spinner size="lg" />
         </div>
       ) : (
-        <>{ !!title && <TemplateBuilder /> }</>
-      ) }
+        <>{!!title && <TemplateBuilder />}</>
+      )}
     </>
   );
 };
