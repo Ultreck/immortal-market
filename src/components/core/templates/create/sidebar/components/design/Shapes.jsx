@@ -24,7 +24,7 @@ const items = [
     },
     preview: (
       <div
-        className="bg-black/10 dark:bg-white/50 hover:bg-black/15 dark:hover:bg-white/60 aspect-square px-6 py-4"
+        className="bg-black/40 dark:bg-white/70 hover:bg-black/50 dark:hover:bg-white/60 aspect-square px-6 py-4"
         style={{ ...shapes[type.replace('shape-', '')] }}
       />
     ),
@@ -51,7 +51,7 @@ const items = [
       height: 8,
     },
     preview: (
-      <div className="text-black/10 dark:text-white/50 hover:text-black/15 dark:hover:text-white/60 aspect-square">
+      <div className="text-black/40 dark:text-white/50 hover:text-black/50 dark:hover:text-white/60 aspect-square">
         <TbLine className="w-full h-full" />
       </div>
     ),
