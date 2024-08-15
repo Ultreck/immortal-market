@@ -20,7 +20,10 @@ const SaveButton = () => {
     try {
       selectElements([]);
       setIsThumbnailLoading(true);
-      const blob = await toBlob(document.getElementById(`canvas-${pages[0].id}`), { skipFonts: true });
+      const blob = await toBlob(document.getElementById(`canvas-${pages[0].id}`), {
+        cacheBust: true,
+        skipFonts: true,
+      });
       const thumbnail = new File([blob], 'thumbnail.png', { type: 'image/png' });
       setIsThumbnailLoading(false);
       await update({ data: { pages }, thumbnail });
