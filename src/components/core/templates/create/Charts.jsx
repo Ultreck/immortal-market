@@ -3,18 +3,16 @@ import { useState } from 'react';
 import {
   RiBarChart2Line,
   RiBarChartHorizontalFill,
-  RiBarChartLine,
   RiLineChartLine,
   RiPieChartLine,
 } from 'react-icons/ri';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import AdvancedTenShapes from './elements/charts/advanced/AdvancedTenShapes.jsx';
 import { TbChartAreaLine, TbChartDonut4, TbChartHistogram, TbChartPpf } from 'react-icons/tb';
-import StandardStackedBar from './elements/charts/StandardStackedBar.jsx';
 import AdvancedGenderStats from './elements/charts/advanced/AdvancedGenderStats.jsx';
-import AdvancedPyramidChart from './elements/charts/advanced/AdvancedPyramidChart.jsx';
 import { IconChartFunnel } from '@tabler/icons-react';
 import AdvancedStackedBar from './elements/charts/advanced/AdvancedStackedBar.jsx';
+import AdvancedLinearBar from './elements/charts/advanced/AdvancedLinearBar.jsx';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -438,6 +436,37 @@ const AdvancedCharts = () => {
               countFormat: 'fraction',
               titlePosition: 'top',
               title: '',
+            },
+          }}
+        />
+      ),
+    },
+    {
+      id: 'chart-linear-bar',
+      type: 'chart-linear-bar',
+      name: 'Linear Bar Chart',
+      icon: RiBarChart2Line,
+      data: {
+        type: 'chart-linear-bar',
+        text: 'Linear Bar Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          progress: 50,
+          height: 50,
+          outerColor: '#ff0000',
+          innerColor: '#2673D9',
+        },
+      },
+      preview: (
+        <AdvancedLinearBar
+          element={{
+            config: {
+              progress: 50,
+              height: 40,
+              outerColor: '#ff0000',
+              innerColor: '#2673D9',
             },
           }}
         />

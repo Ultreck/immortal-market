@@ -18,7 +18,6 @@ const AdvancedCustomBar = ({ element }) => {
   const percentages = getPercentagesMax(element.config.data.map((i) => +i.value));
   const processedData = processData(element.config.data, element.config.numberOfBarsToShow);
   
-  console.log({ processedData, processData });
   useEffect(() => {
     console.log(element.config.data);
   }, [element.config.data]);
@@ -170,14 +169,8 @@ const AdvancedCustomBar = ({ element }) => {
           )}
         </div>
       )}
-      <p className="text-md opacity-75 mt-10">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed mollitia a labore accusantium numquam excepturi
-        dolores error, consectetur pariatur recusandae quae autem laboriosam hic dolor dolorum aliquam optio sunt
-        aliquid.
-      </p>
     </div>
   );
 };
 
 export default AdvancedCustomBar;
-

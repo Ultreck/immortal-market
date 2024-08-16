@@ -65,6 +65,7 @@ export const icons = {
   'chart-funnel': IconChartFunnel,
   'chart-stackedbar-advanced': RiBarChart2Line,
   'chart-custom-bar': RiBarChart2Line,
+  'chart-linear-bar': RiBarChart2Line
 };
 
 export const tools = {
@@ -103,6 +104,7 @@ export const tools = {
   'chart-funnel': ['advanced-chart', 'opacity'],
   'chart-stackedbar-advanced': ['advanced-chart', 'opacity'],
   'chart-custom-bar': ['advanced-chart', 'opacity'],
+  'chart-linear-bar': ['advanced-chart', 'opacity'],
   infographic: ['opacity'],
 };
 
@@ -140,6 +142,7 @@ export const components = {
   'chart-funnel': AdvancedCharts,
   'chart-stackedbar-advanced': AdvancedCharts,
   'chart-custom-bar': AdvancedCharts,
+  'chart-linear-bar': AdvancedCharts,
   infographic: Infographic,
 };
 

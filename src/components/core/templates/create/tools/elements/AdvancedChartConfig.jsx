@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import AdvancedStackedBarConfig from './advance-config/AdvancedStackedBarConfig';
 import AdvancedFunnelConfig from './advance-config/AdvancedFunnelConfig';
 import AdvancedCustomBarConfig from './advance-config/AdvancedCustomBarConfig';
+import AdvancedLinearBarConfig from './advance-config/AdvancedLinearBarConfig';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -413,6 +414,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
             <AdvancedStackedBarConfig element={element} onChange={onChange} />
           )}
           {element.type === 'chart-custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
         </div>
       </PopoverContent>
     </Popover>
