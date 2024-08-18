@@ -4,14 +4,35 @@ import { TbTextSize } from 'react-icons/tb';
 import NumberValueTool from '../../NumberValueTool';
 import { useState } from 'react';
 
-const sizes = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 60];
+const sizes = [
+  8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 60, 64, 68, 70, 72, 76, 80, 84,
+  86, 90, 94, 98, 100, 120, 140, 150,
+];
 const letterSpacingOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const lineHeightOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const fonts = [
   { key: 'Roboto', label: 'Roboto' },
   { key: 'Playwrite BE VLG', label: 'Playwrite BE VLG' },
   { key: 'Kanit', label: 'Kanit' },
+  { key: 'Lato', label: 'Lato' },
+  { key: 'Open Sans', label: 'Open Sans' },
+  { key: 'Poppins', label: 'Poppins' },
+  { key: 'Montserrat', label: 'Montserrat' },
+  { key: 'Oswald', label: 'Oswald' },
+  { key: 'Raleway', label: 'Raleway' },
+  { key: 'Inter', label: 'Inter' },
+  { key: 'Noto Sans', label: 'Noto Sans' },
+  { key: 'Playfair Display', label: 'Playfair Display' },
+  { key: 'Rubik', label: 'Rubik' },
+  { key: 'Nunito', label: 'Nunito' },
+  { key: 'PT Sans', label: 'PT Sans' },
+  { key: 'Work Sans', label: 'Work Sans' },
+  { key: 'Libre Baskerville', label: 'Libre Baskerville' },
+  { key: 'Manrope', label: 'Manrope' },
+  { key: 'Source Sans 3', label: 'Source Sans 3' },
+  { key: 'Hahmlet', label: 'Hahmlet' },
 ];
+
 const verticalAlignOptions = [
   { key: 'baseline', label: 'baseline' },
   { key: 'text-top', label: 'text-top' },
@@ -146,3 +167,4 @@ Font.propTypes = {
 };
 
 export default Font;
+

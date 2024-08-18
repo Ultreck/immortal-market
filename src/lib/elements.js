@@ -16,6 +16,8 @@ import {
 } from 'react-icons/tb';
 import { RiBarChart2Line, RiBarChartHorizontalFill, RiCheckboxMultipleBlankFill } from 'react-icons/ri';
 import Heading from '@/components/core/templates/create/elements/texts/Heading.jsx';
+import SubHeading from '@/components/core/templates/create/elements/texts/SubHeading.jsx';
+import Caption from '@/components/core/templates/create/elements/texts/Caption.jsx';
 import Text from '@/components/core/templates/create/elements/texts/Text.jsx';
 import Logo from '@/components/core/templates/create/elements/Logo.jsx';
 import Image from '@/components/core/templates/create/elements/Image.jsx';
@@ -40,6 +42,8 @@ import StandardLineBarChart from '@/components/core/templates/create/elements/ch
 import StandartAreaLineChart from '@/components/core/templates/create/elements/charts/StandartAreaLineChart';
 import Infographic from '@/components/core/templates/create/elements/Infographic.jsx';
 import { IconChartFunnel } from '@tabler/icons-react';
+import { iconTypes } from './icon-types';
+import GenericIcon from '@/components/core/templates/create/elements/GenericIcon';
 
 export const icons = {
   'frame-tabs': RiCheckboxMultipleBlankFill,
@@ -65,19 +69,24 @@ export const icons = {
   'chart-funnel': IconChartFunnel,
   'chart-stackedbar-advanced': RiBarChart2Line,
   'chart-custom-bar': RiBarChart2Line,
-  'chart-linear-bar': RiBarChart2Line
+  'chart-linear-bar': RiBarChart2Line,
 };
 
 export const tools = {
-  heading: ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity', 'animation', 'shadow'],
-  text: ['bold', 'italic', 'underline', 'font', 'text-color', 'text-align', 'opacity', 'animation', 'shadow'],
-  'shape-rectangle': ['background-color', 'border', 'opacity', 'border-radius', 'animation', 'shadow'],
+  ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
+    acc[type] = ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity', 'animation', 'shadow', 'sideBar'];
+    return acc;
+  }, {}),
   ...Object.keys(shapes).reduce((acc, type) => {
     acc[`shape-${type}`] = ['background-color', 'border', 'opacity', 'border-radius', 'animation', 'shadow'];
     return acc;
   }, {}),
   ...Object.keys(shapes).reduce((acc, type) => {
     acc[`frame-${type}`] = ['opacity', 'border-radius', 'animation', 'shadow'];
+    return acc;
+  }, {}),
+  ...iconTypes.reduce((acc, icon) => {
+    acc[`icon-${icon.name}`] = ['opacity', 'animation', 'shadow', 'text-color'];
     return acc;
   }, {}),
   'frame-tabs': ['opacity', 'animation', 'shadow', 'tabs'],
@@ -109,14 +118,20 @@ export const tools = {
 };
 
 export const components = {
-  heading: Heading,
-  text: Text,
+  ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
+    acc[type] = Text;
+    return acc;
+  }, {}),
   ...Object.keys(shapes).reduce((acc, type) => {
     acc[`shape-${type}`] = GenericShape;
     return acc;
   }, {}),
   ...Object.keys(shapes).reduce((acc, type) => {
     acc[`frame-${type}`] = GenericFrameShape;
+    return acc;
+  }, {}),
+  ...iconTypes.reduce((acc, icon) => {
+    acc[`icon-${icon.name}`] = GenericIcon;
     return acc;
   }, {}),
   'frame-tabs': FrameTabs,
