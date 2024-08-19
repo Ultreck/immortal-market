@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import http from '@/lib/http';
+import axios from 'axios';
 
 export const useGetBanks = () => {
   return useQuery({
@@ -48,5 +49,16 @@ export const useCreateSampleDocument = () => {
     mutationFn: (fd) => {
       return http.post('/product/sample', fd);
     },
+  });
+};
+
+export const useGetSvgCodeFromUrl = (url) => {
+  return useQuery({
+    queryKey: ['svg', url],
+    queryFn: async () => {
+      const res = await axios.get(url);
+      return res.data;
+    },
+    staleTime: Infinity,
   });
 };

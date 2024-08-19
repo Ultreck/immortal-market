@@ -22,6 +22,7 @@ import AdvancedChartConfig from './elements/AdvancedChartConfig.jsx';
 import Shadow from './elements/Shadow.jsx';
 import TabsTool from './elements/TabsTool.jsx';
 import CarouselTool from './elements/CarouselTool.jsx';
+import InfographicConfig from '@/components/core/templates/create/tools/elements/InfographicConfig.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -35,7 +36,7 @@ const ElementTools = () => {
     if (!page) return [];
     let _tools = elements.map((el) => getElementTools(el.type) || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
-    const singles = ['chart', 'table', 'key-value', 'icon', 'tabs', 'carousel'];
+    const singles = ['chart', 'table', 'key-value', 'icon', 'tabs', 'carousel', 'infographic'];
     if (_tools.some((tool) => singles.includes(tool)) && selectedElements.length > 1) {
       return _tools.filter((tool) => !singles.includes(tool));
     }
@@ -49,78 +50,87 @@ const ElementTools = () => {
   return (
     <AnimatePresence>
       {tools.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, x: '100%' }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: '100%' }}
-          className="fixed top-1/3 right-8 rounded-2xl bg-default-200/60 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
-        >
-          {tools.map((tool) => {
-            if (tool === 'bold') {
-              return <Bold key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'italic') {
-              return <Italic key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'underline') {
-              return <Underline key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'font') {
-              return <Font key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'text-color') {
-              return <TextColor key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'background-color') {
-              return <BackgroundColor key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'text-align') {
-              return <TextAlign key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'chart' && selectedElements.length === 1) {
-              return <ChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-            }
-            if (tool === 'icon' && selectedElements.length === 1) {
-              return <IconConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-            }
-            if (tool === 'table' && selectedElements.length === 1) {
-              return <TableConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-            }
-            if (tool === 'key-value' && selectedElements.length === 1) {
-              return <KeyValueConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-            }
-            if (tool === 'border') {
-              return <Border key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'opacity') {
-              return <Opacity key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'border-radius') {
-              return <BorderRadius key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'line') {
-              return <Line key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'animation') {
-              return <Animation key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'advanced-chart') {
-              return (
-                <AdvancedChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
-              );
-            }
-            if (tool === 'shadow') {
-              return <Shadow key={tool} elements={elements} onChange={handleUpdateElements} />;
-            }
-            if (tool === 'tabs' && selectedElements.length === 1) {
-              return <TabsTool key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-            }
-            if (tool === 'carousel' && selectedElements.length === 1) {
-              return <CarouselTool key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-            }
-            throw new Error(`Unknown tool ${tool}`);
-          })}
-        </motion.div>
+        <div className="fixed top-1/2 -translate-y-1/2 right-8">
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            className="rounded-2xl bg-default-200/60 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
+          >
+            {tools.map((tool) => {
+              if (tool === 'bold') {
+                return <Bold key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'italic') {
+                return <Italic key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'underline') {
+                return <Underline key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'font') {
+                return <Font key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'text-color') {
+                return <TextColor key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'background-color') {
+                return <BackgroundColor key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'text-align') {
+                return <TextAlign key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'chart' && selectedElements.length === 1) {
+                return <ChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+              }
+              if (tool === 'icon' && selectedElements.length === 1) {
+                return <IconConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+              }
+              if (tool === 'table' && selectedElements.length === 1) {
+                return <TableConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+              }
+              if (tool === 'key-value' && selectedElements.length === 1) {
+                return (
+                  <KeyValueConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
+                );
+              }
+              if (tool === 'border') {
+                return <Border key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'opacity') {
+                return <Opacity key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'border-radius') {
+                return <BorderRadius key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'line') {
+                return <Line key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'animation') {
+                return <Animation key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'advanced-chart') {
+                return (
+                  <AdvancedChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
+                );
+              }
+              if (tool === 'shadow') {
+                return <Shadow key={tool} elements={elements} onChange={handleUpdateElements} />;
+              }
+              if (tool === 'tabs' && selectedElements.length === 1) {
+                return <TabsTool key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+              }
+              if (tool === 'carousel' && selectedElements.length === 1) {
+                return <CarouselTool key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+              }
+              if (tool === 'infographic' && selectedElements.length === 1) {
+                return (
+                  <InfographicConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
+                );
+              }
+              throw new Error(`Unknown tool ${tool}`);
+            })}
+          </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );

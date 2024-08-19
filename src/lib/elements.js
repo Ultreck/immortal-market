@@ -105,7 +105,7 @@ export const tools = {
   'chart-stackedbar-advanced': ['advanced-chart', 'opacity'],
   'chart-custom-bar': ['advanced-chart', 'opacity'],
   'chart-linear-bar': ['advanced-chart', 'opacity'],
-  infographic: ['opacity'],
+  infographic: ['infographic', 'opacity'],
 };
 
 export const components = {
