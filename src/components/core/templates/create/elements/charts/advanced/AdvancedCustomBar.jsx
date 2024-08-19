@@ -1,6 +1,5 @@
 import { cn, getPercentagesMax } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
 import { TbCircleFilled } from 'react-icons/tb';
 import { Button, Tooltip } from '@nextui-org/react';
 
@@ -14,13 +13,8 @@ const AdvancedCustomBar = ({ element }) => {
     return [...visibleData, { name: 'Others', value: otherValue }];
   };
 
-  
   const percentages = getPercentagesMax(element.config.data.map((i) => +i.value));
   const processedData = processData(element.config.data, element.config.numberOfBarsToShow);
-  
-  useEffect(() => {
-    console.log(element.config.data);
-  }, [element.config.data]);
 
   const chartStyle = element.config.backgroundImage.enabled
     ? {

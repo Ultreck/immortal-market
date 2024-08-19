@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useMount } from 'react-use';
 
 const Infographic = ({ type, data, dynamic = false }) => {
@@ -15,6 +15,12 @@ const Infographic = ({ type, data, dynamic = false }) => {
   });
 
   return <div ref={root}></div>;
+};
+
+Infographic.propTypes = {
+  type: String,
+  data: Object,
+  dynamic: Boolean,
 };
 
 export default Infographic;

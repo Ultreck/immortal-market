@@ -16,8 +16,7 @@ const CustomDocumentDetailsModal = ({ isOpen, onClose, document }) => {
   const isFetching = q.isInvalidated && q.fetchStatus === 'fetching';
 
   const handleGenerateReport = async () => {
-    const res = await generate({ business: business._id, document: document._id });
-    console.log({ res });
+    await generate({ business: business._id, document: document._id });
     await qc.invalidateQueries({ queryKey: ['documents', 'custom'] });
   };
 
