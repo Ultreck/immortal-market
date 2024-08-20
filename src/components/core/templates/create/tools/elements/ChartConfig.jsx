@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils.js';
 import { TbSettings2 } from 'react-icons/tb';
+import { useState } from 'react';
+import { HexAlphaColorPicker } from 'react-colorful';
 
 const ChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });

@@ -117,15 +117,17 @@ const StandardCharts = () => {
         style: { opacity: 1 },
         config: {
           data: [
-            { name: 'Page A', data: 4000 },
-            { name: 'Page B', data: 3000 },
-            { name: 'Page C', data: 2000 },
-            { name: 'Page D', data: 2780 },
-            { name: 'Page E', data: 1890 },
-            { name: 'Page F', data: 2390 },
-            { name: 'Page G', data: 3490 },
+            { name: 'Page A', value: 4000 },
+            { name: 'Page B', value: 3000 },
+            { name: 'Page C', value: 2000 },
+            { name: 'Page D', value: 2780 },
+            { name: 'Page E', value: 1890 },
+            { name: 'Page F', value: 2390 },
+            { name: 'Page G', value: 3490 },
           ],
-          keys: { name: 'name', data: 'data' },
+          keys: { name: 'name', data: 'value' },
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+
         },
       },
       preview: (
