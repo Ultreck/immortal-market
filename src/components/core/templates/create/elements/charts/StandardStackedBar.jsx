@@ -10,18 +10,20 @@ import {
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 import { capitalize } from '@/lib/utils';
 
-const chartConfig = {
-  desktop: {
-    label: 'Desktop',
-    color: '#2673D9',
-  },
-  mobile: {
-    label: 'Mobile',
-    color: '#ff0000',
-  },
-};
 
 const StandardStackedBar = ({ element, active, highlighted, width, onClick, onChange }) => {
+
+  const chartConfig = {
+    desktop: {
+      label: 'Desktop',
+      color: element.config.colors?.[0] || '#2673D9',
+    },
+    mobile: {
+      label: 'Mobile',
+      color: element.config.colors?.[1] || '#ff0000',
+    },
+  };
+  
   return (
     <ElementWrapper
       element={element}
@@ -46,8 +48,8 @@ const StandardStackedBar = ({ element, active, highlighted, width, onClick, onCh
           />
           <ChartTooltip content={<ChartTooltipContent hideLabel />} />
           <ChartLegend content={<ChartLegendContent />} />
-          <Bar dataKey={element.config.keys.y[0]} stackId="a" fill="var(--color-desktop)" radius={[0, 0, 4, 4]} />
-          <Bar dataKey={element.config.keys.y[1]} stackId="a" fill="var(--color-mobile)" radius={[4, 4, 0, 0]} />
+          <Bar dataKey={element.config.keys.y[0]} stackId="a" fill={chartConfig.desktop.color} radius={[0, 0, 4, 4]} />
+          <Bar dataKey={element.config.keys.y[1]} stackId="a" fill={chartConfig.mobile.color} radius={[4, 4, 0, 0]} />
         </BarChart>
       </ChartContainer>
     </ElementWrapper>

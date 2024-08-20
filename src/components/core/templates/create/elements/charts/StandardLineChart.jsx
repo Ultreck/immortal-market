@@ -26,22 +26,22 @@ const chartData = [
   { month: 'June', desktop: 214, mobile: 140 },
 ];
 
-const chartConfig = {
-  desktop: {
-    label: 'Desktop',
-    color: '#2673D9',
-  },
-  mobile: {
-    label: 'Mobile',
-    color: '#ff0000',
-  },
-};
-
 const StandardLineChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const config = {
     [element.config.keys.y]: {
       label: capitalize(element.config.keys.y),
       color: colors[0],
+    },
+  };
+
+  const chartConfig = {
+    desktop: {
+      label: 'Desktop',
+      color: element.config.colors?.[0] || '#2673D9',
+    },
+    mobile: {
+      label: 'Mobile',
+      color: element.config.colors?.[1] || '#ff0000',
     },
   };
 
@@ -82,6 +82,7 @@ const StandardLineChart = ({ element, active, highlighted, width, onClick, onCha
               strokeWidth={2}
               activeDot={{ r: 6 }}
               isAnimationActive={false}
+              stroke={element.config.colors?.[0]}
             >
               <LabelList position="top" offset={12} fontSize={12} />
             </Line>
@@ -106,16 +107,20 @@ const StandardLineChart = ({ element, active, highlighted, width, onClick, onCha
             <Line
               dataKey="desktop"
               type="monotone"
-              fill="var(--color-desktop)"
-              stroke="var(--color-desktop)"
+              stroke={chartConfig.desktop.color}
+              fill={chartConfig.desktop.color}
+              // fill="var(--color-desktop)"
+              // stroke="var(--color-desktop)"
               strokeWidth={2}
               dot={false}
             />
             <Line
               dataKey="mobile"
               type="monotone"
-              fill="var(--color-mobile)"
-              stroke="var(--color-mobile)"
+              stroke={chartConfig.mobile.color}
+              fill={chartConfig.mobile.color}
+              // fill="var(--color-mobile)"
+              // stroke="var(--color-mobile)"
               strokeWidth={2}
               dot={false}
             />
@@ -129,3 +134,4 @@ const StandardLineChart = ({ element, active, highlighted, width, onClick, onCha
 StandardLineChart.propTypes = ElementPropTypes;
 
 export default StandardLineChart;
+

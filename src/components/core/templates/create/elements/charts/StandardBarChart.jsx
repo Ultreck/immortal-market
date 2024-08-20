@@ -21,14 +21,14 @@ const StandardBarChart = ({ element, active, highlighted, width, onClick, onChan
   const config = element.config.data.reduce((acc, item, i) => {
     acc[item[element.config.keys.x]] = {
       label: capitalize(item[element.config.keys.x]),
-      color: colors[i],
+      color: element.config.colors?.[i] || colors[i % colors.length],
     };
     return acc;
   }, {});
 
   const chartData = element.config.data.map((item, index) => ({
     ...item,
-    fill: colors[index % colors.length],
+    fill: element.config.colors?.[index] || colors[index % colors.length],
   }));
 
   return (
@@ -85,3 +85,4 @@ const StandardBarChart = ({ element, active, highlighted, width, onClick, onChan
 StandardBarChart.propTypes = ElementPropTypes;
 
 export default StandardBarChart;
+

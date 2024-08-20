@@ -51,7 +51,7 @@ const StandardDoughnutChart = ({ element, active, highlighted, width, onClick, o
         style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
       >
         {element.config.type === 'normal' && (
-          <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+          <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }} width={element.width} height={element.height}>
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <Pie
               data={data}
