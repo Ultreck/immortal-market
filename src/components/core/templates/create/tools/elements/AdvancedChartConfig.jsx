@@ -22,7 +22,7 @@ import AdvancedLinearBarConfig from './advance-config/AdvancedLinearBarConfig';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
-  const { handleSubmit, control, watch } = useForm({
+  const { handleSubmit } = useForm({
     defaultValues: {
       percentage: element.config.percentage,
       shape: element.config.shape,
@@ -423,11 +423,8 @@ const AdvancedChartConfig = ({ element, onChange }) => {
 
 AdvancedChartConfig.propTypes = {
   element: PropTypes.shape({
-    config: PropTypes.shape({
-      percentage: PropTypes.number,
-      shape: PropTypes.string,
-      color: PropTypes.string,
-    }),
+    type: PropTypes.string,
+    config: PropTypes.any,
   }).isRequired,
   onChange: PropTypes.func.isRequired,
 };
