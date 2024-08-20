@@ -16,6 +16,7 @@ import AdvancedGenderStats from './elements/charts/advanced/AdvancedGenderStats.
 import { IconChartFunnel } from '@tabler/icons-react';
 import AdvancedStackedBar from './elements/charts/advanced/AdvancedStackedBar.jsx';
 import AdvancedLinearBar from './elements/charts/advanced/AdvancedLinearBar.jsx';
+import AdvancedLollipop from './elements/charts/advanced/AdvancedLollipop.jsx';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -127,7 +128,6 @@ const StandardCharts = () => {
           ],
           keys: { name: 'name', data: 'value' },
           colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-
         },
       },
       preview: (
@@ -560,6 +560,51 @@ const AdvancedCharts = () => {
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
           <RiBarChart2Line className="w-full h-full" />
         </div>
+      ),
+    },
+    {
+      id: 'chart-lollipop',
+      type: 'chart-lollipop',
+      name: 'Lollipop Chart',
+      data: {
+        type: 'chart-lollipop',
+        text: 'Lollipop Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: "Reese's Peanut Butter", percentage: 84.2 },
+            { name: "Reese's Miniatures", percentage: 78.9 },
+            { name: 'Twix', percentage: 67.6 },
+            { name: 'Kit Kat', percentage: 56.8 },
+            { name: 'Snickers', percentage: 46.7 },
+            { name: "Reese's pieces", percentage: 40.4 },
+            { name: 'Milky Way', percentage: 30.1 },
+          ],
+          keys: { name: 'name', data: 'data' },
+          type: 'normal',
+          color: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+        },
+      },
+      preview: (
+        <AdvancedLollipop
+          element={{
+            config: {
+              data: [
+                { name: "Reese's Peanut Butter", percentage: 84.2 },
+                { name: "Reese's Miniatures", percentage: 78.9 },
+                { name: 'Twix', percentage: 67.6 },
+                { name: 'Kit Kat', percentage: 56.8 },
+                { name: 'Snickers', percentage: 46.7 },
+                { name: "Reese's pieces", percentage: 40.4 },
+                { name: 'Milky Way', percentage: 30.1 },
+              ],
+              keys: { name: 'name', data: 'data' },
+              color: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+            },
+          }}
+        />
       ),
     },
   ];

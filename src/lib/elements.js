@@ -45,7 +45,7 @@ export const tools = {
   image: ['border', 'border-radius', 'opacity', 'animation', 'shadow'],
   table: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
   'key-value': ['key-value', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
-  'chart-bar': ['chart', 'opacity', 'animation'],
+  'chart-bar': ['chart', 'opacity', 'animation',],
   'chart-line': ['chart', 'opacity', 'animation'],
   'chart-pie': ['chart', 'opacity', 'animation'],
   'chart-doughnut': ['chart', 'opacity', 'animation'],
@@ -63,6 +63,7 @@ export const tools = {
   'chart-custom-bar': ['advanced-chart', 'opacity'],
   'chart-linear-bar': ['advanced-chart', 'opacity'],
   infographic: ['infographic', 'opacity'],
+  'chart-lollipop': ['advanced-chart', 'opacity', 'animation', 'shadow'],
 };
 
 export const components = {
@@ -105,6 +106,7 @@ export const components = {
   'chart-custom-bar': AdvancedCharts,
   'chart-linear-bar': AdvancedCharts,
   infographic: Infographic,
+  'chart-lollipop': AdvancedCharts,
 };
 
 export const getElementTools = (type) => {
