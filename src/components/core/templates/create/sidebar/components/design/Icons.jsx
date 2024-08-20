@@ -1,36 +1,36 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import BasicCarousel from '@/components/ui/BasicCarousel.jsx';
-import { iconTypes } from '@/lib/icon-types';
-import { cn } from '@/lib/utils';
 import { createElement } from 'react';
+import icons from '@/lib/templates/icons.js';
 
-const items = iconTypes.map((icon) => ({
-    id: `icon-${icon.name}`,
+const items = icons.map((icon) => ({
+  id: `icon-${icon.name}`,
+  type: `icon-${icon.name}`,
+  name: `icon ${icon.name}`,
+  data: {
     type: `icon-${icon.name}`,
-    name: `icon ${icon.name}`,
-    data: {
-      style: {
-        borderWidth: 0,
-        borderColor: '#000000',
-        opacity: 1,
-        borderRadius: 0,
-        animationDuration: '1s',
-      },
-      type: `icon-${icon.name}`,
-      text: `icon ${icon.name}`,
-      width: 40,
-      height: 40,
+    text: `icon ${icon.name}`,
+    width: 40,
+    height: 40,
+    style: {
+      borderWidth: 0,
+      borderColor: '#000000',
+      opacity: 1,
+      borderRadius: 0,
+      animationDuration: '1s',
     },
-    preview: (
-      <div
-        className={cn('py-6 bg-default-100 flex flex-col items-center justify-center rounded-xl cursor-pointer', {
-   
-        })}
-      >
-        {createElement(icon.icon, { size: 24 })}
-      </div>
-    ),
-  })) 
+    config: {
+      name: icon.name,
+      keywords: icon.keywords,
+      type: icon.type,
+    },
+  },
+  preview: (
+    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+      {createElement(icon.icon, { className: 'w-full h-full' })}
+    </div>
+  ),
+}));
 
 const IconsSlider = () => {
   return (
@@ -60,4 +60,3 @@ const IconsSlider = () => {
 };
 
 export default IconsSlider;
-

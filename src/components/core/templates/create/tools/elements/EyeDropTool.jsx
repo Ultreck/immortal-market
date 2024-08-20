@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { HiEyeDropper } from 'react-icons/hi2';
 import { useState } from 'react';
 import html2canvas from 'html2canvas';
-import Portal from './Portal.js';
+import Portal from '../../../../../ui/Portal.js';
 import { Button } from '@nextui-org/react';
 
 const EyeDropTool = ({ value, onChange }) => {

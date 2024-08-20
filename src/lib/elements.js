@@ -1,30 +1,8 @@
-import {
-  TbBrackets,
-  TbCapsuleHorizontalFilled,
-  TbCarouselHorizontalFilled,
-  TbChartAreaLine,
-  TbChartBar,
-  TbChartDonut4,
-  TbChartHistogram,
-  TbChartLine,
-  TbChartPieFilled,
-  TbChartPpf,
-  TbIcons,
-  TbImageInPicture,
-  TbLine,
-  TbTableFilled,
-} from 'react-icons/tb';
-import { RiBarChart2Line, RiBarChartHorizontalFill, RiCheckboxMultipleBlankFill } from 'react-icons/ri';
-import Heading from '@/components/core/templates/create/elements/texts/Heading.jsx';
-import SubHeading from '@/components/core/templates/create/elements/texts/SubHeading.jsx';
-import Caption from '@/components/core/templates/create/elements/texts/Caption.jsx';
-import Text from '@/components/core/templates/create/elements/texts/Text.jsx';
-import Logo from '@/components/core/templates/create/elements/Logo.jsx';
+import Text from '@/components/core/templates/create/elements/Text.jsx';
 import Image from '@/components/core/templates/create/elements/Image.jsx';
 import Table from '@/components/core/templates/create/elements/Table.jsx';
 import KeyValue from '@/components/core/templates/create/elements/KeyValue.jsx';
 import Line from '@/components/core/templates/create/elements/Line.jsx';
-import SsIcon from '@/components/core/templates/create/elements/SsIcon.jsx';
 import StandardBarChart from '@/components/core/templates/create/elements/charts/StandardBarChart.jsx';
 import StandardLineChart from '@/components/core/templates/create/elements/charts/StandardLineChart.jsx';
 import StandardPieChart from '@/components/core/templates/create/elements/charts/StandardPieChart.jsx';
@@ -41,40 +19,12 @@ import shapes from '@/lib/templates/shapes.js';
 import StandardLineBarChart from '@/components/core/templates/create/elements/charts/StandartLineBarChart';
 import StandartAreaLineChart from '@/components/core/templates/create/elements/charts/StandartAreaLineChart';
 import Infographic from '@/components/core/templates/create/elements/Infographic.jsx';
-import { IconChartFunnel } from '@tabler/icons-react';
-import { iconTypes } from './icon-types';
 import GenericIcon from '@/components/core/templates/create/elements/GenericIcon';
-
-export const icons = {
-  'frame-tabs': RiCheckboxMultipleBlankFill,
-  'frame-carousel': TbCarouselHorizontalFilled,
-  logo: TbCapsuleHorizontalFilled,
-  line: TbLine,
-  image: TbImageInPicture,
-  table: TbTableFilled,
-  'key-value': TbBrackets,
-  icon: TbIcons,
-  'chart-bar': TbChartBar,
-  'chart-line': TbChartLine,
-  'chart-pie': TbChartPieFilled,
-  'chart-10-shapes': TbCapsuleHorizontalFilled,
-  'chart-10-square': TbCapsuleHorizontalFilled,
-  'chart-doughnut': TbChartDonut4,
-  'chart-bar-horizontal': RiBarChartHorizontalFill,
-  'chart-area': TbChartAreaLine,
-  'chart-stacked-bar': RiBarChart2Line,
-  'chart-line-bar': TbChartHistogram,
-  'chart-line-area': TbChartPpf,
-  'chart-pyramid': IconChartFunnel,
-  'chart-funnel': IconChartFunnel,
-  'chart-stackedbar-advanced': RiBarChart2Line,
-  'chart-custom-bar': RiBarChart2Line,
-  'chart-linear-bar': RiBarChart2Line,
-};
+import icons from '@/lib/templates/icons.js';
 
 export const tools = {
   ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
-    acc[type] = ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity', 'animation', 'shadow', 'sideBar'];
+    acc[type] = ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity', 'animation', 'shadow'];
     return acc;
   }, {}),
   ...Object.keys(shapes).reduce((acc, type) => {
@@ -85,15 +35,13 @@ export const tools = {
     acc[`frame-${type}`] = ['opacity', 'border-radius', 'animation', 'shadow'];
     return acc;
   }, {}),
-  ...iconTypes.reduce((acc, icon) => {
-    acc[`icon-${icon.name}`] = ['opacity', 'animation', 'shadow', 'text-color'];
+  ...icons.reduce((acc, icon) => {
+    acc[`icon-${icon.name}`] = ['icon', 'opacity', 'animation', 'shadow', 'text-color'];
     return acc;
   }, {}),
-  'frame-tabs': ['opacity', 'animation', 'shadow', 'tabs'],
-  'frame-carousel': ['opacity', 'animation', 'shadow', 'carousel'],
-  logo: ['opacity', 'animation', 'shadow'],
+  'frame-tabs': ['tabs', 'opacity', 'animation', 'shadow'],
+  'frame-carousel': ['carousel', 'opacity', 'animation', 'shadow'],
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
-  icon: ['icon', 'opacity', 'animation', 'shadow'],
   image: ['border', 'border-radius', 'opacity', 'animation', 'shadow'],
   table: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
   'key-value': ['key-value', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
@@ -130,18 +78,16 @@ export const components = {
     acc[`frame-${type}`] = GenericFrameShape;
     return acc;
   }, {}),
-  ...iconTypes.reduce((acc, icon) => {
+  ...icons.reduce((acc, icon) => {
     acc[`icon-${icon.name}`] = GenericIcon;
     return acc;
   }, {}),
   'frame-tabs': FrameTabs,
   'frame-carousel': FrameCarousel,
-  logo: Logo,
   line: Line,
   image: Image,
   table: Table,
   'key-value': KeyValue,
-  icon: SsIcon,
   'chart-bar': StandardBarChart,
   'chart-line': StandardLineChart,
   'chart-pie': StandardPieChart,

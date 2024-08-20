@@ -20,8 +20,8 @@ import { getElementTools } from '@/lib/elements.js';
 import Animation from './elements/Animation.jsx';
 import AdvancedChartConfig from './elements/AdvancedChartConfig.jsx';
 import Shadow from './elements/Shadow.jsx';
-import TabsTool from './elements/TabsTool.jsx';
-import CarouselTool from './elements/CarouselTool.jsx';
+import FrameTabsConfig from './elements/FrameTabsConfig.jsx';
+import FrameCarouselConfig from './elements/FrameCarouselConfig.jsx';
 import InfographicConfig from '@/components/core/templates/create/tools/elements/InfographicConfig.jsx';
 
 const ElementTools = () => {
@@ -117,10 +117,12 @@ const ElementTools = () => {
                 return <Shadow key={tool} elements={elements} onChange={handleUpdateElements} />;
               }
               if (tool === 'tabs' && selectedElements.length === 1) {
-                return <TabsTool key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+                return <FrameTabsConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
               }
               if (tool === 'carousel' && selectedElements.length === 1) {
-                return <CarouselTool key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+                return (
+                  <FrameCarouselConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
+                );
               }
               if (tool === 'infographic' && selectedElements.length === 1) {
                 return (

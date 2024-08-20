@@ -1,9 +1,8 @@
 import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import { PiTabsBold } from 'react-icons/pi';
-import { TbMinus, TbPlus } from 'react-icons/tb';
+import { TbMinus, TbPlus, TbSettings2 } from 'react-icons/tb';
 
-const CarouselTool = ({ element, onChange }) => {
+const FrameCarouselConfig = ({ element, onChange }) => {
   const handleChange = (v) => {
     if (!v) return;
     onChange({ ...element, config: { ...element.config, slides: v } });
@@ -13,7 +12,7 @@ const CarouselTool = ({ element, onChange }) => {
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <PiTabsBold size="20" />
+          <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
@@ -47,7 +46,7 @@ const CarouselTool = ({ element, onChange }) => {
   );
 };
 
-CarouselTool.propTypes = {
+FrameCarouselConfig.propTypes = {
   element: PropTypes.shape({
     config: PropTypes.shape({
       slides: PropTypes.number.isRequired,
@@ -56,4 +55,4 @@ CarouselTool.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default CarouselTool;
+export default FrameCarouselConfig;

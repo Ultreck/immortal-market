@@ -1,4 +1,5 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
+import { TbBrackets, TbTableFilled } from 'react-icons/tb';
 
 const data = [
   {
@@ -20,8 +21,11 @@ const data = [
         animationDuration: '1s',
       },
     },
-    group: 'visual',
-    category: 'data',
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <TbTableFilled className="w-full h-full" />
+      </div>
+    ),
   },
   {
     id: 'key-value',
@@ -42,8 +46,11 @@ const data = [
         animationDuration: '1s',
       },
     },
-    group: 'visual',
-    category: 'data',
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <TbBrackets className="w-full h-full" />
+      </div>
+    ),
   },
 ];
 

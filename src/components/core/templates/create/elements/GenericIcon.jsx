@@ -1,11 +1,11 @@
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { iconTypes } from '@/lib/icon-types';
-import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementWrapper from '../ElementWrapper';
+import { TbIcons } from 'react-icons/tb';
 import { createElement, useRef } from 'react';
 import { useMount } from 'react-use';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import icons from '@/lib/templates/icons.js';
 
 const GenericIcon = ({ element, active, highlighted, width, onClick, onChange }) => {
-  const icon = iconTypes.find((icon) => icon.name === element.type.replace('icon-', ''));
   const el = useRef(null);
 
   useMount(() => {
@@ -27,9 +27,15 @@ const GenericIcon = ({ element, active, highlighted, width, onClick, onChange })
       active={active}
       highlighted={highlighted}
     >
-      <div ref={el} className="!h-max" style={{ ...element.style, filter: `drop-shadow(${element.style.shadow})` }}>
-        {createElement(icon.icon, { size: element.width, color: element.style.color })}
-      </div>
+      {element.config?.name ? (
+        <div ref={el} className="!h-max" style={{ ...element.style, filter: `drop-shadow(${element.style.shadow})` }}>
+          {createElement(icons.find((icon) => icon.name === element.config.name)?.icon, { size: element.width })}
+        </div>
+      ) : (
+        <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">
+          <TbIcons size={20} className="opacity-60" />
+        </div>
+      )}
     </ElementWrapper>
   );
 };
@@ -37,4 +43,3 @@ const GenericIcon = ({ element, active, highlighted, width, onClick, onChange })
 GenericIcon.propTypes = ElementPropTypes;
 
 export default GenericIcon;
-

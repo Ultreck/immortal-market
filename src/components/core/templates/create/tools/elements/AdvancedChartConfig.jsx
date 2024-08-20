@@ -1,19 +1,19 @@
-import { capitalize, getKeysFromJson } from '@/lib/utils';
+import { capitalize } from '@/lib/utils';
 import {
   Button,
+  Checkbox,
   Popover,
   PopoverContent,
   PopoverTrigger,
   Select,
   SelectItem,
   Slider,
-  Checkbox,
-  useDisclosure,
   Textarea,
+  useDisclosure,
 } from '@nextui-org/react';
 import { HexAlphaColorPicker } from 'react-colorful';
 import { useForm } from 'react-hook-form';
-import { TbChartPie } from 'react-icons/tb';
+import { TbSettings2 } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import AdvancedStackedBarConfig from './advance-config/AdvancedStackedBarConfig';
 import AdvancedFunnelConfig from './advance-config/AdvancedFunnelConfig';
@@ -48,7 +48,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbChartPie size="20" />
+          <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
@@ -433,4 +433,3 @@ AdvancedChartConfig.propTypes = {
 };
 
 export default AdvancedChartConfig;
-

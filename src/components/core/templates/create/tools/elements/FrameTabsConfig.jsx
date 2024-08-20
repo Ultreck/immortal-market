@@ -1,9 +1,8 @@
 import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import { PiTabsBold } from 'react-icons/pi';
-import { TbPlus, TbX } from 'react-icons/tb';
+import { TbPlus, TbSettings2, TbX } from 'react-icons/tb';
 
-const TabsTool = ({ element, onChange }) => {
+const FrameTabsConfig = ({ element, onChange }) => {
   const handleChange = (e, id) => {
     onChange({
       ...element,
@@ -38,7 +37,7 @@ const TabsTool = ({ element, onChange }) => {
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <PiTabsBold size="20" />
+          <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
@@ -74,11 +73,11 @@ const TabsTool = ({ element, onChange }) => {
   );
 };
 
-TabsTool.propTypes = {
+FrameTabsConfig.propTypes = {
   element: PropTypes.shape({
     config: PropTypes.object,
   }),
   onChange: PropTypes.func.isRequired,
 };
 
-export default TabsTool;
+export default FrameTabsConfig;

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Button, Popover, PopoverContent, PopoverTrigger, Textarea, useDisclosure } from '@nextui-org/react';
-import { TbTableImport } from 'react-icons/tb';
+import { TbSettings2 } from 'react-icons/tb';
 import { Controller, useForm } from 'react-hook-form';
 import { isValidJsonArray } from '@/lib/utils.js';
 
@@ -36,7 +36,7 @@ const TableConfig = ({ element, onChange }) => {
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbTableImport size="20" />
+          <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">

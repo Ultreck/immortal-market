@@ -12,7 +12,7 @@ import {
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils.js';
-import { TbChartPie } from 'react-icons/tb';
+import { TbSettings2 } from 'react-icons/tb';
 
 const ChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -28,7 +28,7 @@ const ChartConfig = ({ element, onChange }) => {
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbChartPie size="20" />
+          <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
@@ -50,7 +50,7 @@ const ChartData = ({ element, onChange, onClose }) => {
       }, {}),
     },
   });
-  
+
   const keys = getKeysFromJson(watch().json);
 
   const onSubmit = async (values) => {
@@ -517,4 +517,3 @@ ChartConfig.propTypes = propTypes;
 ChartData.propTypes = { ...propTypes, onBack: PropTypes.func, onClose: PropTypes.func };
 
 export default ChartConfig;
-

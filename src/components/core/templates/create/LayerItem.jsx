@@ -1,6 +1,5 @@
-import { createElement, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import useTemplateStore from '@/store/template.js';
-import { icons } from '@/lib/elements.js';
 import { cn } from '@/lib/utils.js';
 import { Button } from '@nextui-org/react';
 import { RiCloseFill } from 'react-icons/ri';
@@ -12,7 +11,6 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
   const deleteElements = useTemplateStore((state) => state.deleteElements);
   const activePage = useTemplateStore((state) => state.template.activePage);
 
-  const icon = icons[element.type];
   const active = selectedElements.includes(element.id);
 
   return (
@@ -26,12 +24,11 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
       <div
         onClick={() => selectElements([element.id])}
         className={cn(
-          'relative rounded-2xl px-4 py-2.5 flex items-center space-x-2 cursor-pointer justify-between',
+          'relative rounded-2xl pl-6 pr-4 py-2.5 flex items-center space-x-2 cursor-pointer justify-between',
           'bg-default-200/60 hover:bg-default-200 dark:bg-white/10 dark:hover:bg-white/15'
         )}
       >
         <div className="flex items-center space-x-2 overflow-hidden">
-          <span className="opacity-60">{createElement(icon, { size: 20 })}</span>
           <span className="truncate">{element.text}</span>
         </div>
         <Button isIconOnly variant="light" size="sm" radius="full">

@@ -1,14 +1,17 @@
 import { Tab, Tabs } from '@nextui-org/react';
 import { useState } from 'react';
-import {
-  RiBarChart2Line,
-  RiBarChartHorizontalFill,
-  RiLineChartLine,
-  RiPieChartLine,
-} from 'react-icons/ri';
+import { RiBarChart2Line, RiBarChartHorizontalFill } from 'react-icons/ri';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import AdvancedTenShapes from './elements/charts/advanced/AdvancedTenShapes.jsx';
-import { TbChartAreaLine, TbChartDonut4, TbChartHistogram, TbChartPpf } from 'react-icons/tb';
+import {
+  TbChartAreaLine,
+  TbChartBar,
+  TbChartDonut4,
+  TbChartHistogram,
+  TbChartLine,
+  TbChartPie,
+  TbChartPpf,
+} from 'react-icons/tb';
 import AdvancedGenderStats from './elements/charts/advanced/AdvancedGenderStats.jsx';
 import { IconChartFunnel } from '@tabler/icons-react';
 import AdvancedStackedBar from './elements/charts/advanced/AdvancedStackedBar.jsx';
@@ -46,7 +49,6 @@ const StandardCharts = () => {
       id: 'chart-bar',
       type: 'chart-bar',
       name: 'Bar Chart',
-      icon: RiBarChart2Line,
       data: {
         type: 'chart-bar',
         text: 'Bar Chart',
@@ -67,12 +69,16 @@ const StandardCharts = () => {
           keys: { x: 'browser', y: 'visitors' },
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartBar className="w-full h-full" />
+        </div>
+      ),
     },
     {
       id: 'chart-line',
       type: 'chart-line',
       name: 'Line Chart',
-      icon: RiLineChartLine,
       data: {
         type: 'chart-line',
         text: 'Line Chart',
@@ -91,12 +97,16 @@ const StandardCharts = () => {
           type: 'multiple',
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartLine className="w-full h-full" />
+        </div>
+      ),
     },
     {
       id: 'chart-pie',
       type: 'chart-pie',
       name: 'Pie Chart',
-      icon: RiPieChartLine,
       data: {
         type: 'chart-pie',
         text: 'Pie Chart',
@@ -116,12 +126,16 @@ const StandardCharts = () => {
           keys: { name: 'name', data: 'data' },
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartPie className="w-full h-full" />
+        </div>
+      ),
     },
     {
       id: 'chart-doughnut',
       type: 'chart-doughnut',
       name: 'Doughnut Chart',
-      icon: TbChartDonut4,
       data: {
         type: 'chart-doughnut',
         text: 'Doughnut Chart',
@@ -142,12 +156,16 @@ const StandardCharts = () => {
           type: 'normal',
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartDonut4 className="w-full h-full" />
+        </div>
+      ),
     },
     {
       id: 'chart-bar-horizontal',
       type: 'chart-bar-horizontal',
       name: 'Horizontal Bar Chart',
-      icon: RiBarChartHorizontalFill,
       data: {
         type: 'chart-bar-horizontal',
         text: 'Bar Chart',
@@ -165,12 +183,16 @@ const StandardCharts = () => {
           keys: { x: 'browser', y: 'visitors' },
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <RiBarChartHorizontalFill className="w-full h-full" />
+        </div>
+      ),
     },
     {
       id: 'chart-area',
       type: 'chart-area',
       name: 'Area Chart',
-      icon: TbChartAreaLine,
       data: {
         type: 'chart-area',
         text: 'Area Chart',
@@ -189,12 +211,16 @@ const StandardCharts = () => {
           type: 'line',
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartAreaLine className="w-full h-full" />
+        </div>
+      ),
     },
     {
       id: 'chart-stacked-bar',
       type: 'chart-stacked-bar',
       name: 'Stacked Bar Chart',
-      icon: RiBarChart2Line,
       data: {
         type: 'chart-stacked-bar',
         text: 'Stacked Bar Chart',
@@ -214,12 +240,16 @@ const StandardCharts = () => {
           keys: { x: 'month', y: ['desktop', 'mobile'] },
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <RiBarChart2Line className="w-full h-full" />
+        </div>
+      ),
     },
     {
       id: 'chart-line-bar',
       type: 'chart-line-bar',
       name: 'Line Bar Chart',
-      icon: TbChartHistogram,
       data: {
         type: 'chart-line-bar',
         text: 'Line Bar Chart',
@@ -228,42 +258,12 @@ const StandardCharts = () => {
         style: { opacity: 1 },
         config: {
           data: [
-            {
-              name: 'Page A',
-              uv: 590,
-              pv: 800,
-              amt: 1400,
-            },
-            {
-              name: 'Page B',
-              uv: 868,
-              pv: 967,
-              amt: 1506,
-            },
-            {
-              name: 'Page C',
-              uv: 1397,
-              pv: 1098,
-              amt: 989,
-            },
-            {
-              name: 'Page D',
-              uv: 1480,
-              pv: 1200,
-              amt: 1228,
-            },
-            {
-              name: 'Page E',
-              uv: 1520,
-              pv: 1108,
-              amt: 1100,
-            },
-            {
-              name: 'Page F',
-              uv: 1400,
-              pv: 680,
-              amt: 1700,
-            },
+            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
           ],
           keys: { x: 'name', y: 'pv' },
           showXYaxis: true,
@@ -271,12 +271,16 @@ const StandardCharts = () => {
           orientation: 'horizontal',
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartHistogram className="w-full h-full" />
+        </div>
+      ),
     },
     {
       id: 'chart-line-area',
       type: 'chart-line-area',
       name: 'Line Area Chart',
-      icon: TbChartPpf,
       data: {
         type: 'chart-line-area',
         text: 'Line area Chart',
@@ -285,42 +289,12 @@ const StandardCharts = () => {
         style: { opacity: 1 },
         config: {
           data: [
-            {
-              name: 'Page A',
-              uv: 590,
-              pv: 800,
-              amt: 1400,
-            },
-            {
-              name: 'Page B',
-              uv: 868,
-              pv: 967,
-              amt: 1506,
-            },
-            {
-              name: 'Page C',
-              uv: 1397,
-              pv: 1098,
-              amt: 989,
-            },
-            {
-              name: 'Page D',
-              uv: 1480,
-              pv: 1200,
-              amt: 1228,
-            },
-            {
-              name: 'Page E',
-              uv: 1520,
-              pv: 1108,
-              amt: 1100,
-            },
-            {
-              name: 'Page F',
-              uv: 1400,
-              pv: 680,
-              amt: 1700,
-            },
+            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
           ],
           keys: { x: 'name', y: 'pv' },
           showXYaxis: true,
@@ -328,12 +302,16 @@ const StandardCharts = () => {
           orientation: 'horizontal',
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartPpf className="w-full h-full" />
+        </div>
+      ),
     },
     {
       id: 'chart-funnel',
       type: 'chart-funnel',
       name: 'Funnel Chart',
-      icon: IconChartFunnel,
       data: {
         type: 'chart-funnel',
         text: 'Funnel Chart',
@@ -351,6 +329,11 @@ const StandardCharts = () => {
           keys: { name: 'name', data: 'data' },
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <IconChartFunnel className="w-full h-full" />
+        </div>
+      ),
     },
   ];
 
@@ -369,7 +352,6 @@ const AdvancedCharts = () => {
       id: 'chart-10-shapes',
       type: 'chart-10-shapes',
       name: '10 Circles',
-      icon: RiPieChartLine,
       data: {
         type: 'chart-10-shapes',
         text: '10 Circles',
@@ -408,7 +390,6 @@ const AdvancedCharts = () => {
       id: 'chart-gender-stats',
       type: 'chart-gender-stats',
       name: 'Gender Stats',
-      icon: RiPieChartLine,
       data: {
         type: 'chart-gender-stats',
         text: 'Gender Stats',
@@ -445,7 +426,6 @@ const AdvancedCharts = () => {
       id: 'chart-linear-bar',
       type: 'chart-linear-bar',
       name: 'Linear Bar Chart',
-      icon: RiBarChart2Line,
       data: {
         type: 'chart-linear-bar',
         text: 'Linear Bar Chart',
@@ -476,7 +456,6 @@ const AdvancedCharts = () => {
       id: 'chart-stackedbar-advanced',
       type: 'chart-stackedbar-advanced',
       name: 'Stacked Bar Chart',
-      icon: RiBarChart2Line,
       data: {
         type: 'chart-stackedbar-advanced',
         text: 'Stacked Bar Chart',
@@ -485,48 +464,13 @@ const AdvancedCharts = () => {
         style: { opacity: 1 },
         config: {
           data: [
-            {
-              name: 'Page A',
-              uv: 4000,
-              pv: 2400,
-              amt: 2400,
-            },
-            {
-              name: 'Page B',
-              uv: 3000,
-              pv: 1398,
-              amt: 2210,
-            },
-            {
-              name: 'Page C',
-              uv: 2000,
-              pv: 9800,
-              amt: 2290,
-            },
-            {
-              name: 'Page D',
-              uv: 2780,
-              pv: 3908,
-              amt: 2000,
-            },
-            {
-              name: 'Page E',
-              uv: 1890,
-              pv: 4800,
-              amt: 2181,
-            },
-            {
-              name: 'Page F',
-              uv: 2390,
-              pv: 3800,
-              amt: 2500,
-            },
-            {
-              name: 'Page G',
-              uv: 3490,
-              pv: 4300,
-              amt: 2100,
-            },
+            { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
+            { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
+            { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
+            { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
+            { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
+            { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
+            { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
           ],
           keys: { x: 'month', y: ['desktop', 'mobile'] },
           type: 'separated',
@@ -552,48 +496,13 @@ const AdvancedCharts = () => {
           element={{
             config: {
               data: [
-                {
-                  name: 'Page A',
-                  uv: 4000,
-                  pv: 2400,
-                  amt: 2400,
-                },
-                {
-                  name: 'Page B',
-                  uv: 3000,
-                  pv: 1398,
-                  amt: 2210,
-                },
-                {
-                  name: 'Page C',
-                  uv: 2000,
-                  pv: 9800,
-                  amt: 2290,
-                },
-                {
-                  name: 'Page D',
-                  uv: 2780,
-                  pv: 3908,
-                  amt: 2000,
-                },
-                {
-                  name: 'Page E',
-                  uv: 1890,
-                  pv: 4800,
-                  amt: 2181,
-                },
-                {
-                  name: 'Page F',
-                  uv: 2390,
-                  pv: 3800,
-                  amt: 2500,
-                },
-                {
-                  name: 'Page G',
-                  uv: 3490,
-                  pv: 4300,
-                  amt: 2100,
-                },
+                { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
+                { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
+                { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
+                { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
+                { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
+                { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
+                { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
               ],
               keys: { x: 'month', y: ['desktop', 'mobile'] },
             },
@@ -605,7 +514,6 @@ const AdvancedCharts = () => {
       id: 'chart-custom-bar',
       type: 'chart-custom-bar',
       name: 'Custom Bar Chart',
-      icon: RiBarChart2Line,
       data: {
         type: 'chart-custom-bar',
         text: 'Custom Bar Chart',
@@ -640,53 +548,12 @@ const AdvancedCharts = () => {
           },
         },
       },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <RiBarChart2Line className="w-full h-full" />
+        </div>
+      ),
     },
-    // {
-    //   id: 'chart-pyramid',
-    //   type: 'chart-pyramid',
-    //   name: 'Pyramid Chart',
-    //   icon: IconChartFunnel,
-    //   data: {
-    //     type: 'chart-pyramid',
-    //     text: 'Pyramid Chart',
-    //     width: 400,
-    //     height: 300,
-    //     style: { opacity: 1 },
-    //     config: {
-    //       data: [
-    //         { range: 'Above ₦2.5m', percentage: 10.3 },
-    //         { range: '₦1.1m - ₦2.5m', percentage: 30.3 },
-    //         { range: '₦501k - ₦1m', percentage: 50.6 },
-    //         { range: '₦251k - ₦500k', percentage: 70.3 },
-    //         { range: 'Less than 250k', percentage: 99.4 },
-    //       ],
-    //       faceDirection: 'up',
-    //       stackCount: 5,
-    //       gradientColor: ['#3a5179', '#a8c5e5'],
-    //       titlePosition: 'top',
-    //       title: 'Income Distribution',
-    //     },
-    //   },
-    //   preview: (
-    //     <AdvancedPyramidChart
-    //       element={{
-    //         config: {
-    //           data: [
-    //             { name: 'Page A', value: 4000 },
-    //             { name: 'Page B', value: 3000 },
-    //             { name: 'Page C', value: 2000 },
-    //             { name: 'Page D', value: 2780 },
-    //             { name: 'Page E', value: 1890 },
-    //             { name: 'Page F', value: 2390 },
-    //             { name: 'Page G', value: 3490 },
-    //           ],
-    //           keys: { name: 'name', data: 'data' },
-    //           type: 'normal',
-    //         },
-    //       }}
-    //     />
-    //   ),
-    // },
   ];
 
   return (
@@ -701,4 +568,3 @@ const AdvancedCharts = () => {
 };
 
 export default Charts;
-
