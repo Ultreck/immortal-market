@@ -44,16 +44,16 @@ const StandardLineBarChart = ({ element, active, highlighted, width, onClick, on
             <CartesianGrid stroke="#f5f5f5" />
             <XAxis dataKey="name" scale="band" hide={!element.config.showXYaxis} />
             <YAxis hide={!element.config.showLegend} />
-            <Bar dataKey="pv" barSize={50} fill="#413ea0" radius={8} />
-            <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+            <Bar dataKey="pv" barSize={50} fill={element.config.colors?.[0]} radius={8} />
+            <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
           </ComposedChart>
         ) : (
           <ComposedChart data={element.config.data} layout='vertical'>
             <CartesianGrid stroke="#f5f5f5" />
             <YAxis dataKey="name" type="category" scale="band" hide={!element.config.showXYaxis} />
             <XAxis type='number' hide={!element.config.showLegend} />
-            <Bar dataKey="pv" barSize={50} fill="#413ea0" radius={8} />
-            <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+            <Bar dataKey="pv" barSize={50} fill={element.config.colors?.[0]} radius={8} />
+            <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
           </ComposedChart>
         )}
       </ChartContainer>

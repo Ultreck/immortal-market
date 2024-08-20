@@ -44,16 +44,16 @@ const StandartAreaLineChart = ({ element, active, highlighted, width, onClick, o
             <CartesianGrid stroke="#f5f5f5" />
             <XAxis dataKey="name" scale="band" hide={!element.config.showXYaxis} />
             <YAxis hide={!element.config.showLegend} />
-            <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-            <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+            <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
+            <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
           </ComposedChart>
         ) : (
-          <ComposedChart data={element.config.data} layout='vertical'>
+          <ComposedChart data={element.config.data} layout="vertical">
             <CartesianGrid stroke="#f5f5f5" />
             <YAxis dataKey="name" type="category" scale="band" hide={!element.config.showXYaxis} />
-            <XAxis type='number' hide={!element.config.showLegend} />
-            <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-            <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+            <XAxis type="number" hide={!element.config.showLegend} />
+            <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
+            <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
           </ComposedChart>
         )}
       </ChartContainer>

@@ -67,6 +67,7 @@ const StandardCharts = () => {
           showXYaxis: false,
           showLegend: false,
           keys: { x: 'browser', y: 'visitors' },
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         },
       },
       preview: (
@@ -95,6 +96,7 @@ const StandardCharts = () => {
           ],
           keys: { x: 'browser', y: 'visitors' },
           type: 'multiple',
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         },
       },
       preview: (
@@ -110,8 +112,8 @@ const StandardCharts = () => {
       data: {
         type: 'chart-pie',
         text: 'Pie Chart',
-        width: 400,
-        height: 300,
+        width: 500,
+        height: 400,
         style: { opacity: 1 },
         config: {
           data: [
@@ -208,7 +210,8 @@ const StandardCharts = () => {
             { browser: 'other', visitors: 90 },
           ],
           keys: { x: 'browser', y: 'visitors' },
-          type: 'line',
+          type: 'multiple',
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         },
       },
       preview: (
@@ -238,6 +241,7 @@ const StandardCharts = () => {
             { month: 'Jul', desktop: 349, mobile: 275 },
           ],
           keys: { x: 'month', y: ['desktop', 'mobile'] },
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         },
       },
       preview: (
@@ -269,6 +273,7 @@ const StandardCharts = () => {
           showXYaxis: true,
           showLegend: true,
           orientation: 'horizontal',
+          colors: ['#2673D9', '#F6881F'],
         },
       },
       preview: (
@@ -300,6 +305,7 @@ const StandardCharts = () => {
           showXYaxis: true,
           showLegend: true,
           orientation: 'horizontal',
+          colors: ['#2673D9', '#F6881F'],
         },
       },
       preview: (

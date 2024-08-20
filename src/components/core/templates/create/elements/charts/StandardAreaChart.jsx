@@ -26,22 +26,23 @@ const chartData = [
   { month: 'June', desktop: 214, mobile: 140 },
 ];
 
-const chartConfig = {
-  desktop: {
-    label: 'Desktop',
-    color: '#2673D9',
-  },
-  mobile: {
-    label: 'Mobile',
-    color: '#ff0000',
-  },
-};
 
 const StandardAreaChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const config = {
     [element.config.keys.y]: {
       label: capitalize(element.config.keys.y),
       color: colors[0],
+    },
+  };
+  
+  const chartConfig = {
+    desktop: {
+      label: 'Desktop',
+      color: element.config.colors?.[0] || '#2673D9',
+    },
+    mobile: {
+      label: 'Mobile',
+      color: element.config.colors?.[1] || '#ff0000',
     },
   };
 
@@ -108,16 +109,16 @@ const StandardAreaChart = ({ element, active, highlighted, width, onClick, onCha
             <Area
               dataKey="desktop"
               type="monotone"
-              fill="var(--color-desktop)"
-              stroke="var(--color-desktop)"
+              fill={chartConfig.desktop.color}
+              stroke={chartConfig.desktop.color}
               strokeWidth={2}
               dot={false}
             />
             <Area
               dataKey="mobile"
               type="monotone"
-              fill="var(--color-mobile)"
-              stroke="var(--color-mobile)"
+              fill={chartConfig.mobile.color}
+              stroke={chartConfig.mobile.color}
               strokeWidth={2}
               dot={false}
             />

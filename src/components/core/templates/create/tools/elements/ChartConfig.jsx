@@ -60,9 +60,19 @@ const ChartData = ({ element, onChange, onClose }) => {
     onClose();
   };
 
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const colors = element.config.colors || {};
+
+  const updateColor = (color) => {
+    if (selectedIndex !== null) {
+      const newColors = { ...colors, [selectedIndex]: color };
+      onChange({ ...element, config: { ...element.config, colors: newColors } });
+    }
+  };
+
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="h-[300px] overflow-y-auto">
         <div className="space-y-6">
           <Controller
             name="json"
@@ -120,6 +130,26 @@ const ChartData = ({ element, onChange, onClose }) => {
               );
             })}
           </div>
+
+          {element.type === 'chart-pie' && (
+            <div className="mt-4">
+              <Select label="Select slice to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
+                {element.config.data.map((item, index) => (
+                  <SelectItem key={index} value={index}>
+                    {item[element.config.keys.name]}
+                  </SelectItem>
+                ))}
+              </Select>
+              {selectedIndex !== null && (
+                <div className="mt-2">
+                  <HexAlphaColorPicker
+                    color={colors[selectedIndex] || defaultColors[selectedIndex % defaultColors.length]}
+                    onChange={updateColor}
+                  />
+                </div>
+              )}
+            </div>
+          )}
           {element.type === 'chart-line' && (
             <div>
               <Controller
@@ -150,6 +180,20 @@ const ChartData = ({ element, onChange, onClose }) => {
                   </Select>
                 )}
               />
+              <div className="mt-4">
+                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
+                  {['Line 1', 'Line 2'].map((item, index) => (
+                    <SelectItem key={index} value={index}>
+                      {item}
+                    </SelectItem>
+                  ))}
+                </Select>
+                {selectedIndex !== null && (
+                  <div className="mt-2">
+                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
+                  </div>
+                )}
+              </div>
             </div>
           )}
           {element.type === 'chart-area' && (
@@ -182,6 +226,21 @@ const ChartData = ({ element, onChange, onClose }) => {
                   </Select>
                 )}
               />
+
+              <div className="mt-4">
+                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
+                  {['Line 1', 'Line 2'].map((item, index) => (
+                    <SelectItem key={index} value={index}>
+                      {item}
+                    </SelectItem>
+                  ))}
+                </Select>
+                {selectedIndex !== null && (
+                  <div className="mt-2">
+                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
+                  </div>
+                )}
+              </div>
             </div>
           )}
           {element.type === 'chart-doughnut' && (
@@ -252,6 +311,20 @@ const ChartData = ({ element, onChange, onClose }) => {
                     </Select>
                   )}
                 />
+              </div>
+              <div className="mt-4">
+                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
+                  {['Area', 'Line'].map((item, index) => (
+                    <SelectItem key={index} value={index}>
+                      {item}
+                    </SelectItem>
+                  ))}
+                </Select>
+                {selectedIndex !== null && (
+                  <div className="mt-2">
+                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
+                  </div>
+                )}
               </div>
               <div>
                 <Controller
@@ -343,6 +416,20 @@ const ChartData = ({ element, onChange, onClose }) => {
                   )}
                 />
               </div>
+              <div className="mt-4">
+                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
+                  {['Bar', 'Line'].map((item, index) => (
+                    <SelectItem key={index} value={index}>
+                      {item}
+                    </SelectItem>
+                  ))}
+                </Select>
+                {selectedIndex !== null && (
+                  <div className="mt-2">
+                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
+                  </div>
+                )}
+              </div>
               <div>
                 <Controller
                   name="showXYaxis"
@@ -432,6 +519,20 @@ const ChartData = ({ element, onChange, onClose }) => {
                     </Select>
                   )}
                 />
+              </div>
+              <div className="mt-4">
+                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
+                  {element.config.data.map((item, index) => (
+                    <SelectItem key={index} value={index}>
+                      {item[element.config.keys.x]}
+                    </SelectItem>
+                  ))}
+                </Select>
+                {selectedIndex !== null && (
+                  <div className="mt-2">
+                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
+                  </div>
+                )}
               </div>
               <div>
                 <Controller
