@@ -23,6 +23,7 @@ import Shadow from './elements/Shadow.jsx';
 import FrameTabsConfig from './elements/FrameTabsConfig.jsx';
 import FrameCarouselConfig from './elements/FrameCarouselConfig.jsx';
 import InfographicConfig from '@/components/core/templates/create/tools/elements/InfographicConfig.jsx';
+import AdvancedChartColor from './elements/advance-config/AdvancedChartColor.jsx';
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -128,6 +129,9 @@ const ElementTools = () => {
                 return (
                   <InfographicConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
                 );
+              }
+              if(tool === 'color') {
+                return <AdvancedChartColor key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
               }
               throw new Error(`Unknown tool ${tool}`);
             })}

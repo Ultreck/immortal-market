@@ -150,3 +150,22 @@ export const objectToFormData = (obj, formData = new FormData(), namespace = '')
   });
   return formData;
 };
+
+export const interpolateColor = (color1, color2, factor) => {
+  const hex = (color) => {
+    color = color.replace('#', '');
+    if (color.length === 3) {
+      color = color.split('').map(char => char + char).join('');
+    }
+    return color.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
+  };
+  
+  const rgb1 = hex(color1);
+  const rgb2 = hex(color2);
+  
+  const result = rgb1.map((value, index) => 
+    Math.round(value + (rgb2[index] - value) * factor)
+  );
+  
+  return `#${result.map(value => value.toString(16).padStart(2, '0')).join('')}`;
+};

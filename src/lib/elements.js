@@ -46,11 +46,11 @@ export const tools = {
     return acc;
   }, {}),
   ...charts.standard.reduce((acc, type) => {
-    acc[`chart-s-${type}`] = ['chart', 'opacity', 'animation'];
+    acc[`chart-s-${type}`] = ['chart', 'opacity', 'animation', 'color'];
     return acc;
   }, {}),
   ...charts.advanced.reduce((acc, type) => {
-    acc[`chart-a-${type}`] = ['advanced-chart', 'opacity'];
+    acc[`chart-a-${type}`] = ['advanced-chart', 'opacity', 'color'];
     return acc;
   }, {}),
   'frame-tabs': ['tabs', 'opacity', 'animation', 'shadow'],
