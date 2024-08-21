@@ -1,5 +1,5 @@
 import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils';
-import { Button, Checkbox, Input, Select, SelectItem, Switch, Textarea } from '@nextui-org/react';
+import { Button, Checkbox, Select, SelectItem, Switch, Textarea } from '@nextui-org/react';
 import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
@@ -17,7 +17,7 @@ const AdvancedCustomBarConfig = ({ element, onChange }) => {
   const keys = getKeysFromJson(watch().json);
 
   const onSubmit = async (values) => {
-    const { json, ...rest } = values;
+    const { json } = values;
     const data = JSON.parse(json);
     onChange({ ...element, config: { ...element.config, data } });
   };
@@ -123,7 +123,12 @@ const AdvancedCustomBarConfig = ({ element, onChange }) => {
                 placeholder="Select one"
                 size="lg"
                 selectedKeys={element.config.axisPosition ? [element.config.axisPosition] : []}
-                onChange={(e) => onChange({ ...element, config: { ...element.config, axisPosition: e.target.value } })}
+                onChange={(e) =>
+                  onChange({
+                    ...element,
+                    config: { ...element.config, axisPosition: e.target.value },
+                  })
+                }
                 errorMessage={error?.message}
                 isInvalid={!!error?.message}
                 classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
@@ -185,17 +190,11 @@ const AdvancedCustomBarConfig = ({ element, onChange }) => {
         <div className="mt-6">
           <Switch
             name="backgroundImage.enabled"
-            label="Enable Background Image"
             variant="bordered"
-            labelPlacement="outside"
-            placeholder="Select one"
             size="lg"
-            selectedKeys={element.config.backgroundImage.enabled ? [element.config.backgroundImage.enabled] : []}
             onChange={(e) =>
               onChange({ ...element, config: { ...element.config, backgroundImage: { enabled: !!e.target.checked } } })
             }
-            classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-            disableEmptySelection={true}
           >
             Enable Background Image
           </Switch>
@@ -237,7 +236,7 @@ const AdvancedCustomBarConfig = ({ element, onChange }) => {
                   ...element,
                   config: {
                     ...element.config,
-                    numberOfBarsToShow: +(e.target.value),
+                    numberOfBarsToShow: +e.target.value,
                   },
                 })
               }
@@ -245,14 +244,6 @@ const AdvancedCustomBarConfig = ({ element, onChange }) => {
               minRows={1}
             />
           </div>
-          {/* <Input
-            type="number"
-            label="Number of Bars to Show"
-            value={element.config.numberOfBarsToShow}
-            onChange={(e) => onChange({ ...element.config, numberOfBarsToShow: parseInt(e.target.value) })}
-            min={1}
-            max={element.config.data.length}
-          /> */}
         </div>
       </div>
       <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
@@ -270,4 +261,3 @@ AdvancedCustomBarConfig.propTypes = {
 };
 
 export default AdvancedCustomBarConfig;
-

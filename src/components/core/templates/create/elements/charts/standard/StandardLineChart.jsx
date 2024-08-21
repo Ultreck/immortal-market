@@ -1,8 +1,7 @@
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
+import { CartesianGrid, LabelList, Line, LineChart, XAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { ElementPropTypes } from '@/lib/prop-types.js';
+import PropTypes from 'prop-types';
 
 const colors = [
   '#2673D9',
@@ -26,15 +25,14 @@ const chartData = [
   { month: 'June', desktop: 214, mobile: 140 },
 ];
 
-
-const StandardAreaChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardLineChart = ({ element }) => {
   const config = {
     [element.config.keys.y]: {
       label: capitalize(element.config.keys.y),
       color: colors[0],
     },
   };
-  
+
   const chartConfig = {
     desktop: {
       label: 'Desktop',
@@ -47,27 +45,16 @@ const StandardAreaChart = ({ element, active, highlighted, width, onClick, onCha
   };
 
   return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      onResize={(size) => {
-        onChange({ ...element, width: size.width, height: size.height });
-      }}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['se', 'e', 's']}
-      constrained
-    >
+    <>
       {element.config.type === 'line' && (
         <ChartContainer
           config={config}
           style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
         >
-          <AreaChart
+          <LineChart
             accessibilityLayer
             data={element.config.data}
+            margin={{ top: 20, left: 12, right: 12 }}
             style={{
               opacity: element.style.opacity,
             }}
@@ -81,8 +68,17 @@ const StandardAreaChart = ({ element, active, highlighted, width, onClick, onCha
               tickFormatter={(value) => capitalize(value)}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-            <Area dataKey={element.config.keys.y} type="natural" fillOpacity={0.4} />
-          </AreaChart>
+            <Line
+              dataKey={element.config.keys.y}
+              type="natural"
+              strokeWidth={2}
+              activeDot={{ r: 6 }}
+              isAnimationActive={false}
+              stroke={element.config.colors?.[0]}
+            >
+              <LabelList position="top" offset={12} fontSize={12} />
+            </Line>
+          </LineChart>
         </ChartContainer>
       )}
       {element.config.type === 'multiple' && (
@@ -90,13 +86,7 @@ const StandardAreaChart = ({ element, active, highlighted, width, onClick, onCha
           config={chartConfig}
           style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
         >
-          <AreaChart
-            accessibilityLayer
-            data={chartData}
-            style={{
-              opacity: element.style.opacity,
-            }}
-          >
+          <LineChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"
@@ -106,30 +96,36 @@ const StandardAreaChart = ({ element, active, highlighted, width, onClick, onCha
               tickFormatter={(value) => value.slice(0, 3)}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <Area
+            <Line
               dataKey="desktop"
               type="monotone"
-              fill={chartConfig.desktop.color}
               stroke={chartConfig.desktop.color}
+              fill={chartConfig.desktop.color}
               strokeWidth={2}
               dot={false}
             />
-            <Area
+            <Line
               dataKey="mobile"
               type="monotone"
-              fill={chartConfig.mobile.color}
               stroke={chartConfig.mobile.color}
+              fill={chartConfig.mobile.color}
               strokeWidth={2}
               dot={false}
             />
-          </AreaChart>
+          </LineChart>
         </ChartContainer>
       )}
-    </ElementWrapper>
+    </>
   );
 };
 
-StandardAreaChart.propTypes = ElementPropTypes;
+StandardLineChart.propTypes = {
+  element: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number,
+    style: PropTypes.object,
+    config: PropTypes.object,
+  }),
+};
 
-export default StandardAreaChart;
-
+export default StandardLineChart;

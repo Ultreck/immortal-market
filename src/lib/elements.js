@@ -3,24 +3,30 @@ import Image from '@/components/core/templates/create/elements/Image.jsx';
 import Table from '@/components/core/templates/create/elements/Table.jsx';
 import KeyValue from '@/components/core/templates/create/elements/KeyValue.jsx';
 import Line from '@/components/core/templates/create/elements/Line.jsx';
-import StandardBarChart from '@/components/core/templates/create/elements/charts/StandardBarChart.jsx';
-import StandardLineChart from '@/components/core/templates/create/elements/charts/StandardLineChart.jsx';
-import StandardPieChart from '@/components/core/templates/create/elements/charts/StandardPieChart.jsx';
 import GenericShape from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
 import GenericFrameShape from '@/components/core/templates/create/elements/frames/GenericFrameShape.jsx';
-import StandardDoughnutChart from '@/components/core/templates/create/elements/charts/StandardDoughnutChart.jsx';
-import StandardBarChartHorizontal from '@/components/core/templates/create/elements/charts/StandardBarChartHorizontal.jsx';
-import StandardAreaChart from '@/components/core/templates/create/elements/charts/StandardAreaChart.jsx';
 import AdvancedCharts from '@/components/core/templates/create/elements/charts/advanced/AdvancedCharts.jsx';
 import FrameTabs from '@/components/core/templates/create/elements/frames/FrameTabs.jsx';
 import FrameCarousel from '@/components/core/templates/create/elements/frames/FrameCarousel.jsx';
-import StandardStackedBar from '@/components/core/templates/create/elements/charts/StandardStackedBar';
 import shapes from '@/lib/templates/shapes.js';
-import StandardLineBarChart from '@/components/core/templates/create/elements/charts/StandartLineBarChart';
-import StandartAreaLineChart from '@/components/core/templates/create/elements/charts/StandartAreaLineChart';
 import Infographic from '@/components/core/templates/create/elements/Infographic.jsx';
 import GenericIcon from '@/components/core/templates/create/elements/GenericIcon';
 import icons from '@/lib/templates/icons.js';
+import StandardChart from '@/components/core/templates/create/elements/charts/standard/StandardChart.jsx';
+
+const charts = {
+  standard: ['bar', 'line', 'pie', 'doughnut', 'bar-horizontal', 'area', 'stacked-bar', 'line-bar', 'line-area'],
+  advanced: [
+    '10-shapes',
+    'gender-stats',
+    'pyramid',
+    'funnel',
+    'stackedbar-advanced',
+    'custom-bar',
+    'linear-bar',
+    'lollipop',
+  ],
+};
 
 export const tools = {
   ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
@@ -39,31 +45,21 @@ export const tools = {
     acc[`icon-${icon.name}`] = ['icon', 'opacity', 'animation', 'shadow', 'text-color'];
     return acc;
   }, {}),
+  ...charts.standard.reduce((acc, type) => {
+    acc[`chart-s-${type}`] = ['chart', 'opacity', 'animation'];
+    return acc;
+  }, {}),
+  ...charts.advanced.reduce((acc, type) => {
+    acc[`chart-a-${type}`] = ['advanced-chart', 'opacity'];
+    return acc;
+  }, {}),
   'frame-tabs': ['tabs', 'opacity', 'animation', 'shadow'],
   'frame-carousel': ['carousel', 'opacity', 'animation', 'shadow'],
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
   image: ['border', 'border-radius', 'opacity', 'animation', 'shadow'],
   table: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
   'key-value': ['key-value', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
-  'chart-bar': ['chart', 'opacity', 'animation',],
-  'chart-line': ['chart', 'opacity', 'animation'],
-  'chart-pie': ['chart', 'opacity', 'animation'],
-  'chart-doughnut': ['chart', 'opacity', 'animation'],
-  'chart-10-shapes': ['advanced-chart', 'opacity'],
-  'chart-10-square': ['advanced-chart', 'opacity'],
-  'chart-bar-horizontal': ['chart', 'opacity'],
-  'chart-area': ['chart', 'opacity'],
-  'chart-stacked-bar': ['chart', 'opacity'],
-  'chart-line-bar': ['chart', 'opacity'],
-  'chart-line-area': ['chart', 'opacity'],
-  'chart-gender-stats': ['advanced-chart', 'opacity'],
-  'chart-pyramid': ['advanced-chart', 'opacity'],
-  'chart-funnel': ['advanced-chart', 'opacity'],
-  'chart-stackedbar-advanced': ['advanced-chart', 'opacity'],
-  'chart-custom-bar': ['advanced-chart', 'opacity'],
-  'chart-linear-bar': ['advanced-chart', 'opacity'],
   infographic: ['infographic', 'opacity'],
-  'chart-lollipop': ['advanced-chart', 'opacity', 'animation', 'shadow'],
 };
 
 export const components = {
@@ -83,30 +79,21 @@ export const components = {
     acc[`icon-${icon.name}`] = GenericIcon;
     return acc;
   }, {}),
+  ...charts.standard.reduce((acc, type) => {
+    acc[`chart-s-${type}`] = StandardChart;
+    return acc;
+  }, {}),
+  ...charts.advanced.reduce((acc, type) => {
+    acc[`chart-a-${type}`] = AdvancedCharts;
+    return acc;
+  }, {}),
   'frame-tabs': FrameTabs,
   'frame-carousel': FrameCarousel,
   line: Line,
   image: Image,
   table: Table,
   'key-value': KeyValue,
-  'chart-bar': StandardBarChart,
-  'chart-line': StandardLineChart,
-  'chart-pie': StandardPieChart,
-  'chart-10-shapes': AdvancedCharts,
-  'chart-doughnut': StandardDoughnutChart,
-  'chart-bar-horizontal': StandardBarChartHorizontal,
-  'chart-area': StandardAreaChart,
-  'chart-stacked-bar': StandardStackedBar,
-  'chart-line-bar': StandardLineBarChart,
-  'chart-line-area': StandartAreaLineChart,
-  'chart-gender-stats': AdvancedCharts,
-  'chart-pyramid': AdvancedCharts,
-  'chart-funnel': AdvancedCharts,
-  'chart-stackedbar-advanced': AdvancedCharts,
-  'chart-custom-bar': AdvancedCharts,
-  'chart-linear-bar': AdvancedCharts,
   infographic: Infographic,
-  'chart-lollipop': AdvancedCharts,
 };
 
 export const getElementTools = (type) => {

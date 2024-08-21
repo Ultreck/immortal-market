@@ -47,11 +47,11 @@ const Charts = () => {
 const StandardCharts = () => {
   const elements = [
     {
-      id: 'chart-bar',
-      type: 'chart-bar',
+      id: 'chart-s-bar',
+      type: 'chart-s-bar',
       name: 'Bar Chart',
       data: {
-        type: 'chart-bar',
+        type: 'chart-s-bar',
         text: 'Bar Chart',
         width: 400,
         height: 300,
@@ -78,11 +78,11 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-line',
-      type: 'chart-line',
+      id: 'chart-s-line',
+      type: 'chart-s-line',
       name: 'Line Chart',
       data: {
-        type: 'chart-line',
+        type: 'chart-s-line',
         text: 'Line Chart',
         width: 400,
         height: 300,
@@ -107,11 +107,11 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-pie',
-      type: 'chart-pie',
+      id: 'chart-s-pie',
+      type: 'chart-s-pie',
       name: 'Pie Chart',
       data: {
-        type: 'chart-pie',
+        type: 'chart-s-pie',
         text: 'Pie Chart',
         width: 500,
         height: 400,
@@ -137,11 +137,11 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-doughnut',
-      type: 'chart-doughnut',
+      id: 'chart-s-doughnut',
+      type: 'chart-s-doughnut',
       name: 'Doughnut Chart',
       data: {
-        type: 'chart-doughnut',
+        type: 'chart-s-doughnut',
         text: 'Doughnut Chart',
         width: 500,
         height: 500,
@@ -167,11 +167,11 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-bar-horizontal',
-      type: 'chart-bar-horizontal',
+      id: 'chart-s-bar-horizontal',
+      type: 'chart-s-bar-horizontal',
       name: 'Horizontal Bar Chart',
       data: {
-        type: 'chart-bar-horizontal',
+        type: 'chart-s-bar-horizontal',
         text: 'Bar Chart',
         width: 500,
         height: 400,
@@ -194,11 +194,11 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-area',
-      type: 'chart-area',
+      id: 'chart-s-area',
+      type: 'chart-s-area',
       name: 'Area Chart',
       data: {
-        type: 'chart-area',
+        type: 'chart-s-area',
         text: 'Area Chart',
         width: 500,
         height: 400,
@@ -223,11 +223,11 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-stacked-bar',
-      type: 'chart-stacked-bar',
+      id: 'chart-s-stacked-bar',
+      type: 'chart-s-stacked-bar',
       name: 'Stacked Bar Chart',
       data: {
-        type: 'chart-stacked-bar',
+        type: 'chart-s-stacked-bar',
         text: 'Stacked Bar Chart',
         width: 400,
         height: 300,
@@ -253,11 +253,11 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-line-bar',
-      type: 'chart-line-bar',
+      id: 'chart-s-line-bar',
+      type: 'chart-s-line-bar',
       name: 'Line Bar Chart',
       data: {
-        type: 'chart-line-bar',
+        type: 'chart-s-line-bar',
         text: 'Line Bar Chart',
         width: 400,
         height: 300,
@@ -285,11 +285,11 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-line-area',
-      type: 'chart-line-area',
+      id: 'chart-s-line-area',
+      type: 'chart-s-line-area',
       name: 'Line Area Chart',
       data: {
-        type: 'chart-line-area',
+        type: 'chart-s-line-area',
         text: 'Line area Chart',
         width: 400,
         height: 300,
@@ -316,33 +316,6 @@ const StandardCharts = () => {
         </div>
       ),
     },
-    {
-      id: 'chart-funnel',
-      type: 'chart-funnel',
-      name: 'Funnel Chart',
-      data: {
-        type: 'chart-funnel',
-        text: 'Funnel Chart',
-        width: 400,
-        height: 500,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            { value: 60, name: 'Visit' },
-            { value: 40, name: 'Inquiry' },
-            { value: 20, name: 'Order' },
-            { value: 80, name: 'Click' },
-            { value: 100, name: 'Show' },
-          ],
-          keys: { name: 'name', data: 'data' },
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <IconChartFunnel className="w-full h-full" />
-        </div>
-      ),
-    },
   ];
 
   return (
@@ -357,11 +330,11 @@ const StandardCharts = () => {
 const AdvancedCharts = () => {
   const elements = [
     {
-      id: 'chart-10-shapes',
-      type: 'chart-10-shapes',
+      id: 'chart-a-10-shapes',
+      type: 'chart-a-10-shapes',
       name: '10 Circles',
       data: {
-        type: 'chart-10-shapes',
+        type: 'chart-a-10-shapes',
         text: '10 Circles',
         width: 400,
         height: 300,
@@ -395,11 +368,11 @@ const AdvancedCharts = () => {
       ),
     },
     {
-      id: 'chart-gender-stats',
-      type: 'chart-gender-stats',
+      id: 'chart-a-gender-stats',
+      type: 'chart-a-gender-stats',
       name: 'Gender Stats',
       data: {
-        type: 'chart-gender-stats',
+        type: 'chart-a-gender-stats',
         text: 'Gender Stats',
         width: 400,
         height: 300,
@@ -431,11 +404,11 @@ const AdvancedCharts = () => {
       ),
     },
     {
-      id: 'chart-linear-bar',
-      type: 'chart-linear-bar',
+      id: 'chart-a-linear-bar',
+      type: 'chart-a-linear-bar',
       name: 'Linear Bar Chart',
       data: {
-        type: 'chart-linear-bar',
+        type: 'chart-a-linear-bar',
         text: 'Linear Bar Chart',
         width: 400,
         height: 300,
@@ -461,11 +434,11 @@ const AdvancedCharts = () => {
       ),
     },
     {
-      id: 'chart-stackedbar-advanced',
-      type: 'chart-stackedbar-advanced',
+      id: 'chart-a-stackedbar-advanced',
+      type: 'chart-a-stackedbar-advanced',
       name: 'Stacked Bar Chart',
       data: {
-        type: 'chart-stackedbar-advanced',
+        type: 'chart-a-stackedbar-advanced',
         text: 'Stacked Bar Chart',
         width: 400,
         height: 300,
@@ -519,11 +492,11 @@ const AdvancedCharts = () => {
       ),
     },
     {
-      id: 'chart-custom-bar',
-      type: 'chart-custom-bar',
+      id: 'chart-a-custom-bar',
+      type: 'chart-a-custom-bar',
       name: 'Custom Bar Chart',
       data: {
-        type: 'chart-custom-bar',
+        type: 'chart-a-custom-bar',
         text: 'Custom Bar Chart',
         width: 500,
         height: 600,
@@ -563,11 +536,11 @@ const AdvancedCharts = () => {
       ),
     },
     {
-      id: 'chart-lollipop',
-      type: 'chart-lollipop',
+      id: 'chart-a-lollipop',
+      type: 'chart-a-lollipop',
       name: 'Lollipop Chart',
       data: {
-        type: 'chart-lollipop',
+        type: 'chart-a-lollipop',
         text: 'Lollipop Chart',
         width: 400,
         height: 300,
@@ -605,6 +578,33 @@ const AdvancedCharts = () => {
             },
           }}
         />
+      ),
+    },
+    {
+      id: 'chart-a-funnel',
+      type: 'chart-a-funnel',
+      name: 'Funnel Chart',
+      data: {
+        type: 'chart-a-funnel',
+        text: 'Funnel Chart',
+        width: 400,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { value: 60, name: 'Visit' },
+            { value: 40, name: 'Inquiry' },
+            { value: 20, name: 'Order' },
+            { value: 80, name: 'Click' },
+            { value: 100, name: 'Show' },
+          ],
+          keys: { name: 'name', data: 'data' },
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <IconChartFunnel className="w-full h-full" />
+        </div>
       ),
     },
   ];

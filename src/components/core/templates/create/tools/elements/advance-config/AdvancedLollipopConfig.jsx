@@ -1,7 +1,7 @@
 import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils';
 import { Button, Select, SelectItem, Textarea } from '@nextui-org/react';
-import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
 
 const AdvancedLollipopConfig = ({ element, onChange }) => {
   const { handleSubmit, watch, control } = useForm({
@@ -20,7 +20,6 @@ const AdvancedLollipopConfig = ({ element, onChange }) => {
     const { json, ...rest } = values;
     const data = JSON.parse(json);
     onChange({ ...element, config: { ...element.config, keys: rest, data } });
-    onClose();
   };
 
   return (
@@ -92,5 +91,11 @@ const AdvancedLollipopConfig = ({ element, onChange }) => {
   );
 };
 
-export default AdvancedLollipopConfig;
+AdvancedLollipopConfig.propTypes = {
+  element: PropTypes.shape({
+    config: PropTypes.object,
+  }).isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
+export default AdvancedLollipopConfig;

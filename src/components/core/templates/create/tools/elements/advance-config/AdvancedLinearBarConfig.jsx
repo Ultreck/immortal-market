@@ -1,6 +1,6 @@
 import { Slider } from '@nextui-org/react';
-import React from 'react';
 import { HexAlphaColorPicker } from 'react-colorful';
+import PropTypes from 'prop-types';
 
 const AdvancedLinearBarConfig = ({ element, onChange }) => {
   return (
@@ -26,7 +26,7 @@ const AdvancedLinearBarConfig = ({ element, onChange }) => {
         onChange={(e) => onChange({ ...element, config: { ...element.config, height: e } })}
       />
       <div className="mt-8">
-        <p>      </p>
+        <p></p>
         <HexAlphaColorPicker
           color={element.config.outerColor}
           onChange={(color) =>
@@ -52,5 +52,11 @@ const AdvancedLinearBarConfig = ({ element, onChange }) => {
   );
 };
 
-export default AdvancedLinearBarConfig;
+AdvancedLinearBarConfig.propTypes = {
+  element: PropTypes.shape({
+    config: PropTypes.object,
+  }).isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
+export default AdvancedLinearBarConfig;

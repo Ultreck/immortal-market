@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import { Card } from '@nextui-org/react';
+import PropTypes from 'prop-types';
 
-const StandardRosePieChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardRosePieChart = ({ element }) => {
   const chartRef = useRef(null);
 
   const updatedData = element.config.data.reduce((acc, item) => {
@@ -12,15 +12,11 @@ const StandardRosePieChart = ({ element, active, highlighted, width, onClick, on
 
   useEffect(() => {
     let chart;
-
     const initChart = () => {
       if (chartRef.current) {
         chart = echarts.init(chartRef.current);
 
         const option = {
-          // legend: {
-          //   top: 'bottom',
-          // },
           series: [
             {
               name: 'Nightingale Chart',
@@ -35,23 +31,34 @@ const StandardRosePieChart = ({ element, active, highlighted, width, onClick, on
             },
           ],
         };
-
         chart.setOption(option);
       }
     };
-
     initChart();
     return () => {
-      if (chart) {
-        chart.dispose();
-      }
+      if (chart) chart.dispose();
     };
-  }, [element]);
+  }, [element, updatedData]);
 
   return (
-    <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }}></div>
+    <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }} />
   );
 };
 
-export default StandardRosePieChart;
+StandardRosePieChart.propTypes = {
+  element: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number,
+    style: PropTypes.object,
+    config: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string,
+          data: PropTypes.number,
+        })
+      ),
+    }),
+  }),
+};
 
+export default StandardRosePieChart;

@@ -1,6 +1,4 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Card } from '@nextui-org/react';
 
 const AdvancedPyramidChart = () => {
   const data = [
@@ -25,7 +23,7 @@ const AdvancedPyramidChart = () => {
             marginLeft: `${7.5 - index * 2.5}%`,
           }}
           whileHover={{ scale: 1.2 }}
-          >
+        >
           <div className="text-sm mb-1 text-black">{item.range}</div>
           <motion.div
             className="font-bold text-black"

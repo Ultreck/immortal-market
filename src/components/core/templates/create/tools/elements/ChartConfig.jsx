@@ -333,24 +333,16 @@ const ChartData = ({ element, onChange, onClose }) => {
                   name="showXYaxis"
                   control={control}
                   rules={{ required: `showXYaxis is required` }}
-                  render={({ field, fieldState: { error } }) => (
+                  render={({ field }) => (
                     <Switch
                       name={field.name}
-                      label="Show X and Y Axis"
                       variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
                       size="lg"
-                      selectedKeys={element.config.showXYaxis ? [element.config.showXYaxis] : []}
                       onChange={(e) =>
                         onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
                       }
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
                     >
-                      Show Legend
+                      Show X and Y Axis
                     </Switch>
                   )}
                 />
@@ -360,22 +352,14 @@ const ChartData = ({ element, onChange, onClose }) => {
                   name="showLegend"
                   control={control}
                   rules={{ required: `showLegend is required` }}
-                  render={({ field, fieldState: { error } }) => (
+                  render={({ field }) => (
                     <Switch
                       name={field.name}
-                      label="Show Legend"
                       variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
                       size="lg"
-                      selectedKeys={element.config.showLegend ? [element.config.showLegend] : []}
                       onChange={(e) =>
                         onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
                       }
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
                     >
                       Show Legend
                     </Switch>
@@ -437,24 +421,16 @@ const ChartData = ({ element, onChange, onClose }) => {
                   name="showXYaxis"
                   control={control}
                   rules={{ required: `showXYaxis is required` }}
-                  render={({ field, fieldState: { error } }) => (
+                  render={({ field }) => (
                     <Switch
                       name={field.name}
-                      label="Show X and Y Axis"
                       variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
                       size="lg"
-                      selectedKeys={element.config.showXYaxis ? [element.config.showXYaxis] : []}
                       onChange={(e) =>
                         onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
                       }
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
                     >
-                      Show Legend
+                      Show X and Y Axis
                     </Switch>
                   )}
                 />
@@ -464,22 +440,14 @@ const ChartData = ({ element, onChange, onClose }) => {
                   name="showLegend"
                   control={control}
                   rules={{ required: `showLegend is required` }}
-                  render={({ field, fieldState: { error } }) => (
+                  render={({ field }) => (
                     <Switch
                       name={field.name}
-                      label="Show Legend"
                       variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
                       size="lg"
-                      selectedKeys={element.config.showLegend ? [element.config.showLegend] : []}
                       onChange={(e) =>
                         onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
                       }
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
                     >
                       Show Legend
                     </Switch>
@@ -541,24 +509,16 @@ const ChartData = ({ element, onChange, onClose }) => {
                   name="showXYaxis"
                   control={control}
                   rules={{ required: `showXYaxis is required` }}
-                  render={({ field, fieldState: { error } }) => (
+                  render={({ field }) => (
                     <Switch
                       name={field.name}
-                      label="Show X and Y Axis"
                       variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
                       size="lg"
-                      selectedKeys={element.config.showXYaxis ? [element.config.showXYaxis] : []}
                       onChange={(e) =>
                         onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
                       }
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
                     >
-                      Show Legend
+                      Show X and Y Axis
                     </Switch>
                   )}
                 />
@@ -568,22 +528,14 @@ const ChartData = ({ element, onChange, onClose }) => {
                   name="showLegend"
                   control={control}
                   rules={{ required: `showLegend is required` }}
-                  render={({ field, fieldState: { error } }) => (
+                  render={({ field }) => (
                     <Switch
                       name={field.name}
-                      label="Show Legend"
                       variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
                       size="lg"
-                      selectedKeys={element.config.showLegend ? [element.config.showLegend] : []}
                       onChange={(e) =>
                         onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
                       }
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
                     >
                       Show Legend
                     </Switch>

@@ -102,4 +102,3 @@ AdvancedFunnelConfig.propTypes = {
 };
 
 export default AdvancedFunnelConfig;
-

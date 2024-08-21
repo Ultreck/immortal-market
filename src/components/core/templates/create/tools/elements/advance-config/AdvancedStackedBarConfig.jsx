@@ -1,12 +1,11 @@
-import { getKeysFromJson } from '@/lib/utils';
-import {
-  Textarea,
-} from '@nextui-org/react';
+import { isValidJsonArray } from '@/lib/utils';
+import { Textarea } from '@nextui-org/react';
 import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
+// eslint-disable-next-line no-unused-vars
 const AdvancedStackedBarConfig = ({ element, onChange }) => {
-  const { handleSubmit, control, watch } = useForm({
+  const { control } = useForm({
     defaultValues: {
       json: JSON.stringify(element.config.data, null, 2),
       ...Object.keys(element.config.keys).reduce((acc, key) => {
@@ -15,12 +14,6 @@ const AdvancedStackedBarConfig = ({ element, onChange }) => {
       }, {}),
     },
   });
-
-  const keys = getKeysFromJson(watch().json);
-
-  const onSubmit = async (values) => {
-    onChange({ ...element, config: { ...element.config, ...values } });
-  };
 
   return (
     <div className="grid grid-cols-1 gap-2">
@@ -58,4 +51,3 @@ AdvancedStackedBarConfig.propTypes = {
 };
 
 export default AdvancedStackedBarConfig;
-
