@@ -54,7 +54,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-8 py-6 w-full h-[500px] overflow-y-auto">
-          {element.type === 'chart-10-shapes' && (
+          {element.type === 'chart-a-10-shapes' && (
             <div className="grid grid-cols-1 gap-2">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
@@ -81,7 +81,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
                   />
                 </div>
 
-                {element.type === 'chart-10-shapes' && (
+                {element.type === 'chart-a-10-shapes' && (
                   <div className="mt-20">
                     <Select
                       name="shapes"
@@ -106,7 +106,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
                   </div>
                 )}
 
-                {element.type === 'chart-gender-stats' && (
+                {element.type === 'chart-a-gender-stats' && (
                   <div className="mt-20">
                     <Select
                       name="shapes"
@@ -232,7 +232,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
               </form>
             </div>
           )}
-          {element.type === 'chart-gender-stats' && (
+          {element.type === 'chart-a-gender-stats' && (
             <div className="grid grid-cols-1 gap-2">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
@@ -259,7 +259,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
                   />
                 </div>
 
-                {element.type === 'chart-10-shapes' && (
+                {element.type === 'chart-a-10-shapes' && (
                   <div className="mt-20">
                     <Select
                       name="shapes"
@@ -284,7 +284,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
                   </div>
                 )}
 
-                {element.type === 'chart-gender-stats' && (
+                {element.type === 'chart-a-gender-stats' && (
                   <div className="mt-20">
                     <Select
                       name="shapes"
@@ -410,13 +410,13 @@ const AdvancedChartConfig = ({ element, onChange }) => {
               </form>
             </div>
           )}
-          {element.type === 'chart-funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-stackedbar-advanced' && (
+          {element.type === 'chart-a-funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-stackedbar-advanced' && (
             <AdvancedStackedBarConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
         </div>
       </PopoverContent>
     </Popover>

@@ -133,7 +133,7 @@ const ChartData = ({ element, onChange, onClose }) => {
             })}
           </div>
 
-          {element.type === 'chart-pie' && (
+          {element.type === 'chart-s-pie' && (
             <div className="mt-4">
               <Select label="Select slice to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
                 {element.config.data.map((item, index) => (
@@ -152,7 +152,7 @@ const ChartData = ({ element, onChange, onClose }) => {
               )}
             </div>
           )}
-          {element.type === 'chart-line' && (
+          {element.type === 'chart-s-line' && (
             <div>
               <Controller
                 name="type"
@@ -198,7 +198,7 @@ const ChartData = ({ element, onChange, onClose }) => {
               </div>
             </div>
           )}
-          {element.type === 'chart-area' && (
+          {element.type === 'chart-s-area' && (
             <div>
               <Controller
                 name="type"
@@ -245,7 +245,7 @@ const ChartData = ({ element, onChange, onClose }) => {
               </div>
             </div>
           )}
-          {element.type === 'chart-doughnut' && (
+          {element.type === 'chart-s-doughnut' && (
             <div>
               <Controller
                 name="type"
@@ -280,7 +280,7 @@ const ChartData = ({ element, onChange, onClose }) => {
               />
             </div>
           )}
-          {element.type === 'chart-line-area' && (
+          {element.type === 'chart-s-line-area' && (
             <>
               <div className="">
                 <Controller
@@ -368,7 +368,7 @@ const ChartData = ({ element, onChange, onClose }) => {
               </div>
             </>
           )}
-          {element.type === 'chart-line-bar' && (
+          {element.type === 'chart-s-line-bar' && (
             <>
               <div className="">
                 <Controller
@@ -456,7 +456,7 @@ const ChartData = ({ element, onChange, onClose }) => {
               </div>
             </>
           )}
-          {element.type === 'chart-bar' && (
+          {element.type === 'chart-s-bar' && (
             <>
               <div className="">
                 <Controller
