@@ -20,7 +20,6 @@ import Infographics from '@/components/core/templates/create/Infographics.jsx';
 
 const Sidebar = () => {
   const [tab, setTab] = useState('components');
-
   return (
     <div className="h-full border-r dark:border-default-100 bg-gray-950 dark text-white dark:bg-black">
       <div className="grid grid-cols-[75px_1fr] h-screen overflow-y-auto">
