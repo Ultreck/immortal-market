@@ -13,7 +13,6 @@ const extractColors = (svg) => {
   while ((match = fillRegex.exec(svg)) !== null) {
     uniqueColors[match[1]] = match[1];
   }
-  console.log({uniqueColors});
   return uniqueColors;
 };
 
