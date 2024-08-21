@@ -1,25 +1,12 @@
-import { useGetSvgCodeFromUrl } from '@/api/misc.js';
+import { cn } from '@/lib/utils';
+import { Button, Checkbox, Popover, PopoverContent, PopoverTrigger, Switch } from '@nextui-org/react';
+import React from 'react';
+import { FaFillDrip } from 'react-icons/fa';
 import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
-import { TbSettings2 } from 'react-icons/tb';
 import { HexColorPicker } from 'react-colorful';
-import { cn } from '@/lib/utils.js';
 
-const extractColors = (svg) => {
-  const fillRegex = /(#[A-Fa-f0-9]{6})/g;
-  const uniqueColors = {};
-  let match;
-  while ((match = fillRegex.exec(svg)) !== null) {
-    uniqueColors[match[1]] = match[1];
-  }
-  console.log({uniqueColors});
-  return uniqueColors;
-};
-
-const InfographicConfig = ({ element, onChange }) => {
+const AdvancedChartColor = ({ element, onChange }) => {
   const [colors, setColors] = useState({});
-  const { data } = useGetSvgCodeFromUrl(element.config.src);
   const [selected, setSelected] = useState(Object.keys(colors)[0]);
 
   const handleChange = useCallback(
@@ -34,13 +21,9 @@ const InfographicConfig = ({ element, onChange }) => {
   );
 
   useEffect(() => {
-    if (data) {
-      const extracted = extractColors(data);
-      if (element.config.colors) setColors({ ...extracted, ...element.config.colors });
-      else setColors(extracted);
-      if (!selected) setSelected(Object.keys(extracted)[0]);
-    }
-  }, [data, element.config.colors, handleChange, selected]);
+    if (element.config.colors) setColors({ ...element.config.colors });
+    if (!selected) setSelected(Object.keys(colors)[0]);
+  }, [element.config.colors, handleChange, selected]);
 
   const onColorChange = (newColor) => {
     if (element.config.colors) {
@@ -50,11 +33,19 @@ const InfographicConfig = ({ element, onChange }) => {
     }
   };
 
+
+  const handleGradientColorChange = (gradientColor) => {
+    onChange({
+      ...element,
+      config: { ...element.config, gradientColor },
+    });
+  };
+
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbSettings2 size="20" />
+          <FaFillDrip size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
@@ -85,17 +76,27 @@ const InfographicConfig = ({ element, onChange }) => {
           {!!selected && (
             <HexColorPicker color={colors[selected]} onChange={(c) => onColorChange(c)} className="!w-full" />
           )}
+
+          <div className="mt-10">
+            <Checkbox
+              isSelected={element.config.useGradient}
+              onValueChange={(v) => onChange({ ...element, config: { ...element.config, useGradient: v } })}
+            >
+              Use Gradient
+            </Checkbox>
+            {element.config.useGradient && (
+              <HexColorPicker
+                color={element.config.gradientColor}
+                onChange={handleGradientColorChange}
+                className="!w-full"
+              />
+            )}
+          </div>
         </div>
       </PopoverContent>
     </Popover>
   );
 };
 
-InfographicConfig.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.object,
-  }),
-  onChange: PropTypes.func.isRequired,
-};
+export default AdvancedChartColor;
 
-export default InfographicConfig;

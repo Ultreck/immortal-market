@@ -69,6 +69,8 @@ const StandardCharts = () => {
           showLegend: false,
           keys: { x: 'browser', y: 'visitors' },
           colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          useGradient: false,
+          gradientColor: '#2673D9',
         },
       },
       preview: (
@@ -97,7 +99,7 @@ const StandardCharts = () => {
           ],
           keys: { x: 'browser', y: 'visitors' },
           type: 'multiple',
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          colors: ['#E66B5B', '#1D9085'],
         },
       },
       preview: (
@@ -167,33 +169,6 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-s-bar-horizontal',
-      type: 'chart-s-bar-horizontal',
-      name: 'Horizontal Bar Chart',
-      data: {
-        type: 'chart-s-bar-horizontal',
-        text: 'Bar Chart',
-        width: 500,
-        height: 400,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            { browser: 'chrome', visitors: 187 },
-            { browser: 'safari', visitors: 200 },
-            { browser: 'firefox', visitors: 275 },
-            { browser: 'edge', visitors: 173 },
-            { browser: 'other', visitors: 90 },
-          ],
-          keys: { x: 'browser', y: 'visitors' },
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <RiBarChartHorizontalFill className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
       id: 'chart-s-area',
       type: 'chart-s-area',
       name: 'Area Chart',
@@ -213,7 +188,7 @@ const StandardCharts = () => {
           ],
           keys: { x: 'browser', y: 'visitors' },
           type: 'multiple',
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          colors: ['#E66B5B', '#1D9085'],
         },
       },
       preview: (
@@ -243,7 +218,7 @@ const StandardCharts = () => {
             { month: 'Jul', desktop: 349, mobile: 275 },
           ],
           keys: { x: 'month', y: ['desktop', 'mobile'] },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          colors: ['#E66B5B', '#1D9085'],
         },
       },
       preview: (
@@ -557,7 +532,7 @@ const AdvancedCharts = () => {
           ],
           keys: { name: 'name', data: 'data' },
           type: 'normal',
-          color: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
         },
       },
       preview: (
@@ -574,7 +549,7 @@ const AdvancedCharts = () => {
                 { name: 'Milky Way', percentage: 30.1 },
               ],
               keys: { name: 'name', data: 'data' },
-              color: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+              colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
             },
           }}
         />
@@ -599,6 +574,7 @@ const AdvancedCharts = () => {
             { value: 100, name: 'Show' },
           ],
           keys: { name: 'name', data: 'data' },
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         },
       },
       preview: (
@@ -621,3 +597,4 @@ const AdvancedCharts = () => {
 };
 
 export default Charts;
+

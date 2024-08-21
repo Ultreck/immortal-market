@@ -2,16 +2,6 @@ import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
-const colors = [
-  'bg-orange-400',
-  'bg-yellow-400',
-  'bg-yellow-300',
-  'bg-red-400',
-  'bg-blue-400',
-  'bg-pink-500',
-  'bg-green-400',
-];
-
 const AdvancedLollipop = ({ element }) => {
   return (
     <div className="flex flex-col items-start">
@@ -23,14 +13,15 @@ const AdvancedLollipop = ({ element }) => {
               initial={{ width: 0 }}
               animate={{ width: `${item.percentage}%` }}
               transition={{ duration: 0.5 }}
-              className={`h-2 relative ${colors[index]} mb-6`}
+              className={`h-2 relative mb-6`}
+              style={{ backgroundColor: element.config.colors?.[index] }}
             >
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className={`absolute right-0 -top-7 text-black font-bold h-16 w-16 flex items-center justify-center rounded-full ${colors[index]}`}
-                style={{ left: '100%', transform: 'translateX(-50%)' }}
+                className={`absolute right-0 -top-7 text-black font-bold h-16 w-16 flex items-center justify-center rounded-full` }
+                style={{ left: '100%', transform: 'translateX(-50%)', backgroundColor: element.config.colors?.[index] }}
               >
                 {item.percentage}%
               </motion.div>

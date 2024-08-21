@@ -14,7 +14,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils.js';
 import { TbSettings2 } from 'react-icons/tb';
 import { useState } from 'react';
-import { HexAlphaColorPicker } from 'react-colorful';
 
 const ChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -132,26 +131,6 @@ const ChartData = ({ element, onChange, onClose }) => {
               );
             })}
           </div>
-
-          {element.type === 'chart-s-pie' && (
-            <div className="mt-4">
-              <Select label="Select slice to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
-                {element.config.data.map((item, index) => (
-                  <SelectItem key={index} value={index}>
-                    {item[element.config.keys.name]}
-                  </SelectItem>
-                ))}
-              </Select>
-              {selectedIndex !== null && (
-                <div className="mt-2">
-                  <HexAlphaColorPicker
-                    color={colors[selectedIndex] || defaultColors[selectedIndex % defaultColors.length]}
-                    onChange={updateColor}
-                  />
-                </div>
-              )}
-            </div>
-          )}
           {element.type === 'chart-s-line' && (
             <div>
               <Controller
@@ -182,20 +161,6 @@ const ChartData = ({ element, onChange, onClose }) => {
                   </Select>
                 )}
               />
-              <div className="mt-4">
-                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
-                  {['Line 1', 'Line 2'].map((item, index) => (
-                    <SelectItem key={index} value={index}>
-                      {item}
-                    </SelectItem>
-                  ))}
-                </Select>
-                {selectedIndex !== null && (
-                  <div className="mt-2">
-                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
-                  </div>
-                )}
-              </div>
             </div>
           )}
           {element.type === 'chart-s-area' && (
@@ -228,21 +193,6 @@ const ChartData = ({ element, onChange, onClose }) => {
                   </Select>
                 )}
               />
-
-              <div className="mt-4">
-                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
-                  {['Line 1', 'Line 2'].map((item, index) => (
-                    <SelectItem key={index} value={index}>
-                      {item}
-                    </SelectItem>
-                  ))}
-                </Select>
-                {selectedIndex !== null && (
-                  <div className="mt-2">
-                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
-                  </div>
-                )}
-              </div>
             </div>
           )}
           {element.type === 'chart-s-doughnut' && (
@@ -313,20 +263,6 @@ const ChartData = ({ element, onChange, onClose }) => {
                     </Select>
                   )}
                 />
-              </div>
-              <div className="mt-4">
-                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
-                  {['Area', 'Line'].map((item, index) => (
-                    <SelectItem key={index} value={index}>
-                      {item}
-                    </SelectItem>
-                  ))}
-                </Select>
-                {selectedIndex !== null && (
-                  <div className="mt-2">
-                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
-                  </div>
-                )}
               </div>
               <div>
                 <Controller
@@ -402,20 +338,6 @@ const ChartData = ({ element, onChange, onClose }) => {
                   )}
                 />
               </div>
-              <div className="mt-4">
-                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
-                  {['Bar', 'Line'].map((item, index) => (
-                    <SelectItem key={index} value={index}>
-                      {item}
-                    </SelectItem>
-                  ))}
-                </Select>
-                {selectedIndex !== null && (
-                  <div className="mt-2">
-                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
-                  </div>
-                )}
-              </div>
               <div>
                 <Controller
                   name="showXYaxis"
@@ -489,20 +411,6 @@ const ChartData = ({ element, onChange, onClose }) => {
                     </Select>
                   )}
                 />
-              </div>
-              <div className="mt-4">
-                <Select label="Select item to change color" onChange={(e) => setSelectedIndex(Number(e.target.value))}>
-                  {element.config.data.map((item, index) => (
-                    <SelectItem key={index} value={index}>
-                      {item[element.config.keys.x]}
-                    </SelectItem>
-                  ))}
-                </Select>
-                {selectedIndex !== null && (
-                  <div className="mt-2">
-                    <HexAlphaColorPicker color={colors[selectedIndex] || '#000000'} onChange={updateColor} />
-                  </div>
-                )}
               </div>
               <div>
                 <Controller
