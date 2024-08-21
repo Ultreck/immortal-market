@@ -29,7 +29,7 @@ const DraggableElementWrapper = ({ element }) => {
       element={element}
       className={cn('relative')}
       content={
-        <div className="relative" onClick={handleClick}>
+        <div className="relative overflow-hidden" onClick={handleClick}>
           {element.preview || (
             <div
               className={cn(

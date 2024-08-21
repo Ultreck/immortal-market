@@ -73,8 +73,10 @@ const texts = [
         config: configs[type] || {},
       },
       preview: (
-        <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-6 py-4">
-          <div style={{ ...styles[type], color: '#fff' }}>{capitalize(type)}</div>
+        <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-4 overflow-hidden">
+          <div style={{ ...styles[type], color: '#fff' }} className="truncate">
+            {capitalize(type)}
+          </div>
         </div>
       ),
     };
@@ -85,7 +87,7 @@ const Texts = () => {
   return (
     <div>
       <h2 className="text-lg font-semibold mb-4">Text</h2>
-      <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
         {texts.map((element) => (
           <DraggableElementWrapper key={element.id} element={element} />
         ))}

@@ -2,9 +2,11 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import BasicCarousel from '@/components/ui/BasicCarousel.jsx';
 import shapes from '@/lib/templates/shapes.js';
 import { RiCheckboxMultipleBlankFill } from 'react-icons/ri';
-import { TbCarouselHorizontalFilled } from 'react-icons/tb';
+import { TbCarouselHorizontalFilled, TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import PropTypes from 'prop-types';
+import { Button } from '@nextui-org/react';
 
-const frames = [
+const items = [
   {
     id: 'frame-tabs',
     type: 'frame-tabs',
@@ -84,31 +86,67 @@ const frames = [
   })) || []),
 ];
 
-const Frames = () => {
+const Frames = ({ mini = false, onView, onBack }) => {
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-4">Frames</h2>
-      <div className="relative">
-        <BasicCarousel
-          classNames={{ next: 'right-0', prev: 'left-0' }}
-          slides={Array(Math.ceil(frames.length / 6))
-            .fill(null)
-            .map((_, index) => {
-              return {
-                id: index,
-                content: (
-                  <div className="grid grid-cols-3 gap-6">
-                    {frames.slice(index * 6, index * 6 + 6).map((element) => (
-                      <DraggableElementWrapper key={element.id} element={element} />
-                    ))}
-                  </div>
-                ),
-              };
-            })}
-        />
-      </div>
+      {mini ? (
+        <>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold">Frames</h2>
+            <Button
+              onClick={onView}
+              variant="bordered"
+              size="sm"
+              className="text-md"
+              endContent={<TbChevronRight size={16} />}
+              radius="full"
+            >
+              View All
+            </Button>
+          </div>
+          <div className="relative">
+            <BasicCarousel
+              classNames={{ next: 'right-0', prev: 'left-0' }}
+              slides={Array(2)
+                .fill(null)
+                .map((_, index) => {
+                  return {
+                    id: index,
+                    content: (
+                      <div className="grid grid-cols-3 gap-6">
+                        {items.slice(index * 6, index * 6 + 6).map((element) => (
+                          <DraggableElementWrapper key={element.id} element={element} />
+                        ))}
+                      </div>
+                    ),
+                  };
+                })}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="flex items-center space-x-3 mb-8">
+            <Button onClick={onBack} variant="bordered" radius="full" isIconOnly>
+              <TbChevronLeft size="20" />
+            </Button>
+            <h2 className="text-xl font-semibold">Frames</h2>
+          </div>
+          <div className="grid grid-cols-3 gap-6">
+            {items.map((element) => (
+              <DraggableElementWrapper key={element.id} element={element} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
+};
+
+Frames.propTypes = {
+  mini: PropTypes.bool,
+  onView: PropTypes.func,
+  onBack: PropTypes.func,
 };
 
 export default Frames;
