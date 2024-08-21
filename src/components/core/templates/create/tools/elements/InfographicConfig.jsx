@@ -7,7 +7,7 @@ import { HexColorPicker } from 'react-colorful';
 import { cn } from '@/lib/utils.js';
 
 const extractColors = (svg) => {
-  const fillRegex = /fill="(#[A-Fa-f0-9]{6})"/g;
+  const fillRegex = /(#[A-Fa-f0-9]{6})/g;
   const uniqueColors = {};
   let match;
   while ((match = fillRegex.exec(svg)) !== null) {

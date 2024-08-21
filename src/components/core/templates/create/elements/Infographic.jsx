@@ -18,8 +18,8 @@ const Infographic = ({ element, active, highlighted, onClick, onChange }) => {
     if (!data) return data;
     let coloredSvg = data;
     Object.entries(element.config.colors || {}).forEach(([originalColor, newColor]) => {
-      const regex = new RegExp(`fill="${originalColor}"`, 'g');
-      coloredSvg = coloredSvg.replace(regex, `fill="${newColor}"`);
+      const regex = new RegExp(`${originalColor}`, 'g');
+      coloredSvg = coloredSvg.replace(regex, `${newColor}`);
     });
     return coloredSvg;
   };
