@@ -13,7 +13,7 @@ import Components from '@/components/core/templates/create/Components.jsx';
 import Layers from '@/components/core/templates/create/Layers.jsx';
 import { Link } from 'react-router-dom';
 import Uploads from '@/components/core/templates/create/Uploads.jsx';
-import Build from '@/components/core/templates/create/Build.jsx';
+import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import Charts from '@/components/core/templates/create/Charts.jsx';
 import { Tooltip } from '@nextui-org/react';
 import Infographics from '@/components/core/templates/create/Infographics.jsx';
