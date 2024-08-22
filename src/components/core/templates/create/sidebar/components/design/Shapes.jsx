@@ -105,7 +105,7 @@ const ShapesSlider = ({ mini = false, onView, onBack }) => {
       ) : (
         <>
           <div className="flex items-center space-x-3 mb-8">
-            <Button onClick={onBack} variant="bordered" radius="full" isIconOnly>
+            <Button onClick={onBack} variant="bordered" radius="full" isIconOnly size="sm">
               <TbChevronLeft size="20" />
             </Button>
             <h2 className="text-xl font-semibold">Shapes</h2>
