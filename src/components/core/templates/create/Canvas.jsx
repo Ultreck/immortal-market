@@ -18,7 +18,6 @@ const Canvas = () => {
   useMousewheelScale(root);
   useDelete();
   useHistory();
-  
 
   const handleParentClick = (e) => {
     if (e.target === root.current) updateTemplate({ selectedElements: [], selectedPage: null });

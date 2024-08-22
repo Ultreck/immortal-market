@@ -6,7 +6,7 @@ const StandardDoughnutNormalChart = ({ element }) => {
   const chartRef = useRef(null);
 
   const updatedData = element.config.data.reduce((acc, item) => {
-    acc.push({ name: item.name, value: item.data });
+    acc.push({ name: item.name, value: item.value });
     return acc;
   }, []);
 

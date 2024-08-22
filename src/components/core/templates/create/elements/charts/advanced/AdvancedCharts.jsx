@@ -32,7 +32,6 @@ const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange
       {element.type === 'chart-a-guage' && <AdvanceGuage element={element} />}
       {element.type === 'chart-a-three-circles' && <AdvanceThreeCircles element={element} />}
       {element.type === 'chart-a-circle-icons' && <AdvanceCircleIcons element={element} />}
-
     </ElementWrapper>
   );
 };

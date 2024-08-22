@@ -1,6 +1,6 @@
 import { Tab, Tabs } from '@nextui-org/react';
 import { useState } from 'react';
-import { RiBarChart2Line, RiBarChartHorizontalFill } from 'react-icons/ri';
+import { RiBarChart2Line } from 'react-icons/ri';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import AdvancedTenShapes from './elements/charts/advanced/AdvancedTenShapes.jsx';
 import {
@@ -17,7 +17,6 @@ import { IconChartFunnel } from '@tabler/icons-react';
 import AdvancedStackedBar from './elements/charts/advanced/AdvancedStackedBar.jsx';
 import AdvancedLinearBar from './elements/charts/advanced/AdvancedLinearBar.jsx';
 import AdvancedLollipop from './elements/charts/advanced/AdvancedLollipop.jsx';
-import AdvanceGuage from './elements/charts/advanced/AdvanceGuage.jsx';
 import AdvanceThreeCircles from './elements/charts/advanced/AdvanceThreeCircles.jsx';
 import AdvanceCircleIcons from './elements/charts/advanced/AdvanceCircleIcons.jsx';
 
@@ -163,6 +162,7 @@ const StandardCharts = () => {
           ],
           keys: { name: 'name', data: 'data' },
           type: 'normal',
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333'],
         },
       },
       preview: (
@@ -568,6 +568,52 @@ const AdvancedCharts = () => {
         />
       ),
     },
+    // {
+    //   id: 'chart-a-guage',
+    //   type: 'chart-a-guage',
+    //   name: 'guage Chart',
+    //   data: {
+    //     type: 'chart-a-guage',
+    //     text: 'guage Chart',
+    //     width: 400,
+    //     height: 300,
+    //     style: { opacity: 1 },
+    //     config: {
+    //       data: [
+    //         { name: "Reese's Peanut Butter", percentage: 84.2 },
+    //         { name: "Reese's Miniatures", percentage: 78.9 },
+    //         { name: 'Twix', percentage: 67.6 },
+    //         { name: 'Kit Kat', percentage: 56.8 },
+    //         { name: 'Snickers', percentage: 46.7 },
+    //         { name: "Reese's pieces", percentage: 40.4 },
+    //         { name: 'Milky Way', percentage: 30.1 },
+    //       ],
+    //       keys: { name: 'name', data: 'data' },
+    //       type: 'normal',
+    //       colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
+    //     },
+    //   },
+    //   preview: (
+    //     <AdvanceGuage
+    //       className="w-full h-full"
+    //       element={{
+    //         config: {
+    //           data: [
+    //             { name: "Reese's Peanut Butter", percentage: 84.2 },
+    //             { name: "Reese's Miniatures", percentage: 78.9 },
+    //             { name: 'Twix', percentage: 67.6 },
+    //             { name: 'Kit Kat', percentage: 56.8 },
+    //             { name: 'Snickers', percentage: 46.7 },
+    //             { name: "Reese's pieces", percentage: 40.4 },
+    //             { name: 'Milky Way', percentage: 30.1 },
+    //           ],
+    //           keys: { name: 'name', data: 'data' },
+    //           colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
+    //         },
+    //       }}
+    //     />
+    //   ),
+    // },
     {
       id: 'chart-a-funnel',
       type: 'chart-a-funnel',
@@ -604,14 +650,18 @@ const AdvancedCharts = () => {
         type: 'chart-a-three-circles',
         text: 'three-circles Chart',
         width: 400,
-        height: 200,
+        height: 400,
         style: { opacity: 1 },
         config: {
           data: [
-            { size: 400, color: 'bg-blue-500' },
-            { size: 250, color: 'bg-green-500' },
-            { size: 100, color: 'bg-red-500' },
+            { size: 300, label: 'A' },
+            { size: 50, label: 'C' },
+            { size: 150, label: 'B' },
+            { size: 70, label: 'D' },
+            { size: 200, label: 'E' },
           ],
+          keys: { name: 'label', data: 'size' },
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         },
       },
       preview: (
@@ -619,10 +669,11 @@ const AdvancedCharts = () => {
           element={{
             config: {
               data: [
-                { size: 230, color: 'bg-blue-500' },
-                { size: 180, color: 'bg-green-500' },
-                { size: 100, color: 'bg-red-500' },
+                { size: 300, label: 'A' },
+                { size: 50, label: 'C' },
+                { size: 150, label: 'B' },
               ],
+              colors: ['#E66B5B', '#1D9085', '#264A5A'],
             },
           }}
         />
@@ -688,4 +739,3 @@ const AdvancedCharts = () => {
 };
 
 export default Charts;
-

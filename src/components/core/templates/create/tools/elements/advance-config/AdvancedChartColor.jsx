@@ -33,7 +33,6 @@ const AdvancedChartColor = ({ element, onChange }) => {
     }
   };
 
-
   const handleGradientColorChange = (gradientColor) => {
     onChange({
       ...element,
@@ -77,21 +76,23 @@ const AdvancedChartColor = ({ element, onChange }) => {
             <HexColorPicker color={colors[selected]} onChange={(c) => onColorChange(c)} className="!w-full" />
           )}
 
-          <div className="mt-10">
-            <Checkbox
-              isSelected={element.config.useGradient}
-              onValueChange={(v) => onChange({ ...element, config: { ...element.config, useGradient: v } })}
-            >
-              Use Gradient
-            </Checkbox>
-            {element.config.useGradient && (
-              <HexColorPicker
-                color={element.config.gradientColor}
-                onChange={handleGradientColorChange}
-                className="!w-full"
-              />
-            )}
-          </div>
+          {element.type === 'chart-s-bar' && (
+            <div className="mt-10">
+              <Checkbox
+                isSelected={element.config.useGradient}
+                onValueChange={(v) => onChange({ ...element, config: { ...element.config, useGradient: v } })}
+              >
+                Use Gradient
+              </Checkbox>
+              {element.config.useGradient && (
+                <HexColorPicker
+                  color={element.config.gradientColor}
+                  onChange={handleGradientColorChange}
+                  className="!w-full"
+                />
+              )}
+            </div>
+          )}
         </div>
       </PopoverContent>
     </Popover>

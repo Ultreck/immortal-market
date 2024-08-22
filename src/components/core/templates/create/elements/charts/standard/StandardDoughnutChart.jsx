@@ -1,33 +1,22 @@
-import { LabelList, Pie, PieChart } from 'recharts';
+import { Cell, LabelList, Pie, PieChart } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import StandardDoughnutNormalChart from './StandardDoughnutNormalChart.jsx';
 import StandardRosePieChart from './StandardRosePieChart.jsx';
 import PropTypes from 'prop-types';
 
-const colors = [
-  '#E66B5B',
-  '#1D9085',
-  '#264A5A',
-  '#E8C22C',
-  '#F6881F',
-  '#2673D9',
-  '#2BA385',
-  '#E6A333',
-  '#AB52D9',
-  '#D93566',
-];
-
 const StandardDoughnutChart = ({ element }) => {
   const data = element.config.data.map((item, i) => ({
     ...item,
-    fill: colors[i],
+    fill: element.config.colors[i],
   }));
+
+  const COLORS = element.config.colors;
 
   const config = element.config.data.reduce((acc, item, i) => {
     acc[item[element.config.keys.name]] = {
       label: capitalize(item[element.config.keys.name]),
-      color: colors[i],
+      color: element.config.colors[i],
     };
     return acc;
   }, {});
@@ -38,25 +27,20 @@ const StandardDoughnutChart = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       {element.config.type === 'normal' && (
-        <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }} width={element.width} height={element.height}>
-          <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+        <PieChart width={300} height={400}>
           <Pie
             data={data}
-            dataKey={element.config.keys.data}
-            nameKey={element.config.keys.name}
-            isAnimationActive={false}
-            style={{ opacity: element.style.opacity }}
-            cx="50%"
-            cy="50%"
-            innerRadius={90}
+            cx={120}
+            cy={200}
+            innerRadius={80}
+            outerRadius={120}
+            fill="#8884d8"
+            paddingAngle={3}
+            dataKey="value"
           >
-            <LabelList
-              dataKey={element.config.keys.name}
-              className="fill-background"
-              stroke="none"
-              fontSize={12}
-              formatter={(value) => capitalize(value)}
-            />
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
           </Pie>
         </PieChart>
       )}
@@ -76,3 +60,4 @@ StandardDoughnutChart.propTypes = {
 };
 
 export default StandardDoughnutChart;
+
