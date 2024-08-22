@@ -1,16 +1,18 @@
+import React from 'react';
 import { motion, stagger } from 'framer-motion';
-import PropTypes from 'prop-types';
+import PropTypes, { element } from 'prop-types';
 import Card from '@/components/ui/Card.jsx';
-import { cn, getPercentages } from '../../../../../lib/utils';
+import { cn, getPercentages } from '../../../../../.././../lib/utils';
+import { config } from '@react-spring/web';
 
-const CircleIcons = ({ data }) => {
-  const percentages = getPercentages(data.map((item) => +item.value));
-
+const AdvanceCircleIcons = ({ element }) => {
+    const percentages = getPercentages(element.config.data.map((item) => +item.value));
+    
   return (
-    <Card className="space-y-6 w-full bg-default-300 px-20 py-16 mt-10">
-      <p className='text-black'>Alot of business can not do the needful so we must find a good way to do it.</p>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} layout className="flex items-center pt-40 pb-36">
-        {data
+    <Card className="space-y-6 w-auto bg-default-300 py-16 mt-10">
+      {/* <p className='text-black'>Alot of business can not do the needful so we must find a good way to do it.</p> */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} layout className="flex items-center py-5 w-full px-2">
+        {element.config.data
           .sort((a, b) => +b.value - +a.value)
           .map((circle, index) => (
             <motion.div
@@ -19,7 +21,7 @@ const CircleIcons = ({ data }) => {
               layout
               style={{ flex: 10 - index }}
               initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+              animate={{ y: 1, opacity: 1 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
               whileHover={{ scale: 1.5 }}
             >
@@ -31,7 +33,7 @@ const CircleIcons = ({ data }) => {
               >
                 <i
                   className={`scale-50 md:scale-100 ${circle.icon}`}
-                  style={{ fontSize: `${7 * (12 - index * 1.4)}px`, color: 'white' }}
+                  style={{ fontSize: `${7 * (7 - index * 1.4)}px`, color: 'white' }}
                 />
               </motion.div>
               {index % 2 === 0 ? (
@@ -55,14 +57,14 @@ const CircleIcons = ({ data }) => {
           ))}
       </motion.div>
     </Card>
-  );
-};
+  )
+}
 
-CircleIcons.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })).isRequired,
-  title: PropTypes.string.isRequired,
-  caption: PropTypes.string.isRequired,
-};
+AdvanceCircleIcons.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })).isRequired,
+    element: PropTypes.arrayOf(PropTypes.shape({ config: PropTypes.string, label: PropTypes.string })).isRequired,
+    title: PropTypes.string.isRequired,
+    caption: PropTypes.string.isRequired,
+  };
 
-export default CircleIcons;
-
+export default AdvanceCircleIcons

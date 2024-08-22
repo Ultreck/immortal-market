@@ -17,6 +17,9 @@ import { IconChartFunnel } from '@tabler/icons-react';
 import AdvancedStackedBar from './elements/charts/advanced/AdvancedStackedBar.jsx';
 import AdvancedLinearBar from './elements/charts/advanced/AdvancedLinearBar.jsx';
 import AdvancedLollipop from './elements/charts/advanced/AdvancedLollipop.jsx';
+import AdvanceGuage from './elements/charts/advanced/AdvanceGuage.jsx';
+import AdvanceThreeCircles from './elements/charts/advanced/AdvanceThreeCircles.jsx';
+import AdvanceCircleIcons from './elements/charts/advanced/AdvanceCircleIcons.jsx';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -549,7 +552,17 @@ const AdvancedCharts = () => {
                 { name: 'Milky Way', percentage: 30.1 },
               ],
               keys: { name: 'name', data: 'data' },
-              colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
+              colors: [
+                '#E66B5B',
+                '#1D9085',
+                '#264A5A',
+                '#E8C22C',
+                '#F6881F',
+                '#2BA385',
+                '#E6A333',
+                '#AB52D9',
+                '#D93566',
+              ],
             },
           }}
         />
@@ -581,6 +594,84 @@ const AdvancedCharts = () => {
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
           <IconChartFunnel className="w-full h-full" />
         </div>
+      ),
+    },
+    {
+      id: 'chart-a-three-circles',
+      type: 'chart-a-three-circles',
+      name: 'three-circles Chart',
+      data: {
+        type: 'chart-a-three-circles',
+        text: 'three-circles Chart',
+        width: 400,
+        height: 200,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { size: 400, color: 'bg-blue-500' },
+            { size: 250, color: 'bg-green-500' },
+            { size: 100, color: 'bg-red-500' },
+          ],
+        },
+      },
+      preview: (
+        <AdvanceThreeCircles
+          element={{
+            config: {
+              data: [
+                { size: 230, color: 'bg-blue-500' },
+                { size: 180, color: 'bg-green-500' },
+                { size: 100, color: 'bg-red-500' },
+              ],
+            },
+          }}
+        />
+      ),
+    },
+    {
+      id: 'chart-a-circle-icons',
+      type: 'chart-a-circle-icons',
+      name: 'circle-icons Chart',
+      data: {
+        type: 'chart-a-circle-icons',
+        text: 'circle-icons Chart',
+        width: 400,
+        height: 150,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { id: 1, label: 'Bubble 1', value: 30, color: '#FF6384', icon: 'fa fa-user' },
+            { id: 2, label: 'Bubble 2', value: 50, color: '#36A2EB', icon: 'fa fa-house' },
+            { id: 3, label: 'Bubble 3', value: 20, color: '#FFCE56', icon: 'fa fa-check' },
+            { id: 4, label: 'Bubble 4', value: 40, color: '#9966FF', icon: 'fa fa-bell' },
+            { id: 5, label: 'Bubble 5', value: 60, color: '#4BC0C0', icon: 'fa fa-star' },
+            { id: 5, label: 'Bubble 5', value: 10, color: '#4BC0C0', icon: 'fa fa-music' },
+            { id: 5, label: 'Bubble 5', value: 70, color: '#4BC0C0', icon: 'fa fa-gamepad' },
+            { id: 5, label: 'Bubble 5', value: 15, color: '#4BC0C0', icon: 'fa fa-film' },
+          ],
+          keys: { name: 'name', data: 'data' },
+          colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#4BC0C0', '#4BC0C0', '#4BC0C0'],
+        },
+      },
+      preview: (
+        <AdvanceCircleIcons
+          element={{
+            config: {
+              data: [
+                { id: 1, label: 'Bubble 1', value: 30, color: '#FF6384', icon: 'fa fa-user' },
+                { id: 2, label: 'Bubble 2', value: 40, color: '#36A2EB', icon: 'fa fa-house' },
+                { id: 3, label: 'Bubble 3', value: 20, color: '#FFCE56', icon: 'fa fa-check' },
+                { id: 4, label: 'Bubble 4', value: 40, color: '#9966FF', icon: 'fa fa-bell' },
+                { id: 5, label: 'Bubble 5', value: 60, color: '#4BC0C0', icon: 'fa fa-star' },
+                { id: 5, label: 'Bubble 5', value: 10, color: '#4BC0C0', icon: 'fa fa-music' },
+                { id: 5, label: 'Bubble 5', value: 70, color: '#4BC0C0', icon: 'fa fa-gamepad' },
+                { id: 5, label: 'Bubble 5', value: 15, color: '#4BC0C0', icon: 'fa fa-film' },
+              ],
+              keys: { name: 'name', data: 'data' },
+              colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#4BC0C0', '#4BC0C0', '#4BC0C0']
+            },
+          }}
+        />
       ),
     },
   ];

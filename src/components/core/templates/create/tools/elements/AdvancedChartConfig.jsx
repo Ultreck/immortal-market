@@ -20,6 +20,7 @@ import AdvancedFunnelConfig from './advance-config/AdvancedFunnelConfig';
 import AdvancedCustomBarConfig from './advance-config/AdvancedCustomBarConfig';
 import AdvancedLinearBarConfig from './advance-config/AdvancedLinearBarConfig';
 import AdvancedLollipopConfig from './advance-config/AdvancedLollipopConfig';
+import AdvanceCircleIconsConfig from './advance-config/AdvanceCircleIconsConfig';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -411,6 +412,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
             </div>
           )}
           {element.type === 'chart-a-funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-circle-icons' && <AdvanceCircleIconsConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-stackedbar-advanced' && (
             <AdvancedStackedBarConfig element={element} onChange={onChange} />
           )}

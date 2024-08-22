@@ -18,9 +18,6 @@ const Canvas = () => {
   useMousewheelScale(root);
   useDelete();
   useHistory();
-  console.log(pages);
-  console.log(addPage);
-  console.log(updateTemplate);
   
 
   const handleParentClick = (e) => {
