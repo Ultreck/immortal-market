@@ -8,7 +8,6 @@ import AdvancedStackedBar from './AdvancedStackedBar.jsx';
 import AdvancedTenShapes from './AdvancedTenShapes.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import AdvanceThreeCircles from './AdvanceThreeCircles.jsx';
-import AdvanceGuage from './AdvanceGuage.jsx';
 import AdvanceCircleIcons from './AdvanceCircleIcons.jsx';
 
 const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
@@ -29,7 +28,6 @@ const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange
       {element.type === 'chart-a-custom-bar' && <AdvancedCustomBar element={element} />}
       {element.type === 'chart-a-linear-bar' && <AdvancedLinearBar element={element} />}
       {element.type === 'chart-a-lollipop' && <AdvancedLollipop element={element} />}
-      {element.type === 'chart-a-guage' && <AdvanceGuage element={element} />}
       {element.type === 'chart-a-three-circles' && <AdvanceThreeCircles element={element} />}
       {element.type === 'chart-a-circle-icons' && <AdvanceCircleIcons element={element} />}
     </ElementWrapper>

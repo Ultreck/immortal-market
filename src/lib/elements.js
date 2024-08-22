@@ -25,7 +25,6 @@ const charts = {
     'custom-bar',
     'linear-bar',
     'lollipop',
-    'guage',
     'three-circles',
     'circle-icons',
   ],

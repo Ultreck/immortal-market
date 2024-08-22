@@ -1,17 +1,19 @@
-import React from 'react';
 import { motion, stagger } from 'framer-motion';
-import PropTypes, { element } from 'prop-types';
+import PropTypes from 'prop-types';
 import Card from '@/components/ui/Card.jsx';
-import { cn, getPercentages } from '../../../../../.././../lib/utils';
-// import { config } from '@react-spring/web';
+import { cn, getPercentages } from '@/lib/utils.js';
 
 const AdvanceCircleIcons = ({ element }) => {
-    const percentages = getPercentages(element.config.data.map((item) => +item.value));
-    
+  const percentages = getPercentages(element.config.data.map((item) => +item.value));
+
   return (
     <Card className="space-y-6 w-auto bg-default-300 py-16 mt-10">
-      {/* <p className='text-black'>Alot of business can not do the needful so we must find a good way to do it.</p> */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} layout className="flex items-center py-5 w-full px-2">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        layout
+        className="flex items-center py-5 w-full px-2"
+      >
         {element.config.data
           .sort((a, b) => +b.value - +a.value)
           .map((circle, index) => (
@@ -27,7 +29,7 @@ const AdvanceCircleIcons = ({ element }) => {
             >
               <motion.div
                 className="w-full aspect-square flex justify-center items-center rounded-full"
-                style={{ backgroundColor: `hsl(${+circle.value * 2}, 80%, 60%)` }}
+                style={{ backgroundColor: element.config.colors[index] }}
                 animate={{ delay: stagger(0.1) }}
                 layout
               >
@@ -57,14 +59,13 @@ const AdvanceCircleIcons = ({ element }) => {
           ))}
       </motion.div>
     </Card>
-  )
-}
+  );
+};
 
 AdvanceCircleIcons.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })).isRequired,
-    element: PropTypes.arrayOf(PropTypes.shape({ config: PropTypes.string, label: PropTypes.string })).isRequired,
-    title: PropTypes.string.isRequired,
-    caption: PropTypes.string.isRequired,
-  };
+  element: PropTypes.shape({
+    config: PropTypes.object,
+  }).isRequired,
+};
 
-export default AdvanceCircleIcons
+export default AdvanceCircleIcons;

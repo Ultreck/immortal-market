@@ -568,52 +568,6 @@ const AdvancedCharts = () => {
         />
       ),
     },
-    // {
-    //   id: 'chart-a-guage',
-    //   type: 'chart-a-guage',
-    //   name: 'guage Chart',
-    //   data: {
-    //     type: 'chart-a-guage',
-    //     text: 'guage Chart',
-    //     width: 400,
-    //     height: 300,
-    //     style: { opacity: 1 },
-    //     config: {
-    //       data: [
-    //         { name: "Reese's Peanut Butter", percentage: 84.2 },
-    //         { name: "Reese's Miniatures", percentage: 78.9 },
-    //         { name: 'Twix', percentage: 67.6 },
-    //         { name: 'Kit Kat', percentage: 56.8 },
-    //         { name: 'Snickers', percentage: 46.7 },
-    //         { name: "Reese's pieces", percentage: 40.4 },
-    //         { name: 'Milky Way', percentage: 30.1 },
-    //       ],
-    //       keys: { name: 'name', data: 'data' },
-    //       type: 'normal',
-    //       colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
-    //     },
-    //   },
-    //   preview: (
-    //     <AdvanceGuage
-    //       className="w-full h-full"
-    //       element={{
-    //         config: {
-    //           data: [
-    //             { name: "Reese's Peanut Butter", percentage: 84.2 },
-    //             { name: "Reese's Miniatures", percentage: 78.9 },
-    //             { name: 'Twix', percentage: 67.6 },
-    //             { name: 'Kit Kat', percentage: 56.8 },
-    //             { name: 'Snickers', percentage: 46.7 },
-    //             { name: "Reese's pieces", percentage: 40.4 },
-    //             { name: 'Milky Way', percentage: 30.1 },
-    //           ],
-    //           keys: { name: 'name', data: 'data' },
-    //           colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
-    //         },
-    //       }}
-    //     />
-    //   ),
-    // },
     {
       id: 'chart-a-funnel',
       type: 'chart-a-funnel',
@@ -687,7 +641,7 @@ const AdvancedCharts = () => {
         type: 'chart-a-circle-icons',
         text: 'circle-icons Chart',
         width: 400,
-        height: 150,
+        height: 400,
         style: { opacity: 1 },
         config: {
           data: [
@@ -696,12 +650,12 @@ const AdvancedCharts = () => {
             { label: 'Bubble 3', value: 20, icon: 'fa fa-check' },
             { label: 'Bubble 4', value: 40, icon: 'fa fa-bell' },
             { label: 'Bubble 5', value: 60, icon: 'fa fa-star' },
-            { label: 'Bubble 5', value: 10, icon: 'fa fa-music' },
+            { label: 'Bubble 5', value: 10, icon: 'fa fa-asterisk' },
             { label: 'Bubble 5', value: 70, icon: 'fa fa-gamepad' },
             { label: 'Bubble 5', value: 15, icon: 'fa fa-film' },
           ],
           keys: { name: 'name', data: 'data' },
-          colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#4BC0C0', '#4BC0C0', '#4BC0C0'],
+          colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#E66B5B', '#1D9085', '#264A5A'],
         },
       },
       preview: (
@@ -709,17 +663,14 @@ const AdvancedCharts = () => {
           element={{
             config: {
               data: [
-                {label: 'Bubble 1', value: 30, icon: 'fa fa-user' },
-                {label: 'Bubble 2', value: 40, icon: 'fa fa-house' },
-                {label: 'Bubble 3', value: 20, icon: 'fa fa-check' },
-                {label: 'Bubble 4', value: 40, icon: 'fa fa-bell' },
-                {label: 'Bubble 5', value: 60, icon: 'fa fa-star' },
-                {label: 'Bubble 5', value: 10, icon: 'fa fa-music' },
-                {label: 'Bubble 5', value: 70, icon: 'fa fa-gamepad' },
-                {label: 'Bubble 5', value: 15, icon: 'fa fa-film' },
+                { label: 'Bubble 1', value: 30, icon: 'fa fa-user' },
+                { label: 'Bubble 2', value: 40, icon: 'fa fa-house' },
+                { label: 'Bubble 3', value: 20, icon: 'fa fa-check' },
+                { label: 'Bubble 4', value: 40, icon: 'fa fa-bell' },
+                { label: 'Bubble 5', value: 60, icon: 'fa fa-star' },
               ],
               keys: { name: 'name', data: 'data' },
-              colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#4BC0C0', '#4BC0C0', '#4BC0C0']
+              colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#4BC0C0', '#4BC0C0', '#4BC0C0'],
             },
           }}
         />
