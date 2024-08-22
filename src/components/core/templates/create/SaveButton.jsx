@@ -6,8 +6,10 @@ import { useUpdateDesign } from '@/api/business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { Button } from '@nextui-org/react';
+import { useQueryClient } from '@tanstack/react-query';
 
 const SaveButton = () => {
+  const qc = useQueryClient();
   const toast = useToast();
   const { id: business } = useBusiness();
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
@@ -28,11 +30,12 @@ const SaveButton = () => {
       setIsThumbnailLoading(false);
       await update({ data: { pages }, thumbnail });
       toast.success('Saved successfully');
+      qc.invalidateQueries({ queryKey: ['business', business, 'designs'] });
     } catch (error) {
       setIsThumbnailLoading(false);
       toast.error(error?.response?.data?.message || error.message);
     }
-  }, [selectElements, pages, update, toast]);
+  }, [selectElements, pages, update, toast, business, qc]);
 
   useKey(
     (e) => e.key.toLowerCase() === 's' && e.ctrlKey && !e.shiftKey,
