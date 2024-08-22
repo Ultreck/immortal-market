@@ -156,7 +156,7 @@ input:-webkit-autofill {
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  @apply bg-transparent w-[18px] h-[18px];
+  @apply bg-transparent w-[14px] h-[14px];
 }
 
 ::-webkit-scrollbar-track {
@@ -165,7 +165,7 @@ input:-webkit-autofill {
 
 ::-webkit-scrollbar-thumb {
   @apply bg-black/20 rounded-2xl;
-  border: 6px solid rgba(0, 0, 0, 0);
+  border: 4px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
 }
 
