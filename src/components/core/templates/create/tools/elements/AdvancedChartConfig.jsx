@@ -413,14 +413,18 @@ const AdvancedChartConfig = ({ element, onChange }) => {
             </div>
           )}
           {element.type === 'chart-a-funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-circle-icons' && <AdvanceCircleIconsConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-circle-icons' && (
+            <AdvanceCircleIconsConfig element={element} onChange={onChange} />
+          )}
           {element.type === 'chart-a-stackedbar-advanced' && (
             <AdvancedStackedBarConfig element={element} onChange={onChange} />
           )}
           {element.type === 'chart-a-custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-three-circles' && <AdvancedMultipleCircle element={element} onChange={onChange} />}
+          {element.type === 'chart-a-nested-circles' && (
+            <AdvancedMultipleCircle element={element} onChange={onChange} />
+          )}
         </div>
       </PopoverContent>
     </Popover>

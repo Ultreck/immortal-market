@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
 import { cn, getPercentagesMax } from '@/lib/utils';
+import PropTypes from 'prop-types';
 
-const AdvanceThreeCircles = ({ element }) => {
+const AdvanceNestedCircles = ({ element }) => {
   const sortElement = element.config.data.sort((a, b) => b.size - a.size);
   const percentage = getPercentagesMax(sortElement.map((i) => +i.size));
 
-  useEffect(() => {}, [element]);
   return (
     <div className="relative w-full">
       {sortElement.map((item, index) => (
@@ -24,5 +23,13 @@ const AdvanceThreeCircles = ({ element }) => {
   );
 };
 
-export default AdvanceThreeCircles;
+AdvanceNestedCircles.propTypes = {
+  element: PropTypes.shape({
+    config: PropTypes.shape({
+      data: PropTypes.array,
+      colors: PropTypes.array,
+    }),
+  }).isRequired,
+};
 
+export default AdvanceNestedCircles;

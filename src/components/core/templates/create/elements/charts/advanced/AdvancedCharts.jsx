@@ -7,29 +7,42 @@ import AdvancedLollipop from './AdvancedLollipop.jsx';
 import AdvancedStackedBar from './AdvancedStackedBar.jsx';
 import AdvancedTenShapes from './AdvancedTenShapes.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import AdvanceThreeCircles from './AdvanceThreeCircles.jsx';
+import AdvanceNestedCircles from './AdvanceNestedCircles.jsx';
 import AdvanceCircleIcons from './AdvanceCircleIcons.jsx';
+import { useEffect, useRef } from 'react';
 
 const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
+  const el = useRef(null);
+
+  useEffect(() => {
+    if (el.current && element.height !== el.current.scrollHeight) {
+      onChange({ ...element, height: el.current.scrollHeight });
+    }
+  }, [element, onChange]);
+
   return (
     <ElementWrapper
       element={element}
       onClick={onClick}
-      onChange={onChange}
+      onChange={(values) => {
+        return onChange({ ...element, ...values, height: el.current.scrollHeight });
+      }}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
       editable
     >
-      {element.type === 'chart-a-10-shapes' && <AdvancedTenShapes element={element} />}
-      {element.type === 'chart-a-gender-stats' && <AdvancedGenderStats element={element} />}
-      {element.type === 'chart-a-funnel' && <AdvancedFunnelChart element={element} />}
-      {element.type === 'chart-a-stackedbar-advanced' && <AdvancedStackedBar element={element} />}
-      {element.type === 'chart-a-custom-bar' && <AdvancedCustomBar element={element} />}
-      {element.type === 'chart-a-linear-bar' && <AdvancedLinearBar element={element} />}
-      {element.type === 'chart-a-lollipop' && <AdvancedLollipop element={element} />}
-      {element.type === 'chart-a-three-circles' && <AdvanceThreeCircles element={element} />}
-      {element.type === 'chart-a-circle-icons' && <AdvanceCircleIcons element={element} />}
+      <div ref={el} className="w-full h-max">
+        {element.type === 'chart-a-10-shapes' && <AdvancedTenShapes element={element} />}
+        {element.type === 'chart-a-gender-stats' && <AdvancedGenderStats element={element} />}
+        {element.type === 'chart-a-funnel' && <AdvancedFunnelChart element={element} />}
+        {element.type === 'chart-a-stackedbar-advanced' && <AdvancedStackedBar element={element} />}
+        {element.type === 'chart-a-custom-bar' && <AdvancedCustomBar element={element} />}
+        {element.type === 'chart-a-linear-bar' && <AdvancedLinearBar element={element} />}
+        {element.type === 'chart-a-lollipop' && <AdvancedLollipop element={element} />}
+        {element.type === 'chart-a-nested-circles' && <AdvanceNestedCircles element={element} />}
+        {element.type === 'chart-a-circle-icons' && <AdvanceCircleIcons element={element} />}
+      </div>
     </ElementWrapper>
   );
 };

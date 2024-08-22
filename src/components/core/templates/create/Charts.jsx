@@ -17,7 +17,7 @@ import { IconChartFunnel } from '@tabler/icons-react';
 import AdvancedStackedBar from './elements/charts/advanced/AdvancedStackedBar.jsx';
 import AdvancedLinearBar from './elements/charts/advanced/AdvancedLinearBar.jsx';
 import AdvancedLollipop from './elements/charts/advanced/AdvancedLollipop.jsx';
-import AdvanceThreeCircles from './elements/charts/advanced/AdvanceThreeCircles.jsx';
+import AdvanceNestedCircles from './elements/charts/advanced/AdvanceNestedCircles.jsx';
 import AdvanceCircleIcons from './elements/charts/advanced/AdvanceCircleIcons.jsx';
 
 const Charts = () => {
@@ -597,12 +597,12 @@ const AdvancedCharts = () => {
       ),
     },
     {
-      id: 'chart-a-three-circles',
-      type: 'chart-a-three-circles',
-      name: 'three-circles Chart',
+      id: 'chart-a-nested-circles',
+      type: 'chart-a-nested-circles',
+      name: 'nested-circles Chart',
       data: {
-        type: 'chart-a-three-circles',
-        text: 'three-circles Chart',
+        type: 'chart-a-nested-circles',
+        text: 'nested-circles Chart',
         width: 400,
         height: 400,
         style: { opacity: 1 },
@@ -619,7 +619,7 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <AdvanceThreeCircles
+        <AdvanceNestedCircles
           element={{
             config: {
               data: [
