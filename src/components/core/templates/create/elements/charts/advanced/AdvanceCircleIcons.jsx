@@ -3,7 +3,7 @@ import { motion, stagger } from 'framer-motion';
 import PropTypes, { element } from 'prop-types';
 import Card from '@/components/ui/Card.jsx';
 import { cn, getPercentages } from '../../../../../.././../lib/utils';
-import { config } from '@react-spring/web';
+// import { config } from '@react-spring/web';
 
 const AdvanceCircleIcons = ({ element }) => {
     const percentages = getPercentages(element.config.data.map((item) => +item.value));
