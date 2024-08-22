@@ -52,7 +52,6 @@ const CreateTemplatePage = () => {
         selectedPage: null,
         activePage: null,
         zoom: 1,
-        ...data,
         status,
         type,
         pages,
