@@ -7,6 +7,7 @@ import { getImageLink } from '@/lib/utils.js';
 import { TbPhotoCircle } from 'react-icons/tb';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useNavigate } from 'react-router-dom';
+import NoData from '@/components/ui/NoData.jsx';
 
 const ApplyTemplate = ({ id, onClose }) => {
   const toast = useToast();
@@ -70,42 +71,52 @@ const ApplyTemplate = ({ id, onClose }) => {
           </div>
         </div>
       ) : (
-        <div className="px-6 py-6 w-full">
-          <h3 className="text-base font-medium leading-tight mb-4">{design.title}</h3>
-          {design.thumbnail ? (
-            <Image
-              src={getImageLink(design.thumbnail)}
-              alt={design.title}
-              removeWrapper
-              className="w-full h-full object-cover rounded-xl aspect-square cursor-pointer"
-            />
+        <>
+          {design ? (
+            <div className="px-6 py-6 w-full">
+              <h3 className="text-base font-medium leading-tight mb-4">
+                {design.title} ({design.data.pages.length} pages)
+              </h3>
+              {design.thumbnail ? (
+                <Image
+                  src={getImageLink(design.thumbnail)}
+                  alt={design.title}
+                  removeWrapper
+                  className="w-full h-full object-cover rounded-xl aspect-square cursor-pointer"
+                />
+              ) : (
+                <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
+                  <TbPhotoCircle size="32" className="opacity-50" />
+                </div>
+              )}
+              <div className="space-y-2 mt-6">
+                <Button
+                  onClick={() => handleReplace(design)}
+                  variant="solid"
+                  radius="full"
+                  className="px-6 text-base"
+                  color="primary"
+                  isDisabled={isCreateTemplateLoading}
+                >
+                  Replace current project
+                </Button>
+                <Button
+                  onClick={() => handleCreate(design)}
+                  variant="bordered"
+                  radius="full"
+                  className="px-6 text-base"
+                  isLoading={isCreateTemplateLoading}
+                >
+                  Create new project
+                </Button>
+              </div>
+            </div>
           ) : (
-            <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
-              <TbPhotoCircle size="32" className="opacity-50" />
+            <div className="p-6 w-full">
+              <NoData className="w-full" text="Could not load data" />
             </div>
           )}
-          <div className="space-y-2 mt-6">
-            <Button
-              onClick={() => handleReplace(design)}
-              variant="solid"
-              radius="full"
-              className="px-6 text-base"
-              color="primary"
-              isDisabled={isCreateTemplateLoading}
-            >
-              Replace current project
-            </Button>
-            <Button
-              onClick={() => handleCreate(design)}
-              variant="bordered"
-              radius="full"
-              className="px-6 text-base"
-              isLoading={isCreateTemplateLoading}
-            >
-              Create new project
-            </Button>
-          </div>
-        </div>
+        </>
       )}
     </>
   );
