@@ -19,6 +19,7 @@ import AdvancedLinearBar from './elements/charts/advanced/AdvancedLinearBar.jsx'
 import AdvancedLollipop from './elements/charts/advanced/AdvancedLollipop.jsx';
 import AdvanceNestedCircles from './elements/charts/advanced/AdvanceNestedCircles.jsx';
 import AdvanceCircleIcons from './elements/charts/advanced/AdvanceCircleIcons.jsx';
+import AdvanceDynamicSortingChart from './elements/charts/advanced/AdvanceDynamicSortingChart.jsx';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -671,6 +672,34 @@ const AdvancedCharts = () => {
               ],
               keys: { name: 'name', data: 'data' },
               colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#4BC0C0', '#4BC0C0', '#4BC0C0'],
+            },
+          }}
+        />
+      ),
+    },
+    {
+      id: 'chart-a-dynamic-sorting',
+      type: 'chart-a-dynamic-sorting',
+      name: 'dynamic-sorting Chart',
+      data: {
+        type: 'chart-a-dynamic-sorting',
+        text: 'dynamic-sorting Chart',
+        width: 400,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: ['A', 'B', 'C', 'D', 'E'],
+          keys: { name: 'name', data: 'data' },
+          colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#E66B5B', '#1D9085', '#264A5A'],
+        },
+      },
+      preview: (
+        <AdvanceDynamicSortingChart
+          element={{
+            config: {
+              data: ['A', 'B', 'C', 'D', 'E'],
+              keys: { name: 'name', data: 'data' },
+              colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF'],
             },
           }}
         />

@@ -22,6 +22,7 @@ import AdvancedLinearBarConfig from './advance-config/AdvancedLinearBarConfig';
 import AdvancedLollipopConfig from './advance-config/AdvancedLollipopConfig';
 import AdvanceCircleIconsConfig from './advance-config/AdvanceCircleIconsConfig';
 import AdvancedMultipleCircle from './advance-config/AdvancedMultipleCircle';
+import AdvanceDynamicSortingChartConfig from './advance-config/AdvanceDynamicSortingChartConfig';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -424,6 +425,9 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           {element.type === 'chart-a-lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-nested-circles' && (
             <AdvancedMultipleCircle element={element} onChange={onChange} />
+          )}
+          {element.type === 'chart-a-dynamic-sorting' && (
+            <AdvanceDynamicSortingChartConfig element={element} onChange={onChange} />
           )}
         </div>
       </PopoverContent>

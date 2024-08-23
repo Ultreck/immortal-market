@@ -10,6 +10,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import AdvanceNestedCircles from './AdvanceNestedCircles.jsx';
 import AdvanceCircleIcons from './AdvanceCircleIcons.jsx';
 import { useEffect, useRef } from 'react';
+import AdvanceDynamicSortingChart from './AdvanceDynamicSortingChart.jsx';
 
 const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const el = useRef(null);
@@ -42,6 +43,7 @@ const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange
         {element.type === 'chart-a-lollipop' && <AdvancedLollipop element={element} />}
         {element.type === 'chart-a-nested-circles' && <AdvanceNestedCircles element={element} />}
         {element.type === 'chart-a-circle-icons' && <AdvanceCircleIcons element={element} />}
+        {element.type === 'chart-a-dynamic-sorting' && <AdvanceDynamicSortingChart element={element} />}
       </div>
     </ElementWrapper>
   );

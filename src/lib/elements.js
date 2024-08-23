@@ -27,6 +27,7 @@ const charts = {
     'lollipop',
     'nested-circles',
     'circle-icons',
+    'dynamic-sorting',
   ],
 };
 
