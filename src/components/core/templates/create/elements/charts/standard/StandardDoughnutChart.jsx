@@ -4,6 +4,7 @@ import { capitalize } from '@/lib/utils.js';
 import StandardDoughnutNormalChart from './StandardDoughnutNormalChart.jsx';
 import StandardRosePieChart from './StandardRosePieChart.jsx';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 const StandardDoughnutChart = ({ element }) => {
   const data = element.config.data.map((item, i) => ({
@@ -21,6 +22,8 @@ const StandardDoughnutChart = ({ element }) => {
     return acc;
   }, {});
 
+  useEffect(() => {}, [element]);
+
   return (
     <ChartContainer
       config={config}
@@ -34,13 +37,9 @@ const StandardDoughnutChart = ({ element }) => {
             cy={200}
             innerRadius={80}
             outerRadius={120}
-            fill="#8884d8"
             paddingAngle={3}
             dataKey="value"
           >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
           </Pie>
         </PieChart>
       )}

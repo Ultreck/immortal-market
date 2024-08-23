@@ -2,6 +2,18 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
 
+const defaultColors = [
+  '#5470c6',
+  '#91cc75',
+  '#fac858',
+  '#ee6666',
+  '#73c0de',
+  '#3ba272',
+  '#fc8452',
+  '#9a60b4',
+  '#ea7ccc',
+];
+
 const StandardDoughnutNormalChart = ({ element }) => {
   const chartRef = useRef(null);
 
@@ -17,6 +29,9 @@ const StandardDoughnutNormalChart = ({ element }) => {
       tooltip: {
         trigger: 'item',
       },
+      color: element.config.data.map(
+        (_, index) => element.config.colors?.[index] || defaultColors[index % defaultColors.length]
+      ),
       series: [
         {
           name: 'Access From',
@@ -74,3 +89,4 @@ StandardDoughnutNormalChart.propTypes = {
 };
 
 export default StandardDoughnutNormalChart;
+
