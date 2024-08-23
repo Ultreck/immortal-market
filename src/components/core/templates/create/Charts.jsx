@@ -20,6 +20,8 @@ import AdvancedLinearBar from './elements/charts/advanced/AdvancedLinearBar.jsx'
 import AdvancedLollipop from './elements/charts/advanced/AdvancedLollipop.jsx';
 import AdvanceNestedCircles from './elements/charts/advanced/AdvanceNestedCircles.jsx';
 import AdvanceCircleIcons from './elements/charts/advanced/AdvanceCircleIcons.jsx';
+import AdvancedTreeMap from './elements/charts/advanced/AdvancedTreeMap.jsx';
+import TreeMap from '../../report/components/charts/TreeMap.jsx';
 import AdvanceDynamicSortingChart from './elements/charts/advanced/AdvanceDynamicSortingChart.jsx';
 
 const Charts = () => {
@@ -768,9 +770,7 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <TbChartTreemap className="w-full h-full" />
-        </div>
+        <TreeMap />
       ),
     },
     {
