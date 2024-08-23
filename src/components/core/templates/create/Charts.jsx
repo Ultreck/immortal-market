@@ -13,6 +13,7 @@ import {
   TbChartTreemap,
   TbCircleDot,
   TbCirclesRelation,
+  TbGaugeFilled,
   TbGenderMale,
 } from 'react-icons/tb';
 import { IconChartFunnel } from '@tabler/icons-react';
@@ -744,6 +745,29 @@ const AdvancedCharts = () => {
         </div>
       ),
     },
+    {
+      id: 'chart-a-speedometer',
+      type: 'chart-a-speedometer',
+      name: 'Speedometer Chart',
+      data: {
+        type: 'chart-a-speedometer',
+        text: 'Speedometer Chart',
+        width: 500,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [
+          ],
+          keys: { name: 'name', data: 'value' },
+          colors: ['#E66B5B', '#1D9085', '#264A5A'],
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbGaugeFilled className="w-full h-full" />
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -756,3 +780,4 @@ const AdvancedCharts = () => {
 };
 
 export default Charts;
+
