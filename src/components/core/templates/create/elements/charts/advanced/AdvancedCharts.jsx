@@ -12,6 +12,7 @@ import AdvanceCircleIcons from './AdvanceCircleIcons.jsx';
 import { useEffect, useRef } from 'react';
 import AdvanceDynamicSortingChart from './AdvanceDynamicSortingChart.jsx';
 import AdvancedTreeMap from './AdvancedTreeMap.jsx';
+import AdvanceSpedometer from './AdvanceSpedometer.jsx';
 
 const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const el = useRef(null);
@@ -46,6 +47,7 @@ const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange
         {element.type === 'chart-a-circle-icons' && <AdvanceCircleIcons element={element} />}
         {element.type === 'chart-a-dynamic-sorting' && <AdvanceDynamicSortingChart element={element} />}
         {element.type === 'chart-a-tree-map' && <AdvancedTreeMap element={element} />}
+        {element.type === 'chart-a-speedometer' && <AdvanceSpedometer element={element} />}
       </div>
     </ElementWrapper>
   );
