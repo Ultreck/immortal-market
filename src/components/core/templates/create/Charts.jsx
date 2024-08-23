@@ -1,8 +1,7 @@
 import { Tab, Tabs } from '@nextui-org/react';
 import { useState } from 'react';
-import { RiBarChart2Line } from 'react-icons/ri';
+import { RiShapesLine } from 'react-icons/ri';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import AdvancedTenShapes from './elements/charts/advanced/AdvancedTenShapes.jsx';
 import {
   TbChartAreaLine,
   TbChartBar,
@@ -12,17 +11,14 @@ import {
   TbChartPie,
   TbChartPpf,
   TbChartTreemap,
+  TbCircleDot,
+  TbCirclesRelation,
+  TbGenderMale,
 } from 'react-icons/tb';
-import AdvancedGenderStats from './elements/charts/advanced/AdvancedGenderStats.jsx';
 import { IconChartFunnel } from '@tabler/icons-react';
-import AdvancedStackedBar from './elements/charts/advanced/AdvancedStackedBar.jsx';
-import AdvancedLinearBar from './elements/charts/advanced/AdvancedLinearBar.jsx';
-import AdvancedLollipop from './elements/charts/advanced/AdvancedLollipop.jsx';
-import AdvanceNestedCircles from './elements/charts/advanced/AdvanceNestedCircles.jsx';
-import AdvanceCircleIcons from './elements/charts/advanced/AdvanceCircleIcons.jsx';
-import AdvancedTreeMap from './elements/charts/advanced/AdvancedTreeMap.jsx';
-import TreeMap from '../../report/components/charts/TreeMap.jsx';
-import AdvanceDynamicSortingChart from './elements/charts/advanced/AdvanceDynamicSortingChart.jsx';
+import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react-icons/lu';
+import { CgLoadbarAlt } from 'react-icons/cg';
+import { MdOutlineStackedBarChart } from 'react-icons/md';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
@@ -230,7 +226,7 @@ const StandardCharts = () => {
       },
       preview: (
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <RiBarChart2Line className="w-full h-full" />
+          <MdOutlineStackedBarChart className="w-full h-full" />
         </div>
       ),
     },
@@ -301,7 +297,7 @@ const StandardCharts = () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-3 gap-4">
       {elements.map((element) => {
         return <DraggableElementWrapper key={element.id} element={element} />;
       })}
@@ -333,20 +329,9 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <AdvancedTenShapes
-          element={{
-            config: {
-              percentage: 65,
-              shape: 'circle',
-              color: '#3a5179',
-              shapeCount: 10,
-              showCount: true,
-              countFormat: 'fraction',
-              titlePosition: 'top',
-              title: '10 Circles',
-            },
-          }}
-        />
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <RiShapesLine className="w-full h-full" />
+        </div>
       ),
     },
     {
@@ -370,19 +355,9 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <AdvancedGenderStats
-          element={{
-            config: {
-              percentage: 65,
-              shape: 'male',
-              color: '#3a5179',
-              shapeCount: 10,
-              countFormat: 'fraction',
-              titlePosition: 'top',
-              title: '',
-            },
-          }}
-        />
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbGenderMale className="w-full h-full" />
+        </div>
       ),
     },
     {
@@ -403,74 +378,11 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <AdvancedLinearBar
-          element={{
-            config: {
-              progress: 50,
-              height: 40,
-              outerColor: '#ff0000',
-              innerColor: '#2673D9',
-            },
-          }}
-        />
-      ),
-    },
-    {
-      id: 'chart-a-stackedbar-advanced',
-      type: 'chart-a-stackedbar-advanced',
-      name: 'Stacked Bar Chart',
-      data: {
-        type: 'chart-a-stackedbar-advanced',
-        text: 'Stacked Bar Chart',
-        width: 400,
-        height: 300,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-            { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-            { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-            { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-            { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-            { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-            { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
-          ],
-          keys: { x: 'month', y: ['desktop', 'mobile'] },
-          type: 'separated',
-          orientation: 'vertical',
-          barEnd: 'curved',
-          axisPosition: 'front',
-          barColor1: '#2673D9',
-          barColor2: '#ff0000',
-          useGradient: true,
-          headerText: 'Advanced Stacked Bar Chart',
-          useBgImage: false,
-          bgImageUrl: '',
-          hoverActionOnGroup: true,
-          hoverActionOnBar: true,
-          clickableHover: true,
-          useFilter: false,
-          useOtherBar: true,
-          barsBeforeOther: 5,
-        },
-      },
-      preview: (
-        <AdvancedStackedBar
-          element={{
-            config: {
-              data: [
-                { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-                { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-                { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-                { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-                { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-                { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-                { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
-              ],
-              keys: { x: 'month', y: ['desktop', 'mobile'] },
-            },
-          }}
-        />
+        <>
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+            <CgLoadbarAlt className="w-full h-full" />
+          </div>
+        </>
       ),
     },
     {
@@ -513,7 +425,7 @@ const AdvancedCharts = () => {
       },
       preview: (
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <RiBarChart2Line className="w-full h-full" />
+          <LuBarChartHorizontal className="w-full h-full" />
         </div>
       ),
     },
@@ -543,33 +455,9 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <AdvancedLollipop
-          element={{
-            config: {
-              data: [
-                { name: "Reese's Peanut Butter", percentage: 84.2 },
-                { name: "Reese's Miniatures", percentage: 78.9 },
-                { name: 'Twix', percentage: 67.6 },
-                { name: 'Kit Kat', percentage: 56.8 },
-                { name: 'Snickers', percentage: 46.7 },
-                { name: "Reese's pieces", percentage: 40.4 },
-                { name: 'Milky Way', percentage: 30.1 },
-              ],
-              keys: { name: 'name', data: 'data' },
-              colors: [
-                '#E66B5B',
-                '#1D9085',
-                '#264A5A',
-                '#E8C22C',
-                '#F6881F',
-                '#2BA385',
-                '#E6A333',
-                '#AB52D9',
-                '#D93566',
-              ],
-            },
-          }}
-        />
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <LuLollipop className="w-full h-full" />
+        </div>
       ),
     },
     {
@@ -770,7 +658,9 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <TreeMap />
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartTreemap className="w-full h-full" />
+        </div>
       ),
     },
     {
@@ -796,18 +686,9 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <AdvanceNestedCircles
-          element={{
-            config: {
-              data: [
-                { size: 300, label: 'A' },
-                { size: 50, label: 'C' },
-                { size: 150, label: 'B' },
-              ],
-              colors: ['#E66B5B', '#1D9085', '#264A5A'],
-            },
-          }}
-        />
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbCircleDot className="w-full h-full" />
+        </div>
       ),
     },
     {
@@ -836,21 +717,9 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <AdvanceCircleIcons
-          element={{
-            config: {
-              data: [
-                { label: 'Bubble 1', value: 30, icon: 'fa fa-user' },
-                { label: 'Bubble 2', value: 40, icon: 'fa fa-house' },
-                { label: 'Bubble 3', value: 20, icon: 'fa fa-check' },
-                { label: 'Bubble 4', value: 40, icon: 'fa fa-bell' },
-                { label: 'Bubble 5', value: 60, icon: 'fa fa-star' },
-              ],
-              keys: { name: 'name', data: 'data' },
-              colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#4BC0C0', '#4BC0C0', '#4BC0C0'],
-            },
-          }}
-        />
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbCirclesRelation className="w-full h-full" />
+        </div>
       ),
     },
     {
@@ -870,29 +739,20 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <AdvanceDynamicSortingChart
-          element={{
-            config: {
-              data: ['A', 'B', 'C', 'D', 'E'],
-              keys: { name: 'name', data: 'data' },
-              colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF'],
-            },
-          }}
-        />
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <LuBarChartHorizontalBig className="w-full h-full" />
+        </div>
       ),
     },
   ];
 
   return (
-    <>
-      <div className="grid grid-cols-1 gap-4">
-        {elements.map((element) => {
-          return <DraggableElementWrapper key={element.id} element={element} />;
-        })}
-      </div>
-    </>
+    <div className="grid grid-cols-3 gap-4">
+      {elements.map((element) => {
+        return <DraggableElementWrapper key={element.id} element={element} />;
+      })}
+    </div>
   );
 };
 
 export default Charts;
-

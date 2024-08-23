@@ -427,9 +427,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           {element.type === 'chart-a-nested-circles' && (
             <AdvancedMultipleCircle element={element} onChange={onChange} />
           )}
-          {
-            element.type === 'chart-a-tree-map' && <AdvancedTreeMapConfig element={element} onChange={onChange} />
-          }
+          {element.type === 'chart-a-tree-map' && <AdvancedTreeMapConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-dynamic-sorting' && (
             <AdvanceDynamicSortingChartConfig element={element} onChange={onChange} />
           )}

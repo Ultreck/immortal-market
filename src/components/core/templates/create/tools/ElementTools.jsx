@@ -118,7 +118,9 @@ const ElementTools = () => {
                 return <Shadow key={tool} elements={elements} onChange={handleUpdateElements} />;
               }
               if (tool === 'tabs' && selectedElements.length === 1) {
-                return <FrameTabsConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
+                return (
+                  <FrameTabsConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
+                );
               }
               if (tool === 'carousel' && selectedElements.length === 1) {
                 return (
@@ -130,8 +132,10 @@ const ElementTools = () => {
                   <InfographicConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
                 );
               }
-              if(tool === 'color') {
-                return <AdvancedChartColor key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
+              if (tool === 'color') {
+                return (
+                  <AdvancedChartColor key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
+                );
               }
               throw new Error(`Unknown tool ${tool}`);
             })}

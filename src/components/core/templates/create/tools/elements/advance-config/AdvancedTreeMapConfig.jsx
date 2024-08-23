@@ -1,10 +1,10 @@
-import { getKeysFromJson, isValidJsonArray } from '@/lib/utils';
+import { isValidJsonArray } from '@/lib/utils';
 import { Button, Textarea } from '@nextui-org/react';
-import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
 
 const AdvancedTreeMapConfig = ({ element, onChange }) => {
-  const { handleSubmit, watch, control } = useForm({
+  const { handleSubmit, control } = useForm({
     defaultValues: {
       json: JSON.stringify(element.config.data, null, 2),
       ...Object.keys(element.config.keys).reduce((acc, key) => {
@@ -13,8 +13,6 @@ const AdvancedTreeMapConfig = ({ element, onChange }) => {
       }, {}),
     },
   });
-
-  const keys = getKeysFromJson(watch().json);
 
   const onSubmit = async (values) => {
     const { json, ...rest } = values;
@@ -47,13 +45,17 @@ const AdvancedTreeMapConfig = ({ element, onChange }) => {
             );
           }}
         />
-
         <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
           Apply
         </Button>
       </form>
     </div>
   );
+};
+
+AdvancedTreeMapConfig.propTypes = {
+  element: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default AdvancedTreeMapConfig;

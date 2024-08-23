@@ -1,4 +1,4 @@
-import { ChartContainer } from '@/components/ui/chart';
+import { ChartContainer } from '@/components/ui/chart.jsx';
 import { Button, Card } from '@nextui-org/react';
 import { Bar, BarChart, Legend, Tooltip } from 'recharts';
 import PropTypes from 'prop-types';
@@ -42,7 +42,7 @@ CustomTooltip.propTypes = {
   label: PropTypes.string,
 };
 
-const AdvancedStackedBar = ({ element }) => {
+const StandardStackedBar = ({ element }) => {
   return (
     <ChartContainer config={chartConfig} style={{ height: element.height, width: element.width, opacity: '1' }}>
       <BarChart data={element.config.data} className="space" defaultShowTooltip>
@@ -55,7 +55,7 @@ const AdvancedStackedBar = ({ element }) => {
   );
 };
 
-AdvancedStackedBar.propTypes = {
+StandardStackedBar.propTypes = {
   element: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
@@ -64,4 +64,4 @@ AdvancedStackedBar.propTypes = {
   }),
 };
 
-export default AdvancedStackedBar;
+export default StandardStackedBar;
