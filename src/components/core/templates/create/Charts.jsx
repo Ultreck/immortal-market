@@ -22,6 +22,103 @@ import { MdOutlineStackedBarChart } from 'react-icons/md';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
+  const [view, setView] = useState('all');
+
+  const doughnutDataElement = [
+    {
+      id: 'chart-s-doughnut',
+      type: 'chart-s-doughnut',
+      name: 'Doughnut Chart',
+      data: {
+        type: 'chart-s-doughnut',
+        text: 'Doughnut Chart',
+        width: 500,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', value: 4000 },
+            { name: 'Page B', value: 3000 },
+            { name: 'Page C', value: 2000 },
+            { name: 'Page D', value: 2780 },
+            { name: 'Page E', value: 1890 },
+            { name: 'Page F', value: 2390 },
+            { name: 'Page G', value: 3490 },
+          ],
+          keys: { name: 'name', data: 'data' },
+          type: 'normal',
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333'],
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartDonut4 className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-doughnut-standard',
+      type: 'chart-s-doughnut-standard',
+      name: 'Doughnut-standard Chart',
+      data: {
+        type: 'chart-s-doughnut-standard',
+        text: 'Doughnut-standard Chart',
+        width: 500,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', value: 4000 },
+            { name: 'Page B', value: 3000 },
+            { name: 'Page C', value: 2000 },
+            { name: 'Page D', value: 2780 },
+            { name: 'Page E', value: 1890 },
+            { name: 'Page F', value: 2390 },
+            { name: 'Page G', value: 3490 },
+          ],
+          keys: { name: 'name', data: 'data' },
+          type: 'normal',
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333'],
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartDonut4 className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-doughnut-crazy',
+      type: 'chart-s-doughnut-crazy',
+      name: 'Doughnut-crazy Chart',
+      data: {
+        type: 'chart-s-doughnut-crazy',
+        text: 'Doughnut-crazy Chart',
+        width: 500,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', value: 4000 },
+            { name: 'Page B', value: 3000 },
+            { name: 'Page C', value: 2000 },
+            { name: 'Page D', value: 2780 },
+            { name: 'Page E', value: 1890 },
+            { name: 'Page F', value: 2390 },
+            { name: 'Page G', value: 3490 },
+          ],
+          keys: { name: 'name', data: 'data' },
+          type: 'normal',
+          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333'],
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartDonut4 className="w-full h-full" />
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div>
@@ -40,7 +137,22 @@ const Charts = () => {
         <Tab key="standard" title="Standard" className="text-base" />
         <Tab key="advanced" title="Advanced" className="text-base" />
       </Tabs>
-      {tab === 'standard' && <StandardCharts />}
+      {tab === 'standard' && (
+        <div className="space-y-8">
+          <div>Bar</div>
+          <div>Pie</div>
+          <div>
+            <p>Doughnut</p>
+            <div className="grid grid-cols-3 gap-4">
+              {doughnutDataElement.map((element) => {
+                return <DraggableElementWrapper key={element.id} element={element} />;
+              })}
+            </div>
+          </div>
+          <div>Semi Circle</div>
+        </div>
+      )}
+      {/* {tab === 'standard' && <StandardCharts />} */}
       {tab === 'advanced' && <AdvancedCharts />}
     </div>
   );
@@ -728,7 +840,8 @@ const AdvancedCharts = () => {
         style: { opacity: 1 },
         config: {
           data: [],
-          colors,
+          keys: { name: 'name', data: 'value' },
+          colors: ['#E66B5B', '#1D9085', '#264A5A'],
         },
       },
       preview: (

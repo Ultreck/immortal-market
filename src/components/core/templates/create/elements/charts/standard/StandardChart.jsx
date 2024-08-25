@@ -9,6 +9,8 @@ import StandardAreaChart from '@/components/core/templates/create/elements/chart
 import StandardStackedBar from '@/components/core/templates/create/elements/charts/standard/StandardStackedBar.jsx';
 import StandardAreaLineChart from '@/components/core/templates/create/elements/charts/standard/StandardAreaLineChart.jsx';
 import StandardLineBarChart from '@/components/core/templates/create/elements/charts/standard/StandartLineBarChart.jsx';
+import StandardRosePieChart from './StandardRosePieChart';
+import StandardDoughnutNormalChart from './StandardDoughnutNormalChart';
 
 const StandardChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -25,6 +27,8 @@ const StandardChart = ({ element, active, highlighted, width, onClick, onChange 
       {element.type === 'chart-s-line' && <StandardLineChart element={element} />}
       {element.type === 'chart-s-pie' && <StandardPieChart element={element} />}
       {element.type === 'chart-s-doughnut' && <StandardDoughnutChart element={element} />}
+      {element.type === 'chart-s-doughnut-crazy' && <StandardRosePieChart element={element} />}
+      {element.type === 'chart-s-doughnut-standard' && <StandardDoughnutNormalChart element={element} />}
       {element.type === 'chart-s-bar-horizontal' && <StandardBarChartHorizontal element={element} />}
       {element.type === 'chart-s-area' && <StandardAreaChart element={element} />}
       {element.type === 'chart-s-stacked-bar' && <StandardStackedBar element={element} />}
@@ -37,3 +41,4 @@ const StandardChart = ({ element, active, highlighted, width, onClick, onChange 
 StandardChart.propTypes = ElementPropTypes;
 
 export default StandardChart;
+

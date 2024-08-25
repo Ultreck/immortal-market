@@ -29,7 +29,7 @@ const StandardDoughnutChart = ({ element }) => {
       config={config}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      {element.config.type === 'normal' && (
+      {/* {element.config.type === 'normal' && ( */}
         <PieChart width={300} height={400}>
           <Pie
             data={data}
@@ -42,9 +42,9 @@ const StandardDoughnutChart = ({ element }) => {
           >
           </Pie>
         </PieChart>
-      )}
-      {element.config.type === 'standard' && <StandardDoughnutNormalChart element={element} />}
-      {element.config.type === 'crazy' && <StandardRosePieChart element={element} />}
+      {/* )} */}
+      {/* {element.config.type === 'standard' && <StandardDoughnutNormalChart element={element} />}
+      {element.config.type === 'crazy' && <StandardRosePieChart element={element} />} */}
     </ChartContainer>
   );
 };

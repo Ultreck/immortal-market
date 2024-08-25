@@ -15,7 +15,7 @@ import icons from '@/lib/templates/icons.js';
 import StandardChart from '@/components/core/templates/create/elements/charts/standard/StandardChart.jsx';
 
 const charts = {
-  standard: ['bar', 'line', 'pie', 'doughnut', 'bar-horizontal', 'area', 'stacked-bar', 'line-bar', 'line-area'],
+  standard: ['bar', 'line', 'pie', 'doughnut', 'bar-horizontal', 'area', 'stacked-bar', 'line-bar', 'line-area', 'rose-pie', 'doughnut-standard', 'doughnut-crazy'],
   advanced: [
     'shapes',
     'gender-stats',
