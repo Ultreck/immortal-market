@@ -9,6 +9,7 @@ import AdvanceCircleIcons from './AdvanceCircleIcons.jsx';
 import { createElement } from 'react';
 import AdvanceDynamicSortingChart from './AdvanceDynamicSortingChart.jsx';
 import AdvancedTreeMap from './AdvancedTreeMap.jsx';
+import AdvanceSpedometer from './AdvanceSpedometer.jsx';
 
 const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -21,6 +22,7 @@ const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange
     'chart-a-nested-circles': AdvanceNestedCircles,
     'chart-a-circle-icons': AdvanceCircleIcons,
     'chart-a-dynamic-sorting': AdvanceDynamicSortingChart,
+    'chart-a-speedometer': AdvanceSpedometer,
   };
 
   if (components[element.type]) {

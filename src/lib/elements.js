@@ -29,6 +29,7 @@ const charts = {
     'circle-icons',
     'tree-map',
     'dynamic-sorting',
+    'speedometer',
   ],
 };
 

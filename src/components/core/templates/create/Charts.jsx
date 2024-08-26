@@ -13,6 +13,7 @@ import {
   TbChartTreemap,
   TbCircleDot,
   TbCirclesRelation,
+  TbGaugeFilled,
 } from 'react-icons/tb';
 import { IconChartFunnel } from '@tabler/icons-react';
 import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react-icons/lu';
@@ -712,6 +713,27 @@ const AdvancedCharts = () => {
       preview: (
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
           <LuBarChartHorizontalBig className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-a-speedometer',
+      type: 'chart-a-speedometer',
+      name: 'Speedometer Chart',
+      data: {
+        type: 'chart-a-speedometer',
+        text: 'Speedometer Chart',
+        width: 500,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [],
+          colors,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbGaugeFilled className="w-full h-full" />
         </div>
       ),
     },
