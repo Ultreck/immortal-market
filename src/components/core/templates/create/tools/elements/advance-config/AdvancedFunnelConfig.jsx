@@ -1,20 +1,14 @@
-import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils';
-import { Button, Select, SelectItem, Textarea } from '@nextui-org/react';
+import { isValidJsonArray } from '@/lib/utils';
+import { Button, Textarea } from '@nextui-org/react';
 import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 const AdvancedFunnelConfig = ({ element, onChange }) => {
-  const { handleSubmit, watch, control } = useForm({
+  const { handleSubmit, control } = useForm({
     defaultValues: {
       json: JSON.stringify(element.config.data, null, 2),
-      ...Object.keys(element.config.keys).reduce((acc, key) => {
-        acc[key] = element.config.keys[key];
-        return acc;
-      }, {}),
     },
   });
-
-  const keys = getKeysFromJson(watch().json);
 
   const onSubmit = async (values) => {
     const { json, ...rest } = values;
@@ -49,42 +43,7 @@ const AdvancedFunnelConfig = ({ element, onChange }) => {
                 );
               }}
             />
-            <div className="grid grid-cols-2 gap-2">
-              {Object.keys(element.config.keys).map((name) => {
-                return (
-                  <Controller
-                    key={name}
-                    name={name}
-                    control={control}
-                    rules={{ required: `${name} is required` }}
-                    render={({ field, fieldState: { error } }) => (
-                      <Select
-                        name={field.name}
-                        label={capitalize(name)}
-                        variant="bordered"
-                        labelPlacement="outside"
-                        placeholder="Select one"
-                        size="lg"
-                        selectedKeys={field.value ? [field.value] : []}
-                        onChange={(e) => field.onChange(e)}
-                        errorMessage={error?.message}
-                        isInvalid={!!error?.message}
-                        classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                        disableEmptySelection={true}
-                      >
-                        {keys.map((key) => (
-                          <SelectItem key={key} classNames={{ title: 'text-base px-2' }}>
-                            {key}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                );
-              })}
-            </div>
           </div>
-
           <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
             Apply
           </Button>

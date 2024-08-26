@@ -3,7 +3,7 @@ import { Button, Textarea } from '@nextui-org/react';
 import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
-const AdvancedTreeMapConfig = ({ element, onChange }) => {
+const AdvancedNestedCirclesConfig = ({ element, onChange }) => {
   const { handleSubmit, control } = useForm({
     defaultValues: {
       json: JSON.stringify(element.config.data, null, 2),
@@ -17,7 +17,7 @@ const AdvancedTreeMapConfig = ({ element, onChange }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
         name="json"
         control={control}
@@ -47,9 +47,14 @@ const AdvancedTreeMapConfig = ({ element, onChange }) => {
   );
 };
 
-AdvancedTreeMapConfig.propTypes = {
-  element: PropTypes.object.isRequired,
+AdvancedNestedCirclesConfig.propTypes = {
+  element: PropTypes.shape({
+    config: PropTypes.shape({
+      data: PropTypes.array,
+      colors: PropTypes.array,
+    }),
+  }).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-export default AdvancedTreeMapConfig;
+export default AdvancedNestedCirclesConfig;

@@ -13,7 +13,6 @@ import {
   TbChartTreemap,
   TbCircleDot,
   TbCirclesRelation,
-  TbGenderMale,
 } from 'react-icons/tb';
 import { IconChartFunnel } from '@tabler/icons-react';
 import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react-icons/lu';
@@ -46,6 +45,19 @@ const Charts = () => {
   );
 };
 
+const colors = [
+  '#E66B5B',
+  '#1D9085',
+  '#264A5A',
+  '#E8C22C',
+  '#F6881F',
+  '#2673D9',
+  '#2BA385',
+  '#E6A333',
+  '#AB52D9',
+  '#D93566',
+];
+
 const StandardCharts = () => {
   const elements = [
     {
@@ -70,7 +82,7 @@ const StandardCharts = () => {
           showXYaxis: false,
           showLegend: false,
           keys: { x: 'browser', y: 'visitors' },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          colors,
           useGradient: false,
           gradientColor: '#2673D9',
         },
@@ -101,7 +113,7 @@ const StandardCharts = () => {
           ],
           keys: { x: 'browser', y: 'visitors' },
           type: 'multiple',
-          colors: ['#E66B5B', '#1D9085'],
+          colors,
         },
       },
       preview: (
@@ -131,7 +143,7 @@ const StandardCharts = () => {
             { name: 'Page G', value: 3490 },
           ],
           keys: { name: 'name', data: 'value' },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          colors,
         },
       },
       preview: (
@@ -162,7 +174,7 @@ const StandardCharts = () => {
           ],
           keys: { name: 'name', data: 'data' },
           type: 'normal',
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333'],
+          colors,
         },
       },
       preview: (
@@ -191,7 +203,7 @@ const StandardCharts = () => {
           ],
           keys: { x: 'browser', y: 'visitors' },
           type: 'multiple',
-          colors: ['#E66B5B', '#1D9085'],
+          colors,
         },
       },
       preview: (
@@ -221,7 +233,7 @@ const StandardCharts = () => {
             { month: 'Jul', desktop: 349, mobile: 275 },
           ],
           keys: { x: 'month', y: ['desktop', 'mobile'] },
-          colors: ['#E66B5B', '#1D9085'],
+          colors,
         },
       },
       preview: (
@@ -253,7 +265,7 @@ const StandardCharts = () => {
           showXYaxis: true,
           showLegend: true,
           orientation: 'horizontal',
-          colors: ['#2673D9', '#F6881F'],
+          colors,
         },
       },
       preview: (
@@ -285,7 +297,7 @@ const StandardCharts = () => {
           showXYaxis: true,
           showLegend: true,
           orientation: 'horizontal',
-          colors: ['#2673D9', '#F6881F'],
+          colors,
         },
       },
       preview: (
@@ -308,11 +320,11 @@ const StandardCharts = () => {
 const AdvancedCharts = () => {
   const elements = [
     {
-      id: 'chart-a-10-shapes',
-      type: 'chart-a-10-shapes',
+      id: 'chart-a-shapes',
+      type: 'chart-a-shapes',
       name: '10 Circles',
       data: {
-        type: 'chart-a-10-shapes',
+        type: 'chart-a-shapes',
         text: '10 Circles',
         width: 400,
         height: 300,
@@ -320,43 +332,15 @@ const AdvancedCharts = () => {
         config: {
           percentage: 65,
           shape: 'circle',
-          color: '#3a5179',
-          shapeCount: 10,
-          showCount: true,
+          noOfShapes: 10,
+          isCountVisible: true,
           countFormat: 'fraction',
-          titlePosition: 'top',
-          title: '10 Circles',
+          colors,
         },
       },
       preview: (
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
           <RiShapesLine className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
-      id: 'chart-a-gender-stats',
-      type: 'chart-a-gender-stats',
-      name: 'Gender Stats',
-      data: {
-        type: 'chart-a-gender-stats',
-        text: 'Gender Stats',
-        width: 400,
-        height: 300,
-        style: { opacity: 1 },
-        config: {
-          percentage: 65,
-          shape: 'male',
-          color: '#3a5179',
-          shapeCount: 10,
-          countFormat: 'fraction',
-          titlePosition: 'top',
-          title: '10 Circles',
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <TbGenderMale className="w-full h-full" />
         </div>
       ),
     },
@@ -368,21 +352,17 @@ const AdvancedCharts = () => {
         type: 'chart-a-linear-bar',
         text: 'Linear Bar Chart',
         width: 400,
-        height: 300,
+        height: 100,
         style: { opacity: 1 },
         config: {
           progress: 50,
-          height: 50,
-          outerColor: '#ff0000',
-          innerColor: '#2673D9',
+          colors,
         },
       },
       preview: (
-        <>
-          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-            <CgLoadbarAlt className="w-full h-full" />
-          </div>
-        </>
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <CgLoadbarAlt className="w-full h-full" />
+        </div>
       ),
     },
     {
@@ -393,34 +373,28 @@ const AdvancedCharts = () => {
         type: 'chart-a-custom-bar',
         text: 'Custom Bar Chart',
         width: 500,
-        height: 600,
+        height: 400,
         style: { opacity: 1 },
         config: {
           data: [
-            { name: 'Dangote Cement', value: 4170 },
-            { name: 'MTN', value: 3460 },
-            { name: 'Airtel', value: 3200 },
-            { name: 'Nestle', value: 1190 },
-            { name: 'GTB', value: 952.1 },
-            { name: 'Zenith', value: 778.6 },
-            { name: 'Stanbic IBTC', value: 489.2 },
-            { name: 'Nig Breweries', value: 447.8 },
-            { name: 'Lafarge Africa', value: 339.1 },
-            { name: 'Access Bank', value: 300.4 },
+            { label: 'Dangote Cement', value: 4170 },
+            { label: 'MTN', value: 3460 },
+            { label: 'Airtel', value: 3200 },
+            { label: 'Nestle', value: 1190 },
+            { label: 'GTB', value: 952.1 },
+            { label: 'Zenith', value: 778.6 },
+            { label: 'Stanbic IBTC', value: 489.2 },
+            { label: 'Nig Breweries', value: 447.8 },
+            { label: 'Lafarge Africa', value: 339.1 },
+            { label: 'Access Bank', value: 300.4 },
           ],
           orientation: 'horizontal',
-          curvedEnd: false,
-          haveHeader: true,
-          showIcon: true,
-          axisPosition: 'front',
-          tooltipToEachBar: false,
-          tooltipToCard: false,
-          numberOfBarsToShow: 5,
-          keys: { x: 'name', y: 'value' },
-          backgroundImage: {
-            enabled: false,
-            url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYS6U00TRx4tzuoyOi_0MdJhdxQKNCHIYTUw&s',
-          },
+          isIconVisible: true,
+          labelPosition: 'start',
+          barTooltip: false,
+          cardTooltip: false,
+          bars: 5,
+          colors,
         },
       },
       preview: (
@@ -441,17 +415,18 @@ const AdvancedCharts = () => {
         style: { opacity: 1 },
         config: {
           data: [
-            { name: "Reese's Peanut Butter", percentage: 84.2 },
-            { name: "Reese's Miniatures", percentage: 78.9 },
-            { name: 'Twix', percentage: 67.6 },
-            { name: 'Kit Kat', percentage: 56.8 },
-            { name: 'Snickers', percentage: 46.7 },
-            { name: "Reese's pieces", percentage: 40.4 },
-            { name: 'Milky Way', percentage: 30.1 },
+            { label: 'Dangote Cement', value: 4170 },
+            { label: 'MTN', value: 3460 },
+            { label: 'Airtel', value: 3200 },
+            { label: 'Nestle', value: 1190 },
+            { label: 'GTB', value: 952.1 },
+            { label: 'Zenith', value: 778.6 },
+            { label: 'Stanbic IBTC', value: 489.2 },
+            { label: 'Nig Breweries', value: 447.8 },
+            { label: 'Lafarge Africa', value: 339.1 },
+            { label: 'Access Bank', value: 300.4 },
           ],
-          keys: { name: 'name', data: 'data' },
-          type: 'normal',
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
+          colors,
         },
       },
       preview: (
@@ -478,8 +453,7 @@ const AdvancedCharts = () => {
             { value: 80, name: 'Click' },
             { value: 100, name: 'Show' },
           ],
-          keys: { name: 'name', data: 'data' },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          colors,
         },
       },
       preview: (
@@ -653,8 +627,7 @@ const AdvancedCharts = () => {
               ],
             },
           ],
-          keys: { name: 'name', data: 'children' },
-          colors: ['#8889DD', '#9597E4', '#8DC77B', '#A5D297', '#E2CF45', '#F8C12D', '#FF0000'],
+          colors,
         },
       },
       preview: (
@@ -675,14 +648,13 @@ const AdvancedCharts = () => {
         style: { opacity: 1 },
         config: {
           data: [
-            { size: 300, label: 'A' },
-            { size: 50, label: 'C' },
-            { size: 150, label: 'B' },
-            { size: 70, label: 'D' },
-            { size: 200, label: 'E' },
+            { value: 60, name: 'Visit' },
+            { value: 40, name: 'Inquiry' },
+            { value: 20, name: 'Order' },
+            { value: 80, name: 'Click' },
+            { value: 100, name: 'Show' },
           ],
-          keys: { name: 'label', data: 'size' },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          colors,
         },
       },
       preview: (
@@ -713,7 +685,7 @@ const AdvancedCharts = () => {
             { label: 'Bubble 5', value: 15, icon: 'fa fa-film' },
           ],
           keys: { name: 'name', data: 'data' },
-          colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#E66B5B', '#1D9085', '#264A5A'],
+          colors,
         },
       },
       preview: (
@@ -734,8 +706,7 @@ const AdvancedCharts = () => {
         style: { opacity: 1 },
         config: {
           data: ['A', 'B', 'C', 'D', 'E'],
-          keys: { name: 'name', data: 'data' },
-          colors: ['#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#4BC0C0', '#E66B5B', '#1D9085', '#264A5A'],
+          colors,
         },
       },
       preview: (

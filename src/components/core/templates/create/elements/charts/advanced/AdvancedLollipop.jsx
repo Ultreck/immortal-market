@@ -1,49 +1,56 @@
 import { motion } from 'framer-motion';
-import PropTypes from 'prop-types';
-import { Fragment } from 'react';
+import { getPercentagesMax } from '@/lib/utils.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const AdvancedLollipop = ({ element }) => {
+const AdvancedLollipop = ({ element, active, highlighted, width, onClick, onChange }) => {
+  const percentages = getPercentagesMax(element.config.data.map((item) => item.value));
+
   return (
-    <div className="flex flex-col items-start">
-      {element.config.data.map((item, index) => (
-        <Fragment key={index}>
-          <div className="font-medium text-xl text-black">{item.name}</div>
-          <div className="flex items-center w-full">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${item.percentage}%` }}
-              transition={{ duration: 0.5 }}
-              className={`h-2 relative mb-6`}
-              style={{ backgroundColor: element.config.colors?.[index] }}
-            >
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className={`absolute right-0 -top-7 text-black font-bold h-16 w-16 flex items-center justify-center rounded-full` }
-                style={{ left: '100%', transform: 'translateX(-50%)', backgroundColor: element.config.colors?.[index] }}
-              >
-                {item.percentage}%
-              </motion.div>
-            </motion.div>
-          </div>
-        </Fragment>
-      ))}
-    </div>
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      resizeHandles={['e']}
+      editable
+      fit
+    >
+      <div className="flex flex-col space-y-2 items-start">
+        {element.config.data.map((item, index) => {
+          const color = element.config.colors[index % element.config.colors.length];
+
+          return (
+            <div className="relative w-full" key={index}>
+              <div className="font-medium text-base text-black absolute left-0 top-0 z-[-1]">{item.label}</div>
+              <div className="flex items-center justify-start w-full">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${percentages[index]}%` }}
+                  transition={{ duration: 0.5 }}
+                  className={`h-2 rounded-l-full`}
+                  style={{ backgroundColor: color }}
+                />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className={`font-bold w-max px-4 aspect-[16/12] flex items-center justify-center rounded-full`}
+                  style={{ backgroundColor: color }}
+                >
+                  <span className="text-white mix-blend-difference">{item.value}</span>
+                </motion.div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </ElementWrapper>
   );
 };
 
-AdvancedLollipop.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.shape({
-      data: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string,
-          percentage: PropTypes.number,
-        })
-      ),
-    }),
-  }),
-};
+AdvancedLollipop.propTypes = ElementPropTypes;
 
 export default AdvancedLollipop;

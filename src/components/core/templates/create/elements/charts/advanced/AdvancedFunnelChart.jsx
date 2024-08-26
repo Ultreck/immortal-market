@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import PropTypes from 'prop-types';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const AdvancedFunnelChart = ({ element }) => {
+const AdvancedFunnelChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -15,16 +16,16 @@ const AdvancedFunnelChart = ({ element }) => {
             {
               name: 'Funnel',
               type: 'funnel',
-              left: '10%',
-              top: 60,
-              bottom: 60,
-              width: '80%',
+              left: '0%',
+              top: 0,
+              bottom: 0,
+              width: '100%',
               min: 0,
               max: 100,
               minSize: '0%',
               maxSize: '100%',
               sort: 'descending',
-              gap: 2,
+              gap: 6,
               label: {
                 show: true,
                 position: 'inside',
@@ -46,10 +47,10 @@ const AdvancedFunnelChart = ({ element }) => {
                 },
               },
               data: element.config.data,
+              color: element.config.colors,
             },
           ],
         };
-
         chart.setOption(option);
       }
     };
@@ -57,20 +58,23 @@ const AdvancedFunnelChart = ({ element }) => {
     return () => {
       if (chart) chart.dispose();
     };
-  }, [element]);
+  }, [element.config.data, element.config.colors, element.width, element.height]);
 
   return (
-    <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
+    </ElementWrapper>
   );
 };
 
-AdvancedFunnelChart.propTypes = {
-  element: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number,
-    style: PropTypes.object,
-    config: PropTypes.object,
-  }),
-};
+AdvancedFunnelChart.propTypes = ElementPropTypes;
 
 export default AdvancedFunnelChart;

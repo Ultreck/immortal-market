@@ -6,14 +6,16 @@ import useTemplateStore from '@/store/template.js';
 import { Spinner } from '@nextui-org/react';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
+import { useUnmount } from 'react-use';
 
-const CreateTemplatePage = () => {
+const EditDesignPage = () => {
   const toast = useToast();
   const { id } = useParams();
   const navigate = useNavigate();
   const { id: businessId } = useBusiness();
   const title = useTemplateStore((state) => state.template.title);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const reset = useTemplateStore((state) => state.reset);
   const { data: { success = false, design } = {}, isLoading: isTemplatesLoading } = useGetDesign(businessId, id);
 
   useEffect(() => {
@@ -49,9 +51,11 @@ const CreateTemplatePage = () => {
       }));
       updateTemplate({
         selectedElements: [],
+        undoHistory: [],
+        redoHistory: [],
         selectedPage: null,
         activePage: null,
-        zoom: 1,
+        scale: 1,
         status,
         type,
         pages,
@@ -61,6 +65,10 @@ const CreateTemplatePage = () => {
       });
     }
   }, [design, updateTemplate]);
+
+  useUnmount(() => {
+    reset();
+  });
 
   return (
     <>
@@ -75,4 +83,4 @@ const CreateTemplatePage = () => {
   );
 };
 
-export default CreateTemplatePage;
+export default EditDesignPage;

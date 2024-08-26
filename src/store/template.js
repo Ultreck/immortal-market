@@ -183,24 +183,7 @@ const useTemplateStore = createWithEqualityFn(
     },
     reset: () => {
       set(() => ({
-        template: {
-          id: crypto.randomUUID(),
-          pages: [
-            {
-              id: crypto.randomUUID(),
-              width: 600,
-              height: 600,
-              style: {
-                backgroundColor: '#ffffff',
-              },
-              elements: [],
-            },
-          ],
-          selectedElements: [],
-          selectedPage: null,
-          activePage: null,
-          zoom: 1,
-        },
+        template: {},
       }));
     },
   }),

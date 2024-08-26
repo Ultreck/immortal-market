@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
 import DragResizeRotate from '@/components/ui/DragResizeRotate.jsx';
@@ -19,8 +19,10 @@ const ElementWrapper = ({
   resizeHandles,
   constrained = false,
   editable = false,
+  fit = false,
   className,
 }) => {
+  const el = useRef(null);
   const scale = useTemplateStore((state) => state.template.scale);
   const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
   const [isEditing, setIsEditing] = useState(false);
@@ -32,6 +34,12 @@ const ElementWrapper = ({
   useEffect(() => {
     if (isEditing) onEditStart?.();
   }, [isEditing, onEditStart]);
+
+  useEffect(() => {
+    if (fit && el.current && element.height !== el.current.scrollHeight) {
+      onChange({ ...element, height: el.current.scrollHeight });
+    }
+  }, [element, fit, onChange]);
 
   return (
     <DragResizeRotate
@@ -65,7 +73,13 @@ const ElementWrapper = ({
           { 'border-purple-500': isEditing }
         )}
       />
-      {typeof children === 'function' ? children({ isEditing }) : children}
+      {fit ? (
+        <div ref={el} className="w-full h-max">
+          {typeof children === 'function' ? children({ isEditing }) : children}
+        </div>
+      ) : (
+        <>{typeof children === 'function' ? children({ isEditing }) : children}</>
+      )}
     </DragResizeRotate>
   );
 };
@@ -96,6 +110,7 @@ ElementWrapper.propTypes = {
   className: PropTypes.string,
   highlighted: PropTypes.bool,
   editable: PropTypes.bool,
+  fit: PropTypes.bool,
 };
 
 export default ElementWrapper;

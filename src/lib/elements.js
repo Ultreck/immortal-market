@@ -17,7 +17,7 @@ import StandardChart from '@/components/core/templates/create/elements/charts/st
 const charts = {
   standard: ['bar', 'line', 'pie', 'doughnut', 'bar-horizontal', 'area', 'stacked-bar', 'line-bar', 'line-area'],
   advanced: [
-    '10-shapes',
+    'shapes',
     'gender-stats',
     'pyramid',
     'funnel',
@@ -50,11 +50,11 @@ export const tools = {
     return acc;
   }, {}),
   ...charts.standard.reduce((acc, type) => {
-    acc[`chart-s-${type}`] = ['chart', 'opacity', 'animation', 'color'];
+    acc[`chart-s-${type}`] = ['chart', 'chart-color', 'opacity', 'animation'];
     return acc;
   }, {}),
   ...charts.advanced.reduce((acc, type) => {
-    acc[`chart-a-${type}`] = ['advanced-chart', 'opacity', 'color'];
+    acc[`chart-a-${type}`] = ['advanced-chart', 'chart-color', 'opacity'];
     return acc;
   }, {}),
   'frame-tabs': ['tabs', 'opacity', 'animation', 'shadow'],

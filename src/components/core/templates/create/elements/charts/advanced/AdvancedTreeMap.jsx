@@ -1,5 +1,7 @@
-import React from 'react';
-import { ResponsiveContainer, Treemap } from 'recharts';
+import { Treemap } from 'recharts';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import PropTypes from 'prop-types';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
 const CustomizedContent = ({ root, depth, x, y, width, height, index, colors, name }) => {
   return (
@@ -30,21 +32,43 @@ const CustomizedContent = ({ root, depth, x, y, width, height, index, colors, na
   );
 };
 
-const AdvancedTreeMap = ({ element }) => {
+CustomizedContent.propTypes = {
+  root: PropTypes.object,
+  depth: PropTypes.number,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  index: PropTypes.number,
+  colors: PropTypes.array.isRequired,
+  name: PropTypes.string,
+};
+
+const AdvancedTreeMap = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
-    <div>
-      <ResponsiveContainer width={element.width} height={element.height}>
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
       <Treemap
-          data={element.config.data}
-          className="space"
-          dataKey="size"
-          stroke="#fff"
-          fill="#8884d8"
-          content={<CustomizedContent colors={element.config.colors} />}
-        />
-      </ResponsiveContainer>
-    </div>
+        width={element.width}
+        height={element.height}
+        data={element.config.data}
+        className="space"
+        dataKey="size"
+        stroke="#fff"
+        fill="#8884d8"
+        content={<CustomizedContent colors={element.config.colors} />}
+      />
+    </ElementWrapper>
   );
 };
+
+AdvancedTreeMap.propTypes = ElementPropTypes;
 
 export default AdvancedTreeMap;
