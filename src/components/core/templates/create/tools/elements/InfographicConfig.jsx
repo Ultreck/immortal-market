@@ -71,7 +71,7 @@ const InfographicConfig = ({ element, onChange }) => {
                   <button
                     key={originalColor}
                     style={{ backgroundColor: currentColor }}
-                    className="w-full h-full frounded-full hover:brightness-125 rounded-full"
+                    className="w-full h-full hover:brightness-125 rounded-full"
                   />
                 </div>
               ))}

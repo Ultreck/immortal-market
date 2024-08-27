@@ -26,7 +26,6 @@ import { MdOutlineStackedBarChart } from 'react-icons/md';
 
 const Charts = () => {
   const [tab, setTab] = useState('standard');
-  const [view, setView] = useState('all');
 
   const barDataElement = [
     {
@@ -899,7 +898,7 @@ const AdvancedCharts = () => {
           noOfShapes: 10,
           isCountVisible: true,
           countFormat: 'fraction',
-          colors,
+          colors: colors.slice(0, 2),
         },
       },
       preview: (
@@ -1383,4 +1382,3 @@ const AdvancedCharts = () => {
 };
 
 export default Charts;
-
