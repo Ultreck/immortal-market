@@ -33,8 +33,8 @@ const AdvanceCircleIcons = ({ element, active, highlighted, width, onClick, onCh
                   style={{ backgroundColor: color }}
                 >
                   <i
-                    className={`scale-50 md:scale-100 ${circle.icon}`}
-                    style={{ fontSize: `${7 * (7 - index * 1.4)}px`, color: 'white' }}
+                    className={`scale-50 md:scale-100 text-red-500 mix-blend-difference ${circle.icon}`}
+                    style={{ fontSize: `${Math.max(16, 7 * (7 - index * 1.4))}px`, color: 'white' }}
                   />
                 </div>
                 {index % 2 === 0 ? (
