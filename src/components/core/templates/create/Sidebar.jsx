@@ -9,14 +9,48 @@ import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import Charts from '@/components/core/templates/create/Charts.jsx';
 import { Tooltip } from '@nextui-org/react';
 import Infographics from '@/components/core/templates/create/Infographics.jsx';
-import { TbBrush, TbTemplate } from 'react-icons/tb';
+import { TbBrush, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
 
 const Sidebar = () => {
   const [tab, setTab] = useState('basics');
 
   return (
-    <div className="h-full border-r dark:border-default-100 bg-gray-950 dark text-white dark:bg-black">
-      <div className="grid grid-cols-[80px_1fr] h-screen overflow-y-auto">
+    <div
+      className={cn('h-full border-r dark:border-default-100 bg-gray-950 dark text-white dark:bg-black relative', {
+        'w-[380px]': !!tab,
+        'w-auto': !tab,
+      })}
+    >
+      {!!tab && (
+        <button
+          className="absolute top-1/2 left-[calc(100%-2px)] -translate-y-1/2 z-10"
+          type="button"
+          aria-label="Hide"
+          onClick={() => setTab(null)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 13 96"
+            width="14"
+            height="100%"
+            fill="none"
+            className="IrLwCg"
+          >
+            <path
+              className="fill-gray-950 stroke-[0.5] stroke-default-200"
+              d="M0,0 h1 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32 H0 z"
+            ></path>
+            <path
+              className="fill-gray-950 stroke-[0.5] stroke-default-200"
+              d="M0.5,0 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32"
+            ></path>
+          </svg>
+          <div className="absolute top-1/2 -translate-y-1/2 left-0">
+            {!tab ? <TbChevronRight size="14" /> : <TbChevronLeft size="14" />}
+          </div>
+        </button>
+      )}
+      <div className={cn('grid grid-cols-[80px_1fr] h-screen overflow-y-auto', { 'grid-cols-[80px]': !tab })}>
         <div className="pl-3 py-4 h-full border-default-200 dark:border-default-100 flex flex-col items-center">
           <div className="space-y-1 w-full">
             <Link to="/templates">
@@ -60,14 +94,16 @@ const Sidebar = () => {
             })}
           </div>
         </div>
-        <div className="px-8 py-6 overflow-x-hidden dark:bg-gray-800/50">
-          {tab === 'basics' && <Components />}
-          {tab === 'templates' && <Build />}
-          {tab === 'data' && <Charts />}
-          {tab === 'graphics' && <Infographics />}
-          {tab === 'layers' && <Layers />}
-          {tab === 'uploads' && <Uploads />}
-        </div>
+        {!!tab && (
+          <div className="px-8 py-6 overflow-x-hidden dark:bg-gray-800/50">
+            {tab === 'basics' && <Components />}
+            {tab === 'templates' && <Build />}
+            {tab === 'data' && <Charts />}
+            {tab === 'graphics' && <Infographics />}
+            {tab === 'layers' && <Layers />}
+            {tab === 'uploads' && <Uploads />}
+          </div>
+        )}
       </div>
     </div>
   );

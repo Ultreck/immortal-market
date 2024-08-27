@@ -57,7 +57,7 @@ const Sidebar = () => {
       })}
     >
       <button
-        className="absolute top-1/2 left-full -translate-y-1/2 z-10"
+        className="absolute top-1/2 left-[calc(100%+1px)] -translate-y-1/2 z-10"
         type="button"
         aria-label="Hide"
         onClick={() => setMini(!mini)}
@@ -70,8 +70,14 @@ const Sidebar = () => {
           fill="none"
           className="IrLwCg"
         >
-          <path className="fill-default-100" d="M0,0 h1 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32 H0 z"></path>
-          <path className="fill-default-100" d="M0.5,0 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32"></path>
+          <path
+            className="fill-background stroke-[0.5] stroke-default-200"
+            d="M0,0 h1 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32 H0 z"
+          ></path>
+          <path
+            className="fill-background stroke-[0.5] stroke-default-200"
+            d="M0.5,0 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32"
+          ></path>
         </svg>
         <div className="absolute top-1/2 -translate-y-1/2 left-0">
           {mini ? <TbChevronRight size="14" /> : <TbChevronLeft size="14" />}

@@ -65,7 +65,7 @@ const TemplateBuilder = () => {
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
-      <div className="grid grid-cols-[380px_1fr] gap-0 h-screen overflow-hidden">
+      <div className="grid grid-cols-[auto_1fr] gap-0 h-screen overflow-hidden">
         <Sidebar />
         <div className="flex flex-col overflow-hidden relative bg-default-100 dark:bg-zinc-950">
           <Canvas />
