@@ -14,14 +14,16 @@ import { TbBrush, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/
 const Sidebar = () => {
   const [tab, setTab] = useState('basics');
 
+  const collapsed = !tab;
+
   return (
     <div
       className={cn('h-full border-r dark:border-default-100 bg-gray-950 dark text-white dark:bg-black relative', {
-        'w-[380px]': !!tab,
-        'w-auto': !tab,
+        'w-[380px]': !collapsed,
+        'w-auto': collapsed,
       })}
     >
-      {!!tab && (
+      {!collapsed && (
         <button
           className="absolute top-1/2 left-[calc(100%-2px)] -translate-y-1/2 z-10"
           type="button"
@@ -46,18 +48,28 @@ const Sidebar = () => {
             ></path>
           </svg>
           <div className="absolute top-1/2 -translate-y-1/2 left-0">
-            {!tab ? <TbChevronRight size="14" /> : <TbChevronLeft size="14" />}
+            {collapsed ? <TbChevronRight size="14" /> : <TbChevronLeft size="14" />}
           </div>
         </button>
       )}
-      <div className={cn('grid grid-cols-[80px_1fr] h-screen overflow-y-auto', { 'grid-cols-[80px]': !tab })}>
-        <div className="pl-3 py-4 h-full border-default-200 dark:border-default-100 flex flex-col items-center">
+      <div
+        className={cn('grid grid-cols-[80px_1fr] h-screen overflow-y-auto transition-all duration-200', {
+          'grid-cols-[90px]': collapsed,
+        })}
+      >
+        <div
+          className={cn(
+            'pl-3 py-4 h-full border-default-200 dark:border-default-100 flex flex-col items-center transition-all duration-200',
+            collapsed ? 'px-3' : 'pl-3'
+          )}
+        >
           <div className="space-y-1 w-full">
             <Link to="/templates">
               <div
                 className={cn(
                   'flex flex-col items-center justify-center py-4 px-3 w-full rounded-l-2xl overflow-hidden',
-                  'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer'
+                  'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer',
+                  { 'rounded-2xl': collapsed }
                 )}
               >
                 <RiArrowLeftSLine size={24} />
@@ -82,6 +94,7 @@ const Sidebar = () => {
                       {
                         'bg-primary-500 text-white dark:bg-gray-800/50': active,
                         'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer': !active,
+                        'rounded-2xl': collapsed,
                       }
                     )}
                     onClick={() => setTab(element.key)}
@@ -94,7 +107,7 @@ const Sidebar = () => {
             })}
           </div>
         </div>
-        {!!tab && (
+        {!collapsed && (
           <div className="px-8 py-6 overflow-x-hidden dark:bg-gray-800/50">
             {tab === 'basics' && <Components />}
             {tab === 'templates' && <Build />}
