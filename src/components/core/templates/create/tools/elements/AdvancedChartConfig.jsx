@@ -11,6 +11,7 @@ import AdvancedNestedCirclesConfig from './advance-config/AdvancedNestedCirclesC
 import AdvancedTreeMapConfig from './advance-config/AdvancedTreeMapConfig';
 import AdvanceDynamicSortingChartConfig from './advance-config/AdvanceDynamicSortingChartConfig';
 import AdvanceShapesConfig from '@/components/core/templates/create/tools/elements/advance-config/AdvanceShapesConfig.jsx';
+import AdvanceSpedometerConfig from './advance-config/AdvanceSpedometerConfig';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -49,6 +50,15 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           {element.type === 'chart-a-dynamic-sorting' && (
             <AdvanceDynamicSortingChartConfig element={element} onChange={onChange} />
           )}
+          {element.type === 'chart-a-speedometer-multiple' && (
+            <AdvanceSpedometerConfig element={element} onChange={onChange} />
+          )}
+          {element.type === 'chart-a-speedometer' && (
+            <AdvanceSpedometerConfig element={element} onChange={onChange} />
+          )}
+          {element.type === 'chart-a-speedometer-simple' && (
+            <AdvanceSpedometerConfig element={element} onChange={onChange} />
+          )}
         </div>
       </PopoverContent>
     </Popover>
@@ -64,3 +74,4 @@ AdvancedChartConfig.propTypes = {
 };
 
 export default AdvancedChartConfig;
+

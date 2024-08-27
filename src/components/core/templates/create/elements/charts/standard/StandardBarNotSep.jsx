@@ -17,7 +17,7 @@ const colors = [
   '#D93566',
 ];
 
-const StandardBarChart = ({ element }) => {
+const StandardBarNotSep = ({ element }) => {
   const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
 
   const chartData = element.config.data.map((item, index) => {
@@ -37,7 +37,7 @@ const StandardBarChart = ({ element }) => {
       config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
+      <BarChart accessibilityLayer data={chartData} barGap={0} barCategoryGap={0}>
         <CartesianGrid vertical={false} horizontal={false} />
         <XAxis
           dataKey={element.config.keys.x}
@@ -56,7 +56,7 @@ const StandardBarChart = ({ element }) => {
   );
 };
 
-StandardBarChart.propTypes = {
+StandardBarNotSep.propTypes = {
   element: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
@@ -65,4 +65,4 @@ StandardBarChart.propTypes = {
   }),
 };
 
-export default StandardBarChart;
+export default StandardBarNotSep;

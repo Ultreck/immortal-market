@@ -25,7 +25,7 @@ const chartData = [
   { month: 'June', desktop: 214, mobile: 140 },
 ];
 
-const StandardAreaChart = ({ element }) => {
+const StandardAreaMultiple = ({ element }) => {
   const config = {
     [element.config.keys.y]: {
       label: capitalize(element.config.keys.y),
@@ -47,33 +47,48 @@ const StandardAreaChart = ({ element }) => {
   return (
     <>
       <ChartContainer
-        config={config}
+        config={chartConfig}
         style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
       >
         <AreaChart
           accessibilityLayer
-          data={element.config.data}
+          data={chartData}
           style={{
             opacity: element.style.opacity,
           }}
         >
           <CartesianGrid vertical={false} />
           <XAxis
-            dataKey={element.config.keys.x}
+            dataKey="month"
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            tickFormatter={(value) => capitalize(value)}
+            tickFormatter={(value) => value.slice(0, 3)}
           />
-          <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-          <Area dataKey={element.config.keys.y} type="natural" fillOpacity={0.4} />
+          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+          <Area
+            dataKey="desktop"
+            type="monotone"
+            fill={chartConfig.desktop.color}
+            stroke={chartConfig.desktop.color}
+            strokeWidth={2}
+            dot={false}
+          />
+          <Area
+            dataKey="mobile"
+            type="monotone"
+            fill={chartConfig.mobile.color}
+            stroke={chartConfig.mobile.color}
+            strokeWidth={2}
+            dot={false}
+          />
         </AreaChart>
       </ChartContainer>
     </>
   );
 };
 
-StandardAreaChart.propTypes = {
+StandardAreaMultiple.propTypes = {
   element: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
@@ -82,5 +97,4 @@ StandardAreaChart.propTypes = {
   }),
 };
 
-export default StandardAreaChart;
-
+export default StandardAreaMultiple;

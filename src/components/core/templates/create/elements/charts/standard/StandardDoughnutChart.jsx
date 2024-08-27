@@ -1,8 +1,6 @@
-import { Cell, LabelList, Pie, PieChart } from 'recharts';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
+import { Pie, PieChart } from 'recharts';
+import { ChartContainer } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
-import StandardDoughnutNormalChart from './StandardDoughnutNormalChart.jsx';
-import StandardRosePieChart from './StandardRosePieChart.jsx';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
@@ -29,7 +27,6 @@ const StandardDoughnutChart = ({ element }) => {
       config={config}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      {/* {element.config.type === 'normal' && ( */}
         <PieChart width={300} height={400}>
           <Pie
             data={data}
@@ -42,9 +39,6 @@ const StandardDoughnutChart = ({ element }) => {
           >
           </Pie>
         </PieChart>
-      {/* )} */}
-      {/* {element.config.type === 'standard' && <StandardDoughnutNormalChart element={element} />}
-      {element.config.type === 'crazy' && <StandardRosePieChart element={element} />} */}
     </ChartContainer>
   );
 };

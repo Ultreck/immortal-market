@@ -15,7 +15,7 @@ import icons from '@/lib/templates/icons.js';
 import StandardChart from '@/components/core/templates/create/elements/charts/standard/StandardChart.jsx';
 
 const charts = {
-  standard: ['bar', 'line', 'pie', 'doughnut', 'bar-horizontal', 'area', 'stacked-bar', 'line-bar', 'line-area', 'rose-pie', 'doughnut-standard', 'doughnut-crazy'],
+  standard: ['bar', 'line', 'pie', 'doughnut', 'bar-horizontal', 'area', 'stacked-bar', 'line-bar', 'line-area', 'rose-pie', 'doughnut-standard', 'doughnut-crazy', 'area-multiple', 'semi-circle', 'vertical-bar', 'semi-pie', 'alt-bar', 'bar-not-sep' ],
   advanced: [
     'shapes',
     'gender-stats',
@@ -30,6 +30,8 @@ const charts = {
     'tree-map',
     'dynamic-sorting',
     'speedometer',
+    'speedometer-simple',
+    'speedometer-multiple',
   ],
 };
 

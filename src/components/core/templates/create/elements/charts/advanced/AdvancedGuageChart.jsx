@@ -1,9 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import { Card } from '@nextui-org/react';
 import ElementWrapper from '../../../ElementWrapper';
 
-const AdvanceSpedometer = ({ element, active, highlighted, width, onClick, onChange }) => {
+const defaultColors = [
+  '#5470c6',
+  '#91cc75',
+  '#fac858',
+  '#ee6666',
+  '#73c0de',
+  '#3ba272',
+  '#fc8452',
+  '#9a60b4',
+  '#ea7ccc',
+];
+
+const AdvancedGuageChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -14,49 +25,49 @@ const AdvanceSpedometer = ({ element, active, highlighted, width, onClick, onCha
         chart = echarts.init(chartRef.current);
 
         const option = {
+          color: element.config.colors,
           series: [
             {
               type: 'gauge',
+              progress: {
+                show: true,
+                width: 18,
+              },
               axisLine: {
                 lineStyle: {
-                  width: 30,
-                  color: [
-                    [0.3, element.config.colors[0]],
-                    [0.7, element.config.colors[1]],
-                    [1, element.config.colors[2]],
-                  ],
-                },
-              },
-              pointer: {
-                itemStyle: {
-                  color: 'auto',
+                  width: 18,
                 },
               },
               axisTick: {
-                distance: -30,
-                length: 8,
-                lineStyle: {
-                  color: '#fff',
-                  width: 2,
-                },
+                show: false,
               },
               splitLine: {
-                distance: -30,
-                length: 30,
+                length: 15,
                 lineStyle: {
-                  color: '#fff',
-                  width: 4,
+                  width: 2,
+                  color: '#999',
                 },
               },
               axisLabel: {
-                color: 'inherit',
-                distance: 40,
+                distance: 25,
+                color: '#999',
                 fontSize: 20,
+              },
+              anchor: {
+                show: true,
+                showAbove: true,
+                size: 25,
+                itemStyle: {
+                  borderWidth: 10,
+                },
+              },
+              title: {
+                show: false,
               },
               detail: {
                 valueAnimation: true,
-                formatter: '{value} km/h',
-                color: 'inherit',
+                fontSize: 80,
+                offsetCenter: [0, '70%'],
               },
               data: [
                 {
@@ -72,7 +83,6 @@ const AdvanceSpedometer = ({ element, active, highlighted, width, onClick, onCha
     };
 
     initChart();
-
     return () => {
       if (chart) {
         chart.dispose();
@@ -97,5 +107,5 @@ const AdvanceSpedometer = ({ element, active, highlighted, width, onClick, onCha
   );
 };
 
-export default AdvanceSpedometer;
+export default AdvancedGuageChart;
 

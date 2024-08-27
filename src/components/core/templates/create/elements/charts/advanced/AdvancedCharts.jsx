@@ -10,6 +10,8 @@ import { createElement } from 'react';
 import AdvanceDynamicSortingChart from './AdvanceDynamicSortingChart.jsx';
 import AdvancedTreeMap from './AdvancedTreeMap.jsx';
 import AdvanceSpedometer from './AdvanceSpedometer.jsx';
+import AdvancedGuageChart from './AdvancedGuageChart.jsx';
+import AdvanceMultipleGuageChart from './AdvanceMultipleGuageChart.jsx';
 
 const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -23,6 +25,8 @@ const AdvancedCharts = ({ element, active, highlighted, width, onClick, onChange
     'chart-a-circle-icons': AdvanceCircleIcons,
     'chart-a-dynamic-sorting': AdvanceDynamicSortingChart,
     'chart-a-speedometer': AdvanceSpedometer,
+    'chart-a-speedometer-simple': AdvancedGuageChart,
+    'chart-a-speedometer-multiple': AdvanceMultipleGuageChart,
   };
 
   if (components[element.type]) {

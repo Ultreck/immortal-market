@@ -17,7 +17,7 @@ const colors = [
   '#D93566',
 ];
 
-const StandardBarChart = ({ element }) => {
+const StandardVerticalBarChart = ({ element }) => {
   const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
 
   const chartData = element.config.data.map((item, index) => {
@@ -37,18 +37,17 @@ const StandardBarChart = ({ element }) => {
       config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
-        <CartesianGrid vertical={false} horizontal={false} />
-        <XAxis
+      <BarChart accessibilityLayer data={chartData} layout="vertical">
+        <XAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
+        <YAxis
           dataKey={element.config.keys.x}
+          type="category"
           tickLine={false}
           tickMargin={10}
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
-          interval={0}
           hide={element.config.showXYaxis}
         />
-        <YAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         <Bar dataKey={element.config.keys.y} radius={8} />
       </BarChart>
@@ -56,7 +55,7 @@ const StandardBarChart = ({ element }) => {
   );
 };
 
-StandardBarChart.propTypes = {
+StandardVerticalBarChart.propTypes = {
   element: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
@@ -65,4 +64,5 @@ StandardBarChart.propTypes = {
   }),
 };
 
-export default StandardBarChart;
+export default StandardVerticalBarChart;
+
