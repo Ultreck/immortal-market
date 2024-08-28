@@ -55,7 +55,6 @@ const useClipboardEvents = () => {
                   fontFamily: 'Roboto',
                   letterSpacing: 0,
                   lineHeight: 1,
-                  verticalAlign: 'baseline',
                 },
               };
               try {

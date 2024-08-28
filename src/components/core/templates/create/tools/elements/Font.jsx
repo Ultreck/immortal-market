@@ -33,14 +33,6 @@ const fonts = [
   { key: 'Hahmlet', label: 'Hahmlet' },
 ];
 
-const verticalAlignOptions = [
-  { key: 'baseline', label: 'baseline' },
-  { key: 'text-top', label: 'text-top' },
-  { key: 'text-bottom', label: 'text-bottom' },
-  { key: 'sub', label: 'sub' },
-  { key: 'super', label: 'super' },
-];
-
 const Font = ({ elements, onChange }) => {
   const values = elements.map((e) => e.style.fontSize);
   const same = values.every((v) => v === values[0]);
@@ -58,11 +50,6 @@ const Font = ({ elements, onChange }) => {
   const lineHeightValues = elements.map((e) => e.style.lineHeight);
   const sameLineHeight = lineHeightValues.every((v) => v === lineHeightValues[0]);
   const LineHeightValue = sameLineHeight ? `${lineHeightValues[0]}` : '';
-
-  const verticalAlignValues = elements.map((e) => e.style.verticalAlign);
-  const sameVerticalAlign = verticalAlignValues.every((v) => v === verticalAlignValues[0]);
-  const verticalAlignValue = sameVerticalAlign ? `${verticalAlignValues[0]}` : '';
-  const [alignValue, setAlignValue] = useState(verticalAlignValue || '');
 
   const handleChange = (v) => {
     if (v === '') return;
@@ -83,17 +70,6 @@ const Font = ({ elements, onChange }) => {
     setFontValue(event.target.value);
     if (event.target.value === '') return;
     onChange(elements.map((element) => ({ ...element, style: { ...element.style, fontFamily: event.target.value } })));
-  };
-
-  const handleVerticalAlignChange = (event) => {
-    setAlignValue(event.target.value);
-    if (event.target.value === '') return;
-    onChange(
-      elements.map((element) => ({
-        ...element,
-        style: { ...element.style, verticalAlign: event.target.value },
-      }))
-    );
   };
 
   return (
@@ -131,19 +107,6 @@ const Font = ({ elements, onChange }) => {
               ))}
             </Select>
           </div>
-          <div>
-            <p className="text-left mb-1">Vertical Align</p>
-            <Select
-              placeholder="Select Vertical Align"
-              className="max-w-xs"
-              onChange={handleVerticalAlignChange}
-              defaultSelectedKeys={[alignValue]}
-            >
-              {verticalAlignOptions.map((option) => (
-                <SelectItem key={option.key}>{option.label}</SelectItem>
-              ))}
-            </Select>
-          </div>
         </div>
       </PopoverContent>
     </Popover>
@@ -167,4 +130,3 @@ Font.propTypes = {
 };
 
 export default Font;
-

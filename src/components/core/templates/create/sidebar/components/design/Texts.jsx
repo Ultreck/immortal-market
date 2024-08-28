@@ -11,7 +11,6 @@ const styles = {
     fontFamily: 'Roboto',
     letterSpacing: 0,
     lineHeight: 1,
-    verticalAlign: 'baseline',
     animationDuration: '1s',
   },
   subheading: {
@@ -23,7 +22,6 @@ const styles = {
     fontFamily: 'Roboto',
     letterSpacing: 0,
     lineHeight: 1,
-    verticalAlign: 'baseline',
     animationDuration: '1s',
   },
   paragraph: {
@@ -35,7 +33,6 @@ const styles = {
     fontFamily: 'Roboto',
     letterSpacing: 0,
     lineHeight: 1,
-    verticalAlign: 'baseline',
     animationDuration: '1s',
   },
   caption: {
@@ -47,7 +44,6 @@ const styles = {
     fontFamily: 'Roboto',
     letterSpacing: 0,
     lineHeight: 1.4,
-    verticalAlign: 'baseline',
     animationDuration: '1s',
   },
 };
