@@ -23,8 +23,8 @@ import ProjectPage from '@/pages/ProjectPage.jsx';
 import { useEffect } from 'react';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
-import EditDesignPage from '@/pages/EditDesignPage.jsx';
-import TemplatesPage from './pages/TemplatesPage.jsx';
+import EditDesignPage from '@/pages/designs/EditDesignPage.jsx';
+import TemplatesPage from './pages/designs/TemplatesPage.jsx';
 import ReportPage from './pages/ReportPage.jsx';
 import TeamPage from '@/pages/TeamPage.jsx';
 import ProjectDashboardPage from './pages/ProjectDashboard.jsx';
@@ -82,8 +82,10 @@ const App = () => {
           </Route>
         </Route>
 
+        <Route path="templates/:id/edit" element={<Navigate to="/templates" />} />
+
         <Route
-          path="templates/:id/edit"
+          path="designs/:id/edit"
           element={
             <RequireAuthBusiness>
               <EditDesignPage />

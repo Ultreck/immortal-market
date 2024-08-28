@@ -1,9 +1,9 @@
 import useTemplateStore from '@/store/template.js';
 import { closestCenter, DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import LayerElement from './LayerElement';
+import LayerElement from './LayerElement.jsx';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useState } from 'react';
-import LayerItem from '@/components/core/templates/create/LayerItem.jsx';
+import LayerItem from '@/components/core/templates/create/sidebar/layers/LayerItem.jsx';
 import NoData from '@/components/ui/NoData.jsx';
 
 const Layers = () => {

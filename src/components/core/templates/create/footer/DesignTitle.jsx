@@ -1,5 +1,5 @@
 import useTemplateStore from '@/store/template.js';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils.js';
 import { useCallback, useEffect, useState } from 'react';
 import { useUpdateDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';

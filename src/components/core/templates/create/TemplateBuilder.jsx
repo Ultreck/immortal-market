@@ -3,8 +3,8 @@ import { DndContext, MouseSensor, PointerSensor, useSensor, useSensors } from '@
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import useTemplateStore from '@/store/template.js';
 import { roundToNearestTen } from '@/lib/utils.js';
-import StatusBar from '@/components/core/templates/create/StatusBar.jsx';
-import Sidebar from '@/components/core/templates/create/Sidebar.jsx';
+import StatusBar from '@/components/core/templates/create/footer/StatusBar.jsx';
+import Sidebar from '@/components/core/templates/create/sidebar/Sidebar.jsx';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;

@@ -65,4 +65,3 @@ NumberValueTool.propTypes = {
 };
 
 export default NumberValueTool;
-

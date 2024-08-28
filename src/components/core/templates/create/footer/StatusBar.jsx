@@ -1,9 +1,9 @@
-import PageIndicator from '@/components/core/templates/create/PageIndicator.jsx';
-import ZoomSlider from '@/components/core/templates/create/ZoomSlider.jsx';
+import PageIndicator from '@/components/core/templates/create/footer/PageIndicator.jsx';
+import ZoomSlider from '@/components/core/templates/create/footer/ZoomSlider.jsx';
 import { Chip } from '@nextui-org/react';
 import useTemplateStore from '@/store/template.js';
-import SaveButton from '@/components/core/templates/create/SaveButton.jsx';
-import DesignOptions from '@/components/core/templates/create/DesignOptions.jsx';
+import SaveButton from '@/components/core/templates/create/footer/SaveButton.jsx';
+import DesignOptions from '@/components/core/templates/create/footer/DesignOptions.jsx';
 import DesignTitle from './DesignTitle.jsx';
 
 const StatusBar = () => {

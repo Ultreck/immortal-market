@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useSortable } from '@dnd-kit/sortable';
-import LayerItem from '@/components/core/templates/create/LayerItem.jsx';
+import LayerItem from '@/components/core/templates/create/sidebar/layers/LayerItem.jsx';
 import { CSS } from '@dnd-kit/utilities';
 import { cn } from '@/lib/utils.js';
 

@@ -1,9 +1,9 @@
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@nextui-org/react';
-import { TbBookDownload, TbBookUpload, TbDotsVertical, TbTrash } from 'react-icons/tb';
-import DeleteModal from '@/components/core/templates/create/DeleteModal.jsx';
-import PublishModal from '@/components/core/templates/create/PublishModal.jsx';
+import { TbBookDownload, TbBookUpload, TbDotsVertical, TbPresentation, TbTrash } from 'react-icons/tb';
+import DeleteModal from '@/components/core/templates/create/footer/DeleteModal.jsx';
+import PublishModal from '@/components/core/templates/create/footer/PublishModal.jsx';
 import useTemplateStore from '@/store/template.js';
-import UnpublishModal from '@/components/core/templates/create/UnpublishModal.jsx';
+import UnpublishModal from '@/components/core/templates/create/footer/UnpublishModal.jsx';
 
 const DesignOptions = () => {
   const id = useTemplateStore((state) => state.template.id);
@@ -14,6 +14,11 @@ const DesignOptions = () => {
   const { isOpen: isUnpublishOpen, onOpen: onUnpublishOpen, onClose: onUnpublishClose } = useDisclosure();
 
   const options = [
+    {
+      key: 'present',
+      label: 'Present',
+      icon: <TbPresentation size="16" />,
+    },
     {
       key: 'delete',
       label: 'Delete',
@@ -53,6 +58,7 @@ const DesignOptions = () => {
             if (key === 'publish') onPublishOpen();
             if (key === 'unpublish') onUnpublishOpen();
             if (key === 'delete') onDeleteOpen();
+            // if (key === 'present') onPresentOpen();
           }}
         >
           {options.filter(Boolean).map((action) => (

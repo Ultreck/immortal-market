@@ -47,7 +47,7 @@ const TemplatesPage = () => {
         },
       };
       const res = await create(template);
-      navigate(`/templates/${res.data.design._id}/edit`);
+      navigate(`/designs/${res.data.design._id}/edit`);
     } catch (e) {
       toast.error(e?.response?.data?.message || e.message);
     }
@@ -130,7 +130,7 @@ const TemplatesPage = () => {
               <div className="grid grid-cols-4 gap-4 md:gap-8">
                 {designs.map((design, i) => (
                   <div key={i}>
-                    <Link key={i} to={`/templates/${design._id}/edit`}>
+                    <Link key={i} to={`/designs/${design._id}/edit`}>
                       {design.thumbnail ? (
                         <Image
                           src={getImageLink(design.thumbnail)}

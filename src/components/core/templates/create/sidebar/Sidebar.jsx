@@ -1,12 +1,12 @@
 import { createElement, useState } from 'react';
 import { RiArrowLeftSLine, RiImage2Line, RiPieChartLine, RiShapesLine, RiStackLine } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
-import Components from '@/components/core/templates/create/Components.jsx';
-import Layers from '@/components/core/templates/create/Layers.jsx';
+import Basics from '@/components/core/templates/create/sidebar/components/Basics.jsx';
+import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
 import { Link } from 'react-router-dom';
 import Uploads from '@/components/core/templates/create/Uploads.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
-import Charts from '@/components/core/templates/create/Charts.jsx';
+import Charts from '@/components/core/templates/create/sidebar/data/Charts.jsx';
 import { Tooltip } from '@nextui-org/react';
 import Infographics from '@/components/core/templates/create/Infographics.jsx';
 import { TbBrush, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
@@ -109,7 +109,7 @@ const Sidebar = () => {
         </div>
         {!collapsed && (
           <div className="px-8 py-6 overflow-x-hidden dark:bg-gray-800/50">
-            {tab === 'basics' && <Components />}
+            {tab === 'basics' && <Basics />}
             {tab === 'templates' && <Build />}
             {tab === 'data' && <Charts />}
             {tab === 'graphics' && <Infographics />}

@@ -6,7 +6,7 @@ import Shapes from '@/components/core/templates/create/sidebar/components/design
 import Frames from '@/components/core/templates/create/sidebar/components/design/Frames.jsx';
 import Icons from '@/components/core/templates/create/sidebar/components/design/Icons.jsx';
 
-const Components = () => {
+const Basics = () => {
   const [tab, setTab] = useState('design');
   const [view, setView] = useState('all');
 
@@ -47,4 +47,4 @@ const Components = () => {
   );
 };
 
-export default Components;
+export default Basics;
