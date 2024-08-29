@@ -72,7 +72,7 @@ const Line = ({ elements, onChange }) => {
           <div className="gap-2 w-full flex items-center">
             {options.map((option) => (
               <Button
-                variant={lineEndValue == option.value ? 'solid' : 'text'}
+                variant={lineEndValue === option.value ? 'solid' : 'text'}
                 key={option.value}
                 isIconOnly
                 className="text-base"
@@ -88,7 +88,7 @@ const Line = ({ elements, onChange }) => {
           <div className="gap-2 w-full flex items-center">
             {options.map((option) => (
               <Button
-                variant={lineStartValue == option.value ? 'solid' : 'text'}
+                variant={lineStartValue === option.value ? 'solid' : 'text'}
                 key={option.value}
                 isIconOnly
                 className="text-base"
