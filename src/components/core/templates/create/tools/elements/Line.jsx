@@ -4,8 +4,8 @@ import { LuPenLine } from 'react-icons/lu';
 import { createElement } from 'react';
 import { IoIosRemoveCircleOutline } from 'react-icons/io';
 import { RiArrowRightUpFill } from 'react-icons/ri';
-import { FaSquareFull, FaCircle } from 'react-icons/fa';
-import NumberValueTool from '../../NumberValueTool';
+import { FaCircle, FaSquareFull } from 'react-icons/fa';
+import NumberInput from '@/components/ui/NumberInput.jsx';
 
 const options = [
   {
@@ -25,8 +25,6 @@ const options = [
     icon: FaCircle,
   },
 ];
-
-const sizes = [8, 10, 12, 14, 16];
 
 const Line = ({ elements, onChange }) => {
   const lineEndvalues = elements.map((e) => e.lineEnd);
@@ -62,11 +60,11 @@ const Line = ({ elements, onChange }) => {
       </PopoverTrigger>
       <PopoverContent className="px-6 py-4 shadow border border-default-200 w-[200px] gap-y-3">
         <div>
-          <NumberValueTool
+          <NumberInput
             title="Stroke Width"
             value={strokeWidthValue}
-            handleChange={handleStrokeWidthChange}
-            valuesArray={sizes}
+            onChange={handleStrokeWidthChange}
+            ariaLabel="Stoke width"
           />
         </div>
         <div className="flex flex-col w-full">

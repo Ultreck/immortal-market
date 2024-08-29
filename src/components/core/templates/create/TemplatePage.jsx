@@ -64,7 +64,11 @@ const TemplatePage = ({ id }) => {
   );
 
   const handleUpdateElement = useCallback(
-    (element) => {
+    (element, solo = false) => {
+      if (solo) {
+        updateElements([element], page.id);
+        return;
+      }
       let selection = [...selectedElements];
       if (!selectedElements.includes(element.id)) {
         if (selection.length > 1) {

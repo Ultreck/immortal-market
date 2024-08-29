@@ -1,15 +1,29 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import { TbTextSize } from 'react-icons/tb';
-import NumberValueTool from '../../NumberValueTool';
-import { useState } from 'react';
+import NumberInput from '@/components/ui/NumberInput.jsx';
+import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 
-const sizes = [
-  8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 60, 64, 68, 70, 72, 76, 80, 84,
-  86, 90, 94, 98, 100, 120, 140, 150,
-];
-const letterSpacingOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-const lineHeightOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const Font = ({ elements, onChange }) => {
+  return (
+    <Popover placement="left" showArrow offset={10}>
+      <PopoverTrigger>
+        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+          <TbTextSize size="20" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="p-0 shadow border border-default-200">
+        <div className="px-6 py-6 w-full space-y-4">
+          <FontFamily elements={elements} onChange={onChange} />
+          <FontSize elements={elements} onChange={onChange} />
+          <LetterSpacing elements={elements} onChange={onChange} />
+          <LineHeight elements={elements} onChange={onChange} />
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
 const fonts = [
   { key: 'Roboto', label: 'Roboto' },
   { key: 'Playwrite BE VLG', label: 'Playwrite BE VLG' },
@@ -33,100 +47,97 @@ const fonts = [
   { key: 'Hahmlet', label: 'Hahmlet' },
 ];
 
-const Font = ({ elements, onChange }) => {
+const FontFamily = ({ elements, onChange }) => {
+  const values = elements.map((e) => e.style.fontFamily);
+  const same = values.every((v) => v === values[0]);
+  const value = same ? values[0] : '';
+
+  const handleChange = (event) => {
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, fontFamily: event.target.value } })));
+  };
+
+  return (
+    <div>
+      <Select
+        label="Font family"
+        labelPlacement="outside"
+        aria-label="Select font family"
+        placeholder="Select font family"
+        className="max-w-xs"
+        onChange={handleChange}
+        defaultSelectedKeys={[value]}
+      >
+        {fonts.map((font) => (
+          <SelectItem key={font.key}>{font.label}</SelectItem>
+        ))}
+      </Select>
+    </div>
+  );
+};
+
+const FontSize = ({ elements, onChange }) => {
   const values = elements.map((e) => e.style.fontSize);
   const same = values.every((v) => v === values[0]);
-  const value = same ? `${values[0]}` : '';
-
-  const fontFamilyValues = elements.map((e) => e.style.fontFamily);
-  const sameFontFamily = fontFamilyValues.every((v) => v === fontFamilyValues[0]);
-  const fontFamilyValue = sameFontFamily ? `${fontFamilyValues[0]}` : '';
-  const [fontValue, setFontValue] = useState(fontFamilyValue || '');
-
-  const letterSpacingValues = elements.map((e) => e.style.letterSpacing);
-  const sameLetterSpacing = letterSpacingValues.every((v) => v === letterSpacingValues[0]);
-  const LetterSpacingValue = sameLetterSpacing ? `${letterSpacingValues[0]}` : '';
-
-  const lineHeightValues = elements.map((e) => e.style.lineHeight);
-  const sameLineHeight = lineHeightValues.every((v) => v === lineHeightValues[0]);
-  const LineHeightValue = sameLineHeight ? `${lineHeightValues[0]}` : '';
+  const value = same ? values[0] : '';
 
   const handleChange = (v) => {
     if (v === '') return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, fontSize: +v } })));
   };
 
-  const handleLetterSpacingChange = (v) => {
+  return (
+    <div className="flex items-center justify-between space-x-4">
+      <p className="text-base opacity-75">Font size:</p>
+      <AutoCompleteNumberInput onChange={handleChange} value={value} min={1} max={150} step={1} ariaLabel="Font size" />
+    </div>
+  );
+};
+
+const LetterSpacing = ({ elements, onChange }) => {
+  const values = elements.map((e) => e.style.letterSpacing);
+  const same = values.every((v) => v === values[0]);
+  const value = same ? values[0] : '';
+
+  const handleChange = (v) => {
     if (v === '') return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, letterSpacing: +v } })));
   };
 
-  const handleLineHeightChange = (v) => {
+  return (
+    <div className="flex items-center justify-between space-x-4">
+      <p className="text-base opacity-75">Letter spacing:</p>
+      <NumberInput onChange={handleChange} value={value} min={-10} max={10} step={0.1} ariaLabel="Letter spacing" />
+    </div>
+  );
+};
+
+const LineHeight = ({ elements, onChange }) => {
+  const values = elements.map((e) => e.style.lineHeight);
+  const same = values.every((v) => v === values[0]);
+  const value = same ? values[0] : '';
+
+  const handleChange = (v) => {
     if (v === '') return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, lineHeight: +v } })));
   };
 
-  const handleSelectionChange = (event) => {
-    setFontValue(event.target.value);
-    if (event.target.value === '') return;
-    onChange(elements.map((element) => ({ ...element, style: { ...element.style, fontFamily: event.target.value } })));
-  };
-
   return (
-    <Popover placement="left" showArrow offset={10}>
-      <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbTextSize size="20" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="p-0 shadow border border-default-200">
-        <div className="px-6 py-6 w-full gap-y-4 flex flex-col">
-          <NumberValueTool value={value} handleChange={handleChange} valuesArray={sizes} title="Font Size" />
-          <NumberValueTool
-            value={LetterSpacingValue}
-            handleChange={handleLetterSpacingChange}
-            valuesArray={letterSpacingOptions}
-            title="Letter Spacing"
-          />
-          <NumberValueTool
-            value={LineHeightValue}
-            handleChange={handleLineHeightChange}
-            valuesArray={lineHeightOptions}
-            title="Line Height"
-          />
-          <div>
-            <p className="text-left mb-1">Font Family</p>
-            <Select
-              placeholder="Select font family"
-              className="max-w-xs"
-              onChange={handleSelectionChange}
-              defaultSelectedKeys={[fontValue]}
-            >
-              {fonts.map((font) => (
-                <SelectItem key={font.key}>{font.label}</SelectItem>
-              ))}
-            </Select>
-          </div>
-        </div>
-      </PopoverContent>
-    </Popover>
+    <div className="flex items-center justify-between space-x-4">
+      <p className="text-base opacity-75">Line height:</p>
+      <NumberInput onChange={handleChange} value={value} min={0} max={10} step={0.1} ariaLabel="Line height" />
+    </div>
   );
 };
 
-Font.propTypes = {
-  elements: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-      style: PropTypes.object,
-    })
-  ),
+const propTypes = {
+  elements: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
 };
+
+Font.propTypes = propTypes;
+FontSize.propTypes = propTypes;
+LetterSpacing.propTypes = propTypes;
+LineHeight.propTypes = propTypes;
+FontFamily.propTypes = propTypes;
 
 export default Font;

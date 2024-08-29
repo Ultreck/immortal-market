@@ -2,17 +2,17 @@ import { Autocomplete, AutocompleteItem, Button } from '@nextui-org/react';
 import { TbMinus, TbPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
-const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 100 }) => {
+const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 100, step = 1 }) => {
   return (
-    <div className="gap-2 w-full flex items-center">
+    <div className="gap-2 flex items-center">
       <Button
         isIconOnly
         variant="flat"
         className="text-base"
-        isDisabled={!value || value <= min}
+        isDisabled={isNaN(value) || value <= min}
         onClick={() => {
-          if (!value) return;
-          onChange(Math.max(min, +value - 1));
+          if (isNaN(value)) return;
+          onChange(Math.max(min, +value - step));
         }}
       >
         <TbMinus size="20" />
@@ -20,10 +20,11 @@ const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 10
       <Autocomplete
         aria-label={ariaLabel}
         type="number"
+        step={step}
         isClearable={false}
         classNames={{ base: 'w-[80px] text-base' }}
         allowsEmptyCollection={false}
-        inputValue={`${value}`}
+        inputValue={`${!isNaN(value) ? value : ''}`}
         onInputChange={(v) => {
           if (+v <= 0) return;
           onChange(+v);
@@ -31,6 +32,7 @@ const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 10
         onSelectionChange={(v) => {
           onChange(+v);
         }}
+        menuTrigger="manual"
       >
         {Array.from({ length: max - min + 1 }, (_, i) => i + min).map((n) => (
           <AutocompleteItem key={n} value={n} textValue={n.toString()}>
@@ -42,10 +44,10 @@ const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 10
         isIconOnly
         variant="flat"
         className="text-base"
-        isDisabled={!value || value >= max}
+        isDisabled={isNaN(value) || value >= max}
         onClick={() => {
-          if (!value) return;
-          onChange(Math.min(max, +value + 1));
+          if (isNaN(value)) return;
+          onChange(Math.min(max, +value + step));
         }}
       >
         <TbPlus size="20" />
@@ -55,11 +57,12 @@ const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 10
 };
 
 AutoCompleteNumberInput.propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   onChange: PropTypes.func.isRequired,
   ariaLabel: PropTypes.string.isRequired,
   min: PropTypes.number,
   max: PropTypes.number,
+  step: PropTypes.number,
 };
 
 export default AutoCompleteNumberInput;

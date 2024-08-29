@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils.js';
 import { useRef, useState } from 'react';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { useDeepCompareEffect } from 'react-use';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import { useDeepCompareEffect } from 'react-use';
 
 const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
   const input = useRef(null);
@@ -17,9 +17,9 @@ const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
   useDeepCompareEffect(() => {
     updateInputHeight();
     if (element.height !== input.current.scrollHeight) {
-      onChange({ ...element, height: input.current.scrollHeight });
+      onChange({ ...element, height: input.current.scrollHeight }, true);
     }
-  }, [element]);
+  }, [element.width, element.text, element.style]);
 
   return (
     <ElementWrapper
@@ -37,18 +37,19 @@ const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
     >
       <div
         className={cn('overflow-hidden relative w-full h-full', {
-          'pl-6': element.config?.bar === 'left',
-          'pr-6': element.config?.bar === 'right',
+          'pl-[8%]': element.config?.bar === 'left',
+          'pr-[8%]': element.config?.bar === 'right',
         })}
         style={{ filter: `drop-shadow(${element.style.shadow})` }}
       >
         {element.config?.bar === 'left' && (
           <div
-            className="absolute left-0 top-1/2 -translate-y-1/2 h-[80%] bottom-0 w-2 bg-gray-800 rounded-2xl"
+            className="absolute left-0 top-1/2 -translate-y-1/2 h-[80%] bottom-0 w-[3%] bg-gray-800 rounded-2xl"
             style={{ backgroundColor: element.style.color }}
           />
         )}
         <textarea
+          key={element.id}
           className={cn('bg-transparent w-full h-full resize-none overflow-hidden')}
           style={element.style}
           rows="1"

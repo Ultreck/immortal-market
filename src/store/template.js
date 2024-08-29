@@ -84,9 +84,11 @@ const useTemplateStore = createWithEqualityFn(
                 return {
                   ...page,
                   elements: page.elements.map((el) => {
-                    const exists = elements.find((el2) => el2.id === el.id);
-                    if (exists) return elements.find((el2) => el2.id === el.id);
-                    return el;
+                    const _el = elements.find((el2) => el2.id === el.id);
+                    if (_el) {
+                      console.log('Updating', el.type, el.height, el.text);
+                    }
+                    return _el || el;
                   }),
                 };
               }
