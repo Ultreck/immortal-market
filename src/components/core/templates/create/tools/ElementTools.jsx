@@ -7,14 +7,13 @@ import BackgroundColor from './elements/BackgroundColor.jsx';
 import ChartConfig from './elements/ChartConfig.jsx';
 import useTemplateStore from '@/store/template.js';
 import TextAlign from './elements/TextAlign.jsx';
-import { useMemo } from 'react';
+import { createElement, Fragment, useMemo } from 'react';
 import Border from './elements/Border.jsx';
 import Opacity from './elements/Opacity.jsx';
 import BorderRadius from './elements/BorderRadius.jsx';
 import TableConfig from '@/components/core/templates/create/tools/elements/TableConfig.jsx';
 import KeyValueConfig from '@/components/core/templates/create/tools/elements/KeyValueConfig.jsx';
 import Line from './elements/Line.jsx';
-import Font from './elements/Font.jsx';
 import IconConfig from './elements/IconConfig.jsx';
 import { getElementTools } from '@/lib/elements.js';
 import Animation from './elements/Animation.jsx';
@@ -24,6 +23,32 @@ import FrameTabsConfig from './elements/FrameTabsConfig.jsx';
 import FrameCarouselConfig from './elements/FrameCarouselConfig.jsx';
 import InfographicConfig from '@/components/core/templates/create/tools/elements/InfographicConfig.jsx';
 import ChartColor from './elements/ChartColor.jsx';
+import Font from '@/components/core/templates/create/tools/elements/Font.jsx';
+
+const mapping = {
+  bold: { type: 'multiple', component: Bold },
+  italic: { type: 'multiple', component: Italic },
+  underline: { type: 'multiple', component: Underline },
+  font: { type: 'multiple', component: Font },
+  'text-color': { type: 'multiple', component: TextColor },
+  'background-color': { type: 'multiple', component: BackgroundColor },
+  'text-align': { type: 'multiple', component: TextAlign },
+  chart: { type: 'single', component: ChartConfig },
+  icon: { type: 'single', component: IconConfig },
+  table: { type: 'single', component: TableConfig },
+  'key-value': { type: 'single', component: KeyValueConfig },
+  border: { type: 'multiple', component: Border },
+  opacity: { type: 'multiple', component: Opacity },
+  'border-radius': { type: 'multiple', component: BorderRadius },
+  line: { type: 'multiple', component: Line },
+  animation: { type: 'multiple', component: Animation },
+  'advanced-chart': { type: 'single', component: AdvancedChartConfig },
+  shadow: { type: 'multiple', component: Shadow },
+  tabs: { type: 'single', component: FrameTabsConfig },
+  carousel: { type: 'single', component: FrameCarouselConfig },
+  infographic: { type: 'single', component: InfographicConfig },
+  'chart-color': { type: 'single', component: ChartColor },
+};
 
 const ElementTools = () => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -37,7 +62,7 @@ const ElementTools = () => {
     if (!page) return [];
     let _tools = elements.map((el) => getElementTools(el.type) || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
-    const singles = ['chart', 'table', 'key-value', 'icon', 'tabs', 'carousel', 'infographic'];
+    const singles = Object.keys(mapping).filter((tool) => mapping[tool].type === 'single');
     if (_tools.some((tool) => singles.includes(tool)) && selectedElements.length > 1) {
       return _tools.filter((tool) => !singles.includes(tool));
     }
@@ -51,91 +76,37 @@ const ElementTools = () => {
   return (
     <AnimatePresence>
       {tools.length > 0 && (
-        <div className="fixed top-1/2 -translate-y-1/2 right-8">
+        <div className="fixed top-1/2 -translate-y-1/2 right-0">
           <motion.div
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            className="rounded-2xl bg-default-200/60 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
+            className="rounded-l-3xl rounded-r bg-default-200 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
           >
             {tools.map((tool) => {
-              if (tool === 'bold') {
-                return <Bold key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'italic') {
-                return <Italic key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'underline') {
-                return <Underline key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'font') {
-                return <Font key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'text-color') {
-                return <TextColor key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'background-color') {
-                return <BackgroundColor key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'text-align') {
-                return <TextAlign key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'chart' && selectedElements.length === 1) {
-                return <ChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-              }
-              if (tool === 'icon' && selectedElements.length === 1) {
-                return <IconConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-              }
-              if (tool === 'table' && selectedElements.length === 1) {
-                return <TableConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-              }
-              if (tool === 'key-value' && selectedElements.length === 1) {
-                return (
-                  <KeyValueConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
-                );
-              }
-              if (tool === 'border') {
-                return <Border key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'opacity') {
-                return <Opacity key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'border-radius') {
-                return <BorderRadius key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'line') {
-                return <Line key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'animation') {
-                return <Animation key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'advanced-chart') {
-                return (
-                  <AdvancedChartConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
-                );
-              }
-              if (tool === 'shadow') {
-                return <Shadow key={tool} elements={elements} onChange={handleUpdateElements} />;
-              }
-              if (tool === 'tabs' && selectedElements.length === 1) {
-                return (
-                  <FrameTabsConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
-                );
-              }
-              if (tool === 'carousel' && selectedElements.length === 1) {
-                return (
-                  <FrameCarouselConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
-                );
-              }
-              if (tool === 'infographic' && selectedElements.length === 1) {
-                return (
-                  <InfographicConfig key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />
-                );
-              }
-              if (tool === 'chart-color') {
-                return <ChartColor key={tool} element={elements[0]} onChange={(el) => handleUpdateElements([el])} />;
-              }
-              throw new Error(`Unknown tool ${tool}`);
+              const { type, component } = mapping[tool];
+              return (
+                <Fragment key={tool}>
+                  {type === 'single' && elements.length === 1 && (
+                    <>
+                      {createElement(component, {
+                        key: tool,
+                        element: elements[0],
+                        onChange: (el) => handleUpdateElements([el]),
+                      })}
+                    </>
+                  )}
+                  {type === 'multiple' && (
+                    <>
+                      {createElement(component, {
+                        key: tool,
+                        elements,
+                        onChange: (els) => handleUpdateElements(els),
+                      })}
+                    </>
+                  )}
+                </Fragment>
+              );
             })}
           </motion.div>
         </div>
