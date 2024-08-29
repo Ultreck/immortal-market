@@ -183,6 +183,28 @@ const useTemplateStore = createWithEqualityFn(
         };
       });
     },
+    movePageUp: (id) => {
+      set((state) => {
+        const pages = [...state.template.pages];
+        const index = pages.findIndex((page) => page.id === id);
+        if (index > 0) {
+          const [movedPage] = pages.splice(index, 1);
+          pages.splice(index - 1, 0, movedPage);
+        }
+        return { template: { ...state.template, pages } };
+      });
+    },
+    movePageDown: (id) => {
+      set((state) => {
+        const pages = [...state.template.pages];
+        const index = pages.findIndex((page) => page.id === id);
+        if (index < pages.length - 1) {
+          const [movedPage] = pages.splice(index, 1);
+          pages.splice(index + 1, 0, movedPage);
+        }
+        return { template: { ...state.template, pages } };
+      });
+    },
     reset: () => {
       set(() => ({
         template: {},

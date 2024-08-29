@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useIntersectionObserver } from 'usehooks-ts';
 import { Button, Tooltip } from '@nextui-org/react';
-import { TbCopyPlus, TbSquarePlus, TbTrash } from 'react-icons/tb';
+import { TbChevronDown, TbChevronUp, TbCopyPlus, TbSquarePlus, TbTrash } from 'react-icons/tb';
 import ContextMenu from './ContextMenu';
 import { components } from '@/lib/elements.js';
 
@@ -28,6 +28,8 @@ const TemplatePage = ({ id }) => {
   const { setNodeRef, node } = useDroppable({ id: `canvas-${page.id}` });
   const [contextMenu, setContextMenu] = useState({ isOpen: false, position: { x: 0, y: 0 } });
   const scale = useTemplateStore((state) => state.template.scale);
+  const movePageUp = useTemplateStore((state) => state.movePageUp);
+  const movePageDown = useTemplateStore((state) => state.movePageDown);
 
   useEffect(() => {
     const handleClick = () => setContextMenu({ isOpen: false, position: { x: 0, y: 0 } });
@@ -229,6 +231,20 @@ const TemplatePage = ({ id }) => {
       <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
         <h2 className="font-semibold">Page {index + 1}</h2>
         <div className="flex items-center space-x-1">
+          {index > 0 && (
+            <Tooltip content="Move page up" showArrow>
+              <Button variant="light" isIconOnly onClick={() => movePageUp(page.id)} size="sm">
+                <TbChevronUp size="18" />
+              </Button>
+            </Tooltip>
+          )}
+          {index < pages.length - 1 && (
+            <Tooltip content="Move page down" showArrow>
+              <Button variant="light" isIconOnly onClick={() => movePageDown(page.id)} size="sm">
+                <TbChevronDown size="18" />
+              </Button>
+            </Tooltip>
+          )}
           <Tooltip content="Duplicate page" showArrow>
             <Button variant="light" isIconOnly onClick={handleDuplicatePage} size="sm">
               <TbCopyPlus size="18" />
