@@ -162,3 +162,4 @@ export const getElementIcon = (type) => {
   if (!icons[type]) throw new Error(`No icon found for type ${type}`);
   return icons[type];
 };
+

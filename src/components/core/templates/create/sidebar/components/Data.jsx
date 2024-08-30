@@ -11,6 +11,7 @@ const data = [
       text: 'Table',
       width: 400,
       height: 200,
+      theme: null,
       style: {
         fontSize: 14,
         backgroundColor: '#fff',
@@ -67,3 +68,4 @@ const DataElements = () => {
 };
 
 export default DataElements;
+

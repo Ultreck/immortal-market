@@ -1,5 +1,5 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { cn } from '@/lib/utils.js';
+import { cn, TableThemes } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { TbTableOff } from 'react-icons/tb';
@@ -36,11 +36,52 @@ export const TableElementContent = ({ element }) => {
   const headers = element.config.data[0];
   const rows = element.config.data.slice(1);
   const max = Math.max(...element.config.data.map((row) => row.length));
+  const tableClassNames =
+    element.theme && TableThemes[element.theme]?.tableHeadClassNames
+      ? TableThemes[element.theme]?.tableHeadClassNames
+      : '';
+  const tableHeadClassNames =
+    element.theme && TableThemes[element.theme]?.tableHeadClassNames
+      ? TableThemes[element.theme]?.tableHeadClassNames
+      : '';
+  const tableHeadRowClassNames =
+    element.theme && TableThemes[element.theme]?.tableHeadRowClassNames
+      ? TableThemes[element.theme]?.tableHeadRowClassNames
+      : '';
+  const tableHeadDataClassNames =
+    element.theme && TableThemes[element.theme]?.tableHeadDataClassNames
+      ? TableThemes[element.theme]?.tableHeadDataClassNames
+      : '';
+  const tableBodyClassNames =
+    element.theme && TableThemes[element.theme]?.tableBodyClassNames
+      ? TableThemes[element.theme]?.tableBodyClassNames
+      : '';
+  const tableBodyRowClassNames =
+    element.theme && TableThemes[element.theme]?.tableBodyRowClassNames
+      ? TableThemes[element.theme]?.tableBodyRowClassNames
+      : '';
+  const tableBodyDataClassNames =
+    element.theme && TableThemes[element.theme]?.tableBodyDataClassNames
+      ? TableThemes[element.theme]?.tableBodyDataClassNames
+      : '';
 
   return (
-    <table className="w-full h-full table-auto border-separate border border-gray-400 rounded-lg" style={element.style}>
-      <thead>
-        <tr>
+    <table
+      className={cn(`w-full h-full table-auto border-separate border border-gray-400 rounded-lg ${tableClassNames}`, {
+        [`${tableClassNames}`]: element.theme,
+      })}
+      style={element.style}
+    >
+      <thead
+        className={cn({
+          [`${tableHeadClassNames}`]: element.theme,
+        })}
+      >
+        <tr
+          className={cn({
+            [`${tableHeadRowClassNames}`]: element.theme,
+          })}
+        >
           {Array(max)
             .fill(null)
             .map((_, index) => {
@@ -53,7 +94,13 @@ export const TableElementContent = ({ element }) => {
               return (
                 <th
                   key={`header-${index}`}
-                  className={cn('text-left px-3 py-1 border-gray-400 font-semibold', { 'border-l': index !== 0 })}
+                  className={cn(
+                    'text-left px-3 py-1 border-gray-400 font-semibold',
+                    { 'border-l': index !== 0 },
+                    {
+                      [`${tableHeadDataClassNames}`]: element.theme,
+                    }
+                  )}
                   style={style}
                 >
                   {header}
@@ -62,9 +109,18 @@ export const TableElementContent = ({ element }) => {
             })}
         </tr>
       </thead>
-      <tbody>
+      <tbody
+        className={cn({
+          [`${tableBodyClassNames}`]: element.theme,
+        })}
+      >
         {rows.map((row, index) => (
-          <tr key={`row-${index}`}>
+          <tr
+            key={`row-${index}`}
+            className={cn({
+              [`${tableBodyRowClassNames}`]: element.theme,
+            })}
+          >
             {Array(max)
               .fill(null)
               .map((_, index) => {
@@ -77,9 +133,15 @@ export const TableElementContent = ({ element }) => {
                 return (
                   <td
                     key={`cell-${index}`}
-                    className={cn('text-left border-gray-400 border-t px-3 py-1', {
-                      'border-l': index !== 0,
-                    })}
+                    className={cn(
+                      'text-left border-gray-400 border-t px-3 py-1',
+                      {
+                        'border-l': index !== 0,
+                      },
+                      {
+                        [`${tableBodyDataClassNames}`]: element.theme,
+                      }
+                    )}
                     style={style}
                   >
                     {cell}
@@ -98,3 +160,4 @@ TableElementContent.propTypes = {
 };
 
 export default Table;
+
