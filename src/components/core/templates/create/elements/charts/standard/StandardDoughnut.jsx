@@ -1,11 +1,11 @@
-import { ChartContainer } from '@/components/ui/chart';
-import { capitalize } from '@/lib/utils';
 import { Pie, PieChart } from 'recharts';
+import { ChartContainer } from '@/components/ui/chart.jsx';
+import { capitalize } from '@/lib/utils.js';
+import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import PropTypes from 'prop-types';
 
-const StandardSemiPie = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardDoughnut = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -16,14 +16,14 @@ const StandardSemiPie = ({ element, active, highlighted, width, onClick, onChang
       highlighted={highlighted}
       editable
     >
-      <StandardSemiPieContent element={element} />
+      <StandardDoughnutContent element={element} />
     </ElementWrapper>
   );
 };
 
-StandardSemiPie.propTypes = ElementPropTypes;
+StandardDoughnut.propTypes = ElementPropTypes;
 
-export const StandardSemiPieContent = ({ element }) => {
+export const StandardDoughnutContent = ({ element }) => {
   const data = element.config.data.map((item, i) => ({
     ...item,
     fill: element.config.colors[i % element.config.colors.length],
@@ -43,14 +43,14 @@ export const StandardSemiPieContent = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <PieChart width={element.width} height={element.height}>
-        <Pie dataKey="value" startAngle={180} endAngle={0} data={data} cx="50%" cy="50%" outerRadius={80} label />
+        <Pie data={data} innerRadius={80} outerRadius={120} paddingAngle={3} dataKey={element.config.keys.data}></Pie>
       </PieChart>
     </ChartContainer>
   );
 };
 
-StandardSemiPieContent.propTypes = {
+StandardDoughnutContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default StandardSemiPie;
+export default StandardDoughnut;

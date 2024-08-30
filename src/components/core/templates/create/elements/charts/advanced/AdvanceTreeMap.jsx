@@ -3,6 +3,22 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
+const AdvanceTreeMap = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <AdvanceTreeMapContent element={element} />
+    </ElementWrapper>
+  );
+};
+
 const CustomizedContent = ({ root, depth, x, y, width, height, index, colors, name }) => {
   return (
     <g>
@@ -44,31 +60,25 @@ CustomizedContent.propTypes = {
   name: PropTypes.string,
 };
 
-const AdvancedTreeMap = ({ element, active, highlighted, width, onClick, onChange }) => {
+AdvanceTreeMap.propTypes = ElementPropTypes;
+
+export const AdvanceTreeMapContent = ({ element }) => {
   return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <Treemap
-        width={element.width}
-        height={element.height}
-        data={element.config.data}
-        className="space"
-        dataKey="size"
-        stroke="#fff"
-        fill="#8884d8"
-        content={<CustomizedContent colors={element.config.colors} />}
-      />
-    </ElementWrapper>
+    <Treemap
+      width={element.width}
+      height={element.height}
+      data={element.config.data}
+      className="space"
+      dataKey="size"
+      stroke="#fff"
+      fill="#8884d8"
+      content={<CustomizedContent colors={element.config.colors} />}
+    />
   );
 };
 
-AdvancedTreeMap.propTypes = ElementPropTypes;
+AdvanceTreeMapContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
-export default AdvancedTreeMap;
+export default AdvanceTreeMap;

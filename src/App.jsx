@@ -35,6 +35,7 @@ import BusinessSettingsPage from '@/pages/settings/BusinessSettingsPage.jsx';
 import AppearanceSettingsPage from '@/pages/settings/AppearanceSettingsPage.jsx';
 import AiAssistantPage from '@/pages/AiAssistantPage.jsx';
 import InvitationPage from '@/pages/InvitationPage.jsx';
+import PresentDesignPage from '@/pages/designs/PresentDesignPage.jsx';
 import 'swiper/css/bundle';
 
 const App = () => {
@@ -89,6 +90,15 @@ const App = () => {
           element={
             <RequireAuthBusiness>
               <EditDesignPage />
+            </RequireAuthBusiness>
+          }
+        />
+
+        <Route
+          path="designs/:id/present"
+          element={
+            <RequireAuthBusiness>
+              <PresentDesignPage />
             </RequireAuthBusiness>
           }
         />

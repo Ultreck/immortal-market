@@ -1,6 +1,6 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import FrameContents from '@/pages/FrameContents.jsx';
+import FrameContents from '@/components/core/templates/create/elements/frames/FrameContents.jsx';
 import BasicCarousel from '@/components/ui/BasicCarousel.jsx';
 import { cn } from '@/lib/utils.js';
 

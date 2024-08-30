@@ -1,21 +1,42 @@
-import Text from '@/components/core/templates/create/elements/Text.jsx';
-import Image from '@/components/core/templates/create/elements/Image.jsx';
-import Table from '@/components/core/templates/create/elements/Table.jsx';
-import KeyValue from '@/components/core/templates/create/elements/KeyValue.jsx';
-import Line from '@/components/core/templates/create/elements/Line.jsx';
-import GenericShape from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
+import Text, { TextElementContent } from '@/components/core/templates/create/elements/Text.jsx';
+import Image, { CanvasImageContent } from '@/components/core/templates/create/elements/Image.jsx';
+import Table, { TableElementContent } from '@/components/core/templates/create/elements/Table.jsx';
+import KeyValue, { KeyValueElementContent } from '@/components/core/templates/create/elements/KeyValue.jsx';
+import Line, { LineElementContent } from '@/components/core/templates/create/elements/Line.jsx';
+import GenericShape, { GenericShapeContent } from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
 import GenericFrameShape from '@/components/core/templates/create/elements/frames/GenericFrameShape.jsx';
-import AdvancedCharts from '@/components/core/templates/create/elements/charts/advanced/AdvancedCharts.jsx';
+import AdvanceCharts from '@/components/core/templates/create/elements/charts/advanced/AdvanceCharts.jsx';
 import FrameTabs from '@/components/core/templates/create/elements/frames/FrameTabs.jsx';
 import FrameCarousel from '@/components/core/templates/create/elements/frames/FrameCarousel.jsx';
 import shapes from '@/lib/templates/shapes.js';
-import Infographic from '@/components/core/templates/create/elements/Infographic.jsx';
-import GenericIcon from '@/components/core/templates/create/elements/GenericIcon';
+import Infographic, { InfographicElementContent } from '@/components/core/templates/create/elements/Infographic.jsx';
+import GenericIcon, { GenericIconContent } from '@/components/core/templates/create/elements/GenericIcon';
 import icons from '@/lib/templates/icons.js';
-import StandardChart from '@/components/core/templates/create/elements/charts/standard/StandardChart.jsx';
+import StandardCharts from '@/components/core/templates/create/elements/charts/standard/StandardCharts.jsx';
+import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
+import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
 
-const charts = {
-  standard: ['bar', 'line', 'pie', 'doughnut', 'bar-horizontal', 'area', 'stacked-bar', 'line-bar', 'line-area', 'rose-pie', 'doughnut-standard', 'doughnut-crazy', 'area-multiple', 'semi-circle', 'vertical-bar', 'semi-pie', 'alt-bar', 'bar-not-sep' ],
+export const charts = {
+  standard: [
+    'bar',
+    'line',
+    'pie',
+    'doughnut',
+    'bar-horizontal',
+    'area',
+    'stacked-bar',
+    'line-bar',
+    'line-area',
+    'rose-pie',
+    'doughnut-standard',
+    'doughnut-crazy',
+    'area-multiple',
+    'semi-circle',
+    'vertical-bar',
+    'semi-pie',
+    'alt-bar',
+    'bar-not-sep',
+  ],
   advanced: [
     'shapes',
     'gender-stats',
@@ -70,37 +91,66 @@ export const tools = {
 };
 
 export const components = {
-  ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
-    acc[type] = Text;
-    return acc;
-  }, {}),
-  ...Object.keys(shapes).reduce((acc, type) => {
-    acc[`shape-${type}`] = GenericShape;
-    return acc;
-  }, {}),
-  ...Object.keys(shapes).reduce((acc, type) => {
-    acc[`frame-${type}`] = GenericFrameShape;
-    return acc;
-  }, {}),
-  ...icons.reduce((acc, icon) => {
-    acc[`icon-${icon.name}`] = GenericIcon;
-    return acc;
-  }, {}),
-  ...charts.standard.reduce((acc, type) => {
-    acc[`chart-s-${type}`] = StandardChart;
-    return acc;
-  }, {}),
-  ...charts.advanced.reduce((acc, type) => {
-    acc[`chart-a-${type}`] = AdvancedCharts;
-    return acc;
-  }, {}),
-  'frame-tabs': FrameTabs,
-  'frame-carousel': FrameCarousel,
-  line: Line,
-  image: Image,
-  table: Table,
-  'key-value': KeyValue,
-  infographic: Infographic,
+  edit: {
+    ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
+      acc[type] = Text;
+      return acc;
+    }, {}),
+    ...Object.keys(shapes).reduce((acc, type) => {
+      acc[`shape-${type}`] = GenericShape;
+      return acc;
+    }, {}),
+    ...Object.keys(shapes).reduce((acc, type) => {
+      acc[`frame-${type}`] = GenericFrameShape;
+      return acc;
+    }, {}),
+    ...icons.reduce((acc, icon) => {
+      acc[`icon-${icon.name}`] = GenericIcon;
+      return acc;
+    }, {}),
+    ...charts.standard.reduce((acc, type) => {
+      acc[`chart-s-${type}`] = StandardCharts;
+      return acc;
+    }, {}),
+    ...charts.advanced.reduce((acc, type) => {
+      acc[`chart-a-${type}`] = AdvanceCharts;
+      return acc;
+    }, {}),
+    'frame-tabs': FrameTabs,
+    'frame-carousel': FrameCarousel,
+    line: Line,
+    image: Image,
+    table: Table,
+    'key-value': KeyValue,
+    infographic: Infographic,
+  },
+  present: {
+    ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
+      acc[type] = TextElementContent;
+      return acc;
+    }, {}),
+    ...Object.keys(shapes).reduce((acc, type) => {
+      acc[`shape-${type}`] = GenericShapeContent;
+      return acc;
+    }, {}),
+    ...icons.reduce((acc, icon) => {
+      acc[`icon-${icon.name}`] = GenericIconContent;
+      return acc;
+    }, {}),
+    ...charts.standard.reduce((acc, type) => {
+      acc[`chart-s-${type}`] = StandardChartsPresent;
+      return acc;
+    }, {}),
+    ...charts.advanced.reduce((acc, type) => {
+      acc[`chart-a-${type}`] = AdvanceChartsPresent;
+      return acc;
+    }, {}),
+    line: LineElementContent,
+    image: CanvasImageContent,
+    table: TableElementContent,
+    'key-value': KeyValueElementContent,
+    infographic: InfographicElementContent,
+  },
 };
 
 export const getElementTools = (type) => {

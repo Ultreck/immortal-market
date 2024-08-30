@@ -1,8 +1,9 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { cn } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import FrameContents from '@/pages/FrameContents.jsx';
+import FrameContents from '@/components/core/templates/create/elements/frames/FrameContents.jsx';
 import shapes from '@/lib/templates/shapes.js';
+import PropTypes from 'prop-types';
 
 const GenericFrameShape = ({ element, active, highlighted, width, onClick, onChange }) => {
   const shape = shapes[element.type.replace('frame-', '')];
@@ -45,5 +46,15 @@ const GenericFrameShape = ({ element, active, highlighted, width, onClick, onCha
 };
 
 GenericFrameShape.propTypes = ElementPropTypes;
+
+export const GenericFrameShapeElementContent = ({ element }) => {
+  const shape = shapes[element.type.replace('frame-', '')];
+
+  return <div className="overflow-hidden relative w-full h-full" style={{ ...element.style, ...shape }}></div>;
+};
+
+GenericFrameShapeElementContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
 export default GenericFrameShape;

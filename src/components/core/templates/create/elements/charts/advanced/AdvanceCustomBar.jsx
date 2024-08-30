@@ -5,8 +5,27 @@ import { Fragment, useMemo } from 'react';
 import { TbCircleFilled } from 'react-icons/tb';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import PropTypes from 'prop-types';
 
-const AdvancedCustomBar = ({ element, active, highlighted, width, onClick, onChange }) => {
+const AdvanceCustomBar = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <AdvancedCustomBarContent element={element} />
+    </ElementWrapper>
+  );
+};
+
+AdvanceCustomBar.propTypes = ElementPropTypes;
+
+export const AdvancedCustomBarContent = ({ element }) => {
   const data = useMemo(() => {
     if (element.config.data.length <= element.config.bars) return element.config.data;
     const visibleData = element.config.data.slice(0, element.config.bars);
@@ -65,15 +84,7 @@ const AdvancedCustomBar = ({ element, active, highlighted, width, onClick, onCha
   };
 
   return renderCardTooltip(
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
+    <>
       {element.config.orientation === 'vertical' && (
         <div className="w-full h-full">
           <div
@@ -182,10 +193,12 @@ const AdvancedCustomBar = ({ element, active, highlighted, width, onClick, onCha
           ))}
         </div>
       )}
-    </ElementWrapper>
+    </>
   );
 };
 
-AdvancedCustomBar.propTypes = ElementPropTypes;
+AdvancedCustomBarContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
-export default AdvancedCustomBar;
+export default AdvanceCustomBar;

@@ -1,8 +1,8 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { cn } from '@/lib/utils.js';
-import { TbTableOff } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import { TbTableOff } from 'react-icons/tb';
 
 const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -16,7 +16,7 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
     >
       <div className="overflow-hidden relative w-full h-full">
         {element.config?.data ? (
-          <Content element={element} />
+          <TableElementContent element={element} />
         ) : (
           <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">
             <p className="text-lg font-bold">
@@ -30,7 +30,9 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
   );
 };
 
-const Content = ({ element }) => {
+Table.propTypes = ElementPropTypes;
+
+export const TableElementContent = ({ element }) => {
   const headers = element.config.data[0];
   const rows = element.config.data.slice(1);
   const max = Math.max(...element.config.data.map((row) => row.length));
@@ -91,14 +93,8 @@ const Content = ({ element }) => {
   );
 };
 
-Table.propTypes = ElementPropTypes;
-Content.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.shape({
-      data: PropTypes.array.isRequired,
-    }),
-    style: PropTypes.object,
-  }),
+TableElementContent.propTypes = {
+  element: PropTypes.object.isRequired,
 };
 
 export default Table;

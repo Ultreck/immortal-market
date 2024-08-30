@@ -1,11 +1,11 @@
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardBarNotSep = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardVerticalBar = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -16,14 +16,14 @@ const StandardBarNotSep = ({ element, active, highlighted, width, onClick, onCha
       highlighted={highlighted}
       editable
     >
-      <StandardBarNotSepContent element={element} />
+      <StandardVerticalBarContent element={element} />
     </ElementWrapper>
   );
 };
 
-StandardBarNotSep.propTypes = ElementPropTypes;
+StandardVerticalBar.propTypes = ElementPropTypes;
 
-export const StandardBarNotSepContent = ({ element }) => {
+export const StandardVerticalBarContent = ({ element }) => {
   const chartData = element.config.data.map((item, index) => {
     const color = element.config.colors[index % element.config.colors.length];
     return { ...item, fill: color };
@@ -34,18 +34,17 @@ export const StandardBarNotSepContent = ({ element }) => {
       config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <BarChart accessibilityLayer data={chartData} barGap={0} barCategoryGap={0}>
-        <CartesianGrid vertical={false} horizontal={false} />
-        <XAxis
+      <BarChart accessibilityLayer data={chartData} layout="vertical">
+        <XAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
+        <YAxis
           dataKey={element.config.keys.x}
+          type="category"
           tickLine={false}
           tickMargin={10}
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
-          interval={0}
           hide={element.config.showXYaxis}
         />
-        <YAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         <Bar dataKey={element.config.keys.y} radius={8} />
       </BarChart>
@@ -53,8 +52,8 @@ export const StandardBarNotSepContent = ({ element }) => {
   );
 };
 
-StandardBarNotSepContent.propTypes = {
+StandardVerticalBarContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default StandardBarNotSep;
+export default StandardVerticalBar;

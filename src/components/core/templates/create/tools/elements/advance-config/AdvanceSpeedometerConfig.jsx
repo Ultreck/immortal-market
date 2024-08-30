@@ -1,9 +1,9 @@
 import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils';
 import { Button, Select, SelectItem, Slider, Textarea } from '@nextui-org/react';
-import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
 
-const AdvanceSpedometerConfig = ({ element, onChange }) => {
+const AdvanceSpeedometerConfig = ({ element, onChange }) => {
   const { handleSubmit, watch, control } = useForm({
     defaultValues: {
       json: JSON.stringify(element.config.data, null, 2),
@@ -22,8 +22,6 @@ const AdvanceSpedometerConfig = ({ element, onChange }) => {
     onChange({ ...element, config: { ...element.config, keys: rest, data } });
   };
 
-  console.log(element.type);
-  
   return (
     <div>
       {element.type === 'chart-a-speedometer' && (
@@ -122,5 +120,9 @@ const AdvanceSpedometerConfig = ({ element, onChange }) => {
   );
 };
 
-export default AdvanceSpedometerConfig;
+AdvanceSpeedometerConfig.propTypes = {
+  element: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
+export default AdvanceSpeedometerConfig;

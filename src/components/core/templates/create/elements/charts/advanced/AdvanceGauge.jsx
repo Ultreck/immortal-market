@@ -1,20 +1,30 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import ElementWrapper from '../../../ElementWrapper';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import PropTypes from 'prop-types';
 
-const defaultColors = [
-  '#5470c6',
-  '#91cc75',
-  '#fac858',
-  '#ee6666',
-  '#73c0de',
-  '#3ba272',
-  '#fc8452',
-  '#9a60b4',
-  '#ea7ccc',
-];
+const AdvanceGauge = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      resizeHandles={['e']}
+      editable
+      fit
+    >
+      <AdvanceGaugeContent element={element} />
+    </ElementWrapper>
+  );
+};
 
-const AdvancedGuageChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+AdvanceGauge.propTypes = ElementPropTypes;
+
+export const AdvanceGaugeContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -90,22 +100,11 @@ const AdvancedGuageChart = ({ element, active, highlighted, width, onClick, onCh
     };
   }, [element]);
 
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <div ref={chartRef} style={{ width: element.width, height: element.height }} />
-    </ElementWrapper>
-  );
+  return <div ref={chartRef} style={{ width: element.width, height: element.height }} />;
 };
 
-export default AdvancedGuageChart;
+AdvanceGaugeContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
+export default AdvanceGauge;

@@ -33,8 +33,8 @@ const FrameContents = ({ id, element, active, isEditing, onChange, overlay, styl
             const active = selectedElements.includes(el.id);
             return (
               <Fragment key={el.id}>
-                {components[el.type] ? (
-                  createElement(components[el.type], {
+                {components.edit[el.type] ? (
+                  createElement(components.edit[el.type], {
                     element: el,
                     active,
                     onClick: () => {

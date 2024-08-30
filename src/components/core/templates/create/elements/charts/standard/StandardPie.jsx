@@ -1,32 +1,37 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const defaultColors = [
-  '#5470c6',
-  '#91cc75',
-  '#fac858',
-  '#ee6666',
-  '#73c0de',
-  '#3ba272',
-  '#fc8452',
-  '#9a60b4',
-  '#ea7ccc',
-];
+const StandardPie = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <StandardPieContent element={element} />
+    </ElementWrapper>
+  );
+};
 
-const StandardPieChart = ({ element }) => {
+StandardPie.propTypes = ElementPropTypes;
+
+export const StandardPieContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
     const chart = echarts.init(chartRef.current, 'light');
-
     const option = {
       tooltip: {
         trigger: 'item',
       },
-      color: element.config.data.map(
-        (_, index) => element.config.colors?.[index] || defaultColors[index % defaultColors.length]
-      ),
+      color: element.config.data.map((_, index) => element.config.colors[index % element.config.colors.length]),
       series: [
         {
           name: 'Access From',
@@ -43,26 +48,19 @@ const StandardPieChart = ({ element }) => {
         },
       ],
     };
-
     chart.setOption(option);
-
     return () => {
       chart.dispose();
     };
-  }, [element]);
+  }, [element.config.data, element.config.colors]);
 
   return (
     <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
   );
 };
 
-StandardPieChart.propTypes = {
-  element: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number,
-    style: PropTypes.object,
-    config: PropTypes.object,
-  }),
+StandardPieContent.propTypes = {
+  element: PropTypes.object.isRequired,
 };
 
-export default StandardPieChart;
+export default StandardPie;

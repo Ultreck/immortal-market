@@ -73,8 +73,9 @@ const EditDesignPage = () => {
   return (
     <>
       {isTemplatesLoading ? (
-        <div className="h-screen flex items-center justify-center">
+        <div className="h-screen w-full flex flex-col justify-center items-center text-center">
           <Spinner size="lg" />
+          <p className="mt-6">Loading design..</p>
         </div>
       ) : (
         <>{!!title && <TemplateBuilder />}</>

@@ -2,61 +2,42 @@ import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const colors = [
-  '#2673D9',
-  '#1D9085',
-  '#264A5A',
-  '#E66B5B',
-  '#E8C22C',
-  '#F6881F',
-  '#2BA385',
-  '#E6A333',
-  '#AB52D9',
-  '#D93566',
-];
+const StandardAreaMultiple = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <StandardAreaMultipleContent element={element} />
+    </ElementWrapper>
+  );
+};
 
-const chartData = [
-  { month: 'January', desktop: 186, mobile: 80 },
-  { month: 'February', desktop: 305, mobile: 200 },
-  { month: 'March', desktop: 237, mobile: 120 },
-  { month: 'April', desktop: 73, mobile: 190 },
-  { month: 'May', desktop: 209, mobile: 130 },
-  { month: 'June', desktop: 214, mobile: 140 },
-];
+StandardAreaMultiple.propTypes = ElementPropTypes;
 
-const StandardAreaMultiple = ({ element }) => {
+export const StandardAreaMultipleContent = ({ element }) => {
   const config = {
     [element.config.keys.y]: {
       label: capitalize(element.config.keys.y),
-      color: colors[0],
-    },
-  };
-
-  const chartConfig = {
-    desktop: {
-      label: 'Desktop',
-      color: element.config.colors?.[0] || '#2673D9',
-    },
-    mobile: {
-      label: 'Mobile',
-      color: element.config.colors?.[1] || '#ff0000',
+      color: element.config.colors[0],
     },
   };
 
   return (
     <>
       <ChartContainer
-        config={chartConfig}
+        config={config}
         style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
       >
-        <AreaChart
-          accessibilityLayer
-          data={chartData}
-          style={{
-            opacity: element.style.opacity,
-          }}
-        >
+        <AreaChart accessibilityLayer data={element.config.data} style={{ opacity: element.style.opacity }}>
           <CartesianGrid vertical={false} />
           <XAxis
             dataKey="month"
@@ -67,18 +48,10 @@ const StandardAreaMultiple = ({ element }) => {
           />
           <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
           <Area
-            dataKey="desktop"
+            dataKey={element.config.keys.y}
             type="monotone"
-            fill={chartConfig.desktop.color}
-            stroke={chartConfig.desktop.color}
-            strokeWidth={2}
-            dot={false}
-          />
-          <Area
-            dataKey="mobile"
-            type="monotone"
-            fill={chartConfig.mobile.color}
-            stroke={chartConfig.mobile.color}
+            fill={config[element.config.keys.y].color}
+            stroke={config[element.config.keys.y].color}
             strokeWidth={2}
             dot={false}
           />
@@ -88,13 +61,8 @@ const StandardAreaMultiple = ({ element }) => {
   );
 };
 
-StandardAreaMultiple.propTypes = {
-  element: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number,
-    style: PropTypes.object,
-    config: PropTypes.object,
-  }),
+StandardAreaMultipleContent.propTypes = {
+  element: PropTypes.object.isRequired,
 };
 
 export default StandardAreaMultiple;

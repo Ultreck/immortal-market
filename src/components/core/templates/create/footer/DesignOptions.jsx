@@ -4,8 +4,10 @@ import DeleteModal from '@/components/core/templates/create/footer/DeleteModal.j
 import PublishModal from '@/components/core/templates/create/footer/PublishModal.jsx';
 import useTemplateStore from '@/store/template.js';
 import UnpublishModal from '@/components/core/templates/create/footer/UnpublishModal.jsx';
+import { useParams } from 'react-router-dom';
 
 const DesignOptions = () => {
+  const params = useParams();
   const id = useTemplateStore((state) => state.template.id);
   const type = useTemplateStore((state) => state.template.type);
   const status = useTemplateStore((state) => state.template.status);
@@ -58,7 +60,7 @@ const DesignOptions = () => {
             if (key === 'publish') onPublishOpen();
             if (key === 'unpublish') onUnpublishOpen();
             if (key === 'delete') onDeleteOpen();
-            // if (key === 'present') onPresentOpen();
+            if (key === 'present') window.open(`/designs/${params.id}/present`, '_blank');
           }}
         >
           {options.filter(Boolean).map((action) => (

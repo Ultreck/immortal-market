@@ -1,7 +1,28 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import PropTypes from 'prop-types';
 
-const StandardAltBar = ({ element }) => {
+const StandardAltBar = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <StandardAltBarContent element={element} />
+    </ElementWrapper>
+  );
+};
+
+StandardAltBar.propTypes = ElementPropTypes;
+
+export const StandardAltBarContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -34,9 +55,7 @@ const StandardAltBar = ({ element }) => {
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         },
       ],
-      color: element.config.data.map(
-        (_, index) => element.config.colors?.[index] || defaultColors[index % defaultColors.length]
-      ),
+      color: element.config.data.map((_, index) => element.config.colors[index % element.config.colors.length]),
       series: [
         {
           name: 'Income',
@@ -58,16 +77,19 @@ const StandardAltBar = ({ element }) => {
         },
       ],
     };
-
     myChart.setOption(option);
     return () => {
       myChart.dispose();
     };
   }, [element]);
+
   return (
-    <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }}></div>
+    <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }} />
   );
 };
 
-export default StandardAltBar;
+StandardAltBarContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
+export default StandardAltBar;

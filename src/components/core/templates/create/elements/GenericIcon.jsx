@@ -4,6 +4,7 @@ import { createElement, useRef } from 'react';
 import { useMount } from 'react-use';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import icons from '@/lib/templates/icons.js';
+import PropTypes from 'prop-types';
 
 const GenericIcon = ({ element, active, highlighted, width, onClick, onChange }) => {
   const el = useRef(null);
@@ -18,17 +19,24 @@ const GenericIcon = ({ element, active, highlighted, width, onClick, onChange })
     <ElementWrapper
       element={element}
       onClick={onClick}
-      onChange={(values) => {
-        el.current.style.width = `${values.width}px`;
-        el.current.style.height = `${el.current.scrollHeight}px`;
-        return onChange({ ...element, ...values, height: el.current.scrollHeight });
-      }}
+      onChange={onChange}
       maxWidth={width}
       active={active}
       highlighted={highlighted}
+      fit
     >
+      <GenericIconContent element={element} />
+    </ElementWrapper>
+  );
+};
+
+GenericIcon.propTypes = ElementPropTypes;
+
+export const GenericIconContent = ({ element }) => {
+  return (
+    <>
       {element.config?.name ? (
-        <div ref={el} className="!h-max" style={{ ...element.style, filter: `drop-shadow(${element.style.shadow})` }}>
+        <div className="!h-max" style={{ ...element.style, filter: `drop-shadow(${element.style.shadow})` }}>
           {createElement(icons.find((icon) => icon.name === element.config.name)?.icon, { size: element.width })}
         </div>
       ) : (
@@ -36,10 +44,12 @@ const GenericIcon = ({ element, active, highlighted, width, onClick, onChange })
           <TbIcons size={20} className="opacity-60" />
         </div>
       )}
-    </ElementWrapper>
+    </>
   );
 };
 
-GenericIcon.propTypes = ElementPropTypes;
+GenericIconContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
 export default GenericIcon;

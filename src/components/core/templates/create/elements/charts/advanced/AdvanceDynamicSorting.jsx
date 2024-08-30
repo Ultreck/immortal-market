@@ -2,8 +2,28 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import PropTypes from 'prop-types';
 
-const AdvanceDynamicSortingChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+const AdvanceDynamicSorting = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+      fit
+    >
+      <AdvanceDynamicSortingContent element={element} />
+    </ElementWrapper>
+  );
+};
+
+AdvanceDynamicSorting.propTypes = ElementPropTypes;
+
+export const AdvanceDynamicSortingContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -82,22 +102,11 @@ const AdvanceDynamicSortingChart = ({ element, active, highlighted, width, onCli
     };
   }, [element.config.colors, element.config.data, element.height, element.width]);
 
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-      fit
-    >
-      <div ref={chartRef} style={{ width: '100%', height: element.height }} />
-    </ElementWrapper>
-  );
+  return <div ref={chartRef} style={{ width: '100%', height: element.height }} />;
 };
 
-AdvanceDynamicSortingChart.propTypes = ElementPropTypes;
+AdvanceDynamicSortingContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
-export default AdvanceDynamicSortingChart;
+export default AdvanceDynamicSorting;

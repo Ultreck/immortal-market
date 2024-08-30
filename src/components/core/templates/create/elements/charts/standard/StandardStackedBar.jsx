@@ -8,22 +8,39 @@ import {
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardStackedBar = ({ element }) => {
-  const chartConfig = {
-    desktop: {
-      label: 'Desktop',
-      color: element.config.colors?.[0] || '#2673D9',
-    },
-    mobile: {
-      label: 'Mobile',
-      color: element.config.colors?.[1] || '#ff0000',
-    },
-  };
+const StandardStackedBar = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <StandardStackedBarContent element={element} />
+    </ElementWrapper>
+  );
+};
+
+StandardStackedBar.propTypes = ElementPropTypes;
+
+export const StandardStackedBarContent = ({ element }) => {
+  const config = element.config.data.reduce((acc, item, i) => {
+    acc[item[element.config.keys.x]] = {
+      label: capitalize(item[element.config.keys.x]),
+      color: element.config.colors[i % element.config.colors.length],
+    };
+    return acc;
+  }, {});
 
   return (
     <ChartContainer
-      config={chartConfig}
+      config={config}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <BarChart accessibilityLayer data={element.config.data}>
@@ -37,20 +54,24 @@ const StandardStackedBar = ({ element }) => {
         />
         <ChartTooltip content={<ChartTooltipContent hideLabel />} />
         <ChartLegend content={<ChartLegendContent />} />
-        <Bar dataKey={element.config.keys.y[0]} stackId="a" fill={chartConfig.desktop.color} radius={[0, 0, 4, 4]} />
-        <Bar dataKey={element.config.keys.y[1]} stackId="a" fill={chartConfig.mobile.color} radius={[4, 4, 0, 0]} />
+        {element.config.keys.y.map((key, index) => {
+          return (
+            <Bar
+              key={key}
+              dataKey={key}
+              stackId="a"
+              fill={element.config.colors[index % element.config.colors.length]}
+              radius={[index === 0 ? 0 : 4, index === 0 ? 4 : 0, index === 1 ? 0 : 4, index === 1 ? 4 : 0]}
+            />
+          );
+        })}
       </BarChart>
     </ChartContainer>
   );
 };
 
-StandardStackedBar.propTypes = {
-  element: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number,
-    style: PropTypes.object,
-    config: PropTypes.object,
-  }),
+StandardStackedBarContent.propTypes = {
+  element: PropTypes.object.isRequired,
 };
 
 export default StandardStackedBar;

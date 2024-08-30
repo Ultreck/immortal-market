@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Tab, Tabs } from '@nextui-org/react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import FrameContents from '@/pages/FrameContents.jsx';
+import FrameContents from '@/components/core/templates/create/elements/frames/FrameContents.jsx';
 
 const FrameTabs = ({ element, active, highlighted, width, onClick, onChange }) => {
   const [selected, setSelected] = useState(0);

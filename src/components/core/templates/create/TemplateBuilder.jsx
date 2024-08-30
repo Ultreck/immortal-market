@@ -1,4 +1,4 @@
-import Canvas from './Canvas.jsx';
+import Editor from './Editor.jsx';
 import { DndContext, MouseSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import useTemplateStore from '@/store/template.js';
@@ -68,7 +68,7 @@ const TemplateBuilder = () => {
       <div className="grid grid-cols-[auto_1fr] gap-0 h-screen overflow-hidden">
         <Sidebar />
         <div className="flex flex-col overflow-hidden relative bg-default-100 dark:bg-zinc-950">
-          <Canvas />
+          <Editor />
           <StatusBar />
         </div>
       </div>

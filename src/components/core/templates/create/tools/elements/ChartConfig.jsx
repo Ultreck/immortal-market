@@ -13,7 +13,6 @@ import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils.js';
 import { TbSettings2 } from 'react-icons/tb';
-import { useState } from 'react';
 
 const ChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -61,403 +60,391 @@ const ChartData = ({ element, onChange, onClose }) => {
     onClose();
   };
 
-  const [selectedIndex, setSelectedIndex] = useState(null);
-  const colors = element.config.colors || {};
-
-  const updateColor = (color) => {
-    if (selectedIndex !== null) {
-      const newColors = { ...colors, [selectedIndex]: color };
-      onChange({ ...element, config: { ...element.config, colors: newColors } });
-    }
-  };
-
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} className="h-[300px] overflow-y-auto">
-        <div className="space-y-6">
-          <Controller
-            name="json"
-            control={control}
-            rules={{
-              required: 'A valid JSON array is required',
-              validate: (value) => isValidJsonArray(value),
-            }}
-            render={({ field, fieldState: { error } }) => {
-              const message = error?.type === 'validate' ? 'Invalid JSON array' : error?.message;
-              return (
-                <Textarea
-                  classNames={{ inputWrapper: 'px-5 py-5' }}
-                  minRows="10"
-                  label="Paste JSON Array Here.."
-                  bordered
-                  {...field}
-                  errorMessage={message}
-                  isInvalid={!!message}
-                />
-              );
-            }}
-          />
-          <div className="grid grid-cols-2 gap-2">
-            {Object.keys(element.config.keys).map((name) => {
-              return (
-                <Controller
-                  key={name}
-                  name={name}
-                  control={control}
-                  rules={{ required: `${name} is required` }}
-                  render={({ field, fieldState: { error } }) => (
-                    <Select
-                      name={field.name}
-                      label={capitalize(name)}
-                      variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
-                      size="lg"
-                      selectedKeys={field.value ? [field.value] : []}
-                      onChange={(e) => field.onChange(e)}
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
-                    >
-                      {keys.map((key) => (
-                        <SelectItem key={key} classNames={{ title: 'text-base px-2' }}>
-                          {key}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-              );
-            })}
-          </div>
-          {element.type === 'chart-s-line' && (
-            <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex flex-col space-y-6">
+        <Controller
+          name="json"
+          control={control}
+          rules={{
+            required: 'A valid JSON array is required',
+            validate: (value) => isValidJsonArray(value),
+          }}
+          render={({ field, fieldState: { error } }) => {
+            const message = error?.type === 'validate' ? 'Invalid JSON array' : error?.message;
+            return (
+              <Textarea
+                classNames={{ inputWrapper: 'px-5 py-5' }}
+                minRows="10"
+                label="Paste JSON Array Here.."
+                bordered
+                {...field}
+                errorMessage={message}
+                isInvalid={!!message}
+              />
+            );
+          }}
+        />
+        <div className="grid grid-cols-2 gap-2">
+          {Object.keys(element.config.keys).map((name) => {
+            return (
               <Controller
-                name="type"
+                key={name}
+                name={name}
                 control={control}
-                rules={{ required: `type is required` }}
+                rules={{ required: `${name} is required` }}
                 render={({ field, fieldState: { error } }) => (
                   <Select
                     name={field.name}
-                    label="Type"
+                    label={capitalize(name)}
                     variant="bordered"
                     labelPlacement="outside"
                     placeholder="Select one"
                     size="lg"
-                    selectedKeys={element.config.type ? [element.config.type] : []}
-                    onChange={(e) => onChange({ ...element, config: { ...element.config, type: e.target.value } })}
+                    selectedKeys={field.value ? [field.value] : []}
+                    onChange={(e) => field.onChange(e)}
                     errorMessage={error?.message}
                     isInvalid={!!error?.message}
                     classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
                     disableEmptySelection={true}
                   >
-                    <SelectItem key="line" classNames={{ title: 'text-base px-2' }}>
-                      Line
-                    </SelectItem>
-                    <SelectItem key="multiple" classNames={{ title: 'text-base px-2' }}>
-                      Multiple
-                    </SelectItem>
+                    {keys.map((key) => (
+                      <SelectItem key={key} classNames={{ title: 'text-base px-2' }}>
+                        {key}
+                      </SelectItem>
+                    ))}
                   </Select>
                 )}
               />
-            </div>
-          )}
-          {element.type === 'chart-s-area' && (
-            <div>
-              <Controller
-                name="type"
-                control={control}
-                rules={{ required: `type is required` }}
-                render={({ field, fieldState: { error } }) => (
-                  <Select
-                    name={field.name}
-                    label="Type"
-                    variant="bordered"
-                    labelPlacement="outside"
-                    placeholder="Select one"
-                    size="lg"
-                    selectedKeys={element.config.type ? [element.config.type] : []}
-                    onChange={(e) => onChange({ ...element, config: { ...element.config, type: e.target.value } })}
-                    errorMessage={error?.message}
-                    isInvalid={!!error?.message}
-                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                    disableEmptySelection={true}
-                  >
-                    <SelectItem key="line" classNames={{ title: 'text-base px-2' }}>
-                      Line
-                    </SelectItem>
-                    <SelectItem key="multiple" classNames={{ title: 'text-base px-2' }}>
-                      Multiple
-                    </SelectItem>
-                  </Select>
-                )}
-              />
-            </div>
-          )}
-          {element.type === 'chart-s-doughnut' && (
-            <div>
-              <Controller
-                name="type"
-                control={control}
-                rules={{ required: `type is required` }}
-                render={({ field, fieldState: { error } }) => (
-                  <Select
-                    name={field.name}
-                    label="Type"
-                    variant="bordered"
-                    labelPlacement="outside"
-                    placeholder="Select one"
-                    size="lg"
-                    selectedKeys={element.config.type ? [element.config.type] : []}
-                    onChange={(e) => onChange({ ...element, config: { ...element.config, type: e.target.value } })}
-                    errorMessage={error?.message}
-                    isInvalid={!!error?.message}
-                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                    disableEmptySelection={true}
-                  >
-                    <SelectItem key="normal" classNames={{ title: 'text-base px-2' }}>
-                      Normal
-                    </SelectItem>
-                    <SelectItem key="standard" classNames={{ title: 'text-base px-2' }}>
-                      Standard
-                    </SelectItem>
-                    <SelectItem key="crazy" classNames={{ title: 'text-base px-2' }}>
-                      Crazy
-                    </SelectItem>
-                  </Select>
-                )}
-              />
-            </div>
-          )}
-          {element.type === 'chart-s-line-area' && (
-            <>
-              <div className="">
-                <Controller
-                  name="orientation"
-                  control={control}
-                  rules={{ required: `orientation is required` }}
-                  render={({ field, fieldState: { error } }) => (
-                    <Select
-                      name={field.name}
-                      label="Orientation"
-                      variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
-                      size="lg"
-                      selectedKeys={element.config.orientation ? [element.config.orientation] : []}
-                      onChange={(e) =>
-                        onChange({ ...element, config: { ...element.config, orientation: e.target.value } })
-                      }
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
-                    >
-                      <SelectItem key="vertical" classNames={{ title: 'text-base px-2' }}>
-                        Vertical
-                      </SelectItem>
-                      <SelectItem key="horizontal" classNames={{ title: 'text-base px-2' }}>
-                        Horizontal
-                      </SelectItem>
-                    </Select>
-                  )}
-                />
-              </div>
-              <div>
-                <Controller
-                  name="showXYaxis"
-                  control={control}
-                  rules={{ required: `showXYaxis is required` }}
-                  render={({ field }) => (
-                    <Switch
-                      name={field.name}
-                      variant="bordered"
-                      size="lg"
-                      onChange={(e) =>
-                        onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
-                      }
-                    >
-                      Show X and Y Axis
-                    </Switch>
-                  )}
-                />
-              </div>
-              <div>
-                <Controller
-                  name="showLegend"
-                  control={control}
-                  rules={{ required: `showLegend is required` }}
-                  render={({ field }) => (
-                    <Switch
-                      name={field.name}
-                      variant="bordered"
-                      size="lg"
-                      onChange={(e) =>
-                        onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
-                      }
-                    >
-                      Show Legend
-                    </Switch>
-                  )}
-                />
-              </div>
-            </>
-          )}
-          {element.type === 'chart-s-line-bar' && (
-            <>
-              <div className="">
-                <Controller
-                  name="orientation"
-                  control={control}
-                  rules={{ required: `orientation is required` }}
-                  render={({ field, fieldState: { error } }) => (
-                    <Select
-                      name={field.name}
-                      label="Orientation"
-                      variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
-                      size="lg"
-                      selectedKeys={element.config.orientation ? [element.config.orientation] : []}
-                      onChange={(e) =>
-                        onChange({ ...element, config: { ...element.config, orientation: e.target.value } })
-                      }
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
-                    >
-                      <SelectItem key="vertical" classNames={{ title: 'text-base px-2' }}>
-                        Vertical
-                      </SelectItem>
-                      <SelectItem key="horizontal" classNames={{ title: 'text-base px-2' }}>
-                        Horizontal
-                      </SelectItem>
-                    </Select>
-                  )}
-                />
-              </div>
-              <div>
-                <Controller
-                  name="showXYaxis"
-                  control={control}
-                  rules={{ required: `showXYaxis is required` }}
-                  render={({ field }) => (
-                    <Switch
-                      name={field.name}
-                      variant="bordered"
-                      size="lg"
-                      onChange={(e) =>
-                        onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
-                      }
-                    >
-                      Show X and Y Axis
-                    </Switch>
-                  )}
-                />
-              </div>
-              <div>
-                <Controller
-                  name="showLegend"
-                  control={control}
-                  rules={{ required: `showLegend is required` }}
-                  render={({ field }) => (
-                    <Switch
-                      name={field.name}
-                      variant="bordered"
-                      size="lg"
-                      onChange={(e) =>
-                        onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
-                      }
-                    >
-                      Show Legend
-                    </Switch>
-                  )}
-                />
-              </div>
-            </>
-          )}
-          {element.type === 'chart-s-bar' && (
-            <>
-              <div className="">
-                <Controller
-                  name="orientation"
-                  control={control}
-                  rules={{ required: `orientation is required` }}
-                  render={({ field, fieldState: { error } }) => (
-                    <Select
-                      name={field.name}
-                      label="Orientation"
-                      variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Select one"
-                      size="lg"
-                      selectedKeys={element.config.orientation ? [element.config.orientation] : []}
-                      onChange={(e) =>
-                        onChange({ ...element, config: { ...element.config, orientation: e.target.value } })
-                      }
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
-                    >
-                      <SelectItem key="vertical" classNames={{ title: 'text-base px-2' }}>
-                        Vertical
-                      </SelectItem>
-                      <SelectItem key="horizontal" classNames={{ title: 'text-base px-2' }}>
-                        Horizontal
-                      </SelectItem>
-                    </Select>
-                  )}
-                />
-              </div>
-              <div>
-                <Controller
-                  name="showXYaxis"
-                  control={control}
-                  rules={{ required: `showXYaxis is required` }}
-                  render={({ field }) => (
-                    <Switch
-                      name={field.name}
-                      variant="bordered"
-                      size="lg"
-                      onChange={(e) =>
-                        onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
-                      }
-                    >
-                      Show X and Y Axis
-                    </Switch>
-                  )}
-                />
-              </div>
-              <div>
-                <Controller
-                  name="showLegend"
-                  control={control}
-                  rules={{ required: `showLegend is required` }}
-                  render={({ field }) => (
-                    <Switch
-                      name={field.name}
-                      variant="bordered"
-                      size="lg"
-                      onChange={(e) =>
-                        onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
-                      }
-                    >
-                      Show Legend
-                    </Switch>
-                  )}
-                />
-              </div>
-            </>
-          )}
+            );
+          })}
         </div>
-        <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
-          Apply
-        </Button>
-      </form>
-    </>
+        {element.type === 'chart-s-line' && (
+          <div>
+            <Controller
+              name="type"
+              control={control}
+              rules={{ required: `type is required` }}
+              render={({ field, fieldState: { error } }) => (
+                <Select
+                  name={field.name}
+                  label="Type"
+                  variant="bordered"
+                  labelPlacement="outside"
+                  placeholder="Select one"
+                  size="lg"
+                  selectedKeys={element.config.type ? [element.config.type] : []}
+                  onChange={(e) => onChange({ ...element, config: { ...element.config, type: e.target.value } })}
+                  errorMessage={error?.message}
+                  isInvalid={!!error?.message}
+                  classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                  disableEmptySelection={true}
+                >
+                  <SelectItem key="line" classNames={{ title: 'text-base px-2' }}>
+                    Line
+                  </SelectItem>
+                  <SelectItem key="multiple" classNames={{ title: 'text-base px-2' }}>
+                    Multiple
+                  </SelectItem>
+                </Select>
+              )}
+            />
+          </div>
+        )}
+        {element.type === 'chart-s-area' && (
+          <div>
+            <Controller
+              name="type"
+              control={control}
+              rules={{ required: `type is required` }}
+              render={({ field, fieldState: { error } }) => (
+                <Select
+                  name={field.name}
+                  label="Type"
+                  variant="bordered"
+                  labelPlacement="outside"
+                  placeholder="Select one"
+                  size="lg"
+                  selectedKeys={element.config.type ? [element.config.type] : []}
+                  onChange={(e) => onChange({ ...element, config: { ...element.config, type: e.target.value } })}
+                  errorMessage={error?.message}
+                  isInvalid={!!error?.message}
+                  classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                  disableEmptySelection={true}
+                >
+                  <SelectItem key="line" classNames={{ title: 'text-base px-2' }}>
+                    Line
+                  </SelectItem>
+                  <SelectItem key="multiple" classNames={{ title: 'text-base px-2' }}>
+                    Multiple
+                  </SelectItem>
+                </Select>
+              )}
+            />
+          </div>
+        )}
+        {element.type === 'chart-s-doughnut' && (
+          <div>
+            <Controller
+              name="type"
+              control={control}
+              rules={{ required: `type is required` }}
+              render={({ field, fieldState: { error } }) => (
+                <Select
+                  name={field.name}
+                  label="Type"
+                  variant="bordered"
+                  labelPlacement="outside"
+                  placeholder="Select one"
+                  size="lg"
+                  selectedKeys={element.config.type ? [element.config.type] : []}
+                  onChange={(e) => onChange({ ...element, config: { ...element.config, type: e.target.value } })}
+                  errorMessage={error?.message}
+                  isInvalid={!!error?.message}
+                  classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                  disableEmptySelection={true}
+                >
+                  <SelectItem key="normal" classNames={{ title: 'text-base px-2' }}>
+                    Normal
+                  </SelectItem>
+                  <SelectItem key="standard" classNames={{ title: 'text-base px-2' }}>
+                    Standard
+                  </SelectItem>
+                  <SelectItem key="crazy" classNames={{ title: 'text-base px-2' }}>
+                    Crazy
+                  </SelectItem>
+                </Select>
+              )}
+            />
+          </div>
+        )}
+        {element.type === 'chart-s-line-area' && (
+          <>
+            <div>
+              <Controller
+                name="orientation"
+                control={control}
+                rules={{ required: `orientation is required` }}
+                render={({ field, fieldState: { error } }) => (
+                  <Select
+                    name={field.name}
+                    label="Orientation"
+                    variant="bordered"
+                    labelPlacement="outside"
+                    placeholder="Select one"
+                    size="lg"
+                    selectedKeys={element.config.orientation ? [element.config.orientation] : []}
+                    onChange={(e) =>
+                      onChange({ ...element, config: { ...element.config, orientation: e.target.value } })
+                    }
+                    errorMessage={error?.message}
+                    isInvalid={!!error?.message}
+                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                    disableEmptySelection={true}
+                  >
+                    <SelectItem key="vertical" classNames={{ title: 'text-base px-2' }}>
+                      Vertical
+                    </SelectItem>
+                    <SelectItem key="horizontal" classNames={{ title: 'text-base px-2' }}>
+                      Horizontal
+                    </SelectItem>
+                  </Select>
+                )}
+              />
+            </div>
+            <div>
+              <Controller
+                name="showXYaxis"
+                control={control}
+                rules={{ required: `showXYaxis is required` }}
+                render={({ field }) => (
+                  <Switch
+                    name={field.name}
+                    variant="bordered"
+                    size="lg"
+                    onChange={(e) =>
+                      onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
+                    }
+                  >
+                    Show X and Y Axis
+                  </Switch>
+                )}
+              />
+            </div>
+            <div>
+              <Controller
+                name="showLegend"
+                control={control}
+                rules={{ required: `showLegend is required` }}
+                render={({ field }) => (
+                  <Switch
+                    name={field.name}
+                    variant="bordered"
+                    size="lg"
+                    onChange={(e) =>
+                      onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
+                    }
+                  >
+                    Show Legend
+                  </Switch>
+                )}
+              />
+            </div>
+          </>
+        )}
+        {element.type === 'chart-s-line-bar' && (
+          <>
+            <div>
+              <Controller
+                name="orientation"
+                control={control}
+                rules={{ required: `orientation is required` }}
+                render={({ field, fieldState: { error } }) => (
+                  <Select
+                    name={field.name}
+                    label="Orientation"
+                    variant="bordered"
+                    labelPlacement="outside"
+                    placeholder="Select one"
+                    size="lg"
+                    selectedKeys={element.config.orientation ? [element.config.orientation] : []}
+                    onChange={(e) =>
+                      onChange({ ...element, config: { ...element.config, orientation: e.target.value } })
+                    }
+                    errorMessage={error?.message}
+                    isInvalid={!!error?.message}
+                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                    disableEmptySelection={true}
+                  >
+                    <SelectItem key="vertical" classNames={{ title: 'text-base px-2' }}>
+                      Vertical
+                    </SelectItem>
+                    <SelectItem key="horizontal" classNames={{ title: 'text-base px-2' }}>
+                      Horizontal
+                    </SelectItem>
+                  </Select>
+                )}
+              />
+            </div>
+            <div>
+              <Controller
+                name="showXYaxis"
+                control={control}
+                rules={{ required: `showXYaxis is required` }}
+                render={({ field }) => (
+                  <Switch
+                    name={field.name}
+                    variant="bordered"
+                    size="lg"
+                    onChange={(e) =>
+                      onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
+                    }
+                  >
+                    Show X and Y Axis
+                  </Switch>
+                )}
+              />
+            </div>
+            <div>
+              <Controller
+                name="showLegend"
+                control={control}
+                rules={{ required: `showLegend is required` }}
+                render={({ field }) => (
+                  <Switch
+                    name={field.name}
+                    variant="bordered"
+                    size="lg"
+                    onChange={(e) =>
+                      onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
+                    }
+                  >
+                    Show Legend
+                  </Switch>
+                )}
+              />
+            </div>
+          </>
+        )}
+        {element.type === 'chart-s-bar' && (
+          <>
+            <div>
+              <Controller
+                name="orientation"
+                control={control}
+                rules={{ required: `orientation is required` }}
+                render={({ field, fieldState: { error } }) => (
+                  <Select
+                    name={field.name}
+                    label="Orientation"
+                    variant="bordered"
+                    labelPlacement="outside"
+                    placeholder="Select one"
+                    size="lg"
+                    selectedKeys={element.config.orientation ? [element.config.orientation] : []}
+                    onChange={(e) =>
+                      onChange({ ...element, config: { ...element.config, orientation: e.target.value } })
+                    }
+                    errorMessage={error?.message}
+                    isInvalid={!!error?.message}
+                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                    disableEmptySelection={true}
+                  >
+                    <SelectItem key="vertical" classNames={{ title: 'text-base px-2' }}>
+                      Vertical
+                    </SelectItem>
+                    <SelectItem key="horizontal" classNames={{ title: 'text-base px-2' }}>
+                      Horizontal
+                    </SelectItem>
+                  </Select>
+                )}
+              />
+            </div>
+            <div>
+              <Controller
+                name="showXYaxis"
+                control={control}
+                rules={{ required: `showXYaxis is required` }}
+                render={({ field }) => (
+                  <Switch
+                    name={field.name}
+                    variant="bordered"
+                    size="lg"
+                    onChange={(e) =>
+                      onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
+                    }
+                  >
+                    Show X and Y Axis
+                  </Switch>
+                )}
+              />
+            </div>
+            <div>
+              <Controller
+                name="showLegend"
+                control={control}
+                rules={{ required: `showLegend is required` }}
+                render={({ field }) => (
+                  <Switch
+                    name={field.name}
+                    variant="bordered"
+                    size="lg"
+                    onChange={(e) =>
+                      onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
+                    }
+                  >
+                    Show Legend
+                  </Switch>
+                )}
+              />
+            </div>
+          </>
+        )}
+      </div>
+      <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
+        Apply
+      </Button>
+    </form>
   );
 };
 
@@ -477,6 +464,7 @@ const propTypes = {
 };
 
 ChartConfig.propTypes = propTypes;
+
 ChartData.propTypes = { ...propTypes, onBack: PropTypes.func, onClose: PropTypes.func };
 
 export default ChartConfig;

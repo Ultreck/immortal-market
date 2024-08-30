@@ -15,7 +15,7 @@ const KeyValue = ({ element, active, highlighted, width, onClick, onChange }) =>
     >
       <div className="overflow-hidden relative w-full h-full">
         {element.config?.data ? (
-          <Content element={element} />
+          <KeyValueElementContent element={element} />
         ) : (
           <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">
             <p className="text-lg font-bold">
@@ -29,7 +29,9 @@ const KeyValue = ({ element, active, highlighted, width, onClick, onChange }) =>
   );
 };
 
-const Content = ({ element }) => {
+KeyValue.propTypes = ElementPropTypes;
+
+export const KeyValueElementContent = ({ element }) => {
   const header = element.config.data[0];
   const rows = element.config.data.slice(1);
 
@@ -63,14 +65,8 @@ const Content = ({ element }) => {
   );
 };
 
-KeyValue.propTypes = ElementPropTypes;
-Content.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.shape({
-      data: PropTypes.array.isRequired,
-    }),
-    style: PropTypes.object,
-  }),
+KeyValueElementContent.propTypes = {
+  element: PropTypes.object.isRequired,
 };
 
 export default KeyValue;

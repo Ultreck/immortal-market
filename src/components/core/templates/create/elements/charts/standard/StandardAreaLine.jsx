@@ -2,25 +2,32 @@ import { Area, CartesianGrid, ComposedChart, Line, XAxis, YAxis } from 'recharts
 import { ChartContainer } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const colors = [
-  '#E66B5B',
-  '#1D9085',
-  '#264A5A',
-  '#E8C22C',
-  '#F6881F',
-  '#2673D9',
-  '#2BA385',
-  '#E6A333',
-  '#AB52D9',
-  '#D93566',
-];
+const StandardAreaLine = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <StandardAreaLineContent element={element} />
+    </ElementWrapper>
+  );
+};
 
-const StandardAreaLineChart = ({ element }) => {
+StandardAreaLine.propTypes = ElementPropTypes;
+
+export const StandardAreaLineContent = ({ element }) => {
   const config = element.config.data.reduce((acc, item, i) => {
     acc[item[element.config.keys.x]] = {
       label: capitalize(item[element.config.keys.x]),
-      color: colors[i],
+      color: element.config.colors[i % element.config.colors.length],
     };
     return acc;
   }, {});
@@ -51,13 +58,8 @@ const StandardAreaLineChart = ({ element }) => {
   );
 };
 
-StandardAreaLineChart.propTypes = {
-  element: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number,
-    style: PropTypes.object,
-    config: PropTypes.object,
-  }),
+StandardAreaLineContent.propTypes = {
+  element: PropTypes.object.isRequired,
 };
 
-export default StandardAreaLineChart;
+export default StandardAreaLine;

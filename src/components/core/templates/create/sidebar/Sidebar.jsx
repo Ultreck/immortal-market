@@ -8,7 +8,7 @@ import Uploads from '@/components/core/templates/create/Uploads.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import Charts from '@/components/core/templates/create/sidebar/data/Charts.jsx';
 import { Tooltip } from '@nextui-org/react';
-import Infographics from '@/components/core/templates/create/Infographics.jsx';
+import Infographics from '@/components/core/templates/create/sidebar/graphics/Infographics.jsx';
 import { TbBrush, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
 
 const Sidebar = () => {

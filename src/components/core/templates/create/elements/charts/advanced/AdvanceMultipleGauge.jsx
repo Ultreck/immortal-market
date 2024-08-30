@@ -1,20 +1,30 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import ElementWrapper from '../../../ElementWrapper';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import PropTypes from 'prop-types';
 
-const defaultColors = [
-    '#5470c6',
-    '#91cc75',
-    '#fac858',
-    '#ee6666',
-    '#73c0de',
-    '#3ba272',
-    '#fc8452',
-    '#9a60b4',
-    '#ea7ccc',
-  ];
+const AdvanceMultipleGauge = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      resizeHandles={['e']}
+      editable
+      fit
+    >
+      <AdvanceMultipleGaugeContent element={element} />
+    </ElementWrapper>
+  );
+};
 
-const AdvanceMultipleGuageChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+AdvanceMultipleGauge.propTypes = ElementPropTypes;
+
+export const AdvanceMultipleGaugeContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -45,9 +55,7 @@ const AdvanceMultipleGuageChart = ({ element, active, highlighted, width, onClic
         chart = echarts.init(chartRef.current);
 
         const option = {
-          color: element.config.data.map(
-            (_, index) => element.config.colors?.[index] || defaultColors[index % defaultColors.length]
-          ),
+          color: element.config.colors,
           series: [
             {
               type: 'gauge',
@@ -96,22 +104,11 @@ const AdvanceMultipleGuageChart = ({ element, active, highlighted, width, onClic
     };
   }, [element]);
 
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <div ref={chartRef} style={{ width: element.width, height: element.height }} />
-    </ElementWrapper>
-  );
+  return <div ref={chartRef} style={{ width: element.width, height: element.height }} />;
 };
 
-export default AdvanceMultipleGuageChart;
+AdvanceMultipleGaugeContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
+export default AdvanceMultipleGauge;

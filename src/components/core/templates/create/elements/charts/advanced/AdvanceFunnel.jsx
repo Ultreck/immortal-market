@@ -2,8 +2,27 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import PropTypes from 'prop-types';
 
-const AdvancedFunnelChart = ({ element, active, highlighted, width, onClick, onChange }) => {
+const AdvanceFunnel = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <AdvanceFunnelChartContent element={element} />
+    </ElementWrapper>
+  );
+};
+
+AdvanceFunnel.propTypes = ElementPropTypes;
+
+export const AdvanceFunnelChartContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -61,20 +80,12 @@ const AdvancedFunnelChart = ({ element, active, highlighted, width, onClick, onC
   }, [element.config.data, element.config.colors, element.width, element.height]);
 
   return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
-    </ElementWrapper>
+    <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
   );
 };
 
-AdvancedFunnelChart.propTypes = ElementPropTypes;
+AdvanceFunnelChartContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
-export default AdvancedFunnelChart;
+export default AdvanceFunnel;

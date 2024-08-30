@@ -215,6 +215,7 @@ const StandardCharts = () => {
             { name: 'Page G', value: 3490 },
           ],
           keys: { name: 'name', data: 'value' },
+          colors,
         },
       },
       preview: (
@@ -233,8 +234,8 @@ const StandardCharts = () => {
       data: {
         type: 'chart-s-doughnut',
         text: 'Doughnut Chart',
-        width: 500,
-        height: 500,
+        width: 400,
+        height: 400,
         style: { opacity: 1 },
         config: {
           data: [
@@ -246,9 +247,9 @@ const StandardCharts = () => {
             { name: 'Page F', value: 2390 },
             { name: 'Page G', value: 3490 },
           ],
-          keys: { name: 'name', data: 'data' },
+          keys: { name: 'name', data: 'value' },
           type: 'normal',
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333'],
+          colors,
         },
       },
       preview: (
@@ -279,7 +280,7 @@ const StandardCharts = () => {
           ],
           keys: { name: 'name', data: 'data' },
           type: 'normal',
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333'],
+          colors,
         },
       },
       preview: (
@@ -310,7 +311,7 @@ const StandardCharts = () => {
           ],
           keys: { name: 'name', data: 'data' },
           type: 'normal',
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2BA385', '#E6A333'],
+          colors,
         },
       },
       preview: (
@@ -496,7 +497,7 @@ const StandardCharts = () => {
             { name: 'Group B', value: 200 },
             { name: 'Group C', value: 100 },
           ],
-          colors: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
+          colors,
         },
       },
       preview: (
@@ -522,7 +523,7 @@ const StandardCharts = () => {
             { name: 'Group B', value: 200 },
             { name: 'Group C', value: 100 },
           ],
-          colors: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
+          colors,
           keys: { name: 'name', data: 'value' },
         },
       },

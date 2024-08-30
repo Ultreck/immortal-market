@@ -3,6 +3,17 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import { Skeleton } from '@nextui-org/react';
 import { useGetSvgCodeFromUrl } from '@/api/misc.js';
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+
+const applyColors = (data, colors) => {
+  if (!data) return data;
+  let coloredSvg = data;
+  Object.entries(colors || {}).forEach(([originalColor, newColor]) => {
+    const regex = new RegExp(`${originalColor}`, 'g');
+    coloredSvg = coloredSvg.replace(regex, `${newColor}`);
+  });
+  return coloredSvg;
+};
 
 const Infographic = ({ element, active, highlighted, onClick, onChange }) => {
   const el = useRef(null);
@@ -14,25 +25,14 @@ const Infographic = ({ element, active, highlighted, onClick, onChange }) => {
     }
   }, [data, element, isLoading, onChange]);
 
-  const applyColors = () => {
-    if (!data) return data;
-    let coloredSvg = data;
-    Object.entries(element.config.colors || {}).forEach(([originalColor, newColor]) => {
-      const regex = new RegExp(`${originalColor}`, 'g');
-      coloredSvg = coloredSvg.replace(regex, `${newColor}`);
-    });
-    return coloredSvg;
-  };
-
   return (
     <ElementWrapper
       element={element}
       onClick={onClick}
-      onChange={(values) => {
-        return onChange({ ...element, ...values, height: el.current.scrollHeight });
-      }}
+      onChange={onChange}
       active={active}
       highlighted={highlighted}
+      fit
     >
       <div ref={el} className="w-full h-max">
         {isLoading ? (
@@ -43,7 +43,7 @@ const Infographic = ({ element, active, highlighted, onClick, onChange }) => {
           <div
             style={element.style}
             className="h-max w-full infographic"
-            dangerouslySetInnerHTML={{ __html: applyColors() }}
+            dangerouslySetInnerHTML={{ __html: applyColors(data, element.config.colors) }}
           />
         )}
       </div>
@@ -52,5 +52,29 @@ const Infographic = ({ element, active, highlighted, onClick, onChange }) => {
 };
 
 Infographic.propTypes = ElementPropTypes;
+
+export const InfographicElementContent = ({ element }) => {
+  const { data, isLoading } = useGetSvgCodeFromUrl(element.config.src);
+
+  return (
+    <div className="w-full h-max">
+      {isLoading ? (
+        <div className="light w-full" style={{ height: element.height }}>
+          <Skeleton className="rounded-2xl w-full h-full" />
+        </div>
+      ) : (
+        <div
+          style={element.style}
+          className="h-max w-full infographic"
+          dangerouslySetInnerHTML={{ __html: applyColors(data, element.config.colors) }}
+        />
+      )}
+    </div>
+  );
+};
+
+InfographicElementContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
 export default Infographic;

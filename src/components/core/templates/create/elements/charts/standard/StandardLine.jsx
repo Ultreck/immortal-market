@@ -2,45 +2,32 @@ import { CartesianGrid, LabelList, Line, LineChart, XAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const colors = [
-  '#2673D9',
-  '#1D9085',
-  '#264A5A',
-  '#E66B5B',
-  '#E8C22C',
-  '#F6881F',
-  '#2BA385',
-  '#E6A333',
-  '#AB52D9',
-  '#D93566',
-];
+const StandardLine = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      <StandardLineContent element={element} />
+    </ElementWrapper>
+  );
+};
 
-const chartData = [
-  { month: 'January', desktop: 186, mobile: 80 },
-  { month: 'February', desktop: 305, mobile: 200 },
-  { month: 'March', desktop: 237, mobile: 120 },
-  { month: 'April', desktop: 73, mobile: 190 },
-  { month: 'May', desktop: 209, mobile: 130 },
-  { month: 'June', desktop: 214, mobile: 140 },
-];
+StandardLine.propTypes = ElementPropTypes;
 
-const StandardLineChart = ({ element }) => {
+export const StandardLineContent = ({ element }) => {
   const config = {
     [element.config.keys.y]: {
       label: capitalize(element.config.keys.y),
-      color: colors[0],
-    },
-  };
-
-  const chartConfig = {
-    desktop: {
-      label: 'Desktop',
-      color: element.config.colors?.[0] || '#2673D9',
-    },
-    mobile: {
-      label: 'Mobile',
-      color: element.config.colors?.[1] || '#ff0000',
+      color: element.config.colors[0],
     },
   };
 
@@ -83,13 +70,13 @@ const StandardLineChart = ({ element }) => {
       )}
       {element.config.type === 'multiple' && (
         <ChartContainer
-          config={chartConfig}
+          config={config}
           style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
         >
-          <LineChart accessibilityLayer data={chartData}>
+          <LineChart accessibilityLayer data={element.config.data}>
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey={element.config.keys.x}
               tickLine={false}
               axisLine={false}
               tickMargin={8}
@@ -97,18 +84,10 @@ const StandardLineChart = ({ element }) => {
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Line
-              dataKey="desktop"
+              dataKey={element.config.keys.y}
               type="monotone"
-              stroke={chartConfig.desktop.color}
-              fill={chartConfig.desktop.color}
-              strokeWidth={2}
-              dot={false}
-            />
-            <Line
-              dataKey="mobile"
-              type="monotone"
-              stroke={chartConfig.mobile.color}
-              fill={chartConfig.mobile.color}
+              stroke={config[element.config.keys.y].color}
+              fill={config[element.config.keys.y].color}
               strokeWidth={2}
               dot={false}
             />
@@ -119,13 +98,8 @@ const StandardLineChart = ({ element }) => {
   );
 };
 
-StandardLineChart.propTypes = {
-  element: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number,
-    style: PropTypes.object,
-    config: PropTypes.object,
-  }),
+StandardLineContent.propTypes = {
+  element: PropTypes.object.isRequired,
 };
 
-export default StandardLineChart;
+export default StandardLine;

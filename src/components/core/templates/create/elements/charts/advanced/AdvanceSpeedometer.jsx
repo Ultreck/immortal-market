@@ -1,9 +1,30 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import { Card } from '@nextui-org/react';
 import ElementWrapper from '../../../ElementWrapper';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import PropTypes from 'prop-types';
 
-const AdvanceSpedometer = ({ element, active, highlighted, width, onClick, onChange }) => {
+const AdvanceSpeedometer = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      resizeHandles={['e']}
+      editable
+      fit
+    >
+      <AdvanceSpeedometerContent element={element} />
+    </ElementWrapper>
+  );
+};
+
+AdvanceSpeedometer.propTypes = ElementPropTypes;
+
+export const AdvanceSpeedometerContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -80,22 +101,11 @@ const AdvanceSpedometer = ({ element, active, highlighted, width, onClick, onCha
     };
   }, [element]);
 
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <div ref={chartRef} style={{ width: element.width, height: element.height }} />
-    </ElementWrapper>
-  );
+  return <div ref={chartRef} style={{ width: element.width, height: element.height }} />;
 };
 
-export default AdvanceSpedometer;
+AdvanceSpeedometerContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
 
+export default AdvanceSpeedometer;
