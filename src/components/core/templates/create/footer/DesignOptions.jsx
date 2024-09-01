@@ -2,18 +2,18 @@ import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDiscl
 import { TbBookDownload, TbBookUpload, TbDotsVertical, TbPresentation, TbTrash } from 'react-icons/tb';
 import DeleteModal from '@/components/core/templates/create/footer/DeleteModal.jsx';
 import PublishModal from '@/components/core/templates/create/footer/PublishModal.jsx';
-import useTemplateStore from '@/store/template.js';
 import UnpublishModal from '@/components/core/templates/create/footer/UnpublishModal.jsx';
-import { useParams } from 'react-router-dom';
+import FullscreenPreview from '@/components/core/templates/create/FullscreenPreview.jsx';
+import useTemplateStore from '@/store/template.js';
 
 const DesignOptions = () => {
-  const params = useParams();
   const id = useTemplateStore((state) => state.template.id);
   const type = useTemplateStore((state) => state.template.type);
   const status = useTemplateStore((state) => state.template.status);
   const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
   const { isOpen: isPublishOpen, onOpen: onPublishOpen, onClose: onPublishClose } = useDisclosure();
   const { isOpen: isUnpublishOpen, onOpen: onUnpublishOpen, onClose: onUnpublishClose } = useDisclosure();
+  const { isOpen: isPreviewOpen, onOpen: onPreviewOpen, onClose: onPreviewClose } = useDisclosure();
 
   const options = [
     {
@@ -60,7 +60,7 @@ const DesignOptions = () => {
             if (key === 'publish') onPublishOpen();
             if (key === 'unpublish') onUnpublishOpen();
             if (key === 'delete') onDeleteOpen();
-            if (key === 'present') window.open(`/designs/${params.id}/present`, '_blank');
+            if (key === 'present') onPreviewOpen();
           }}
         >
           {options.filter(Boolean).map((action) => (
@@ -82,6 +82,7 @@ const DesignOptions = () => {
       <DeleteModal id={id} isOpen={isDeleteOpen} onClose={onDeleteClose} />
       <PublishModal id={id} isOpen={isPublishOpen} onClose={onPublishClose} />
       <UnpublishModal id={id} isOpen={isUnpublishOpen} onClose={onUnpublishClose} />
+      <FullscreenPreview isOpen={isPreviewOpen} onClose={onPreviewClose} />
     </>
   );
 };

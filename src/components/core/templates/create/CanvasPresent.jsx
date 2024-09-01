@@ -1,17 +1,29 @@
-import { createElement, Fragment } from 'react';
+import { createElement, Fragment, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ElementWrapperPresent from '@/components/core/templates/create/ElementWrapperPresent.jsx';
 import { components } from '@/lib/elements.js';
 
 const CanvasPresent = ({ page }) => {
+  const el = useRef(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const ph = el.current.parentElement.clientHeight;
+    const h = el.current.clientHeight;
+    const scale = ph / h;
+    setScale(scale);
+  }, []);
+
   return (
     <div
+      ref={el}
       style={{
         width: page.width,
         height: page.height,
         backgroundColor: page.style.backgroundColor,
+        transform: `scale(${scale})`,
       }}
-      className="origin-top-left relative overflow-hidden border-x first:border-t last:border-b first:rounded-t-2xl last:rounded-b-2xl"
+      className="origin-top relative overflow-hidden mx-auto"
     >
       {page.elements.map((element) => {
         return (
