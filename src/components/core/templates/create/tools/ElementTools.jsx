@@ -24,6 +24,7 @@ import FrameCarouselConfig from './elements/FrameCarouselConfig.jsx';
 import InfographicConfig from '@/components/core/templates/create/tools/elements/InfographicConfig.jsx';
 import ChartColor from './elements/ChartColor.jsx';
 import Font from '@/components/core/templates/create/tools/elements/Font.jsx';
+import LocalMapColor from './elements/advance-config/LocalMapColor.jsx';
 
 const mapping = {
   bold: { type: 'multiple', component: Bold },
@@ -48,6 +49,7 @@ const mapping = {
   carousel: { type: 'single', component: FrameCarouselConfig },
   infographic: { type: 'single', component: InfographicConfig },
   'chart-color': { type: 'single', component: ChartColor },
+  'map-color': { type: 'single', component: LocalMapColor },
 };
 
 const ElementTools = () => {

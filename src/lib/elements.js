@@ -54,6 +54,7 @@ export const charts = {
     'speedometer-simple',
     'speedometer-multiple',
   ],
+  map: ['map', 'europe-map', 'africa-map'],
 };
 
 export const tools = {
@@ -79,6 +80,10 @@ export const tools = {
   }, {}),
   ...charts.advanced.reduce((acc, type) => {
     acc[`chart-a-${type}`] = ['advanced-chart', 'chart-color', 'opacity'];
+    return acc;
+  }, {}),
+  ...charts.map.reduce((acc, type) => {
+    acc[`chart-a-${type}`] = ['advanced-chart', 'map-color', 'opacity'];
     return acc;
   }, {}),
   'frame-tabs': ['tabs', 'opacity', 'animation', 'shadow'],
@@ -116,6 +121,10 @@ export const components = {
       acc[`chart-a-${type}`] = AdvanceCharts;
       return acc;
     }, {}),
+    ...charts.map.reduce((acc, type) => {
+      acc[`chart-a-${type}`] = AdvanceCharts;
+      return acc;
+    }, {}),
     'frame-tabs': FrameTabs,
     'frame-carousel': FrameCarousel,
     line: Line,
@@ -142,6 +151,10 @@ export const components = {
       return acc;
     }, {}),
     ...charts.advanced.reduce((acc, type) => {
+      acc[`chart-a-${type}`] = AdvanceChartsPresent;
+      return acc;
+    }, {}),
+    ...charts.map.reduce((acc, type) => {
       acc[`chart-a-${type}`] = AdvanceChartsPresent;
       return acc;
     }, {}),

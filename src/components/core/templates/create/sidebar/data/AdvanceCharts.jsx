@@ -4,6 +4,8 @@ import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react
 import { IconChartFunnel } from '@tabler/icons-react';
 import { TbChartTreemap, TbCircleDot, TbCirclesRelation, TbGaugeFilled } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
+import { europeMapPayload, payload, africaCountries, africaMapPayload } from '@/lib/helper';
+import { GiNigeria, GiEarthAfricaEurope, GiAfrica } from "react-icons/gi";
 
 const colors = [
   '#E66B5B',
@@ -500,6 +502,78 @@ const AdvancedCharts = () => {
     },
   ];
 
+  const mapDataElements = [
+    {
+      id: 'chart-a-map',
+      type: 'chart-a-map',
+      name: 'Map Chart',
+      data: {
+        type: 'chart-a-map',
+        text: 'Map Chart',
+        width: 400,
+        height: 400,
+        showDetails: false,
+        backgroundColor: "#f9fafb",
+        style: { opacity: 1 },
+        config: {
+          data:payload.data,
+          colors: ['#f9fafb','#c2410c', '#15803d', '#1d4ed8', '#4d7c0f', '#be185d', '#0369a1', '#5a189a', '#b91c1c', '#a16207', '#b45309', '#047857', '#374151', '#404E4D', '#5D737E', '#A4036F'],
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <GiNigeria className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-a-europe-map',
+      type: 'chart-a-europe-map',
+      name: 'Europe-map Chart',
+      data: {
+        type: 'chart-a-europe-map',
+        text: 'Europe-map Chart',
+        width: 500,
+        height: 500,
+        showDetails: false,
+        backgroundColor: "#f9fafb",
+        style: { opacity: 1 },
+        config: {
+          data:europeMapPayload,
+          colors: ['#f9fafb','#c2410c', '#15803d', '#1d4ed8', '#4d7c0f', '#be185d', '#0369a1', '#5a189a', '#b91c1c', '#a16207', '#b45309', '#047857', '#374151', '#404E4D', '#5D737E', '#A4036F'],
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <GiEarthAfricaEurope className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-a-africa-map',
+      type: 'chart-a-africa-map',
+      name: 'Africa-map Chart',
+      data: {
+        type: 'chart-a-africa-map',
+        text: 'Africa-map Chart',
+        width: 500,
+        height: 500,
+        showDetails: false,
+        backgroundColor: "#f9fafb",
+        style: { opacity: 1 },
+        config: {
+          data: africaMapPayload,
+          colors: ['#f9fafb','#c2410c', '#15803d', '#1d4ed8', '#4d7c0f', '#be185d', '#0369a1', '#5a189a', '#b91c1c', '#a16207', '#b45309', '#047857', '#374151', '#404E4D', '#5D737E', '#A4036F'],
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <GiAfrica className="w-full h-full" />
+        </div>
+      ),
+    },
+  ]
+
   return (
     <>
       <div className="grid grid-cols-3 gap-4">
@@ -511,6 +585,14 @@ const AdvancedCharts = () => {
         <p>Speedometer</p>
         <div className="grid grid-cols-3 gap-4">
           {speedometerDataElement.map((element) => {
+            return <DraggableElementWrapper key={element.id} element={element} />;
+          })}
+        </div>
+      </div>
+      <div className="mt-10">
+        <p>Maps</p>
+        <div className="grid grid-cols-3 gap-4">
+          {mapDataElements.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>

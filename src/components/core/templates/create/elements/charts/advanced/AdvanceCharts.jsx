@@ -12,6 +12,9 @@ import AdvanceTreeMap from './AdvanceTreeMap.jsx';
 import AdvanceSpeedometer from './AdvanceSpeedometer.jsx';
 import AdvanceGauge from './AdvanceGauge.jsx';
 import AdvanceMultipleGauge from './AdvanceMultipleGauge.jsx';
+import AdvanceAfricaMap from './AdvanceAfricaMap.jsx';
+import AdvanceEuropeMap from './AdvanceEuropeMap.jsx';
+import AdvanceMap from './AdvanceMap.jsx';
 
 const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -27,6 +30,9 @@ const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange 
     'chart-a-speedometer': AdvanceSpeedometer,
     'chart-a-speedometer-simple': AdvanceGauge,
     'chart-a-speedometer-multiple': AdvanceMultipleGauge,
+    'chart-a-map': AdvanceMap,
+    'chart-a-europe-map': AdvanceEuropeMap,
+    'chart-a-africa-map': AdvanceAfricaMap,
   };
 
   if (components[element.type]) {

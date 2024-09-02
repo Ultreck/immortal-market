@@ -12,6 +12,9 @@ import AdvancedTreeMapConfig from './advance-config/AdvancedTreeMapConfig';
 import AdvanceDynamicSortingChartConfig from './advance-config/AdvanceDynamicSortingChartConfig';
 import AdvanceShapesConfig from '@/components/core/templates/create/tools/elements/advance-config/AdvanceShapesConfig.jsx';
 import AdvanceSpeedometerConfig from './advance-config/AdvanceSpeedometerConfig.jsx';
+import AdvanceMapConfig from './advance-config/AdvanceMapConfig';
+import AdvancedEuropeMapConfig from './advance-config/AdvancedEuropeMapConfig';
+import AdvancedAfricaMapConfig from './advance-config/AdvancedAfricaMapConfig';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -57,6 +60,9 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           {element.type === 'chart-a-speedometer-simple' && (
             <AdvanceSpeedometerConfig element={element} onChange={onChange} />
           )}
+          {element.type === 'chart-a-map' && <AdvanceMapConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-europe-map' && <AdvancedEuropeMapConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-africa-map' && <AdvancedAfricaMapConfig element={element} onChange={onChange} />}
         </div>
       </PopoverContent>
     </Popover>
@@ -72,3 +78,4 @@ AdvancedChartConfig.propTypes = {
 };
 
 export default AdvancedChartConfig;
+
