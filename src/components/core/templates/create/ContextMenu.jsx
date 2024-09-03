@@ -2,10 +2,10 @@ import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import { TbArrowDown, TbArrowUp, TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbTrash } from 'react-icons/tb';
 import { Listbox, ListboxItem, useDisclosure } from '@nextui-org/react';
-
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import LinkTool from './tools/elements/Link';
+import { LuGroup, LuUngroup } from 'react-icons/lu';
 
 const ContextMenu = ({ position, isOpen, onClose }) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -13,6 +13,8 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
   const deleteElements = useTemplateStore((state) => state.deleteElements);
   const addElements = useTemplateStore((state) => state.addElements);
   const updatePage = useTemplateStore((state) => state.updatePage);
+  const groupElements = useTemplateStore((state) => state.groupElements);
+  const ungroupElements = useTemplateStore((state) => state.ungroupElements);
   const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
   const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id));
   const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
@@ -55,6 +57,38 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
     await navigator.clipboard.write([new ClipboardItem({ 'text/plain': textBlob })]);
   };
 
+  const handleGroup = () => {
+    groupElements(selectedElements, page.id);
+  };
+
+  const handleUngroup = () => {
+    const group = elements.find((el) => el.id === selectedElements[0]).group;
+    ungroupElements(group, page.id);
+  };
+
+  const menu = [
+    { key: 'copy', label: 'Copy', icon: <TbClipboardCopy size="18" /> },
+    { key: 'duplicate', label: 'Duplicate', icon: <TbCopyPlus size="18" /> },
+    { key: 'move-top', label: 'Move to top', icon: <TbArrowUp size="18" /> },
+    { key: 'move-bottom', label: 'Move to bottom', icon: <TbArrowDown size="18" /> },
+  ];
+
+  if (selectedElements.length > 1) {
+    if (!elements.every((el) => el.group && el.group === elements[0].group)) {
+      menu.push({ key: 'group', label: 'Group', icon: <LuGroup size="18" /> });
+    } else {
+      menu.push({ key: 'ungroup', label: 'Ungroup', icon: <LuUngroup size="18" /> });
+    }
+  }
+
+  if (elements?.length && elements.every((el) => el.href)) {
+    menu.push({ key: 'link', label: 'Edit link', icon: <TbLinkPlus size="18" />, showDivider: true });
+  } else {
+    menu.push({ key: 'link', label: 'Link', icon: <TbLink size="18" />, showDivider: true });
+  }
+
+  menu.push(...[{ key: 'delete', label: 'Delete', icon: <TbTrash size="18" /> }]);
+
   return (
     <>
       {isOpen && (
@@ -74,34 +108,17 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
                   if (key === 'move-top') handleMoveToTop();
                   if (key === 'move-bottom') handleMoveToBottom();
                   if (key === 'link') onLinkToolOpen();
+                  if (key === 'group') handleGroup();
+                  if (key === 'ungroup') handleUngroup();
                   onClose();
                 }}
                 itemClasses={{ title: 'text-base' }}
               >
-                <ListboxItem key="copy" startContent={<TbClipboardCopy size="18" />}>
-                  Copy
-                </ListboxItem>
-                <ListboxItem key="duplicate" startContent={<TbCopyPlus size="18" />}>
-                  Duplicate
-                </ListboxItem>
-                <ListboxItem key="move-top" startContent={<TbArrowUp size="18" />}>
-                  Move to top
-                </ListboxItem>
-                <ListboxItem key="move-bottom" startContent={<TbArrowDown size="18" />}>
-                  Move to bottom
-                </ListboxItem>
-                {elements.every((el) => el.href) ? (
-                  <ListboxItem key="link" startContent={<TbLinkPlus size="18" />} showDivider>
-                    Edit link
+                {menu.map((item) => (
+                  <ListboxItem key={item.key} startContent={item.icon} showDivider={item.showDivider}>
+                    {item.label}
                   </ListboxItem>
-                ) : (
-                  <ListboxItem key="link" startContent={<TbLink size="18" />} showDivider>
-                    Link
-                  </ListboxItem>
-                )}
-                <ListboxItem key="delete" startContent={<TbTrash size="18" />} color="danger">
-                  Delete
-                </ListboxItem>
+                ))}
               </Listbox>
             </div>,
             document.body

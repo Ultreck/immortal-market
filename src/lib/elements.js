@@ -170,9 +170,3 @@ export const getElementTools = (type) => {
   if (!tools[type]) throw new Error(`No tools found for type ${type}`);
   return tools[type];
 };
-
-export const getElementIcon = (type) => {
-  if (!icons[type]) throw new Error(`No icon found for type ${type}`);
-  return icons[type];
-};
-

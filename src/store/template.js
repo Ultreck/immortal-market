@@ -113,6 +113,53 @@ const useTemplateStore = createWithEqualityFn(
         },
       }));
     },
+    groupElements: (ids, pageId) => {
+      get().addUndoHistory();
+      set((state) => {
+        const group = crypto.randomUUID();
+        const template = {
+          ...state.template,
+          pages: state.template.pages.map((page) => {
+            if (page.id === pageId) {
+              return {
+                ...page,
+                elements: page.elements.map((el) => {
+                  if (ids.includes(el.id)) return { ...el, group };
+                  return el;
+                }),
+              };
+            }
+            return page;
+          }),
+          selectedElements: ids,
+        };
+        return {
+          template,
+        };
+      });
+    },
+    ungroupElements: (group, pageId) => {
+      get().addUndoHistory();
+      set((state) => {
+        return {
+          template: {
+            ...state.template,
+            pages: state.template.pages.map((page) => {
+              if (page.id === pageId) {
+                return {
+                  ...page,
+                  elements: page.elements.map((el) => {
+                    if (el.group && el.group === group) return { ...el, group: null };
+                    return el;
+                  }),
+                };
+              }
+              return page;
+            }),
+          },
+        };
+      });
+    },
     selectPage: (id) => {
       set((state) => ({
         template: {

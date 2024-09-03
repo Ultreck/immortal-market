@@ -50,21 +50,6 @@ const Canvas = ({ id }) => {
     },
   });
 
-  const handleAddToSelection = useCallback(
-    (id) => {
-      if (selectedElements.includes(id)) {
-        selectElements(selectedElements.filter((elementId) => elementId !== id));
-      } else {
-        if (page.elements.find((el) => selectedElements.includes(el.id))) {
-          selectElements([...selectedElements, id]);
-        } else {
-          selectElements([id]);
-        }
-      }
-    },
-    [page.elements, selectElements, selectedElements]
-  );
-
   const handleUpdateElement = useCallback(
     (element, solo = false) => {
       if (solo) {
@@ -79,6 +64,16 @@ const Canvas = ({ id }) => {
         } else {
           selectElements([element.id]);
           selection = [element.id];
+        }
+        if (
+          element.group &&
+          !page.elements.filter((el) => el.group === element.group).every((el) => selectedElements.includes(el.id))
+        ) {
+          const els = page.elements.filter((_el) => _el.group === element.group).map((el) => el.id);
+          if (els.length) {
+            selectElements([...selectedElements, ...els]);
+            selection = [...selectedElements, ...els];
+          }
         }
       }
       if (selection.length > 1) {
@@ -109,12 +104,48 @@ const Canvas = ({ id }) => {
     [page.elements, page.id, selectElements, selectedElements, updateElements]
   );
 
+  const handleAddToSelection = useCallback(
+    (id) => {
+      if (selectedElements.includes(id)) {
+        const element = page.elements.find((el) => el.id === id);
+        if (element.group) {
+          const els = page.elements.filter((_el) => _el.group === element.group).map((el) => el.id);
+          selectElements(selectedElements.filter((_id) => !els.includes(_id)));
+        } else {
+          selectElements(selectedElements.filter((_id) => _id !== id));
+        }
+      } else {
+        const isSamePage = page.elements.find((el) => selectedElements.includes(el.id));
+        if (isSamePage) {
+          const el = page.elements.find((el) => el.id === id);
+          if (el.group) {
+            const els = page.elements.filter((_el) => _el.group === el.group).map((el) => el.id);
+            selectElements([...selectedElements, ...els]);
+          } else {
+            selectElements([...selectedElements, id]);
+          }
+        } else {
+          selectElements([id]);
+        }
+      }
+    },
+    [page.elements, selectElements, selectedElements]
+  );
+
   const handleElementClick = useCallback(
     (id, e) => {
+      const el = page.elements.find((el) => el.id === id);
       if (e.shiftKey) handleAddToSelection(id);
-      else selectElements([id]);
+      else {
+        if (el.group) {
+          const els = page.elements.filter((_el) => _el.group === el.group).map((el) => el.id);
+          if (els.length) selectElements(els);
+        } else {
+          selectElements([id]);
+        }
+      }
     },
-    [handleAddToSelection, selectElements]
+    [handleAddToSelection, page.elements, selectElements]
   );
 
   const handleMouseDown = (event) => {
