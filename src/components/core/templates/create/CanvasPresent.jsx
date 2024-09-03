@@ -8,10 +8,12 @@ const CanvasPresent = ({ page }) => {
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    const ph = el.current.parentElement.clientHeight;
-    const h = el.current.clientHeight;
-    const scale = ph / h;
-    setScale(scale);
+    setTimeout(() => {
+      const ph = el.current.parentElement.clientHeight;
+      const h = el.current.clientHeight;
+      const scale = ph / h;
+      setScale(scale);
+    }, 50);
   }, []);
 
   return (
