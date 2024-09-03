@@ -58,21 +58,16 @@ const Canvas = ({ id }) => {
       }
       let selection = [...selectedElements];
       if (!selectedElements.includes(element.id)) {
-        if (selection.length > 1) {
-          selectElements([...selectedElements, element.id]);
-          selection = [...selectedElements, element.id];
-        } else {
-          selectElements([element.id]);
-          selection = [element.id];
-        }
+        selectElements([element.id]);
+        selection = [element.id];
         if (
           element.group &&
           !page.elements.filter((el) => el.group === element.group).every((el) => selectedElements.includes(el.id))
         ) {
           const els = page.elements.filter((_el) => _el.group === element.group).map((el) => el.id);
           if (els.length) {
-            selectElements([...selectedElements, ...els]);
-            selection = [...selectedElements, ...els];
+            selectElements(els);
+            selection = els;
           }
         }
       }
@@ -87,6 +82,7 @@ const Canvas = ({ id }) => {
           y: element.y - original.y,
           width: element.width - original.width,
           height: element.height - original.height,
+          rotate: element.rotate - original.rotate,
         };
         Object.keys(diff).forEach((key) => {
           if (diff[key] !== 0) {
