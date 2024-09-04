@@ -1,12 +1,15 @@
 import useTemplateStore from '@/store/template.js';
 import Present from '@/components/core/templates/create/Present.jsx';
-import PropTypes from 'prop-types';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { Button, useDisclosure } from '@nextui-org/react';
+import { RiExpandDiagonalLine } from 'react-icons/ri';
+import { createPortal } from 'react-dom';
 
-const FullscreenPreview = ({ isOpen, onClose }) => {
+const FullscreenPreview = () => {
   const root = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const template = useTemplateStore((state) => state.template);
+  const { isOpen: isOpen, onOpen: onOpen, onClose: onClose } = useDisclosure();
 
   const enableFullscreen = () => {
     if (root.current.requestFullscreen) {
@@ -36,12 +39,14 @@ const FullscreenPreview = ({ isOpen, onClose }) => {
     };
   }, [disableFullscreen, isFullscreen, isOpen, onClose]);
 
-  return <div ref={root}>{isOpen && <Present pages={template.pages} />}</div>;
-};
-
-FullscreenPreview.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+  return (
+    <>
+      <Button variant="light" color="default" radius="full" size="sm" className="text-base" onClick={onOpen} isIconOnly>
+        <RiExpandDiagonalLine size="18" />
+      </Button>
+      {createPortal(<div ref={root}>{isOpen && <Present pages={template.pages} />}</div>, document.body)}
+    </>
+  );
 };
 
 export default FullscreenPreview;

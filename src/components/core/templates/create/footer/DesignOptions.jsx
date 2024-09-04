@@ -1,9 +1,8 @@
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@nextui-org/react';
-import { TbBookDownload, TbBookUpload, TbDotsVertical, TbPresentation, TbTrash } from 'react-icons/tb';
+import { TbBookDownload, TbBookUpload, TbDotsVertical, TbTrash } from 'react-icons/tb';
 import DeleteModal from '@/components/core/templates/create/footer/DeleteModal.jsx';
 import PublishModal from '@/components/core/templates/create/footer/PublishModal.jsx';
 import UnpublishModal from '@/components/core/templates/create/footer/UnpublishModal.jsx';
-import FullscreenPreview from '@/components/core/templates/create/FullscreenPreview.jsx';
 import useTemplateStore from '@/store/template.js';
 
 const DesignOptions = () => {
@@ -13,14 +12,8 @@ const DesignOptions = () => {
   const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
   const { isOpen: isPublishOpen, onOpen: onPublishOpen, onClose: onPublishClose } = useDisclosure();
   const { isOpen: isUnpublishOpen, onOpen: onUnpublishOpen, onClose: onUnpublishClose } = useDisclosure();
-  const { isOpen: isPreviewOpen, onOpen: onPreviewOpen, onClose: onPreviewClose } = useDisclosure();
 
   const options = [
-    {
-      key: 'present',
-      label: 'Present',
-      icon: <TbPresentation size="16" />,
-    },
     {
       key: 'delete',
       label: 'Delete',
@@ -51,7 +44,7 @@ const DesignOptions = () => {
     <>
       <Dropdown placement="bottom" size="lg">
         <DropdownTrigger>
-          <Button isIconOnly variant="light" className="text-base" radius="full">
+          <Button isIconOnly variant="light" className="text-base" radius="full" size="sm">
             <TbDotsVertical size="18" />
           </Button>
         </DropdownTrigger>
@@ -60,7 +53,6 @@ const DesignOptions = () => {
             if (key === 'publish') onPublishOpen();
             if (key === 'unpublish') onUnpublishOpen();
             if (key === 'delete') onDeleteOpen();
-            if (key === 'present') onPreviewOpen();
           }}
         >
           {options.filter(Boolean).map((action) => (
@@ -82,7 +74,6 @@ const DesignOptions = () => {
       <DeleteModal id={id} isOpen={isDeleteOpen} onClose={onDeleteClose} />
       <PublishModal id={id} isOpen={isPublishOpen} onClose={onPublishClose} />
       <UnpublishModal id={id} isOpen={isUnpublishOpen} onClose={onUnpublishClose} />
-      <FullscreenPreview isOpen={isPreviewOpen} onClose={onPreviewClose} />
     </>
   );
 };
