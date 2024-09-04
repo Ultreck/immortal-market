@@ -11,12 +11,12 @@ const Present = ({ pages = [] }) => {
   const page = pages[index];
 
   return (
-    <div className="relative inset-0 w-full h-screen overflow-hidden z-[100]">
+    <div className="relative inset-0 w-full h-screen overflow-hidden z-[100] text-black">
       <div className="bg-gray-950 w-full h-screen flex flex-col">
         <CanvasPresent key={page} page={page} />
       </div>
       {!!pages.length && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full px-8 py-3 bg-default-100 dark text-white flex items-center justify-between space-x-4 max-w-[600px] w-full">
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 rounded-full px-8 py-3 bg-default-100 dark text-white flex items-center justify-between space-x-4 max-w-[600px] w-full">
           <h1 className="text-base">{page.title}</h1>
           <div className="flex items-center space-x-2">
             <Button

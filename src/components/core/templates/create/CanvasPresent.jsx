@@ -14,7 +14,7 @@ const CanvasPresent = ({ page }) => {
       const scale = ph / h;
       setScale(scale);
     }, 50);
-  }, []);
+  }, [page]);
 
   return (
     <div

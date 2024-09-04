@@ -49,9 +49,9 @@ const Share = () => {
             Share
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="px-3 py-5 shadow border border-default-200">
+        <PopoverContent className="px-5 py-5 shadow border border-default-200">
           <div className="w-full">
-            <div className="px-4 w-full">
+            <div className="px-1 w-full">
               <h2 className="text-base font-semibold mb-4">Share</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div
