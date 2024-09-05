@@ -16,7 +16,7 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
   const groupElements = useTemplateStore((state) => state.groupElements);
   const ungroupElements = useTemplateStore((state) => state.ungroupElements);
   const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
-  const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id));
+  const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id)).filter(Boolean);
   const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
 
   useEffect(() => {
