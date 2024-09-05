@@ -1,60 +1,20 @@
 import { useCreateUploadMutation, useGetUploads } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { Image, Input, Skeleton } from '@nextui-org/react';
+import { Image, Skeleton } from '@nextui-org/react';
 import { getImageLink } from '@/lib/utils.js';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { useGetFreepikImages } from '@/api/misc.js';
-import { useDebounce } from 'react-use';
 
-const Uploads = () => {
+const UploadedImages = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const { id } = useBusiness();
   const [files, setFiles] = useState([]);
   const { data: { uploads = [] } = {}, isLoading: isUploadsLoading } = useGetUploads(id);
   const { mutateAsync: upload, isPending: isCreateUploadLoading } = useCreateUploadMutation(id);
-  const [searchValue, setSearchValue] = useState('');
-  const [debouncedSearchValue, setDebouncedSearchValue] = useState('');
-  const [fetchedImagesElement, setFetchedImagesElement] = useState([]);
-
-  useDebounce(
-    () => {
-      setDebouncedSearchValue(searchValue);
-    },
-    2000,
-    [searchValue]
-  );
-
-  const { data, isLoading } = useGetFreepikImages(debouncedSearchValue);
-
-  useEffect(() => {
-    const transformedArray = data?.data.map((imageData) => ({
-      id: `${imageData.id}`,
-      type: 'image',
-      name: 'Image',
-      icon: icons['image'],
-      data: {
-        type: 'image',
-        text: 'Image',
-        width: 400,
-        height: 300,
-        style: {
-          borderWidth: 0,
-          borderColor: '#000',
-          opacity: 1,
-          borderRadius: 0,
-        },
-        config: {
-          src: imageData.image.source.url,
-        },
-      },
-    }));
-    setFetchedImagesElement(transformedArray);
-  }, [data]);
 
   const query = qc.getQueryState(['business', id, 'uploads']);
   const isFetching = query.isInvalidated && query.fetchStatus === 'fetching';
@@ -100,13 +60,7 @@ const Uploads = () => {
     <div>
       <DndFileInput label="Drop images or click to select" onChange={handleChange} className="mb-8" />
 
-      <Input
-        className="mb-5"
-        label="Search for an Image"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
-      {isUploadsLoading || isLoading ? (
+      {isUploadsLoading ? (
         <div className="grid grid-cols-2 gap-4">
           <Skeleton className="aspect-square w-full rounded-2xl" />
           <Skeleton className="aspect-square w-full rounded-2xl" />
@@ -124,28 +78,6 @@ const Uploads = () => {
                   ))}
                 </>
               )}
-              {fetchedImagesElement?.length &&
-                fetchedImagesElement.map((element) => (
-                  <DraggableElement
-                    key={element.id}
-                    element={element}
-                    className="overflow-hidden"
-                    content={
-                      <Image
-                        src={element.data.config.src}
-                        alt={element.data.text}
-                        className="w-full h-full object-cover rounded-2xl cursor-grab aspect-square"
-                      />
-                    }
-                    dragging={
-                      <Image
-                        src={element.data.config.src}
-                        alt={element.data.text}
-                        className="w-full h-full object-cover rounded-2xl aspect-square"
-                      />
-                    }
-                  />
-                ))}
               {elements.map((element) => (
                 <DraggableElementWrapper key={element.id} element={element} />
               ))}
@@ -165,4 +97,4 @@ const Uploads = () => {
   );
 };
 
-export default Uploads;
+export default UploadedImages;

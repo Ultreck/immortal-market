@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import http from '@/lib/http';
 import axios from 'axios';
 
@@ -63,23 +63,39 @@ export const useGetSvgCodeFromUrl = (url) => {
   });
 };
 
-export const useGetFreepikImages = (term) => {
-  const http = axios.create({
-    baseURL: `https://api.freepik.com/v1/resources`,
-    headers: {
-      'x-freepik-api-key': 'FPSXefab1e55aacb472a8b3648827fda7f68',
-      'Accept-Language': '<accept-language>',
-    },
-  });
-  return useQuery({
-    queryKey: ['freepikImages', term],
-    queryFn: async () => {
-      const res = await http.get(
-        `?term=${term}&filters%5Bcontent_type%5D%5Bphoto%5D=1&filters%5Blicense%5D%5Bfreemium%5D=1`
-      );
+export const useSearchImagesFromUnsplash = (query) => {
+  return useInfiniteQuery({
+    queryKey: ['unsplash', query],
+    queryFn: async ({ pageParam }) => {
+      const res = await axios.get(`https://api.unsplash.com/search/photos`, {
+        params: { query, page: pageParam, per_page: 20 },
+        headers: {
+          Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_ACCESS_KEY}`,
+        },
+      });
       return res.data;
     },
-    enabled: !!term,
+    staleTime: Infinity,
+    enabled: !!query,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) => pages.length + 1,
   });
 };
 
+export const useGetImagesFromUnsplash = () => {
+  return useInfiniteQuery({
+    queryKey: ['unsplash'],
+    queryFn: async ({ pageParam }) => {
+      const res = await axios.get(`https://api.unsplash.com/photos`, {
+        params: { page: pageParam, per_page: 20 },
+        headers: {
+          Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_ACCESS_KEY}`,
+        },
+      });
+      return res.data;
+    },
+    staleTime: Infinity,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) => pages.length + 1,
+  });
+};

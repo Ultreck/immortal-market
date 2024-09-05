@@ -4,12 +4,12 @@ import { cn } from '@/lib/utils.js';
 import Basics from '@/components/core/templates/create/sidebar/components/Basics.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
 import { Link } from 'react-router-dom';
-import Uploads from '@/components/core/templates/create/Uploads.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import Charts from '@/components/core/templates/create/sidebar/data/Charts.jsx';
 import { Tooltip } from '@nextui-org/react';
 import Infographics from '@/components/core/templates/create/sidebar/graphics/Infographics.jsx';
 import { TbBrush, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
+import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
 
 const Sidebar = () => {
   const [tab, setTab] = useState('basics');
@@ -81,7 +81,7 @@ const Sidebar = () => {
               { icon: RiPieChartLine, title: 'Data', key: 'data' },
               { icon: TbTemplate, title: 'Templates', key: 'templates' },
               { icon: TbBrush, title: 'Graphics', key: 'graphics' },
-              { icon: RiImage2Line, title: 'Uploads', key: 'uploads' },
+              { icon: RiImage2Line, title: 'Images', key: 'images' },
               { icon: RiStackLine, title: 'Layers', key: 'layers' },
             ].map((element) => {
               const active = tab === element.key;
@@ -114,7 +114,7 @@ const Sidebar = () => {
             {tab === 'data' && <Charts />}
             {tab === 'graphics' && <Infographics />}
             {tab === 'layers' && <Layers />}
-            {tab === 'uploads' && <Uploads />}
+            {tab === 'images' && <Images />}
           </div>
         )}
       </div>
