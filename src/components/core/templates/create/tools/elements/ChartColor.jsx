@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
+import { Button, Checkbox, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
 import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TbCheck, TbColorSwatch } from 'react-icons/tb';
@@ -62,9 +62,11 @@ const ChartColor = ({ element, onChange }) => {
           >
             <Tab key="palettes" title="Palettes" className="text-base" />
             <Tab key="manual" title="Manual" className="text-base" />
+            <Tab key="gradient" title="Gradient" className="text-base" />
           </Tabs>
           {tab === 'palettes' && <Palettes onChange={onChange} element={element} />}
           {tab === 'manual' && <Manual onChange={onChange} element={element} />}
+          {tab === 'gradient' && <Gradient onChange={onChange} element={element} />}
         </div>
       </PopoverContent>
     </Popover>
@@ -173,6 +175,44 @@ const Manual = ({ element, onChange }) => {
   );
 };
 
+const Gradient = ({ element, onChange }) => {
+  const [colors, setColors] = useState([]);
+  const [selected, setSelected] = useState(0);
+
+  const handleChange = useCallback(
+    (_colors) => {
+      setColors((v) => ({ ...v, ..._colors }));
+      onChange({
+        ...element,
+        config: { ...element.config, colors: _colors },
+      });
+    },
+    [element, onChange]
+  );
+
+  useEffect(() => {
+    if (element.config.colors?.length) setColors(element.config.colors);
+    if (isNaN(selected)) setSelected(0);
+  }, [colors, element.config.colors, handleChange, selected]);
+
+  const onColorChange = (newColor) => {
+    handleChange(element.config.colors.map((c, i) => (i === selected ? newColor : c)));
+  };
+
+  return (
+    <>
+      <Checkbox
+        checked={element.config.useGradient}
+        onChange={(e) => onChange({ ...element, config: { ...element.config, useGradient: e.target.checked } })}
+        className="mt-4"
+      >
+        Gradient
+      </Checkbox>
+      <HexColorPicker color={element.config.gradientColor} onChange={(c) => onChange({ ...element, config: { ...element.config, gradientColor: c } })} className="!w-full mt-4" />
+    </>
+  );
+};
+
 Palettes.propTypes = {
   element: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -184,3 +224,4 @@ Manual.propTypes = {
 };
 
 export default ChartColor;
+

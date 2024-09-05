@@ -17,6 +17,7 @@ import StandardSemiPie from './StandardSemiPie';
 import StandardAltBar from './StandardAltBar';
 import StandardBarNotSep from './StandardBarNotSep';
 import { createElement } from 'react';
+import StandardOrdinaryPieChart from './StandardOrdinaryPieChart.jsx';
 
 const StandardCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -37,6 +38,7 @@ const StandardCharts = ({ element, active, highlighted, width, onClick, onChange
     'chart-s-semi-pie': StandardSemiPie,
     'chart-s-alt-bar': StandardAltBar,
     'chart-s-bar-not-sep': StandardBarNotSep,
+    'chart-s-pie-ordinary': StandardOrdinaryPieChart,
   };
 
   if (components[element.type]) {

@@ -224,6 +224,36 @@ const StandardCharts = () => {
         </div>
       ),
     },
+    {
+      id: 'chart-s-pie-ordinary',
+      type: 'chart-s-pie-ordinary',
+      name: 'Ordinary Pie Chart',
+      data: {
+        type: 'chart-s-pie-ordinary',
+        text: 'Ordinary Pie Chart',
+        width: 500,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { browser: 'chrome', visitors: 187 },
+            { browser: 'safari', visitors: 200 },
+            { browser: 'firefox', visitors: 275 },
+            { browser: 'edge', visitors: 173 },
+            { browser: 'other', visitors: 90 },
+          ],
+          keys: { x: 'browser', y: 'visitors' },
+          colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartPie className="w-full h-full" />
+        </div>
+      ),
+    },
   ];
 
   const doughnutDataElement = [
@@ -590,3 +620,4 @@ const StandardCharts = () => {
 };
 
 export default StandardCharts;
+
