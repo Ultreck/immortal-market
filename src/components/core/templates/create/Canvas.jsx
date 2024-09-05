@@ -1,14 +1,14 @@
 import useTemplateStore from '@/store/template.js';
 import { useDroppable } from '@dnd-kit/core';
 import { createElement, Fragment, useCallback, useEffect, useRef, useState } from 'react';
-import { cn, mergeRefs } from '@/lib/utils.js';
+import { cn } from '@/lib/utils.js';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useIntersectionObserver } from 'usehooks-ts';
 import { Button, Tooltip } from '@nextui-org/react';
 import { TbChevronDown, TbChevronUp, TbCopyPlus, TbSquarePlus, TbTrash } from 'react-icons/tb';
 import ContextMenu from './ContextMenu';
 import { components } from '@/lib/elements.js';
+import { InView } from 'react-intersection-observer';
 
 const Canvas = ({ id }) => {
   const selectionBoxRef = useRef(null);
@@ -40,15 +40,6 @@ const Canvas = ({ id }) => {
       window.removeEventListener('auxclick', handleClick);
     };
   }, [contextMenu.isOpen]);
-
-  const { ref: intersectionRef } = useIntersectionObserver({
-    root: document.getElementById('main'),
-    initialIsIntersecting: false,
-    threshold: 0.5,
-    onChange: (isIntersecting) => {
-      if (isIntersecting) updateTemplate({ activePage: id });
-    },
-  });
 
   const handleUpdateElement = useCallback(
     (element, solo = false) => {
@@ -292,65 +283,75 @@ const Canvas = ({ id }) => {
         </div>
       </div>
       <div className={cn('relative border-2 border-transparent p-0.5 w-max', { 'border-primary-500': selected })}>
-        <motion.div
-          style={{ width: page.width * scale, height: page.height * scale }}
-          ref={mergeRefs(setNodeRef, intersectionRef)}
-          id={`canvas-${page.id}`}
-          draggable={false}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onContextMenu={handleContextMenu}
-          className={cn('bg-white text-black border border-default-200 relative overflow-hidden canvas')}
+        <InView
+          as="div"
+          threshold={0.5}
+          onChange={(inView) => {
+            if (inView) {
+              updateTemplate({ activePage: id });
+            }
+          }}
         >
-          <div
-            style={{
-              transform: `scale(${scale})`,
-              width: page.width,
-              height: page.height,
-              backgroundColor: page.style.backgroundColor,
-            }}
-            className="origin-top-left pointer-events-none"
+          <motion.div
+            style={{ width: page.width * scale, height: page.height * scale }}
+            ref={setNodeRef}
+            id={`canvas-${page.id}`}
+            draggable={false}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onContextMenu={handleContextMenu}
+            className={cn('bg-white text-black border border-default-200 relative overflow-hidden canvas')}
           >
-            {page.elements.map((element) => {
-              const active = selectedElements.includes(element.id);
-              const highlighted = highlightedElements.includes(element.id);
-              return (
-                <Fragment key={element.id}>
-                  {components.edit[element.type] ? (
-                    createElement(components.edit[element.type], {
-                      element,
-                      active,
-                      highlighted,
-                      onClick: handleElementClick,
-                      onChange: handleUpdateElement,
-                      width: page.width,
-                      scale,
-                    })
-                  ) : (
-                    <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
-                      Unknown element type: {element.type}
-                    </div>
-                  )}
-                </Fragment>
-              );
-            })}
-          </div>
-          {!!selectionBox && (
             <div
-              ref={selectionBoxRef}
               style={{
-                position: 'absolute',
-                left: Math.min(selectionBox.startX, selectionBox.endX),
-                top: Math.min(selectionBox.startY, selectionBox.endY),
-                width: Math.abs(selectionBox.endX - selectionBox.startX),
-                height: Math.abs(selectionBox.endY - selectionBox.startY),
-                backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                border: '1px solid #007bff',
+                transform: `scale(${scale})`,
+                width: page.width,
+                height: page.height,
+                backgroundColor: page.style.backgroundColor,
               }}
-            />
-          )}
-        </motion.div>
+              className="origin-top-left pointer-events-none"
+            >
+              {page.elements.map((element) => {
+                const active = selectedElements.includes(element.id);
+                const highlighted = highlightedElements.includes(element.id);
+                return (
+                  <Fragment key={element.id}>
+                    {components.edit[element.type] ? (
+                      createElement(components.edit[element.type], {
+                        element,
+                        active,
+                        highlighted,
+                        onClick: handleElementClick,
+                        onChange: handleUpdateElement,
+                        width: page.width,
+                        scale,
+                      })
+                    ) : (
+                      <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
+                        Unknown element type: {element.type}
+                      </div>
+                    )}
+                  </Fragment>
+                );
+              })}
+            </div>
+            {!!selectionBox && (
+              <div
+                ref={selectionBoxRef}
+                style={{
+                  position: 'absolute',
+                  left: Math.min(selectionBox.startX, selectionBox.endX),
+                  top: Math.min(selectionBox.startY, selectionBox.endY),
+                  width: Math.abs(selectionBox.endX - selectionBox.startX),
+                  height: Math.abs(selectionBox.endY - selectionBox.startY),
+                  backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                  border: '1px solid #007bff',
+                }}
+              />
+            )}
+          </motion.div>
+        </InView>
       </div>
 
       <ContextMenu
