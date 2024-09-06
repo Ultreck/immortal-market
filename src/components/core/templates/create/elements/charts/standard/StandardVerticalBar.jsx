@@ -1,4 +1,4 @@
-import { Bar, BarChart, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
@@ -45,7 +45,8 @@ export const StandardVerticalBarContent = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <BarChart accessibilityLayer data={chartData} layout="vertical">
-        <XAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
+      <CartesianGrid vertical={element.config.showGridline} horizontal={element.config.showGridline} />
+        <XAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showLegend} />
         <YAxis
           dataKey={element.config.keys.x}
           type="category"

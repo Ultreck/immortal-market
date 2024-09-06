@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { Pie, PieChart } from 'recharts';
 import PropTypes from 'prop-types';
 import { colors, interpolateColor } from '@/lib/utils';
+import ElementWrapper from '../../../ElementWrapper';
 
 const StandardOrdinaryPieChart = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -36,10 +37,8 @@ export const StandardOrdinaryPieChartContent = ({ element }) => {
     return { ...item, fill: color };
   });
 
-  console.log({ chartData });
-
   useEffect(() => {}, [element.config.data, element.config.colors, element.config.keys.y]);
-  
+
   return (
     <div>
       <ChartContainer

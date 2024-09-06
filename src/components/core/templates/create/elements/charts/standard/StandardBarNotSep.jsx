@@ -45,17 +45,17 @@ export const StandardBarNotSepContent = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <BarChart accessibilityLayer data={chartData} barGap={0} barCategoryGap={0}>
-        <CartesianGrid vertical={false} horizontal={false} />
-        <XAxis
+      <CartesianGrid vertical={element.config.showGridline} horizontal={element.config.showGridline} />
+      <XAxis
           dataKey={element.config.keys.x}
           tickLine={false}
           tickMargin={10}
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
           interval={0}
-          hide={element.config.showXYaxis}
+          hide={!element.config.showXYaxis}
         />
-        <YAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
+        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showLegend} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         <Bar dataKey={element.config.keys.y} radius={8} />
       </BarChart>

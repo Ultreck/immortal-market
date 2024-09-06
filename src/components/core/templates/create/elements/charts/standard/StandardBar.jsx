@@ -36,10 +36,6 @@ export const StandardBarContent = ({ element }) => {
 
     return { ...item, fill: color };
   });
-
-  console.log({chartData});
-  
-
   useEffect(() => {}, [element.config.data, element.config.colors, element.config.keys.y]);
 
   return (
@@ -48,7 +44,7 @@ export const StandardBarContent = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
-        <CartesianGrid vertical={false} horizontal={false} />
+        <CartesianGrid vertical={element.config.showGridline} horizontal={element.config.showGridline} />
         <XAxis
           dataKey={element.config.keys.x}
           tickLine={false}
@@ -56,9 +52,9 @@ export const StandardBarContent = ({ element }) => {
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
           interval={0}
-          hide={element.config.showXYaxis}
+          hide={!element.config.showXYaxis}
         />
-        <YAxis type="number" dataKey="visitors" hide={!element.config.showLegend} />
+        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showLegend} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         <Bar dataKey={element.config.keys.y} radius={8} />
       </BarChart>
