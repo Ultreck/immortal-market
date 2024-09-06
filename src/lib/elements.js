@@ -37,6 +37,7 @@ export const charts = {
     'alt-bar',
     'bar-not-sep',
     'pie-ordinary',
+    'bar-multiple',
   ],
   advanced: [
     'shapes',

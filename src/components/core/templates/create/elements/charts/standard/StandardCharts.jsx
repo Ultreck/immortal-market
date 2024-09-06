@@ -18,6 +18,7 @@ import StandardAltBar from './StandardAltBar';
 import StandardBarNotSep from './StandardBarNotSep';
 import { createElement } from 'react';
 import StandardOrdinaryPieChart from './StandardOrdinaryPieChart.jsx';
+import StandardMultipleBar from './StandardMultipleBar.jsx';
 
 const StandardCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -39,6 +40,7 @@ const StandardCharts = ({ element, active, highlighted, width, onClick, onChange
     'chart-s-alt-bar': StandardAltBar,
     'chart-s-bar-not-sep': StandardBarNotSep,
     'chart-s-pie-ordinary': StandardOrdinaryPieChart,
+    'chart-s-bar-multiple': StandardMultipleBar,
   };
 
   if (components[element.type]) {
