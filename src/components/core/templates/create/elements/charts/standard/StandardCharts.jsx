@@ -19,9 +19,9 @@ import StandardBarNotSep from './StandardBarNotSep';
 import { createElement } from 'react';
 import StandardOrdinaryPieChart from './StandardOrdinaryPieChart.jsx';
 import StandardMultipleBar from './StandardMultipleBar.jsx';
-import StandardVerticalBarNoSep from './standardVerticalBarNoSep.jsx';
 import StandardVerticalStackedBar from './StandardVerticalStackedBar.jsx';
 import StandardMultipleBarVertical from './StandardMultipleBarVertical.jsx';
+import StandardVerticalBarNoSep from './StandardVerticalBarNoSep.jsx';
 
 const StandardCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {

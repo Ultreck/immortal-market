@@ -18,7 +18,6 @@ import { StandardAltBarContent } from '@/components/core/templates/create/elemen
 import { StandardBarNotSepContent } from '@/components/core/templates/create/elements/charts/standard/StandardBarNotSep.jsx';
 import PropTypes from 'prop-types';
 import StandardMultipleBar from './StandardMultipleBar';
-import { StandardVerticalBarNoSepContent } from './standardVerticalBarNoSep';
 import { StandardVerticalStackedBarContent } from './StandardVerticalStackedBar';
 import { StandardMultipleBarVerticalContent } from './StandardMultipleBarVertical';
 
