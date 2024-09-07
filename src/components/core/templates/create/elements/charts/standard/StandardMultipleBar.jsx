@@ -1,6 +1,6 @@
 import React from 'react';
 import { ElementPropTypes } from '@/lib/prop-types';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
@@ -30,9 +30,10 @@ export const StandardMultipleBarContent = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <BarChart accessibilityLayer data={element.config.data}>
-        <CartesianGrid vertical={element.config.showGridline} horizontal={element.config.showGridline} />
-        <XAxis dataKey="name" hide={!element.config.showXYaxis} />
-        <YAxis hide={!element.config.showLegend} />
+        <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+        <XAxis dataKey="name" hide={!element.config.showXaxis} />
+        <YAxis hide={!element.config.showYaxis} />
+        {element.config.showLegend && <Legend />}
         {element.config.keys.y.map((key, index) => {
           return (
             <Bar
@@ -53,4 +54,3 @@ StandardMultipleBarContent.propTypes = {
 };
 
 export default StandardMultipleBar;
-

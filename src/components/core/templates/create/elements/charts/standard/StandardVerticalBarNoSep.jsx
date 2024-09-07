@@ -6,7 +6,7 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useEffect } from 'react';
 
-const StandardVerticalBar = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardVerticalBarNoSep = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -17,14 +17,14 @@ const StandardVerticalBar = ({ element, active, highlighted, width, onClick, onC
       highlighted={highlighted}
       editable
     >
-      <StandardVerticalBarContent element={element} />
+      <StandardVerticalBarNoSepContent element={element} />
     </ElementWrapper>
   );
 };
 
-StandardVerticalBar.propTypes = ElementPropTypes;
+StandardVerticalBarNoSep.propTypes = ElementPropTypes;
 
-export const StandardVerticalBarContent = ({ element }) => {
+export const StandardVerticalBarNoSepContent = ({ element }) => {
   const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
 
   const chartData = element.config.data.map((item, index) => {
@@ -44,7 +44,7 @@ export const StandardVerticalBarContent = ({ element }) => {
       config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <BarChart accessibilityLayer data={chartData} layout="vertical">
+      <BarChart accessibilityLayer data={chartData} layout="vertical" barGap={0} barCategoryGap={0}>
       <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
         <XAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showXaxis} />
         <YAxis
@@ -64,8 +64,8 @@ export const StandardVerticalBarContent = ({ element }) => {
   );
 };
 
-StandardVerticalBarContent.propTypes = {
+StandardVerticalBarNoSepContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default StandardVerticalBar;
+export default StandardVerticalBarNoSep;

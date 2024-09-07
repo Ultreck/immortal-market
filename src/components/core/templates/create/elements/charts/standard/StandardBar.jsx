@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
@@ -44,7 +44,7 @@ export const StandardBarContent = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
-        <CartesianGrid vertical={element.config.showGridline} horizontal={element.config.showGridline} />
+        <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
         <XAxis
           dataKey={element.config.keys.x}
           tickLine={false}
@@ -52,10 +52,11 @@ export const StandardBarContent = ({ element }) => {
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
           interval={0}
-          hide={!element.config.showXYaxis}
+          hide={!element.config.showXaxis}
         />
-        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showLegend} />
+        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+        {element.config.showLegend && <Legend />}
         <Bar dataKey={element.config.keys.y} radius={8} />
       </BarChart>
     </ChartContainer>
@@ -67,4 +68,3 @@ StandardBarContent.propTypes = {
 };
 
 export default StandardBar;
-

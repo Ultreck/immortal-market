@@ -38,6 +38,9 @@ export const charts = {
     'bar-not-sep',
     'pie-ordinary',
     'bar-multiple',
+    'vertical-bar-no-sep',
+    'stacked-bar-vertical',
+    'bar-multiple-vertical',
   ],
   advanced: [
     'shapes',

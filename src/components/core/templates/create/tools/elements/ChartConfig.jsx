@@ -238,14 +238,30 @@ const ChartData = ({ element, onChange, onClose }) => {
                   <Controller
                     name="showXYaxis"
                     control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
                     rules={{ required: `showXYaxis is required` }}
                     render={({ field }) => (
                       <Checkbox
-                        isSelected={element.config.showXYaxis}
+                        isSelected={element.config.showYaxis}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXYaxis: v } })}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
                       >
-                        Show X and Y Axis
+                        Show Y Axis
                       </Checkbox>
                     )}
                   />
@@ -268,36 +284,204 @@ const ChartData = ({ element, onChange, onClose }) => {
                 </div>
                 <div>
                   <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
                     name="showGridline"
                     control={control}
                     rules={{ required: `showGridline is required` }}
                     render={({ field }) => (
                       <Checkbox
-                        isSelected={element.config.showGridline}
+                        isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showGridline: v } })}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
                       >
-                        Show Grid Line
+                        Show Y Grid Line
                       </Checkbox>
                     )}
                   />
                 </div>
-                {/* <div>
+              </>
+            )}
+            {element.type === 'chart-s-stacked-bar' && (
+              <>
+                <div>
                   <Controller
-                    name="swapXYAxis"
+                    name="showXYaxis"
                     control={control}
-                    rules={{ required: `swapXYAxis is required` }}
+                    rules={{ required: `showXaxis is required` }}
                     render={({ field }) => (
                       <Checkbox
-                        isSelected={element.config.swapXYAxis}
+                        isSelected={element.config.showXaxis}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, swapXYAxis: v } })}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
                       >
-                        Swap X and Y Axis
+                        Show X Axis
                       </Checkbox>
                     )}
                   />
-                </div> */}
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-stacked-bar-vertical' && (
+              <>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
               </>
             )}
             {element.type === 'chart-s-bar-not-sep' && (
@@ -306,14 +490,30 @@ const ChartData = ({ element, onChange, onClose }) => {
                   <Controller
                     name="showXYaxis"
                     control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
                     rules={{ required: `showXYaxis is required` }}
                     render={({ field }) => (
                       <Checkbox
-                        isSelected={element.config.showXYaxis}
+                        isSelected={element.config.showYaxis}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXYaxis: v } })}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
                       >
-                        Show X and Y Axis
+                        Show Y Axis
                       </Checkbox>
                     )}
                   />
@@ -336,16 +536,32 @@ const ChartData = ({ element, onChange, onClose }) => {
                 </div>
                 <div>
                   <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
                     name="showGridline"
                     control={control}
                     rules={{ required: `showGridline is required` }}
                     render={({ field }) => (
                       <Checkbox
-                        isSelected={element.config.showGridline}
+                        isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showGridline: v } })}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
                       >
-                        Show Grid Line
+                        Show Y Grid Line
                       </Checkbox>
                     )}
                   />
@@ -358,14 +574,30 @@ const ChartData = ({ element, onChange, onClose }) => {
                   <Controller
                     name="showXYaxis"
                     control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
                     rules={{ required: `showXYaxis is required` }}
                     render={({ field }) => (
                       <Checkbox
-                        isSelected={element.config.showXYaxis}
+                        isSelected={element.config.showYaxis}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXYaxis: v } })}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
                       >
-                        Show X and Y Axis
+                        Show Y Axis
                       </Checkbox>
                     )}
                   />
@@ -388,16 +620,116 @@ const ChartData = ({ element, onChange, onClose }) => {
                 </div>
                 <div>
                   <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
                     name="showGridline"
                     control={control}
                     rules={{ required: `showGridline is required` }}
                     render={({ field }) => (
                       <Checkbox
-                        isSelected={element.config.showGridline}
+                        isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showGridline: v } })}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
                       >
-                        Show Grid Line
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-vertical-bar-no-sep' && (
+              <>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
                       </Checkbox>
                     )}
                   />
@@ -410,14 +742,30 @@ const ChartData = ({ element, onChange, onClose }) => {
                   <Controller
                     name="showXYaxis"
                     control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
                     rules={{ required: `showXYaxis is required` }}
                     render={({ field }) => (
                       <Checkbox
-                        isSelected={element.config.showXYaxis}
+                        isSelected={element.config.showYaxis}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXYaxis: v } })}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
                       >
-                        Show X and Y Axis
+                        Show Y Axis
                       </Checkbox>
                     )}
                   />
@@ -440,16 +788,116 @@ const ChartData = ({ element, onChange, onClose }) => {
                 </div>
                 <div>
                   <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
                     name="showGridline"
                     control={control}
                     rules={{ required: `showGridline is required` }}
                     render={({ field }) => (
                       <Checkbox
-                        isSelected={element.config.showGridline}
+                        isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showGridline: v } })}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
                       >
-                        Show Grid Line
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-bar-multiple-vertical' && (
+              <>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
                       </Checkbox>
                     )}
                   />
