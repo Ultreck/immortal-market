@@ -126,6 +126,7 @@ const StandardCharts = () => {
           gradientColor: '#2673D9',
           showXGridline: false,
           showYGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -161,6 +162,7 @@ const StandardCharts = () => {
           gradientColor: '#2673D9',
           showXGridline: false,
           showYGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -198,6 +200,7 @@ const StandardCharts = () => {
           gradientColor: '#2673D9',
           showXGridline: false,
           showYGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -235,6 +238,7 @@ const StandardCharts = () => {
           gradientColor: '#2673D9',
           showXGridline: false,
           showYGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -270,6 +274,7 @@ const StandardCharts = () => {
           gradientColor: '#2673D9',
           showXGridline: false,
           showYGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -334,6 +339,7 @@ const StandardCharts = () => {
           useGradient: false,
           gradientColor: '#2673D9',
           showGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -398,6 +404,7 @@ const StandardCharts = () => {
           useGradient: false,
           gradientColor: '#2673D9',
           showGridline: false,
+          bars: 5,
         },
       },
       preview: (

@@ -43,7 +43,7 @@ export const StandardStackedBarContent = ({ element }) => {
       config={config}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <BarChart accessibilityLayer data={element.config.data}>
+      <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
         <XAxis
           dataKey={element.config.keys.x}
@@ -77,3 +77,4 @@ StandardStackedBarContent.propTypes = {
 };
 
 export default StandardStackedBar;
+

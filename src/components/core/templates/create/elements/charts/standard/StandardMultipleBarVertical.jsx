@@ -29,11 +29,7 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
       config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <BarChart
-        accessibilityLayer
-        data={element.config.data}
-        layout="vertical"
-      >
+      <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)} layout='vertical'>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
         <YAxis type="category" dataKey="name" hide={!element.config.showYaxis} />
         <XAxis type="number" hide={!element.config.showXaxis} />

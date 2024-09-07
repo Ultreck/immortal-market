@@ -17,6 +17,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils.js';
 import { TbSettings2 } from 'react-icons/tb';
 import { useState } from 'react';
+import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput';
 
 const ChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -398,6 +399,21 @@ const ChartData = ({ element, onChange, onClose }) => {
                     )}
                   />
                 </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
+                  />
+                </div>
               </>
             )}
             {element.type === 'chart-s-stacked-bar-vertical' && (
@@ -480,6 +496,21 @@ const ChartData = ({ element, onChange, onClose }) => {
                         Show Y Grid Line
                       </Checkbox>
                     )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
                   />
                 </div>
               </>
@@ -818,6 +849,21 @@ const ChartData = ({ element, onChange, onClose }) => {
                     )}
                   />
                 </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
+                  />
+                </div>
               </>
             )}
             {element.type === 'chart-s-bar-multiple-vertical' && (
@@ -900,6 +946,21 @@ const ChartData = ({ element, onChange, onClose }) => {
                         Show Y Grid Line
                       </Checkbox>
                     )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
                   />
                 </div>
               </>
