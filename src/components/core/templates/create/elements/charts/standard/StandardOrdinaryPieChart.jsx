@@ -47,7 +47,7 @@ export const StandardOrdinaryPieChartContent = ({ element }) => {
       >
         <PieChart>
           <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-          <Pie data={chartData} dataKey={element.config.keys.y} nameKey={element.config.keys.x} />
+          <Pie data={chartData} dataKey={element.config.keys.y} nameKey={element.config.keys.x} label />
         </PieChart>
       </ChartContainer>
     </div>
@@ -59,4 +59,3 @@ StandardOrdinaryPieChartContent.propTypes = {
 };
 
 export default StandardOrdinaryPieChart;
-
