@@ -3,6 +3,7 @@ import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { interpolateColor } from '@/lib/utils';
 
 const StandardRosePie = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -26,12 +27,25 @@ export const StandardRosePieContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
+    const maxDataValue = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
+    
+    const chartData = element.config.data.map((item, index) => {
+      const value = item[element.config.keys.data];
+      const factor = 1 - value / maxDataValue;  
+      const color = element.config.useGradient
+        ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
+        : element.config.colors?.[index % element.config.colors.length];
+      
+      return { ...item, fill: color };
+    });
+
+
     let chart;
     const initChart = () => {
       if (chartRef.current) {
         chart = echarts.init(chartRef.current);
         const option = {
-          color: element.config.data.map((_, index) => element.config.colors[index % element.config.colors.length]),
+          color: chartData.map((item) => item.fill),
           series: [
             {
               name: 'Nightingale Chart',
@@ -42,7 +56,25 @@ export const StandardRosePieContent = ({ element }) => {
               itemStyle: {
                 borderRadius: 8,
               },
-              data: element.config.data,
+              label: {
+                show: element.config.showLabel,
+              },
+              legend: {
+                left: 'center',
+                top: 'top',
+                data: [
+                  'Page A',
+                  'Page B',
+                  'Page C',
+                  'Page D',
+                  'Page E',
+                  'Page F',
+                  'Page G',
+                  'Page H',
+                ],
+                show: element.config.showLegend,
+              },
+              data: element.config.data.slice(0, element.config.pies),
             },
           ],
         };
@@ -53,7 +85,7 @@ export const StandardRosePieContent = ({ element }) => {
     return () => {
       if (chart) chart.dispose();
     };
-  }, [element.config.data, element.config.colors]);
+  }, [element]);
 
   return (
     <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }} />

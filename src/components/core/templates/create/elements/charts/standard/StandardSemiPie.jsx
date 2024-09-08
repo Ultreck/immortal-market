@@ -1,6 +1,6 @@
 import { ChartContainer } from '@/components/ui/chart';
-import { colors, interpolateColor } from '@/lib/utils';
-import { Pie, PieChart } from 'recharts';
+import { capitalize, colors, interpolateColor } from '@/lib/utils';
+import { Legend, Pie, PieChart } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
@@ -25,10 +25,10 @@ const StandardSemiPie = ({ element, active, highlighted, width, onClick, onChang
 StandardSemiPie.propTypes = ElementPropTypes;
 
 export const StandardSemiPieContent = ({ element }) => {
-  const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
+  const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
 
-  const data = element.config.data.map((item, index) => {
-    const value = item[element.config.keys.y];
+  const data = element.config.data.slice(0, element.config.pies).map((item, index) => {
+    const value = item[element.config.keys.data];
     const factor = 1 - value / maxVisitors;
     const color = element.config.useGradient
       ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
@@ -37,7 +37,7 @@ export const StandardSemiPieContent = ({ element }) => {
     return { ...item, fill: color };
   });
 
-  useEffect(() => {}, [element.config.data, element.config.colors, element.config.keys.y]);
+  useEffect(() => {}, [element]);
 
   return (
     <ChartContainer
@@ -45,7 +45,8 @@ export const StandardSemiPieContent = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <PieChart width={element.width} height={element.height}>
-        <Pie dataKey="value" startAngle={180} endAngle={0} data={data} cx="50%" cy="50%" outerRadius={80} label />
+        {element.config.showLegend && <Legend />}
+        <Pie dataKey="value" startAngle={180} endAngle={0} data={data} cx="50%" cy="50%" outerRadius={80} label={element.config.showLabel} />
       </PieChart>
     </ChartContainer>
   );

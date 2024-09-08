@@ -396,12 +396,11 @@ const StandardCharts = () => {
               pv: 4300,
             },
           ],
-          orientation: 'vertical',
-          showXYaxis: false,
-          showLegend: false,
           keys: { x: 'name', y: ['pv', 'uv'] },
           colors,
           useGradient: false,
+          showXYaxis: false,
+          showLegend: false,
           gradientColor: '#2673D9',
           showGridline: false,
           bars: 5,
@@ -440,36 +439,10 @@ const StandardCharts = () => {
           colors,
           useGradient: false,
           gradientColor: '#2673D9',
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <TbChartPie className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
-      id: 'chart-s-pie-ordinary',
-      type: 'chart-s-pie-ordinary',
-      name: 'Ordinary Pie Chart',
-      data: {
-        type: 'chart-s-pie-ordinary',
-        text: 'Ordinary Pie Chart',
-        width: 500,
-        height: 400,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            { browser: 'chrome', visitors: 187 },
-            { browser: 'safari', visitors: 200 },
-            { browser: 'firefox', visitors: 275 },
-            { browser: 'edge', visitors: 173 },
-            { browser: 'other', visitors: 90 },
-          ],
-          keys: { x: 'browser', y: 'visitors' },
-          colors,
-          useGradient: false,
-          gradientColor: '#2673D9',
+          showLabel: true,
+          pies: 5,
+          showLegend: false,
+          showToolTip: true,
         },
       },
       preview: (
@@ -500,12 +473,16 @@ const StandardCharts = () => {
             { name: 'Page E', value: 1890 },
             { name: 'Page F', value: 2390 },
             { name: 'Page G', value: 3490 },
+            { name: 'Page H', value: 4390 },
           ],
           keys: { name: 'name', data: 'value' },
           type: 'normal',
           colors,
           useGradient: false,
           gradientColor: '#2673D9',
+          pies: 5,
+          showLegend: true,
+          showLabel: true,
         },
       },
       preview: (
@@ -533,12 +510,16 @@ const StandardCharts = () => {
             { name: 'Page E', value: 1890 },
             { name: 'Page F', value: 2390 },
             { name: 'Page G', value: 3490 },
+            { name: 'Page H', value: 4390 },
           ],
-          keys: { name: 'name', data: 'data' },
+          keys: { name: 'name', data: 'value' },
           type: 'normal',
           colors,
           useGradient: false,
           gradientColor: '#2673D9',
+          pies: 5,
+          showLegend: true,
+          showLabel: true,
         },
       },
       preview: (
@@ -566,12 +547,16 @@ const StandardCharts = () => {
             { name: 'Page E', value: 1890 },
             { name: 'Page F', value: 2390 },
             { name: 'Page G', value: 3490 },
+            { name: 'Page H', value: 4390 },
           ],
-          keys: { name: 'name', data: 'data' },
+          keys: { name: 'name', data: 'value' },
           type: 'normal',
           colors,
           useGradient: false,
           gradientColor: '#2673D9',
+          pies: 5,
+          showLegend: true,
+          showLabel: true,
         },
       },
       preview: (
@@ -600,10 +585,19 @@ const StandardCharts = () => {
             { browser: 'firefox', visitors: 275 },
             { browser: 'edge', visitors: 173 },
             { browser: 'other', visitors: 90 },
+            { browser: 'a', visitors: 230 },
+            { browser: 'b', visitors: 50 },
+            { browser: 'c', visitors: 100 },
+            { browser: 'd', visitors: 20 },
           ],
           keys: { x: 'browser', y: 'visitors' },
-          type: 'multiple',
           colors,
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+          showLegend: false,
+          showXaxis: false,
+          showYaxis: false,
         },
       },
       preview: (
@@ -613,66 +607,42 @@ const StandardCharts = () => {
       ),
     },
     {
-      id: 'chart-s-line-bar',
-      type: 'chart-s-line-bar',
-      name: 'Line Bar Chart',
+      id: 'chart-s-line-multiple',
+      type: 'chart-s-line-multiple',
+      name: 'Line Multiple Chart',
       data: {
-        type: 'chart-s-line-bar',
-        text: 'Line Bar Chart',
+        type: 'chart-s-line-multiple',
+        text: 'Line Multiple Chart',
         width: 400,
         height: 300,
         style: { opacity: 1 },
         config: {
           data: [
-            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
-            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
-            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
-            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
-            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
+            { month: 'Jan', desktop: 187, mobile: 200 },
+            { month: 'Feb', desktop: 275, mobile: 173 },
+            { month: 'Mar', desktop: 200, mobile: 90 },
+            { month: 'Apr', desktop: 275, mobile: 173 },
+            { month: 'May', desktop: 187, mobile: 90 },
+            { month: 'Jun', desktop: 239, mobile: 200 },
+            { month: 'Jul', desktop: 349, mobile: 275 },
+            { month: 'Aug', desktop: 230, mobile: 50 },
+            { month: 'Sep', desktop: 50, mobile: 100 },
+            { month: 'Oct', desktop: 100, mobile: 20 },
+            { month: 'Nov', desktop: 20, mobile: 20 },
           ],
-          keys: { x: 'name', y: 'pv' },
-          showXYaxis: true,
-          showLegend: true,
-          orientation: 'horizontal',
+          keys: { x: 'month', y: ['desktop', 'mobile'] },
           colors,
+          bars: 5,
+          showLegend: false,
+          showXaxis: false,
+          showYaxis: false,
+          showXGridline: false,
+          showYGridline: false,
         },
       },
       preview: (
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <TbChartHistogram className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
-      id: 'chart-s-line-area',
-      type: 'chart-s-line-area',
-      name: 'Line Area Chart',
-      data: {
-        type: 'chart-s-line-area',
-        text: 'Line area Chart',
-        width: 400,
-        height: 300,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
-            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
-            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
-            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
-            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
-          ],
-          keys: { x: 'name', y: 'pv' },
-          showXYaxis: true,
-          showLegend: true,
-          orientation: 'horizontal',
-          colors,
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <TbChartPpf className="w-full h-full" />
+          <TbChartLine className="w-full h-full" />
         </div>
       ),
     },
@@ -696,10 +666,22 @@ const StandardCharts = () => {
             { browser: 'firefox', visitors: 275 },
             { browser: 'edge', visitors: 173 },
             { browser: 'other', visitors: 90 },
+            { browser: 'a', visitors: 230 },
+            { browser: 'b', visitors: 50 },
+            { browser: 'c', visitors: 100 },
+            { browser: 'd', visitors: 20 },
           ],
           keys: { x: 'browser', y: 'visitors' },
           type: 'multiple',
           colors,
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+          showLegend: false,
+          showXaxis: false,
+          showYaxis: false,
+          useGradient: false,
+          gradientColor: '#2673D9',
         },
       },
       preview: (
@@ -720,15 +702,24 @@ const StandardCharts = () => {
         style: { opacity: 1 },
         config: {
           data: [
-            { browser: 'chrome', visitors: 187 },
-            { browser: 'safari', visitors: 200 },
-            { browser: 'firefox', visitors: 275 },
-            { browser: 'edge', visitors: 173 },
-            { browser: 'other', visitors: 90 },
+            { month: 'Jan', desktop: 187, mobile: 200 },
+            { month: 'Feb', desktop: 275, mobile: 173 },
+            { month: 'Mar', desktop: 200, mobile: 90 },
+            { month: 'Apr', desktop: 275, mobile: 173 },
+            { month: 'May', desktop: 187, mobile: 90 },
+            { month: 'Jun', desktop: 239, mobile: 200 },
+            { month: 'Jul', desktop: 349, mobile: 275 },
           ],
-          keys: { x: 'browser', y: 'visitors' },
-          type: 'multiple',
+          keys: { x: 'month', y: ['desktop', 'mobile'] },
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
           colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -739,7 +730,7 @@ const StandardCharts = () => {
     },
   ];
 
-  const semiCircleDataElement = [
+  const semiDoughnut = [
     {
       id: 'chart-s-semi-circle',
       type: 'chart-s-semi-circle',
@@ -756,10 +747,17 @@ const StandardCharts = () => {
             { name: 'Group D', value: 300 },
             { name: 'Group B', value: 200 },
             { name: 'Group C', value: 100 },
+            { name: 'Group G', value: 700 },
+            { name: 'Group H', value: 800 },
+            { name: 'Group I', value: 900 },
           ],
+          keys: { name: 'name', data: 'value' },
           colors,
           useGradient: false,
           gradientColor: '#2673D9',
+          pies: 5,
+          showLabel: true,
+          showLegend: true,
         },
       },
       preview: (
@@ -768,6 +766,9 @@ const StandardCharts = () => {
         </div>
       ),
     },
+  ];
+
+  const semiPie = [
     {
       id: 'chart-s-semi-pie',
       type: 'chart-s-semi-pie',
@@ -780,20 +781,180 @@ const StandardCharts = () => {
         style: { opacity: 1 },
         config: {
           data: [
+            { name: 'Group E', value: 500 },
+            { name: 'Group F', value: 600 },
             { name: 'Group A', value: 400 },
             { name: 'Group D', value: 300 },
             { name: 'Group B', value: 200 },
             { name: 'Group C', value: 100 },
+            { name: 'Group G', value: 700 },
+            { name: 'Group H', value: 800 },
           ],
           colors,
           keys: { name: 'name', data: 'value' },
           useGradient: false,
           gradientColor: '#2673D9',
+          pies: 5,
+          showLabel: true,
+          showLegend: true,
         },
       },
       preview: (
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
           <TbCircleHalf className="w-full h-full" />
+        </div>
+      ),
+    },
+  ];
+
+  const combineDataElement = [
+    {
+      id: 'chart-s-line-area',
+      type: 'chart-s-line-area',
+      name: 'Line Area Chart',
+      data: {
+        type: 'chart-s-line-area',
+        text: 'Line area Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
+          ],
+          keys: { x: 'name', y: 'pv' },
+          colors,
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
+          colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartPpf className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-line-area-vertical',
+      type: 'chart-s-line-area-vertical',
+      name: 'Line Area-vertical Chart',
+      data: {
+        type: 'chart-s-line-area-vertical',
+        text: 'Line area-vertical Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
+          ],
+          keys: { x: 'name', y: 'pv' },
+          colors,
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartPpf className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-line-bar',
+      type: 'chart-s-line-bar',
+      name: 'Line Bar Chart',
+      data: {
+        type: 'chart-s-line-bar',
+        text: 'Line Bar Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
+          ],
+          keys: { x: 'name', y: 'pv' },
+          colors,
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartHistogram className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-line-bar-vertical',
+      type: 'chart-s-line-bar-vertical',
+      name: 'Line Bar Chart',
+      data: {
+        type: 'chart-s-line-bar-vertical',
+        text: 'Line Bar Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
+          ],
+          keys: { x: 'name', y: 'pv' },
+          colors,
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartHistogram className="w-full h-full" />
         </div>
       ),
     },
@@ -826,9 +987,17 @@ const StandardCharts = () => {
         </div>
       </div>
       <div>
-        <p>Semi Circle</p>
+        <p>Semi Doughnut</p>
         <div className="grid grid-cols-3 gap-4">
-          {semiCircleDataElement.map((element) => {
+          {semiDoughnut.map((element) => {
+            return <DraggableElementWrapper key={element.id} element={element} />;
+          })}
+        </div>
+      </div>
+      <div>
+        <p>Semi Pie</p>
+        <div className="grid grid-cols-3 gap-4">
+          {semiPie.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
@@ -845,6 +1014,14 @@ const StandardCharts = () => {
         <p>Area</p>
         <div className="grid grid-cols-3 gap-4">
           {areaDataElement.map((element) => {
+            return <DraggableElementWrapper key={element.id} element={element} />;
+          })}
+        </div>
+      </div>
+      <div>
+        <p>Combinations</p>
+        <div className="grid grid-cols-3 gap-4">
+          {combineDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>

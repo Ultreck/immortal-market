@@ -3,6 +3,7 @@ import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { interpolateColor } from '@/lib/utils';
 
 const StandardDoughnutNormal = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -28,11 +29,29 @@ export const StandardDoughnutNormalContent = ({ element }) => {
   useEffect(() => {
     const chartDom = chartRef.current;
     const myChart = echarts.init(chartDom);
+
+    const maxDataValue = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
+    
+    const chartData = element.config.data.map((item, index) => {
+      const value = item[element.config.keys.data];
+      const factor = 1 - value / maxDataValue;  
+      const color = element.config.useGradient
+        ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
+        : element.config.colors?.[index % element.config.colors.length];
+      
+      return { ...item, fill: color };
+    });
+
     const option = {
       tooltip: {
         trigger: 'item',
       },
-      color: element.config.data.map((_, index) => element.config.colors[index % element.config.colors.length]),
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        show: element.config.showLegend,
+      },
+      color: chartData.map((item) => item.fill),
       series: [
         {
           name: 'Access From',
@@ -44,8 +63,8 @@ export const StandardDoughnutNormalContent = ({ element }) => {
             borderRadius: 10,
           },
           label: {
-            show: false,
             position: 'center',
+            show: element.config.showLabel,
           },
           emphasis: {
             label: {
@@ -57,7 +76,7 @@ export const StandardDoughnutNormalContent = ({ element }) => {
           labelLine: {
             show: false,
           },
-          data: element.config.data,
+          data: element.config.data.slice(0, element.config.pies),
         },
       ],
     };
@@ -65,7 +84,7 @@ export const StandardDoughnutNormalContent = ({ element }) => {
     return () => {
       myChart.dispose();
     };
-  }, [element.config.data, element.config.colors]);
+  }, [element]);
 
   return (
     <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }}></div>

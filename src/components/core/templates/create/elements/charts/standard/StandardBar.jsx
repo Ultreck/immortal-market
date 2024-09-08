@@ -36,7 +36,7 @@ export const StandardBarContent = ({ element }) => {
 
     return { ...item, fill: color };
   });
-  useEffect(() => {}, [element.config.data, element.config.colors, element.config.keys.y]);
+  useEffect(() => {}, [element]);
 
   return (
     <ChartContainer

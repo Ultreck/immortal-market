@@ -3,6 +3,7 @@ import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
+import { interpolateColor } from '@/lib/utils';
 
 const StandardSemiCircle = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -25,11 +26,28 @@ StandardSemiCircle.propTypes = ElementPropTypes;
 export const StandardSemiCircleContent = ({ element }) => {
   const chartRef = useRef(null);
 
+  const maxDataValue = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
+    
+  const chartData = element.config.data.map((item, index) => {
+    const value = item[element.config.keys.data];
+    const factor = 1 - value / maxDataValue;  
+    const color = element.config.useGradient
+      ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
+      : element.config.colors?.[index % element.config.colors.length];
+    
+    return { ...item, fill: color };
+  });
+
   useEffect(() => {
     const chartDom = chartRef.current;
     const myChart = echarts.init(chartDom);
     const option = {
-      color: element.config.data.map((_, index) => element.config.colors[index % element.config.colors.length]),
+      color: chartData.map((item) => item.fill),
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        show: element.config.showLegend,
+      },
       series: [
         {
           name: 'Access From',
@@ -38,7 +56,10 @@ export const StandardSemiCircleContent = ({ element }) => {
           center: ['50%', '70%'],
           startAngle: 180,
           endAngle: 360,
-          data: element.config.data,
+          data: element.config.data.slice(0, element.config.pies),
+          label: {
+            show: element.config.showLabel,
+          },
         },
       ],
     };
@@ -46,7 +67,7 @@ export const StandardSemiCircleContent = ({ element }) => {
     return () => {
       myChart.dispose();
     };
-  }, [element.config.colors, element.config.data]);
+  }, [element]);
 
   return <div id="main" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>;
 };

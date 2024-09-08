@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardAreaLine = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardAreaLineVertical = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -16,31 +16,34 @@ const StandardAreaLine = ({ element, active, highlighted, width, onClick, onChan
       highlighted={highlighted}
       editable
     >
-      <StandardAreaLineContent element={element} />
+      <StandardAreaLineVerticalContent element={element} />
     </ElementWrapper>
   );
 };
 
-StandardAreaLine.propTypes = ElementPropTypes;
+StandardAreaLineVertical.propTypes = ElementPropTypes;
 
-export const StandardAreaLineContent = ({ element }) => {
-  // const config = element.config.data.slice(0, element.config.bars).reduce((acc, item, i) => {
-  //   acc[item[element.config.keys.x]] = {
-  //     label: capitalize(item[element.config.keys.x]),
-  //     color: element.config.colors[i % element.config.colors.length],
-  //   };
-  //   return acc;
-  // }, {});
+export const StandardAreaLineVerticalContent = ({ element }) => {
+//   const config = element.config.data
+//     .slice(0, element.config.bars)
+//     .slice(0, element.config.bars)
+//     .reduce((acc, item, i) => {
+//       acc[item[element.config.keys.x]] = {
+//         label: capitalize(item[element.config.keys.x]),
+//         color: element.config.colors[i % element.config.colors.length],
+//       };
+//       return acc;
+//     }, {});
 
   return (
     <ChartContainer
       config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <ComposedChart data={element.config.data.slice(0, element.config.bars)}>
+      <ComposedChart data={element.config.data.slice(0, element.config.bars)} layout="vertical">
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis dataKey="name" scale="band" hide={!element.config.showXaxis} />
-        <YAxis hide={!element.config.showYaxis} />
+        <YAxis dataKey="name" type="category" scale="band" hide={!element.config.showYaxis} />
+        <XAxis type="number" hide={!element.config.showXaxis} />
         {element.config.showLegend && <Legend />}
         <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
         <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
@@ -49,9 +52,9 @@ export const StandardAreaLineContent = ({ element }) => {
   );
 };
 
-StandardAreaLineContent.propTypes = {
+StandardAreaLineVerticalContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default StandardAreaLine;
+export default StandardAreaLineVertical;
 

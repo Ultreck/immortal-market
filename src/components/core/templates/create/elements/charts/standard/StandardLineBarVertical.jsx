@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardLineBar = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardLineBarVertical = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -16,23 +16,23 @@ const StandardLineBar = ({ element, active, highlighted, width, onClick, onChang
       highlighted={highlighted}
       editable
     >
-      <StandardLineBarContent element={element} />
+      <StandardLineBarVerticalContent element={element} />
     </ElementWrapper>
   );
 };
 
-StandardLineBar.propTypes = ElementPropTypes;
+StandardLineBarVertical.propTypes = ElementPropTypes;
 
-export const StandardLineBarContent = ({ element }) => {
+export const StandardLineBarVerticalContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <ComposedChart data={element.config.data.slice(0, element.config.bars)}>
+      <ComposedChart data={element.config.data.slice(0, element.config.bars)} layout="vertical">
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis dataKey="name" scale="band" hide={!element.config.showXaxis} />
-        <YAxis hide={!element.config.showYAxis} />
+        <YAxis dataKey="name" type="category" scale="band" hide={!element.config.showYaxis} />
+        <XAxis type="number" hide={!element.config.showXaxis} />
         {element.config.showLegend && <Legend />}
         <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={8} />
         <Line type="monotone" dataKey="uv" stroke={element.config.colors[1]} />
@@ -41,8 +41,9 @@ export const StandardLineBarContent = ({ element }) => {
   );
 };
 
-StandardLineBarContent.propTypes = {
+StandardLineBarVerticalContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default StandardLineBar;
+export default StandardLineBarVertical;
+

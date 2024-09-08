@@ -41,6 +41,9 @@ export const charts = {
     'vertical-bar-no-sep',
     'stacked-bar-vertical',
     'bar-multiple-vertical',
+    'line-multiple',
+    'line-area-vertical',
+    'line-bar-vertical',
   ],
   advanced: [
     'shapes',

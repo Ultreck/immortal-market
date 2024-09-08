@@ -155,18 +155,31 @@ const ChartData = ({ element, onChange, onClose }) => {
                   <Controller
                     name="showXYaxis"
                     control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
                     rules={{ required: `showXYaxis is required` }}
                     render={({ field }) => (
-                      <Switch
-                        name={field.name}
-                        variant="bordered"
-                        size="lg"
-                        onChange={(e) =>
-                          onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
-                        }
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
                       >
-                        Show X and Y Axis
-                      </Switch>
+                        Show Y Axis
+                      </Checkbox>
                     )}
                   />
                 </div>
@@ -176,17 +189,160 @@ const ChartData = ({ element, onChange, onClose }) => {
                     control={control}
                     rules={{ required: `showLegend is required` }}
                     render={({ field }) => (
-                      <Switch
-                        name={field.name}
-                        variant="bordered"
-                        size="lg"
-                        onChange={(e) =>
-                          onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
-                        }
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
                       >
                         Show Legend
-                      </Switch>
+                      </Checkbox>
                     )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
+                  />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-line-area-vertical' && (
+              <>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
                   />
                 </div>
               </>
@@ -197,18 +353,31 @@ const ChartData = ({ element, onChange, onClose }) => {
                   <Controller
                     name="showXYaxis"
                     control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
                     rules={{ required: `showXYaxis is required` }}
                     render={({ field }) => (
-                      <Switch
-                        name={field.name}
-                        variant="bordered"
-                        size="lg"
-                        onChange={(e) =>
-                          onChange({ ...element, config: { ...element.config, showXYaxis: !!e.target.checked } })
-                        }
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
                       >
-                        Show X and Y Axis
-                      </Switch>
+                        Show Y Axis
+                      </Checkbox>
                     )}
                   />
                 </div>
@@ -218,17 +387,160 @@ const ChartData = ({ element, onChange, onClose }) => {
                     control={control}
                     rules={{ required: `showLegend is required` }}
                     render={({ field }) => (
-                      <Switch
-                        name={field.name}
-                        variant="bordered"
-                        size="lg"
-                        onChange={(e) =>
-                          onChange({ ...element, config: { ...element.config, showLegend: !!e.target.checked } })
-                        }
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
                       >
                         Show Legend
-                      </Switch>
+                      </Checkbox>
                     )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
+                  />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-line-bar-vertical' && (
+              <>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
                   />
                 </div>
               </>
@@ -313,6 +625,402 @@ const ChartData = ({ element, onChange, onClose }) => {
                         Show Y Grid Line
                       </Checkbox>
                     )}
+                  />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-area' && (
+              <>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
+                  />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-area-multiple' && (
+              <>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
+                  />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-line' && (
+              <>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
+                  />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-line-multiple' && (
+              <>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+                      >
+                        Show X Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXYaxis"
+                    control={control}
+                    rules={{ required: `showXYaxis is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYaxis}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+                      >
+                        Show Y Axis
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showLegend"
+                    control={control}
+                    rules={{ required: `showLegend is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showLegend}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                      >
+                        Show Legend
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showXGridline"
+                    control={control}
+                    rules={{ required: `showXGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showXGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                      >
+                        Show X Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div>
+                  <Controller
+                    name="showGridline"
+                    control={control}
+                    rules={{ required: `showGridline is required` }}
+                    render={({ field }) => (
+                      <Checkbox
+                        isSelected={element.config.showYGridline}
+                        classNames={{ base: 'py-0' }}
+                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                      >
+                        Show Y Grid Line
+                      </Checkbox>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bars: Number(v) },
+                      })
+                    }
+                    value={element.config.bars}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of Bars to Show"
                   />
                 </div>
               </>
@@ -962,6 +1670,264 @@ const ChartData = ({ element, onChange, onClose }) => {
                     max={element.config.data.length}
                     ariaLabel="No of Bars to Show"
                   />
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-pie' && (
+              <>
+                <div className="flex flex-col gap-2 space-y-6">
+                  <Checkbox
+                    isSelected={element.config.showLabel}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+                    classNames={{ base: 'py-0' }}
+                  >
+                    Show Label
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showLegend}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                  >
+                    Show Legend
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showToolTip}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showToolTip: v } })}
+                  >
+                    Show Tooltip
+                  </Checkbox>
+
+                  <div className="flex items-center space-x-4">
+                    <p className="text-base opacity-75 whitespace-nowrap">No. of Pie:</p>
+                    <AutoCompleteNumberInput
+                      onChange={(v) =>
+                        onChange({
+                          ...element,
+                          config: { ...element.config, pies: Number(v) },
+                        })
+                      }
+                      value={element.config.pies}
+                      min={1}
+                      max={element.config.data.length}
+                      ariaLabel="No of pies to Show"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-semi-pie' && (
+              <>
+                <div className="flex flex-col gap-2 space-y-6">
+                  <Checkbox
+                    isSelected={element.config.showLabel}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+                    classNames={{ base: 'py-0' }}
+                  >
+                    Show Label
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showLegend}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                  >
+                    Show Legend
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showTooltip}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showTooltip: v } })}
+                  >
+                    Show Tooltip
+                  </Checkbox>
+
+                  <div className="flex items-center space-x-4">
+                    <p className="text-base opacity-75 whitespace-nowrap">No. of Pie:</p>
+                    <AutoCompleteNumberInput
+                      onChange={(v) =>
+                        onChange({
+                          ...element,
+                          config: { ...element.config, pies: Number(v) },
+                        })
+                      }
+                      value={element.config.pies}
+                      min={1}
+                      max={element.config.data.length}
+                      ariaLabel="No of pies to Show"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-semi-circle' && (
+              <>
+                <div className="flex flex-col gap-2 space-y-6">
+                  <Checkbox
+                    isSelected={element.config.showLabel}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+                    classNames={{ base: 'py-0' }}
+                  >
+                    Show Label
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showLegend}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                  >
+                    Show Legend
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showTooltip}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showTooltip: v } })}
+                  >
+                    Show Tooltip
+                  </Checkbox>
+
+                  <div className="flex items-center space-x-4">
+                    <p className="text-base opacity-75 whitespace-nowrap">No. of Pie:</p>
+                    <AutoCompleteNumberInput
+                      onChange={(v) =>
+                        onChange({
+                          ...element,
+                          config: { ...element.config, pies: Number(v) },
+                        })
+                      }
+                      value={element.config.pies}
+                      min={1}
+                      max={element.config.data.length}
+                      ariaLabel="No of pies to Show"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-doughnut' && (
+              <>
+                <div className="flex flex-col gap-2 space-y-6">
+                  <Checkbox
+                    isSelected={element.config.showLabel}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+                    classNames={{ base: 'py-0' }}
+                  >
+                    Show Label
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showLegend}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                  >
+                    Show Legend
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showTooltip}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showTooltip: v } })}
+                  >
+                    Show Tooltip
+                  </Checkbox>
+
+                  <div className="flex items-center space-x-4">
+                    <p className="text-base opacity-75 whitespace-nowrap">No. of Pie:</p>
+                    <AutoCompleteNumberInput
+                      onChange={(v) =>
+                        onChange({
+                          ...element,
+                          config: { ...element.config, pies: Number(v) },
+                        })
+                      }
+                      value={element.config.pies}
+                      min={1}
+                      max={element.config.data.length}
+                      ariaLabel="No of pies to Show"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-doughnut-standard' && (
+              <>
+                <div className="flex flex-col gap-2 space-y-6">
+                  <Checkbox
+                    isSelected={element.config.showLabel}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+                    classNames={{ base: 'py-0' }}
+                  >
+                    Show Label
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showLegend}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                  >
+                    Show Legend
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showTooltip}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showTooltip: v } })}
+                  >
+                    Show Tooltip
+                  </Checkbox>
+
+                  <div className="flex items-center space-x-4">
+                    <p className="text-base opacity-75 whitespace-nowrap">No. of Pie:</p>
+                    <AutoCompleteNumberInput
+                      onChange={(v) =>
+                        onChange({
+                          ...element,
+                          config: { ...element.config, pies: Number(v) },
+                        })
+                      }
+                      value={element.config.pies}
+                      min={1}
+                      max={element.config.data.length}
+                      ariaLabel="No of pies to Show"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+            {element.type === 'chart-s-doughnut-crazy' && (
+              <>
+                <div className="flex flex-col gap-2 space-y-6">
+                  <Checkbox
+                    isSelected={element.config.showLabel}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+                    classNames={{ base: 'py-0' }}
+                  >
+                    Show Label
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showLegend}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+                  >
+                    Show Legend
+                  </Checkbox>
+                  <Checkbox
+                    isSelected={element.config.showTooltip}
+                    classNames={{ base: 'py-0' }}
+                    onValueChange={(v) => onChange({ ...element, config: { ...element.config, showTooltip: v } })}
+                  >
+                    Show Tooltip
+                  </Checkbox>
+
+                  <div className="flex items-center space-x-4">
+                    <p className="text-base opacity-75 whitespace-nowrap">No. of Pie:</p>
+                    <AutoCompleteNumberInput
+                      onChange={(v) =>
+                        onChange({
+                          ...element,
+                          config: { ...element.config, pies: Number(v) },
+                        })
+                      }
+                      value={element.config.pies}
+                      min={1}
+                      max={element.config.data.length}
+                      ariaLabel="No of pies to Show"
+                    />
+                  </div>
                 </div>
               </>
             )}

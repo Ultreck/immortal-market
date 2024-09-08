@@ -22,6 +22,9 @@ import StandardMultipleBar from './StandardMultipleBar.jsx';
 import StandardVerticalStackedBar from './StandardVerticalStackedBar.jsx';
 import StandardMultipleBarVertical from './StandardMultipleBarVertical.jsx';
 import StandardVerticalBarNoSep from './StandardVerticalBarNoSep.jsx';
+import StandardLineMultiple from './StandardLineMultiple.jsx';
+import StandardAreaLineVertical from './StandardAreaLineVertical.jsx';
+import StandardLineBarVertical from './StandardLineBarVertical.jsx';
 
 const StandardCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -47,6 +50,9 @@ const StandardCharts = ({ element, active, highlighted, width, onClick, onChange
     'chart-s-vertical-bar-no-sep': StandardVerticalBarNoSep,
     'chart-s-stacked-bar-vertical': StandardVerticalStackedBar,
     'chart-s-bar-multiple-vertical' : StandardMultipleBarVertical,
+    'chart-s-line-multiple': StandardLineMultiple,
+    'chart-s-line-area-vertical': StandardAreaLineVertical,
+    'chart-s-line-bar-vertical': StandardLineBarVertical,
   };
 
   if (components[element.type]) {

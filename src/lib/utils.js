@@ -159,7 +159,7 @@ export const interpolateColor = (color1, color2, factor) => {
     }
     return color.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
   };
-  
+
   const rgb1 = hex(color1);
   const rgb2 = hex(color2);
   

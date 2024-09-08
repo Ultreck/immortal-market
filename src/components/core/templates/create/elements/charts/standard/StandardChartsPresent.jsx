@@ -20,6 +20,10 @@ import PropTypes from 'prop-types';
 import StandardMultipleBar from './StandardMultipleBar';
 import { StandardVerticalStackedBarContent } from './StandardVerticalStackedBar';
 import { StandardMultipleBarVerticalContent } from './StandardMultipleBarVertical';
+import { StandardVerticalBarNoSepContent } from './StandardVerticalBarNoSep';
+import { StandardLineMultipleContent } from './StandardLineMultiple';
+import { StandardAreaLineVerticalContent } from './StandardAreaLineVertical';
+import { StandardLineBarVerticalContent } from './StandardLineBarVertical';
 
 const StandardChartsPresent = ({ element }) => {
   const components = {
@@ -44,6 +48,9 @@ const StandardChartsPresent = ({ element }) => {
     'chart-s-vertical-bar-no-sep': StandardVerticalBarNoSepContent,
     'chart-s-stacked-bar-vertical': StandardVerticalStackedBarContent,
     'chart-s-bar-multiple-vertical': StandardMultipleBarVerticalContent,
+    'chart-s-line-multiple': StandardLineMultipleContent,
+    'chart-s-line-area-vertical': StandardAreaLineVerticalContent,
+    'chart-s-line-bar-vertical': StandardLineBarVerticalContent,
   };
 
   if (components[element.type]) {

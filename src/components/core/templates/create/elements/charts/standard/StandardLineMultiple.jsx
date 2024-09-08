@@ -1,10 +1,11 @@
-import { Area, AreaChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, LabelList, Legend, Line, LineChart, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
+import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const StandardAreaMultiple = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardLineMultiple = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -15,28 +16,28 @@ const StandardAreaMultiple = ({ element, active, highlighted, width, onClick, on
       highlighted={highlighted}
       editable
     >
-      <StandardAreaMultipleContent element={element} />
+      <StandardLineMultipleContent element={element} />
     </ElementWrapper>
   );
 };
 
-StandardAreaMultiple.propTypes = ElementPropTypes;
+StandardLineMultiple.propTypes = ElementPropTypes;
 
-export const StandardAreaMultipleContent = ({ element }) => {
+export const StandardLineMultipleContent = ({ element }) => {
   return (
     <>
       <ChartContainer
         config={{}}
         style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
       >
-        <AreaChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
-          <CartesianGrid vertical={false} horizontal={element.config.showXGridline} />
+        <LineChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
+          <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
           <XAxis
-            dataKey="month"
+            dataKey={element.config.keys.x}
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            tickFormatter={(value) => value.slice(0, 3)}
+            tickFormatter={(value) => capitalize(value)}
             hide={!element.config.showXaxis}
           />
           <YAxis type="number" hide={!element.config.showYaxis} />
@@ -44,7 +45,7 @@ export const StandardAreaMultipleContent = ({ element }) => {
           {element.config.showLegend && <Legend />}
           {element.config.keys.y.map((key, index) => {
             return (
-              <Area
+              <Line
                 key={key}
                 dataKey={key}
                 type="monotone"
@@ -55,14 +56,15 @@ export const StandardAreaMultipleContent = ({ element }) => {
               />
             );
           })}
-        </AreaChart>
+        </LineChart>
       </ChartContainer>
     </>
   );
 };
 
-StandardAreaMultipleContent.propTypes = {
+StandardLineMultipleContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default StandardAreaMultiple;
+export default StandardLineMultiple;
+

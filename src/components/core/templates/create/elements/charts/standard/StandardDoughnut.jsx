@@ -1,9 +1,10 @@
-import { Pie, PieChart } from 'recharts';
+import { Legend, Pie, PieChart } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart.jsx';
-import { capitalize } from '@/lib/utils.js';
+import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { useEffect } from 'react';
 
 const StandardDoughnut = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -24,26 +25,28 @@ const StandardDoughnut = ({ element, active, highlighted, width, onClick, onChan
 StandardDoughnut.propTypes = ElementPropTypes;
 
 export const StandardDoughnutContent = ({ element }) => {
-  const data = element.config.data.map((item, i) => ({
-    ...item,
-    fill: element.config.colors[i % element.config.colors.length],
-  }));
+  const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
 
-  const config = element.config.data.reduce((acc, item, i) => {
-    acc[item[element.config.keys.name]] = {
-      label: capitalize(item[element.config.keys.name]),
-      color: element.config.colors[i % element.config.colors.length],
-    };
-    return acc;
-  }, {});
+  const data = element.config.data.slice(0, element.config.pies).map((item, index) => {
+    const value = item[element.config.keys.data];
+    const factor = 1 - value / maxVisitors;
+    const color = element.config.useGradient
+      ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
+      : element.config.colors?.[index] || colors[index % colors.length];
+
+    return { ...item, fill: color };
+  });
+
+  useEffect(() => {}, [element]);
 
   return (
     <ChartContainer
-      config={config}
+      config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <PieChart width={element.width} height={element.height}>
-        <Pie data={data} innerRadius={80} outerRadius={120} paddingAngle={3} dataKey={element.config.keys.data}></Pie>
+        {element.config.showLegend && <Legend />}
+        <Pie data={data} innerRadius={80} outerRadius={120} dataKey={element.config.keys.data} label={element.config.showLabel} labelLine={false} />
       </PieChart>
     </ChartContainer>
   );
@@ -54,3 +57,4 @@ StandardDoughnutContent.propTypes = {
 };
 
 export default StandardDoughnut;
+
