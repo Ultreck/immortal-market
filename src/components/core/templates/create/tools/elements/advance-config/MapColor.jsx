@@ -17,26 +17,26 @@ const MapColor = ({ element, onChange }) => {
 
   return (
     <div className="px- py-6 w-full">
-      <div className="p-5 bg-slate-800 w-full relative rounded">
-        <div className="text border-b-2 border-slate-900">
+      <div className="p-5 dark:bg-slate-800 bg-gray-300 w-full relative rounded">
+        <div className="text border-b-2 dark:border-slate-900">
           <table className="w-full">
             <thead className="">
-              <tr className="text-start">
-                <th className=" text-start p-1">S/n</th>
-                <th className=" text-start p-1">Color</th>
-                <th className="text-start p-1">Name</th>
-                <th className="text-start p-1">Area</th>
+              <tr className="text">
+                <th className=" text-center">S/n</th>
+                <th className=" text-center">Color</th>
+                <th className="text-center">Name</th>
+                <th className="text-center">Value</th>
               </tr>
             </thead>
           </table>
         </div>
         <ScrollShadow offset={100} orientation="horizontal" className="h-[200px]">
-          <table className="w-full border-collapse border border-slate-500 ">
+          <table className="w-full border border-slate-600 ">
             <tbody className="text">
               {element.config.data.map((state, index) => (
                 <tr key={state.x} className="text">
-                  <td className="border border-slate-600 p-1">{index + 1}</td>
-                  <td className="border border-slate-600 p-1">
+                  <td className="border text-center border-slate-600 w-10">{index + 1}</td>
+                  <td className="border text-center border-slate-600 w-24 pt-1.5">
                     <ColourPane
                       colors={element.config.colors}
                       id={state.id}
@@ -44,8 +44,8 @@ const MapColor = ({ element, onChange }) => {
                       onSelectColor={handleChange}
                     />
                   </td>
-                  <td className="border border-slate-600 p-1">{state.label}</td>
-                  <td className="border border-slate-600 p-1">{state.area}</td>
+                  <td className="border text-center border-slate-600">{state.label}</td>
+                  <td className="border text-center border-slate-600">{state.value}</td>
                 </tr>
               ))}
             </tbody>

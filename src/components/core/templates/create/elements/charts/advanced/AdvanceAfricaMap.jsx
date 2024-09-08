@@ -15,7 +15,7 @@ const AdvanceAfricaMap = ({ element, active, highlighted, width, onClick, onChan
     } else {
       setbackgroundColor('black');
     }
-  }, [element.backgroundColor]);
+  }, [element]);
 
   const assignColor = (label) => {
     const colorFound = element.config.data.find((value) => value.label === label);
@@ -86,8 +86,8 @@ const AdvanceAfricaMap = ({ element, active, highlighted, width, onClick, onChan
         />
         <path
           id="CF"
-          name="Central African Rep."
-          fill={assignColor('Central African Rep')}
+          name="Central African Republic"
+          fill={assignColor('Central African Republic')}
           stroke={backgroundColor}
           strokeWidth="2"
           data-id="CF"
@@ -95,8 +95,8 @@ const AdvanceAfricaMap = ({ element, active, highlighted, width, onClick, onChan
         />
         <path
           id="CI"
-          name="Côte d'Ivoire"
-          fill={assignColor("Côte d'Ivoire")}
+          name="Cote De Ivoire"
+          fill={assignColor("Cote De Ivoire")}
           stroke={backgroundColor}
           strokeWidth="2"
           data-id="CI"
@@ -113,8 +113,8 @@ const AdvanceAfricaMap = ({ element, active, highlighted, width, onClick, onChan
         />
         <path
           id="CD"
-          name="Dem. Rep. Congo"
-          fill={assignColor('Dem. Rep. Congo')}
+          name="Congo Republic"
+          fill={assignColor('Congo Republic')}
           stroke={backgroundColor}
           strokeWidth="2"
           data-id="CD"
@@ -212,8 +212,8 @@ const AdvanceAfricaMap = ({ element, active, highlighted, width, onClick, onChan
         />
         <path
           id="GW"
-          name="Guinea-Bissau"
-          fill={assignColor('Guinea-Bissau')}
+          name="Guinea Bissau"
+          fill={assignColor('Guinea Bissau')}
           stroke={backgroundColor}
           strokeWidth="2"
           data-id="GW"
@@ -221,8 +221,8 @@ const AdvanceAfricaMap = ({ element, active, highlighted, width, onClick, onChan
         />
         <path
           id="GQ"
-          name="Eq. Guinea"
-          fill={assignColor('Eq. Guinea')}
+          name="Equatorial Guinea"
+          fill={assignColor('Equatorial Guinea')}
           stroke={backgroundColor}
           strokeWidth="2"
           data-id="GQ"
@@ -356,8 +356,8 @@ const AdvanceAfricaMap = ({ element, active, highlighted, width, onClick, onChan
         />
         <path
           id="EH"
-          name="W. Sahara"
-          fill={assignColor('W. Sahara')}
+          name="West Sahara"
+          fill={assignColor('West Sahara')}
           stroke={backgroundColor}
           strokeWidth="2"
           data-id="EH"
@@ -494,7 +494,7 @@ const AdvanceAfricaMap = ({ element, active, highlighted, width, onClick, onChan
           if (!key) return null;
           const state = africaCountries[key];
           if (!state) return null;
-          if (element.showDetails) {
+          if (element.showLabels || element.showValues) {
             return (
               <SvgText key={item.label} x={state.x} y={state.y} width="100%" height="80px">
                 <div className="p-1 cursor-pointer text-gray-700">
@@ -508,12 +508,16 @@ const AdvanceAfricaMap = ({ element, active, highlighted, width, onClick, onChan
                       })}
                       style={{ background: item.color || element.backgroundColor }}
                     >
-                      <Tooltip content={item.label} offset={-7}>
-                        <p className="leading-none text-[22px] grid truncate">
-                          <span className="font-medium">{item.label}</span>
-                          <span className="font-medium text-center mt-1">{item.value}</span>
-                        </p>
-                      </Tooltip>
+                       <Tooltip content={item.label} offset={-7}>
+                          <p className="leading-none text-[22px] grid truncate">
+                            {element.showLabels && (
+                              <span className="font-medium">{item.label}</span>
+                            )}
+                            {element.showValues && (
+                            <span className="font-medium text-center mt-1">{item.value}</span>
+                            )}
+                          </p>
+                        </Tooltip>
                     </div>
                   </div>
                 </div>

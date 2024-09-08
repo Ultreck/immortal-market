@@ -16,7 +16,7 @@ const GlobalMapColor = ({ element, onChange }) => {
         <PopoverTrigger>
           <Button
             aria-label="Adjust font size"
-            className={`h-9 rounded-none`}
+            className={`h-9 rounded-none shadow border`}
             style={{ backgroundColor: `${element.backgroundColor}` }}
           ></Button>
         </PopoverTrigger>

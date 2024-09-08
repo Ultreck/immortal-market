@@ -4,8 +4,7 @@ import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react
 import { IconChartFunnel } from '@tabler/icons-react';
 import { TbChartTreemap, TbCircleDot, TbCirclesRelation, TbGaugeFilled } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { europeMapPayload, payload, africaCountries, africaMapPayload } from '@/lib/helper';
-import { GiNigeria, GiEarthAfricaEurope, GiAfrica } from "react-icons/gi";
+import { GiNigeria, GiEarthAfricaEurope, GiAfrica } from 'react-icons/gi';
 
 const colors = [
   '#E66B5B',
@@ -512,12 +511,31 @@ const AdvancedCharts = () => {
         text: 'Map Chart',
         width: 400,
         height: 400,
-        showDetails: false,
-        backgroundColor: "#f9fafb",
+        showLabels: true,
+        showValues: true,
+        backgroundColor: '#f9fafb',
         style: { opacity: 1 },
         config: {
-          data:payload.data,
-          colors: ['#f9fafb','#c2410c', '#15803d', '#1d4ed8', '#4d7c0f', '#be185d', '#0369a1', '#5a189a', '#b91c1c', '#a16207', '#b45309', '#047857', '#374151', '#404E4D', '#5D737E', '#A4036F'],
+          data: [],
+          colors: [
+            '#f9fafb',
+            '#c2410c',
+            '#15803d',
+            '#1d4ed8',
+            '#4d7c0f',
+            '#be185d',
+            '#0369a1',
+            '#5a189a',
+            '#b91c1c',
+            '#a16207',
+            '#b45309',
+            '#047857',
+            '#374151',
+            '#404E4D',
+            '#5D737E',
+            '#A4036F',
+          ],
+          keys: { name: 'label', data: 'value' },
         },
       },
       preview: (
@@ -535,12 +553,30 @@ const AdvancedCharts = () => {
         text: 'Europe-map Chart',
         width: 500,
         height: 500,
-        showDetails: false,
-        backgroundColor: "#f9fafb",
+        showLabels: true,
+        showValues: true,
+        backgroundColor: '#f9fafb',
         style: { opacity: 1 },
         config: {
-          data:europeMapPayload,
-          colors: ['#f9fafb','#c2410c', '#15803d', '#1d4ed8', '#4d7c0f', '#be185d', '#0369a1', '#5a189a', '#b91c1c', '#a16207', '#b45309', '#047857', '#374151', '#404E4D', '#5D737E', '#A4036F'],
+          data: [],
+          colors: [
+            '#f9fafb',
+            '#c2410c',
+            '#15803d',
+            '#1d4ed8',
+            '#4d7c0f',
+            '#be185d',
+            '#0369a1',
+            '#5a189a',
+            '#b91c1c',
+            '#a16207',
+            '#b45309',
+            '#047857',
+            '#374151',
+            '#404E4D',
+            '#5D737E',
+            '#A4036F',
+          ],
         },
       },
       preview: (
@@ -558,12 +594,30 @@ const AdvancedCharts = () => {
         text: 'Africa-map Chart',
         width: 500,
         height: 500,
-        showDetails: false,
-        backgroundColor: "#f9fafb",
+        showLabels: true,
+        showValues: true,
+        backgroundColor: '#f9fafb',
         style: { opacity: 1 },
         config: {
-          data: africaMapPayload,
-          colors: ['#f9fafb','#c2410c', '#15803d', '#1d4ed8', '#4d7c0f', '#be185d', '#0369a1', '#5a189a', '#b91c1c', '#a16207', '#b45309', '#047857', '#374151', '#404E4D', '#5D737E', '#A4036F'],
+          data: [],
+          colors: [
+            '#f9fafb',
+            '#c2410c',
+            '#15803d',
+            '#1d4ed8',
+            '#4d7c0f',
+            '#be185d',
+            '#0369a1',
+            '#5a189a',
+            '#b91c1c',
+            '#a16207',
+            '#b45309',
+            '#047857',
+            '#374151',
+            '#404E4D',
+            '#5D737E',
+            '#A4036F',
+          ],
         },
       },
       preview: (
@@ -572,7 +626,7 @@ const AdvancedCharts = () => {
         </div>
       ),
     },
-  ]
+  ];
 
   return (
     <>

@@ -14,11 +14,11 @@ const ColourPane = ({ colors, id, state, onSelectColor }) => {
       <PopoverTrigger>
         <Button
           aria-label="Adjust font size"
-          className={`text- h-5 rounded-none`}
+          className={`text-center h-6  rounded-none`}
           style={{ backgroundColor: `${state.color ? state.color : 'white'}` }}
         ></Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 shadow border border-default-200">
+      <PopoverContent className="p-0 shadow border bg-gray-200 border-default-200">
         <div className="grid grid-cols-4 gap-2 p-2">
           {safeColors?.map((color, index) => (
             <div
