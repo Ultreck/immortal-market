@@ -83,6 +83,7 @@ const AdvancedAfricaMapConfig = ({ element, onChange }) => {
       <Tab key="create" title="Create" className="text-base">
         <form onSubmit={handleSubmit(handleAddMapValues)}>
           <div className="">
+          <h1 className="text-lg font-semibold">Enter both value and name of state/country</h1>
             <div className="text my-5">
               <input
                 type="text"
