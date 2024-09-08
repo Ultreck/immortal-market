@@ -1,10 +1,10 @@
 import { isValidJsonArray } from '@/lib/utils';
 import { Button, Checkbox, Tab, Tabs, Textarea } from '@nextui-org/react';
 import { Controller, useForm } from 'react-hook-form';
-import { ElementPropTypes } from '@/lib/prop-types';
 import { useState } from 'react';
 import GlobalMapColor from './GlobalMapColor';
 import MapColor from './MapColor';
+import PropTypes from 'prop-types';
 
 const AdvanceMapConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
@@ -114,6 +114,9 @@ const AdvanceMapConfig = ({ element, onChange }) => {
   );
 };
 
-AdvanceMapConfig.propTypes = ElementPropTypes;
+AdvanceMapConfig.propTypes = {
+  element: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default AdvanceMapConfig;
