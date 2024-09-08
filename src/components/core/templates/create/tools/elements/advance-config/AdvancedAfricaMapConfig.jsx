@@ -1,6 +1,7 @@
 import { isValidJsonArray } from '@/lib/utils';
 import { Button, Checkbox, Tab, Tabs, Textarea } from '@nextui-org/react';
 import { Controller, useForm } from 'react-hook-form';
+import { ElementPropTypes } from '@/lib/prop-types';
 import { useEffect, useState } from 'react';
 import GlobalMapColor from './GlobalMapColor';
 import MapColor from './MapColor';
@@ -83,6 +84,44 @@ useEffect(() => {
         <Tab key="create" title="Create" className="text-base">
         <form onSubmit={handleSubmit(handleAddMapValues)}>
           <div className="">
+            <div className="text my-5">
+              <input
+                type="text"
+                placeholder="Label"
+                {...register('label', { required: true })}
+                className="border px-2 py-3 w-full rounded-lg mr-2"
+              />
+              {errorMessage && <small className="text-red-500">{errorMessage}</small>}
+            </div>
+            <div className="text my-5">
+              <input
+                type="text"
+                placeholder="Value"
+                {...register('value', { required: true })}
+                className="border px-2 py-3 w-full rounded-lg mr-2"
+              />
+              {/* {errorMessage &&
+              <small className="text-red-500">{errorMessage}</small>
+              } */}
+            </div>
+            <div className="text">
+              <Button
+                type="submit"
+                variant="solid"
+                radius="full"
+                color="primary"
+                className="text-base px-4 mt-3 w-32"
+              >
+                Add
+              </Button>
+            </div>
+          </div>
+        </form>
+      </Tab>
+      {element.config.data.length > 0 && (
+        <Tab key="create" title="Create" className="text-base">
+        <form onSubmit={handleSubmit(handleAddMapValues)}>
+          <div className="">
           <h1 className="text-lg font-semibold">Enter both value and name of state/country</h1>
             <div className="text my-5">
               <input
@@ -119,7 +158,7 @@ useEffect(() => {
         </form>
       </Tab>
       {element.config.data.length > 0 && (
-        <Tab key="data" title="Data" className="text-base">
+        <Tabkey="data" title="Data" className="text-base">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 gap-2">
               <Controller
@@ -160,8 +199,9 @@ useEffect(() => {
               Update
             </Button>
           </form>
-        </Tab>
-      )}
+        </Tab>)}
+      {element.config.data.length > 0 && (
+        )}
       {element.config.data.length > 0 && (
         <Tab key="color" title="color" className="text-base">
           <div className="">

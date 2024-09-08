@@ -5,6 +5,7 @@ import { IconChartFunnel } from '@tabler/icons-react';
 import { TbChartScatter, TbChartTreemap, TbCircleDot, TbCirclesRelation, TbGaugeFilled, TbIcons } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { GiNigeria, GiEarthAfricaEurope, GiAfrica } from 'react-icons/gi';
+import { GiNigeria, GiEarthAfricaEurope, GiAfrica } from 'react-icons/gi';
 import { starterLifeChartData } from '@/lib/charts';
 
 const colors = [

@@ -38,7 +38,6 @@ export const StandardSemiPieContent = ({ element }) => {
   });
 
 
-
   useEffect(() => {}, [element]);
 
   return (
