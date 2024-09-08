@@ -25,31 +25,12 @@ const Sidebar = () => {
     >
       {!collapsed && (
         <button
-          className="absolute top-1/2 left-[calc(100%-2px)] -translate-y-1/2 z-10"
           type="button"
           aria-label="Hide"
           onClick={() => setTab(null)}
+          className="absolute top-1/2 left-[calc(100%)] -translate-y-1/2 z-10 bg-gray-900 hover:bg-gray-800 border border-default-200 dark:border-default-100 h-[70px] rounded-r-full transition-all duration-200"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 13 96"
-            width="14"
-            height="100%"
-            fill="none"
-            className="IrLwCg"
-          >
-            <path
-              className="fill-gray-950 stroke-[0.5] stroke-default-200"
-              d="M0,0 h1 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32 H0 z"
-            ></path>
-            <path
-              className="fill-gray-950 stroke-[0.5] stroke-default-200"
-              d="M0.5,0 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32"
-            ></path>
-          </svg>
-          <div className="absolute top-1/2 -translate-y-1/2 left-0">
-            {collapsed ? <TbChevronRight size="14" /> : <TbChevronLeft size="14" />}
-          </div>
+          <div className="">{collapsed ? <TbChevronRight size="16" /> : <TbChevronLeft size="16" />}</div>
         </button>
       )}
       <div
