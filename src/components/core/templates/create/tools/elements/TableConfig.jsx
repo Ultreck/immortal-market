@@ -1,19 +1,78 @@
 import PropTypes from 'prop-types';
-import { Button, Popover, PopoverContent, PopoverTrigger, Textarea, useDisclosure, Tab, Tabs, Image } from '@nextui-org/react';
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Textarea,
+  useDisclosure,
+  Tab,
+  Tabs,
+  Image,
+} from '@nextui-org/react';
 import { TbSettings2 } from 'react-icons/tb';
 import { Controller, useForm } from 'react-hook-form';
-import { isValidJsonArray } from '@/lib/utils.js';
+// import { isValidJsonArray } from '@/lib/utils.js';
 import { useState } from 'react';
 import { HiCheck } from 'react-icons/hi2';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TableThemes } from '@/lib/utils';
-const data = [
-  ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-  ['', 'Cell 1', 'Cell 2', 'Cell 3'],
-  ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
-];
+// const data = [
+//   ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+//   ['', 'Cell 1', 'Cell 2', 'Cell 3'],
+//   ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
+// ];
+
+const defaultData = {
+  table: [
+    ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+    ['', 'Cell 1', 'Cell 2', 'Cell 3'],
+    ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
+  ],
+  table2: [
+    'headinggg',
+    ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+    ['', 'Cell 1', 'Cell 2', 'Cell 3'],
+    ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
+  ],
+  table3: {
+    heading: ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+    sideheading: ['Side 1', 'Side 2', 'Side 3', 'Side 4'],
+    rows: [
+      [
+        ['Cell 1', 'Cell 2', 'Cell 3'],
+        ['Cell 4', 'Cell 5', 'Cell 6'],
+        ['Cell 7', 'Cell 8', 'Cell 9'],
+        ['Cell 10', 'Cell 11', 'Cell 12'],
+      ],
+      [
+        ['Cell 1', 'Cell 2', 'Cell 3'],
+        ['Cell 4', 'Cell 5', 'Cell 6'],
+        ['Cell 7', 'Cell 8', 'Cell 9'],
+        ['Cell 10', 'Cell 11', 'Cell 12'],
+      ],
+      [
+        ['Cell 1', 'Cell 2', 'Cell 3'],
+        ['Cell 4', 'Cell 5', 'Cell 6'],
+        ['Cell 7', 'Cell 8', 'Cell 9'],
+        ['Cell 10', 'Cell 11', 'Cell 12'],
+      ],
+    ],
+  },
+  table4: {
+    heading: ['Heading 1', 'Heading 2', 'Heading 3'],
+    subheading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
+};
 
 const TableConfig = ({ element, onChange }) => {
+  const data = defaultData[element.type];
   const [tab, setTab] = useState('data');
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
   const { handleSubmit, control } = useForm({
@@ -71,7 +130,7 @@ const TableConfig = ({ element, onChange }) => {
                     control={control}
                     rules={{
                       required: 'A valid JSON array is required',
-                      validate: (value) => isValidJsonArray(value),
+                      // validate: (value) => isValidJsonArray(value),
                     }}
                     render={({ field, fieldState: { error } }) => {
                       const message = error?.type === 'validate' ? 'Invalid JSON array' : error?.message;

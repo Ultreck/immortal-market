@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { TbTableOff } from 'react-icons/tb';
 
-const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
+const Table3 = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -30,12 +30,14 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
   );
 };
 
-Table.propTypes = ElementPropTypes;
+Table3.propTypes = ElementPropTypes;
 
 export const TableElementContent = ({ element }) => {
-  const headers = element.config.data[0];
-  const rows = element.config.data.slice(1);
-  const max = Math.max(...element.config.data.map((row) => row.length));
+  const headers = element.config.data.heading;
+  const sides = element.config.data.sideheading;
+  const rows = element.config.data.rows;
+  console.log(headers, sides, rows);
+  const max = headers.length;
   const tableClassNames =
     element.theme && TableThemes[element.theme]?.tableHeadClassNames
       ? TableThemes[element.theme]?.tableHeadClassNames
@@ -77,7 +79,6 @@ export const TableElementContent = ({ element }) => {
           [`${tableHeadClassNames}`]: element.theme,
         })}
       >
-
         <tr
           className={cn({
             [`${tableHeadRowClassNames}`]: element.theme,
@@ -118,37 +119,43 @@ export const TableElementContent = ({ element }) => {
         {rows.map((row, index) => (
           <tr
             key={`row-${index}`}
-            className={cn({
+            className={cn('', {
               [`${tableBodyRowClassNames}`]: element.theme,
             })}
           >
-            {Array(max)
-              .fill(null)
-              .map((_, index) => {
-                const cell = row[index];
-                const style = { borderTopWidth: element.style.borderWidth, borderTopColor: element.style.borderColor };
-                if (index !== 0) {
-                  style.borderLeftWidth = element.style.borderWidth;
-                  style.borderLeftColor = element.style.borderColor;
+            <td
+              key={`cell-${index}`}
+              className={cn(
+                'border border-gray-300 px-4 py-2 h-fit',
+                {
+                  'border-l': index !== 0,
+                },
+                {
+                  [`${tableBodyDataClassNames}`]: element.theme,
                 }
-                return (
-                  <td
-                    key={`cell-${index}`}
-                    className={cn(
-                      'text-left border-gray-400 border-t px-3 py-1',
-                      {
-                        'border-l': index !== 0,
-                      },
-                      {
-                        [`${tableBodyDataClassNames}`]: element.theme,
-                      }
-                    )}
-                    style={style}
-                  >
-                    {cell}
-                  </td>
-                );
-              })}
+              )}
+            >
+              {sides[index]}
+            </td>
+            {row.map((_, index) => {
+              const cell = _;
+              const style = { borderTopWidth: element.style.borderWidth, borderTopColor: element.style.borderColor };
+              if (index !== 0) {
+                style.borderLeftWidth = element.style.borderWidth;
+                style.borderLeftColor = element.style.borderColor;
+              }
+              return (
+                <td key={`cell-${index}`} className="border border-gray-300 h-fit">
+                  <div className="flex flex-col h-full">
+                    {cell.map((_, index) => (
+                      <div key={`data-${index}`} className="border-b h-1/3 px-2 flex flex-col justify-center">
+                        {_}
+                      </div>
+                    ))}
+                  </div>
+                </td>
+              );
+            })}
           </tr>
         ))}
       </tbody>
@@ -160,5 +167,5 @@ TableElementContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default Table;
+export default Table3;
 

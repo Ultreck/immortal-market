@@ -1,6 +1,15 @@
 import Text, { TextElementContent } from '@/components/core/templates/create/elements/Text.jsx';
 import Image, { CanvasImageContent } from '@/components/core/templates/create/elements/Image.jsx';
 import Table, { TableElementContent } from '@/components/core/templates/create/elements/Table.jsx';
+import Table2, {
+  TableElementContent as Table2ElementContent,
+} from '@/components/core/templates/create/elements/Table2.jsx';
+import Table3, {
+  TableElementContent as Table3ElementContent,
+} from '@/components/core/templates/create/elements/Table3.jsx';
+import Table4, {
+  TableElementContent as Table4ElementContent,
+} from '@/components/core/templates/create/elements/Table4.jsx';
 import KeyValue, { KeyValueElementContent } from '@/components/core/templates/create/elements/KeyValue.jsx';
 import Line, { LineElementContent } from '@/components/core/templates/create/elements/Line.jsx';
 import GenericShape, { GenericShapeContent } from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
@@ -99,6 +108,9 @@ export const tools = {
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
   image: ['border', 'border-radius', 'opacity', 'animation', 'shadow'],
   table: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
+  table2: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
+  table3: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
+  table4: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
   'key-value': ['key-value', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
   infographic: ['infographic', 'opacity'],
 };
@@ -138,6 +150,9 @@ export const components = {
     line: Line,
     image: Image,
     table: Table,
+    table2: Table2,
+    table3: Table3,
+    table4: Table4,
     'key-value': KeyValue,
     infographic: Infographic,
   },
@@ -169,6 +184,9 @@ export const components = {
     line: LineElementContent,
     image: CanvasImageContent,
     table: TableElementContent,
+    table2: Table2ElementContent,
+    table3: Table3ElementContent,
+    table4: Table4ElementContent,
     'key-value': KeyValueElementContent,
     infographic: InfographicElementContent,
   },
@@ -178,3 +196,4 @@ export const getElementTools = (type) => {
   if (!tools[type]) throw new Error(`No tools found for type ${type}`);
   return tools[type];
 };
+

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { TbTableOff } from 'react-icons/tb';
 
-const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
+const Table2 = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -30,12 +30,12 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
   );
 };
 
-Table.propTypes = ElementPropTypes;
+Table2.propTypes = ElementPropTypes;
 
 export const TableElementContent = ({ element }) => {
-  const headers = element.config.data[0];
-  const rows = element.config.data.slice(1);
-  const max = Math.max(...element.config.data.map((row) => row.length));
+  const headers = element.config.data[1];
+  const rows = element.config.data.slice(2);
+  const max = Math.max(...element.config.data.slice(1).map((row) => row.length));
   const tableClassNames =
     element.theme && TableThemes[element.theme]?.tableHeadClassNames
       ? TableThemes[element.theme]?.tableHeadClassNames
@@ -77,7 +77,13 @@ export const TableElementContent = ({ element }) => {
           [`${tableHeadClassNames}`]: element.theme,
         })}
       >
-
+        <tr>
+          <th colSpan={5}>
+            <span className="block w-full">
+              {element.config.data[0]}
+            </span>
+          </th>
+        </tr>
         <tr
           className={cn({
             [`${tableHeadRowClassNames}`]: element.theme,
@@ -160,5 +166,5 @@ TableElementContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default Table;
+export default Table2;
 

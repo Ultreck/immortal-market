@@ -8,6 +8,7 @@ import ContextMenu from './ContextMenu';
 import { components } from '@/lib/elements.js';
 import { InView } from 'react-intersection-observer';
 import CanvasActions from '@/components/core/templates/create/CanvasActions.jsx';
+import PageTitle from './PageTitle';
 
 const Canvas = ({ id }) => {
   const selectionBoxRef = useRef(null);
@@ -233,7 +234,7 @@ const Canvas = ({ id }) => {
   return (
     <div className="relative">
       <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
-        <h2 className="font-semibold">Page {index + 1}</h2>
+        <PageTitle title={page.title} id={page.id} />
         <CanvasActions id={id} />
       </div>
       <div className={cn('relative border-2 border-transparent p-0.5 w-max', { 'border-primary-500': selected })}>
