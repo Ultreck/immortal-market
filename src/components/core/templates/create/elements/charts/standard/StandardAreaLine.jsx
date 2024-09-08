@@ -24,13 +24,6 @@ const StandardAreaLine = ({ element, active, highlighted, width, onClick, onChan
 StandardAreaLine.propTypes = ElementPropTypes;
 
 export const StandardAreaLineContent = ({ element }) => {
-  // const config = element.config.data.slice(0, element.config.bars).reduce((acc, item, i) => {
-  //   acc[item[element.config.keys.x]] = {
-  //     label: capitalize(item[element.config.keys.x]),
-  //     color: element.config.colors[i % element.config.colors.length],
-  //   };
-  //   return acc;
-  // }, {});
 
   return (
     <ChartContainer
