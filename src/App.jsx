@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import 'swiper/css/bundle';
 import OldDashboard from './pages/OldDashboard.jsx';
 import OldDashboardLayout from './components/core/shared/OldDashboardLayout.jsx';
 import RequireAuth from './components/core/shared/RequireAuth.jsx';
@@ -36,7 +37,7 @@ import AppearanceSettingsPage from '@/pages/settings/AppearanceSettingsPage.jsx'
 import AiAssistantPage from '@/pages/AiAssistantPage.jsx';
 import InvitationPage from '@/pages/InvitationPage.jsx';
 import PresentDesignPage from '@/pages/designs/PresentDesignPage.jsx';
-import 'swiper/css/bundle';
+import SvgShapes from '@/components/core/SvgShapes.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -172,6 +173,7 @@ const App = () => {
         </Route>
       </Routes>
       <GlobalModals />
+      <SvgShapes />
     </>
   );
 };

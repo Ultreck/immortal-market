@@ -143,6 +143,27 @@ const shapes = {
   'display': {
     clipPath: 'polygon(100% 0, 100% 83%, 60% 83%, 62% 92%, 71% 100%, 57% 100%, 46% 100%, 27% 100%, 38% 92%, 40% 83%, 0 83%, 0 0)',
   },
+  'wave': {
+    clipPath: 'url(#wave-hero)',
+  },
+  'wave-high-left': {
+    clipPath: 'url(#wave-high-left)',
+  },
+  'wave-high-right': {
+    clipPath: 'url(#wave-high-right)',
+  },
+  'wave-high-left-short': {
+    clipPath: 'url(#wave-high-left-short)',
+  },
+  'wave-higher-left': {
+    clipPath: 'url(#wave-higher-left)',
+  },
+  'chat-bubble': {
+    clipPath: 'url(#chat-bubble)',
+  },
+  'cloud': {
+    clipPath: 'url(#cloud)',
+  },
 };
 
 export default shapes;
