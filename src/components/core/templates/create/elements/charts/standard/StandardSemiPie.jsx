@@ -1,5 +1,5 @@
 import { ChartContainer } from '@/components/ui/chart';
-import { capitalize, colors, interpolateColor } from '@/lib/utils';
+import { colors, interpolateColor } from '@/lib/utils';
 import { Legend, Pie, PieChart } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
@@ -36,6 +36,8 @@ export const StandardSemiPieContent = ({ element }) => {
 
     return { ...item, fill: color };
   });
+
+
 
   useEffect(() => {}, [element]);
 

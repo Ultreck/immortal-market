@@ -4,6 +4,7 @@ import SvgText from '@/components/ui/SvgText';
 import { cn } from '@/lib/utils';
 import { europeContries } from '@/lib/helper';
 import { useEffect, useState } from 'react';
+import { Tooltip } from '@nextui-org/react';
 
 const AdvanceEuropeMap = ({ element, active, highlighted, width, onClick, onChange }) => {
   const [backgroundColor, setbackgroundColor] = useState('');
@@ -14,9 +15,9 @@ const AdvanceEuropeMap = ({ element, active, highlighted, width, onClick, onChan
     } else {
       setbackgroundColor('black');
     }
-  }, [element.backgroundColor]);
+  }, [element]);
   const assignColor = (label) => {
-    const colorFound = element.config.data.find((value) => value.label === label);
+    const colorFound = element?.config?.data?.find((value) => value.label === label);
 
     return colorFound && colorFound.color;
   };
@@ -409,7 +410,7 @@ const AdvanceEuropeMap = ({ element, active, highlighted, width, onClick, onChan
           if (!key) return null;
           const state = europeContries[key];
           if (!state) return null;
-          if (element.showDetails) {
+          if (element.showLabels || element.showValues) {
             return (
               <SvgText key={item.label} x={state.x} y={state.y} width="100%" height="80px">
                 <div className="p-1">
@@ -423,10 +424,12 @@ const AdvanceEuropeMap = ({ element, active, highlighted, width, onClick, onChan
                       })}
                       style={{ background: item.color || element.backgroundColor }}
                     >
-                      <p className="leading-none text-[14px] grid truncate">
-                        <span className="font-medium">{item.label}</span>
-                        <span className="font-medium text-center mt-1">{item.value}</span>
-                      </p>
+                      <Tooltip content={item.label} offset={-7}>
+                        <p className="leading-none text-[22px] grid truncate">
+                          {element.showLabels && <span className="font-medium">{item.label}</span>}
+                          {element.showValues && <span className="font-medium text-center mt-1">{item.value}</span>}
+                        </p>
+                      </Tooltip>
                     </div>
                   </div>
                 </div>
@@ -442,4 +445,3 @@ const AdvanceEuropeMap = ({ element, active, highlighted, width, onClick, onChan
 AdvanceEuropeMap.propTypes = ElementPropTypes;
 
 export default AdvanceEuropeMap;
-

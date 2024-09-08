@@ -15,11 +15,11 @@ const AdvanceMap = ({ element, active, highlighted, width, onClick, onChange }) 
     } else {
       setbackgroundColor('black');
     }
-  }, [element.backgroundColor]);
+  }, [element]);
 
   const assignColor = (label) => {
-    const colorFound = element.config.data.find((value) => value.label === label);
-    return colorFound.color;
+    const colorFound = element?.config?.data?.find((value) => value.label === label);
+    return colorFound?.color;
   };
 
   return (
@@ -393,7 +393,8 @@ const AdvanceMap = ({ element, active, highlighted, width, onClick, onChange }) 
             if (!key) return null;
             const state = NGstates[key];
             if (!state) return null;
-            if (element.showDetails) {
+
+            if(element.showLabels || element.showValues){
               return (
                 <SvgText key={item.label} x={state.x} y={state.y} width="100%" height="80px">
                   <div className="p-1 cursor-pointer text-gray-700">
@@ -409,8 +410,12 @@ const AdvanceMap = ({ element, active, highlighted, width, onClick, onChange }) 
                       >
                         <Tooltip content={item.label} offset={-7}>
                           <p className="leading-none text-[22px] grid truncate">
-                            <span className="font-medium">{item.label}</span>
+                            {element.showLabels && (
+                              <span className="font-medium">{item.label}</span>
+                            )}
+                            {element.showValues && (
                             <span className="font-medium text-center mt-1">{item.value}</span>
+                            )}
                           </p>
                         </Tooltip>
                       </div>
@@ -429,4 +434,3 @@ const AdvanceMap = ({ element, active, highlighted, width, onClick, onChange }) 
 AdvanceMap.propTypes = ElementPropTypes;
 
 export default AdvanceMap;
-
