@@ -272,3 +272,16 @@ export const TableThemes = {
     tableBodyDataClassNames: 'text-white',
   },
 };
+
+export const colors = [
+  '#E66B5B',
+  '#1D9085',
+  '#264A5A',
+  '#E8C22C',
+  '#F6881F',
+  '#2673D9',
+  '#2BA385',
+  '#E6A333',
+  '#AB52D9',
+  '#D93566',
+];

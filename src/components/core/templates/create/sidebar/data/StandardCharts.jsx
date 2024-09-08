@@ -47,13 +47,15 @@ const StandardCharts = () => {
             { browser: 'edge', visitors: 173 },
             { browser: 'other', visitors: 90 },
           ],
-          orientation: 'vertical',
-          showXYaxis: false,
+          showXaxis: false,
+          showYaxis: false,
           showLegend: false,
           keys: { x: 'browser', y: 'visitors' },
           colors,
           useGradient: false,
           gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
         },
       },
       preview: (
@@ -80,13 +82,15 @@ const StandardCharts = () => {
             { browser: 'edge', visitors: 173 },
             { browser: 'other', visitors: 90 },
           ],
-          orientation: 'vertical',
-          showXYaxis: false,
+          showXaxis: false,
+          showYaxis: false,
           showLegend: false,
-          keys: { x: 'country', y: 'visitors' },
+          keys: { x: 'browser', y: 'visitors' },
           colors,
           useGradient: false,
           gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
         },
       },
       preview: (
@@ -113,13 +117,52 @@ const StandardCharts = () => {
             { browser: 'edge', visitors: 173 },
             { browser: 'other', visitors: 90 },
           ],
-          orientation: 'vertical',
-          showXYaxis: false,
+          showXaxis: false,
+          showYaxis: false,
           showLegend: false,
           keys: { x: 'browser', y: 'visitors' },
           colors,
           useGradient: false,
           gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartBar className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-vertical-bar-no-sep',
+      type: 'chart-s-vertical-bar-no-sep',
+      name: 'Vertical Bar-no-sep Chart',
+      data: {
+        type: 'chart-s-vertical-bar-no-sep',
+        text: 'Vertical Bar-no-sep Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { browser: 'chrome', visitors: 187 },
+            { browser: 'safari', visitors: 200 },
+            { browser: 'firefox', visitors: 275 },
+            { browser: 'edge', visitors: 173 },
+            { browser: 'other', visitors: 90 },
+          ],
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
+          keys: { x: 'browser', y: 'visitors' },
+          colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -149,7 +192,53 @@ const StandardCharts = () => {
             { month: 'Jul', desktop: 349, mobile: 275 },
           ],
           keys: { x: 'month', y: ['desktop', 'mobile'] },
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
           colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <MdOutlineStackedBarChart className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-stacked-bar-vertical',
+      type: 'chart-s-stacked-bar-vertical',
+      name: 'Stacked Bar-vertical Chart',
+      data: {
+        type: 'chart-s-stacked-bar-vertical',
+        text: 'Stacked Bar-vertical Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { month: 'Jan', desktop: 187, mobile: 200 },
+            { month: 'Feb', desktop: 275, mobile: 173 },
+            { month: 'Mar', desktop: 200, mobile: 90 },
+            { month: 'Apr', desktop: 275, mobile: 173 },
+            { month: 'May', desktop: 187, mobile: 90 },
+            { month: 'Jun', desktop: 239, mobile: 200 },
+            { month: 'Jul', desktop: 349, mobile: 275 },
+          ],
+          keys: { x: 'month', y: ['desktop', 'mobile'] },
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
+          colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -176,13 +265,146 @@ const StandardCharts = () => {
             { browser: 'edge', visitors: 173 },
             { browser: 'other', visitors: 90 },
           ],
-          orientation: 'vertical',
-          showXYaxis: false,
+          showXaxis: false,
+          showYaxis: false,
           showLegend: false,
           keys: { x: 'browser', y: 'visitors' },
           colors,
           useGradient: false,
           gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartBar className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-bar-multiple',
+      type: 'chart-s-bar-multiple',
+      name: 'Bar Multiple Chart',
+      data: {
+        type: 'chart-s-bar-multiple',
+        text: 'Bar Multiple Chart',
+        width: 600,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            {
+              name: 'Page A',
+              uv: 4000,
+              pv: 1400,
+            },
+            {
+              name: 'Page B',
+              uv: 3000,
+              pv: 1398,
+            },
+            {
+              name: 'Page C',
+              uv: 2000,
+              pv: 9800,
+            },
+            {
+              name: 'Page D',
+              uv: 2780,
+              pv: 3908,
+            },
+            {
+              name: 'Page E',
+              uv: 1890,
+              pv: 4800,
+            },
+            {
+              name: 'Page F',
+              uv: 2390,
+              pv: 3800,
+            },
+            {
+              name: 'Page G',
+              uv: 3490,
+              pv: 4300,
+            },
+          ],
+          orientation: 'vertical',
+          showXYaxis: false,
+          showLegend: false,
+          keys: { x: 'name', y: ['pv', 'uv'] },
+          colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showGridline: false,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartBar className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-bar-multiple-vertical',
+      type: 'chart-s-bar-multiple-vertical',
+      name: 'Bar Multiple-vertical Chart',
+      data: {
+        type: 'chart-s-bar-multiple-vertical',
+        text: 'Bar Multiple-vertical Chart',
+        width: 600,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            {
+              name: 'Page A',
+              uv: 4000,
+              pv: 1400,
+            },
+            {
+              name: 'Page B',
+              uv: 3000,
+              pv: 1398,
+            },
+            {
+              name: 'Page C',
+              uv: 2000,
+              pv: 9800,
+            },
+            {
+              name: 'Page D',
+              uv: 2780,
+              pv: 3908,
+            },
+            {
+              name: 'Page E',
+              uv: 1890,
+              pv: 4800,
+            },
+            {
+              name: 'Page F',
+              uv: 2390,
+              pv: 3800,
+            },
+            {
+              name: 'Page G',
+              uv: 3490,
+              pv: 4300,
+            },
+          ],
+          orientation: 'vertical',
+          showXYaxis: false,
+          showLegend: false,
+          keys: { x: 'name', y: ['pv', 'uv'] },
+          colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showGridline: false,
+          bars: 5,
         },
       },
       preview: (
@@ -216,6 +438,38 @@ const StandardCharts = () => {
           ],
           keys: { name: 'name', data: 'value' },
           colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartPie className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-pie-ordinary',
+      type: 'chart-s-pie-ordinary',
+      name: 'Ordinary Pie Chart',
+      data: {
+        type: 'chart-s-pie-ordinary',
+        text: 'Ordinary Pie Chart',
+        width: 500,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { browser: 'chrome', visitors: 187 },
+            { browser: 'safari', visitors: 200 },
+            { browser: 'firefox', visitors: 275 },
+            { browser: 'edge', visitors: 173 },
+            { browser: 'other', visitors: 90 },
+          ],
+          keys: { x: 'browser', y: 'visitors' },
+          colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
         },
       },
       preview: (
@@ -250,6 +504,8 @@ const StandardCharts = () => {
           keys: { name: 'name', data: 'value' },
           type: 'normal',
           colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
         },
       },
       preview: (
@@ -281,6 +537,8 @@ const StandardCharts = () => {
           keys: { name: 'name', data: 'data' },
           type: 'normal',
           colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
         },
       },
       preview: (
@@ -312,6 +570,8 @@ const StandardCharts = () => {
           keys: { name: 'name', data: 'data' },
           type: 'normal',
           colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
         },
       },
       preview: (
@@ -498,6 +758,8 @@ const StandardCharts = () => {
             { name: 'Group C', value: 100 },
           ],
           colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
         },
       },
       preview: (
@@ -525,6 +787,8 @@ const StandardCharts = () => {
           ],
           colors,
           keys: { name: 'name', data: 'value' },
+          useGradient: false,
+          gradientColor: '#2673D9',
         },
       },
       preview: (
@@ -590,3 +854,4 @@ const StandardCharts = () => {
 };
 
 export default StandardCharts;
+

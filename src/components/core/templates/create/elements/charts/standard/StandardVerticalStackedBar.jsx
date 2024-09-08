@@ -5,13 +5,13 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart.jsx';
-import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardStackedBar = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardVerticalStackedBar = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -22,14 +22,14 @@ const StandardStackedBar = ({ element, active, highlighted, width, onClick, onCh
       highlighted={highlighted}
       editable
     >
-      <StandardStackedBarContent element={element} />
+      <StandardVerticalStackedBarContent element={element} />
     </ElementWrapper>
   );
 };
 
-StandardStackedBar.propTypes = ElementPropTypes;
+StandardVerticalStackedBar.propTypes = ElementPropTypes;
 
-export const StandardStackedBarContent = ({ element }) => {
+export const StandardVerticalStackedBarContent = ({ element }) => {
   const config = element.config.data.reduce((acc, item, i) => {
     acc[item[element.config.keys.x]] = {
       label: capitalize(item[element.config.keys.x]),
@@ -43,18 +43,18 @@ export const StandardStackedBarContent = ({ element }) => {
       config={config}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
-        <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis
+      <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)} layout="vertical">
+      <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+      <YAxis
+          type="category"
           dataKey={element.config.keys.x}
           tickLine={false}
           tickMargin={10}
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
-          hide={!element.config.showXaxis}
+          hide={!element.config.showYaxis}
         />
-        <YAxis type="number" hide={!element.config.showYaxis} />
-        <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+        <XAxis type="number" hide={!element.config.showXaxis} />
         {element.config.showLegend && <ChartLegend content={<ChartLegendContent />} />}
         {element.config.keys.y.map((key, index) => {
           return (
@@ -72,9 +72,8 @@ export const StandardStackedBarContent = ({ element }) => {
   );
 };
 
-StandardStackedBarContent.propTypes = {
+StandardVerticalStackedBarContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default StandardStackedBar;
-
+export default StandardVerticalStackedBar;

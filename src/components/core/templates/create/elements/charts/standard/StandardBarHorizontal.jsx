@@ -1,9 +1,10 @@
 import { Bar, BarChart, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
-import { capitalize } from '@/lib/utils.js';
+import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import { useEffect } from 'react';
 
 const StandardBarHorizontal = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -24,22 +25,23 @@ const StandardBarHorizontal = ({ element, active, highlighted, width, onClick, o
 StandardBarHorizontal.propTypes = ElementPropTypes;
 
 export const StandardBarHorizontalContent = ({ element }) => {
-  const chartData = element.config.data.map((item, index) => ({
-    ...item,
-    fill: element.config.colors[index % element.config.colors.length],
-  }));
+  const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
 
-  const config = element.config.data.reduce((acc, item, i) => {
-    acc[item[element.config.keys.x]] = {
-      label: capitalize(item[element.config.keys.x]),
-      color: element.config.colors[i % element.config.colors.length],
-    };
-    return acc;
-  }, {});
+  const chartData = element.config.data.map((item, index) => {
+    const value = item[element.config.keys.y];
+    const factor = 1 - value / maxVisitors;
+    const color = element.config.useGradient
+      ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
+      : element.config.colors?.[index] || colors[index % colors.length];
+
+    return { ...item, fill: color };
+  });
+
+  useEffect(() => {}, [element.config.data, element.config.colors, element.config.keys.y]);
 
   return (
     <ChartContainer
-      config={config}
+      config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <BarChart accessibilityLayer data={chartData} layout="vertical">
@@ -64,3 +66,4 @@ StandardBarHorizontalContent.propTypes = {
 };
 
 export default StandardBarHorizontal;
+

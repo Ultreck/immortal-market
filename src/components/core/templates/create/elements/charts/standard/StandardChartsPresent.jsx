@@ -17,6 +17,9 @@ import { StandardSemiPieContent } from '@/components/core/templates/create/eleme
 import { StandardAltBarContent } from '@/components/core/templates/create/elements/charts/standard/StandardAltBar.jsx';
 import { StandardBarNotSepContent } from '@/components/core/templates/create/elements/charts/standard/StandardBarNotSep.jsx';
 import PropTypes from 'prop-types';
+import StandardMultipleBar from './StandardMultipleBar';
+import { StandardVerticalStackedBarContent } from './StandardVerticalStackedBar';
+import { StandardMultipleBarVerticalContent } from './StandardMultipleBarVertical';
 
 const StandardChartsPresent = ({ element }) => {
   const components = {
@@ -37,6 +40,10 @@ const StandardChartsPresent = ({ element }) => {
     'chart-s-semi-pie': StandardSemiPieContent,
     'chart-s-alt-bar': StandardAltBarContent,
     'chart-s-bar-not-sep': StandardBarNotSepContent,
+    'chart-s-bar-multiple': StandardMultipleBar,
+    'chart-s-vertical-bar-no-sep': StandardVerticalBarNoSepContent,
+    'chart-s-stacked-bar-vertical': StandardVerticalStackedBarContent,
+    'chart-s-bar-multiple-vertical': StandardMultipleBarVerticalContent,
   };
 
   if (components[element.type]) {

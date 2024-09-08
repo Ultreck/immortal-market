@@ -36,6 +36,11 @@ export const charts = {
     'semi-pie',
     'alt-bar',
     'bar-not-sep',
+    'pie-ordinary',
+    'bar-multiple',
+    'vertical-bar-no-sep',
+    'stacked-bar-vertical',
+    'bar-multiple-vertical',
   ],
   advanced: [
     'shapes',

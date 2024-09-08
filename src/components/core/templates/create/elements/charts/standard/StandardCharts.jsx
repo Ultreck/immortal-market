@@ -17,6 +17,11 @@ import StandardSemiPie from './StandardSemiPie';
 import StandardAltBar from './StandardAltBar';
 import StandardBarNotSep from './StandardBarNotSep';
 import { createElement } from 'react';
+import StandardOrdinaryPieChart from './StandardOrdinaryPieChart.jsx';
+import StandardMultipleBar from './StandardMultipleBar.jsx';
+import StandardVerticalStackedBar from './StandardVerticalStackedBar.jsx';
+import StandardMultipleBarVertical from './StandardMultipleBarVertical.jsx';
+import StandardVerticalBarNoSep from './StandardVerticalBarNoSep.jsx';
 
 const StandardCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -37,6 +42,11 @@ const StandardCharts = ({ element, active, highlighted, width, onClick, onChange
     'chart-s-semi-pie': StandardSemiPie,
     'chart-s-alt-bar': StandardAltBar,
     'chart-s-bar-not-sep': StandardBarNotSep,
+    'chart-s-pie-ordinary': StandardOrdinaryPieChart,
+    'chart-s-bar-multiple': StandardMultipleBar,
+    'chart-s-vertical-bar-no-sep': StandardVerticalBarNoSep,
+    'chart-s-stacked-bar-vertical': StandardVerticalStackedBar,
+    'chart-s-bar-multiple-vertical' : StandardMultipleBarVertical,
   };
 
   if (components[element.type]) {
