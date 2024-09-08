@@ -11,7 +11,7 @@ const AdvanceMapConfig = ({ element, onChange }) => {
   const { handleSubmit, control } = useForm({
     defaultValues: {
       json: JSON.stringify(
-        element.config.data.map(({ color, id, area, ...rest }) => rest),
+        element.config.data.map(({ ...rest }) => rest),
         null,
         2
       ),
@@ -24,7 +24,6 @@ const AdvanceMapConfig = ({ element, onChange }) => {
     const data = realData.map((data, index) => ({ ...data, id: index + 1, color: '' }));
     onChange({ ...element, config: { ...element.config, data } });
   };
-console.log(element);
 
   return (
     <div className="">
@@ -81,10 +80,7 @@ console.log(element);
         </Tab>
         <Tab key="color" title="color" className="text-base">
           <div className="">
-              <MapColor
-              element={element}
-              onChange={onChange}
-              />
+            <MapColor element={element} onChange={onChange} />
           </div>
         </Tab>
         <Tab key="setting" title="setting" className="text-base">
@@ -98,22 +94,19 @@ console.log(element);
                 <GlobalMapColor element={element} onChange={onChange} />
               </div>
             </div>
-              <div className="text flex justify-between items-center w-full my-5">
-                <div className="text ">
-                  <h1 className="text">Map Details</h1>
-                  <span className="text-gray-400 text-sm">Show map details</span>
-                </div>
-                <Checkbox
-              isSelected={element.showDetails}
-              classNames={{ base: 'py-0' }}
-              onValueChange={(v) => onChange({ ...element,  showDetails: v? true : false })}
-            >
-              <span className="text ml-3">
-
-              {element.showDetails? "Hide" : "Show"}
-              </span>
-            </Checkbox>
+            <div className="text flex justify-between items-center w-full my-5">
+              <div className="text ">
+                <h1 className="text">Map Details</h1>
+                <span className="text-gray-400 text-sm">Show map details</span>
               </div>
+              <Checkbox
+                isSelected={element.showDetails}
+                classNames={{ base: 'py-0' }}
+                onValueChange={(v) => onChange({ ...element, showDetails: !!v })}
+              >
+                <span className="text ml-3">{element.showDetails ? 'Hide' : 'Show'}</span>
+              </Checkbox>
+            </div>
           </div>
         </Tab>
       </Tabs>
@@ -121,6 +114,6 @@ console.log(element);
   );
 };
 
-
 AdvanceMapConfig.propTypes = ElementPropTypes;
+
 export default AdvanceMapConfig;

@@ -1,5 +1,5 @@
-import { ElementPropTypes } from '@/lib/prop-types';
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import PropTypes from 'prop-types';
 
 const GlobalMapColor = ({ element, onChange }) => {
   const onSelectColor = (color) => {
@@ -36,5 +36,10 @@ const GlobalMapColor = ({ element, onChange }) => {
     </div>
   );
 };
-GlobalMapColor.propTypes = ElementPropTypes;
+
+GlobalMapColor.propTypes = {
+  element: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 export default GlobalMapColor;

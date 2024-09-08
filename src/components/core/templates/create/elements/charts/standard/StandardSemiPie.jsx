@@ -1,5 +1,5 @@
 import { ChartContainer } from '@/components/ui/chart';
-import { capitalize, colors, interpolateColor } from '@/lib/utils';
+import { colors, interpolateColor } from '@/lib/utils';
 import { Pie, PieChart } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
@@ -37,9 +37,6 @@ export const StandardSemiPieContent = ({ element }) => {
     return { ...item, fill: color };
   });
 
-  console.log({data})
-  
-
   useEffect(() => {}, [element.config.data, element.config.colors, element.config.keys.y]);
 
   return (
@@ -59,4 +56,3 @@ StandardSemiPieContent.propTypes = {
 };
 
 export default StandardSemiPie;
-
