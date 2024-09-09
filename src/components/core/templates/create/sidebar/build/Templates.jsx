@@ -1,4 +1,4 @@
-import { useGetDesignsTemplates } from '@/api/business.js';
+import { useGetTemplates } from '@/api/business.js';
 import { Image, Input, Popover, PopoverContent, PopoverTrigger, Skeleton, useDisclosure } from '@nextui-org/react';
 import { TbPhotoCircle, TbSearch } from 'react-icons/tb';
 import { getImageLink } from '@/lib/utils.js';
@@ -6,10 +6,7 @@ import ApplyTemplate from '@/components/core/templates/create/sidebar/build/Appl
 import PropTypes from 'prop-types';
 
 const Templates = () => {
-  const { data: { designs = [] } = {}, isLoading: isDeignsLoading } = useGetDesignsTemplates({
-    status: 'published',
-    type: 'template',
-  });
+  const { data: { designs = [] } = {}, isLoading: isDeignsLoading } = useGetTemplates();
 
   return (
     <div>

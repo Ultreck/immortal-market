@@ -117,7 +117,7 @@ export const useGetDesigns = ({ business, status, type }) => {
   });
 };
 
-export const useGetDesignsTemplates = () => {
+export const useGetTemplates = () => {
   return useQuery({
     queryKey: ['business', 'designs', 'templates'],
     queryFn: async () => {
@@ -163,6 +163,26 @@ export const useGetInfographics = (business) => {
     queryKey: ['infographics'],
     queryFn: async () => {
       const res = await http.get(`/businesses/${business}/designs/infographics`);
+      return res.data;
+    },
+  });
+};
+
+export const useCreateDesignBlock = (business) => {
+  return useMutation({
+    mutationKey: ['designs', 'blocks'],
+    mutationFn: (data) => {
+      const fd = objectToFormData(data);
+      return http.post(`/businesses/${business}/designs/blocks`, fd);
+    },
+  });
+};
+
+export const useGetDesignBlocks = (business) => {
+  return useQuery({
+    queryKey: ['designs', 'blocks'],
+    queryFn: async () => {
+      const res = await http.get(`/businesses/${business}/designs/blocks`);
       return res.data;
     },
   });

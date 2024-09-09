@@ -4,11 +4,10 @@ import { createElement, Fragment, useCallback, useEffect, useRef, useState } fro
 import { cn } from '@/lib/utils.js';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { Button, Tooltip } from '@nextui-org/react';
-import { TbChevronDown, TbChevronUp, TbCopyPlus, TbSquarePlus, TbTrash } from 'react-icons/tb';
 import ContextMenu from './ContextMenu';
 import { components } from '@/lib/elements.js';
 import { InView } from 'react-intersection-observer';
+import CanvasActions from '@/components/core/templates/create/CanvasActions.jsx';
 
 const Canvas = ({ id }) => {
   const selectionBoxRef = useRef(null);
@@ -18,9 +17,7 @@ const Canvas = ({ id }) => {
   const updateElements = useTemplateStore((state) => state.updateElements);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const selectPage = useTemplateStore((state) => state.selectPage);
-  const addPage = useTemplateStore((state) => state.addPage);
   const selectElements = useTemplateStore((state) => state.selectElements);
-  const deletePage = useTemplateStore((state) => state.deletePage);
   const selected = useTemplateStore((state) => state.template.selectedPage === id);
   const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
   const pages = useTemplateStore(({ template }) => template.pages);
@@ -28,8 +25,6 @@ const Canvas = ({ id }) => {
   const { setNodeRef, node } = useDroppable({ id: `canvas-${page.id}` });
   const [contextMenu, setContextMenu] = useState({ isOpen: false, position: { x: 0, y: 0 } });
   const scale = useTemplateStore((state) => state.template.scale);
-  const movePageUp = useTemplateStore((state) => state.movePageUp);
-  const movePageDown = useTemplateStore((state) => state.movePageDown);
 
   useEffect(() => {
     const handleClick = () => setContextMenu({ isOpen: false, position: { x: 0, y: 0 } });
@@ -207,15 +202,6 @@ const Canvas = ({ id }) => {
     }
   };
 
-  const handleDuplicatePage = () => {
-    const payload = {
-      ...page,
-      id: crypto.randomUUID(),
-      elements: page.elements.map((el) => ({ ...el, id: crypto.randomUUID() })),
-    };
-    addPage(payload, page.id);
-  };
-
   const getElementUnderCursor = useCallback(
     (event) => {
       const canvasRect = node.current.getBoundingClientRect();
@@ -248,39 +234,7 @@ const Canvas = ({ id }) => {
     <div className="relative">
       <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
         <h2 className="font-semibold">Page {index + 1}</h2>
-        <div className="flex items-center space-x-1">
-          {index > 0 && (
-            <Tooltip content="Move page up" showArrow>
-              <Button variant="light" isIconOnly onClick={() => movePageUp(page.id)} size="sm">
-                <TbChevronUp size="18" />
-              </Button>
-            </Tooltip>
-          )}
-          {index < pages.length - 1 && (
-            <Tooltip content="Move page down" showArrow>
-              <Button variant="light" isIconOnly onClick={() => movePageDown(page.id)} size="sm">
-                <TbChevronDown size="18" />
-              </Button>
-            </Tooltip>
-          )}
-          <Tooltip content="Duplicate page" showArrow>
-            <Button variant="light" isIconOnly onClick={handleDuplicatePage} size="sm">
-              <TbCopyPlus size="18" />
-            </Button>
-          </Tooltip>
-          {pages.length > 1 && (
-            <Tooltip content="Delete page" showArrow>
-              <Button variant="light" isIconOnly onClick={() => deletePage(page.id)} size="sm">
-                <TbTrash size="18" />
-              </Button>
-            </Tooltip>
-          )}
-          <Tooltip content="Add page" showArrow>
-            <Button variant="light" isIconOnly onClick={() => addPage(null, page.id)} size="sm">
-              <TbSquarePlus size="18" />
-            </Button>
-          </Tooltip>
-        </div>
+        <CanvasActions id={id} />
       </div>
       <div className={cn('relative border-2 border-transparent p-0.5 w-max', { 'border-primary-500': selected })}>
         <InView
