@@ -24,6 +24,7 @@ import { StandardVerticalBarNoSepContent } from './StandardVerticalBarNoSep';
 import { StandardLineMultipleContent } from './StandardLineMultiple';
 import { StandardAreaLineVerticalContent } from './StandardAreaLineVertical';
 import { StandardLineBarVerticalContent } from './StandardLineBarVertical';
+import { StandardBubbleChartContent } from './StandardBubbleChart';
 
 const StandardChartsPresent = ({ element }) => {
   const components = {
@@ -51,6 +52,7 @@ const StandardChartsPresent = ({ element }) => {
     'chart-s-line-multiple': StandardLineMultipleContent,
     'chart-s-line-area-vertical': StandardAreaLineVerticalContent,
     'chart-s-line-bar-vertical': StandardLineBarVerticalContent,
+    'chart-s-bubble': StandardBubbleChartContent,
   };
 
   if (components[element.type]) {

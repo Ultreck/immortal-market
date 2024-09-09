@@ -53,6 +53,7 @@ export const charts = {
     'line-multiple',
     'line-area-vertical',
     'line-bar-vertical',
+    'bubble',
   ],
   advanced: [
     'shapes',

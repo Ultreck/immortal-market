@@ -2,6 +2,7 @@ import {
   TbChartArea,
   TbChartAreaLine,
   TbChartBar,
+  TbChartBubble,
   TbChartDonut,
   TbChartDonut2,
   TbChartDonut4,
@@ -807,6 +808,61 @@ const StandardCharts = () => {
     },
   ];
 
+  const bubbleChartElement = [
+    {
+      id: 'chart-s-bubble',
+      type: 'chart-s-bubble',
+      name: 'Bubble Chart',
+      data: {
+        type: 'chart-s-bubble',
+        text: 'Bubble Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            [10.0, 8.04],
+            [8.07, 6.95],
+            [13.0, 7.58],
+            [9.05, 8.81],
+            [11.0, 8.33],
+            [14.0, 7.66],
+            [13.4, 6.81],
+            [10.0, 6.33],
+            [14.0, 8.96],
+            [12.5, 6.82],
+            [9.15, 7.2],
+            [11.5, 7.2],
+            [3.03, 4.23],
+            [12.2, 7.83],
+            [2.02, 4.47],
+            [1.05, 3.33],
+            [4.05, 4.96],
+            [6.03, 7.24],
+            [12.0, 6.26],
+            [12.0, 8.84],
+            [7.08, 5.82],
+            [5.02, 5.68],
+          ],
+          keys: { x: 'x', y: 'y' },
+          colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showGridline: true,
+          bubbles: 20,
+          showLegend: true,
+          showXaxis: true,
+          showYaxis: true,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartBubble className="w-full h-full" />
+        </div>
+      ),
+    },
+  ];
+
   const combineDataElement = [
     {
       id: 'chart-s-line-area',
@@ -912,7 +968,6 @@ const StandardCharts = () => {
           showXGridline: false,
           showYGridline: false,
           bars: 5,
-
         },
       },
       preview: (
@@ -958,6 +1013,7 @@ const StandardCharts = () => {
         </div>
       ),
     },
+    {},
   ];
 
   return (
@@ -1014,6 +1070,14 @@ const StandardCharts = () => {
         <p>Area</p>
         <div className="grid grid-cols-3 gap-4">
           {areaDataElement.map((element) => {
+            return <DraggableElementWrapper key={element.id} element={element} />;
+          })}
+        </div>
+      </div>
+      <div>
+        <p>Bubbles</p>
+        <div className="grid grid-cols-3 gap-4">
+          {bubbleChartElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
