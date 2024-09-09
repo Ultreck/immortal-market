@@ -15,6 +15,7 @@ import AdvanceSpeedometerConfig from './advance-config/AdvanceSpeedometerConfig.
 import AdvanceMapConfig from './advance-config/AdvanceMapConfig';
 import AdvancedEuropeMapConfig from './advance-config/AdvancedEuropeMapConfig';
 import AdvancedAfricaMapConfig from './advance-config/AdvancedAfricaMapConfig';
+import AdvancedNorthAmericaMapConfig from './advance-config/AdvancedNorthAmericaMapConfig';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -63,6 +64,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           {element.type === 'chart-a-map' && <AdvanceMapConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-europe-map' && <AdvancedEuropeMapConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-africa-map' && <AdvancedAfricaMapConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-north-america-map' && <AdvancedNorthAmericaMapConfig element={element} onChange={onChange} />}
         </div>
       </PopoverContent>
     </Popover>

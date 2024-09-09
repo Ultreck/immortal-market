@@ -15,6 +15,7 @@ import AdvanceMultipleGauge from './AdvanceMultipleGauge.jsx';
 import AdvanceAfricaMap from './AdvanceAfricaMap.jsx';
 import AdvanceEuropeMap from './AdvanceEuropeMap.jsx';
 import AdvanceMap from './AdvanceMap.jsx';
+import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap.jsx';
 
 const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -33,6 +34,7 @@ const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange 
     'chart-a-map': AdvanceMap,
     'chart-a-europe-map': AdvanceEuropeMap,
     'chart-a-africa-map': AdvanceAfricaMap,
+    'chart-a-north-america-map': AdvancedNorthAmericaMap,
   };
 
   if (components[element.type]) {

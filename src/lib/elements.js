@@ -56,7 +56,7 @@ export const charts = {
     'speedometer-simple',
     'speedometer-multiple',
   ],
-  map: ['map', 'europe-map', 'africa-map'],
+  map: ['map', 'europe-map', 'africa-map', 'north-america-map'],
 };
 
 export const tools = {
