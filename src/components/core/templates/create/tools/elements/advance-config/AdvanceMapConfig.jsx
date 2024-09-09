@@ -1,10 +1,10 @@
 import { isValidJsonArray } from '@/lib/utils';
 import { Button, Checkbox, Tab, Tabs, Textarea } from '@nextui-org/react';
 import { Controller, useForm } from 'react-hook-form';
+import { ElementPropTypes } from '@/lib/prop-types';
 import { useEffect, useState } from 'react';
 import GlobalMapColor from './GlobalMapColor';
 import MapColor from './MapColor';
-import PropTypes from 'prop-types';
 import { capitalizeFirstLetter, getRandomColor } from '@/lib/constants';
 import { ngStateNames } from '@/lib/helper';
 // import { color } from 'framer-motion';
@@ -215,8 +215,5 @@ const AdvanceMapConfig = ({ element, onChange }) => {
   );
 };
 
-AdvanceMapConfig.propTypes = {
-  element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
+AdvanceMapConfig.propTypes = ElementPropTypes;
 export default AdvanceMapConfig;
