@@ -1013,7 +1013,80 @@ const StandardCharts = () => {
         </div>
       ),
     },
-    {},
+    {
+      id: 'chart-s-area-bar',
+      type: 'chart-s-area-bar',
+      name: 'area Bar Chart',
+      data: {
+        type: 'chart-s-area-bar',
+        text: 'area Bar Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
+          ],
+          keys: { x: 'name', y: 'pv' },
+          colors,
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartHistogram className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-s-area-bar-vertical',
+      type: 'chart-s-area-bar-vertical',
+      name: 'area Bar Chart',
+      data: {
+        type: 'chart-s-area-bar-vertical',
+        text: 'area Bar Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+            { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+            { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+            { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+            { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
+          ],
+          keys: { x: 'name', y: 'pv' },
+          colors,
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showXGridline: false,
+          showYGridline: false,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartHistogram className="w-full h-full" />
+        </div>
+      ),
+    },
   ];
 
   return (

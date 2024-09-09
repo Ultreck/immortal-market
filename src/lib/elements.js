@@ -54,6 +54,8 @@ export const charts = {
     'line-area-vertical',
     'line-bar-vertical',
     'bubble',
+    'area-bar',
+    'area-bar-vertical',
   ],
   advanced: [
     'shapes',

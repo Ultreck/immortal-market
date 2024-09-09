@@ -1,11 +1,10 @@
-import { Area, CartesianGrid, ComposedChart, Legend, Line, XAxis, YAxis } from 'recharts';
+import { Area, Bar, CartesianGrid, ComposedChart, Legend, Line, XAxis, YAxis } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart.jsx';
-import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardAreaLineVertical = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardAreaBarVertical = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -16,14 +15,14 @@ const StandardAreaLineVertical = ({ element, active, highlighted, width, onClick
       highlighted={highlighted}
       editable
     >
-      <StandardAreaLineVerticalContent element={element} />
+      <StandardAreaBarVerticalContent element={element} />
     </ElementWrapper>
   );
 };
 
-StandardAreaLineVertical.propTypes = ElementPropTypes;
+StandardAreaBarVertical.propTypes = ElementPropTypes;
 
-export const StandardAreaLineVerticalContent = ({ element }) => {
+export const StandardAreaBarVerticalContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
@@ -34,16 +33,16 @@ export const StandardAreaLineVerticalContent = ({ element }) => {
         <YAxis dataKey="name" type="category" scale="band" hide={!element.config.showYaxis} />
         <XAxis type="number" hide={!element.config.showXaxis} />
         {element.config.showLegend && <Legend />}
-        <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
-        <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
+        <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={8} />
+        <Area type="monotone" dataKey="amt" fill={element.config.colors?.[1]} stroke={element.config.colors?.[1]} />
       </ComposedChart>
     </ChartContainer>
   );
 };
 
-StandardAreaLineVerticalContent.propTypes = {
+StandardAreaBarVerticalContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default StandardAreaLineVertical;
+export default StandardAreaBarVertical;
 
