@@ -12,6 +12,7 @@ import { ngStateNames } from '@/lib/helper';
 const AdvanceMapConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('create');
   const [errorMessage, seterrorMessage] = useState('');
+  const [isShown, setIsShown] = useState(false)
   const { handleSubmit, control, register, setValue, reset } = useForm({
     defaultValues: {
       json: JSON.stringify(
@@ -106,6 +107,7 @@ const AdvanceMapConfig = ({ element, onChange }) => {
                 <small className="text-red-500">{errorMessage}</small>
                 } */}
               </div>
+              </div>
               <div className="text">
                 <Button
                   type="submit"
@@ -116,7 +118,6 @@ const AdvanceMapConfig = ({ element, onChange }) => {
                 >
                   Add
                 </Button>
-              </div>
             </div>
           </form>
         </Tab>

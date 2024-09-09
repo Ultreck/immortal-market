@@ -77,7 +77,7 @@ export const charts = {
     'pictogram-shapes'
 
   ],
-  map: ['map', 'europe-map', 'africa-map'],
+  map: ['map', 'europe-map', 'africa-map', 'north-america-map'],
 };
 
 export const tools = {

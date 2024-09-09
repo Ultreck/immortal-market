@@ -16,6 +16,7 @@ import AdvanceMap from './AdvanceMap';
 import AdvanceEuropeMap from './AdvanceEuropeMap';
 import AdvanceAfricaMap from './AdvanceAfricaMap';
 import { AdvancedPictogramShapesContent } from './AdvancedPictogramShapes';
+import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap';
 
 const AdvanceChartsPresent = ({ element }) => {
   const components = {
@@ -35,8 +36,8 @@ const AdvanceChartsPresent = ({ element }) => {
     'chart-a-europe-map': AdvanceEuropeMap,
     'chart-a-africa-map': AdvanceAfricaMap,
     'chart-a-scatter-life-expectancy': AdvanceDynamicSortingContent,
-    'chart-a-pictogram-shapes': AdvancedPictogramShapesContent
-
+    'chart-a-pictogram-shapes': AdvancedPictogramShapesContent,
+    'chart-a-north-america-map': AdvancedNorthAmericaMap,
   };
 
   if (components[element.type]) {
