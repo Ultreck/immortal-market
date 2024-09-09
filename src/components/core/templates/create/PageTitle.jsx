@@ -26,10 +26,15 @@ const PageTitle = ({ title, id }) => {
   const handleSave = useCallback(async () => {
     if (value === title) return setIsEditing(false);
     try {
-      await update({ data: { pages: pages.map((page) => (page.id === id ? { ...page, title: value } : page)) } });
-
+      await update({
+        data: {
+          pages: pages.map((page) => {
+            return page.id === id ? { ...page, title: value } : page;
+          }),
+        },
+      });
       toast.success('Page Title updated');
-      qc.invalidateQueries({ queryKey: ['business', business, 'designs'] });
+      await qc.invalidateQueries({ queryKey: ['business', business, 'designs'] });
     } catch (error) {
       toast.error(error?.response?.data?.message || error.message);
     }
@@ -73,10 +78,10 @@ const PageTitle = ({ title, id }) => {
     </div>
   );
 };
+
 PageTitle.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 
 export default PageTitle;
-

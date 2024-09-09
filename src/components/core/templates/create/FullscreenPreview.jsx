@@ -1,43 +1,27 @@
 import useTemplateStore from '@/store/template.js';
 import Present from '@/components/core/templates/create/Present.jsx';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Button, useDisclosure } from '@nextui-org/react';
 import { RiExpandDiagonalLine } from 'react-icons/ri';
 import { createPortal } from 'react-dom';
 
 const FullscreenPreview = () => {
   const root = useRef(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const template = useTemplateStore((state) => state.template);
   const { isOpen: isOpen, onOpen: onOpen, onClose: onClose } = useDisclosure();
 
-  const enableFullscreen = () => {
-    if (root.current.requestFullscreen) {
-      root.current.requestFullscreen();
-      setIsFullscreen(true);
-    }
-  };
-
-  const disableFullscreen = useCallback(() => {
-    if (isFullscreen && document.exitFullscreen) {
-      document.exitFullscreen();
-      setIsFullscreen(false);
-    }
-  }, [isFullscreen]);
-
   useEffect(() => {
-    if (isOpen && !isFullscreen) enableFullscreen();
+    if (isOpen && root.current.requestFullscreen && !document.fullscreenElement) {
+      root.current.requestFullscreen();
+    }
     const handleFullscreenChange = () => {
-      if (!document.fullscreenElement) {
-        disableFullscreen();
-        onClose();
-      }
+      if (!document.fullscreenElement) onClose();
     };
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
-  }, [disableFullscreen, isFullscreen, isOpen, onClose]);
+  }, [isOpen, onClose]);
 
   return (
     <>
