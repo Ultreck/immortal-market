@@ -31,6 +31,8 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
     let data = Array(5)
       .fill(null)
       .map(() => Math.round(Math.random() * 200));
+      console.log({data});
+      
 
     const initChart = () => {
       if (chartRef.current) {
@@ -39,6 +41,7 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
         const option = {
           xAxis: {
             max: 'dataMax',
+            show: element.config.showXaxis,
           },
           yAxis: {
             type: 'category',
@@ -47,6 +50,7 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
             animationDuration: 300,
             animationDurationUpdate: 300,
             max: 3,
+            show: element.config.showYaxis,
           },
           series: [
             {
@@ -62,8 +66,11 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
               },
             },
           ],
+          grid: {
+            show: element.config.showGridline,
+          },
           legend: {
-            show: false,
+            show: element.config.showLegend,
           },
           animationDuration: 0,
           animationDurationUpdate: 3000,
@@ -100,7 +107,7 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
         chart.dispose();
       }
     };
-  }, [element.config.colors, element.config.data, element.height, element.width]);
+  }, [element]);
 
   return <div ref={chartRef} style={{ width: '100%', height: element.height }} />;
 };

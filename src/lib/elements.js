@@ -73,6 +73,9 @@ export const charts = {
     'speedometer',
     'speedometer-simple',
     'speedometer-multiple',
+    'scatter-life-expectancy',
+    'pictogram-shapes'
+
   ],
   map: ['map', 'europe-map', 'africa-map'],
 };

@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-const AdvanceDynamicSortingChartConfig = ({ element, onChange }) => {
+const AdvancedScatterLifeExpentancyConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -97,7 +97,7 @@ const AdvanceDynamicSortingChartConfig = ({ element, onChange }) => {
             )}
           />
         </div>
-        <div>
+        {/* <div>
           <Controller
             name="showLegend"
             control={control}
@@ -112,13 +112,13 @@ const AdvanceDynamicSortingChartConfig = ({ element, onChange }) => {
               </Checkbox>
             )}
           />
-        </div>
+        </div> */}
         <Checkbox
-          isSelected={element.config.showLabel}
-          onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+          isSelected={element.config.showGridline}
+          onValueChange={(v) => onChange({ ...element, config: { ...element.config, showGridline: v } })}
           classNames={{ base: 'py-0' }}
         >
-          Show Label
+          Show Gridline
         </Checkbox>
         </div>
 
@@ -127,12 +127,12 @@ const AdvanceDynamicSortingChartConfig = ({ element, onChange }) => {
   );
 };
 
-AdvanceDynamicSortingChartConfig.propTypes = {
+AdvancedScatterLifeExpentancyConfig.propTypes = {
   element: PropTypes.shape({
     config: PropTypes.object,
   }).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-export default AdvanceDynamicSortingChartConfig;
+export default AdvancedScatterLifeExpentancyConfig;
 

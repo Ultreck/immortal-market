@@ -1,11 +1,31 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import { Card } from '@nextui-org/react';
-import { starterLifeChartData } from '../../../../../lib/charts';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import PropTypes from 'prop-types';
+import { starterLifeChartData } from '@/lib/charts';
 
-const ROOT_PATH = 'https://echarts.apache.org/examples';
+const AdvancedScatterLifeExpentancy = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <div>
+      <ElementWrapper
+        element={element}
+        onClick={onClick}
+        onChange={onChange}
+        maxWidth={width}
+        active={active}
+        highlighted={highlighted}
+        editable
+      >
+        <AdvanceDynamicSortingChartContent element={element} />
+      </ElementWrapper>
+    </div>
+  );
+};
 
-const ScatterLifeExpectancyChart = () => {
+AdvancedScatterLifeExpentancy.propTypes = ElementPropTypes;
+
+export const AdvanceDynamicSortingChartContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -83,9 +103,9 @@ const ScatterLifeExpectancyChart = () => {
               formatter: function (obj) {
                 const value = obj.value;
                 return `${schema[3].text}：${value[3]}<br>
-                            ${schema[1].text}：${value[1]}${schema[1].unit}<br>
-                            ${schema[0].text}：${value[0]}${schema[0].unit}<br>
-                            ${schema[2].text}：${value[2]}<br>`;
+                          ${schema[1].text}：${value[1]}${schema[1].unit}<br>
+                          ${schema[0].text}：${value[0]}${schema[0].unit}<br>
+                          ${schema[2].text}：${value[2]}<br>`;
               },
             },
             grid: {
@@ -93,6 +113,7 @@ const ScatterLifeExpectancyChart = () => {
               containLabel: true,
               left: 30,
               right: '110',
+              show: element.config.showGridline,
             },
             xAxis: {
               type: 'log',
@@ -110,6 +131,7 @@ const ScatterLifeExpectancyChart = () => {
               axisLabel: {
                 formatter: '{value} $',
               },
+              show: element.config.showXaxis,
             },
             yAxis: {
               type: 'value',
@@ -124,6 +146,7 @@ const ScatterLifeExpectancyChart = () => {
               axisLabel: {
                 formatter: '{value} 岁',
               },
+              show: element.config.showYaxis,
             },
             visualMap: [
               {
@@ -131,21 +154,7 @@ const ScatterLifeExpectancyChart = () => {
                 dimension: 3,
                 categories: starterLifeChartData.counties,
                 inRange: {
-                  color: (function () {
-                    const colors = [
-                      '#51689b',
-                      '#ce5c5c',
-                      '#fbc357',
-                      '#8fbf8f',
-                      '#659d84',
-                      '#fb8e6a',
-                      '#c77288',
-                      '#786090',
-                      '#91c4c5',
-                      '#6890ba',
-                    ];
-                    return colors.concat(colors);
-                  })(),
+                  color: element.config.colors.concat(element.config.colors),
                 },
               },
             ],
@@ -153,7 +162,7 @@ const ScatterLifeExpectancyChart = () => {
               {
                 type: 'scatter',
                 itemStyle: itemStyle,
-                data: starterLifeChartData.series[0],
+                data: starterLifeChartData.series[0].slice(0, element.config.circles.length),
                 symbolSize: function (val) {
                   return sizeFunction(val[2]);
                 },
@@ -176,7 +185,7 @@ const ScatterLifeExpectancyChart = () => {
               name: starterLifeChartData.timeline[n],
               type: 'scatter',
               itemStyle: itemStyle,
-              data: starterLifeChartData.series[n],
+              data: starterLifeChartData.series[n].slice(0, element.config.circles.length),
               symbolSize: function (val) {
                 return sizeFunction(val[2]);
               },
@@ -193,13 +202,16 @@ const ScatterLifeExpectancyChart = () => {
     return () => {
       chart && chart.dispose();
     };
-  }, []);
+  }, [element]);
 
   return (
-    <Card className='w-full bg-white space-y-6 px-8 py-6 mt-10'>
-      <div ref={chartRef} style={{ width: '100%', height: '600px' }} />
-    </Card>
+    <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
   );
 };
 
-export default ScatterLifeExpectancyChart;
+AdvanceDynamicSortingChartContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+
+export default AdvancedScatterLifeExpentancy;
+

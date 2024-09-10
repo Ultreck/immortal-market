@@ -1163,9 +1163,11 @@ const StandardCharts = () => {
           })}
         </div>
       </div>
+      <div>
+        <p>Historicals</p>
+      </div>
     </div>
   );
 };
 
 export default StandardCharts;
-
