@@ -1,12 +1,10 @@
 import { RiShapesLine } from 'react-icons/ri';
-import { GiSouthAmerica } from "react-icons/gi";
+import { GiAfrica, GiEarthAfricaEurope, GiNigeria, GiSouthAmerica } from 'react-icons/gi';
 import { CgLoadbarAlt } from 'react-icons/cg';
 import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react-icons/lu';
 import { IconChartFunnel } from '@tabler/icons-react';
 import { TbChartScatter, TbChartTreemap, TbCircleDot, TbCirclesRelation, TbGaugeFilled, TbIcons } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { GiNigeria, GiEarthAfricaEurope, GiAfrica } from 'react-icons/gi';
-import { GiNigeria, GiEarthAfricaEurope, GiAfrica } from 'react-icons/gi';
 import { starterLifeChartData } from '@/lib/charts';
 
 const colors = [
@@ -783,4 +781,3 @@ const AdvancedCharts = () => {
 };
 
 export default AdvancedCharts;
-
