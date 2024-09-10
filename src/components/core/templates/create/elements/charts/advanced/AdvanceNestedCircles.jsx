@@ -22,7 +22,7 @@ const AdvanceNestedCircles = ({ element, active, highlighted, width, onClick, on
 AdvanceNestedCircles.propTypes = ElementPropTypes;
 
 export const AdvanceNestedCirclesContent = ({ element }) => {
-  const sortElement = element.config.data.sort((a, b) => b.value - a.value);
+  const sortElement = element.config.data.slice(0, element.config.bars).sort((a, b) => b.value - a.value);
   const percentage = getPercentagesMax(sortElement.map((i) => +i.value));
 
   return (

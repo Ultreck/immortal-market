@@ -17,6 +17,7 @@ import AdvanceEuropeMap from './AdvanceEuropeMap';
 import AdvanceAfricaMap from './AdvanceAfricaMap';
 import { AdvancedPictogramShapesContent } from './AdvancedPictogramShapes';
 import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap';
+import { AdvancedStackedCardContent } from './AdvancedStackedCard';
 
 const AdvanceChartsPresent = ({ element }) => {
   const components = {
@@ -38,6 +39,8 @@ const AdvanceChartsPresent = ({ element }) => {
     'chart-a-scatter-life-expectancy': AdvanceDynamicSortingContent,
     'chart-a-pictogram-shapes': AdvancedPictogramShapesContent,
     'chart-a-north-america-map': AdvancedNorthAmericaMap,
+    'chart-a-stacked-card': AdvanceDynamicSortingContent,
+    'chart-a-percentage-card': AdvancedStackedCardContent,
   };
 
   if (components[element.type]) {

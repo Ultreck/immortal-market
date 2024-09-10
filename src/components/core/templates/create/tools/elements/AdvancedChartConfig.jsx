@@ -18,6 +18,8 @@ import AdvancedAfricaMapConfig from './advance-config/AdvancedAfricaMapConfig';
 import AdvancedScatterLifeExpentancyConfig from './advance-config/AdvancedScatterLifeExpentancyConfig';
 import AdvancedPictogramShapesConfig from './advance-config/AdvancedPictogramShapesConfig';
 import AdvancedNorthAmericaMapConfig from './advance-config/AdvancedNorthAmericaMapConfig';
+import AdvancedStackedCardConfig from './advance-config/AdvancedStackedCardConfig';
+import AdvancePercentageCardConfig from './advance-config/AdvancePercentageCardConfig';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -71,6 +73,8 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           )}
           { element.type === 'chart-a-pictogram-shapes' && <AdvancedPictogramShapesConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-north-america-map' && <AdvancedNorthAmericaMapConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-stacked-card' && <AdvancedStackedCardConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-percentage-card' && <AdvancePercentageCardConfig element={element} onChange={onChange} />}
         </div>
       </PopoverContent>
     </Popover>
