@@ -77,7 +77,7 @@ const DraggableResizableRotatable = ({
     }
   );
 
-  const bingResize = useDrag(
+  const bindResize = useDrag(
     (state) => {
       if (state.tap) return;
       if (state.first) onResizeStart?.();
@@ -179,56 +179,56 @@ const DraggableResizableRotatable = ({
               <div
                 data-name="resize-se"
                 className="cursor-se-resize absolute -bottom-2 -right-2 w-4 h-4 border border-gray-500 rounded-full touch-none"
-                {...bingResize()}
+                {...bindResize()}
               />
             )}
             {!!handles.includes('ne') && (
               <div
                 data-name="resize-ne"
                 className="cursor-ne-resize absolute -top-2 -right-2 w-4 h-4 border border-gray-500 rounded-full touch-none"
-                {...bingResize()}
+                {...bindResize()}
               />
             )}
             {!!handles.includes('nw') && (
               <div
                 data-name="resize-nw"
                 className="cursor-nw-resize absolute -top-2 -left-2 w-4 h-4 border border-gray-500 rounded-full touch-none"
-                {...bingResize()}
+                {...bindResize()}
               />
             )}
             {!!handles.includes('sw') && (
               <div
                 data-name="resize-sw"
                 className="cursor-sw-resize absolute -bottom-2 -left-2 w-4 h-4 border border-gray-500 rounded-full touch-none"
-                {...bingResize()}
+                {...bindResize()}
               />
             )}
             {!!handles.includes('e') && (
               <div
                 data-name="resize-e"
                 className="cursor-e-resize absolute top-1/2 -translate-y-1/2 -right-1 w-2 h-8 max-h-[98%] border border-gray-500 rounded-full touch-none"
-                {...bingResize()}
+                {...bindResize()}
               />
             )}
             {!!handles.includes('w') && (
               <div
                 data-name="resize-w"
                 className="cursor-e-resize absolute top-1/2 -translate-y-1/2 -left-1 w-2 h-8 max-h-[98%] border border-gray-500 rounded-full touch-none"
-                {...bingResize()}
+                {...bindResize()}
               />
             )}
             {!!handles.includes('n') && (
               <div
                 data-name="resize-n"
                 className="cursor-n-resize absolute -top-1 -translate-x-1/2 left-1/2 w-8 h-2 max-w-[98%] border border-gray-500 rounded-full touch-none"
-                {...bingResize()}
+                {...bindResize()}
               />
             )}
             {!!handles.includes('s') && (
               <div
                 data-name="resize-s"
                 className="cursor-s-resize absolute -bottom-1 -translate-x-1/2 left-1/2 w-8 h-2 max-w-[98%] border border-gray-500 rounded-full touch-none"
-                {...bingResize()}
+                {...bindResize()}
               />
             )}
           </>
