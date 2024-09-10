@@ -1,5 +1,5 @@
 import { ElementPropTypes } from '@/lib/prop-types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ElementWrapper from '../../../ElementWrapper';
 import { NACountries } from '@/lib/helper';
 import SvgText from '@/components/ui/SvgText';

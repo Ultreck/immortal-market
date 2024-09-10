@@ -1,8 +1,7 @@
-import { isValidJsonArray } from '@/lib/utils';
-import { Button, Checkbox, ScrollShadow, Tab, Tabs, Textarea } from '@nextui-org/react';
-import { Controller, useForm } from 'react-hook-form';
+import { Button, Checkbox, ScrollShadow, Tab, Tabs } from '@nextui-org/react';
+import { useForm } from 'react-hook-form';
 import { ElementPropTypes } from '@/lib/prop-types';
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import GlobalMapColor from './GlobalMapColor';
 import MapColor from './MapColor';
 import { capitalizeFirstLetter, getRandomColor } from '@/lib/constants';
@@ -31,14 +30,6 @@ const AdvanceMapConfig = ({ element, onChange }) => {
     },
   });
 
-
-  // const onSubmit = async (values) => {
-  //   const { json } = values;
-  //   const realData = JSON.parse(json);
-  //   const data = realData.map((data, index) => ({ ...data, id: index + 1, color: getRandomColor() }));
-  //   console.log(data);
-  //   onChange({ ...element, config: { ...element.config, data } });
-  // };
 
   const handleAddMapValues = (map) => {
     const { label, value } = map;
