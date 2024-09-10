@@ -246,6 +246,7 @@ const Canvas = ({ id }) => {
               updateTemplate({ activePage: id });
             }
           }}
+          className="border border-default-200"
         >
           <motion.div
             style={{ width: page.width * scale, height: page.height * scale }}
@@ -256,7 +257,7 @@ const Canvas = ({ id }) => {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onContextMenu={handleContextMenu}
-            className={cn('bg-white text-black border border-default-200 relative overflow-hidden canvas')}
+            className={cn('bg-white text-black relative overflow-hidden canvas')}
           >
             <div
               style={{
