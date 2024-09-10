@@ -32,14 +32,6 @@ const AdvanceMapConfig = ({ element, onChange }) => {
     },
   });
 
-  // const onSubmit = async (values) => {
-  //   const { json } = values;
-  //   const realData = JSON.parse(json);
-  //   const data = realData.map((data, index) => ({ ...data, id: index + 1, color: getRandomColor() }));
-  //   console.log(data);
-  //   onChange({ ...element, config: { ...element.config, data } });
-  // };
-
   const handleAddMapValues = (map) => {
     const { label, value } = map;
     const capitalizedWord = capitalizeFirstLetter(label);
