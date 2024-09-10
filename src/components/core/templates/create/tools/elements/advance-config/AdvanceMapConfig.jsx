@@ -1,5 +1,5 @@
 import { isValidJsonArray } from '@/lib/utils';
-import { Button, Checkbox, Tab, Tabs, Textarea } from '@nextui-org/react';
+import { Button, Checkbox, ScrollShadow, Tab, Tabs, Textarea } from '@nextui-org/react';
 import { Controller, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import GlobalMapColor from './GlobalMapColor';
@@ -7,19 +7,24 @@ import MapColor from './MapColor';
 import PropTypes from 'prop-types';
 import { capitalizeFirstLetter, getRandomColor } from '@/lib/constants';
 import { ngStateNames } from '@/lib/helper';
+import { FaPlus } from 'react-icons/fa6';
+import { RxCross2 } from 'react-icons/rx';
 // import { color } from 'framer-motion';
 
 const AdvanceMapConfig = ({ element, onChange }) => {
-  const [tab, setTab] = useState('create');
+  const [tab, setTab] = useState('data');
+  const [isAddNew, setIsAddNew] = useState(false);
+  const [formData, setFormData] = useState({
+    label: '',
+    value: '',
+    id: '',
+  });
+  const [indexId, setIndexId] = useState('');
+  const [onFocus, setOnFocus] = useState(false);
   const [errorMessage, seterrorMessage] = useState('');
-  const [isShown, setIsShown] = useState(false)
-  const { handleSubmit, control, register, setValue, reset } = useForm({
+  const [isShown, setIsShown] = useState(false);
+  const { handleSubmit, register, reset } = useForm({
     defaultValues: {
-      json: JSON.stringify(
-        element.config.data.map(({ ...rest }) => rest),
-        null,
-        2
-      ),
       label: '',
       value: '',
       color: '',
@@ -27,29 +32,18 @@ const AdvanceMapConfig = ({ element, onChange }) => {
     },
   });
 
-  useEffect(() => {
-    setValue(
-      'json',
-      JSON.stringify(
-        element.config.data.map(({ color, id, area, ...rest }) => rest),
-        null,
-        2
-      )
-    );
-  }, [element]);
-
-  const onSubmit = async (values) => {
-    const { json } = values;
-    const realData = JSON.parse(json);
-    const data = realData.map((data, index) => ({ ...data, id: index + 1, color: getRandomColor() }));
-    console.log(data);
-    onChange({ ...element, config: { ...element.config, data } });
-  };
+  // const onSubmit = async (values) => {
+  //   const { json } = values;
+  //   const realData = JSON.parse(json);
+  //   const data = realData.map((data, index) => ({ ...data, id: index + 1, color: getRandomColor() }));
+  //   console.log(data);
+  //   onChange({ ...element, config: { ...element.config, data } });
+  // };
 
   const handleAddMapValues = (map) => {
     const { label, value } = map;
     const capitalizedWord = capitalizeFirstLetter(label);
-    if(ngStateNames.includes(capitalizedWord)){
+    if (ngStateNames.includes(capitalizedWord)) {
       const itsExist = element.config.data.find((data) => data.label === label);
       if (!itsExist) {
         const data = {
@@ -64,9 +58,35 @@ const AdvanceMapConfig = ({ element, onChange }) => {
       } else {
         seterrorMessage(`${label} already exist. Click on data tab to edit it.`);
       }
-    }else{
+    } else {
       seterrorMessage(`Invalid name ${label}, please input correct name.`);
     }
+  };
+
+  const handleInputChange = (e, id) => {
+    setIndexId(id);
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleDelete = (id) => {
+    const data = element.config.data.filter((data) => data.id !== id);
+    onChange({ ...element, config: { ...element.config, data } });
+  };
+
+  const handleEdit = () => {
+    const capitalizedWord = capitalizeFirstLetter(formData.label);
+    const data = element.config.data.map((data) =>
+      data.id === indexId
+        ? {
+            ...data,
+            label: capitalizedWord,
+            value: formData.value,
+          }
+        : data
+    );
+    onChange({ ...element, config: { ...element.config, data } });
+    setOnFocus(false);
   };
 
   return (
@@ -83,88 +103,108 @@ const AdvanceMapConfig = ({ element, onChange }) => {
         selectedKey={tab}
         onSelectionChange={setTab}
       >
-        <Tab key="create" title="Create" className="text-base">
+        <Tab key="data" title="Data" className="text-base">
           <form onSubmit={handleSubmit(handleAddMapValues)}>
             <div className="">
-              <h1 className="text-lg font-semibold">Enter both value and name of state/country</h1>
-              <div className="text my-5">
-                <input
-                  type="text"
-                  placeholder="Label"
-                  {...register('label', { required: true })}
-                  className="border px-2 py-3 w-full rounded-lg mr-2"
-                />
-                {errorMessage && <small className="text-red-500">{errorMessage}</small>}
-              </div>
-              <div className="text my-5">
-                <input
-                  type="text"
-                  placeholder="Value"
-                  {...register('value', { required: true })}
-                  className="border px-2 py-3 w-full rounded-lg mr-2"
-                />
-                {/* {errorMessage &&
-                <small className="text-red-500">{errorMessage}</small>
-                } */}
-              </div>
-              </div>
+              {element.config.data.length > 0 && (
+                <>
+                  <ScrollShadow offset={100} orientation="horizontal" className="min-h-24 max-h-60 overflow-x-hidden">
+                    {element.config.data.map((map, index) => (
+                      <>
+                        <div key={index} className="text flex items-center">
+                          <div className="text flex gap-2">
+                            <div className="text my-2">
+                              <input
+                                type="text"
+                                name="label"
+                                value={onFocus && formData.id === map.id ? formData.label : map.label}
+                                onFocus={() => {
+                                  setOnFocus(true);
+                                  setFormData({ ...formData, id: map.id, label: map.label, value: map.value });
+                                }}
+                                onChange={(e) => handleInputChange(e, map.id)}
+                                className="border pl-4 py-3 w-full rounded-full mr-2"
+                              />
+                            </div>
+                            <div className="text my-2">
+                              <input
+                                type="text"
+                                name="value"
+                                value={onFocus && formData.id === map.id ? formData.value : map.value}
+                                onFocus={() => {
+                                  setOnFocus(true);
+                                  setFormData({ ...formData, id: map.id, label: map.label, value: map.value });
+                                }}
+                                onChange={(e) => handleInputChange(e, map.id)}
+                                className="border pl-4 py-3 w-full rounded-full mr-2"
+                              />
+                            </div>
+                          </div>
+                          <div className="text px-5">
+                            <button className="text">
+                              <RxCross2 className="text-xl" onClick={() => handleDelete(map.id)} />
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    ))}
+                  </ScrollShadow>
+                  {onFocus && (
+                    <Button
+                      type="submit"
+                      variant="solid"
+                      radius="full"
+                      onClick={handleEdit}
+                      className={`text-base px-4 mt-3 w-32  bg-blue-600 text-white`}
+                    >
+                      Update
+                    </Button>
+                  )}
+                </>
+              )}
+              {isAddNew && (
+                <div className="text grid grid-cols-2 gap-3 pr-16">
+                  <div className="text my-5">
+                    <input
+                      type="text"
+                      placeholder="Label"
+                      {...register('label', { required: true })}
+                      className="border pl-5 py-3 w-full rounded-full mr-2"
+                    />
+                  </div>
+                  <div className="text my-5">
+                    <input
+                      type="text"
+                      placeholder="Value"
+                      {...register('value', { required: true })}
+                      className="border pl-5 py-3 w-full rounded-full mr-2"
+                    />
+                  </div>
+                </div>
+              )}
+              {isAddNew && errorMessage && <small className="text-red-500">{errorMessage}</small>}
               <div className="text">
-                <Button
-                  type="submit"
-                  variant="solid"
-                  radius="full"
-                  color="primary"
-                  className="text-base px-4 mt-3 w-32"
-                >
-                  Add
-                </Button>
+                {!onFocus && (
+                  <Button
+                    type="submit"
+                    variant="solid"
+                    radius="full"
+                    onClick={() => setIsAddNew(!isAddNew)}
+                    className={`text-base px-4 mt-3 w-32  ${isAddNew && 'bg-blue-600 text-white'}`}
+                  >
+                    {isAddNew ? (
+                      <span className="text">Submit</span>
+                    ) : (
+                      <span className="text flex items-center gap-2">
+                        <FaPlus /> Add
+                      </span>
+                    )}
+                  </Button>
+                )}
+              </div>
             </div>
           </form>
         </Tab>
-        {element.config.data.length > 0 && (
-          <Tab key="data" title="Data" className="text-base">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="grid grid-cols-1 gap-2">
-                <Controller
-                  name="json"
-                  control={control}
-                  rules={{
-                    required: 'A valid JSON array is required, with each item having a label and value',
-                    validate: (value) => {
-                      return (
-                        isValidJsonArray(value) &&
-                        JSON.parse(value).every((item) => Object.hasOwn(item, 'label') && Object.hasOwn(item, 'value'))
-                      );
-                    },
-                  }}
-                  render={({ field, fieldState: { error } }) => {
-                    const message =
-                      error?.type === 'validate'
-                        ? 'A valid JSON array is required, with each item having a label and value'
-                        : error?.message;
-                    return (
-                      <Textarea
-                        // classNames={{ inputWrapper: 'px-5 py-5' }}
-                        classNames={{
-                          base: 'max-w-lg',
-                          input: 'resize-y min-h-[25vh]',
-                        }}
-                        label="Paste JSON Array Here.."
-                        bordered
-                        {...field}
-                        errorMessage={message}
-                        isInvalid={!!message}
-                      />
-                    );
-                  }}
-                />
-              </div>
-              <Button type="submit" variant="solid" radius="full" color="primary" className="text-base px-4 mt-5 w-32">
-                Update
-              </Button>
-            </form>
-          </Tab>
-        )}
         {element.config.data.length > 0 && (
           <Tab key="color" title="color" className="text-base">
             <div className="">
@@ -191,7 +231,7 @@ const AdvanceMapConfig = ({ element, onChange }) => {
               <Checkbox
                 isSelected={element.showLabels}
                 classNames={{ base: 'py-0' }}
-                onValueChange={(v) => onChange({ ...element, showLabels: !!v  })}
+                onValueChange={(v) => onChange({ ...element, showLabels: !!v })}
               >
                 <span className="text ml-3">{element.showLabels ? 'Hide' : 'Show'}</span>
               </Checkbox>
