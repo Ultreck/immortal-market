@@ -78,245 +78,6 @@ const AdvancedCharts = () => {
       ),
     },
     {
-      id: 'chart-a-custom-bar',
-      type: 'chart-a-custom-bar',
-      name: 'Custom Bar Chart',
-      data: {
-        type: 'chart-a-custom-bar',
-        text: 'Custom Bar Chart',
-        width: 500,
-        height: 400,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            { label: 'Dangote Cement', value: 4170 },
-            { label: 'MTN', value: 3460 },
-            { label: 'Airtel', value: 3200 },
-            { label: 'Nestle', value: 1190 },
-            { label: 'GTB', value: 952.1 },
-            { label: 'Zenith', value: 778.6 },
-            { label: 'Stanbic IBTC', value: 489.2 },
-            { label: 'Nig Breweries', value: 447.8 },
-            { label: 'Lafarge Africa', value: 339.1 },
-            { label: 'Access Bank', value: 300.4 },
-          ],
-          orientation: 'horizontal',
-          isIconVisible: true,
-          labelPosition: 'start',
-          barTooltip: false,
-          cardTooltip: false,
-          bars: 5,
-          colors,
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <LuBarChartHorizontal className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
-      id: 'chart-a-funnel',
-      type: 'chart-a-funnel',
-      name: 'Funnel Chart',
-      data: {
-        type: 'chart-a-funnel',
-        text: 'Funnel Chart',
-        width: 400,
-        height: 500,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            { value: 60, name: 'Visit' },
-            { value: 40, name: 'Inquiry' },
-            { value: 20, name: 'Order' },
-            { value: 80, name: 'Click' },
-            { value: 100, name: 'Show' },
-          ],
-          colors,
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <IconChartFunnel className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
-      id: 'chart-a-tree-map',
-      type: 'chart-a-tree-map',
-      name: 'Tree Map Chart',
-      data: {
-        type: 'chart-a-tree-map',
-        text: 'Tree Map Chart',
-        width: 500,
-        height: 400,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            {
-              name: 'axis',
-              children: [
-                { name: 'Axes', size: 1302 },
-                { name: 'Axis', size: 24593 },
-                { name: 'AxisGridLine', size: 652 },
-                { name: 'AxisLabel', size: 636 },
-                { name: 'CartesianAxes', size: 6703 },
-              ],
-            },
-            {
-              name: 'controls',
-              children: [
-                { name: 'AnchorControl', size: 2138 },
-                { name: 'ClickControl', size: 3824 },
-                { name: 'Control', size: 1353 },
-                { name: 'ControlList', size: 4665 },
-                { name: 'DragControl', size: 2649 },
-                { name: 'ExpandControl', size: 2832 },
-                { name: 'HoverControl', size: 4896 },
-                { name: 'IControl', size: 763 },
-                { name: 'PanZoomControl', size: 5222 },
-                { name: 'SelectionControl', size: 7862 },
-                { name: 'TooltipControl', size: 8435 },
-              ],
-            },
-            {
-              name: 'data',
-              children: [
-                { name: 'Data', size: 20544 },
-                { name: 'DataList', size: 19788 },
-                { name: 'DataSprite', size: 10349 },
-                { name: 'EdgeSprite', size: 3301 },
-                { name: 'NodeSprite', size: 19382 },
-                {
-                  name: 'render',
-                  children: [
-                    { name: 'ArrowType', size: 698 },
-                    { name: 'EdgeRenderer', size: 5569 },
-                    { name: 'IRenderer', size: 353 },
-                    { name: 'ShapeRenderer', size: 2247 },
-                  ],
-                },
-                { name: 'ScaleBinding', size: 11275 },
-                { name: 'Tree', size: 7147 },
-                { name: 'TreeBuilder', size: 9930 },
-              ],
-            },
-            {
-              name: 'events',
-              children: [
-                { name: 'DataEvent', size: 7313 },
-                { name: 'SelectionEvent', size: 6880 },
-                { name: 'TooltipEvent', size: 3701 },
-                { name: 'VisualizationEvent', size: 2117 },
-              ],
-            },
-            {
-              name: 'legend',
-              children: [
-                { name: 'Legend', size: 20859 },
-                { name: 'LegendItem', size: 4614 },
-                { name: 'LegendRange', size: 10530 },
-              ],
-            },
-            {
-              name: 'operator',
-              children: [
-                {
-                  name: 'distortion',
-                  children: [
-                    { name: 'BifocalDistortion', size: 4461 },
-                    { name: 'Distortion', size: 6314 },
-                    { name: 'FisheyeDistortion', size: 3444 },
-                  ],
-                },
-                {
-                  name: 'encoder',
-                  children: [
-                    { name: 'ColorEncoder', size: 3179 },
-                    { name: 'Encoder', size: 4060 },
-                    { name: 'PropertyEncoder', size: 4138 },
-                    { name: 'ShapeEncoder', size: 1690 },
-                    { name: 'SizeEncoder', size: 1830 },
-                  ],
-                },
-                {
-                  name: 'filter',
-                  children: [
-                    { name: 'FisheyeTreeFilter', size: 5219 },
-                    { name: 'GraphDistanceFilter', size: 3165 },
-                    { name: 'VisibilityFilter', size: 3509 },
-                  ],
-                },
-                { name: 'IOperator', size: 1286 },
-                {
-                  name: 'label',
-                  children: [
-                    { name: 'Labeler', size: 9956 },
-                    { name: 'RadialLabeler', size: 3899 },
-                    { name: 'StackedAreaLabeler', size: 3202 },
-                  ],
-                },
-                {
-                  name: 'layout',
-                  children: [
-                    { name: 'AxisLayout', size: 6725 },
-                    { name: 'BundledEdgeRouter', size: 3727 },
-                    { name: 'CircleLayout', size: 9317 },
-                    { name: 'CirclePackingLayout', size: 12003 },
-                    { name: 'DendrogramLayout', size: 4853 },
-                    { name: 'ForceDirectedLayout', size: 8411 },
-                    { name: 'IcicleTreeLayout', size: 4864 },
-                    { name: 'IndentedTreeLayout', size: 3174 },
-                    { name: 'Layout', size: 7881 },
-                    { name: 'NodeLinkTreeLayout', size: 12870 },
-                    { name: 'PieLayout', size: 2728 },
-                    { name: 'RadialTreeLayout', size: 12348 },
-                    { name: 'RandomLayout', size: 870 },
-                    { name: 'StackedAreaLayout', size: 9121 },
-                    { name: 'TreeMapLayout', size: 9191 },
-                  ],
-                },
-                { name: 'Operator', size: 2490 },
-                { name: 'OperatorList', size: 5248 },
-                { name: 'OperatorSequence', size: 4190 },
-                { name: 'OperatorSwitch', size: 2581 },
-                { name: 'SortOperator', size: 2023 },
-              ],
-            },
-            {
-              name: 'data',
-              children: [
-                { name: 'Data', size: 20544 },
-                { name: 'DataList', size: 19788 },
-                { name: 'DataSprite', size: 10349 },
-                { name: 'EdgeSprite', size: 3301 },
-                { name: 'NodeSprite', size: 19382 },
-                {
-                  name: 'render',
-                  children: [
-                    { name: 'ArrowType', size: 698 },
-                    { name: 'EdgeRenderer', size: 5569 },
-                    { name: 'IRenderer', size: 353 },
-                    { name: 'ShapeRenderer', size: 2247 },
-                  ],
-                },
-                { name: 'ScaleBinding', size: 11275 },
-                { name: 'Tree', size: 7147 },
-                { name: 'TreeBuilder', size: 9930 },
-              ],
-            },
-          ],
-          colors,
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <TbChartTreemap className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
       id: 'chart-a-circle-icons',
       type: 'chart-a-circle-icons',
       name: 'circle-icons Chart',
@@ -780,6 +541,207 @@ const AdvancedCharts = () => {
         </div>
       ),
     },
+    {
+      id: 'chart-a-funnel',
+      type: 'chart-a-funnel',
+      name: 'Funnel Chart',
+      data: {
+        type: 'chart-a-funnel',
+        text: 'Funnel Chart',
+        width: 400,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { value: 60, name: 'Visit' },
+            { value: 40, name: 'Inquiry' },
+            { value: 20, name: 'Order' },
+            { value: 80, name: 'Click' },
+            { value: 100, name: 'Show' },
+          ],
+          colors,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <IconChartFunnel className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-a-tree-map',
+      type: 'chart-a-tree-map',
+      name: 'Tree Map Chart',
+      data: {
+        type: 'chart-a-tree-map',
+        text: 'Tree Map Chart',
+        width: 500,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            {
+              name: 'axis',
+              children: [
+                { name: 'Axes', size: 1302 },
+                { name: 'Axis', size: 24593 },
+                { name: 'AxisGridLine', size: 652 },
+                { name: 'AxisLabel', size: 636 },
+                { name: 'CartesianAxes', size: 6703 },
+              ],
+            },
+            {
+              name: 'controls',
+              children: [
+                { name: 'AnchorControl', size: 2138 },
+                { name: 'ClickControl', size: 3824 },
+                { name: 'Control', size: 1353 },
+                { name: 'ControlList', size: 4665 },
+                { name: 'DragControl', size: 2649 },
+                { name: 'ExpandControl', size: 2832 },
+                { name: 'HoverControl', size: 4896 },
+                { name: 'IControl', size: 763 },
+                { name: 'PanZoomControl', size: 5222 },
+                { name: 'SelectionControl', size: 7862 },
+                { name: 'TooltipControl', size: 8435 },
+              ],
+            },
+            {
+              name: 'data',
+              children: [
+                { name: 'Data', size: 20544 },
+                { name: 'DataList', size: 19788 },
+                { name: 'DataSprite', size: 10349 },
+                { name: 'EdgeSprite', size: 3301 },
+                { name: 'NodeSprite', size: 19382 },
+                {
+                  name: 'render',
+                  children: [
+                    { name: 'ArrowType', size: 698 },
+                    { name: 'EdgeRenderer', size: 5569 },
+                    { name: 'IRenderer', size: 353 },
+                    { name: 'ShapeRenderer', size: 2247 },
+                  ],
+                },
+                { name: 'ScaleBinding', size: 11275 },
+                { name: 'Tree', size: 7147 },
+                { name: 'TreeBuilder', size: 9930 },
+              ],
+            },
+            {
+              name: 'events',
+              children: [
+                { name: 'DataEvent', size: 7313 },
+                { name: 'SelectionEvent', size: 6880 },
+                { name: 'TooltipEvent', size: 3701 },
+                { name: 'VisualizationEvent', size: 2117 },
+              ],
+            },
+            {
+              name: 'legend',
+              children: [
+                { name: 'Legend', size: 20859 },
+                { name: 'LegendItem', size: 4614 },
+                { name: 'LegendRange', size: 10530 },
+              ],
+            },
+            {
+              name: 'operator',
+              children: [
+                {
+                  name: 'distortion',
+                  children: [
+                    { name: 'BifocalDistortion', size: 4461 },
+                    { name: 'Distortion', size: 6314 },
+                    { name: 'FisheyeDistortion', size: 3444 },
+                  ],
+                },
+                {
+                  name: 'encoder',
+                  children: [
+                    { name: 'ColorEncoder', size: 3179 },
+                    { name: 'Encoder', size: 4060 },
+                    { name: 'PropertyEncoder', size: 4138 },
+                    { name: 'ShapeEncoder', size: 1690 },
+                    { name: 'SizeEncoder', size: 1830 },
+                  ],
+                },
+                {
+                  name: 'filter',
+                  children: [
+                    { name: 'FisheyeTreeFilter', size: 5219 },
+                    { name: 'GraphDistanceFilter', size: 3165 },
+                    { name: 'VisibilityFilter', size: 3509 },
+                  ],
+                },
+                { name: 'IOperator', size: 1286 },
+                {
+                  name: 'label',
+                  children: [
+                    { name: 'Labeler', size: 9956 },
+                    { name: 'RadialLabeler', size: 3899 },
+                    { name: 'StackedAreaLabeler', size: 3202 },
+                  ],
+                },
+                {
+                  name: 'layout',
+                  children: [
+                    { name: 'AxisLayout', size: 6725 },
+                    { name: 'BundledEdgeRouter', size: 3727 },
+                    { name: 'CircleLayout', size: 9317 },
+                    { name: 'CirclePackingLayout', size: 12003 },
+                    { name: 'DendrogramLayout', size: 4853 },
+                    { name: 'ForceDirectedLayout', size: 8411 },
+                    { name: 'IcicleTreeLayout', size: 4864 },
+                    { name: 'IndentedTreeLayout', size: 3174 },
+                    { name: 'Layout', size: 7881 },
+                    { name: 'NodeLinkTreeLayout', size: 12870 },
+                    { name: 'PieLayout', size: 2728 },
+                    { name: 'RadialTreeLayout', size: 12348 },
+                    { name: 'RandomLayout', size: 870 },
+                    { name: 'StackedAreaLayout', size: 9121 },
+                    { name: 'TreeMapLayout', size: 9191 },
+                  ],
+                },
+                { name: 'Operator', size: 2490 },
+                { name: 'OperatorList', size: 5248 },
+                { name: 'OperatorSequence', size: 4190 },
+                { name: 'OperatorSwitch', size: 2581 },
+                { name: 'SortOperator', size: 2023 },
+              ],
+            },
+            {
+              name: 'data',
+              children: [
+                { name: 'Data', size: 20544 },
+                { name: 'DataList', size: 19788 },
+                { name: 'DataSprite', size: 10349 },
+                { name: 'EdgeSprite', size: 3301 },
+                { name: 'NodeSprite', size: 19382 },
+                {
+                  name: 'render',
+                  children: [
+                    { name: 'ArrowType', size: 698 },
+                    { name: 'EdgeRenderer', size: 5569 },
+                    { name: 'IRenderer', size: 353 },
+                    { name: 'ShapeRenderer', size: 2247 },
+                  ],
+                },
+                { name: 'ScaleBinding', size: 11275 },
+                { name: 'Tree', size: 7147 },
+                { name: 'TreeBuilder', size: 9930 },
+              ],
+            },
+          ],
+          colors,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartTreemap className="w-full h-full" />
+        </div>
+      ),
+    },
   ];
 
   const pictogramShapesElement = [
@@ -815,6 +777,47 @@ const AdvancedCharts = () => {
     },
   ];
 
+  const pictogramColumnChart = [
+    {
+      id: 'chart-a-custom-bar',
+      type: 'chart-a-custom-bar',
+      name: 'Custom Bar Chart',
+      data: {
+        type: 'chart-a-custom-bar',
+        text: 'Custom Bar Chart',
+        width: 500,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { label: 'Dangote Cement', value: 4170 },
+            { label: 'MTN', value: 3460 },
+            { label: 'Airtel', value: 3200 },
+            { label: 'Nestle', value: 1190 },
+            { label: 'GTB', value: 952.1 },
+            { label: 'Zenith', value: 778.6 },
+            { label: 'Stanbic IBTC', value: 489.2 },
+            { label: 'Nig Breweries', value: 447.8 },
+            { label: 'Lafarge Africa', value: 339.1 },
+            { label: 'Access Bank', value: 300.4 },
+          ],
+          orientation: 'horizontal',
+          isIconVisible: true,
+          labelPosition: 'start',
+          barTooltip: false,
+          cardTooltip: false,
+          bars: 5,
+          colors,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <LuBarChartHorizontal className="w-full h-full" />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <>
       <div className="grid grid-cols-3 gap-4">
@@ -826,6 +829,14 @@ const AdvancedCharts = () => {
         <p>Pictogram Shapes</p>
         <div className="grid grid-cols-3 gap-4">
           {pictogramShapesElement.map((element) => {
+            return <DraggableElementWrapper key={element.id} element={element} />;
+          })}
+        </div>
+      </div>
+      <div className="mt-10">
+        <p>Pictogram Column Chart</p>
+        <div className="grid grid-cols-3 gap-4">
+          {pictogramColumnChart.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>

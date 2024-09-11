@@ -171,12 +171,21 @@ export const AdvancedCustomBarContent = ({ element }) => {
                         delay: index * 0.1,
                       }}
                       className={cn('w-1 h-full relative rounded-2xl')}
-                    >
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-md font-medium mix-blend-difference flex items-center space-x-2">
-                        {element.config.isIconVisible && <TbCircleFilled size={16} />}
-                        <span>{item.value}</span>
+                    ></motion.div>
+                    {element.config.isIconVisible && (
+                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-md font-medium flex items-center space-x-2">
+                        <div className="w-10 h-10 rounded-full !bg-white flex" style={{ backgroundColor: 'white' }}>
+                          <div
+                            className="z-50 text-center my-auto mx-auto uppercase"
+                            style={{ color: element.config.colors[index % element.config.colors.length] }}
+                          >
+                            {item.label[0]}
+                            {item.label[1]}
+                          </div>
+                        </div>
+                        <span className='text-black' >{item.value}</span>
                       </div>
-                    </motion.div>
+                    )}
                     {element.config.labelPosition === 'end' && (
                       <p
                         key={index}
@@ -202,3 +211,4 @@ AdvancedCustomBarContent.propTypes = {
 };
 
 export default AdvanceCustomBar;
+
