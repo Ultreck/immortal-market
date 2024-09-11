@@ -1,0 +1,70 @@
+import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Card } from '@nextui-org/react';
+import ElementWrapper from '../../../ElementWrapper';
+import { ElementPropTypes } from '@/lib/prop-types';
+import PropTypes from 'prop-types';
+
+const AdvancedStackedCard = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+      fit
+    >
+      <AdvancedStackedCardContent element={element} />
+    </ElementWrapper>
+  );
+};
+
+AdvancedStackedCard.propTypes = ElementPropTypes;
+
+export const AdvancedStackedCardContent = ({ element }) => {
+  const { data, colors, bars } = element.config;
+
+  useEffect(() => {}, [element]);
+  return (
+    <div style={{ width: element.width, height: element.height, opacity: element.style.opacity }}>
+      {data.slice(0, bars).map((item, index) => (
+        <motion.div
+          key={item.range}
+          className={`rounded-lg p-4 text-center`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.2 }}
+          style={{
+            width: `${85 + index * 5}%`,
+            marginLeft: `${7.5 - index * 2.5}%`,
+            backgroundColor: colors[index],
+          }}
+          whileHover={{ scale: 1.1 }}
+        >
+          <>
+            <div className="text-sm mb-1 text-black">{item.range}</div>
+            <motion.div
+              className="font-bold text-black"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+              style={{ fontSize: `${Math.max(16, item.percentage * 0.8)}px` }}
+            >
+              {item.percentage}%
+            </motion.div>
+          </>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+AdvancedStackedCardContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+
+export default AdvancedStackedCard;
+

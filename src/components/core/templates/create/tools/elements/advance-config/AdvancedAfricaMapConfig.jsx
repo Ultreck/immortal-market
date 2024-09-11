@@ -57,16 +57,16 @@ const AdvancedAfricaMapConfig = ({ element, onChange }) => {
     setIndexId(id);
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
+
   };
-  
+
 
   const handleDelete = (id) => {
     const data = element.config.data.filter((data) => data.id !== id)
     onChange({ ...element, config: { ...element.config, data } })
   };
 
-  
+
   const handleEdit = () => {
     const capitalizedWord = capitalizeFirstLetter(formData.label);
     const data = element.config.data.map((data) => data.id === indexId ? { ...data, label: capitalizedWord, value: formData.value } : data)
@@ -135,7 +135,7 @@ const AdvancedAfricaMapConfig = ({ element, onChange }) => {
                       </>
                     ))}
                 </ScrollShadow>
-                {onFocus && 
+                {onFocus &&
                 <Button
                 type="submit"
                 variant="solid"
@@ -170,7 +170,7 @@ const AdvancedAfricaMapConfig = ({ element, onChange }) => {
               )}
               {isAddNew && errorMessage && <small className="text-red-500">{errorMessage}</small>}
               <div className="text">
-                {!onFocus && 
+                {!onFocus &&
                 <Button
                 type="submit"
                 variant="solid"

@@ -92,7 +92,6 @@ export const namesOfEuropeanCountries = [
   'Vatican City',
 ];
 
-
 export const namesOfAfricanCountries = [
   'Algeria',
   'Angola',
@@ -237,7 +236,6 @@ export const namesOfNorthAmericanCountries = [
   'Saint Vincent Grenadines',
   'Trinidad Tobago',
 ];
-
 
 export const NGstates = {
   abia: {

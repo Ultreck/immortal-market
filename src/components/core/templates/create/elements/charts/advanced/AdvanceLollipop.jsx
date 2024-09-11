@@ -25,11 +25,11 @@ const AdvanceLollipop = ({ element, active, highlighted, width, onClick, onChang
 AdvanceLollipop.propTypes = ElementPropTypes;
 
 export const AdvanceLollipopContent = ({ element }) => {
-  const percentages = getPercentagesMax(element.config.data.map((item) => item.value));
+  const percentages = getPercentagesMax(element.config.data.slice(0, element.config.bars).map((item) => item.value));
 
   return (
     <div className="flex flex-col space-y-2 items-start">
-      {element.config.data.map((item, index) => {
+      {element.config.data.slice(0, element.config.bars).map((item, index) => {
         const color = element.config.colors[index % element.config.colors.length];
 
         return (
@@ -50,7 +50,7 @@ export const AdvanceLollipopContent = ({ element }) => {
                 className={`font-bold w-max px-4 aspect-[16/12] flex items-center justify-center rounded-full`}
                 style={{ backgroundColor: color }}
               >
-                <span className="text-white mix-blend-difference">{item.value}</span>
+                <span className="!text-white mix-blend-difference">{item.value}</span>
               </motion.div>
             </div>
           </div>
@@ -65,3 +65,4 @@ AdvanceLollipopContent.propTypes = {
 };
 
 export default AdvanceLollipop;
+

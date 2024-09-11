@@ -83,7 +83,7 @@ const NewPageTemplatesModal = ({ isOpen, onClose }) => {
                       <Image
                         onClick={() => handleClick(block)}
                         src={getImageLink(block.thumbnail)}
-                        className="w-full object-cover rounded-2xl cursor-pointer hover:brightness-90"
+                        className="w-full object-cover rounded-2xl cursor-pointer hover:brightness-90 border"
                       />
                     </div>
                   );

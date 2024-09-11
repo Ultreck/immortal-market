@@ -1,11 +1,20 @@
 import { RiShapesLine } from 'react-icons/ri';
-import { GiSouthAmerica } from "react-icons/gi";
+import { GiAfrica, GiEarthAfricaEurope, GiNigeria, GiSouthAmerica } from 'react-icons/gi';
 import { CgLoadbarAlt } from 'react-icons/cg';
 import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react-icons/lu';
 import { IconChartFunnel } from '@tabler/icons-react';
-import { TbChartTreemap, TbCircleDot, TbCirclesRelation, TbGaugeFilled } from 'react-icons/tb';
+import {
+  TbCardboards,
+  TbChartScatter,
+  TbChartTreemap,
+  TbCircleDot,
+  TbCirclesRelation,
+  TbGaugeFilled,
+  TbIcons,
+  TbLayoutList,
+} from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { GiNigeria, GiEarthAfricaEurope, GiAfrica } from 'react-icons/gi';
+import { starterLifeChartData } from '@/lib/charts';
 
 const colors = [
   '#E66B5B',
@@ -103,38 +112,6 @@ const AdvancedCharts = () => {
       preview: (
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
           <LuBarChartHorizontal className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
-      id: 'chart-a-lollipop',
-      type: 'chart-a-lollipop',
-      name: 'Lollipop Chart',
-      data: {
-        type: 'chart-a-lollipop',
-        text: 'Lollipop Chart',
-        width: 400,
-        height: 300,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            { label: 'Dangote Cement', value: 4170 },
-            { label: 'MTN', value: 3460 },
-            { label: 'Airtel', value: 3200 },
-            { label: 'Nestle', value: 1190 },
-            { label: 'GTB', value: 952.1 },
-            { label: 'Zenith', value: 778.6 },
-            { label: 'Stanbic IBTC', value: 489.2 },
-            { label: 'Nig Breweries', value: 447.8 },
-            { label: 'Lafarge Africa', value: 339.1 },
-            { label: 'Access Bank', value: 300.4 },
-          ],
-          colors,
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <LuLollipop className="w-full h-full" />
         </div>
       ),
     },
@@ -340,33 +317,6 @@ const AdvancedCharts = () => {
       ),
     },
     {
-      id: 'chart-a-nested-circles',
-      type: 'chart-a-nested-circles',
-      name: 'nested-circles Chart',
-      data: {
-        type: 'chart-a-nested-circles',
-        text: 'nested-circles Chart',
-        width: 400,
-        height: 400,
-        style: { opacity: 1 },
-        config: {
-          data: [
-            { value: 60, name: 'Visit' },
-            { value: 40, name: 'Inquiry' },
-            { value: 20, name: 'Order' },
-            { value: 80, name: 'Click' },
-            { value: 100, name: 'Show' },
-          ],
-          colors,
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <TbCircleDot className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
       id: 'chart-a-circle-icons',
       type: 'chart-a-circle-icons',
       name: 'circle-icons Chart',
@@ -394,27 +344,6 @@ const AdvancedCharts = () => {
       preview: (
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
           <TbCirclesRelation className="w-full h-full" />
-        </div>
-      ),
-    },
-    {
-      id: 'chart-a-dynamic-sorting',
-      type: 'chart-a-dynamic-sorting',
-      name: 'dynamic-sorting Chart',
-      data: {
-        type: 'chart-a-dynamic-sorting',
-        text: 'dynamic-sorting Chart',
-        width: 400,
-        height: 400,
-        style: { opacity: 1 },
-        config: {
-          data: ['A', 'B', 'C', 'D', 'E'],
-          colors,
-        },
-      },
-      preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-          <LuBarChartHorizontalBig className="w-full h-full" />
         </div>
       ),
     },
@@ -670,6 +599,222 @@ const AdvancedCharts = () => {
     },
   ];
 
+  const historicals = [
+    {
+      id: 'chart-a-dynamic-sorting',
+      type: 'chart-a-dynamic-sorting',
+      name: 'dynamic-sorting Chart',
+      data: {
+        type: 'chart-a-dynamic-sorting',
+        text: 'dynamic-sorting Chart',
+        width: 400,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: ['A', 'B', 'C', 'D', 'E'],
+          colors,
+          showXaxis: false,
+          showYaxis: false,
+          showGridline: false,
+          showLegend: false,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <LuBarChartHorizontalBig className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-a-scatter-life-expectancy',
+      type: 'chart-a-scatter-life-expectancy',
+      name: 'Scatter Life Expectancy Chart',
+      data: {
+        type: 'chart-a-scatter-life-expectancy',
+        text: 'Scatter Life Expectancy Chart',
+        width: 600,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: starterLifeChartData.series[0],
+          keys: { name: 'name', data: 'value' },
+          colors,
+          showXaxis: true,
+          showYaxis: true,
+          showGridline: true,
+          showLegend: true,
+          circles: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbChartScatter className="w-full h-full" />
+        </div>
+      ),
+    },
+  ];
+
+  const specialChartsElement = [
+    {
+      id: 'chart-a-stacked-card',
+      type: 'chart-a-stacked-card',
+      name: 'Stacked Card Chart',
+      data: {
+        type: 'chart-a-stacked-card',
+        text: 'Stacked Card Chart',
+        width: 500,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { range: 'Above ₦2.5m', percentage: 10.3 },
+            { range: '₦1.1m - ₦2.5m', percentage: 20.3 },
+            { range: '₦501k - ₦1m', percentage: 30.6 },
+            { range: '₦251k - ₦500k', percentage: 40.3 },
+            { range: 'Less than 250k', percentage: 50.4 },
+          ],
+          keys: { name: 'range', data: 'percentage' },
+          colors,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbLayoutList className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-a-percentage-card',
+      type: 'chart-a-percentage-card',
+      name: 'Percentage Card Chart',
+      data: {
+        type: 'chart-a-percentage-card',
+        text: 'Percentage Card Chart',
+        width: 500,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { age: '25-34 years...', percentage: 73.1 },
+            { age: '35-44 years', percentage: 68.9 },
+            { age: '18-24 years', percentage: 54.4 },
+            { age: '45-54 years', percentage: 40.0 },
+            { age: '55-64 years', percentage: 30.8 },
+            { age: '65 years and over', percentage: 0.1 },
+          ],
+          keys: { name: 'age', data: 'percentage' },
+          colors,
+          bars: 4,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square flex">
+          <div className="my-auto mx-auto">Percentages Card</div>
+        </div>
+      ),
+    },
+    {
+      id: 'chart-a-lollipop',
+      type: 'chart-a-lollipop',
+      name: 'Lollipop Chart',
+      data: {
+        type: 'chart-a-lollipop',
+        text: 'Lollipop Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { label: 'Dangote Cement', value: 4170 },
+            { label: 'GTB', value: 952.1 },
+            { label: 'Stanbic IBTC', value: 489.2 },
+            { label: 'Nestle', value: 1190 },
+            { label: 'Access Bank', value: 300.4 },
+            { label: 'MTN', value: 3460 },
+            { label: 'Nig Breweries', value: 447.8 },
+            { label: 'Lafarge Africa', value: 339.1 },
+            { label: 'Airtel', value: 3200 },
+            { label: 'Zenith', value: 778.6 },
+          ],
+          colors,
+          bars: 5,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <LuLollipop className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-a-nested-circles',
+      type: 'chart-a-nested-circles',
+      name: 'nested-circles Chart',
+      data: {
+        type: 'chart-a-nested-circles',
+        text: 'nested-circles Chart',
+        width: 400,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { value: 60, name: 'Visit' },
+            { value: 40, name: 'Inquiry' },
+            { value: 20, name: 'Order' },
+            { value: 80, name: 'Click' },
+            { value: 100, name: 'Show' },
+            { value: 70, name: 'Visit' },
+            { value: 80, name: 'Inquiry' },
+            { value: 10, name: 'Order' },
+            { value: 90, name: 'Click' },
+            { value: 30, name: 'Show' },
+          ],
+          colors,
+          bars: 4,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbCircleDot className="w-full h-full" />
+        </div>
+      ),
+    },
+  ];
+
+  const pictogramShapesElement = [
+    {
+      id: 'chart-a-pictogram-shapes',
+      type: 'chart-a-pictogram-shapes',
+      name: 'Pictogram Shapes Chart',
+      data: {
+        type: 'chart-a-pictogram-shapes',
+        text: 'Pictogram Shapes Chart',
+        width: 400,
+        height: 300,
+        style: { opacity: 1 },
+        config: {
+          percentage: 65,
+          shape: 'circle',
+          noOfShapes: 10,
+          isCountVisible: true,
+          countFormat: 'fraction',
+          icon1: 'circle',
+          icon2: 'square',
+          color1: '#FF0000',
+          color2: '#00FF00',
+          icon1count: 4,
+          icon2count: 3,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbIcons className="w-full h-full" />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <>
       <div className="grid grid-cols-3 gap-4">
@@ -678,9 +823,33 @@ const AdvancedCharts = () => {
         })}
       </div>
       <div className="mt-10">
+        <p>Pictogram Shapes</p>
+        <div className="grid grid-cols-3 gap-4">
+          {pictogramShapesElement.map((element) => {
+            return <DraggableElementWrapper key={element.id} element={element} />;
+          })}
+        </div>
+      </div>
+      <div className="mt-10">
         <p>Speedometer</p>
         <div className="grid grid-cols-3 gap-4">
           {speedometerDataElement.map((element) => {
+            return <DraggableElementWrapper key={element.id} element={element} />;
+          })}
+        </div>
+      </div>
+      <div className="mt-10">
+        <p>Historicals</p>
+        <div className="grid grid-cols-3 gap-4">
+          {historicals.map((element) => {
+            return <DraggableElementWrapper key={element.id} element={element} />;
+          })}
+        </div>
+      </div>
+      <div className="mt-10">
+        <p>Special Charts</p>
+        <div className="grid grid-cols-3 gap-4">
+          {specialChartsElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
@@ -698,3 +867,4 @@ const AdvancedCharts = () => {
 };
 
 export default AdvancedCharts;
+

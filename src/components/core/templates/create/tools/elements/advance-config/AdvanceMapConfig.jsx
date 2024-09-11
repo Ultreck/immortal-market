@@ -1,13 +1,13 @@
 import { Button, Checkbox, ScrollShadow, Tab, Tabs } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
-import { ElementPropTypes } from '@/lib/prop-types';
-import {useState } from 'react';
+import { useState } from 'react';
 import GlobalMapColor from './GlobalMapColor';
 import MapColor from './MapColor';
 import { capitalizeFirstLetter, getRandomColor } from '@/lib/constants';
 import { ngStateNames } from '@/lib/helper';
 import { FaPlus } from 'react-icons/fa6';
 import { RxCross2 } from 'react-icons/rx';
+import { ElementPropTypes } from '@/lib/prop-types';
 // import { color } from 'framer-motion';
 
 const AdvanceMapConfig = ({ element, onChange }) => {
@@ -18,7 +18,7 @@ const AdvanceMapConfig = ({ element, onChange }) => {
     value: '',
     id: '',
   });
-  const [indexId, setIndexId] = useState('')
+  const [indexId, setIndexId] = useState('');
   const [onFocus, setOnFocus] = useState(false);
   const [errorMessage, seterrorMessage] = useState('');
   const { handleSubmit, register, reset } = useForm({
@@ -29,7 +29,6 @@ const AdvanceMapConfig = ({ element, onChange }) => {
       id: '',
     },
   });
-
 
   const handleAddMapValues = (map) => {
     const { label, value } = map;
@@ -54,26 +53,24 @@ const AdvanceMapConfig = ({ element, onChange }) => {
     }
   };
 
-
   const handleInputChange = (e, id) => {
     setIndexId(id);
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
   };
-  
 
   const handleDelete = (id) => {
-    const data = element.config.data.filter((data) => data.id !== id)
-    onChange({ ...element, config: { ...element.config, data } })
+    const data = element.config.data.filter((data) => data.id !== id);
+    onChange({ ...element, config: { ...element.config, data } });
   };
 
-  
   const handleEdit = () => {
     const capitalizedWord = capitalizeFirstLetter(formData.label);
-    const data = element.config.data.map((data) => data.id === indexId ? { ...data, label: capitalizedWord, value: formData.value } : data)
-    onChange({ ...element, config: { ...element.config, data }});
-    setOnFocus(false)
+    const data = element.config.data.map((data) =>
+      data.id === indexId ? { ...data, label: capitalizedWord, value: formData.value } : data
+    );
+    onChange({ ...element, config: { ...element.config, data } });
+    setOnFocus(false);
   };
 
   return (
@@ -94,8 +91,8 @@ const AdvanceMapConfig = ({ element, onChange }) => {
           <form onSubmit={handleSubmit(handleAddMapValues)}>
             <div className="">
               {element.config.data.length > 0 && (
-                  <>
-                <ScrollShadow offset={100} orientation="horizontal" className="min-h-24 max-h-60 overflow-x-hidden">
+                <>
+                  <ScrollShadow offset={100} orientation="horizontal" className="min-h-24 max-h-60 overflow-x-hidden">
                     {element.config.data.map((map, index) => (
                       <>
                         <div key={index} className="text flex items-center">
@@ -104,50 +101,50 @@ const AdvanceMapConfig = ({ element, onChange }) => {
                               <input
                                 type="text"
                                 name="label"
-                                value={onFocus && formData.id === map.id? formData.label : map.label}
+                                value={onFocus && formData.id === map.id ? formData.label : map.label}
                                 onFocus={() => {
                                   setOnFocus(true);
-                                  setFormData({...formData, id: map.id, label: map.label, value: map.value});
+                                  setFormData({ ...formData, id: map.id, label: map.label, value: map.value });
                                 }}
-                                onChange={(e) =>handleInputChange(e, map.id)}
+                                onChange={(e) => handleInputChange(e, map.id)}
                                 className="border pl-4 py-3 w-full rounded-full mr-2"
-                                />
+                              />
                             </div>
                             <div className="text my-2">
                               <input
                                 type="text"
                                 name="value"
-                                value={onFocus && formData.id === map.id? formData.value : map.value}
+                                value={onFocus && formData.id === map.id ? formData.value : map.value}
                                 onFocus={() => {
                                   setOnFocus(true);
-                                  setFormData({...formData, id: map.id, label: map.label, value: map.value});
+                                  setFormData({ ...formData, id: map.id, label: map.label, value: map.value });
                                 }}
-                                onChange={(e) =>handleInputChange(e, map.id)}
+                                onChange={(e) => handleInputChange(e, map.id)}
                                 className="border pl-4 py-3 w-full rounded-full mr-2"
                               />
                             </div>
                           </div>
                           <div className="text px-5">
                             <button className="text">
-                              <RxCross2 className='text-xl' onClick={() =>handleDelete(map.id)} />
+                              <RxCross2 className="text-xl" onClick={() => handleDelete(map.id)} />
                             </button>
                           </div>
                         </div>
                       </>
                     ))}
-                </ScrollShadow>
-                {onFocus && 
-                <Button
-                type="submit"
-                variant="solid"
-                radius="full"
-                onClick={handleEdit}
-                className={`text-base px-4 mt-3 w-32  bg-blue-600 text-white`}
-              >
-                Update
-              </Button>
-                }
-                  </>
+                  </ScrollShadow>
+                  {onFocus && (
+                    <Button
+                      type="submit"
+                      variant="solid"
+                      radius="full"
+                      onClick={handleEdit}
+                      className={`text-base px-4 mt-3 w-32  bg-blue-600 text-white`}
+                    >
+                      Update
+                    </Button>
+                  )}
+                </>
               )}
               {isAddNew && (
                 <div className="text grid grid-cols-2 gap-3 pr-16">
@@ -171,23 +168,23 @@ const AdvanceMapConfig = ({ element, onChange }) => {
               )}
               {isAddNew && errorMessage && <small className="text-red-500">{errorMessage}</small>}
               <div className="text">
-                {!onFocus && 
-                <Button
-                type="submit"
-                variant="solid"
-                radius="full"
-                onClick={() => setIsAddNew(!isAddNew)}
-                className={`text-base px-4 mt-3 w-32  ${isAddNew && 'bg-blue-600 text-white'}`}
-                >
-                  {isAddNew ? (
-                    <span className="text">Submit</span>
-                  ) : (
-                    <span className="text flex items-center gap-2">
-                      <FaPlus /> Add
-                    </span>
-                  )}
-                </Button>
-                }
+                {!onFocus && (
+                  <Button
+                    type="submit"
+                    variant="solid"
+                    radius="full"
+                    onClick={() => setIsAddNew(!isAddNew)}
+                    className={`text-base px-4 mt-3 w-32  ${isAddNew && 'bg-blue-600 text-white'}`}
+                  >
+                    {isAddNew ? (
+                      <span className="text">Submit</span>
+                    ) : (
+                      <span className="text flex items-center gap-2">
+                        <FaPlus /> Add
+                      </span>
+                    )}
+                  </Button>
+                )}
               </div>
             </div>
           </form>

@@ -15,7 +15,11 @@ import AdvanceMultipleGauge from './AdvanceMultipleGauge.jsx';
 import AdvanceAfricaMap from './AdvanceAfricaMap.jsx';
 import AdvanceEuropeMap from './AdvanceEuropeMap.jsx';
 import AdvanceMap from './AdvanceMap.jsx';
+import AdvancedScatterLifeExpentancy from './AdvancedScatterLifeExpentancy.jsx';
+import AdvancedPictogramShapes from './AdvancedPictogramShapes.jsx';
 import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap.jsx';
+import AdvancedStackedCard from './AdvancedStackedCard.jsx';
+import AdvancePercentageCard from './AdvancePercentageCard.jsx';
 
 const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -34,7 +38,11 @@ const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange 
     'chart-a-map': AdvanceMap,
     'chart-a-europe-map': AdvanceEuropeMap,
     'chart-a-africa-map': AdvanceAfricaMap,
+    'chart-a-scatter-life-expectancy': AdvancedScatterLifeExpentancy,
+    'chart-a-pictogram-shapes': AdvancedPictogramShapes,
     'chart-a-north-america-map': AdvancedNorthAmericaMap,
+    'chart-a-stacked-card': AdvancedStackedCard,
+    'chart-a-percentage-card': AdvancePercentageCard,
   };
 
   if (components[element.type]) {

@@ -15,7 +15,9 @@ import { AdvanceMultipleGaugeContent } from '@/components/core/templates/create/
 import AdvanceMap from './AdvanceMap';
 import AdvanceEuropeMap from './AdvanceEuropeMap';
 import AdvanceAfricaMap from './AdvanceAfricaMap';
+import { AdvancedPictogramShapesContent } from './AdvancedPictogramShapes';
 import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap';
+import { AdvancedStackedCardContent } from './AdvancedStackedCard';
 
 const AdvanceChartsPresent = ({ element }) => {
   const components = {
@@ -34,7 +36,11 @@ const AdvanceChartsPresent = ({ element }) => {
     'chart-a-map': AdvanceMap,
     'chart-a-europe-map': AdvanceEuropeMap,
     'chart-a-africa-map': AdvanceAfricaMap,
+    'chart-a-scatter-life-expectancy': AdvanceDynamicSortingContent,
+    'chart-a-pictogram-shapes': AdvancedPictogramShapesContent,
     'chart-a-north-america-map': AdvancedNorthAmericaMap,
+    'chart-a-stacked-card': AdvanceDynamicSortingContent,
+    'chart-a-percentage-card': AdvancedStackedCardContent,
   };
 
   if (components[element.type]) {

@@ -21,8 +21,6 @@ const Canvas = ({ id }) => {
   const selectElements = useTemplateStore((state) => state.selectElements);
   const selected = useTemplateStore((state) => state.template.selectedPage === id);
   const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
-  const pages = useTemplateStore(({ template }) => template.pages);
-  const index = pages.findIndex((p) => p.id === id);
   const { setNodeRef, node } = useDroppable({ id: `canvas-${page.id}` });
   const [contextMenu, setContextMenu] = useState({ isOpen: false, position: { x: 0, y: 0 } });
   const scale = useTemplateStore((state) => state.template.scale);
@@ -246,6 +244,7 @@ const Canvas = ({ id }) => {
               updateTemplate({ activePage: id });
             }
           }}
+          className="border border-default-200"
         >
           <motion.div
             style={{ width: page.width * scale, height: page.height * scale }}
@@ -256,7 +255,7 @@ const Canvas = ({ id }) => {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onContextMenu={handleContextMenu}
-            className={cn('bg-white text-black border border-default-200 relative overflow-hidden canvas')}
+            className={cn('bg-white text-black relative overflow-hidden canvas')}
           >
             <div
               style={{
