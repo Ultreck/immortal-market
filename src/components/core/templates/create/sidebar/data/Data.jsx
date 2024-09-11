@@ -1,6 +1,6 @@
 import { createElement, useState } from 'react';
 import Charts from '@/components/core/templates/create/sidebar/data/Charts.jsx';
-import { RiArrowRightSLine, RiBarChart2Line, RiInputField, RiMap2Line, RiTable2 } from 'react-icons/ri';
+import { RiBarChart2Line, RiInputField, RiMap2Line, RiTable2 } from 'react-icons/ri';
 import Tables from '@/components/core/templates/create/sidebar/data/Tables.jsx';
 import Maps from '@/components/core/templates/create/sidebar/data/Maps.jsx';
 import DynamicFields from '@/components/core/templates/create/sidebar/data/DynamicFields.jsx';
@@ -22,7 +22,7 @@ const Data = () => {
   return (
     <>
       {view === 'options' && (
-        <div className="space-y-4 flex flex-col">
+        <div className="grid grid-cols-2 gap-4">
           {[
             { name: 'Charts & graphs', icon: RiBarChart2Line, key: 'charts' },
             { name: 'Tables', icon: RiTable2, key: 'tables' },
@@ -31,17 +31,14 @@ const Data = () => {
           ].map((item, i) => (
             <button
               key={item.key}
-              className="bg-white/5 hover:bg-white/10 cursor-pointer rounded-2xl px-5 py-4 flex items-center justify-between"
+              className="bg-white/5 hover:bg-white/10 cursor-pointer rounded-2xl px-4 py-5 flex flex-col text-center items-center justify-center"
               onClick={() => setView(item.key)}
             >
-              <div className="flex items-center space-x-4">
-                {createElement(item.icon, {
-                  size: '24',
-                  className: cn('opacity-60', classes[i]),
-                })}
-                <span>{item.name}</span>
-              </div>
-              <RiArrowRightSLine size="20" />
+              {createElement(item.icon, {
+                size: '32',
+                className: cn('opacity-60', classes[i]),
+              })}
+              <span className="mt-2.5 leading-tight">{item.name}</span>
             </button>
           ))}
         </div>
