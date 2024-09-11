@@ -60,7 +60,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -95,7 +95,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -131,7 +131,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -167,7 +167,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -205,7 +205,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <MdOutlineStackedBarChart className="w-full h-full" />
         </div>
       ),
@@ -243,7 +243,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <MdOutlineStackedBarChart className="w-full h-full" />
         </div>
       ),
@@ -279,7 +279,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -344,7 +344,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -408,7 +408,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -447,7 +447,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartPie className="w-full h-full" />
         </div>
       ),
@@ -487,7 +487,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartDonut2 className="w-full h-full" />
         </div>
       ),
@@ -524,7 +524,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartDonut4 className="w-full h-full" />
         </div>
       ),
@@ -561,7 +561,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartDonut className="w-full h-full" />
         </div>
       ),
@@ -602,7 +602,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartLine className="w-full h-full" />
         </div>
       ),
@@ -642,7 +642,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartLine className="w-full h-full" />
         </div>
       ),
@@ -686,7 +686,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartArea className="w-full h-full" />
         </div>
       ),
@@ -724,7 +724,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartAreaLine className="w-full h-full" />
         </div>
       ),
@@ -762,7 +762,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbCircleHalf className="w-full h-full" />
         </div>
       ),
@@ -801,7 +801,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbCircleHalf className="w-full h-full" />
         </div>
       ),
@@ -856,7 +856,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartBubble className="w-full h-full" />
         </div>
       ),
@@ -897,7 +897,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartPpf className="w-full h-full" />
         </div>
       ),
@@ -934,7 +934,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartPpf className="w-full h-full" />
         </div>
       ),
@@ -971,7 +971,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartHistogram className="w-full h-full" />
         </div>
       ),
@@ -1008,7 +1008,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartHistogram className="w-full h-full" />
         </div>
       ),
@@ -1045,7 +1045,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartHistogram className="w-full h-full" />
         </div>
       ),
@@ -1082,7 +1082,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
           <TbChartHistogram className="w-full h-full" />
         </div>
       ),

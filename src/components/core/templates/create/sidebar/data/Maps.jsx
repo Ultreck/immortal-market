@@ -42,7 +42,7 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
         <GiNigeria className="w-full h-full" />
       </div>
     ),
@@ -83,7 +83,7 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
         <GiEarthAfricaEurope className="w-full h-full" />
       </div>
     ),
@@ -124,7 +124,7 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
         <GiAfrica className="w-full h-full" />
       </div>
     ),
@@ -165,7 +165,7 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
         <GiSouthAmerica className="w-full h-full" />
       </div>
     ),

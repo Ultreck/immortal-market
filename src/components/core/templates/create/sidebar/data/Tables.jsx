@@ -42,7 +42,7 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-2">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
         <TbTableFilled className="w-full h-full" />
       </div>
     ),
@@ -71,7 +71,7 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-2">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
         <TbTableFilled className="w-full h-full" />
       </div>
     ),
@@ -100,7 +100,7 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-2">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
         <TbTableFilled className="w-full h-full" />
       </div>
     ),
@@ -129,7 +129,7 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-2">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
         <TbTableFilled className="w-full h-full" />
       </div>
     ),
@@ -154,7 +154,7 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-2">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
         <TbBrackets className="w-full h-full" />
       </div>
     ),
