@@ -60,7 +60,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -95,7 +95,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -131,7 +131,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -167,7 +167,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -205,7 +205,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <MdOutlineStackedBarChart className="w-full h-full" />
         </div>
       ),
@@ -243,7 +243,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <MdOutlineStackedBarChart className="w-full h-full" />
         </div>
       ),
@@ -279,7 +279,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -344,7 +344,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -408,7 +408,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartBar className="w-full h-full" />
         </div>
       ),
@@ -447,7 +447,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartPie className="w-full h-full" />
         </div>
       ),
@@ -487,7 +487,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartDonut2 className="w-full h-full" />
         </div>
       ),
@@ -524,7 +524,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartDonut4 className="w-full h-full" />
         </div>
       ),
@@ -561,7 +561,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartDonut className="w-full h-full" />
         </div>
       ),
@@ -602,7 +602,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartLine className="w-full h-full" />
         </div>
       ),
@@ -642,7 +642,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartLine className="w-full h-full" />
         </div>
       ),
@@ -686,7 +686,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartArea className="w-full h-full" />
         </div>
       ),
@@ -724,7 +724,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartAreaLine className="w-full h-full" />
         </div>
       ),
@@ -762,7 +762,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbCircleHalf className="w-full h-full" />
         </div>
       ),
@@ -801,7 +801,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbCircleHalf className="w-full h-full" />
         </div>
       ),
@@ -856,7 +856,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartBubble className="w-full h-full" />
         </div>
       ),
@@ -884,20 +884,20 @@ const StandardCharts = () => {
             { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
           ],
           keys: { x: 'name', y: 'pv' },
+          axis: { x: false, y: false },
+          grid: { x: false, y: false },
+          legend: false,
           colors,
-          showXaxis: false,
-          showYaxis: false,
-          showLegend: false,
-          colors,
-          useGradient: false,
-          gradientColor: '#2673D9',
-          showXGridline: false,
-          showYGridline: false,
           bars: 5,
+          // showXaxis: false,
+          // showYaxis: false,
+          // showLegend: false,
+          // showXGridline: false,
+          // showYGridline: false,
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartPpf className="w-full h-full" />
         </div>
       ),
@@ -934,7 +934,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartPpf className="w-full h-full" />
         </div>
       ),
@@ -971,7 +971,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartHistogram className="w-full h-full" />
         </div>
       ),
@@ -1008,7 +1008,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartHistogram className="w-full h-full" />
         </div>
       ),
@@ -1045,7 +1045,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartHistogram className="w-full h-full" />
         </div>
       ),
@@ -1082,7 +1082,7 @@ const StandardCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 bg-white/5 rounded-2xl p-4">
           <TbChartHistogram className="w-full h-full" />
         </div>
       ),
@@ -1092,72 +1092,72 @@ const StandardCharts = () => {
   return (
     <div className="space-y-8">
       <div>
-        <p>Bar</p>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-base font-medium mb-3 px-2">Bar</h3>
+        <div className="grid grid-cols-2 gap-4">
           {barDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
       </div>
       <div>
-        <p>Pies</p>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-base font-medium mb-3 px-2">Pies</h3>
+        <div className="grid grid-cols-2 gap-4">
           {pieDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
       </div>
       <div>
-        <p>Doughnut</p>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-base font-medium mb-3 px-2">Doughnut</h3>
+        <div className="grid grid-cols-2 gap-4">
           {doughnutDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
       </div>
       <div>
-        <p>Semi Doughnut</p>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-base font-medium mb-3 px-2">Semi Doughnut</h3>
+        <div className="grid grid-cols-2 gap-4">
           {semiDoughnut.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
       </div>
       <div>
-        <p>Semi Pie</p>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-base font-medium mb-3 px-2">Semi Pie</h3>
+        <div className="grid grid-cols-2 gap-4">
           {semiPie.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
       </div>
       <div>
-        <p>Line</p>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-base font-medium mb-3 px-2">Line</h3>
+        <div className="grid grid-cols-2 gap-4">
           {lineDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
       </div>
       <div>
-        <p>Area</p>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-base font-medium mb-3 px-2">Area</h3>
+        <div className="grid grid-cols-2 gap-4">
           {areaDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
       </div>
       <div>
-        <p>Bubbles</p>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-base font-medium mb-3 px-2">Bubbles</h3>
+        <div className="grid grid-cols-2 gap-4">
           {bubbleChartElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
         </div>
       </div>
       <div>
-        <p>Combinations</p>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-base font-medium mb-3 px-2">Combinations</h3>
+        <div className="grid grid-cols-2 gap-4">
           {combineDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}

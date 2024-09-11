@@ -5,7 +5,7 @@ import Basics from '@/components/core/templates/create/sidebar/components/Basics
 import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
 import { Link } from 'react-router-dom';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
-import Charts from '@/components/core/templates/create/sidebar/data/Charts.jsx';
+import Data from '@/components/core/templates/create/sidebar/data/Data.jsx';
 import { Tooltip } from '@nextui-org/react';
 import Infographics from '@/components/core/templates/create/sidebar/graphics/Infographics.jsx';
 import { TbBrush, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
@@ -13,7 +13,6 @@ import Images from '@/components/core/templates/create/sidebar/images/Images.jsx
 
 const Sidebar = () => {
   const [tab, setTab] = useState('basics');
-
   const collapsed = !tab;
 
   return (
@@ -92,7 +91,7 @@ const Sidebar = () => {
           <div className="px-8 py-6 overflow-x-hidden dark:bg-gray-800/50">
             {tab === 'basics' && <Basics />}
             {tab === 'templates' && <Build />}
-            {tab === 'data' && <Charts />}
+            {tab === 'data' && <Data />}
             {tab === 'graphics' && <Infographics />}
             {tab === 'layers' && <Layers />}
             {tab === 'images' && <Images />}
