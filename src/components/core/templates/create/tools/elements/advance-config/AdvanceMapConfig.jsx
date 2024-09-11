@@ -7,8 +7,7 @@ import { capitalizeFirstLetter, getRandomColor } from '@/lib/constants';
 import { ngStateNames } from '@/lib/helper';
 import { FaPlus } from 'react-icons/fa6';
 import { RxCross2 } from 'react-icons/rx';
-import { ElementPropTypes } from '@/lib/prop-types';
-// import { color } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 const AdvanceMapConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
@@ -240,5 +239,9 @@ const AdvanceMapConfig = ({ element, onChange }) => {
   );
 };
 
-AdvanceMapConfig.propTypes = ElementPropTypes;
+AdvanceMapConfig.propTypes = {
+  element: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 export default AdvanceMapConfig;
