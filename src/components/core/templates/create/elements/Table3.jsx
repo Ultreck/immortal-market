@@ -1,5 +1,5 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { cn, TableThemes } from '@/lib/utils.js';
+import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { TbTableOff } from 'react-icons/tb';
@@ -33,57 +33,20 @@ const Table3 = ({ element, active, highlighted, width, onClick, onChange }) => {
 Table3.propTypes = ElementPropTypes;
 
 export const TableElementContent = ({ element }) => {
+  const colors = element.config.colors;
   const headers = element.config.data.heading;
   const sides = element.config.data.sideheading;
   const rows = element.config.data.rows;
-  console.log(headers, sides, rows);
   const max = headers.length;
-  const tableClassNames =
-    element.theme && TableThemes[element.theme]?.tableHeadClassNames
-      ? TableThemes[element.theme]?.tableHeadClassNames
-      : '';
-  const tableHeadClassNames =
-    element.theme && TableThemes[element.theme]?.tableHeadClassNames
-      ? TableThemes[element.theme]?.tableHeadClassNames
-      : '';
-  const tableHeadRowClassNames =
-    element.theme && TableThemes[element.theme]?.tableHeadRowClassNames
-      ? TableThemes[element.theme]?.tableHeadRowClassNames
-      : '';
-  const tableHeadDataClassNames =
-    element.theme && TableThemes[element.theme]?.tableHeadDataClassNames
-      ? TableThemes[element.theme]?.tableHeadDataClassNames
-      : '';
-  const tableBodyClassNames =
-    element.theme && TableThemes[element.theme]?.tableBodyClassNames
-      ? TableThemes[element.theme]?.tableBodyClassNames
-      : '';
-  const tableBodyRowClassNames =
-    element.theme && TableThemes[element.theme]?.tableBodyRowClassNames
-      ? TableThemes[element.theme]?.tableBodyRowClassNames
-      : '';
-  const tableBodyDataClassNames =
-    element.theme && TableThemes[element.theme]?.tableBodyDataClassNames
-      ? TableThemes[element.theme]?.tableBodyDataClassNames
-      : '';
+
 
   return (
     <table
-      className={cn(`w-full h-full table-auto border-separate border border-gray-400 rounded-lg ${tableClassNames}`, {
-        [`${tableClassNames}`]: element.theme,
-      })}
+      className={cn(`w-full h-full table-auto border-separate border border-gray-400 rounded-lg `)}
       style={element.style}
     >
-      <thead
-        className={cn({
-          [`${tableHeadClassNames}`]: element.theme,
-        })}
-      >
-        <tr
-          className={cn({
-            [`${tableHeadRowClassNames}`]: element.theme,
-          })}
-        >
+      <thead >
+        <tr>
           {Array(max)
             .fill(null)
             .map((_, index) => {
@@ -99,11 +62,8 @@ export const TableElementContent = ({ element }) => {
                   className={cn(
                     'text-left px-3 py-1 border-gray-400 font-semibold',
                     { 'border-l': index !== 0 },
-                    {
-                      [`${tableHeadDataClassNames}`]: element.theme,
-                    }
                   )}
-                  style={style}
+                  style={{ ...style, background: index ? colors[0] : '#ffff' }}
                 >
                   {header}
                 </th>
@@ -112,16 +72,11 @@ export const TableElementContent = ({ element }) => {
         </tr>
       </thead>
       <tbody
-        className={cn({
-          [`${tableBodyClassNames}`]: element.theme,
-        })}
+
       >
         {rows.map((row, index) => (
           <tr
             key={`row-${index}`}
-            className={cn('', {
-              [`${tableBodyRowClassNames}`]: element.theme,
-            })}
           >
             <td
               key={`cell-${index}`}
@@ -130,10 +85,8 @@ export const TableElementContent = ({ element }) => {
                 {
                   'border-l': index !== 0,
                 },
-                {
-                  [`${tableBodyDataClassNames}`]: element.theme,
-                }
               )}
+              style={{ background: colors[1] }}
             >
               {sides[index]}
             </td>
@@ -145,7 +98,7 @@ export const TableElementContent = ({ element }) => {
                 style.borderLeftColor = element.style.borderColor;
               }
               return (
-                <td key={`cell-${index}`} className="border border-gray-300 h-fit">
+                <td key={`cell-${index}`} className="border border-gray-300 h-fit" style={{ background: colors[2] }}>
                   <div className="flex flex-col h-full">
                     {cell.map((_, index) => (
                       <div key={`data-${index}`} className="border-b h-1/3 px-2 flex flex-col justify-center">

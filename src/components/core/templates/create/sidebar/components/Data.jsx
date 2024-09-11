@@ -1,33 +1,8 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { TbBrackets, TbTableFilled } from 'react-icons/tb';
+import { TbBrackets } from 'react-icons/tb';
+
 
 const data = [
-  {
-    id: 'table',
-    type: 'table',
-    name: 'Table',
-    data: {
-      type: 'table',
-      text: 'Table',
-      width: 400,
-      height: 200,
-      theme: null,
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <TbTableFilled className="w-full h-full" />
-      </div>
-    ),
-  },
   {
     id: 'key-value',
     type: 'key-value',
@@ -53,84 +28,7 @@ const data = [
       </div>
     ),
   },
-  {
-    id: 'table2',
-    type: 'table2',
-    name: 'Table2',
-    data: {
-      type: 'table2',
-      text: 'Table2',
-      width: 400,
-      height: 200,
-      theme: null,
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <TbTableFilled className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'table3',
-    type: 'table3',
-    name: 'Table3',
-    data: {
-      type: 'table3',
-      text: 'Table3',
-      width: 400,
-      height: 200,
-      theme: null,
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <TbTableFilled className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'table4',
-    type: 'table4',
-    name: 'Table4',
-    data: {
-      type: 'table4',
-      text: 'Table4',
-      width: 400,
-      height: 200,
-      theme: null,
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <TbTableFilled className="w-full h-full" />
-      </div>
-    ),
-  },
+
 ];
 
 const DataElements = () => {

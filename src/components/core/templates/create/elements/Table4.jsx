@@ -33,10 +33,10 @@ const Table4 = ({ element, active, highlighted, width, onClick, onChange }) => {
 Table4.propTypes = ElementPropTypes;
 
 export const TableElementContent = ({ element }) => {
+  const colors = element.config.colors;
   const headers = element.config.data.heading;
   const subheading = element.config.data.subheading;
   const rows = element.config.data.rows;
-  const max = headers.length;
   const tableClassNames =
     element.theme && TableThemes[element.theme]?.tableHeadClassNames
       ? TableThemes[element.theme]?.tableHeadClassNames
@@ -53,24 +53,16 @@ export const TableElementContent = ({ element }) => {
     element.theme && TableThemes[element.theme]?.tableHeadDataClassNames
       ? TableThemes[element.theme]?.tableHeadDataClassNames
       : '';
-  const tableBodyClassNames =
-    element.theme && TableThemes[element.theme]?.tableBodyClassNames
-      ? TableThemes[element.theme]?.tableBodyClassNames
-      : '';
-  const tableBodyRowClassNames =
-    element.theme && TableThemes[element.theme]?.tableBodyRowClassNames
-      ? TableThemes[element.theme]?.tableBodyRowClassNames
-      : '';
-  // const tableBodyDataClassNames =
-  //   element.theme && TableThemes[element.theme]?.tableBodyDataClassNames
-  //     ? TableThemes[element.theme]?.tableBodyDataClassNames
-  //     : '';
+
 
   return (
     <table
-      className={cn(`w-full h-full table-audddto border-separate border border-gray-400 rounded-lg ${tableClassNames}`, {
-        [`${tableClassNames}`]: element.theme,
-      })}
+      className={cn(
+        `w-full h-full table-audddto border-separate border border-gray-400 rounded-lg ${tableClassNames}`,
+        {
+          [`${tableClassNames}`]: element.theme,
+        }
+      )}
       style={element.style}
     >
       <thead
@@ -79,7 +71,7 @@ export const TableElementContent = ({ element }) => {
         })}
       >
         <tr
-          className={cn("border-b",{
+          className={cn('border-b', {
             [`${tableHeadRowClassNames}`]: element.theme,
           })}
         >
@@ -88,10 +80,9 @@ export const TableElementContent = ({ element }) => {
               [`${tableHeadDataClassNames}`]: element.theme,
             })}
           ></th>
-          {Array(max)
-            .fill(null)
+          {headers
             .map((_, index) => {
-              const header = headers[index];
+              const header = _;
               const style = {};
               if (index !== 0) {
                 style.borderLeftWidth = element.style.borderWidth;
@@ -101,26 +92,16 @@ export const TableElementContent = ({ element }) => {
                 <th
                   colSpan={2}
                   key={`header-${index}`}
-                  className={cn(
-                    'text-left px-3 py-1 border-gray-400 font-semibold',
-                    { 'border-l': index !== 0 },
-                    {
-                      [`${tableHeadDataClassNames}`]: element.theme,
-                    }
-                  )}
-                  style={style}
+                  className={cn('text-left px-3 py-1 border-gray-400 font-semibold', { 'border-l': index !== 0 })}
+                  style={{ ...style, background: colors[0] }}
                 >
                   {header}
                 </th>
               );
             })}
         </tr>
-        <tr
-          className={cn({
-            [`${tableHeadRowClassNames}`]: element.theme,
-          })}
-        >
-          {subheading.map((_, index) => {
+        <tr>
+         {subheading.map((_, index) => {
             const style = {};
             if (index !== 0) {
               style.borderLeftWidth = element.style.borderWidth;
@@ -136,26 +117,17 @@ export const TableElementContent = ({ element }) => {
                     [`${tableHeadDataClassNames}`]: element.theme,
                   }
                 )}
-                style={style}
+                style={{ ...style, background: colors[1] }}
               >
                 {_}
               </th>
             );
-          })}
+          })} 
         </tr>
       </thead>
-      <tbody
-        className={cn({
-          [`${tableBodyClassNames}`]: element.theme,
-        })}
-      >
+      <tbody style={{ background: colors[0] }}>
         {rows.map((row, index) => (
-          <tr
-            key={`row-${index}`}
-            className={cn('', {
-              [`${tableBodyRowClassNames}`]: element.theme,
-            })}
-          >
+          <tr key={`row-${index}`}>
             {row.map((_, index) => {
               const style = { borderTopWidth: element.style.borderWidth, borderTopColor: element.style.borderColor };
               if (index !== 0) {

@@ -1,15 +1,5 @@
 import Text, { TextElementContent } from '@/components/core/templates/create/elements/Text.jsx';
 import Image, { CanvasImageContent } from '@/components/core/templates/create/elements/Image.jsx';
-import Table, { TableElementContent } from '@/components/core/templates/create/elements/Table.jsx';
-import Table2, {
-  TableElementContent as Table2ElementContent,
-} from '@/components/core/templates/create/elements/Table2.jsx';
-import Table3, {
-  TableElementContent as Table3ElementContent,
-} from '@/components/core/templates/create/elements/Table3.jsx';
-import Table4, {
-  TableElementContent as Table4ElementContent,
-} from '@/components/core/templates/create/elements/Table4.jsx';
 import KeyValue, { KeyValueElementContent } from '@/components/core/templates/create/elements/KeyValue.jsx';
 import Line, { LineElementContent } from '@/components/core/templates/create/elements/Line.jsx';
 import GenericShape, { GenericShapeContent } from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
@@ -22,8 +12,13 @@ import Infographic, { InfographicElementContent } from '@/components/core/templa
 import GenericIcon, { GenericIconContent } from '@/components/core/templates/create/elements/GenericIcon';
 import icons from '@/lib/templates/icons.js';
 import StandardCharts from '@/components/core/templates/create/elements/charts/standard/StandardCharts.jsx';
+import Tables from '@/components/core/templates/create/elements/tables/Tables.jsx';
 import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
+import TablesPresent from '@/components/core/templates/create/elements/tables/TablesPresent.jsx';
+
+export const tables =['table', 'table2', 'table3', 'table4']
+
 
 export const charts = {
   standard: [
@@ -110,14 +105,14 @@ export const tools = {
     acc[`chart-a-${type}`] = ['advanced-chart', 'map-color', 'opacity'];
     return acc;
   }, {}),
+  ...tables.reduce((acc, type) => {
+    acc[`${type}`] = ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation', 'table-color'];
+    return acc;
+  }, {}),
   'frame-tabs': ['tabs', 'opacity', 'animation', 'shadow'],
   'frame-carousel': ['carousel', 'opacity', 'animation', 'shadow'],
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
   image: ['border', 'border-radius', 'opacity', 'animation', 'shadow'],
-  table: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
-  table2: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
-  table3: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
-  table4: ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
   'key-value': ['key-value', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
   infographic: ['infographic', 'opacity'],
 };
@@ -144,6 +139,10 @@ export const components = {
       acc[`chart-s-${type}`] = StandardCharts;
       return acc;
     }, {}),
+    ...tables.reduce((acc, type) => {
+      acc[`${type}`] = Tables;
+      return acc;
+    }, {}),
     ...charts.advanced.reduce((acc, type) => {
       acc[`chart-a-${type}`] = AdvanceCharts;
       return acc;
@@ -156,10 +155,6 @@ export const components = {
     'frame-carousel': FrameCarousel,
     line: Line,
     image: Image,
-    table: Table,
-    table2: Table2,
-    table3: Table3,
-    table4: Table4,
     'key-value': KeyValue,
     infographic: Infographic,
   },
@@ -180,6 +175,10 @@ export const components = {
       acc[`chart-s-${type}`] = StandardChartsPresent;
       return acc;
     }, {}),
+    ...tables.reduce((acc, type) => {
+      acc[`${type}`] = TablesPresent;
+      return acc;
+    }, {}),
     ...charts.advanced.reduce((acc, type) => {
       acc[`chart-a-${type}`] = AdvanceChartsPresent;
       return acc;
@@ -190,10 +189,10 @@ export const components = {
     }, {}),
     line: LineElementContent,
     image: CanvasImageContent,
-    table: TableElementContent,
-    table2: Table2ElementContent,
-    table3: Table3ElementContent,
-    table4: Table4ElementContent,
+    // table: TableElementContent,
+    // table2: Table2ElementContent,
+    // table3: Table3ElementContent,
+    // table4: Table4ElementContent,
     'key-value': KeyValueElementContent,
     infographic: InfographicElementContent,
   },

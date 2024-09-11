@@ -153,7 +153,7 @@ const TableConfig = ({ element, onChange }) => {
                 </Button>
               </form>
             </Tab>
-            <Tab key="theme" title="Theme" className="text-base">
+            {/* <Tab key="theme" title="Theme" className="text-base">
               <div className="grid grid-cols-2 gap-y-3 gap-x-3 ">
                 {Object.keys(TableThemes).map((key, index) => (
                   <div
@@ -166,7 +166,6 @@ const TableConfig = ({ element, onChange }) => {
                       alt="Image"
                       className="w-full rounded-none"
                     />
-                    {/* Theme-{TableThemes[key].id} */}
                     <AnimatePresence mode="wait">
                       {value === TableThemes[key].id && (
                         <motion.div
@@ -181,7 +180,7 @@ const TableConfig = ({ element, onChange }) => {
                   </div>
                 ))}
               </div>
-            </Tab>
+            </Tab> */}
           </Tabs>
         </div>
       </PopoverContent>

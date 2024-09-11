@@ -5,6 +5,7 @@ import Texts from '@/components/core/templates/create/sidebar/components/design/
 import Shapes from '@/components/core/templates/create/sidebar/components/design/Shapes.jsx';
 import Frames from '@/components/core/templates/create/sidebar/components/design/Frames.jsx';
 import Icons from '@/components/core/templates/create/sidebar/components/design/Icons.jsx';
+import Tables from './Tables';
 
 const Basics = () => {
   const [tab, setTab] = useState('design');
@@ -37,7 +38,12 @@ const Basics = () => {
               <Icons mini onView={() => setView('icons')} />
             </div>
           )}
-          {tab === 'data' && <Data />}
+          {tab === 'data' && (
+            <>
+              <Data />
+              <Tables/>
+            </>
+          )}
         </>
       )}
       {view === 'shapes' && <Shapes onBack={() => setView('all')} />}
@@ -48,3 +54,4 @@ const Basics = () => {
 };
 
 export default Basics;
+
