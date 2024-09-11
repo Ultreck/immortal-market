@@ -17,7 +17,7 @@ import AdvanceChartsPresent from '@/components/core/templates/create/elements/ch
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
 import TablesPresent from '@/components/core/templates/create/elements/tables/TablesPresent.jsx';
 
-export const tables =['table', 'table2', 'table3', 'table4']
+export const tables =['table', 'table2', 'table3', 'table4', 'table5', 'table6', 'table7','table8'];
 
 
 export const charts = {

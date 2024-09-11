@@ -135,6 +135,122 @@ const elements = [
     ),
   },
   {
+    id: 'table5',
+    type: 'table5',
+    name: 'Table5',
+    data: {
+      type: 'table5',
+      text: 'Table5',
+      width: 400,
+      height: 200,
+      config: {
+        theme: null,
+        colors,
+      },
+      style: {
+        fontSize: 14,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#888',
+        color: '#000',
+        opacity: 1,
+        animationDuration: '1s',
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+        <TbTableFilled className="w-full h-full" />
+      </div>
+    ),
+  },
+  {
+    id: 'table6',
+    type: 'table6',
+    name: 'Table6',
+    data: {
+      type: 'table6',
+      text: 'Table6',
+      width: 400,
+      height: 200,
+      config: {
+        theme: null,
+        colors,
+      },
+      style: {
+        fontSize: 14,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#888',
+        color: '#000',
+        opacity: 1,
+        animationDuration: '1s',
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+        <TbTableFilled className="w-full h-full" />
+      </div>
+    ),
+  },
+  {
+    id: 'table7',
+    type: 'table7',
+    name: 'Table7',
+    data: {
+      type: 'table7',
+      text: 'Table7',
+      width: 400,
+      height: 200,
+      config: {
+        theme: null,
+        colors,
+      },
+      style: {
+        fontSize: 14,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#888',
+        color: '#000',
+        opacity: 1,
+        animationDuration: '1s',
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+        <TbTableFilled className="w-full h-full" />
+      </div>
+    ),
+  },
+  {
+    id: 'table8',
+    type: 'table8',
+    name: 'Table8',
+    data: {
+      type: 'table8',
+      text: 'Table8',
+      width: 400,
+      height: 200,
+      config: {
+        theme: null,
+        colors,
+      },
+      style: {
+        fontSize: 14,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#888',
+        color: '#000',
+        opacity: 1,
+        animationDuration: '1s',
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+        <TbTableFilled className="w-full h-full" />
+      </div>
+    ),
+  },
+  {
     id: 'key-value',
     type: 'key-value',
     name: 'Key Value',

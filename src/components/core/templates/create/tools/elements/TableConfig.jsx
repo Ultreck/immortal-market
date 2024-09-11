@@ -1,27 +1,9 @@
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Textarea,
-  useDisclosure,
-  Tab,
-  Tabs,
-  Image,
-} from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Textarea, useDisclosure, Tab, Tabs } from '@nextui-org/react';
 import { TbSettings2 } from 'react-icons/tb';
 import { Controller, useForm } from 'react-hook-form';
 // import { isValidJsonArray } from '@/lib/utils.js';
 import { useState } from 'react';
-import { HiCheck } from 'react-icons/hi2';
-import { AnimatePresence, motion } from 'framer-motion';
-import { TableThemes } from '@/lib/utils';
-// const data = [
-//   ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-//   ['', 'Cell 1', 'Cell 2', 'Cell 3'],
-//   ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
-// ];
 
 const defaultData = {
   table: [
@@ -69,6 +51,42 @@ const defaultData = {
       ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
     ],
   },
+  table5: {
+    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
+  table6: {
+    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
+  table7: {
+    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
+    ],
+  },
+  table8: {
+    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
 };
 
 const TableConfig = ({ element, onChange }) => {
@@ -86,12 +104,6 @@ const TableConfig = ({ element, onChange }) => {
     const data = JSON.parse(json);
     onChange({ ...element, config: { ...(element?.config || {}), data } });
     onOpenChange();
-  };
-  const values = element.theme;
-  const value = values ? values : '';
-  const handleChange = (v) => {
-    if (!v) return;
-    onChange({ ...element, theme: v });
   };
 
   return (
@@ -153,34 +165,6 @@ const TableConfig = ({ element, onChange }) => {
                 </Button>
               </form>
             </Tab>
-            {/* <Tab key="theme" title="Theme" className="text-base">
-              <div className="grid grid-cols-2 gap-y-3 gap-x-3 ">
-                {Object.keys(TableThemes).map((key, index) => (
-                  <div
-                    key={index}
-                    className="w-full border rounded-sm flex items-center justify-center border-white  hover:scale-105 transition-transform cursor-pointer relative"
-                    onClick={() => handleChange(TableThemes[key].id)}
-                  >
-                    <Image
-                      src={`/images/theme-${TableThemes[key].id}.png`}
-                      alt="Image"
-                      className="w-full rounded-none"
-                    />
-                    <AnimatePresence mode="wait">
-                      {value === TableThemes[key].id && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.5 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          className="z-50 absolute inset-0 rounded-full bg-white/50 dark:bg-black/50 flex items-center justify-center"
-                        >
-                          <HiCheck size={16} />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ))}
-              </div>
-            </Tab> */}
           </Tabs>
         </div>
       </PopoverContent>

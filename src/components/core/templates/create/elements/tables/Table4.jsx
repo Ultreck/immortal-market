@@ -41,44 +41,24 @@ export const TableElementContent = ({ element }) => {
     element.theme && TableThemes[element.theme]?.tableHeadClassNames
       ? TableThemes[element.theme]?.tableHeadClassNames
       : '';
-  const tableHeadClassNames =
-    element.theme && TableThemes[element.theme]?.tableHeadClassNames
-      ? TableThemes[element.theme]?.tableHeadClassNames
-      : '';
-  const tableHeadRowClassNames =
-    element.theme && TableThemes[element.theme]?.tableHeadRowClassNames
-      ? TableThemes[element.theme]?.tableHeadRowClassNames
-      : '';
-  const tableHeadDataClassNames =
-    element.theme && TableThemes[element.theme]?.tableHeadDataClassNames
-      ? TableThemes[element.theme]?.tableHeadDataClassNames
-      : '';
 
 
   return (
     <table
       className={cn(
         `w-full h-full table-audddto border-separate border border-gray-400 rounded-lg ${tableClassNames}`,
-        {
-          [`${tableClassNames}`]: element.theme,
-        }
+
       )}
       style={element.style}
     >
       <thead
-        className={cn({
-          [`${tableHeadClassNames}`]: element.theme,
-        })}
+     
       >
         <tr
-          className={cn('border-b', {
-            [`${tableHeadRowClassNames}`]: element.theme,
-          })}
+       
         >
           <th
-            className={cn('text-left px-3 py-1 border-gray-400 font-semibold', {
-              [`${tableHeadDataClassNames}`]: element.theme,
-            })}
+            className={cn('text-left px-3 py-1 border-gray-400 font-semibold')}
           ></th>
           {headers
             .map((_, index) => {
@@ -113,9 +93,6 @@ export const TableElementContent = ({ element }) => {
                 className={cn(
                   'text-left px-3 py-1 border-gray-400 font-semibold',
                   { 'border-l': index !== 0 },
-                  {
-                    [`${tableHeadDataClassNames}`]: element.theme,
-                  }
                 )}
                 style={{ ...style, background: colors[1] }}
               >
