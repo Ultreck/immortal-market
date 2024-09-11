@@ -765,88 +765,88 @@ export const africaCountries = {
   },
 };
 export const NACountries = {
-  Canada: { x: 100, y: 50 },
-  Alberta: { x: 115, y: 55 },
-  'British Columbia': { x: 90, y: 60 },
-  Manitoba: { x: 120, y: 65 },
-  'New Brunswick': { x: 130, y: 90 },
-  'Newfoundland Labrador': { x: 140, y: 100 },
-  'Northwest Territories': { x: 80, y: 40 },
-  'Nova Scotia': { x: 135, y: 95 },
-  Nunavut: { x: 70, y: 30 },
-  Ontario: { x: 125, y: 80 },
-  Montana: { x: 155, y: 180 },
-  Minnesota: { x: 225, y: 100 },
-  'Prince Edward Island': { x: 132, y: 87 },
-  Quebec: { x: 128, y: 85 },
-  Saskatchewan: { x: 110, y: 60 },
-  Yukon: { x: 60, y: 50 },
-  'United States': { x: 200, y: 150 },
-  'New Mexico': { x: 250, y: 300 },
-  Bahamas: { x: 330, y: 350 },
-  Barbados: { x: 400, y: 500 },
-  Belize: { x: 280, y: 380 },
-  'Costa Rica': { x: 310, y: 420 },
-  'North Dakota': { x: 210, y: 320 },
-  Hawaii: { x: 250, y: 370 },
-  Idaho: { x: 200, y: 270 },
-  Washington: { x: 300, y: 170 },
-  Arizona: { x: 100, y: 170 },
-  California: { x: 180, y: 270 },
-  Colorado: { x: 200, y: 270 },
-  Nevada: { x: 300, y: 470 },
-  Oregon: { x: 30, y: 70 },
-  Utah: { x: 90, y: 170 },
-  Wyoming: { x: 290, y: 170 },
-  Arkansas: { x: 390, y: 170 },
-  Iowa: { x: 90, y: 100 },
-  Kansas: { x: 90, y: 100 },
-  Missouri: { x: 190, y: 50 },
-  Nebraska: { x: 340, y: 250 },
-  Oklahoma: { x: 240, y: 250 },
-  'South Dakota': { x: 140, y: 250 },
-  Louisiana: { x: 240, y: 250 },
-  Texas: { x: 140, y: 250 },
-  Connecticut: { x: 340, y: 250 },
-  'New Hampshire': { x: 140, y: 250 },
-  'Rhode Island': { x: 240, y: 250 },
-  Vermont: { x: 140, y: 250 },
-  Alabama: { x: 140, y: 250 },
-  Florida: { x: 160, y: 250 },
-  Georgia: { x: 160, y: 250 },
-  Mississippi: { x: 160, y: 250 },
-  'South Carolina': { x: 240, y: 250 },
-  Illinois: { x: 160, y: 250 },
-  Indiana: { x: 160, y: 250 },
-  Kentucky: { x: 160, y: 250 },
-  'North Carolina': { x: 240, y: 250 },
-  Ohio: { x: 160, y: 250 },
-  Tennessee: { x: 160, y: 250 },
-  Virginia: { x: 160, y: 250 },
-  Wisconsin: { x: 160, y: 250 },
-  'West Virginia': { x: 370, y: 380 },
-  Delaware: { x: 160, y: 250 },
-  'District Of Columbia': { x: 370, y: 380 },
-  Maryland: { x: 160, y: 250 },
-  'New Jersey': { x: 370, y: 380 },
-  'New York': { x: 370, y: 380 },
-  Pennsylvania: { x: 160, y: 250 },
-  Maine: { x: 160, y: 250 },
-  Michigan: { x: 160, y: 250 },
-  Alaska: { x: 160, y: 250 },
-  Mexico: { x: 160, y: 250 },
-  Cuba: { x: 350, y: 370 },
-  'Dominican Republic': { x: 370, y: 380 },
-  'El Salvador': { x: 290, y: 390 },
-  Guatemala: { x: 275, y: 370 },
-  Haiti: { x: 360, y: 375 },
-  Massachusetts: { x: 300, y: 275 },
-  Honduras: { x: 295, y: 380 },
-  Jamaica: { x: 345, y: 360 },
-  Nicaragua: { x: 305, y: 400 },
-  Panama: { x: 320, y: 430 },
-  'Saint Kitts Nevis': { x: 390, y: 490 },
-  'Saint Lucia': { x: 410, y: 505 },
-  'Saint Vincent Grenadines': { x: 415, y: 510 },
-  'Trinidad Tobago': { x: 425, y: 525 },
+  Canada: { x: 100, y: 50 }, //done
+  Alberta: { x: 410, y: 360 }, //done
+  'British Columbia': { x: 240, y: 340 }, //done
+  Manitoba: { x: 520, y: 365 }, //done
+  'New Brunswick': { x: 910, y: 470 }, //done
+  'Newfoundland Labrador': { x: 900, y: 320 }, //done
+  'Northwest Territories': { x: 230, y: 230 }, //done
+  'Nova Scotia': { x: 930, y: 485 }, //done
+  Nunavut: { x: 720, y: 130 }, //done
+  Ontario: { x: 670, y: 420 }, //done
+  Montana: { x: 400, y: 470 }, //done
+  Minnesota: { x: 520, y:490 }, //done
+  'Prince Edward Island': { x: 132, y: 87 }, //done
+  Quebec: { x: 850, y: 285 }, //done
+  Saskatchewan: { x: 400, y: 360 }, //done
+  Yukon: { x: 360, y: 210 }, //done
+  'United States': { x: 200, y: 150 }, // done
+  'New Mexico': { x: 390, y: 610 }, //done
+  Bahamas: { x: 330, y: 350 }, //done
+  Barbados: { x: 400, y: 500 }, //done
+  Belize: { x: 280, y: 380 }, //done
+  'Costa Rica': { x: 310, y: 420 }, //done
+  'North Dakota': { x: 210, y: 320 }, //done
+  Hawaii: { x: 250, y: 370 }, //done
+  Idaho: { x: 420, y: 480 }, //done
+  Washington: { x: 300, y: 460}, //done
+  Arizona: { x: 380, y: 610 }, //done
+  California: {  x: 320, y: 550 }, //done
+  Colorado: { x: 430, y: 560 }, //done
+  Nevada: { x: 350, y: 550 }, //done
+  Oregon: { x: 330, y: 480 }, //done
+  Utah: { x: 430, y: 550 }, //done
+  Wyoming: { x: 410, y: 500 }, //done
+  Arkansas: { x: 550, y: 610 }, //done
+  Iowa: { x: 590, y: 530 }, //done
+  Kansas: { x: 520, y: 570 }, //done
+  Missouri: { x: 560, y: 570 }, //done
+  Nebraska: { x: 500, y: 530}, //done
+  Oklahoma: { x: 500, y:600 }, //done
+  'South Dakota': { x: 450, y: 510 }, //done
+  Louisiana: { x: 560, y: 650 }, //done
+  Texas: { x: 520, y: 650 }, //done
+  Connecticut: { x: 870, y: 550 }, //done
+  'New Hampshire': { x: 870, y: 530 }, //done
+  'Rhode Island': { x: 200, y: 150 }, //done
+  Vermont: { x: 870, y: 500 }, //done
+  Alabama: { x: 660, y: 650 }, //done
+  Florida: { x: 730, y: 710 }, //done
+  Georgia: { x: 790, y: 630 }, //done
+  Mississippi: { x: 640, y: 650 }, //done
+  'South Carolina': { x: 830, y: 630 }, //done
+  Illinois: { x: 640, y: 550 }, //done
+  Indiana: { x: 660, y: 570 }, //done
+  Kentucky: { x: 660, y: 600 }, //done
+  'North Carolina': { x: 850, y: 600 }, //done
+  Ohio: { x: 680, y: 530 }, //done
+  Tennessee: { x: 660, y: 620 }, //done
+  Virginia: { x: 850, y: 580 }, //done
+  Wisconsin: { x: 630, y: 530 }, //done
+  'West Virginia': { x: 370, y: 380 }, //done
+  Delaware: { x: 160, y: 250 }, //done
+  'District Of Columbia': { x: 370, y: 380 }, //done
+  Maryland: { x: 855, y: 580 }, //done
+  'New Jersey': { x: 860, y: 570 }, //done
+  'New York': { x: 870, y: 550 }, //done
+  Pennsylvania: { x: 630, y: 530 }, //done
+  Maine: { x: 890, y: 450 }, //done
+  Michigan: { x: 610, y: 530 }, //done
+  Alaska: { x: 160, y: 250 }, //done
+  Mexico: { x: 460, y: 750 }, //done
+  Cuba: { x: 100, y: 170 }, //done
+  'Dominican Republic': { x: 370, y: 380 }, //done
+  'El Salvador': { x: 290, y: 390 }, //done
+  Guatemala: { x: 275, y: 370 }, //done
+  Haiti: { x: 360, y: 375 }, //done
+  Massachusetts: { x: 300, y: 275 }, //done
+  Honduras: { x: 855, y: 580 }, //done
+  Jamaica: { x: 895, y: 360 }, //done
+  Nicaragua: { x: 985, y: 400 }, //done
+  Panama: { x: 320, y: 430 }, //done
+  'Saint Kitts Nevis': { x: 925, y: 490 }, //done
+  'Saint Lucia': { x: 410, y: 505 }, //done
+  'Saint Vincent Grenadines': { x: 415, y: 510 }, //done
+  'Trinidad Tobago': { x: 425, y: 525 }, //done
 };
