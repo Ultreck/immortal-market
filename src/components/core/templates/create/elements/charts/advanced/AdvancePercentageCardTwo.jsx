@@ -1,0 +1,71 @@
+import React, { useEffect } from 'react';
+import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
+
+const AdvancePercentageCardTwo = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <div>
+      <ElementWrapper
+        element={element}
+        onClick={onClick}
+        onChange={onChange}
+        maxWidth={width}
+        active={active}
+        highlighted={highlighted}
+      >
+        <AdvancePercentageCardTwoElementContent element={element} />
+      </ElementWrapper>
+    </div>
+  );
+};
+
+AdvancePercentageCardTwo.propTypes = ElementPropTypes;
+
+const Dot = ({ active, color }) => <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: active ? color : '#ddd' }} />;
+
+export const AdvancePercentageCardTwoElementContent = ({ element }) => {
+  const { data, seasons, colors, bars } = element.config;
+  useEffect(() => {}, [element]);
+  return (
+    <div className="grid grid-cols-4 gap-4">
+      {seasons.map((season) => (
+        <div key={season} className="text-center font-bold text-black">
+          {season}
+        </div>
+      ))}
+      {data.slice(0, bars).map((row, rowIndex) => (
+        <React.Fragment key={row.age}>
+          {seasons.map((season, index) => (
+            <motion.div
+              key={`${row.age}-${season}`}
+              className="flex flex-col items-center relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: rowIndex * 0.2 }}
+            >
+              <div className="grid grid-cols-10 gap-2 mb-2">
+                {[...Array(100)].map((_, i) => (
+                  <Dot key={i} active={i < row[season.toLowerCase()]} style={{ backgroundColor: colors[rowIndex] }} color={element.config.colors[index]} />
+                ))}
+              </div>
+              <div
+                className={`absolute inset-0 flex items-center justify-center text-5xl font-bold ${colors[index].replace('bg-', 'text-')}`}
+              >
+                {row[season.toLowerCase()]}%
+              </div>
+            </motion.div>
+          ))}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+AdvancePercentageCardTwoElementContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+
+export default AdvancePercentageCardTwo;
+

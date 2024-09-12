@@ -18,6 +18,7 @@ import AdvanceAfricaMap from './AdvanceAfricaMap';
 import { AdvancedPictogramShapesContent } from './AdvancedPictogramShapes';
 import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap';
 import { AdvancedStackedCardContent } from './AdvancedStackedCard';
+import { AdvancePercentageCardTwoElementContent } from './AdvancePercentageCardTwo';
 
 const AdvanceChartsPresent = ({ element }) => {
   const components = {
@@ -42,6 +43,7 @@ const AdvanceChartsPresent = ({ element }) => {
     'chart-a-stacked-card': AdvanceDynamicSortingContent,
     'chart-a-percentage-card': AdvancedStackedCardContent,
     'chart-a-column-card': AdvanceDynamicSortingContent,
+    'chart-a-percentage-card-2': AdvancePercentageCardTwoElementContent,
   };
 
   if (components[element.type]) {

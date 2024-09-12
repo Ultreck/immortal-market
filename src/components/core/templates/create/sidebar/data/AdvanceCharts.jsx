@@ -11,6 +11,7 @@ import {
   TbGaugeFilled,
   TbIcons,
   TbLayoutList,
+  TbReceiptTax,
 } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { starterLifeChartData } from '@/lib/charts';
@@ -605,6 +606,43 @@ const AdvancedCharts = () => {
       preview: (
         <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
           <TbDice6 className="w-full h-full" />
+        </div>
+      ),
+    },
+    {
+      id: 'chart-a-percentage-card-2',
+      type: 'chart-a-percentage-card-2',
+      name: 'Column Chart',
+      data: {
+        type: 'chart-a-percentage-card-2',
+        text: 'Column Chart',
+        width: 550,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { age: '18-34', spring: 20, summer: 30, fall: 26, winter: 13 },
+            { age: '35-54', spring: 25, summer: 27, fall: 31, winter: 6 },
+            { age: '55+', spring: 27, summer: 23, fall: 30, winter: 4 },
+            { age: '18-34', spring: 20, summer: 30, fall: 26, winter: 13 },
+            { age: '35-54', spring: 25, summer: 27, fall: 31, winter: 6 },
+            { age: '55+', spring: 27, summer: 23, fall: 30, winter: 4 },
+            { age: '18-34', spring: 20, summer: 30, fall: 26, winter: 13 },
+            { age: '35-54', spring: 25, summer: 27, fall: 31, winter: 6 },
+            { age: '55+', spring: 27, summer: 23, fall: 30, winter: 4 },
+          ],
+          seasons: ['SPRING', 'SUMMER', 'FALL', 'WINTER'],
+          keys: { name: 'setting', data: 'n' },
+          barTooltip: false,
+          cardTooltip: false,
+          bars: 2,
+          colors,
+          showLabel: false,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbReceiptTax className="w-full h-full" />
         </div>
       ),
     },

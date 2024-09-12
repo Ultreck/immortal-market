@@ -21,6 +21,7 @@ import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap.jsx';
 import AdvancedStackedCard from './AdvancedStackedCard.jsx';
 import AdvancePercentageCard from './AdvancePercentageCard.jsx';
 import AdvanceColumnCard from './AdvanceColumnCard.jsx';
+import AdvancePercentageCardTwo from './AdvancePercentageCardTwo.jsx';
 
 const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -45,6 +46,7 @@ const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange 
     'chart-a-stacked-card': AdvancedStackedCard,
     'chart-a-percentage-card': AdvancePercentageCard,
     'chart-a-column-card': AdvanceColumnCard,
+    'chart-a-percentage-card-2': AdvancePercentageCardTwo,
   };
 
   if (components[element.type]) {
