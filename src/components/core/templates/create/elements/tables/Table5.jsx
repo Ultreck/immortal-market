@@ -2,7 +2,6 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { cn, TableThemes } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { TbTableOff } from 'react-icons/tb';
 
 const Table5 = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -15,16 +14,7 @@ const Table5 = ({ element, active, highlighted, width, onClick, onChange }) => {
       highlighted={highlighted}
     >
       <div className="overflow-hidden relative w-full h-full">
-        {element.config?.data ? (
-          <TableElementContent element={element} />
-        ) : (
-          <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">
-            <p className="text-lg font-bold">
-              <TbTableOff size={40} className="opacity-60" />
-            </p>
-            <p className="mt-4 text-sm max-w-xs">Select the table tool to configure your table.</p>
-          </div>
-        )}
+        {element.config?.data && <TableElementContent element={element} />}
       </div>
     </ElementWrapper>
   );

@@ -2,7 +2,6 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { cn, TableThemes } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { TbTableOff } from 'react-icons/tb';
 
 const Table4 = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -15,16 +14,7 @@ const Table4 = ({ element, active, highlighted, width, onClick, onChange }) => {
       highlighted={highlighted}
     >
       <div className="overflow-hidden relative w-full h-full">
-        {element.config?.data ? (
-          <TableElementContent element={element} />
-        ) : (
-          <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">
-            <p className="text-lg font-bold">
-              <TbTableOff size={40} className="opacity-60" />
-            </p>
-            <p className="mt-4 text-sm max-w-xs">Select the table tool to configure your table.</p>
-          </div>
-        )}
+        {element.config?.data && <TableElementContent element={element} />}
       </div>
     </ElementWrapper>
   );
@@ -42,46 +32,35 @@ export const TableElementContent = ({ element }) => {
       ? TableThemes[element.theme]?.tableHeadClassNames
       : '';
 
-
   return (
     <table
-      className={cn(
-        `w-full h-full table-audddto border-separate border border-gray-400 rounded-lg ${tableClassNames}`,
-
-      )}
+      className={cn(`w-full h-full table-audddto border-separate border border-gray-400 rounded-lg ${tableClassNames}`)}
       style={element.style}
     >
-      <thead
-     
-      >
-        <tr
-       
-        >
-          <th
-            className={cn('text-left px-3 py-1 border-gray-400 font-semibold')}
-          ></th>
-          {headers
-            .map((_, index) => {
-              const header = _;
-              const style = {};
-              if (index !== 0) {
-                style.borderLeftWidth = element.style.borderWidth;
-                style.borderLeftColor = element.style.borderColor;
-              }
-              return (
-                <th
-                  colSpan={2}
-                  key={`header-${index}`}
-                  className={cn('text-left px-3 py-1 border-gray-400 font-semibold', { 'border-l': index !== 0 })}
-                  style={{ ...style, background: colors[0] }}
-                >
-                  {header}
-                </th>
-              );
-            })}
+      <thead>
+        <tr>
+          <th className={cn('text-left px-3 py-1 border-gray-400 font-semibold')}></th>
+          {headers.map((_, index) => {
+            const header = _;
+            const style = {};
+            if (index !== 0) {
+              style.borderLeftWidth = element.style.borderWidth;
+              style.borderLeftColor = element.style.borderColor;
+            }
+            return (
+              <th
+                colSpan={2}
+                key={`header-${index}`}
+                className={cn('text-left px-3 py-1 border-gray-400 font-semibold', { 'border-l': index !== 0 })}
+                style={{ ...style, background: colors[0] }}
+              >
+                {header}
+              </th>
+            );
+          })}
         </tr>
         <tr>
-         {subheading.map((_, index) => {
+          {subheading.map((_, index) => {
             const style = {};
             if (index !== 0) {
               style.borderLeftWidth = element.style.borderWidth;
@@ -90,16 +69,13 @@ export const TableElementContent = ({ element }) => {
             return (
               <th
                 key={`header-${index}`}
-                className={cn(
-                  'text-left px-3 py-1 border-gray-400 font-semibold',
-                  { 'border-l': index !== 0 },
-                )}
+                className={cn('text-left px-3 py-1 border-gray-400 font-semibold', { 'border-l': index !== 0 })}
                 style={{ ...style, background: colors[1] }}
               >
                 {_}
               </th>
             );
-          })} 
+          })}
         </tr>
       </thead>
       <tbody style={{ background: colors[0] }}>

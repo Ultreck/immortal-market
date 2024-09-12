@@ -2,7 +2,6 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { TbTableOff } from 'react-icons/tb';
 
 const Table2 = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -15,16 +14,7 @@ const Table2 = ({ element, active, highlighted, width, onClick, onChange }) => {
       highlighted={highlighted}
     >
       <div className="overflow-hidden relative w-full h-full">
-        {element.config?.data ? (
-          <TableElementContent element={element} />
-        ) : (
-          <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">
-            <p className="text-lg font-bold">
-              <TbTableOff size={40} className="opacity-60" />
-            </p>
-            <p className="mt-4 text-sm max-w-xs">Select the table tool to configure your table.</p>
-          </div>
-        )}
+        {element.config?.data && <TableElementContent element={element} />}
       </div>
     </ElementWrapper>
   );
@@ -62,10 +52,7 @@ export const TableElementContent = ({ element }) => {
               return (
                 <th
                   key={`header-${index}`}
-                  className={cn(
-                    'text-left px-3 py-1 border-gray-400 font-semibold',
-                    { 'border-l': index !== 0 },
-                  )}
+                  className={cn('text-left px-3 py-1 border-gray-400 font-semibold', { 'border-l': index !== 0 })}
                   style={style}
                 >
                   {header}
@@ -74,13 +61,9 @@ export const TableElementContent = ({ element }) => {
             })}
         </tr>
       </thead>
-      <tbody
-        style={{ background: colors[2] }}
-      >
+      <tbody style={{ background: colors[2] }}>
         {rows.map((row, index) => (
-          <tr
-            key={`row-${index}`}
-          >
+          <tr key={`row-${index}`}>
             {Array(max)
               .fill(null)
               .map((_, index) => {
@@ -93,12 +76,9 @@ export const TableElementContent = ({ element }) => {
                 return (
                   <td
                     key={`cell-${index}`}
-                    className={cn(
-                      'text-left border-gray-400 border-t px-3 py-1',
-                      {
-                        'border-l': index !== 0,
-                      },
-                    )}
+                    className={cn('text-left border-gray-400 border-t px-3 py-1', {
+                      'border-l': index !== 0,
+                    })}
                     style={style}
                   >
                     {cell}

@@ -17,6 +17,90 @@ const colors = [
   '#D93566',
 ];
 
+export const defaultTablesData = {
+  table: [
+    ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+    ['', 'Cell 1', 'Cell 2', 'Cell 3'],
+    ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
+  ],
+  table2: [
+    'headinggg',
+    ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+    ['', 'Cell 1', 'Cell 2', 'Cell 3'],
+    ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
+  ],
+  table3: {
+    heading: ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+    sideheading: ['Side 1', 'Side 2', 'Side 3', 'Side 4'],
+    rows: [
+      [
+        ['Cell 1', 'Cell 2', 'Cell 3'],
+        ['Cell 4', 'Cell 5', 'Cell 6'],
+        ['Cell 7', 'Cell 8', 'Cell 9'],
+        ['Cell 10', 'Cell 11', 'Cell 12'],
+      ],
+      [
+        ['Cell 1', 'Cell 2', 'Cell 3'],
+        ['Cell 4', 'Cell 5', 'Cell 6'],
+        ['Cell 7', 'Cell 8', 'Cell 9'],
+        ['Cell 10', 'Cell 11', 'Cell 12'],
+      ],
+      [
+        ['Cell 1', 'Cell 2', 'Cell 3'],
+        ['Cell 4', 'Cell 5', 'Cell 6'],
+        ['Cell 7', 'Cell 8', 'Cell 9'],
+        ['Cell 10', 'Cell 11', 'Cell 12'],
+      ],
+    ],
+  },
+  table4: {
+    heading: ['Heading 1', 'Heading 2', 'Heading 3'],
+    subheading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
+  table5: {
+    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
+  table6: {
+    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
+  table7: {
+    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
+    ],
+  },
+  table8: {
+    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
+};
+
 const elements = [
   {
     id: 'table',
@@ -30,6 +114,7 @@ const elements = [
       config: {
         theme: null,
         colors,
+        data: defaultTablesData.table,
       },
       style: {
         fontSize: 14,
@@ -59,6 +144,7 @@ const elements = [
       config: {
         theme: null,
         colors,
+        data: defaultTablesData.table2,
       },
       style: {
         fontSize: 14,
@@ -88,6 +174,7 @@ const elements = [
       config: {
         theme: null,
         colors,
+        data: defaultTablesData.table3,
       },
       style: {
         fontSize: 14,
@@ -117,6 +204,7 @@ const elements = [
       config: {
         theme: null,
         colors,
+        data: defaultTablesData.table4,
       },
       style: {
         fontSize: 14,
@@ -146,6 +234,7 @@ const elements = [
       config: {
         theme: null,
         colors,
+        data: defaultTablesData.table5,
       },
       style: {
         fontSize: 14,
@@ -175,6 +264,7 @@ const elements = [
       config: {
         theme: null,
         colors,
+        data: defaultTablesData.table6,
       },
       style: {
         fontSize: 14,
@@ -204,6 +294,7 @@ const elements = [
       config: {
         theme: null,
         colors,
+        data: defaultTablesData.table7,
       },
       style: {
         fontSize: 14,
@@ -233,6 +324,7 @@ const elements = [
       config: {
         theme: null,
         colors,
+        data: defaultTablesData.table8,
       },
       style: {
         fontSize: 14,

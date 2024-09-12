@@ -2,7 +2,6 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { TbTableOff } from 'react-icons/tb';
 
 const Table3 = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -15,16 +14,7 @@ const Table3 = ({ element, active, highlighted, width, onClick, onChange }) => {
       highlighted={highlighted}
     >
       <div className="overflow-hidden relative w-full h-full">
-        {element.config?.data ? (
-          <TableElementContent element={element} />
-        ) : (
-          <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">
-            <p className="text-lg font-bold">
-              <TbTableOff size={40} className="opacity-60" />
-            </p>
-            <p className="mt-4 text-sm max-w-xs">Select the table tool to configure your table.</p>
-          </div>
-        )}
+        {element.config?.data && <TableElementContent element={element} />}
       </div>
     </ElementWrapper>
   );
@@ -39,13 +29,12 @@ export const TableElementContent = ({ element }) => {
   const rows = element.config.data.rows;
   const max = headers.length;
 
-
   return (
     <table
       className={cn(`w-full h-full table-auto border-separate border border-gray-400 rounded-lg `)}
       style={element.style}
     >
-      <thead >
+      <thead>
         <tr>
           {Array(max)
             .fill(null)
@@ -59,10 +48,7 @@ export const TableElementContent = ({ element }) => {
               return (
                 <th
                   key={`header-${index}`}
-                  className={cn(
-                    'text-left px-3 py-1 border-gray-400 font-semibold',
-                    { 'border-l': index !== 0 },
-                  )}
+                  className={cn('text-left px-3 py-1 border-gray-400 font-semibold', { 'border-l': index !== 0 })}
                   style={{ ...style, background: index ? colors[0] : '#ffff' }}
                 >
                   {header}
@@ -71,21 +57,14 @@ export const TableElementContent = ({ element }) => {
             })}
         </tr>
       </thead>
-      <tbody
-
-      >
+      <tbody>
         {rows.map((row, index) => (
-          <tr
-            key={`row-${index}`}
-          >
+          <tr key={`row-${index}`}>
             <td
               key={`cell-${index}`}
-              className={cn(
-                'border border-gray-300 px-4 py-2 h-fit',
-                {
-                  'border-l': index !== 0,
-                },
-              )}
+              className={cn('border border-gray-300 px-4 py-2 h-fit', {
+                'border-l': index !== 0,
+              })}
               style={{ background: colors[1] }}
             >
               {sides[index]}
