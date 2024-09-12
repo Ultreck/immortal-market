@@ -72,6 +72,7 @@ export const charts = {
     'pictogram-shapes',
     'stacked-card',
     'percentage-card',
+    'column-card'
   ],
   map: ['map', 'europe-map', 'africa-map', 'north-america-map'],
 };

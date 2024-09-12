@@ -75,6 +75,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           {element.type === 'chart-a-north-america-map' && <AdvancedNorthAmericaMapConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-stacked-card' && <AdvancedStackedCardConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-percentage-card' && <AdvancePercentageCardConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-column-card' && <AdvancePercentageCardConfig element={element} onChange={onChange} />}
         </div>
       </PopoverContent>
     </Popover>

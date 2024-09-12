@@ -7,6 +7,7 @@ import {
   TbChartTreemap,
   TbCircleDot,
   TbCirclesRelation,
+  TbDice6,
   TbGaugeFilled,
   TbIcons,
   TbLayoutList,
@@ -572,6 +573,41 @@ const AdvancedCharts = () => {
         </div>
       ),
     },
+    {
+      id: 'chart-a-column-card',
+      type: 'chart-a-column-card',
+      name: 'Column Chart',
+      data: {
+        type: 'chart-a-column-card',
+        text: 'Column Chart',
+        width: 550,
+        height: 500,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            { setting: 'School', n: 58 },
+            { setting: 'Community', n: 48 },
+            { setting: 'University', n: 11 },
+            { setting: 'Healthcare facility', n: 8 },
+            { setting: 'Workplace', n: 6 },
+            { setting: 'Home', n: 6 },
+            { setting: 'Religious', n: 3 },
+            { setting: 'Other', n: 20 },
+          ],
+          keys: { name: 'setting', data: 'n' },
+          barTooltip: false,
+          cardTooltip: false,
+          bars: 4,
+          colors,
+          showLabel: false,
+        },
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <TbDice6 className="w-full h-full" />
+        </div>
+      ),
+    },
   ];
 
   const pictogramShapesElement = [
@@ -700,3 +736,4 @@ const AdvancedCharts = () => {
 };
 
 export default AdvancedCharts;
+

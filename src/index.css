@@ -63,6 +63,10 @@ input:-webkit-autofill {
   grid-template-columns: repeat(36, minmax(0, 1fr));
 }
 
+.grid-30 {
+  grid-template-columns: repeat(18, minmax(0, 1fr));
+}
+
 .grid-20 {
   grid-template-columns: repeat(20, minmax(0, 1fr));
 }

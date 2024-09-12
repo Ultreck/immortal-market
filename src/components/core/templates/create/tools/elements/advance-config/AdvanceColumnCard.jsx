@@ -1,10 +1,11 @@
+import React from 'react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput';
 import { isValidJsonArray } from '@/lib/utils';
-import { Button, Checkbox, Tab, Tabs, Textarea } from '@nextui-org/react';
+import { Button, Tab, Tabs, Textarea } from '@nextui-org/react';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-const AdvancePercentageCardConfig = ({ element, onChange }) => {
+const AdvanceColumnCard = () => {
   const [tab, setTab] = useState('data');
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -17,9 +18,7 @@ const AdvancePercentageCardConfig = ({ element, onChange }) => {
     const data = JSON.parse(json);
     onChange({ ...element, config: { ...element.config, data } });
   };
-
-  console.log(element.config);
-
+  
   return (
     <div>
       <Tabs
@@ -67,15 +66,6 @@ const AdvancePercentageCardConfig = ({ element, onChange }) => {
         </Tab>
         <Tab key="settings" title="Settings" className="text-base">
           <div className="space-y-6">
-            <div className="flex items-center space-x-4 mb-6">
-              <Checkbox
-                isSelected={element.config.showLabel}
-                onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
-                classNames={{ base: 'py-0' }}
-              >
-                Show Label
-              </Checkbox>
-            </div>
             <div className="flex items-center space-x-4">
               <p className="text-base opacity-75 whitespace-nowrap">No. of Cards:</p>
               <AutoCompleteNumberInput
@@ -98,5 +88,5 @@ const AdvancePercentageCardConfig = ({ element, onChange }) => {
   );
 };
 
-export default AdvancePercentageCardConfig;
+export default AdvanceColumnCard;
 

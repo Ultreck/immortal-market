@@ -41,6 +41,7 @@ const AdvanceChartsPresent = ({ element }) => {
     'chart-a-north-america-map': AdvancedNorthAmericaMap,
     'chart-a-stacked-card': AdvanceDynamicSortingContent,
     'chart-a-percentage-card': AdvancedStackedCardContent,
+    'chart-a-column-card': AdvanceDynamicSortingContent,
   };
 
   if (components[element.type]) {

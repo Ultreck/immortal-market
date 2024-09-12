@@ -20,6 +20,7 @@ import AdvancedPictogramShapes from './AdvancedPictogramShapes.jsx';
 import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap.jsx';
 import AdvancedStackedCard from './AdvancedStackedCard.jsx';
 import AdvancePercentageCard from './AdvancePercentageCard.jsx';
+import AdvanceColumnCard from './AdvanceColumnCard.jsx';
 
 const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -43,6 +44,7 @@ const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange 
     'chart-a-north-america-map': AdvancedNorthAmericaMap,
     'chart-a-stacked-card': AdvancedStackedCard,
     'chart-a-percentage-card': AdvancePercentageCard,
+    'chart-a-column-card': AdvanceColumnCard,
   };
 
   if (components[element.type]) {
