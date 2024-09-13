@@ -26,15 +26,16 @@ StandardSemiCircle.propTypes = ElementPropTypes;
 export const StandardSemiCircleContent = ({ element }) => {
   const chartRef = useRef(null);
 
-  const maxDataValue = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
-    
+  const dataKey = element.config.keys?.data || 'value';
+  const maxDataValue = Math.max(...element.config.data.map((d) => d[dataKey]));
+
   const chartData = element.config.data.map((item, index) => {
-    const value = item[element.config.keys.data];
-    const factor = 1 - value / maxDataValue;  
+    const value = item[dataKey];
+    const factor = 1 - value / maxDataValue;
     const color = element.config.useGradient
       ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
       : element.config.colors?.[index % element.config.colors.length];
-    
+
     return { ...item, fill: color };
   });
 
@@ -67,7 +68,7 @@ export const StandardSemiCircleContent = ({ element }) => {
     return () => {
       myChart.dispose();
     };
-  }, [element]);
+  }, [chartData, element]);
 
   return <div id="main" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>;
 };
