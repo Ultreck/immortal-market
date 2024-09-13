@@ -9,6 +9,7 @@ import { TableElementContent as Table5ElementContent } from '@/components/core/t
 import { TableElementContent as Table6ElementContent } from '@/components/core/templates/create/elements/tables/Table6.jsx';
 import { TableElementContent as Table7ElementContent } from '@/components/core/templates/create/elements/tables/Table7.jsx';
 import { TableElementContent as Table8ElementContent } from '@/components/core/templates/create/elements/tables/Table8.jsx';
+import { TableElementContent as Table9ElementContent } from '@/components/core/templates/create/elements/tables/Table9.jsx';
 
 
 const TablesPresent = ({ element }) => {
@@ -21,6 +22,7 @@ const TablesPresent = ({ element }) => {
     table6: Table6ElementContent,
     table7: Table7ElementContent,
     table8: Table8ElementContent,
+    table9: Table9ElementContent,
   };
 
   if (components[element.type]) {

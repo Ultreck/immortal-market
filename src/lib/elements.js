@@ -18,8 +18,19 @@ import StandardChartsPresent from '@/components/core/templates/create/elements/c
 import TablesPresent from '@/components/core/templates/create/elements/tables/TablesPresent.jsx';
 import Map from '@/components/core/templates/create/elements/maps/Map.jsx';
 
-export const tables = ['table', 'table2', 'table3', 'table4', 'table5', 'table6', 'table7', 'table8'];
-
+export const tables = [
+  'table',
+  'table2',
+  'table3',
+  'table4',
+  'table5',
+  'table6',
+  'table7',
+  'table8',
+  'table9',
+  'table10',
+  'table11',
+];
 export const charts = {
   standard: [
     'bar',

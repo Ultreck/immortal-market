@@ -1,6 +1,6 @@
 import { TbBrackets, TbTableFilled } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { Button } from '@nextui-org/react';
+import { Button, Image } from '@nextui-org/react';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 
@@ -19,15 +19,15 @@ const colors = [
 
 export const defaultTablesData = {
   table: [
-    ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-    ['', 'Cell 1', 'Cell 2', 'Cell 3'],
-    ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
+    ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+    ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4'],
+    ['Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
   ],
   table2: [
-    'headinggg',
-    ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-    ['', 'Cell 1', 'Cell 2', 'Cell 3'],
-    ['Cell 4', 'Cell 5', 'Cell 6', '', 'Cell 7'],
+    'Heading',
+    ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+    ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4'],
+    ['Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
   ],
   table3: {
     heading: ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
@@ -99,6 +99,49 @@ export const defaultTablesData = {
       ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
     ],
   },
+  table9: {
+    heading: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
+    rows: [
+      ['2020', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['2021', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['2022', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['2023', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
+  table10: {
+    heading: ['', 'Heading 1', 'Heading 2', 'Heading 3'],
+    sideheading: ['2022', '2023', '2024', '2025'],
+    rows: [
+      [
+        ['Male', 'Female'],
+        ['Cell 4', 'Cell 5'],
+        ['Cell 7', 'Cell 8'],
+        ['Cell 10', 'Cell 11'],
+      ],
+      [
+        ['Male', 'Female'],
+        ['Cell 4', 'Cell 5'],
+        ['Cell 7', 'Cell 8'],
+        ['Cell 10', 'Cell 11'],
+      ],
+      [
+        ['Male', 'Female'],
+        ['Cell 4', 'Cell 5'],
+        ['Cell 7', 'Cell 8'],
+        ['Cell 10', 'Cell 11'],
+      ],
+    ],
+  },
+  table11: {
+    heading: ['Dogs', 'Cats', 'Rabbits'],
+    subheading: ['Rate', 'Male', 'Female', 'Male', 'Female', 'Male', 'Female'],
+    rows: [
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+  },
 };
 
 const elements = [
@@ -128,7 +171,8 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbTableFilled className="w-full h-full" />
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-1.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
       </div>
     ),
   },
@@ -158,7 +202,8 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbTableFilled className="w-full h-full" />
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-2.png" alt="Table" className="w-full h-16 rounded-"one" width={400} height="400} />
       </div>
     ),
   },
@@ -188,7 +233,8 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbTableFilled className="w-full h-full" />
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-3.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
       </div>
     ),
   },
@@ -218,7 +264,8 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbTableFilled className="w-full h-full" />
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-4.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
       </div>
     ),
   },
@@ -248,7 +295,8 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbTableFilled className="w-full h-full" />
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-5.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
       </div>
     ),
   },
@@ -278,7 +326,8 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbTableFilled className="w-full h-full" />
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-6.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
       </div>
     ),
   },
@@ -308,7 +357,8 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbTableFilled className="w-full h-full" />
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-7.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
       </div>
     ),
   },
@@ -338,7 +388,101 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbTableFilled className="w-full h-full" />
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-8.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
+      </div>
+    ),
+  },
+  {
+    id: 'table9',
+    type: 'table9',
+    name: 'Table9',
+    data: {
+      type: 'table9',
+      text: 'Table9',
+      width: 400,
+      height: 200,
+      config: {
+        theme: null,
+        colors,
+        data: defaultTablesData.table9,
+      },
+      style: {
+        fontSize: 14,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#888',
+        color: '#000',
+        opacity: 1,
+        animationDuration: '1s',
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-9.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
+      </div>
+    ),
+  },
+  {
+    id: 'table10',
+    type: 'table10',
+    name: 'Table10',
+    data: {
+      type: 'table10',
+      text: 'Table10',
+      width: 400,
+      height: 200,
+      config: {
+        theme: null,
+        colors,
+        data: defaultTablesData.table10,
+      },
+      style: {
+        fontSize: 14,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#888',
+        color: '#000',
+        opacity: 1,
+        animationDuration: '1s',
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-10.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
+      </div>
+    ),
+  },
+  {
+    id: 'table11',
+    type: 'table11',
+    name: 'Table11',
+    data: {
+      type: 'table11',
+      text: 'Table11',
+      width: 400,
+      height: 200,
+      config: {
+        theme: null,
+        colors,
+        data: defaultTablesData.table11,
+      },
+      style: {
+        fontSize: 14,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#888',
+        color: '#000',
+        opacity: 1,
+        animationDuration: '1s',
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+        {/* <TbTableFilled className="w-full h-full" /> */}
+        <Image src="/images/table-11.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
       </div>
     ),
   },
@@ -392,3 +536,4 @@ Tables.propTypes = {
 };
 
 export default Tables;
+
