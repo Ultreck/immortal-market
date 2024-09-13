@@ -1093,7 +1093,7 @@ const StandardCharts = () => {
     <div className="space-y-8">
       <div>
         <h3 className="text-base font-medium mb-3 px-2">Bar</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {barDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
@@ -1101,7 +1101,7 @@ const StandardCharts = () => {
       </div>
       <div>
         <h3 className="text-base font-medium mb-3 px-2">Pies</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {pieDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
@@ -1109,7 +1109,7 @@ const StandardCharts = () => {
       </div>
       <div>
         <h3 className="text-base font-medium mb-3 px-2">Doughnut</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {doughnutDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
@@ -1117,7 +1117,7 @@ const StandardCharts = () => {
       </div>
       <div>
         <h3 className="text-base font-medium mb-3 px-2">Semi Doughnut</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {semiDoughnut.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
@@ -1125,7 +1125,7 @@ const StandardCharts = () => {
       </div>
       <div>
         <h3 className="text-base font-medium mb-3 px-2">Semi Pie</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {semiPie.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
@@ -1133,7 +1133,7 @@ const StandardCharts = () => {
       </div>
       <div>
         <h3 className="text-base font-medium mb-3 px-2">Line</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {lineDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
@@ -1141,7 +1141,7 @@ const StandardCharts = () => {
       </div>
       <div>
         <h3 className="text-base font-medium mb-3 px-2">Area</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {areaDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
@@ -1149,7 +1149,7 @@ const StandardCharts = () => {
       </div>
       <div>
         <h3 className="text-base font-medium mb-3 px-2">Bubbles</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {bubbleChartElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
@@ -1157,7 +1157,7 @@ const StandardCharts = () => {
       </div>
       <div>
         <h3 className="text-base font-medium mb-3 px-2">Combinations</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {combineDataElement.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;
           })}
