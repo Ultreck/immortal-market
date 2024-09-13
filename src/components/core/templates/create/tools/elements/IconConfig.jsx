@@ -3,7 +3,7 @@ import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '
 import { createElement } from 'react';
 import { TbSettings2 } from 'react-icons/tb';
 import PropTypes from 'prop-types';
-import icons from '@/lib/templates/icons.js';
+import icons from '@/lib/design/icons.js';
 
 const IconConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });

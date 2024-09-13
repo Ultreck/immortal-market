@@ -1,6 +1,6 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import shapes from '@/lib/templates/shapes.js';
+import shapes from '@/lib/design/shapes.js';
 import PropTypes from 'prop-types';
 
 const GenericShape = ({ element, active, highlighted, width, onClick, onChange }) => {

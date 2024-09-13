@@ -12,11 +12,11 @@ import { AdvanceNestedCirclesContent } from '@/components/core/templates/create/
 import { AdvanceGaugeContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceGauge.jsx';
 import { AdvanceSpeedometerContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceSpeedometer.jsx';
 import { AdvanceMultipleGaugeContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceMultipleGauge.jsx';
-import AdvanceMap from './AdvanceMap';
-import AdvanceEuropeMap from './AdvanceEuropeMap';
-import AdvanceAfricaMap from './AdvanceAfricaMap';
+import MapNigeria from '../../maps/MapNigeria.jsx';
+import MapEurope from '../../maps/MapEurope.jsx';
+import MapAfrica from '../../maps/MapAfrica.jsx';
 import { AdvancedPictogramShapesContent } from './AdvancedPictogramShapes';
-import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap';
+import MapNorthAmerica from '../../maps/MapNorthAmerica.jsx';
 import { AdvancedStackedCardContent } from './AdvancedStackedCard';
 import { AdvancePercentageCardTwoElementContent } from './AdvancePercentageCardTwo';
 
@@ -34,12 +34,12 @@ const AdvanceChartsPresent = ({ element }) => {
     'chart-a-speedometer': AdvanceSpeedometerContent,
     'chart-a-speedometer-simple': AdvanceGaugeContent,
     'chart-a-speedometer-multiple': AdvanceMultipleGaugeContent,
-    'chart-a-map': AdvanceMap,
-    'chart-a-europe-map': AdvanceEuropeMap,
-    'chart-a-africa-map': AdvanceAfricaMap,
+    'chart-a-map': MapNigeria,
+    'chart-a-europe-map': MapEurope,
+    'chart-a-africa-map': MapAfrica,
     'chart-a-scatter-life-expectancy': AdvanceDynamicSortingContent,
     'chart-a-pictogram-shapes': AdvancedPictogramShapesContent,
-    'chart-a-north-america-map': AdvancedNorthAmericaMap,
+    'chart-a-north-america-map': MapNorthAmerica,
     'chart-a-stacked-card': AdvanceDynamicSortingContent,
     'chart-a-percentage-card': AdvancedStackedCardContent,
     'chart-a-column-card': AdvanceDynamicSortingContent,

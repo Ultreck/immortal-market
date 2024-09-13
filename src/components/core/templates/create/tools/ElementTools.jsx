@@ -25,7 +25,7 @@ import InfographicConfig from '@/components/core/templates/create/tools/elements
 import ChartColor from './elements/ChartColor.jsx';
 import TableColor from './elements/TableColor.jsx';
 import Font from '@/components/core/templates/create/tools/elements/Font.jsx';
-import LocalMapColor from './elements/advance-config/LocalMapColor.jsx';
+import MapConfig from '@/components/core/templates/create/tools/elements/map/MapConfig.jsx';
 
 const mapping = {
   bold: { type: 'multiple', component: Bold },
@@ -51,7 +51,7 @@ const mapping = {
   infographic: { type: 'single', component: InfographicConfig },
   'chart-color': { type: 'single', component: ChartColor },
   'table-color': { type: 'single', component: TableColor },
-  'map-color': { type: 'single', component: LocalMapColor },
+  map: { type: 'single', component: MapConfig },
 };
 
 const ElementTools = () => {

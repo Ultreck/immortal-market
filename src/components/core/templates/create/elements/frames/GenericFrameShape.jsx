@@ -2,7 +2,7 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { cn } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import FrameContents from '@/components/core/templates/create/elements/frames/FrameContents.jsx';
-import shapes from '@/lib/templates/shapes.js';
+import shapes from '@/lib/design/shapes.js';
 import PropTypes from 'prop-types';
 
 const GenericFrameShape = ({ element, active, highlighted, width, onClick, onChange }) => {

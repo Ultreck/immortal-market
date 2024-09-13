@@ -39,10 +39,8 @@ const DraggableElementWrapper = ({ element }) => {
 DraggableElementWrapper.propTypes = {
   element: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    preview: PropTypes.any,
     data: PropTypes.any,
+    preview: PropTypes.any,
   }),
 };
 

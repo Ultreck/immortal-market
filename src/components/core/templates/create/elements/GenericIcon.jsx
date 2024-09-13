@@ -3,7 +3,7 @@ import { TbIcons } from 'react-icons/tb';
 import { createElement, useRef } from 'react';
 import { useMount } from 'react-use';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import icons from '@/lib/templates/icons.js';
+import icons from '@/lib/design/icons.js';
 import PropTypes from 'prop-types';
 
 const GenericIcon = ({ element, active, highlighted, width, onClick, onChange }) => {

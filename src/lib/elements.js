@@ -7,18 +7,18 @@ import GenericFrameShape from '@/components/core/templates/create/elements/frame
 import AdvanceCharts from '@/components/core/templates/create/elements/charts/advanced/AdvanceCharts.jsx';
 import FrameTabs from '@/components/core/templates/create/elements/frames/FrameTabs.jsx';
 import FrameCarousel from '@/components/core/templates/create/elements/frames/FrameCarousel.jsx';
-import shapes from '@/lib/templates/shapes.js';
+import shapes from '@/lib/design/shapes.js';
 import Infographic, { InfographicElementContent } from '@/components/core/templates/create/elements/Infographic.jsx';
 import GenericIcon, { GenericIconContent } from '@/components/core/templates/create/elements/GenericIcon';
-import icons from '@/lib/templates/icons.js';
+import icons from '@/lib/design/icons.js';
 import StandardCharts from '@/components/core/templates/create/elements/charts/standard/StandardCharts.jsx';
 import Tables from '@/components/core/templates/create/elements/tables/Tables.jsx';
 import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
 import TablesPresent from '@/components/core/templates/create/elements/tables/TablesPresent.jsx';
+import Map from '@/components/core/templates/create/elements/maps/Map.jsx';
 
-export const tables =['table', 'table2', 'table3', 'table4', 'table5', 'table6', 'table7','table8'];
-
+export const tables = ['table', 'table2', 'table3', 'table4', 'table5', 'table6', 'table7', 'table8'];
 
 export const charts = {
   standard: [
@@ -73,7 +73,7 @@ export const charts = {
     'stacked-card',
     'percentage-card',
     'column-card',
-    'percentage-card-2'
+    'percentage-card-2',
   ],
   map: ['map', 'europe-map', 'africa-map', 'north-america-map'],
 };
@@ -103,12 +103,18 @@ export const tools = {
     acc[`chart-a-${type}`] = ['advanced-chart', 'chart-color', 'opacity'];
     return acc;
   }, {}),
-  ...charts.map.reduce((acc, type) => {
-    acc[`chart-a-${type}`] = ['advanced-chart', 'map-color', 'opacity'];
-    return acc;
-  }, {}),
+  map: ['map', 'opacity'],
   ...tables.reduce((acc, type) => {
-    acc[`${type}`] = ['table', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation', 'table-color'];
+    acc[`${type}`] = [
+      'table',
+      'opacity',
+      'font',
+      'text-color',
+      'border',
+      'background-color',
+      'animation',
+      'table-color',
+    ];
     return acc;
   }, {}),
   'frame-tabs': ['tabs', 'opacity', 'animation', 'shadow'],
@@ -149,10 +155,7 @@ export const components = {
       acc[`chart-a-${type}`] = AdvanceCharts;
       return acc;
     }, {}),
-    ...charts.map.reduce((acc, type) => {
-      acc[`chart-a-${type}`] = AdvanceCharts;
-      return acc;
-    }, {}),
+    map: Map,
     'frame-tabs': FrameTabs,
     'frame-carousel': FrameCarousel,
     line: Line,
@@ -191,10 +194,6 @@ export const components = {
     }, {}),
     line: LineElementContent,
     image: CanvasImageContent,
-    // table: TableElementContent,
-    // table2: Table2ElementContent,
-    // table3: Table3ElementContent,
-    // table4: Table4ElementContent,
     'key-value': KeyValueElementContent,
     infographic: InfographicElementContent,
   },
@@ -204,4 +203,3 @@ export const getElementTools = (type) => {
   if (!tools[type]) throw new Error(`No tools found for type ${type}`);
   return tools[type];
 };
-

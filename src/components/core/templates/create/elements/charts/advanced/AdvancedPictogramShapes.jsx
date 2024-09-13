@@ -1,7 +1,7 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
-import icons from '@/lib/templates/icons';
+import icons from '@/lib/design/icons';
 
 const AdvancedPictogramShapes = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -53,14 +53,7 @@ const classes = {
 };
 
 export const AdvancedPictogramShapesContent = ({ element }) => {
-  const {
-    icon1,
-    icon2,
-    color1,
-    color2,
-    icon1count,
-    icon2count,
-  } = element.config;
+  const { icon1, icon2, color1, color2, icon1count, icon2count } = element.config;
   const Icon1 = icons.find((icon) => icon.name === icon1).icon;
   const Icon2 = icons.find((icon) => icon.name === icon2).icon;
   const numberOfIcons = icon1count + icon2count;
@@ -84,4 +77,3 @@ AdvancedPictogramShapesContent.propTypes = {
 };
 
 export default AdvancedPictogramShapes;
-

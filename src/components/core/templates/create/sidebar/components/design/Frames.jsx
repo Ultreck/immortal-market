@@ -1,6 +1,6 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import BasicCarousel from '@/components/ui/BasicCarousel.jsx';
-import shapes from '@/lib/templates/shapes.js';
+import shapes from '@/lib/design/shapes.js';
 import { RiCheckboxMultipleBlankFill } from 'react-icons/ri';
 import { TbCarouselHorizontalFilled, TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';

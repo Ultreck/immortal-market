@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
-import icons from '@/lib/templates/icons';
+import icons from '@/lib/design/icons';
 import { HexColorPicker } from 'react-colorful';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput';
 
@@ -168,4 +168,3 @@ AdvancedPictogramShapesConfig.propTypes = {
 };
 
 export default AdvancedPictogramShapesConfig;
-

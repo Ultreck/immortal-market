@@ -21,13 +21,7 @@ const DraggableElement = ({ element, content, dragging, className }) => {
 DraggableElement.propTypes = {
   element: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    data: PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-    }),
+    data: PropTypes.object.isRequired,
   }),
   content: PropTypes.any,
   dragging: PropTypes.any,

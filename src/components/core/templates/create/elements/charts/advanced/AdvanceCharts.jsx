@@ -12,12 +12,9 @@ import AdvanceTreeMap from './AdvanceTreeMap.jsx';
 import AdvanceSpeedometer from './AdvanceSpeedometer.jsx';
 import AdvanceGauge from './AdvanceGauge.jsx';
 import AdvanceMultipleGauge from './AdvanceMultipleGauge.jsx';
-import AdvanceAfricaMap from './AdvanceAfricaMap.jsx';
-import AdvanceEuropeMap from './AdvanceEuropeMap.jsx';
-import AdvanceMap from './AdvanceMap.jsx';
 import AdvancedScatterLifeExpentancy from './AdvancedScatterLifeExpentancy.jsx';
 import AdvancedPictogramShapes from './AdvancedPictogramShapes.jsx';
-import AdvancedNorthAmericaMap from './AdvancedNorthAmericaMap.jsx';
+import MapNorthAmerica from '../../maps/MapNorthAmerica.jsx';
 import AdvancedStackedCard from './AdvancedStackedCard.jsx';
 import AdvancePercentageCard from './AdvancePercentageCard.jsx';
 import AdvanceColumnCard from './AdvanceColumnCard.jsx';
@@ -37,12 +34,9 @@ const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange 
     'chart-a-speedometer': AdvanceSpeedometer,
     'chart-a-speedometer-simple': AdvanceGauge,
     'chart-a-speedometer-multiple': AdvanceMultipleGauge,
-    'chart-a-map': AdvanceMap,
-    'chart-a-europe-map': AdvanceEuropeMap,
-    'chart-a-africa-map': AdvanceAfricaMap,
     'chart-a-scatter-life-expectancy': AdvancedScatterLifeExpentancy,
     'chart-a-pictogram-shapes': AdvancedPictogramShapes,
-    'chart-a-north-america-map': AdvancedNorthAmericaMap,
+    'chart-a-north-america-map': MapNorthAmerica,
     'chart-a-stacked-card': AdvancedStackedCard,
     'chart-a-percentage-card': AdvancePercentageCard,
     'chart-a-column-card': AdvanceColumnCard,

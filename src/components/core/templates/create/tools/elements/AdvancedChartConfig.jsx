@@ -12,12 +12,8 @@ import AdvancedTreeMapConfig from './advance-config/AdvancedTreeMapConfig';
 import AdvanceDynamicSortingChartConfig from './advance-config/AdvanceDynamicSortingChartConfig';
 import AdvanceShapesConfig from '@/components/core/templates/create/tools/elements/advance-config/AdvanceShapesConfig.jsx';
 import AdvanceSpeedometerConfig from './advance-config/AdvanceSpeedometerConfig.jsx';
-import AdvanceMapConfig from './advance-config/AdvanceMapConfig';
-import AdvancedEuropeMapConfig from './advance-config/AdvancedEuropeMapConfig';
-import AdvancedAfricaMapConfig from './advance-config/AdvancedAfricaMapConfig';
 import AdvancedScatterLifeExpentancyConfig from './advance-config/AdvancedScatterLifeExpentancyConfig';
 import AdvancedPictogramShapesConfig from './advance-config/AdvancedPictogramShapesConfig';
-import AdvancedNorthAmericaMapConfig from './advance-config/AdvancedNorthAmericaMapConfig';
 import AdvancedStackedCardConfig from './advance-config/AdvancedStackedCardConfig';
 import AdvancePercentageCardConfig from './advance-config/AdvancePercentageCardConfig';
 
@@ -65,17 +61,21 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           {element.type === 'chart-a-speedometer-simple' && (
             <AdvanceSpeedometerConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-map' && <AdvanceMapConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-europe-map' && <AdvancedEuropeMapConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-africa-map' && <AdvancedAfricaMapConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-scatter-life-expectancy' && (
             <AdvancedScatterLifeExpentancyConfig element={element} onChange={onChange} />
           )}
-          { element.type === 'chart-a-pictogram-shapes' && <AdvancedPictogramShapesConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-north-america-map' && <AdvancedNorthAmericaMapConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-stacked-card' && <AdvancedStackedCardConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-percentage-card' && <AdvancePercentageCardConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-column-card' && <AdvancePercentageCardConfig element={element} onChange={onChange} />}
+          {element.type === 'chart-a-pictogram-shapes' && (
+            <AdvancedPictogramShapesConfig element={element} onChange={onChange} />
+          )}
+          {element.type === 'chart-a-stacked-card' && (
+            <AdvancedStackedCardConfig element={element} onChange={onChange} />
+          )}
+          {element.type === 'chart-a-percentage-card' && (
+            <AdvancePercentageCardConfig element={element} onChange={onChange} />
+          )}
+          {element.type === 'chart-a-column-card' && (
+            <AdvancePercentageCardConfig element={element} onChange={onChange} />
+          )}
         </div>
       </PopoverContent>
     </Popover>
@@ -91,4 +91,3 @@ AdvancedChartConfig.propTypes = {
 };
 
 export default AdvancedChartConfig;
-

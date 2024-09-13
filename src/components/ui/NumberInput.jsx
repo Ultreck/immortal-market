@@ -2,7 +2,7 @@ import { Button, Input } from '@nextui-org/react';
 import { TbMinus, TbPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
-const NumberInput = ({ value, onChange, ariaLabel, min = 0, max = 100, step = 1 }) => {
+const NumberInput = ({ variant = 'flat', value, onChange, ariaLabel, min = 0, max = 100, step = 1 }) => {
   const handleChange = (v) => {
     if (isNaN(v)) return;
     if (`${v}`.includes('.')) {
@@ -15,7 +15,7 @@ const NumberInput = ({ value, onChange, ariaLabel, min = 0, max = 100, step = 1 
     <div className="gap-2 flex items-center">
       <Button
         isIconOnly
-        variant="flat"
+        variant="bordered"
         className="text-base"
         isDisabled={isNaN(value) || value <= min}
         onClick={() => handleChange(+value - step)}
@@ -25,6 +25,7 @@ const NumberInput = ({ value, onChange, ariaLabel, min = 0, max = 100, step = 1 
       <Input
         aria-label={ariaLabel}
         type="number"
+        variant={variant}
         step={step}
         isClearable={false}
         classNames={{ base: 'w-[80px] text-base' }}
@@ -33,7 +34,7 @@ const NumberInput = ({ value, onChange, ariaLabel, min = 0, max = 100, step = 1 
       />
       <Button
         isIconOnly
-        variant="flat"
+        variant="bordered"
         className="text-base"
         isDisabled={isNaN(value) || value >= max}
         onClick={() => handleChange(+value + step)}
@@ -45,6 +46,7 @@ const NumberInput = ({ value, onChange, ariaLabel, min = 0, max = 100, step = 1 
 };
 
 NumberInput.propTypes = {
+  variant: PropTypes.oneOf(['flat', 'bordered', 'faded', 'underlined']),
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   onChange: PropTypes.func.isRequired,
   ariaLabel: PropTypes.string.isRequired,

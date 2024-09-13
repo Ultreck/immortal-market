@@ -1,7 +1,7 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import BasicCarousel from '@/components/ui/BasicCarousel.jsx';
 import { createElement } from 'react';
-import icons from '@/lib/templates/icons.js';
+import icons from '@/lib/design/icons.js';
 import { Button } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';

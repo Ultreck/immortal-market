@@ -6,7 +6,6 @@ import {
   PopoverTrigger,
   Select,
   SelectItem,
-  Switch,
   Tab,
   Tabs,
   Textarea,
@@ -208,7 +207,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -224,7 +228,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -307,7 +316,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -323,7 +337,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -406,7 +425,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -422,7 +446,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -505,7 +534,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -521,7 +555,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -604,7 +643,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -620,7 +664,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -703,7 +752,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -719,7 +773,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -802,7 +861,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -818,7 +882,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -886,7 +955,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showGridline: v },
+                          })
+                        }
                       >
                         Show Grid Line
                       </Checkbox>
@@ -894,20 +968,20 @@ const ChartData = ({ element, onChange, onClose }) => {
                   />
                 </div>
                 <div className="flex items-center space-x-4">
-                    <p className="text-base opacity-75 whitespace-nowrap">No. of bubbles:</p>
-                    <AutoCompleteNumberInput
-                      onChange={(v) =>
-                        onChange({
-                          ...element,
-                          config: { ...element.config, bubbles: Number(v) },
-                        })
-                      }
-                      value={element.config.bubbles}
-                      min={1}
-                      max={element.config.data.length}
-                      ariaLabel="No of bubbles to Show"
-                    />
-                  </div>
+                  <p className="text-base opacity-75 whitespace-nowrap">No. of bubbles:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, bubbles: Number(v) },
+                      })
+                    }
+                    value={element.config.bubbles}
+                    min={1}
+                    max={element.config.data.length}
+                    ariaLabel="No of bubbles to Show"
+                  />
+                </div>
               </>
             )}
             {element.type === 'chart-s-area' && (
@@ -969,7 +1043,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -985,7 +1064,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1068,7 +1152,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1084,7 +1173,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1167,7 +1261,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1183,7 +1282,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1266,7 +1370,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1282,7 +1391,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1365,7 +1479,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1381,7 +1500,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1464,7 +1588,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1480,7 +1609,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1563,7 +1697,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1579,7 +1718,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1647,7 +1791,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1663,7 +1812,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1731,7 +1885,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1747,7 +1906,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1815,7 +1979,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1831,7 +2000,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -1914,7 +2088,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showXGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showXGridline: v },
+                          })
+                        }
                       >
                         Show X Grid Line
                       </Checkbox>
@@ -1930,7 +2109,12 @@ const ChartData = ({ element, onChange, onClose }) => {
                       <Checkbox
                         isSelected={element.config.showYGridline}
                         classNames={{ base: 'py-0' }}
-                        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYGridline: v } })}
+                        onValueChange={(v) =>
+                          onChange({
+                            ...element,
+                            config: { ...element.config, showYGridline: v },
+                          })
+                        }
                       >
                         Show Y Grid Line
                       </Checkbox>
@@ -2239,4 +2423,3 @@ ChartConfig.propTypes = propTypes;
 ChartData.propTypes = { ...propTypes, onBack: PropTypes.func, onClose: PropTypes.func };
 
 export default ChartConfig;
-
