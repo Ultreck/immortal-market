@@ -12,25 +12,11 @@ import Infographic, { InfographicElementContent } from '@/components/core/templa
 import GenericIcon, { GenericIconContent } from '@/components/core/templates/create/elements/GenericIcon';
 import icons from '@/lib/design/icons.js';
 import StandardCharts from '@/components/core/templates/create/elements/charts/standard/StandardCharts.jsx';
-import Tables from '@/components/core/templates/create/elements/tables/Tables.jsx';
 import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
-import TablesPresent from '@/components/core/templates/create/elements/tables/TablesPresent.jsx';
 import Map from '@/components/core/templates/create/elements/maps/Map.jsx';
+import Table, { TableContent } from '@/components/core/templates/create/elements/tables/Table.jsx';
 
-export const tables = [
-  'table',
-  'table2',
-  'table3',
-  'table4',
-  'table5',
-  'table6',
-  'table7',
-  'table8',
-  'table9',
-  'table10',
-  'table11',
-];
 export const charts = {
   standard: [
     'bar',
@@ -107,27 +93,15 @@ export const tools = {
     return acc;
   }, {}),
   ...charts.standard.reduce((acc, type) => {
-    acc[`chart-s-${type}`] = ['chart', 'chart-color', 'opacity', 'animation'];
+    acc[`chart-s-${type}`] = ['chart', 'colors', 'opacity', 'animation'];
     return acc;
   }, {}),
   ...charts.advanced.reduce((acc, type) => {
-    acc[`chart-a-${type}`] = ['advanced-chart', 'chart-color', 'opacity'];
+    acc[`chart-a-${type}`] = ['advanced-chart', 'colors', 'opacity'];
     return acc;
   }, {}),
   map: ['map', 'opacity'],
-  ...tables.reduce((acc, type) => {
-    acc[`${type}`] = [
-      'table',
-      'opacity',
-      'font',
-      'text-color',
-      'border',
-      'background-color',
-      'animation',
-      'table-color',
-    ];
-    return acc;
-  }, {}),
+  table: ['table', 'colors', 'opacity', 'font', 'text-color', 'animation'],
   'frame-tabs': ['tabs', 'opacity', 'animation', 'shadow'],
   'frame-carousel': ['carousel', 'opacity', 'animation', 'shadow'],
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
@@ -158,10 +132,7 @@ export const components = {
       acc[`chart-s-${type}`] = StandardCharts;
       return acc;
     }, {}),
-    ...tables.reduce((acc, type) => {
-      acc[`${type}`] = Tables;
-      return acc;
-    }, {}),
+    table: Table,
     ...charts.advanced.reduce((acc, type) => {
       acc[`chart-a-${type}`] = AdvanceCharts;
       return acc;
@@ -191,10 +162,7 @@ export const components = {
       acc[`chart-s-${type}`] = StandardChartsPresent;
       return acc;
     }, {}),
-    ...tables.reduce((acc, type) => {
-      acc[`${type}`] = TablesPresent;
-      return acc;
-    }, {}),
+    table: TableContent,
     ...charts.advanced.reduce((acc, type) => {
       acc[`chart-a-${type}`] = AdvanceChartsPresent;
       return acc;

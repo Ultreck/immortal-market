@@ -1,109 +1,54 @@
-import { GiAfrica, GiEarthAfricaEurope, GiNigeria, GiSouthAmerica } from 'react-icons/gi';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { Button } from '@nextui-org/react';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
+import { GiAfrica, GiEarthAfricaEurope, GiNigeria, GiSouthAmerica } from 'react-icons/gi';
 
-const elements = [
-  {
-    id: 'map-nigeria',
-    data: {
-      type: 'map',
-      text: 'Map',
-      width: 400,
-      height: 400,
-      style: {
-        opacity: 1,
-      },
-      config: {
-        data: [],
-        name: 'nigeria',
-        fill: '#f9fafb',
-        stroke: '#333',
-        showLabels: true,
-        showValues: true,
-        labelsCount: 1,
-      },
+const names = ['nigeria', 'africa', 'europe', 'north-america'];
+
+const previews = {
+  nigeria: (
+    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+      <GiNigeria className="w-full h-full" />
+    </div>
+  ),
+  africa: (
+    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+      <GiAfrica className="w-full h-full" />
+    </div>
+  ),
+  europe: (
+    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+      <GiEarthAfricaEurope className="w-full h-full" />
+    </div>
+  ),
+  'north-america': (
+    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+      <GiSouthAmerica className="w-full h-full" />
+    </div>
+  ),
+};
+
+const elements = names.map((name) => ({
+  id: `map-${name}`,
+  data: {
+    type: 'map',
+    text: name,
+    width: 400,
+    height: 400,
+    style: { opacity: 1 },
+    config: {
+      data: [],
+      name,
+      fill: '#f9fafb',
+      stroke: '#333',
+      showLabels: true,
+      showValues: true,
+      labelsCount: 1,
     },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <GiNigeria className="w-full h-full" />
-      </div>
-    ),
   },
-  {
-    id: 'map-europe',
-    data: {
-      type: 'map',
-      text: 'Europe',
-      width: 500,
-      height: 500,
-      style: { opacity: 1 },
-      config: {
-        data: [],
-        name: 'europe',
-        fill: '#f9fafb',
-        stroke: '#333',
-        showLabels: true,
-        showValues: true,
-        labelsCount: 1,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <GiEarthAfricaEurope className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'map-africa',
-    data: {
-      type: 'map',
-      text: 'Africa',
-      width: 500,
-      height: 500,
-      style: { opacity: 1 },
-      config: {
-        data: [],
-        name: 'africa',
-        fill: '#f9fafb',
-        stroke: '#333',
-        showLabels: true,
-        showValues: true,
-        labelsCount: 1,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <GiAfrica className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'map-north-america',
-    data: {
-      type: 'map',
-      text: 'North America',
-      width: 500,
-      height: 500,
-      style: { opacity: 1 },
-      config: {
-        data: [],
-        name: 'north-america',
-        fill: '#f9fafb',
-        stroke: '#333',
-        showLabels: true,
-        showValues: true,
-        labelsCount: 1,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <GiSouthAmerica className="w-full h-full" />
-      </div>
-    ),
-  },
-];
+  preview: previews[name],
+}));
 
 const Maps = ({ onBack }) => {
   return (

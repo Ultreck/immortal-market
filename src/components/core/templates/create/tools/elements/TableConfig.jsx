@@ -1,18 +1,16 @@
 import PropTypes from 'prop-types';
-import { Button, Popover, PopoverContent, PopoverTrigger, Textarea, useDisclosure, Tab, Tabs } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea, useDisclosure } from '@nextui-org/react';
 import { TbSettings2 } from 'react-icons/tb';
 import { Controller, useForm } from 'react-hook-form';
-// import { isValidJsonArray } from '@/lib/utils.js';
+import { isValidJsonArray } from '@/lib/utils.js';
 import { useState } from 'react';
-import { defaultTablesData } from '../../sidebar/data/Tables';
 
 const TableConfig = ({ element, onChange }) => {
-  const data = defaultTablesData[element.type];
   const [tab, setTab] = useState('data');
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
   const { handleSubmit, control } = useForm({
     defaultValues: {
-      json: element?.config?.data ? JSON.stringify(element.config.data, null, 2) : JSON.stringify(data, null, 2),
+      json: JSON.stringify(element.config.data, null, 2),
     },
   });
 
@@ -59,7 +57,7 @@ const TableConfig = ({ element, onChange }) => {
                     control={control}
                     rules={{
                       required: 'A valid JSON array is required',
-                      // validate: (value) => isValidJsonArray(value),
+                      validate: (value) => isValidJsonArray(value),
                     }}
                     render={({ field, fieldState: { error } }) => {
                       const message = error?.type === 'validate' ? 'Invalid JSON array' : error?.message;
@@ -106,4 +104,3 @@ TableConfig.propTypes = {
 };
 
 export default TableConfig;
-

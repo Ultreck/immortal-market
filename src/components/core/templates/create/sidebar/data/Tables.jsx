@@ -1,4 +1,3 @@
-import { TbBrackets, TbTableFilled } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { Button, Image } from '@nextui-org/react';
 import { RiArrowLeftSLine } from 'react-icons/ri';
@@ -17,501 +16,81 @@ const colors = [
   '#D93566',
 ];
 
-export const defaultTablesData = {
-  table: [
-    ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-    ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4'],
-    ['Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-  ],
-  table2: [
-    'Heading',
-    ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-    ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4'],
-    ['Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-  ],
-  table3: {
-    heading: ['', 'Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-    sideheading: ['Side 1', 'Side 2', 'Side 3', 'Side 4'],
-    rows: [
-      [
-        ['Cell 1', 'Cell 2', 'Cell 3'],
-        ['Cell 4', 'Cell 5', 'Cell 6'],
-        ['Cell 7', 'Cell 8', 'Cell 9'],
-        ['Cell 10', 'Cell 11', 'Cell 12'],
-      ],
-      [
-        ['Cell 1', 'Cell 2', 'Cell 3'],
-        ['Cell 4', 'Cell 5', 'Cell 6'],
-        ['Cell 7', 'Cell 8', 'Cell 9'],
-        ['Cell 10', 'Cell 11', 'Cell 12'],
-      ],
-      [
-        ['Cell 1', 'Cell 2', 'Cell 3'],
-        ['Cell 4', 'Cell 5', 'Cell 6'],
-        ['Cell 7', 'Cell 8', 'Cell 9'],
-        ['Cell 10', 'Cell 11', 'Cell 12'],
-      ],
-    ],
-  },
-  table4: {
-    heading: ['Heading 1', 'Heading 2', 'Heading 3'],
-    subheading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
-    rows: [
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-    ],
-  },
-  table5: {
-    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
-    rows: [
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-    ],
-  },
-  table6: {
-    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
-    rows: [
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-    ],
-  },
-  table7: {
-    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
-    rows: [
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8'],
-    ],
-  },
-  table8: {
-    heading: ['Side 1', 'Side 2', 'Side 3', 'Side 4', 'Side 5', 'Side 6', 'Side 7'],
-    rows: [
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-    ],
-  },
-  table9: {
-    heading: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
-    rows: [
-      ['2020', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['2021', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['2022', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['2023', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-    ],
-  },
-  table10: {
-    heading: ['', 'Heading 1', 'Heading 2', 'Heading 3'],
-    sideheading: ['2022', '2023', '2024', '2025'],
-    rows: [
-      [
-        ['Male', 'Female'],
-        ['Cell 4', 'Cell 5'],
-        ['Cell 7', 'Cell 8'],
-        ['Cell 10', 'Cell 11'],
-      ],
-      [
-        ['Male', 'Female'],
-        ['Cell 4', 'Cell 5'],
-        ['Cell 7', 'Cell 8'],
-        ['Cell 10', 'Cell 11'],
-      ],
-      [
-        ['Male', 'Female'],
-        ['Cell 4', 'Cell 5'],
-        ['Cell 7', 'Cell 8'],
-        ['Cell 10', 'Cell 11'],
-      ],
-    ],
-  },
-  table11: {
-    heading: ['Dogs', 'Cats', 'Rabbits'],
-    subheading: ['Rate', 'Male', 'Female', 'Male', 'Female', 'Male', 'Female'],
-    rows: [
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
-    ],
-  },
-};
-
 const elements = [
   {
-    id: 'table',
-    type: 'table',
-    name: 'Table',
+    theme: 'basic',
+    data: [
+      ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4'],
+      ['Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+    colors: colors.slice(0, 1),
+  },
+  {
+    theme: 'basic-striped',
+    data: [
+      ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
+      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4'],
+      ['Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+    ],
+    colors: colors.slice(0, 1),
+  },
+  {
+    theme: 'trend-analysis',
+    data: [
+      ['Trend Analysis'],
+      ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
+      ['2020', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+      ['2021', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+      ['2022', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+      ['2023', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+    ],
+    colors: colors.slice(0, 2),
+  },
+  {
+    theme: 'marketing-report',
+    data: [
+      ['', 'Feb', 'March', 'April', 'May', 'June'],
+      ['2020', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+      ['2021', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+      ['2022', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+      ['2023', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+    ],
+    colors: colors.slice(0, 2),
+  },
+].map((i) => {
+  return {
+    id: `table-${i.theme}`,
+    category: 'basic',
     data: {
       type: 'table',
       text: 'Table',
       width: 400,
       height: 200,
+      style: {
+        fontSize: 14,
+        opacity: 1,
+        animationDuration: '1s',
+      },
       config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
+        theme: i.theme,
+        colors: i.colors,
+        data: i.data,
       },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-1.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
+        <Image
+          src={`/images/previews/tables/${i.theme}.png`}
+          alt="Table"
+          className="w-full h-16 rounded-lg"
+          width={400}
+          height={400}
+        />
       </div>
     ),
-  },
-  {
-    id: 'table2',
-    type: 'table2',
-    name: 'Table2',
-    data: {
-      type: 'table2',
-      text: 'Table2',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table2,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-2.png" alt="Table" className="w-full h-16 rounded-"one" width={400} height="400} />
-      </div>
-    ),
-  },
-  {
-    id: 'table3',
-    type: 'table3',
-    name: 'Table3',
-    data: {
-      type: 'table3',
-      text: 'Table3',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table3,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-3.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
-      </div>
-    ),
-  },
-  {
-    id: 'table4',
-    type: 'table4',
-    name: 'Table4',
-    data: {
-      type: 'table4',
-      text: 'Table4',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table4,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-4.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
-      </div>
-    ),
-  },
-  {
-    id: 'table5',
-    type: 'table5',
-    name: 'Table5',
-    data: {
-      type: 'table5',
-      text: 'Table5',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table5,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-5.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
-      </div>
-    ),
-  },
-  {
-    id: 'table6',
-    type: 'table6',
-    name: 'Table6',
-    data: {
-      type: 'table6',
-      text: 'Table6',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table6,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-6.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
-      </div>
-    ),
-  },
-  {
-    id: 'table7',
-    type: 'table7',
-    name: 'Table7',
-    data: {
-      type: 'table7',
-      text: 'Table7',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table7,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-7.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
-      </div>
-    ),
-  },
-  {
-    id: 'table8',
-    type: 'table8',
-    name: 'Table8',
-    data: {
-      type: 'table8',
-      text: 'Table8',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table8,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-8.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
-      </div>
-    ),
-  },
-  {
-    id: 'table9',
-    type: 'table9',
-    name: 'Table9',
-    data: {
-      type: 'table9',
-      text: 'Table9',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table9,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-9.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
-      </div>
-    ),
-  },
-  {
-    id: 'table10',
-    type: 'table10',
-    name: 'Table10',
-    data: {
-      type: 'table10',
-      text: 'Table10',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table10,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-10.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
-      </div>
-    ),
-  },
-  {
-    id: 'table11',
-    type: 'table11',
-    name: 'Table11',
-    data: {
-      type: 'table11',
-      text: 'Table11',
-      width: 400,
-      height: 200,
-      config: {
-        theme: null,
-        colors,
-        data: defaultTablesData.table11,
-      },
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        {/* <TbTableFilled className="w-full h-full" /> */}
-        <Image src="/images/table-11.png" alt="Table" className="w-full h-16 rounded-none" width={400} height={400} />
-      </div>
-    ),
-  },
-  {
-    id: 'key-value',
-    type: 'key-value',
-    name: 'Key Value',
-    data: {
-      type: 'key-value',
-      text: 'Key Value',
-      width: 400,
-      height: 200,
-      style: {
-        fontSize: 14,
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#888',
-        color: '#000',
-        opacity: 1,
-        animationDuration: '1s',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbBrackets className="w-full h-full" />
-      </div>
-    ),
-  },
-];
+  };
+});
 
 const Tables = ({ onBack }) => {
   return (
@@ -536,4 +115,3 @@ Tables.propTypes = {
 };
 
 export default Tables;
-

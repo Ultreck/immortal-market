@@ -22,8 +22,7 @@ import Shadow from './elements/Shadow.jsx';
 import FrameTabsConfig from './elements/FrameTabsConfig.jsx';
 import FrameCarouselConfig from './elements/FrameCarouselConfig.jsx';
 import InfographicConfig from '@/components/core/templates/create/tools/elements/InfographicConfig.jsx';
-import ChartColor from './elements/ChartColor.jsx';
-import TableColor from './elements/TableColor.jsx';
+import Colors from './elements/Colors.jsx';
 import Font from '@/components/core/templates/create/tools/elements/Font.jsx';
 import MapConfig from '@/components/core/templates/create/tools/elements/map/MapConfig.jsx';
 
@@ -49,8 +48,7 @@ const mapping = {
   tabs: { type: 'single', component: FrameTabsConfig },
   carousel: { type: 'single', component: FrameCarouselConfig },
   infographic: { type: 'single', component: InfographicConfig },
-  'chart-color': { type: 'single', component: ChartColor },
-  'table-color': { type: 'single', component: TableColor },
+  colors: { type: 'single', component: Colors },
   map: { type: 'single', component: MapConfig },
 };
 

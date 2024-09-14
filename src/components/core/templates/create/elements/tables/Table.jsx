@@ -1,7 +1,10 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import Basic from '@/components/core/templates/create/elements/tables/Basic.jsx';
+import BasicStriped from '@/components/core/templates/create/elements/tables/BasicStriped.jsx';
+import TrendAnalysis from '@/components/core/templates/create/elements/tables/TrendAnalysis.jsx';
+import MarketingReport from '@/components/core/templates/create/elements/tables/MarketingReport.jsx';
 
 const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -14,9 +17,7 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
       highlighted={highlighted}
     >
       <div className="overflow-hidden relative w-full h-full">
-        {element.config?.data && (
-          <TableElementContent element={element} />
-        )}
+        {element.config?.data && <TableContent element={element} />}
       </div>
     </ElementWrapper>
   );
@@ -24,75 +25,19 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
 
 Table.propTypes = ElementPropTypes;
 
-export const TableElementContent = ({ element }) => {
-  const colors = element.config.colors;
-  const headers = element.config.data[0];
-  const rows = element.config.data.slice(1);
-  const max = Math.max(...element.config.data.map((row) => row.length));
-  
-
+export const TableContent = ({ element }) => {
   return (
-    <table
-      className={cn(`w-full h-full table-auto border-separate border border-gray-400 rounded-lg`)}
-      style={element.style}
-    >
-      <thead style={{ background: colors[0] }}>
-        <tr>
-          {Array(max)
-            .fill(null)
-            .map((_, index) => {
-              const header = headers[index];
-              const style = {};
-              if (index !== 0) {
-                style.borderLeftWidth = element.style.borderWidth;
-                style.borderLeftColor = element.style.borderColor;
-              }
-              return (
-                <th
-                  key={`header-${index}`}
-                  className={cn('text-left px-3 py-1 border-gray-400 font-semibold', { 'border-l': index !== 0 })}
-                  style={style}
-                >
-                  {header}
-                </th>
-              );
-            })}
-        </tr>
-      </thead>
-      <tbody style={{ background: colors[1] }}>
-        {rows.map((row, index) => (
-          <tr key={`row-${index}`}>
-            {Array(max)
-              .fill(null)
-              .map((_, index) => {
-                const cell = row[index];
-                const style = { borderTopWidth: element.style.borderWidth, borderTopColor: element.style.borderColor };
-                if (index !== 0) {
-                  style.borderLeftWidth = element.style.borderWidth;
-                  style.borderLeftColor = element.style.borderColor;
-                }
-                return (
-                  <td
-                    key={`cell-${index}`}
-                    className={cn('text-left border-gray-400 border-t px-3 py-1', {
-                      'border-l': index !== 0,
-                    })}
-                    style={style}
-                  >
-                    {cell}
-                  </td>
-                );
-              })}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <>
+      {element.config.theme === 'basic' && <Basic element={element} />}
+      {element.config.theme === 'basic-striped' && <BasicStriped element={element} />}
+      {element.config.theme === 'trend-analysis' && <TrendAnalysis element={element} />}
+      {element.config.theme === 'marketing-report' && <MarketingReport element={element} />}
+    </>
   );
 };
 
-TableElementContent.propTypes = {
+TableContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
 export default Table;
-

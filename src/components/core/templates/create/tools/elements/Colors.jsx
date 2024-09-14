@@ -31,7 +31,7 @@ const options = [
   ['#0B132B', '#1C2541', '#3A506B', '#5BC0BE', '#6FFFE9', '#FC5185', '#364F6B', '#F73859', '#61C0BF', '#50514F'],
 ];
 
-const ChartColor = ({ element, onChange }) => {
+const Colors = ({ element, onChange }) => {
   const [tab, setTab] = useState('palettes');
 
   return (
@@ -39,7 +39,7 @@ const ChartColor = ({ element, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      classNames={{ content: 'w-[300px] !max-h-[500px] overflow-y-auto block' }}
+      classNames={{ content: 'w-[350px] !max-h-[500px] overflow-y-auto block' }}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
@@ -73,7 +73,7 @@ const ChartColor = ({ element, onChange }) => {
   );
 };
 
-ChartColor.propTypes = {
+Colors.propTypes = {
   element: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
 };
@@ -195,10 +195,6 @@ const Gradient = ({ element, onChange }) => {
     if (isNaN(selected)) setSelected(0);
   }, [colors, element.config.colors, handleChange, selected]);
 
-  const onColorChange = (newColor) => {
-    handleChange(element.config.colors.map((c, i) => (i === selected ? newColor : c)));
-  };
-
   return (
     <>
       <Checkbox
@@ -208,7 +204,11 @@ const Gradient = ({ element, onChange }) => {
       >
         Gradient
       </Checkbox>
-      <HexColorPicker color={element.config.gradientColor} onChange={(c) => onChange({ ...element, config: { ...element.config, gradientColor: c } })} className="!w-full mt-4" />
+      <HexColorPicker
+        color={element.config.gradientColor}
+        onChange={(c) => onChange({ ...element, config: { ...element.config, gradientColor: c } })}
+        className="!w-full mt-4"
+      />
     </>
   );
 };
@@ -223,5 +223,9 @@ Manual.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default ChartColor;
+Gradient.propTypes = {
+  element: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
+export default Colors;

@@ -28,12 +28,13 @@ const Border = ({ elements, onChange }) => {
   const sameWidth = borderWidthValues.every((v) => v === borderWidthValues[0]);
   const borderWidthValue = sameWidth ? borderWidthValues[0] : '';
 
-  const handleChange = (v) => {
+  const handleColorChange = (v) => {
     if (!v) return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, borderColor: v } })));
   };
+
   const handleWidthChange = (v) => {
-    if (!v) return;
+    if (isNaN(v)) return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, borderWidth: v } })));
   };
 
@@ -56,14 +57,14 @@ const Border = ({ elements, onChange }) => {
         />
         <div>
           <p className="mb-2">Border color</p>
-          <HexAlphaColorPicker color={borderColorValue} onChange={(color) => handleChange(color)} />
+          <HexAlphaColorPicker color={borderColorValue} onChange={(color) => handleColorChange(color)} />
           <div className="grid grid-cols-6 gap-y-3 gap-x-3 mt-6">
             {colors.map((color, index) => (
               <div
                 key={index}
                 className="w-[25px] h-[25px] rounded-full hover:scale-105 transition-transform cursor-pointer relative"
                 style={{ backgroundColor: color }}
-                onClick={() => handleChange(color)}
+                onClick={() => handleColorChange(color)}
               >
                 <AnimatePresence mode="wait">
                   {borderColorValue === color && (
