@@ -79,11 +79,11 @@ const elements = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 rounded-xl overflow-hidden">
         <Image
           src={`/images/previews/tables/${i.theme}.png`}
           alt="Table"
-          className="w-full h-16 rounded-lg"
+          className="w-full rounded-lg scale-[1.01]"
           width={400}
           height={400}
         />
@@ -101,7 +101,7 @@ const Tables = ({ onBack }) => {
         </Button>
         <h3 className="text-base font-medium">Tables</h3>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         {elements.map((element) => {
           return <DraggableElementWrapper key={element.id} element={element} />;
         })}
