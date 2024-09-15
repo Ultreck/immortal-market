@@ -15,9 +15,10 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
       maxWidth={width}
       active={active}
       highlighted={highlighted}
+      editable
     >
-      <div className="overflow-hidden relative w-full h-full">
-        {element.config?.data && <TableContent element={element} />}
+      <div className="relative w-full h-full">
+        {element.config?.data && <TableContent element={element} onChange={onChange} />}
       </div>
     </ElementWrapper>
   );
@@ -25,10 +26,10 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
 
 Table.propTypes = ElementPropTypes;
 
-export const TableContent = ({ element }) => {
+export const TableContent = ({ element, onChange }) => {
   return (
     <>
-      {element.config.theme === 'basic' && <Basic element={element} />}
+      {element.config.theme === 'basic' && <Basic element={element} onChange={onChange} />}
       {element.config.theme === 'basic-striped' && <BasicStriped element={element} />}
       {element.config.theme === 'trend-analysis' && <TrendAnalysis element={element} />}
       {element.config.theme === 'marketing-report' && <MarketingReport element={element} />}
@@ -38,6 +39,7 @@ export const TableContent = ({ element }) => {
 
 TableContent.propTypes = {
   element: PropTypes.object.isRequired,
+  onChange: PropTypes.func,
 };
 
 export default Table;
