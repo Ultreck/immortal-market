@@ -18,7 +18,7 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
       editable
     >
       <div className="relative w-full h-full">
-        {element.config?.data && <TableContent element={element} onChange={onChange} />}
+        {element.config?.data && <TableContent element={element} onChange={onChange} active={active} />}
       </div>
     </ElementWrapper>
   );
@@ -26,10 +26,10 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
 
 Table.propTypes = ElementPropTypes;
 
-export const TableContent = ({ element, onChange }) => {
+export const TableContent = ({ element, onChange, active }) => {
   return (
     <>
-      {element.config.theme === 'basic' && <Basic element={element} onChange={onChange} />}
+      {element.config.theme === 'basic' && <Basic element={element} onChange={onChange} active={active} />}
       {element.config.theme === 'basic-striped' && <BasicStriped element={element} />}
       {element.config.theme === 'trend-analysis' && <TrendAnalysis element={element} />}
       {element.config.theme === 'marketing-report' && <MarketingReport element={element} />}
@@ -40,6 +40,7 @@ export const TableContent = ({ element, onChange }) => {
 TableContent.propTypes = {
   element: PropTypes.object.isRequired,
   onChange: PropTypes.func,
+  active: PropTypes.bool,
 };
 
 export default Table;

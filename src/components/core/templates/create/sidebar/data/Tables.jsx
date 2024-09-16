@@ -20,9 +20,30 @@ const elements = [
   {
     theme: 'basic',
     data: [
-      ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4'],
-      ['Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      {
+        cells: [
+          { value: 'Heading 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 4', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 7', colSpan: 1, rowSpan: 1 },
+        ],
+      },
     ],
     colors: colors.slice(0, 1),
   },

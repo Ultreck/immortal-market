@@ -161,7 +161,6 @@ const DraggableResizableRotatable = ({
         rotate,
         ...style,
       }}
-      onClick={onClick}
     >
       <>
         {children}
@@ -171,6 +170,7 @@ const DraggableResizableRotatable = ({
             className="absolute inset-0 w-full h-full touch-none"
             {...bindDrag()}
             onDoubleClick={onDragDblClick}
+            onClick={onClick}
           />
         )}
         {!!resizable && (
