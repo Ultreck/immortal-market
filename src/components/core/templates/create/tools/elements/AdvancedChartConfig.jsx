@@ -34,7 +34,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 shadow border border-default-200">
+      <PopoverContent className="p-0 border shadow border-default-200">
         <div className="px-8 py-6 w-full !max-h-[500px] overflow-y-auto">
           {element.type === 'chart-a-shapes' && <AdvanceShapesConfig element={element} onChange={onChange} />}
           {element.type === 'chart-a-funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}

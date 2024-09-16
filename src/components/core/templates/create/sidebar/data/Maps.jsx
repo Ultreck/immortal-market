@@ -3,8 +3,9 @@ import { Button } from '@nextui-org/react';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 import { GiAfrica, GiEarthAfricaEurope, GiNigeria, GiSouthAmerica } from 'react-icons/gi';
+import { BiWorld } from 'react-icons/bi';
 
-const names = ['nigeria', 'africa', 'europe', 'north-america'];
+const names = ['nigeria', 'africa', 'europe', 'north-america', 'world'];
 
 const previews = {
   nigeria: (
@@ -25,6 +26,11 @@ const previews = {
   'north-america': (
     <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
       <GiSouthAmerica className="w-full h-full" />
+    </div>
+  ),
+  world: (
+    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+      <BiWorld className="w-full h-full" />
     </div>
   ),
 };

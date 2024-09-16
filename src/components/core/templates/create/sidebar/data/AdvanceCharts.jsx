@@ -302,8 +302,8 @@ const AdvancedCharts = () => {
         },
       },
       preview: (
-        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square flex">
-          <div className="my-auto mx-auto">Percentages Card</div>
+        <div className="flex text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+          <div className="mx-auto my-auto">Percentages Card</div>
         </div>
       ),
     },
@@ -774,4 +774,3 @@ const AdvancedCharts = () => {
 };
 
 export default AdvancedCharts;
-

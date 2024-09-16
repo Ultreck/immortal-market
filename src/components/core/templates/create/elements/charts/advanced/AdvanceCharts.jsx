@@ -14,7 +14,6 @@ import AdvanceGauge from './AdvanceGauge.jsx';
 import AdvanceMultipleGauge from './AdvanceMultipleGauge.jsx';
 import AdvancedScatterLifeExpentancy from './AdvancedScatterLifeExpentancy.jsx';
 import AdvancedPictogramShapes from './AdvancedPictogramShapes.jsx';
-import MapNorthAmerica from '../../maps/MapNorthAmerica.jsx';
 import AdvancedStackedCard from './AdvancedStackedCard.jsx';
 import AdvancePercentageCard from './AdvancePercentageCard.jsx';
 import AdvanceColumnCard from './AdvanceColumnCard.jsx';
@@ -36,7 +35,6 @@ const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange 
     'chart-a-speedometer-multiple': AdvanceMultipleGauge,
     'chart-a-scatter-life-expectancy': AdvancedScatterLifeExpentancy,
     'chart-a-pictogram-shapes': AdvancedPictogramShapes,
-    'chart-a-north-america-map': MapNorthAmerica,
     'chart-a-stacked-card': AdvancedStackedCard,
     'chart-a-percentage-card': AdvancePercentageCard,
     'chart-a-column-card': AdvanceColumnCard,

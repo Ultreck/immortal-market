@@ -72,7 +72,7 @@ export const charts = {
     'column-card',
     'percentage-card-2',
   ],
-  map: ['map', 'europe-map', 'africa-map', 'north-america-map'],
+  map: ['map', 'europe-map', 'africa-map', 'north-america-map', 'world-map'],
 };
 
 export const tools = {

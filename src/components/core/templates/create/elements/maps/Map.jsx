@@ -4,6 +4,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import MapEurope from '@/components/core/templates/create/elements/maps/MapEurope.jsx';
 import MapAfrica from '@/components/core/templates/create/elements/maps/MapAfrica.jsx';
 import MapNorthAmerica from '@/components/core/templates/create/elements/maps/MapNorthAmerica.jsx';
+import MapWorld from '@/components/core/templates/create/elements/maps/MapWorld.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -11,6 +12,7 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     europe: MapEurope,
     africa: MapAfrica,
     'north-america': MapNorthAmerica,
+    world: MapWorld,
   };
 
   if (components[element.config.name]) {
