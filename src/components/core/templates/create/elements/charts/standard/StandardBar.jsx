@@ -24,18 +24,13 @@ const StandardBar = ({ element, active, highlighted, width, onClick, onChange })
 
 StandardBar.propTypes = ElementPropTypes;
 
+
 export const StandardBarContent = ({ element }) => {
-  const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
-
-  const chartData = element.config.data.map((item, index) => {
-    const value = item[element.config.keys.y];
-    const factor = 1 - value / maxVisitors;
-    const color = element.config.useGradient
-      ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
-      : element.config.colors?.[index] || colors[index % colors.length];
-
+  const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
+    const color = element.config.colors?.[index];
     return { ...item, fill: color };
   });
+
   useEffect(() => {}, [element]);
   return (
     <ChartContainer
@@ -46,14 +41,11 @@ export const StandardBarContent = ({ element }) => {
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
         <XAxis
           dataKey={element.config.keys.x}
-          tickLine={false}
-          tickMargin={10}
-          axisLine={false}
           tickFormatter={(value) => capitalize(value)}
-          interval={0}
           hide={!element.config.showXaxis}
+          type="category"
         />
-        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} />
+        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} domain={[50, 'auto']} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         {element.config.showLegend && <Legend />}
         <Bar dataKey={element.config.keys.y} radius={8} />
@@ -67,3 +59,4 @@ StandardBarContent.propTypes = {
 };
 
 export default StandardBar;
+

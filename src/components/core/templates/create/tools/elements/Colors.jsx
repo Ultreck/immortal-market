@@ -2,7 +2,7 @@ import { Button, Checkbox, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } 
 import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TbCheck, TbColorSwatch } from 'react-icons/tb';
-import { cn } from '@/lib/utils.js';
+import { cn, interpolateColor } from '@/lib/utils.js';
 import { HexColorPicker } from 'react-colorful';
 
 const options = [
@@ -34,6 +34,8 @@ const options = [
 const Colors = ({ element, onChange }) => {
   const [tab, setTab] = useState('palettes');
 
+  useEffect(() => {}, [element]);
+
   return (
     <Popover
       placement="left"
@@ -62,7 +64,7 @@ const Colors = ({ element, onChange }) => {
           >
             <Tab key="palettes" title="Palettes" className="text-base" />
             <Tab key="manual" title="Manual" className="text-base" />
-            <Tab key="gradient" title="Gradient" className="text-base" />
+            {element.type !== 'chart-s-stacked-bar' && <Tab key="gradient" title="Gradient" className="text-base" />}
           </Tabs>
           {tab === 'palettes' && <Palettes onChange={onChange} element={element} />}
           {tab === 'manual' && <Manual onChange={onChange} element={element} />}
@@ -190,6 +192,18 @@ const Gradient = ({ element, onChange }) => {
     [element, onChange]
   );
 
+  const handleGenerateGradient = () => {
+    const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
+    const chartData = element.config.data.map((item, index) => {
+      const value = item[element.config.keys.y];
+      const factor = 1 - value / maxVisitors;
+      const color = interpolateColor(element.config.gradientColor, '#FFFFFF', factor);
+      return { ...item, fill: color };
+    });
+
+    onChange({ ...element, config: { ...element.config, data: chartData, colors: chartData.map((d) => d.fill) } });
+  };
+
   useEffect(() => {
     if (element.config.colors?.length) setColors(element.config.colors);
     if (isNaN(selected)) setSelected(0);
@@ -197,18 +211,17 @@ const Gradient = ({ element, onChange }) => {
 
   return (
     <>
-      <Checkbox
-        checked={element.config.useGradient}
-        onChange={(e) => onChange({ ...element, config: { ...element.config, useGradient: e.target.checked } })}
-        className="mt-4"
-      >
-        Gradient
-      </Checkbox>
       <HexColorPicker
         color={element.config.gradientColor}
         onChange={(c) => onChange({ ...element, config: { ...element.config, gradientColor: c } })}
         className="!w-full mt-4"
       />
+
+      <div>
+        <Button className="mt-10" size="sm" onClick={handleGenerateGradient}>
+          Generate Gradient
+        </Button>
+      </div>
     </>
   );
 };
@@ -229,3 +242,4 @@ Gradient.propTypes = {
 };
 
 export default Colors;
+

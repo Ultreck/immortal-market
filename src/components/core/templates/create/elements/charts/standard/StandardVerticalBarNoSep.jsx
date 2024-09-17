@@ -25,19 +25,12 @@ const StandardVerticalBarNoSep = ({ element, active, highlighted, width, onClick
 StandardVerticalBarNoSep.propTypes = ElementPropTypes;
 
 export const StandardVerticalBarNoSepContent = ({ element }) => {
-  const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
-
-  const chartData = element.config.data.map((item, index) => {
-    const value = item[element.config.keys.y];
-    const factor = 1 - value / maxVisitors;
-    const color = element.config.useGradient
-      ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
-      : element.config.colors?.[index] || colors[index % colors.length];
-
+  const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
+    const color = element.config.colors?.[index];
     return { ...item, fill: color };
   });
 
-  useEffect(() => {}, [element.config.data, element.config.colors, element.config.keys.y]);
+  useEffect(() => {}, [element]);
 
   return (
     <ChartContainer

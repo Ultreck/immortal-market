@@ -25,9 +25,6 @@ AdvanceColumnCard.propTypes = ElementPropTypes;
 const AdvanceColumnCardElementContent = ({ element }) => {
   const { data, bars, colors, showLabel } = element.config;
 
-  console.log({showLabel});
-  
-
   useEffect(() => {}, [element]);
 
   return (

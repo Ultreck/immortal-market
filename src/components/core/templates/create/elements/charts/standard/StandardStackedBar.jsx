@@ -55,7 +55,7 @@ export const StandardStackedBarContent = ({ element }) => {
         />
         <YAxis type="number" hide={!element.config.showYaxis} />
         <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-        {element.config.showLegend && <ChartLegend content={<ChartLegendContent />} />}
+        {element.config.showLegend && <Legend />}
         {element.config.keys.y.map((key, index) => {
           return (
             <Bar

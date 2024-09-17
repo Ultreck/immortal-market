@@ -5,7 +5,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart.jsx';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
@@ -55,7 +55,7 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
           hide={!element.config.showYaxis}
         />
         <XAxis type="number" hide={!element.config.showXaxis} />
-        {element.config.showLegend && <ChartLegend content={<ChartLegendContent />} />}
+        {element.config.showLegend && <Legend />}
         {element.config.keys.y.map((key, index) => {
           return (
             <Bar

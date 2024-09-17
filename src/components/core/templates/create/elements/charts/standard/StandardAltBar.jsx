@@ -44,6 +44,7 @@ export const StandardAltBarContent = ({ element }) => {
       xAxis: [
         {
           type: 'value',
+          show: false,
         },
       ],
       yAxis: [
@@ -52,10 +53,10 @@ export const StandardAltBarContent = ({ element }) => {
           axisTick: {
             show: false,
           },
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: element.config.data[0],
         },
       ],
-      color: element.config.data.map((_, index) => element.config.colors[index % element.config.colors.length]),
+      color: element.config.colors,
       series: [
         {
           name: 'Income',
@@ -64,7 +65,11 @@ export const StandardAltBarContent = ({ element }) => {
           emphasis: {
             focus: 'series',
           },
-          data: [320, 302, 341, 374, 90, 450, 420],
+          label: {
+            show: true,
+            position: 'inside',
+          },
+          data: element.config.data[1],
         },
         {
           name: 'Expenses',
@@ -73,7 +78,11 @@ export const StandardAltBarContent = ({ element }) => {
           emphasis: {
             focus: 'series',
           },
-          data: [-120, -132, -101, -134, -190, -230, -310],
+          label: {
+            show: true,
+            position: 'inside',
+          },
+          data: element.config.data[2],
         },
       ],
     };
@@ -93,3 +102,4 @@ StandardAltBarContent.propTypes = {
 };
 
 export default StandardAltBar;
+
