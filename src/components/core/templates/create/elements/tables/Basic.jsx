@@ -2,9 +2,8 @@ import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { RiAddLine, RiCloseLine } from 'react-icons/ri';
-import { Button } from '@nextui-org/react';
-import { MdJoinFull } from 'react-icons/md';
+import { RiAddLine, RiArrowDownSLine } from 'react-icons/ri';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
 
 const getMaxColumns = (data) => {
   let max = 0;
@@ -15,16 +14,6 @@ const getMaxColumns = (data) => {
   });
   return max;
 };
-
-// const getMaxRows = (data) => {
-//   let maxRows = 0;
-//   data.forEach((row, rowIndex) => {
-//     row.cells.forEach(({ rowSpan = 1 }) => {
-//       maxRows = Math.max(maxRows, rowIndex + rowSpan);
-//     });
-//   });
-//   return maxRows;
-// };
 
 const Basic = ({ element, onChange, active }) => {
   const table = useRef(null);
@@ -99,7 +88,7 @@ const Basic = ({ element, onChange, active }) => {
   const handleMouseDown = (e, rowIndex, cellIndex) => {
     setEditing(null);
     setIsSelecting(true);
-    if (e.shiftKey) setSelection((prev) => ({ ...prev, startRow: rowIndex, startCol: cellIndex }));
+    if (e.shiftKey) setSelection((prev) => ({ ...prev, endRow: rowIndex, endCol: cellIndex }));
     else setSelection({ startRow: rowIndex, startCol: cellIndex, endRow: rowIndex, endCol: cellIndex });
   };
 
@@ -113,16 +102,16 @@ const Basic = ({ element, onChange, active }) => {
     setIsSelecting(false);
   };
 
-  const handleMergeCells = useCallback(() => {
+  const handleMergeCellsAll = useCallback(() => {
     if (!selection) return;
     const { startRow, startCol, endRow, endCol } = selection;
     const [minRow, maxRow] = [Math.min(startRow, endRow), Math.max(startRow, endRow)];
     const [minCol, maxCol] = [Math.min(startCol, endCol), Math.max(startCol, endCol)];
     let newRows = JSON.parse(JSON.stringify(rows));
-    const mergedValue = newRows[minRow].cells[minCol].value;
-    const rowSpan = maxRow - minRow + 1;
-    const colSpan = maxCol - minCol + 1;
-    newRows[minRow].cells[minCol] = { value: mergedValue, rowSpan, colSpan };
+    const merged = newRows[minRow].cells[minCol];
+    const rowSpan = maxRow - minRow + (merged.rowSpan || 1);
+    const colSpan = maxCol - minCol + (merged.colSpan || 1);
+    newRows[minRow].cells[minCol] = { value: merged.value, rowSpan, colSpan };
     for (let i = minRow; i <= maxRow; i++) {
       for (let j = minCol; j <= maxCol; j++) {
         if (i !== minRow || j !== minCol) {
@@ -135,16 +124,63 @@ const Basic = ({ element, onChange, active }) => {
     setSelection(null);
   }, [selection, rows, onChange, element]);
 
-  const handleClearCells = useCallback(() => {
+  const handleDeleteCells = useCallback(() => {
     if (!selection) return;
     const { startRow, startCol, endRow, endCol } = selection;
     const [minRow, maxRow] = [Math.min(startRow, endRow), Math.max(startRow, endRow)];
     const [minCol, maxCol] = [Math.min(startCol, endCol), Math.max(startCol, endCol)];
     let newRows = JSON.parse(JSON.stringify(rows));
-    for (let i = minRow; i <= maxRow; i++) {
-      for (let j = minCol; j <= maxCol; j++) {
-        const cell = newRows[i].cells[j];
-        newRows[i].cells[j] = { ...cell, value: '' };
+    for (let rowIndex = minRow; rowIndex <= maxRow; rowIndex++) {
+      for (let cellIndex = minCol; cellIndex <= maxCol; cellIndex++) {
+        const colSpan = newRows[rowIndex].cells[cellIndex].colSpan || 1;
+        const rowSpan = newRows[rowIndex].cells[cellIndex].rowSpan || 1;
+        newRows[rowIndex].cells[cellIndex] = { value: '', colSpan: 1, rowSpan: 1 };
+        if (colSpan > 1) {
+          for (let k = 0; k < colSpan - 1; k++) {
+            newRows[rowIndex].cells = newRows[rowIndex].cells.toSpliced(cellIndex + k, 0, {
+              value: '',
+              colSpan: 1,
+              rowSpan: 1,
+            });
+          }
+        }
+        if (rowSpan > 1) {
+          for (let k = 0; k < rowSpan - 1; k++) {
+            for (let l = 0; l < colSpan; l++) {
+              newRows[rowIndex + k + 1].cells = newRows[rowIndex + k + 1].cells.toSpliced(cellIndex + l, 0, {
+                value: '',
+                colSpan: 1,
+                rowSpan: 1,
+              });
+            }
+          }
+        }
+      }
+    }
+    onChange({ ...element, config: { ...element.config, data: newRows } });
+    setSelection(null);
+  }, [selection, rows, onChange, element]);
+
+  const handleDeleteRows = useCallback(() => {
+    if (!selection) return;
+    const { startRow, endRow } = selection;
+    const [minRow, maxRow] = [Math.min(startRow, endRow), Math.max(startRow, endRow)];
+    let newRows = JSON.parse(JSON.stringify(rows));
+    for (let i = maxRow; i >= minRow; i--) {
+      newRows.splice(i, 1);
+    }
+    onChange({ ...element, config: { ...element.config, data: newRows } });
+    setSelection(null);
+  }, [selection, rows, onChange, element]);
+
+  const handleDeleteColumns = useCallback(() => {
+    if (!selection) return;
+    const { startCol, endCol } = selection;
+    const [minCol, maxCol] = [Math.min(startCol, endCol), Math.max(startCol, endCol)];
+    let newRows = JSON.parse(JSON.stringify(rows));
+    for (let i = maxCol; i >= minCol; i--) {
+      for (let j = 0; j < newRows.length; j++) {
+        newRows[j].cells = newRows[j].cells.toSpliced(i, 1);
       }
     }
     onChange({ ...element, config: { ...element.config, data: newRows } });
@@ -154,25 +190,57 @@ const Basic = ({ element, onChange, active }) => {
   return (
     <div className="w-full h-full relative flex flex-col">
       {!!selection && (
-        <div className="absolute bottom-[calc(100%+10px)] left-0 space-x-2">
-          <Button
-            onClick={handleMergeCells}
-            variant="flat"
-            size="sm"
-            className="text-md"
-            startContent={<MdJoinFull size="20" />}
-          >
-            Merge
-          </Button>
-          <Button
-            onClick={handleClearCells}
-            variant="flat"
-            size="sm"
-            className="text-md"
-            startContent={<RiCloseLine size="20" />}
-          >
-            Clear
-          </Button>
+        <div className="absolute bottom-[calc(100%+10px)] left-0 space-x-2 flex items-center">
+          {(selection.startCol !== selection.endCol || selection.startRow !== selection.endRow) && (
+            <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
+              <DropdownTrigger>
+                <Button variant="flat" size="sm" className="text-md" endContent={<RiArrowDownSLine size="20" />}>
+                  Merge
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                aria-label="Merge actions"
+                onAction={(key) => {
+                  if (key === 'all') handleMergeCellsAll();
+                }}
+              >
+                <DropdownItem key="all" classNames={{ title: 'text-base' }}>
+                  Merge all
+                </DropdownItem>
+                <DropdownItem key="horizontal" classNames={{ title: 'text-base' }} isDisabled>
+                  Merge horizontally
+                </DropdownItem>
+                <DropdownItem key="vertical" classNames={{ title: 'text-base' }} isDisabled>
+                  Merge vertically
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          )}
+          <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
+            <DropdownTrigger>
+              <Button variant="flat" size="sm" className="text-md" endContent={<RiArrowDownSLine size="20" />}>
+                Delete
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              aria-label="Delete actions"
+              onAction={(key) => {
+                if (key === 'rows') handleDeleteRows();
+                if (key === 'columns') handleDeleteColumns();
+                if (key === 'cells') handleDeleteCells();
+              }}
+            >
+              <DropdownItem key="rows" classNames={{ title: 'text-base' }}>
+                Delete row(s)
+              </DropdownItem>
+              <DropdownItem key="columns" classNames={{ title: 'text-base' }}>
+                Delete column(s)
+              </DropdownItem>
+              <DropdownItem key="cells" classNames={{ title: 'text-base' }}>
+                Delete cell(s)
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </div>
       )}
       <table
