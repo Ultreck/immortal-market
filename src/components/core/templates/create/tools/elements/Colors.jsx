@@ -210,7 +210,7 @@ const Gradient = ({ element, onChange }) => {
 
   const handleGenerateGradient = () => {
     const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
-    const chartData = element.config.data.map((item, index) => {
+    const chartData = element.config.data.map((item) => {
       const value = item[element.config.keys.y];
       const factor = 1 - value / maxVisitors;
       const color = interpolateColor(element.config.gradientColor, '#FFFFFF', factor);
@@ -230,14 +230,11 @@ const Gradient = ({ element, onChange }) => {
       <HexColorPicker
         color={element.config.gradientColor}
         onChange={(c) => onChange({ ...element, config: { ...element.config, gradientColor: c } })}
-        className="!w-full mt-4"
+        className="!w-full"
       />
-
-      <div>
-        <Button className="mt-10" size="sm" onClick={handleGenerateGradient}>
-          Generate Gradient
-        </Button>
-      </div>
+      <Button className="mt-6 text-base" radius="full" onClick={handleGenerateGradient}>
+        Apply
+      </Button>
     </>
   );
 };
