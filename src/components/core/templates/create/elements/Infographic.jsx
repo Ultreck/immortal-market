@@ -51,11 +51,12 @@ const Infographic = ({ element, active, highlighted, onClick, onChange }) => {
   );
 };
 
-Infographic.propTypes = ElementPropTypes;
+export const InfographicPresent = ({ element }) => {
+  return <InfographicContent element={element} />;
+};
 
-export const InfographicElementContent = ({ element }) => {
+const InfographicContent = ({ element }) => {
   const { data, isLoading } = useGetSvgCodeFromUrl(element.config.src);
-
   return (
     <div className="w-full h-max">
       {isLoading ? (
@@ -73,7 +74,13 @@ export const InfographicElementContent = ({ element }) => {
   );
 };
 
-InfographicElementContent.propTypes = {
+Infographic.propTypes = ElementPropTypes;
+
+InfographicContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+
+InfographicPresent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 

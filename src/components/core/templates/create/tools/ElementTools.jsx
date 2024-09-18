@@ -60,7 +60,7 @@ const ElementTools = () => {
 
   const tools = useMemo(() => {
     if (!page) return [];
-    let _tools = elements.map((el) => getElementTools(el.type) || []);
+    let _tools = elements.map((el) => getElementTools(el) || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
     const singles = Object.keys(mapping).filter((tool) => mapping[tool].type === 'single');
     if (_tools.some((tool) => singles.includes(tool)) && selectedElements.length > 1) {

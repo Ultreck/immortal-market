@@ -4,13 +4,16 @@ import shapes from '@/lib/design/shapes.js';
 import { TbChevronLeft, TbChevronRight, TbLine } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { Button } from '@nextui-org/react';
+import { capitalize } from '@/lib/utils.js';
 
 const items = [
-  ...(Object.keys(shapes).map((type) => ({
-    id: `shape-${type}`,
-    type: `shape-${type}`,
-    name: `Shape ${type}`,
+  ...(Object.keys(shapes).map((name) => ({
+    id: `shape-${name}`,
     data: {
+      type: 'shape',
+      text: capitalize(name.replace('-', ' ')),
+      width: 120,
+      height: 120,
       style: {
         backgroundColor: '#eee',
         borderWidth: 0,
@@ -19,15 +22,14 @@ const items = [
         borderRadius: 0,
         animationDuration: '1s',
       },
-      type: `shape-${type}`,
-      text: `Shape ${type}`,
-      width: 120,
-      height: 120,
+      config: {
+        name,
+      },
     },
     preview: (
       <div
         className="bg-black/40 dark:bg-white/70 hover:bg-black/50 dark:hover:bg-white/60 aspect-square px-6 py-4"
-        style={{ ...shapes[type.replace('shape-', '')] }}
+        style={{ ...shapes[name] }}
       />
     ),
   })) || []),
@@ -36,6 +38,10 @@ const items = [
     type: 'line',
     name: 'Line',
     data: {
+      type: 'line',
+      text: 'Line',
+      width: 100,
+      height: 8,
       style: {
         backgroundColor: '#eee',
         borderWidth: 0,
@@ -51,10 +57,6 @@ const items = [
         start: null,
         end: null,
       },
-      type: 'line',
-      text: 'Line',
-      width: 100,
-      height: 8,
     },
     preview: (
       <div className="text-black/40 dark:text-white/50 hover:text-black/50 dark:hover:text-white/60 aspect-square">

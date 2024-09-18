@@ -1,4 +1,3 @@
-import { cn } from '@/lib/utils.js';
 import DraggableElement from '@/components/core/templates/create/sidebar/DraggableElement.jsx';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
@@ -25,7 +24,7 @@ const DraggableElementWrapper = ({ element }) => {
   return (
     <DraggableElement
       element={element}
-      className={cn('relative h-full')}
+      className="relative h-full"
       content={
         <div className="relative overflow-hidden h-full" onClick={handleClick}>
           {element.preview}

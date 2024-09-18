@@ -8,11 +8,9 @@ import PropTypes from 'prop-types';
 
 const items = icons.map((icon) => ({
   id: `icon-${icon.name}`,
-  type: `icon-${icon.name}`,
-  name: `icon ${icon.name}`,
   data: {
-    type: `icon-${icon.name}`,
-    text: `icon ${icon.name}`,
+    type: `icon`,
+    text: `Icon ${icon.name}`,
     width: 40,
     height: 40,
     style: {

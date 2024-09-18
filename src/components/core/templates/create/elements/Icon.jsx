@@ -6,7 +6,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import icons from '@/lib/design/icons.js';
 import PropTypes from 'prop-types';
 
-const GenericIcon = ({ element, active, highlighted, width, onClick, onChange }) => {
+const Icon = ({ element, active, highlighted, width, onClick, onChange }) => {
   const el = useRef(null);
 
   useMount(() => {
@@ -25,14 +25,12 @@ const GenericIcon = ({ element, active, highlighted, width, onClick, onChange })
       highlighted={highlighted}
       fit
     >
-      <GenericIconContent element={element} />
+      <IconContent element={element} />
     </ElementWrapper>
   );
 };
 
-GenericIcon.propTypes = ElementPropTypes;
-
-export const GenericIconContent = ({ element }) => {
+export const IconContent = ({ element }) => {
   return (
     <>
       {element.config?.name ? (
@@ -48,8 +46,18 @@ export const GenericIconContent = ({ element }) => {
   );
 };
 
-GenericIconContent.propTypes = {
+export const IconPresent = ({ element }) => {
+  return <IconContent element={element} />;
+};
+
+Icon.propTypes = ElementPropTypes;
+
+IconContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default GenericIcon;
+IconPresent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+
+export default Icon;

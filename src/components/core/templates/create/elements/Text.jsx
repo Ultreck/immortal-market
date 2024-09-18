@@ -66,9 +66,7 @@ const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
   );
 };
 
-Text.propTypes = ElementPropTypes;
-
-export const TextElementContent = ({ element }) => {
+export const TextPresent = ({ element }) => {
   return (
     <div
       className={cn('overflow-hidden w-full h-full relative', {
@@ -89,7 +87,9 @@ export const TextElementContent = ({ element }) => {
   );
 };
 
-TextElementContent.propTypes = {
+Text.propTypes = ElementPropTypes;
+
+TextPresent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 

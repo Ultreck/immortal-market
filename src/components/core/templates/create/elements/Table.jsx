@@ -27,8 +27,6 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
   );
 };
 
-Table.propTypes = ElementPropTypes;
-
 const getMaxColumns = (data) => {
   let max = 0;
   data.forEach((row) => {
@@ -366,7 +364,7 @@ const TableContent = ({ element, onChange, active }) => {
   );
 };
 
-export const TableContentPresent = ({ element }) => {
+export const TablePresent = ({ element }) => {
   const rows = element.config.data;
 
   return (
@@ -411,7 +409,7 @@ export const TableContentPresent = ({ element }) => {
   );
 };
 
-export const TableContentPreview = ({ element }) => {
+export const TablePreview = ({ element }) => {
   const rows = element.config.data;
 
   return (
@@ -454,17 +452,19 @@ export const TableContentPreview = ({ element }) => {
   );
 };
 
+Table.propTypes = ElementPropTypes;
+
 TableContent.propTypes = {
   element: PropTypes.object.isRequired,
   onChange: PropTypes.func,
   active: PropTypes.bool,
 };
 
-TableContentPresent.propTypes = {
+TablePresent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-TableContentPreview.propTypes = {
+TablePreview.propTypes = {
   element: PropTypes.object.isRequired,
 };
 

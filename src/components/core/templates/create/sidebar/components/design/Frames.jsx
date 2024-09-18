@@ -9,23 +9,22 @@ import { Button } from '@nextui-org/react';
 const items = [
   {
     id: 'frame-tabs',
-    type: 'frame-tabs',
-    name: 'Frame tabs',
     data: {
-      type: 'frame-tabs',
+      type: 'frame',
       text: 'Frame tabs',
       width: 300,
       height: 300,
       children: [],
+      style: {
+        animationDuration: '1s',
+        opacity: 1,
+      },
       config: {
+        name: 'tabs',
         tabs: [
           { id: 0, title: 'Tab 1' },
           { id: 1, title: 'Tab 2' },
         ],
-      },
-      style: {
-        animationDuration: '1s',
-        opacity: 1,
       },
     },
     preview: (
@@ -36,20 +35,19 @@ const items = [
   },
   {
     id: 'frame-carousel',
-    type: 'frame-carousel',
-    name: 'Frame carousel',
     data: {
-      type: 'frame-carousel',
+      type: 'frame',
       text: 'Frame carousel',
       width: 300,
       height: 300,
       children: [],
-      config: {
-        slides: 2,
-      },
       style: {
         animationDuration: '1s',
         opacity: 1,
+      },
+      config: {
+        name: 'carousel',
+        slides: 2,
       },
     },
     preview: (
@@ -58,11 +56,14 @@ const items = [
       </div>
     ),
   },
-  ...(Object.keys(shapes).map((type) => ({
-    id: `frame-${type}`,
-    type: `frame-${type}`,
-    name: `Frame ${type}`,
+  ...(Object.keys(shapes).map((name) => ({
+    id: `frame-${name}`,
     data: {
+      type: 'frame',
+      text: `Frame ${name}`,
+      width: 300,
+      height: 300,
+      children: [],
       style: {
         backgroundColor: '#eee',
         borderWidth: 0,
@@ -71,16 +72,14 @@ const items = [
         borderRadius: 0,
         animationDuration: '1s',
       },
-      type: `frame-${type}`,
-      text: `Frame ${type}`,
-      width: 300,
-      height: 300,
-      children: [],
+      config: {
+        name: `shape-${name}`,
+      },
     },
     preview: (
       <div
         className="bg-black/40 dark:bg-white/70 hover:bg-black/50 dark:hover:bg-white/60 aspect-square px-6 py-4"
-        style={{ ...shapes[type.replace('shape-', '')] }}
+        style={{ ...shapes[name] }}
       />
     ),
   })) || []),

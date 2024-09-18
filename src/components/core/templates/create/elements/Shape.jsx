@@ -3,7 +3,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import shapes from '@/lib/design/shapes.js';
 import PropTypes from 'prop-types';
 
-const GenericShape = ({ element, active, highlighted, width, onClick, onChange }) => {
+const Shape = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -13,16 +13,13 @@ const GenericShape = ({ element, active, highlighted, width, onClick, onChange }
       active={active}
       highlighted={highlighted}
     >
-      <GenericShapeContent element={element} />
+      <ShapeContent element={element} />
     </ElementWrapper>
   );
 };
 
-GenericShape.propTypes = ElementPropTypes;
-
-export const GenericShapeContent = ({ element }) => {
-  const shape = shapes[element.type.replace('shape-', '')];
-
+const ShapeContent = ({ element }) => {
+  const shape = shapes[element.config.name];
   return (
     <div className="w-full h-full" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
       <div className="w-full h-full" style={{ ...element.style, ...shape }} />
@@ -30,8 +27,18 @@ export const GenericShapeContent = ({ element }) => {
   );
 };
 
-GenericShapeContent.propTypes = {
+export const ShapePresent = ({ element }) => {
+  return <ShapeContent element={element} />;
+};
+
+Shape.propTypes = ElementPropTypes;
+
+ShapeContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default GenericShape;
+ShapePresent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+
+export default Shape;

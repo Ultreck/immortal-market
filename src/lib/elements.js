@@ -1,16 +1,15 @@
-import Text, { TextElementContent } from '@/components/core/templates/create/elements/Text.jsx';
-import Image, { CanvasImageContent } from '@/components/core/templates/create/elements/Image.jsx';
+import Text, { TextPresent } from '@/components/core/templates/create/elements/Text.jsx';
+import Image, { ImagePresent } from '@/components/core/templates/create/elements/Image.jsx';
 import Line, { LineElementContent } from '@/components/core/templates/create/elements/Line.jsx';
-import Shape, { ShapeContent } from '@/components/core/templates/create/elements/Shape.jsx';
+import Shape, { ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
 import AdvanceCharts from '@/components/core/templates/create/elements/charts/advanced/AdvanceCharts.jsx';
-import Infographic, { InfographicElementContent } from '@/components/core/templates/create/elements/Infographic.jsx';
-import GenericIcon, { GenericIconContent } from '@/components/core/templates/create/elements/GenericIcon';
-import icons from '@/lib/design/icons.js';
+import Infographic, { InfographicPresent } from '@/components/core/templates/create/elements/Infographic.jsx';
+import Icon, { IconPresent } from '@/components/core/templates/create/elements/Icon.jsx';
 import StandardCharts from '@/components/core/templates/create/elements/charts/standard/StandardCharts.jsx';
 import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
 import Map from '@/components/core/templates/create/elements/maps/Map.jsx';
-import Table, { TableContentPresent } from '@/components/core/templates/create/elements/Table.jsx';
+import Table, { TablePresent } from '@/components/core/templates/create/elements/Table.jsx';
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
 
 export const charts = {
@@ -114,7 +113,7 @@ export const components = {
     }, {}),
     shape: Shape,
     frame: Frame,
-    icon: GenericIcon,
+    icon: Icon,
     table: Table,
     map: Map,
     line: Line,
@@ -123,30 +122,23 @@ export const components = {
   },
   present: {
     ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
-      acc[type] = TextElementContent;
-      return acc;
-    }, {}),
-    ...icons.reduce((acc, icon) => {
-      acc[`icon-${icon.name}`] = GenericIconContent;
+      acc[type] = TextPresent;
       return acc;
     }, {}),
     ...charts.standard.reduce((acc, type) => {
       acc[`chart-s-${type}`] = StandardChartsPresent;
       return acc;
     }, {}),
-    table: TableContentPresent,
     ...charts.advanced.reduce((acc, type) => {
       acc[`chart-a-${type}`] = AdvanceChartsPresent;
       return acc;
     }, {}),
-    ...charts.map.reduce((acc, type) => {
-      acc[`chart-a-${type}`] = AdvanceChartsPresent;
-      return acc;
-    }, {}),
-    shape: ShapeContent,
+    table: TablePresent,
+    shape: ShapePresent,
     line: LineElementContent,
-    image: CanvasImageContent,
-    infographic: InfographicElementContent,
+    icon: IconPresent,
+    image: ImagePresent,
+    infographic: InfographicPresent,
   },
 };
 

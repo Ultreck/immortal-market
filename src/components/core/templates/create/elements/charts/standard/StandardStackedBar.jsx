@@ -1,10 +1,4 @@
-import {
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
-} from '@/components/ui/chart.jsx';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
@@ -77,4 +71,3 @@ StandardStackedBarContent.propTypes = {
 };
 
 export default StandardStackedBar;
-

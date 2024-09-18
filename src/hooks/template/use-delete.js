@@ -10,6 +10,7 @@ const useDelete = () => {
     'Delete',
     () => {
       const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
+      if (!selectedElements.length || !page) return;
       deleteElements(selectedElements, page.id);
     },
     undefined,
