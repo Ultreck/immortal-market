@@ -205,7 +205,6 @@ const StandardCharts = () => {
           tools: {
             colors: {
               gradient: false,
-              manual: false,
             },
           },
         },
@@ -245,6 +244,11 @@ const StandardCharts = () => {
           showXGridline: false,
           showYGridline: false,
           bars: 5,
+          tools: {
+            colors: {
+              gradient: false,
+            },
+          },
         },
       },
       preview: (
@@ -279,6 +283,11 @@ const StandardCharts = () => {
           showXGridline: false,
           showYGridline: false,
           bars: 5,
+          tools: {
+            colors: {
+              gradient: false,
+            },
+          },
         },
       },
       preview: (
@@ -352,6 +361,11 @@ const StandardCharts = () => {
           showGridline: false,
           bars: 5,
           noOfBarsPerGroup: 2,
+          tools: {
+            colors: {
+              gradient: false,
+            },
+          },
         },
       },
       preview: (
@@ -423,6 +437,11 @@ const StandardCharts = () => {
           showGridline: false,
           bars: 5,
           noOfBarsPerGroup: 2,
+          tools: {
+            colors: {
+              gradient: false,
+            },
+          },
         },
       },
       preview: (
@@ -604,6 +623,12 @@ const StandardCharts = () => {
           showLegend: false,
           showXaxis: false,
           showYaxis: false,
+          tools: {
+            colors: {
+              gradient: false,
+              palettes: false,
+            },
+          },
         },
       },
       preview: (
@@ -678,6 +703,12 @@ const StandardCharts = () => {
           showYaxis: false,
           useGradient: false,
           gradientColor: '#2673D9',
+          tools: {
+            colors: {
+              gradient: false,
+              palettes: false,
+            },
+          },
         },
       },
       preview: (
@@ -869,15 +900,17 @@ const StandardCharts = () => {
             { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
             { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
             { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-            // { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
           ],
           keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
-          // keys: { x: 'name', y: 'pv' },
           axis: { x: false, y: false },
           grid: { x: false, y: false },
-          legend: false,
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          colors: ['#E66B5B', '#1D9085'],
           bars: 5,
+          numberOfArea: 3,
+          numberOfLines: 4,
+          showXaxis: false,
+          showYaxis: false,
+          showLegend: false,
         },
       },
       preview: (
@@ -903,10 +936,9 @@ const StandardCharts = () => {
             { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
             { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
             { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
           ],
-          keys: { x: 'name', y: 'pv' },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
+          colors: ['#E66B5B', '#1D9085'],
           showXaxis: false,
           showYaxis: false,
           showLegend: false,
@@ -940,10 +972,9 @@ const StandardCharts = () => {
             { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
             { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
             { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
           ],
-          keys: { x: 'name', y: 'pv' },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
+          colors: ['#E66B5B', '#1D9085'],
           showXaxis: false,
           showYaxis: false,
           showLegend: false,
@@ -979,8 +1010,8 @@ const StandardCharts = () => {
             { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
             { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
           ],
-          keys: { x: 'name', y: 'pv' },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
+          colors: ['#E66B5B', '#1D9085'],
           showXaxis: false,
           showYaxis: false,
           showLegend: false,
@@ -1014,10 +1045,9 @@ const StandardCharts = () => {
             { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
             { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
             { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
           ],
-          keys: { x: 'name', y: 'pv' },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
+          colors: ['#E66B5B', '#1D9085'],
           showXaxis: false,
           showYaxis: false,
           showLegend: false,
@@ -1051,10 +1081,9 @@ const StandardCharts = () => {
             { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
             { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
             { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-            { name: 'Page F', uv: 1400, pv: 680, amt: 1700 },
           ],
-          keys: { x: 'name', y: 'pv' },
-          colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+          keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
+          colors: ['#E66B5B', '#1D9085'],
           showXaxis: false,
           showYaxis: false,
           showLegend: false,
@@ -1155,3 +1184,4 @@ const StandardCharts = () => {
 };
 
 export default StandardCharts;
+

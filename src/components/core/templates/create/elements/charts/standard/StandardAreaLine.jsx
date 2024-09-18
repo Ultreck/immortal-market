@@ -4,6 +4,7 @@ import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import { useEffect } from 'react';
 
 const StandardAreaLine = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -24,6 +25,7 @@ const StandardAreaLine = ({ element, active, highlighted, width, onClick, onChan
 StandardAreaLine.propTypes = ElementPropTypes;
 
 export const StandardAreaLineContent = ({ element }) => {
+  useEffect(() => {}, [element]);
 
   return (
     <ChartContainer
@@ -35,8 +37,17 @@ export const StandardAreaLineContent = ({ element }) => {
         <XAxis dataKey="name" scale="band" hide={!element.config.showXaxis} />
         <YAxis hide={!element.config.showYaxis} />
         {element.config.showLegend && <Legend />}
-        <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
-        <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
+        <Area
+          type="monotone"
+          dataKey="amt"
+          fill={element.config.colors?.[0]}
+          stroke={element.config.colors?.[0]}
+        />
+        <Line
+          type="monotone"
+          dataKey="uv"
+          stroke={element.config.colors?.[1]}
+        />
       </ComposedChart>
     </ChartContainer>
   );

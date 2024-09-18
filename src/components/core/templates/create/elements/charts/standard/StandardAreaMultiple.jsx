@@ -41,31 +41,19 @@ export const StandardAreaMultipleContent = ({ element }) => {
         <YAxis type="number" hide={!element.config.showYaxis} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
         {element.config.showLegend && <Legend />}
-        {Array.isArray(element.config.keys.y) ? (
-          element.config.keys.y.map((key, index) => {
-            return (
-              <Area
-                key={key}
-                dataKey={key}
-                type="monotone"
-                strokeWidth={2}
-                dot={false}
-                fill={element.config.colors[index % element.config.colors.length]}
-                stroke={element.config.colors[index % element.config.colors.length]}
-              />
-            );
-          })
-        ) : (
-          <Area
-            key={element.config.keys.y}
-            dataKey={element.config.keys.y}
-            type="monotone"
-            strokeWidth={2}
-            dot={false}
-            fill={element.config.colors[0]}
-            stroke={element.config.colors[0]}
-          />
-        )}
+        {element.config.keys.y.map((key, index) => {
+          return (
+            <Area
+              key={key}
+              dataKey={key}
+              type="monotone"
+              strokeWidth={2}
+              dot={false}
+              fill={element.config.colors[index % element.config.colors.length]}
+              stroke={element.config.colors[index % element.config.colors.length]}
+            />
+          );
+        })}
       </AreaChart>
     </ChartContainer>
   );
@@ -76,3 +64,4 @@ StandardAreaMultipleContent.propTypes = {
 };
 
 export default StandardAreaMultiple;
+

@@ -76,7 +76,7 @@ const ChartData = ({ element, onChange, onClose }) => {
       )}
       {element.type === 'chart-s-line-area' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-line-area-vertical' && (
-        <StandardBarCommonConfig element={element} onChange={onChange} />
+        <StandardMultipleBarConfig element={element} onChange={onChange} />
       )}
       {element.type === 'chart-s-line-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-area-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
@@ -148,7 +148,7 @@ const ChartData = ({ element, onChange, onClose }) => {
         </>
       )}
       {element.type === 'chart-s-area' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-area-multiple' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'chart-s-area-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-line' && <StandardBarCommonConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-line-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-bar-not-sep' && <StandardBarCommonConfig element={element} onChange={onChange} />}
