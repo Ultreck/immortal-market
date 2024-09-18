@@ -202,6 +202,12 @@ const StandardCharts = () => {
           showXGridline: false,
           showYGridline: false,
           bars: 5,
+          tools: {
+            colors: {
+              gradient: false,
+              manual: false,
+            },
+          },
         },
       },
       preview: (
@@ -1149,4 +1155,3 @@ const StandardCharts = () => {
 };
 
 export default StandardCharts;
-

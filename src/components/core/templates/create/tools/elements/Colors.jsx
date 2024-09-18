@@ -1,8 +1,8 @@
-import { Button, Checkbox, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
 import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TbCheck, TbColorSwatch } from 'react-icons/tb';
-import { cn, interpolateColor } from '@/lib/utils.js';
+import { capitalize, cn, interpolateColor } from '@/lib/utils.js';
 import { HexColorPicker } from 'react-colorful';
 
 const options = [
@@ -34,7 +34,23 @@ const options = [
 const Colors = ({ element, onChange }) => {
   const [tab, setTab] = useState('palettes');
 
-  useEffect(() => {}, [element]);
+  const config = {
+    palettes: true,
+    manual: true,
+    gradient: true,
+  };
+
+  if (Object.hasOwn(element.config, 'tools')) {
+    if (Object.hasOwn(element.config.tools, 'colors')) {
+      ['palettes', 'manual', 'gradient'].forEach((key) => {
+        if (Object.hasOwn(element.config.tools.colors, key)) {
+          config[key] = !!element.config.tools.colors[key];
+        }
+      });
+    }
+  }
+
+  const tabs = ['palettes', 'manual', 'gradient'].filter((key) => config[key]);
 
   return (
     <Popover
@@ -62,9 +78,9 @@ const Colors = ({ element, onChange }) => {
             selectedKey={tab}
             onSelectionChange={setTab}
           >
-            <Tab key="palettes" title="Palettes" className="text-base" />
-            <Tab key="manual" title="Manual" className="text-base" />
-            {element.type !== 'chart-s-stacked-bar' && <Tab key="gradient" title="Gradient" className="text-base" />}
+            {tabs.map((key) => {
+              return <Tab key={key} title={capitalize(key)} className="text-base" />;
+            })}
           </Tabs>
           {tab === 'palettes' && <Palettes onChange={onChange} element={element} />}
           {tab === 'manual' && <Manual onChange={onChange} element={element} />}
@@ -242,4 +258,3 @@ Gradient.propTypes = {
 };
 
 export default Colors;
-
