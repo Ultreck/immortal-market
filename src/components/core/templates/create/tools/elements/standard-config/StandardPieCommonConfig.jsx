@@ -2,9 +2,17 @@ import { Checkbox, Input, Tab, Tabs } from '@nextui-org/react';
 import { TbCirclePlus } from 'react-icons/tb';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput';
 import { useEffect, useState } from 'react';
+import { capitalize } from '@/lib/utils';
 
 const StandardPieCommonConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
+
+  const handleChange = (updatedItem) => {
+    const updatedData = element.config.data.map((item, idx) =>
+      idx === updatedItem.index ? { ...item, ...updatedItem } : item
+    );
+    onChange({ ...element, config: { ...element.config, data: updatedData } });
+  };
 
   useEffect(() => {}, [element]);
   return (
@@ -26,23 +34,23 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
             {element.config.data.map((item, index) => (
               <div key={index} className="grid grid-cols-2 gap-2">
                 <Input
-                  value={item.browser}
-                  placeholder="Browser name"
+                  value={item.name}
+                  placeholder="name"
                   required
                   variant="bordered"
                   classNames={{ input: 'text-base capitalize' }}
                   onChange={(e) => {
-                    handleChange({ ...item, browser: e.target.value, index });
+                    handleChange({ ...item, name: e.target.value, index });
                   }}
                 />
                 <Input
-                  value={item.visitors}
+                  value={item.value}
                   placeholder="Number of visitors"
                   required
                   type="number"
                   variant="bordered"
                   onChange={(e) => {
-                    handleChange({ ...item, visitors: e.target.value, index });
+                    handleChange({ ...item, value: +e.target.value, index });
                   }}
                 />
               </div>
@@ -54,9 +62,9 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
                   ...element,
                   config: {
                     ...element.config,
-                    data: [...element.config.data, { browser: 'Immortal', visitors: 10 }],
+                    data: [...element.config.data, { name: 'Immortal', value: 100 }],
                     colors: [...element.config.colors, '#E66B5B'],
-                    bars: element.config.bars + 1,
+                    pies: element.config.pies + 1,
                   },
                 });
               }}
@@ -86,6 +94,25 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
             >
               Show Tooltip
             </Checkbox>
+
+            {element.type === 'chart-s-pie' && (
+              <div className="flex items-center space-x-4">
+                {['top', 'bottom'].map((position) => (
+                  <Checkbox
+                    key={position}
+                    isSelected={element.config.legendPosition === position}
+                    onValueChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, legendPosition: position },
+                      })
+                    }
+                  >
+                    {capitalize(position)}
+                  </Checkbox>
+                ))}
+              </div>
+            )}
 
             <div className="flex items-center space-x-4">
               <p className="text-base opacity-75 whitespace-nowrap">No. of Pie:</p>

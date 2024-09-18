@@ -34,8 +34,6 @@ export const StandardLineMultipleContent = ({ element }) => {
           <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
           <XAxis
             dataKey={element.config.keys.x}
-            tickLine={false}
-            axisLine={false}
             tickMargin={8}
             tickFormatter={(value) => capitalize(value)}
             hide={!element.config.showXaxis}

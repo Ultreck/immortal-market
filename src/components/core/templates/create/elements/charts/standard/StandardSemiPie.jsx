@@ -1,4 +1,4 @@
-import { ChartContainer } from '@/components/ui/chart';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { colors, interpolateColor } from '@/lib/utils';
 import { Legend, Pie, PieChart } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
@@ -47,7 +47,8 @@ export const StandardSemiPieContent = ({ element }) => {
     >
       <PieChart width={element.width} height={element.height}>
         {element.config.showLegend && <Legend />}
-        <Pie dataKey="value" startAngle={180} endAngle={0} data={data} cx="50%" cy="50%" outerRadius={80} label={element.config.showLabel} />
+        {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
+        <Pie dataKey="value" startAngle={180} endAngle={0} data={data} cx="50%" cy="50%" outerRadius={180} label={element.config.showLabel} />
       </PieChart>
     </ChartContainer>
   );

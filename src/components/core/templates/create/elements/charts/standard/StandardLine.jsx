@@ -41,8 +41,6 @@ export const StandardLineContent = ({ element }) => {
           {element.config.showLegend && <Legend />}
           <XAxis
             dataKey={element.config.keys.x}
-            tickLine={false}
-            axisLine={false}
             tickMargin={8}
             tickFormatter={(value) => capitalize(value)}
             hide={!element.config.showXaxis}

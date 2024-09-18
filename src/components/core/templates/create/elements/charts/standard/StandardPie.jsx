@@ -29,15 +29,8 @@ export const StandardPieContent = ({ element }) => {
   useEffect(() => {
     const chart = echarts.init(chartRef.current, 'light');
 
-    const maxDataValue = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
-    
-    const chartData = element.config.data.map((item, index) => {
-      const value = item[element.config.keys.data];
-      const factor = 1 - value / maxDataValue;  
-      const color = element.config.useGradient
-        ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
-        : element.config.colors?.[index % element.config.colors.length];
-      
+    const chartData = element.config.data.slice(0, element.config.pies).map((item, index) => {
+      const color = element.config.colors?.[index];
       return { ...item, fill: color };
     });
     
@@ -50,6 +43,7 @@ export const StandardPieContent = ({ element }) => {
       legend: {
         orient: 'vertical',
         left: 'left',
+        top: element.config.legendPosition === 'top' ? 'top' : 'bottom',
         show: element.config.showLegend,
       },
       series: [
@@ -57,7 +51,7 @@ export const StandardPieContent = ({ element }) => {
           name: 'Access From',
           type: 'pie',
           radius: '50%',
-          data: element.config.data.slice(0, element.config.pies),
+          data: chartData,
           label: {
             show: element.config.showLabel,
           },

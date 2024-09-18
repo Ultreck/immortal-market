@@ -1,5 +1,5 @@
 import { Legend, Pie, PieChart } from 'recharts';
-import { ChartContainer } from '@/components/ui/chart.jsx';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
@@ -25,15 +25,8 @@ const StandardDoughnut = ({ element, active, highlighted, width, onClick, onChan
 StandardDoughnut.propTypes = ElementPropTypes;
 
 export const StandardDoughnutContent = ({ element }) => {
-  const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
-
-  const data = element.config.data.slice(0, element.config.pies).map((item, index) => {
-    const value = item[element.config.keys.data];
-    const factor = 1 - value / maxVisitors;
-    const color = element.config.useGradient
-      ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
-      : element.config.colors?.[index] || colors[index % colors.length];
-
+  const chartData = element.config.data.slice(0, element.config.pies).map((item, index) => {
+    const color = element.config.colors?.[index];
     return { ...item, fill: color };
   });
 
@@ -46,7 +39,15 @@ export const StandardDoughnutContent = ({ element }) => {
     >
       <PieChart width={element.width} height={element.height}>
         {element.config.showLegend && <Legend />}
-        <Pie data={data} innerRadius={80} outerRadius={120} dataKey={element.config.keys.data} label={element.config.showLabel} labelLine={false} />
+        {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
+        <Pie
+          data={chartData}
+          innerRadius={80}
+          outerRadius={120}
+          dataKey={element.config.keys.data}
+          label={element.config.showLabel}
+          labelLine={false}
+        />
       </PieChart>
     </ChartContainer>
   );

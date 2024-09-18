@@ -29,16 +29,8 @@ export const StandardDoughnutNormalContent = ({ element }) => {
   useEffect(() => {
     const chartDom = chartRef.current;
     const myChart = echarts.init(chartDom);
-
-    const maxDataValue = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
-    
-    const chartData = element.config.data.map((item, index) => {
-      const value = item[element.config.keys.data];
-      const factor = 1 - value / maxDataValue;  
-      const color = element.config.useGradient
-        ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
-        : element.config.colors?.[index % element.config.colors.length];
-      
+    const chartData = element.config.data.slice(0, element.config.pies).map((item, index) => {
+      const color = element.config.colors?.[index];
       return { ...item, fill: color };
     });
 
@@ -76,7 +68,7 @@ export const StandardDoughnutNormalContent = ({ element }) => {
           labelLine: {
             show: false,
           },
-          data: element.config.data.slice(0, element.config.pies),
+          data: chartData,
         },
       ],
     };
@@ -96,3 +88,4 @@ StandardDoughnutNormalContent.propTypes = {
 };
 
 export default StandardDoughnutNormal;
+

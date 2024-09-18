@@ -27,18 +27,12 @@ export const StandardRosePieContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const maxDataValue = Math.max(...element.config.data.map((d) => d[element.config.keys.data]));
-    
-    const chartData = element.config.data.map((item, index) => {
-      const value = item[element.config.keys.data];
-      const factor = 1 - value / maxDataValue;  
-      const color = element.config.useGradient
-        ? interpolateColor(element.config.gradientColor, '#FFFFFF', factor)
-        : element.config.colors?.[index % element.config.colors.length];
-      
+    const chartData = element.config.data.slice(0, element.config.pies).map((item, index) => {
+      const color = element.config.colors?.[index];
       return { ...item, fill: color };
     });
 
+    console.log(chartData);
 
     let chart;
     const initChart = () => {
@@ -50,7 +44,7 @@ export const StandardRosePieContent = ({ element }) => {
             {
               name: 'Nightingale Chart',
               type: 'pie',
-              radius: [50, 250],
+              radius: [50, 200],
               center: ['50%', '50%'],
               roseType: 'area',
               itemStyle: {
@@ -62,16 +56,7 @@ export const StandardRosePieContent = ({ element }) => {
               legend: {
                 left: 'center',
                 top: 'top',
-                data: [
-                  'Page A',
-                  'Page B',
-                  'Page C',
-                  'Page D',
-                  'Page E',
-                  'Page F',
-                  'Page G',
-                  'Page H',
-                ],
+                data: ['Page A', 'Page B', 'Page C', 'Page D', 'Page E', 'Page F', 'Page G', 'Page H'],
                 show: element.config.showLegend,
               },
               data: element.config.data.slice(0, element.config.pies),
@@ -97,3 +82,4 @@ StandardRosePieContent.propTypes = {
 };
 
 export default StandardRosePie;
+

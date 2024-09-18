@@ -15,6 +15,7 @@ import StandardStackedBarConfig from './standard-config/StandardStackedBarConfig
 import StandardBarCommonConfig from './standard-config/StandardBarCommonConfig';
 import StandardPieCommonConfig from './standard-config/StandardPieCommonConfig';
 import StandardAltBarConfig from './standard-config/StandardAltBarConfig';
+import StandardMultipleBarConfig from './standard-config/StandardMultipleBarConfig';
 
 const ChartConfig = ({ element, onChange }) => {
   const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
@@ -73,7 +74,7 @@ const ChartData = ({ element, onChange, onClose }) => {
       {element.type === 'chart-s-stacked-bar-vertical' && (
         <StandardStackedBarConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-line-area' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'chart-s-line-area' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-line-area-vertical' && (
         <StandardBarCommonConfig element={element} onChange={onChange} />
       )}
@@ -149,15 +150,15 @@ const ChartData = ({ element, onChange, onClose }) => {
       {element.type === 'chart-s-area' && <StandardBarCommonConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-area-multiple' && <StandardBarCommonConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-line' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-line-multiple' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'chart-s-line-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-bar-not-sep' && <StandardBarCommonConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-vertical-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-vertical-bar-no-sep' && (
         <StandardBarCommonConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-bar-multiple' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'chart-s-bar-multiple' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-bar-multiple-vertical' && (
-        <StandardBarCommonConfig element={element} onChange={onChange} />
+        <StandardMultipleBarConfig element={element} onChange={onChange} />
       )}
       {element.type === 'chart-s-pie' && <StandardPieCommonConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-semi-pie' && <StandardPieCommonConfig element={element} onChange={onChange} />}
