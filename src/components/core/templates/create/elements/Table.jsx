@@ -20,7 +20,7 @@ const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
     >
       {({ isEditing }) => (
         <div className="relative w-full h-full">
-          {element.config?.data && <TableContent element={element} onChange={onChange} active={isEditing} />}
+          <TableContent element={element} onChange={onChange} active={isEditing} />
         </div>
       )}
     </ElementWrapper>

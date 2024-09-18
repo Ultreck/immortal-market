@@ -22,6 +22,36 @@ const elements = [
     data: [
       {
         cells: [
+          { value: 'Key 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Value 1', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Key 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Value 2', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Key 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Value 3', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Key 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Value 4', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+    ],
+    colors: [],
+    scheme: [],
+  },
+  {
+    data: [
+      {
+        cells: [
           { value: 'Heading 1', colSpan: 1, rowSpan: 1 },
           { value: 'Heading 2', colSpan: 1, rowSpan: 1 },
           { value: 'Heading 3', colSpan: 1, rowSpan: 1 },

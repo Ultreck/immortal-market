@@ -1,13 +1,8 @@
 import Text, { TextElementContent } from '@/components/core/templates/create/elements/Text.jsx';
 import Image, { CanvasImageContent } from '@/components/core/templates/create/elements/Image.jsx';
-import KeyValue, { KeyValueElementContent } from '@/components/core/templates/create/elements/KeyValue.jsx';
 import Line, { LineElementContent } from '@/components/core/templates/create/elements/Line.jsx';
-import GenericShape, { GenericShapeContent } from '@/components/core/templates/create/elements/shapes/GenericShape.jsx';
-import GenericFrameShape from '@/components/core/templates/create/elements/frames/GenericFrameShape.jsx';
+import Shape, { ShapeContent } from '@/components/core/templates/create/elements/Shape.jsx';
 import AdvanceCharts from '@/components/core/templates/create/elements/charts/advanced/AdvanceCharts.jsx';
-import FrameTabs from '@/components/core/templates/create/elements/frames/FrameTabs.jsx';
-import FrameCarousel from '@/components/core/templates/create/elements/frames/FrameCarousel.jsx';
-import shapes from '@/lib/design/shapes.js';
 import Infographic, { InfographicElementContent } from '@/components/core/templates/create/elements/Infographic.jsx';
 import GenericIcon, { GenericIconContent } from '@/components/core/templates/create/elements/GenericIcon';
 import icons from '@/lib/design/icons.js';
@@ -16,6 +11,7 @@ import AdvanceChartsPresent from '@/components/core/templates/create/elements/ch
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
 import Map from '@/components/core/templates/create/elements/maps/Map.jsx';
 import Table, { TableContentPresent } from '@/components/core/templates/create/elements/Table.jsx';
+import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
 
 export const charts = {
   standard: [
@@ -80,18 +76,6 @@ export const tools = {
     acc[type] = ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity', 'animation', 'shadow'];
     return acc;
   }, {}),
-  ...Object.keys(shapes).reduce((acc, type) => {
-    acc[`shape-${type}`] = ['background-color', 'border', 'opacity', 'border-radius', 'animation', 'shadow'];
-    return acc;
-  }, {}),
-  ...Object.keys(shapes).reduce((acc, type) => {
-    acc[`frame-${type}`] = ['opacity', 'border-radius', 'animation', 'shadow'];
-    return acc;
-  }, {}),
-  ...icons.reduce((acc, icon) => {
-    acc[`icon-${icon.name}`] = ['icon', 'opacity', 'animation', 'shadow', 'text-color'];
-    return acc;
-  }, {}),
   ...charts.standard.reduce((acc, type) => {
     acc[`chart-s-${type}`] = ['chart', 'colors', 'opacity', 'animation'];
     return acc;
@@ -100,13 +84,17 @@ export const tools = {
     acc[`chart-a-${type}`] = ['advanced-chart', 'colors', 'opacity'];
     return acc;
   }, {}),
+  shape: ['background-color', 'border', 'opacity', 'border-radius', 'animation', 'shadow'],
+  frame: (element) => {
+    if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow'];
+    if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow'];
+    return ['opacity', 'border-radius', 'animation', 'shadow'];
+  },
+  icon: ['icon', 'opacity', 'animation', 'shadow', 'text-color'],
   map: ['map', 'opacity'],
   table: ['table', 'colors', 'opacity', 'font', 'text-color', 'animation'],
-  'frame-tabs': ['tabs', 'opacity', 'animation', 'shadow'],
-  'frame-carousel': ['carousel', 'opacity', 'animation', 'shadow'],
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
   image: ['border', 'border-radius', 'opacity', 'animation', 'shadow'],
-  'key-value': ['key-value', 'opacity', 'font', 'text-color', 'border', 'background-color', 'animation'],
   infographic: ['infographic', 'opacity'],
 };
 
@@ -116,42 +104,26 @@ export const components = {
       acc[type] = Text;
       return acc;
     }, {}),
-    ...Object.keys(shapes).reduce((acc, type) => {
-      acc[`shape-${type}`] = GenericShape;
-      return acc;
-    }, {}),
-    ...Object.keys(shapes).reduce((acc, type) => {
-      acc[`frame-${type}`] = GenericFrameShape;
-      return acc;
-    }, {}),
-    ...icons.reduce((acc, icon) => {
-      acc[`icon-${icon.name}`] = GenericIcon;
-      return acc;
-    }, {}),
     ...charts.standard.reduce((acc, type) => {
       acc[`chart-s-${type}`] = StandardCharts;
       return acc;
     }, {}),
-    table: Table,
     ...charts.advanced.reduce((acc, type) => {
       acc[`chart-a-${type}`] = AdvanceCharts;
       return acc;
     }, {}),
+    shape: Shape,
+    frame: Frame,
+    icon: GenericIcon,
+    table: Table,
     map: Map,
-    'frame-tabs': FrameTabs,
-    'frame-carousel': FrameCarousel,
     line: Line,
     image: Image,
-    'key-value': KeyValue,
     infographic: Infographic,
   },
   present: {
     ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
       acc[type] = TextElementContent;
-      return acc;
-    }, {}),
-    ...Object.keys(shapes).reduce((acc, type) => {
-      acc[`shape-${type}`] = GenericShapeContent;
       return acc;
     }, {}),
     ...icons.reduce((acc, icon) => {
@@ -171,14 +143,15 @@ export const components = {
       acc[`chart-a-${type}`] = AdvanceChartsPresent;
       return acc;
     }, {}),
+    shape: ShapeContent,
     line: LineElementContent,
     image: CanvasImageContent,
-    'key-value': KeyValueElementContent,
     infographic: InfographicElementContent,
   },
 };
 
-export const getElementTools = (type) => {
-  if (!tools[type]) throw new Error(`No tools found for type ${type}`);
-  return tools[type];
+export const getElementTools = (element) => {
+  if (!tools[element.type]) throw new Error(`No tools found for type ${element.type}`);
+  if (typeof tools[element.type] === 'function') return tools[element.type](element);
+  return tools[element.type];
 };

@@ -12,7 +12,6 @@ import Border from './elements/Border.jsx';
 import Opacity from './elements/Opacity.jsx';
 import BorderRadius from './elements/BorderRadius.jsx';
 import TableConfig from '@/components/core/templates/create/tools/elements/TableConfig.jsx';
-import KeyValueConfig from '@/components/core/templates/create/tools/elements/KeyValueConfig.jsx';
 import Line from './elements/Line.jsx';
 import IconConfig from './elements/IconConfig.jsx';
 import { getElementTools } from '@/lib/elements.js';
@@ -37,7 +36,6 @@ const mapping = {
   chart: { type: 'single', component: ChartConfig },
   icon: { type: 'single', component: IconConfig },
   table: { type: 'single', component: TableConfig },
-  'key-value': { type: 'single', component: KeyValueConfig },
   border: { type: 'multiple', component: Border },
   opacity: { type: 'multiple', component: Opacity },
   'border-radius': { type: 'multiple', component: BorderRadius },
