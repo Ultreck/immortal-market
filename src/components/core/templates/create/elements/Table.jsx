@@ -1,9 +1,33 @@
-import { cn } from '@/lib/utils.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
-import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
+import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { RiAddLine, RiArrowDownSLine } from 'react-icons/ri';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import { RiAddLine, RiArrowDownSLine } from 'react-icons/ri';
+import { cn } from '@/lib/utils.js';
+import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
+
+const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
+  return (
+    <ElementWrapper
+      element={element}
+      onClick={onClick}
+      onChange={onChange}
+      maxWidth={width}
+      active={active}
+      highlighted={highlighted}
+      editable
+    >
+      {({ isEditing }) => (
+        <div className="relative w-full h-full">
+          {element.config?.data && <TableContent element={element} onChange={onChange} active={isEditing} />}
+        </div>
+      )}
+    </ElementWrapper>
+  );
+};
+
+Table.propTypes = ElementPropTypes;
 
 const getMaxColumns = (data) => {
   let max = 0;
@@ -15,9 +39,28 @@ const getMaxColumns = (data) => {
   return max;
 };
 
-const Basic = ({ element, onChange, active }) => {
+const getCellBackground = (row, col, scheme, colors) => {
+  const c = scheme.reduce((acc, cur) => {
+    const [name, index] = cur.split('/');
+    acc[name] = colors[index];
+    return acc;
+  }, {});
+  return c[col] || c[row];
+};
+
+const getCellPosition = (rows, rowIndex, cellIndex) => {
+  for (let i = 0; i < rowIndex; i++) {
+    const cell = rows[i].cells[cellIndex];
+    if (!cell) continue;
+    if (cell.rowSpan > 1 && cell.rowSpan > rowIndex - i) {
+      return cellIndex + cell.colSpan;
+    }
+  }
+  return cellIndex;
+};
+
+const TableContent = ({ element, onChange, active }) => {
   const table = useRef(null);
-  const colors = element.config.colors;
   const rows = element.config.data;
   const [selection, setSelection] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
@@ -111,7 +154,7 @@ const Basic = ({ element, onChange, active }) => {
     const merged = newRows[minRow].cells[minCol];
     const rowSpan = maxRow - minRow + (merged.rowSpan || 1);
     const colSpan = maxCol - minCol + (merged.colSpan || 1);
-    newRows[minRow].cells[minCol] = { value: merged.value, rowSpan, colSpan };
+    newRows[minRow].cells[minCol] = { ...merged, rowSpan, colSpan };
     for (let i = minRow; i <= maxRow; i++) {
       for (let j = minCol; j <= maxCol; j++) {
         if (i !== minRow || j !== minCol) {
@@ -188,7 +231,7 @@ const Basic = ({ element, onChange, active }) => {
   }, [selection, rows, onChange, element]);
 
   return (
-    <div className="w-full h-full relative flex flex-col">
+    <>
       {!!selection && (
         <div className="absolute bottom-[calc(100%+10px)] left-0 space-x-2 flex items-center">
           {(selection.startCol !== selection.endCol || selection.startRow !== selection.endRow) && (
@@ -230,14 +273,14 @@ const Basic = ({ element, onChange, active }) => {
                 if (key === 'cells') handleDeleteCells();
               }}
             >
+              <DropdownItem key="cells" classNames={{ title: 'text-base' }}>
+                Delete cell(s)
+              </DropdownItem>
               <DropdownItem key="rows" classNames={{ title: 'text-base' }}>
                 Delete row(s)
               </DropdownItem>
               <DropdownItem key="columns" classNames={{ title: 'text-base' }}>
                 Delete column(s)
-              </DropdownItem>
-              <DropdownItem key="cells" classNames={{ title: 'text-base' }}>
-                Delete cell(s)
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
@@ -251,20 +294,27 @@ const Basic = ({ element, onChange, active }) => {
         <tbody>
           {rows.map((row, rowIndex) => {
             return (
-              <tr
-                key={`row-${rowIndex}`}
-                className="group"
-                style={rowIndex === 0 ? { background: colors[0], color: 'white' } : {}}
-              >
+              <tr key={`row-${rowIndex}`} className="group">
                 {row.cells.map((cell, cellIndex) => {
+                  const { scheme, colors } = element.config;
+                  const cellPosition = getCellPosition(rows, rowIndex, cellIndex);
+                  const background = getCellBackground(`r${rowIndex}`, `c${cellPosition}`, scheme, colors);
                   return (
                     <td
                       key={`cell-${cellIndex}`}
                       colSpan={cell.colSpan || 1}
                       rowSpan={cell.rowSpan || 1}
-                      className={cn('text-left border border-gray-300 p-0 relative', {
-                        'first:rounded-bl-lg last:rounded-br-lg': rowIndex === rows.length - 1,
+                      className={cn('border border-gray-300 p-0 relative', {
+                        'rounded-bl-lg': cellPosition === 0 && cell.rowSpan >= rows.length - rowIndex,
+                        'rounded-tl-lg': cellPosition === 0 && rowIndex === 0,
+                        'rounded-br-lg': rowIndex === rows.length - 1 && cellIndex === rows[rowIndex].cells.length - 1,
+                        'rounded-tr-lg': rowIndex === 0 && cellIndex === rows[rowIndex].cells.length - 1,
                       })}
+                      style={{
+                        background,
+                        color: background ? '#ffffff' : '#000000',
+                        ...(cell.style || {}),
+                      }}
                     >
                       {editing !== `row,${rowIndex},${cellIndex}` && (
                         <div
@@ -286,6 +336,7 @@ const Basic = ({ element, onChange, active }) => {
                         value={cell.value}
                         onChange={(v) => handleRowChange(rowIndex, cellIndex, v)}
                         className="bg-transparent w-full h-full px-3 py-1 leading-tight border border-transparent hover:border-gray-300"
+                        style={{ ...(cell.style || {}) }}
                       />
                     </td>
                   );
@@ -295,26 +346,126 @@ const Basic = ({ element, onChange, active }) => {
           })}
         </tbody>
       </table>
-      <button
-        onClick={handleAddRow}
-        className="rounded-2xl flex items-center justify-center border hover:bg-gray-300 px-2 py-0.5 absolute top-[calc(100%+8px)] left-2 bg-white"
-      >
-        <RiAddLine size="16" />
-      </button>
-      <button
-        onClick={handleAddColumn}
-        className="rounded-2xl flex items-center justify-center border hover:bg-gray-300 px-0.5 py-2 absolute left-[calc(100%+8px)] top-2 bg-white"
-      >
-        <RiAddLine size="16" />
-      </button>
-    </div>
+      {active && (
+        <>
+          <button
+            onClick={handleAddRow}
+            className="rounded-2xl flex items-center justify-center border hover:bg-gray-300 px-2 py-0.5 absolute top-[calc(100%+8px)] left-2 bg-white"
+          >
+            <RiAddLine size="16" />
+          </button>
+          <button
+            onClick={handleAddColumn}
+            className="rounded-2xl flex items-center justify-center border hover:bg-gray-300 px-0.5 py-2 absolute left-[calc(100%+8px)] top-2 bg-white"
+          >
+            <RiAddLine size="16" />
+          </button>
+        </>
+      )}
+    </>
   );
 };
 
-Basic.propTypes = {
+export const TableContentPresent = ({ element }) => {
+  const rows = element.config.data;
+
+  return (
+    <table
+      style={element.style}
+      className="w-full h-full table-auto border-separate border-spacing-0.5 rounded-lg bg-white"
+    >
+      <tbody>
+        {rows.map((row, rowIndex) => {
+          return (
+            <tr key={`row-${rowIndex}`} className="group">
+              {row.cells.map((cell, cellIndex) => {
+                const { scheme, colors } = element.config;
+                const cellPosition = getCellPosition(rows, rowIndex, cellIndex);
+                const background = getCellBackground(`r${rowIndex}`, `c${cellPosition}`, scheme, colors);
+                return (
+                  <td
+                    key={`cell-${cellIndex}`}
+                    colSpan={cell.colSpan || 1}
+                    rowSpan={cell.rowSpan || 1}
+                    className={cn('border border-gray-300 p-0 relative', {
+                      'rounded-bl-lg': cellPosition === 0 && cell.rowSpan >= rows.length - rowIndex,
+                      'rounded-tl-lg': cellPosition === 0 && rowIndex === 0,
+                      'rounded-br-lg': rowIndex === rows.length - 1 && cellIndex === rows[rowIndex].cells.length - 1,
+                      'rounded-tr-lg': rowIndex === 0 && cellIndex === rows[rowIndex].cells.length - 1,
+                    })}
+                    style={{
+                      background,
+                      color: background ? '#ffffff' : '#000000',
+                      ...(cell.style || {}),
+                    }}
+                  >
+                    <p className="px-3 py-1 leading-tight">{cell.value}</p>
+                  </td>
+                );
+              })}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+};
+
+export const TableContentPreview = ({ element }) => {
+  const rows = element.config.data;
+
+  return (
+    <table
+      style={element.style}
+      className="w-full h-full table-auto border-separate border-spacing-0 rounded-lg bg-white"
+    >
+      <tbody>
+        {rows.map((row, rowIndex) => {
+          return (
+            <tr key={`row-${rowIndex}`} className="group">
+              {row.cells.map((cell, cellIndex) => {
+                const { scheme, colors } = element.config;
+                const cellPosition = getCellPosition(rows, rowIndex, cellIndex);
+                const background = getCellBackground(`r${rowIndex}`, `c${cellPosition}`, scheme, colors);
+                return (
+                  <td
+                    key={`cell-${cellIndex}`}
+                    colSpan={cell.colSpan || 1}
+                    rowSpan={cell.rowSpan || 1}
+                    className={cn('text-left border p-2', {
+                      'rounded-bl-lg': cellPosition === 0 && cell.rowSpan >= rows.length - rowIndex,
+                      'rounded-tl-lg': cellPosition === 0 && rowIndex === 0,
+                      'rounded-br-lg': rowIndex === rows.length - 1 && cellIndex === rows[rowIndex].cells.length - 1,
+                      'rounded-tr-lg': rowIndex === 0 && cellIndex === rows[rowIndex].cells.length - 1,
+                    })}
+                    style={{
+                      background,
+                      color: background ? '#ffffff' : '#000000',
+                      ...(cell.style || {}),
+                    }}
+                  ></td>
+                );
+              })}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+};
+
+TableContent.propTypes = {
   element: PropTypes.object.isRequired,
   onChange: PropTypes.func,
   active: PropTypes.bool,
 };
 
-export default Basic;
+TableContentPresent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+
+TableContentPreview.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+
+export default Table;

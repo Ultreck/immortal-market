@@ -1,7 +1,8 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { Button, Image } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
+import { TableContentPreview } from '@/components/core/templates/create/elements/Table.jsx';
 
 const colors = [
   '#E66B5B',
@@ -18,7 +19,6 @@ const colors = [
 
 const elements = [
   {
-    theme: 'basic',
     data: [
       {
         cells: [
@@ -44,69 +44,198 @@ const elements = [
           { value: 'Cell 7', colSpan: 1, rowSpan: 1 },
         ],
       },
+      {
+        cells: [
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 7', colSpan: 1, rowSpan: 1 },
+        ],
+      },
     ],
     colors: colors.slice(0, 1),
+    scheme: ['r0/0'],
   },
   {
-    theme: 'basic-striped',
     data: [
-      ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4'],
-      ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4'],
-      ['Cell 4', 'Cell 5', 'Cell 6', 'Cell 7'],
+      {
+        cells: [
+          { value: 'S/N', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 3', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: '1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: '2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 7', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: '3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 7', colSpan: 1, rowSpan: 1 },
+        ],
+      },
     ],
-    colors: colors.slice(0, 1),
+    colors: colors.slice(1, 3),
+    scheme: ['r0/0', 'c0/1'],
   },
   {
-    theme: 'trend-analysis',
     data: [
-      ['Trend Analysis'],
-      ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
-      ['2020', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
-      ['2021', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
-      ['2022', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
-      ['2023', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+      {
+        cells: [
+          { value: '', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 5', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: '1', colSpan: 1, rowSpan: 2 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Cell 8', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 9', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 10', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 11', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 12', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: '1', colSpan: 1, rowSpan: 2 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Cell 8', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 9', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 10', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 11', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 12', colSpan: 1, rowSpan: 1 },
+        ],
+      },
     ],
-    colors: colors.slice(0, 2),
+    colors: colors.slice(3, 5),
+    scheme: ['r0/0', 'c0/1'],
   },
   {
-    theme: 'marketing-report',
     data: [
-      ['', 'Feb', 'March', 'April', 'May', 'June'],
-      ['2020', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
-      ['2021', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
-      ['2022', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
-      ['2023', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6'],
+      {
+        cells: [
+          { value: '', colSpan: 1, rowSpan: 1 },
+          { value: 'Title 1', colSpan: 2, rowSpan: 1 },
+          { value: 'Title 2', colSpan: 2, rowSpan: 1 },
+          { value: 'Title 3', colSpan: 2, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: '', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 6', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Label 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Label 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+        ],
+      },
+      {
+        cells: [
+          { value: 'Label 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+        ],
+      },
     ],
-    colors: colors.slice(0, 2),
+    colors: colors.slice(5, 6),
+    scheme: ['r0/0', 'r1/0'],
   },
-].map((i) => {
+].map((item, i) => {
   return {
-    id: `table-${i.theme}`,
+    id: `table-${i}`,
     category: 'basic',
     data: {
       type: 'table',
       text: 'Table',
-      width: 400,
-      height: 200,
+      width: 500,
+      height: 300,
       style: {
         fontSize: 14,
         opacity: 1,
         animationDuration: '1s',
       },
       config: {
-        theme: i.theme,
-        colors: i.colors,
-        data: i.data,
+        scheme: item.scheme,
+        colors: item.colors,
+        data: item.data,
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 rounded-xl overflow-hidden">
-        <Image
-          src={`/images/previews/tables/${i.theme}.png`}
-          alt="Table"
-          className="w-full rounded-lg scale-[1.01]"
-          width={400}
-          height={400}
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 rounded-lg h-full">
+        <TableContentPreview
+          element={{
+            config: {
+              data: item.data,
+              scheme: item.scheme,
+              colors: item.colors,
+            },
+          }}
         />
       </div>
     ),
@@ -124,7 +253,11 @@ const Tables = ({ onBack }) => {
       </div>
       <div className="grid grid-cols-1 gap-4">
         {elements.map((element) => {
-          return <DraggableElementWrapper key={element.id} element={element} />;
+          return (
+            <div key={element.id} className="aspect-[16/8]">
+              <DraggableElementWrapper element={element} />
+            </div>
+          );
         })}
       </div>
     </div>

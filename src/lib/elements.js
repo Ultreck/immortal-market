@@ -15,7 +15,7 @@ import StandardCharts from '@/components/core/templates/create/elements/charts/s
 import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
 import Map from '@/components/core/templates/create/elements/maps/Map.jsx';
-import Table, { TableContent } from '@/components/core/templates/create/elements/tables/Table.jsx';
+import Table, { TableContentPresent } from '@/components/core/templates/create/elements/Table.jsx';
 
 export const charts = {
   standard: [
@@ -162,7 +162,7 @@ export const components = {
       acc[`chart-s-${type}`] = StandardChartsPresent;
       return acc;
     }, {}),
-    table: TableContent,
+    table: TableContentPresent,
     ...charts.advanced.reduce((acc, type) => {
       acc[`chart-a-${type}`] = AdvanceChartsPresent;
       return acc;

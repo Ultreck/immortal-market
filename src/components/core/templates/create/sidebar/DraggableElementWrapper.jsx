@@ -25,13 +25,13 @@ const DraggableElementWrapper = ({ element }) => {
   return (
     <DraggableElement
       element={element}
-      className={cn('relative')}
+      className={cn('relative h-full')}
       content={
-        <div className="relative overflow-hidden" onClick={handleClick}>
+        <div className="relative overflow-hidden h-full" onClick={handleClick}>
           {element.preview}
         </div>
       }
-      dragging={<div className="relative overflow-hidden">{element.preview}</div>}
+      dragging={<div className="relative overflow-hidden h-full">{element.preview}</div>}
     />
   );
 };
