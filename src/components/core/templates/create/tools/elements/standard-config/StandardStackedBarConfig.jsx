@@ -1,5 +1,5 @@
 import { Checkbox, Input, Tab, Tabs } from '@nextui-org/react';
-import { TbCirclePlus } from 'react-icons/tb';
+import { TbChartLine, TbCirclePlus, TbTimeline } from 'react-icons/tb';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput';
 import { useEffect, useState } from 'react';
 
@@ -131,6 +131,27 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                 Show Y Grid Line
               </Checkbox>
             </div>
+            {element.type === 'chart-s-line-multiple' && (
+              <div className="flex items-center space-x-4">
+                {[
+                  { name: 'Natural', icon: <TbChartLine size={25} /> },
+                  { name: 'Linear', icon: <TbTimeline size={25} /> },
+                ].map((position, i) => (
+                  <Checkbox
+                    key={i}
+                    isSelected={element.config.type === position.name}
+                    onValueChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, type: position.name },
+                      })
+                    }
+                  >
+                    {position.icon}
+                  </Checkbox>
+                ))}
+              </div>
+            )}
             <div className="flex items-center space-x-4">
               <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
               <AutoCompleteNumberInput

@@ -3,19 +3,19 @@ import { Checkbox, Input, Tab, Tabs } from '@nextui-org/react';
 import { TbChartLine, TbCirclePlus, TbTimeline } from 'react-icons/tb';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput';
 
-const StandardBarCommonConfig = ({ element, onChange }) => {
+const StandardBubbleChartConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
 
-  const handleChange = (updatedItem) => {
-    const updatedData = element.config.data.map((item, idx) =>
-      idx === updatedItem.index ? { ...item, ...updatedItem } : item
-    );
-    onChange({ ...element, config: { ...element.config, data: updatedData } });
+  const handleChange = (item) => {
+    console.log({ item });
+    // const newData = [...element.config.data];
+    // newData[item.index] = item;
+    // onChange({ ...element, config: { ...element.config, data: newData } });
   };
 
   useEffect(() => {}, [element]);
   return (
-    <div>
+    <>
       <Tabs
         variant="bordered"
         aria-label="Options"
@@ -33,28 +33,28 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
             {element.config.data.map((item, index) => (
               <div key={index} className="grid grid-cols-2 gap-2">
                 <Input
-                  value={item.browser}
+                  value={item[0]}
                   placeholder="Browser name"
                   required
                   variant="bordered"
                   classNames={{ input: 'text-base capitalize' }}
                   onChange={(e) => {
-                    handleChange({ ...item, browser: e.target.value, index });
+                    handleChange({ ...item, [0]: Number(e.target.value), index });
                   }}
                 />
                 <Input
-                  value={item.visitors}
+                  value={item[1]}
                   placeholder="Number of visitors"
                   required
                   type="number"
                   variant="bordered"
                   onChange={(e) => {
-                    handleChange({ ...item, visitors: e.target.value, index });
+                    handleChange({ ...item, [1]: Number(e.target.value), index });
                   }}
                 />
               </div>
             ))}
-            <TbCirclePlus
+            {/* <TbCirclePlus
               size={30}
               onClick={() => {
                 onChange({
@@ -67,11 +67,11 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                   },
                 });
               }}
-            />
+            /> */}
           </div>
         </Tab>
         <Tab key="settings" title="Settings" className="text-base">
-          <div className="space-y-6">
+          <div className="flex flex-col space-y-6">
             <div>
               <Checkbox
                 isSelected={element.config.showXaxis}
@@ -101,74 +101,39 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
             </div>
             <div>
               <Checkbox
-                isSelected={element.config.showXGridline}
+                isSelected={element.config.showGridline}
                 classNames={{ base: 'py-0' }}
                 onValueChange={(v) =>
                   onChange({
                     ...element,
-                    config: { ...element.config, showXGridline: v },
+                    config: { ...element.config, showGridline: v },
                   })
                 }
               >
-                Show X Grid Line
+                Show Grid Line
               </Checkbox>
             </div>
-            <div>
-              <Checkbox
-                isSelected={element.config.showYGridline}
-                classNames={{ base: 'py-0' }}
-                onValueChange={(v) =>
-                  onChange({
-                    ...element,
-                    config: { ...element.config, showYGridline: v },
-                  })
-                }
-              >
-                Show Y Grid Line
-              </Checkbox>
-            </div>
-            {element.type === 'chart-s-line' && (
-              <div className="flex items-center space-x-4">
-                {[
-                  { name: 'Natural', icon: <TbChartLine size={25} /> },
-                  { name: 'Linear', icon: <TbTimeline size={25} /> },
-                ].map((position, i) => (
-                  <Checkbox
-                    key={i}
-                    isSelected={element.config.type === position.name}
-                    onValueChange={(v) =>
-                      onChange({
-                        ...element,
-                        config: { ...element.config, type: position.name },
-                      })
-                    }
-                  >
-                    {position.icon}
-                  </Checkbox>
-                ))}
-              </div>
-            )}
             <div className="flex items-center space-x-4">
-              <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+              <p className="text-base opacity-75 whitespace-nowrap">No. of bubbles:</p>
               <AutoCompleteNumberInput
                 onChange={(v) =>
                   onChange({
                     ...element,
-                    config: { ...element.config, bars: Number(v) },
+                    config: { ...element.config, bubbles: Number(v) },
                   })
                 }
-                value={element.config.bars}
+                value={element.config.bubbles}
                 min={1}
                 max={element.config.data.length}
-                ariaLabel="No of Bars to Show"
+                ariaLabel="No of bubbles to Show"
               />
             </div>
           </div>
         </Tab>
       </Tabs>
-    </div>
+    </>
   );
 };
 
-export default StandardBarCommonConfig;
+export default StandardBubbleChartConfig;
 

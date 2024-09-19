@@ -46,11 +46,11 @@ export const StandardLineMultipleContent = ({ element }) => {
               <Line
                 key={key}
                 dataKey={key}
-                type="monotone"
                 strokeWidth={2}
                 dot={false}
                 fill={element.config.colors[index % element.config.colors.length]}
                 stroke={element.config.colors[index % element.config.colors.length]}
+                type={element.config.type}
               />
             );
           })}

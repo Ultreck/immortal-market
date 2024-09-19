@@ -49,7 +49,8 @@ export const StandardLineContent = ({ element }) => {
           <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
           <Line
             dataKey={element.config.keys.y}
-            type="natural"
+            type={element.config.type}
+            // type="natural"
             strokeWidth={2}
             activeDot={{ r: 6 }}
             isAnimationActive={false}

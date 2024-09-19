@@ -623,6 +623,7 @@ const StandardCharts = () => {
           showLegend: false,
           showXaxis: false,
           showYaxis: false,
+          type: 'Natural',
           tools: {
             colors: {
               gradient: false,
@@ -663,6 +664,7 @@ const StandardCharts = () => {
           showYaxis: false,
           showXGridline: false,
           showYGridline: false,
+          type: 'Natural',
         },
       },
       preview: (
@@ -911,6 +913,7 @@ const StandardCharts = () => {
           showXaxis: false,
           showYaxis: false,
           showLegend: false,
+          gradientColor: '#2673D9',
         },
       },
       preview: (
