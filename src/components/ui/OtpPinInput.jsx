@@ -35,25 +35,23 @@ const OtpPinInput = forwardRef(({ value, onChange, disabled, length = 6, native 
   return (
     <div>
       <div ref={parent} className="w-full grid grid-cols-6 gap-2 md:gap-4" {...props}>
-        {Array(length)
-          .fill(null)
-          .map((_, i) => (
-            <input
-              maxLength="1"
-              disabled={disabled}
-              key={i}
-              data-index={i}
-              value={value?.[i] || ''}
-              onChange={() => null}
-              onKeyDown={handleKeydown}
-              onPaste={handlePaste}
-              ref={i === 0 ? ref : null}
-              className={classNames(
-                'inline-flex bg-transparent px-2 py-4 sm:px-2 sm:py-5 rounded-3xl border border-zinc-300 focus:ring focus:ring-primary-100 text-xl text-center',
-                { 'opacity-60 pointer-events-none': disabled }
-              )}
-            />
-          ))}
+        {[...Array(length).fill(null)].map((_, i) => (
+          <input
+            maxLength="1"
+            disabled={disabled}
+            key={i}
+            data-index={i}
+            value={value?.[i] || ''}
+            onChange={() => null}
+            onKeyDown={handleKeydown}
+            onPaste={handlePaste}
+            ref={i === 0 ? ref : null}
+            className={classNames(
+              'inline-flex bg-transparent px-2 py-4 sm:px-2 sm:py-5 rounded-3xl border border-zinc-300 focus:ring focus:ring-primary-100 text-xl text-center',
+              { 'opacity-60 pointer-events-none': disabled }
+            )}
+          />
+        ))}
       </div>
       {!!error && <div className="text-sm text-red-500 mt-3 px-1">{error}</div>}
     </div>

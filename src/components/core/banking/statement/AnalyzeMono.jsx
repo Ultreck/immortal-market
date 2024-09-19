@@ -70,11 +70,9 @@ const AnalyzeMono = ({ onBack }) => {
           {isLoading ? (
             <>
               <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
-                {Array(20)
-                  .fill(null)
-                  .map((_, i) => (
-                    <div key={i} className="w-full h-32 bg-gray-100 rounded-2xl"></div>
-                  ))}
+                {[...Array(20).fill(null)].map((_, i) => (
+                  <div key={i} className="w-full h-32 bg-gray-100 rounded-2xl"></div>
+                ))}
               </div>
             </>
           ) : (

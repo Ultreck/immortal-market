@@ -105,8 +105,7 @@ const TableContent = ({ element, onChange, active }) => {
         data: [
           ...rows,
           {
-            // prettier-ignore
-            cells: Array(maxCols).fill(null).map(() => ({ value: '' })),
+            cells: [...Array(maxCols).fill(null)].map(() => ({ value: '' })),
           },
         ],
       },

@@ -38,20 +38,18 @@ const AiAssistantPage = () => {
           project.
         </p>
         <div className="grid grid-cols-! gap-4">
-          {Array(3)
-            .fill(null)
-            .map((_, index) => (
-              <div
-                className="border border-default-200 rounded-2xl px-6 py-4 flex items-center gap-4 justify-between hover:bg-default-100 cursor-pointer"
-                key={index}
-              >
-                <div>
-                  <div>Project {index + 1}</div>
-                  <div className="opacity-75 text-md mt-0.5">Last updated: 2 months ago</div>
-                </div>
-                <HiChevronRight size="20" className="opacity-75" />
+          {[...Array(3).fill(null)].map((_, index) => (
+            <div
+              className="border border-default-200 rounded-2xl px-6 py-4 flex items-center gap-4 justify-between hover:bg-default-100 cursor-pointer"
+              key={index}
+            >
+              <div>
+                <div>Project {index + 1}</div>
+                <div className="opacity-75 text-md mt-0.5">Last updated: 2 months ago</div>
               </div>
-            ))}
+              <HiChevronRight size="20" className="opacity-75" />
+            </div>
+          ))}
         </div>
 
         <div className="absolute bottom-0 -right-0 hidden sm:block ">

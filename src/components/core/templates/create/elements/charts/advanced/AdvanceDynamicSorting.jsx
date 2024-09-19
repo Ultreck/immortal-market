@@ -28,16 +28,11 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
 
   useEffect(() => {
     let chart;
-    let data = Array(5)
-      .fill(null)
-      .map(() => Math.round(Math.random() * 200));
-      console.log({data});
-      
+    let data = [...Array(5).fill(null)].map(() => Math.round(Math.random() * 200));
 
     const initChart = () => {
       if (chartRef.current) {
         chart = echarts.init(chartRef.current);
-
         const option = {
           xAxis: {
             max: 'dataMax',
@@ -78,7 +73,6 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
           animationEasingUpdate: 'linear',
           color: element.config.colors,
         };
-
         chart.setOption(option);
       }
     };
@@ -91,7 +85,6 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
           return value + Math.round(Math.random() * 200);
         }
       });
-
       chart.setOption({
         series: [{ type: 'bar', data }],
       });

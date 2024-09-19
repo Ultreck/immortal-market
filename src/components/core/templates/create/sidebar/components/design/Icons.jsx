@@ -54,20 +54,18 @@ const IconsSlider = ({ mini = false, onView, onBack }) => {
           <div className="relative">
             <BasicCarousel
               classNames={{ next: 'right-0', prev: 'left-0', base: 'overflow-hidden' }}
-              slides={Array(2)
-                .fill(null)
-                .map((_, index) => {
-                  return {
-                    id: index,
-                    content: (
-                      <div className="grid grid-cols-3 gap-6">
-                        {items.slice(index * 6, index * 6 + 6).map((element) => (
-                          <DraggableElementWrapper key={element.id} element={element} />
-                        ))}
-                      </div>
-                    ),
-                  };
-                })}
+              slides={[...Array(2).fill(null)].map((_, index) => {
+                return {
+                  id: index,
+                  content: (
+                    <div className="grid grid-cols-3 gap-6">
+                      {items.slice(index * 6, index * 6 + 6).map((element) => (
+                        <DraggableElementWrapper key={element.id} element={element} />
+                      ))}
+                    </div>
+                  ),
+                };
+              })}
             />
           </div>
         </>

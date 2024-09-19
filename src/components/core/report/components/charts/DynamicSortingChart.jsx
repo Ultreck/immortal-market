@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@nextui-org/react';
 
@@ -7,9 +7,7 @@ const DynamicSortingChart = () => {
 
   useEffect(() => {
     let chart;
-    let data = Array(5)
-      .fill()
-      .map(() => Math.round(Math.random() * 200));
+    let data = [...Array(5).fill(null)].map(() => Math.round(Math.random() * 200));
 
     const initChart = () => {
       if (chartRef.current) {
