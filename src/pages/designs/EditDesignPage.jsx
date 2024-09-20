@@ -28,27 +28,6 @@ const EditDesignPage = () => {
   useEffect(() => {
     if (design) {
       const { _id, title, description, status, type, data } = design;
-      const pages = data.pages.map((page) => ({
-        ...page,
-        elements: page.elements.map((el) => {
-          if (el.type.startsWith('frame-')) {
-            return {
-              ...el,
-              rotate: 0,
-              children: el.children.map((el) => {
-                if (el.type === 'image' && !el.config?.src && el.src) {
-                  return { ...el, rotate: 0, config: { src: el.src } };
-                }
-                return { ...el, rotate: 0 };
-              }),
-            };
-          }
-          if (el.type === 'image' && !el.config?.src && el.src) {
-            return { ...el, rotate: 0, config: { src: el.src } };
-          }
-          return { ...el, rotate: 0 };
-        }),
-      }));
       updateTemplate({
         selectedElements: [],
         undoHistory: [],
@@ -58,7 +37,7 @@ const EditDesignPage = () => {
         scale: 1,
         status,
         type,
-        pages,
+        pages: data.pages,
         title,
         description,
         id: _id,
