@@ -43,6 +43,7 @@ export const charts = {
     'bubble',
     'area-bar',
     'area-bar-vertical',
+    'scatter'
   ],
   advanced: [
     'shapes',

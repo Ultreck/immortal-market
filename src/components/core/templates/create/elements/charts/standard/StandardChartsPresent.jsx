@@ -26,6 +26,7 @@ import { StandardAreaLineVerticalContent } from './StandardAreaLineVertical';
 import { StandardLineBarVerticalContent } from './StandardLineBarVertical';
 import { StandardBubbleChartContent } from './StandardBubbleChart';
 import { StandardBarAreaContent } from './StandardBarArea';
+import { StandardBubbleChartInSizesContent } from './StandardBubbleChartInSizes';
 
 const StandardChartsPresent = ({ element }) => {
   const components = {
@@ -55,6 +56,7 @@ const StandardChartsPresent = ({ element }) => {
     'chart-s-line-bar-vertical': StandardLineBarVerticalContent,
     'chart-s-bubble': StandardBubbleChartContent,
     'chart-s-area-bar': StandardBarAreaContent,
+    'chart-s-scatter': StandardBubbleChartInSizesContent,
     // 'chart-s-area-bar': StandardAreaBarVerticalContent,
   };
 

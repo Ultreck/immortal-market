@@ -882,6 +882,49 @@ const StandardCharts = () => {
         </div>
       ),
     },
+    {
+      id: 'chart-s-scatter',
+      type: 'chart-s-scatter',
+      name: 'Scatter Chart',
+      data: {
+        type: 'chart-s-scatter',
+        text: 'Scatter Chart',
+        width: 550,
+        height: 400,
+        style: { opacity: 1 },
+        config: {
+          data: [
+            [1777, 57.7, 187060177, 'India', 1990],
+            [15161, 68.0, 115460577, 'China', 1990],
+            [29550, 79.1, 122249285, 'Japan', 1990],
+            [19349, 69.6, 147568552, 'Russia', 1990],
+            [37062, 75.4, 252847810, 'United States', 1990],
+            [26424, 75.7, 57110117, 'United Kingdom', 1990],
+            [10088, 70.8, 38195258, 'Poland', 1990],
+            [10670, 67.3, 53994605, 'Turkey', 1990],
+            [31476, 75.4, 78958237, 'Germany', 1990],
+          ],
+          keys: { x: 'x', y: 'y' },
+          colors,
+          useGradient: false,
+          gradientColor: '#2673D9',
+          showGridline: true,
+          bubbles: 20,
+          showLegend: true,
+          showXaxis: true,
+          showYaxis: true,
+        },
+        showLegend: true,
+        showTooltip: true,
+        showXaxis: true,
+        showYaxis: true,
+      },
+      preview: (
+        <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+          <TbChartBubble className="w-full h-full" />
+        </div>
+      ),
+    },
   ];
 
   const combineDataElement = [

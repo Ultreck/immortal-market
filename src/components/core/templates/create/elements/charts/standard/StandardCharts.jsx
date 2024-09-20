@@ -28,6 +28,7 @@ import StandardLineBarVertical from './StandardLineBarVertical.jsx';
 import StandardBubbleChart from './StandardBubbleChart.jsx';
 import StandardBarArea from './StandardBarArea.jsx';
 import StandardAreaBarVertical from './StandardBarAreaVertical.jsx';
+import StandardBubbleChartInSizes from './StandardBubbleChartInSizes.jsx';
 
 const StandardCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -59,6 +60,7 @@ const StandardCharts = ({ element, active, highlighted, width, onClick, onChange
     'chart-s-bubble': StandardBubbleChart,
     'chart-s-area-bar': StandardBarArea,
     'chart-s-area-bar-vertical': StandardAreaBarVertical,
+    'chart-s-scatter': StandardBubbleChartInSizes,
   };
 
   if (components[element.type]) {
