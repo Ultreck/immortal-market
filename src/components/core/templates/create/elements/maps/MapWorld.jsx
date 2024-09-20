@@ -19,7 +19,7 @@ const MapWorld = ({ element, active, highlighted, width, onClick, onChange }) =>
     >
       <svg
         width={element.width}
-        viewBox="0 0 1227 1010"
+        viewBox="0 0 2227 1010"
         fill={element.config.fill}
         xmlns="http://www.w3.org/2000/svg"
         ref={el}

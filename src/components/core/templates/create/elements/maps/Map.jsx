@@ -5,6 +5,7 @@ import MapEurope from '@/components/core/templates/create/elements/maps/MapEurop
 import MapAfrica from '@/components/core/templates/create/elements/maps/MapAfrica.jsx';
 import MapNorthAmerica from '@/components/core/templates/create/elements/maps/MapNorthAmerica.jsx';
 import MapWorld from '@/components/core/templates/create/elements/maps/MapWorld.jsx';
+import MapAsia from '@/components/core/templates/create/elements/maps/MapAsia.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -13,6 +14,7 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     africa: MapAfrica,
     'north-america': MapNorthAmerica,
     world: MapWorld,
+    asia: MapAsia,
   };
 
   if (components[element.config.name]) {

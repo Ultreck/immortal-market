@@ -4,8 +4,9 @@ import { RiArrowLeftSLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 import { GiAfrica, GiEarthAfricaEurope, GiNigeria, GiSouthAmerica } from 'react-icons/gi';
 import { BiWorld } from 'react-icons/bi';
+import { FaEarthAsia } from "react-icons/fa6";
 
-const names = ['nigeria', 'africa', 'europe', 'north-america', 'world'];
+const names = ['nigeria', 'africa', 'europe', 'north-america', 'world', 'asia',];
 
 const previews = {
   nigeria: (
@@ -31,6 +32,11 @@ const previews = {
   world: (
     <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
       <BiWorld className="w-full h-full" />
+    </div>
+  ),
+  asia: (
+    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+      <FaEarthAsia className="w-full h-full" />
     </div>
   ),
 };
@@ -59,7 +65,7 @@ const elements = names.map((name) => ({
 const Maps = ({ onBack }) => {
   return (
     <>
-      <div className="flex items-center space-x-3 mb-6">
+      <div className="flex items-center mb-6 space-x-3">
         <Button variant="bordered" radius="full" size="sm" isIconOnly onClick={onBack}>
           <RiArrowLeftSLine size="20" />
         </Button>

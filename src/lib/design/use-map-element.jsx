@@ -30,9 +30,9 @@ const useMapElement = (element) => {
 
               return (
                 <SvgText key={item.label} x={state.x} y={state.y} width="100%" height="80px">
-                  <div className="p-1 cursor-pointer text-gray-700">
+                  <div className="p-1 text-gray-700 cursor-pointer">
                     <div className="relative">
-                      <div className="absolute -top-1 -left-1 w-3 h-3 rounded-sm border-2 border-black"></div>
+                      <div className="absolute w-3 h-3 border-2 border-black rounded-sm -top-1 -left-1"></div>
                       <Tooltip content={item.label} offset={-7}>
                         <div
                           className={cn('shadow border border-black rounded-xl px-4 py-3 w-max relative text-white', {
@@ -42,12 +42,12 @@ const useMapElement = (element) => {
                         >
                           <p className="leading-none text-[22px] grid truncate">
                             {element.config.showLabels && (
-                              <span className="font-medium text-white mix-blend-difference capitalize">
+                              <span className="font-medium text-white capitalize mix-blend-difference">
                                 {item.label}
                               </span>
                             )}
                             {element.config.showValues && (
-                              <span className="font-medium text-center text-white mix-blend-difference mt-1">
+                              <span className="mt-1 font-medium text-center text-white mix-blend-difference">
                                 {item.value}
                               </span>
                             )}
