@@ -5,7 +5,7 @@ import { TbRotate2 } from 'react-icons/tb';
 import { useRef } from 'react';
 import { cn } from '@/lib/utils.js';
 
-const DraggableResizableRotatable = ({
+const DragResizeRotate = ({
   children,
   className,
   resizable = false,
@@ -28,6 +28,7 @@ const DraggableResizableRotatable = ({
   minWidth = 20,
   minHeight = 10,
   style = {},
+  scale,
 }) => {
   const root = useRef(null);
   const [{ x, y, width, height, rotate }, api] = useSpring(
@@ -59,19 +60,27 @@ const DraggableResizableRotatable = ({
     (state) => {
       if (state.tap) return;
       if (state.first) onDragStart?.();
-      api.set({ x: state.offset[0], y: state.offset[1] });
+      api.set({
+        x: state.offset[0] / scale,
+        y: state.offset[1] / scale,
+      });
       handleChange();
       if (state.last) onDragEnd?.();
     },
     {
       enabled: draggable,
-      from: () => [x.get(), y.get()],
+      from: () => [x.get() * scale, y.get() * scale],
       filterTaps: true,
       bounds: () => {
         const parent = root.current.parentElement;
         const rect = parent.getBoundingClientRect();
         if (constrained) {
-          return { left: 0, top: 0, bottom: rect.height - height.get(), right: rect.width - width.get() };
+          return {
+            left: 0,
+            top: 0,
+            bottom: (rect.height - height.get() * scale) / scale,
+            right: (rect.width - width.get() * scale) / scale,
+          };
         } else return {};
       },
     }
@@ -90,41 +99,41 @@ const DraggableResizableRotatable = ({
       const ry = rect.y;
       const rx = rect.x;
       if (name === 'resize-se') {
-        api.set({ width: resolveWidth(ox), height: resolveHeight(oy) });
+        api.set({ width: resolveWidth(ox / scale), height: resolveHeight(oy / scale) });
       } else if (name === 'resize-ne') {
-        const _height = oy - my - my;
-        const y = iy + my - ry;
-        api.set({ width: resolveWidth(ox), height: resolveHeight(_height), y });
+        const _height = (oy - my - my) / scale;
+        const y = (iy + my - ry) / scale;
+        api.set({ width: resolveWidth(ox / scale), height: resolveHeight(_height), y });
       } else if (name === 'resize-nw') {
-        const _width = ox - mx - mx;
-        const _height = oy - my - my;
-        const x = ix + mx - rx;
-        const y = iy + my - ry;
+        const _width = (ox - mx - mx) / scale;
+        const _height = (oy - my - my) / scale;
+        const x = (ix + mx - rx) / scale;
+        const y = (iy + my - ry) / scale;
         api.set({ width: resolveWidth(_width), height: resolveHeight(_height), x, y });
       } else if (name === 'resize-sw') {
-        const _width = ox - mx - mx;
-        const _height = oy;
-        const x = ix + mx - rx;
+        const _width = (ox - mx - mx) / scale;
+        const _height = oy / scale;
+        const x = (ix + mx - rx) / scale;
         api.set({ width: resolveWidth(_width), height: resolveHeight(_height), x });
       } else if (name === 'resize-e') {
-        api.set({ width: resolveWidth(ox) });
+        api.set({ width: resolveWidth(ox / scale) });
       } else if (name === 'resize-w') {
-        const _width = ox - mx - mx;
-        const x = ix + mx - rx;
+        const _width = (ox - mx - mx) / scale;
+        const x = (ix + mx - rx) / scale;
         api.set({ width: resolveWidth(_width), x });
       } else if (name === 'resize-n') {
-        const _height = oy - my - my;
-        const y = iy + my - ry;
+        const _height = (oy - my - my) / scale;
+        const y = (iy + my - ry) / scale;
         api.set({ height: resolveHeight(_height), y });
       } else if (name === 'resize-s') {
-        api.set({ height: resolveHeight(oy) });
+        api.set({ height: resolveHeight(oy / scale) });
       }
       handleChange();
       if (state.last) onResizeEnd?.();
     },
     {
       enabled: resizable,
-      from: () => [width.get(), height.get()],
+      from: () => [width.get() * scale, height.get() * scale],
       filterTaps: true,
     }
   );
@@ -135,8 +144,8 @@ const DraggableResizableRotatable = ({
       if (state.first) onRotateStart?.();
       const rect = root.current.getBoundingClientRect();
       const [cx, cy] = state.xy;
-      const centerX = rect.left + width.get() / 2;
-      const centerY = rect.top + height.get() / 2;
+      const centerX = rect.left + (width.get() * scale) / 2;
+      const centerY = rect.top + (height.get() * scale) / 2;
       const angle = Math.atan2(cy - centerY, cx - centerX) * (180 / Math.PI) - 90;
       api.set({ rotate: angle });
       handleChange();
@@ -247,7 +256,7 @@ const DraggableResizableRotatable = ({
   );
 };
 
-DraggableResizableRotatable.propTypes = {
+DragResizeRotate.propTypes = {
   values: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
@@ -279,4 +288,4 @@ DraggableResizableRotatable.propTypes = {
   style: PropTypes.object,
 };
 
-export default DraggableResizableRotatable;
+export default DragResizeRotate;
