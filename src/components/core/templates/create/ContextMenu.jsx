@@ -24,6 +24,7 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
   const deleteElements = useTemplateStore((state) => state.deleteElements);
   const addElements = useTemplateStore((state) => state.addElements);
   const updatePage = useTemplateStore((state) => state.updatePage);
+  const updateElements = useTemplateStore((state) => state.updateElements);
   const groupElements = useTemplateStore((state) => state.groupElements);
   const ungroupElements = useTemplateStore((state) => state.ungroupElements);
   const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
@@ -105,7 +106,7 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
     let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const x = Math.min(..._elements.map((el) => el.x));
     _elements = _elements.map((el) => ({ ...el, x }));
-    updatePage({ elements: _elements }, page.id, true);
+    updateElements(_elements, page.id, true);
   };
 
   const handleAlignCenter = () => {
@@ -117,7 +118,7 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
       ...el,
       x: centerX - el.width / 2,
     }));
-    updatePage({ elements: _elements }, page.id, true);
+    updateElements(_elements, page.id, true);
   };
 
   const handleAlignRight = () => {
@@ -127,14 +128,14 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
       ...el,
       x: maxRight - el.width,
     }));
-    updatePage({ elements: _elements }, page.id, true);
+    updateElements(_elements, page.id, true);
   };
 
   const handleAlignTop = () => {
     let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const y = Math.min(..._elements.map((el) => el.y));
     _elements = _elements.map((el) => ({ ...el, y }));
-    updatePage({ elements: _elements }, page.id, true);
+    updateElements(_elements, page.id, true);
   };
 
   const handleAlignMiddle = () => {
@@ -146,7 +147,7 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
       ...el,
       y: centerY - el.height / 2,
     }));
-    updatePage({ elements: _elements }, page.id, true);
+    updateElements(_elements, page.id, true);
   };
 
   const handleAlignBottom = () => {
@@ -156,7 +157,7 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
       ...el,
       y: maxBottom - el.height,
     }));
-    updatePage({ elements: _elements }, page.id, true);
+    updateElements(_elements, page.id, true);
   };
 
   const menu = [
