@@ -112,7 +112,8 @@ const useClipboardEvents = () => {
                       ],
                     },
                   ],
-                  activePage
+                  activePage,
+                  true
                 );
               } else {
                 addElements([payload], activePage);
