@@ -210,8 +210,6 @@ const Gradient = ({ element, onChange }) => {
 
   const handleGenerateGradient = () => {
     const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
-
-    console.log(maxVisitors);
     
     const chartData = element.config.data.map((item) => {
       const value = item[element.config.keys.y];

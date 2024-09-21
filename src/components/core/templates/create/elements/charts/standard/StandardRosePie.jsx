@@ -32,8 +32,6 @@ export const StandardRosePieContent = ({ element }) => {
       return { ...item, fill: color };
     });
 
-    console.log(chartData);
-
     let chart;
     const initChart = () => {
       if (chartRef.current) {

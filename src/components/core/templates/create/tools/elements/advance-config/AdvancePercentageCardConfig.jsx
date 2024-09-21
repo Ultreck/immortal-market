@@ -18,8 +18,6 @@ const AdvancePercentageCardConfig = ({ element, onChange }) => {
     onChange({ ...element, config: { ...element.config, data } });
   };
 
-  console.log(element.config);
-
   return (
     <div>
       <Tabs

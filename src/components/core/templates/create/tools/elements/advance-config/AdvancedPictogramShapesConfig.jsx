@@ -20,8 +20,6 @@ const AdvancedPictogramShapesConfig = ({ element, onChange }) => {
     });
   };
 
-  console.log(element.config.color1);
-
   return (
     <div className="flex flex-col space-y-4">
       <p className="text-xl">Change Icon Settings</p>

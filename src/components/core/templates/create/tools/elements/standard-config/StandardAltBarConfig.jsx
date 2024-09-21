@@ -9,12 +9,9 @@ const StandardAltBarConfig = ({ element, onChange }) => {
   const handleChange = (rowIndex, colIndex, value) => {
     const updatedData = [...element.config.data];
     updatedData[colIndex][rowIndex] = value;
-
-    console.log(updatedData);
+    
     onChange({ ...element, config: { ...element.config, data: updatedData } });
   };
-
-  console.log(element);
 
   useEffect(() => {}, [element]);
   return (

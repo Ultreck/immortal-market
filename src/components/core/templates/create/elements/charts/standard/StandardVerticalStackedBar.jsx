@@ -38,9 +38,6 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
     return acc;
   }, {});
 
-  console.log({config});
-  
-
   return (
     <ChartContainer
       config={config}

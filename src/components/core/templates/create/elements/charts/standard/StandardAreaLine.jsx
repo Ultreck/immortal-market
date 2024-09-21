@@ -27,9 +27,6 @@ StandardAreaLine.propTypes = ElementPropTypes;
 export const StandardAreaLineContent = ({ element }) => {
   useEffect(() => {}, [element]);
 
-  console.log(element.config);
-  
-
   return (
     <ChartContainer
       config={{}}
