@@ -16,6 +16,7 @@ const EditDesignPage = () => {
   const title = useTemplateStore((state) => state.template.title);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const reset = useTemplateStore((state) => state.reset);
+  const currentId = useTemplateStore((state) => state.template.id);
   const { data: { success = false, design } = {}, isLoading: isTemplatesLoading } = useGetDesign(businessId, id);
 
   useEffect(() => {
@@ -28,22 +29,30 @@ const EditDesignPage = () => {
   useEffect(() => {
     if (design) {
       const { _id, title, description, status, type, data } = design;
-      updateTemplate({
-        selectedElements: [],
-        undoHistory: [],
-        redoHistory: [],
-        selectedPage: null,
-        activePage: null,
-        scale: 1,
-        status,
-        type,
-        pages: data.pages,
+      const payload = {
+        id: _id,
         title,
         description,
-        id: _id,
-      });
+        status,
+        type,
+        data,
+        pages: data.pages,
+      };
+      if (currentId === _id) {
+        updateTemplate(payload);
+      } else {
+        updateTemplate({
+          selectedElements: [],
+          undoHistory: [],
+          redoHistory: [],
+          selectedPage: null,
+          activePage: null,
+          scale: 1,
+          ...payload,
+        });
+      }
     }
-  }, [design, updateTemplate]);
+  }, [currentId, design, updateTemplate]);
 
   useUnmount(() => {
     reset();
