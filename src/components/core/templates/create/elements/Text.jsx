@@ -37,18 +37,9 @@ const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
       resizeHandles={['e']}
     >
       <div
-        className={cn('overflow-hidden relative w-full h-full', {
-          'pl-[8%]': element.config?.bar === 'left',
-          'pr-[8%]': element.config?.bar === 'right',
-        })}
+        className="overflow-hidden relative w-full h-full"
         style={{ filter: `drop-shadow(${element.style.shadow})` }}
       >
-        {element.config?.bar === 'left' && (
-          <div
-            className="absolute left-0 top-1/2 -translate-y-1/2 h-[80%] bottom-0 w-[3%] bg-gray-800 rounded-2xl"
-            style={{ backgroundColor: element.style.color }}
-          />
-        )}
         <textarea
           key={element.id}
           className={cn('bg-transparent w-full h-full resize-none overflow-hidden')}
@@ -68,18 +59,7 @@ const Text = ({ element, active, highlighted, width, onClick, onChange }) => {
 
 export const TextPresent = ({ element }) => {
   return (
-    <div
-      className={cn('overflow-hidden w-full h-full relative', {
-        'pl-[8%]': element.config?.bar === 'left',
-        'pr-[8%]': element.config?.bar === 'right',
-      })}
-    >
-      {element.config?.bar === 'left' && (
-        <div
-          className="absolute left-0 top-1/2 -translate-y-1/2 h-[80%] bottom-0 w-[3%] bg-gray-800 rounded-2xl"
-          style={{ backgroundColor: element.style.color }}
-        />
-      )}
+    <div className="overflow-hidden w-full h-full relative">
       <div style={{ ...element.style, filter: `drop-shadow(${element.style.shadow})` }} className="w-full h-full">
         {element.text}
       </div>

@@ -48,12 +48,6 @@ const styles = {
   },
 };
 
-const configs = {
-  heading: {
-    bar: 'left',
-  },
-};
-
 const texts = [
   ...['heading', 'subheading', 'paragraph', 'caption'].map((type) => {
     return {
@@ -66,7 +60,7 @@ const texts = [
         width: 400,
         height: 36,
         style: styles[type],
-        config: configs[type] || {},
+        config: {},
       },
       preview: (
         <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-4 overflow-hidden">
