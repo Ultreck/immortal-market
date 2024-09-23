@@ -1,12 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import Bold from '@/components/core/templates/create/tools/elements/Bold.jsx';
-import Italic from '@/components/core/templates/create/tools/elements/Italic.jsx';
-import Underline from '@/components/core/templates/create/tools/elements/Underline.jsx';
-import TextColor from '@/components/core/templates/create/tools/elements/TextColor.jsx';
 import Background from './elements/Background.jsx';
 import ChartConfig from './elements/ChartConfig.jsx';
 import useTemplateStore from '@/store/template.js';
-import TextAlign from './elements/TextAlign.jsx';
 import { createElement, Fragment, useMemo } from 'react';
 import Border from './elements/Border.jsx';
 import Opacity from './elements/Opacity.jsx';
@@ -23,15 +18,12 @@ import InfographicConfig from '@/components/core/templates/create/tools/elements
 import Colors from './elements/Colors.jsx';
 import Font from '@/components/core/templates/create/tools/elements/Font.jsx';
 import MapConfig from '@/components/core/templates/create/tools/elements/map/MapConfig.jsx';
+import Color from '@/components/core/templates/create/tools/elements/Color.jsx';
 
 const mapping = {
-  bold: { type: 'multiple', component: Bold },
-  italic: { type: 'multiple', component: Italic },
-  underline: { type: 'multiple', component: Underline },
   font: { type: 'multiple', component: Font },
-  'text-color': { type: 'multiple', component: TextColor },
-  'background-color': { type: 'multiple', component: Background },
-  'text-align': { type: 'multiple', component: TextAlign },
+  color: { type: 'multiple', component: Color },
+  background: { type: 'multiple', component: Background },
   chart: { type: 'single', component: ChartConfig },
   icon: { type: 'single', component: IconConfig },
   table: { type: 'single', component: TableConfig },

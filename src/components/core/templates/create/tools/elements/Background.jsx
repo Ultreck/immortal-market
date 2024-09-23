@@ -31,8 +31,7 @@ const Background = ({ elements, onChange }) => {
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
-        <div
-          tabIndex="0"
+        <button
           className={cn('my-2 w-[20px] h-[20px] rounded-full hover:brightness-105 cursor-pointer')}
           style={{ background: value }}
         />
@@ -44,17 +43,19 @@ const Background = ({ elements, onChange }) => {
           color="primary"
           radius="full"
           classNames={{
-            base: 'mb-4',
+            base: 'mb-2',
             tab: 'text-base px-4',
           }}
           selectedKey={tab}
           onSelectionChange={handleTabChange}
         >
-          <Tab key="solid" title="Solid" />
-          <Tab key="gradient" title="Gradient" />
+          <Tab key="solid" title="Solid">
+            <Solid elements={elements} onChange={onChange} />
+          </Tab>
+          <Tab key="gradient" title="Gradient">
+            <Gradient elements={elements} onChange={onChange} />
+          </Tab>
         </Tabs>
-        {tab === 'solid' && <Solid elements={elements} onChange={onChange} />}
-        {tab === 'gradient' && <Gradient elements={elements} onChange={onChange} />}
       </PopoverContent>
     </Popover>
   );

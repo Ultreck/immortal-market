@@ -2,12 +2,12 @@ import { Autocomplete, AutocompleteItem, Button } from '@nextui-org/react';
 import { TbMinus, TbPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
-const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 100, step = 1 }) => {
+const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel, min = 0, max = 100, step = 1 }) => {
   return (
     <div className="gap-2 flex items-center">
       <Button
         isIconOnly
-        variant="flat"
+        variant="bordered"
         className="text-base"
         isDisabled={isNaN(value) || value <= min}
         onClick={() => {
@@ -33,6 +33,7 @@ const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 10
           onChange(+v);
         }}
         menuTrigger="manual"
+        variant={variant}
       >
         {Array.from({ length: max - min + 1 }, (_, i) => i + min).map((n) => (
           <AutocompleteItem key={n} value={n} textValue={n.toString()}>
@@ -42,7 +43,7 @@ const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 10
       </Autocomplete>
       <Button
         isIconOnly
-        variant="flat"
+        variant="bordered"
         className="text-base"
         isDisabled={isNaN(value) || value >= max}
         onClick={() => {
@@ -57,6 +58,7 @@ const AutoCompleteNumberInput = ({ value, onChange, ariaLabel, min = 0, max = 10
 };
 
 AutoCompleteNumberInput.propTypes = {
+  variant: PropTypes.oneOf(['flat', 'bordered', 'faded', 'underlined']),
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   onChange: PropTypes.func.isRequired,
   ariaLabel: PropTypes.string.isRequired,

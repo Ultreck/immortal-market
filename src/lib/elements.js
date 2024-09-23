@@ -43,7 +43,7 @@ export const charts = {
     'bubble',
     'area-bar',
     'area-bar-vertical',
-    'scatter'
+    'scatter',
   ],
   advanced: [
     'shapes',
@@ -73,7 +73,7 @@ export const charts = {
 
 export const tools = {
   ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
-    acc[type] = ['bold', 'italic', 'underline', 'font', 'text-color', 'opacity', 'animation', 'shadow'];
+    acc[type] = ['font', 'opacity', 'animation', 'shadow'];
     return acc;
   }, {}),
   ...charts.standard.reduce((acc, type) => {
@@ -84,16 +84,16 @@ export const tools = {
     acc[`chart-a-${type}`] = ['advanced-chart', 'colors', 'opacity'];
     return acc;
   }, {}),
-  shape: ['background-color', 'border', 'opacity', 'animation', 'shadow'],
+  shape: ['background', 'border', 'opacity', 'animation', 'shadow'],
   frame: (element) => {
     if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow'];
     if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow'];
     return ['opacity', 'animation', 'shadow'];
   },
-  icon: ['icon', 'opacity', 'animation', 'shadow', 'text-color'],
+  icon: ['icon', 'color', 'opacity', 'animation', 'shadow'],
   map: ['map', 'opacity'],
-  table: ['table', 'colors', 'opacity', 'font', 'text-color', 'animation'],
-  line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
+  table: ['table', 'colors', 'font', 'opacity', 'animation'],
+  line: ['background', 'opacity', 'line', 'animation', 'shadow'],
   image: ['border', 'opacity', 'animation', 'shadow'],
   infographic: ['infographic', 'opacity'],
 };

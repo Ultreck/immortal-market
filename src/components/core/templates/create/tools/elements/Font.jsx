@@ -1,19 +1,30 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import { TbTextSize } from 'react-icons/tb';
+import { TbBold, TbItalic, TbUnderline } from 'react-icons/tb';
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
+import useResolveValue from '@/hooks/template/use-resolve-value.js';
+import { RiAlignCenter, RiAlignJustify, RiAlignLeft, RiAlignRight, RiFontFamily } from 'react-icons/ri';
+import { createElement } from 'react';
+import ColorPicker from '@/components/ui/ColorPicker.jsx';
 
 const Font = ({ elements, onChange }) => {
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbTextSize size="20" />
+          <RiFontFamily size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-6 py-6 w-full space-y-4">
+          <div className="flex items-center space-x-2">
+            <Bold elements={elements} onChange={onChange} />
+            <Italic elements={elements} onChange={onChange} />
+            <Underline elements={elements} onChange={onChange} />
+            <TextAlign elements={elements} onChange={onChange} />
+            <TextColor elements={elements} onChange={onChange} />
+          </div>
           <FontFamily elements={elements} onChange={onChange} />
           <FontSize elements={elements} onChange={onChange} />
           <LetterSpacing elements={elements} onChange={onChange} />
@@ -48,22 +59,19 @@ const fonts = [
 ];
 
 const FontFamily = ({ elements, onChange }) => {
-  const values = elements.map((e) => e.style.fontFamily);
-  const same = values.every((v) => v === values[0]);
-  const value = same ? values[0] : '';
+  const value = useResolveValue(elements.map((e) => e.style.fontFamily));
 
   const handleChange = (event) => {
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, fontFamily: event.target.value } })));
   };
 
   return (
-    <div>
+    <div className="flex flex-col space-y-2">
+      <p className="text-base opacity-75 whitespace-nowrap">Font family:</p>
       <Select
-        label="Font family"
-        labelPlacement="outside"
         aria-label="Select font family"
         placeholder="Select font family"
-        className="max-w-xs"
+        classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
         onChange={handleChange}
         defaultSelectedKeys={[value]}
       >
@@ -76,9 +84,7 @@ const FontFamily = ({ elements, onChange }) => {
 };
 
 const FontSize = ({ elements, onChange }) => {
-  const values = elements.map((e) => e.style.fontSize);
-  const same = values.every((v) => v === values[0]);
-  const value = same ? values[0] : '';
+  const value = useResolveValue(elements.map((e) => e.style.fontSize));
 
   const handleChange = (v) => {
     if (v === '') return;
@@ -94,9 +100,7 @@ const FontSize = ({ elements, onChange }) => {
 };
 
 const LetterSpacing = ({ elements, onChange }) => {
-  const values = elements.map((e) => e.style.letterSpacing);
-  const same = values.every((v) => v === values[0]);
-  const value = same ? values[0] : '';
+  const value = useResolveValue(elements.map((e) => e.style.letterSpacing));
 
   const handleChange = (v) => {
     if (v === '') return;
@@ -112,9 +116,7 @@ const LetterSpacing = ({ elements, onChange }) => {
 };
 
 const LineHeight = ({ elements, onChange }) => {
-  const values = elements.map((e) => e.style.lineHeight);
-  const same = values.every((v) => v === values[0]);
-  const value = same ? values[0] : '';
+  const value = useResolveValue(elements.map((e) => e.style.lineHeight));
 
   const handleChange = (v) => {
     if (v === '') return;
@@ -129,6 +131,125 @@ const LineHeight = ({ elements, onChange }) => {
   );
 };
 
+const Bold = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((el) => el.style.fontWeight));
+
+  return (
+    <Button
+      isIconOnly
+      variant={value === 'bold' ? 'solid' : 'text'}
+      aria-label="Bold/unbold text"
+      onClick={() => {
+        const _elements = elements.map((el) => {
+          if (!value) return { ...el, style: { ...el.style, fontWeight: 'bold' } };
+          const style = { ...el.style };
+          style.fontWeight = style.fontWeight === 'bold' ? 'normal' : 'bold';
+          return { ...el, style };
+        });
+        onChange(_elements);
+      }}
+    >
+      <TbBold size="20" />
+    </Button>
+  );
+};
+
+const Italic = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((el) => el.style.fontStyle));
+
+  return (
+    <Button
+      isIconOnly
+      variant={value === 'italic' ? 'solid' : 'text'}
+      aria-label="Italisize/unitalicize text"
+      onClick={() => {
+        const _elements = elements.map((el) => {
+          if (!value) return { ...el, style: { ...el.style, fontStyle: 'italic' } };
+          const style = { ...el.style };
+          style.fontStyle = style.fontStyle === 'italic' ? 'normal' : 'italic';
+          return { ...el, style };
+        });
+        onChange(_elements);
+      }}
+    >
+      <TbItalic size="20" />
+    </Button>
+  );
+};
+
+const Underline = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((el) => el.style.textDecoration));
+
+  return (
+    <Button
+      isIconOnly
+      variant={value === 'underline' ? 'solid' : 'text'}
+      aria-label="Underline/unbold text"
+      onClick={() => {
+        const _elements = elements.map((el) => {
+          if (!value) return { ...el, style: { ...el.style, textDecoration: 'underline' } };
+          const style = { ...el.style };
+          style.textDecoration = style.textDecoration === 'underline' ? 'none' : 'underline';
+          return { ...el, style };
+        });
+        onChange(_elements);
+      }}
+    >
+      <TbUnderline size="20" />
+    </Button>
+  );
+};
+
+const options = [
+  { value: 'left', icon: RiAlignLeft },
+  { value: 'right', icon: RiAlignRight },
+  { value: 'center', icon: RiAlignCenter },
+  { value: 'justify', icon: RiAlignJustify },
+];
+
+const TextAlign = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((e) => e.style.textAlign));
+  const selected = options.find((option) => option.value === value);
+
+  const handleChange = () => {
+    const index = options.findIndex((option) => option.value === selected.value);
+    const next = options[(index + 1) % options.length];
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, textAlign: next.value } })));
+  };
+
+  return (
+    <Button variant="text" isIconOnly className="text-base" onClick={() => handleChange()}>
+      {createElement(selected.icon, { size: 20 })}
+    </Button>
+  );
+};
+
+const TextColor = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((e) => e.style.color));
+
+  const handleChange = (v) => {
+    if (!v) return;
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, color: v } })));
+  };
+
+  return (
+    <div>
+      <ColorPicker
+        color={value}
+        onChange={(color) => handleChange(color)}
+        trigger={
+          <Button variant="text" isIconOnly className="text-base">
+            <div className="w-6 flex flex-col items-center justify-center">
+              <RiFontFamily size="16" />
+              <div className="rounded-2xl h-1.5 mt-0.5 w-full" style={{ background: value }}></div>
+            </div>
+          </Button>
+        }
+      />
+    </div>
+  );
+};
+
 const propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
@@ -139,5 +260,10 @@ FontSize.propTypes = propTypes;
 LetterSpacing.propTypes = propTypes;
 LineHeight.propTypes = propTypes;
 FontFamily.propTypes = propTypes;
+Bold.propTypes = propTypes;
+Italic.propTypes = propTypes;
+Underline.propTypes = propTypes;
+TextAlign.propTypes = propTypes;
+TextColor.propTypes = propTypes;
 
 export default Font;
