@@ -133,7 +133,7 @@ const TemplatesPage = () => {
                     <Link
                       key={i}
                       to={`/designs/${design._id}/edit`}
-                      className="flex items-center justify-center p-5 bg-default-200 rounded-3xl aspect-square"
+                      className="flex items-center justify-center p-5 bg-default-200 dark:bg-default-50 rounded-3xl aspect-square"
                     >
                       {design.thumbnail ? (
                         <Image
