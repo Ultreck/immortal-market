@@ -130,16 +130,20 @@ const TemplatesPage = () => {
               <div className="grid grid-cols-4 gap-4 md:gap-8">
                 {designs.map((design, i) => (
                   <div key={i}>
-                    <Link key={i} to={`/designs/${design._id}/edit`}>
+                    <Link
+                      key={i}
+                      to={`/designs/${design._id}/edit`}
+                      className="flex items-center justify-center p-5 bg-default-200 rounded-3xl aspect-square"
+                    >
                       {design.thumbnail ? (
                         <Image
                           src={getImageLink(design.thumbnail)}
                           alt={design.title}
                           removeWrapper
-                          className="object-cover aspect-square"
+                          className="object-contain rounded-2xl"
                         />
                       ) : (
-                        <div className="rounded-2xl bg-default-200 dark:bg-default-50 aspect-square flex justify-center items-center">
+                        <div className="">
                           <TbPhotoCircle size="48" className="opacity-50" />
                         </div>
                       )}
