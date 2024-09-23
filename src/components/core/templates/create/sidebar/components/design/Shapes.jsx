@@ -15,7 +15,7 @@ const items = [
       width: 120,
       height: 120,
       style: {
-        backgroundColor: '#eee',
+        background: '#eee',
         borderWidth: 0,
         borderColor: '#000000',
         opacity: 1,
@@ -43,7 +43,7 @@ const items = [
       width: 100,
       height: 8,
       style: {
-        backgroundColor: '#eee',
+        background: '#eee',
         borderWidth: 0,
         borderColor: '#000000',
         opacity: 1,

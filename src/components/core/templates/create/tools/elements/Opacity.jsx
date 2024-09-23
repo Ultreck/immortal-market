@@ -1,14 +1,12 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import { BsTransparency } from 'react-icons/bs';
+import useResolveValue from '@/hooks/template/use-resolve-value.js';
 
 const Opacity = ({ elements, onChange }) => {
-  const values = elements.map((e) => e.style.opacity);
-  const same = values.every((v) => v === values[0]);
-  const value = same ? values[0] : '';
+  const value = useResolveValue(elements.map((e) => e.style.opacity));
 
   const handleChange = (v) => {
-    if (!v) return;
+    if (isNaN(v)) return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, opacity: v } })));
   };
 
@@ -16,18 +14,45 @@ const Opacity = ({ elements, onChange }) => {
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <BsTransparency size="20" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g fill="currentColor" fillRule="evenodd">
+              <path d="M3 2h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm0 8h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm0 8h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"></path>
+              <path
+                d="M11 2h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm0 8h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm0 8h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"
+                opacity=".45"
+              ></path>
+              <path
+                d="M19 2h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm0 8h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm0 8h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"
+                opacity=".15"
+              ></path>
+              <path
+                d="M7 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 8h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"
+                opacity=".7"
+              ></path>
+              <path
+                d="M15 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 8h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"
+                opacity=".3"
+              ></path>
+            </g>
+          </svg>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="px-6 py-4 shadow border border-default-200 w-[200px]">
+      <PopoverContent className="px-6 py-4 shadow border border-default-200 w-[240px]">
         <Slider
-          color="foreground"
-          onChange={(opacity) => handleChange(opacity)}
-          label="Opacity"
-          step={0.1}
-          maxValue={1}
+          value={value * 100}
+          onChange={(opacity) => handleChange(opacity / 100)}
+          label="Transparency"
+          maxValue={100}
           minValue={0}
-          defaultValue={value}
+          classNames={{
+            thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+            track: 'border-s-default-300',
+            filler: 'bg-gradient-to-r from-default-300 to-default-400',
+            label: 'text-base',
+            value: 'text-base opacity-60',
+          }}
+          size="sm"
+          showOutline
         />
       </PopoverContent>
     </Popover>
@@ -35,18 +60,7 @@ const Opacity = ({ elements, onChange }) => {
 };
 
 Opacity.propTypes = {
-  elements: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-      style: PropTypes.object,
-    })
-  ),
+  elements: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

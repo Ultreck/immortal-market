@@ -22,7 +22,7 @@ const CanvasPresent = ({ page }) => {
       style={{
         width: page.width,
         height: page.height,
-        backgroundColor: page.style.backgroundColor,
+        background: page.style.background,
         transform: `scale(${scale})`,
       }}
       className="origin-top relative overflow-hidden mx-auto"

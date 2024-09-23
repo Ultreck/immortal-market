@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
-import { HiEyeDropper } from 'react-icons/hi2';
 import { useState } from 'react';
 import html2canvas from 'html2canvas';
 import Portal from '../../../../../ui/Portal.js';
 import { Button } from '@nextui-org/react';
+import { TbColorPicker } from 'react-icons/tb';
 
 const EyeDropTool = ({ value, onChange }) => {
-  const [pickerCanvas, setPickerCanvas] = useState(null);
   const [coverUp, setCoverUp] = useState(false);
   const [isPicking, setIsPicking] = useState(false);
 
@@ -21,11 +20,8 @@ const EyeDropTool = ({ value, onChange }) => {
         blankCanvas.height = root.offsetHeight * 2;
         ctx.drawImage(canvas, 0, 0);
       }
-      setPickerCanvas(ctx);
     });
   };
-
-  const onSelect = (color) => console.log(color);
 
   const getEyeDrop = () => {
     setIsPicking(true);
@@ -48,18 +44,11 @@ const EyeDropTool = ({ value, onChange }) => {
 
   const getColorLegacy = (e) => {
     e.stopPropagation();
-    if (pickerCanvas) {
-      const { pageX, pageY } = e;
-      const x1 = pageX * 2;
-      const y1 = pageY * 2;
-      const rgb = pickerCanvas.getImageData(x1, y1, 1, 1).data;
-      onSelect(`rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 1)`);
-    }
     setIsPicking(false);
     setCoverUp(false);
   };
 
-  let bgValueText = value.startsWith('linear') ? 'gradient' : value;
+  let bgValueText = value.includes('gradient') ? 'gradient' : value;
 
   return (
     <div className="mt-5">
@@ -72,7 +61,7 @@ const EyeDropTool = ({ value, onChange }) => {
           variant="light"
           className={`border p-2 ${isPicking && `bg-slate-600`}`}
         >
-          <HiEyeDropper size={16} />
+          <TbColorPicker size={16} />
         </Button>
       </div>
       {coverUp && (

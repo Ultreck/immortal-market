@@ -68,7 +68,7 @@ export const charts = {
     'column-card',
     'percentage-card-2',
   ],
-  map: ['map', 'europe-map', 'africa-map', 'north-america-map', 'world-map', 'asia-map',],
+  map: ['map', 'europe-map', 'africa-map', 'north-america-map', 'world-map', 'asia-map'],
 };
 
 export const tools = {
@@ -84,17 +84,17 @@ export const tools = {
     acc[`chart-a-${type}`] = ['advanced-chart', 'colors', 'opacity'];
     return acc;
   }, {}),
-  shape: ['background-color', 'border', 'opacity', 'border-radius', 'animation', 'shadow'],
+  shape: ['background-color', 'border', 'opacity', 'animation', 'shadow'],
   frame: (element) => {
     if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow'];
     if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow'];
-    return ['opacity', 'border-radius', 'animation', 'shadow'];
+    return ['opacity', 'animation', 'shadow'];
   },
   icon: ['icon', 'opacity', 'animation', 'shadow', 'text-color'],
   map: ['map', 'opacity'],
   table: ['table', 'colors', 'opacity', 'font', 'text-color', 'animation'],
   line: ['background-color', 'opacity', 'line', 'animation', 'shadow'],
-  image: ['border', 'border-radius', 'opacity', 'animation', 'shadow'],
+  image: ['border', 'opacity', 'animation', 'shadow'],
   infographic: ['infographic', 'opacity'],
 };
 

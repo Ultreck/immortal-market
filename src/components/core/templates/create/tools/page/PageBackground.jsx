@@ -31,9 +31,9 @@ const PageBackground = ({ page, onChange }) => {
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-4 py-6 w-full">
           <HexColorPicker
-            color={page.style.backgroundColor}
+            color={page.style.background}
             onChange={(color) => {
-              onChange({ style: { ...page.style, backgroundColor: color } });
+              onChange({ style: { ...page.style, background: color } });
             }}
           />
           <div className="grid grid-cols-6 gap-y-3 gap-x-3 mt-6">
@@ -41,11 +41,11 @@ const PageBackground = ({ page, onChange }) => {
               <div
                 key={index}
                 className="w-[25px] h-[25px] rounded-full hover:scale-105 transition-transform cursor-pointer relative"
-                style={{ backgroundColor: color }}
-                onClick={() => onChange({ style: { ...page.style, backgroundColor: color } })}
+                style={{ background: color }}
+                onClick={() => onChange({ style: { ...page.style, background: color } })}
               >
                 <AnimatePresence mode="wait">
-                  {page.style.backgroundColor === color && (
+                  {page.style.background === color && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}

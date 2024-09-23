@@ -1,37 +1,33 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@nextui-org/react';
-import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
-import { HiCheck } from 'react-icons/hi2';
-import { AnimatePresence, motion } from 'framer-motion';
-import { TbBorderStyle } from 'react-icons/tb';
-
-const colors = [
-  '#000000',
-  '#800000',
-  '#808000',
-  '#008080',
-  '#808080',
-  '#993366',
-  '#660066',
-  '#0066CC',
-  '#800080',
-  '#366883',
-  '#1c3575',
-  '#2b3793',
-];
+import ColorPicker from '@/components/ui/ColorPicker.jsx';
+import useResolveValue from '@/hooks/template/use-resolve-value.js';
 
 const Border = ({ elements, onChange }) => {
-  const borderColorValues = elements.map((e) => e.style.borderColor);
-  const same = borderColorValues.every((v) => v === borderColorValues[0]);
-  const borderColorValue = same ? borderColorValues[0] : '';
-  const borderWidthValues = elements.map((e) => e.style.borderWidth);
-  const sameWidth = borderWidthValues.every((v) => v === borderWidthValues[0]);
-  const borderWidthValue = sameWidth ? borderWidthValues[0] : '';
+  return (
+    <Popover placement="left" showArrow offset={10} classNames={{ content: 'w-[260px]' }}>
+      <PopoverTrigger>
+        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+            <rect width="18" height="1.5" x="3" y="4" fill="currentColor" rx=".75"></rect>
+            <rect width="18" height="3" x="3" y="8.5" fill="currentColor" rx="1"></rect>
+            <rect width="18" height="5.5" x="3" y="14.5" fill="currentColor" rx="1"></rect>
+          </svg>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="px-8 py-6 shadow border border-default-200 space-y-4">
+        <div className="w-full flex items-center space-x-6">
+          <BorderWeight onChange={onChange} elements={elements} />
+          <BorderColor onChange={onChange} elements={elements} />
+        </div>
+        <BorderRadius onChange={onChange} elements={elements} />
+      </PopoverContent>
+    </Popover>
+  );
+};
 
-  const handleColorChange = (v) => {
-    if (!v) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, borderColor: v } })));
-  };
+const BorderWeight = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((e) => e.style.borderWidth));
 
   const handleWidthChange = (v) => {
     if (isNaN(v)) return;
@@ -39,67 +35,74 @@ const Border = ({ elements, onChange }) => {
   };
 
   return (
-    <Popover placement="left" showArrow offset={10}>
-      <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbBorderStyle size="20" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="px-8 py-6 shadow border border-default-200 space-y-4">
-        <Slider
-          color="foreground"
-          onChange={(width) => handleWidthChange(width)}
-          label="Border width"
-          step={1}
-          maxValue={50}
-          minValue={0}
-          defaultValue={borderWidthValue}
-        />
-        <div>
-          <p className="mb-2">Border color</p>
-          <HexAlphaColorPicker color={borderColorValue} onChange={(color) => handleColorChange(color)} />
-          <div className="grid grid-cols-6 gap-y-3 gap-x-3 mt-6">
-            {colors.map((color, index) => (
-              <div
-                key={index}
-                className="w-[25px] h-[25px] rounded-full hover:scale-105 transition-transform cursor-pointer relative"
-                style={{ backgroundColor: color }}
-                onClick={() => handleColorChange(color)}
-              >
-                <AnimatePresence mode="wait">
-                  {borderColorValue === color && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="absolute inset-0 rounded-full bg-white/50 dark:bg-black/50 flex items-center justify-center"
-                    >
-                      <HiCheck size={16} />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </div>
-        </div>
-      </PopoverContent>
-    </Popover>
+    <Slider
+      value={value}
+      onChange={(width) => handleWidthChange(width)}
+      label="Border weight"
+      step={1}
+      maxValue={50}
+      minValue={0}
+      showOutline
+      classNames={{
+        thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+        track: 'border-s-default-300',
+        filler: 'bg-gradient-to-r from-default-300 to-default-400',
+        label: 'text-base',
+        value: 'text-base opacity-60',
+      }}
+      size="sm"
+    />
   );
 };
 
-Border.propTypes = {
-  elements: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-      style: PropTypes.object,
-    })
-  ),
+const BorderColor = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((e) => e.style.borderColor));
+
+  const handleColorChange = (v) => {
+    if (!v) return;
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, borderColor: v } })));
+  };
+
+  return <ColorPicker color={value} onChange={(color) => handleColorChange(color)} />;
+};
+
+const BorderRadius = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((e) => e.style.borderRadius));
+
+  const handleChange = (v) => {
+    if (!v) return;
+    onChange(elements.map((e) => ({ ...e, style: { ...e.style, borderRadius: v } })));
+  };
+
+  return (
+    <Slider
+      onChange={(opacity) => handleChange(opacity)}
+      label="Corner rounding"
+      step={1}
+      maxValue={150}
+      minValue={0}
+      value={value}
+      showOutline
+      classNames={{
+        thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+        track: 'border-s-default-300',
+        filler: 'bg-gradient-to-r from-default-300 to-default-400',
+        label: 'text-base',
+        value: 'text-base opacity-60',
+      }}
+      size="sm"
+    />
+  );
+};
+
+const propTypes = {
+  elements: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
 };
+
+Border.propTypes = propTypes;
+BorderWeight.propTypes = propTypes;
+BorderColor.propTypes = propTypes;
+BorderRadius.propTypes = propTypes;
 
 export default Border;

@@ -1,38 +1,40 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@nextui-org/react';
-import { TbShadow } from 'react-icons/tb';
 import PropTypes from 'prop-types';
-import { HexAlphaColorPicker } from 'react-colorful';
+import useResolveValue from '@/hooks/template/use-resolve-value.js';
+import ColorPicker from '@/components/ui/ColorPicker.jsx';
+import { RiShadowLine } from 'react-icons/ri';
 
 const Shadow = ({ onChange, elements }) => {
-  const values = elements.map((e) => e.style.shadow);
-  const same = values.every((v) => v === values[0]);
-  const value = same ? values[0] : '';
+  const value = useResolveValue(elements.map((e) => e.style.shadow));
 
-  const x = same && value ? value.split(' ')?.[0]?.replace('px', '') || '0' : '0';
-  const y = same && value ? value.split(' ')?.[1]?.replace('px', '') || '0' : '0';
-  const blur = same && value ? value.split(' ')?.[2]?.replace('px', '') || '0' : '0';
-  const color = same && value ? value.split(' ')?.[3] || '#00000000' : '#00000000';
+  const x = value ? value.split(' ')?.[0]?.replace('px', '') || '0' : '0';
+  const y = value ? value.split(' ')?.[1]?.replace('px', '') || '0' : '0';
+  const blur = value ? value.split(' ')?.[2]?.replace('px', '') || '0' : '0';
+  const color = value ? value.split(' ')?.[3] || '#00000000' : '#00000000';
 
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbShadow size="20" />
+          <RiShadowLine size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 shadow border border-default-200">
-        <div className="px-6 py-6 w-64 space-y-4">
-          <HexAlphaColorPicker
-            color={color}
-            onChange={(c) => {
-              onChange(
-                elements.map((e) => ({
-                  ...e,
-                  style: { ...e.style, shadow: `${x}px ${y}px ${blur}px ${c}` },
-                }))
-              );
-            }}
-          />
+      <PopoverContent className="px-8 py-6 shadow border border-default-200 w-[260px]">
+        <div className="space-y-4 w-full">
+          <div className="flex items-center justify-between space-x-2">
+            <p className="text-base">Color</p>
+            <ColorPicker
+              color={color}
+              onChange={(c) =>
+                onChange(
+                  elements.map((e) => ({
+                    ...e,
+                    style: { ...e.style, shadow: `${x}px ${y}px ${blur}px ${c}` },
+                  }))
+                )
+              }
+            />
+          </div>
           <Slider
             color="foreground"
             value={x}
@@ -51,6 +53,14 @@ const Shadow = ({ onChange, elements }) => {
             fillOffset={0}
             formatOptions={{ signDisplay: 'always' }}
             size="sm"
+            classNames={{
+              thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+              track: 'border-s-default-300',
+              filler: 'bg-gradient-to-r from-default-300 to-default-400',
+              label: 'text-base',
+              value: 'text-base opacity-60',
+            }}
+            showOutline
           />
           <Slider
             color="foreground"
@@ -70,6 +80,14 @@ const Shadow = ({ onChange, elements }) => {
             fillOffset={0}
             formatOptions={{ signDisplay: 'always' }}
             size="sm"
+            classNames={{
+              thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+              track: 'border-s-default-300',
+              filler: 'bg-gradient-to-r from-default-300 to-default-400',
+              label: 'text-base',
+              value: 'text-base opacity-60',
+            }}
+            showOutline
           />
           <Slider
             color="foreground"
@@ -87,6 +105,14 @@ const Shadow = ({ onChange, elements }) => {
             maxValue={100}
             minValue={0}
             size="sm"
+            classNames={{
+              thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+              track: 'border-s-default-300',
+              filler: 'bg-gradient-to-r from-default-300 to-default-400',
+              label: 'text-base',
+              value: 'text-base opacity-60',
+            }}
+            showOutline
           />
         </div>
       </PopoverContent>
@@ -95,18 +121,7 @@ const Shadow = ({ onChange, elements }) => {
 };
 
 Shadow.propTypes = {
-  elements: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-      style: PropTypes.object,
-    })
-  ),
+  elements: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

@@ -29,4 +29,3 @@ const ZoomSlider = () => {
 };
 
 export default ZoomSlider;
-

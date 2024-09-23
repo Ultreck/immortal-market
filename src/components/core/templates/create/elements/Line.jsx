@@ -30,7 +30,7 @@ export const LineElementContent = ({ element }) => {
         {element.lineEnd === 'arrow' && (
           <defs>
             <marker id="lineEnd" orient="auto" markerWidth="3" markerHeight="4" refX="0.1" refY="2">
-              <path d="M0,0 V4 L2,2 Z" fill={element.style.backgroundColor} />
+              <path d="M0,0 V4 L2,2 Z" fill={element.style.background} />
             </marker>
           </defs>
         )}
@@ -44,7 +44,7 @@ export const LineElementContent = ({ element }) => {
                     a 75,75 0 1,0 -150,0
                     a 75,75 0 1,0  150,0
                     "
-                fill={element.style.backgroundColor}
+                fill={element.style.background}
               />
             </marker>
           </defs>
@@ -52,14 +52,14 @@ export const LineElementContent = ({ element }) => {
         {element.lineEnd === 'circle' && (
           <defs>
             <marker id="lineEnd" markerWidth="4" markerHeight="4" refX="2" refY="2">
-              <circle cx="2" cy="2" r="2" fill={element.style.backgroundColor} />
+              <circle cx="2" cy="2" r="2" fill={element.style.background} />
             </marker>
           </defs>
         )}
         {element.lineStart === 'arrow' && (
           <defs>
             <marker id="lineStart" orient="auto" markerWidth="3" markerHeight="4" refX="0" refY="2">
-              <path d="M4,0 V4 L-2,2 Z" fill={element.style.backgroundColor} />
+              <path d="M4,0 V4 L-2,2 Z" fill={element.style.background} />
             </marker>
           </defs>
         )}
@@ -73,7 +73,7 @@ export const LineElementContent = ({ element }) => {
                     a 75,75 0 1,0 -150,0
                     a 75,75 0 1,0  150,0
                     "
-                fill={element.style.backgroundColor}
+                fill={element.style.background}
               />
             </marker>
           </defs>
@@ -81,7 +81,7 @@ export const LineElementContent = ({ element }) => {
         {element.lineStart === 'circle' && (
           <defs>
             <marker id="lineStart" markerWidth="4" markerHeight="4" refX="0" refY="2">
-              <circle cx="2" cy="2" r="2" fill={element.style.backgroundColor} />
+              <circle cx="2" cy="2" r="2" fill={element.style.background} />
             </marker>
           </defs>
         )}
@@ -91,10 +91,10 @@ export const LineElementContent = ({ element }) => {
           markerEnd="url(#lineEnd)"
           markerStart="url(#lineStart)"
           strokeWidth="4"
-          fill={element.style.backgroundColor}
+          fill={element.style.background}
           stroke="black"
           d={`M0,${element.height / 2}, ${element.width / 1.1} ${element.height / 2},20`}
-          style={{ stroke: element.style.backgroundColor, strokeWidth: element.style.strokeWidth }}
+          style={{ stroke: element.style.background, strokeWidth: element.style.strokeWidth }}
         />
       </svg>
     </div>

@@ -3,14 +3,13 @@ import Bold from '@/components/core/templates/create/tools/elements/Bold.jsx';
 import Italic from '@/components/core/templates/create/tools/elements/Italic.jsx';
 import Underline from '@/components/core/templates/create/tools/elements/Underline.jsx';
 import TextColor from '@/components/core/templates/create/tools/elements/TextColor.jsx';
-import BackgroundColor from './elements/BackgroundColor.jsx';
+import Background from './elements/Background.jsx';
 import ChartConfig from './elements/ChartConfig.jsx';
 import useTemplateStore from '@/store/template.js';
 import TextAlign from './elements/TextAlign.jsx';
 import { createElement, Fragment, useMemo } from 'react';
 import Border from './elements/Border.jsx';
 import Opacity from './elements/Opacity.jsx';
-import BorderRadius from './elements/BorderRadius.jsx';
 import TableConfig from '@/components/core/templates/create/tools/elements/TableConfig.jsx';
 import Line from './elements/Line.jsx';
 import IconConfig from './elements/IconConfig.jsx';
@@ -31,14 +30,13 @@ const mapping = {
   underline: { type: 'multiple', component: Underline },
   font: { type: 'multiple', component: Font },
   'text-color': { type: 'multiple', component: TextColor },
-  'background-color': { type: 'multiple', component: BackgroundColor },
+  'background-color': { type: 'multiple', component: Background },
   'text-align': { type: 'multiple', component: TextAlign },
   chart: { type: 'single', component: ChartConfig },
   icon: { type: 'single', component: IconConfig },
   table: { type: 'single', component: TableConfig },
   border: { type: 'multiple', component: Border },
   opacity: { type: 'multiple', component: Opacity },
-  'border-radius': { type: 'multiple', component: BorderRadius },
   line: { type: 'multiple', component: Line },
   animation: { type: 'multiple', component: Animation },
   'advanced-chart': { type: 'single', component: AdvancedChartConfig },

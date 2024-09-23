@@ -183,3 +183,7 @@ export const colors = [
   '#AB52D9',
   '#D93566',
 ];
+
+export const extractColorsFromGradient = (gradient) => {
+  return gradient.match(/#(?:[0-9a-fA-F]{3}){1,2}\b|rgb(?:a)?\((?:\d{1,3},\s*){2,3}\d{1,3}\)/g) ?? [];
+};

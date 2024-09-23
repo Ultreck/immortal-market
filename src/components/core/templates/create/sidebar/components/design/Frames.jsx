@@ -65,7 +65,7 @@ const items = [
       height: 300,
       children: [],
       style: {
-        backgroundColor: '#eee',
+        background: '#eee',
         borderWidth: 0,
         borderColor: '#000000',
         opacity: 1,

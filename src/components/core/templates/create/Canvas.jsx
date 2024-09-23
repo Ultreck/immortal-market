@@ -262,7 +262,7 @@ const Canvas = ({ id }) => {
                 transform: `scale(${scale})`,
                 width: page.width,
                 height: page.height,
-                backgroundColor: page.style.backgroundColor,
+                background: page.style.background,
               }}
               className="origin-top-left pointer-events-none"
             >
@@ -299,11 +299,12 @@ const Canvas = ({ id }) => {
                   top: Math.min(selectionBox.startY, selectionBox.endY),
                   width: Math.abs(selectionBox.endX - selectionBox.startX),
                   height: Math.abs(selectionBox.endY - selectionBox.startY),
-                  backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                  background: 'rgba(0, 123, 255, 0.2)',
                   border: '1px solid #007bff',
                 }}
               />
             )}
+            {/*<DragResizeRotateWrapper id={id} />*/}
           </motion.div>
         </InView>
       </div>
