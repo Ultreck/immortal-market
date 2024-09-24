@@ -56,7 +56,7 @@ const classes = {
 export const AdvanceShapesContent = ({ element }) => {
   const { percentage, shape, noOfShapes, isCountVisible, countFormat, icon1 } = element.config;
   const n = Math.floor((percentage / 100) * noOfShapes);
-  const Icon1 = icons.find((icon) => icon.name === shape).filledIcon;
+  const Icon1 = icons.find((icon) => icon.name === icon1 || 'circle').filledIcon;
 
   return (
     <div className="space-y-6 w-full">
