@@ -2,7 +2,7 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import { Button } from '@nextui-org/react';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
-import { TablePreview } from '@/components/core/templates/create/elements/Table.jsx';
+import { TablePreview } from '@/components/core/templates/create/elements/table/Table.jsx';
 
 const colors = [
   '#E66B5B',
@@ -17,40 +17,31 @@ const colors = [
   '#D93566',
 ];
 
-const defaultCellStyles = {
-  fontSize: 14,
-  fontWeight: 'normal',
-  color: '#000000',
-  textAlign: 'left',
-  opacity: 1,
-  fontFamily: 'Roboto',
-};
-
 const elements = [
   {
     data: [
       {
         cells: [
-          { value: 'Key 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Value 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Key 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Value 1', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Key 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Value 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Key 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Value 2', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Key 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Value 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Key 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Value 3', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Key 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Value 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Key 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Value 4', colSpan: 1, rowSpan: 1 },
         ],
       },
     ],
@@ -65,35 +56,34 @@ const elements = [
             value: 'Heading 1',
             colSpan: 1,
             rowSpan: 1,
-            style: defaultCellStyles,
           },
-          { value: 'Heading 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Heading 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 4', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Cell 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Cell 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 6', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 7', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 7', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Cell 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 6', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 7', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 7', colSpan: 1, rowSpan: 1 },
         ],
       },
     ],
@@ -104,34 +94,34 @@ const elements = [
     data: [
       {
         cells: [
-          { value: 'S/N', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'S/N', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 3', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: '1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: '1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: '2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 6', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 7', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: '2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 7', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: '3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 6', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 7', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: '3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 7', colSpan: 1, rowSpan: 1 },
         ],
       },
     ],
@@ -142,50 +132,50 @@ const elements = [
     data: [
       {
         cells: [
-          { value: '', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: '', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 5', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: '1', colSpan: 1, rowSpan: 2, style: defaultCellStyles },
-          { value: 'Cell 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: '1', colSpan: 1, rowSpan: 2 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Cell 8', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 9', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 10', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 11', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 12', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Cell 8', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 9', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 10', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 11', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 12', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: '1', colSpan: 1, rowSpan: 2, style: defaultCellStyles },
-          { value: 'Cell 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: '1', colSpan: 1, rowSpan: 2 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Cell 8', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 9', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 10', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 11', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 12', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Cell 8', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 9', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 10', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 11', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 12', colSpan: 1, rowSpan: 1 },
         ],
       },
     ],
@@ -196,54 +186,54 @@ const elements = [
     data: [
       {
         cells: [
-          { value: '', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Title 1', colSpan: 2, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Title 2', colSpan: 2, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Title 3', colSpan: 2, rowSpan: 1, style: defaultCellStyles },
+          { value: '', colSpan: 1, rowSpan: 1 },
+          { value: 'Title 1', colSpan: 2, rowSpan: 1 },
+          { value: 'Title 2', colSpan: 2, rowSpan: 1 },
+          { value: 'Title 3', colSpan: 2, rowSpan: 1 },
         ],
       },
       {
         cells: [
           { value: '', colSpan: 1, rowSpan: 1 },
-          { value: 'Heading 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Heading 6', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Heading 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Heading 6', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Label 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 6', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Label 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Label 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 6', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Label 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
         ],
       },
       {
         cells: [
-          { value: 'Label 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 1', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 2', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 3', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 4', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 5', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
-          { value: 'Cell 6', colSpan: 1, rowSpan: 1, style: defaultCellStyles },
+          { value: 'Label 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 1', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 2', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 3', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 4', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 5', colSpan: 1, rowSpan: 1 },
+          { value: 'Cell 6', colSpan: 1, rowSpan: 1 },
         ],
       },
     ],
@@ -313,4 +303,3 @@ Tables.propTypes = {
 };
 
 export default Tables;
-
