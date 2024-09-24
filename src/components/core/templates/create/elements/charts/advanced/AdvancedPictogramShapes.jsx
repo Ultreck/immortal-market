@@ -66,7 +66,7 @@ export const AdvancedPictogramShapesContent = ({ element }) => {
     showIcon1,
     showIcon2,
     showIcon3,
-    showLabel
+    showLabel,
   } = element.config;
 
   const Icon1 = icons.find((icon) => icon.name === icon1).filledIcon;
@@ -111,4 +111,3 @@ AdvancedPictogramShapesContent.propTypes = {
 };
 
 export default AdvancedPictogramShapes;
-
