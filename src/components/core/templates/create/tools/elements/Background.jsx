@@ -133,6 +133,12 @@ const Gradient = ({ elements, onChange }) => {
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, background: v } })));
   };
 
+  const handleGradientColorChange = (index, c) => {
+    setColors((prev) => {
+      return [...prev.slice(0, index), c, ...prev.slice(index + 1)];
+    });
+  };
+
   useDeepCompareEffect(() => {
     const gradient = `linear-gradient(to right, ${colors.join(', ')}) no-repeat`;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, background: gradient } })));
@@ -156,15 +162,7 @@ const Gradient = ({ elements, onChange }) => {
                 <RiCloseLine size="12" />
               </Button>
             )}
-            <ColorPicker
-              color={color}
-              onChange={(c) =>
-                setColors((prev) => {
-                  return [...prev.slice(0, index), c, ...prev.slice(index + 1)];
-                })
-              }
-              key={index}
-            />
+            <ColorPicker color={color} onChange={(c) => handleGradientColorChange(index, c)} />
           </div>
         ))}
         <Button isIconOnly variant="bordered" radius="full" onClick={() => setColors((prev) => [...prev, '#000000'])}>

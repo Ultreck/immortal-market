@@ -53,7 +53,7 @@ const StandardCharts = ({ element, active, highlighted, width, onClick, onChange
     'chart-s-bar-multiple': StandardMultipleBar,
     'chart-s-vertical-bar-no-sep': StandardVerticalBarNoSep,
     'chart-s-stacked-bar-vertical': StandardVerticalStackedBar,
-    'chart-s-bar-multiple-vertical' : StandardMultipleBarVertical,
+    'chart-s-bar-multiple-vertical': StandardMultipleBarVertical,
     'chart-s-line-multiple': StandardLineMultiple,
     'chart-s-line-area-vertical': StandardAreaLineVertical,
     'chart-s-line-bar-vertical': StandardLineBarVertical,

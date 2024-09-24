@@ -201,7 +201,7 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
         <>
           {createPortal(
             <div
-              className="w-[220px] max-h-[300px] overflow-y-auto border-small px-1 py-1 rounded-xl border-default-200 dark:border-default-100 bg-white dark:bg-default-50 fixed"
+              className="w-[220px] max-h-[300px] overflow-y-auto border-small px-1 py-1 rounded-xl border-default-200 dark:border-default-100 bg-white dark:bg-default-50 fixed z-[99]"
               style={{ top: `${position.y}px`, left: `${position.x}px` }}
               onContextMenu={(e) => e.preventDefault()}
             >
