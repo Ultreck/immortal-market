@@ -1,19 +1,8 @@
 import { motion } from 'framer-motion';
-import {
-  TbCircleFilled,
-  TbHexagonalPyramid,
-  TbHexagonFilled,
-  TbOctagonFilled,
-  TbPentagonFilled,
-  TbSquareFilled,
-  TbStarFilled,
-  TbTriangleFilled,
-} from 'react-icons/tb';
-import { createElement } from 'react';
-import { IoMan, IoWoman } from 'react-icons/io5';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import icons from '@/lib/design/icons';
 
 const AdvanceShapes = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -34,19 +23,6 @@ const AdvanceShapes = ({ element, active, highlighted, width, onClick, onChange 
 };
 
 AdvanceShapes.propTypes = ElementPropTypes;
-
-const icons = {
-  circle: TbCircleFilled,
-  square: TbSquareFilled,
-  triangle: TbTriangleFilled,
-  star: TbStarFilled,
-  hexagon: TbHexagonFilled,
-  pentagon: TbPentagonFilled,
-  hexagonpyramid: TbHexagonalPyramid,
-  octagon: TbOctagonFilled,
-  male: IoMan,
-  female: IoWoman,
-};
 
 const classes = {
   grid: {
@@ -78,8 +54,9 @@ const classes = {
 };
 
 export const AdvanceShapesContent = ({ element }) => {
-  const { percentage, shape, noOfShapes, isCountVisible, countFormat } = element.config;
+  const { percentage, shape, noOfShapes, isCountVisible, countFormat, icon1 } = element.config;
   const n = Math.floor((percentage / 100) * noOfShapes);
+  const Icon1 = icons.find((icon) => icon.name === icon1).filledIcon;
 
   return (
     <div className="space-y-6 w-full">
@@ -98,12 +75,10 @@ export const AdvanceShapesContent = ({ element }) => {
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: i * 0.02 }}
           >
-            {createElement(icons[shape], {
-              color: i < n ? element.config.colors[1] : '#ddd',
-              className: 'w-full h-full',
-              width: '100%',
-              size: '100%',
-            })}
+            <Icon1
+              color={i < n ? element.config.color1 : '#ddd'}
+              size={classes.size[noOfShapes] || classes.size.default}
+            />
           </motion.div>
         ))}
       </div>
@@ -116,3 +91,4 @@ AdvanceShapesContent.propTypes = {
 };
 
 export default AdvanceShapes;
+

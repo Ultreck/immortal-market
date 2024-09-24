@@ -53,20 +53,54 @@ const classes = {
 };
 
 export const AdvancedPictogramShapesContent = ({ element }) => {
-  const { icon1, icon2, color1, color2, icon1count, icon2count } = element.config;
-  const Icon1 = icons.find((icon) => icon.name === icon1).icon;
-  const Icon2 = icons.find((icon) => icon.name === icon2).icon;
-  const numberOfIcons = icon1count + icon2count;
+  const {
+    icon1,
+    icon2,
+    icon3,
+    color1,
+    color2,
+    color3,
+    icon1count,
+    icon2count,
+    icon3count,
+    showIcon1,
+    showIcon2,
+    showIcon3,
+    showLabel
+  } = element.config;
+
+  const Icon1 = icons.find((icon) => icon.name === icon1).filledIcon;
+  const Icon2 = icons.find((icon) => icon.name === icon2).filledIcon;
+  const Icon3 = icons.find((icon) => icon.name === icon3).filledIcon;
+  const numberOfIcons = icon1count + icon2count + icon3count;
 
   return (
     <div className="space-y-6 w-full">
+      {showLabel && (
+        <div className="flex space-x-3 capitalize">
+          <>
+            {showIcon1 && (
+              <p>
+                {icon1} - {icon1count}
+              </p>
+            )}
+            {showIcon2 && (
+              <p>
+                {icon2} - {icon2count}
+              </p>
+            )}
+            {showIcon3 && (
+              <p>
+                {icon3} - {icon3count}
+              </p>
+            )}
+          </>
+        </div>
+      )}
       <div className={`grid ${classes.grid[numberOfIcons] || classes.grid.default} gap-3`}>
-        {Array.from({ length: icon1count }, (_) => (
-          <Icon1 size={48} color={color1} />
-        ))}
-        {Array.from({ length: icon2count }, (_) => (
-          <Icon2 size={48} color={color2} />
-        ))}
+        {showIcon1 && Array.from({ length: icon1count }, (_) => <Icon1 size={48} color={color1} />)}
+        {showIcon2 && Array.from({ length: icon2count }, (_) => <Icon2 size={48} color={color2} />)}
+        {showIcon3 && Array.from({ length: icon3count }, (_) => <Icon3 size={48} color={color3} />)}
       </div>
     </div>
   );
@@ -77,3 +111,4 @@ AdvancedPictogramShapesContent.propTypes = {
 };
 
 export default AdvancedPictogramShapes;
+

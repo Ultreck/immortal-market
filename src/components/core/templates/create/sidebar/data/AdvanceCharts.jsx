@@ -48,6 +48,8 @@ const AdvancedCharts = () => {
           isCountVisible: true,
           countFormat: 'fraction',
           colors: colors.slice(0, 2),
+          icon1: 'circle',
+          color1: '#FF0000',
         },
       },
       preview: (
@@ -667,10 +669,17 @@ const AdvancedCharts = () => {
           countFormat: 'fraction',
           icon1: 'circle',
           icon2: 'square',
+          icon3: 'triangle',
           color1: '#FF0000',
           color2: '#00FF00',
+          color3: '#0000FF',
           icon1count: 4,
           icon2count: 3,
+          icon3count: 6,
+          showIcon1: true,
+          showIcon2: true,
+          showIcon3: true,
+          showLabel: true
         },
       },
       preview: (

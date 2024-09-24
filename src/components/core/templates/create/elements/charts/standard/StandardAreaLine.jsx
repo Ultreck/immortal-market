@@ -25,14 +25,18 @@ const StandardAreaLine = ({ element, active, highlighted, width, onClick, onChan
 StandardAreaLine.propTypes = ElementPropTypes;
 
 export const StandardAreaLineContent = ({ element }) => {
-  useEffect(() => {}, [element]);
+  const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
+    const color = element.config.colors?.[index];
+    return { ...item, fill: color };
+  });
 
+  useEffect(() => {}, [element]);
   return (
     <ChartContainer
       config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <ComposedChart data={element.config.data.slice(0, element.config.bars)}>
+      <ComposedChart data={chartData}>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
         <XAxis dataKey="name" scale="band" hide={!element.config.showXaxis} />
         <YAxis hide={!element.config.showYaxis} />

@@ -1,8 +1,23 @@
 import PropTypes from 'prop-types';
-import { Checkbox, Select, SelectItem, Slider } from '@nextui-org/react';
-import { capitalize } from '@/lib/utils.js';
+import { Checkbox, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Slider } from '@nextui-org/react';
 
+import { HexColorPicker } from 'react-colorful';
+import { IconConfig } from './AdvancedPictogramShapesConfig';
 const AdvanceShapesConfig = ({ element, onChange }) => {
+  const handleIconChange = (iconKey, newIcon) => {    
+    onChange({
+      ...element,
+      config: { ...element.config, [iconKey]: newIcon },
+    });
+  };
+
+  const handleColorChange = (colorKey, newColor) => {
+    onChange({
+      ...element,
+      config: { ...element.config, [colorKey]: newColor },
+    });
+  };
+
   return (
     <div className="flex flex-col space-y-6">
       <div>
@@ -47,38 +62,40 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
         />
       </div>
 
-      <div>
-        <Select
-          name="shapes"
-          label={capitalize('shapes')}
-          variant="bordered"
-          labelPlacement="outside"
-          placeholder="Select one"
-          size="lg"
-          selectedKeys={element.config.shape ? [element.config.shape] : []}
-          onChange={(e) => onChange({ ...element, config: { ...element.config, shape: e.target.value } })}
-          classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-          disableEmptySelection={true}
-        >
-          {[
-            'circle',
-            'square',
-            'triangle',
-            'star',
-            'hexagon',
-            'pentagon',
-            'hexagonpyramid',
-            'octagon',
-            'male',
-            'female',
-          ].map((shape) => (
-            <SelectItem key={shape} classNames={{ title: 'text-base px-2' }}>
-              {capitalize(shape)}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
+      <p>Change Icon</p>
+      <div className="border border-default-400 rounded w-[80px] flex flex-col">
+        <IconConfig
+          iconKey="icon1"
+          colorKey="color1"
+          currentIcon={element.config.icon}
+          onIconChange={handleIconChange}
+          onColorChange={handleColorChange}
+          element={element}
+        />
 
+        <Popover
+          placement="top"
+          showArrow
+          offset={10}
+          classNames={{ content: 'w-[200px] !max-h-[500px] overflow-y-auto block' }}
+        >
+          <PopoverTrigger>
+            <div className="w-full h-6 mt-5">
+              <div
+                style={{ backgroundColor: element.config.color1 }}
+                className="w-full h-full rounded-none shadow border"
+              ></div>
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="p-0 shadow border border-default-200">
+            <HexColorPicker
+              color={element.config.color1}
+              onChange={(c) => onChange({ ...element, config: { ...element.config, color1: c } })}
+              className="!w-full mt-4"
+            />
+          </PopoverContent>
+        </Popover>
+      </div>
       <div>
         <Checkbox
           isSelected={element.config.isCountVisible}
@@ -121,3 +138,4 @@ AdvanceShapesConfig.propTypes = {
 };
 
 export default AdvanceShapesConfig;
+

@@ -209,10 +209,14 @@ const Gradient = ({ element, onChange }) => {
   );
 
   const handleGenerateGradient = () => {
-    const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
-    
+    const key = Array.isArray(element.config.keys.y)
+      ? element.config.keys.y.find((k) => k === 'uv')
+      : element.config.keys.y;
+
+    const maxVisitors = Math.max(...element.config.data.map((d) => d[key]));
+
     const chartData = element.config.data.map((item) => {
-      const value = item[element.config.keys.y];
+      const value = item[key];
       const factor = 1 - value / maxVisitors;
       const color = interpolateColor(element.config.gradientColor, '#FFFFFF', factor);
       return { ...item, fill: color };
@@ -256,3 +260,4 @@ Gradient.propTypes = {
 };
 
 export default Colors;
+
