@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils.js';
 const PageBackground = ({ page, onChange }) => {
   return (
     <ColorPicker
-      color={page.style.background}
+      color={page.style.background || '#fff'}
       onChange={(color) => onChange({ style: { ...page.style, background: color } })}
       size="sm"
       trigger={

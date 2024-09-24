@@ -1,9 +1,9 @@
 import { createElement, useState } from 'react';
 import Charts from '@/components/core/templates/create/sidebar/data/Charts.jsx';
-import { RiBarChart2Line, RiInputField, RiMap2Line, RiTable2 } from 'react-icons/ri';
+import { RiApps2Line, RiBarChart2Line, RiMap2Line, RiTable2 } from 'react-icons/ri';
 import Tables from '@/components/core/templates/create/sidebar/data/Tables.jsx';
 import Maps from '@/components/core/templates/create/sidebar/data/Maps.jsx';
-import DynamicFields from '@/components/core/templates/create/sidebar/data/DynamicFields.jsx';
+import Widgets from '@/components/core/templates/create/sidebar/data/Widgets.jsx';
 import { cn } from '@/lib/utils.js';
 
 const classes = [
@@ -27,7 +27,7 @@ const Data = () => {
             { name: 'Charts & graphs', icon: RiBarChart2Line, key: 'charts' },
             { name: 'Tables', icon: RiTable2, key: 'tables' },
             { name: 'Maps', icon: RiMap2Line, key: 'maps' },
-            { name: 'Dynamic fields', icon: RiInputField, key: 'dynamic' },
+            { name: 'Widgets', icon: RiApps2Line, key: 'widgets' },
           ].map((item, i) => (
             <button
               key={item.key}
@@ -46,7 +46,7 @@ const Data = () => {
       {view === 'charts' && <Charts onBack={() => setView('options')} />}
       {view === 'tables' && <Tables onBack={() => setView('options')} />}
       {view === 'maps' && <Maps onBack={() => setView('options')} />}
-      {view === 'dynamic' && <DynamicFields onBack={() => setView('options')} />}
+      {view === 'widgets' && <Widgets onBack={() => setView('options')} />}
     </>
   );
 };

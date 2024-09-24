@@ -1,24 +1,25 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import Background from './elements/Background.jsx';
-import ChartConfig from './elements/ChartConfig.jsx';
+import Background from './elements/generic/Background.jsx';
+import ChartConfig from './elements/specific/ChartConfig.jsx';
 import useTemplateStore from '@/store/template.js';
 import { createElement, Fragment, useMemo } from 'react';
-import Border from './elements/Border.jsx';
-import Opacity from './elements/Opacity.jsx';
-import TableConfig from '@/components/core/templates/create/tools/elements/TableConfig.jsx';
-import Line from './elements/Line.jsx';
-import IconConfig from './elements/IconConfig.jsx';
+import Border from './elements/generic/Border.jsx';
+import Opacity from './elements/generic/Opacity.jsx';
+import TableConfig from '@/components/core/templates/create/tools/elements/specific/TableConfig.jsx';
+import LineConfig from './elements/specific/LineConfig.jsx';
+import IconConfig from './elements/specific/IconConfig.jsx';
 import { getElementTools } from '@/lib/elements.js';
-import Animation from './elements/Animation.jsx';
-import AdvancedChartConfig from './elements/AdvancedChartConfig.jsx';
-import Shadow from './elements/Shadow.jsx';
-import FrameTabsConfig from './elements/FrameTabsConfig.jsx';
-import FrameCarouselConfig from './elements/FrameCarouselConfig.jsx';
-import InfographicConfig from '@/components/core/templates/create/tools/elements/InfographicConfig.jsx';
-import Colors from './elements/Colors.jsx';
-import Font from '@/components/core/templates/create/tools/elements/Font.jsx';
-import MapConfig from '@/components/core/templates/create/tools/elements/map/MapConfig.jsx';
-import Color from '@/components/core/templates/create/tools/elements/Color.jsx';
+import Animation from './elements/generic/Animation.jsx';
+import AdvancedChartConfig from './elements/specific/AdvancedChartConfig.jsx';
+import Shadow from './elements/generic/Shadow.jsx';
+import FrameTabsConfig from './elements/specific/FrameTabsConfig.jsx';
+import FrameCarouselConfig from './elements/specific/FrameCarouselConfig.jsx';
+import InfographicConfig from '@/components/core/templates/create/tools/elements/specific/InfographicConfig.jsx';
+import Colors from './elements/generic/Colors.jsx';
+import Font from '@/components/core/templates/create/tools/elements/generic/Font.jsx';
+import MapConfig from '@/components/core/templates/create/tools/elements/specific/map/MapConfig.jsx';
+import Color from '@/components/core/templates/create/tools/elements/generic/Color.jsx';
+import SummarizerConfig from '@/components/core/templates/create/tools/elements/specific/SummarizerConfig.jsx';
 
 const mapping = {
   font: { type: 'multiple', component: Font },
@@ -29,7 +30,7 @@ const mapping = {
   table: { type: 'single', component: TableConfig },
   border: { type: 'multiple', component: Border },
   opacity: { type: 'multiple', component: Opacity },
-  line: { type: 'multiple', component: Line },
+  line: { type: 'multiple', component: LineConfig },
   animation: { type: 'multiple', component: Animation },
   'advanced-chart': { type: 'single', component: AdvancedChartConfig },
   shadow: { type: 'multiple', component: Shadow },
@@ -38,6 +39,7 @@ const mapping = {
   infographic: { type: 'single', component: InfographicConfig },
   colors: { type: 'single', component: Colors },
   map: { type: 'single', component: MapConfig },
+  summarizer: { type: 'single', component: SummarizerConfig },
 };
 
 const ElementTools = () => {

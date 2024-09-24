@@ -4,7 +4,7 @@ import { TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbTrash } from 'react-
 import { Listbox, ListboxItem, useDisclosure } from '@nextui-org/react';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
-import LinkTool from './tools/elements/Link';
+import LinkTool from './ElementLink.jsx';
 import { LuGroup, LuUngroup } from 'react-icons/lu';
 import {
   RiAlignItemBottomLine,

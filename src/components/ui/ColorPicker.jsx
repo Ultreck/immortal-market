@@ -4,7 +4,7 @@ import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HiCheck } from 'react-icons/hi2';
-import EyeDropTool from '@/components/core/templates/create/tools/elements/EyeDropTool.jsx';
+import Eyedropper from '@/components/ui/Eyedropper.jsx';
 
 const colors = ['#000000', '#800000', '#808000', '#008080', '#808080', '#993366'];
 
@@ -49,7 +49,7 @@ const ColorPicker = ({ color, onChange, size, trigger }) => {
             </div>
           ))}
         </div>
-        <EyeDropTool value={color} onChange={onChange} />
+        <Eyedropper value={color} onChange={onChange} />
       </PopoverContent>
     </Popover>
   );

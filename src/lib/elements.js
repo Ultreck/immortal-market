@@ -11,6 +11,7 @@ import StandardChartsPresent from '@/components/core/templates/create/elements/c
 import Map from '@/components/core/templates/create/elements/maps/Map.jsx';
 import Table, { TablePresent } from '@/components/core/templates/create/elements/table/Table.jsx';
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
+import Widget from '@/components/core/templates/create/elements/widgets/Widget.jsx';
 
 export const charts = {
   standard: [
@@ -96,6 +97,7 @@ export const tools = {
   line: ['background', 'opacity', 'line', 'animation', 'shadow'],
   image: ['border', 'opacity', 'animation', 'shadow'],
   infographic: ['infographic', 'opacity'],
+  widget: ['summarizer', 'opacity', 'animation'],
 };
 
 export const components = {
@@ -120,6 +122,7 @@ export const components = {
     line: Line,
     image: Image,
     infographic: Infographic,
+    widget: Widget,
   },
   present: {
     ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
