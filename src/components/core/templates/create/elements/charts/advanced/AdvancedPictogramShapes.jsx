@@ -71,7 +71,7 @@ export const AdvancedPictogramShapesContent = ({ element }) => {
 
   const Icon1 = icons.find((icon) => icon.name === icon1).filledIcon;
   const Icon2 = icons.find((icon) => icon.name === icon2).filledIcon;
-  const Icon3 = icons.find((icon) => icon.name === icon3).filledIcon;
+  const Icon3 = icons.find((icon) => icon.name === icon3 || 'triangle').filledIcon;
   const numberOfIcons = icon1count + icon2count + icon3count;
 
   return (
