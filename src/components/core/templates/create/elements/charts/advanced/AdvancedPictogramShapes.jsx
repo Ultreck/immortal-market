@@ -98,9 +98,12 @@ export const AdvancedPictogramShapesContent = ({ element }) => {
         </div>
       )}
       <div className={`grid ${classes.grid[numberOfIcons] || classes.grid.default} gap-3`}>
-        {showIcon1 && Array.from({ length: icon1count }, (_) => <Icon1 size={48} color={color1} />)}
-        {showIcon2 && Array.from({ length: icon2count }, (_) => <Icon2 size={48} color={color2} />)}
-        {showIcon3 && Array.from({ length: icon3count }, (_) => <Icon3 size={48} color={color3} />)}
+        {showIcon1 &&
+          Array.from({ length: icon1count }, () => <Icon1 key={crypto.randomUUID()} size={48} color={color1} />)}
+        {showIcon2 &&
+          Array.from({ length: icon2count }, () => <Icon2 key={crypto.randomUUID()} size={48} color={color2} />)}
+        {showIcon3 &&
+          Array.from({ length: icon3count }, () => <Icon3 key={crypto.randomUUID()} size={48} color={color3} />)}
       </div>
     </div>
   );
