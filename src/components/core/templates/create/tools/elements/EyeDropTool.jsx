@@ -48,7 +48,7 @@ const EyeDropTool = ({ value, onChange }) => {
     setCoverUp(false);
   };
 
-  let bgValueText = value.includes('gradient') ? 'gradient' : value;
+  let bgValueText = value?.includes('gradient') ? 'gradient' : value || '';
 
   return (
     <div className="mt-5">

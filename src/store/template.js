@@ -15,7 +15,7 @@ const useTemplateStore = createWithEqualityFn(
           width: 600,
           height: 600,
           style: {
-            backgroundColor: '#ffffff',
+            background: '#ffffff',
           },
           elements: [],
         },
@@ -176,7 +176,7 @@ const useTemplateStore = createWithEqualityFn(
         title: 'Untitled',
         width: 600,
         height: 600,
-        style: { backgroundColor: '#ffffff' },
+        style: { background: '#ffffff' },
         elements: [],
       };
       set((state) => {

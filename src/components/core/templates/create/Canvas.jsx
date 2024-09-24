@@ -304,7 +304,6 @@ const Canvas = ({ id }) => {
                 }}
               />
             )}
-            {/*<DragResizeRotateWrapper id={id} />*/}
           </motion.div>
         </InView>
       </div>
