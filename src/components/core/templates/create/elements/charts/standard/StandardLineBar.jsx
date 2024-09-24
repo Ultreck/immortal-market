@@ -4,6 +4,7 @@ import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import { useEffect } from 'react';
 
 const StandardLineBar = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (

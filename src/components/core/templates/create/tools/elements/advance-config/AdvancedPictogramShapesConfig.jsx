@@ -5,7 +5,7 @@ import icons from '@/lib/design/icons';
 import { HexColorPicker } from 'react-colorful';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput';
 
-const IconWithConfig = ({ iconKey, colorKey, currentIcon, currentColor, onIconChange, onColorChange }) => {
+export const IconWithConfig = ({ iconKey, colorKey, currentIcon, currentColor, onIconChange, onColorChange }) => {
   const CurrentIcon = icons.find((icon) => icon.name === currentIcon).icon;
 
   return (

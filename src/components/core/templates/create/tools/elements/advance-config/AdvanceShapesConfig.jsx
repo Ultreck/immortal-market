@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Checkbox, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Slider } from '@nextui-org/react';
 import { HexColorPicker } from 'react-colorful';
-
+import {  IconWithConfig } from './AdvancedPictogramShapesConfig';
 const AdvanceShapesConfig = ({ element, onChange }) => {
   return (
     <div className="flex flex-col space-y-6">
@@ -49,6 +49,15 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
 
       <p>Change Icon</p>
       <div className="border border-default-400 rounded w-[80px] flex flex-col">
+        <IconWithConfig
+          iconKey="icon1"
+          colorKey="color1"
+          currentIcon={element.config.icon}
+          onIconChange={handleIconChange}
+          onColorChange={handleColorChange}
+          element={element}
+        />
+
         <Popover
           placement="top"
           showArrow
