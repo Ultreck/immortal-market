@@ -8,8 +8,9 @@ import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import Data from '@/components/core/templates/create/sidebar/data/Data.jsx';
 import { Tooltip } from '@nextui-org/react';
 import Infographics from '@/components/core/templates/create/sidebar/graphics/Infographics.jsx';
-import { TbBrush, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
+import { TbBrush, TbChartBar, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
+import Charts from './charts/Charts';
 
 const Sidebar = () => {
   const [tab, setTab] = useState('basics');
@@ -58,6 +59,7 @@ const Sidebar = () => {
             </Link>
             {[
               { icon: RiShapesLine, title: 'Basics', key: 'basics' },
+              { icon: TbChartBar, title: 'Charts', key: 'charts' },
               { icon: RiPieChartLine, title: 'Data', key: 'data' },
               { icon: TbTemplate, title: 'Templates', key: 'templates' },
               { icon: TbBrush, title: 'Graphics', key: 'graphics' },
@@ -95,6 +97,7 @@ const Sidebar = () => {
             {tab === 'graphics' && <Infographics />}
             {tab === 'layers' && <Layers />}
             {tab === 'images' && <Images />}
+            {tab === 'charts' && <Charts />}
           </div>
         )}
       </div>
@@ -103,3 +106,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+

@@ -24,9 +24,9 @@ const Data = () => {
       {view === 'options' && (
         <div className="grid grid-cols-2 gap-4">
           {[
-            { name: 'Charts & graphs', icon: RiBarChart2Line, key: 'charts' },
+            // { name: 'Charts & graphs', icon: RiBarChart2Line, key: 'charts' },
             { name: 'Tables', icon: RiTable2, key: 'tables' },
-            { name: 'Maps', icon: RiMap2Line, key: 'maps' },
+            // { name: 'Maps', icon: RiMap2Line, key: 'maps' },
             { name: 'Widgets', icon: RiApps2Line, key: 'widgets' },
           ].map((item, i) => (
             <button
@@ -43,9 +43,9 @@ const Data = () => {
           ))}
         </div>
       )}
-      {view === 'charts' && <Charts onBack={() => setView('options')} />}
+      {/* {view === 'charts' && <Charts onBack={() => setView('options')} />} */}
       {view === 'tables' && <Tables onBack={() => setView('options')} />}
-      {view === 'maps' && <Maps onBack={() => setView('options')} />}
+      {/* {view === 'maps' && <Maps onBack={() => setView('options')} />} */}
       {view === 'widgets' && <Widgets onBack={() => setView('options')} />}
     </>
   );

@@ -65,12 +65,12 @@ const elements = names.map((name) => ({
 const Maps = ({ onBack }) => {
   return (
     <>
-      <div className="flex items-center mb-6 space-x-3">
-        <Button variant="bordered" radius="full" size="sm" isIconOnly onClick={onBack}>
+      {/* <div className="flex items-center mb-6 space-x-3"> */}
+        {/* <Button variant="bordered" radius="full" size="sm" isIconOnly onClick={onBack}>
           <RiArrowLeftSLine size="20" />
-        </Button>
-        <h3 className="text-base font-medium">Maps</h3>
-      </div>
+        </Button> */}
+        {/* <h3 className="text-base font-medium">Maps</h3> */}
+      {/* </div> */}
       <div className="grid grid-cols-2 gap-4">
         {elements.map((element) => {
           return <DraggableElementWrapper key={element.id} element={element} />;
