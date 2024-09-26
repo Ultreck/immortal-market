@@ -8,6 +8,7 @@ import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 import MergeOptions from '@/components/core/templates/create/elements/table/MergeOptions.jsx';
 import DeleteOptions from '@/components/core/templates/create/elements/table/DeleteOptions.jsx';
 import FontOptions from '@/components/core/templates/create/elements/table/FontOptions.jsx';
+import BackgroundOptions from '@/components/core/templates/create/elements/table/BackgroundOptions.jsx';
 
 const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -163,6 +164,7 @@ const TableContent = ({ element, onChange, active }) => {
           )}
           <DeleteOptions element={element} onChange={onChange} selection={selection} onSelectionChange={setSelection} />
           <FontOptions element={element} onChange={onChange} selection={selection} />
+          <BackgroundOptions element={element} onChange={onChange} selection={selection} />
         </div>
       )}
       <table
