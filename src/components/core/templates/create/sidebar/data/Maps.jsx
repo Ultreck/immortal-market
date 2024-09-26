@@ -1,12 +1,9 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { Button } from '@nextui-org/react';
-import { RiArrowLeftSLine } from 'react-icons/ri';
-import PropTypes from 'prop-types';
 import { GiAfrica, GiEarthAfricaEurope, GiNigeria, GiSouthAmerica } from 'react-icons/gi';
 import { BiWorld } from 'react-icons/bi';
-import { FaEarthAsia } from "react-icons/fa6";
+import { FaEarthAsia } from 'react-icons/fa6';
 
-const names = ['nigeria', 'africa', 'europe', 'north-america', 'world', 'asia',];
+const names = ['nigeria', 'africa', 'europe', 'north-america', 'world', 'asia'];
 
 const previews = {
   nigeria: (
@@ -62,26 +59,14 @@ const elements = names.map((name) => ({
   preview: previews[name],
 }));
 
-const Maps = ({ onBack }) => {
+const Maps = () => {
   return (
-    <>
-      {/* <div className="flex items-center mb-6 space-x-3"> */}
-        {/* <Button variant="bordered" radius="full" size="sm" isIconOnly onClick={onBack}>
-          <RiArrowLeftSLine size="20" />
-        </Button> */}
-        {/* <h3 className="text-base font-medium">Maps</h3> */}
-      {/* </div> */}
-      <div className="grid grid-cols-2 gap-4">
-        {elements.map((element) => {
-          return <DraggableElementWrapper key={element.id} element={element} />;
-        })}
-      </div>
-    </>
+    <div className="grid grid-cols-2 gap-4">
+      {elements.map((element) => {
+        return <DraggableElementWrapper key={element.id} element={element} />;
+      })}
+    </div>
   );
-};
-
-Maps.propTypes = {
-  onBack: PropTypes.func.isRequired,
 };
 
 export default Maps;

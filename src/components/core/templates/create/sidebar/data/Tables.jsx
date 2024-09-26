@@ -1,7 +1,4 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { Button } from '@nextui-org/react';
-import { RiArrowLeftSLine } from 'react-icons/ri';
-import PropTypes from 'prop-types';
 import { TablePreview } from '@/components/core/templates/create/elements/table/Table.jsx';
 
 const colors = [
@@ -276,30 +273,18 @@ const elements = [
   };
 });
 
-const Tables = ({ onBack }) => {
+const Tables = () => {
   return (
-    <div>
-      {/* <div className="flex items-center space-x-3 mb-6">
-        <Button variant="bordered" radius="full" size="sm" isIconOnly onClick={onBack}>
-          <RiArrowLeftSLine size="20" />
-        </Button>
-        <h3 className="text-base font-medium">Tables</h3>
-      </div> */}
-      <div className="grid grid-cols-1 gap-4">
-        {elements.map((element) => {
-          return (
-            <div key={element.id} className="aspect-[16/8]">
-              <DraggableElementWrapper element={element} />
-            </div>
-          );
-        })}
-      </div>
+    <div className="grid grid-cols-1 gap-4">
+      {elements.map((element) => {
+        return (
+          <div key={element.id} className="aspect-[16/8]">
+            <DraggableElementWrapper element={element} />
+          </div>
+        );
+      })}
     </div>
   );
-};
-
-Tables.propTypes = {
-  onBack: PropTypes.func.isRequired,
 };
 
 export default Tables;

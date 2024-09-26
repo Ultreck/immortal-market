@@ -8,12 +8,15 @@ import { RiArrowRightSLine } from 'react-icons/ri';
 
 const Basics = () => {
   return (
-    <Accordion variant="bordered" itemClasses={{ base: 'px-3', content: 'pt-4 pb-5' }}>
+    <Accordion
+      variant="bordered"
+      itemClasses={{ base: 'px-3', content: 'pt-4 pb-5', title: 'whitespace-nowrap text-base' }}
+    >
       <AccordionItem
         key="texts"
         aria-label="Texts"
         title="Texts"
-        startContent={<TbAbc size="25" />}
+        startContent={<TbAbc size="20" />}
         indicator={<RiArrowRightSLine size="20" />}
       >
         <Texts />
@@ -22,7 +25,7 @@ const Basics = () => {
         key="shapes"
         aria-label="Shapes"
         title="Shapes"
-        startContent={<TbSortAscendingShapes size="25" />}
+        startContent={<TbSortAscendingShapes size="20" />}
         indicator={<RiArrowRightSLine size="20" />}
       >
         <Shapes />
@@ -31,7 +34,7 @@ const Basics = () => {
         key="frames"
         aria-label="Frames"
         title="Frames"
-        startContent={<TbShape size="25" />}
+        startContent={<TbShape size="20" />}
         indicator={<RiArrowRightSLine size="20" />}
       >
         <Frames />
@@ -40,7 +43,7 @@ const Basics = () => {
         key="icons"
         aria-label="Icons"
         title="Icons"
-        startContent={<TbIcons size="25" />}
+        startContent={<TbIcons size="20" />}
         indicator={<RiArrowRightSLine size="20" />}
       >
         <Icons />

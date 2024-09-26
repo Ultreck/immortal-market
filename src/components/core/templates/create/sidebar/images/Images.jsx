@@ -2,16 +2,25 @@ import { useState } from 'react';
 import { Accordion, AccordionItem, Tab, Tabs } from '@nextui-org/react';
 import ExternalImages from '@/components/core/templates/create/sidebar/images/ExternalImages.jsx';
 import UploadedImages from '@/components/core/templates/create/sidebar/images/UploadedImages.jsx';
-import Infographics from '../graphics/Infographics';
-import { RiImage2Line } from 'react-icons/ri';
+import Infographics from './Infographics.jsx';
+import { RiArrowRightSLine, RiImage2Line } from 'react-icons/ri';
 import { TbBrush } from 'react-icons/tb';
 
 const Images = () => {
   const [tab, setTab] = useState('uploads');
 
   return (
-    <Accordion variant="splitted">
-      <AccordionItem key="1" aria-label="Images" title="Images" startContent={<RiImage2Line size="25" />}>
+    <Accordion
+      variant="bordered"
+      itemClasses={{ base: 'px-3', content: 'pt-4 pb-5', title: 'whitespace-nowrap text-base' }}
+    >
+      <AccordionItem
+        key="1"
+        aria-label="Images"
+        title="Images"
+        startContent={<RiImage2Line size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
         <div>
           <Tabs
             variant="bordered"
@@ -32,12 +41,17 @@ const Images = () => {
           {tab === 'uploads' && <UploadedImages />}
         </div>
       </AccordionItem>
-      <AccordionItem key="2" aria-label="Specials" title="Specials" startContent={<TbBrush size="25" />}>
-      <Infographics />
+      <AccordionItem
+        key="2"
+        aria-label="Specials"
+        title="Specials"
+        startContent={<TbBrush size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <Infographics />
       </AccordionItem>
     </Accordion>
   );
 };
 
 export default Images;
-

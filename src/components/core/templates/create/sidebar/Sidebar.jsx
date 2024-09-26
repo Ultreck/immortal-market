@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import Data from '@/components/core/templates/create/sidebar/data/Data.jsx';
 import { Tooltip } from '@nextui-org/react';
-import Infographics from '@/components/core/templates/create/sidebar/graphics/Infographics.jsx';
-import { TbBrush, TbChartBar, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
+import Infographics from '@/components/core/templates/create/sidebar/images/Infographics.jsx';
+import { TbChartBar, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
-import Charts from './charts/Charts';
+import Charts from './data/Charts.jsx';
 
 const Sidebar = () => {
   const [tab, setTab] = useState('basics');
@@ -62,7 +62,6 @@ const Sidebar = () => {
               { icon: TbChartBar, title: 'Charts', key: 'charts' },
               { icon: RiPieChartLine, title: 'Data', key: 'data' },
               { icon: TbTemplate, title: 'Templates', key: 'templates' },
-              // { icon: TbBrush, title: 'Graphics', key: 'graphics' },
               { icon: RiImage2Line, title: 'Images', key: 'images' },
               { icon: RiStackLine, title: 'Layers', key: 'layers' },
             ].map((element) => {
@@ -106,4 +105,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-

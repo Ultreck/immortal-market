@@ -1,6 +1,3 @@
-import { Button } from '@nextui-org/react';
-import { RiArrowLeftSLine } from 'react-icons/ri';
-import PropTypes from 'prop-types';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 
 const elements = [
@@ -27,15 +24,9 @@ const elements = [
   },
 ];
 
-const Widgets = ({ onBack }) => {
+const Widgets = () => {
   return (
     <div>
-      {/* <div className="flex items-center space-x-3 mb-6">
-        <Button variant="bordered" radius="full" size="sm" isIconOnly onClick={onBack}>
-          <RiArrowLeftSLine size="20" />
-        </Button>
-        <h3 className="text-base font-medium">Dynamic fields</h3>
-      </div> */}
       <div className="grid grid-cols-1 gap-4">
         {elements.map((element) => {
           return (
@@ -47,10 +38,6 @@ const Widgets = ({ onBack }) => {
       </div>
     </div>
   );
-};
-
-Widgets.propTypes = {
-  onBack: PropTypes.func.isRequired,
 };
 
 export default Widgets;

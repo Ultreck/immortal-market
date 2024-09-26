@@ -1,44 +1,45 @@
-import { useState } from 'react';
-import { Button, Tab, Tabs } from '@nextui-org/react';
-import StandardCharts from '@/components/core/templates/create/sidebar/data/StandardCharts.jsx';
-import AdvancedCharts from '@/components/core/templates/create/sidebar/data/AdvanceCharts.jsx';
-import { RiArrowLeftSLine } from 'react-icons/ri';
-import PropTypes from 'prop-types';
+import { Accordion, AccordionItem } from '@nextui-org/react';
+import StandardCharts from './StandardCharts.jsx';
+import AdvancedCharts from './AdvanceCharts.jsx';
+import Maps from './Maps.jsx';
+import { TbChartBar, TbChartPie, TbWorld } from 'react-icons/tb';
+import { RiArrowRightSLine } from 'react-icons/ri';
 
-const Charts = ({ onBack }) => {
-  const [tab, setTab] = useState('standard');
-
+const Charts = () => {
   return (
-    <>
-      <div className="flex items-center space-x-3 mb-6">
-        <Button variant="bordered" radius="full" size="sm" isIconOnly onClick={onBack}>
-          <RiArrowLeftSLine size="20" />
-        </Button>
-        <h3 className="text-base font-medium">Charts</h3>
-      </div>
-      <Tabs
-        variant="bordered"
-        aria-label="Options"
-        color="primary"
-        radius="full"
-        classNames={{
-          base: 'mb-6',
-          tab: 'text-base px-4',
-        }}
-        selectedKey={tab}
-        onSelectionChange={setTab}
+    <Accordion
+      variant="bordered"
+      itemClasses={{ base: 'px-3', content: 'pt-4 pb-5', title: 'whitespace-nowrap text-base' }}
+    >
+      <AccordionItem
+        key="1"
+        aria-label="Standard Charts"
+        title="Standard Charts"
+        startContent={<TbChartPie size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
       >
-        <Tab key="standard" title="Standard" className="text-base" />
-        <Tab key="advanced" title="Advanced" className="text-base" />
-      </Tabs>
-      {tab === 'standard' && <StandardCharts />}
-      {tab === 'advanced' && <AdvancedCharts />}
-    </>
+        <StandardCharts />
+      </AccordionItem>
+      <AccordionItem
+        key="2"
+        aria-label="Advanced Charts"
+        title="Advanced Charts"
+        startContent={<TbChartBar size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <AdvancedCharts />
+      </AccordionItem>
+      <AccordionItem
+        key="3"
+        aria-label="Maps"
+        title="Maps"
+        startContent={<TbWorld size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <Maps />
+      </AccordionItem>
+    </Accordion>
   );
-};
-
-Charts.propTypes = {
-  onBack: PropTypes.func.isRequired,
 };
 
 export default Charts;
