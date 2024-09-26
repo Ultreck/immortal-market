@@ -1,48 +1,32 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { GiAfrica, GiEarthAfricaEurope, GiNigeria, GiSouthAmerica } from 'react-icons/gi';
-import { BiWorld } from 'react-icons/bi';
-import { FaEarthAsia } from 'react-icons/fa6';
+import { MapOceanicPreview } from '@/components/core/templates/create/elements/maps/MapOceanic.jsx';
+import { MapNorthAmericaPreview } from '@/components/core/templates/create/elements/maps/MapNorthAmerica.jsx';
+import { MapNigeriaRegionsPreview } from '@/components/core/templates/create/elements/maps/MapNigeriaRegions.jsx';
+import { MapNigeriaPreview } from '@/components/core/templates/create/elements/maps/MapNigeria.jsx';
+import { MapAfricaPreview } from '@/components/core/templates/create/elements/maps/MapAfrica.jsx';
+import { MapEuropePreview } from '@/components/core/templates/create/elements/maps/MapEurope.jsx';
+import { MapWorldPreview } from '@/components/core/templates/create/elements/maps/MapWorld.jsx';
+import { MapAsiaPreview } from '@/components/core/templates/create/elements/maps/MapAsia.jsx';
+import { capitalize } from '@/lib/utils.js';
 
-const names = ['nigeria', 'africa', 'europe', 'north-america', 'world', 'asia'];
+const names = ['nigeria', 'nigeria-regions', 'africa', 'europe', 'north-america', 'world', 'asia', 'oceanic'];
 
 const previews = {
-  nigeria: (
-    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-      <GiNigeria className="w-full h-full" />
-    </div>
-  ),
-  africa: (
-    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-      <GiAfrica className="w-full h-full" />
-    </div>
-  ),
-  europe: (
-    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-      <GiEarthAfricaEurope className="w-full h-full" />
-    </div>
-  ),
-  'north-america': (
-    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-      <GiSouthAmerica className="w-full h-full" />
-    </div>
-  ),
-  world: (
-    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-      <BiWorld className="w-full h-full" />
-    </div>
-  ),
-  asia: (
-    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-      <FaEarthAsia className="w-full h-full" />
-    </div>
-  ),
+  nigeria: <MapNigeriaPreview />,
+  'nigeria-regions': <MapNigeriaRegionsPreview />,
+  africa: <MapAfricaPreview />,
+  europe: <MapEuropePreview />,
+  'north-america': <MapNorthAmericaPreview />,
+  world: <MapWorldPreview />,
+  asia: <MapAsiaPreview />,
+  oceanic: <MapOceanicPreview />,
 };
 
 const elements = names.map((name) => ({
   id: `map-${name}`,
   data: {
     type: 'map',
-    text: name,
+    text: name.split('-').map(capitalize).join(' '),
     width: 400,
     height: 400,
     style: { opacity: 1 },

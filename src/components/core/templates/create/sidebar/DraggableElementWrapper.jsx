@@ -26,7 +26,7 @@ const DraggableElementWrapper = ({ element }) => {
       element={element}
       className="relative h-full"
       content={
-        <div className="relative overflow-hidden h-full" onClick={handleClick}>
+        <div className="relative overflow-hidden h-full" onClick={handleClick} title={element.data.text}>
           {element.preview}
         </div>
       }

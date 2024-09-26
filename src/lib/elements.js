@@ -8,7 +8,7 @@ import Icon, { IconPresent } from '@/components/core/templates/create/elements/I
 import StandardCharts from '@/components/core/templates/create/elements/charts/standard/StandardCharts.jsx';
 import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
-import Map from '@/components/core/templates/create/elements/maps/Map.jsx';
+import Map, { MapPresent } from '@/components/core/templates/create/elements/maps/Map.jsx';
 import Table, { TablePresent } from '@/components/core/templates/create/elements/table/Table.jsx';
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
 import Widget from '@/components/core/templates/create/elements/widgets/Widget.jsx';
@@ -143,6 +143,7 @@ export const components = {
     icon: IconPresent,
     image: ImagePresent,
     infographic: InfographicPresent,
+    map: MapPresent,
   },
 };
 
