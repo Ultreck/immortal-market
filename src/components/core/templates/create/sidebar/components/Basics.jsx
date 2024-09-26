@@ -1,31 +1,52 @@
-import { useState } from 'react';
 import Texts from '@/components/core/templates/create/sidebar/components/design/Texts.jsx';
 import Shapes from '@/components/core/templates/create/sidebar/components/design/Shapes.jsx';
 import Frames from '@/components/core/templates/create/sidebar/components/design/Frames.jsx';
 import Icons from '@/components/core/templates/create/sidebar/components/design/Icons.jsx';
 import { Accordion, AccordionItem } from '@nextui-org/react';
-import { TbAbc, TbAlpha, TbIcons, TbShape, TbSortAscendingShapes } from 'react-icons/tb';
+import { TbAbc, TbIcons, TbShape, TbSortAscendingShapes } from 'react-icons/tb';
+import { RiArrowRightSLine } from 'react-icons/ri';
 
 const Basics = () => {
-  const [view, setView] = useState('all');
-
   return (
-    <Accordion variant="splitted">
-      <AccordionItem key="1" aria-label="Texts" title="Texts" startContent={<TbAbc size="25" />}>
+    <Accordion variant="bordered" itemClasses={{ base: 'px-3', content: 'pt-4 pb-5' }}>
+      <AccordionItem
+        key="texts"
+        aria-label="Texts"
+        title="Texts"
+        startContent={<TbAbc size="25" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
         <Texts />
       </AccordionItem>
-      <AccordionItem key="2" aria-label="Shapes" title="Shapes" startContent={<TbSortAscendingShapes size="25" />}>
-        <Shapes onView={() => setView('shapes')} />
+      <AccordionItem
+        key="shapes"
+        aria-label="Shapes"
+        title="Shapes"
+        startContent={<TbSortAscendingShapes size="25" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <Shapes />
       </AccordionItem>
-      <AccordionItem key="3" aria-label="Frames" title="Frames" startContent={<TbShape size="25" />}>
-        <Frames onView={() => setView('frames')} />
+      <AccordionItem
+        key="frames"
+        aria-label="Frames"
+        title="Frames"
+        startContent={<TbShape size="25" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <Frames />
       </AccordionItem>
-      <AccordionItem key="4" aria-label="Icons" title="Icons" startContent={<TbIcons size="25" />}>
-        <Icons onView={() => setView('icons')} />
+      <AccordionItem
+        key="icons"
+        aria-label="Icons"
+        title="Icons"
+        startContent={<TbIcons size="25" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <Icons />
       </AccordionItem>
     </Accordion>
   );
 };
 
 export default Basics;
-
