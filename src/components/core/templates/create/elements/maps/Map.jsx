@@ -21,7 +21,7 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     europe: MapEurope,
     africa: MapAfrica,
     'north-america': MapNorthAmerica,
-    world: MapWorld,
+     world: MapWorld,
     asia: MapAsia,
     oceanic: MapOceanic,
   };
