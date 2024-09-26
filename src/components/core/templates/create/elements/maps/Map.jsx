@@ -23,6 +23,10 @@ import MapAfghanistan, {
   MapAfghanistanPresent,
 } from '@/components/core/templates/create/elements/maps/MapAfghanistan.jsx';
 import MapAustria, { MapAustriaPresent } from '@/components/core/templates/create/elements/maps/MapAustria.jsx';
+import MapArgentina, { MapArgentinaPresent } from '@/components/core/templates/create/elements/maps/MapArgentina.jsx';
+import MapAzerbaijan, {
+  MapAzerbaijanPresent,
+} from '@/components/core/templates/create/elements/maps/MapAzerbaijan.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -40,6 +44,8 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     albania: MapAlbania,
     afghanistan: MapAfghanistan,
     austria: MapAustria,
+    argentina: MapArgentina,
+    azerbaijan: MapAzerbaijan,
   };
 
   if (components[element.config.name]) {
@@ -65,6 +71,8 @@ export const MapPresent = ({ element }) => {
     albania: MapAlbaniaPresent,
     afghanistan: MapAfghanistanPresent,
     austria: MapAustriaPresent,
+    argentina: MapArgentinaPresent,
+    azerbaijan: MapAzerbaijanPresent,
   };
 
   if (components[element.config.name]) {
