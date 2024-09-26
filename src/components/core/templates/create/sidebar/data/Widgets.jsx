@@ -30,12 +30,12 @@ const elements = [
 const Widgets = ({ onBack }) => {
   return (
     <div>
-      <div className="flex items-center space-x-3 mb-6">
+      {/* <div className="flex items-center space-x-3 mb-6">
         <Button variant="bordered" radius="full" size="sm" isIconOnly onClick={onBack}>
           <RiArrowLeftSLine size="20" />
         </Button>
         <h3 className="text-base font-medium">Dynamic fields</h3>
-      </div>
+      </div> */}
       <div className="grid grid-cols-1 gap-4">
         {elements.map((element) => {
           return (

@@ -35,55 +35,55 @@ const items = icons.map((icon) => ({
 
 const IconsSlider = ({ mini = false, onView, onBack }) => {
   return (
-    <div>
-      {mini ? (
-        <>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Icons</h2>
-            <Button
-              onClick={onView}
-              variant="bordered"
-              size="sm"
-              className="text-md"
-              endContent={<TbChevronRight size={16} />}
-              radius="full"
-            >
-              View All
-            </Button>
-          </div>
-          <div className="relative">
-            <BasicCarousel
-              classNames={{ next: 'right-0', prev: 'left-0', base: 'overflow-hidden' }}
-              slides={[...Array(2).fill(null)].map((_, index) => {
-                return {
-                  id: index,
-                  content: (
-                    <div className="grid grid-cols-3 gap-6">
-                      {items.slice(index * 6, index * 6 + 6).map((element) => (
-                        <DraggableElementWrapper key={element.id} element={element} />
-                      ))}
-                    </div>
-                  ),
-                };
-              })}
-            />
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="flex items-center space-x-3 mb-8">
-            <Button onClick={onBack} variant="bordered" radius="full" isIconOnly size="sm">
-              <TbChevronLeft size="20" />
-            </Button>
-            <h2 className="text-xl font-semibold">Icons</h2>
-          </div>
-          <div className="grid grid-cols-3 gap-6">
-            {items.map((element) => (
-              <DraggableElementWrapper key={element.id} element={element} />
-            ))}
-          </div>
-        </>
-      )}
+    // <div>
+    //   {mini ? (
+    //     <>
+    //       <div className="flex items-center justify-between mb-4">
+    //         <h2 className="text-lg font-semibold">Icons</h2>
+    //         <Button
+    //           onClick={onView}
+    //           variant="bordered"
+    //           size="sm"
+    //           className="text-md"
+    //           endContent={<TbChevronRight size={16} />}
+    //           radius="full"
+    //         >
+    //           View All
+    //         </Button>
+    //       </div>
+    //       <div className="relative">
+    //         <BasicCarousel
+    //           classNames={{ next: 'right-0', prev: 'left-0', base: 'overflow-hidden' }}
+    //           slides={[...Array(2).fill(null)].map((_, index) => {
+    //             return {
+    //               id: index,
+    //               content: (
+    //                 <div className="grid grid-cols-3 gap-6">
+    //                   {items.slice(index * 6, index * 6 + 6).map((element) => (
+    //                     <DraggableElementWrapper key={element.id} element={element} />
+    //                   ))}
+    //                 </div>
+    //               ),
+    //             };
+    //           })}
+    //         />
+    //       </div>
+    //     </>
+    //   ) : (
+    //     <>
+    //       <div className="flex items-center space-x-3 mb-8">
+    //         <Button onClick={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+    //           <TbChevronLeft size="20" />
+    //         </Button>
+    //         <h2 className="text-xl font-semibold">Icons</h2>
+    //       </div>
+    //     </>
+    //   )}
+    // </div>
+    <div className="grid grid-cols-3 gap-6">
+      {items.map((element) => (
+        <DraggableElementWrapper key={element.id} element={element} />
+      ))}
     </div>
   );
 };
@@ -95,3 +95,4 @@ IconsSlider.propTypes = {
 };
 
 export default IconsSlider;
+

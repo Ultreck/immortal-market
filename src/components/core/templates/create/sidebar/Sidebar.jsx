@@ -62,7 +62,7 @@ const Sidebar = () => {
               { icon: TbChartBar, title: 'Charts', key: 'charts' },
               { icon: RiPieChartLine, title: 'Data', key: 'data' },
               { icon: TbTemplate, title: 'Templates', key: 'templates' },
-              { icon: TbBrush, title: 'Graphics', key: 'graphics' },
+              // { icon: TbBrush, title: 'Graphics', key: 'graphics' },
               { icon: RiImage2Line, title: 'Images', key: 'images' },
               { icon: RiStackLine, title: 'Layers', key: 'layers' },
             ].map((element) => {
