@@ -24,19 +24,6 @@ const Basics = () => {
         <Icons onView={() => setView('icons')} />
       </AccordionItem>
     </Accordion>
-    // <>
-    //   {view === 'all' && (
-    //     <div className="space-y-8">
-    //       <Texts />
-    //       <Shapes mini onView={() => setView('shapes')} />
-    //       <Frames mini onView={() => setView('frames')} />
-    //       <Icons mini onView={() => setView('icons')} />
-    //     </div>
-    //   )}
-    //   {view === 'shapes' && <Shapes onBack={() => setView('all')} />}
-    //   {view === 'frames' && <Frames onBack={() => setView('all')} />}
-    //   {view === 'icons' && <Icons onBack={() => setView('all')} />}
-    // </>
   );
 };
 
