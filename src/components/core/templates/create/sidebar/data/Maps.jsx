@@ -12,6 +12,8 @@ import { MapAlgeriaPreview } from '@/components/core/templates/create/elements/m
 import { MapAlbaniaPreview } from '@/components/core/templates/create/elements/maps/MapAlbania.jsx';
 import { MapAngolaPreview } from '@/components/core/templates/create/elements/maps/MapAngola.jsx';
 import { MapSouthAmericaPreview } from '@/components/core/templates/create/elements/maps/MapSouthAmerica.jsx';
+import { MapAfghanistanPreview } from '@/components/core/templates/create/elements/maps/MapAfghanistan.jsx';
+import { MapAustriaPreview } from '@/components/core/templates/create/elements/maps/MapAustria.jsx';
 
 const names = [
   'nigeria',
@@ -26,6 +28,8 @@ const names = [
   'algeria',
   'angola',
   'albania',
+  'afghanistan',
+  'austria',
 ];
 
 const previews = {
@@ -41,6 +45,8 @@ const previews = {
   algeria: <MapAlgeriaPreview />,
   angola: <MapAngolaPreview />,
   albania: <MapAlbaniaPreview />,
+  afghanistan: <MapAfghanistanPreview />,
+  austria: <MapAustriaPreview />,
 };
 
 const elements = names.map((name) => ({

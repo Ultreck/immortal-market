@@ -42,12 +42,10 @@ const MapAfricaContent = ({ element }) => {
         data-y="650"
         stroke={element.config.stroke}
         data-id="AO"
-        name="Angola"
         d="m 495.3,598.6 -36,-0.2 -4.3,1.7 -3.5,-0.3 -5.1,1.9 -1.1,2.7 6,8.7 2.4,9.3 3.6,13.4 -3.8,5.5 -0.6,2.8 2.9,8.3 3.1,8.4 3.6,5 0.6,7.8 -1.4,10.3 -4,6.1 -7.1,9.1 -2.9,5.6 -4.1,12.5 -0.8,5.9 -4.3,12.7 -1.9,12.2 1,8.7 5.9,-2.7 7.2,-2.3 7.8,0.4 7.1,6.3 1.9,-1 48.8,-0.6 8.2,6.6 29.1,2 22.4,-5.7 -7.6,-8.6 -7.8,-11.3 1.6,-44 25.3,0.1 -1,-4.7 2,-5.2 -2,-6.5 1.5,-6.7 -1.2,-4.3 -5.5,-0.8 -7.6,2 -5.3,-0.3 -3,1.3 0.9,-16.5 -3.9,-5.1 -0.8,-8.5 1.9,-8.4 -2.4,-5.3 -0.1,-8.7 -14.8,0.1 1.1,-5 -6.2,0.1 -0.7,2.4 -7.6,0.5 -3.1,8.1 -1.9,3.4 -6.7,-1.9 -4,1.9 -8.1,1.1 -4.6,-7.2 -2.7,-4.5 -3.5,-8.3 -2.9,-10.3 z m -47.4,-2.7 0.4,-6 2,-3.5 4.5,-2.9 -4.6,-4.8 -3.7,2.3 -5,6 3.3,10.4 3.1,-1.5 z"
       />
       <path
         id="BI"
-        name="Burundi"
         fill={assignColor('Burundi')}
         data-name="Burundi"
         data-x="669"
@@ -58,7 +56,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="BJ"
-        name="Benin"
         fill={assignColor('Benin')}
         data-name="Benin"
         data-x="320"
@@ -69,7 +66,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="BF"
-        name="Burkina Faso"
         fill={assignColor('Burkina Faso')}
         data-name="Burkina Faso"
         data-x="300.7"
@@ -80,7 +76,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="BW"
-        name="Botswana"
         fill={assignColor('Botswana')}
         data-name="Botswana"
         data-x="540"
@@ -91,7 +86,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="CF"
-        name="Central African Republic"
         fill={assignColor('Central African Republic')}
         data-name="Central African Republic"
         data-x="587"
@@ -102,7 +96,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="CI"
-        name="Cote De Ivoire"
         fill={assignColor('Cote De Ivoire')}
         data-name="Cote De Ivoire"
         data-x="230"
@@ -113,7 +106,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="CM"
-        name="Cameroon"
         fill={assignColor('Cameroon')}
         data-name="Cameroon"
         data-x="280"
@@ -124,7 +116,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="CD"
-        name="Congo Republic"
         fill={assignColor('Congo Republic')}
         data-name="Congo Republic"
         data-x="500"
@@ -135,7 +126,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="CG"
-        name="Congo"
         fill={assignColor('Congo')}
         data-name="Congo"
         data-x="500"
@@ -146,7 +136,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="DJ"
-        name="Djibouti"
         fill={assignColor('Djibouti')}
         data-name="Djibouti"
         data-x="820.3"
@@ -157,7 +146,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="DZ"
-        name="Algeria"
         fill={assignColor('Algeria')}
         data-name="Algeria"
         data-x="270"
@@ -168,7 +156,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="EG"
-        name="Egypt"
         fill={assignColor('Egypt')}
         data-name="Egypt"
         data-x="600"
@@ -179,7 +166,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="ER"
-        name="Eritrea"
         fill={assignColor('Eritrea')}
         data-name="Eritrea"
         data-x="750"
@@ -190,7 +176,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="ET"
-        name="Ethiopia"
         fill={assignColor('Ethiopia')}
         data-name="Ethiopia"
         data-x="715"
@@ -201,7 +186,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="GA"
-        name="Gabon"
         fill={assignColor('Gabon')}
         data-name="Gabon"
         data-x="330"
@@ -212,7 +196,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="GH"
-        name="Ghana"
         fill={assignColor('Ghana')}
         data-name="Ghana"
         data-x="240"
@@ -223,7 +206,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="GN"
-        name="Guinea"
         fill={assignColor('Guinea')}
         data-name="Guinea"
         data-x="20"
@@ -234,7 +216,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="GM"
-        name="Gambia"
         fill={assignColor('Gambia')}
         data-name="Gambia"
         data-x="-10"
@@ -245,7 +226,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="GW"
-        name="Guinea Bissau"
         fill={assignColor('Guinea Bissau')}
         data-name="Guinea Bissau"
         data-x="129.9"
@@ -256,7 +236,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="GQ"
-        name="Equatorial Guinea"
         fill={assignColor('Equatorial Guinea')}
         data-name="Equatorial Guinea"
         data-x="433"
@@ -267,7 +246,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="KE"
-        name="Kenya"
         fill={assignColor('Kenya')}
         data-name="Kenya"
         data-x="750"
@@ -278,7 +256,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="LR"
-        name="Liberia"
         fill={assignColor('Liberia')}
         data-name="Liberia"
         data-x="100"
@@ -289,7 +266,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="LY"
-        name="Libya"
         fill={assignColor('Libya')}
         data-name="Libya"
         data-x="470"
@@ -300,7 +276,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="LS"
-        name="Lesotho"
         fill={assignColor('Lesotho')}
         data-name="Lesotho"
         data-x="625.3"
@@ -311,7 +286,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="MA"
-        name="Morocco"
         fill={assignColor('Morocco')}
         data-name="Morocco"
         data-x="100"
@@ -322,7 +296,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="MG"
-        name="Madagascar"
         fill={assignColor('Madagascar')}
         data-name="Madagascar"
         data-x="902.9"
@@ -333,7 +306,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="ML"
-        name="Mali"
         fill={assignColor('Mali')}
         data-name="Mali"
         data-x="230"
@@ -344,7 +316,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="MZ"
-        name="Mozambique"
         fill={assignColor('Mozambique')}
         data-name="Mozambique"
         data-x="770"
@@ -355,7 +326,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="MR"
-        name="Mauritania"
         fill={assignColor('Mauritania')}
         data-name="Mauritania"
         data-x="0"
@@ -366,7 +336,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="MW"
-        name="Malawi"
         fill={assignColor('Malawi')}
         data-name="Malawi"
         data-x="714"
@@ -377,7 +346,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="NA"
-        name="Namibia"
         fill={assignColor('Namibia')}
         data-name="Namibia"
         data-x="376"
@@ -388,7 +356,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="NE"
-        name="Niger"
         fill={assignColor('Niger')}
         data-name="Niger"
         data-x="358"
@@ -399,7 +366,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="NG"
-        name="Nigeria"
         fill={assignColor('Nigeria')}
         data-name="Nigeria"
         data-x="468"
@@ -410,7 +376,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="RW"
-        name="Rwanda"
         fill={assignColor('Rwanda')}
         data-name="Rwanda"
         data-x="669"
@@ -421,7 +386,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="EH"
-        name="West Sahara"
         fill={assignColor('West Sahara')}
         data-name="West Sahara"
         data-x="193.8"
@@ -432,7 +396,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="SD"
-        name="Sudan"
         fill={assignColor('Sudan')}
         data-name="Sudan"
         data-x="610"
@@ -443,7 +406,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="SS"
-        name="South Sudan"
         fill={assignColor('South Sudan')}
         data-name="South Sudan"
         data-x="407"
@@ -454,7 +416,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="SN"
-        name="Senegal"
         fill={assignColor('Senegal')}
         data-name="Senegal"
         data-x="0"
@@ -465,7 +426,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="SL"
-        name="Sierra Leone"
         fill={assignColor('Sierra Leone')}
         data-name="Sierra Leone"
         data-x="0"
@@ -476,7 +436,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="SZ"
-        name="Swaziland"
         fill={assignColor('Swaziland')}
         data-name="Swaziland"
         data-x="0"
@@ -487,7 +446,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="TD"
-        name="Chad"
         fill={assignColor('Chad')}
         data-name="Chad"
         data-x="472"
@@ -498,7 +456,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="TG"
-        name="Togo"
         fill={assignColor('Togo')}
         data-name="Togo"
         data-x="307"
@@ -509,7 +466,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="TN"
-        name="Tunisia"
         fill={assignColor('Tunisia')}
         data-name="Tunisia"
         data-x="415"
@@ -520,7 +476,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="TZ"
-        name="Tanzania"
         fill={assignColor('Tanzania')}
         data-name="Tanzania"
         data-x="672"
@@ -531,7 +486,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="UG"
-        name="Uganda"
         fill={assignColor('Uganda')}
         data-name="Uganda"
         data-x="711.3"
@@ -542,7 +496,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="ZA"
-        name="South Africa"
         fill={assignColor('South Africa')}
         data-name="South Africa"
         data-x="400"
@@ -553,7 +506,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="ZM"
-        name="Zambia"
         fill={assignColor('Zambia')}
         data-name="Zambia"
         data-x="671"
@@ -564,7 +516,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="ZW"
-        name="Zimbabwe"
         fill={assignColor('Zimbabwe')}
         data-name="Zimbabwe"
         data-x="669"
@@ -575,7 +526,6 @@ const MapAfricaContent = ({ element }) => {
       />
       <path
         id="SO"
-        name="Somalia"
         data-name="Somalia"
         data-x="832"
         data-y="672"
