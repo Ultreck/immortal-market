@@ -40,7 +40,7 @@ const useMapElement = (element) => {
                           })}
                           style={{ background: item.color || element.config.fill }}
                         >
-                          <p className="leading-none text-[22px] grid truncate">
+                          <p className="leading-none text-[12px] grid truncate">
                             {element.config.showLabels && (
                               <span className="font-medium text-white capitalize mix-blend-difference">
                                 {item.label}

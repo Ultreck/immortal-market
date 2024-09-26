@@ -33,7 +33,7 @@ const MapNigeriaRegionsContent = ({ element }) => {
   const { el, assignColor, renderLabels } = useMapElement(element);
 
   return (
-    <svg width="100%" viewBox="0 0 1227 1010" xmlns="http://www.w3.org/2000/svg" ref={el}>
+    <svg width="100%" fill="none" viewBox="0 0 1227 1010" xmlns="http://www.w3.org/2000/svg" ref={el}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

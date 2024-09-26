@@ -13,9 +13,9 @@ import MapNigeriaRegions, {
   MapNigeriaRegionsPresent,
 } from '@/components/core/templates/create/elements/maps/MapNigeriaRegions.jsx';
 import PropTypes from 'prop-types';
-import MapAlgeria from '@/components/core/templates/create/elements/maps/MapAlgeria.jsx';
-import MapAngola from '@/components/core/templates/create/elements/maps/MapAngola.jsx';
-import MapAlbania from '@/components/core/templates/create/elements/maps/MapAlbania.jsx';
+import MapAlgeria, { MapAlgeriaPresent } from '@/components/core/templates/create/elements/maps/MapAlgeria.jsx';
+import MapAngola, { MapAngolaPresent } from '@/components/core/templates/create/elements/maps/MapAngola.jsx';
+import MapAlbania, { MapAlbaniaPresent } from '@/components/core/templates/create/elements/maps/MapAlbania.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -27,9 +27,9 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
      world: MapWorld,
     asia: MapAsia,
     oceanic: MapOceanic,
-    algeria:MapAlgeria,
-    angola:MapAngola,
-    albania:MapAlbania
+    algeria: MapAlgeria,
+    angola: MapAngola,
+    albania: MapAlbania,
   };
 
   if (components[element.config.name]) {
@@ -49,6 +49,9 @@ export const MapPresent = ({ element }) => {
     world: MapWorldPresent,
     asia: MapAsiaPresent,
     oceanic: MapOceanicPresent,
+    algeria: MapAlgeriaPresent,
+    angola: MapAngolaPresent,
+    albania: MapAlbaniaPresent,
   };
 
   if (components[element.config.name]) {

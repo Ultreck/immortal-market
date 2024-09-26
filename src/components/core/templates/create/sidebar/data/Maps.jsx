@@ -8,10 +8,23 @@ import { MapEuropePreview } from '@/components/core/templates/create/elements/ma
 import { MapWorldPreview } from '@/components/core/templates/create/elements/maps/MapWorld.jsx';
 import { MapAsiaPreview } from '@/components/core/templates/create/elements/maps/MapAsia.jsx';
 import { capitalize } from '@/lib/utils.js';
-import { GiAlgeria } from "react-icons/gi";
-import { GiAngola } from "react-icons/gi";
+import { MapAlgeriaPreview } from '@/components/core/templates/create/elements/maps/MapAlgeria.jsx';
+import { MapAlbaniaPreview } from '@/components/core/templates/create/elements/maps/MapAlbania.jsx';
+import { MapAngolaPreview } from '@/components/core/templates/create/elements/maps/MapAngola.jsx';
 
-const names = ['nigeria', 'nigeria-regions', 'africa', 'europe', 'north-america', 'world', 'asia', 'oceanic', 'algeria','angola','albania'];
+const names = [
+  'nigeria',
+  'nigeria-regions',
+  'africa',
+  'europe',
+  'north-america',
+  'world',
+  'asia',
+  'oceanic',
+  'algeria',
+  'angola',
+  'albania',
+];
 
 const previews = {
   nigeria: <MapNigeriaPreview />,
@@ -22,22 +35,9 @@ const previews = {
   world: <MapWorldPreview />,
   asia: <MapAsiaPreview />,
   oceanic: <MapOceanicPreview />,
-  algeria: (
-    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-      <GiAlgeria className="w-full h-full" />
-    </div>
-  ),
-  angola: (
-    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-      <GiAngola  className="w-full h-full" />
-    </div>
-  ),
-  albania: (
-    <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-      <GiAngola  className="w-full h-full" />
-      albania
-    </div>
-  ),
+  algeria: <MapAlgeriaPreview />,
+  angola: <MapAngolaPreview />,
+  albania: <MapAlbaniaPreview />,
 };
 
 const elements = names.map((name) => ({
