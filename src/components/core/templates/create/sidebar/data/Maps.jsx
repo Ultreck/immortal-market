@@ -16,6 +16,15 @@ import { MapAfghanistanPreview } from '@/components/core/templates/create/elemen
 import { MapAustriaPreview } from '@/components/core/templates/create/elements/maps/MapAustria.jsx';
 import { MapArgentinaPreview } from '@/components/core/templates/create/elements/maps/MapArgentina.jsx';
 import { MapAzerbaijanPreview } from '@/components/core/templates/create/elements/maps/MapAzerbaijan.jsx';
+import { MapBeninPreview } from '@/components/core/templates/create/elements/maps/MapBenin.jsx';
+import { MapBangladeshPreview } from '@/components/core/templates/create/elements/maps/MapBangladesh';
+import { MapBelarusPreview } from '@/components/core/templates/create/elements/maps/MapBelarus';
+import { MapBermudaPreview } from '@/components/core/templates/create/elements/maps/MapBermuda';
+import { MapBotswanaPreview } from '@/components/core/templates/create/elements/maps/MapBotswana';
+import { MapBahrainPreview } from '@/components/core/templates/create/elements/maps/MapBahrain';
+import { MapBulgariaPreview } from '@/components/core/templates/create/elements/maps/MapBulgaria';
+import { MapBurkinafasoPreview } from '@/components/core/templates/create/elements/maps/MapBurkinafaso';
+import { MapBurundiPreview } from '@/components/core/templates/create/elements/maps/MapBurundi';
 
 const names = [
   'nigeria',
@@ -34,6 +43,15 @@ const names = [
   'austria',
   'argentina',
   'azerbaijan',
+  'benin',
+  'bangladesh',
+  'belarus',
+  'bermuda',
+  'botswana',
+  'bahrain',
+  'bulgaria',
+  'burkinafaso',
+  'burundi',
 ];
 
 const previews = {
@@ -53,6 +71,15 @@ const previews = {
   austria: <MapAustriaPreview />,
   argentina: <MapArgentinaPreview />,
   azerbaijan: <MapAzerbaijanPreview />,
+  benin: <MapBeninPreview />,
+  bangladesh: <MapBangladeshPreview />,
+  belarus: <MapBelarusPreview />,
+  bermuda: <MapBermudaPreview />,
+  botswana: <MapBotswanaPreview />,
+  bahrain: <MapBahrainPreview />,
+  bulgaria: <MapBulgariaPreview />,
+  burkinafaso: <MapBurkinafasoPreview />,
+  burundi: <MapBurundiPreview />,
 };
 
 const elements = names.map((name) => ({
