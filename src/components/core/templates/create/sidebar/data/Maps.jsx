@@ -25,6 +25,15 @@ import { MapBahrainPreview } from '@/components/core/templates/create/elements/m
 import { MapBulgariaPreview } from '@/components/core/templates/create/elements/maps/MapBulgaria';
 import { MapBurkinafasoPreview } from '@/components/core/templates/create/elements/maps/MapBurkinafaso';
 import { MapBurundiPreview } from '@/components/core/templates/create/elements/maps/MapBurundi';
+import { MapArmeniaPreview } from '@/components/core/templates/create/elements/maps/MapArmenia.jsx';
+import { MapAustraliaPreview } from '@/components/core/templates/create/elements/maps/MapAustralia.jsx';
+import { MapBelgiumPreview } from '@/components/core/templates/create/elements/maps/MapBelgium.jsx';
+import { MapBelizePreview } from '@/components/core/templates/create/elements/maps/MapBelize.jsx';
+import { MapBhutanPreview } from '@/components/core/templates/create/elements/maps/MapBhutan.jsx';
+import { MapBoliviaPreview } from '@/components/core/templates/create/elements/maps/MapBolivia.jsx';
+import { MapBosniaAndHerzegovinaPreview } from '@/components/core/templates/create/elements/maps/MapBosniaAndHerzegovina.jsx';
+import { MapBrazilPreview } from '@/components/core/templates/create/elements/maps/MapBrazil.jsx';
+import { MapBahamasPreview } from '@/components/core/templates/create/elements/maps/MapBahamas.jsx';
 
 const names = [
   'nigeria',
@@ -52,6 +61,16 @@ const names = [
   'bulgaria',
   'burkinafaso',
   'burundi',
+  'armenia',
+  'australia',
+  'belgium',
+  'belize',
+  'bhutan',
+  'bolivia',
+  'bosnia-and-aerzegovina',
+  'brazil',
+  'bruneiDarussalam',
+  'bahamas',
 ];
 
 const previews = {
@@ -80,6 +99,15 @@ const previews = {
   bulgaria: <MapBulgariaPreview />,
   burkinafaso: <MapBurkinafasoPreview />,
   burundi: <MapBurundiPreview />,
+  armenia: <MapArmeniaPreview />,
+  australia: <MapAustraliaPreview />,
+  belgium: <MapBelgiumPreview />,
+  belize: <MapBelizePreview />,
+  bhutan: <MapBhutanPreview />,
+  bolivia: <MapBoliviaPreview />,
+  'bosnia-and-aerzegovina': <MapBosniaAndHerzegovinaPreview />,
+  brazil: <MapBrazilPreview />,
+  bahamas: <MapBahamasPreview />,
 };
 
 const elements = names.map((name) => ({

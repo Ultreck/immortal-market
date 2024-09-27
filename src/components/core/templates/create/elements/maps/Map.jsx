@@ -40,6 +40,17 @@ import MapBurkinafaso, {
   MapBurkinafasoPresent,
 } from '@/components/core/templates/create/elements/maps/MapBurkinafaso.jsx';
 import MapBurundi, { MapBurundiPresent } from '@/components/core/templates/create/elements/maps/MapBurundi.jsx';
+import MapArmenia, { MapArmeniaPresent } from '@/components/core/templates/create/elements/maps/MapArmenia.jsx';
+import MapAustralia, { MapAustraliaPresent } from '@/components/core/templates/create/elements/maps/MapAustralia.jsx';
+import MapBelgium, { MapBelgiumPresent } from '@/components/core/templates/create/elements/maps/MapBelgium.jsx';
+import MapBelize, { MapBelizePresent } from '@/components/core/templates/create/elements/maps/MapBelize.jsx';
+import MapBhutan, { MapBhutanPresent } from '@/components/core/templates/create/elements/maps/MapBhutan.jsx';
+import MapBolivia, { MapBoliviaPresent } from '@/components/core/templates/create/elements/maps/MapBolivia.jsx';
+import MapBosniaAndHerzegovina, {
+  MapBosniaAndHerzegovinaPresent,
+} from '@/components/core/templates/create/elements/maps/MapBosniaAndHerzegovina.jsx';
+import MapBrazil, { MapBrazilPresent } from '@/components/core/templates/create/elements/maps/MapBrazil.jsx';
+import MapBahamas, { MapBahamasPresent } from '@/components/core/templates/create/elements/maps/MapBahamas.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -68,6 +79,15 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     bulgaria: MapBulgaria,
     burkinafaso: MapBurkinafaso,
     burundi: MapBurundi,
+    armenia: MapArmenia,
+    australia: MapAustralia,
+    belgium: MapBelgium,
+    belize: MapBelize,
+    bhutan: MapBhutan,
+    bolivia: MapBolivia,
+    'bosnia-and-aerzegovina': MapBosniaAndHerzegovina,
+    brazil: MapBrazil,
+    bahamas: MapBahamas,
   };
 
   if (components[element.config.name]) {
@@ -104,6 +124,15 @@ export const MapPresent = ({ element }) => {
     bulgaria: MapBulgariaPresent,
     burkinafaso: MapBurkinafasoPresent,
     burundi: MapBurundiPresent,
+    armenia: MapArmeniaPresent,
+    australia: MapAustraliaPresent,
+    belgium: MapBelgiumPresent,
+    belize: MapBelizePresent,
+    bhutan: MapBhutanPresent,
+    bolivia: MapBoliviaPresent,
+    'bosnia-and-aerzegovina': MapBosniaAndHerzegovinaPresent,
+    brazil: MapBrazilPresent,
+    bahamas: MapBahamasPresent,
   };
 
   if (components[element.config.name]) {
