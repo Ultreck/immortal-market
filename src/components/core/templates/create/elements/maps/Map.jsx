@@ -16,6 +16,9 @@ import PropTypes from 'prop-types';
 import MapAlgeria, { MapAlgeriaPresent } from '@/components/core/templates/create/elements/maps/MapAlgeria.jsx';
 import MapAngola, { MapAngolaPresent } from '@/components/core/templates/create/elements/maps/MapAngola.jsx';
 import MapAlbania, { MapAlbaniaPresent } from '@/components/core/templates/create/elements/maps/MapAlbania.jsx';
+import MapSouthAmerica, {
+  MapSouthAmericaPresent,
+} from '@/components/core/templates/create/elements/maps/MapSouthAmerica.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -24,7 +27,8 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     europe: MapEurope,
     africa: MapAfrica,
     'north-america': MapNorthAmerica,
-     world: MapWorld,
+    'south-america': MapSouthAmerica,
+    world: MapWorld,
     asia: MapAsia,
     oceanic: MapOceanic,
     algeria: MapAlgeria,
@@ -46,6 +50,7 @@ export const MapPresent = ({ element }) => {
     europe: MapEuropePresent,
     africa: MapAfricaPresent,
     'north-america': MapNorthAmericaPresent,
+    'south-america': MapSouthAmericaPresent,
     world: MapWorldPresent,
     asia: MapAsiaPresent,
     oceanic: MapOceanicPresent,

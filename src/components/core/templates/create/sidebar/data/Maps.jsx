@@ -11,6 +11,7 @@ import { capitalize } from '@/lib/utils.js';
 import { MapAlgeriaPreview } from '@/components/core/templates/create/elements/maps/MapAlgeria.jsx';
 import { MapAlbaniaPreview } from '@/components/core/templates/create/elements/maps/MapAlbania.jsx';
 import { MapAngolaPreview } from '@/components/core/templates/create/elements/maps/MapAngola.jsx';
+import { MapSouthAmericaPreview } from '@/components/core/templates/create/elements/maps/MapSouthAmerica.jsx';
 
 const names = [
   'nigeria',
@@ -18,6 +19,7 @@ const names = [
   'africa',
   'europe',
   'north-america',
+  'south-america',
   'world',
   'asia',
   'oceanic',
@@ -32,6 +34,7 @@ const previews = {
   africa: <MapAfricaPreview />,
   europe: <MapEuropePreview />,
   'north-america': <MapNorthAmericaPreview />,
+  'south-america': <MapSouthAmericaPreview />,
   world: <MapWorldPreview />,
   asia: <MapAsiaPreview />,
   oceanic: <MapOceanicPreview />,
