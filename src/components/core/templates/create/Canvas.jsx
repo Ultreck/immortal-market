@@ -262,7 +262,7 @@ const Canvas = ({ id }) => {
                 transform: `scale(${scale})`,
                 width: page.width,
                 height: page.height,
-                background: page.style.background,
+                background: page.style.background || '#fff',
               }}
               className="origin-top-left pointer-events-none"
             >
