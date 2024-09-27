@@ -37,23 +37,44 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                   placeholder="Month name"
                   required
                   variant="bordered"
-                  classNames={{ input: 'text-base capitalize' }}
+                  classNames={{ input: 'text-lg capitalize font-bold rounded-md  text-primary' }}
                   onChange={(e) => {
                     handleChange({ ...item, month: e.target.value, index });
                   }}
                 />
-                {element.config.keys.y.map((key, i) => (
-                  <Input
-                    value={item[key]}
-                    placeholder={key}
-                    required
-                    variant="bordered"
-                    classNames={{ input: 'text-base capitalize' }}
-                    onChange={(e) => {
-                      handleChange({ ...item, [key]: e.target.value, index });
-                    }}
-                  />
-                ))}
+                {element.type === 'chart-s-line-multiple' ? (
+                  <>
+                    {element.config.keys.y.slice(0, element.config.noOfLines).map((key, i) => (
+                      <Input
+                        key={i}
+                        value={item[key]}
+                        placeholder={key}
+                        required
+                        variant="bordered"
+                        classNames={{ input: 'text-base capitalize' }}
+                        onChange={(e) => {
+                          handleChange({ ...item, [key]: e.target.value, index });
+                        }}
+                      />
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {element.config.keys.y.map((key, i) => (
+                      <Input
+                        key={i}
+                        value={item[key]}
+                        placeholder={key}
+                        required
+                        variant="bordered"
+                        classNames={{ input: 'text-base capitalize' }}
+                        onChange={(e) => {
+                          handleChange({ ...item, [key]: e.target.value, index });
+                        }}
+                      />
+                    ))}
+                  </>
+                )}
               </div>
             ))}
             <TbCirclePlus
@@ -133,28 +154,30 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
               </Checkbox>
             </div>
             {element.type === 'chart-s-line-multiple' && (
-              <div className="flex items-center space-x-4">
-                {[
-                  { name: 'Natural', icon: <TbChartLine size={25} /> },
-                  { name: 'Linear', icon: <TbTimeline size={25} /> },
-                ].map((position, i) => (
-                  <Checkbox
-                    key={i}
-                    isSelected={element.config.type === position.name}
-                    onValueChange={(v) =>
-                      onChange({
-                        ...element,
-                        config: { ...element.config, type: position.name },
-                      })
-                    }
-                  >
-                    {position.icon}
-                  </Checkbox>
-                ))}
-              </div>
+              <>
+                <div className="flex items-center space-x-4">
+                  {[
+                    { name: 'Natural', icon: <TbChartLine size={25} /> },
+                    { name: 'Linear', icon: <TbTimeline size={25} /> },
+                  ].map((position, i) => (
+                    <Checkbox
+                      key={i}
+                      isSelected={element.config.type === position.name}
+                      onValueChange={(v) =>
+                        onChange({
+                          ...element,
+                          config: { ...element.config, type: position.name },
+                        })
+                      }
+                    >
+                      {position.icon}
+                    </Checkbox>
+                  ))}
+                </div>
+              </>
             )}
             <div className="flex items-center space-x-4">
-              <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+              <p className="text-base opacity-75 whitespace-nowrap">No. of points:</p>
               <AutoCompleteNumberInput
                 onChange={(v) =>
                   onChange({
@@ -165,6 +188,21 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                 value={element.config.bars}
                 min={1}
                 max={element.config.data.length}
+                ariaLabel="No of Bars to Show"
+              />
+            </div>
+            <div className="flex items-center space-x-4">
+              <p className="text-base opacity-75 whitespace-nowrap">No. of Lines:</p>
+              <AutoCompleteNumberInput
+                onChange={(v) =>
+                  onChange({
+                    ...element,
+                    config: { ...element.config, noOfLines: Number(v) },
+                  })
+                }
+                value={element.config.noOfLines}
+                min={1}
+                max={5}
                 ariaLabel="No of Bars to Show"
               />
             </div>

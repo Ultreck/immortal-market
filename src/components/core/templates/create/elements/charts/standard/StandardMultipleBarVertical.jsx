@@ -1,6 +1,5 @@
-import React from 'react';
 import { ElementPropTypes } from '@/lib/prop-types';
-import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartLegend, ChartLegendContent } from '@/components/ui/chart';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
@@ -29,12 +28,12 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
       config={{}}
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
-      <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)} layout='vertical'>
+      <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)} layout="vertical">
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
         <YAxis type="category" dataKey="name" hide={!element.config.showYaxis} />
         <XAxis type="number" hide={!element.config.showXaxis} />
         {element.config.showLegend && <ChartLegend content={<ChartLegendContent />} />}
-        {element.config.keys.y.map((key, index) => (
+        {element.config.keys.y.slice(0, element.config.noOfBarsPerGroup).map((key, index) => (
           <Bar
             key={key}
             dataKey={key}

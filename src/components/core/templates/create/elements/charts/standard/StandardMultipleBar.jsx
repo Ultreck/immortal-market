@@ -1,4 +1,3 @@
-import React from 'react';
 import { ElementPropTypes } from '@/lib/prop-types';
 import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart';
@@ -24,6 +23,7 @@ const StandardMultipleBar = ({ element, active, highlighted, width, onClick, onC
 StandardMultipleBar.propTypes = ElementPropTypes;
 
 export const StandardMultipleBarContent = ({ element }) => {
+  
   return (
     <ChartContainer
       config={{}}

@@ -42,7 +42,7 @@ export const StandardRosePieContent = ({ element }) => {
             {
               name: 'Nightingale Chart',
               type: 'pie',
-              radius: [50, 200],
+              radius: [Math.min(element.width, element.height) * 0.1, Math.min(element.width, element.height) * 0.35],
               center: ['50%', '50%'],
               roseType: 'area',
               itemStyle: {

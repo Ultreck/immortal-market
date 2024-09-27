@@ -42,8 +42,8 @@ export const StandardDoughnutContent = ({ element }) => {
         {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
         <Pie
           data={chartData}
-          innerRadius={80}
-          outerRadius={120}
+          innerRadius={Math.min(element.width, element.height) * 0.3}
+          outerRadius={Math.min(element.width, element.height) * 0.43}
           dataKey={element.config.keys.data}
           label={element.config.showLabel}
           labelLine={false}

@@ -1,9 +1,9 @@
 import {
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
+  // ChartLegend,
+  // ChartLegendContent,
+  // ChartTooltip,
+  // ChartTooltipContent,
 } from '@/components/ui/chart.jsx';
 import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { capitalize } from '@/lib/utils.js';

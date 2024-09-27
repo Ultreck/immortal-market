@@ -37,7 +37,6 @@ export const StandardSemiPieContent = ({ element }) => {
     return { ...item, fill: color };
   });
 
-
   useEffect(() => {}, [element]);
 
   return (
@@ -46,9 +45,22 @@ export const StandardSemiPieContent = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <PieChart width={element.width} height={element.height}>
-        {element.config.showLegend && <Legend />}
+        {element.config.showLegend && <Legend
+         verticalAlign="top"
+         align="center"     
+         layout="horizontal" 
+          />}
         {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
-        <Pie dataKey="value" startAngle={180} endAngle={0} data={data} cx="50%" cy="50%" outerRadius={180} label={element.config.showLabel} />
+        <Pie
+          dataKey="value"
+          startAngle={180}
+          endAngle={0}
+          data={data}
+          cx="50%"
+          cy="50%"
+          outerRadius={Math.min(element.width, element.height) * 0.35}
+          label={element.config.showLabel}
+        />
       </PieChart>
     </ChartContainer>
   );

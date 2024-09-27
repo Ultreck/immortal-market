@@ -45,13 +45,13 @@ const ChartData = ({ element, onChange }) => {
       {element.type === 'chart-s-line-area-vertical' && (
         <StandardMultipleBarConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-line-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-area-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'chart-s-line-bar' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
+      {element.type === 'chart-s-area-bar' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-area-bar-vertical' && (
-        <StandardBarCommonConfig element={element} onChange={onChange} />
+        <StandardMultipleBarConfig element={element} onChange={onChange} />
       )}
       {element.type === 'chart-s-line-bar-vertical' && (
-        <StandardBarCommonConfig element={element} onChange={onChange} />
+        <StandardMultipleBarConfig element={element} onChange={onChange} />
       )}
       {element.type === 'chart-s-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
       {element.type === 'chart-s-bubble' && <StandardBubbleChartConfig element={element} onChange={onChange} />}

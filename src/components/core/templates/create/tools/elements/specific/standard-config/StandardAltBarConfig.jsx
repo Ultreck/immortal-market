@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Input, Tab, Tabs } from '@nextui-org/react';
+import { Checkbox, Input, Tab, Tabs } from '@nextui-org/react';
 import { TbCirclePlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
@@ -73,7 +73,28 @@ const StandardAltBarConfig = ({ element, onChange }) => {
             />
           </div>
         </Tab>
-        <Tab key="settings" title="Settings" className="text-base"></Tab>
+        <Tab key="settings" title="Settings" className="text-base">
+          <div className="flex flex-col space-y-6">
+            <div>
+              <Checkbox
+                isSelected={element.config.showXaxis}
+                classNames={{ base: 'py-0' }}
+                onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
+              >
+                Show X Axis
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox
+                isSelected={element.config.showYaxis}
+                classNames={{ base: 'py-0' }}
+                onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+              >
+                Show Y Axis
+              </Checkbox>
+            </div>
+          </div>
+        </Tab>
       </Tabs>
     </div>
   );

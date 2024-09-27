@@ -43,6 +43,7 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
                 />
                 {element.config.keys.y.slice(0, element.config.noOfBarsPerGroup).map((key, i) => (
                   <Input
+                    key={i}
                     value={item[key]}
                     placeholder={key}
                     required
@@ -146,7 +147,7 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
                 ariaLabel="No of Bars to Show"
               />
             </div>
-            {element.type === 'chart-s-stacked-bar-vertical' && (
+            {element.type === 'chart-s-bar-multiple' && (
               <div className="flex items-center space-x-4">
                 <p className="text-base opacity-75 whitespace-nowrap">No. of bars per group:</p>
                 <AutoCompleteNumberInput
@@ -158,7 +159,24 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
                   }
                   value={element.config.noOfBarsPerGroup}
                   min={1}
-                  max={3}
+                  max={5}
+                  ariaLabel="No of noOfBarsPerGroup to Show"
+                />
+              </div>
+            )}
+            {element.type === 'chart-s-bar-multiple-vertical' && (
+              <div className="flex items-center space-x-4">
+                <p className="text-base opacity-75 whitespace-nowrap">No. of bars per group:</p>
+                <AutoCompleteNumberInput
+                  onChange={(v) =>
+                    onChange({
+                      ...element,
+                      config: { ...element.config, noOfBarsPerGroup: Number(v) },
+                    })
+                  }
+                  value={element.config.noOfBarsPerGroup}
+                  min={1}
+                  max={5}
                   ariaLabel="No of noOfBarsPerGroup to Show"
                 />
               </div>

@@ -1,4 +1,4 @@
-import { CartesianGrid, LabelList, Legend, Line, LineChart, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Legend, Line, LineChart, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
@@ -41,7 +41,7 @@ export const StandardLineMultipleContent = ({ element }) => {
           <YAxis type="number" hide={!element.config.showYaxis} />
           <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
           {element.config.showLegend && <Legend />}
-          {element.config.keys.y.map((key, index) => {
+          {element.config.keys.y.slice(0, element.config.noOfLines).map((key, index) => {
             return (
               <Line
                 key={key}
@@ -65,4 +65,3 @@ StandardLineMultipleContent.propTypes = {
 };
 
 export default StandardLineMultiple;
-

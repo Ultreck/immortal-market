@@ -150,7 +150,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
               </div>
             )}
             <div className="flex items-center space-x-4">
-              <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+              <p className="text-base opacity-75 whitespace-nowrap">No. of points:</p>
               <AutoCompleteNumberInput
                 onChange={(v) =>
                   onChange({
@@ -160,7 +160,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                 }
                 value={element.config.bars}
                 min={1}
-                max={element.config.data.length}
+                max={20}
                 ariaLabel="No of Bars to Show"
               />
             </div>
