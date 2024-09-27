@@ -1,10 +1,4 @@
-import {
-  ChartContainer,
-  // ChartLegend,
-  // ChartLegendContent,
-  // ChartTooltip,
-  // ChartTooltipContent,
-} from '@/components/ui/chart.jsx';
+import { ChartContainer } from '@/components/ui/chart.jsx';
 import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
@@ -44,8 +38,8 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
       style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
     >
       <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)} layout="vertical">
-      <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-      <YAxis
+        <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+        <YAxis
           type="category"
           dataKey={element.config.keys.x}
           tickLine={false}

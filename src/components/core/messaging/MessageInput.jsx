@@ -1,14 +1,6 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
-const MessageInput = ({ 
-  placeholder, 
-  id, 
-  type, 
-  // required, 
-  // register, 
-  value,
-  onChange
-}) => {
+const MessageInput = ({ placeholder, id, type, value, onChange }) => {
   return (
     <div className="relative w-full">
       <input
@@ -17,15 +9,14 @@ const MessageInput = ({
         id={id}
         type={type}
         autoComplete={id}
-        // {...register(id, { required })}
         placeholder={placeholder}
         className="
           text-black
           font-light
           py-2
           px-4
-          bg-neutral-100 
-          w-full 
+          bg-neutral-100
+          w-full
           rounded-full
           focus:outline-none
           dark:bg-zinc-800
@@ -33,7 +24,15 @@ const MessageInput = ({
         "
       />
     </div>
-   );
-}
- 
+  );
+};
+
+MessageInput.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 export default MessageInput;

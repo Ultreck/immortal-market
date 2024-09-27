@@ -75,13 +75,10 @@ const texts = [
 
 const Texts = () => {
   return (
-    <div>
-      {/* <h2 className="text-lg font-semibold mb-4">Text</h2> */}
-      <div className="grid grid-cols-1 gap-4">
-        {texts.map((element) => (
-          <DraggableElementWrapper key={element.id} element={element} />
-        ))}
-      </div>
+    <div className="grid grid-cols-1 gap-4">
+      {texts.map((element) => (
+        <DraggableElementWrapper key={element.id} element={element} />
+      ))}
     </div>
   );
 };

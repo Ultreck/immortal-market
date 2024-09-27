@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@nextui-org/react';
 
 const SimpleGuageChart = () => {
   const chartRef = useRef(null);
-  const [gaugeValue, setGaugeValue] = useState(70);
 
   useEffect(() => {
     let chart;
@@ -74,7 +73,6 @@ const SimpleGuageChart = () => {
 
     const timer = setInterval(() => {
       const newValue = Math.floor(Math.random() * 100);
-      setGaugeValue(newValue);
       chart.setOption({
         series: [
           {
@@ -84,21 +82,19 @@ const SimpleGuageChart = () => {
       });
     }, 2000);
 
-    // Cleanup function
     return () => {
       clearInterval(timer);
       if (chart) {
         chart.dispose();
       }
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
-    <Card className='w-full bg-white space-y-6 px-8 py-6 mt-10'>
+    <Card className="w-full bg-white space-y-6 px-8 py-6 mt-10">
       <div ref={chartRef} style={{ width: '100%', height: '400px' }} />
     </Card>
   );
 };
 
 export default SimpleGuageChart;
-

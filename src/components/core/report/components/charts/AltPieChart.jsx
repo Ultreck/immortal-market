@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@nextui-org/react';
 
@@ -12,10 +12,6 @@ const AltPieChart = () => {
       tooltip: {
         trigger: 'item',
       },
-      // legend: {
-      //   top: '5%',
-      //   left: 'center',
-      // },
       series: [
         {
           name: 'Access From',
@@ -65,4 +61,3 @@ const AltPieChart = () => {
 };
 
 export default AltPieChart;
-

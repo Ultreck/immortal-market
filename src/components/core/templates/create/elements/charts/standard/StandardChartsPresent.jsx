@@ -57,7 +57,6 @@ const StandardChartsPresent = ({ element }) => {
     'chart-s-bubble': StandardBubbleChartContent,
     'chart-s-area-bar': StandardBarAreaContent,
     'chart-s-scatter': StandardBubbleChartInSizesContent,
-    // 'chart-s-area-bar': StandardAreaBarVerticalContent,
   };
 
   if (components[element.type]) {

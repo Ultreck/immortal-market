@@ -50,7 +50,6 @@ export const StandardLineContent = ({ element }) => {
           <Line
             dataKey={element.config.keys.y}
             type={element.config.type}
-            // type="natural"
             strokeWidth={2}
             activeDot={{ r: 6 }}
             isAnimationActive={false}
@@ -69,4 +68,3 @@ StandardLineContent.propTypes = {
 };
 
 export default StandardLine;
-

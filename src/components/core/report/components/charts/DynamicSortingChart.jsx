@@ -74,14 +74,13 @@ const DynamicSortingChart = () => {
 
     const runInterval = setInterval(updateData, 3000);
 
-    // Cleanup function
     return () => {
       clearInterval(runInterval);
       if (chart) {
         chart.dispose();
       }
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <Card className="px-8 py-6 bg-white mt-10">

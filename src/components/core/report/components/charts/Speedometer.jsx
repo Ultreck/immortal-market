@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@nextui-org/react';
 
@@ -89,17 +89,16 @@ const SpeedometerGauge = () => {
 
     const timer = setInterval(updateData, 2000);
 
-    // Cleanup function
     return () => {
       clearInterval(timer);
       if (chart) {
         chart.dispose();
       }
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
-    <Card className='w-full bg-white space-y-6 px-8 py-6 mt-10'>
+    <Card className="w-full bg-white space-y-6 px-8 py-6 mt-10">
       <div ref={chartRef} style={{ width: '100%', height: '500px' }} />
     </Card>
   );

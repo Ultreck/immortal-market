@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@nextui-org/react';
 
@@ -78,13 +78,12 @@ const FunnelChart = () => {
 
     initChart();
 
-    // Cleanup function
     return () => {
       if (chart) {
         chart.dispose();
       }
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <Card className="bg-white space-y-6 w-full px-8 py-6">
