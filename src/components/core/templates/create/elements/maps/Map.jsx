@@ -55,11 +55,32 @@ import MapChad, { MapChadPresent } from '@/components/core/templates/create/elem
 import MapColombia, { MapColombiaPresent } from '@/components/core/templates/create/elements/maps/MapColombia.jsx';
 import MapCroatia, { MapCroatiaPresent } from '@/components/core/templates/create/elements/maps/MapCroatia.jsx';
 import MapCuba, { MapCubaPresent } from '@/components/core/templates/create/elements/maps/MapCuba.jsx';
-import MapCzechRepublic, { MapCzechRepublicPresent } from '@/components/core/templates/create/elements/maps/MapCzechRepublic.jsx';
+import MapCzechRepublic, {
+  MapCzechRepublicPresent,
+} from '@/components/core/templates/create/elements/maps/MapCzechRepublic.jsx';
 import MapCongo, { MapCongoPresent } from '@/components/core/templates/create/elements/maps/MapCongo.jsx';
-import MapDominicanRepublic, { MapDominicanRepublicPresent } from '@/components/core/templates/create/elements/maps/MapDominicanRepublic.jsx';
-import MapBruneiDarussalam, { MapBruneiDarussalamPresent } from '@/components/core/templates/create/elements/maps/MapBruneiDarussalam.jsx';
-
+import MapDominicanRepublic, {
+  MapDominicanRepublicPresent,
+} from '@/components/core/templates/create/elements/maps/MapDominicanRepublic.jsx';
+import MapBruneiDarussalam, {
+  MapBruneiDarussalamPresent,
+} from '@/components/core/templates/create/elements/maps/MapBruneiDarussalam.jsx';
+import MapCaylandIslands, {
+  MapCaylandIslandsPresent,
+} from '@/components/core/templates/create/elements/maps/MapCaylandIslands.jsx';
+import MapCambodia, { MapCambodiaPresent } from '@/components/core/templates/create/elements/maps/MapCambodia.jsx';
+import MapCameroon, { MapCameroonPresent } from '@/components/core/templates/create/elements/maps/MapCameroon.jsx';
+import MapCanada, { MapCanadaPresent } from '@/components/core/templates/create/elements/maps/MapCanada.jsx';
+import MapCentralAfricanRepublic, {
+  MapCentralAfricanRepublicPresent,
+} from '@/components/core/templates/create/elements/maps/MapCentralAfricanRepublic.jsx';
+import MapChile, { MapChilePresent } from '@/components/core/templates/create/elements/maps/MapChile.jsx';
+import MapChina, { MapChinaPresent } from '@/components/core/templates/create/elements/maps/MapChina.jsx';
+import MapCostarica, { MapCostaricaPresent } from '@/components/core/templates/create/elements/maps/MapCostarica.jsx';
+import MapCyprus, { MapCyprusPresent } from '@/components/core/templates/create/elements/maps/MapCyprus.jsx';
+import MapCongoDr, { MapCongoDrPresent } from '@/components/core/templates/create/elements/maps/MapCongoDr.jsx';
+import MapDenmark, { MapDenmarkPresent } from '@/components/core/templates/create/elements/maps/MapDenmark.jsx';
+import MapDjibouti, { MapDjiboutiPresent } from '@/components/core/templates/create/elements/maps/MapDjibouti.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -104,7 +125,19 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     'czech-republic': MapCzechRepublic,
     congo: MapCongo,
     'dominican-republic': MapDominicanRepublic,
-    'brunei-darussalam': MapBruneiDarussalam
+    'brunei-darussalam': MapBruneiDarussalam,
+    'cayland-islands': MapCaylandIslands,
+    cambodia: MapCambodia,
+    cameroon: MapCameroon,
+    canada: MapCanada,
+    'central-african-republic': MapCentralAfricanRepublic,
+    chile: MapChile,
+    china: MapChina,
+    costarica: MapCostarica,
+    cyprus: MapCyprus,
+    'congo-dr': MapCongoDr,
+    denmark: MapDenmark,
+    djibouti: MapDjibouti,
   };
 
   if (components[element.config.name]) {
@@ -157,7 +190,19 @@ export const MapPresent = ({ element }) => {
     'czech-republic': MapCzechRepublicPresent,
     congo: MapCongoPresent,
     'dominican-republic': MapDominicanRepublicPresent,
-    'brunei-darussalam': MapBruneiDarussalamPresent
+    'brunei-darussalam': MapBruneiDarussalamPresent,
+    'cayland-islands': MapCaylandIslandsPresent,
+    cambodia: MapCambodiaPresent,
+    cameroon: MapCameroonPresent,
+    canada: MapCanadaPresent,
+    'central-african-republic': MapCentralAfricanRepublicPresent,
+    chile: MapChilePresent,
+    china: MapChinaPresent,
+    costarica: MapCostaricaPresent,
+    cyprus: MapCyprusPresent,
+    'congo-dr': MapCongoDrPresent,
+    denmark: MapDenmarkPresent,
+    djibouti: MapDjiboutiPresent,
   };
 
   if (components[element.config.name]) {

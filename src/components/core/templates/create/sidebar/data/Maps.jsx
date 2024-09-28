@@ -42,6 +42,18 @@ import { MapCzechRepublicPreview } from '@/components/core/templates/create/elem
 import { MapCongoPreview } from '@/components/core/templates/create/elements/maps/MapCongo.jsx';
 import { MapDominicanRepublicPreview } from '@/components/core/templates/create/elements/maps/MapDominicanRepublic.jsx';
 import { MapBruneiDarussalamPreview } from '@/components/core/templates/create/elements/maps/MapBruneiDarussalam.jsx';
+import { MapCaylandIslandsPreview } from '@/components/core/templates/create/elements/maps/MapCaylandIslands.jsx';
+import { MapCambodiaPreview } from '@/components/core/templates/create/elements/maps/MapCambodia.jsx';
+import { MapCameroonPreview } from '@/components/core/templates/create/elements/maps/MapCameroon.jsx';
+import { MapCanadaPreview } from '@/components/core/templates/create/elements/maps/MapCanada.jsx';
+import { MapCentralAfricanRepublicPreview } from '@/components/core/templates/create/elements/maps/MapCentralAfricanRepublic.jsx';
+import { MapChilePreview } from '@/components/core/templates/create/elements/maps/MapChile.jsx';
+import { MapChinaPreview } from '@/components/core/templates/create/elements/maps/MapChina.jsx';
+import { MapCostaricaPreview } from '@/components/core/templates/create/elements/maps/MapCostarica';
+import { MapCyprusPreview } from '@/components/core/templates/create/elements/maps/MapCyprus';
+import { MapCongoDrPreview } from '@/components/core/templates/create/elements/maps/MapCongoDr';
+import { MapDenmarkPreview } from '@/components/core/templates/create/elements/maps/MapDenmark';
+import { MapDjiboutiPreview } from '@/components/core/templates/create/elements/maps/MapDjibouti';
 
 const names = [
   'nigeria',
@@ -86,6 +98,18 @@ const names = [
   'czech-republic',
   'congo',
   'dominican-republic',
+  'cayland-islands',
+  'cambodia',
+  'cameroon',
+  'canada',
+  'central-african-republic',
+  'chile',
+  'china',
+  'costarica',
+  'cyprus',
+  'congo-dr',
+  'denmark',
+  'djibouti',
 ];
 
 const previews = {
@@ -131,6 +155,18 @@ const previews = {
   'czech-republic': <MapCzechRepublicPreview />,
   congo: <MapCongoPreview />,
   'dominican-republic': <MapDominicanRepublicPreview />,
+  'cayland-islands': <MapCaylandIslandsPreview/>,
+  cambodia: <MapCambodiaPreview/>,
+  cameroon: <MapCameroonPreview/>,
+  canada: <MapCanadaPreview/>,
+  'central-african-republic' : <MapCentralAfricanRepublicPreview/>,
+  chile : <MapChilePreview/>,
+  china : <MapChinaPreview/>,
+  costarica : <MapCostaricaPreview/>,
+  cyprus : <MapCyprusPreview/>,
+  'congo-dr' : <MapCongoDrPreview/>,
+  'denmark' : <MapDenmarkPreview/>,
+  'djibouti': <MapDjiboutiPreview/>,
 };
 
 const elements = names.map((name) => ({
