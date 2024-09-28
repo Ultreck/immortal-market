@@ -39,7 +39,7 @@ const MapWorldContent = ({ element }) => {
         stroke={element.config.stroke}
         fill={assignColor('Russia')}
         data-name="Russia"
-        data-x="900"
+        data-x="420"
         data-y="93"
       />
       <path
