@@ -51,6 +51,15 @@ import MapBosniaAndHerzegovina, {
 } from '@/components/core/templates/create/elements/maps/MapBosniaAndHerzegovina.jsx';
 import MapBrazil, { MapBrazilPresent } from '@/components/core/templates/create/elements/maps/MapBrazil.jsx';
 import MapBahamas, { MapBahamasPresent } from '@/components/core/templates/create/elements/maps/MapBahamas.jsx';
+import MapChad, { MapChadPresent } from '@/components/core/templates/create/elements/maps/MapChad.jsx';
+import MapColombia, { MapColombiaPresent } from '@/components/core/templates/create/elements/maps/MapColombia.jsx';
+import MapCroatia, { MapCroatiaPresent } from '@/components/core/templates/create/elements/maps/MapCroatia.jsx';
+import MapCuba, { MapCubaPresent } from '@/components/core/templates/create/elements/maps/MapCuba.jsx';
+import MapCzechRepublic, { MapCzechRepublicPresent } from '@/components/core/templates/create/elements/maps/MapCzechRepublic.jsx';
+import MapCongo, { MapCongoPresent } from '@/components/core/templates/create/elements/maps/MapCongo.jsx';
+import MapDominicanRepublic, { MapDominicanRepublicPresent } from '@/components/core/templates/create/elements/maps/MapDominicanRepublic.jsx';
+import MapBruneiDarussalam, { MapBruneiDarussalamPresent } from '@/components/core/templates/create/elements/maps/MapBruneiDarussalam.jsx';
+
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -88,6 +97,14 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     'bosnia-and-aerzegovina': MapBosniaAndHerzegovina,
     brazil: MapBrazil,
     bahamas: MapBahamas,
+    chad: MapChad,
+    colombia: MapColombia,
+    croatia: MapCroatia,
+    cuba: MapCuba,
+    'czech-republic': MapCzechRepublic,
+    congo: MapCongo,
+    'dominican-republic': MapDominicanRepublic,
+    'brunei-darussalam': MapBruneiDarussalam
   };
 
   if (components[element.config.name]) {
@@ -133,6 +150,14 @@ export const MapPresent = ({ element }) => {
     'bosnia-and-aerzegovina': MapBosniaAndHerzegovinaPresent,
     brazil: MapBrazilPresent,
     bahamas: MapBahamasPresent,
+    chad: MapChadPresent,
+    colombia: MapColombiaPresent,
+    croatia: MapCroatiaPresent,
+    cuba: MapCubaPresent,
+    'czech-republic': MapCzechRepublicPresent,
+    congo: MapCongoPresent,
+    'dominican-republic': MapDominicanRepublicPresent,
+    'brunei-darussalam': MapBruneiDarussalamPresent
   };
 
   if (components[element.config.name]) {

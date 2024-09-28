@@ -34,6 +34,14 @@ import { MapBoliviaPreview } from '@/components/core/templates/create/elements/m
 import { MapBosniaAndHerzegovinaPreview } from '@/components/core/templates/create/elements/maps/MapBosniaAndHerzegovina.jsx';
 import { MapBrazilPreview } from '@/components/core/templates/create/elements/maps/MapBrazil.jsx';
 import { MapBahamasPreview } from '@/components/core/templates/create/elements/maps/MapBahamas.jsx';
+import { MapChadPreview } from '@/components/core/templates/create/elements/maps/MapChad.jsx';
+import { MapColombiaPreview } from '@/components/core/templates/create/elements/maps/MapColombia.jsx';
+import { MapCroatiaPreview } from '@/components/core/templates/create/elements/maps/MapCroatia.jsx';
+import { MapCubaPreview } from '@/components/core/templates/create/elements/maps/MapCuba.jsx';
+import { MapCzechRepublicPreview } from '@/components/core/templates/create/elements/maps/MapCzechRepublic.jsx';
+import { MapCongoPreview } from '@/components/core/templates/create/elements/maps/MapCongo.jsx';
+import { MapDominicanRepublicPreview } from '@/components/core/templates/create/elements/maps/MapDominicanRepublic.jsx';
+import { MapBruneiDarussalamPreview } from '@/components/core/templates/create/elements/maps/MapBruneiDarussalam.jsx';
 
 const names = [
   'nigeria',
@@ -69,8 +77,15 @@ const names = [
   'bolivia',
   'bosnia-and-aerzegovina',
   'brazil',
-  'bruneiDarussalam',
+  'brunei-darussalam',
   'bahamas',
+  'chad',
+  'colombia',
+  'croatia',
+  'cuba',
+  'czech-republic',
+  'congo',
+  'dominican-republic',
 ];
 
 const previews = {
@@ -107,7 +122,15 @@ const previews = {
   bolivia: <MapBoliviaPreview />,
   'bosnia-and-aerzegovina': <MapBosniaAndHerzegovinaPreview />,
   brazil: <MapBrazilPreview />,
+  'brunei-darussalam': <MapBruneiDarussalamPreview />,
   bahamas: <MapBahamasPreview />,
+  chad: <MapChadPreview />,
+  colombia: <MapColombiaPreview />,
+  croatia: <MapCroatiaPreview />,
+  cuba: <MapCubaPreview />,
+  'czech-republic': <MapCzechRepublicPreview />,
+  congo: <MapCongoPreview />,
+  'dominican-republic': <MapDominicanRepublicPreview />,
 };
 
 const elements = names.map((name) => ({
@@ -128,7 +151,12 @@ const elements = names.map((name) => ({
       labelsCount: 1,
     },
   },
-  preview: previews[name],
+  preview: (
+    <div className="flex flex-col items-center justify-center">
+      {previews[name]}
+      <p className="text-sm text-center leading-tight mt-2 opacity-80">{name.split('-').map(capitalize).join(' ')}</p>
+    </div>
+  ),
 }));
 
 const Maps = () => {
