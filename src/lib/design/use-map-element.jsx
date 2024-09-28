@@ -35,7 +35,7 @@ const useMapElement = (element) => {
                       <div className="absolute w-3 h-3 border-2 border-black rounded-sm -top-1 -left-1"></div>
                       <Tooltip content={item.label} offset={-7}>
                         <div
-                          className={cn('shadow border border-black rounded-xl px-4 py-3 w-max relative text-white', {
+                          className={cn('shadow border border-black rounded-xl px-3 py-1.5 w-max relative text-white', {
                             'max-w-[310px]': +state.x > 900,
                           })}
                           style={{ background: item.color || element.config.fill }}
