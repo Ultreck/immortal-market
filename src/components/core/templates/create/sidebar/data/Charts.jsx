@@ -2,8 +2,9 @@ import { Accordion, AccordionItem } from '@nextui-org/react';
 import StandardCharts from './StandardCharts.jsx';
 import AdvancedCharts from './AdvanceCharts.jsx';
 import Maps from './Maps.jsx';
-import { TbChartBar, TbChartPie, TbWorld } from 'react-icons/tb';
+import { TbChartBar, TbChartPie, TbStar, TbWorld } from 'react-icons/tb';
 import { RiArrowRightSLine } from 'react-icons/ri';
+import FavouriteCharts from './FavouriteCharts.jsx';
 
 const Charts = () => {
   return (
@@ -13,6 +14,15 @@ const Charts = () => {
     >
       <AccordionItem
         key="1"
+        aria-label="Favourites"
+        title="Favourites"
+        startContent={<TbStar size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <FavouriteCharts />
+      </AccordionItem>
+      <AccordionItem
+        key="2"
         aria-label="Standard Charts"
         title="Standard Charts"
         startContent={<TbChartPie size="20" />}
@@ -21,7 +31,7 @@ const Charts = () => {
         <StandardCharts />
       </AccordionItem>
       <AccordionItem
-        key="2"
+        key="3"
         aria-label="Advanced Charts"
         title="Advanced Charts"
         startContent={<TbChartBar size="20" />}
@@ -30,7 +40,7 @@ const Charts = () => {
         <AdvancedCharts />
       </AccordionItem>
       <AccordionItem
-        key="3"
+        key="4"
         aria-label="Maps"
         title="Maps"
         startContent={<TbWorld size="20" />}
@@ -38,8 +48,20 @@ const Charts = () => {
       >
         <Maps />
       </AccordionItem>
+      <AccordionItem
+        key="5"
+        aria-label="Immortal Charts"
+        title="Immortal Charts"
+        startContent={<TbWorld size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <div>
+          Immortal Charts
+        </div>
+      </AccordionItem>
     </Accordion>
   );
 };
 
 export default Charts;
+

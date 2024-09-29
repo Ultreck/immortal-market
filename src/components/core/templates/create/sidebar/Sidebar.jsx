@@ -1,20 +1,23 @@
 import { createElement, useState } from 'react';
 import { RiArrowLeftSLine, RiImage2Line, RiPieChartLine, RiShapesLine, RiStackLine } from 'react-icons/ri';
-import { cn } from '@/lib/utils.js';
+import { cn, getImageLink } from '@/lib/utils.js';
 import Basics from '@/components/core/templates/create/sidebar/components/Basics.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
 import { Link } from 'react-router-dom';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import Data from '@/components/core/templates/create/sidebar/data/Data.jsx';
-import { Tooltip } from '@nextui-org/react';
+import { Avatar, Tooltip } from '@nextui-org/react';
 import Infographics from '@/components/core/templates/create/sidebar/images/Infographics.jsx';
 import { TbChartBar, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
 import Charts from './data/Charts.jsx';
+import { useAuth } from '@/hooks/use-auth.jsx';
+import MyWork from './my-work/MyWork.jsx';
 
-const Sidebar = () => {
+const Sidebar = ({ className }) => {
   const [tab, setTab] = useState('basics');
   const collapsed = !tab;
+  const { user } = useAuth();
 
   return (
     <div
@@ -86,10 +89,20 @@ const Sidebar = () => {
                 </Tooltip>
               );
             })}
+            <div className={cn('cursor-pointer flex items-center justify-center !mt-4', className)}
+            onClick={() => setTab('my-work')}
+            >
+              <Avatar
+                src={getImageLink(user.image)}
+                radius="full"
+                classNames={{ base: 'w-[32px] h-[32px]' }}
+                isBordered
+              />
+            </div>
           </div>
         </div>
         {!collapsed && (
-          <div className="px-8 py-6 overflow-x-hidden dark:bg-gray-800/50">
+          <div className="px-4 py-6 overflow-x-hidden dark:bg-gray-800/50">
             {tab === 'basics' && <Basics />}
             {tab === 'templates' && <Build />}
             {tab === 'data' && <Data />}
@@ -97,6 +110,7 @@ const Sidebar = () => {
             {tab === 'layers' && <Layers />}
             {tab === 'images' && <Images />}
             {tab === 'charts' && <Charts />}
+            {tab === 'my-work' && <MyWork />}
           </div>
         )}
       </div>
@@ -105,3 +119,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+

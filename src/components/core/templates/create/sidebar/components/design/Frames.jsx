@@ -1,7 +1,9 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
+import BasicCarousel from '@/components/ui/BasicCarousel';
 import shapes from '@/lib/design/shapes.js';
+import { Button } from '@nextui-org/react';
 import { RiCheckboxMultipleBlankFill } from 'react-icons/ri';
-import { TbCarouselHorizontalFilled } from 'react-icons/tb';
+import { TbCarouselHorizontalFilled, TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 
 const items = [
   {
@@ -82,14 +84,61 @@ const items = [
   })) || []),
 ];
 
-const Frames = () => {
+const Frames = ({ mini = false, onView, onBack }) => {
   return (
-    <div className="grid grid-cols-3 gap-6">
-      {items.map((element) => (
-        <DraggableElementWrapper key={element.id} element={element} />
-      ))}
+    <div>
+      {mini ? (
+        <>
+          <div className="relative">
+            <BasicCarousel
+              classNames={{ next: 'right-0', prev: 'left-0' }}
+              slides={Array(2)
+                .fill(null)
+                .map((_, index) => {
+                  return {
+                    id: index,
+                    content: (
+                      <div className="grid grid-cols-3 gap-6">
+                        {items.slice(index * 9, index * 9 + 9).map((element) => (
+                          <DraggableElementWrapper key={element.id} element={element} />
+                        ))}
+                      </div>
+                    ),
+                  };
+                })}
+            />
+          </div>
+          <div className="flex items-center justify-between mb-4 mt-6">
+            <Button
+              onClick={onView}
+              variant="bordered"
+              size="sm"
+              className="text-md"
+              endContent={<TbChevronRight size={16} />}
+              radius="full"
+            >
+              View All
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="flex items-center space-x-3 mb-8">
+            <Button onClick={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+              <TbChevronLeft size="20" />
+            </Button>
+            <h2 className="text-xl font-semibold">Frames</h2>
+          </div>
+          <div className="grid grid-cols-3 gap-6">
+            {items.map((element) => (
+              <DraggableElementWrapper key={element.id} element={element} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
 export default Frames;
+

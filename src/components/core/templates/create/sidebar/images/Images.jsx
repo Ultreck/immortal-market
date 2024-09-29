@@ -4,7 +4,7 @@ import ExternalImages from '@/components/core/templates/create/sidebar/images/Ex
 import UploadedImages from '@/components/core/templates/create/sidebar/images/UploadedImages.jsx';
 import Infographics from './Infographics.jsx';
 import { RiArrowRightSLine, RiImage2Line } from 'react-icons/ri';
-import { TbBrush } from 'react-icons/tb';
+import { TbBrush, TbStar } from 'react-icons/tb';
 
 const Images = () => {
   const [tab, setTab] = useState('uploads');
@@ -14,6 +14,17 @@ const Images = () => {
       variant="bordered"
       itemClasses={{ base: 'px-3', content: 'pt-4 pb-5', title: 'whitespace-nowrap text-base' }}
     >
+      <AccordionItem
+        key="3"
+        aria-label="Favourites"
+        title="Favourites"
+        startContent={<TbStar size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente delectus quas in exercitationem fugit
+        voluptate libero, assumenda sed, laudantium autem enim molestias repudiandae pariatur architecto consequatur
+        dicta, ratione tempore alias!
+      </AccordionItem>
       <AccordionItem
         key="1"
         aria-label="Images"
@@ -55,3 +66,4 @@ const Images = () => {
 };
 
 export default Images;
+
