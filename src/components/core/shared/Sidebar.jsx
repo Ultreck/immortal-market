@@ -13,6 +13,7 @@ import {
   TbTableExport,
   TbUsers,
 } from 'react-icons/tb';
+import { RiDashboardFill } from "react-icons/ri";
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
@@ -98,6 +99,7 @@ const Sidebar = () => {
                 { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
                 { name: 'Ai Assistant', href: '/assistant', icon: <TbInputAi size="20" /> },
                 { name: 'Outsource', href: '/outsource', icon: <TbTableExport size="20" /> },
+                { name: 'Dashboard', href: '/home', icon: <RiDashboardFill size="20" /> },
               ].map((item) => (
                 <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
               ))}
