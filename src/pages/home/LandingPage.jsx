@@ -100,7 +100,7 @@ const LandingPage = () => {
           <div className="text-center rounded-xl bg-custom-gradient bg-cover  container py-16 space-y-10">
             <h1 className="text-[36px] font-extrabold ">What can we help you create today?</h1>
             <p className="text-[16px] text-[#00000099] leading-none">
-              Start by creating a new design or exploring banking templates.
+              Start by creating a new design or exploring business templates.
             </p>
           </div>
           <div className="text flex justify-center">
