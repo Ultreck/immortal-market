@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { cn } from '@/lib/utils.js';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 
@@ -18,7 +17,7 @@ const Color = ({ elements, onChange }) => {
         onChange={handleChange}
         trigger={
           <button
-            className={cn('my-2 w-[20px] h-[20px] rounded-full hover:brightness-105 cursor-pointer')}
+            className="my-2 w-[22px] h-[22px] rounded-full hover:brightness-105 cursor-pointer border-2"
             style={{ background: value }}
           />
         }

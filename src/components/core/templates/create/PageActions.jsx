@@ -20,7 +20,7 @@ import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import SaveCanvasAsBlockModal from '@/components/core/templates/create/SaveCanvasAsBlockModal.jsx';
 
-const CanvasActions = ({ id }) => {
+const PageActions = ({ id }) => {
   const { isOpen: isSaveAsBlockOpen, onOpen: onSaveAsBlockOpen, onClose: onSaveAsBlockClose } = useDisclosure();
   const deletePage = useTemplateStore((state) => state.deletePage);
   const movePageUp = useTemplateStore((state) => state.movePageUp);
@@ -101,8 +101,8 @@ const CanvasActions = ({ id }) => {
   );
 };
 
-CanvasActions.propTypes = {
+PageActions.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default CanvasActions;
+export default PageActions;

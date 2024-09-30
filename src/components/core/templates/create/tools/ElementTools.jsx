@@ -20,6 +20,7 @@ import Font from '@/components/core/templates/create/tools/elements/generic/Font
 import MapConfig from '@/components/core/templates/create/tools/elements/specific/map/MapConfig.jsx';
 import Color from '@/components/core/templates/create/tools/elements/generic/Color.jsx';
 import SummarizerConfig from '@/components/core/templates/create/tools/elements/specific/SummarizerConfig.jsx';
+import DataConfig from '@/components/core/templates/create/tools/elements/specific/DataConfig.jsx';
 
 const mapping = {
   font: { type: 'multiple', component: Font },
@@ -40,6 +41,7 @@ const mapping = {
   colors: { type: 'single', component: Colors },
   map: { type: 'single', component: MapConfig },
   summarizer: { type: 'single', component: SummarizerConfig },
+  data: { type: 'single', component: DataConfig },
 };
 
 const ElementTools = () => {
@@ -68,12 +70,12 @@ const ElementTools = () => {
   return (
     <AnimatePresence>
       {tools.length > 0 && (
-        <div className="fixed top-1/2 -translate-y-1/2 right-0">
+        <div className="fixed top-1/2 -translate-y-1/2 right-6">
           <motion.div
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            className="rounded-l-3xl rounded-r bg-default-200 dark:bg-default-100 flex flex-col items-center py-4 space-y-2 px-4"
+            className="rounded-full bg-white shadow dark:bg-default-100 flex flex-col items-center py-6 space-y-2 px-4"
           >
             {tools.map((tool) => {
               const { type, component } = mapping[tool];

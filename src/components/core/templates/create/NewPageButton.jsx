@@ -8,7 +8,7 @@ import {
   useDisclosure,
 } from '@nextui-org/react';
 import useTemplateStore from '@/store/template.js';
-import NewPageTemplatesModal from '@/components/core/templates/create/NewPageTemplatesModal.jsx';
+import PageBlocksModal from '@/components/core/templates/create/PageBlocksModal.jsx';
 
 const NewPageButton = () => {
   const addPage = useTemplateStore((state) => state.addPage);
@@ -59,7 +59,7 @@ const NewPageButton = () => {
         </Dropdown>
       </div>
 
-      <NewPageTemplatesModal isOpen={isTemplatesOpen} onClose={onTemplatesClose} />
+      <PageBlocksModal isOpen={isTemplatesOpen} onClose={onTemplatesClose} />
     </>
   );
 };

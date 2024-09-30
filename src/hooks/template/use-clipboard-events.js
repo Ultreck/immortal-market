@@ -34,6 +34,7 @@ const useClipboardEvents = () => {
       }
     };
     const handlePaste = (e) => {
+      if (selectedElements.length) return;
       try {
         for (const item of e.clipboardData.items) {
           if (item.type === 'text/plain') {

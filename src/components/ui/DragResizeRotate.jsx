@@ -16,7 +16,7 @@ const DragResizeRotate = ({
   values,
   onChange,
   onClick,
-  onDragDblClick,
+  onDoubleClick,
   onDragStart,
   onDragEnd,
   onResizeStart,
@@ -178,7 +178,7 @@ const DragResizeRotate = ({
             data-name="drag"
             className="absolute inset-0 w-full h-full touch-none"
             {...bindDrag()}
-            onDoubleClick={onDragDblClick}
+            onDoubleClick={onDoubleClick}
             onClick={onClick}
           />
         )}
@@ -272,7 +272,7 @@ DragResizeRotate.propTypes = {
   rotatable: PropTypes.bool,
   handles: PropTypes.arrayOf(PropTypes.string),
   onClick: PropTypes.func,
-  onDragDblClick: PropTypes.func,
+  onDoubleClick: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   onDragStart: PropTypes.func,
   onDragEnd: PropTypes.func,

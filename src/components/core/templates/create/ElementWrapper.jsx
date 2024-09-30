@@ -7,6 +7,7 @@ import DragResizeRotate from '@/components/ui/DragResizeRotate.jsx';
 const ElementWrapper = ({
   element,
   onClick,
+  onDoubleClick,
   children,
   onEditStart,
   active,
@@ -50,8 +51,9 @@ const ElementWrapper = ({
       draggable={!isEditing}
       className={cn('w-max border-2 border-transparent absolute group select-none pointer-events-auto', className)}
       onClick={(e) => onClick(element.id, e)}
-      onDragDblClick={() => {
+      onDoubleClick={(e) => {
         if (editable) setIsEditing(true);
+        onDoubleClick(element.id, e);
       }}
       handles={resizeHandles}
       constrained={constrained}
@@ -97,6 +99,7 @@ ElementWrapper.propTypes = {
     style: PropTypes.object,
   }),
   onClick: PropTypes.func.isRequired,
+  onDoubleClick: PropTypes.func,
   active: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   maxWidth: PropTypes.number,

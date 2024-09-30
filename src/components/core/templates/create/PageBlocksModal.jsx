@@ -17,7 +17,7 @@ const categories = [
   { key: 'infographics', label: 'Infographics' },
 ];
 
-const NewPageTemplatesModal = ({ isOpen, onClose }) => {
+const PageBlocksModal = ({ isOpen, onClose }) => {
   const { id: business } = useBusiness();
   const [category, setCategory] = useState('all');
   const { data: { blocks = [] } = {}, isLoading: isBlocksLoading } = useGetDesignBlocks(business);
@@ -99,9 +99,9 @@ const NewPageTemplatesModal = ({ isOpen, onClose }) => {
   );
 };
 
-NewPageTemplatesModal.propTypes = {
+PageBlocksModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
-export default NewPageTemplatesModal;
+export default PageBlocksModal;

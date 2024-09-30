@@ -1,0 +1,304 @@
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Radio,
+  RadioGroup,
+  Select,
+  SelectItem,
+} from '@nextui-org/react';
+import { RiSettingsLine } from 'react-icons/ri';
+import { Controller, useForm } from 'react-hook-form';
+import NumberInput from '@/components/ui/NumberInput.jsx';
+import PropTypes from 'prop-types';
+
+const columns = [{ key: 'default', label: 'Default' }];
+
+const groups = [
+  { key: 'count', label: 'Count' },
+  { key: 'sum', label: 'Sum' },
+  { key: 'average', label: 'Average' },
+  { key: 'min', label: 'Min' },
+  { key: 'max', label: 'Max' },
+];
+
+const orders = [
+  { key: 'top-1', label: 'Top 1' },
+  { key: 'top-2', label: 'Top 2' },
+  { key: 'top-3', label: 'Top 3' },
+  { key: 'top-4', label: 'Top 4' },
+  { key: 'top-5', label: 'Top 5' },
+  { key: 'top-6', label: 'Top 6' },
+  { key: 'top-7', label: 'Top 7' },
+  { key: 'bottom-3', label: 'Bottom 3' },
+  { key: 'bottom-2', label: 'Bottom 2' },
+  { key: 'bottom-1', label: 'Bottom 1' },
+];
+
+const units = [
+  { key: 'percent', label: 'Percent (%)' },
+  { key: 'currency', label: 'Currency ($)' },
+];
+
+const DataConfig = ({ element, onChange }) => {
+  const { handleSubmit, control, watch } = useForm({
+    defaultValues: {
+      column: element.config.column,
+      group: element.config.group,
+      order: element.config.order,
+      type: element.config.type,
+      decimal: element.config.decimal,
+      unit: element.config.unit,
+      words: element.config.words,
+    },
+  });
+
+  const onSubmit = (data) => {
+    onChange({
+      ...element,
+      config: {
+        ...element.config,
+        column: data.column,
+        group: data.group,
+        order: data.order,
+        type: data.type,
+        decimal: data.decimal,
+        unit: data.unit,
+        words: data.words,
+      },
+    });
+  };
+
+  return (
+    <Popover placement="left" showArrow offset={10}>
+      <PopoverTrigger>
+        <Button isIconOnly variant="light" aria-label="Data config" className="text-base">
+          <RiSettingsLine size="20" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="px-8 py-8 shadow border border-default-200 w-[350px] items-stretch">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex flex-col space-y-6">
+            <Controller
+              name="column"
+              control={control}
+              rules={{ required: 'Column is required' }}
+              render={({ field, fieldState: { error } }) => (
+                <div>
+                  <Select
+                    label="Column"
+                    labelPlacement="outside"
+                    variant="bordered"
+                    placeholder="Select column"
+                    size="lg"
+                    selectedKeys={field.value ? [field.value] : []}
+                    onChange={(e) => field.onChange(e)}
+                    errorMessage={error?.message}
+                    isInvalid={!!error?.message}
+                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                    disableEmptySelection={true}
+                  >
+                    {columns.map((role) => (
+                      <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
+                        {role.label}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+              )}
+            />
+            <div className="flex items-end space-x-4">
+              <Controller
+                name="order"
+                control={control}
+                rules={{ required: 'Order is required' }}
+                render={({ field, fieldState: { error } }) => (
+                  <div className="flex-1">
+                    <Select
+                      label="Order"
+                      labelPlacement="outside"
+                      variant="bordered"
+                      placeholder="Select order"
+                      size="lg"
+                      selectedKeys={field.value ? [field.value] : []}
+                      onChange={(e) => field.onChange(e)}
+                      errorMessage={error?.message}
+                      isInvalid={!!error?.message}
+                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                      disableEmptySelection={true}
+                    >
+                      {orders.map((role) => (
+                        <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
+                          {role.label}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  </div>
+                )}
+              />
+              <div className="text-base mb-4">vs</div>
+              <Controller
+                name="group"
+                control={control}
+                rules={{ required: 'Group is required' }}
+                render={({ field, fieldState: { error } }) => (
+                  <div className="flex-1">
+                    <Select
+                      label="Group"
+                      labelPlacement="outside"
+                      variant="bordered"
+                      placeholder="Select group"
+                      size="lg"
+                      selectedKeys={field.value ? [field.value] : []}
+                      onChange={(e) => field.onChange(e)}
+                      errorMessage={error?.message}
+                      isInvalid={!!error?.message}
+                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                      disableEmptySelection={true}
+                    >
+                      {groups.map((role) => (
+                        <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
+                          {role.label}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  </div>
+                )}
+              />
+            </div>
+            <div className="flex items-center space-x-4">
+              <p className="text-base leading-tight">Type:</p>
+              <Controller
+                name="type"
+                control={control}
+                rules={{
+                  validate: (value) => value.length > 0,
+                }}
+                render={({ field, fieldState: { error } }) => {
+                  const message = error?.type === 'validate' ? 'Select heading type' : error?.message;
+                  return (
+                    <RadioGroup
+                      orientation="horizontal"
+                      value={field.value}
+                      onValueChange={(v) => field.onChange({ target: { value: v } })}
+                      errorMessage={message}
+                      isInvalid={!!message}
+                    >
+                      <Radio value="number">Number</Radio>
+                      <Radio value="text">Text</Radio>
+                    </RadioGroup>
+                  );
+                }}
+              />
+            </div>
+            {watch().type === 'text' && (
+              <div className="flex flex-row justify-between items-center space-x-4">
+                <p className="text-base leading-tight">No. of words:</p>
+                <Controller
+                  name="words"
+                  control={control}
+                  rules={{
+                    required: 'No. of words is required',
+                    validate: (value) => value > 0,
+                  }}
+                  render={({ field, fieldState: { error } }) => {
+                    const message = error?.type === 'validate' ? 'No. of words is required' : error?.message;
+                    return (
+                      <NumberInput
+                        variant="bordered"
+                        value={field.value}
+                        onChange={field.onChange}
+                        ariaLabel="No. of words"
+                        min={1}
+                        max={100}
+                        step={1}
+                        errorMessage={message}
+                        isInvalid={!!message}
+                      />
+                    );
+                  }}
+                />
+              </div>
+            )}
+            {watch().type === 'number' && (
+              <>
+                <div className="flex flex-row justify-between items-center space-x-4">
+                  <p className="text-base leading-tight">Decimal places:</p>
+                  <Controller
+                    name="decimal"
+                    control={control}
+                    rules={{
+                      required: 'Decimal is required',
+                      validate: (value) => value > 0,
+                    }}
+                    render={({ field, fieldState: { error } }) => {
+                      const message = error?.type === 'validate' ? 'Decimal is required' : error?.message;
+                      return (
+                        <NumberInput
+                          variant="bordered"
+                          value={field.value}
+                          onChange={field.onChange}
+                          ariaLabel="Decimal"
+                          min={1}
+                          max={100}
+                          step={1}
+                          errorMessage={message}
+                          isInvalid={!!message}
+                        />
+                      );
+                    }}
+                  />
+                </div>
+                <div className="flex flex-row justify-between items-center space-x-4">
+                  <p className="text-base leading-tight">Unit:</p>
+                  <Controller
+                    name="unit"
+                    control={control}
+                    rules={{ required: 'Unit is required' }}
+                    render={({ field, fieldState: { error } }) => {
+                      const message = error?.type === 'validate' ? 'Unit is required' : error?.message;
+                      return (
+                        <Select
+                          variant="bordered"
+                          placeholder="Select unit"
+                          size="lg"
+                          selectedKeys={field.value ? [field.value] : []}
+                          onChange={(e) => field.onChange(e)}
+                          errorMessage={message}
+                          isInvalid={!!message}
+                          classNames={{
+                            value: 'text-base px-2',
+                            popoverContent: 'bg-default-100',
+                            base: 'w-[165px]',
+                          }}
+                          disableEmptySelection={true}
+                        >
+                          {units.map((role) => (
+                            <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
+                              {role.label}
+                            </SelectItem>
+                          ))}
+                        </Select>
+                      );
+                    }}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+          <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
+            Apply
+          </Button>
+        </form>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+DataConfig.propTypes = {
+  element: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+export default DataConfig;

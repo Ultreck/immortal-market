@@ -9,11 +9,12 @@ import { Spinner } from '@nextui-org/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 
-const PageTitle = ({ title, id }) => {
+const PageTitle = ({ id }) => {
   const toast = useToast();
   const qc = useQueryClient();
   const { id: business } = useBusiness();
   const pages = useTemplateStore(({ template }) => template.pages);
+  const title = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id).title);
   const templateId = useTemplateStore((state) => state.template.id);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(business, templateId);
   const [value, setValue] = useState('');
@@ -81,7 +82,6 @@ const PageTitle = ({ title, id }) => {
 
 PageTitle.propTypes = {
   id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
 };
 
 export default PageTitle;

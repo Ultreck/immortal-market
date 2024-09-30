@@ -1,11 +1,11 @@
 import useTemplateStore from '@/store/template.js';
-import Canvas from '@/components/core/templates/create/Canvas.jsx';
+import Page from '@/components/core/templates/create/Page.jsx';
 import ElementTools from '@/components/core/templates/create/tools/ElementTools.jsx';
 import PageTools from '@/components/core/templates/create/tools/PageTools.jsx';
 import useClipboardEvents from '@/hooks/template/use-clipboard-events.js';
 import useDelete from '@/hooks/template/use-delete.js';
 import { useRef } from 'react';
-import useMousewheelScale from '@/hooks/template/use-mousewheel-scale.js';
+import useZoom from '@/hooks/template/use-zoom.js';
 import useHistory from '@/hooks/template/use-history.js';
 import NewPageButton from '@/components/core/templates/create/NewPageButton.jsx';
 
@@ -14,7 +14,7 @@ const Editor = () => {
   const pages = useTemplateStore((state) => state.template.pages);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   useClipboardEvents();
-  useMousewheelScale(root);
+  useZoom(root);
   useDelete();
   useHistory();
 
@@ -27,12 +27,11 @@ const Editor = () => {
       <div className="mx-auto w-max">
         <div className="space-y-6 flex flex-col items-center w-max mx-auto select-none">
           {pages.map((page) => (
-            <Canvas key={page.id} id={page.id} />
+            <Page key={page.id} id={page.id} />
           ))}
           <NewPageButton />
         </div>
       </div>
-
       <ElementTools />
       <PageTools />
     </div>

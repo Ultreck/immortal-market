@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { HiCheck } from 'react-icons/hi2';
 import { AnimatePresence, motion } from 'framer-motion';
 import Eyedropper from '../../../../../../ui/Eyedropper.jsx';
-import { cn, extractColorsFromGradient } from '@/lib/utils.js';
+import { extractColorsFromGradient } from '@/lib/utils.js';
 import { useEffect, useState } from 'react';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import { useDeepCompareEffect } from 'react-use';
@@ -32,7 +32,7 @@ const Background = ({ elements, onChange }) => {
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
         <button
-          className={cn('my-2 w-[20px] h-[20px] rounded-full hover:brightness-105 cursor-pointer')}
+          className="my-2 w-[22px] h-[22px] rounded-full hover:brightness-105 cursor-pointer border-2 border-default-200"
           style={{ background: value }}
         />
       </PopoverTrigger>

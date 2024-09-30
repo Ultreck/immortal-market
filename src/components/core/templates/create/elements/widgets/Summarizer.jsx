@@ -2,6 +2,9 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
 const Summarizer = ({ element, active, highlighted, width, onClick, onChange }) => {
+  const heading = element.config.heading?.output;
+  const body = element.config.body?.output;
+
   return (
     <ElementWrapper
       element={element}
@@ -13,11 +16,27 @@ const Summarizer = ({ element, active, highlighted, width, onClick, onChange }) 
       fit
     >
       <div>
-        <p className="text-4xl">20%</p>
-        <p className="mt-2">
-          lorem ipsum dolor sit amet consectetur adipisicing elit. fugiat, quidem, voluptate, doloremque, quos,
-          aspernatur
-        </p>
+        <p className="text-4xl">{heading || 'Lorem ipsum dolor sit amet.'}</p>
+        <div className="mt-3">
+          {body ? (
+            <>
+              {Array.isArray(body) ? (
+                <ul className="list-disc ml-4">
+                  {body.map((o, index) => (
+                    <li key={index}>{o}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>{body}</p>
+              )}
+            </>
+          ) : (
+            <>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. fugiat, quidem, voluptate, doloremque, quos,
+              aspernatur
+            </>
+          )}
+        </div>
       </div>
     </ElementWrapper>
   );

@@ -6,27 +6,11 @@ import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import LinkTool from './ElementLink.jsx';
 import { LuGroup, LuUngroup } from 'react-icons/lu';
-import {
-  RiAlignItemBottomLine,
-  RiAlignItemHorizontalCenterLine,
-  RiAlignItemLeftLine,
-  RiAlignItemTopLine,
-  RiAlignItemVerticalCenterLine,
-  RiArrowDownDoubleLine,
-  RiArrowDownSLine,
-  RiArrowUpDoubleLine,
-  RiArrowUpSLine,
-} from 'react-icons/ri';
+import { AnimatePresence, motion } from 'framer-motion';
 
-const ContextMenu = ({ position, isOpen, onClose }) => {
+const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
   const pages = useTemplateStore(({ template }) => template.pages);
-  const deleteElements = useTemplateStore((state) => state.deleteElements);
-  const addElements = useTemplateStore((state) => state.addElements);
-  const updatePage = useTemplateStore((state) => state.updatePage);
-  const updateElements = useTemplateStore((state) => state.updateElements);
-  const groupElements = useTemplateStore((state) => state.groupElements);
-  const ungroupElements = useTemplateStore((state) => state.ungroupElements);
   const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
   const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id)).filter(Boolean);
   const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
@@ -41,132 +25,9 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  const handleDuplicate = () => {
-    const _elements = page.elements.filter((element) => selectedElements.includes(element.id));
-    const duplicatedElements = _elements.map((element) => {
-      return { ...element, id: crypto.randomUUID(), x: element.x + 10, y: element.y + 10 };
-    });
-    addElements(duplicatedElements, page.id);
-  };
-
-  const handleDelete = () => deleteElements(selectedElements, page.id);
-
-  const handleMoveToTop = () => {
-    const right = page.elements.filter((el) => selectedElements.includes(el.id));
-    const left = page.elements.filter((el) => !selectedElements.includes(el.id));
-    updatePage({ elements: [...left, ...right] }, page.id, true);
-  };
-
-  const handleMoveToBottom = () => {
-    const left = page.elements.filter((el) => selectedElements.includes(el.id));
-    const right = page.elements.filter((el) => !selectedElements.includes(el.id));
-    updatePage({ elements: [...left, ...right] }, page.id, true);
-  };
-
-  const handleMoveUp = () => {
-    const _elements = [...page.elements];
-    const selectedIndices = selectedElements.map((id) => _elements.findIndex((el) => el.id === id));
-    for (let i = selectedIndices.length - 1; i >= 0; i--) {
-      const index = selectedIndices[i];
-      if (index < _elements.length - 1) {
-        [_elements[index], _elements[index + 1]] = [_elements[index + 1], _elements[index]];
-      }
-    }
-    updatePage({ elements: _elements }, page.id, true);
-  };
-
-  const handleMoveDown = () => {
-    const _elements = [...page.elements];
-    const selectedIndices = selectedElements.map((id) => _elements.findIndex((el) => el.id === id));
-    for (let i = 0; i < selectedIndices.length; i++) {
-      const index = selectedIndices[i];
-      if (index > 0) {
-        [_elements[index], _elements[index - 1]] = [_elements[index - 1], _elements[index]];
-      }
-    }
-    updatePage({ elements: _elements }, page.id, true);
-  };
-
-  const handleCopy = async () => {
-    const _elements = page.elements.filter((element) => selectedElements.includes(element.id));
-    const textBlob = new Blob([JSON.stringify(_elements)], { type: 'text/plain' });
-    await navigator.clipboard.write([new ClipboardItem({ 'text/plain': textBlob })]);
-  };
-
-  const handleGroup = () => {
-    groupElements(selectedElements, page.id);
-  };
-
-  const handleUngroup = () => {
-    const group = elements.find((el) => el.id === selectedElements[0]).group;
-    ungroupElements(group, page.id);
-  };
-
-  const handleAlignLeft = () => {
-    let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
-    const x = Math.min(..._elements.map((el) => el.x));
-    _elements = _elements.map((el) => ({ ...el, x }));
-    updateElements(_elements, page.id, true);
-  };
-
-  const handleAlignCenter = () => {
-    let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
-    const minX = Math.min(..._elements.map((el) => el.x));
-    const maxX = Math.max(..._elements.map((el) => el.x + el.width));
-    const centerX = (minX + maxX) / 2;
-    _elements = _elements.map((el) => ({
-      ...el,
-      x: centerX - el.width / 2,
-    }));
-    updateElements(_elements, page.id, true);
-  };
-
-  const handleAlignRight = () => {
-    let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
-    const maxRight = Math.max(..._elements.map((el) => el.x + el.width));
-    _elements = _elements.map((el) => ({
-      ...el,
-      x: maxRight - el.width,
-    }));
-    updateElements(_elements, page.id, true);
-  };
-
-  const handleAlignTop = () => {
-    let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
-    const y = Math.min(..._elements.map((el) => el.y));
-    _elements = _elements.map((el) => ({ ...el, y }));
-    updateElements(_elements, page.id, true);
-  };
-
-  const handleAlignMiddle = () => {
-    let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
-    const minY = Math.min(..._elements.map((el) => el.y));
-    const maxY = Math.max(..._elements.map((el) => el.y + el.height));
-    const centerY = (minY + maxY) / 2;
-    _elements = _elements.map((el) => ({
-      ...el,
-      y: centerY - el.height / 2,
-    }));
-    updateElements(_elements, page.id, true);
-  };
-
-  const handleAlignBottom = () => {
-    let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
-    const maxBottom = Math.max(..._elements.map((el) => el.y + el.height));
-    _elements = _elements.map((el) => ({
-      ...el,
-      y: maxBottom - el.height,
-    }));
-    updateElements(_elements, page.id, true);
-  };
-
   const menu = [
     { key: 'copy', label: 'Copy', icon: <TbClipboardCopy size="18" /> },
     { key: 'duplicate', label: 'Duplicate', icon: <TbCopyPlus size="18" /> },
-    { key: 'move-top', label: 'Move to top', icon: <RiArrowUpDoubleLine size="18" /> },
-    { key: 'move-bottom', label: 'Move to bottom', icon: <RiArrowDownDoubleLine size="18" /> },
-    { key: 'move-up', label: 'Move up', icon: <RiArrowUpSLine size="18" /> },
-    { key: 'move-down', label: 'Move down', icon: <RiArrowDownSLine size="18" /> },
   ];
 
   if (selectedElements.length > 1) {
@@ -175,16 +36,6 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
     } else {
       menu.push({ key: 'ungroup', label: 'Ungroup', icon: <LuUngroup size="18" /> });
     }
-    menu.push(
-      ...[
-        { key: 'align-left', label: 'Align left', icon: <RiAlignItemLeftLine size="18" /> },
-        { key: 'align-center', label: 'Align center', icon: <RiAlignItemHorizontalCenterLine size="18" /> },
-        { key: 'align-right', label: 'Align right', icon: <RiAlignItemVerticalCenterLine size="18" /> },
-        { key: 'align-top', label: 'Align top', icon: <RiAlignItemTopLine size="18" /> },
-        { key: 'align-middle', label: 'Align middle', icon: <RiAlignItemVerticalCenterLine size="18" /> },
-        { key: 'align-bottom', label: 'Align bottom', icon: <RiAlignItemBottomLine size="18" /> },
-      ]
-    );
   }
 
   if (elements?.length && elements.every((el) => el.href)) {
@@ -196,34 +47,23 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
   menu.push(...[{ key: 'delete', label: 'Delete', icon: <TbTrash size="18" /> }]);
 
   return (
-    <>
+    <AnimatePresence mode="wait">
       {isOpen && elements?.length > 0 && (
         <>
           {createPortal(
-            <div
-              className="w-[220px] max-h-[300px] overflow-y-auto border-small px-1 py-1 rounded-xl border-default-200 dark:border-default-100 bg-white dark:bg-default-50 fixed z-[99]"
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="w-[220px] max-h-[300px] overflow-y-auto border-small px-1 py-1 rounded-xl shadow bg-white dark:bg-default-50 fixed top-0 left-0 z-[99]"
               style={{ top: `${position.y}px`, left: `${position.x}px` }}
               onContextMenu={(e) => e.preventDefault()}
             >
               <Listbox
                 aria-label="Actions"
                 onAction={(key) => {
-                  if (key === 'copy') handleCopy();
-                  if (key === 'duplicate') handleDuplicate();
-                  if (key === 'delete') handleDelete();
-                  if (key === 'move-top') handleMoveToTop();
-                  if (key === 'move-bottom') handleMoveToBottom();
-                  if (key === 'move-up') handleMoveUp();
-                  if (key === 'move-down') handleMoveDown();
                   if (key === 'link') onLinkToolOpen();
-                  if (key === 'group') handleGroup();
-                  if (key === 'ungroup') handleUngroup();
-                  if (key === 'align-left') handleAlignLeft();
-                  if (key === 'align-center') handleAlignCenter();
-                  if (key === 'align-right') handleAlignRight();
-                  if (key === 'align-top') handleAlignTop();
-                  if (key === 'align-middle') handleAlignMiddle();
-                  if (key === 'align-bottom') handleAlignBottom();
+                  else onAction(key);
                   onClose();
                 }}
                 itemClasses={{ title: 'text-base' }}
@@ -234,14 +74,13 @@ const ContextMenu = ({ position, isOpen, onClose }) => {
                   </ListboxItem>
                 ))}
               </Listbox>
-            </div>,
+            </motion.div>,
             document.body
           )}
         </>
       )}
-
       <LinkTool elements={elements} isOpen={isLinkToolOpen} onClose={onLinkToolClose} />
-    </>
+    </AnimatePresence>
   );
 };
 
@@ -249,6 +88,7 @@ ContextMenu.propTypes = {
   position: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onAction: PropTypes.func.isRequired,
 };
 
 export default ContextMenu;
