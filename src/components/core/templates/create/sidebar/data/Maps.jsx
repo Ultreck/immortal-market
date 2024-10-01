@@ -49,11 +49,20 @@ import { MapCanadaPreview } from '@/components/core/templates/create/elements/ma
 import { MapCentralAfricanRepublicPreview } from '@/components/core/templates/create/elements/maps/MapCentralAfricanRepublic.jsx';
 import { MapChilePreview } from '@/components/core/templates/create/elements/maps/MapChile.jsx';
 import { MapChinaPreview } from '@/components/core/templates/create/elements/maps/MapChina.jsx';
-import { MapCostaricaPreview } from '@/components/core/templates/create/elements/maps/MapCostarica';
-import { MapCyprusPreview } from '@/components/core/templates/create/elements/maps/MapCyprus';
-import { MapCongoDrPreview } from '@/components/core/templates/create/elements/maps/MapCongoDr';
-import { MapDenmarkPreview } from '@/components/core/templates/create/elements/maps/MapDenmark';
-import { MapDjiboutiPreview } from '@/components/core/templates/create/elements/maps/MapDjibouti';
+import { MapCostaricaPreview } from '@/components/core/templates/create/elements/maps/MapCostarica.jsx';
+import { MapCyprusPreview } from '@/components/core/templates/create/elements/maps/MapCyprus.jsx';
+import { MapCongoDrPreview } from '@/components/core/templates/create/elements/maps/MapCongoDr.jsx';
+import { MapDenmarkPreview } from '@/components/core/templates/create/elements/maps/MapDenmark.jsx';
+import { MapDjiboutiPreview } from '@/components/core/templates/create/elements/maps/MapDjibouti.jsx';
+import { MapTaiwanPreview } from '@/components/core/templates/create/elements/maps/MapTaiwan.jsx';
+import { MapTogoPreview } from '@/components/core/templates/create/elements/maps/MapTogo.jsx';
+import { MapTrinidadAndTobagoPreview } from '@/components/core/templates/create/elements/maps/MapTrinidadAndTobago.jsx';
+import { MapTanzaniaPreview } from '@/components/core/templates/create/elements/maps/MapTanzania.jsx';
+import { MapTunisiaPreview } from '@/components/core/templates/create/elements/maps/MapTunisia.jsx';
+import { MapTurkmenistanPreview } from '@/components/core/templates/create/elements/maps/MapTurkmenistan.jsx';
+import { MapEritreaPreview } from '@/components/core/templates/create/elements/maps/MapEritrea.jsx';
+import { MapEstoniaPreview } from '@/components/core/templates/create/elements/maps/MapEstonia.jsx';
+import { MapEthiopiaPreview } from '@/components/core/templates/create/elements/maps/MapEthiopia.jsx';
 
 const names = [
   'nigeria',
@@ -110,6 +119,15 @@ const names = [
   'congo-dr',
   'denmark',
   'djibouti',
+  'taiwan',
+  'togo',
+  'trinidad-and-tobago',
+  'tanzania',
+  'tunisia',
+  'turkmenistan',
+  'eritrea',
+  'estonia',
+  'ethiopia',
 ];
 
 const previews = {
@@ -155,18 +173,27 @@ const previews = {
   'czech-republic': <MapCzechRepublicPreview />,
   congo: <MapCongoPreview />,
   'dominican-republic': <MapDominicanRepublicPreview />,
-  'cayland-islands': <MapCaylandIslandsPreview/>,
-  cambodia: <MapCambodiaPreview/>,
-  cameroon: <MapCameroonPreview/>,
-  canada: <MapCanadaPreview/>,
-  'central-african-republic' : <MapCentralAfricanRepublicPreview/>,
-  chile : <MapChilePreview/>,
-  china : <MapChinaPreview/>,
-  costarica : <MapCostaricaPreview/>,
-  cyprus : <MapCyprusPreview/>,
-  'congo-dr' : <MapCongoDrPreview/>,
-  'denmark' : <MapDenmarkPreview/>,
-  'djibouti': <MapDjiboutiPreview/>,
+  'cayland-islands': <MapCaylandIslandsPreview />,
+  cambodia: <MapCambodiaPreview />,
+  cameroon: <MapCameroonPreview />,
+  canada: <MapCanadaPreview />,
+  'central-african-republic': <MapCentralAfricanRepublicPreview />,
+  chile: <MapChilePreview />,
+  china: <MapChinaPreview />,
+  costarica: <MapCostaricaPreview />,
+  cyprus: <MapCyprusPreview />,
+  'congo-dr': <MapCongoDrPreview />,
+  denmark: <MapDenmarkPreview />,
+  djibouti: <MapDjiboutiPreview />,
+  taiwan: <MapTaiwanPreview />,
+  togo: <MapTogoPreview />,
+  'trinidad-and-tobago': <MapTrinidadAndTobagoPreview />,
+  tanzania: <MapTanzaniaPreview />,
+  tunisia: <MapTunisiaPreview />,
+  turkmenistan: <MapTurkmenistanPreview />,
+  eritrea: <MapEritreaPreview />,
+  estonia: <MapEstoniaPreview />,
+  ethiopia: <MapEthiopiaPreview />,
 };
 
 const elements = names.map((name) => ({

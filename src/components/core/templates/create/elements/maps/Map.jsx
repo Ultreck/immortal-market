@@ -81,6 +81,15 @@ import MapCyprus, { MapCyprusPresent } from '@/components/core/templates/create/
 import MapCongoDr, { MapCongoDrPresent } from '@/components/core/templates/create/elements/maps/MapCongoDr.jsx';
 import MapDenmark, { MapDenmarkPresent } from '@/components/core/templates/create/elements/maps/MapDenmark.jsx';
 import MapDjibouti, { MapDjiboutiPresent } from '@/components/core/templates/create/elements/maps/MapDjibouti.jsx';
+import MapTaiwan, { MapTaiwanPresent } from '@/components/core/templates/create/elements/maps/MapTaiwan.jsx';
+import MapTogo, { MapTogoPresent } from '@/components/core/templates/create/elements/maps/MapTogo.jsx';
+import MapTrinidadAndTobago, { MapTrinidadAndTobagoPresent } from '@/components/core/templates/create/elements/maps/MapTrinidadAndTobago.jsx';
+import MapTanzania, { MapTanzaniaPresent } from '@/components/core/templates/create/elements/maps/MapTanzania.jsx';
+import MapTunisia, { MapTunisiaPresent } from '@/components/core/templates/create/elements/maps/MapTunisia.jsx';
+import MapTurkmenistan, { MapTurkmenistanPresent } from '@/components/core/templates/create/elements/maps/MapTurkmenistan.jsx';
+import MapEritrea, { MapEritreaPresent } from '@/components/core/templates/create/elements/maps/MapEritrea.jsx';
+import MapEstonia, { MapEstoniaPresent } from '@/components/core/templates/create/elements/maps/MapEstonia.jsx';
+import MapEthiopia, { MapEthiopiaPresent } from '@/components/core/templates/create/elements/maps/MapEthiopia.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -138,6 +147,15 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     'congo-dr': MapCongoDr,
     denmark: MapDenmark,
     djibouti: MapDjibouti,
+    taiwan: MapTaiwan,
+    togo: MapTogo,
+    'trinidad-and-tobago': MapTrinidadAndTobago,
+    tanzania: MapTanzania,
+    tunisia: MapTunisia,
+    turkmenistan: MapTurkmenistan,
+    eritrea: MapEritrea,
+    estonia: MapEstonia,
+    ethiopia: MapEthiopia,
   };
 
   if (components[element.config.name]) {
@@ -203,6 +221,15 @@ export const MapPresent = ({ element }) => {
     'congo-dr': MapCongoDrPresent,
     denmark: MapDenmarkPresent,
     djibouti: MapDjiboutiPresent,
+    taiwan: MapTaiwanPresent,
+    togo: MapTogoPresent,
+    'trinidad-and-tobago': MapTrinidadAndTobagoPresent,
+    tanzania: MapTanzaniaPresent,
+    tunisia: MapTunisiaPresent,
+    turkmenistan: MapTurkmenistanPresent,
+    eritrea: MapEritreaPresent,
+    estonia: MapEstoniaPresent,
+    ethiopia: MapEthiopiaPresent,
   };
 
   if (components[element.config.name]) {
