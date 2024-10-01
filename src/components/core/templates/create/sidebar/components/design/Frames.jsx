@@ -108,6 +108,36 @@ const items = [
       </div>
     ),
   },
+  {
+    id: 'frame-typewriter-text',
+    data: {
+      type: 'frame',
+      text: 'Frame typewriter Text',
+      width: 300,
+      height: 36,
+      children: [],
+      style: {
+        animationDuration: '1s',
+        opacity: 1,
+        fontSize: 16,
+        fontWeight: 'normal',
+        color: '#000000',
+        textAlign: 'left',
+        fontFamily: 'Roboto',
+        letterSpacing: 0,
+        lineHeight: 1,
+      },
+      config: {
+        name: 'typewriterText',
+        texts: ['fwf', 'wvbetver', 'e4wgwwff'],
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <TbCarouselHorizontalFilled className="w-full h-full" />
+      </div>
+    ),
+  },
   ...(Object.keys(shapes).map((name) => ({
     id: `frame-${name}`,
     data: {

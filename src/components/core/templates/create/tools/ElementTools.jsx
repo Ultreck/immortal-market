@@ -40,6 +40,7 @@ const mapping = {
   carousel: { type: 'single', component: FrameCarouselConfig },
   marquee: { type: 'single', component: FrameCarouselConfig },
   marqueeText: { type: 'single', component: MarqueeTextConfig },
+  typewriterText: { type: 'single', component: MarqueeTextConfig },
   infographic: { type: 'single', component: InfographicConfig },
   colors: { type: 'single', component: Colors },
   map: { type: 'single', component: MapConfig },

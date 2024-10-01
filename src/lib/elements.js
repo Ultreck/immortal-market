@@ -91,6 +91,7 @@ export const tools = {
     if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow'];
     if (element.config.name === 'marquee') return ['carousel', 'opacity', 'animation', 'shadow'];
     if (element.config.name === 'marqueeText') return ['font','marqueeText', 'opacity', 'animation', 'shadow'];
+    if (element.config.name === 'typewriterText') return ['font','marqueeText', 'opacity', 'animation', 'shadow'];
     return ['opacity', 'animation', 'shadow'];
   },
   icon: ['icon', 'color', 'opacity', 'animation', 'shadow'],
