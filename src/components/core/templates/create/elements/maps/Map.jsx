@@ -83,13 +83,42 @@ import MapDenmark, { MapDenmarkPresent } from '@/components/core/templates/creat
 import MapDjibouti, { MapDjiboutiPresent } from '@/components/core/templates/create/elements/maps/MapDjibouti.jsx';
 import MapTaiwan, { MapTaiwanPresent } from '@/components/core/templates/create/elements/maps/MapTaiwan.jsx';
 import MapTogo, { MapTogoPresent } from '@/components/core/templates/create/elements/maps/MapTogo.jsx';
-import MapTrinidadAndTobago, { MapTrinidadAndTobagoPresent } from '@/components/core/templates/create/elements/maps/MapTrinidadAndTobago.jsx';
+import MapTrinidadAndTobago, {
+  MapTrinidadAndTobagoPresent,
+} from '@/components/core/templates/create/elements/maps/MapTrinidadAndTobago.jsx';
 import MapTanzania, { MapTanzaniaPresent } from '@/components/core/templates/create/elements/maps/MapTanzania.jsx';
 import MapTunisia, { MapTunisiaPresent } from '@/components/core/templates/create/elements/maps/MapTunisia.jsx';
-import MapTurkmenistan, { MapTurkmenistanPresent } from '@/components/core/templates/create/elements/maps/MapTurkmenistan.jsx';
+import MapTurkmenistan, {
+  MapTurkmenistanPresent,
+} from '@/components/core/templates/create/elements/maps/MapTurkmenistan.jsx';
 import MapEritrea, { MapEritreaPresent } from '@/components/core/templates/create/elements/maps/MapEritrea.jsx';
 import MapEstonia, { MapEstoniaPresent } from '@/components/core/templates/create/elements/maps/MapEstonia.jsx';
 import MapEthiopia, { MapEthiopiaPresent } from '@/components/core/templates/create/elements/maps/MapEthiopia.jsx';
+import MapTimorLeste, {
+  MapTimorLestePresent,
+} from '@/components/core/templates/create/elements/maps/MapTimorLeste.jsx';
+import MapTajikistan, {
+  MapTajikistanPresent,
+} from '@/components/core/templates/create/elements/maps/MapTajikistan.jsx';
+import MapThailand, { MapThailandPresent } from '@/components/core/templates/create/elements/maps/MapThailand.jsx';
+import MapTurkey, { MapTurkeyPresent } from '@/components/core/templates/create/elements/maps/MapTurkey.jsx';
+import MapEcuador, { MapEcuadorPresent } from '@/components/core/templates/create/elements/maps/MapEcuador.jsx';
+import MapEgypt, { MapEgyptPresent } from '@/components/core/templates/create/elements/maps/MapEgypt.jsx';
+import MapElSalvador, {
+  MapElSalvadorPresent,
+} from '@/components/core/templates/create/elements/maps/MapElSalvador.jsx';
+import MapEquatorialGuinea, {
+  MapEquatorialGuineaPresent,
+} from '@/components/core/templates/create/elements/maps/MapEquatorialGuinea.jsx';
+import MapFalklandIslands, {
+  MapFalklandIslandsPresent,
+} from '@/components/core/templates/create/elements/maps/MapFalkLandIslands.jsx';
+import MapFiji, { MapFijiPresent } from '@/components/core/templates/create/elements/maps/MapFiji.jsx';
+import MapFinland, { MapFinlandPresent } from '@/components/core/templates/create/elements/maps/MapFinland.jsx';
+import MapFrance, { MapFrancePresent } from '@/components/core/templates/create/elements/maps/MapFrance.jsx';
+import MapFrenchSouthernAndAntarcticLands, {
+  MapFrenchSouthernAndAntarcticLandsPresent,
+} from '@/components/core/templates/create/elements/maps/MapFrenchSouthernAndAntarcticLands.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -156,6 +185,19 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     eritrea: MapEritrea,
     estonia: MapEstonia,
     ethiopia: MapEthiopia,
+    'timor-leste': MapTimorLeste,
+    tajikistan: MapTajikistan,
+    thailand: MapThailand,
+    turkey: MapTurkey,
+    ecuador: MapEcuador,
+    egypt: MapEgypt,
+    'el-salvador': MapElSalvador,
+    'equatorial-guinea': MapEquatorialGuinea,
+    'falkland-islands': MapFalklandIslands,
+    fiji: MapFiji,
+    finland: MapFinland,
+    france: MapFrance,
+    'french-southern-and-antarctic-lands': MapFrenchSouthernAndAntarcticLands,
   };
 
   if (components[element.config.name]) {
@@ -230,6 +272,19 @@ export const MapPresent = ({ element }) => {
     eritrea: MapEritreaPresent,
     estonia: MapEstoniaPresent,
     ethiopia: MapEthiopiaPresent,
+    'timor-leste': MapTimorLestePresent,
+    tajikistan: MapTajikistanPresent,
+    thailand: MapThailandPresent,
+    turkey: MapTurkeyPresent,
+    ecuador: MapEcuadorPresent,
+    egypt: MapEgyptPresent,
+    'el-salvador': MapElSalvadorPresent,
+    'equatorial-guinea': MapEquatorialGuineaPresent,
+    'falkland-islands': MapFalklandIslandsPresent,
+    fiji: MapFijiPresent,
+    finland: MapFinlandPresent,
+    france: MapFrancePresent,
+    'french-southern-and-antarctic-lands': MapFrenchSouthernAndAntarcticLandsPresent,
   };
 
   if (components[element.config.name]) {

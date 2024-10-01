@@ -63,6 +63,19 @@ import { MapTurkmenistanPreview } from '@/components/core/templates/create/eleme
 import { MapEritreaPreview } from '@/components/core/templates/create/elements/maps/MapEritrea.jsx';
 import { MapEstoniaPreview } from '@/components/core/templates/create/elements/maps/MapEstonia.jsx';
 import { MapEthiopiaPreview } from '@/components/core/templates/create/elements/maps/MapEthiopia.jsx';
+import { MapTimorLestePreview } from '@/components/core/templates/create/elements/maps/MapTimorLeste.jsx';
+import { MapTajikistanPreview } from '@/components/core/templates/create/elements/maps/MapTajikistan.jsx';
+import { MapThailandPreview } from '@/components/core/templates/create/elements/maps/MapThailand.jsx';
+import { MapTurkeyPreview } from '@/components/core/templates/create/elements/maps/MapTurkey.jsx';
+import { MapEcuadorPreview } from '@/components/core/templates/create/elements/maps/MapEcuador.jsx';
+import { MapEgyptPreview } from '@/components/core/templates/create/elements/maps/MapEgypt.jsx';
+import { MapElSalvadorPreview } from '@/components/core/templates/create/elements/maps/MapElSalvador.jsx';
+import { MapEquatorialGuineaPreview } from '@/components/core/templates/create/elements/maps/MapEquatorialGuinea.jsx';
+import { MapFalklandIslandsPreview } from '@/components/core/templates/create/elements/maps/MapFalkLandIslands.jsx';
+import { MapFijiPreview } from '@/components/core/templates/create/elements/maps/MapFiji.jsx';
+import { MapFinlandPreview } from '@/components/core/templates/create/elements/maps/MapFinland.jsx';
+import { MapFrancePreview } from '@/components/core/templates/create/elements/maps/MapFrance.jsx';
+import { MapFrenchSouthernAndAntarcticLandsPreview } from '@/components/core/templates/create/elements/maps/MapFrenchSouthernAndAntarcticLands.jsx';
 
 const names = [
   'nigeria',
@@ -128,6 +141,19 @@ const names = [
   'eritrea',
   'estonia',
   'ethiopia',
+  'timor-leste',
+  'tajikistan',
+  'thailand',
+  'turkey',
+  'ecuador',
+  'egypt',
+  'el-salvador',
+  'equatorial-guinea',
+  'falkland-islands',
+  'fiji',
+  'finland',
+  'france',
+  'french-southern-and-antarctic-lands',
 ];
 
 const previews = {
@@ -194,6 +220,19 @@ const previews = {
   eritrea: <MapEritreaPreview />,
   estonia: <MapEstoniaPreview />,
   ethiopia: <MapEthiopiaPreview />,
+  'timor-leste': <MapTimorLestePreview />,
+  tajikistan: <MapTajikistanPreview />,
+  thailand: <MapThailandPreview />,
+  turkey: <MapTurkeyPreview />,
+  ecuador: <MapEcuadorPreview />,
+  egypt: <MapEgyptPreview />,
+  'el-salvador': <MapElSalvadorPreview />,
+  'equatorial-guinea': <MapEquatorialGuineaPreview />,
+  'falkland-islands': <MapFalklandIslandsPreview />,
+  fiji: <MapFijiPreview />,
+  finland: <MapFinlandPreview />,
+  france: <MapFrancePreview />,
+  'french-southern-and-antarctic-lands': <MapFrenchSouthernAndAntarcticLandsPreview />,
 };
 
 const elements = names.map((name) => ({
