@@ -1,6 +1,7 @@
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 
 const Data = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -13,7 +14,13 @@ const Data = ({ element, active, highlighted, width, onClick, onChange }) => {
       highlighted={highlighted}
       fit
     >
-      <DataContent element={element} />
+      <AutoResizeTextArea
+        value={element.config.content}
+        onChange={(v) => {
+          onChange({ ...element, config: { ...element.config, content: v } });
+        }}
+        style={{ ...element.style }}
+      />
     </ElementWrapper>
   );
 };
