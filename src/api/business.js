@@ -178,11 +178,13 @@ export const useCreateDesignBlock = (business) => {
   });
 };
 
-export const useGetDesignBlocks = (business) => {
+export const useGetDesignBlocks = ({ business, type, category }) => {
   return useQuery({
-    queryKey: ['designs', 'blocks'],
+    queryKey: ['designs', 'blocks', type, category],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs/blocks`);
+      const res = await http.get(`/businesses/${business}/designs/blocks`, {
+        params: { type, category },
+      });
       return res.data;
     },
   });

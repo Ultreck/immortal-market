@@ -17,7 +17,7 @@ const categories = [
   { key: 'infographics', label: 'Infographics' },
 ];
 
-const SaveCanvasAsBlockModal = ({ isOpen, onClose, id }) => {
+const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
   const toast = useToast();
   const { id: business } = useBusiness();
   const { control, handleSubmit, reset } = useForm();
@@ -43,7 +43,7 @@ const SaveCanvasAsBlockModal = ({ isOpen, onClose, id }) => {
         style: page.style,
         title: page.title,
       };
-      await create({ ...values, data, thumbnail });
+      await create({ ...values, data, thumbnail, type: 'page' });
       onClose();
       reset();
       toast.success('Block saved');
@@ -108,10 +108,10 @@ const SaveCanvasAsBlockModal = ({ isOpen, onClose, id }) => {
   );
 };
 
-SaveCanvasAsBlockModal.propTypes = {
+CreatePageBlockModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
 };
 
-export default SaveCanvasAsBlockModal;
+export default CreatePageBlockModal;

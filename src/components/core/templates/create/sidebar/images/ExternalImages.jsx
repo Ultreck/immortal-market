@@ -48,8 +48,6 @@ const List = () => {
   const elements = images.map((i) => {
     return {
       id: `${i.id}`,
-      type: 'image',
-      name: 'Image',
       data: {
         type: 'image',
         text: 'Image',

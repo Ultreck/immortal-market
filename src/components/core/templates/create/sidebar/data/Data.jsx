@@ -1,8 +1,9 @@
 import { RiApps2Line, RiArrowRightSLine, RiTable2 } from 'react-icons/ri';
 import { Accordion, AccordionItem } from '@nextui-org/react';
 import Tables from './Tables';
-import Widgets from './Widgets';
+import DataTags from './DataTags.jsx';
 import { TbStar } from 'react-icons/tb';
+import DataBlocks from '@/components/core/templates/create/sidebar/data/DataBlocks.jsx';
 
 const Data = () => {
   return (
@@ -47,13 +48,22 @@ const Data = () => {
         <Tables />
       </AccordionItem>
       <AccordionItem
-        key="5"
-        aria-label="Widgets"
-        title="Widgets"
+        key="data-tags"
+        aria-label="Data tags"
+        title="Data tags"
         startContent={<RiApps2Line size="20" />}
         indicator={<RiArrowRightSLine size="20" />}
       >
-        <Widgets />
+        <DataTags />
+      </AccordionItem>
+      <AccordionItem
+        key="data-blocks"
+        aria-label="Data tag blocks"
+        title="Data tag blocks"
+        startContent={<RiApps2Line size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <DataBlocks />
       </AccordionItem>
       <AccordionItem
         key="6"
@@ -78,4 +88,3 @@ const Data = () => {
 };
 
 export default Data;
-

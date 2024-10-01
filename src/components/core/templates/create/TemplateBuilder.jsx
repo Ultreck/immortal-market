@@ -27,7 +27,7 @@ const TemplateBuilder = () => {
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent, collisions } = event;
-    if (over && over.id.startsWith('frame/') && active.data.current.type === 'image') {
+    if (over && over.id.startsWith('frame/')) {
       const [, n, id] = over.id.split('/');
       const element = getElement(id);
       const page = getElementPage(id);
@@ -58,8 +58,13 @@ const TemplateBuilder = () => {
       const distanceFromTop = getElementDistanceFromTop(node);
       const x = Math.max(roundToNearestTen(activatorEvent.x + delta.x - canvasRect.left), 0);
       const y = Math.max(roundToNearestTen(activatorEvent.y + delta.y - distanceFromTop), 0);
-      const el = { ...active.data.current, x, y, rotate: 0, id: crypto.randomUUID() };
-      addElements([el], page);
+      if (Array.isArray(active.data.current)) {
+        const elements = active.data.current.map((el) => ({ ...el, id: crypto.randomUUID() }));
+        addElements(elements, page);
+      } else {
+        const el = { ...active.data.current, x, y, rotate: 0, id: crypto.randomUUID() };
+        addElements([el], page);
+      }
     }
   };
 

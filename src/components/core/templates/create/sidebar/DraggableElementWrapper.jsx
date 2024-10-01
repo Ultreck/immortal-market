@@ -7,18 +7,23 @@ const DraggableElementWrapper = ({ element }) => {
   const activePage = useTemplateStore((state) => state.template.activePage);
 
   const handleClick = () => {
-    addElements(
-      [
-        {
-          id: crypto.randomUUID(),
-          ...element.data,
-          x: 10,
-          y: 10,
-          rotate: 0,
-        },
-      ],
-      activePage
-    );
+    if (Array.isArray(element.data)) {
+      const elements = element.data.map((el) => ({ ...el, id: crypto.randomUUID() }));
+      addElements(elements, activePage);
+    } else {
+      addElements(
+        [
+          {
+            id: crypto.randomUUID(),
+            ...element.data,
+            x: 10,
+            y: 10,
+            rotate: 0,
+          },
+        ],
+        activePage
+      );
+    }
   };
 
   return (
@@ -38,7 +43,7 @@ const DraggableElementWrapper = ({ element }) => {
 DraggableElementWrapper.propTypes = {
   element: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    data: PropTypes.any,
+    data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
     preview: PropTypes.any,
   }),
 };

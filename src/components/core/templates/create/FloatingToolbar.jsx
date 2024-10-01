@@ -8,15 +8,19 @@ import {
   RiAlignItemLeftLine,
   RiAlignItemTopLine,
   RiAlignItemVerticalCenterLine,
-  RiArrowDownDoubleLine,
-  RiArrowDownSLine,
-  RiArrowUpDoubleLine,
-  RiArrowUpSLine,
 } from 'react-icons/ri';
-import { LuGroup, LuUngroup } from 'react-icons/lu';
+import {
+  LuBringToFront,
+  LuChevronDown,
+  LuChevronUp,
+  LuCopyPlus,
+  LuGroup,
+  LuSendToBack,
+  LuUngroup,
+} from 'react-icons/lu';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TbTrash } from 'react-icons/tb';
-import ElementsPreview from '@/components/core/templates/create/ElementsPreview.jsx';
+import CreateGroupBlockModal from '@/components/core/templates/CreateGroupBlockModal.jsx';
 
 const FloatingToolbar = ({ id, onAction }) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -35,7 +39,7 @@ const FloatingToolbar = ({ id, onAction }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute top-3 left-1/2 -translate-x-1/2 w-max px-2 py-2 z-10 bg-white shadow dark:bg-default-100 rounded-full flex items-center"
+          className="absolute top-3 left-1/2 -translate-x-1/2 w-max px-2 py-2 z-10 bg-white shadow border border-default-100 dark:bg-default-100 rounded-full flex items-center"
         >
           {elements.length > 1 && (
             <>
@@ -93,42 +97,46 @@ const FloatingToolbar = ({ id, onAction }) => {
                   ))}
                 </DropdownMenu>
               </Dropdown>
-              <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
-                <DropdownTrigger>
-                  <Button variant="light" radius="full" className="text-base px-4" size="sm">
-                    Arrange
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label="Arrange actions" onAction={(key) => onAction(key)}>
-                  {[
-                    { key: 'move-top', label: 'Move to top', icon: <RiArrowUpDoubleLine size="18" /> },
-                    { key: 'move-bottom', label: 'Move to bottom', icon: <RiArrowDownDoubleLine size="18" /> },
-                    { key: 'move-up', label: 'Move up', icon: <RiArrowUpSLine size="18" /> },
-                    { key: 'move-down', label: 'Move down', icon: <RiArrowDownSLine size="18" /> },
-                  ].map((item) => (
-                    <DropdownItem key={item.key} startContent={item.icon}>
-                      <span className="text-base">{item.label}</span>
-                    </DropdownItem>
-                  ))}
-                </DropdownMenu>
-              </Dropdown>
             </>
           )}
-          <Button
-            variant="light"
-            color="danger"
-            radius="full"
-            className="text-base px-4"
-            size="sm"
-            startContent={<TbTrash size="18" />}
-            onClick={() => onAction('delete')}
-          >
-            Delete
-          </Button>
+          <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
+            <DropdownTrigger>
+              <Button variant="light" radius="full" className="text-base px-4" size="sm">
+                Arrange
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Arrange actions" onAction={(key) => onAction(key)}>
+              {[
+                { key: 'move-top', label: 'Move to top', icon: <LuBringToFront size="18" /> },
+                { key: 'move-bottom', label: 'Move to bottom', icon: <LuSendToBack size="18" /> },
+                { key: 'move-up', label: 'Move up', icon: <LuChevronUp size="18" /> },
+                { key: 'move-down', label: 'Move down', icon: <LuChevronDown size="18" /> },
+              ].map((item) => (
+                <DropdownItem key={item.key} startContent={item.icon}>
+                  <span className="text-base">{item.label}</span>
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+          <div className="flex items-center gap-2">
+            <Button variant="light" radius="full" size="sm" isIconOnly onClick={() => onAction('duplicate')}>
+              <LuCopyPlus size="18" />
+            </Button>
+            <Button
+              variant="light"
+              color="danger"
+              radius="full"
+              size="sm"
+              isIconOnly
+              onClick={() => onAction('delete')}
+            >
+              <TbTrash size="18" />
+            </Button>
+          </div>
         </motion.div>
       )}
 
-      <ElementsPreview isOpen={isOpen} onClose={onClose} elements={elements} />
+      <CreateGroupBlockModal isOpen={isOpen} onClose={onClose} elements={elements} />
     </AnimatePresence>
   );
 };

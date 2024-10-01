@@ -30,8 +30,6 @@ const UploadedImages = () => {
 
   const elements = uploads.map((upload) => ({
     id: upload._id,
-    type: 'image',
-    name: 'Image',
     data: {
       type: 'image',
       text: 'Image',

@@ -18,7 +18,7 @@ import {
 } from 'react-icons/tb';
 import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
-import SaveCanvasAsBlockModal from '@/components/core/templates/create/SaveCanvasAsBlockModal.jsx';
+import CreatePageBlockModal from '@/components/core/templates/create/CreatePageBlockModal.jsx';
 
 const PageActions = ({ id }) => {
   const { isOpen: isSaveAsBlockOpen, onOpen: onSaveAsBlockOpen, onClose: onSaveAsBlockClose } = useDisclosure();
@@ -96,7 +96,7 @@ const PageActions = ({ id }) => {
         </DropdownMenu>
       </Dropdown>
 
-      <SaveCanvasAsBlockModal isOpen={isSaveAsBlockOpen} onClose={onSaveAsBlockClose} id={id} />
+      <CreatePageBlockModal isOpen={isSaveAsBlockOpen} onClose={onSaveAsBlockClose} id={id} />
     </div>
   );
 };

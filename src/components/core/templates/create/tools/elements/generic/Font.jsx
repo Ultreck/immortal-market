@@ -59,7 +59,7 @@ const fonts = [
 ];
 
 const FontFamily = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((e) => e.style.fontFamily));
+  const value = useResolveValue(elements.map((e) => e.style?.fontFamily));
 
   const handleChange = (event) => {
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, fontFamily: event.target.value } })));
@@ -84,7 +84,7 @@ const FontFamily = ({ elements, onChange }) => {
 };
 
 const FontSize = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((e) => e.style.fontSize));
+  const value = useResolveValue(elements.map((e) => e.style?.fontSize));
 
   const handleChange = (v) => {
     if (v === '') return;
@@ -100,7 +100,7 @@ const FontSize = ({ elements, onChange }) => {
 };
 
 const LetterSpacing = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((e) => e.style.letterSpacing));
+  const value = useResolveValue(elements.map((e) => e.style?.letterSpacing));
 
   const handleChange = (v) => {
     if (v === '') return;
@@ -116,7 +116,7 @@ const LetterSpacing = ({ elements, onChange }) => {
 };
 
 const LineHeight = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((e) => e.style.lineHeight));
+  const value = useResolveValue(elements.map((e) => e.style?.lineHeight));
 
   const handleChange = (v) => {
     if (v === '') return;
@@ -132,7 +132,7 @@ const LineHeight = ({ elements, onChange }) => {
 };
 
 const Bold = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((el) => el.style.fontWeight));
+  const value = useResolveValue(elements.map((el) => el.style?.fontWeight));
 
   return (
     <Button
@@ -155,7 +155,7 @@ const Bold = ({ elements, onChange }) => {
 };
 
 const Italic = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((el) => el.style.fontStyle));
+  const value = useResolveValue(elements.map((el) => el.style?.fontStyle));
 
   return (
     <Button
@@ -178,7 +178,7 @@ const Italic = ({ elements, onChange }) => {
 };
 
 const Underline = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((el) => el.style.textDecoration));
+  const value = useResolveValue(elements.map((el) => el.style?.textDecoration));
 
   return (
     <Button
@@ -208,8 +208,8 @@ const options = [
 ];
 
 const TextAlign = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((e) => e.style.textAlign));
-  const selected = options.find((option) => option.value === value);
+  const value = useResolveValue(elements.map((e) => e.style?.textAlign));
+  const selected = options.find((option) => option.value === value) || options[0];
 
   const handleChange = () => {
     const index = options.findIndex((option) => option.value === selected.value);
@@ -225,7 +225,7 @@ const TextAlign = ({ elements, onChange }) => {
 };
 
 const TextColor = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((e) => e.style.color));
+  const value = useResolveValue(elements.map((e) => e.style?.color));
 
   const handleChange = (v) => {
     if (!v) return;

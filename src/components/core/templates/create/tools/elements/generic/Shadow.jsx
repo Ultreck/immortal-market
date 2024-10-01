@@ -5,7 +5,7 @@ import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { RiShadowLine } from 'react-icons/ri';
 
 const Shadow = ({ onChange, elements }) => {
-  const value = useResolveValue(elements.map((e) => e.style.shadow));
+  const value = useResolveValue(elements.map((e) => e.style?.shadow));
 
   const x = value ? value.split(' ')?.[0]?.replace('px', '') || '0' : '0';
   const y = value ? value.split(' ')?.[1]?.replace('px', '') || '0' : '0';
