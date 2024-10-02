@@ -1,55 +1,26 @@
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
-import { Button, Image, Skeleton } from '@nextui-org/react';
-import { useCreateDesign, useGetDesigns } from '@/api/business.js';
+import { useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
-import { Link, useNavigate } from 'react-router-dom';
-import NoData from '@/components/ui/NoData.jsx';
+import { Link } from 'react-router-dom';
+import { Button, Image, Skeleton } from '@nextui-org/react';
 import { RiAddLine } from 'react-icons/ri';
 import { getImageLink } from '@/lib/utils.js';
 import { TbPhotoCircle } from 'react-icons/tb';
+import NoData from '@/components/ui/NoData.jsx';
+import useGlobalStore from '@/store/global.js';
 
-const TemplatesPage = () => {
-  const toast = useToast();
-  const navigate = useNavigate();
+const ProjectsPage = () => {
   const { id: business } = useBusiness();
-  const { mutateAsync: create, isPending: isCreateTemplateLoading } = useCreateDesign(business);
-  const { data: { designs = [] } = {}, isLoading: isTemplatesLoading } = useGetDesigns({ business, type: 'template' });
-
-  const handleCreateTemplate = async () => {
-    try {
-      const res = await create({
-        title: 'Untitled',
-        description: '',
-        type: 'template',
-        data: {
-          pages: [
-            {
-              id: crypto.randomUUID(),
-              title: 'Untitled',
-              width: 600,
-              height: 600,
-              style: {
-                background: '#ffffff',
-              },
-              elements: [],
-            },
-          ],
-        },
-      });
-      navigate(`/designs/${res.data.design._id}/edit`);
-    } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
-    }
-  };
+  const { data: { designs = [] } = {}, isLoading: isDesignsLoading } = useGetDesigns({ business, type: 'project' });
+  const updateData = useGlobalStore((state) => state.updateData);
 
   return (
     <>
       <DashboardTitle
-        text="Templates"
+        text="Projects"
         breadcrumbs={[
           { text: 'Home', href: '/' },
-          { text: 'Templates', href: '/templates' },
+          { text: 'Projects', href: '/projects' },
         ]}
         after={
           <Button
@@ -57,15 +28,14 @@ const TemplatesPage = () => {
             radius="full"
             className="text-base"
             startContent={<RiAddLine size="20" />}
-            isLoading={isCreateTemplateLoading}
-            onClick={handleCreateTemplate}
+            onClick={() => updateData({ isCreateProjectModalOpen: true })}
           >
-            Create template
+            Create project
           </Button>
         }
       />
       <div className="container py-8 md:py-10 min-h-screen flex flex-col space-y-10">
-        {isTemplatesLoading ? (
+        {isDesignsLoading ? (
           <div className="grid grid-cols-4 gap-4 md:gap-8">
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
@@ -112,4 +82,4 @@ const TemplatesPage = () => {
   );
 };
 
-export default TemplatesPage;
+export default ProjectsPage;

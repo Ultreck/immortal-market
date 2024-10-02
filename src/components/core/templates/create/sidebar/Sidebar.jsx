@@ -29,7 +29,6 @@ const Sidebar = ({ className }) => {
     >
       {!collapsed && (
         <button
-          type="button"
           aria-label="Hide"
           onClick={() => setTab(null)}
           className="absolute top-1/2 left-[calc(100%)] -translate-y-1/2 z-10 bg-gray-900 hover:bg-gray-800 border border-default-200 dark:border-default-100 h-[70px] rounded-r-full transition-all duration-200"

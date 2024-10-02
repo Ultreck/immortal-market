@@ -20,7 +20,7 @@ import Custom from './pages/document/Custom.jsx';
 import Wallet from './pages/Wallet.jsx';
 import DashboardLayout from '@/components/core/layout/DashboardLayout.jsx';
 import OverviewPage from '@/pages/OverviewPage.jsx';
-import ProjectPage from '@/pages/ProjectPage.jsx';
+import ProjectsPage from '@/pages/ProjectsPage.jsx';
 import { useEffect } from 'react';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import GlobalModals from '@/components/core/GlobalModals.jsx';
@@ -68,7 +68,7 @@ const App = () => {
         >
           <Route path="" element={<OverviewPage />} />
           <Route path="/overview" element={<Navigate to="/" replace />} />
-          <Route path="projects" element={<ProjectPage />} />
+          <Route path="projects" element={<ProjectsPage />} />
           <Route path="home" element={<LandingPage />} />
           <Route path="templates" element={<TemplatesPage />} />
           <Route path="dashboards" element={<ProjectDashboardPage />} />
@@ -179,7 +179,5 @@ const App = () => {
     </>
   );
 };
-
-
 
 export default App;

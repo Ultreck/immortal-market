@@ -38,7 +38,7 @@ const AuthDropdown = ({ className, mini = false }) => {
         ) : (
           <div
             className={cn(
-              'bg-default-200 dark:bg-default-100/60 pl-6 pr-4 py-4 rounded-2xl flex items-center justify-between cursor-pointer',
+              'bg-black/[.07] dark:bg-white/10 pl-6 pr-4 py-4 rounded-2xl flex items-center justify-between cursor-pointer',
               className
             )}
           >
@@ -48,7 +48,7 @@ const AuthDropdown = ({ className, mini = false }) => {
               name={user.firstName}
               avatarProps={{ radius: 'full', size: 'sm', src: getImageLink(user.image) }}
               classNames={{
-                name: 'text-base leading-none',
+                name: 'text-base leading-none font-medium',
                 description: 'text-sm leading-none mt-1.5',
                 base: 'gap-4',
               }}

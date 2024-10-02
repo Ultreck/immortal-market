@@ -1,19 +1,7 @@
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
-import { IconFileInvoice } from '@tabler/icons-react';
-import {
-  TbChevronLeft,
-  TbChevronRight,
-  TbCrown,
-  TbInputAi,
-  TbLayout,
-  TbLayoutList,
-  TbSettings2,
-  TbTableExport,
-  TbUsers,
-} from 'react-icons/tb';
-import { RiDashboardFill } from "react-icons/ri";
+import { TbChevronLeft, TbChevronRight, TbCrown, TbSettings2, TbUsers } from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
@@ -21,6 +9,9 @@ import Logo from '@/components/core/shared/Logo.jsx';
 import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { LuBot, LuFolderOutput } from 'react-icons/lu';
+import { HiOutlineTemplate, HiOutlineViewGrid, HiOutlineViewList } from 'react-icons/hi';
+import { HiOutlineBookmarkSquare } from 'react-icons/hi2';
 
 const NavItem = ({ icon, title, href, mini = false }) => {
   return (
@@ -29,7 +20,7 @@ const NavItem = ({ icon, title, href, mini = false }) => {
       className={({ isActive }) =>
         cn(
           'flex items-center px-6 py-2.5 rounded-full text-base',
-          isActive ? `bg-default-100 font-bold` : 'hover:bg-default-100 opacity-90',
+          isActive ? `bg-black/5 dark:bg-white/10 font-semibold` : 'hover:bg-black/5 opacity-80',
           { 'w-12 h-12 p-0 justify-center': mini }
         )
       }
@@ -53,36 +44,16 @@ const Sidebar = () => {
 
   return (
     <div
-      className={cn('w-[280px] border-r border-default-200 dark:border-default-100 relative group transition-width', {
+      className={cn('w-[280px] relative group transition-width', {
         'w-[90px]': mini,
       })}
     >
       <button
-        className="absolute top-1/2 left-[calc(100%+1px)] -translate-y-1/2 z-10"
-        type="button"
-        aria-label="Hide"
         onClick={() => setMini(!mini)}
+        aria-label={mini ? 'Hide' : 'Show'}
+        className="absolute top-1/2 left-[calc(100%)] -translate-y-1/2 z-10 bg-[#eff6fd] dark:bg-gray-950 border border-default-200 dark:border-default-50 h-[70px] rounded-r-full transition-all duration-200"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 13 96"
-          width="14"
-          height="100%"
-          fill="none"
-          className="IrLwCg"
-        >
-          <path
-            className="fill-background stroke-[0.5] stroke-default-200"
-            d="M0,0 h1 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32 H0 z"
-          ></path>
-          <path
-            className="fill-background stroke-[0.5] stroke-default-200"
-            d="M0.5,0 c0,20,12,12,12,32 v32 c0,20,-12,12,-12,32"
-          ></path>
-        </svg>
-        <div className="absolute top-1/2 -translate-y-1/2 left-0">
-          {mini ? <TbChevronRight size="14" /> : <TbChevronLeft size="14" />}
-        </div>
+        <div className="">{mini ? <TbChevronRight size="16" /> : <TbChevronLeft size="16" />}</div>
       </button>
       <div className={cn('w-[280px] h-full overflow-hidden', { 'w-[90px]': mini })}>
         <div className={cn('w-[280px] h-full overflow-hidden')}>
@@ -94,12 +65,12 @@ const Sidebar = () => {
             <CreateDropdown className="mt-6" mini={mini} />
             <div className={cn('flex flex-col space-y-2 mt-6', { '-ml-1': mini })}>
               {[
-                { name: 'Overview', href: '/', icon: <TbLayout size="20" /> },
-                { name: 'Projects', href: '/projects', icon: <TbLayoutList size="20" /> },
-                { name: 'Templates', href: '/templates', icon: <IconFileInvoice size="20" /> },
-                { name: 'Ai Assistant', href: '/assistant', icon: <TbInputAi size="20" /> },
-                { name: 'Outsource', href: '/outsource', icon: <TbTableExport size="20" /> },
-                { name: 'Dashboard', href: '/home', icon: <RiDashboardFill size="20" /> },
+                { name: 'Overview', href: '/', icon: <HiOutlineViewGrid size="20" /> },
+                { name: 'Projects', href: '/projects', icon: <HiOutlineViewList size="20" /> },
+                { name: 'Templates', href: '/templates', icon: <HiOutlineTemplate size="20" /> },
+                { name: 'Ai Assistant', href: '/assistant', icon: <LuBot size="20" /> },
+                { name: 'Outsource', href: '/outsource', icon: <LuFolderOutput size="20" /> },
+                { name: 'Dashboard', href: '/home', icon: <HiOutlineBookmarkSquare size="20" /> },
               ].map((item) => (
                 <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
               ))}
