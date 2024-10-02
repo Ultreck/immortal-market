@@ -76,6 +76,15 @@ import { MapFijiPreview } from '@/components/core/templates/create/elements/maps
 import { MapFinlandPreview } from '@/components/core/templates/create/elements/maps/MapFinland.jsx';
 import { MapFrancePreview } from '@/components/core/templates/create/elements/maps/MapFrance.jsx';
 import { MapFrenchSouthernAndAntarcticLandsPreview } from '@/components/core/templates/create/elements/maps/MapFrenchSouthernAndAntarcticLands.jsx';
+import { MapGabonPreview } from '@/components/core/templates/create/elements/maps/MapGabon.jsx';
+import { MapGambiaPreview } from '@/components/core/templates/create/elements/maps/MapGambia.jsx';
+import { MapGeorgiaPreview } from '@/components/core/templates/create/elements/maps/MapGeorgia.jsx';
+import { MapGermanyPreview } from '@/components/core/templates/create/elements/maps/MapGermany.jsx';
+import { MapGhanaPreview } from '@/components/core/templates/create/elements/maps/MapGhana.jsx';
+import { MapGreecePreview } from '@/components/core/templates/create/elements/maps/MapGreece.jsx';
+import { MapGreenlandPreview } from '@/components/core/templates/create/elements/maps/MapGreenland.jsx';
+import { MapGrenadaPreview } from '@/components/core/templates/create/elements/maps/MapGrenada.jsx';
+import { MapGuatemalaPreview } from '@/components/core/templates/create/elements/maps/MapGuatemala.jsx';
 
 const names = [
   'nigeria',
@@ -154,6 +163,15 @@ const names = [
   'finland',
   'france',
   'french-southern-and-antarctic-lands',
+  'gabon',
+  'gambia',
+  'georgia',
+  'germany',
+  'ghana',
+  'greece',
+  'greenland',
+  'grenada',
+  'guatemala',
 ];
 
 const previews = {
@@ -233,6 +251,15 @@ const previews = {
   finland: <MapFinlandPreview />,
   france: <MapFrancePreview />,
   'french-southern-and-antarctic-lands': <MapFrenchSouthernAndAntarcticLandsPreview />,
+  gabon: <MapGabonPreview />,
+  gambia: <MapGambiaPreview/>,
+  georgia: <MapGeorgiaPreview/>,
+  germany: <MapGermanyPreview/>,
+  ghana: <MapGhanaPreview/>,
+  greece: <MapGreecePreview/>,
+  greenland: <MapGreenlandPreview/>,
+  grenada: <MapGrenadaPreview/>,
+  guatemala: <MapGuatemalaPreview/>,
 };
 
 const elements = names.map((name) => ({

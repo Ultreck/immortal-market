@@ -119,6 +119,15 @@ import MapFrance, { MapFrancePresent } from '@/components/core/templates/create/
 import MapFrenchSouthernAndAntarcticLands, {
   MapFrenchSouthernAndAntarcticLandsPresent,
 } from '@/components/core/templates/create/elements/maps/MapFrenchSouthernAndAntarcticLands.jsx';
+import MapGabon, { MapGabonPresent } from '@/components/core/templates/create/elements/maps/MapGabon.jsx';
+import MapGambia, { MapGambiaPresent } from '@/components/core/templates/create/elements/maps/MapGambia.jsx';
+import MapGeorgia, { MapGeorgiaPresent } from '@/components/core/templates/create/elements/maps/MapGeorgia.jsx';
+import MapGermany, { MapGermanyPresent } from '@/components/core/templates/create/elements/maps/MapGermany.jsx';
+import MapGhana, { MapGhanaPresent } from '@/components/core/templates/create/elements/maps/MapGhana.jsx';
+import MapGreece, { MapGreecePresent } from '@/components/core/templates/create/elements/maps/MapGreece.jsx';
+import MapGreenland, { MapGreenlandPresent } from '@/components/core/templates/create/elements/maps/MapGreenland.jsx';
+import MapGrenada, { MapGrenadaPresent } from '@/components/core/templates/create/elements/maps/MapGrenada.jsx';
+import MapGuatemala, { MapGuatemalaPresent } from '@/components/core/templates/create/elements/maps/MapGuatemala.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -198,6 +207,15 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     finland: MapFinland,
     france: MapFrance,
     'french-southern-and-antarctic-lands': MapFrenchSouthernAndAntarcticLands,
+    gabon: MapGabon,
+    gambia: MapGambia,
+    georgia: MapGeorgia,
+    germany: MapGermany,
+    ghana: MapGhana,
+    greece: MapGreece,
+    greenland: MapGreenland,
+    grenada: MapGrenada,
+    guatemala: MapGuatemala,
   };
 
   if (components[element.config.name]) {
@@ -285,6 +303,15 @@ export const MapPresent = ({ element }) => {
     finland: MapFinlandPresent,
     france: MapFrancePresent,
     'french-southern-and-antarctic-lands': MapFrenchSouthernAndAntarcticLandsPresent,
+    gabon: MapGabonPresent,
+    gambia: MapGambiaPresent,
+    georgia: MapGeorgiaPresent,
+    germany: MapGermanyPresent,
+    ghana: MapGhanaPresent,
+    greece: MapGreecePresent,
+    greenland: MapGreenlandPresent,
+    grenada: MapGrenadaPresent,
+    guatemala: MapGuatemalaPresent,
   };
 
   if (components[element.config.name]) {
