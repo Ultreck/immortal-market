@@ -8,6 +8,7 @@ const elements = [
       text: 'Data',
       width: 150,
       height: 100,
+      style: {},
       config: {
         column: 'default',
         group: 'average',
@@ -32,6 +33,7 @@ const elements = [
       text: 'Data',
       width: 150,
       height: 100,
+      style: {},
       config: {
         column: 'default',
         group: 'average',

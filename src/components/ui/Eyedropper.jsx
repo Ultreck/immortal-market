@@ -7,7 +7,6 @@ import { TbColorPicker } from 'react-icons/tb';
 
 const Eyedropper = ({ value, onChange }) => {
   const [coverUp, setCoverUp] = useState(false);
-  const [isPicking, setIsPicking] = useState(false);
 
   const takePick = () => {
     const root = document.getElementById('root');
@@ -24,7 +23,6 @@ const Eyedropper = ({ value, onChange }) => {
   };
 
   const getEyeDrop = () => {
-    setIsPicking(true);
     if (!window.EyeDropper) {
       takePick();
     } else {
@@ -34,17 +32,13 @@ const Eyedropper = ({ value, onChange }) => {
         .open({ signal: abortController.signal })
         .then((result) => {
           onChange(result.sRGBHex);
-          setIsPicking(false);
         })
-        .catch(() => {
-          setIsPicking(false);
-        });
+        .catch(() => {});
     }
   };
 
   const getColorLegacy = (e) => {
     e.stopPropagation();
-    setIsPicking(false);
     setCoverUp(false);
   };
 
@@ -53,14 +47,10 @@ const Eyedropper = ({ value, onChange }) => {
   return (
     <div className="mt-5">
       <div className="flex gap-3">
-        <div className="w-full rounded-xl border text-lg flex items-center justify-center">{bgValueText}</div>
-        <Button
-          onClick={getEyeDrop}
-          isIconOnly
-          size="md"
-          variant="light"
-          className={`border p-2 ${isPicking && `bg-slate-600`}`}
-        >
+        <div className="w-full rounded-xl border border-default-200 text-lg flex items-center justify-center">
+          {bgValueText}
+        </div>
+        <Button onClick={getEyeDrop} isIconOnly size="md" variant="bordered">
           <TbColorPicker size={16} />
         </Button>
       </div>

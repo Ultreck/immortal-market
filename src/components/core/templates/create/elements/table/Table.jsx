@@ -153,7 +153,7 @@ const TableContent = ({ element, onChange, active }) => {
   return (
     <>
       {!!selection && (
-        <div className="absolute bottom-[calc(100%+10px)] left-0 space-x-2 flex items-center">
+        <div className="absolute bottom-[calc(100%+10px)] left-0 space-x-2 flex items-center light">
           {isMultipleSelection && (
             <MergeOptions
               element={element}

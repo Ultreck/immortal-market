@@ -53,7 +53,7 @@ const ElementWrapper = ({
       onClick={(e) => onClick(element.id, e)}
       onDoubleClick={(e) => {
         if (editable) setIsEditing(true);
-        onDoubleClick(element.id, e);
+        onDoubleClick?.(element.id, e);
       }}
       handles={resizeHandles}
       constrained={constrained}
