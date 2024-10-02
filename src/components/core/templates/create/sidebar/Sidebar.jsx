@@ -13,6 +13,7 @@ import Images from '@/components/core/templates/create/sidebar/images/Images.jsx
 import Charts from './data/Charts.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import MyWork from './my-work/MyWork.jsx';
+import PropTypes from 'prop-types';
 
 const Sidebar = ({ className }) => {
   const [tab, setTab] = useState('basics');
@@ -89,8 +90,9 @@ const Sidebar = ({ className }) => {
                 </Tooltip>
               );
             })}
-            <div className={cn('cursor-pointer flex items-center justify-center !mt-4', className)}
-            onClick={() => setTab('my-work')}
+            <div
+              className={cn('cursor-pointer flex items-center justify-center !mt-4', className)}
+              onClick={() => setTab('my-work')}
             >
               <Avatar
                 src={getImageLink(user.image)}
@@ -118,5 +120,8 @@ const Sidebar = ({ className }) => {
   );
 };
 
-export default Sidebar;
+Sidebar.propTypes = {
+  className: PropTypes.string,
+};
 
+export default Sidebar;

@@ -7,31 +7,23 @@ import {
   DropdownSection,
   DropdownTrigger,
   ScrollShadow,
-  Skeleton,
 } from '@nextui-org/react';
-import { useCreateDesign, useGetDesigns } from '@/api/business.js';
-import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
-import { Link, useNavigate } from 'react-router-dom';
-import NoData from '@/components/ui/NoData.jsx';
-import { RiAddLine, RiLayout2Line, RiLayoutRowLine } from 'react-icons/ri';
-import { getImageLink } from '@/lib/utils.js';
-import { TbShape } from 'react-icons/tb';
-import { RiImage2Line } from 'react-icons/ri';
-import { TbChartBar, TbTemplate } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
+import { RiAddLine, RiImage2Line, RiLayout2Line, RiLayoutRowLine } from 'react-icons/ri';
+import { TbChartBar, TbShape, TbTemplate } from 'react-icons/tb';
 import { CiGlobe } from 'react-icons/ci';
 import { useState } from 'react';
 import CardComponent from './CardComponent';
-import { FaPlusSquare } from "react-icons/fa";
+import { FaPlusSquare } from 'react-icons/fa';
 import img1 from '../../assets/video_autocut.ffdd64f3.png';
 import img2 from '../../assets/capcut2.png';
 import img3 from '../../assets/capcut3.png';
 import img4 from '../../assets/capcut4.png';
-import { ElementPropTypes } from '@/lib/prop-types';
 import TemplateCardComponent from './TemplateCardComponent';
 
 const LandingPage = () => {
-  const [tabs, settabs] = useState(0);
+  const [tabs, setTabs] = useState(0);
+
   return (
     <div className="container">
       <DashboardTitle
@@ -114,7 +106,7 @@ const LandingPage = () => {
               ].map((tab, index) => (
                 <li
                   key={index}
-                  onClick={() => settabs(index)}
+                  onClick={() => setTabs(index)}
                   className={`text px-3 py-5 border-[#2CBCEF] ${index === tabs ? 'border-b-4 font-semibold transition-all ease-in-out duration-500' : ''}`}
                 >
                   <Link to={``}>
@@ -134,7 +126,7 @@ const LandingPage = () => {
             {/* <div className="flex overflow-x-auto space-x-6 w-150%"> */}
             <ScrollShadow hideScrollBar orientation="horizontal" className="w-full h-full flex gap-5 px-6 ">
               {[
-                { title: 'New Design', icon: <FaPlusSquare className='text-2xl' />, imageUrl: '' },
+                { title: 'New Design', icon: <FaPlusSquare className="text-2xl" />, imageUrl: '' },
                 { title: 'Maps to Template', icon: '', imageUrl: img1 },
                 { title: 'Charts to Template', icon: '', imageUrl: img2 },
                 { title: 'Framed Image Creation', icon: '', imageUrl: img3 },
@@ -157,5 +149,5 @@ const LandingPage = () => {
     </div>
   );
 };
-LandingPage.propTypes = ElementPropTypes;
+
 export default LandingPage;

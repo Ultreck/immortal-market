@@ -4,7 +4,7 @@ import { TbLinkOff } from 'react-icons/tb';
 import useTemplateStore from '@/store/template.js';
 import { useState } from 'react';
 
-const LinkTool = ({ elements, isOpen, onClose }) => {
+const LinkModal = ({ elements, isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} hideCloseButton>
       <ModalContent>
@@ -99,7 +99,7 @@ const Content = ({ elements, onClose }) => {
   );
 };
 
-LinkTool.propTypes = {
+LinkModal.propTypes = {
   elements: PropTypes.array,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
@@ -110,4 +110,4 @@ Content.propTypes = {
   onClose: PropTypes.func,
 };
 
-export default LinkTool;
+export default LinkModal;

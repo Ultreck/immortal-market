@@ -1,15 +1,15 @@
-import { ElementPropTypes } from '@/lib/prop-types';
 import { Card, Image } from '@nextui-org/react';
+import PropTypes from 'prop-types';
 
 const CardComponent = ({ data }) => {
   return (
     <div className="text mt-5">
       <Card className="rounded-2xl p-4 w-[250px] mb-2  h-48 cursor-pointer">
-        {data.icon && <div className="text  border-2 border-dashed rounded-md w-full h-full">
-           <span className="text hover:scale-110 w-full h-full flex justify-center items-center">
-            {data.icon}
-            </span> 
-            </div>}
+        {data.icon && (
+          <div className="text  border-2 border-dashed rounded-md w-full h-full">
+            <span className="text hover:scale-110 w-full h-full flex justify-center items-center">{data.icon}</span>
+          </div>
+        )}
         {data.imageUrl && (
           <Image
             removeWrapper
@@ -24,5 +24,9 @@ const CardComponent = ({ data }) => {
     </div>
   );
 };
-CardComponent.propTypes = ElementPropTypes;
+
+CardComponent.propTypes = {
+  data: PropTypes.any,
+};
+
 export default CardComponent;

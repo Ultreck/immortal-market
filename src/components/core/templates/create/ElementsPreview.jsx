@@ -48,7 +48,6 @@ ElementsPreview.displayName = 'ElementsPreview';
 
 ElementsPreview.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
-  ref: PropTypes.any,
 };
 
 export default ElementsPreview;
