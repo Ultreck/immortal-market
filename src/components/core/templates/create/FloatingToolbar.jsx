@@ -1,23 +1,8 @@
 import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@nextui-org/react';
-import {
-  RiAddLine,
-  RiAlignItemBottomLine,
-  RiAlignItemHorizontalCenterLine,
-  RiAlignItemLeftLine,
-  RiAlignItemTopLine,
-  RiAlignItemVerticalCenterLine,
-} from 'react-icons/ri';
-import {
-  LuBringToFront,
-  LuChevronDown,
-  LuChevronUp,
-  LuCopyPlus,
-  LuGroup,
-  LuSendToBack,
-  LuUngroup,
-} from 'react-icons/lu';
+import { Button, useDisclosure } from '@nextui-org/react';
+import { RiAddLine } from 'react-icons/ri';
+import { LuCopyPlus, LuGroup, LuUngroup } from 'react-icons/lu';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TbTrash } from 'react-icons/tb';
 import CreateGroupBlockModal from '@/components/core/templates/CreateGroupBlockModal.jsx';
@@ -76,48 +61,8 @@ const FloatingToolbar = ({ id, onAction }) => {
                   Ungroup
                 </Button>
               )}
-              <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
-                <DropdownTrigger>
-                  <Button variant="light" radius="full" className="text-base px-4" size="sm">
-                    Align to
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label="Arrange actions" onAction={(key) => onAction(key)}>
-                  {[
-                    { key: 'align-left', label: 'Align left', icon: <RiAlignItemLeftLine size="18" /> },
-                    { key: 'align-center', label: 'Align center', icon: <RiAlignItemHorizontalCenterLine size="18" /> },
-                    { key: 'align-right', label: 'Align right', icon: <RiAlignItemVerticalCenterLine size="18" /> },
-                    { key: 'align-top', label: 'Align top', icon: <RiAlignItemTopLine size="18" /> },
-                    { key: 'align-middle', label: 'Align middle', icon: <RiAlignItemVerticalCenterLine size="18" /> },
-                    { key: 'align-bottom', label: 'Align bottom', icon: <RiAlignItemBottomLine size="18" /> },
-                  ].map((item) => (
-                    <DropdownItem key={item.key} startContent={item.icon}>
-                      <span className="text-base">{item.label}</span>
-                    </DropdownItem>
-                  ))}
-                </DropdownMenu>
-              </Dropdown>
             </>
           )}
-          <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
-            <DropdownTrigger>
-              <Button variant="light" radius="full" className="text-base px-4" size="sm">
-                Arrange
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Arrange actions" onAction={(key) => onAction(key)}>
-              {[
-                { key: 'move-top', label: 'Move to top', icon: <LuBringToFront size="18" /> },
-                { key: 'move-bottom', label: 'Move to bottom', icon: <LuSendToBack size="18" /> },
-                { key: 'move-up', label: 'Move up', icon: <LuChevronUp size="18" /> },
-                { key: 'move-down', label: 'Move down', icon: <LuChevronDown size="18" /> },
-              ].map((item) => (
-                <DropdownItem key={item.key} startContent={item.icon}>
-                  <span className="text-base">{item.label}</span>
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
           <div className="flex items-center gap-2">
             <Button variant="light" radius="full" size="sm" isIconOnly onClick={() => onAction('duplicate')}>
               <LuCopyPlus size="18" />
