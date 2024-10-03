@@ -2,7 +2,20 @@ import { RiApps2Line, RiArrowRightSLine, RiTable2 } from 'react-icons/ri';
 import { Accordion, AccordionItem } from '@nextui-org/react';
 import Tables from './Tables';
 import DataTags from './DataTags.jsx';
-import { TbStar } from 'react-icons/tb';
+import { Chip } from '@nextui-org/react';
+import { RiFileExcel2Line } from 'react-icons/ri';
+import {
+  TbBrandGoogleDrive,
+  TbBrandMongodb,
+  TbBrandMysql,
+  TbFileTypeCsv,
+  TbFileTypePdf,
+  TbFileZip,
+  TbLink,
+  TbPlus,
+  TbStar,
+} from 'react-icons/tb';
+import { SiOracle } from 'react-icons/si';
 import DataBlocks from '@/components/core/templates/create/sidebar/data/DataBlocks.jsx';
 
 const Data = () => {
@@ -18,7 +31,125 @@ const Data = () => {
         startContent={<TbStar size="20" />}
         indicator={<RiArrowRightSLine size="20" />}
       >
-        <div>Connect</div>
+        <div className="flex flex-wrap justify-between gap-x-4 gap-y-3 mb-1">
+          <Chip
+            size="lg"
+            variant="flat"
+            color="default"
+            onClick={() => null}
+            radius="full"
+            className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
+            title="Excel"
+          >
+            <div className="flex flex-row items-center space-x-1 text-teal-500">
+              <RiFileExcel2Line size="28" />
+            </div>
+          </Chip>
+          <Chip
+            size="lg"
+            variant="flat"
+            color="default"
+            onClick={() => null}
+            radius="full"
+            className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
+            title="CSV"
+          >
+            <div className="flex flex-row items-center space-x-1 text-primary-500">
+              <TbFileTypeCsv size="28" />
+            </div>
+          </Chip>
+          <Chip
+            size="lg"
+            variant="flat"
+            color="default"
+            onClick={() => null}
+            radius="full"
+            className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
+            title="PDF"
+          >
+            <div className="flex flex-row items-center space-x-1 text-red-500">
+              <TbFileTypePdf size="28" />
+            </div>
+          </Chip>
+          <Chip
+            size="lg"
+            variant="flat"
+            color="default"
+            onClick={() => null}
+            radius="full"
+            className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
+            title="Link"
+          >
+            <div className="flex flex-row items-center space-x-1 text-cyan-500">
+              <TbLink size="28" />
+            </div>
+          </Chip>
+          <Chip
+            size="lg"
+            variant="flat"
+            color="default"
+            onClick={() => null}
+            radius="full"
+            className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
+            title="Google Drive"
+          >
+            <div className="flex flex-row items-center space-x-1 text-red-500">
+              <TbBrandGoogleDrive size="28" />
+            </div>
+          </Chip>
+          <Chip
+            size="lg"
+            variant="flat"
+            color="default"
+            onClick={() => null}
+            radius="full"
+            className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
+            title="MySQL"
+          >
+            <div className="flex flex-row items-center space-x-1 text-yellow-500">
+              <TbBrandMysql size="28" />
+            </div>
+          </Chip>
+          <Chip
+            size="lg"
+            variant="flat"
+            color="default"
+            onClick={() => null}
+            radius="full"
+            className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
+            title="Oracle"
+          >
+            <div className="flex flex-row items-center space-x-1 text-orange-500">
+              <SiOracle size="28" />
+            </div>
+          </Chip>
+          <Chip
+            size="lg"
+            variant="flat"
+            color="default"
+            onClick={() => null}
+            radius="full"
+            className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
+            title="MongoDB"
+          >
+            <div className="flex flex-row items-center space-x-1 text-green-500">
+              <TbBrandMongodb size="28" />
+            </div>
+          </Chip>
+          <Chip
+            size="lg"
+            variant="flat"
+            color="default"
+            onClick={() => null}
+            radius="full"
+            className="px-3 py-5 h-auto cursor-pointer hover:scale-105 transition-transform bg-default-200/60 dark:bg-default-100/60"
+            title="Zip"
+          >
+            <div className="flex flex-row items-center space-x-1 text-primary-500">
+              <TbFileZip size="28" />
+            </div>
+          </Chip>
+        </div>
       </AccordionItem>
       <AccordionItem
         key="2"
@@ -37,15 +168,6 @@ const Data = () => {
         indicator={<RiArrowRightSLine size="20" />}
       >
         <div>Shared Data</div>
-      </AccordionItem>
-      <AccordionItem
-        key="4"
-        aria-label="Tables"
-        title="Tables"
-        startContent={<RiTable2 size="20" />}
-        indicator={<RiArrowRightSLine size="20" />}
-      >
-        <Tables />
       </AccordionItem>
       <AccordionItem
         key="data-tags"
@@ -73,15 +195,6 @@ const Data = () => {
         indicator={<RiArrowRightSLine size="20" />}
       >
         <div>Tags</div>
-      </AccordionItem>
-      <AccordionItem
-        key="7"
-        aria-label="Templates"
-        title="Templates"
-        startContent={<TbStar size="20" />}
-        indicator={<RiArrowRightSLine size="20" />}
-      >
-        <div>Templates</div>
       </AccordionItem>
     </Accordion>
   );

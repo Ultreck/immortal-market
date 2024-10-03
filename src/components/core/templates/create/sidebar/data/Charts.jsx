@@ -3,8 +3,9 @@ import StandardCharts from './StandardCharts.jsx';
 import AdvancedCharts from './AdvanceCharts.jsx';
 import Maps from './Maps.jsx';
 import { TbChartBar, TbChartPie, TbStar, TbWorld } from 'react-icons/tb';
-import { RiArrowRightSLine } from 'react-icons/ri';
+import { RiArrowRightSLine, RiTable2 } from 'react-icons/ri';
 import FavouriteCharts from './FavouriteCharts.jsx';
+import Tables from './Tables.jsx';
 
 const Charts = () => {
   return (
@@ -49,15 +50,22 @@ const Charts = () => {
         <Maps />
       </AccordionItem>
       <AccordionItem
+        key="4"
+        aria-label="Tables"
+        title="Tables"
+        startContent={<RiTable2 size="20" />}
+        indicator={<RiArrowRightSLine size="20" />}
+      >
+        <Tables />
+      </AccordionItem>
+      <AccordionItem
         key="5"
         aria-label="Immortal Charts"
         title="Immortal Charts"
         startContent={<TbWorld size="20" />}
         indicator={<RiArrowRightSLine size="20" />}
       >
-        <div>
-          Immortal Charts
-        </div>
+        <div>Immortal Charts</div>
       </AccordionItem>
     </Accordion>
   );
