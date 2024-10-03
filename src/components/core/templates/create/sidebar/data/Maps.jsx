@@ -85,6 +85,15 @@ import { MapGreecePreview } from '@/components/core/templates/create/elements/ma
 import { MapGreenlandPreview } from '@/components/core/templates/create/elements/maps/MapGreenland.jsx';
 import { MapGrenadaPreview } from '@/components/core/templates/create/elements/maps/MapGrenada.jsx';
 import { MapGuatemalaPreview } from '@/components/core/templates/create/elements/maps/MapGuatemala.jsx';
+import { MapGuineaBissauPreview } from '@/components/core/templates/create/elements/maps/MapGuineaBissau.jsx';
+import { MapGuineaPreview } from '@/components/core/templates/create/elements/maps/MapGuinea.jsx';
+import { MapGuyanaPreview } from '@/components/core/templates/create/elements/maps/MapGuyana.jsx';
+import { MapHaitiPreview } from '@/components/core/templates/create/elements/maps/MapHaiti.jsx';
+import { MapHondurasPreview } from '@/components/core/templates/create/elements/maps/MapHonduras.jsx';
+import { MapHongKongPreview } from '@/components/core/templates/create/elements/maps/MapHongKong.jsx';
+import { MapIcelandPreview } from '@/components/core/templates/create/elements/maps/MapIceland.jsx';
+import { MapIndiaPreview } from '@/components/core/templates/create/elements/maps/MapIndia.jsx';
+import { MapIndonesiaPreview } from '@/components/core/templates/create/elements/maps/MapIndonesia.jsx';
 
 const names = [
   'nigeria',
@@ -172,6 +181,15 @@ const names = [
   'greenland',
   'grenada',
   'guatemala',
+  'guinea-bissau',
+  'guinea',
+  'guyana',
+  'haiti',
+  'honduras',
+  'hong-kong',
+  'iceland',
+  'india',
+  'indonesia',
 ];
 
 const previews = {
@@ -252,14 +270,23 @@ const previews = {
   france: <MapFrancePreview />,
   'french-southern-and-antarctic-lands': <MapFrenchSouthernAndAntarcticLandsPreview />,
   gabon: <MapGabonPreview />,
-  gambia: <MapGambiaPreview/>,
-  georgia: <MapGeorgiaPreview/>,
-  germany: <MapGermanyPreview/>,
-  ghana: <MapGhanaPreview/>,
-  greece: <MapGreecePreview/>,
-  greenland: <MapGreenlandPreview/>,
-  grenada: <MapGrenadaPreview/>,
-  guatemala: <MapGuatemalaPreview/>,
+  gambia: <MapGambiaPreview />,
+  georgia: <MapGeorgiaPreview />,
+  germany: <MapGermanyPreview />,
+  ghana: <MapGhanaPreview />,
+  greece: <MapGreecePreview />,
+  greenland: <MapGreenlandPreview />,
+  grenada: <MapGrenadaPreview />,
+  guatemala: <MapGuatemalaPreview />,
+  'guinea-bissau': <MapGuineaBissauPreview />,
+  guinea: <MapGuineaPreview />,
+  guyana: <MapGuyanaPreview />,
+  haiti: <MapHaitiPreview />,
+  honduras: <MapHondurasPreview />,
+  'hong-kong': <MapHongKongPreview />,
+  iceland: <MapIcelandPreview />,
+  india: <MapIndiaPreview />,
+  indonesia: <MapIndonesiaPreview />,
 };
 
 const elements = names.map((name) => ({

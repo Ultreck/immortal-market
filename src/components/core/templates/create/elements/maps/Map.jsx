@@ -128,6 +128,17 @@ import MapGreece, { MapGreecePresent } from '@/components/core/templates/create/
 import MapGreenland, { MapGreenlandPresent } from '@/components/core/templates/create/elements/maps/MapGreenland.jsx';
 import MapGrenada, { MapGrenadaPresent } from '@/components/core/templates/create/elements/maps/MapGrenada.jsx';
 import MapGuatemala, { MapGuatemalaPresent } from '@/components/core/templates/create/elements/maps/MapGuatemala.jsx';
+import MapGuineaBissau, {
+  MapGuineaBissauPresent,
+} from '@/components/core/templates/create/elements/maps/MapGuineaBissau.jsx';
+import MapGuinea, { MapGuineaPresent } from '@/components/core/templates/create/elements/maps/MapGuinea.jsx';
+import MapGuyana, { MapGuyanaPresent } from '@/components/core/templates/create/elements/maps/MapGuyana.jsx';
+import MapHaiti, { MapHaitiPresent } from '@/components/core/templates/create/elements/maps/MapHaiti.jsx';
+import MapHonduras, { MapHondurasPresent } from '@/components/core/templates/create/elements/maps/MapHonduras.jsx';
+import MapHongKong, { MapHongKongPresent } from '@/components/core/templates/create/elements/maps/MapHongKong.jsx';
+import MapIceland, { MapIcelandPresent } from '@/components/core/templates/create/elements/maps/MapIceland.jsx';
+import MapIndia, { MapIndiaPresent } from '@/components/core/templates/create/elements/maps/MapIndia.jsx';
+import MapIndonesia, { MapIndonesiaPresent } from '@/components/core/templates/create/elements/maps/MapIndonesia.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -216,6 +227,15 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     greenland: MapGreenland,
     grenada: MapGrenada,
     guatemala: MapGuatemala,
+    'guinea-bissau': MapGuineaBissau,
+    guinea: MapGuinea,
+    guyana: MapGuyana,
+    haiti: MapHaiti,
+    honduras: MapHonduras,
+    'hong-kong': MapHongKong,
+    iceland: MapIceland,
+    india: MapIndia,
+    indonesia: MapIndonesia,
   };
 
   if (components[element.config.name]) {
@@ -312,6 +332,15 @@ export const MapPresent = ({ element }) => {
     greenland: MapGreenlandPresent,
     grenada: MapGrenadaPresent,
     guatemala: MapGuatemalaPresent,
+    'guinea-bissau': MapGuineaBissauPresent,
+    guinea: MapGuineaPresent,
+    guyana: MapGuyanaPresent,
+    haiti: MapHaitiPresent,
+    honduras: MapHondurasPresent,
+    'hong-kong': MapHongKongPresent,
+    iceland: MapIcelandPresent,
+    india: MapIndiaPresent,
+    indonesia: MapIndonesiaPresent,
   };
 
   if (components[element.config.name]) {
