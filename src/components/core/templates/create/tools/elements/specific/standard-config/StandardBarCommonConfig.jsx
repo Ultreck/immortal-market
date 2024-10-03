@@ -1,77 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Checkbox, Input, Tab, Tabs } from '@nextui-org/react';
-import { TbChartLine, TbCirclePlus, TbTimeline } from 'react-icons/tb';
+import { useEffect } from 'react';
+import { Checkbox } from '@nextui-org/react';
+import { TbChartLine, TbTimeline } from 'react-icons/tb';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import PropTypes from 'prop-types';
 
 const StandardBarCommonConfig = ({ element, onChange }) => {
-  const [tab, setTab] = useState('data');
-
-  const handleChange = (updatedItem) => {
-    const updatedData = element.config.data.map((item, idx) =>
-      idx === updatedItem.index ? { ...item, ...updatedItem } : item
-    );
-    onChange({ ...element, config: { ...element.config, data: updatedData } });
-  };
-
   useEffect(() => {}, [element]);
   return (
     <div>
-      {/* <Tabs
-        variant="bordered"
-        aria-label="Options"
-        color="primary"
-        radius="full"
-        classNames={{
-          base: 'mb-2',
-          tab: 'text-base px-4',
-        }}
-        selectedKey={tab}
-        onSelectionChange={setTab}
-      > */}
-      {/* <Tab key="data" title="Data" className="text-base">
-          <div className="flex flex-col space-y-6">
-            {element.config.data.map((item, index) => (
-              <div key={index} className="grid grid-cols-2 gap-2">
-                <Input
-                  value={item.browser}
-                  placeholder="Browser name"
-                  required
-                  variant="bordered"
-                  classNames={{ input: 'text-base capitalize' }}
-                  onChange={(e) => {
-                    handleChange({ ...item, browser: e.target.value, index });
-                  }}
-                />
-                <Input
-                  value={item.visitors}
-                  placeholder="Number of visitors"
-                  required
-                  type="number"
-                  variant="bordered"
-                  onChange={(e) => {
-                    handleChange({ ...item, visitors: e.target.value, index });
-                  }}
-                />
-              </div>
-            ))}
-            <TbCirclePlus
-              size={30}
-              onClick={() => {
-                onChange({
-                  ...element,
-                  config: {
-                    ...element.config,
-                    data: [...element.config.data, { browser: 'Immortal', visitors: 10 }],
-                    colors: [...element.config.colors, '#E66B5B'],
-                    bars: element.config.bars + 1,
-                  },
-                });
-              }}
-            />
-          </div>
-        </Tab> */}
-      {/* <Tab key="settings" title="Settings" className="text-base"> */}
       <div className="space-y-6">
         <div>
           <Checkbox
@@ -165,8 +101,6 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
           />
         </div>
       </div>
-      {/* </Tab>
-      </Tabs> */}
     </div>
   );
 };
