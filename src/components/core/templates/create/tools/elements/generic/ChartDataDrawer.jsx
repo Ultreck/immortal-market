@@ -1,7 +1,9 @@
 import Drawer from '@/components/ui/Drawer';
+import { chartElements } from '@/lib/standard-charts';
 import { Input } from '@nextui-org/react';
 import React from 'react';
 import { TbCirclePlus } from 'react-icons/tb';
+import DraggableElementWrapper from '../../../sidebar/DraggableElementWrapper';
 
 const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
   const handleChange = (updatedItem) => {
@@ -119,17 +121,40 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
     }
   }
 
+  const getChartsByKeysStructure = () => {
+    const areKeysEqual = (keys1, keys2) => {
+      if (!keys1 || !keys2) return false;
+
+      const xEqual = keys1.x === keys2.x;
+      const bothArrays = Array.isArray(keys1.y) && Array.isArray(keys2.y);
+      const yEqual = bothArrays
+        ? keys1.y.length === keys2.y.length && keys1.y.every((val, index) => val === keys2.y[index])
+        : keys1.y === keys2.y;
+
+      return xEqual && yEqual;
+    };
+
+    return chartElements.filter((chart) => {
+      const chartKeys = chart.data.config.keys;
+      return areKeysEqual(chartKeys, element.config.keys);
+    });
+  };
+
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title={item?.title} width={700}>
       {item?.title === 'View Data' && getConfig()}
       {item?.title === 'Change Chart' && (
-        <>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit tempora at qui sit. Eos inventore dignissimos
-          provident aperiam nisi repellendus officiis perferendis itaque veniam, vel id eius velit corrupti eum.
-        </>
+        <div>
+          <div className="grid grid-cols-6 gap-4">
+            {getChartsByKeysStructure().map((element) => (
+              <DraggableElementWrapper key={element.id} element={element} />
+            ))}
+          </div>
+        </div>
       )}
     </Drawer>
   );
 };
 
 export default ChartDataDrawer;
+
