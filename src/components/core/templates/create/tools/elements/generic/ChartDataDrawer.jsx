@@ -122,9 +122,14 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title={item?.title} width={700}>
       {item?.title === 'View Data' && getConfig()}
+      {item?.title === 'Change Chart' && (
+        <>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit tempora at qui sit. Eos inventore dignissimos
+          provident aperiam nisi repellendus officiis perferendis itaque veniam, vel id eius velit corrupti eum.
+        </>
+      )}
     </Drawer>
   );
 };
 
 export default ChartDataDrawer;
-

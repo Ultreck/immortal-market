@@ -43,9 +43,8 @@ export const StandardBarContent = ({ element }) => {
           dataKey={element.config.keys.x}
           tickFormatter={(value) => capitalize(value)}
           hide={!element.config.showXaxis}
-          type="category"
         />
-        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} domain={[50, 'auto']} />
+        <YAxis dataKey={element.config.keys.y} hide={!element.config.showYaxis} domain={[50, 'auto']} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         {element.config.showLegend && <Legend />}
         <Bar dataKey={element.config.keys.y} radius={8} />
