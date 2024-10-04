@@ -1,6 +1,6 @@
 import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
-import { TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbTrash } from 'react-icons/tb';
+import { TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbPlus, TbTrash } from 'react-icons/tb';
 import { Listbox, ListboxItem, useDisclosure } from '@nextui-org/react';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
@@ -23,6 +23,7 @@ import {
   RiAlignItemVerticalCenterLine,
 } from 'react-icons/ri';
 import { useKey } from 'react-use';
+import CreateGroupBlockModal from '@/components/core/templates/CreateGroupBlockModal.jsx';
 
 const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -30,6 +31,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
   const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
   const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id)).filter(Boolean);
   const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
+  const { isOpen: isCreateBlockOpen, onOpen: onCreateBlockOpen, onClose: onCreateBlockClose } = useDisclosure();
 
   useKey('Escape', () => {
     onClose();
@@ -90,6 +92,8 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
     menu.push({ key: 'link', label: 'Link', icon: <TbLink size="18" />, showDivider: true });
   }
 
+  menu.push({ key: 'save-as-block', label: 'Save as block', icon: <TbPlus size="18" />, showDivider: true });
+
   menu.push(...[{ key: 'delete', label: 'Delete', icon: <TbTrash size="18" />, color: 'danger' }]);
 
   return (
@@ -110,6 +114,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
                 onAction={(key) => {
                   if (menu.find((item) => item.key === key)?.children?.length) return;
                   if (key === 'link') onLinkToolOpen();
+                  if (key === 'save-as-block') onCreateBlockOpen();
                   else onAction(key);
                   onClose();
                 }}
@@ -158,6 +163,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
       )}
 
       <LinkTool elements={elements} isOpen={isLinkToolOpen} onClose={onLinkToolClose} />
+      <CreateGroupBlockModal isOpen={isCreateBlockOpen} onClose={onCreateBlockClose} elements={elements} />
     </AnimatePresence>
   );
 };

@@ -1,7 +1,6 @@
 import { createElement, Fragment } from 'react';
 import { cn } from '@/lib/utils.js';
 import { components } from '@/lib/elements.js';
-import FloatingToolbar from '@/components/core/templates/create/FloatingToolbar.jsx';
 import { motion } from 'framer-motion';
 import { useContextMenu } from '@/hooks/template/use-context-menu.jsx';
 import useSelectionBox from '@/hooks/template/use-selection-box.jsx';
@@ -71,7 +70,6 @@ const PageContent = ({ id }) => {
           })}
         </div>
         {renderSelectionBox()}
-        <FloatingToolbar id={id} onAction={handleAction} />
         {renderContextMenu()}
       </motion.div>
     </>
