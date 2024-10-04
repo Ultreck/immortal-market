@@ -14,7 +14,7 @@ const Charts = () => {
       itemClasses={{ base: 'px-3', content: 'pt-4 pb-5', title: 'whitespace-nowrap text-base' }}
     >
       <AccordionItem
-        key="1"
+        key="favourites"
         aria-label="Favourites"
         title="Favourites"
         startContent={<TbStar size="20" />}
@@ -23,7 +23,7 @@ const Charts = () => {
         <FavouriteCharts />
       </AccordionItem>
       <AccordionItem
-        key="2"
+        key="standard-charts"
         aria-label="Standard Charts"
         title="Standard Charts"
         startContent={<TbChartPie size="20" />}
@@ -32,7 +32,7 @@ const Charts = () => {
         <StandardCharts />
       </AccordionItem>
       <AccordionItem
-        key="3"
+        key="advanced-charts"
         aria-label="Advanced Charts"
         title="Advanced Charts"
         startContent={<TbChartBar size="20" />}
@@ -41,7 +41,7 @@ const Charts = () => {
         <AdvancedCharts />
       </AccordionItem>
       <AccordionItem
-        key="4"
+        key="maps"
         aria-label="Maps"
         title="Maps"
         startContent={<TbWorld size="20" />}
@@ -50,7 +50,7 @@ const Charts = () => {
         <Maps />
       </AccordionItem>
       <AccordionItem
-        key="4"
+        key="tables"
         aria-label="Tables"
         title="Tables"
         startContent={<RiTable2 size="20" />}
@@ -59,7 +59,7 @@ const Charts = () => {
         <Tables />
       </AccordionItem>
       <AccordionItem
-        key="5"
+        key="immortal-charts"
         aria-label="Immortal Charts"
         title="Immortal Charts"
         startContent={<TbWorld size="20" />}
@@ -72,4 +72,3 @@ const Charts = () => {
 };
 
 export default Charts;
-
