@@ -17,6 +17,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-bar',
       type: 'chart-s-bar',
       name: 'Bar Chart',
+      identifier: 'barCharElement',
       data: {
         type: 'chart-s-bar',
         text: 'Bar Chart',
@@ -53,6 +54,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-pie',
       type: 'chart-s-pie',
       name: 'Pie Chart',
+      identifier: 'pieChartElement',
       data: {
         type: 'chart-s-pie',
         text: 'Pie Chart',
@@ -88,6 +90,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-area',
       type: 'chart-s-area',
       name: 'Area Chart',
+      identifier: 'areaChartElement',
       data: {
         type: 'chart-s-area',
         text: 'Area Chart',
@@ -131,6 +134,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-stacked-bar',
       type: 'chart-s-stacked-bar',
       name: 'Stacked Bar Chart',
+      identifier: 'barCharElement',
       data: {
         type: 'chart-s-stacked-bar',
         text: 'Stacked Bar Chart',
@@ -172,6 +176,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-bar-multiple-vertical',
       type: 'chart-s-bar-multiple-vertical',
       name: 'Bar Multiple-vertical Chart',
+      identifier: 'barCharElement',
       data: {
         type: 'chart-s-bar-multiple-vertical',
         text: 'Bar Multiple-vertical Chart',
@@ -263,6 +268,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-doughnut',
       type: 'chart-s-doughnut',
       name: 'Doughnut Chart',
+      identifier: 'doughnutChartElement',
       data: {
         type: 'chart-s-doughnut',
         text: 'Doughnut Chart',
@@ -298,6 +304,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-line',
       type: 'chart-s-line',
       name: 'Line Chart',
+      identifier: 'lineChartElement',
       data: {
         type: 'chart-s-line',
         text: 'Line Chart',
@@ -339,6 +346,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-semi-pie',
       type: 'chart-s-semi-pie',
       name: 'Semi Pie Chart',
+      identifier: 'semiPieChartElement',
       data: {
         type: 'chart-s-semi-pie',
         text: 'Semi Pie Chart',
@@ -372,6 +380,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-line-bar',
       type: 'chart-s-line-bar',
       name: 'Line Bar Chart',
+      identifier: 'combinationChartElement',
       data: {
         type: 'chart-s-line-bar',
         text: 'Line Bar Chart',
