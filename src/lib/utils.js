@@ -51,6 +51,13 @@ export const capitalize = (word) => {
   return word.charAt(0).toUpperCase() + word.slice(1);
 };
 
+export const kebabToWords = (str) => {
+  return str
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
 export const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
