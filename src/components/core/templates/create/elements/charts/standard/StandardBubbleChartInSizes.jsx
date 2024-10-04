@@ -94,7 +94,15 @@ export const StandardBubbleChartInSizesContent = ({ element }) => {
   }, [element]);
 
   return (
-    <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
+    <div
+      ref={chartRef}
+      style={{
+        width: element.width,
+        height: element.height,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
+    />
   );
 };
 

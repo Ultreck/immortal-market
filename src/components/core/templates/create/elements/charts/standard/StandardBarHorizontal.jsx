@@ -35,7 +35,12 @@ export const StandardBarHorizontalContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
-      style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
     >
       <BarChart accessibilityLayer data={chartData} layout="vertical">
         <XAxis type="number" dataKey={element.config.keys.x} hide />

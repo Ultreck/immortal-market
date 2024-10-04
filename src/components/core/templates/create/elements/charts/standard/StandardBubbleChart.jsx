@@ -27,8 +27,8 @@ export const StandardBubbleChartContent = ({ element }) => {
   useEffect(() => {
     const chart = echarts.init(chartRef.current, 'light');
     const option = {
-      yAxis: {show: element.config.showYaxis},
-      xAxis: {show: element.config.showXaxis},
+      yAxis: { show: element.config.showYaxis },
+      xAxis: { show: element.config.showXaxis },
       grid: {
         show: element.config.showGridline,
       },
@@ -53,7 +53,15 @@ export const StandardBubbleChartContent = ({ element }) => {
     };
   }, [element]);
   return (
-    <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
+    <div
+      ref={chartRef}
+      style={{
+        width: element.width,
+        height: element.height,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
+    />
   );
 };
 

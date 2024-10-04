@@ -27,7 +27,12 @@ export const StandardAreaLineVerticalContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
-      style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
     >
       <ComposedChart data={element.config.data.slice(0, element.config.bars)} layout="vertical">
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />

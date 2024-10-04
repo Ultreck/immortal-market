@@ -28,7 +28,12 @@ export const StandardLineContent = ({ element }) => {
     <>
       <ChartContainer
         config={{}}
-        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+          transform: `rotate(${element.config.rotation || 0}deg)`,
+        }}
       >
         <LineChart
           accessibilityLayer
@@ -68,3 +73,4 @@ StandardLineContent.propTypes = {
 };
 
 export default StandardLine;
+

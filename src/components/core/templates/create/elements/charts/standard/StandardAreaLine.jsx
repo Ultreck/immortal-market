@@ -34,24 +34,20 @@ export const StandardAreaLineContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
-      style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
     >
       <ComposedChart data={chartData}>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
         <XAxis dataKey="name" scale="band" hide={!element.config.showXaxis} />
         <YAxis hide={!element.config.showYaxis} />
         {element.config.showLegend && <Legend />}
-        <Area
-          type="monotone"
-          dataKey="amt"
-          fill={element.config.colors?.[0]}
-          stroke={element.config.colors?.[0]}
-        />
-        <Line
-          type="monotone"
-          dataKey="uv"
-          stroke={element.config.colors?.[1]}
-        />
+        <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
+        <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
       </ComposedChart>
     </ChartContainer>
   );

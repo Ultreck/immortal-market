@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Checkbox } from '@nextui-org/react';
+import { Checkbox, Input } from '@nextui-org/react';
 import { TbChartLine, TbTimeline } from 'react-icons/tb';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import PropTypes from 'prop-types';
@@ -98,6 +98,16 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
             min={1}
             max={20}
             ariaLabel="No of Bars to Show"
+          />
+        </div>
+        <div className='w-50'>
+          <Input
+            type="number"
+            title='Rotate'
+            label='Rotate'
+            labelPlacement='outside-left'
+            value={element.config.rotation || 0}
+            onChange={(e) => onChange({ ...element, config: { ...element.config, rotation: Number(e.target.value) } })}
           />
         </div>
       </div>

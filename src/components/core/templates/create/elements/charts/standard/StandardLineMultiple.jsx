@@ -28,7 +28,12 @@ export const StandardLineMultipleContent = ({ element }) => {
     <>
       <ChartContainer
         config={{}}
-        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+          transform: `rotate(${element.config.rotation || 0}deg)`,
+        }}
       >
         <LineChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
           <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
@@ -65,3 +70,4 @@ StandardLineMultipleContent.propTypes = {
 };
 
 export default StandardLineMultiple;
+

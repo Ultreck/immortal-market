@@ -70,7 +70,18 @@ export const StandardSemiCircleContent = ({ element }) => {
     };
   }, [chartData, element]);
 
-  return <div id="main" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>;
+  return (
+    <div
+      id="main"
+      ref={chartRef}
+      style={{
+        width: element.width,
+        height: element.height,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
+    ></div>
+  );
 };
 
 StandardSemiCircleContent.propTypes = {
@@ -78,3 +89,4 @@ StandardSemiCircleContent.propTypes = {
 };
 
 export default StandardSemiCircle;
+

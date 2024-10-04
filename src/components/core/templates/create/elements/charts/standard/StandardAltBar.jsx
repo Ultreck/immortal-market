@@ -93,7 +93,15 @@ export const StandardAltBarContent = ({ element }) => {
   }, [element]);
 
   return (
-    <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }} />
+    <div
+      ref={chartRef}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
+    />
   );
 };
 

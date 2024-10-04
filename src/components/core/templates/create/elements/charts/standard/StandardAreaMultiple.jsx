@@ -26,7 +26,12 @@ export const StandardAreaMultipleContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
-      style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
     >
       <AreaChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
         <CartesianGrid vertical={false} horizontal={element.config.showXGridline} />

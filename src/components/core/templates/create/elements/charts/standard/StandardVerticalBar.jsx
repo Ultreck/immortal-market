@@ -34,10 +34,15 @@ export const StandardVerticalBarContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
-      style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
     >
       <BarChart accessibilityLayer data={chartData} layout="vertical">
-      <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+        <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
         <XAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showXaxis} />
         <YAxis
           dataKey={element.config.keys.x}

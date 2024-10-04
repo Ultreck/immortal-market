@@ -24,7 +24,6 @@ const StandardBar = ({ element, active, highlighted, width, onClick, onChange })
 
 StandardBar.propTypes = ElementPropTypes;
 
-
 export const StandardBarContent = ({ element }) => {
   const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
     const color = element.config.colors?.[index];
@@ -35,7 +34,12 @@ export const StandardBarContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
-      style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
     >
       <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
@@ -58,4 +62,3 @@ StandardBarContent.propTypes = {
 };
 
 export default StandardBar;
-

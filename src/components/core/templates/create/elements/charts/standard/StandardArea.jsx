@@ -41,7 +41,12 @@ export const StandardAreaContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
-      style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
     >
       <AreaChart
         accessibilityLayer
@@ -73,3 +78,4 @@ StandardAreaContent.propTypes = {
 };
 
 export default StandardArea;
+

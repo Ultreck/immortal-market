@@ -30,12 +30,17 @@ export const StandardLineBarContent = ({ element }) => {
     return { ...item, fill: color };
   });
 
-  useEffect(() => {}, [element]);  
+  useEffect(() => {}, [element]);
 
   return (
     <ChartContainer
       config={{}}
-      style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
     >
       <ComposedChart data={chartData}>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
@@ -54,3 +59,4 @@ StandardLineBarContent.propTypes = {
 };
 
 export default StandardLineBar;
+

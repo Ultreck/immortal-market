@@ -17,7 +17,7 @@ const StandardOrdinaryPieChart = ({ element, active, highlighted, width, onClick
       highlighted={highlighted}
       editable
     >
-        <StandardOrdinaryPieChartContent element={element} />
+      <StandardOrdinaryPieChartContent element={element} />
     </ElementWrapper>
   );
 };
@@ -43,7 +43,12 @@ export const StandardOrdinaryPieChartContent = ({ element }) => {
     <div>
       <ChartContainer
         config={{}}
-        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+          transform: `rotate(${element.config.rotation || 0}deg)`,
+        }}
       >
         <PieChart>
           <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />

@@ -111,6 +111,16 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
             />
           </div>
         )}
+        <div className="w-50">
+          <Input
+            type="number"
+            title="Rotate"
+            label="Rotate"
+            labelPlacement="outside-left"
+            value={element.config.rotation || 0}
+            onChange={(e) => onChange({ ...element, config: { ...element.config, rotation: Number(e.target.value) } })}
+          />
+        </div>
       </div>
     </>
   );

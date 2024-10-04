@@ -42,14 +42,15 @@ export const StandardSemiPieContent = ({ element }) => {
   return (
     <ChartContainer
       config={{}}
-      style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      style={{
+        height: element.height,
+        width: element.width,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
     >
       <PieChart width={element.width} height={element.height}>
-        {element.config.showLegend && <Legend
-         verticalAlign="top"
-         align="center"     
-         layout="horizontal" 
-          />}
+        {element.config.showLegend && <Legend verticalAlign="top" align="center" layout="horizontal" />}
         {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
         <Pie
           dataKey="value"
@@ -71,3 +72,4 @@ StandardSemiPieContent.propTypes = {
 };
 
 export default StandardSemiPie;
+

@@ -16,87 +16,6 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
   useEffect(() => {}, [element]);
   return (
     <>
-      {/* <Tabs
-        variant="bordered"
-        aria-label="Options"
-        color="primary"
-        radius="full"
-        classNames={{
-          base: 'mb-2',
-          tab: 'text-base px-4',
-        }}
-        selectedKey={tab}
-        onSelectionChange={setTab}
-      >
-        <Tab key="data" title="Data" className="text-base">
-          <div className="flex flex-col space-y-6">
-            {element.config.data.map((item, index) => (
-              <div key={index} className="grid grid-cols-3 gap-2">
-                <Input
-                  value={item.month}
-                  placeholder="Month name"
-                  required
-                  variant="bordered"
-                  classNames={{ input: 'text-lg capitalize font-bold rounded-md  text-primary' }}
-                  onChange={(e) => {
-                    handleChange({ ...item, month: e.target.value, index });
-                  }}
-                />
-                {element.type === 'chart-s-line-multiple' ? (
-                  <>
-                    {element.config.keys.y.slice(0, element.config.noOfLines).map((key, i) => (
-                      <Input
-                        key={i}
-                        value={item[key]}
-                        placeholder={key}
-                        required
-                        variant="bordered"
-                        classNames={{ input: 'text-base capitalize' }}
-                        onChange={(e) => {
-                          handleChange({ ...item, [key]: e.target.value, index });
-                        }}
-                      />
-                    ))}
-                  </>
-                ) : (
-                  <>
-                    {element.config.keys.y.map((key, i) => (
-                      <Input
-                        key={i}
-                        value={item[key]}
-                        placeholder={key}
-                        required
-                        variant="bordered"
-                        classNames={{ input: 'text-base capitalize' }}
-                        onChange={(e) => {
-                          handleChange({ ...item, [key]: e.target.value, index });
-                        }}
-                      />
-                    ))}
-                  </>
-                )}
-              </div>
-            ))}
-            <TbCirclePlus
-              size={30}
-              onClick={() => {
-                onChange({
-                  ...element,
-                  config: {
-                    ...element.config,
-                    data: [
-                      ...element.config.data,
-                      { month: 'January', ...element.config.keys.y.reduce((acc, key) => ({ ...acc, [key]: 10 }), {}) },
-                    ],
-                    colors: [...element.config.colors, '#E66B5B'],
-                    bars: element.config.bars + 1,
-                  },
-                });
-              }}
-            />
-          </div>
-        </Tab> */}
-      {/* <Tab key="settings" title="Settings" className="text-base"> */}
       <div className="flex flex-col space-y-6">
         <div>
           <Checkbox
@@ -206,9 +125,17 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
             ariaLabel="No of Bars to Show"
           />
         </div>
+        <div className='w-50'>
+          <Input
+            type="number"
+            title='Rotate'
+            label='Rotate'
+            labelPlacement='outside-left'
+            value={element.config.rotation || 0}
+            onChange={(e) => onChange({ ...element, config: { ...element.config, rotation: Number(e.target.value) } })}
+          />
+        </div>
       </div>
-      {/* </Tab> */}
-      {/* </Tabs> */}
     </>
   );
 };

@@ -33,7 +33,7 @@ export const StandardPieContent = ({ element }) => {
       const color = element.config.colors?.[index];
       return { ...item, fill: color };
     });
-    
+
     const option = {
       tooltip: {
         trigger: 'item',
@@ -72,7 +72,15 @@ export const StandardPieContent = ({ element }) => {
   }, [element]);
 
   return (
-    <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
+    <div
+      ref={chartRef}
+      style={{
+        width: element.width,
+        height: element.height,
+        opacity: element.style.opacity,
+        transform: `rotate(${element.config.rotation || 0}deg)`,
+      }}
+    />
   );
 };
 
