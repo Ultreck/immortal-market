@@ -66,7 +66,7 @@ const App = () => {
           }
         >
           <Route path="" element={<OverviewPage />} />
-          <Route path="/overview" element={<Navigate to="/" replace />} />
+          <Route path="overview" element={<Navigate to="/" replace />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="templates" element={<TemplatesPage />} />
           <Route path="dashboards" element={<ProjectDashboardPage />} />
