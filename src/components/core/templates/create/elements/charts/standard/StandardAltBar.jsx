@@ -24,7 +24,7 @@ StandardAltBar.propTypes = ElementPropTypes;
 
 export const StandardAltBarContent = ({ element }) => {
   const chartRef = useRef(null);
-
+  const yAxisValues = element.config.data[0];
   useEffect(() => {
     const chartDom = chartRef.current;
     const myChart = echarts.init(chartDom);
@@ -35,6 +35,7 @@ export const StandardAltBarContent = ({ element }) => {
           type: 'shadow',
         },
       },
+      legend: element.config.showLegend && { data: element.config.legend },
       grid: {
         left: '3%',
         right: '4%',
@@ -44,7 +45,7 @@ export const StandardAltBarContent = ({ element }) => {
       xAxis: [
         {
           type: 'value',
-          show: false,
+          show: element.config.showXGridline,
         },
       ],
       yAxis: [
@@ -53,21 +54,20 @@ export const StandardAltBarContent = ({ element }) => {
           axisTick: {
             show: false,
           },
-          data: element.config.data[0],
+          data: element.config.showYaxis ? yAxisValues : { yAxisValues },
         },
       ],
       color: element.config.colors,
       series: [
         {
-          name: 'Income',
+          name: 'Profit',
           type: 'bar',
-          stack: 'Total',
-          emphasis: {
-            focus: 'series',
-          },
           label: {
             show: true,
-            position: 'inside',
+            position: element.config.labelPosition? 'outside' : 'inside',
+          },
+          emphasis: {
+            focus: 'series',
           },
           data: element.config.data[1],
         },
@@ -75,12 +75,12 @@ export const StandardAltBarContent = ({ element }) => {
           name: 'Expenses',
           type: 'bar',
           stack: 'Total',
-          emphasis: {
-            focus: 'series',
-          },
           label: {
             show: true,
-            position: 'inside',
+            position: element.config.labelPosition? 'outside' : 'inside',
+          },
+          emphasis: {
+            focus: 'series',
           },
           data: element.config.data[2],
         },
@@ -90,7 +90,7 @@ export const StandardAltBarContent = ({ element }) => {
     return () => {
       myChart.dispose();
     };
-  }, [element]);
+  }, [element, yAxisValues]);
 
   return (
     <div
@@ -110,4 +110,3 @@ StandardAltBarContent.propTypes = {
 };
 
 export default StandardAltBar;
-
