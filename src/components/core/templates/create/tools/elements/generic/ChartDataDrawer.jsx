@@ -4,6 +4,7 @@ import { Input } from '@nextui-org/react';
 import React from 'react';
 import { TbCirclePlus } from 'react-icons/tb';
 import DraggableElementWrapper from '../../../sidebar/DraggableElementWrapper';
+import NewConnection from '../chart-submenu/NewConnection';
 
 const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
   const handleChange = (updatedItem) => {
@@ -123,6 +124,8 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
 
   const getChartsByKeysStructure = () => {
     const areKeysEqual = (keys1, keys2) => {
+      console.log(keys1, keys2)
+      
       if (!keys1 || !keys2) return false;
 
       const xEqual = keys1.x === keys2.x;
@@ -152,6 +155,7 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
           </div>
         </div>
       )}
+      {item?.title === 'New Connection' && <NewConnection />}
     </Drawer>
   );
 };
