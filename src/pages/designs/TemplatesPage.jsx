@@ -1,13 +1,12 @@
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
-import { Button, Image, Skeleton } from '@nextui-org/react';
+import { Button, Skeleton } from '@nextui-org/react';
 import { useCreateDesign, useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NoData from '@/components/ui/NoData.jsx';
 import { RiAddLine } from 'react-icons/ri';
-import { getImageLink } from '@/lib/utils.js';
-import { TbPhotoCircle } from 'react-icons/tb';
+import DesignCard from '@/components/core/project/DesignCard.jsx';
 
 const TemplatesPage = () => {
   const toast = useToast();
@@ -54,7 +53,7 @@ const TemplatesPage = () => {
         after={
           <Button
             color="primary"
-            radius="full"
+            radius="2xl"
             className="text-base"
             startContent={<RiAddLine size="20" />}
             isLoading={isCreateTemplateLoading}
@@ -77,29 +76,7 @@ const TemplatesPage = () => {
             {designs.length > 0 ? (
               <div className="grid grid-cols-4 gap-4 md:gap-8">
                 {designs.map((design, i) => (
-                  <div key={i}>
-                    <Link
-                      key={i}
-                      to={`/designs/${design._id}/edit`}
-                      className="flex items-center justify-center p-5 bg-black/5 dark:bg-white/5 rounded-2xl aspect-square"
-                    >
-                      {design.thumbnail ? (
-                        <Image
-                          src={getImageLink(design.thumbnail)}
-                          alt={design.title}
-                          removeWrapper
-                          className="object-contain rounded-xl"
-                        />
-                      ) : (
-                        <div className="">
-                          <TbPhotoCircle size="48" className="opacity-50" />
-                        </div>
-                      )}
-                    </Link>
-                    <div className="mt-4 px-2 flex items-center justify-between">
-                      <h4 className="font-medium text-lg leading-tight">{design.title}</h4>
-                    </div>
-                  </div>
+                  <DesignCard key={i} id={design._id} title={design.title} thumbnail={design.thumbnail} />
                 ))}
               </div>
             ) : (

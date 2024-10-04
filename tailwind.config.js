@@ -50,7 +50,7 @@ export default {
           '100%': { transform: 'translateX(-100%)' },
         },
       },
-      backgroundImage:{
+      backgroundImage: {
         'custom-gradient': `
           url(//lf16-web-buz.capcut.com/obj/capcut-web-buz-sg/ies/lvweb/platform_online/static/image/start_image_bg.ace35048.jpeg), 
           radial-gradient(19.51% 127.29% at 81.05% 84.1%, rgba(23, 224, 226, 1) 0%, rgba(23, 224, 226, 0) 100%), 
@@ -70,4 +70,3 @@ export default {
   },
   plugins: [tailwindAnimate, nextui()],
 };
-

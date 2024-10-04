@@ -15,7 +15,7 @@ const CreateDropdown = ({ className, mini = false }) => {
               <RiAddLine size="20" />
             </Button>
           ) : (
-            <Button color="primary" radius="full" className="w-full text-base" startContent={<RiAddLine size="20" />}>
+            <Button color="primary" radius="2xl" className="w-full text-base" startContent={<RiAddLine size="20" />}>
               Create
             </Button>
           )}

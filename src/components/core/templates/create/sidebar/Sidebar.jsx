@@ -103,7 +103,7 @@ const Sidebar = ({ className }) => {
           </div>
         </div>
         {!collapsed && (
-          <div className="px-4 py-6 overflow-x-hidden dark:bg-gray-800/50">
+          <div className="px-6 py-6 overflow-x-hidden dark:bg-gray-800/50">
             {tab === 'basics' && <Basics />}
             {tab === 'templates' && <Build />}
             {tab === 'data' && <Data />}

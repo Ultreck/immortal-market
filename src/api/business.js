@@ -107,11 +107,11 @@ export const useDeleteDesign = (business) => {
   });
 };
 
-export const useGetDesigns = ({ business, status, type }) => {
+export const useGetDesigns = ({ business, status, type, page, limit }) => {
   return useQuery({
-    queryKey: ['business', business, 'designs', status, type],
+    queryKey: ['business', business, 'designs', status, type, page, limit],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs`, { params: { status, type } });
+      const res = await http.get(`/businesses/${business}/designs`, { params: { status, type, limit, page } });
       return res.data;
     },
   });

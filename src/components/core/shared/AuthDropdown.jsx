@@ -38,7 +38,7 @@ const AuthDropdown = ({ className, mini = false }) => {
         ) : (
           <div
             className={cn(
-              'bg-black/[.07] dark:bg-white/10 pl-6 pr-4 py-4 rounded-2xl flex items-center justify-between cursor-pointer',
+              'bg-black/[.07] dark:bg-white/[.07] pl-6 pr-4 py-4 rounded-2xl flex items-center justify-between cursor-pointer',
               className
             )}
           >

@@ -1,60 +1,53 @@
-import DashboardStatGrid from '@/components/core/overview/DashboardStatGrid';
 import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
-import { Avatar, AvatarGroup, Button, Tooltip } from '@nextui-org/react';
-import { TbMessage } from 'react-icons/tb';
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
+import { HiOutlineChartBar, HiOutlineGlobeAlt, HiOutlinePhoto, HiOutlineSquares2X2 } from 'react-icons/hi2';
+import { HiOutlineTemplate } from 'react-icons/hi';
+import RecentProjects from '@/components/core/overview/RecentProjects.jsx';
+import PopularTemplates from '@/components/core/overview/PopularTemplates.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
-import useGlobalStore from '@/store/global.js';
-import ProjectTable from '@/components/core/project/ProjectTable.jsx';
-import Separator from '@/components/core/shared/Separator.jsx';
-
-const users = [
-  {
-    name: 'Adamas',
-    image: 'https://huma.demo.frontendmatter.com/assets/images/256_michael-dam-258165-unsplash.jpg',
-  },
-  {
-    name: 'Timothy',
-    image: 'https://huma.demo.frontendmatter.com/assets/images/256_luke-porter-261779-unsplash.jpg',
-  },
-];
 
 const OverviewPage = () => {
   const { user } = useAuth();
-  const updateData = useGlobalStore((state) => state.updateData);
 
   return (
-    <>
+    <div className="container pb-20">
       <DashboardTitle
         text={`Welcome ${user?.firstName} 👋🏽`}
         breadcrumbs={[
           { text: 'Home', href: '/' },
-          { text: 'Overview', href: '/' },
+          { text: 'Dashboard', href: '/home' },
         ]}
-        after={
-          <div className="flex items-center space-x-6">
-            <Button onClick={() => updateData({ isChatModalOpen: true })} isIconOnly radius="full" variant="light">
-              <TbMessage size="20" />
-            </Button>
-            <div className="relative flex gap-1 items-center">
-              <AvatarGroup>
-                {users?.map((tr) => (
-                  <Tooltip key={tr.name} showArrow={true} placement="bottom" content={tr?.name}>
-                    <Avatar size="sm" src={tr?.image} name={tr?.name} className=" cursor-pointer" />
-                  </Tooltip>
-                ))}
-              </AvatarGroup>
-            </div>
-            <CreateDropdown />
-          </div>
-        }
+        after={<CreateDropdown />}
       />
-      <div className="container py-10 space-y-10">
-        <DashboardStatGrid />
-        <Separator text="Projects" />
-        <ProjectTable />
+      <section>
+        <div className="text-center rounded-3xl bg-cover pt-20 pb-24 bg-gradient-to-tl from-cyan-500 to-blue-500 text-white">
+          <h1 className="text-4xl font-bold">What can we help you create today?</h1>
+          <p className="text-lg leading-none mt-4">Start by creating a new design or exploring banking templates.</p>
+        </div>
+        <div className="flex justify-center">
+          <ul className="flex w-auto px-10 rounded-full -mt-10 mx-auto justify-center gap-4 bg-white border border-default-200 dark:bg-default-100">
+            {[
+              { text: 'Charts', icon: <HiOutlineChartBar size="22" /> },
+              { text: 'Maps', icon: <HiOutlineGlobeAlt size="22" /> },
+              { text: 'Frames', icon: <HiOutlineSquares2X2 size="22" /> },
+              { text: 'Images', icon: <HiOutlinePhoto size="22" /> },
+              { text: 'Templates', icon: <HiOutlineTemplate size="22" /> },
+            ].map((tab, index) => (
+              <li key={index} className="py-4">
+                <button className="flex flex-col items-center justify-center px-4 py-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5">
+                  {tab.icon}
+                  <span>{tab.text}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      <div className="mt-10 space-y-24">
+        <RecentProjects />
+        <PopularTemplates />
       </div>
-    </>
+    </div>
   );
 };
 

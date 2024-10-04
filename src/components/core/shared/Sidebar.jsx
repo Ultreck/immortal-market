@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { LuBot, LuFolderOutput } from 'react-icons/lu';
 import { HiOutlineTemplate, HiOutlineViewGrid, HiOutlineViewList } from 'react-icons/hi';
-import { HiOutlineBookmarkSquare } from 'react-icons/hi2';
 
 const NavItem = ({ icon, title, href, mini = false }) => {
   return (
@@ -70,7 +69,6 @@ const Sidebar = () => {
                 { name: 'Templates', href: '/templates', icon: <HiOutlineTemplate size="20" /> },
                 { name: 'Ai Assistant', href: '/assistant', icon: <LuBot size="20" /> },
                 { name: 'Outsource', href: '/outsource', icon: <LuFolderOutput size="20" /> },
-                { name: 'Dashboard', href: '/home', icon: <HiOutlineBookmarkSquare size="20" /> },
               ].map((item) => (
                 <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
               ))}
