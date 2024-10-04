@@ -139,6 +139,21 @@ import MapHongKong, { MapHongKongPresent } from '@/components/core/templates/cre
 import MapIceland, { MapIcelandPresent } from '@/components/core/templates/create/elements/maps/MapIceland.jsx';
 import MapIndia, { MapIndiaPresent } from '@/components/core/templates/create/elements/maps/MapIndia.jsx';
 import MapIndonesia, { MapIndonesiaPresent } from '@/components/core/templates/create/elements/maps/MapIndonesia.jsx';
+import MapHungary, { MapHungaryPresent } from '@/components/core/templates/create/elements/maps/MapHungary.jsx';
+import MapIran, { MapIranPresent } from '@/components/core/templates/create/elements/maps/MapIran.jsx';
+import MapIraq, { MapIraqPresent } from '@/components/core/templates/create/elements/maps/MapIraq.jsx';
+import MapIreland, { MapIrelandPresent } from '@/components/core/templates/create/elements/maps/MapIreland.jsx';
+import MapIsrael, { MapIsraelPresent } from '@/components/core/templates/create/elements/maps/MapIsrael.jsx';
+import MapItaly, { MapItalyPresent } from '@/components/core/templates/create/elements/maps/MapItaly.jsx';
+import MapIvoryCoast, {
+  MapIvoryCoastPresent,
+} from '@/components/core/templates/create/elements/maps/MapIvoryCoast.jsx';
+import MapJamaica, { MapJamaicaPresent } from '@/components/core/templates/create/elements/maps/MapJamaica.jsx';
+import MapJapan, { MapJapanPresent } from '@/components/core/templates/create/elements/maps/MapJapan.jsx';
+import MapJordan, { MapJordanPresent } from '@/components/core/templates/create/elements/maps/MapJordan.jsx';
+import MapKazakhstan, {
+  MapKazakhstanPresent,
+} from '@/components/core/templates/create/elements/maps/MapKazakhstan.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -236,6 +251,17 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     iceland: MapIceland,
     india: MapIndia,
     indonesia: MapIndonesia,
+    hungary: MapHungary,
+    iran: MapIran,
+    iraq: MapIraq,
+    ireland: MapIreland,
+    israel: MapIsrael,
+    italy: MapItaly,
+    'ivory-coast': MapIvoryCoast,
+    jamaica: MapJamaica,
+    japan: MapJapan,
+    jordan: MapJordan,
+    kazakhstan: MapKazakhstan,
   };
 
   if (components[element.config.name]) {
@@ -341,6 +367,17 @@ export const MapPresent = ({ element }) => {
     iceland: MapIcelandPresent,
     india: MapIndiaPresent,
     indonesia: MapIndonesiaPresent,
+    hungary: MapHungaryPresent,
+    iran: MapIranPresent,
+    iraq: MapIraqPresent,
+    ireland: MapIrelandPresent,
+    israel: MapIsraelPresent,
+    italy: MapItalyPresent,
+    'ivory-coast': MapIvoryCoastPresent,
+    jamaica: MapJamaicaPresent,
+    japan: MapJapanPresent,
+    jordan: MapJordanPresent,
+    kazakhstan: MapKazakhstanPresent,
   };
 
   if (components[element.config.name]) {

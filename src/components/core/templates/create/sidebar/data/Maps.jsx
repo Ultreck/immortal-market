@@ -94,6 +94,17 @@ import { MapHongKongPreview } from '@/components/core/templates/create/elements/
 import { MapIcelandPreview } from '@/components/core/templates/create/elements/maps/MapIceland.jsx';
 import { MapIndiaPreview } from '@/components/core/templates/create/elements/maps/MapIndia.jsx';
 import { MapIndonesiaPreview } from '@/components/core/templates/create/elements/maps/MapIndonesia.jsx';
+import { MapHungaryPreview } from '@/components/core/templates/create/elements/maps/MapHungary.jsx';
+import { MapIranPreview } from '@/components/core/templates/create/elements/maps/MapIran.jsx';
+import { MapIraqPreview } from '@/components/core/templates/create/elements/maps/MapIraq.jsx';
+import { MapIrelandPreview } from '@/components/core/templates/create/elements/maps/MapIreland.jsx';
+import { MapIsraelPreview } from '@/components/core/templates/create/elements/maps/MapIsrael.jsx';
+import { MapItalyPreview } from '@/components/core/templates/create/elements/maps/MapItaly.jsx';
+import { MapIvoryCoastPreview } from '@/components/core/templates/create/elements/maps/MapIvoryCoast.jsx';
+import { MapJamaicaPreview } from '@/components/core/templates/create/elements/maps/MapJamaica.jsx';
+import { MapJapanPreview } from '@/components/core/templates/create/elements/maps/MapJapan.jsx';
+import { MapJordanPreview } from '@/components/core/templates/create/elements/maps/MapJordan.jsx';
+import { MapKazakhstanPreview } from '@/components/core/templates/create/elements/maps/MapKazakhstan.jsx';
 
 const names = [
   'nigeria',
@@ -190,6 +201,17 @@ const names = [
   'iceland',
   'india',
   'indonesia',
+  'hungary',
+  'iran',
+  'iraq',
+  'ireland',
+  'israel',
+  'italy',
+  'ivory-coast',
+  'jamaica',
+  'japan',
+  'jordan',
+  'kazakhstan',
 ];
 
 const previews = {
@@ -287,6 +309,17 @@ const previews = {
   iceland: <MapIcelandPreview />,
   india: <MapIndiaPreview />,
   indonesia: <MapIndonesiaPreview />,
+  hungary: <MapHungaryPreview />,
+  iran: <MapIranPreview />,
+  iraq: <MapIraqPreview />,
+  ireland: <MapIrelandPreview />,
+  israel: <MapIsraelPreview />,
+  italy: <MapItalyPreview />,
+  'ivory-coast': <MapIvoryCoastPreview />,
+  jamaica: <MapJamaicaPreview />,
+  japan: <MapJapanPreview />,
+  jordan: <MapJordanPreview />,
+  kazakhstan: <MapKazakhstanPreview />,
 };
 
 const elements = names.map((name) => ({
