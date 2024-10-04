@@ -1,9 +1,6 @@
-import { RiApps2Line, RiArrowRightSLine, RiTable2 } from 'react-icons/ri';
-import { Accordion, AccordionItem } from '@nextui-org/react';
-import Tables from './Tables';
+import { RiApps2Line, RiArrowRightSLine, RiFileExcel2Line } from 'react-icons/ri';
+import { Accordion, AccordionItem, Chip } from '@nextui-org/react';
 import DataTags from './DataTags.jsx';
-import { Chip } from '@nextui-org/react';
-import { RiFileExcel2Line } from 'react-icons/ri';
 import {
   TbBrandGoogleDrive,
   TbBrandMongodb,
@@ -12,7 +9,6 @@ import {
   TbFileTypePdf,
   TbFileZip,
   TbLink,
-  TbPlus,
   TbStar,
 } from 'react-icons/tb';
 import { SiOracle } from 'react-icons/si';
