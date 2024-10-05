@@ -1,6 +1,6 @@
 import { Bar, BarChart, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
-import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
+import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
@@ -64,4 +64,3 @@ StandardBarHorizontalContent.propTypes = {
 };
 
 export default StandardBarHorizontal;
-

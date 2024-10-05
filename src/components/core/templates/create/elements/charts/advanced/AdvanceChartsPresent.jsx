@@ -40,8 +40,8 @@ const AdvanceChartsPresent = ({ element }) => {
     'chart-a-percentage-card-2': AdvancePercentageCardTwoElementContent,
   };
 
-  if (components[element.type]) {
-    return createElement(components[element.type], { element });
+  if (components[element.config.name]) {
+    return createElement(components[element.config.name], { element });
   }
 
   return null;

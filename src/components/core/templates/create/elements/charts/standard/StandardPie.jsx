@@ -3,7 +3,6 @@ import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { interpolateColor } from '@/lib/utils';
 
 const StandardPie = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -89,4 +88,3 @@ StandardPieContent.propTypes = {
 };
 
 export default StandardPie;
-

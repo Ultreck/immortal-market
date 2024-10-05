@@ -26,6 +26,7 @@ export const chartElements = [
       height: 300,
       style: { opacity: 1 },
       config: {
+        name: 'bar',
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -33,7 +34,6 @@ export const chartElements = [
           { name: 'Page D', value: 2780 },
           { name: 'Page E', value: 1890 },
         ],
-        name: 'bar',
         keys: { x: 'name', y: 'value' },
         showXaxis: false,
         showYaxis: false,
@@ -378,7 +378,7 @@ export const chartElements = [
     id: 'chart-s-bar-multiple-vertical',
     category: 'bar',
     data: {
-      type: 'chart-s-bar-multiple-vertical',
+      type: 'chart-s',
       text: 'Bar Multiple-vertical Chart',
       width: 600,
       height: 400,

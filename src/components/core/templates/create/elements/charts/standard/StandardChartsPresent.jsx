@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { StandardBarContent } from '@/components/core/templates/create/elements/charts/standard/StandardBar.jsx';
+import { StandardBarPresent } from '@/components/core/templates/create/elements/charts/standard/StandardBar.jsx';
 import { StandardLineContent } from '@/components/core/templates/create/elements/charts/standard/StandardLine.jsx';
 import { StandardPieContent } from '@/components/core/templates/create/elements/charts/standard/StandardPie.jsx';
 import { StandardDoughnutContent } from '@/components/core/templates/create/elements/charts/standard/StandardDoughnut.jsx';
@@ -30,37 +30,37 @@ import { StandardBubbleChartInSizesContent } from './StandardBubbleChartInSizes'
 
 const StandardChartsPresent = ({ element }) => {
   const components = {
-    'chart-s-bar': StandardBarContent,
-    'chart-s-line': StandardLineContent,
-    'chart-s-pie': StandardPieContent,
-    'chart-s-doughnut': StandardDoughnutContent,
-    'chart-s-doughnut-crazy': StandardRosePieContent,
-    'chart-s-doughnut-standard': StandardDoughnutNormalContent,
-    'chart-s-bar-horizontal': StandardBarHorizontalContent,
-    'chart-s-area': StandardAreaContent,
-    'chart-s-area-multiple': StandardAreaMultipleContent,
-    'chart-s-stacked-bar': StandardStackedBarContent,
-    'chart-s-line-bar': StandardLineBarContent,
-    'chart-s-line-area': StandardAreaLineContent,
-    'chart-s-semi-circle': StandardSemiCircleContent,
-    'chart-s-vertical-bar': StandardVerticalBarContent,
-    'chart-s-semi-pie': StandardSemiPieContent,
-    'chart-s-alt-bar': StandardAltBarContent,
-    'chart-s-bar-not-sep': StandardBarNotSepContent,
-    'chart-s-bar-multiple': StandardMultipleBar,
-    'chart-s-vertical-bar-no-sep': StandardVerticalBarNoSepContent,
-    'chart-s-stacked-bar-vertical': StandardVerticalStackedBarContent,
-    'chart-s-bar-multiple-vertical': StandardMultipleBarVerticalContent,
-    'chart-s-line-multiple': StandardLineMultipleContent,
-    'chart-s-line-area-vertical': StandardAreaLineVerticalContent,
-    'chart-s-line-bar-vertical': StandardLineBarVerticalContent,
-    'chart-s-bubble': StandardBubbleChartContent,
-    'chart-s-area-bar': StandardBarAreaContent,
-    'chart-s-scatter': StandardBubbleChartInSizesContent,
+    bar: StandardBarPresent,
+    line: StandardLineContent,
+    pie: StandardPieContent,
+    doughnut: StandardDoughnutContent,
+    'doughnut-crazy': StandardRosePieContent,
+    'doughnut-standard': StandardDoughnutNormalContent,
+    'bar-horizontal': StandardBarHorizontalContent,
+    area: StandardAreaContent,
+    'area-multiple': StandardAreaMultipleContent,
+    'stacked-bar': StandardStackedBarContent,
+    'line-bar': StandardLineBarContent,
+    'line-area': StandardAreaLineContent,
+    'semi-circle': StandardSemiCircleContent,
+    'vertical-bar': StandardVerticalBarContent,
+    'semi-pie': StandardSemiPieContent,
+    'alt-bar': StandardAltBarContent,
+    'bar-not-sep': StandardBarNotSepContent,
+    'bar-multiple': StandardMultipleBar,
+    'vertical-bar-no-sep': StandardVerticalBarNoSepContent,
+    'stacked-bar-vertical': StandardVerticalStackedBarContent,
+    'bar-multiple-vertical': StandardMultipleBarVerticalContent,
+    'line-multiple': StandardLineMultipleContent,
+    'line-area-vertical': StandardAreaLineVerticalContent,
+    'line-bar-vertical': StandardLineBarVerticalContent,
+    bubble: StandardBubbleChartContent,
+    'area-bar': StandardBarAreaContent,
+    scatter: StandardBubbleChartInSizesContent,
   };
 
-  if (components[element.type]) {
-    return createElement(components[element.type], { element });
+  if (components[element.config.name]) {
+    return createElement(components[element.config.name], { element });
   }
 };
 

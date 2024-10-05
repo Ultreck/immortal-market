@@ -14,84 +14,20 @@ import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx'
 import Widget from '@/components/core/templates/create/elements/widgets/Widget.jsx';
 import Data, { DataPresent } from '@/components/core/templates/create/elements/Data.jsx';
 
-export const charts = {
-  standard: [
-    'bar',
-    'line',
-    'pie',
-    'doughnut',
-    'bar-horizontal',
-    'area',
-    'stacked-bar',
-    'line-bar',
-    'line-area',
-    'rose-pie',
-    'doughnut-standard',
-    'doughnut-crazy',
-    'area-multiple',
-    'semi-circle',
-    'vertical-bar',
-    'semi-pie',
-    'alt-bar',
-    'bar-not-sep',
-    'pie-ordinary',
-    'bar-multiple',
-    'vertical-bar-no-sep',
-    'stacked-bar-vertical',
-    'bar-multiple-vertical',
-    'line-multiple',
-    'line-area-vertical',
-    'line-bar-vertical',
-    'bubble',
-    'area-bar',
-    'area-bar-vertical',
-    'scatter',
-  ],
-  advanced: [
-    'shapes',
-    'gender-stats',
-    'pyramid',
-    'funnel',
-    'stackedbar-advanced',
-    'custom-bar',
-    'linear-bar',
-    'lollipop',
-    'nested-circles',
-    'circle-icons',
-    'tree-map',
-    'dynamic-sorting',
-    'speedometer',
-    'speedometer-simple',
-    'speedometer-multiple',
-    'scatter-life-expectancy',
-    'pictogram-shapes',
-    'stacked-card',
-    'percentage-card',
-    'column-card',
-    'percentage-card-2',
-  ],
-};
-
 export const tools = {
   ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
     acc[type] = ['font', 'opacity', 'animation', 'shadow'];
     return acc;
   }, {}),
-  ...charts.standard.reduce((acc, type) => {
-    acc[`chart-s-${type}`] = ['chart', 'colors', 'opacity', 'animation', 'chart-data'];
-    return acc;
-  }, {}),
-  ...charts.advanced.reduce((acc, type) => {
-    acc[`chart-a-${type}`] = ['advanced-chart', 'colors', 'opacity', 'chart-data'];
-    return acc;
-  }, {}),
+  'chart-s': ['chart', 'colors', 'opacity', 'animation', 'chart-data'],
+  'chart-a': ['advanced-chart', 'colors', 'opacity', 'chart-data'],
   shape: ['background', 'border', 'opacity', 'animation', 'shadow'],
   frame: (element) => {
     if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow'];
     if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow'];
     if (element.config.name === 'marquee') return ['carousel', 'opacity', 'animation', 'shadow'];
-    if (element.config.name === 'marqueeText') return ['font','marqueeText', 'opacity', 'animation', 'shadow'];
-    if (element.config.name === 'typewriterText') return ['font','marqueeText', 'opacity', 'animation', 'shadow'];
+    if (element.config.name === 'marqueeText') return ['font', 'marqueeText', 'opacity', 'animation', 'shadow'];
+    if (element.config.name === 'typewriterText') return ['font', 'marqueeText', 'opacity', 'animation', 'shadow'];
     return ['opacity', 'animation', 'shadow'];
   },
   icon: ['icon', 'color', 'opacity', 'animation', 'shadow'],
@@ -110,14 +46,8 @@ export const components = {
       acc[type] = Text;
       return acc;
     }, {}),
-    ...charts.standard.reduce((acc, type) => {
-      acc[`chart-s-${type}`] = StandardCharts;
-      return acc;
-    }, {}),
-    ...charts.advanced.reduce((acc, type) => {
-      acc[`chart-a-${type}`] = AdvanceCharts;
-      return acc;
-    }, {}),
+    'chart-s': StandardCharts,
+    'chart-a': AdvanceCharts,
     shape: Shape,
     frame: Frame,
     icon: Icon,
@@ -134,14 +64,8 @@ export const components = {
       acc[type] = TextPresent;
       return acc;
     }, {}),
-    ...charts.standard.reduce((acc, type) => {
-      acc[`chart-s-${type}`] = StandardChartsPresent;
-      return acc;
-    }, {}),
-    ...charts.advanced.reduce((acc, type) => {
-      acc[`chart-a-${type}`] = AdvanceChartsPresent;
-      return acc;
-    }, {}),
+    'chart-s': StandardChartsPresent,
+    'chart-a': AdvanceChartsPresent,
     table: TablePresent,
     shape: ShapePresent,
     line: LineElementContent,

@@ -1,10 +1,9 @@
 import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
-import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
+import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { useEffect } from 'react';
 
 const StandardBar = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -22,15 +21,15 @@ const StandardBar = ({ element, active, highlighted, width, onClick, onChange })
   );
 };
 
-StandardBar.propTypes = ElementPropTypes;
+export const StandardBarPresent = ({ element }) => {
+  return <StandardBarContent element={element} />;
+};
 
 export const StandardBarContent = ({ element }) => {
   const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
     const color = element.config.colors?.[index];
     return { ...item, fill: color };
   });
-
-  useEffect(() => {}, [element]);
   return (
     <ChartContainer
       config={{}}
@@ -57,7 +56,11 @@ export const StandardBarContent = ({ element }) => {
   );
 };
 
+StandardBar.propTypes = ElementPropTypes;
 StandardBarContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+StandardBarPresent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 

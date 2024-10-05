@@ -1,21 +1,11 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@nextui-org/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { RiFontFamily } from 'react-icons/ri';
-import {
-  TbArrowsExchange,
-  TbChartPie,
-  TbChevronRight,
-  TbEye,
-  TbReplace,
-  TbSquareRoundedPlus,
-} from 'react-icons/tb';
+import { TbArrowsExchange, TbChartPie, TbChevronRight, TbEye, TbReplace, TbSquareRoundedPlus } from 'react-icons/tb';
 import ChartDataDrawer from './ChartDataDrawer';
 import PropTypes from 'prop-types';
 
 const ChartData = ({ element, onChange }) => {
-  console.log({ element, onChange });
-  console.log('Hello');
-  
   const items = [
     {
       title: 'Change Source',
@@ -101,4 +91,3 @@ ChartData.propTypes = {
 };
 
 export default ChartData;
-

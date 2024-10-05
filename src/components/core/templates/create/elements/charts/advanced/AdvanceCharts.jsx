@@ -41,8 +41,8 @@ const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange 
     'chart-a-percentage-card-2': AdvancePercentageCardTwo,
   };
 
-  if (components[element.type]) {
-    return createElement(components[element.type], { element, active, highlighted, width, onClick, onChange });
+  if (components[element.config.name]) {
+    return createElement(components[element.config.name], { element, active, highlighted, width, onClick, onChange });
   }
 
   return null;
