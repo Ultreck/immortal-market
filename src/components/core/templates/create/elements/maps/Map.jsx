@@ -154,6 +154,10 @@ import MapJordan, { MapJordanPresent } from '@/components/core/templates/create/
 import MapKazakhstan, {
   MapKazakhstanPresent,
 } from '@/components/core/templates/create/elements/maps/MapKazakhstan.jsx';
+import MapKenya, { MapKenyaPresent } from '@/components/core/templates/create/elements/maps/MapKenya.jsx';
+import MapKosovo, { MapKosovoPresent } from '@/components/core/templates/create/elements/maps/MapKosovo.jsx';
+import MapKuwait, { MapKuwaitPresent } from '@/components/core/templates/create/elements/maps/MapKuwait.jsx';
+import MapKyrgyzstan, { MapKyrgyzstanPresent } from '@/components/core/templates/create/elements/maps/MapKyrgyzstan.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -262,6 +266,10 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     japan: MapJapan,
     jordan: MapJordan,
     kazakhstan: MapKazakhstan,
+    kenya: MapKenya,
+    kosovo: MapKosovo,
+    kuwait: MapKuwait,
+    kyrgyzstan: MapKyrgyzstan,
   };
 
   if (components[element.config.name]) {
@@ -378,6 +386,10 @@ export const MapPresent = ({ element }) => {
     japan: MapJapanPresent,
     jordan: MapJordanPresent,
     kazakhstan: MapKazakhstanPresent,
+    kenya: MapKenyaPresent,
+    kosovo: MapKosovoPresent,
+    kuwait: MapKuwaitPresent,
+    kyrgyzstan: MapKyrgyzstanPresent,
   };
 
   if (components[element.config.name]) {

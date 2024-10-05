@@ -105,6 +105,10 @@ import { MapJamaicaPreview } from '@/components/core/templates/create/elements/m
 import { MapJapanPreview } from '@/components/core/templates/create/elements/maps/MapJapan.jsx';
 import { MapJordanPreview } from '@/components/core/templates/create/elements/maps/MapJordan.jsx';
 import { MapKazakhstanPreview } from '@/components/core/templates/create/elements/maps/MapKazakhstan.jsx';
+import { MapKenyaPreview } from '@/components/core/templates/create/elements/maps/MapKenya.jsx';
+import { MapKosovoPreview } from '@/components/core/templates/create/elements/maps/MapKosovo.jsx';
+import { MapKuwaitPreview } from '@/components/core/templates/create/elements/maps/MapKuwait.jsx';
+import { MapKyrgyzstanPreview } from '@/components/core/templates/create/elements/maps/MapKyrgyzstan.jsx';
 
 const names = [
   'nigeria',
@@ -212,6 +216,10 @@ const names = [
   'japan',
   'jordan',
   'kazakhstan',
+  'kenya',
+  'kosovo',
+  'kuwait',
+  'kyrgyzstan',
 ];
 
 const previews = {
@@ -320,6 +328,10 @@ const previews = {
   japan: <MapJapanPreview />,
   jordan: <MapJordanPreview />,
   kazakhstan: <MapKazakhstanPreview />,
+  kenya: <MapKenyaPreview />,
+  kosovo: <MapKosovoPreview />,
+  kuwait: <MapKuwaitPreview />,
+  kyrgyzstan: <MapKyrgyzstanPreview />,
 };
 
 const elements = names.map((name) => ({
