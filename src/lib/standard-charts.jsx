@@ -504,7 +504,7 @@ export const chartElements = [
     id: 'chart-s-doughnut',
     category: 'doughnut',
     data: {
-      type: 'chart-s-doughnut',
+      type: 'chart-s',
       text: 'Doughnut Chart',
       width: 400,
       height: 400,

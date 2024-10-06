@@ -33,15 +33,14 @@ const AdvancedCharts = () => {
   const elements = [
     {
       id: 'chart-a-shapes',
-      type: 'chart-a-shapes',
-      name: '10 Circles',
       data: {
-        type: 'chart-a-shapes',
+        type: 'chart-a',
         text: '10 Circles',
         width: 400,
         height: 300,
         style: { opacity: 1 },
         config: {
+          name: 'shapes',
           percentage: 65,
           shape: 'circle',
           noOfShapes: 10,
@@ -60,10 +59,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-linear-bar',
-      type: 'chart-a-linear-bar',
-      name: 'Linear Bar Chart',
       data: {
-        type: 'chart-a-linear-bar',
+        type: 'chart-a',
         text: 'Linear Bar Chart',
         width: 400,
         height: 100,
@@ -71,6 +68,7 @@ const AdvancedCharts = () => {
         config: {
           progress: 50,
           colors,
+          name: 'linear-bar',
         },
       },
       preview: (
@@ -81,10 +79,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-circle-icons',
-      type: 'chart-a-circle-icons',
-      name: 'circle-icons Chart',
       data: {
-        type: 'chart-a-circle-icons',
+        type: 'chart-a',
         text: 'circle-icons Chart',
         width: 400,
         height: 400,
@@ -100,6 +96,7 @@ const AdvancedCharts = () => {
             { label: 'Bubble 5', value: 70, icon: 'fa fa-gamepad' },
             { label: 'Bubble 5', value: 15, icon: 'fa fa-film' },
           ],
+          name: 'circle-icons',
           keys: { name: 'name', data: 'data' },
           colors,
         },
@@ -115,10 +112,8 @@ const AdvancedCharts = () => {
   const speedometerDataElement = [
     {
       id: 'chart-a-speedometer',
-      type: 'chart-a-speedometer',
-      name: 'Speedometer Chart',
       data: {
-        type: 'chart-a-speedometer',
+        type: 'chart-a',
         text: 'Speedometer Chart',
         width: 500,
         height: 500,
@@ -127,6 +122,7 @@ const AdvancedCharts = () => {
           data: 20,
           keys: { name: 'name', data: 'value' },
           colors: ['#E66B5B', '#1D9085', '#264A5A'],
+          name: 'speedometer',
         },
       },
       preview: (
@@ -137,10 +133,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-speedometer-simple',
-      type: 'chart-a-speedometer-simple',
-      name: 'Speedometer-simple Chart',
       data: {
-        type: 'chart-a-speedometer-simple',
+        type: 'chart-a',
         text: 'Speedometer-simple Chart',
         width: 500,
         height: 500,
@@ -149,6 +143,7 @@ const AdvancedCharts = () => {
           data: 20,
           keys: { name: 'name', data: 'value' },
           colors: '#E66B5B',
+          name: 'speedometer-simple',
         },
       },
       preview: (
@@ -159,10 +154,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-speedometer-multiple',
-      type: 'chart-a-speedometer-multiple',
-      name: 'Speedometer-multiple Chart',
       data: {
-        type: 'chart-a-speedometer-multiple',
+        type: 'chart-a',
         text: 'Speedometer-multiple Chart',
         width: 500,
         height: 500,
@@ -184,6 +177,7 @@ const AdvancedCharts = () => {
           ],
           keys: { name: 'name', data: 'value' },
           colors: ['#E66B5B', '#1D9085', '#264A5A'],
+          name: 'speedometer-multiple',
         },
       },
       preview: (
@@ -197,10 +191,8 @@ const AdvancedCharts = () => {
   const historicals = [
     {
       id: 'chart-a-dynamic-sorting',
-      type: 'chart-a-dynamic-sorting',
-      name: 'dynamic-sorting Chart',
       data: {
-        type: 'chart-a-dynamic-sorting',
+        type: 'chart-a',
         text: 'dynamic-sorting Chart',
         width: 400,
         height: 400,
@@ -212,6 +204,7 @@ const AdvancedCharts = () => {
           showYaxis: false,
           showGridline: false,
           showLegend: false,
+          name: 'dynamic-sorting',
         },
       },
       preview: (
@@ -222,10 +215,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-scatter-life-expectancy',
-      type: 'chart-a-scatter-life-expectancy',
-      name: 'Scatter Life Expectancy Chart',
       data: {
-        type: 'chart-a-scatter-life-expectancy',
+        type: 'chart-a',
         text: 'Scatter Life Expectancy Chart',
         width: 600,
         height: 500,
@@ -239,6 +230,7 @@ const AdvancedCharts = () => {
           showGridline: true,
           showLegend: true,
           circles: 5,
+          name: 'scatter-life-expectancy',
         },
       },
       preview: (
@@ -252,10 +244,8 @@ const AdvancedCharts = () => {
   const specialChartsElement = [
     {
       id: 'chart-a-stacked-card',
-      type: 'chart-a-stacked-card',
-      name: 'Stacked Card Chart',
       data: {
-        type: 'chart-a-stacked-card',
+        type: 'chart-a',
         text: 'Stacked Card Chart',
         width: 500,
         height: 300,
@@ -269,6 +259,7 @@ const AdvancedCharts = () => {
             { range: 'Less than 250k', percentage: 50.4 },
           ],
           keys: { name: 'range', data: 'percentage' },
+          name: 'stacked-card',
           colors,
           bars: 5,
         },
@@ -281,10 +272,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-percentage-card',
-      type: 'chart-a-percentage-card',
-      name: 'Percentage Card Chart',
       data: {
-        type: 'chart-a-percentage-card',
+        type: 'chart-a',
         text: 'Percentage Card Chart',
         width: 500,
         height: 300,
@@ -301,6 +290,7 @@ const AdvancedCharts = () => {
           keys: { name: 'age', data: 'percentage' },
           colors,
           bars: 4,
+          name: 'percentage-card',
         },
       },
       preview: (
@@ -311,10 +301,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-lollipop',
-      type: 'chart-a-lollipop',
-      name: 'Lollipop Chart',
       data: {
-        type: 'chart-a-lollipop',
+        type: 'chart-a',
         text: 'Lollipop Chart',
         width: 400,
         height: 300,
@@ -334,6 +322,7 @@ const AdvancedCharts = () => {
           ],
           colors,
           bars: 5,
+          name: 'lollipop',
         },
       },
       preview: (
@@ -344,10 +333,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-nested-circles',
-      type: 'chart-a-nested-circles',
-      name: 'nested-circles Chart',
       data: {
-        type: 'chart-a-nested-circles',
+        type: 'chart-a',
         text: 'nested-circles Chart',
         width: 400,
         height: 400,
@@ -367,6 +354,7 @@ const AdvancedCharts = () => {
           ],
           colors,
           bars: 4,
+          name: 'nested-circles',
         },
       },
       preview: (
@@ -377,10 +365,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-funnel',
-      type: 'chart-a-funnel',
-      name: 'Funnel Chart',
       data: {
-        type: 'chart-a-funnel',
+        type: 'chart-a',
         text: 'Funnel Chart',
         width: 400,
         height: 500,
@@ -394,6 +380,7 @@ const AdvancedCharts = () => {
             { value: 100, name: 'Show' },
           ],
           colors,
+          name: 'funnel',
         },
       },
       preview: (
@@ -404,10 +391,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-tree-map',
-      type: 'chart-a-tree-map',
-      name: 'Tree Map Chart',
       data: {
-        type: 'chart-a-tree-map',
+        type: 'chart-a',
         text: 'Tree Map Chart',
         width: 500,
         height: 400,
@@ -568,6 +553,7 @@ const AdvancedCharts = () => {
             },
           ],
           colors,
+          name: 'tree-map',
         },
       },
       preview: (
@@ -578,10 +564,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-column-card',
-      type: 'chart-a-column-card',
-      name: 'Column Chart',
       data: {
-        type: 'chart-a-column-card',
+        type: 'chart-a',
         text: 'Column Chart',
         width: 550,
         height: 500,
@@ -603,6 +587,7 @@ const AdvancedCharts = () => {
           bars: 4,
           colors,
           showLabel: false,
+          name: 'column-card',
         },
       },
       preview: (
@@ -613,10 +598,8 @@ const AdvancedCharts = () => {
     },
     {
       id: 'chart-a-percentage-card-2',
-      type: 'chart-a-percentage-card-2',
-      name: 'Column Chart',
       data: {
-        type: 'chart-a-percentage-card-2',
+        type: 'chart-a',
         text: 'Column Chart',
         width: 550,
         height: 500,
@@ -640,6 +623,7 @@ const AdvancedCharts = () => {
           bars: 2,
           colors,
           showLabel: false,
+          name: 'percentage-card-2',
         },
       },
       preview: (
@@ -653,10 +637,8 @@ const AdvancedCharts = () => {
   const pictogramShapesElement = [
     {
       id: 'chart-a-pictogram-shapes',
-      type: 'chart-a-pictogram-shapes',
-      name: 'Pictogram Shapes Chart',
       data: {
-        type: 'chart-a-pictogram-shapes',
+        type: 'chart-a',
         text: 'Pictogram Shapes Chart',
         width: 400,
         height: 300,
@@ -679,7 +661,8 @@ const AdvancedCharts = () => {
           showIcon1: true,
           showIcon2: true,
           showIcon3: true,
-          showLabel: true
+          showLabel: true,
+          name: 'pictogram-shapes',
         },
       },
       preview: (
@@ -693,10 +676,8 @@ const AdvancedCharts = () => {
   const pictogramColumnChart = [
     {
       id: 'chart-a-custom-bar',
-      type: 'chart-a-custom-bar',
-      name: 'Custom Bar Chart',
       data: {
-        type: 'chart-a-custom-bar',
+        type: 'chart-a',
         text: 'Custom Bar Chart',
         width: 500,
         height: 400,
@@ -721,6 +702,7 @@ const AdvancedCharts = () => {
           cardTooltip: false,
           bars: 5,
           colors,
+          name: 'custom-bar',
         },
       },
       preview: (
