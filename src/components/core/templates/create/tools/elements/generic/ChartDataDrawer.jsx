@@ -1,10 +1,10 @@
 import Drawer from '@/components/ui/Drawer';
 import { chartElements } from '@/lib/standard-charts';
 import { Input } from '@nextui-org/react';
-import React from 'react';
 import { TbCirclePlus } from 'react-icons/tb';
-import DraggableElementWrapper from '../../../sidebar/DraggableElementWrapper';
 import NewConnection from '../chart-submenu/NewConnection';
+import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 
 const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
   const handleChange = (updatedItem) => {
@@ -122,12 +122,9 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
     }
   }
 
-  const getChartsByKeysStructure = () => {
+  const filteredCharts = useMemo(() => {
     const areKeysEqual = (keys1, keys2) => {
-      console.log(keys1, keys2)
-      
       if (!keys1 || !keys2) return false;
-
       const xEqual = keys1.x === keys2.x;
       const bothArrays = Array.isArray(keys1.y) && Array.isArray(keys2.y);
       const yEqual = bothArrays
@@ -136,23 +133,28 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
 
       return xEqual && yEqual;
     };
-
     return chartElements.filter((chart) => {
       const chartKeys = chart.data.config.keys;
       return areKeysEqual(chartKeys, element.config.keys);
     });
-  };
+  }, [element.config.keys]);
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} title={item?.title} width={700}>
       {item?.title === 'View Data' && getConfig()}
       {item?.title === 'Change Chart' && (
-        <div>
-          <div className="grid grid-cols-6 gap-4">
-            {getChartsByKeysStructure().map((element) => (
-              <DraggableElementWrapper key={element.id} element={element} />
-            ))}
-          </div>
+        <div className="grid grid-cols-6 gap-4">
+          {filteredCharts.map((e) => (
+            <div
+              className="cursor-pointer"
+              key={e.id}
+              onClick={() => {
+                onChange({ ...element, config: { ...element.config, name: e.data.config.name } });
+              }}
+            >
+              {e.preview}
+            </div>
+          ))}
         </div>
       )}
       {item?.title === 'New Connection' && <NewConnection />}
@@ -160,5 +162,12 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
   );
 };
 
-export default ChartDataDrawer;
+ChartDataDrawer.propTypes = {
+  item: PropTypes.object.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  element: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
+export default ChartDataDrawer;
