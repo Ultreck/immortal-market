@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbPlus, TbTrash } from 'react-icons/tb';
 import { Listbox, ListboxItem, useDisclosure } from '@nextui-org/react';
 import { createPortal } from 'react-dom';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import LinkTool from './LinkModal.jsx';
 import {
   LuBringToFront,
@@ -14,7 +14,7 @@ import {
   LuSendToBack,
   LuUngroup,
 } from 'react-icons/lu';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   RiAlignItemBottomLine,
   RiAlignItemHorizontalCenterLine,
@@ -47,57 +47,55 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
     }
   }, [isOpen]);
 
-  const menu = [
-    { key: 'copy', label: 'Copy', icon: <TbClipboardCopy size="18" /> },
-    { key: 'duplicate', label: 'Duplicate', icon: <TbCopyPlus size="18" /> },
-  ];
+  const menu = useMemo(() => {
+    const items = [
+      { key: 'copy', label: 'Copy', icon: <TbClipboardCopy size="18" /> },
+      { key: 'duplicate', label: 'Duplicate', icon: <TbCopyPlus size="18" /> },
+    ];
+    if (selectedElements.length > 1) {
+      if (!elements.every((el) => el.group && el.group === elements[0].group)) {
+        items.push({ key: 'group', label: 'Group', icon: <LuGroup size="18" /> });
+      } else {
+        items.push({ key: 'ungroup', label: 'Ungroup', icon: <LuUngroup size="18" /> });
+      }
 
-  if (selectedElements.length > 1) {
-    if (!elements.every((el) => el.group && el.group === elements[0].group)) {
-      menu.push({ key: 'group', label: 'Group', icon: <LuGroup size="18" /> });
-    } else {
-      menu.push({ key: 'ungroup', label: 'Ungroup', icon: <LuUngroup size="18" /> });
+      items.push({
+        key: 'align',
+        label: 'Align to',
+        icon: <RiAlignItemLeftLine size="18" />,
+        children: [
+          { key: 'align-left', label: 'Align left', icon: <RiAlignItemLeftLine size="18" /> },
+          { key: 'align-center', label: 'Align center', icon: <RiAlignItemHorizontalCenterLine size="18" /> },
+          { key: 'align-right', label: 'Align right', icon: <RiAlignItemVerticalCenterLine size="18" /> },
+          { key: 'align-top', label: 'Align top', icon: <RiAlignItemTopLine size="18" /> },
+          { key: 'align-middle', label: 'Align middle', icon: <RiAlignItemVerticalCenterLine size="18" /> },
+          { key: 'align-bottom', label: 'Align bottom', icon: <RiAlignItemBottomLine size="18" /> },
+        ],
+      });
     }
-
-    menu.push({
-      key: 'align',
-      label: 'Align to',
-      icon: <RiAlignItemLeftLine size="18" />,
+    items.push({
+      key: 'arrange',
+      label: 'Arrange',
+      icon: <LuBringToFront size="18" />,
       children: [
-        { key: 'align-left', label: 'Align left', icon: <RiAlignItemLeftLine size="18" /> },
-        { key: 'align-center', label: 'Align center', icon: <RiAlignItemHorizontalCenterLine size="18" /> },
-        { key: 'align-right', label: 'Align right', icon: <RiAlignItemVerticalCenterLine size="18" /> },
-        { key: 'align-top', label: 'Align top', icon: <RiAlignItemTopLine size="18" /> },
-        { key: 'align-middle', label: 'Align middle', icon: <RiAlignItemVerticalCenterLine size="18" /> },
-        { key: 'align-bottom', label: 'Align bottom', icon: <RiAlignItemBottomLine size="18" /> },
+        { key: 'move-top', label: 'Move to top', icon: <LuBringToFront size="18" /> },
+        { key: 'move-bottom', label: 'Move to bottom', icon: <LuSendToBack size="18" /> },
+        { key: 'move-up', label: 'Move up', icon: <LuChevronUp size="18" /> },
+        { key: 'move-down', label: 'Move down', icon: <LuChevronDown size="18" /> },
       ],
     });
-  }
-
-  menu.push({
-    key: 'arrange',
-    label: 'Arrange',
-    icon: <LuBringToFront size="18" />,
-    children: [
-      { key: 'move-top', label: 'Move to top', icon: <LuBringToFront size="18" /> },
-      { key: 'move-bottom', label: 'Move to bottom', icon: <LuSendToBack size="18" /> },
-      { key: 'move-up', label: 'Move up', icon: <LuChevronUp size="18" /> },
-      { key: 'move-down', label: 'Move down', icon: <LuChevronDown size="18" /> },
-    ],
-  });
-
-  if (elements?.length && elements.every((el) => el.href)) {
-    menu.push({ key: 'link', label: 'Edit link', icon: <TbLinkPlus size="18" />, showDivider: true });
-  } else {
-    menu.push({ key: 'link', label: 'Link', icon: <TbLink size="18" />, showDivider: true });
-  }
-
-  menu.push({ key: 'save-as-block', label: 'Save as block', icon: <TbPlus size="18" />, showDivider: true });
-
-  menu.push(...[{ key: 'delete', label: 'Delete', icon: <TbTrash size="18" />, color: 'danger' }]);
+    if (elements?.length && elements.every((el) => el.href)) {
+      items.push({ key: 'link', label: 'Edit link', icon: <TbLinkPlus size="18" />, showDivider: true });
+    } else {
+      items.push({ key: 'link', label: 'Link', icon: <TbLink size="18" />, showDivider: true });
+    }
+    items.push({ key: 'save-as-block', label: 'Save as block', icon: <TbPlus size="18" />, showDivider: true });
+    items.push(...[{ key: 'delete', label: 'Delete', icon: <TbTrash size="18" />, color: 'danger' }]);
+    return items;
+  }, [elements, selectedElements.length]);
 
   return (
-    <AnimatePresence>
+    <>
       {isOpen && elements?.length > 0 && (
         <>
           {createPortal(
@@ -164,7 +162,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
 
       <LinkTool elements={elements} isOpen={isLinkToolOpen} onClose={onLinkToolClose} />
       <CreateGroupBlockModal isOpen={isCreateBlockOpen} onClose={onCreateBlockClose} elements={elements} />
-    </AnimatePresence>
+    </>
   );
 };
 
