@@ -35,48 +35,50 @@ const ChartConfig = ({ element, onChange }) => {
 };
 
 const ChartData = ({ element, onChange }) => {
+  console.log({element});
+  
   return (
     <div>
-      {element.type === 'chart-s-stacked-bar' && <StandardStackedBarConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-stacked-bar-vertical' && (
+      {element.type === 'stacked-bar' && <StandardStackedBarConfig element={element} onChange={onChange} />}
+      {element.type === 'stacked-bar-vertical' && (
         <StandardStackedBarConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-line-area' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-line-area-vertical' && (
+      {element.type === 'line-area' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
+      {element.type === 'line-area-vertical' && (
         <StandardMultipleBarConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-line-bar' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-area-bar' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-area-bar-vertical' && (
+      {element.type === 'line-bar' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
+      {element.type === 'area-bar' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
+      {element.type === 'area-bar-vertical' && (
         <StandardMultipleBarConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-line-bar-vertical' && (
+      {element.type === 'line-bar-vertical' && (
         <StandardMultipleBarConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-bubble' && <StandardBubbleChartConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-area' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-area-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-line' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-line-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-bar-not-sep' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-vertical-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-vertical-bar-no-sep' && (
+      {element.type === 'bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'bubble' && <StandardBubbleChartConfig element={element} onChange={onChange} />}
+      {element.type === 'area' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'area-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
+      {element.type === 'line' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'line-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
+      {element.type === 'bar-not-sep' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'vertical-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'vertical-bar-no-sep' && (
         <StandardBarCommonConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-bar-multiple' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-bar-multiple-vertical' && (
+      {element.type === 'bar-multiple' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
+      {element.type === 'bar-multiple-vertical' && (
         <StandardMultipleBarConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-pie' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-semi-pie' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-semi-circle' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-doughnut' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-doughnut-standard' && (
+      {element.type === 'pie' && <StandardPieCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'semi-pie' && <StandardPieCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'semi-circle' && <StandardPieCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'doughnut' && <StandardPieCommonConfig element={element} onChange={onChange} />}
+      {element.type === 'doughnut-standard' && (
         <StandardPieCommonConfig element={element} onChange={onChange} />
       )}
-      {element.type === 'chart-s-doughnut-crazy' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.type === 'chart-s-alt-bar' && <StandardAltBarConfig element={element} onChange={onChange} />}
+      {element.type === 'doughnut-crazy' && <StandardPieCommonConfig element={element} onChange={onChange} />}
+      {element.config.name === 'alt-bar' && <StandardAltBarConfig element={element} onChange={onChange} />}
     </div>
   );
 };

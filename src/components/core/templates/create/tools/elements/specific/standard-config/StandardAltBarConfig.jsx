@@ -17,190 +17,54 @@ const StandardAltBarConfig = ({ element, onChange }) => {
   useEffect(() => {}, [element]);
   return (
     <div>
-      <Tabs
-        variant="bordered"
-        aria-label="Options"
-        color="primary"
-        radius="full"
-        classNames={{
-          base: 'mb-2',
-          tab: 'text-base px-4',
-        }}
-        selectedKey={tab}
-        onSelectionChange={setTab}
-      >
-        <Tab key="data" title="Data" className="text-base">
-          <div className="flex flex-col space-y-6">
-            {element.config.data[0].map((item, index) => (
-              <div key={index} className="grid grid-cols-3 gap-2">
-                <Input
-                  value={element.config.data[0][index]}
-                  placeholder="Browser name"
-                  required
-                  variant="bordered"
-                  classNames={{ input: 'text-base capitalize' }}
-                  onChange={(e) => {
-                    handleChange(index, 0, e.target.value);
-                  }}
-                />
-                <Input
-                  value={element.config.data[1][index]}
-                  placeholder="Number of visitors"
-                  required
-                  type="number"
-                  variant="bordered"
-                  onChange={(e) => {
-                    handleChange(index, 1, e.target.value);
-                  }}
-                />
-                <Input
-                  value={element.config.data[2][index]}
-                  placeholder="Number of visitors"
-                  required
-                  type="number"
-                  variant="bordered"
-                  onChange={(e) => {
-                    handleChange(index, 2, e.target.value);
-                  }}
-                />
-              </div>
-            ))}
-            <TbCirclePlus
-              size={30}
-              on
-              Click={() => {
-                onChange({});
-              }}
-            />
-          </div>
-        </Tab>
-        <Tab key="settings" title="Settings" className="text-base">
-        <div className="flex flex-col space-y-6">
-            {/* <div>
-              <Checkbox
-                isSelected={element.config.showXaxis}
-                classNames={{ base: 'py-0' }}
-                onValueChange={(v) => onChange({ ...element, config: { ...element.config, showXaxis: v } })}
-              >
-                Show X Axis
-              </Checkbox>
-            </div> */}
-            <div>
-              <Checkbox
-                isSelected={element.config.showYaxis}
-                classNames={{ base: 'py-0' }}
-                onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
-              >
-                Show Y Axis
-              </Checkbox>
-            </div>
-            <div>
-              <Checkbox
-                isSelected={element.config.showLegend}
-                classNames={{ base: 'py-0' }}
-                onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
-              >
-                Show Legend
-              </Checkbox>
-            </div>
-            <div>
-              <Checkbox
-                isSelected={element.config.showXGridline}
-                classNames={{ base: 'py-0' }}
-                onValueChange={(v) =>
-                  onChange({
-                    ...element,
-                    config: { ...element.config, showXGridline: v },
-                  })
-                }
-              >
-                Show Grid Lines
-              </Checkbox>
-            </div>
-            {/* <div>
-              <Checkbox
-                isSelected={element.config.showYGridline}
-                classNames={{ base: 'py-0' }}
-                onValueChange={(v) =>
-                  onChange({
-                    ...element,
-                    config: { ...element.config, showYGridline: v },
-                  })
-                }
-              >
-                Show Y Grid Line
-              </Checkbox>
-            </div> */}
-            <div>
-              <Checkbox
-                isSelected={element.config.labelPosition}
-                classNames={{ base: 'py-0' }}
-                onValueChange={(v) =>
-                  onChange({
-                    ...element,
-                    config: { ...element.config, labelPosition: v },
-                  })
-                }
-              >
-                Show Values outside
-              </Checkbox>
-            </div>
-            {/* {element.type === 'chart-s-line-multiple' && (
-              <>
-                <div className="flex items-center space-x-4">
-                  {[
-                    { name: 'Natural', icon: <TbChartLine size={25} /> },
-                    { name: 'Linear', icon: <TbTimeline size={25} /> },
-                  ].map((position, i) => (
-                    <Checkbox
-                      key={i}
-                      isSelected={element.config.type === position.name}
-                      onValueChange={(v) =>
-                        onChange({
-                          ...element,
-                          config: { ...element.config, type: position.name },
-                        })
-                      }
-                    >
-                      {position.icon}
-                    </Checkbox>
-                  ))}
-                </div>
-              </>
-            )} */}
-            {/* <div className="flex items-center space-x-4">
-              <p className="text-base opacity-75 whitespace-nowrap">No. of points:</p>
-              <AutoCompleteNumberInput
-                onChange={(v) =>
-                  onChange({
-                    ...element,
-                    config: { ...element.config, bars: Number(v) },
-                  })
-                }
-                value={element.config.bars}
-                min={1}
-                max={element.config.data.length}
-                ariaLabel="No of Bars to Show"
-              />
-            </div>
-            <div className="flex items-center space-x-4">
-              <p className="text-base opacity-75 whitespace-nowrap">No. of Lines:</p>
-              <AutoCompleteNumberInput
-                onChange={(v) =>
-                  onChange({
-                    ...element,
-                    config: { ...element.config, noOfLines: Number(v) },
-                  })
-                }
-                value={element.config.noOfLines}
-                min={1}
-                max={5}
-                ariaLabel="No of Bars to Show"
-              />
-            </div> */}
-          </div>
-        </Tab>
-      </Tabs>
+      <div className="flex flex-col space-y-6">
+        <div>
+          <Checkbox
+            isSelected={element.config.showYaxis}
+            classNames={{ base: 'py-0' }}
+            onValueChange={(v) => onChange({ ...element, config: { ...element.config, showYaxis: v } })}
+          >
+            Show Y Axis
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox
+            isSelected={element.config.showLegend}
+            classNames={{ base: 'py-0' }}
+            onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLegend: v } })}
+          >
+            Show Legend
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox
+            isSelected={element.config.showXGridline}
+            classNames={{ base: 'py-0' }}
+            onValueChange={(v) =>
+              onChange({
+                ...element,
+                config: { ...element.config, showXGridline: v },
+              })
+            }
+          >
+            Show Grid Lines
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox
+            isSelected={element.config.labelPosition}
+            classNames={{ base: 'py-0' }}
+            onValueChange={(v) =>
+              onChange({
+                ...element,
+                config: { ...element.config, labelPosition: v },
+              })
+            }
+          >
+            Show Values outside
+          </Checkbox>
+        </div>
+      </div>
     </div>
   );
 };
@@ -211,3 +75,4 @@ StandardAltBarConfig.propTypes = {
 };
 
 export default StandardAltBarConfig;
+
