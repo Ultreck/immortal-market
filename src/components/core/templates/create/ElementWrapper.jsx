@@ -38,7 +38,7 @@ const ElementWrapper = ({
 
   useEffect(() => {
     if (fit && el.current && element.height !== el.current.scrollHeight) {
-      onChange({ ...element, height: el.current.scrollHeight });
+      onChange({ ...element, height: el.current.scrollHeight }, true);
     }
   }, [element, fit, onChange]);
 
