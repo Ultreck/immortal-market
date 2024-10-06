@@ -1,4 +1,4 @@
-import { Checkbox } from '@nextui-org/react';
+import { Checkbox, Input } from '@nextui-org/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
