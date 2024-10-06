@@ -36,7 +36,7 @@ const AutoResizeTextArea = ({ value, onChange, onHeightChange, className, ...pro
       value={value}
       onChange={handleChange}
       rows="1"
-      className={cn('resize-none overflow-hidden', className)}
+      className={cn('resize-none overflow-hidden w-full', className)}
       {...props}
     />
   );

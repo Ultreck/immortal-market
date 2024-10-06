@@ -21,7 +21,7 @@ import Font from '@/components/core/templates/create/tools/elements/generic/Font
 import MapConfig from '@/components/core/templates/create/tools/elements/specific/map/MapConfig.jsx';
 import Color from '@/components/core/templates/create/tools/elements/generic/Color.jsx';
 import SummarizerConfig from '@/components/core/templates/create/tools/elements/specific/SummarizerConfig.jsx';
-import DataConfig from '@/components/core/templates/create/tools/elements/specific/DataConfig.jsx';
+import DataTagConfig from '@/components/core/templates/create/tools/elements/specific/DataTagConfig.jsx';
 import ChartData from './elements/generic/ChartData.jsx';
 
 const mapping = {
@@ -46,7 +46,7 @@ const mapping = {
   colors: { type: 'single', component: Colors },
   map: { type: 'single', component: MapConfig },
   summarizer: { type: 'single', component: SummarizerConfig },
-  data: { type: 'single', component: DataConfig },
+  'data-tag': { type: 'single', component: DataTagConfig },
   'chart-data': { type: 'single', component: ChartData },
 };
 

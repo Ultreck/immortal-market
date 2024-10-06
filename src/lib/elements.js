@@ -12,7 +12,7 @@ import Map, { MapPresent } from '@/components/core/templates/create/elements/map
 import Table, { TablePresent } from '@/components/core/templates/create/elements/table/Table.jsx';
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
 import Widget from '@/components/core/templates/create/elements/widgets/Widget.jsx';
-import Data, { DataPresent } from '@/components/core/templates/create/elements/Data.jsx';
+import DataTag, { DataPresent } from '@/components/core/templates/create/elements/DataTag.jsx';
 
 export const tools = {
   ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
@@ -37,7 +37,7 @@ export const tools = {
   image: ['border', 'opacity', 'animation', 'shadow'],
   infographic: ['infographic', 'opacity'],
   widget: ['summarizer', 'opacity', 'animation'],
-  data: ['data', 'font', 'opacity', 'animation', 'shadow'],
+  'data-tag': ['data-tag', 'font', 'opacity', 'animation', 'shadow'],
 };
 
 export const components = {
@@ -57,7 +57,7 @@ export const components = {
     image: Image,
     infographic: Infographic,
     widget: Widget,
-    data: Data,
+    'data-tag': DataTag,
   },
   present: {
     ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
@@ -73,7 +73,7 @@ export const components = {
     image: ImagePresent,
     infographic: InfographicPresent,
     map: MapPresent,
-    data: DataPresent,
+    'data-tag': DataPresent,
   },
 };
 

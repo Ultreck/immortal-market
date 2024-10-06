@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 const columns = [{ key: 'default', label: 'Default' }];
 
 const groups = [
-  { key: 'count', label: 'Count' },
+  { key: 'rank', label: 'Rank' },
   { key: 'sum', label: 'Sum' },
   { key: 'average', label: 'Average' },
   { key: 'min', label: 'Min' },
@@ -24,6 +24,7 @@ const groups = [
 ];
 
 const orders = [
+  { key: 'all', label: 'All' },
   { key: 'top-1', label: 'Top 1' },
   { key: 'top-2', label: 'Top 2' },
   { key: 'top-3', label: 'Top 3' },
@@ -50,17 +51,16 @@ const units = [
   { key: 'currency', label: 'Currency ($)' },
 ];
 
-const DataConfig = ({ element, onChange }) => {
+const DataTagConfig = ({ element, onChange }) => {
   const { handleSubmit, control, watch } = useForm({
     defaultValues: {
       column: element.config.column || '',
-      group: element.config.group || '',
-      order: element.config.order || '',
       type: element.config.type || '',
-      decimal: element.config.decimal || 0,
+      decimal: element.config.decimal || 2,
       unit: element.config.unit || '',
-      characters: element.config.characters || 0,
+      characters: element.config.characters || 150,
       combination: element.config.combination || '',
+      compare: element.config.compare || [],
     },
   });
 
@@ -124,18 +124,14 @@ const DataConfig = ({ element, onChange }) => {
               <Controller
                 name="type"
                 control={control}
-                rules={{
-                  validate: (value) => value.length > 0,
-                }}
                 render={({ field, fieldState: { error } }) => {
-                  const message = error?.type === 'validate' ? 'Select heading type' : error?.message;
                   return (
                     <RadioGroup
                       orientation="horizontal"
                       value={field.value}
                       onValueChange={(v) => field.onChange({ target: { value: v } })}
-                      errorMessage={message}
-                      isInvalid={!!message}
+                      errorMessage={error?.message}
+                      isInvalid={!!error?.message}
                     >
                       <Radio value="number">Number</Radio>
                       <Radio value="text">Text</Radio>
@@ -148,125 +144,63 @@ const DataConfig = ({ element, onChange }) => {
             {watch().type === 'text' && (
               <>
                 <div className="space-y-2">
-                  <div className="flex items-end space-x-4">
-                    <Controller
-                      name="compare[0].order"
-                      control={control}
-                      rules={{ required: 'Order is required' }}
-                      render={({ field, fieldState: { error } }) => (
-                        <div className="flex-1">
-                          <Select
-                            label="Order"
-                            labelPlacement="outside"
-                            variant="bordered"
-                            placeholder="Select order"
-                            size="lg"
-                            selectedKeys={field.value ? [field.value] : []}
-                            onChange={(e) => field.onChange(e)}
-                            errorMessage={error?.message}
-                            isInvalid={!!error?.message}
-                            classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                            disableEmptySelection={true}
-                          >
-                            {orders.map((role) => (
-                              <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
-                                {role.label}
-                              </SelectItem>
-                            ))}
-                          </Select>
-                        </div>
-                      )}
-                    />
-                    <div className="text-base mb-4">-</div>
-                    <Controller
-                      name="compare[0].group"
-                      control={control}
-                      rules={{ required: 'Group is required' }}
-                      render={({ field, fieldState: { error } }) => (
-                        <div className="flex-1">
-                          <Select
-                            label="Group"
-                            labelPlacement="outside"
-                            variant="bordered"
-                            placeholder="Select group"
-                            size="lg"
-                            selectedKeys={field.value ? [field.value] : []}
-                            onChange={(e) => field.onChange(e)}
-                            errorMessage={error?.message}
-                            isInvalid={!!error?.message}
-                            classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                            disableEmptySelection={true}
-                          >
-                            {groups.map((role) => (
-                              <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
-                                {role.label}
-                              </SelectItem>
-                            ))}
-                          </Select>
-                        </div>
-                      )}
-                    />
-                  </div>
+                  <Controller
+                    name="compare[0].combination"
+                    control={control}
+                    rules={{ required: 'Combination is required' }}
+                    render={({ field, fieldState: { error } }) => (
+                      <div className="flex-1">
+                        <Select
+                          label="Combination"
+                          labelPlacement="outside"
+                          variant="bordered"
+                          placeholder="Select one"
+                          size="lg"
+                          selectedKeys={field.value ? [field.value] : []}
+                          onChange={(e) => field.onChange(e)}
+                          errorMessage={error?.message}
+                          isInvalid={!!error?.message}
+                          classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                          disableEmptySelection={true}
+                        >
+                          {combinations.map((role) => (
+                            <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
+                              {role.label}
+                            </SelectItem>
+                          ))}
+                        </Select>
+                      </div>
+                    )}
+                  />
                   <p className="text-center border border-default-200 rounded-full w-max px-3 py-1 mx-auto">VS</p>
-                  <div className="flex items-end space-x-4">
-                    <Controller
-                      name="compare[1].order"
-                      control={control}
-                      rules={{ required: 'Order is required' }}
-                      render={({ field, fieldState: { error } }) => (
-                        <div className="flex-1">
-                          <Select
-                            label="Order"
-                            labelPlacement="outside"
-                            variant="bordered"
-                            placeholder="Select order"
-                            size="lg"
-                            selectedKeys={field.value ? [field.value] : []}
-                            onChange={(e) => field.onChange(e)}
-                            errorMessage={error?.message}
-                            isInvalid={!!error?.message}
-                            classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                            disableEmptySelection={true}
-                          >
-                            {orders.map((role) => (
-                              <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
-                                {role.label}
-                              </SelectItem>
-                            ))}
-                          </Select>
-                        </div>
-                      )}
-                    />
-                    <div className="text-base mb-4">-</div>
-                    <Controller
-                      name="compare[1].group"
-                      control={control}
-                      rules={{ required: 'Group is required' }}
-                      render={({ field, fieldState: { error } }) => (
-                        <div className="flex-1">
-                          <Select
-                            label="Group"
-                            labelPlacement="outside"
-                            variant="bordered"
-                            placeholder="Select group"
-                            size="lg"
-                            selectedKeys={field.value ? [field.value] : []}
-                            onChange={(e) => field.onChange(e)}
-                            errorMessage={error?.message}
-                            isInvalid={!!error?.message}
-                            classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                            disableEmptySelection={true}
-                          >
-                            {groups.map((role) => (
-                              <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
-                                {role.label}
-                              </SelectItem>
-                            ))}
-                          </Select>
-                        </div>
-                      )}
-                    />
-                  </div>
+                  <Controller
+                    name="compare[1].combination"
+                    control={control}
+                    rules={{ required: 'Combination is required' }}
+                    render={({ field, fieldState: { error } }) => (
+                      <div className="flex-1">
+                        <Select
+                          label="Combination"
+                          labelPlacement="outside"
+                          variant="bordered"
+                          placeholder="Select one"
+                          size="lg"
+                          selectedKeys={field.value ? [field.value] : []}
+                          onChange={(e) => field.onChange(e)}
+                          errorMessage={error?.message}
+                          isInvalid={!!error?.message}
+                          classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                          disableEmptySelection={true}
+                        >
+                          {combinations.map((role) => (
+                            <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
+                              {role.label}
+                            </SelectItem>
+                          ))}
+                        </Select>
+                      </div>
+                    )}
+                  />
                 </div>
                 <hr className="border-default-200 dark:border-default-100" />
                 <div className="flex flex-row justify-between items-center space-x-4">
@@ -366,6 +300,7 @@ const DataConfig = ({ element, onChange }) => {
                       const message = error?.type === 'validate' ? 'Unit is required' : error?.message;
                       return (
                         <Select
+                          aria-label="Unit"
                           variant="bordered"
                           placeholder="Select unit"
                           size="lg"
@@ -402,9 +337,9 @@ const DataConfig = ({ element, onChange }) => {
   );
 };
 
-DataConfig.propTypes = {
+DataTagConfig.propTypes = {
   element: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-export default DataConfig;
+export default DataTagConfig;
