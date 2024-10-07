@@ -1,8 +1,41 @@
 import { Autocomplete, AutocompleteItem, Button } from '@nextui-org/react';
 import { TbMinus, TbPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
+import { useRef } from 'react';
 
 const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel, min = 0, max = 100, step = 1 }) => {
+  const interval = useRef(null);
+
+  const handleChange = (v) => {
+    if (isNaN(v)) return;
+    if (`${v}`.includes('.')) {
+      return onChange(Math.min(max, Math.max(min, +v.toFixed(1))));
+    }
+    onChange(Math.min(max, Math.max(min, +v)));
+  };
+
+  const handlePressStart = (type) => {
+    if (type === 'increment') {
+      handleChange(+value + step);
+      let initial = +value + step;
+      interval.current = setInterval(() => {
+        handleChange(initial + step);
+        initial = initial + step;
+      }, 100);
+    } else if (type === 'decrement') {
+      handleChange(+value - step);
+      let initial = +value - step;
+      interval.current = setInterval(() => {
+        handleChange(initial - step);
+        initial = initial - step;
+      }, 100);
+    }
+  };
+
+  const handlePressEnd = () => {
+    clearInterval(interval.current);
+  };
+
   return (
     <div className="gap-2 flex items-center">
       <Button
@@ -10,10 +43,8 @@ const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel,
         variant="bordered"
         className="text-base"
         isDisabled={isNaN(value) || value <= min}
-        onClick={() => {
-          if (isNaN(value)) return;
-          onChange(Math.max(min, +value - step));
-        }}
+        onPressStart={() => handlePressStart('decrement')}
+        onPressEnd={handlePressEnd}
       >
         <TbMinus size="20" />
       </Button>
@@ -25,13 +56,8 @@ const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel,
         classNames={{ base: 'w-[80px] text-base' }}
         allowsEmptyCollection={false}
         inputValue={`${!isNaN(value) ? value : ''}`}
-        onInputChange={(v) => {
-          if (+v <= 0) return;
-          onChange(+v);
-        }}
-        onSelectionChange={(v) => {
-          onChange(+v);
-        }}
+        onInputChange={(v) => handleChange(v)}
+        onSelectionChange={(v) => handleChange(v)}
         menuTrigger="manual"
         variant={variant}
       >
@@ -46,10 +72,8 @@ const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel,
         variant="bordered"
         className="text-base"
         isDisabled={isNaN(value) || value >= max}
-        onClick={() => {
-          if (isNaN(value)) return;
-          onChange(Math.min(max, +value + step));
-        }}
+        onPressStart={() => handlePressStart('increment')}
+        onPressEnd={handlePressEnd}
       >
         <TbPlus size="20" />
       </Button>
