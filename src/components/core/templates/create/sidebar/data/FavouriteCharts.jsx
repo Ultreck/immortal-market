@@ -372,7 +372,7 @@ const FavouriteCharts = () => {
       id: 'chart-s-line-bar',
       category: 'combination',
       data: {
-        type: 'chart-s-line-bar',
+        type: 'chart-s',
         text: 'Line Bar Chart',
         width: 400,
         height: 300,

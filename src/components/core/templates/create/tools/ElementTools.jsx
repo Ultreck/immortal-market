@@ -23,6 +23,7 @@ import Color from '@/components/core/templates/create/tools/elements/generic/Col
 import SummarizerConfig from '@/components/core/templates/create/tools/elements/specific/SummarizerConfig.jsx';
 import DataTagConfig from '@/components/core/templates/create/tools/elements/specific/DataTagConfig.jsx';
 import ChartData from './elements/generic/ChartData.jsx';
+import Rotate from './elements/generic/Rotate.jsx';
 
 const mapping = {
   font: { type: 'multiple', component: Font },
@@ -48,6 +49,7 @@ const mapping = {
   summarizer: { type: 'single', component: SummarizerConfig },
   'data-tag': { type: 'single', component: DataTagConfig },
   'chart-data': { type: 'single', component: ChartData },
+  rotate: { type: 'single', component: Rotate },
 };
 
 const ElementTools = () => {
