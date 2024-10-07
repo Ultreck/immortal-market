@@ -46,7 +46,7 @@ export const StandardAreaMultipleContent = ({ element }) => {
         <YAxis type="number" hide={!element.config.showYaxis} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
         {element.config.showLegend && <Legend />}
-        {element.config.keys.y.map((key, index) => {
+        {element.config.keys.y.slice(0, element.config.noOfLines).map((key, index) => {
           return (
             <Area
               key={key}

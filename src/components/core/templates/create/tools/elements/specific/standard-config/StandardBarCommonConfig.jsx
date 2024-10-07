@@ -64,7 +64,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
             Show Y Grid Line
           </Checkbox>
         </div>
-        {element.type === 'chart-s-line' && (
+        {element.type === 'chart-s-line' && element.type === 'chart-s-area' (
           <div className="flex items-center space-x-4">
             {[
               { name: 'Natural', icon: <TbChartLine size={25} /> },
