@@ -1,8 +1,8 @@
-import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Input, Popover, PopoverContent, PopoverTrigger, Radio, RadioGroup } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import { TbMinus, TbPlus, TbSettings2 } from 'react-icons/tb';
 
-const MarqueeTextConfig = ({ element, onChange }) => {
+const BulletTextConfig = ({ element, onChange }) => {
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
@@ -12,6 +12,15 @@ const MarqueeTextConfig = ({ element, onChange }) => {
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-6 py-6 w-full gap-y-4 flex flex-col">
+          <p>Bullet Type</p>
+          <RadioGroup
+            orientation="horizontal"
+            value={element.config.type}
+            onValueChange={(v) => onChange({ ...element, config: { ...element.config, type: v } })}
+          >
+            <Radio value="number">Number</Radio>
+            <Radio value="bullet">Text</Radio>
+          </RadioGroup>
           {element.config.texts.map((text, i) => (
             <div key={i} className="flex gap-2">
               <Input
@@ -57,11 +66,14 @@ const MarqueeTextConfig = ({ element, onChange }) => {
   );
 };
 
-MarqueeTextConfig.propTypes = {
+BulletTextConfig.propTypes = {
   element: PropTypes.shape({
-    config: PropTypes.object,
+    config: PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      texts: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }),
   }),
   onChange: PropTypes.func.isRequired,
 };
 
-export default MarqueeTextConfig;
+export default BulletTextConfig;

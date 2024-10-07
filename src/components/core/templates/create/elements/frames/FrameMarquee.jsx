@@ -28,16 +28,23 @@ const FrameMarquee = ({ element, active, highlighted, width, onClick, onChange }
         <div className={cn(`relative flex h-full `, !isEditing ? 'overflow-x-hidden ' : '')}>
           <div
             className={cn(
-              `h-full relative top-0  whitespace-nowrap flex py-5 gap-5 w-full`,
-              !isEditing ? 'animate-marquee' : ''
+              `h-full relative top-0  whitespace-nowrap flex py-5 gap-5 w-full`
+              // !isEditing ? 'animate-marquee' : ''
             )}
-            style={{ width: element.width * element.config.slides, height: '100%' }}
+            style={{
+              width: element.width * element.config.slides,
+              height: '100%',
+              animationName: isEditing ? '' : 'marquee',
+              animationDuration: `${element.config.speed}s`,
+              animationTimingFunction: 'linear',
+              animationIterationCount: 'infinite',
+            }}
           >
             {Array(element.config.slides)
               .fill(null)
               .map((s, i) => (
                 <FrameContents
-                  style={{ width: element.width, height: '100%' }}
+                  style={{ width: element.width / element.config.slidesPerView, height: '100%' }}
                   key={i}
                   id={`frame/${i}/${element.id}`}
                   element={element}

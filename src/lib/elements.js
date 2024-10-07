@@ -1,4 +1,5 @@
 import Text, { TextPresent } from '@/components/core/templates/create/elements/Text.jsx';
+import List, { ListPresent } from '@/components/core/templates/create/elements/List.jsx';
 import Image, { ImagePresent } from '@/components/core/templates/create/elements/Image.jsx';
 import Line, { LineElementContent } from '@/components/core/templates/create/elements/Line.jsx';
 import Shape, { ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
@@ -19,13 +20,14 @@ export const tools = {
     acc[type] = ['font', 'opacity', 'animation', 'shadow', 'layout'];
     return acc;
   }, {}),
+  list: ['list', 'font', 'opacity', 'animation', 'shadow', 'layout'],
   'chart-s': ['chart', 'colors', 'opacity', 'animation', 'chart-data', 'layout'],
   'chart-a': ['advanced-chart', 'colors', 'opacity', 'chart-data', 'layout'],
   shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout'],
   frame: (element) => {
     if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow', 'layout'];
     if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow', 'layout'];
-    if (element.config.name === 'marquee') return ['carousel', 'opacity', 'animation', 'shadow', 'layout'];
+    if (element.config.name === 'marquee') return ['marquee', 'opacity', 'animation', 'shadow', 'layout'];
     if (element.config.name === 'marquee-text') {
       return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout'];
     }
@@ -50,6 +52,7 @@ export const components = {
       acc[type] = Text;
       return acc;
     }, {}),
+    list: List,
     'chart-s': StandardCharts,
     'chart-a': AdvanceCharts,
     shape: Shape,
@@ -68,6 +71,7 @@ export const components = {
       acc[type] = TextPresent;
       return acc;
     }, {}),
+    list: ListPresent,
     'chart-s': StandardChartsPresent,
     'chart-a': AdvanceChartsPresent,
     table: TablePresent,

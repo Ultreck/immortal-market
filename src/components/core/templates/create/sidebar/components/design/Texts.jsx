@@ -14,10 +14,20 @@ const styles = {
   caption: {
     fontSize: 12,
   },
+  list: {
+    fontSize: 12,
+  },
+};
+
+const configs = {
+  list: {
+    type: 'number',
+    texts: ['fwf', 'wvbetver', 'e4wgwwff'],
+  },
 };
 
 const texts = [
-  ...['heading', 'subheading', 'paragraph', 'caption'].map((type) => {
+  ...['heading', 'subheading', 'paragraph', 'caption', 'list'].map((type) => {
     return {
       id: type,
       type: type,
@@ -31,7 +41,7 @@ const texts = [
           ...getElementDefaultStyle({ type }),
           ...(styles[type] || {}),
         },
-        config: {},
+        config: configs[type] || {},
       },
       preview: (
         <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-4 overflow-hidden">

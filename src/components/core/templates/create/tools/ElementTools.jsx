@@ -14,7 +14,9 @@ import AdvancedChartConfig from './elements/specific/AdvancedChartConfig.jsx';
 import Shadow from './elements/generic/Shadow.jsx';
 import FrameTabsConfig from './elements/specific/FrameTabsConfig.jsx';
 import FrameCarouselConfig from './elements/specific/FrameCarouselConfig.jsx';
+import FrameMarqueeConfig from './elements/specific/FrameMarqueeConfig.jsx';
 import MarqueeTextConfig from './elements/specific/MarqueeTextConfig.jsx';
+import BulletTextConfig from './elements/specific/BulletTextConfig.jsx';
 import InfographicConfig from '@/components/core/templates/create/tools/elements/specific/InfographicConfig.jsx';
 import Colors from './elements/generic/Colors.jsx';
 import Font from '@/components/core/templates/create/tools/elements/generic/Font.jsx';
@@ -40,8 +42,9 @@ const mapping = {
   shadow: { type: 'multiple', component: Shadow },
   tabs: { type: 'single', component: FrameTabsConfig },
   carousel: { type: 'single', component: FrameCarouselConfig },
-  marquee: { type: 'single', component: FrameCarouselConfig },
-  marqueeText: { type: 'single', component: MarqueeTextConfig },
+  marquee: { type: 'single', component: FrameMarqueeConfig },
+  'marquee-text': { type: 'single', component: MarqueeTextConfig },
+  list: { type: 'single', component: BulletTextConfig },
   typewriterText: { type: 'single', component: MarqueeTextConfig },
   infographic: { type: 'single', component: InfographicConfig },
   colors: { type: 'single', component: Colors },

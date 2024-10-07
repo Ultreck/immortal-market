@@ -63,6 +63,8 @@ const items = [
       config: {
         name: 'marquee',
         slides: 3,
+        slidesPerView: 1,
+        speed: 12,
       },
     },
     preview: (
