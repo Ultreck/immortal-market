@@ -26,10 +26,12 @@ export const tools = {
     if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow', 'layout'];
     if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow', 'layout'];
     if (element.config.name === 'marquee') return ['carousel', 'opacity', 'animation', 'shadow', 'layout'];
-    if (element.config.name === 'marqueeText')
-      return ['font', 'marqueeText', 'opacity', 'animation', 'shadow', 'layout'];
-    if (element.config.name === 'typewriterText')
-      return ['font', 'marqueeText', 'opacity', 'animation', 'shadow', 'layout'];
+    if (element.config.name === 'marquee-text') {
+      return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+    }
+    if (element.config.name === 'typewriter-text') {
+      return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+    }
     return ['opacity', 'animation', 'shadow'];
   },
   icon: ['icon', 'color', 'opacity', 'animation', 'shadow', 'layout'],
@@ -83,4 +85,40 @@ export const getElementTools = (element) => {
   if (!tools[element.type]) throw new Error(`No tools found for type ${element.type}`);
   if (typeof tools[element.type] === 'function') return tools[element.type](element);
   return tools[element.type];
+};
+
+export const getElementDefaultStyle = ({ type, name }) => {
+  const tools = getElementTools({ type, config: { name } });
+  if (tools.length === 0) return {};
+  let styles = {};
+  if (tools.includes('font')) {
+    styles = {
+      ...styles,
+      fontSize: 16,
+      fontWeight: 'normal',
+      color: '#000000',
+      textAlign: 'left',
+      letterSpacing: 0,
+      lineHeight: 1,
+    };
+  }
+  if (tools.includes('opacity')) {
+    styles = { ...styles, opacity: 1 };
+  }
+  if (tools.includes('color')) {
+    styles = { ...styles, color: '#000000' };
+  }
+  if (tools.includes('background')) {
+    styles = { ...styles, background: '#ddd' };
+  }
+  if (tools.includes('animation')) {
+    styles = { ...styles, animationName: '', animationDuration: '1s' };
+  }
+  if (tools.includes('shadow')) {
+    styles = { ...styles, shadow: '' };
+  }
+  if (tools.includes('border')) {
+    styles = { ...styles, borderWidth: 0, borderColor: '#000000', borderRadius: 0 };
+  }
+  return styles;
 };

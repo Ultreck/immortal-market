@@ -3,9 +3,9 @@ import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
-import { starterLifeChartData } from '@/lib/charts';
+import { starterLifeChartData } from '@/lib/design/chart-data.js';
 
-const AdvancedScatterLifeExpentancy = ({ element, active, highlighted, width, onClick, onChange }) => {
+const AdvancedScatterLifeExpectancy = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <div>
       <ElementWrapper
@@ -23,7 +23,7 @@ const AdvancedScatterLifeExpentancy = ({ element, active, highlighted, width, on
   );
 };
 
-AdvancedScatterLifeExpentancy.propTypes = ElementPropTypes;
+AdvancedScatterLifeExpectancy.propTypes = ElementPropTypes;
 
 export const AdvanceDynamicSortingChartContent = ({ element }) => {
   const chartRef = useRef(null);
@@ -213,5 +213,4 @@ AdvanceDynamicSortingChartContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
-export default AdvancedScatterLifeExpentancy;
-
+export default AdvancedScatterLifeExpectancy;

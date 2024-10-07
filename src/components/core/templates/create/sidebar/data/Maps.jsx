@@ -109,6 +109,7 @@ import { MapKenyaPreview } from '@/components/core/templates/create/elements/map
 import { MapKosovoPreview } from '@/components/core/templates/create/elements/maps/MapKosovo.jsx';
 import { MapKuwaitPreview } from '@/components/core/templates/create/elements/maps/MapKuwait.jsx';
 import { MapKyrgyzstanPreview } from '@/components/core/templates/create/elements/maps/MapKyrgyzstan.jsx';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const names = [
   'nigeria',
@@ -341,7 +342,7 @@ const elements = names.map((name) => ({
     text: name.split('-').map(capitalize).join(' '),
     width: 400,
     height: 400,
-    style: { opacity: 1 },
+    style: getElementDefaultStyle({ type: 'map' }),
     config: {
       data: [],
       name,

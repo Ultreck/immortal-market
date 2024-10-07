@@ -1,5 +1,5 @@
 import Drawer from '@/components/ui/Drawer';
-import { chartElements } from '@/lib/standard-charts';
+import { standard } from '@/lib/design/charts.jsx';
 import { Input } from '@nextui-org/react';
 import { TbCirclePlus } from 'react-icons/tb';
 import NewConnection from '../chart-submenu/NewConnection';
@@ -133,7 +133,7 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
 
       return xEqual && yEqual;
     };
-    return chartElements.filter((chart) => {
+    return standard.filter((chart) => {
       const chartKeys = chart.data.config.keys;
       return areKeysEqual(chartKeys, element.config.keys);
     });

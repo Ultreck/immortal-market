@@ -1,9 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@nextui-org/react';
-import { starterLifeChartData } from '../../../../../lib/charts';
-
-const ROOT_PATH = 'https://echarts.apache.org/examples';
+import { starterLifeChartData } from '@/lib/design/chart-data.js';
 
 const ScatterLifeExpectancyChart = () => {
   const chartRef = useRef(null);
@@ -196,7 +194,7 @@ const ScatterLifeExpectancyChart = () => {
   }, []);
 
   return (
-    <Card className='w-full bg-white space-y-6 px-8 py-6 mt-10'>
+    <Card className="w-full bg-white space-y-6 px-8 py-6 mt-10">
       <div ref={chartRef} style={{ width: '100%', height: '600px' }} />
     </Card>
   );

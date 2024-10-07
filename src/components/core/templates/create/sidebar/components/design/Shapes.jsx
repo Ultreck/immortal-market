@@ -4,6 +4,8 @@ import shapes from '@/lib/design/shapes.js';
 import { capitalize } from '@/lib/utils.js';
 import { Button } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight, TbLine } from 'react-icons/tb';
+import PropTypes from 'prop-types';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const items = [
   ...(Object.keys(shapes).map((name) => ({
@@ -13,17 +15,8 @@ const items = [
       text: capitalize(name.replace('-', ' ')),
       width: 120,
       height: 120,
-      style: {
-        background: '#eee',
-        borderWidth: 0,
-        borderColor: '#000000',
-        opacity: 1,
-        borderRadius: 0,
-        animationDuration: '1s',
-      },
-      config: {
-        name,
-      },
+      style: getElementDefaultStyle({ type: 'shape', name }),
+      config: { name },
     },
     preview: (
       <div
@@ -41,17 +34,7 @@ const items = [
       text: 'Line',
       width: 100,
       height: 8,
-      style: {
-        background: '#eee',
-        borderWidth: 0,
-        borderColor: '#000000',
-        opacity: 1,
-        borderRadius: 0,
-        strokeWidth: 2,
-        animationDuration: '1s',
-      },
-      // lineEnd: null, // TODO: fix this
-      // lineStart: null,
+      style: getElementDefaultStyle({ type: 'line' }),
       config: {
         start: null,
         end: null,
@@ -72,6 +55,7 @@ const ShapesSlider = ({ mini = false, onView, onBack }) => {
         <>
           <div className="relative">
             <BasicCarousel
+              shadow
               classNames={{ next: 'right-0', prev: 'left-0', base: 'overflow-hidden' }}
               slides={Array(2)
                 .fill(null)
@@ -121,5 +105,10 @@ const ShapesSlider = ({ mini = false, onView, onBack }) => {
   );
 };
 
-export default ShapesSlider;
+ShapesSlider.propTypes = {
+  mini: PropTypes.bool,
+  onView: PropTypes.func,
+  onBack: PropTypes.func,
+};
 
+export default ShapesSlider;

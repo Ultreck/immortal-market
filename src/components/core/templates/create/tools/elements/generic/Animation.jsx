@@ -18,7 +18,7 @@ const Animation = ({ elements, onChange }) => {
   const same = animationValues.every((v) => v === animationValues[0]);
   const animationValue = same ? animationValues[0] : '';
 
-  const animationDurationValues = elements.map((e) => e?.style?.animationDuration);
+  const animationDurationValues = elements.map((e) => e?.style?.animationDuration || '1s');
   const sameAnimationDuration = animationDurationValues.every((v) => v === animationDurationValues[0]);
   const animationDurationValue = sameAnimationDuration ? parseFloat(animationDurationValues[0]?.replace('s', '')) : 0;
 
@@ -79,13 +79,21 @@ const Animation = ({ elements, onChange }) => {
             ))}
           </Select>
           <Slider
-            color="foreground"
             onChange={(duration) => handleAnimationDurationChange(duration)}
             label="Animation Duration"
             step={0.1}
             maxValue={2}
             minValue={0}
-            defaultValue={animationDurationValue}
+            value={animationDurationValue}
+            renderValue={() => `${animationDurationValue}s`}
+            classNames={{
+              thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+              track: 'border-s-default-300',
+              filler: 'bg-gradient-to-r from-default-300 to-default-400',
+              label: 'text-base',
+              value: 'text-base opacity-60',
+            }}
+            size="sm"
           />
         </div>
       </PopoverContent>

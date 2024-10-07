@@ -12,7 +12,7 @@ import AdvanceTreeMap from './AdvanceTreeMap.jsx';
 import AdvanceSpeedometer from './AdvanceSpeedometer.jsx';
 import AdvanceGauge from './AdvanceGauge.jsx';
 import AdvanceMultipleGauge from './AdvanceMultipleGauge.jsx';
-import AdvancedScatterLifeExpentancy from './AdvancedScatterLifeExpentancy.jsx';
+import AdvancedScatterLifeExpectancy from './AdvancedScatterLifeExpectancy.jsx';
 import AdvancedPictogramShapes from './AdvancedPictogramShapes.jsx';
 import AdvancedStackedCard from './AdvancedStackedCard.jsx';
 import AdvancePercentageCard from './AdvancePercentageCard.jsx';
@@ -21,19 +21,19 @@ import AdvancePercentageCardTwo from './AdvancePercentageCardTwo.jsx';
 
 const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
-    'shapes': AdvanceShapes,
+    shapes: AdvanceShapes,
     'linear-bar': AdvanceLinearBar,
     'custom-bar': AdvanceCustomBar,
-    'lollipop': AdvanceLollipop,
-    'funnel': AdvanceFunnel,
+    lollipop: AdvanceLollipop,
+    funnel: AdvanceFunnel,
     'tree-map': AdvanceTreeMap,
     'nested-circles': AdvanceNestedCircles,
     'circle-icons': AdvanceCircleIcons,
     'dynamic-sorting': AdvanceDynamicSorting,
-    'speedometer': AdvanceSpeedometer,
+    speedometer: AdvanceSpeedometer,
     'speedometer-simple': AdvanceGauge,
     'speedometer-multiple': AdvanceMultipleGauge,
-    'scatter-life-expectancy': AdvancedScatterLifeExpentancy,
+    'scatter-life-expectancy': AdvancedScatterLifeExpectancy,
     'pictogram-shapes': AdvancedPictogramShapes,
     'stacked-card': AdvancedStackedCard,
     'percentage-card': AdvancePercentageCard,

@@ -1,5 +1,6 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { TablePreview } from '@/components/core/templates/create/elements/table/Table.jsx';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const colors = [
   '#E66B5B',
@@ -246,11 +247,7 @@ const elements = [
       text: 'Table',
       width: 500,
       height: 300,
-      style: {
-        fontSize: 14,
-        opacity: 1,
-        animationDuration: '1s',
-      },
+      style: getElementDefaultStyle({ type: 'table' }),
       config: {
         scheme: item.scheme,
         colors: item.colors,

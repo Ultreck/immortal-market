@@ -30,7 +30,7 @@ const FrameTextMarquee = ({ element, active, highlighted, width, onClick, onChan
               `h-full relative top-0  whitespace-nowrap flex py-5 gap-5 w-full`,
               !isEditing ? 'animate-marquee' : ''
             )}
-            style={{ width: element.width , height: '100%' }}
+            style={{ width: element.width, height: '100%' }}
           >
             {element.config.texts.map((text, i) => (
               <span style={element.style} key={i} className="text-4xl mx-4">
@@ -47,4 +47,3 @@ const FrameTextMarquee = ({ element, active, highlighted, width, onClick, onChan
 FrameTextMarquee.propTypes = ElementPropTypes;
 
 export default FrameTextMarquee;
-

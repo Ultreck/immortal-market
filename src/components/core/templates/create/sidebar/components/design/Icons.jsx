@@ -4,6 +4,8 @@ import icons from '@/lib/design/icons.js';
 import BasicCarousel from '@/components/ui/BasicCarousel';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import { Button } from '@nextui-org/react';
+import PropTypes from 'prop-types';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const items = icons.map((icon) => ({
   id: `icon-${icon.name}`,
@@ -12,13 +14,7 @@ const items = icons.map((icon) => ({
     text: `Icon ${icon.name}`,
     width: 40,
     height: 40,
-    style: {
-      borderWidth: 0,
-      borderColor: '#000000',
-      opacity: 1,
-      borderRadius: 0,
-      animationDuration: '1s',
-    },
+    style: getElementDefaultStyle({ type: 'icon' }),
     config: {
       name: icon.name,
       keywords: icon.keywords,
@@ -39,6 +35,7 @@ const IconsSlider = ({ mini = false, onView, onBack }) => {
         <>
           <div className="relative">
             <BasicCarousel
+              shadow
               classNames={{ next: 'right-0', prev: 'left-0', base: 'overflow-hidden' }}
               slides={Array(2)
                 .fill(null)
@@ -88,5 +85,10 @@ const IconsSlider = ({ mini = false, onView, onBack }) => {
   );
 };
 
-export default IconsSlider;
+IconsSlider.propTypes = {
+  mini: PropTypes.bool,
+  onView: PropTypes.func,
+  onBack: PropTypes.func,
+};
 
+export default IconsSlider;

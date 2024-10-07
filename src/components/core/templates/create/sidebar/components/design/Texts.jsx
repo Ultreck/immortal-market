@@ -1,50 +1,18 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { capitalize } from '@/lib/utils.js';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const styles = {
   heading: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#000000',
-    textAlign: 'left',
-    opacity: 1,
-    fontFamily: 'Roboto',
-    letterSpacing: 0,
-    lineHeight: 1,
-    animationDuration: '1s',
   },
   subheading: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#000000',
-    textAlign: 'left',
-    opacity: 1,
-    fontFamily: 'Roboto',
-    letterSpacing: 0,
-    lineHeight: 1,
-    animationDuration: '1s',
-  },
-  paragraph: {
-    fontSize: 16,
-    fontWeight: 'normal',
-    color: '#000000',
-    textAlign: 'left',
-    opacity: 1,
-    fontFamily: 'Roboto',
-    letterSpacing: 0,
-    lineHeight: 1,
-    animationDuration: '1s',
   },
   caption: {
     fontSize: 12,
-    fontWeight: 'normal',
-    color: '#000000',
-    textAlign: 'left',
-    opacity: 1,
-    fontFamily: 'Roboto',
-    letterSpacing: 0,
-    lineHeight: 1.4,
-    animationDuration: '1s',
   },
 };
 
@@ -59,7 +27,10 @@ const texts = [
         text: capitalize(type),
         width: 400,
         height: 36,
-        style: styles[type],
+        style: {
+          ...getElementDefaultStyle({ type }),
+          ...(styles[type] || {}),
+        },
         config: {},
       },
       preview: (

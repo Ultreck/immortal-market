@@ -7,6 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { getImageLink } from '@/lib/utils.js';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { useAddInfographics, useGetInfographics } from '@/api/business.js';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const Infographics = () => {
   const toast = useToast();
@@ -38,9 +39,7 @@ const Infographics = () => {
       text: 'Infographic',
       width: 400,
       height: 300,
-      style: {
-        opacity: 1,
-      },
+      style: getElementDefaultStyle({ type: 'infographic' }),
       config: {
         src: getImageLink(infographic.Key),
       },

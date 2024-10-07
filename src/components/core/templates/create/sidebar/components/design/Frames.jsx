@@ -4,6 +4,8 @@ import shapes from '@/lib/design/shapes.js';
 import { Button } from '@nextui-org/react';
 import { RiCheckboxMultipleBlankFill } from 'react-icons/ri';
 import { TbCarouselHorizontalFilled, TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import PropTypes from 'prop-types';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const items = [
   {
@@ -14,10 +16,7 @@ const items = [
       width: 300,
       height: 300,
       children: [],
-      style: {
-        animationDuration: '1s',
-        opacity: 1,
-      },
+      style: getElementDefaultStyle({ type: 'frame', name: 'tabs' }),
       config: {
         name: 'tabs',
         tabs: [
@@ -40,10 +39,7 @@ const items = [
       width: 300,
       height: 300,
       children: [],
-      style: {
-        animationDuration: '1s',
-        opacity: 1,
-      },
+      style: getElementDefaultStyle({ type: 'frame', name: 'carousel' }),
       config: {
         name: 'carousel',
         slides: 2,
@@ -63,10 +59,7 @@ const items = [
       width: 300,
       height: 300,
       children: [],
-      style: {
-        animationDuration: '1s',
-        opacity: 1,
-      },
+      style: getElementDefaultStyle({ type: 'frame', name: 'marquee' }),
       config: {
         name: 'marquee',
         slides: 3,
@@ -82,23 +75,13 @@ const items = [
     id: 'frame-marquee-text',
     data: {
       type: 'frame',
-      text: 'Frame marquee Text',
+      text: 'Frame marquee text',
       width: 300,
       height: 300,
       children: [],
-      style: {
-        animationDuration: '1s',
-        opacity: 1,
-        fontSize: 16,
-        fontWeight: 'normal',
-        color: '#000000',
-        textAlign: 'left',
-        fontFamily: 'Roboto',
-        letterSpacing: 0,
-        lineHeight: 1,
-      },
+      style: getElementDefaultStyle({ type: 'frame', name: 'marquee-text' }),
       config: {
-        name: 'marqueeText',
+        name: 'marquee-text',
         texts: ['fwf', 'wvbetver', 'e4wgwwff'],
       },
     },
@@ -116,19 +99,9 @@ const items = [
       width: 300,
       height: 36,
       children: [],
-      style: {
-        animationDuration: '1s',
-        opacity: 1,
-        fontSize: 16,
-        fontWeight: 'normal',
-        color: '#000000',
-        textAlign: 'left',
-        fontFamily: 'Roboto',
-        letterSpacing: 0,
-        lineHeight: 1,
-      },
+      style: getElementDefaultStyle({ type: 'frame', name: 'typewriter-text' }),
       config: {
-        name: 'typewriterText',
+        name: 'typewriter-text',
         texts: ['fwf', 'wvbetver', 'e4wgwwff'],
       },
     },
@@ -138,7 +111,7 @@ const items = [
       </div>
     ),
   },
-  ...(Object.keys(shapes).map((name) => ({
+  ...Object.keys(shapes).map((name) => ({
     id: `frame-${name}`,
     data: {
       type: 'frame',
@@ -146,14 +119,7 @@ const items = [
       width: 300,
       height: 300,
       children: [],
-      style: {
-        background: '#eee',
-        borderWidth: 0,
-        borderColor: '#000000',
-        opacity: 1,
-        borderRadius: 0,
-        animationDuration: '1s',
-      },
+      style: getElementDefaultStyle({ type: 'frame', name: `shape-${name}` }),
       config: {
         name: `shape-${name}`,
       },
@@ -164,7 +130,7 @@ const items = [
         style={{ ...shapes[name] }}
       />
     ),
-  })) || []),
+  })),
 ];
 
 const Frames = ({ mini = false, onView, onBack }) => {
@@ -174,6 +140,7 @@ const Frames = ({ mini = false, onView, onBack }) => {
         <>
           <div className="relative">
             <BasicCarousel
+              shadow
               classNames={{ next: 'right-0', prev: 'left-0' }}
               slides={Array(2)
                 .fill(null)
@@ -223,5 +190,10 @@ const Frames = ({ mini = false, onView, onBack }) => {
   );
 };
 
-export default Frames;
+Frames.propTypes = {
+  mini: PropTypes.bool,
+  onView: PropTypes.func,
+  onBack: PropTypes.func,
+};
 
+export default Frames;

@@ -5,6 +5,7 @@ import { useGetImagesFromUnsplash, useSearchImagesFromUnsplash } from '@/api/mis
 import { TbSearch, TbX } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import PropTypes from 'prop-types';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const ExternalImages = () => {
   const [query, setQuery] = useState('');
@@ -53,12 +54,7 @@ const List = () => {
         text: 'Image',
         width: 400,
         height: 300,
-        style: {
-          borderWidth: 0,
-          borderColor: '#000',
-          opacity: 1,
-          borderRadius: 0,
-        },
+        style: getElementDefaultStyle({ type: 'image' }),
         config: {
           src: i.urls.regular,
         },
@@ -123,12 +119,7 @@ const Search = ({ query }) => {
         text: 'Image',
         width: 400,
         height: 300,
-        style: {
-          borderWidth: 0,
-          borderColor: '#000',
-          opacity: 1,
-          borderRadius: 0,
-        },
+        style: getElementDefaultStyle({ type: 'image' }),
         config: {
           src: i.urls.regular,
         },

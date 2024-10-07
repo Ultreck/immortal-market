@@ -29,7 +29,7 @@ const Frame = ({ element, active, highlighted, width, onClick, onChange }) => {
           onChange={onChange}
         />
       )}
-      {element.config.name === 'marqueeText' && (
+      {element.config.name === 'marquee-text' && (
         <FrameTextMarquee
           element={element}
           active={active}
@@ -39,7 +39,7 @@ const Frame = ({ element, active, highlighted, width, onClick, onChange }) => {
           onChange={onChange}
         />
       )}
-      {element.config.name === 'typewriterText' && (
+      {element.config.name === 'typewriter-text' && (
         <FrameType
           element={element}
           active={active}

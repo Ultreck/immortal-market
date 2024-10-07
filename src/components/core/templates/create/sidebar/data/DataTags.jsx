@@ -3,6 +3,7 @@ import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { Button } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const groups = [
   { key: 'rank', label: 'Rank' },
@@ -45,7 +46,7 @@ const numbers = [
       text: 'Data',
       width: 150,
       height: 100,
-      style: {},
+      style: getElementDefaultStyle({ type: 'data-tag' }),
       config: {
         ...el,
         column: 'default',
@@ -87,7 +88,7 @@ const texts = [
       text: 'Data',
       width: 150,
       height: 100,
-      style: {},
+      style: getElementDefaultStyle({ type: 'data-tag' }),
       config: {
         ...el,
         column: 'default',

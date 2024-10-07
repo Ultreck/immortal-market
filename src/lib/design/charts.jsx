@@ -13,9 +13,9 @@ import {
   TbCircleHalf,
 } from 'react-icons/tb';
 import { MdOutlineStackedBarChart } from 'react-icons/md';
-import { colors } from './utils';
+import { colors } from '../utils.js';
 
-export const chartElements = [
+export const standard = [
   {
     id: 'chart-s-bar',
     category: 'bar',
@@ -62,6 +62,7 @@ export const chartElements = [
       height: 300,
       style: { opacity: 1 },
       config: {
+        name: 'bar-not-sep',
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -70,7 +71,6 @@ export const chartElements = [
           { name: 'Page E', value: 1890 },
         ],
         keys: { x: 'name', y: 'value' },
-        name: 'bar-not-sep',
         showXaxis: false,
         showYaxis: false,
         showLegend: false,
@@ -98,6 +98,7 @@ export const chartElements = [
       height: 300,
       style: { opacity: 1 },
       config: {
+        name: 'vertical-bar',
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -106,7 +107,6 @@ export const chartElements = [
           { name: 'Page E', value: 1890 },
         ],
         keys: { x: 'name', y: 'value' },
-        name: 'vertical-bar',
         showXaxis: false,
         showYaxis: false,
         showLegend: false,
@@ -134,6 +134,7 @@ export const chartElements = [
       height: 300,
       style: { opacity: 1 },
       config: {
+        name: 'vertical-bar-no-sep',
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -142,7 +143,6 @@ export const chartElements = [
           { name: 'Page E', value: 1890 },
         ],
         keys: { x: 'name', y: 'value' },
-        name: 'vertical-bar-no-sep',
         showXaxis: false,
         showYaxis: false,
         showLegend: false,
@@ -170,6 +170,7 @@ export const chartElements = [
       height: 300,
       style: { opacity: 1 },
       config: {
+        name: 'stacked-bar',
         data: [
           { month: 'Jan', desktop: 187, mobile: 200 },
           { month: 'Feb', desktop: 275, mobile: 173 },
@@ -178,7 +179,6 @@ export const chartElements = [
           { month: 'May', desktop: 187, mobile: 90 },
         ],
         keys: { x: 'month', y: ['desktop', 'mobile'] },
-        name: 'stacked-bar',
         showXaxis: false,
         showYaxis: false,
         showLegend: false,
@@ -211,6 +211,7 @@ export const chartElements = [
       height: 300,
       style: { opacity: 1 },
       config: {
+        name: 'stacked-bar-vertical',
         data: [
           { month: 'Jan', desktop: 187, mobile: 200 },
           { month: 'Feb', desktop: 275, mobile: 173 },
@@ -220,7 +221,6 @@ export const chartElements = [
           { month: 'Jun', desktop: 239, mobile: 200 },
         ],
         keys: { x: 'month', y: ['desktop', 'mobile'] },
-        name: 'stacked-bar-vertical',
         showXaxis: false,
         showYaxis: false,
         showLegend: false,
@@ -253,12 +253,12 @@ export const chartElements = [
       height: 300,
       style: { opacity: 1 },
       config: {
+        name: 'alt-bar',
         data: [
           ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
           [320, 302, 341, 374, 90, 450, 420],
           [-120, -132, -101, -134, -190, -230, -310],
         ],
-        name: 'alt-bar',
         showXaxis: false,
         showYaxis: false,
         showLegend: false,
@@ -759,10 +759,9 @@ export const chartElements = [
       </div>
     ),
   },
-
   {
     id: 'chart-s-semi-pie',
-    category: 'semiPie',
+    category: 'semi-pie',
     data: {
       type: 'chart-s',
       text: 'Semi Pie Chart',
@@ -793,7 +792,6 @@ export const chartElements = [
       </div>
     ),
   },
-
   {
     id: 'chart-s-semi-circle',
     category: 'semi',

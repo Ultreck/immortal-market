@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast.jsx';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const UploadedImages = () => {
   const toast = useToast();
@@ -35,12 +36,7 @@ const UploadedImages = () => {
       text: 'Image',
       width: 400,
       height: 300,
-      style: {
-        borderWidth: 0,
-        borderColor: '#000',
-        opacity: 1,
-        borderRadius: 0,
-      },
+      style: getElementDefaultStyle({ type: 'image' }),
       config: {
         src: getImageLink(upload.file),
       },
