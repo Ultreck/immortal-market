@@ -1,4 +1,6 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
+import { capitalize } from '@/lib/utils.js';
+import { getElementDefaultStyle } from '@/lib/elements.js';
 import { MapOceanicPreview } from '@/components/core/templates/create/elements/maps/MapOceanic.jsx';
 import { MapNorthAmericaPreview } from '@/components/core/templates/create/elements/maps/MapNorthAmerica.jsx';
 import { MapNigeriaRegionsPreview } from '@/components/core/templates/create/elements/maps/MapNigeriaRegions.jsx';
@@ -7,7 +9,6 @@ import { MapAfricaPreview } from '@/components/core/templates/create/elements/ma
 import { MapEuropePreview } from '@/components/core/templates/create/elements/maps/MapEurope.jsx';
 import { MapWorldPreview } from '@/components/core/templates/create/elements/maps/MapWorld.jsx';
 import { MapAsiaPreview } from '@/components/core/templates/create/elements/maps/MapAsia.jsx';
-import { capitalize } from '@/lib/utils.js';
 import { MapAlgeriaPreview } from '@/components/core/templates/create/elements/maps/MapAlgeria.jsx';
 import { MapAlbaniaPreview } from '@/components/core/templates/create/elements/maps/MapAlbania.jsx';
 import { MapAngolaPreview } from '@/components/core/templates/create/elements/maps/MapAngola.jsx';
@@ -109,119 +110,8 @@ import { MapKenyaPreview } from '@/components/core/templates/create/elements/map
 import { MapKosovoPreview } from '@/components/core/templates/create/elements/maps/MapKosovo.jsx';
 import { MapKuwaitPreview } from '@/components/core/templates/create/elements/maps/MapKuwait.jsx';
 import { MapKyrgyzstanPreview } from '@/components/core/templates/create/elements/maps/MapKyrgyzstan.jsx';
-import { getElementDefaultStyle } from '@/lib/elements.js';
-
-const names = [
-  'nigeria',
-  'nigeria-regions',
-  'africa',
-  'europe',
-  'north-america',
-  'south-america',
-  'world',
-  'asia',
-  'oceanic',
-  'algeria',
-  'angola',
-  'albania',
-  'afghanistan',
-  'austria',
-  'argentina',
-  'azerbaijan',
-  'benin',
-  'bangladesh',
-  'belarus',
-  'bermuda',
-  'botswana',
-  'bahrain',
-  'bulgaria',
-  'burkinafaso',
-  'burundi',
-  'armenia',
-  'australia',
-  'belgium',
-  'belize',
-  'bhutan',
-  'bolivia',
-  'bosnia-and-aerzegovina',
-  'brazil',
-  'brunei-darussalam',
-  'bahamas',
-  'chad',
-  'colombia',
-  'croatia',
-  'cuba',
-  'czech-republic',
-  'congo',
-  'dominican-republic',
-  'cayland-islands',
-  'cambodia',
-  'cameroon',
-  'canada',
-  'central-african-republic',
-  'chile',
-  'china',
-  'costarica',
-  'cyprus',
-  'congo-dr',
-  'denmark',
-  'djibouti',
-  'taiwan',
-  'togo',
-  'trinidad-and-tobago',
-  'tanzania',
-  'tunisia',
-  'turkmenistan',
-  'eritrea',
-  'estonia',
-  'ethiopia',
-  'timor-leste',
-  'tajikistan',
-  'thailand',
-  'turkey',
-  'ecuador',
-  'egypt',
-  'el-salvador',
-  'equatorial-guinea',
-  'falkland-islands',
-  'fiji',
-  'finland',
-  'france',
-  'french-southern-and-antarctic-lands',
-  'gabon',
-  'gambia',
-  'georgia',
-  'germany',
-  'ghana',
-  'greece',
-  'greenland',
-  'grenada',
-  'guatemala',
-  'guinea-bissau',
-  'guinea',
-  'guyana',
-  'haiti',
-  'honduras',
-  'hong-kong',
-  'iceland',
-  'india',
-  'indonesia',
-  'hungary',
-  'iran',
-  'iraq',
-  'ireland',
-  'israel',
-  'italy',
-  'ivory-coast',
-  'jamaica',
-  'japan',
-  'jordan',
-  'kazakhstan',
-  'kenya',
-  'kosovo',
-  'kuwait',
-  'kyrgyzstan',
-];
+import { MapLaosPreview } from '@/components/core/templates/create/elements/maps/MapLaos.jsx';
+import { MapLatviaPreview } from '@/components/core/templates/create/elements/maps/MapLatvia.jsx';
 
 const previews = {
   nigeria: <MapNigeriaPreview />,
@@ -333,9 +223,11 @@ const previews = {
   kosovo: <MapKosovoPreview />,
   kuwait: <MapKuwaitPreview />,
   kyrgyzstan: <MapKyrgyzstanPreview />,
+  laos: <MapLaosPreview />,
+  latvia: <MapLatviaPreview />,
 };
 
-const elements = names.map((name) => ({
+const elements = Object.keys(previews).map((name) => ({
   id: `map-${name}`,
   data: {
     type: 'map',

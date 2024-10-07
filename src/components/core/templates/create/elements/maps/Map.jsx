@@ -158,6 +158,8 @@ import MapKenya, { MapKenyaPresent } from '@/components/core/templates/create/el
 import MapKosovo, { MapKosovoPresent } from '@/components/core/templates/create/elements/maps/MapKosovo.jsx';
 import MapKuwait, { MapKuwaitPresent } from '@/components/core/templates/create/elements/maps/MapKuwait.jsx';
 import MapKyrgyzstan, { MapKyrgyzstanPresent } from '@/components/core/templates/create/elements/maps/MapKyrgyzstan.jsx';
+import MapLaos, { MapLaosPresent } from '@/components/core/templates/create/elements/maps/MapLaos.jsx';
+import MapLatvia, { MapLatviaPresent } from '@/components/core/templates/create/elements/maps/MapLatvia.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -270,6 +272,8 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     kosovo: MapKosovo,
     kuwait: MapKuwait,
     kyrgyzstan: MapKyrgyzstan,
+    laos: MapLaos,
+    latvia: MapLatvia,
   };
 
   if (components[element.config.name]) {
@@ -390,6 +394,8 @@ export const MapPresent = ({ element }) => {
     kosovo: MapKosovoPresent,
     kuwait: MapKuwaitPresent,
     kyrgyzstan: MapKyrgyzstanPresent,
+    laos: MapLaosPresent,
+    latvia: MapLatviaPresent,
   };
 
   if (components[element.config.name]) {
