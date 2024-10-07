@@ -16,28 +16,30 @@ import DataTag, { DataPresent } from '@/components/core/templates/create/element
 
 export const tools = {
   ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
-    acc[type] = ['font', 'opacity', 'animation', 'shadow', 'rotate'];
+    acc[type] = ['font', 'opacity', 'animation', 'shadow', 'layout'];
     return acc;
   }, {}),
-  'chart-s': ['chart', 'colors', 'opacity', 'animation', 'chart-data', 'rotate'],
-  'chart-a': ['advanced-chart', 'colors', 'opacity', 'chart-data', 'rotate'],
-  shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'rotate'],
+  'chart-s': ['chart', 'colors', 'opacity', 'animation', 'chart-data', 'layout'],
+  'chart-a': ['advanced-chart', 'colors', 'opacity', 'chart-data', 'layout'],
+  shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout'],
   frame: (element) => {
-    if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow', 'rotate'];
-    if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow', 'rotate'];
-    if (element.config.name === 'marquee') return ['carousel', 'opacity', 'animation', 'shadow', 'rotate'];
-    if (element.config.name === 'marqueeText') return ['font', 'marqueeText', 'opacity', 'animation', 'shadow', 'rotate'];
-    if (element.config.name === 'typewriterText') return ['font', 'marqueeText', 'opacity', 'animation', 'shadow', 'rotate'];
+    if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow', 'layout'];
+    if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow', 'layout'];
+    if (element.config.name === 'marquee') return ['carousel', 'opacity', 'animation', 'shadow', 'layout'];
+    if (element.config.name === 'marqueeText')
+      return ['font', 'marqueeText', 'opacity', 'animation', 'shadow', 'layout'];
+    if (element.config.name === 'typewriterText')
+      return ['font', 'marqueeText', 'opacity', 'animation', 'shadow', 'layout'];
     return ['opacity', 'animation', 'shadow'];
   },
-  icon: ['icon', 'color', 'opacity', 'animation', 'shadow', 'rotate'],
+  icon: ['icon', 'color', 'opacity', 'animation', 'shadow', 'layout'],
   map: ['map', 'opacity'],
   table: ['table', 'colors', 'font', 'opacity', 'animation'],
-  line: ['background', 'opacity', 'line', 'animation', 'shadow', 'rotate'],
-  image: ['border', 'opacity', 'animation', 'shadow', 'rotate'],
+  line: ['background', 'opacity', 'line', 'animation', 'shadow', 'layout'],
+  image: ['border', 'opacity', 'animation', 'shadow', 'layout'],
   infographic: ['infographic', 'opacity'],
   widget: ['summarizer', 'opacity', 'animation'],
-  'data-tag': ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'rotate'],
+  'data-tag': ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'layout'],
 };
 
 export const components = {

@@ -23,7 +23,7 @@ import Color from '@/components/core/templates/create/tools/elements/generic/Col
 import SummarizerConfig from '@/components/core/templates/create/tools/elements/specific/SummarizerConfig.jsx';
 import DataTagConfig from '@/components/core/templates/create/tools/elements/specific/DataTagConfig.jsx';
 import ChartData from './elements/generic/ChartData.jsx';
-import Rotate from './elements/generic/Rotate.jsx';
+import Layout from './elements/generic/Layout.jsx';
 
 const mapping = {
   font: { type: 'multiple', component: Font },
@@ -49,7 +49,7 @@ const mapping = {
   summarizer: { type: 'single', component: SummarizerConfig },
   'data-tag': { type: 'single', component: DataTagConfig },
   'chart-data': { type: 'single', component: ChartData },
-  rotate: { type: 'single', component: Rotate },
+  layout: { type: 'single', component: Layout },
 };
 
 const ElementTools = () => {
@@ -83,7 +83,7 @@ const ElementTools = () => {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            className="rounded-full bg-white shadow dark:bg-default-100 flex flex-col items-center py-6 space-y-2 px-4"
+            className="rounded-full bg-white shadow dark:bg-default-100 flex flex-col items-center py-6 space-y-3 px-4"
           >
             {tools.map((tool) => {
               const { type, component } = mapping[tool];
