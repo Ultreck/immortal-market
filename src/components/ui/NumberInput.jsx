@@ -2,6 +2,7 @@ import { Button, Input } from '@nextui-org/react';
 import { TbMinus, TbPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils.js';
+import { useRef } from 'react';
 
 const NumberInput = ({
   variant = 'flat',
@@ -9,17 +10,41 @@ const NumberInput = ({
   onChange,
   ariaLabel,
   min = 0,
-  max = 100,
+  max = Infinity,
   step = 1,
   size = 'md',
   ...props
 }) => {
+  const interval = useRef(null);
+
   const handleChange = (v) => {
     if (isNaN(v)) return;
     if (`${v}`.includes('.')) {
       return onChange(Math.min(max, Math.max(min, +v.toFixed(1))));
     }
     onChange(Math.min(max, Math.max(min, +v)));
+  };
+
+  const handlePressStart = (type) => {
+    if (type === 'increment') {
+      handleChange(+value + step);
+      let initial = +value + step;
+      interval.current = setInterval(() => {
+        handleChange(initial + step);
+        initial = initial + step;
+      }, 100);
+    } else if (type === 'decrement') {
+      handleChange(+value - step);
+      let initial = +value - step;
+      interval.current = setInterval(() => {
+        handleChange(initial - step);
+        initial = initial - step;
+      }, 100);
+    }
+  };
+
+  const handlePressEnd = () => {
+    clearInterval(interval.current);
   };
 
   return (
@@ -29,8 +54,9 @@ const NumberInput = ({
         variant="bordered"
         className="text-base"
         isDisabled={isNaN(value) || value <= min}
-        onClick={() => handleChange(+value - step)}
         size={size}
+        onPressStart={() => handlePressStart('decrement')}
+        onPressEnd={handlePressEnd}
       >
         <TbMinus size="20" />
       </Button>
@@ -51,8 +77,9 @@ const NumberInput = ({
         variant="bordered"
         className="text-base"
         isDisabled={isNaN(value) || value >= max}
-        onClick={() => handleChange(+value + step)}
         size={size}
+        onPressStart={() => handlePressStart('increment')}
+        onPressEnd={handlePressEnd}
       >
         <TbPlus size="20" />
       </Button>
