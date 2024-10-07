@@ -4,7 +4,7 @@ import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils.js';
 
-const BasicCarousel = ({ slides, classNames = {} }) => {
+const BasicCarousel = ({ slides, classNames = {}, shadow = false }) => {
   const [slide, setSlide] = useState(0);
   const [direction, setDirection] = useState(1);
 
@@ -12,7 +12,9 @@ const BasicCarousel = ({ slides, classNames = {} }) => {
     <div className={classNames.base}>
       {slide !== 0 && (
         <>
-          <div className="z-[1] absolute top-0 left-0 h-full w-[15%] bg-gradient-to-r from-black/30 to-transparent pointer-events-none" />
+          {shadow && (
+            <div className="z-[1] absolute top-0 left-0 h-full w-[15%] bg-gradient-to-r from-black/30 to-transparent pointer-events-none" />
+          )}
           <div className={cn('absolute top-1/2 -translate-y-1/2 left-2 z-[10]', classNames.prev)}>
             <button
               onClick={() => {
@@ -28,7 +30,9 @@ const BasicCarousel = ({ slides, classNames = {} }) => {
       )}
       {slide !== slides.length - 1 && (
         <>
-          <div className="z-[1] absolute top-0 right-0 h-full w-[15%] bg-gradient-to-l from-black/30 to-transparent pointer-events-none" />
+          {shadow && (
+            <div className="z-[1] absolute top-0 right-0 h-full w-[15%] bg-gradient-to-l from-black/30 to-transparent pointer-events-none" />
+          )}
           <div className={cn('absolute top-1/2 -translate-y-1/2 right-2 z-[10]', classNames.next)}>
             <button
               onClick={() => {
@@ -77,6 +81,7 @@ BasicCarousel.propTypes = {
     prev: PropTypes.string,
     next: PropTypes.string,
   }),
+  shadow: PropTypes.bool,
 };
 
 export default BasicCarousel;
