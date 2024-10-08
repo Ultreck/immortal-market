@@ -157,9 +157,29 @@ import MapKazakhstan, {
 import MapKenya, { MapKenyaPresent } from '@/components/core/templates/create/elements/maps/MapKenya.jsx';
 import MapKosovo, { MapKosovoPresent } from '@/components/core/templates/create/elements/maps/MapKosovo.jsx';
 import MapKuwait, { MapKuwaitPresent } from '@/components/core/templates/create/elements/maps/MapKuwait.jsx';
-import MapKyrgyzstan, { MapKyrgyzstanPresent } from '@/components/core/templates/create/elements/maps/MapKyrgyzstan.jsx';
+import MapKyrgyzstan, {
+  MapKyrgyzstanPresent,
+} from '@/components/core/templates/create/elements/maps/MapKyrgyzstan.jsx';
 import MapLaos, { MapLaosPresent } from '@/components/core/templates/create/elements/maps/MapLaos.jsx';
 import MapLatvia, { MapLatviaPresent } from '@/components/core/templates/create/elements/maps/MapLatvia.jsx';
+import MapMalta, { MapMaltaPresent } from '@/components/core/templates/create/elements/maps/MapMalta.jsx';
+import MapMauritania, {
+  MapMauritaniaPresent,
+} from '@/components/core/templates/create/elements/maps/MapMauritania.jsx';
+import MapMauritius, { MapMauritiusPresent } from '@/components/core/templates/create/elements/maps/MapMauritius.jsx';
+import MapMexico, { MapMexicoPresent } from '@/components/core/templates/create/elements/maps/MapMexico.jsx';
+import MapMoldova, { MapMoldovaPresent } from '@/components/core/templates/create/elements/maps/MapMoldova.jsx';
+import MapMorocco, { MapMoroccoPresent } from '@/components/core/templates/create/elements/maps/MapMorocco.jsx';
+import MapMozambique, {
+  MapMozambiquePresent,
+} from '@/components/core/templates/create/elements/maps/MapMozambique.jsx';
+import MapMyanmar, { MapMyanmarPresent } from '@/components/core/templates/create/elements/maps/MapMyanmar.jsx';
+import MapNepal, { MapNepalPresent } from '@/components/core/templates/create/elements/maps/MapNepal.jsx';
+import MapNamibia, { MapNamibiaPresent } from '@/components/core/templates/create/elements/maps/MapNamibia.jsx';
+import MapNetherlands, {
+  MapNetherlandsPresent,
+} from '@/components/core/templates/create/elements/maps/MapNetherlands.jsx';
+import MapMongolia, { MapMongoliaPresent } from '@/components/core/templates/create/elements/maps/MapMongolia.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -274,6 +294,18 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     kyrgyzstan: MapKyrgyzstan,
     laos: MapLaos,
     latvia: MapLatvia,
+    malta: MapMalta,
+    mauritania: MapMauritania,
+    mauritius: MapMauritius,
+    mexico: MapMexico,
+    moldova: MapMoldova,
+    morocco: MapMorocco,
+    mozambique: MapMozambique,
+    myanmar: MapMyanmar,
+    nepal: MapNepal,
+    namibia: MapNamibia,
+    netherlands: MapNetherlands,
+    mongolia: MapMongolia,
   };
 
   if (components[element.config.name]) {
@@ -396,6 +428,18 @@ export const MapPresent = ({ element }) => {
     kyrgyzstan: MapKyrgyzstanPresent,
     laos: MapLaosPresent,
     latvia: MapLatviaPresent,
+    malta: MapMaltaPresent,
+    mauritania: MapMauritaniaPresent,
+    mauritius: MapMauritiusPresent,
+    mexico: MapMexicoPresent,
+    moldova: MapMoldovaPresent,
+    morocco: MapMoroccoPresent,
+    mozambique: MapMozambiquePresent,
+    myanmar: MapMyanmarPresent,
+    nepal: MapNepalPresent,
+    namibia: MapNamibiaPresent,
+    netherlands: MapNetherlandsPresent,
+    mongolia: MapMongoliaPresent,
   };
 
   if (components[element.config.name]) {

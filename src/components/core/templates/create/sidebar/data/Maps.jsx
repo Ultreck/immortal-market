@@ -115,6 +115,18 @@ import { MapKuwaitPreview } from '@/components/core/templates/create/elements/ma
 import { MapKyrgyzstanPreview } from '@/components/core/templates/create/elements/maps/MapKyrgyzstan.jsx';
 import { MapLaosPreview } from '@/components/core/templates/create/elements/maps/MapLaos.jsx';
 import { MapLatviaPreview } from '@/components/core/templates/create/elements/maps/MapLatvia.jsx';
+import { MapMaltaPreview } from '@/components/core/templates/create/elements/maps/MapMalta.jsx';
+import { MapMauritaniaPreview } from '@/components/core/templates/create/elements/maps/MapMauritania.jsx';
+import { MapMauritiusPreview } from '@/components/core/templates/create/elements/maps/MapMauritius.jsx';
+import { MapMexicoPreview } from '@/components/core/templates/create/elements/maps/MapMexico.jsx';
+import { MapMoldovaPreview } from '@/components/core/templates/create/elements/maps/MapMoldova.jsx';
+import { MapMoroccoPreview } from '@/components/core/templates/create/elements/maps/MapMorocco.jsx';
+import { MapMozambiquePreview } from '@/components/core/templates/create/elements/maps/MapMozambique.jsx';
+import { MapMyanmarPreview } from '@/components/core/templates/create/elements/maps/MapMyanmar.jsx';
+import { MapNepalPreview } from '@/components/core/templates/create/elements/maps/MapNepal.jsx';
+import { MapNamibiaPreview } from '@/components/core/templates/create/elements/maps/MapNamibia.jsx';
+import { MapNetherlandsPreview } from '@/components/core/templates/create/elements/maps/MapNetherlands.jsx';
+import { MapMongoliaPreview } from '@/components/core/templates/create/elements/maps/MapMongolia.jsx';
 
 const previews = {
   continents: {
@@ -231,6 +243,18 @@ const previews = {
     kyrgyzstan: <MapKyrgyzstanPreview />,
     laos: <MapLaosPreview />,
     latvia: <MapLatviaPreview />,
+    malta: <MapMaltaPreview />,
+    mauritania: <MapMauritaniaPreview />,
+    mauritius: <MapMauritiusPreview />,
+    mexico: <MapMexicoPreview />,
+    moldova: <MapMoldovaPreview />,
+    morocco: <MapMoroccoPreview />,
+    mozambique: <MapMozambiquePreview />,
+    myanmar: <MapMyanmarPreview />,
+    nepal: <MapNepalPreview />,
+    namibia: <MapNamibiaPreview />,
+    netherlands: <MapNetherlandsPreview />,
+    mongolia: <MapMongoliaPreview />,
   },
 };
 
