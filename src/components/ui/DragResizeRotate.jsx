@@ -134,7 +134,7 @@ const DragResizeRotate = ({
           api.set({ width: resolveWidth(_width), height: resolveHeight(_height), x });
         }
       } else if (name === 'resize-e') {
-        if (state.shiftKey) {
+        if (state.shiftKey && handles.includes('w')) {
           api.set({ width: resolveWidth(ox / scale), height: resolveWidth(ox / scale) });
         } else {
           api.set({ width: resolveWidth(ox / scale) });
