@@ -1,6 +1,9 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { capitalize } from '@/lib/utils.js';
 import { getElementDefaultStyle } from '@/lib/elements.js';
+import PropTypes from 'prop-types';
+import { Button } from '@nextui-org/react';
+import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import { MapOceanicPreview } from '@/components/core/templates/create/elements/maps/MapOceanic.jsx';
 import { MapNorthAmericaPreview } from '@/components/core/templates/create/elements/maps/MapNorthAmerica.jsx';
 import { MapNigeriaRegionsPreview } from '@/components/core/templates/create/elements/maps/MapNigeriaRegions.jsx';
@@ -114,153 +117,235 @@ import { MapLaosPreview } from '@/components/core/templates/create/elements/maps
 import { MapLatviaPreview } from '@/components/core/templates/create/elements/maps/MapLatvia.jsx';
 
 const previews = {
-  nigeria: <MapNigeriaPreview />,
-  'nigeria-regions': <MapNigeriaRegionsPreview />,
-  africa: <MapAfricaPreview />,
-  europe: <MapEuropePreview />,
-  'north-america': <MapNorthAmericaPreview />,
-  'south-america': <MapSouthAmericaPreview />,
-  world: <MapWorldPreview />,
-  asia: <MapAsiaPreview />,
-  oceanic: <MapOceanicPreview />,
-  algeria: <MapAlgeriaPreview />,
-  angola: <MapAngolaPreview />,
-  albania: <MapAlbaniaPreview />,
-  afghanistan: <MapAfghanistanPreview />,
-  austria: <MapAustriaPreview />,
-  argentina: <MapArgentinaPreview />,
-  azerbaijan: <MapAzerbaijanPreview />,
-  benin: <MapBeninPreview />,
-  bangladesh: <MapBangladeshPreview />,
-  belarus: <MapBelarusPreview />,
-  bermuda: <MapBermudaPreview />,
-  botswana: <MapBotswanaPreview />,
-  bahrain: <MapBahrainPreview />,
-  bulgaria: <MapBulgariaPreview />,
-  burkinafaso: <MapBurkinafasoPreview />,
-  burundi: <MapBurundiPreview />,
-  armenia: <MapArmeniaPreview />,
-  australia: <MapAustraliaPreview />,
-  belgium: <MapBelgiumPreview />,
-  belize: <MapBelizePreview />,
-  bhutan: <MapBhutanPreview />,
-  bolivia: <MapBoliviaPreview />,
-  'bosnia-and-aerzegovina': <MapBosniaAndHerzegovinaPreview />,
-  brazil: <MapBrazilPreview />,
-  'brunei-darussalam': <MapBruneiDarussalamPreview />,
-  bahamas: <MapBahamasPreview />,
-  chad: <MapChadPreview />,
-  colombia: <MapColombiaPreview />,
-  croatia: <MapCroatiaPreview />,
-  cuba: <MapCubaPreview />,
-  'czech-republic': <MapCzechRepublicPreview />,
-  congo: <MapCongoPreview />,
-  'dominican-republic': <MapDominicanRepublicPreview />,
-  'cayland-islands': <MapCaylandIslandsPreview />,
-  cambodia: <MapCambodiaPreview />,
-  cameroon: <MapCameroonPreview />,
-  canada: <MapCanadaPreview />,
-  'central-african-republic': <MapCentralAfricanRepublicPreview />,
-  chile: <MapChilePreview />,
-  china: <MapChinaPreview />,
-  costarica: <MapCostaricaPreview />,
-  cyprus: <MapCyprusPreview />,
-  'congo-dr': <MapCongoDrPreview />,
-  denmark: <MapDenmarkPreview />,
-  djibouti: <MapDjiboutiPreview />,
-  taiwan: <MapTaiwanPreview />,
-  togo: <MapTogoPreview />,
-  'trinidad-and-tobago': <MapTrinidadAndTobagoPreview />,
-  tanzania: <MapTanzaniaPreview />,
-  tunisia: <MapTunisiaPreview />,
-  turkmenistan: <MapTurkmenistanPreview />,
-  eritrea: <MapEritreaPreview />,
-  estonia: <MapEstoniaPreview />,
-  ethiopia: <MapEthiopiaPreview />,
-  'timor-leste': <MapTimorLestePreview />,
-  tajikistan: <MapTajikistanPreview />,
-  thailand: <MapThailandPreview />,
-  turkey: <MapTurkeyPreview />,
-  ecuador: <MapEcuadorPreview />,
-  egypt: <MapEgyptPreview />,
-  'el-salvador': <MapElSalvadorPreview />,
-  'equatorial-guinea': <MapEquatorialGuineaPreview />,
-  'falkland-islands': <MapFalklandIslandsPreview />,
-  fiji: <MapFijiPreview />,
-  finland: <MapFinlandPreview />,
-  france: <MapFrancePreview />,
-  'french-southern-and-antarctic-lands': <MapFrenchSouthernAndAntarcticLandsPreview />,
-  gabon: <MapGabonPreview />,
-  gambia: <MapGambiaPreview />,
-  georgia: <MapGeorgiaPreview />,
-  germany: <MapGermanyPreview />,
-  ghana: <MapGhanaPreview />,
-  greece: <MapGreecePreview />,
-  greenland: <MapGreenlandPreview />,
-  grenada: <MapGrenadaPreview />,
-  guatemala: <MapGuatemalaPreview />,
-  'guinea-bissau': <MapGuineaBissauPreview />,
-  guinea: <MapGuineaPreview />,
-  guyana: <MapGuyanaPreview />,
-  haiti: <MapHaitiPreview />,
-  honduras: <MapHondurasPreview />,
-  'hong-kong': <MapHongKongPreview />,
-  iceland: <MapIcelandPreview />,
-  india: <MapIndiaPreview />,
-  indonesia: <MapIndonesiaPreview />,
-  hungary: <MapHungaryPreview />,
-  iran: <MapIranPreview />,
-  iraq: <MapIraqPreview />,
-  ireland: <MapIrelandPreview />,
-  israel: <MapIsraelPreview />,
-  italy: <MapItalyPreview />,
-  'ivory-coast': <MapIvoryCoastPreview />,
-  jamaica: <MapJamaicaPreview />,
-  japan: <MapJapanPreview />,
-  jordan: <MapJordanPreview />,
-  kazakhstan: <MapKazakhstanPreview />,
-  kenya: <MapKenyaPreview />,
-  kosovo: <MapKosovoPreview />,
-  kuwait: <MapKuwaitPreview />,
-  kyrgyzstan: <MapKyrgyzstanPreview />,
-  laos: <MapLaosPreview />,
-  latvia: <MapLatviaPreview />,
+  continents: {
+    africa: <MapAfricaPreview />,
+    europe: <MapEuropePreview />,
+    'north-america': <MapNorthAmericaPreview />,
+    'south-america': <MapSouthAmericaPreview />,
+    world: <MapWorldPreview />,
+    asia: <MapAsiaPreview />,
+    oceanic: <MapOceanicPreview />,
+  },
+  countries: {
+    nigeria: <MapNigeriaPreview />,
+    'nigeria-regions': <MapNigeriaRegionsPreview />,
+    algeria: <MapAlgeriaPreview />,
+    angola: <MapAngolaPreview />,
+    albania: <MapAlbaniaPreview />,
+    afghanistan: <MapAfghanistanPreview />,
+    austria: <MapAustriaPreview />,
+    argentina: <MapArgentinaPreview />,
+    azerbaijan: <MapAzerbaijanPreview />,
+    benin: <MapBeninPreview />,
+    bangladesh: <MapBangladeshPreview />,
+    belarus: <MapBelarusPreview />,
+    bermuda: <MapBermudaPreview />,
+    botswana: <MapBotswanaPreview />,
+    bahrain: <MapBahrainPreview />,
+    bulgaria: <MapBulgariaPreview />,
+    burkinafaso: <MapBurkinafasoPreview />,
+    burundi: <MapBurundiPreview />,
+    armenia: <MapArmeniaPreview />,
+    australia: <MapAustraliaPreview />,
+    belgium: <MapBelgiumPreview />,
+    belize: <MapBelizePreview />,
+    bhutan: <MapBhutanPreview />,
+    bolivia: <MapBoliviaPreview />,
+    'bosnia-and-aerzegovina': <MapBosniaAndHerzegovinaPreview />,
+    brazil: <MapBrazilPreview />,
+    'brunei-darussalam': <MapBruneiDarussalamPreview />,
+    bahamas: <MapBahamasPreview />,
+    chad: <MapChadPreview />,
+    colombia: <MapColombiaPreview />,
+    croatia: <MapCroatiaPreview />,
+    cuba: <MapCubaPreview />,
+    'czech-republic': <MapCzechRepublicPreview />,
+    congo: <MapCongoPreview />,
+    'dominican-republic': <MapDominicanRepublicPreview />,
+    'cayland-islands': <MapCaylandIslandsPreview />,
+    cambodia: <MapCambodiaPreview />,
+    cameroon: <MapCameroonPreview />,
+    canada: <MapCanadaPreview />,
+    'central-african-republic': <MapCentralAfricanRepublicPreview />,
+    chile: <MapChilePreview />,
+    china: <MapChinaPreview />,
+    costarica: <MapCostaricaPreview />,
+    cyprus: <MapCyprusPreview />,
+    'congo-dr': <MapCongoDrPreview />,
+    denmark: <MapDenmarkPreview />,
+    djibouti: <MapDjiboutiPreview />,
+    taiwan: <MapTaiwanPreview />,
+    togo: <MapTogoPreview />,
+    'trinidad-and-tobago': <MapTrinidadAndTobagoPreview />,
+    tanzania: <MapTanzaniaPreview />,
+    tunisia: <MapTunisiaPreview />,
+    turkmenistan: <MapTurkmenistanPreview />,
+    eritrea: <MapEritreaPreview />,
+    estonia: <MapEstoniaPreview />,
+    ethiopia: <MapEthiopiaPreview />,
+    'timor-leste': <MapTimorLestePreview />,
+    tajikistan: <MapTajikistanPreview />,
+    thailand: <MapThailandPreview />,
+    turkey: <MapTurkeyPreview />,
+    ecuador: <MapEcuadorPreview />,
+    egypt: <MapEgyptPreview />,
+    'el-salvador': <MapElSalvadorPreview />,
+    'equatorial-guinea': <MapEquatorialGuineaPreview />,
+    'falkland-islands': <MapFalklandIslandsPreview />,
+    fiji: <MapFijiPreview />,
+    finland: <MapFinlandPreview />,
+    france: <MapFrancePreview />,
+    'french-southern-and-antarctic-lands': <MapFrenchSouthernAndAntarcticLandsPreview />,
+    gabon: <MapGabonPreview />,
+    gambia: <MapGambiaPreview />,
+    georgia: <MapGeorgiaPreview />,
+    germany: <MapGermanyPreview />,
+    ghana: <MapGhanaPreview />,
+    greece: <MapGreecePreview />,
+    greenland: <MapGreenlandPreview />,
+    grenada: <MapGrenadaPreview />,
+    guatemala: <MapGuatemalaPreview />,
+    'guinea-bissau': <MapGuineaBissauPreview />,
+    guinea: <MapGuineaPreview />,
+    guyana: <MapGuyanaPreview />,
+    haiti: <MapHaitiPreview />,
+    honduras: <MapHondurasPreview />,
+    'hong-kong': <MapHongKongPreview />,
+    iceland: <MapIcelandPreview />,
+    india: <MapIndiaPreview />,
+    indonesia: <MapIndonesiaPreview />,
+    hungary: <MapHungaryPreview />,
+    iran: <MapIranPreview />,
+    iraq: <MapIraqPreview />,
+    ireland: <MapIrelandPreview />,
+    israel: <MapIsraelPreview />,
+    italy: <MapItalyPreview />,
+    'ivory-coast': <MapIvoryCoastPreview />,
+    jamaica: <MapJamaicaPreview />,
+    japan: <MapJapanPreview />,
+    jordan: <MapJordanPreview />,
+    kazakhstan: <MapKazakhstanPreview />,
+    kenya: <MapKenyaPreview />,
+    kosovo: <MapKosovoPreview />,
+    kuwait: <MapKuwaitPreview />,
+    kyrgyzstan: <MapKyrgyzstanPreview />,
+    laos: <MapLaosPreview />,
+    latvia: <MapLatviaPreview />,
+  },
 };
 
-const elements = Object.keys(previews).map((name) => ({
-  id: `map-${name}`,
-  data: {
-    type: 'map',
-    text: name.split('-').map(capitalize).join(' '),
-    width: 400,
-    height: 400,
-    style: getElementDefaultStyle({ type: 'map' }),
-    config: {
-      data: [],
-      name,
-      fill: '#f9fafb',
-      stroke: '#333',
-      showLabels: true,
-      showValues: true,
-      labelsCount: 1,
+const elements = {
+  continents: Object.keys(previews.continents).map((name) => ({
+    id: `map-${name}`,
+    data: {
+      type: 'map',
+      text: name.split('-').map(capitalize).join(' '),
+      width: 400,
+      height: 400,
+      style: getElementDefaultStyle({ type: 'map' }),
+      config: {
+        data: [],
+        name: name,
+        fill: '#f9fafb',
+        stroke: '#333',
+        showLabels: true,
+        showValues: true,
+        labelsCount: 1,
+      },
     },
-  },
-  preview: (
-    <div className="flex flex-col items-center justify-center">
-      {previews[name]}
-      <p className="text-sm text-center leading-tight mt-2 opacity-80">{name.split('-').map(capitalize).join(' ')}</p>
-    </div>
-  ),
-}));
+    preview: (
+      <div className="flex flex-col items-center justify-center">
+        {previews.continents[name]}
+        <p className="text-sm text-center leading-tight mt-2 opacity-60">{name.split('-').map(capitalize).join(' ')}</p>
+      </div>
+    ),
+  })),
+  countries: Object.keys(previews.countries).map((name) => ({
+    id: `map-${name}`,
+    data: {
+      type: 'map',
+      text: name.split('-').map(capitalize).join(' '),
+      width: 400,
+      height: 400,
+      style: getElementDefaultStyle({ type: 'map' }),
+      config: {
+        data: [],
+        name,
+        fill: '#f9fafb',
+        stroke: '#333',
+        showLabels: true,
+        showValues: true,
+        labelsCount: 1,
+      },
+    },
+    preview: (
+      <div className="flex flex-col items-center justify-center">
+        {previews.countries[name]}
+        <p className="text-sm text-center leading-tight mt-2 opacity-60">{name.split('-').map(capitalize).join(' ')}</p>
+      </div>
+    ),
+  })),
+};
 
-const Maps = () => {
+const Maps = ({ mini, onView, onBack }) => {
   return (
-    <div className="grid grid-cols-2 gap-4">
-      {elements.map((element) => {
-        return <DraggableElementWrapper key={element.id} element={element} />;
-      })}
-    </div>
+    <>
+      {mini ? (
+        <>
+          <div className="grid grid-cols-2 gap-4">
+            {elements.continents.map((element) => {
+              return <DraggableElementWrapper key={element.id} element={element} />;
+            })}
+            {
+              //prettier-ignore
+              elements.countries.filter((el) => el.id === 'map-nigeria').map((element) => {
+                return <DraggableElementWrapper key={ element.id } element={ element } />;
+              })
+            }
+          </div>
+          <Button
+            onClick={onView}
+            variant="bordered"
+            className="text-md mt-8"
+            endContent={<TbChevronRight size={16} />}
+            radius="full"
+            fullWidth
+          >
+            View All
+          </Button>
+        </>
+      ) : (
+        <>
+          <div className="flex items-center space-x-3 mb-8">
+            <Button onClick={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+              <TbChevronLeft size="20" />
+            </Button>
+            <h2 className="text-xl font-semibold">Maps</h2>
+          </div>
+          <div className="space-y-6">
+            {['continents', 'countries'].map((type) => {
+              return (
+                <div key={type} className="border border-white/10 rounded-2xl px-6 py-5">
+                  <h2 className="text-base font-semibold capitalize mb-6">{type}</h2>
+                  <div className="grid grid-cols-2 gap-4">
+                    {elements[type].map((element) => {
+                      return <DraggableElementWrapper key={element.id} element={element} />;
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </>
   );
+};
+
+Maps.propTypes = {
+  mini: PropTypes.bool,
+  onView: PropTypes.func,
+  onBack: PropTypes.func,
 };
 
 export default Maps;
