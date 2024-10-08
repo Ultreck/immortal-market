@@ -24,11 +24,8 @@ const AdvanceSpeedometerConfig = ({ element, onChange }) => {
 
   return (
     <div>
-      {element.type === 'chart-a-speedometer' && (
+      {element.config.name === 'speedometer' && (
         <>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo debitis animi incidunt ratione necessitatibus
-          praesentium corporis, a autem in impedit quia ullam laudantium aspernatur deserunt dicta esse voluptates
-          repellat veniam!
           <Slider
             min={0}
             max={100}
@@ -41,7 +38,7 @@ const AdvanceSpeedometerConfig = ({ element, onChange }) => {
           />
         </>
       )}
-      {element.type === 'chart-a-speedometer-simple' && (
+      {element.config.name === 'speedometer-simple' && (
         <Slider
           min={0}
           max={100}
@@ -53,7 +50,7 @@ const AdvanceSpeedometerConfig = ({ element, onChange }) => {
           label="Progress"
         />
       )}
-      {element.type === 'chart-a-speedometer-multiple' && (
+      {element.config.name === 'speedometer-multiple' && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="json"

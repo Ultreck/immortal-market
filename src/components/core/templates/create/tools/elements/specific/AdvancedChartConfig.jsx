@@ -36,44 +36,44 @@ const AdvancedChartConfig = ({ element, onChange }) => {
       </PopoverTrigger>
       <PopoverContent className="p-0 border shadow border-default-200">
         <div className="px-8 py-6 w-full !max-h-[500px] overflow-y-auto">
-          {element.type === 'chart-a-shapes' && <AdvanceShapesConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-circle-icons' && (
+          {element.config.name === 'shapes' && <AdvanceShapesConfig element={element} onChange={onChange} />}
+          {element.config.name === 'funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}
+          {element.config.name === 'circle-icons' && (
             <AdvanceCircleIconsConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-stackedbar-advanced' && (
+          {element.config.name === 'stackedbar-advanced' && (
             <AdvancedStackedBarConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-nested-circles' && (
+          {element.config.name === 'custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
+          {element.config.name === 'linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
+          {element.config.name === 'lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
+          {element.config.name === 'nested-circles' && (
             <AdvancedNestedCirclesConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-tree-map' && <AdvancedTreeMapConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-dynamic-sorting' && (
+          {element.config.name === 'tree-map' && <AdvancedTreeMapConfig element={element} onChange={onChange} />}
+          {element.config.name === 'dynamic-sorting' && (
             <AdvanceDynamicSortingChartConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-speedometer-multiple' && (
+          {element.config.name === 'speedometer-multiple' && (
             <AdvanceSpeedometerConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-speedometer' && <AdvanceSpeedometerConfig element={element} onChange={onChange} />}
-          {element.type === 'chart-a-speedometer-simple' && (
+          {element.config.name === 'speedometer' && <AdvanceSpeedometerConfig element={element} onChange={onChange} />}
+          {element.config.name === 'speedometer-simple' && (
             <AdvanceSpeedometerConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-scatter-life-expectancy' && (
+          {element.config.name === 'scatter-life-expectancy' && (
             <AdvancedScatterLifeExpentancyConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-pictogram-shapes' && (
+          {element.config.name === 'pictogram-shapes' && (
             <AdvancedPictogramShapesConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-stacked-card' && (
+          {element.config.name === 'stacked-card' && (
             <AdvancedStackedCardConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-percentage-card' && (
+          {element.config.name === 'percentage-card' && (
             <AdvancePercentageCardConfig element={element} onChange={onChange} />
           )}
-          {element.type === 'chart-a-column-card' && (
+          {element.config.name === 'column-card' && (
             <AdvancePercentageCardConfig element={element} onChange={onChange} />
           )}
         </div>

@@ -5,7 +5,7 @@ import { HexColorPicker } from 'react-colorful';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 
 export const IconWithConfig = ({ iconKey, colorKey, currentIcon, currentColor, onIconChange, onColorChange }) => {
-  const CurrentIcon = icons.find((icon) => icon.name === currentIcon).icon;
+  const CurrentIcon = icons.find((icon) => icon.name === currentIcon || 'circle').icon;
 
   return (
     <div className="">

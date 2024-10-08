@@ -3,6 +3,19 @@ import { Checkbox, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, 
 import { HexColorPicker } from 'react-colorful';
 import {  IconWithConfig } from './AdvancedPictogramShapesConfig';
 const AdvanceShapesConfig = ({ element, onChange }) => {
+  const handleIconChange = (iconKey, newIcon) => {
+    onChange({
+      ...element,
+      config: { ...element.config, [iconKey]: newIcon },
+    });
+  };
+
+  const handleColorChange = (colorKey, newColor) => {
+    onChange({
+      ...element,
+      config: { ...element.config, [colorKey]: newColor },
+    });
+  };
   return (
     <div className="flex flex-col space-y-6">
       <div>
