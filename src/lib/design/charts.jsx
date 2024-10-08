@@ -796,7 +796,7 @@ export const standard = [
   },
   {
     id: 'chart-s-semi-circle',
-    category: 'semi',
+    category: 'semi-circle',
     data: {
       type: 'chart-s',
       text: 'Semi Circle Chart',

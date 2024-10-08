@@ -11,6 +11,7 @@ const StandardCharts = () => {
         { id: 'line', title: 'Line' },
         { id: 'area', title: 'Area' },
         { id: 'semi-pie', title: 'Semi Pie' },
+        { id: 'semi-circle', title: 'Semi Circle' },
         { id: 'bubble', title: 'Bubbles' },
         { id: 'combination', title: 'Combinations' },
       ].map(({ id, title }) => {
