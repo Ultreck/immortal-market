@@ -180,6 +180,21 @@ import MapNetherlands, {
   MapNetherlandsPresent,
 } from '@/components/core/templates/create/elements/maps/MapNetherlands.jsx';
 import MapMongolia, { MapMongoliaPresent } from '@/components/core/templates/create/elements/maps/MapMongolia.jsx';
+import MapLebanon, { MapLebanonPresent } from '@/components/core/templates/create/elements/maps/MapLebanon.jsx';
+import MapLesotho, { MapLesothoPresent } from '@/components/core/templates/create/elements/maps/MapLesotho.jsx';
+import MapLiberia, { MapLiberiaPresent } from '@/components/core/templates/create/elements/maps/MapLiberia.jsx';
+import MapLibya, { MapLibyaPresent } from '@/components/core/templates/create/elements/maps/MapLibya.jsx';
+import MapLithuania, { MapLithuaniaPresent } from '@/components/core/templates/create/elements/maps/MapLithuania.jsx';
+import MapLuxembourg, {
+  MapLuxembourgPresent,
+} from '@/components/core/templates/create/elements/maps/MapLuxembourg.jsx';
+import MapMacedonia, { MapMacedoniaPresent } from '@/components/core/templates/create/elements/maps/MapMacedonia.jsx';
+import MapMadagascar, {
+  MapMadagascarPresent,
+} from '@/components/core/templates/create/elements/maps/MapMadagascar.jsx';
+import MapMalawi, { MapMalawiPresent } from '@/components/core/templates/create/elements/maps/MapMalawi.jsx';
+import MapMalaysia, { MapMalaysiaPresent } from '@/components/core/templates/create/elements/maps/MapMalaysia.jsx';
+import MapMali, { MapMaliPresent } from '@/components/core/templates/create/elements/maps/MapMali.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -306,6 +321,17 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     namibia: MapNamibia,
     netherlands: MapNetherlands,
     mongolia: MapMongolia,
+    lebanon: MapLebanon,
+    lesotho: MapLesotho,
+    liberia: MapLiberia,
+    libya: MapLibya,
+    lithuania: MapLithuania,
+    luxembourg: MapLuxembourg,
+    macedonia: MapMacedonia,
+    madagascar: MapMadagascar,
+    malawi: MapMalawi,
+    malaysia: MapMalaysia,
+    mali: MapMali,
   };
 
   if (components[element.config.name]) {
@@ -440,6 +466,17 @@ export const MapPresent = ({ element }) => {
     namibia: MapNamibiaPresent,
     netherlands: MapNetherlandsPresent,
     mongolia: MapMongoliaPresent,
+    lebanon: MapLebanonPresent,
+    lesotho: MapLesothoPresent,
+    liberia: MapLiberiaPresent,
+    libya: MapLibyaPresent,
+    lithuania: MapLithuaniaPresent,
+    luxembourg: MapLuxembourgPresent,
+    macedonia: MapMacedoniaPresent,
+    madagascar: MapMadagascarPresent,
+    malawi: MapMalawiPresent,
+    malaysia: MapMalaysiaPresent,
+    mali: MapMaliPresent,
   };
 
   if (components[element.config.name]) {

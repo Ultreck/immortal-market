@@ -127,6 +127,17 @@ import { MapNepalPreview } from '@/components/core/templates/create/elements/map
 import { MapNamibiaPreview } from '@/components/core/templates/create/elements/maps/MapNamibia.jsx';
 import { MapNetherlandsPreview } from '@/components/core/templates/create/elements/maps/MapNetherlands.jsx';
 import { MapMongoliaPreview } from '@/components/core/templates/create/elements/maps/MapMongolia.jsx';
+import { MapLebanonPreview } from '@/components/core/templates/create/elements/maps/MapLebanon.jsx';
+import { MapLesothoPreview } from '@/components/core/templates/create/elements/maps/MapLesotho.jsx';
+import { MapLiberiaPreview } from '@/components/core/templates/create/elements/maps/MapLiberia.jsx';
+import { MapLibyaPreview } from '@/components/core/templates/create/elements/maps/MapLibya.jsx';
+import { MapLithuaniaPreview } from '@/components/core/templates/create/elements/maps/MapLithuania.jsx';
+import { MapLuxembourgPreview } from '@/components/core/templates/create/elements/maps/MapLuxembourg.jsx';
+import { MapMacedoniaPreview } from '@/components/core/templates/create/elements/maps/MapMacedonia.jsx';
+import { MapMadagascarPreview } from '@/components/core/templates/create/elements/maps/MapMadagascar.jsx';
+import { MapMalawiPreview } from '@/components/core/templates/create/elements/maps/MapMalawi.jsx';
+import { MapMalaysiaPreview } from '@/components/core/templates/create/elements/maps/MapMalaysia.jsx';
+import { MapMaliPreview } from '@/components/core/templates/create/elements/maps/MapMali.jsx';
 
 const previews = {
   continents: {
@@ -255,6 +266,17 @@ const previews = {
     namibia: <MapNamibiaPreview />,
     netherlands: <MapNetherlandsPreview />,
     mongolia: <MapMongoliaPreview />,
+    lebanon: <MapLebanonPreview />,
+    lesotho: <MapLesothoPreview />,
+    liberia: <MapLiberiaPreview />,
+    libya: <MapLibyaPreview />,
+    lithuania: <MapLithuaniaPreview />,
+    luxembourg: <MapLuxembourgPreview />,
+    macedonia: <MapMacedoniaPreview />,
+    madagascar: <MapMadagascarPreview />,
+    malawi: <MapMalawiPreview />,
+    malaysia: <MapMalaysiaPreview />,
+    mali: <MapMaliPreview />,
   },
 };
 
