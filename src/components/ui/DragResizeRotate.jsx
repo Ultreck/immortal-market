@@ -99,34 +99,68 @@ const DragResizeRotate = ({
       const ry = rect.y;
       const rx = rect.x;
       if (name === 'resize-se') {
-        api.set({ width: resolveWidth(ox / scale), height: resolveHeight(oy / scale) });
+        if (state.shiftKey) {
+          api.set({ width: resolveWidth(ox / scale), height: resolveWidth(ox / scale) });
+        } else {
+          api.set({ width: resolveWidth(ox / scale), height: resolveHeight(oy / scale) });
+        }
       } else if (name === 'resize-ne') {
         const _height = (oy - my - my) / scale;
-        const y = (iy + my - ry) / scale;
-        api.set({ width: resolveWidth(ox / scale), height: resolveHeight(_height), y });
+        if (state.shiftKey) {
+          const y = (iy - mx - ry) / scale;
+          api.set({ width: resolveWidth(ox / scale), height: resolveWidth(ox / scale), y });
+        } else {
+          const y = (iy + my - ry) / scale;
+          api.set({ width: resolveWidth(ox / scale), height: resolveHeight(_height), y });
+        }
       } else if (name === 'resize-nw') {
         const _width = (ox - mx - mx) / scale;
         const _height = (oy - my - my) / scale;
         const x = (ix + mx - rx) / scale;
-        const y = (iy + my - ry) / scale;
-        api.set({ width: resolveWidth(_width), height: resolveHeight(_height), x, y });
+        if (state.shiftKey) {
+          const y = (iy + mx - ry) / scale;
+          api.set({ width: resolveWidth(_width), height: resolveWidth(_width), x, y });
+        } else {
+          const y = (iy + my - ry) / scale;
+          api.set({ width: resolveWidth(_width), height: resolveHeight(_height), x, y });
+        }
       } else if (name === 'resize-sw') {
         const _width = (ox - mx - mx) / scale;
         const _height = oy / scale;
         const x = (ix + mx - rx) / scale;
-        api.set({ width: resolveWidth(_width), height: resolveHeight(_height), x });
+        if (state.shiftKey) {
+          api.set({ width: resolveWidth(_width), height: resolveWidth(_width), x });
+        } else {
+          api.set({ width: resolveWidth(_width), height: resolveHeight(_height), x });
+        }
       } else if (name === 'resize-e') {
-        api.set({ width: resolveWidth(ox / scale) });
+        if (state.shiftKey) {
+          api.set({ width: resolveWidth(ox / scale), height: resolveWidth(ox / scale) });
+        } else {
+          api.set({ width: resolveWidth(ox / scale) });
+        }
       } else if (name === 'resize-w') {
         const _width = (ox - mx - mx) / scale;
         const x = (ix + mx - rx) / scale;
-        api.set({ width: resolveWidth(_width), x });
+        if (state.shiftKey) {
+          api.set({ width: resolveWidth(_width), height: resolveWidth(_width), x });
+        } else {
+          api.set({ width: resolveWidth(_width), x });
+        }
       } else if (name === 'resize-n') {
         const _height = (oy - my - my) / scale;
         const y = (iy + my - ry) / scale;
-        api.set({ height: resolveHeight(_height), y });
+        if (state.shiftKey) {
+          api.set({ width: resolveHeight(_height), height: resolveHeight(_height), y });
+        } else {
+          api.set({ height: resolveHeight(_height), y });
+        }
       } else if (name === 'resize-s') {
-        api.set({ height: resolveHeight(oy / scale) });
+        if (state.shiftKey) {
+          api.set({ width: resolveHeight(oy / scale), height: resolveHeight(oy / scale) });
+        } else {
+          api.set({ height: resolveHeight(oy / scale) });
+        }
       }
       handleChange();
       if (state.last) onResizeEnd?.();
