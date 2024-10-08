@@ -2484,7 +2484,6 @@ const fields = {
     'Manica',
     'Cabo Delgado',
     'Maputo',
-    'Maputo',
   ],
   myanmar: [
     'Shan',
