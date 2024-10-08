@@ -8,6 +8,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { useSelectionActions } from '@/hooks/template/use-selection-actions.js';
 import PropTypes from 'prop-types';
 import { useElementHandlers } from '@/hooks/template/use-element-handlers.js';
+import { useKey } from 'react-use';
 
 const PageContent = ({ id }) => {
   const { setNodeRef, node } = useDroppable({ id: `canvas-${id}` });
@@ -21,6 +22,14 @@ const PageContent = ({ id }) => {
     node,
   });
   const { handleChange, handleClick } = useElementHandlers({ id });
+
+  useKey(
+    (e) => e.key.toLowerCase() === 'd' && e.ctrlKey && !e.shiftKey,
+    async (e) => {
+      e.preventDefault();
+      await handleAction('duplicate');
+    }
+  );
 
   return (
     <div
