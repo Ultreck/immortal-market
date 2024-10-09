@@ -138,6 +138,16 @@ import { MapMadagascarPreview } from '@/components/core/templates/create/element
 import { MapMalawiPreview } from '@/components/core/templates/create/elements/maps/MapMalawi.jsx';
 import { MapMalaysiaPreview } from '@/components/core/templates/create/elements/maps/MapMalaysia.jsx';
 import { MapMaliPreview } from '@/components/core/templates/create/elements/maps/MapMali.jsx';
+import { MapNewCaledoniaPreview } from '@/components/core/templates/create/elements/maps/MapNewCaledonia.jsx';
+import { MapNewZealandPreview } from '@/components/core/templates/create/elements/maps/MapNewZealand.jsx';
+import { MapNicaraguaPreview } from '@/components/core/templates/create/elements/maps/MapNicaragua.jsx';
+import { MapNigerPreview } from '@/components/core/templates/create/elements/maps/MapNiger.jsx';
+import { MapNorthKoreaPreview } from '@/components/core/templates/create/elements/maps/MapNorthKorea.jsx';
+import { MapNorwayPreview } from '@/components/core/templates/create/elements/maps/MapNorway.jsx';
+import { MapOmanPreview } from '@/components/core/templates/create/elements/maps/MapOman.jsx';
+import { MapPakistanPreview } from '@/components/core/templates/create/elements/maps/MapPakistan.jsx';
+import { MapPanamaPreview } from '@/components/core/templates/create/elements/maps/MapPanama.jsx';
+import { MapPapuaNewGuinueaPreview } from '@/components/core/templates/create/elements/maps/MapPapuaNewGuinuea.jsx';
 
 const previews = {
   continents: {
@@ -277,6 +287,16 @@ const previews = {
     malawi: <MapMalawiPreview />,
     malaysia: <MapMalaysiaPreview />,
     mali: <MapMaliPreview />,
+    'new-caledonia': <MapNewCaledoniaPreview />,
+    'new-zealand': <MapNewZealandPreview />,
+    nicaragua: <MapNicaraguaPreview />,
+    niger: <MapNigerPreview />,
+    'north-korea': <MapNorthKoreaPreview />,
+    norway: <MapNorwayPreview />,
+    oman: <MapOmanPreview />,
+    pakistan: <MapPakistanPreview />,
+    panama: <MapPanamaPreview />,
+    'papua-new-guinea': <MapPapuaNewGuinueaPreview />,
   },
 };
 
