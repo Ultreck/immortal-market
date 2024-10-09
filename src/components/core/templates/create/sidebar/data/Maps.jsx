@@ -163,6 +163,16 @@ import { MapSurinamePreview } from '@/components/core/templates/create/elements/
 import { MapParaguayPreview } from '@/components/core/templates/create/elements/maps/MapParaguay.jsx';
 import { MapRomaniaPreview } from '@/components/core/templates/create/elements/maps/MapRomania.jsx';
 import { MapRwandaPreview } from '@/components/core/templates/create/elements/maps/MapRwanda.jsx';
+import { MapSloveniaPreview } from '@/components/core/templates/create/elements/maps/MapSlovenia.jsx';
+import { MapSingaporePreview } from '@/components/core/templates/create/elements/maps/MapSingapore.jsx';
+import { MapSlovakiaPreview } from '@/components/core/templates/create/elements/maps/MapSlovakia.jsx';
+import { MapSolomonIslandsPreview } from '@/components/core/templates/create/elements/maps/MapSolomonIslands.jsx';
+import { MapSomaliaPreview } from '@/components/core/templates/create/elements/maps/MapSomalia.jsx';
+import { MapSomalilandPreview } from '@/components/core/templates/create/elements/maps/MapSomaliland.jsx';
+import { MapSouthAfricaPreview } from '@/components/core/templates/create/elements/maps/MapSouthAfrica.jsx';
+import { MapSouthKoreaPreview } from '@/components/core/templates/create/elements/maps/MapSouthKorea.jsx';
+import { MapSouthSudanPreview } from '@/components/core/templates/create/elements/maps/MapSouthSudan.jsx';
+import { MapSpainPreview } from '@/components/core/templates/create/elements/maps/MapSpain.jsx';
 
 const previews = {
   continents: {
@@ -312,21 +322,31 @@ const previews = {
     pakistan: <MapPakistanPreview />,
     panama: <MapPanamaPreview />,
     'papua-new-guinea': <MapPapuaNewGuinueaPreview />,
-    palestine: <MapPalestinePreview/>,
-    peru: <MapPeruPreview/>,
-    philippines: <MapPhilippinesPreview/>,
-    poland: <MapPolandPreview/>,
-    portugal: <MapPortugalPreview/>,
-    'puerto-rico': <MapPuertoRicoPreview/>,
-    qatar: <MapQatarPreview/>,
-    'saudi-arabia': <MapSaudiArabiaPreview/>,
-    senegal: <MapSenegalPreview/>,
-    serbia: <MapSerbiaPreview/>,
-    'sierra-leone': <MapSierraLeonePreview/>,
-    suriname: <MapSurinamePreview/>,
-    paraguay: <MapParaguayPreview/>,
-    romania: <MapRomaniaPreview/>,
-    rwanda: <MapRwandaPreview/>,
+    palestine: <MapPalestinePreview />,
+    peru: <MapPeruPreview />,
+    philippines: <MapPhilippinesPreview />,
+    poland: <MapPolandPreview />,
+    portugal: <MapPortugalPreview />,
+    'puerto-rico': <MapPuertoRicoPreview />,
+    qatar: <MapQatarPreview />,
+    'saudi-arabia': <MapSaudiArabiaPreview />,
+    senegal: <MapSenegalPreview />,
+    serbia: <MapSerbiaPreview />,
+    'sierra-leone': <MapSierraLeonePreview />,
+    suriname: <MapSurinamePreview />,
+    paraguay: <MapParaguayPreview />,
+    romania: <MapRomaniaPreview />,
+    rwanda: <MapRwandaPreview />,
+    slovenia: <MapSloveniaPreview />,
+    singapore: <MapSingaporePreview />,
+    slovakia: <MapSlovakiaPreview />,
+    'solomon-islands': <MapSolomonIslandsPreview />,
+    somalia: <MapSomaliaPreview />,
+    somaliland: <MapSomalilandPreview />,
+    'south-africa': <MapSouthAfricaPreview />,
+    'south-korea': <MapSouthKoreaPreview />,
+    'south-sudan': <MapSouthSudanPreview />,
+    spain: <MapSpainPreview />,
   },
 };
 
