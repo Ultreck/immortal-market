@@ -52,7 +52,12 @@ const UploadedImages = () => {
 
   return (
     <div>
-      <DndFileInput label="Drop images or click to select" onChange={handleChange} className="mb-8" />
+      <DndFileInput
+        label="Drop images or click to select"
+        onChange={handleChange}
+        className="mb-8"
+        maxSize={10000000}
+      />
 
       {isUploadsLoading ? (
         <div className="grid grid-cols-2 gap-4">
