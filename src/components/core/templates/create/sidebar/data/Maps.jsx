@@ -148,6 +148,21 @@ import { MapOmanPreview } from '@/components/core/templates/create/elements/maps
 import { MapPakistanPreview } from '@/components/core/templates/create/elements/maps/MapPakistan.jsx';
 import { MapPanamaPreview } from '@/components/core/templates/create/elements/maps/MapPanama.jsx';
 import { MapPapuaNewGuinueaPreview } from '@/components/core/templates/create/elements/maps/MapPapuaNewGuinuea.jsx';
+import { MapPalestinePreview } from '@/components/core/templates/create/elements/maps/MapPalestine.jsx';
+import { MapPeruPreview } from '@/components/core/templates/create/elements/maps/MapPeru.jsx';
+import { MapPhilippinesPreview } from '@/components/core/templates/create/elements/maps/MapPhilippines.jsx';
+import { MapPolandPreview } from '@/components/core/templates/create/elements/maps/MapPoland.jsx';
+import { MapPortugalPreview } from '@/components/core/templates/create/elements/maps/MapPortugal.jsx';
+import { MapPuertoRicoPreview } from '@/components/core/templates/create/elements/maps/MapPuertoRico.jsx';
+import { MapQatarPreview } from '@/components/core/templates/create/elements/maps/MapQatar.jsx';
+import { MapSaudiArabiaPreview } from '@/components/core/templates/create/elements/maps/MapSaudiArabia.jsx';
+import { MapSenegalPreview } from '@/components/core/templates/create/elements/maps/MapSenegal.jsx';
+import { MapSerbiaPreview } from '@/components/core/templates/create/elements/maps/MapSerbia.jsx';
+import { MapSierraLeonePreview } from '@/components/core/templates/create/elements/maps/MapSierraLeone.jsx';
+import { MapSurinamePreview } from '@/components/core/templates/create/elements/maps/MapSuriname.jsx';
+import { MapParaguayPreview } from '@/components/core/templates/create/elements/maps/MapParaguay.jsx';
+import { MapRomaniaPreview } from '@/components/core/templates/create/elements/maps/MapRomania.jsx';
+import { MapRwandaPreview } from '@/components/core/templates/create/elements/maps/MapRwanda.jsx';
 
 const previews = {
   continents: {
@@ -297,6 +312,21 @@ const previews = {
     pakistan: <MapPakistanPreview />,
     panama: <MapPanamaPreview />,
     'papua-new-guinea': <MapPapuaNewGuinueaPreview />,
+    palestine: <MapPalestinePreview/>,
+    peru: <MapPeruPreview/>,
+    philippines: <MapPhilippinesPreview/>,
+    poland: <MapPolandPreview/>,
+    portugal: <MapPortugalPreview/>,
+    'puerto-rico': <MapPuertoRicoPreview/>,
+    qatar: <MapQatarPreview/>,
+    'saudi-arabia': <MapSaudiArabiaPreview/>,
+    senegal: <MapSenegalPreview/>,
+    serbia: <MapSerbiaPreview/>,
+    'sierra-leone': <MapSierraLeonePreview/>,
+    suriname: <MapSurinamePreview/>,
+    paraguay: <MapParaguayPreview/>,
+    romania: <MapRomaniaPreview/>,
+    rwanda: <MapRwandaPreview/>,
   },
 };
 
