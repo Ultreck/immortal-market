@@ -2,13 +2,14 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { RiAddLine } from 'react-icons/ri';
+import { RiAddLine, RiArrowDownSLine } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 import MergeOptions from '@/components/core/templates/create/elements/table/MergeOptions.jsx';
 import DeleteOptions from '@/components/core/templates/create/elements/table/DeleteOptions.jsx';
 import FontOptions from '@/components/core/templates/create/elements/table/FontOptions.jsx';
 import BackgroundOptions from '@/components/core/templates/create/elements/table/BackgroundOptions.jsx';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
 
 const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -100,34 +101,49 @@ const TableContent = ({ element, onChange, active }) => {
     });
   };
 
-  const handleAddRow = () => {
+  const handleAddRow = (rowIndex) => {
     onChange({
       ...element,
       config: {
         ...element.config,
-        data: [
-          ...rows,
-          {
+        data: (() => {
+          const newRow = {
             cells: [...Array(maxCols).fill(null)].map(() => ({ value: '' })),
-          },
-        ],
+          };
+
+          if (typeof rowIndex !== 'number') {
+            return [...rows, newRow];
+          }
+          return [
+            ...rows.slice(0, rowIndex + 1), 
+            newRow,
+            ...rows.slice(rowIndex + 1), 
+          ];
+        })(),
       },
     });
   };
 
-  const handleAddColumn = () => {
+  const handleAddColumn = (cellIndex) => {
     onChange({
       ...element,
       config: {
         ...element.config,
-        data: rows.map((row) => ({
-          ...row,
-          cells: [...row.cells, { value: '' }],
-        })),
+        data: rows.map((row) => {
+          const index = typeof cellIndex === 'number' ? cellIndex : row.cells.length - 1; 
+
+          return {
+            ...row,
+            cells: [
+              ...row.cells.slice(0, index + 1),
+              { value: '' }, 
+              ...row.cells.slice(index + 1), 
+            ],
+          };
+        }),
       },
     });
   };
-
   const handleMouseDown = (e, rowIndex, cellIndex) => {
     setEditing(null);
     setIsSelecting(true);
@@ -165,6 +181,37 @@ const TableContent = ({ element, onChange, active }) => {
           <DeleteOptions element={element} onChange={onChange} selection={selection} onSelectionChange={setSelection} />
           <FontOptions element={element} onChange={onChange} selection={selection} />
           <BackgroundOptions element={element} onChange={onChange} selection={selection} />
+          {!isMultipleSelection && (
+            <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
+              <DropdownTrigger>
+                <Button variant="solid" size="sm" className="text-md" endContent={<RiArrowDownSLine size="20" />}>
+                  Insert
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                aria-label="Delete actions"
+                onAction={(key) => {
+                  if (key === 'col-before') handleAddColumn(selection.endCol - 1);
+                  if (key === 'col-after') handleAddColumn(selection.endCol);
+                  if (key === 'row-above') handleAddRow(selection.endRow - 1);
+                  if (key === 'row-below') handleAddRow(selection.endRow);
+                }}
+              >
+                <DropdownItem key="col-before" classNames={{ title: 'text-base' }}>
+                  Insert Column Before
+                </DropdownItem>
+                <DropdownItem key="col-after" classNames={{ title: 'text-base' }}>
+                  Insert Column After
+                </DropdownItem>
+                <DropdownItem key="row-above" classNames={{ title: 'text-base' }}>
+                  Insert Row Above
+                </DropdownItem>
+                <DropdownItem key="row-below" classNames={{ title: 'text-base' }}>
+                  Insert Row Below
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          )}
         </div>
       )}
       <table
@@ -352,3 +399,4 @@ TablePreview.propTypes = {
 };
 
 export default Table;
+
