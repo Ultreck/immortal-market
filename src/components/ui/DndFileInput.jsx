@@ -50,9 +50,9 @@ const DndFileInput = ({
               <input {...getInputProps()} />
               <IconCloudUpload size="48" className="opacity-30" />
               {isDragReject ? (
-                <div className="mt-4 max-w-[300px] opacity-80 text-center leading-tight text-red-500">{error}</div>
+                <div className="mt-4 px-6 max-w-[300px] opacity-80 text-center leading-tight text-red-500">{error}</div>
               ) : (
-                <p className="mt-4 max-w-[300px] opacity-80 text-center leading-tight">{label}</p>
+                <p className="mt-4 px-6 max-w-[300px] opacity-80 text-center leading-tight">{label}</p>
               )}
             </div>
           </>
