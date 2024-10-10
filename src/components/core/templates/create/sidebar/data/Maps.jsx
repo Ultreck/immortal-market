@@ -173,6 +173,18 @@ import { MapSouthAfricaPreview } from '@/components/core/templates/create/elemen
 import { MapSouthKoreaPreview } from '@/components/core/templates/create/elements/maps/MapSouthKorea.jsx';
 import { MapSouthSudanPreview } from '@/components/core/templates/create/elements/maps/MapSouthSudan.jsx';
 import { MapSpainPreview } from '@/components/core/templates/create/elements/maps/MapSpain.jsx';
+import { MapRussiaPreview } from '@/components/core/templates/create/elements/maps/MapRussia.jsx';
+import { MapSwazilandPreview } from '@/components/core/templates/create/elements/maps/MapSwaziland.jsx';
+import { MapSwedenPreview } from '@/components/core/templates/create/elements/maps/MapSweden.jsx';
+import { MapSwitzerlandPreview } from '@/components/core/templates/create/elements/maps/MapSwitzerland.jsx';
+import { MapSyriaPreview } from '@/components/core/templates/create/elements/maps/MapSyria.jsx';
+import { MapUgandaPreview } from '@/components/core/templates/create/elements/maps/MapUganda.jsx';
+import { MapUnitedArabEmiratesPreview } from '@/components/core/templates/create/elements/maps/MapUnitedArabEmirates.jsx';
+import { MapUkrainePreview } from '@/components/core/templates/create/elements/maps/MapUkraine.jsx';
+import { MapUnitedKingdomPreview } from '@/components/core/templates/create/elements/maps/MapUnitedKingdom.jsx';
+import { MapDistrictOfColumbiaPreview } from '@/components/core/templates/create/elements/maps/MapDistrictOfColumbia.jsx';
+import { MapFloridaPreview } from '@/components/core/templates/create/elements/maps/MapFlorida.jsx';
+import { MapGeorgiaUsPreview } from '@/components/core/templates/create/elements/maps/MapGeorgiaUs.jsx';
 
 const previews = {
   continents: {
@@ -347,6 +359,18 @@ const previews = {
     'south-korea': <MapSouthKoreaPreview />,
     'south-sudan': <MapSouthSudanPreview />,
     spain: <MapSpainPreview />,
+    russia: <MapRussiaPreview />,
+    swaziland: <MapSwazilandPreview />,
+    sweden: <MapSwedenPreview />,
+    switzerland: <MapSwitzerlandPreview />,
+    syria: <MapSyriaPreview />,
+    uganda: <MapUgandaPreview />,
+    'united-arab-emirates': <MapUnitedArabEmiratesPreview />,
+    ukraine: <MapUkrainePreview />,
+    'united-kingdom': <MapUnitedKingdomPreview />,
+    'district-of-columbia': <MapDistrictOfColumbiaPreview />,
+    florida: <MapFloridaPreview />,
+    'georgia-us': <MapGeorgiaUsPreview />,
   },
 };
 

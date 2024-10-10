@@ -256,6 +256,26 @@ import MapSouthSudan, {
   MapSouthSudanPresent,
 } from '@/components/core/templates/create/elements/maps/MapSouthSudan.jsx';
 import MapSpain, { MapSpainPresent } from '@/components/core/templates/create/elements/maps/MapSpain.jsx';
+import MapRussia, { MapRussiaPresent } from '@/components/core/templates/create/elements/maps/MapRussia.jsx';
+import MapSwaziland, { MapSwazilandPresent } from '@/components/core/templates/create/elements/maps/MapSwaziland.jsx';
+import MapSweden, { MapSwedenPresent } from '@/components/core/templates/create/elements/maps/MapSweden.jsx';
+import MapSwitzerland, {
+  MapSwitzerlandPresent,
+} from '@/components/core/templates/create/elements/maps/MapSwitzerland.jsx';
+import MapSyria, { MapSyriaPresent } from '@/components/core/templates/create/elements/maps/MapSyria.jsx';
+import MapUganda, { MapUgandaPresent } from '@/components/core/templates/create/elements/maps/MapUganda.jsx';
+import MapUnitedArabEmirates, {
+  MapUnitedArabEmiratesPresent,
+} from '@/components/core/templates/create/elements/maps/MapUnitedArabEmirates.jsx';
+import MapUkraine, { MapUkrainePresent } from '@/components/core/templates/create/elements/maps/MapUkraine.jsx';
+import MapUnitedKingdom, {
+  MapUnitedKingdomPresent,
+} from '@/components/core/templates/create/elements/maps/MapUnitedKingdom.jsx';
+import MapDistrictOfColumbia, {
+  MapDistrictOfColumbiaPresent,
+} from '@/components/core/templates/create/elements/maps/MapDistrictOfColumbia.jsx';
+import MapFlorida, { MapFloridaPresent } from '@/components/core/templates/create/elements/maps/MapFlorida.jsx';
+import MapGeorgiaUs, { MapGeorgiaUsPresent } from '@/components/core/templates/create/elements/maps/MapGeorgiaUs.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -428,6 +448,18 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     'south-korea': MapSouthKorea,
     'south-sudan': MapSouthSudan,
     spain: MapSpain,
+    russia: MapRussia,
+    swaziland: MapSwaziland,
+    sweden: MapSweden,
+    switzerland: MapSwitzerland,
+    syria: MapSyria,
+    uganda: MapUganda,
+    'united-arab-emirates': MapUnitedArabEmirates,
+    ukraine: MapUkraine,
+    'united-kingdom': MapUnitedKingdom,
+    'district-of-columbia': MapDistrictOfColumbia,
+    florida: MapFlorida,
+    'georgia-us': MapGeorgiaUs,
   };
 
   if (components[element.config.name]) {
@@ -608,6 +640,18 @@ export const MapPresent = ({ element }) => {
     'south-korea': MapSouthKoreaPresent,
     'south-sudan': MapSouthSudanPresent,
     spain: MapSpainPresent,
+    russia: MapRussiaPresent,
+    swaziland: MapSwazilandPresent,
+    sweden: MapSwedenPresent,
+    switzerland: MapSwitzerlandPresent,
+    syria: MapSyriaPresent,
+    uganda: MapUgandaPresent,
+    'united-arab-emirates': MapUnitedArabEmiratesPresent,
+    ukraine: MapUkrainePresent,
+    'united-kingdom': MapUnitedKingdomPresent,
+    'district-of-columbia': MapDistrictOfColumbiaPresent,
+    florida: MapFloridaPresent,
+    'georgia-us': MapGeorgiaUsPresent,
   };
 
   if (components[element.config.name]) {
