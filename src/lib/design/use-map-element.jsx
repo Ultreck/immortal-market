@@ -3,14 +3,22 @@ import SvgText from '@/components/ui/SvgText.jsx';
 import { Tooltip } from '@nextui-org/react';
 import { cn } from '@/lib/utils.js';
 
+const getCoordinatesFromPath = (path) => {
+  const [, x, y] = path.getAttribute('d').match(/M\s*([0-9.]+)\s+([0-9.]+)/) || [];
+  return x && y ? { x: parseFloat(x), y: parseFloat(y) } : null;
+};
+
 const useMapElement = (element) => {
   const el = useRef(null);
   const paths = Array.from(el.current?.getElementsByTagName('path') ?? []).filter((path) => !!path.dataset.name);
-  const items = paths.map((path) => ({
-    name: path.dataset.name,
-    x: path.dataset.x,
-    y: path.dataset.y,
-  }));
+  const items = paths.map((path) => {
+    const coords = getCoordinatesFromPath(path);
+    return {
+      name: path.dataset.name,
+      x: path.dataset?.x || coords.x,
+      y: path.dataset?.y || coords.y,
+    };
+  });
 
   const data = element.config.data.filter((i) => !!i.value);
 
