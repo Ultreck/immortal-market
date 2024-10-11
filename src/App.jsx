@@ -83,9 +83,6 @@ const App = () => {
             <Route path="security" element={<></>} />
           </Route>
         </Route>
-
-        <Route path="templates/:id/edit" element={<Navigate to="/templates" />} />
-
         <Route
           path="designs/:id/edit"
           element={
@@ -94,7 +91,6 @@ const App = () => {
             </RequireAuthBusiness>
           }
         />
-
         <Route
           path="designs/:id/present"
           element={
@@ -103,7 +99,6 @@ const App = () => {
             </RequireAuthBusiness>
           }
         />
-
         <Route
           path="/invitation/:id"
           element={
@@ -112,7 +107,6 @@ const App = () => {
             </RequireAuth>
           }
         />
-
         <Route
           path="/business"
           element={
@@ -172,6 +166,7 @@ const App = () => {
           <Route path="custom" element={<Custom />} />
         </Route>
       </Routes>
+
       <GlobalModals />
       <SvgShapes />
     </>
