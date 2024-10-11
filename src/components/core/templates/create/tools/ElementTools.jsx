@@ -25,7 +25,7 @@ import MapConfig from '@/components/core/templates/create/tools/elements/specifi
 import Color from '@/components/core/templates/create/tools/elements/generic/Color.jsx';
 import SummarizerConfig from '@/components/core/templates/create/tools/elements/specific/SummarizerConfig.jsx';
 import DataTagConfig from '@/components/core/templates/create/tools/elements/specific/DataTagConfig.jsx';
-import ChartData from './elements/generic/ChartData.jsx';
+import ChartData from './elements/specific/ChartData.jsx';
 import Layout from './elements/generic/Layout.jsx';
 
 const mapping = {

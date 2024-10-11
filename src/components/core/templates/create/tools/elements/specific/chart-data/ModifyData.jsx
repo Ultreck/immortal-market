@@ -1,12 +1,9 @@
-import Drawer from '@/components/ui/Drawer';
-import { standard } from '@/lib/design/charts.jsx';
-import { Input } from '@nextui-org/react';
+import { Button, Input } from '@nextui-org/react';
 import { TbCirclePlus } from 'react-icons/tb';
-import NewConnection from '../chart-submenu/NewConnection';
 import PropTypes from 'prop-types';
-import { useMemo } from 'react';
+import { RiArrowLeftSLine } from 'react-icons/ri';
 
-const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
+const ModifyData = ({ element, onChange, onBack }) => {
   const handleChange = (updatedItem) => {
     const updatedData = element.config.data.map((item, idx) =>
       idx === updatedItem.index ? { ...item, ...updatedItem } : item
@@ -14,12 +11,12 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
     onChange({ ...element, config: { ...element.config, data: updatedData } });
   };
 
-  function getConfig() {
+  const getConfig = () => {
     const { y } = element.config.keys;
     if (typeof y === 'string' || element.type === 'chart-s-pie') {
       return (
         <>
-          <div className="flex flex-col space-y-6">
+          <div className="flex flex-col space-y-3">
             {element.config.data.map((item, index) => (
               <div key={index} className="grid grid-cols-2 gap-2">
                 <Input
@@ -64,7 +61,7 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
     } else if (Array.isArray(y)) {
       return (
         <>
-          <div className="flex flex-col space-y-6">
+          <div className="flex flex-col space-y-3">
             {element.config.data.map((item, index) => (
               <div key={index} className="grid grid-cols-3 gap-2">
                 <Input
@@ -120,54 +117,26 @@ const ChartDataDrawer = ({ item, isOpen, onClose, element, onChange }) => {
         </>
       );
     }
-  }
-
-  const filteredCharts = useMemo(() => {
-    const areKeysEqual = (keys1, keys2) => {
-      if (!keys1 || !keys2) return false;
-      const xEqual = keys1.x === keys2.x;
-      const bothArrays = Array.isArray(keys1.y) && Array.isArray(keys2.y);
-      const yEqual = bothArrays
-        ? keys1.y.length === keys2.y.length && keys1.y.every((val, index) => val === keys2.y[index])
-        : keys1.y === keys2.y;
-
-      return xEqual && yEqual;
-    };
-    return standard.filter((chart) => {
-      const chartKeys = chart.data.config.keys;
-      return areKeysEqual(chartKeys, element.config.keys);
-    });
-  }, [element.config.keys]);
+  };
 
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} title={item?.title} width={700}>
-      {item?.title === 'View Data' && getConfig()}
-      {item?.title === 'Change Chart' && (
-        <div className="grid grid-cols-6 gap-4">
-          {filteredCharts.map((e) => (
-            <div
-              className="cursor-pointer"
-              key={e.id}
-              onClick={() => {
-                onChange({ ...element, config: { ...element.config, name: e.data.config.name } });
-              }}
-            >
-              {e.preview}
-            </div>
-          ))}
-        </div>
-      )}
-      {item?.title === 'New Connection' && <NewConnection />}
-    </Drawer>
+    <div>
+      <div className="flex items-center space-x-1 mb-6">
+        <Button onClick={onBack} variant="bordered" className="mr-2" radius="full" isIconOnly size="sm">
+          <RiArrowLeftSLine size="20" />
+        </Button>
+        <h2 className="text-lg">Chart Data</h2>
+      </div>
+
+      {getConfig()}
+    </div>
   );
 };
 
-ChartDataDrawer.propTypes = {
-  item: PropTypes.object.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+ModifyData.propTypes = {
   element: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
-export default ChartDataDrawer;
+export default ModifyData;

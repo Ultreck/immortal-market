@@ -23,8 +23,8 @@ export const tools = {
   }, {}),
   list: ['list', 'font', 'opacity', 'animation', 'shadow', 'layout'],
   'count-up-number': ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout'],
-  'chart-s': ['chart', 'colors', 'opacity', 'animation', 'chart-data', 'layout'],
-  'chart-a': ['advanced-chart', 'colors', 'opacity', 'chart-data', 'layout'],
+  'chart-s': ['chart', 'chart-data', 'colors', 'opacity', 'animation', 'layout'],
+  'chart-a': ['advanced-chart', 'chart-data', 'colors', 'opacity', 'layout'],
   shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout'],
   frame: (element) => {
     if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow', 'layout'];
