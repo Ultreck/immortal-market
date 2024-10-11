@@ -196,6 +196,14 @@ import { MapColoradoPreview } from '@/components/core/templates/create/elements/
 import { MapConnecticutPreview } from '@/components/core/templates/create/elements/maps/MapConnecticut.jsx';
 import { MapDelawarePreview } from '@/components/core/templates/create/elements/maps/MapDelaware.jsx';
 import { MapEnglandPreview } from '@/components/core/templates/create/elements/maps/MapEngland.jsx';
+import { MapHawaiiPreview } from '@/components/core/templates/create/elements/maps/MapHawaii.jsx';
+import { MapIdahoPreview } from '@/components/core/templates/create/elements/maps/MapIdaho.jsx';
+import { MapIllinoisPreview } from '@/components/core/templates/create/elements/maps/MapIllinois.jsx';
+import { MapIndianaPreview } from '@/components/core/templates/create/elements/maps/MapIndiana.jsx';
+import { MapMainePreview } from '@/components/core/templates/create/elements/maps/MapMaine.jsx';
+import { MapMarylandPreview } from '@/components/core/templates/create/elements/maps/MapMaryland.jsx';
+import { MapMassachusettsPreview } from '@/components/core/templates/create/elements/maps/MapMassachusetts.jsx';
+import { MapIowaPreview } from '@/components/core/templates/create/elements/maps/MapIowa.jsx';
 
 const previews = {
   continents: {
@@ -393,6 +401,14 @@ const previews = {
     connecticut: <MapConnecticutPreview />,
     delaware: <MapDelawarePreview />,
     england: <MapEnglandPreview />,
+    hawaii: <MapHawaiiPreview />,
+    idaho: <MapIdahoPreview />,
+    illinois: <MapIllinoisPreview />,
+    indiana: <MapIndianaPreview />,
+    maine: <MapMainePreview />,
+    maryland: <MapMarylandPreview />,
+    massachusetts: <MapMassachusettsPreview />,
+    iowa: <MapIowaPreview />,
   },
 };
 

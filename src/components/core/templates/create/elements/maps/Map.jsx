@@ -291,6 +291,14 @@ import MapConnecticut, {
 } from '@/components/core/templates/create/elements/maps/MapConnecticut.jsx';
 import MapDelaware, { MapDelawarePresent } from '@/components/core/templates/create/elements/maps/MapDelaware.jsx';
 import MapEngland, { MapEnglandPresent } from '@/components/core/templates/create/elements/maps/MapEngland.jsx';
+import MapHawaii, { MapHawaiiPresent } from '@/components/core/templates/create/elements/maps/MapHawaii.jsx';
+import MapIdaho, { MapIdahoPresent } from '@/components/core/templates/create/elements/maps/MapIdaho.jsx';
+import MapIllinois, { MapIllinoisPresent } from '@/components/core/templates/create/elements/maps/MapIllinois.jsx';
+import MapIndiana, { MapIndianaPresent } from '@/components/core/templates/create/elements/maps/MapIndiana.jsx';
+import MapMaine, { MapMainePresent } from '@/components/core/templates/create/elements/maps/MapMaine.jsx';
+import MapMaryland, { MapMarylandPresent } from '@/components/core/templates/create/elements/maps/MapMaryland.jsx';
+import MapMassachusetts, { MapMassachusettsPresent } from '@/components/core/templates/create/elements/maps/MapMassachusetts.jsx';
+import MapIowa, { MapIowaPresent } from '@/components/core/templates/create/elements/maps/MapIowa.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -486,6 +494,14 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     connecticut: MapConnecticut,
     delaware: MapDelaware,
     england: MapEngland,
+    hawaii: MapHawaii,
+    idaho: MapIdaho,
+    illinois: MapIllinois,
+    indiana: MapIndiana,
+    maine: MapMaine,
+    maryland: MapMaryland,
+    massachusetts: MapMassachusetts,
+    iowa: MapIowa,
   };
 
   if (components[element.config.name]) {
@@ -689,6 +705,14 @@ export const MapPresent = ({ element }) => {
     connecticut: MapConnecticutPresent,
     delaware: MapDelawarePresent,
     england: MapEnglandPresent,
+    hawaii: MapHawaiiPresent,
+    idaho: MapIdahoPresent,
+    illinois: MapIllinoisPresent,
+    indiana: MapIndianaPresent,
+    maine: MapMainePresent,
+    maryland: MapMarylandPresent,
+    massachusetts: MapMassachusettsPresent,
+    iowa: MapIowaPresent,
   };
 
   if (components[element.config.name]) {
