@@ -1,5 +1,5 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { capitalize } from '@/lib/utils.js';
+import { kebabToWords } from '@/lib/utils.js';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const styles = {
@@ -38,12 +38,10 @@ const texts = [
   ...['heading', 'subheading', 'paragraph', 'caption', 'list', 'count-up-number'].map((type) => {
     return {
       id: type,
-      type: type,
-      name: capitalize(type),
       data: {
         type: type,
-        text: capitalize(type),
-        width: 300,
+        text: kebabToWords(type),
+        width: 200,
         height: 36,
         style: {
           ...getElementDefaultStyle({ type }),
@@ -54,7 +52,7 @@ const texts = [
       preview: (
         <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-4 overflow-hidden">
           <div style={{ ...styles[type], color: '#fff' }} className="truncate">
-            {capitalize(type)}
+            {kebabToWords(type)}
           </div>
         </div>
       ),

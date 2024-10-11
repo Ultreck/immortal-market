@@ -52,10 +52,10 @@ export const capitalize = (word) => {
 };
 
 export const kebabToWords = (str) => {
-  return str
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+  let s = str.split('-');
+  s = s.map((word) => word.charAt(0) + word.slice(1));
+  s = s.join(' ');
+  return capitalize(s);
 };
 
 export const shuffle = (array) => {
