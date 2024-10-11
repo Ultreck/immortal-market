@@ -1,5 +1,6 @@
 import Text, { TextPresent } from '@/components/core/templates/create/elements/Text.jsx';
 import List, { ListPresent } from '@/components/core/templates/create/elements/List.jsx';
+import CountUpNumber, { CountUpNumberPresent } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
 import Image, { ImagePresent } from '@/components/core/templates/create/elements/Image.jsx';
 import Line, { LineElementContent } from '@/components/core/templates/create/elements/Line.jsx';
 import Shape, { ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
@@ -21,6 +22,7 @@ export const tools = {
     return acc;
   }, {}),
   list: ['list', 'font', 'opacity', 'animation', 'shadow', 'layout'],
+  'count-up-number': ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout'],
   'chart-s': ['chart', 'colors', 'opacity', 'animation', 'chart-data', 'layout'],
   'chart-a': ['advanced-chart', 'colors', 'opacity', 'chart-data', 'layout'],
   shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout'],
@@ -53,6 +55,7 @@ export const components = {
       return acc;
     }, {}),
     list: List,
+    'count-up-number': CountUpNumber,
     'chart-s': StandardCharts,
     'chart-a': AdvanceCharts,
     shape: Shape,
@@ -72,6 +75,7 @@ export const components = {
       return acc;
     }, {}),
     list: ListPresent,
+    'count-up-number': CountUpNumberPresent,
     'chart-s': StandardChartsPresent,
     'chart-a': AdvanceChartsPresent,
     table: TablePresent,

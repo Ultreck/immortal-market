@@ -17,6 +17,9 @@ const styles = {
   list: {
     fontSize: 12,
   },
+  CountUpText: {
+    fontSize: 24,
+  },
 };
 
 const configs = {
@@ -24,10 +27,15 @@ const configs = {
     type: 'number',
     texts: ['fwf', 'wvbetver', 'e4wgwwff'],
   },
+  'count-up-number': {
+    start: 0,
+    end: 100,
+    duration: 10,
+  },
 };
 
 const texts = [
-  ...['heading', 'subheading', 'paragraph', 'caption', 'list'].map((type) => {
+  ...['heading', 'subheading', 'paragraph', 'caption', 'list', 'count-up-number'].map((type) => {
     return {
       id: type,
       type: type,
@@ -35,7 +43,7 @@ const texts = [
       data: {
         type: type,
         text: capitalize(type),
-        width: 400,
+        width: 300,
         height: 36,
         style: {
           ...getElementDefaultStyle({ type }),
