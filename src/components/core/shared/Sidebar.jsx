@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { TbChevronLeft, TbChevronRight, TbCrown, TbSettings2, TbUsers } from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
-import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
 import Logo from '@/components/core/shared/Logo.jsx';
 import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
 import PropTypes from 'prop-types';
@@ -18,7 +17,7 @@ const NavItem = ({ icon, title, href, mini = false }) => {
       to={href}
       className={({ isActive }) =>
         cn(
-          'flex items-center px-6 py-2.5 rounded-full text-base',
+          'flex items-center px-5 py-2 rounded-xl text-base',
           isActive ? `bg-black/5 dark:bg-white/10 font-semibold` : 'hover:bg-black/5 opacity-80',
           { 'w-12 h-12 p-0 justify-center': mini }
         )
@@ -43,7 +42,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={cn('w-[280px] relative group transition-width', {
+      className={cn('w-[260px] relative group transition-width', {
         'w-[90px]': mini,
       })}
     >
@@ -54,14 +53,19 @@ const Sidebar = () => {
       >
         <div className="">{mini ? <TbChevronRight size="16" /> : <TbChevronLeft size="16" />}</div>
       </button>
-      <div className={cn('w-[280px] h-full overflow-hidden', { 'w-[90px]': mini })}>
-        <div className={cn('w-[280px] h-full overflow-hidden')}>
+      <div className={cn('w-[260px] h-full overflow-hidden', { 'w-[90px]': mini })}>
+        <div className={cn('w-[260px] h-full overflow-hidden')}>
           <div
-            className={cn('py-6 px-8 flex flex-col align-stretch w-[280px] relative h-full', { 'items-start': mini })}
+            className={cn('py-8 px-8 flex flex-col align-stretch w-[260px] relative h-full', { 'items-start': mini })}
           >
-            {mini ? <LogoIcon light={isDarkMode} /> : <Logo light={isDarkMode} />}
-            <AuthDropdown className={cn('mt-6', { 'mt-6': mini })} mini={mini} />
-            <CreateDropdown className="mt-6" mini={mini} />
+            {mini ? (
+              <LogoIcon light={isDarkMode} className="mb-8" />
+            ) : (
+              <div className="px-3">
+                <Logo width={130} light={isDarkMode} className="mb-8" />
+              </div>
+            )}
+            <CreateDropdown mini={mini} />
             <div className={cn('flex flex-col space-y-2 mt-6', { '-ml-1': mini })}>
               {[
                 { name: 'Overview', href: '/', icon: <HiOutlineViewGrid size="20" /> },

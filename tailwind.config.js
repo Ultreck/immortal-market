@@ -57,5 +57,29 @@ export default {
       },
     },
   },
-  plugins: [tailwindAnimate, nextui()],
+  plugins: [
+    tailwindAnimate,
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              DEFAULT: '#143C9C',
+              foreground: '#fff',
+            },
+            focus: '#143C9C',
+          },
+        },
+        dark: {
+          colors: {
+            primary: {
+              DEFAULT: '#66AAF9',
+              foreground: '#000',
+            },
+            focus: '#66AAF9',
+          },
+        },
+      },
+    }),
+  ],
 };

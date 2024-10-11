@@ -9,10 +9,10 @@ const DesignCard = ({ id, title, thumbnail }) => {
     <div>
       <Link
         to={`/designs/${id}/edit`}
-        className="flex items-center justify-center p-5 bg-black/5 dark:bg-white/5 rounded-2xl aspect-square"
+        className="flex items-center justify-center p-5 bg-black/5 dark:bg-white/5 hover:bg-black/[.07] hover:dark:bg-white/[.07] rounded-2xl aspect-square cursor-pointer"
       >
         {thumbnail ? (
-          <Image src={getImageLink(thumbnail)} alt={title} removeWrapper className="object-contain rounded-xl" />
+          <Image src={getImageLink(thumbnail)} alt={title} removeWrapper className="object-contain rounded-lg" />
         ) : (
           <div className="">
             <TbPhotoCircle size="48" className="opacity-50" />

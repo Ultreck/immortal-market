@@ -9,7 +9,7 @@ import {
 } from '@nextui-org/react';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import { cn, getImageLink } from '@/lib/utils.js';
-import { TbCheck, TbChevronRight, TbHelp, TbLogout, TbUser } from 'react-icons/tb';
+import { TbCheck, TbHelp, TbLogout, TbUser } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
 
@@ -17,14 +17,10 @@ const ACCOUNT_URL = import.meta.env.VITE_ACCOUNT_URL;
 
 const AuthDropdown = ({ className, mini = false }) => {
   const { user, logout } = useAuth();
-  const { businesses, id, setCurrent } = useBusiness();
+  const { businesses, id, setCurrent, business } = useBusiness();
 
   return (
-    <Dropdown
-      className="w-full"
-      classNames={{ content: 'shadow border border-default-100 w-[260px]' }}
-      placement="right-start"
-    >
+    <Dropdown className="w-full" classNames={{ content: 'shadow border border-default-100 w-[260px]' }}>
       <DropdownTrigger className="w-full">
         {mini ? (
           <div className={cn('cursor-pointer w-max', className)}>
@@ -36,25 +32,17 @@ const AuthDropdown = ({ className, mini = false }) => {
             />
           </div>
         ) : (
-          <div
-            className={cn(
-              'bg-black/[.07] dark:bg-white/[.07] pl-6 pr-4 py-4 rounded-2xl flex items-center justify-between cursor-pointer',
-              className
-            )}
-          >
-            <User
-              className={cn('transition-transform')}
-              description={`@${user.username}`}
-              name={user.firstName}
-              avatarProps={{ radius: 'full', size: 'sm', src: getImageLink(user.image) }}
-              classNames={{
-                name: 'text-base leading-none font-medium',
-                description: 'text-sm leading-none mt-1.5',
-                base: 'gap-4',
-              }}
-            />
-            <TbChevronRight size="20" className="text-default-500" />
-          </div>
+          <User
+            className={cn('transition-transform')}
+            description={`@${user.username}`}
+            name={business.name}
+            avatarProps={{ radius: 'full', size: 'sm', src: getImageLink(user.image) }}
+            classNames={{
+              name: 'text-base leading-none font-medium',
+              description: 'text-sm leading-none mt-1.5',
+              base: 'gap-4 cursor-pointer',
+            }}
+          />
         )}
       </DropdownTrigger>
       <DropdownMenu

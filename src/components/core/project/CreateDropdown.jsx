@@ -15,8 +15,13 @@ const CreateDropdown = ({ className, mini = false }) => {
               <RiAddLine size="20" />
             </Button>
           ) : (
-            <Button color="primary" radius="2xl" className="w-full text-base" startContent={<RiAddLine size="20" />}>
-              Create
+            <Button
+              color="primary"
+              radius="xl"
+              className="w-full text-base font-medium h-auto py-2 px-5 text-start justify-start gap-4"
+              startContent={<RiAddLine size="20" />}
+            >
+              Create new
             </Button>
           )}
         </DropdownTrigger>

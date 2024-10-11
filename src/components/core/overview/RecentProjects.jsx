@@ -9,12 +9,12 @@ const RecentProjects = () => {
   const { data: { designs = [] } = {}, isLoading: isDesignsLoading } = useGetDesigns({
     business,
     type: 'project',
-    limit: 4,
+    limit: 5,
   });
 
   return (
     <section>
-      <h2 className="font-semibold text-xl mb-8 border-b border-default-200 pb-4">Recent Projects</h2>
+      <h2 className="font-semibold text-xl mb-6">Recent Projects</h2>
       {isDesignsLoading ? (
         <div className="grid grid-cols-4 gap-4 md:gap-8">
           <Skeleton className="aspect-square w-full rounded-2xl" />
@@ -25,7 +25,7 @@ const RecentProjects = () => {
       ) : (
         <>
           {designs.length > 0 ? (
-            <div className="grid grid-cols-4 gap-4 md:gap-8">
+            <div className="grid grid-cols-5 gap-4 md:gap-8">
               {designs.map((design, i) => (
                 <DesignCard key={i} id={design._id} title={design.title} thumbnail={design.thumbnail} />
               ))}
