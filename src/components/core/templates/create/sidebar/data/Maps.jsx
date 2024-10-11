@@ -204,6 +204,10 @@ import { MapMainePreview } from '@/components/core/templates/create/elements/map
 import { MapMarylandPreview } from '@/components/core/templates/create/elements/maps/MapMaryland.jsx';
 import { MapMassachusettsPreview } from '@/components/core/templates/create/elements/maps/MapMassachusetts.jsx';
 import { MapIowaPreview } from '@/components/core/templates/create/elements/maps/MapIowa.jsx';
+import { MapNorthernIrelandPreview } from '@/components/core/templates/create/elements/maps/MapNorthernIreland.jsx';
+import { MapScotlandPreview } from '@/components/core/templates/create/elements/maps/MapScotland.jsx';
+import { MapUnitedStatesPreview } from '@/components/core/templates/create/elements/maps/MapUnitedStates.jsx';
+import { MapWalesPreview } from '@/components/core/templates/create/elements/maps/MapWales.jsx';
 
 const previews = {
   continents: {
@@ -409,6 +413,10 @@ const previews = {
     maryland: <MapMarylandPreview />,
     massachusetts: <MapMassachusettsPreview />,
     iowa: <MapIowaPreview />,
+    'northern-ireland': <MapNorthernIrelandPreview />,
+    scotland: <MapScotlandPreview />,
+    'united-states': <MapUnitedStatesPreview />,
+    wales: <MapWalesPreview />,
   },
 };
 

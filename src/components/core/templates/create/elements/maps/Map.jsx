@@ -297,8 +297,19 @@ import MapIllinois, { MapIllinoisPresent } from '@/components/core/templates/cre
 import MapIndiana, { MapIndianaPresent } from '@/components/core/templates/create/elements/maps/MapIndiana.jsx';
 import MapMaine, { MapMainePresent } from '@/components/core/templates/create/elements/maps/MapMaine.jsx';
 import MapMaryland, { MapMarylandPresent } from '@/components/core/templates/create/elements/maps/MapMaryland.jsx';
-import MapMassachusetts, { MapMassachusettsPresent } from '@/components/core/templates/create/elements/maps/MapMassachusetts.jsx';
+import MapMassachusetts, {
+  MapMassachusettsPresent,
+} from '@/components/core/templates/create/elements/maps/MapMassachusetts.jsx';
 import MapIowa, { MapIowaPresent } from '@/components/core/templates/create/elements/maps/MapIowa.jsx';
+import MapNorthernIreland, {
+  MapNorthernIrelandPresent,
+} from '@/components/core/templates/create/elements/maps/MapNorthernIreland.jsx';
+import MapScotland, { MapScotlandPresent } from '@/components/core/templates/create/elements/maps/MapScotland.jsx';
+import MapUnitedStates, {
+  MapUnitedStatesPresent,
+} from '@/components/core/templates/create/elements/maps/MapUnitedStates.jsx';
+import MapWales, { MapWalesPresent } from '@/components/core/templates/create/elements/maps/MapWales.jsx';
+import MapMinnesota, { MapMinnesotaPresent } from '@/components/core/templates/create/elements/maps/MapMinnesota.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -502,6 +513,11 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     maryland: MapMaryland,
     massachusetts: MapMassachusetts,
     iowa: MapIowa,
+    'northern-ireland': MapNorthernIreland,
+    scotland: MapScotland,
+    'united-states': MapUnitedStates,
+    wales: MapWales,
+    minnesota: MapMinnesota,
   };
 
   if (components[element.config.name]) {
@@ -713,6 +729,11 @@ export const MapPresent = ({ element }) => {
     maryland: MapMarylandPresent,
     massachusetts: MapMassachusettsPresent,
     iowa: MapIowaPresent,
+    'norther-ireland': MapNorthernIrelandPresent,
+    scotland: MapScotlandPresent,
+    'united-states': MapUnitedStatesPresent,
+    wales: MapWalesPresent,
+    minnesota: MapMinnesotaPresent,
   };
 
   if (components[element.config.name]) {
