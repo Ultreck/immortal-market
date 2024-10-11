@@ -185,6 +185,17 @@ import { MapUnitedKingdomPreview } from '@/components/core/templates/create/elem
 import { MapDistrictOfColumbiaPreview } from '@/components/core/templates/create/elements/maps/MapDistrictOfColumbia.jsx';
 import { MapFloridaPreview } from '@/components/core/templates/create/elements/maps/MapFlorida.jsx';
 import { MapGeorgiaUsPreview } from '@/components/core/templates/create/elements/maps/MapGeorgiaUs.jsx';
+import { MapSudanPreview } from '@/components/core/templates/create/elements/maps/MapSudan.jsx';
+import { MapSriLankaPreview } from '@/components/core/templates/create/elements/maps/MapSriLanka.jsx';
+import { MapAlabamaPreview } from '@/components/core/templates/create/elements/maps/MapAlabama.jsx';
+import { MapAlaskaPreview } from '@/components/core/templates/create/elements/maps/MapAlaska.jsx';
+import { MapArizonaPreview } from '@/components/core/templates/create/elements/maps/MapArizona.jsx';
+import { MapArkansasPreview } from '@/components/core/templates/create/elements/maps/MapArkansas.jsx';
+import { MapCaliforniaPreview } from '@/components/core/templates/create/elements/maps/MapCalifornia.jsx';
+import { MapColoradoPreview } from '@/components/core/templates/create/elements/maps/MapColorado.jsx';
+import { MapConnecticutPreview } from '@/components/core/templates/create/elements/maps/MapConnecticut.jsx';
+import { MapDelawarePreview } from '@/components/core/templates/create/elements/maps/MapDelaware.jsx';
+import { MapEnglandPreview } from '@/components/core/templates/create/elements/maps/MapEngland.jsx';
 
 const previews = {
   continents: {
@@ -371,6 +382,17 @@ const previews = {
     'district-of-columbia': <MapDistrictOfColumbiaPreview />,
     florida: <MapFloridaPreview />,
     'georgia-us': <MapGeorgiaUsPreview />,
+    sudan: <MapSudanPreview />,
+    'sri-lanka': <MapSriLankaPreview />,
+    alabama: <MapAlabamaPreview />,
+    alaska: <MapAlaskaPreview />,
+    arizona: <MapArizonaPreview />,
+    arkansas: <MapArkansasPreview />,
+    california: <MapCaliforniaPreview />,
+    colorado: <MapColoradoPreview />,
+    connecticut: <MapConnecticutPreview />,
+    delaware: <MapDelawarePreview />,
+    england: <MapEnglandPreview />,
   },
 };
 

@@ -276,6 +276,21 @@ import MapDistrictOfColumbia, {
 } from '@/components/core/templates/create/elements/maps/MapDistrictOfColumbia.jsx';
 import MapFlorida, { MapFloridaPresent } from '@/components/core/templates/create/elements/maps/MapFlorida.jsx';
 import MapGeorgiaUs, { MapGeorgiaUsPresent } from '@/components/core/templates/create/elements/maps/MapGeorgiaUs.jsx';
+import MapSudan, { MapSudanPresent } from '@/components/core/templates/create/elements/maps/MapSudan.jsx';
+import MapSriLanka, { MapSriLankaPresent } from '@/components/core/templates/create/elements/maps/MapSriLanka.jsx';
+import MapAlabama, { MapAlabamaPresent } from '@/components/core/templates/create/elements/maps/MapAlabama.jsx';
+import MapAlaska, { MapAlaskaPresent } from '@/components/core/templates/create/elements/maps/MapAlaska.jsx';
+import MapArizona, { MapArizonaPresent } from '@/components/core/templates/create/elements/maps/MapArizona.jsx';
+import MapArkansas, { MapArkansasPresent } from '@/components/core/templates/create/elements/maps/MapArkansas.jsx';
+import MapCalifornia, {
+  MapCaliforniaPresent,
+} from '@/components/core/templates/create/elements/maps/MapCalifornia.jsx';
+import MapColorado, { MapColoradoPresent } from '@/components/core/templates/create/elements/maps/MapColorado.jsx';
+import MapConnecticut, {
+  MapConnecticutPresent,
+} from '@/components/core/templates/create/elements/maps/MapConnecticut.jsx';
+import MapDelaware, { MapDelawarePresent } from '@/components/core/templates/create/elements/maps/MapDelaware.jsx';
+import MapEngland, { MapEnglandPresent } from '@/components/core/templates/create/elements/maps/MapEngland.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -460,6 +475,17 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     'district-of-columbia': MapDistrictOfColumbia,
     florida: MapFlorida,
     'georgia-us': MapGeorgiaUs,
+    sudan: MapSudan,
+    'sri-lanka': MapSriLanka,
+    alabama: MapAlabama,
+    alaska: MapAlaska,
+    arizona: MapArizona,
+    arkansas: MapArkansas,
+    california: MapCalifornia,
+    colorado: MapColorado,
+    connecticut: MapConnecticut,
+    delaware: MapDelaware,
+    england: MapEngland,
   };
 
   if (components[element.config.name]) {
@@ -652,6 +678,17 @@ export const MapPresent = ({ element }) => {
     'district-of-columbia': MapDistrictOfColumbiaPresent,
     florida: MapFloridaPresent,
     'georgia-us': MapGeorgiaUsPresent,
+    sudan: MapSudanPresent,
+    'sri-lanka': MapSriLankaPresent,
+    alabama: MapAlabamaPresent,
+    alaska: MapAlaskaPresent,
+    arizona: MapArizonaPresent,
+    arkansas: MapArkansasPresent,
+    california: MapCaliforniaPresent,
+    colorado: MapColoradoPresent,
+    connecticut: MapConnecticutPresent,
+    delaware: MapDelawarePresent,
+    england: MapEnglandPresent,
   };
 
   if (components[element.config.name]) {
