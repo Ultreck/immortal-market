@@ -36,7 +36,7 @@ export const StandardAreaContent = ({ element }) => {
 
     return { ...item, fill: color };
   });
-  useEffect(() => {}, [element]);
+  useEffect(() => { }, [element]);
 
   return (
     <ChartContainer
@@ -45,7 +45,6 @@ export const StandardAreaContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <AreaChart
@@ -63,8 +62,9 @@ export const StandardAreaContent = ({ element }) => {
           tickMargin={8}
           tickFormatter={(value) => capitalize(value)}
           hide={!element.config.showXaxis}
+          fontSize={element.config.fontSize}
         />
-        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} />
+        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
         {element.config.showLegend && <Legend />}
         <Area dataKey={element.config.keys.y} fill={element.config.colors[0]} type="natural" fillOpacity={0.4} />

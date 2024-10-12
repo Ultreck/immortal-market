@@ -39,11 +39,10 @@ export const StandardBarHorizontalContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <BarChart accessibilityLayer data={chartData} layout="vertical">
-        <XAxis type="number" dataKey={element.config.keys.x} hide />
+        <XAxis type="number" dataKey={element.config.keys.x} hide fontSize={element.config.fontSize} />
         <YAxis
           dataKey={element.config.keys.y}
           type="category"
@@ -51,6 +50,7 @@ export const StandardBarHorizontalContent = ({ element }) => {
           tickMargin={10}
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
+          fontSize={element.config.fontSize}
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         <Bar dataKey={element.config.keys.y} radius={8} />

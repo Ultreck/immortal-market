@@ -30,13 +30,12 @@ export const StandardMultipleBarContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis dataKey="name" hide={!element.config.showXaxis} />
-        <YAxis hide={!element.config.showYaxis} />
+        <XAxis dataKey="name" hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
+        <YAxis hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
         {element.config.showLegend && <Legend />}
         {element.config.keys.y.slice(0, element.config.noOfBarsPerGroup).map((key, index) => {
           return (

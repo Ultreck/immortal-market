@@ -30,7 +30,7 @@ export const StandardAreaLineContent = ({ element }) => {
     return { ...item, fill: color };
   });
 
-  useEffect(() => {}, [element]);
+  useEffect(() => { }, [element]);
   return (
     <ChartContainer
       config={{}}
@@ -38,13 +38,12 @@ export const StandardAreaLineContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <ComposedChart data={chartData}>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis dataKey="name" scale="band" hide={!element.config.showXaxis} />
-        <YAxis hide={!element.config.showYaxis} />
+        <XAxis dataKey="name" scale="band" hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
+        <YAxis hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
         {element.config.showLegend && <Legend />}
         <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
         <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />

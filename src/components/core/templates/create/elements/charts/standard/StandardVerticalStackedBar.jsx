@@ -39,7 +39,6 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)} layout="vertical">
@@ -52,8 +51,9 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
           hide={!element.config.showYaxis}
+          fontSize={element.config.fontSize}
         />
-        <XAxis type="number" hide={!element.config.showXaxis} />
+        <XAxis type="number" hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
         {element.config.showLegend && <Legend />}
         {element.config.keys.y.map((key, index) => {
           return (

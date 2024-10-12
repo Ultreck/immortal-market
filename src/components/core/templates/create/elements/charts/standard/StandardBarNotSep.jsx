@@ -40,7 +40,6 @@ export const StandardBarNotSepContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <BarChart accessibilityLayer data={chartData} barGap={0} barCategoryGap={0}>
@@ -53,8 +52,9 @@ export const StandardBarNotSepContent = ({ element }) => {
           tickFormatter={(value) => capitalize(value)}
           interval={0}
           hide={!element.config.showXaxis}
+          fontSize={element.config.fontSize}
         />
-        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} />
+        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         {element.config.showLegend && <Legend />}
         <Bar dataKey={element.config.keys.y} radius={8} />

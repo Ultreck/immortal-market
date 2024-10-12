@@ -30,7 +30,6 @@ export const StandardAreaMultipleContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <AreaChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
@@ -42,8 +41,9 @@ export const StandardAreaMultipleContent = ({ element }) => {
           tickMargin={8}
           tickFormatter={(value) => value.slice(0, 3)}
           hide={!element.config.showXaxis}
+          fontSize={element.config.fontSize}
         />
-        <YAxis type="number" hide={!element.config.showYaxis} />
+        <YAxis type="number" hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
         {element.config.showLegend && <Legend />}
         {element.config.keys.y.slice(0, element.config.noOfLines).map((key, index) => {

@@ -45,6 +45,7 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -81,6 +82,7 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -117,6 +119,7 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -153,6 +156,7 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -188,6 +192,7 @@ export const standard = [
         gradientColor: '#2673D9',
         showXGridline: false,
         showYGridline: false,
+        fontSize: 12,
         bars: 5,
         tools: {
           colors: {
@@ -230,6 +235,7 @@ export const standard = [
         gradientColor: '#2673D9',
         showXGridline: false,
         showYGridline: false,
+        fontSize: 12,
         bars: 5,
         tools: {
           colors: {
@@ -269,6 +275,7 @@ export const standard = [
         gradientColor: '#2673D9',
         showXGridline: false,
         showYGridline: false,
+        fontSize: 12,
         bars: 5,
         tools: {
           colors: {
@@ -626,6 +633,7 @@ export const standard = [
         colors: ['#E66B5B'],
         showXGridline: false,
         showYGridline: false,
+        fontSize: 12,
         bars: 5,
         showLegend: false,
         showXaxis: false,
@@ -671,6 +679,7 @@ export const standard = [
         showYaxis: false,
         showXGridline: false,
         showYGridline: false,
+        fontSize: 12,
         type: 'Natural',
         noOfLines: 2,
       },
@@ -704,6 +713,7 @@ export const standard = [
         colors: ['#E66B5B'],
         showXGridline: false,
         showYGridline: false,
+        fontSize: 12,
         bars: 5,
         showLegend: false,
         showXaxis: false,
@@ -753,6 +763,7 @@ export const standard = [
         showYGridline: false,
         noOfLines: 2,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -786,6 +797,7 @@ export const standard = [
         pies: 5,
         showLabel: true,
         showLegend: true,
+        fontSize: 12,
       },
     },
     preview: (
@@ -819,6 +831,7 @@ export const standard = [
         pies: 5,
         showLabel: true,
         showLegend: true,
+        fontSize: 12,
       },
     },
     preview: (
@@ -871,6 +884,7 @@ export const standard = [
         showLegend: true,
         showXaxis: true,
         showYaxis: true,
+        fontSize: 12,
       },
     },
     preview: (
@@ -915,6 +929,7 @@ export const standard = [
       showTooltip: true,
       showXaxis: true,
       showYaxis: true,
+      fontSize: 12,
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -949,6 +964,7 @@ export const standard = [
         showYaxis: false,
         showLegend: false,
         gradientColor: '#2673D9',
+        fontSize: 12,
       },
     },
     preview: (
@@ -985,6 +1001,7 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -1021,6 +1038,7 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -1058,6 +1076,7 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -1094,6 +1113,7 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -1130,6 +1150,7 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (

@@ -46,7 +46,6 @@ export const StandardSemiPieContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <PieChart width={element.width} height={element.height}>

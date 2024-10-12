@@ -39,7 +39,6 @@ export const StandardDoughnutContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <PieChart width={element.width} height={element.height}>

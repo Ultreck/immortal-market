@@ -35,8 +35,6 @@ const ChartConfig = ({ element, onChange }) => {
 };
 
 const ChartData = ({ element, onChange }) => {
-  console.log({element});
-  
   return (
     <div>
       {element.config.name === 'stacked-bar' && <StandardStackedBarConfig element={element} onChange={onChange} />}

@@ -37,7 +37,6 @@ export const StandardBarContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     >
       <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
@@ -46,8 +45,9 @@ export const StandardBarContent = ({ element }) => {
           dataKey={element.config.keys.x}
           tickFormatter={(value) => capitalize(value)}
           hide={!element.config.showXaxis}
+          fontSize={12}
         />
-        <YAxis dataKey={element.config.keys.y} hide={!element.config.showYaxis} domain={[50, 'auto']} />
+        <YAxis dataKey={element.config.keys.y} hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         {element.config.showLegend && <Legend />}
         <Bar dataKey={element.config.keys.y} radius={8} />

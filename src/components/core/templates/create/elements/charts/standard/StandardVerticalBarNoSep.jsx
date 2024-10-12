@@ -44,7 +44,7 @@ export const StandardVerticalBarNoSepContent = ({ element }) => {
     >
       <BarChart accessibilityLayer data={chartData} layout="vertical" barGap={0} barCategoryGap={0}>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showXaxis} />
+        <XAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
         <YAxis
           dataKey={element.config.keys.x}
           type="category"
@@ -53,6 +53,7 @@ export const StandardVerticalBarNoSepContent = ({ element }) => {
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
           hide={!element.config.showYaxis}
+          fontSize={element.config.fontSize}
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
         {element.config.showLegend && <Legend />}

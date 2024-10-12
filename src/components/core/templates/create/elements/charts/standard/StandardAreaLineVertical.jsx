@@ -36,8 +36,8 @@ export const StandardAreaLineVerticalContent = ({ element }) => {
     >
       <ComposedChart data={element.config.data.slice(0, element.config.bars)} layout="vertical">
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <YAxis dataKey="name" type="category" scale="band" hide={!element.config.showYaxis} />
-        <XAxis type="number" hide={!element.config.showXaxis} />
+        <YAxis dataKey="name" type="category" scale="band" hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
+        <XAxis type="number" hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
         {element.config.showLegend && <Legend />}
         <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
         <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />

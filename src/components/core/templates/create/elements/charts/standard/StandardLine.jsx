@@ -32,7 +32,6 @@ export const StandardLineContent = ({ element }) => {
           height: element.height,
           width: element.width,
           opacity: element.style.opacity,
-          transform: `rotate(${element.config.rotation || 0}deg)`,
         }}
       >
         <LineChart
@@ -49,8 +48,9 @@ export const StandardLineContent = ({ element }) => {
             tickMargin={8}
             tickFormatter={(value) => capitalize(value)}
             hide={!element.config.showXaxis}
+            fontSize={element.config.fontSize}
           />
-          <YAxis type="number" hide={!element.config.showYaxis} />
+          <YAxis type="number" hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
           <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
           <Line
             dataKey={element.config.keys.y}

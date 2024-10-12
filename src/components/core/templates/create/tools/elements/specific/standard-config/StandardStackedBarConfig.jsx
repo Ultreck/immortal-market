@@ -125,6 +125,21 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
             ariaLabel="No of Bars to Show"
           />
         </div>
+        <div className="flex items-center space-x-4">
+          <p className="text-base opacity-75 whitespace-nowrap">Label Font Size:</p>
+          <AutoCompleteNumberInput
+            onChange={(v) =>
+              onChange({
+                ...element,
+                config: { ...element.config, fontSize: Number(v) },
+              })
+            }
+            value={element.config.fontSize}
+            min={1}
+            max={30}
+            ariaLabel="FontSize"
+          />
+        </div>
       </div>
     </>
   );
