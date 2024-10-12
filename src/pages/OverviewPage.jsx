@@ -5,6 +5,7 @@ import { TbSearch } from 'react-icons/tb';
 import { Input } from '@nextui-org/react';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import { HiOutlineSwitchHorizontal, HiOutlineViewGrid } from 'react-icons/hi';
+import { ReactTyped } from 'react-typed';
 
 const OverviewPage = () => {
   return (
@@ -37,7 +38,18 @@ const OverviewPage = () => {
                 'url("//lf16-web-buz.capcut.com/obj/capcut-web-buz-sg/ies/lvweb/platform_online/static/image/start_image_bg.ace35048.jpeg") 50% center / cover no-repeat, radial-gradient(19.51% 127.29% at 81.05% 84.1%, rgb(23, 224, 226) 0%, rgba(23, 224, 226, 0) 100%), radial-gradient(100% 357.86% at 54.27% 26.6%, rgb(176, 242, 251) 0%, rgba(176, 242, 251, 0) 100%), radial-gradient(21.47% 124.06% at 2.13% -6.45%, rgb(203, 245, 255) 0%, rgba(179, 239, 253, 0) 100%), radial-gradient(29.86% 837.67% at 97.87% 66.05%, rgba(0, 178, 205, 0.8) 0%, rgba(49, 201, 226, 0) 100%), radial-gradient(24.04% 145.4% at 57.67% 135.49%, rgb(0, 195, 202) 0%, rgba(50, 208, 240, 0) 100%), linear-gradient(112.12deg, rgb(53, 213, 232) 27.38%, rgb(12, 198, 222) 55.15%, rgb(90, 215, 252) 96.02%)',
             }}
           >
-            <h1 className="text-4xl font-bold">What are you creating today</h1>
+            <h1 className="text-4xl font-bold">
+              What are you{' '}
+              <ReactTyped
+                className="bg-transparent"
+                strings={['creating', 'analyzing', 'building', 'presenting', 'reporting']}
+                typeSpeed={40}
+                backSpeed={50}
+                backDelay={3000}
+                loop
+              />{' '}
+              today
+            </h1>
             <p className="text-lg leading-none mt-2">Start by creating a new design or exploring banking templates.</p>
           </div>
           <div className="flex justify-center">

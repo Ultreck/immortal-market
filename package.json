@@ -46,6 +46,7 @@
     "react-responsive": "^10.0.0",
     "react-router-dom": "^6.26.2",
     "react-spinners": "^0.14.1",
+    "react-typed": "^2.0.12",
     "react-use": "^17.5.1",
     "recharts": "^2.12.7",
     "socket.io-client": "^4.8.0",
