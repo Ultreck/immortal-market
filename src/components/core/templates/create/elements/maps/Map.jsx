@@ -322,6 +322,11 @@ import MapNewHampshire, {
 } from '@/components/core/templates/create/elements/maps/MapNewHampshire.jsx';
 import MapNewJersey, { MapNewJerseyPresent } from '@/components/core/templates/create/elements/maps/MapNewJersey.jsx';
 import MapNewMexico, { MapNewMexicoPresent } from '@/components/core/templates/create/elements/maps/MapNewMexico.jsx';
+import MapKansas, { MapKansasPresent } from '@/components/core/templates/create/elements/maps/MapKansas.jsx';
+import MapLouisiana, { MapLouisianaPresent } from '@/components/core/templates/create/elements/maps/MapLouisiana.jsx';
+import MapKentucky, { MapKentuckyPresent } from '@/components/core/templates/create/elements/maps/MapKentucky.jsx';
+import MapZambia, { MapZambiaPresent } from '@/components/core/templates/create/elements/maps/MapZambia.jsx';
+import MapZimbabwe, { MapZimbabwePresent } from '@/components/core/templates/create/elements/maps/MapZimbabwe.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -538,6 +543,11 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     'new-hampshire': MapNewHampshire,
     'new-jersey': MapNewJersey,
     'new-mexico': MapNewMexico,
+    kansas: MapKansas,
+    louisiana: MapLouisiana,
+    kentucky: MapKentucky,
+    zambia: MapZambia,
+    zimbabwe: MapZimbabwe,
   };
 
   if (components[element.config.name]) {
@@ -762,6 +772,11 @@ export const MapPresent = ({ element }) => {
     'new-hampshire': MapNewHampshirePresent,
     'new-jersey': MapNewJerseyPresent,
     'new-mexico': MapNewMexicoPresent,
+    kansas: MapKansasPresent,
+    louisiana: MapLouisianaPresent,
+    kentucky: MapKentuckyPresent,
+    zambia: MapZambiaPresent,
+    zimbabwe: MapZimbabwePresent,
   };
 
   if (components[element.config.name]) {

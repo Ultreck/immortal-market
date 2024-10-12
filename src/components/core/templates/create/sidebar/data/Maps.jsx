@@ -217,6 +217,11 @@ import { MapNevadaPreview } from '@/components/core/templates/create/elements/ma
 import { MapNewHampshirePreview } from '@/components/core/templates/create/elements/maps/MapNewHampshire.jsx';
 import { MapNewJerseyPreview } from '@/components/core/templates/create/elements/maps/MapNewJersey.jsx';
 import { MapNewMexicoPreview } from '@/components/core/templates/create/elements/maps/MapNewMexico.jsx';
+import { MapKansasPreview } from '@/components/core/templates/create/elements/maps/MapKansas.jsx';
+import { MapLouisianaPreview } from '@/components/core/templates/create/elements/maps/MapLouisiana.jsx';
+import { MapKentuckyPreview } from '@/components/core/templates/create/elements/maps/MapKentucky.jsx';
+import { MapZambiaPreview } from '@/components/core/templates/create/elements/maps/MapZambia.jsx';
+import { MapZimbabwePreview } from '@/components/core/templates/create/elements/maps/MapZimbabwe.jsx';
 
 const previews = {
   continents: {
@@ -435,6 +440,11 @@ const previews = {
     'new-hampshire': <MapNewHampshirePreview />,
     'new-jersey': <MapNewJerseyPreview />,
     'new-mexico': <MapNewMexicoPreview />,
+    kansas: <MapKansasPreview />,
+    louisiana: <MapLouisianaPreview />,
+    kentucky: <MapKentuckyPreview />,
+    zambia: <MapZambiaPreview />,
+    zimbabwe: <MapZimbabwePreview />,
   },
 };
 
