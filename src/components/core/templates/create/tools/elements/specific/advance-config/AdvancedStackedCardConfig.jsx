@@ -19,50 +19,7 @@ const AdvancedStackedCardConfig = ({ element, onChange }) => {
     onChange({ ...element, config: { ...element.config, data } });
   };
   return (
-    <Tabs
-      variant="bordered"
-      aria-label="Options"
-      color="primary"
-      radius="full"
-      classNames={{
-        base: 'mb-2',
-        tab: 'text-base px-4',
-      }}
-      selectedKey={tab}
-      onSelectionChange={setTab}
-    >
-      <Tab key="data" title="Data" className="text-base">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-6">
-            <Controller
-              name="json"
-              control={control}
-              rules={{
-                required: 'A valid JSON array is required',
-                validate: (value) => isValidJsonArray(value),
-              }}
-              render={({ field, fieldState: { error } }) => {
-                const message = error?.type === 'validate' ? 'Invalid JSON array' : error?.message;
-                return (
-                  <Textarea
-                    classNames={{ inputWrapper: 'px-5 py-5' }}
-                    minRows="10"
-                    label="Paste JSON Array Here.."
-                    bordered
-                    {...field}
-                    errorMessage={message}
-                    isInvalid={!!message}
-                  />
-                );
-              }}
-            />
-          </div>
-          <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
-            Apply
-          </Button>
-        </form>
-      </Tab>
-      <Tab key="settings" title="Settings" className="text-base">
+
         <div className="space-y-6">
           <div className="flex items-center space-x-4">
             <p className="text-base opacity-75 whitespace-nowrap">No. of Cards:</p>
@@ -80,8 +37,6 @@ const AdvancedStackedCardConfig = ({ element, onChange }) => {
             />
           </div>
         </div>
-      </Tab>
-    </Tabs>
   );
 };
 

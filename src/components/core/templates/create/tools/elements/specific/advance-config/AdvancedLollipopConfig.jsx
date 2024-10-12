@@ -20,53 +20,6 @@ const AdvancedLollipopConfig = ({ element, onChange }) => {
   };
 
   return (
-    <Tabs
-      variant="bordered"
-      aria-label="Options"
-      color="primary"
-      radius="full"
-      classNames={{
-        base: 'mb-2',
-        tab: 'text-base px-4',
-      }}
-      selectedKey={tab}
-      onSelectionChange={setTab}
-    >
-      <Tab key="data" title="Data" className="text-base">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="json"
-            control={control}
-            rules={{
-              required: 'A valid JSON array is required, with each item having a label and value',
-              validate: (value) => {
-                return (
-                  isValidJsonArray(value) &&
-                  JSON.parse(value).every((item) => Object.hasOwn(item, 'label') && Object.hasOwn(item, 'value'))
-                );
-              },
-            }}
-            render={({ field, fieldState: { error } }) => {
-              const message = error?.type === 'validate' ? 'Invalid JSON array' : error?.message;
-              return (
-                <Textarea
-                  classNames={{ inputWrapper: 'px-5 py-5' }}
-                  minRows="10"
-                  label="Paste JSON Array Here.."
-                  bordered
-                  {...field}
-                  errorMessage={message}
-                  isInvalid={!!message}
-                />
-              );
-            }}
-          />
-          <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
-            Apply
-          </Button>
-        </form>
-      </Tab>
-      <Tab key="settings" title="Settings" className="text-base">
         <div className="flex items-center space-x-4">
           <p className="text-base opacity-75 whitespace-nowrap">No. of Lollipops:</p>
           <AutoCompleteNumberInput
@@ -82,8 +35,6 @@ const AdvancedLollipopConfig = ({ element, onChange }) => {
             ariaLabel="No of Bars to Show"
           />
         </div>
-      </Tab>
-    </Tabs>
   );
 };
 

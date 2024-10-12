@@ -18,7 +18,8 @@ const AdvanceCircleIconsConfig = ({ element, onChange }) => {
 
   return (
     <div className="grid grid-cols-1 gap-2">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="text">{"There's no settings for this chart"}</div>
+      {/* <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <div className="space-y-6">
             <Controller
@@ -49,7 +50,7 @@ const AdvanceCircleIconsConfig = ({ element, onChange }) => {
             Apply
           </Button>
         </div>
-      </form>
+      </form> */}
     </div>
   );
 };

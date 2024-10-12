@@ -17,33 +17,34 @@ const AdvancedTreeMapConfig = ({ element, onChange }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
-      <Controller
-        name="json"
-        control={control}
-        rules={{
-          required: 'A valid JSON array is required',
-          validate: (value) => isValidJsonArray(value),
-        }}
-        render={({ field, fieldState: { error } }) => {
-          const message = error?.type === 'validate' ? 'Invalid JSON array' : error?.message;
-          return (
-            <Textarea
-              classNames={{ inputWrapper: 'px-5 py-5' }}
-              minRows="10"
-              label="Paste JSON Array Here.."
-              bordered
-              {...field}
-              errorMessage={message}
-              isInvalid={!!message}
-            />
-          );
-        }}
-      />
-      <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
-        Apply
-      </Button>
-    </form>
+    <div className="text">{"There's no settings for this chart"}</div>
+    // <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+    //   <Controller
+    //     name="json"
+    //     control={control}
+    //     rules={{
+    //       required: 'A valid JSON array is required',
+    //       validate: (value) => isValidJsonArray(value),
+    //     }}
+    //     render={({ field, fieldState: { error } }) => {
+    //       const message = error?.type === 'validate' ? 'Invalid JSON array' : error?.message;
+    //       return (
+    //         <Textarea
+    //           classNames={{ inputWrapper: 'px-5 py-5' }}
+    //           minRows="10"
+    //           label="Paste JSON Array Here.."
+    //           bordered
+    //           {...field}
+    //           errorMessage={message}
+    //           isInvalid={!!message}
+    //         />
+    //       );
+    //     }}
+    //   />
+    //   <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
+    //     Apply
+    //   </Button>
+    // </form>
   );
 };
 

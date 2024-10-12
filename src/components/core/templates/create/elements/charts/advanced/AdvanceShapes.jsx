@@ -66,7 +66,7 @@ export const AdvanceShapesContent = ({ element }) => {
           {countFormat === 'fraction' && `${n}/${noOfShapes}`}
         </p>
       )}
-      <div className={`grid ${classes.grid[noOfShapes] || classes.grid.default} gap-3`}>
+      <div className={`grid ${classes.grid[noOfShapes] || classes.grid.default} gap-${element.config.gap}`}>
         {Array.from({ length: noOfShapes }, (_, i) => (
           <motion.div
             key={i}

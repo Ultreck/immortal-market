@@ -59,6 +59,25 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
           value={element.config.noOfShapes}
         />
       </div>
+      <div>
+        <Slider
+          label="Gap between shapes"
+          step={2}
+          maxValue={12}
+          minValue={2}
+          marks={[
+            { value: 2, label: '2' },
+            { value: 4, label: '4' },
+            { value: 6, label: '6' },
+            { value: 8, label: '8' },
+            { value: 10, label: '10' },
+            { value: 12, label: '12' },
+          ]}
+          className="max-w-md"
+          onChange={(e) => onChange({ ...element, config: { ...element.config, gap: e } })}
+          value={element.config.gap}
+        />
+      </div>
 
       <p>Change Icon</p>
       <div className="border border-default-400 rounded w-[80px] flex flex-col">

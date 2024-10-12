@@ -7,6 +7,7 @@ import ModifyData from '@/components/core/templates/create/tools/elements/specif
 import ChangeChart from '@/components/core/templates/create/tools/elements/specific/chart-data/ChangeChart.jsx';
 import NewConnection from '@/components/core/templates/create/tools/elements/specific/chart-data/NewConnection.jsx';
 import { cn } from '@/lib/utils.js';
+import ModifyAdvancedChart from './chart-data/ModifyAdvancedChart';
 
 const items = [
   {
@@ -48,6 +49,7 @@ const items = [
 
 const ChartData = ({ element, onChange }) => {
   const [view, setView] = useState('home');
+  console.log(element);
 
   return (
     <>
@@ -84,7 +86,12 @@ const ChartData = ({ element, onChange }) => {
                 </div>
               </>
             )}
-            {view === 'data' && <ModifyData element={element} onChange={onChange} onBack={() => setView('home')} />}
+            {view === 'data' && element.type === 'chart-s' && (
+              <ModifyData element={element} onChange={onChange} onBack={() => setView('home')} />
+            )}
+            {view === 'data' && element.type === 'chart-a' && (
+              <ModifyAdvancedChart element={element} onChange={onChange} onBack={() => setView('home')} />
+            )}
             {view === 'change' && <ChangeChart element={element} onChange={onChange} onBack={() => setView('home')} />}
             {view === 'connection' && <NewConnection onBack={() => setView('home')} />}
           </div>
