@@ -208,6 +208,15 @@ import { MapNorthernIrelandPreview } from '@/components/core/templates/create/el
 import { MapScotlandPreview } from '@/components/core/templates/create/elements/maps/MapScotland.jsx';
 import { MapUnitedStatesPreview } from '@/components/core/templates/create/elements/maps/MapUnitedStates.jsx';
 import { MapWalesPreview } from '@/components/core/templates/create/elements/maps/MapWales.jsx';
+import { MapMinnesotaPreview } from '@/components/core/templates/create/elements/maps/MapMinnesota.jsx';
+import { MapMississippiPreview } from '@/components/core/templates/create/elements/maps/MapMississippi.jsx';
+import { MapMissouriPreview } from '@/components/core/templates/create/elements/maps/MapMissouri.jsx';
+import { MapMontanaPreview } from '@/components/core/templates/create/elements/maps/MapMontana.jsx';
+import { MapNebraskaPreview } from '@/components/core/templates/create/elements/maps/MapNebraska.jsx';
+import { MapNevadaPreview } from '@/components/core/templates/create/elements/maps/MapNevada.jsx';
+import { MapNewHampshirePreview } from '@/components/core/templates/create/elements/maps/MapNewHampshire.jsx';
+import { MapNewJerseyPreview } from '@/components/core/templates/create/elements/maps/MapNewJersey.jsx';
+import { MapNewMexicoPreview } from '@/components/core/templates/create/elements/maps/MapNewMexico.jsx';
 
 const previews = {
   continents: {
@@ -417,6 +426,15 @@ const previews = {
     scotland: <MapScotlandPreview />,
     'united-states': <MapUnitedStatesPreview />,
     wales: <MapWalesPreview />,
+    minnesota: <MapMinnesotaPreview />,
+    mississippi: <MapMississippiPreview />,
+    missouri: <MapMissouriPreview />,
+    montana: <MapMontanaPreview />,
+    nebraska: <MapNebraskaPreview />,
+    nevada: <MapNevadaPreview />,
+    'new-hampshire': <MapNewHampshirePreview />,
+    'new-jersey': <MapNewJerseyPreview />,
+    'new-mexico': <MapNewMexicoPreview />,
   },
 };
 

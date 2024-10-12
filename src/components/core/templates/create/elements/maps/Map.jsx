@@ -310,6 +310,18 @@ import MapUnitedStates, {
 } from '@/components/core/templates/create/elements/maps/MapUnitedStates.jsx';
 import MapWales, { MapWalesPresent } from '@/components/core/templates/create/elements/maps/MapWales.jsx';
 import MapMinnesota, { MapMinnesotaPresent } from '@/components/core/templates/create/elements/maps/MapMinnesota.jsx';
+import MapMississippi, {
+  MapMississippiPresent,
+} from '@/components/core/templates/create/elements/maps/MapMississippi.jsx';
+import MapMissouri, { MapMissouriPresent } from '@/components/core/templates/create/elements/maps/MapMissouri.jsx';
+import MapMontana, { MapMontanaPresent } from '@/components/core/templates/create/elements/maps/MapMontana.jsx';
+import MapNebraska, { MapNebraskaPresent } from '@/components/core/templates/create/elements/maps/MapNebraska.jsx';
+import MapNevada, { MapNevadaPresent } from '@/components/core/templates/create/elements/maps/MapNevada.jsx';
+import MapNewHampshire, {
+  MapNewHampshirePresent,
+} from '@/components/core/templates/create/elements/maps/MapNewHampshire.jsx';
+import MapNewJersey, { MapNewJerseyPresent } from '@/components/core/templates/create/elements/maps/MapNewJersey.jsx';
+import MapNewMexico, { MapNewMexicoPresent } from '@/components/core/templates/create/elements/maps/MapNewMexico.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -518,6 +530,14 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     'united-states': MapUnitedStates,
     wales: MapWales,
     minnesota: MapMinnesota,
+    mississippi: MapMississippi,
+    missouri: MapMissouri,
+    montana: MapMontana,
+    nebraska: MapNebraska,
+    nevada: MapNevada,
+    'new-hampshire': MapNewHampshire,
+    'new-jersey': MapNewJersey,
+    'new-mexico': MapNewMexico,
   };
 
   if (components[element.config.name]) {
@@ -734,6 +754,14 @@ export const MapPresent = ({ element }) => {
     'united-states': MapUnitedStatesPresent,
     wales: MapWalesPresent,
     minnesota: MapMinnesotaPresent,
+    mississippi: MapMississippiPresent,
+    missouri: MapMissouriPresent,
+    montana: MapMontanaPresent,
+    nebraska: MapNebraskaPresent,
+    nevada: MapNevadaPresent,
+    'new-hampshire': MapNewHampshirePresent,
+    'new-jersey': MapNewJerseyPresent,
+    'new-mexico': MapNewMexicoPresent,
   };
 
   if (components[element.config.name]) {
