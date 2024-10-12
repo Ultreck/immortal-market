@@ -15,8 +15,8 @@ const useMapElement = (element) => {
     const coords = getCoordinatesFromPath(path);
     return {
       name: path.dataset.name,
-      x: path.dataset?.x || coords.x,
-      y: path.dataset?.y || coords.y,
+      x: coords.x || path.dataset?.x || 0,
+      y: coords.y || path.dataset?.y || 0,
     };
   });
 
