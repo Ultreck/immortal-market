@@ -1,13 +1,17 @@
-import { HiOutlineChartBar, HiOutlinePlus } from 'react-icons/hi2';
+import { HiChevronRight, HiOutlineChartBar, HiOutlinePlus, HiOutlinePresentationChartBar } from 'react-icons/hi2';
 import RecentProjects from '@/components/core/overview/RecentProjects.jsx';
 import PopularTemplates from '@/components/core/overview/PopularTemplates.jsx';
-import { TbSearch } from 'react-icons/tb';
+import { TbChartInfographic, TbSearch } from 'react-icons/tb';
 import { Input } from '@nextui-org/react';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
-import { HiOutlineSwitchHorizontal, HiOutlineViewGrid } from 'react-icons/hi';
+import { HiOutlineDocumentReport, HiOutlineSwitchHorizontal, HiOutlineViewGrid } from 'react-icons/hi';
 import { ReactTyped } from 'react-typed';
+import { RiRobot2Line } from 'react-icons/ri';
+import { useState } from 'react';
 
 const OverviewPage = () => {
+  const [view, setView] = useState('create');
+
   return (
     <>
       <DashboardHeader
@@ -55,24 +59,110 @@ const OverviewPage = () => {
           <div className="flex justify-center">
             <ul className="flex w-auto px-10 rounded-full -mt-10 mx-auto justify-center gap-4 bg-white dark:bg-default-100 shadow-subtle">
               {[
-                { text: 'Create', icon: <HiOutlinePlus size="22" /> },
-                { text: 'Analyze', icon: <HiOutlineChartBar size="22" /> },
-                { text: 'Connect', icon: <HiOutlineSwitchHorizontal size="22" /> },
-                { text: 'AI Apps', icon: <HiOutlineViewGrid size="22" /> },
-              ].map((tab, index) => (
-                <li key={index} className="py-2">
-                  <button className="flex flex-col items-center justify-center px-4 py-2.5 rounded-3xl hover:bg-black/5 dark:hover:bg-white/5">
-                    {tab.icon}
-                    <span>{tab.text}</span>
-                  </button>
-                </li>
-              ))}
+                { id: 'create', text: 'Create', icon: <HiOutlinePlus size="22" /> },
+                { id: 'analyze', text: 'Analyze', icon: <HiOutlineChartBar size="22" /> },
+                { id: 'connect', text: 'Connect', icon: <HiOutlineSwitchHorizontal size="22" /> },
+                { id: 'ai-apps', text: 'AI Apps', icon: <HiOutlineViewGrid size="22" /> },
+              ].map((tab, index) => {
+                const active = view === tab.id;
+                return (
+                  <li key={index} className="py-2 relative">
+                    <button
+                      onClick={() => setView(tab.id)}
+                      className="flex flex-col items-center justify-center px-4 py-2.5 rounded-3xl hover:bg-black/5 dark:hover:bg-white/5"
+                    >
+                      {tab.icon}
+                      <span>{tab.text}</span>
+                    </button>
+                    {active && (
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[4px] w-1/2 bg-orange-500 z-10 rounded-t-3xl" />
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>
-        <div className="mt-10 space-y-24">
-          <RecentProjects />
-          <PopularTemplates />
+        <div className="mt-12">
+          {view === 'create' && (
+            <div className="grid grid-cols-5 gap-6 mb-10">
+              <div className="rounded-3xl px-5 py-5 bg-default-100 flex items-center gap-2 hover:bg-default-200/60 cursor-pointer">
+                <div>
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)]">
+                    <HiOutlineDocumentReport size="20" className="text-black" />
+                  </div>
+                </div>
+                <p className="font-semibold leading-tight">Report</p>
+              </div>
+              <div className="rounded-3xl px-5 py-5 bg-default-100 flex items-center gap-2 hover:bg-default-200/60 cursor-pointer">
+                <div>
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(242,_210,_255)_0.75%,_rgb(251,_225,_255)_98.5%)]">
+                    <HiOutlineChartBar size="20" className="text-black" />
+                  </div>
+                </div>
+                <p className="font-semibold leading-tight">Chart</p>
+              </div>
+              <div className="rounded-3xl px-5 py-5 bg-default-100 flex items-center gap-2 hover:bg-default-200/60 cursor-pointer">
+                <div>
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(208,_224,_141)_1.69%,_rgb(223,_234,_194)_100%)]">
+                    <HiOutlinePresentationChartBar size="20" className="text-black" />
+                  </div>
+                </div>
+                <p className="font-semibold leading-tight">Presentation</p>
+              </div>
+              <div className="rounded-3xl px-5 py-5 bg-default-100 flex items-center gap-2 hover:bg-default-200/60 cursor-pointer">
+                <div>
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(219,_204,_255)_6.18%,_rgb(219,_229,_255)_94.94%)]">
+                    <TbChartInfographic size="20" className="text-black" />
+                  </div>
+                </div>
+                <p className="font-semibold leading-tight">Infographic</p>
+              </div>
+              <div className="rounded-3xl px-5 py-5 bg-default-100 flex items-center gap-2 hover:bg-default-200/60 cursor-pointer">
+                <div>
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(156,_226,_243)_2.43%,_rgb(199,_248,_243)_97.75%)]">
+                    <RiRobot2Line size="20" className="text-black" />
+                  </div>
+                </div>
+                <p className="font-semibold leading-tight">Gen AI</p>
+              </div>
+            </div>
+          )}
+          {view === 'analyze' && (
+            <div className="grid grid-cols-3 gap-6 mb-10">
+              <div className="flex items-start rounded-3xl px-6 py-5 bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)] text-black">
+                <div className="py-2">
+                  <p className="font-semibold leading-tight">Lorem ipsum dolor sit amet,</p>
+                  <button className="flex items-center mt-6">
+                    Try <HiChevronRight size="16" />
+                  </button>
+                </div>
+                <img src="https://picsum.photos/150" alt="Profile" className="rounded-3xl w-[90px] h-full" />
+              </div>
+              <div className="flex items-start rounded-3xl px-6 py-5 bg-[linear-gradient(270deg,_rgb(242,_210,_255)_0.75%,_rgb(251,_225,_255)_98.5%)] text-black">
+                <div className="py-2">
+                  <p className="font-semibold leading-tight">Lorem ipsum dolor sit amet,</p>
+                  <button className="flex items-center mt-6">
+                    Try <HiChevronRight size="16" />
+                  </button>
+                </div>
+                <img src="https://picsum.photos/152" alt="Profile" className="rounded-3xl w-[90px] h-full" />
+              </div>
+              <div className="flex items-start rounded-3xl px-6 py-5 bg-[linear-gradient(270deg,_rgb(208,_224,_141)_1.69%,_rgb(223,_234,_194)_100%)] text-black">
+                <div className="py-2">
+                  <p className="font-semibold leading-tight">Lorem ipsum dolor sit amet,</p>
+                  <button className="flex items-center mt-6">
+                    Try <HiChevronRight size="16" />
+                  </button>
+                </div>
+                <img src="https://picsum.photos/151" alt="Profile" className="rounded-3xl w-[90px] h-full" />
+              </div>
+            </div>
+          )}
+          <div className="space-y-12">
+            <RecentProjects />
+            <PopularTemplates />
+          </div>
         </div>
       </div>
     </>

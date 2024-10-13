@@ -19,8 +19,8 @@ const DesignCard = ({ id, title, thumbnail }) => {
           </div>
         )}
       </Link>
-      <div className="mt-4 px-2 flex items-center justify-between">
-        <h4 className="font-medium text-lg leading-tight">{title}</h4>
+      <div className="mt-3 px-2 flex items-center justify-between">
+        <h4 className="font-medium text-base leading-tight truncate">{title}</h4>
       </div>
     </div>
   );
