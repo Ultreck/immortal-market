@@ -33,6 +33,12 @@ export const StandardDoughnutContent = ({ element }) => {
   useEffect(() => {}, [element]);
 
   return (
+    <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
     <ChartContainer
       config={{}}
       style={{
@@ -54,6 +60,7 @@ export const StandardDoughnutContent = ({ element }) => {
         />
       </PieChart>
     </ChartContainer>
+  </div>
   );
 };
 

@@ -4,6 +4,7 @@ import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import { useEffect } from 'react';
 
 const StandardBar = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -26,33 +27,44 @@ export const StandardBarPresent = ({ element }) => {
 };
 
 export const StandardBarContent = ({ element }) => {
+  const { useBackgroundImage, backgroundImage, useBackgroundColor, backgroundColor } = element.config;
   const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
     const color = element.config.colors?.[index];
     return { ...item, fill: color };
   });
+
+  useEffect(() => {}, [element]);
+
   return (
-    <ChartContainer
-      config={{}}
-      style={{
-        height: element.height,
-        width: element.width,
-        opacity: element.style.opacity,
+    <div
+    style={{
+        backgroundColor: useBackgroundColor ? backgroundColor : 'none',
+        backgroundImage: useBackgroundImage ? `url(${backgroundImage})` : 'none',
       }}
     >
-      <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
-        <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis
-          dataKey={element.config.keys.x}
-          tickFormatter={(value) => capitalize(value)}
-          hide={!element.config.showXaxis}
-          fontSize={12}
-        />
-        <YAxis dataKey={element.config.keys.y} hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
-        <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-        {element.config.showLegend && <Legend />}
-        <Bar dataKey={element.config.keys.y} radius={8} />
-      </BarChart>
-    </ChartContainer>
+      <ChartContainer
+        config={{}}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+        }}
+      >
+        <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
+          <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+          <XAxis
+            dataKey={element.config.keys.x}
+            tickFormatter={(value) => capitalize(value)}
+            hide={!element.config.showXaxis}
+            fontSize={12}
+          />
+          <YAxis dataKey={element.config.keys.y} hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
+          <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+          {element.config.showLegend && <Legend />}
+          <Bar dataKey={element.config.keys.y} radius={8} />
+        </BarChart>
+      </ChartContainer>
+    </div>
   );
 };
 
@@ -65,3 +77,4 @@ StandardBarPresent.propTypes = {
 };
 
 export default StandardBar;
+

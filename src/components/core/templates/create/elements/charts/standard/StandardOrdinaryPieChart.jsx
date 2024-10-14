@@ -40,6 +40,12 @@ export const StandardOrdinaryPieChartContent = ({ element }) => {
   useEffect(() => {}, [element.config.data, element.config.colors, element.config.keys.y]);
 
   return (
+    <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
     <div>
       <ChartContainer
         config={{}}
@@ -55,6 +61,7 @@ export const StandardOrdinaryPieChartContent = ({ element }) => {
         </PieChart>
       </ChartContainer>
     </div>
+  </div>
   );
 };
 

@@ -24,23 +24,36 @@ StandardAreaBarVertical.propTypes = ElementPropTypes;
 
 export const StandardAreaBarVerticalContent = ({ element }) => {
   return (
-    <ChartContainer
-      config={{}}
+    <div
       style={{
-        height: element.height,
-        width: element.width,
-        opacity: element.style.opacity,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
     >
-      <ComposedChart data={element.config.data.slice(0, element.config.bars)} layout="vertical">
-        <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <YAxis dataKey="name" type="category" scale="band" hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
-        <XAxis type="number" hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
-        {element.config.showLegend && <Legend />}
-        <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={8} />
-        <Area type="monotone" dataKey="amt" fill={element.config.colors?.[1]} stroke={element.config.colors?.[1]} />
-      </ComposedChart>
-    </ChartContainer>
+      <ChartContainer
+        config={{}}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+        }}
+      >
+        <ComposedChart data={element.config.data.slice(0, element.config.bars)} layout="vertical">
+          <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+          <YAxis
+            dataKey="name"
+            type="category"
+            scale="band"
+            hide={!element.config.showYaxis}
+            fontSize={element.config.fontSize}
+          />
+          <XAxis type="number" hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
+          {element.config.showLegend && <Legend />}
+          <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={8} />
+          <Area type="monotone" dataKey="amt" fill={element.config.colors?.[1]} stroke={element.config.colors?.[1]} />
+        </ComposedChart>
+      </ChartContainer>
+    </div>
   );
 };
 

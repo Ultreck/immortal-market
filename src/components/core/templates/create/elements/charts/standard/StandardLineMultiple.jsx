@@ -26,41 +26,48 @@ StandardLineMultiple.propTypes = ElementPropTypes;
 export const StandardLineMultipleContent = ({ element }) => {
   return (
     <>
-      <ChartContainer
-        config={{}}
+      <div
         style={{
-          height: element.height,
-          width: element.width,
-          opacity: element.style.opacity,
+          backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+          backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
         }}
       >
-        <LineChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
-          <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-          <XAxis
-            dataKey={element.config.keys.x}
-            tickMargin={8}
-            tickFormatter={(value) => capitalize(value)}
-            hide={!element.config.showXaxis}
-            fontSize={element.config.fontSize}
-          />
-          <YAxis type="number" hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
-          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-          {element.config.showLegend && <Legend />}
-          {element.config.keys.y.slice(0, element.config.noOfLines).map((key, index) => {
-            return (
-              <Line
-                key={key}
-                dataKey={key}
-                strokeWidth={2}
-                dot={false}
-                fill={element.config.colors[index % element.config.colors.length]}
-                stroke={element.config.colors[index % element.config.colors.length]}
-                type={element.config.type}
-              />
-            );
-          })}
-        </LineChart>
-      </ChartContainer>
+        <ChartContainer
+          config={{}}
+          style={{
+            height: element.height,
+            width: element.width,
+            opacity: element.style.opacity,
+          }}
+        >
+          <LineChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
+            <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+            <XAxis
+              dataKey={element.config.keys.x}
+              tickMargin={8}
+              tickFormatter={(value) => capitalize(value)}
+              hide={!element.config.showXaxis}
+              fontSize={element.config.fontSize}
+            />
+            <YAxis type="number" hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            {element.config.showLegend && <Legend />}
+            {element.config.keys.y.slice(0, element.config.noOfLines).map((key, index) => {
+              return (
+                <Line
+                  key={key}
+                  dataKey={key}
+                  strokeWidth={2}
+                  dot={false}
+                  fill={element.config.colors[index % element.config.colors.length]}
+                  stroke={element.config.colors[index % element.config.colors.length]}
+                  type={element.config.type}
+                />
+              );
+            })}
+          </LineChart>
+        </ChartContainer>
+      </div>
     </>
   );
 };

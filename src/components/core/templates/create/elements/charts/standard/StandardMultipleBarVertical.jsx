@@ -24,6 +24,12 @@ StandardMultipleBarVertical.propTypes = ElementPropTypes;
 
 export const StandardMultipleBarVerticalContent = ({ element }) => {
   return (
+    <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
     <ChartContainer
       config={{}}
       style={{
@@ -47,6 +53,7 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
         ))}
       </BarChart>
     </ChartContainer>
+  </div>
   );
 };
 

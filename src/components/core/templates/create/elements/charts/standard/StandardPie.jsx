@@ -72,14 +72,21 @@ export const StandardPieContent = ({ element }) => {
 
   return (
     <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
+    <div
+      className='bg-gray-200'
       ref={chartRef}
       style={{
         width: element.width,
         height: element.height,
         opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     />
+  </div>
   );
 };
 
