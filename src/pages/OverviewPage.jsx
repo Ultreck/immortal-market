@@ -1,13 +1,23 @@
 import { HiChevronRight, HiOutlineChartBar, HiOutlinePlus, HiOutlinePresentationChartBar } from 'react-icons/hi2';
 import RecentProjects from '@/components/core/overview/RecentProjects.jsx';
 import PopularTemplates from '@/components/core/overview/PopularTemplates.jsx';
-import { TbChartInfographic, TbSearch } from 'react-icons/tb';
+import {
+  TbBrandGoogleDrive,
+  TbBrandMongodb,
+  TbBrandMysql,
+  TbChartInfographic,
+  TbFileTypeCsv,
+  TbFileTypePdf,
+  TbLink,
+  TbSearch,
+} from 'react-icons/tb';
 import { Input } from '@nextui-org/react';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import { HiOutlineDocumentReport, HiOutlineSwitchHorizontal, HiOutlineViewGrid } from 'react-icons/hi';
 import { ReactTyped } from 'react-typed';
-import { RiRobot2Line } from 'react-icons/ri';
+import { RiFileLine, RiRobot2Line } from 'react-icons/ri';
 import { useState } from 'react';
+import { SiOracle } from 'react-icons/si';
 
 const OverviewPage = () => {
   const [view, setView] = useState('create');
@@ -62,7 +72,7 @@ const OverviewPage = () => {
                 { id: 'create', text: 'Create', icon: <HiOutlinePlus size="22" /> },
                 { id: 'analyze', text: 'Analyze', icon: <HiOutlineChartBar size="22" /> },
                 { id: 'connect', text: 'Connect', icon: <HiOutlineSwitchHorizontal size="22" /> },
-                { id: 'ai-apps', text: 'AI Apps', icon: <HiOutlineViewGrid size="22" /> },
+                { id: 'apps', text: 'AI Apps', icon: <HiOutlineViewGrid size="22" /> },
               ].map((tab, index) => {
                 const active = view === tab.id;
                 return (
@@ -84,6 +94,98 @@ const OverviewPage = () => {
           </div>
         </section>
         <div className="mt-12">
+          {view === 'connect' && (
+            <div className="grid grid-cols-8 gap-4 mb-10">
+              <div
+                onClick={() => null}
+                className="flex flex-col items-center justify-center py-4 hover:bg-default-100 rounded-2xl cursor-pointer"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)] text-black">
+                    <RiFileLine size="24" />
+                  </div>
+                </div>
+                <p className="mt-2">Excel</p>
+              </div>
+              <div
+                onClick={() => null}
+                className="flex flex-col items-center justify-center py-4 hover:bg-default-100 rounded-2xl cursor-pointer"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(242,_210,_255)_0.75%,_rgb(251,_225,_255)_98.5%)] text-black">
+                    <TbFileTypeCsv size="24" />
+                  </div>
+                </div>
+                <p className="mt-2">CSV</p>
+              </div>
+              <div
+                onClick={() => null}
+                className="flex flex-col items-center justify-center py-4 hover:bg-default-100 rounded-2xl cursor-pointer"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(208,_224,_141)_1.69%,_rgb(223,_234,_194)_100%)] text-black">
+                    <TbFileTypePdf size="24" />
+                  </div>
+                </div>
+                <p className="mt-2">PDF</p>
+              </div>
+              <div
+                onClick={() => null}
+                className="flex flex-col items-center justify-center py-4 hover:bg-default-100 rounded-2xl cursor-pointer"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(219,_204,_255)_6.18%,_rgb(219,_229,_255)_94.94%)] text-black">
+                    <TbLink size="24" />
+                  </div>
+                </div>
+                <p className="mt-2">Link</p>
+              </div>
+              <div
+                onClick={() => null}
+                className="flex flex-col items-center justify-center py-4 hover:bg-default-100 rounded-2xl cursor-pointer"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)] text-black">
+                    <TbBrandGoogleDrive size="24" />
+                  </div>
+                </div>
+                <p className="mt-2">Google Drive</p>
+              </div>
+              <div
+                onClick={() => null}
+                className="flex flex-col items-center justify-center py-4 hover:bg-default-100 rounded-2xl cursor-pointer"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(242,_210,_255)_0.75%,_rgb(251,_225,_255)_98.5%)] text-black">
+                    <TbBrandMysql size="24" />
+                  </div>
+                </div>
+                <p className="mt-2">MySQL</p>
+              </div>
+              <div
+                onClick={() => null}
+                className="flex flex-col items-center justify-center py-4 hover:bg-default-100 rounded-2xl cursor-pointer"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(208,_224,_141)_1.69%,_rgb(223,_234,_194)_100%)] text-black">
+                    <SiOracle size="24" />
+                  </div>
+                </div>
+                <p className="mt-2">Oracle</p>
+              </div>
+              <div
+                onClick={() => null}
+                className="flex flex-col items-center justify-center py-4 hover:bg-default-100 rounded-2xl cursor-pointer"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(219,_204,_255)_6.18%,_rgb(219,_229,_255)_94.94%)] text-black">
+                    <TbBrandMongodb size="24" />
+                  </div>
+                </div>
+                <p className="mt-2">MongoDB</p>
+              </div>
+            </div>
+          )}
           {view === 'create' && (
             <div className="grid grid-cols-5 gap-6 mb-10">
               <div className="rounded-3xl px-5 py-5 bg-default-100 flex items-center gap-2 hover:bg-default-200/60 cursor-pointer">
@@ -156,6 +258,60 @@ const OverviewPage = () => {
                   </button>
                 </div>
                 <img src="https://picsum.photos/151" alt="Profile" className="rounded-3xl w-[90px] h-full" />
+              </div>
+            </div>
+          )}
+          {view === 'apps' && (
+            <div className="grid grid-cols-5 gap-6 mb-10">
+              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)] text-black">
+                <img src="https://picsum.photos/150" alt="Profile" className="rounded-2xl h-[60px]" />
+                <div className="mt-4 w-full px-2">
+                  <h3 className="font-medium leading-none mb-2">Stocks</h3>
+                  <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
+                  <button className="flex items-center mt-6">
+                    Launch <HiChevronRight size="16" />
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(242,_210,_255)_0.75%,_rgb(251,_225,_255)_98.5%)] text-black">
+                <img src="https://picsum.photos/152" alt="Profile" className="rounded-2xl h-[60px]" />
+                <div className="mt-4 w-full px-2">
+                  <h3 className="font-medium leading-none mb-2">Bank statement</h3>
+                  <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
+                  <button className="flex items-center mt-6">
+                    Launch <HiChevronRight size="16" />
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(208,_224,_141)_1.69%,_rgb(223,_234,_194)_100%)] text-black">
+                <img src="https://picsum.photos/151" alt="Profile" className="rounded-2xl h-[60px]" />
+                <div className="mt-4 w-full px-2">
+                  <h3 className="font-medium leading-none mb-2">Markets</h3>
+                  <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
+                  <button className="flex items-center mt-6">
+                    Launch <HiChevronRight size="16" />
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(219,_204,_255)_6.18%,_rgb(219,_229,_255)_94.94%)] text-black">
+                <img src="https://picsum.photos/151" alt="Profile" className="rounded-2xl h-[60px]" />
+                <div className="mt-4 w-full px-2">
+                  <h3 className="font-medium leading-none mb-2">Financial report</h3>
+                  <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
+                  <button className="flex items-center mt-6">
+                    Launch <HiChevronRight size="16" />
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(156,_226,_243)_2.43%,_rgb(199,_248,_243)_97.75%)] text-black">
+                <img src="https://picsum.photos/151" alt="Profile" className="rounded-2xl h-[60px]" />
+                <div className="mt-4 w-full px-2">
+                  <h3 className="font-medium leading-none mb-2">News</h3>
+                  <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
+                  <button className="flex items-center mt-6">
+                    Launch <HiChevronRight size="16" />
+                  </button>
+                </div>
               </div>
             </div>
           )}
