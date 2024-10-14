@@ -222,6 +222,17 @@ import { MapLouisianaPreview } from '@/components/core/templates/create/elements
 import { MapKentuckyPreview } from '@/components/core/templates/create/elements/maps/MapKentucky.jsx';
 import { MapZambiaPreview } from '@/components/core/templates/create/elements/maps/MapZambia.jsx';
 import { MapZimbabwePreview } from '@/components/core/templates/create/elements/maps/MapZimbabwe.jsx';
+import { MapUruguayPreview } from '@/components/core/templates/create/elements/maps/MapUruguay.jsx';
+import { MapUsVirginIslandsPreview } from '@/components/core/templates/create/elements/maps/MapUsVirginIslands.jsx';
+import { MapUzbekistanPreview } from '@/components/core/templates/create/elements/maps/MapUzbekistan.jsx';
+import { MapVanuatuPreview } from '@/components/core/templates/create/elements/maps/MapVanuatu.jsx';
+import { MapVietnamPreview } from '@/components/core/templates/create/elements/maps/MapVietnam.jsx';
+import { MapWesternSaharaPreview } from '@/components/core/templates/create/elements/maps/MapWesternSahara.jsx';
+import { MapVenezuelaPreview } from '@/components/core/templates/create/elements/maps/MapVenezuela.jsx';
+import { MapYemenPreview } from '@/components/core/templates/create/elements/maps/MapYemen.jsx';
+import { MapMichiganPreview } from '@/components/core/templates/create/elements/maps/MapMichigan.jsx';
+import { MapVermontPreview } from '@/components/core/templates/create/elements/maps/MapVermont.jsx';
+import { MapRhodeIslandPreview } from '@/components/core/templates/create/elements/maps/MapRhodeIsland.jsx';
 
 const previews = {
   continents: {
@@ -445,6 +456,17 @@ const previews = {
     kentucky: <MapKentuckyPreview />,
     zambia: <MapZambiaPreview />,
     zimbabwe: <MapZimbabwePreview />,
+    uruguay: <MapUruguayPreview/>,
+    'us-virgin-islands': <MapUsVirginIslandsPreview/>,
+    uzbekistan: <MapUzbekistanPreview/>,
+    vanuatu: <MapVanuatuPreview/>,
+    vietnam: <MapVietnamPreview/>,
+    'western-sahara': <MapWesternSaharaPreview/>,
+    venezuela: <MapVenezuelaPreview/>,
+    yemen: <MapYemenPreview/>,
+    michigan: <MapMichiganPreview/>,
+    vermont: <MapVermontPreview/>,
+    'rhode-island': <MapRhodeIslandPreview/>,
   },
 };
 

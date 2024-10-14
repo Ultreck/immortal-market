@@ -327,6 +327,17 @@ import MapLouisiana, { MapLouisianaPresent } from '@/components/core/templates/c
 import MapKentucky, { MapKentuckyPresent } from '@/components/core/templates/create/elements/maps/MapKentucky.jsx';
 import MapZambia, { MapZambiaPresent } from '@/components/core/templates/create/elements/maps/MapZambia.jsx';
 import MapZimbabwe, { MapZimbabwePresent } from '@/components/core/templates/create/elements/maps/MapZimbabwe.jsx';
+import MapUruguay, { MapUruguayPresent } from '@/components/core/templates/create/elements/maps/MapUruguay.jsx';
+import MapUsVirginIslands, { MapUsVirginIslandsPresent } from '@/components/core/templates/create/elements/maps/MapUsVirginIslands.jsx';
+import MapUzbekistan, { MapUzbekistanPresent } from '@/components/core/templates/create/elements/maps/MapUzbekistan.jsx';
+import MapVanuatu, { MapVanuatuPresent } from '@/components/core/templates/create/elements/maps/MapVanuatu.jsx';
+import MapVietnam, { MapVietnamPresent } from '@/components/core/templates/create/elements/maps/MapVietnam.jsx';
+import MapWesternSahara, { MapWesternSaharaPresent } from '@/components/core/templates/create/elements/maps/MapWesternSahara.jsx';
+import MapVenezuela, { MapVenezuelaPresent } from '@/components/core/templates/create/elements/maps/MapVenezuela.jsx';
+import MapYemen, { MapYemenPresent } from '@/components/core/templates/create/elements/maps/MapYemen.jsx';
+import MapMichigan, { MapMichiganPresent } from '@/components/core/templates/create/elements/maps/MapMichigan.jsx';
+import MapVermont, { MapVermontPresent } from '@/components/core/templates/create/elements/maps/MapVermont.jsx';
+import MapRhodeIsland, { MapRhodeIslandPresent } from '@/components/core/templates/create/elements/maps/MapRhodeIsland.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -548,6 +559,17 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     kentucky: MapKentucky,
     zambia: MapZambia,
     zimbabwe: MapZimbabwe,
+    uruguay: MapUruguay,
+    'us-virgin-islands': MapUsVirginIslands,
+    uzbekistan: MapUzbekistan,
+    vanuatu: MapVanuatu,
+    vietnam: MapVietnam,
+    'western-sahara': MapWesternSahara,
+    venezuela: MapVenezuela,
+    yemen: MapYemen,
+    michigan: MapMichigan,
+    vermont: MapVermont,
+    'rhode-island': MapRhodeIsland,
   };
 
   if (components[element.config.name]) {
@@ -777,6 +799,17 @@ export const MapPresent = ({ element }) => {
     kentucky: MapKentuckyPresent,
     zambia: MapZambiaPresent,
     zimbabwe: MapZimbabwePresent,
+    uruguay: MapUruguayPresent,
+    'us-virgin-islands': MapUsVirginIslandsPresent,
+    uzbekistan: MapUzbekistanPresent,
+    vanuatu: MapVanuatuPresent,
+    vietnam: MapVietnamPresent,
+    'western-sahara': MapWesternSaharaPresent,
+    venezuela: MapVenezuelaPresent,
+    yemen: MapYemenPresent,
+    michigan: MapMichiganPresent,
+    vermont: MapVermontPresent,
+    'rhode-island': MapRhodeIslandPresent,
   };
 
   if (components[element.config.name]) {
