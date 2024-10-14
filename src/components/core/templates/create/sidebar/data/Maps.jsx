@@ -233,6 +233,12 @@ import { MapYemenPreview } from '@/components/core/templates/create/elements/map
 import { MapMichiganPreview } from '@/components/core/templates/create/elements/maps/MapMichigan.jsx';
 import { MapVermontPreview } from '@/components/core/templates/create/elements/maps/MapVermont.jsx';
 import { MapRhodeIslandPreview } from '@/components/core/templates/create/elements/maps/MapRhodeIsland.jsx';
+import { MapNewYorkPreview } from '@/components/core/templates/create/elements/maps/MapNewYork.jsx';
+import { MapNorthCarolinaPreview } from '@/components/core/templates/create/elements/maps/MapNorthCarolina.jsx';
+import { MapNorthDakotaPreview } from '@/components/core/templates/create/elements/maps/MapNorthDakota.jsx';
+import { MapOhioPreview } from '@/components/core/templates/create/elements/maps/MapOhio.jsx';
+import { MapOklahomaPreview } from '@/components/core/templates/create/elements/maps/MapOklahoma.jsx';
+import { MapOregonPreview } from '@/components/core/templates/create/elements/maps/MapOregon.jsx';
 
 const previews = {
   continents: {
@@ -456,17 +462,23 @@ const previews = {
     kentucky: <MapKentuckyPreview />,
     zambia: <MapZambiaPreview />,
     zimbabwe: <MapZimbabwePreview />,
-    uruguay: <MapUruguayPreview/>,
-    'us-virgin-islands': <MapUsVirginIslandsPreview/>,
-    uzbekistan: <MapUzbekistanPreview/>,
-    vanuatu: <MapVanuatuPreview/>,
-    vietnam: <MapVietnamPreview/>,
-    'western-sahara': <MapWesternSaharaPreview/>,
-    venezuela: <MapVenezuelaPreview/>,
-    yemen: <MapYemenPreview/>,
-    michigan: <MapMichiganPreview/>,
-    vermont: <MapVermontPreview/>,
-    'rhode-island': <MapRhodeIslandPreview/>,
+    uruguay: <MapUruguayPreview />,
+    'us-virgin-islands': <MapUsVirginIslandsPreview />,
+    uzbekistan: <MapUzbekistanPreview />,
+    vanuatu: <MapVanuatuPreview />,
+    vietnam: <MapVietnamPreview />,
+    'western-sahara': <MapWesternSaharaPreview />,
+    venezuela: <MapVenezuelaPreview />,
+    yemen: <MapYemenPreview />,
+    michigan: <MapMichiganPreview />,
+    vermont: <MapVermontPreview />,
+    'rhode-island': <MapRhodeIslandPreview />,
+    'new-york': <MapNewYorkPreview />,
+    'north-carolina': <MapNorthCarolinaPreview />,
+    'north-dakota': <MapNorthDakotaPreview />,
+    ohio: <MapOhioPreview />,
+    oklahoma: <MapOklahomaPreview />,
+    oregon: <MapOregonPreview />,
   },
 };
 

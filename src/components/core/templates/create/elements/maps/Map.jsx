@@ -328,16 +328,34 @@ import MapKentucky, { MapKentuckyPresent } from '@/components/core/templates/cre
 import MapZambia, { MapZambiaPresent } from '@/components/core/templates/create/elements/maps/MapZambia.jsx';
 import MapZimbabwe, { MapZimbabwePresent } from '@/components/core/templates/create/elements/maps/MapZimbabwe.jsx';
 import MapUruguay, { MapUruguayPresent } from '@/components/core/templates/create/elements/maps/MapUruguay.jsx';
-import MapUsVirginIslands, { MapUsVirginIslandsPresent } from '@/components/core/templates/create/elements/maps/MapUsVirginIslands.jsx';
-import MapUzbekistan, { MapUzbekistanPresent } from '@/components/core/templates/create/elements/maps/MapUzbekistan.jsx';
+import MapUsVirginIslands, {
+  MapUsVirginIslandsPresent,
+} from '@/components/core/templates/create/elements/maps/MapUsVirginIslands.jsx';
+import MapUzbekistan, {
+  MapUzbekistanPresent,
+} from '@/components/core/templates/create/elements/maps/MapUzbekistan.jsx';
 import MapVanuatu, { MapVanuatuPresent } from '@/components/core/templates/create/elements/maps/MapVanuatu.jsx';
 import MapVietnam, { MapVietnamPresent } from '@/components/core/templates/create/elements/maps/MapVietnam.jsx';
-import MapWesternSahara, { MapWesternSaharaPresent } from '@/components/core/templates/create/elements/maps/MapWesternSahara.jsx';
+import MapWesternSahara, {
+  MapWesternSaharaPresent,
+} from '@/components/core/templates/create/elements/maps/MapWesternSahara.jsx';
 import MapVenezuela, { MapVenezuelaPresent } from '@/components/core/templates/create/elements/maps/MapVenezuela.jsx';
 import MapYemen, { MapYemenPresent } from '@/components/core/templates/create/elements/maps/MapYemen.jsx';
 import MapMichigan, { MapMichiganPresent } from '@/components/core/templates/create/elements/maps/MapMichigan.jsx';
 import MapVermont, { MapVermontPresent } from '@/components/core/templates/create/elements/maps/MapVermont.jsx';
-import MapRhodeIsland, { MapRhodeIslandPresent } from '@/components/core/templates/create/elements/maps/MapRhodeIsland.jsx';
+import MapRhodeIsland, {
+  MapRhodeIslandPresent,
+} from '@/components/core/templates/create/elements/maps/MapRhodeIsland.jsx';
+import MapNewYork, { MapNewYorkPresent } from '@/components/core/templates/create/elements/maps/MapNewYork.jsx';
+import MapNorthCarolina, {
+  MapNorthCarolinaPresent,
+} from '@/components/core/templates/create/elements/maps/MapNorthCarolina.jsx';
+import MapNorthDakota, {
+  MapNorthDakotaPresent,
+} from '@/components/core/templates/create/elements/maps/MapNorthDakota.jsx';
+import MapOhio, { MapOhioPresent } from '@/components/core/templates/create/elements/maps/MapOhio.jsx';
+import MapOklahoma, { MapOklahomaPresent } from '@/components/core/templates/create/elements/maps/MapOklahoma.jsx';
+import MapOregon, { MapOregonPresent } from '@/components/core/templates/create/elements/maps/MapOregon.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -570,6 +588,12 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     michigan: MapMichigan,
     vermont: MapVermont,
     'rhode-island': MapRhodeIsland,
+    'new-york': MapNewYork,
+    'north-carolina': MapNorthCarolina,
+    'north-dakota': MapNorthDakota,
+    ohio: MapOhio,
+    oklahoma: MapOklahoma,
+    oregon: MapOregon,
   };
 
   if (components[element.config.name]) {
@@ -810,6 +834,12 @@ export const MapPresent = ({ element }) => {
     michigan: MapMichiganPresent,
     vermont: MapVermontPresent,
     'rhode-island': MapRhodeIslandPresent,
+    'new-york': MapNewYorkPresent,
+    'north-carolina': MapNorthCarolinaPresent,
+    'north-dakota': MapNorthDakotaPresent,
+    ohio: MapOhioPresent,
+    oklahoma: MapOklahomaPresent,
+    oregon: MapOregonPresent,
   };
 
   if (components[element.config.name]) {
