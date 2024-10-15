@@ -362,6 +362,24 @@ import MapWisconsin, { MapWisconsinPresent } from '@/components/core/templates/c
 import MapMontenegro, {
   MapMontenegroPresent,
 } from '@/components/core/templates/create/elements/maps/MapMontenegro.jsx';
+import MapSouthCarolina, {
+  MapSouthCarolinaPresent,
+} from '@/components/core/templates/create/elements/maps/MapSouthCarolina.jsx';
+import MapSouthDakota, {
+  MapSouthDakotaPresent,
+} from '@/components/core/templates/create/elements/maps/MapSouthDakota.jsx';
+import MapPennsylvania, {
+  MapPennsylvaniaPresent,
+} from '@/components/core/templates/create/elements/maps/MapPennsylvania.jsx';
+import MapTennessee, { MapTennesseePresent } from '@/components/core/templates/create/elements/maps/MapTennessee.jsx';
+import MapUtah, { MapUtahPresent } from '@/components/core/templates/create/elements/maps/MapUtah.jsx';
+import MapWashington, {
+  MapWashingtonPresent,
+} from '@/components/core/templates/create/elements/maps/MapWashington.jsx';
+import MapWyoming, { MapWyomingPresent } from '@/components/core/templates/create/elements/maps/MapWyoming.jsx';
+import MapWestVirginia, {
+  MapWestVirginiaPresent,
+} from '@/components/core/templates/create/elements/maps/MapWestVirginia.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -604,6 +622,14 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     virginia: MapVirginia,
     wisconsin: MapWisconsin,
     montenegro: MapMontenegro,
+    'south-carolina': MapSouthCarolina,
+    'south-dakota': MapSouthDakota,
+    pennsylvania: MapPennsylvania,
+    tennessee: MapTennessee,
+    utah: MapUtah,
+    washington: MapWashington,
+    wyoming: MapWyoming,
+    'west-virginia': MapWestVirginia,
   };
 
   if (components[element.config.name]) {
@@ -853,6 +879,14 @@ export const MapPresent = ({ element }) => {
     texas: MapTexasPresent,
     wisconsin: MapWisconsinPresent,
     montenegro: MapMontenegroPresent,
+    'south-carolina': MapSouthCarolinaPresent,
+    'south-dakota': MapSouthDakotaPresent,
+    pennsylvania: MapPennsylvaniaPresent,
+    tennessee: MapTennesseePresent,
+    utah: MapUtahPresent,
+    washington: MapWashingtonPresent,
+    wyoming: MapWyomingPresent,
+    'west-virginia': MapWestVirginiaPresent,
   };
 
   if (components[element.config.name]) {

@@ -243,6 +243,14 @@ import { MapTexasPreview } from '@/components/core/templates/create/elements/map
 import { MapVirginiaPreview } from '@/components/core/templates/create/elements/maps/MapVirginia.jsx';
 import { MapWisconsinPreview } from '@/components/core/templates/create/elements/maps/MapWisconsin.jsx';
 import { MapMontenegroPreview } from '@/components/core/templates/create/elements/maps/MapMontenegro.jsx';
+import { MapSouthCarolinaPreview } from '@/components/core/templates/create/elements/maps/MapSouthCarolina.jsx';
+import { MapSouthDakotaPreview } from '@/components/core/templates/create/elements/maps/MapSouthDakota.jsx';
+import { MapPennsylvaniaPreview } from '@/components/core/templates/create/elements/maps/MapPennsylvania.jsx';
+import { MapTennesseePreview } from '@/components/core/templates/create/elements/maps/MapTennessee.jsx';
+import { MapUtahPreview } from '@/components/core/templates/create/elements/maps/MapUtah.jsx';
+import { MapWashingtonPreview } from '@/components/core/templates/create/elements/maps/MapWashington.jsx';
+import { MapWyomingPreview } from '@/components/core/templates/create/elements/maps/MapWyoming.jsx';
+import { MapWestVirginiaPreview } from '@/components/core/templates/create/elements/maps/MapWestVirginia.jsx';
 
 const previews = {
   continents: {
@@ -487,6 +495,14 @@ const previews = {
     virginia: <MapVirginiaPreview />,
     wisconsin: <MapWisconsinPreview />,
     montenegro: <MapMontenegroPreview />,
+    'south-carolina': <MapSouthCarolinaPreview />,
+    'south-dakota': <MapSouthDakotaPreview />,
+    pennsylvania: <MapPennsylvaniaPreview />,
+    tennessee: <MapTennesseePreview />,
+    utah: <MapUtahPreview />,
+    washington: <MapWashingtonPreview />,
+    wyoming: <MapWyomingPreview />,
+    'west-virginia': <MapWestVirginiaPreview />,
   },
 };
 
