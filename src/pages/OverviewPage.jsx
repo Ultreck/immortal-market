@@ -263,9 +263,9 @@ const OverviewPage = () => {
           )}
           {view === 'apps' && (
             <div className="grid grid-cols-5 gap-6 mb-10">
-              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)] text-black">
+              <div className="flex flex-col rounded-3xl bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)] text-black">
                 <img src="https://picsum.photos/150" alt="Profile" className="rounded-2xl h-[60px]" />
-                <div className="mt-4 w-full px-2">
+                <div className="w-full px-6 py-4">
                   <h3 className="font-medium leading-none mb-2">Stocks</h3>
                   <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
                   <button className="flex items-center mt-6">
@@ -273,9 +273,9 @@ const OverviewPage = () => {
                   </button>
                 </div>
               </div>
-              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(242,_210,_255)_0.75%,_rgb(251,_225,_255)_98.5%)] text-black">
+              <div className="flex flex-col rounded-3xl bg-[linear-gradient(270deg,_rgb(242,_210,_255)_0.75%,_rgb(251,_225,_255)_98.5%)] text-black">
                 <img src="https://picsum.photos/152" alt="Profile" className="rounded-2xl h-[60px]" />
-                <div className="mt-4 w-full px-2">
+                <div className="w-full px-6 py-4">
                   <h3 className="font-medium leading-none mb-2">Bank statement</h3>
                   <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
                   <button className="flex items-center mt-6">
@@ -283,9 +283,9 @@ const OverviewPage = () => {
                   </button>
                 </div>
               </div>
-              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(208,_224,_141)_1.69%,_rgb(223,_234,_194)_100%)] text-black">
+              <div className="flex flex-col rounded-3xl bg-[linear-gradient(270deg,_rgb(208,_224,_141)_1.69%,_rgb(223,_234,_194)_100%)] text-black">
                 <img src="https://picsum.photos/151" alt="Profile" className="rounded-2xl h-[60px]" />
-                <div className="mt-4 w-full px-2">
+                <div className="w-full px-6 py-4">
                   <h3 className="font-medium leading-none mb-2">Markets</h3>
                   <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
                   <button className="flex items-center mt-6">
@@ -293,9 +293,9 @@ const OverviewPage = () => {
                   </button>
                 </div>
               </div>
-              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(219,_204,_255)_6.18%,_rgb(219,_229,_255)_94.94%)] text-black">
+              <div className="flex flex-col rounded-3xl bg-[linear-gradient(270deg,_rgb(219,_204,_255)_6.18%,_rgb(219,_229,_255)_94.94%)] text-black">
                 <img src="https://picsum.photos/151" alt="Profile" className="rounded-2xl h-[60px]" />
-                <div className="mt-4 w-full px-2">
+                <div className="w-full px-6 py-4">
                   <h3 className="font-medium leading-none mb-2">Financial report</h3>
                   <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
                   <button className="flex items-center mt-6">
@@ -303,9 +303,9 @@ const OverviewPage = () => {
                   </button>
                 </div>
               </div>
-              <div className="flex flex-col rounded-3xl px-4 py-4 bg-[linear-gradient(270deg,_rgb(156,_226,_243)_2.43%,_rgb(199,_248,_243)_97.75%)] text-black">
+              <div className="flex flex-col rounded-3xl bg-[linear-gradient(270deg,_rgb(156,_226,_243)_2.43%,_rgb(199,_248,_243)_97.75%)] text-black">
                 <img src="https://picsum.photos/151" alt="Profile" className="rounded-2xl h-[60px]" />
-                <div className="mt-4 w-full px-2">
+                <div className="w-full px-6 py-4">
                   <h3 className="font-medium leading-none mb-2">News</h3>
                   <p className="font-semibold leading-tight opacity-70">Lorem ipsum dolor sit amet,</p>
                   <button className="flex items-center mt-6">
