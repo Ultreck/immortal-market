@@ -356,6 +356,12 @@ import MapNorthDakota, {
 import MapOhio, { MapOhioPresent } from '@/components/core/templates/create/elements/maps/MapOhio.jsx';
 import MapOklahoma, { MapOklahomaPresent } from '@/components/core/templates/create/elements/maps/MapOklahoma.jsx';
 import MapOregon, { MapOregonPresent } from '@/components/core/templates/create/elements/maps/MapOregon.jsx';
+import MapTexas, { MapTexasPresent } from '@/components/core/templates/create/elements/maps/MapTexas.jsx';
+import MapVirginia from '@/components/core/templates/create/elements/maps/MapVirginia.jsx';
+import MapWisconsin, { MapWisconsinPresent } from '@/components/core/templates/create/elements/maps/MapWisconsin.jsx';
+import MapMontenegro, {
+  MapMontenegroPresent,
+} from '@/components/core/templates/create/elements/maps/MapMontenegro.jsx';
 
 const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   const components = {
@@ -594,6 +600,10 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
     ohio: MapOhio,
     oklahoma: MapOklahoma,
     oregon: MapOregon,
+    texas: MapTexas,
+    virginia: MapVirginia,
+    wisconsin: MapWisconsin,
+    montenegro: MapMontenegro,
   };
 
   if (components[element.config.name]) {
@@ -840,6 +850,9 @@ export const MapPresent = ({ element }) => {
     ohio: MapOhioPresent,
     oklahoma: MapOklahomaPresent,
     oregon: MapOregonPresent,
+    texas: MapTexasPresent,
+    wisconsin: MapWisconsinPresent,
+    montenegro: MapMontenegroPresent,
   };
 
   if (components[element.config.name]) {

@@ -239,6 +239,10 @@ import { MapNorthDakotaPreview } from '@/components/core/templates/create/elemen
 import { MapOhioPreview } from '@/components/core/templates/create/elements/maps/MapOhio.jsx';
 import { MapOklahomaPreview } from '@/components/core/templates/create/elements/maps/MapOklahoma.jsx';
 import { MapOregonPreview } from '@/components/core/templates/create/elements/maps/MapOregon.jsx';
+import { MapTexasPreview } from '@/components/core/templates/create/elements/maps/MapTexas.jsx';
+import { MapVirginiaPreview } from '@/components/core/templates/create/elements/maps/MapVirginia.jsx';
+import { MapWisconsinPreview } from '@/components/core/templates/create/elements/maps/MapWisconsin.jsx';
+import { MapMontenegroPreview } from '@/components/core/templates/create/elements/maps/MapMontenegro.jsx';
 
 const previews = {
   continents: {
@@ -479,6 +483,10 @@ const previews = {
     ohio: <MapOhioPreview />,
     oklahoma: <MapOklahomaPreview />,
     oregon: <MapOregonPreview />,
+    texas: <MapTexasPreview />,
+    virginia: <MapVirginiaPreview />,
+    wisconsin: <MapWisconsinPreview />,
+    montenegro: <MapMontenegroPreview />,
   },
 };
 
