@@ -103,7 +103,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="w-[220px] max-h-[300px] border-small border-default-200 px-2 py-2 rounded-xl shadow bg-white dark:bg-default-50 fixed top-0 left-0 z-[99]"
+              className="w-[220px] border-small border-default-200 px-2 py-2 rounded-xl shadow bg-white dark:bg-default-50 fixed top-0 left-0 z-[99]"
               style={{ top: `${position.y}px`, left: `${position.x}px` }}
               onContextMenu={(e) => e.preventDefault()}
             >
