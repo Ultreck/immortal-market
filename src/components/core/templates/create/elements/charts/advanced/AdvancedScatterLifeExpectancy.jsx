@@ -84,7 +84,10 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
                 left: '63%',
                 top: '55%',
                 textStyle: {
-                  fontSize: 100,
+                  fontSize: element.config.styles.valueSize || 100,
+                  color: element.config.styles.valueAndLableColor,
+                  fontWeight: element.config.styles.lFontWeight,
+                  fontStyle: element.config.styles.lFontStyle,
                 },
               },
               {
@@ -92,8 +95,9 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
                 left: 'center',
                 top: 10,
                 textStyle: {
-                  fontWeight: 'normal',
-                  fontSize: 20,
+                  fontWeight: element.config.styles.gFontWeight,
+                  fontSize: element.config.styles.legendSize,
+                  color: element.config.styles.gridAndLegendColor,
                 },
               },
             ],
@@ -103,16 +107,16 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
               formatter: function (obj) {
                 const value = obj.value;
                 return `${schema[3].text}：${value[3]}<br>
-                          ${schema[1].text}：${value[1]}${schema[1].unit}<br>
+                ${schema[1].text}：${value[1]}${schema[1].unit}<br>
                           ${schema[0].text}：${value[0]}${schema[0].unit}<br>
                           ${schema[2].text}：${value[2]}<br>`;
               },
             },
             grid: {
-              top: 100,
+              top: element.config.styles.yPadding || 100,
               containLabel: true,
-              left: 30,
-              right: '110',
+              left: element.config.styles.xPadding || 30,
+              right: element.config.styles.xPadding || '110',
               show: element.config.showGridline,
             },
             xAxis: {
@@ -123,13 +127,20 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
               nameGap: 25,
               nameLocation: 'middle',
               nameTextStyle: {
-                fontSize: 18,
+                fontSize: element.config.styles.labelSize,
+                color: element.config.styles.valueAndLableColor,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
               },
               splitLine: {
                 show: false,
               },
               axisLabel: {
                 formatter: '{value} $',
+                fontSize: element.config.styles.xGridSize,
+                fontWeight: element.config.styles.gFontWeight,
+                fontStyle: element.config.styles.gFontStyle,
+                color: element.config.styles.gridAndLegendColor,
               },
               show: element.config.showXaxis,
             },
@@ -145,6 +156,10 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
               },
               axisLabel: {
                 formatter: '{value} 岁',
+                fontSize: element.config.styles.yGridSize,
+                fontWeight: element.config.styles.gFontWeight,
+                fontStyle: element.config.styles.gFontStyle,
+                color: element.config.styles.gridAndLegendColor,
               },
               show: element.config.showYaxis,
             },

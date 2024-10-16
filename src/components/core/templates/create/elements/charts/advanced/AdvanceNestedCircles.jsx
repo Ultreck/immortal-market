@@ -26,7 +26,14 @@ export const AdvanceNestedCirclesContent = ({ element }) => {
   const percentage = getPercentagesMax(sortElement.map((i) => +i.value));
 
   return (
-    <div className="relative w-full">
+    <div
+    style={{
+      paddingTop: element.config.styles.yPadding,
+      paddingLeft: element.config.styles.xPadding,
+      paddingBottom: element.config.styles.yPadding,
+      paddingRight: element.config.styles.xPadding,
+    }}
+    className="relative w-full">
       {sortElement.map((item, index) => (
         <div
           key={index}
@@ -36,7 +43,14 @@ export const AdvanceNestedCirclesContent = ({ element }) => {
           )}
           style={{ width: `${percentage[index]}%`, backgroundColor: element.config.colors[index] }}
         >
-          <div className="text-center text-white pt-2">{item.name}</div>
+          <div
+          style={{
+            fontSize: element.config.styles.labelSize,
+            fontWeight: element.config.styles.lFontWeight,
+            fontStyle: element.config.styles.lFontStyle,
+            color: element.config.styles.valueAndLableColor,
+          }}
+           className="text-center text-white pt-2">{item.name}</div>
         </div>
       ))}
     </div>

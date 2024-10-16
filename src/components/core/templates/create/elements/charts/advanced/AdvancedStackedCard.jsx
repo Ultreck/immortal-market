@@ -6,6 +6,7 @@ import { ElementPropTypes } from '@/lib/prop-types';
 import PropTypes from 'prop-types';
 
 const AdvancedStackedCard = ({ element, active, highlighted, width, onClick, onChange }) => {
+  console.log(element);
   return (
     <ElementWrapper
       element={element}
@@ -29,7 +30,14 @@ export const AdvancedStackedCardContent = ({ element }) => {
 
   useEffect(() => {}, [element]);
   return (
-    <div style={{ width: element.width, height: element.height, opacity: element.style.opacity }}>
+    <div style={{ 
+      paddingTop: element.config.styles.yPadding,
+      paddingLeft: element.config.styles.xPadding,
+      paddingBottom: element.config.styles.yPadding,
+      paddingRight: element.config.styles.xPadding,
+      width: element.width, height: element.height, opacity: element.style.opacity, 
+      }}
+      >
       {data.slice(0, bars).map((item, index) => (
         <motion.div
           key={item.range}
@@ -41,17 +49,32 @@ export const AdvancedStackedCardContent = ({ element }) => {
             width: `${85 + index * 5}%`,
             marginLeft: `${7.5 - index * 2.5}%`,
             backgroundColor: colors[index],
+            fontFamily: 'Arial, sans-serif',
           }}
           whileHover={{ scale: 1.1 }}
         >
           <>
-            <div className="text-sm mb-1 text-black">{item.range}</div>
+            <div 
+             style={{
+              fontFamily: 'Arial, sans-serif',
+              fontWeight: element.config.styles.lFontWeight,
+              fontStyle: element.config.styles.lFontStyle,
+              fontSize: element.config.styles.labelSize || '18px',
+              color: element.config.styles.valueAndLableColor,
+            }}
+            className="text-sm mb-1 text-black">{item.range}</div>
             <motion.div
               className="font-bold text-black"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-              style={{ fontSize: `${Math.max(16, item.percentage * 0.8)}px` }}
+              style={{
+                fontFamily: 'Verdana, sans-serif',
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
+                fontSize: element.config.styles.valueSize || '18px',
+                color: element.config.styles.valueAndLableColor,
+              }}
             >
               {item.percentage}%
             </motion.div>
@@ -67,4 +90,3 @@ AdvancedStackedCardContent.propTypes = {
 };
 
 export default AdvancedStackedCard;
-

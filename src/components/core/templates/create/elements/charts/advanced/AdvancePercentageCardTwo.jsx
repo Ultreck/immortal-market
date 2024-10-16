@@ -23,17 +23,40 @@ const AdvancePercentageCardTwo = ({ element, active, highlighted, width, onClick
 
 AdvancePercentageCardTwo.propTypes = ElementPropTypes;
 
-const Dot = ({ active, color }) => <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: active ? color : '#ddd' }} />;
+const Dot = ({ active, color }) => (
+  <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: active ? color : '#ddd' }} />
+);
 
 export const AdvancePercentageCardTwoElementContent = ({ element }) => {
+  console.log(element);
+
   const { data, seasons, colors, bars } = element.config;
   useEffect(() => {}, [element]);
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div
+      style={{
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
+      }}
+      className="grid grid-cols-4 gap-4"
+    >
       {seasons.map((season) => (
-        <div key={season} className="text-center font-bold text-black">
-          {season}
-        </div>
+        <>
+          {element.config.showLabel && (
+            <div
+            style={{
+              fontSize: element.config.styles.labelSize,
+              fontWeight: element.config.styles.lFontWeight,
+              fontStyle: element.config.styles.lFontStyle,
+              color: element.config.styles.valueAndLableColor,
+            }}
+            key={season} className="text-center font-bold text-black">
+              {season}
+            </div>
+          )}
+        </>
       ))}
       {data.slice(0, bars).map((row, rowIndex) => (
         <React.Fragment key={row.age}>
@@ -47,13 +70,29 @@ export const AdvancePercentageCardTwoElementContent = ({ element }) => {
             >
               <div className="grid grid-cols-10 gap-2 mb-2">
                 {[...Array(100)].map((_, i) => (
-                  <Dot key={i} active={i < row[season.toLowerCase()]} style={{ backgroundColor: colors[rowIndex] }} color={element.config.colors[index]} />
+                  <Dot
+                    key={i}
+                    active={i < row[season.toLowerCase()]}
+                    style={{ backgroundColor: colors[rowIndex] }}
+                    color={element.config.colors[index]}
+                  />
                 ))}
               </div>
               <div
                 className={`absolute inset-0 flex items-center justify-center text-5xl font-bold ${colors[index].replace('bg-', 'text-')}`}
               >
-                {row[season.toLowerCase()]}%
+                {element.config.showValue && (
+                  <div
+                    style={{
+                      fontSize: element.config.styles.valueSize,
+                      fontWeight: element.config.styles.lFontWeight,
+                      fontStyle: element.config.styles.lFontStyle,
+                      color: element.config.styles.valueAndLableColor,
+                    }}
+                  >
+                    {row[season.toLowerCase()]}%
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -68,4 +107,3 @@ AdvancePercentageCardTwoElementContent.propTypes = {
 };
 
 export default AdvancePercentageCardTwo;
-

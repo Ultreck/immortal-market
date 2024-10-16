@@ -26,7 +26,17 @@ AdvancePercentageCard.propTypes = ElementPropTypes;
 
 const AdvancePercentageCardContent = ({ element }) => {
   return (
-    <div style={{ width: element.width, height: element.height, opacity: element.style.opacity }}>
+    <div
+      style={{
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
+        width: element.width,
+        height: element.height,
+        opacity: element.style.opacity,
+      }}
+    >
       {element.config.data.slice(0, element.config.bars).map((item, index) => (
         <Tooltip
           key={index}
@@ -60,10 +70,22 @@ const AdvancePercentageCardContent = ({ element }) => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             style={{ backgroundColor: element.config.colors[index] }}
           >
-            <span className="text-gray-800 font-medium">{item.age}</span>
+            <span
+            style={{
+              fontSize: `${element.config.styles.labelSize}px`,
+              fontWeight: element.config.styles.lFontWeight,
+              fontStyle: element.config.styles.lFontStyle,
+              color: element.config.styles.valueAndLableColor,
+            }}
+            className="text-gray-800 font-medium">{item.age}</span>
             <motion.span
               className="text-gray-800 font-bold"
-              style={{ fontSize: `${Math.max(20, item.percentage)}px` }}
+              style={{ 
+                fontSize: `${Math.max(item.percentage +element.config.styles.valueSize)}px`,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
+                color: element.config.styles.valueAndLableColor,
+               }}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
@@ -82,4 +104,3 @@ AdvancePercentageCardContent.propTypes = {
 };
 
 export default AdvancePercentageCard;
-

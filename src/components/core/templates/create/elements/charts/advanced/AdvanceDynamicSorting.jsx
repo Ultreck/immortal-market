@@ -27,6 +27,8 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
+    console.log(element);
+
     let chart;
     let data = [...Array(5).fill(null)].map(() => Math.round(Math.random() * 200));
 
@@ -37,6 +39,12 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
           xAxis: {
             max: 'dataMax',
             show: element.config.showXaxis,
+            axisLabel: {
+              color: element.config.styles.gridAndLegendColor,
+              fontSize: element.config.styles.xGridSize,
+              fontStyle: element.config.styles.lFontStyle,
+            },
+            
           },
           yAxis: {
             type: 'category',
@@ -46,6 +54,11 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
             animationDurationUpdate: 300,
             max: 3,
             show: element.config.showYaxis,
+            axisLabel: {
+              color: element.config.styles.gridAndLegendColor,
+              fontSize: element.config.styles.yGridSize,
+              fontStyle: element.config.styles.lFontStyle,
+            },
           },
           series: [
             {
@@ -54,18 +67,33 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
               type: 'bar',
               data: data,
               top: 0,
+              padding: '30px',
               label: {
                 show: true,
                 position: 'right',
                 valueAnimation: true,
+                color: element.config.styles.valueAndLableColor,
+                fontSize: element.config.styles.labelSize,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle, 
               },
             },
           ],
           grid: {
             show: element.config.showGridline,
+            top: element.config.styles.yPadding || '30px',
+            bottom: element.config.styles.yPadding || '30px',
+            left: element.config.styles.xPadding || '30px',
+            right: element.config.styles.xPadding || '30px',
           },
           legend: {
             show: element.config.showLegend,
+            textStyle: {
+              color: element.config.styles.gridAndLegendColor,
+              fontSize: element.config.styles.legendSize,
+              fontWeight: element.config.styles.gFontWeight,
+              fontStyle: element.config.styles.gFontStyle,
+            },
           },
           animationDuration: 0,
           animationDurationUpdate: 3000,

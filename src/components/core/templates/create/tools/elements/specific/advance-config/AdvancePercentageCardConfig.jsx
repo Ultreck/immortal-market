@@ -23,6 +23,8 @@ const AdvancePercentageCardConfig = ({ element, onChange }) => {
     <div>
           <div className="space-y-6">
             <div className="flex items-center space-x-4 mb-6">
+              <div className="text grid gap-7">
+
               <Checkbox
                 isSelected={element.config.showLabel}
                 onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
@@ -30,6 +32,17 @@ const AdvancePercentageCardConfig = ({ element, onChange }) => {
               >
                 Show Label
               </Checkbox>
+              {element.config.name === "percentage-card-2" && (
+              <Checkbox
+                isSelected={element.config.showValue}
+                onValueChange={(v) => onChange({ ...element, config: { ...element.config, showValue: v } })}
+                classNames={{ base: 'py-0' }}
+              >
+                Show Value
+              </Checkbox>
+
+              )}
+              </div>
             </div>
             <div className="flex items-center space-x-4">
               <p className="text-base opacity-75 whitespace-nowrap">No. of Cards:</p>

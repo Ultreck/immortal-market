@@ -49,7 +49,6 @@ const items = [
 
 const ChartData = ({ element, onChange }) => {
   const [view, setView] = useState('home');
-  console.log(element);
 
   return (
     <>

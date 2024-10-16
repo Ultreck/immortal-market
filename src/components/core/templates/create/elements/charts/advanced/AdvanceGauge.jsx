@@ -60,8 +60,10 @@ export const AdvanceGaugeContent = ({ element }) => {
               },
               axisLabel: {
                 distance: 25,
-                color: '#999',
-                fontSize: 20,
+                color: element.config.styles.valueAndLableColor,
+                fontSize: element.config.styles.valueSize,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
               },
               anchor: {
                 show: true,
@@ -76,7 +78,9 @@ export const AdvanceGaugeContent = ({ element }) => {
               },
               detail: {
                 valueAnimation: true,
-                fontSize: 80,
+                fontSize: element.config.styles.labelSize,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
                 offsetCenter: [0, '70%'],
               },
               data: [
@@ -100,7 +104,10 @@ export const AdvanceGaugeContent = ({ element }) => {
     };
   }, [element]);
 
-  return <div ref={chartRef} style={{ width: element.width, height: element.height }} />;
+  return <div ref={chartRef} style={{
+    padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
+    width: element.width, height: element.height
+  }} />;
 };
 
 AdvanceGaugeContent.propTypes = {

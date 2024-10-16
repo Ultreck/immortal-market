@@ -72,12 +72,17 @@ export const AdvanceSpeedometerContent = ({ element }) => {
               axisLabel: {
                 color: 'inherit',
                 distance: 40,
-                fontSize: 20,
+                fontSize: element.config.styles.valueSize,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
               },
               detail: {
                 valueAnimation: true,
                 formatter: '{value} km/h',
                 color: 'inherit',
+                fontSize: element.config.styles.labelSize,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
               },
               data: [
                 {
@@ -101,7 +106,10 @@ export const AdvanceSpeedometerContent = ({ element }) => {
     };
   }, [element]);
 
-  return <div ref={chartRef} style={{ width: element.width, height: element.height }} />;
+  return <div style={{
+    padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
+    width: element.width, height: element.height
+  }} ref={chartRef} />;
 };
 
 AdvanceSpeedometerContent.propTypes = {

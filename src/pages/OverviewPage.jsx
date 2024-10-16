@@ -5,9 +5,9 @@ import { TbChartInfographic, TbSearch } from 'react-icons/tb';
 import { Input } from '@nextui-org/react';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import { HiOutlineDocumentReport, HiOutlineSwitchHorizontal, HiOutlineViewGrid } from 'react-icons/hi';
-import { ReactTyped } from 'react-typed';
 import { RiRobot2Line } from 'react-icons/ri';
 import { useState } from 'react';
+import { ReactTyped } from 'react-typed';
 
 const OverviewPage = () => {
   const [view, setView] = useState('create');

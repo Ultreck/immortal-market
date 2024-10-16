@@ -21,6 +21,7 @@ import CountUpNumberConfig from './elements/specific/CountUpNumberConfig.jsx';
 import InfographicConfig from '@/components/core/templates/create/tools/elements/specific/InfographicConfig.jsx';
 import Colors from './elements/generic/Colors.jsx';
 import Font from '@/components/core/templates/create/tools/elements/generic/Font.jsx';
+import ChartFont from '@/components/core/templates/create/tools/elements/generic/ChartFont.jsx';
 import MapConfig from '@/components/core/templates/create/tools/elements/specific/map/MapConfig.jsx';
 import Color from '@/components/core/templates/create/tools/elements/generic/Color.jsx';
 import SummarizerConfig from '@/components/core/templates/create/tools/elements/specific/SummarizerConfig.jsx';
@@ -54,6 +55,7 @@ const mapping = {
   summarizer: { type: 'single', component: SummarizerConfig },
   'data-tag': { type: 'single', component: DataTagConfig },
   'chart-data': { type: 'single', component: ChartData },
+  'chart-font': { type: 'multiple', component: ChartFont },
   layout: { type: 'single', component: Layout },
 };
 

@@ -34,19 +34,34 @@ export const AdvanceMultipleGaugeContent = ({ element }) => {
         value: element.config.data[0].value,
         name: element.config.data[0].name,
         title: { offsetCenter: ['-40%', '80%'] },
-        detail: { offsetCenter: ['-40%', '95%'] },
+        detail: {
+          offsetCenter: ['-40%', '95%'],
+          fontSize: element.config.styles.valueSize,
+          fontWeight: element.config.styles.lFontWeight,
+          fontStyle: element.config.styles.lFontStyle,
+        },
       },
       {
         value: element.config.data[1].value,
         name: element.config.data[1].name,
         title: { offsetCenter: ['0%', '80%'] },
-        detail: { offsetCenter: ['0%', '95%'] },
+        detail: {
+          offsetCenter: ['0%', '95%'],
+          fontSize: element.config.styles.valueSize,
+          fontWeight: element.config.styles.lFontWeight,
+          fontStyle: element.config.styles.lFontStyle,
+        },
       },
       {
         value: element.config.data[2].value,
         name: element.config.data[2].name,
         title: { offsetCenter: ['40%', '80%'] },
-        detail: { offsetCenter: ['40%', '95%'] },
+        detail: {
+          offsetCenter: ['40%', '95%'],
+          fontSize: element.config.styles.valueSize,
+          fontWeight: element.config.styles.lFontWeight,
+          fontStyle: element.config.styles.lFontStyle,
+        },
       },
     ];
 
@@ -104,7 +119,10 @@ export const AdvanceMultipleGaugeContent = ({ element }) => {
     };
   }, [element]);
 
-  return <div ref={chartRef} style={{ width: element.width, height: element.height }} />;
+  return <div ref={chartRef} style={{ 
+    padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
+    width: element.width, height: element.height
+  }} />;
 };
 
 AdvanceMultipleGaugeContent.propTypes = {
