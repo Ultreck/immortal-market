@@ -506,8 +506,11 @@ const previews = {
   },
 };
 
+const continents = Object.keys(previews.continents).sort();
+const countries = Object.keys(previews.countries).sort();
+
 const elements = {
-  continents: Object.keys(previews.continents).map((name) => ({
+  continents: continents.map((name) => ({
     id: `map-${name}`,
     data: {
       type: 'map',
@@ -532,7 +535,7 @@ const elements = {
       </div>
     ),
   })),
-  countries: Object.keys(previews.countries).map((name) => ({
+  countries: countries.map((name) => ({
     id: `map-${name}`,
     data: {
       type: 'map',
