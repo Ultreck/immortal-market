@@ -662,6 +662,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'pictogram-shapes' }),
       config: {
         name: 'pictogram-shapes',
+        styles: getChartsDefaultStyle({  type: 'chart-a', name: 'pictogram-shapes' }),
         percentage: 65,
         shape: 'circle',
         noOfShapes: 10,
@@ -699,6 +700,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'custom-bar' }),
       config: {
         name: 'custom-bar',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'custom-bar' }),
         data: [
           { label: 'Dangote Cement', value: 4170 },
           { label: 'MTN', value: 3460 },

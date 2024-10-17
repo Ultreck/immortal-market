@@ -190,6 +190,18 @@ export const colors = [
   '#AB52D9',
   '#D93566',
 ];
+export const chartNames = [
+  'scatter-life-expectancy',
+  'dynamic-sorting',
+  '#264A5A',
+  '#E8C22C',
+  '#F6881F',
+  '#2673D9',
+  '#2BA385',
+  '#E6A333',
+  '#AB52D9',
+  '#D93566',
+];
 
 export const extractColorsFromGradient = (gradient) => {
   return gradient.match(/#(?:[0-9a-fA-F]{3}){1,2}\b|rgb(?:a)?\((?:\d{1,3},\s*){2,3}\d{1,3}\)/g) ?? [];
