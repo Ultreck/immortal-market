@@ -25,6 +25,12 @@ StandardAreaLineVertical.propTypes = ElementPropTypes;
 
 export const StandardAreaLineVerticalContent = ({ element }) => {
   return (
+    <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >
     <ChartContainer
       config={{}}
       style={{
@@ -43,6 +49,7 @@ export const StandardAreaLineVerticalContent = ({ element }) => {
         <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
       </ComposedChart>
     </ChartContainer>
+  </div>
   );
 };
 

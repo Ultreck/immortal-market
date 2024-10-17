@@ -34,6 +34,12 @@ export const StandardBarNotSepContent = ({ element }) => {
   useEffect(() => {}, [element]);
 
   return (
+    <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
     <ChartContainer
       config={{}}
       style={{
@@ -60,6 +66,7 @@ export const StandardBarNotSepContent = ({ element }) => {
         <Bar dataKey={element.config.keys.y} radius={8} />
       </BarChart>
     </ChartContainer>
+  </div>
   );
 };
 

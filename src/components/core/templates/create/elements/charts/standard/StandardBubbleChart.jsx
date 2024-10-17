@@ -54,6 +54,12 @@ export const StandardBubbleChartContent = ({ element }) => {
   }, [element]);
   return (
     <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
+    <div
       ref={chartRef}
       style={{
         width: element.width,
@@ -62,6 +68,7 @@ export const StandardBubbleChartContent = ({ element }) => {
         transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     />
+  </div>
   );
 };
 

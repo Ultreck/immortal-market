@@ -30,25 +30,32 @@ export const StandardAreaLineContent = ({ element }) => {
     return { ...item, fill: color };
   });
 
-  useEffect(() => { }, [element]);
+  useEffect(() => {}, [element]);
   return (
-    <ChartContainer
-      config={{}}
+    <div
       style={{
-        height: element.height,
-        width: element.width,
-        opacity: element.style.opacity,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
     >
-      <ComposedChart data={chartData}>
-        <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis dataKey="name" scale="band" hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
-        <YAxis hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
-        {element.config.showLegend && <Legend />}
-        <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
-        <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
-      </ComposedChart>
-    </ChartContainer>
+      <ChartContainer
+        config={{}}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+        }}
+      >
+        <ComposedChart data={chartData}>
+          <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+          <XAxis dataKey="name" scale="band" hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
+          <YAxis hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
+          {element.config.showLegend && <Legend />}
+          <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
+          <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
+        </ComposedChart>
+      </ChartContainer>
+    </div>
   );
 };
 

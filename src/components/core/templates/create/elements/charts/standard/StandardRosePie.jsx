@@ -72,6 +72,12 @@ export const StandardRosePieContent = ({ element }) => {
 
   return (
     <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
+    <div
       ref={chartRef}
       style={{
         height: element.height,
@@ -80,6 +86,7 @@ export const StandardRosePieContent = ({ element }) => {
         transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
     />
+  </div>
   );
 };
 

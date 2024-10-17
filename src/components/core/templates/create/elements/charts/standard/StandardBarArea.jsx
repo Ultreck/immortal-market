@@ -24,6 +24,12 @@ StandardBarArea.propTypes = ElementPropTypes;
 
 export const StandardBarAreaContent = ({ element }) => {
   return (
+    <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >
     <ChartContainer
       config={{}}
       style={{
@@ -41,6 +47,7 @@ export const StandardBarAreaContent = ({ element }) => {
         <Area type="monotone" dataKey="amt" fill={element.config.colors?.[1]} stroke={element.config.colors?.[1]} />
       </ComposedChart>
     </ChartContainer>
+  </div>
   );
 };
 

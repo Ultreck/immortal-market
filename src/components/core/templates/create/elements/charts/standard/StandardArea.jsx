@@ -36,40 +36,52 @@ export const StandardAreaContent = ({ element }) => {
 
     return { ...item, fill: color };
   });
-  useEffect(() => { }, [element]);
+  useEffect(() => {}, [element]);
 
   return (
-    <ChartContainer
-      config={{}}
+    <div
       style={{
-        height: element.height,
-        width: element.width,
-        opacity: element.style.opacity,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
     >
-      <AreaChart
-        accessibilityLayer
-        data={chartData}
+      <ChartContainer
+        config={{}}
         style={{
+          height: element.height,
+          width: element.width,
           opacity: element.style.opacity,
         }}
       >
-        <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis
-          dataKey={element.config.keys.x}
-          tickLine={false}
-          axisLine={false}
-          tickMargin={8}
-          tickFormatter={(value) => capitalize(value)}
-          hide={!element.config.showXaxis}
-          fontSize={element.config.fontSize}
-        />
-        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
-        <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-        {element.config.showLegend && <Legend />}
-        <Area dataKey={element.config.keys.y} fill={element.config.colors[0]} type="natural" fillOpacity={0.4} />
-      </AreaChart>
-    </ChartContainer>
+        <AreaChart
+          accessibilityLayer
+          data={chartData}
+          style={{
+            opacity: element.style.opacity,
+          }}
+        >
+          <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+          <XAxis
+            dataKey={element.config.keys.x}
+            tickLine={false}
+            axisLine={false}
+            tickMargin={8}
+            tickFormatter={(value) => capitalize(value)}
+            hide={!element.config.showXaxis}
+            fontSize={element.config.fontSize}
+          />
+          <YAxis
+            type="number"
+            dataKey={element.config.keys.y}
+            hide={!element.config.showYaxis}
+            fontSize={element.config.fontSize}
+          />
+          <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+          {element.config.showLegend && <Legend />}
+          <Area dataKey={element.config.keys.y} fill={element.config.colors[0]} type="natural" fillOpacity={0.4} />
+        </AreaChart>
+      </ChartContainer>
+    </div>
   );
 };
 

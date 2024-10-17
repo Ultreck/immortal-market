@@ -64,7 +64,7 @@ export const StandardAltBarContent = ({ element }) => {
           type: 'bar',
           label: {
             show: true,
-            position: element.config.labelPosition? 'outside' : 'inside',
+            position: element.config.labelPosition ? 'outside' : 'inside',
           },
           emphasis: {
             focus: 'series',
@@ -77,7 +77,7 @@ export const StandardAltBarContent = ({ element }) => {
           stack: 'Total',
           label: {
             show: true,
-            position: element.config.labelPosition? 'outside' : 'inside',
+            position: element.config.labelPosition ? 'outside' : 'inside',
           },
           emphasis: {
             focus: 'series',
@@ -94,14 +94,21 @@ export const StandardAltBarContent = ({ element }) => {
 
   return (
     <div
-      ref={chartRef}
       style={{
-        height: element.height,
-        width: element.width,
-        opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
-    />
+    >
+      <div
+        ref={chartRef}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+          transform: `rotate(${element.config.rotation || 0}deg)`,
+        }}
+      />
+    </div>
   );
 };
 
@@ -110,3 +117,4 @@ StandardAltBarContent.propTypes = {
 };
 
 export default StandardAltBar;
+

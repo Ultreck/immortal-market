@@ -72,6 +72,12 @@ export const StandardSemiCircleContent = ({ element }) => {
 
   return (
     <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
+    <div
       id="main"
       ref={chartRef}
       style={{
@@ -80,7 +86,8 @@ export const StandardSemiCircleContent = ({ element }) => {
         opacity: element.style.opacity,
         transform: `rotate(${element.config.rotation || 0}deg)`,
       }}
-    ></div>
+    />
+  </div>
   );
 };
 

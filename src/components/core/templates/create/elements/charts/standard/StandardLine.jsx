@@ -25,6 +25,12 @@ StandardLine.propTypes = ElementPropTypes;
 
 export const StandardLineContent = ({ element }) => {
   return (
+    <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
     <>
       <ChartContainer
         config={{}}
@@ -65,6 +71,7 @@ export const StandardLineContent = ({ element }) => {
         </LineChart>
       </ChartContainer>
     </>
+  </div>
   );
 };
 

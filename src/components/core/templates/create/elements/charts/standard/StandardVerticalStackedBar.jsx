@@ -33,6 +33,12 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
   }, {});
 
   return (
+    <div
+    style={{
+      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+    }}
+  >    
     <ChartContainer
       config={config}
       style={{
@@ -68,6 +74,7 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
         })}
       </BarChart>
     </ChartContainer>
+  </div>
   );
 };
 

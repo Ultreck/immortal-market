@@ -222,6 +222,35 @@ import { MapLouisianaPreview } from '@/components/core/templates/create/elements
 import { MapKentuckyPreview } from '@/components/core/templates/create/elements/maps/MapKentucky.jsx';
 import { MapZambiaPreview } from '@/components/core/templates/create/elements/maps/MapZambia.jsx';
 import { MapZimbabwePreview } from '@/components/core/templates/create/elements/maps/MapZimbabwe.jsx';
+import { MapUruguayPreview } from '@/components/core/templates/create/elements/maps/MapUruguay.jsx';
+import { MapUsVirginIslandsPreview } from '@/components/core/templates/create/elements/maps/MapUsVirginIslands.jsx';
+import { MapUzbekistanPreview } from '@/components/core/templates/create/elements/maps/MapUzbekistan.jsx';
+import { MapVanuatuPreview } from '@/components/core/templates/create/elements/maps/MapVanuatu.jsx';
+import { MapVietnamPreview } from '@/components/core/templates/create/elements/maps/MapVietnam.jsx';
+import { MapWesternSaharaPreview } from '@/components/core/templates/create/elements/maps/MapWesternSahara.jsx';
+import { MapVenezuelaPreview } from '@/components/core/templates/create/elements/maps/MapVenezuela.jsx';
+import { MapYemenPreview } from '@/components/core/templates/create/elements/maps/MapYemen.jsx';
+import { MapMichiganPreview } from '@/components/core/templates/create/elements/maps/MapMichigan.jsx';
+import { MapVermontPreview } from '@/components/core/templates/create/elements/maps/MapVermont.jsx';
+import { MapRhodeIslandPreview } from '@/components/core/templates/create/elements/maps/MapRhodeIsland.jsx';
+import { MapNewYorkPreview } from '@/components/core/templates/create/elements/maps/MapNewYork.jsx';
+import { MapNorthCarolinaPreview } from '@/components/core/templates/create/elements/maps/MapNorthCarolina.jsx';
+import { MapNorthDakotaPreview } from '@/components/core/templates/create/elements/maps/MapNorthDakota.jsx';
+import { MapOhioPreview } from '@/components/core/templates/create/elements/maps/MapOhio.jsx';
+import { MapOklahomaPreview } from '@/components/core/templates/create/elements/maps/MapOklahoma.jsx';
+import { MapOregonPreview } from '@/components/core/templates/create/elements/maps/MapOregon.jsx';
+import { MapTexasPreview } from '@/components/core/templates/create/elements/maps/MapTexas.jsx';
+import { MapVirginiaPreview } from '@/components/core/templates/create/elements/maps/MapVirginia.jsx';
+import { MapWisconsinPreview } from '@/components/core/templates/create/elements/maps/MapWisconsin.jsx';
+import { MapMontenegroPreview } from '@/components/core/templates/create/elements/maps/MapMontenegro.jsx';
+import { MapSouthCarolinaPreview } from '@/components/core/templates/create/elements/maps/MapSouthCarolina.jsx';
+import { MapSouthDakotaPreview } from '@/components/core/templates/create/elements/maps/MapSouthDakota.jsx';
+import { MapPennsylvaniaPreview } from '@/components/core/templates/create/elements/maps/MapPennsylvania.jsx';
+import { MapTennesseePreview } from '@/components/core/templates/create/elements/maps/MapTennessee.jsx';
+import { MapUtahPreview } from '@/components/core/templates/create/elements/maps/MapUtah.jsx';
+import { MapWashingtonPreview } from '@/components/core/templates/create/elements/maps/MapWashington.jsx';
+import { MapWyomingPreview } from '@/components/core/templates/create/elements/maps/MapWyoming.jsx';
+import { MapWestVirginiaPreview } from '@/components/core/templates/create/elements/maps/MapWestVirginia.jsx';
 
 const previews = {
   continents: {
@@ -445,11 +474,43 @@ const previews = {
     kentucky: <MapKentuckyPreview />,
     zambia: <MapZambiaPreview />,
     zimbabwe: <MapZimbabwePreview />,
+    uruguay: <MapUruguayPreview />,
+    'us-virgin-islands': <MapUsVirginIslandsPreview />,
+    uzbekistan: <MapUzbekistanPreview />,
+    vanuatu: <MapVanuatuPreview />,
+    vietnam: <MapVietnamPreview />,
+    'western-sahara': <MapWesternSaharaPreview />,
+    venezuela: <MapVenezuelaPreview />,
+    yemen: <MapYemenPreview />,
+    michigan: <MapMichiganPreview />,
+    vermont: <MapVermontPreview />,
+    'rhode-island': <MapRhodeIslandPreview />,
+    'new-york': <MapNewYorkPreview />,
+    'north-carolina': <MapNorthCarolinaPreview />,
+    'north-dakota': <MapNorthDakotaPreview />,
+    ohio: <MapOhioPreview />,
+    oklahoma: <MapOklahomaPreview />,
+    oregon: <MapOregonPreview />,
+    texas: <MapTexasPreview />,
+    virginia: <MapVirginiaPreview />,
+    wisconsin: <MapWisconsinPreview />,
+    montenegro: <MapMontenegroPreview />,
+    'south-carolina': <MapSouthCarolinaPreview />,
+    'south-dakota': <MapSouthDakotaPreview />,
+    pennsylvania: <MapPennsylvaniaPreview />,
+    tennessee: <MapTennesseePreview />,
+    utah: <MapUtahPreview />,
+    washington: <MapWashingtonPreview />,
+    wyoming: <MapWyomingPreview />,
+    'west-virginia': <MapWestVirginiaPreview />,
   },
 };
 
+const continents = Object.keys(previews.continents).sort();
+const countries = Object.keys(previews.countries).sort();
+
 const elements = {
-  continents: Object.keys(previews.continents).map((name) => ({
+  continents: continents.map((name) => ({
     id: `map-${name}`,
     data: {
       type: 'map',
@@ -474,7 +535,7 @@ const elements = {
       </div>
     ),
   })),
-  countries: Object.keys(previews.countries).map((name) => ({
+  countries: countries.map((name) => ({
     id: `map-${name}`,
     data: {
       type: 'map',

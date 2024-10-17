@@ -40,6 +40,7 @@ const elements = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
@@ -75,6 +76,7 @@ const elements = [
         showLegend: false,
         showToolTip: true,
         legendPosition: 'top',
+        fontSize: 12,
       },
     },
     preview: (
@@ -112,6 +114,7 @@ const elements = [
         showYaxis: false,
         useGradient: false,
         gradientColor: '#2673D9',
+        fontSize: 12,
         tools: {
           colors: {
             gradient: false,
@@ -154,6 +157,7 @@ const elements = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
         tools: {
           colors: {
             gradient: false,
@@ -245,6 +249,7 @@ const elements = [
         showGridline: false,
         bars: 5,
         noOfBarsPerGroup: 2,
+        fontSize: 12,
         tools: {
           colors: {
             gradient: false,
@@ -285,6 +290,7 @@ const elements = [
         showLegend: true,
         showLabel: true,
         showToolTip: true,
+        fontSize: 12,
       },
     },
     preview: (
@@ -319,6 +325,7 @@ const elements = [
         showLegend: false,
         showXaxis: false,
         showYaxis: false,
+        fontSize: 12,
         type: 'Natural',
         tools: {
           colors: {
@@ -359,6 +366,7 @@ const elements = [
         pies: 5,
         showLabel: true,
         showLegend: true,
+        fontSize: 12,
       },
     },
     preview: (
@@ -395,6 +403,7 @@ const elements = [
         showXGridline: false,
         showYGridline: false,
         bars: 5,
+        fontSize: 12,
       },
     },
     preview: (
