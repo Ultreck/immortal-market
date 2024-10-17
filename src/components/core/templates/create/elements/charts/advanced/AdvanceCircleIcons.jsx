@@ -4,6 +4,8 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import PropTypes from 'prop-types';
 
 const AdvanceCircleIcons = ({ element, active, highlighted, width, onClick, onChange }) => {
+  console.log(element);
+
   return (
     <ElementWrapper
       element={element}
@@ -27,7 +29,12 @@ export const AdvanceCircleIconsContent = ({ element }) => {
   const percentages = getPercentages(element.config.data.map((item) => +item.value));
 
   return (
-    <div className="flex items-center py-24 w-full px-4">
+    <div
+      style={{
+        padding: `${element.config.styles.yPadding || '96'}px ${element.config.styles.xPadding || '16'}px`,
+      }}
+      className="flex items-center py-24 w-full px-4"
+    >
       {element.config.data
         .sort((a, b) => +b.value - +a.value)
         .map((circle, index) => {
@@ -50,8 +57,28 @@ export const AdvanceCircleIconsContent = ({ element }) => {
               {index % 2 === 0 ? (
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center text-center text-black">
                   <div className="mb-2">
-                    <div className="font-bold leading-none">{percentages[index]}%</div>
-                    <p className="text-sm leading-none mt-1">{circle.label}</p>
+                    <div
+                      style={{
+                        fontSize: `${element.config.styles.valueSize}px`,
+                        fontWeight: element.config.styles.lFontWeight,
+                        fontStyle: element.config.styles.lFontStyle,
+                        color: element.config.styles.valueAndLableColor,
+                      }}
+                      className={`font-bold leading-none`}
+                    >
+                      {percentages[index]}%
+                    </div>
+                    <p
+                      style={{
+                        fontSize: `${element.config.styles.labelSize}px`,
+                        fontWeight: element.config.styles.lFontWeight,
+                        fontStyle: element.config.styles.lFontStyle,
+                        color: element.config.styles.valueAndLableColor,
+                      }}
+                      className={`text-sm  leading-none mt-1`}
+                    >
+                      {circle.label}
+                    </p>
                   </div>
                   <div className="flex flex-col w-[1px] h-[20px] bg-red-900"></div>
                 </div>
@@ -59,8 +86,28 @@ export const AdvanceCircleIconsContent = ({ element }) => {
                 <div className="absolute top-full left-1/2 -translate-x-1/2 flex flex-col items-center text-center text-black">
                   <div className="flex flex-col w-[1px] h-[20px] bg-red-900"></div>
                   <div className="mt-2">
-                    <div className="font-bold leading-none">{percentages[index]}%</div>
-                    <p className="text-sm leading-none mt-1">{circle.label}</p>
+                    <div
+                      style={{
+                        fontSize: `${element.config.styles.valueSize}px`,
+                        fontWeight: element.config.styles.lFontWeight,
+                        fontStyle: element.config.styles.lFontStyle,
+                        color: element.config.styles.valueAndLableColor,
+                      }}
+                      className={`font-bold leading-none`}
+                    >
+                      {percentages[index]}%
+                    </div>
+                    <p
+                      style={{
+                        fontSize: `${element.config.styles.labelSize}px`,
+                        fontWeight: element.config.styles.lFontWeight,
+                        color: element.config.styles.valueAndLableColor,
+                        fontStyle: element.config.styles.lFontStyle,
+                      }}
+                      className={`text-sm leading-none mt-1`}
+                    >
+                      {circle.label}
+                    </p>
                   </div>
                 </div>
               )}

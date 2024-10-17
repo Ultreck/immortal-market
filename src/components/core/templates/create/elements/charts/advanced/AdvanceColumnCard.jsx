@@ -28,7 +28,17 @@ const AdvanceColumnCardElementContent = ({ element }) => {
   useEffect(() => {}, [element]);
 
   return (
-    <div className="flex flex-col" style={{ width: element.width, height: element.height }}>
+    <div
+      className="flex flex-col"
+      style={{
+        width: element.width,
+        height: element.height,
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
+      }}
+    >
       {data.slice(0, bars).map((item, index) => (
         <Tooltip
           key={index}
@@ -55,7 +65,19 @@ const AdvanceColumnCardElementContent = ({ element }) => {
             className="flex items-center space-x-4"
             style={{ width: element.width, height: element.height }}
           >
-            {showLabel && <div className="w-32 text-black">{item.setting}</div>}
+            {showLabel && (
+              <div
+                style={{
+                  fontSize: element.config.styles.labelSize,
+                  fontWeight: element.config.styles.lFontWeight,
+                  fontStyle: element.config.styles.lFontStyle,
+                  color: element.config.styles.valueAndLableColor,
+                }}
+                className="w-32 text-black"
+              >
+                {item.setting}
+              </div>
+            )}
             <div className="grid grid-30 gap-2 mb-6">
               {Array.from({ length: 108 }).map((_, i) => (
                 <motion.div
@@ -80,4 +102,3 @@ AdvanceColumnCardElementContent.propTypes = {
 };
 
 export default AdvanceColumnCard;
-

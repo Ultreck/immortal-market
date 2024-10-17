@@ -15,7 +15,7 @@ import {
 } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { starterLifeChartData } from '@/lib/design/chart-data.js';
-import { getElementDefaultStyle } from '@/lib/elements.js';
+import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 import { kebabToWords } from '@/lib/utils.js';
 
 const colors = [
@@ -92,6 +92,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'circle-icons' }),
       config: {
         name: 'circle-icons',
+        styles:getChartsDefaultStyle({ type: 'chart-a', name: 'circle-icons'}),
         data: [
           { label: 'Bubble 1', value: 30, icon: 'fa fa-user' },
           { label: 'Bubble 2', value: 50, icon: 'fa fa-house' },
@@ -123,6 +124,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'speedometer' }),
       config: {
         name: 'speedometer',
+        styles: getChartsDefaultStyle({type: 'chart-a', name: 'speedometer'}),
         data: 20,
         keys: { name: 'name', data: 'value' },
         colors: ['#E66B5B', '#1D9085', '#264A5A'],
@@ -145,6 +147,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'speedometer-simple' }),
       config: {
         name: 'speedometer-simple',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'speedometer-simple' }),
         data: 20,
         keys: { name: 'name', data: 'value' },
         colors: '#E66B5B',
@@ -167,6 +170,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'speedometer-multiple' }),
       config: {
         name: 'speedometer-multiple',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'speedometer-multiple' }),
         data: [
           { value: 30, name: 'Good' },
           { value: 40, name: 'Better' },
@@ -192,6 +196,7 @@ const elements = [
       height: 400,
       style: getElementDefaultStyle({ type: 'chart-a', name: 'dynamic-sorting' }),
       config: {
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'dynamic-sorting' }),
         name: 'dynamic-sorting',
         data: ['A', 'B', 'C', 'D', 'E'],
         keys: { name: '', data: '' },
@@ -219,6 +224,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'scatter-life-expectancy' }),
       config: {
         name: 'scatter-life-expectancy',
+        styles: getChartsDefaultStyle({type: 'chart-a', name: 'scatter-life-expectancy'}),
         data: starterLifeChartData.series[0],
         keys: { name: 'name', data: 'value' },
         colors,
@@ -246,6 +252,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'stacked-card' }),
       config: {
         name: 'stacked-card',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'stacked-card' }),
         data: [
           { range: 'Above ₦2.5m', percentage: 10.3 },
           { range: '₦1.1m - ₦2.5m', percentage: 20.3 },
@@ -275,6 +282,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'percentage-card' }),
       config: {
         name: 'percentage-card',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'percentage-card'  }),
         data: [
           { age: '25-34 years...', percentage: 73.1 },
           { age: '35-44 years', percentage: 68.9 },
@@ -305,6 +313,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'lollipop' }),
       config: {
         name: 'lollipop',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'lollipop' }),
         data: [
           { label: 'Dangote Cement', value: 4170 },
           { label: 'GTB', value: 952.1 },
@@ -339,6 +348,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'nested-circles' }),
       config: {
         name: 'nested-circles',
+        styles: getChartsDefaultStyle({type: 'chart-a', name: 'nested-circles' }),
         data: [
           { value: 60, name: 'Visit' },
           { value: 40, name: 'Inquiry' },
@@ -373,6 +383,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'funnel' }),
       config: {
         name: 'funnel',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'funnel' }),
         data: [
           { value: 60, name: 'Visit' },
           { value: 40, name: 'Inquiry' },
@@ -401,6 +412,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'tree-map' }),
       config: {
         name: 'tree-map',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'tree-map' }),
         data: [
           {
             name: 'axis',
@@ -575,6 +587,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'column-card' }),
       config: {
         name: 'column-card',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'column-card' }),
         data: [
           { setting: 'School', n: 58 },
           { setting: 'Community', n: 48 },
@@ -610,6 +623,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'percentage-card-2' }),
       config: {
         name: 'percentage-card-2',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'percentage-card-2' }),
         data: [
           { age: '18-34', spring: 20, summer: 30, fall: 26, winter: 13 },
           { age: '35-54', spring: 25, summer: 27, fall: 31, winter: 6 },
@@ -622,12 +636,13 @@ const elements = [
           { age: '55+', spring: 27, summer: 23, fall: 30, winter: 4 },
         ],
         seasons: ['SPRING', 'SUMMER', 'FALL', 'WINTER'],
-        keys: { name: 'setting', data: 'n' },
+        keys: { name: 'age', data1: 'spring', data2: 'fall', data3: 'summer', data4: 'winter' },
         barTooltip: false,
         cardTooltip: false,
         bars: 2,
         colors,
-        showLabel: false,
+        showLabel: true,
+        showValue: true,
       },
     },
     preview: (
@@ -647,6 +662,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'pictogram-shapes' }),
       config: {
         name: 'pictogram-shapes',
+        styles: getChartsDefaultStyle({  type: 'chart-a', name: 'pictogram-shapes' }),
         percentage: 65,
         shape: 'circle',
         noOfShapes: 10,
@@ -684,6 +700,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'custom-bar' }),
       config: {
         name: 'custom-bar',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'custom-bar' }),
         data: [
           { label: 'Dangote Cement', value: 4170 },
           { label: 'MTN', value: 3460 },

@@ -48,6 +48,10 @@ export const AdvanceFunnelChartContent = ({ element }) => {
               label: {
                 show: true,
                 position: 'inside',
+                fontSize: element.config.styles.labelSize,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
+                color: element.config.styles.valueAndLableColor,
               },
               labelLine: {
                 length: 10,
@@ -77,10 +81,18 @@ export const AdvanceFunnelChartContent = ({ element }) => {
     return () => {
       if (chart) chart.dispose();
     };
-  }, [element.config.data, element.config.colors, element.width, element.height]);
+  }, [element.config.data, element.config.colors, element.width, element.height, element.config.styles]);
 
   return (
-    <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
+    <div ref={chartRef} style={{ 
+      width: element.width, 
+      height: element.height, 
+      opacity: element.style.opacity,
+      paddingTop: element.config.styles.yPadding,
+      paddingLeft: element.config.styles.xPadding,
+      paddingBottom: element.config.styles.yPadding,
+      paddingRight: element.config.styles.xPadding,
+     }} />
   );
 };
 

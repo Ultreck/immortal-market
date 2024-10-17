@@ -75,9 +75,23 @@ export const AdvancedPictogramShapesContent = ({ element }) => {
   const numberOfIcons = icon1count + icon2count + icon3count;
 
   return (
-    <div className="space-y-6 w-full">
+    <div 
+    style={{
+      paddingTop: element.config.styles.yPadding,
+      paddingLeft: element.config.styles.xPadding,
+      paddingBottom: element.config.styles.yPadding,
+      paddingRight: element.config.styles.xPadding,
+    }}
+    className="space-y-6 w-full">
       {showLabel && (
-        <div className="flex space-x-3 capitalize">
+        <div
+        style={{
+          fontSize: element.config.styles.labelSize,
+          fontWeight: element.config.styles.lFontWeight,
+          fontStyle: element.config.styles.lFontStyle,
+          color: element.config.styles.valueAndLableColor,
+        }}
+         className="flex space-x-3 capitalize">
           <>
             {showIcon1 && (
               <p>

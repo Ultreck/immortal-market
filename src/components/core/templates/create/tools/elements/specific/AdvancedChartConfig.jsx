@@ -76,6 +76,9 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           {element.config.name === 'column-card' && (
             <AdvancePercentageCardConfig element={element} onChange={onChange} />
           )}
+          {element.config.name === 'percentage-card-2' && (
+            <AdvancePercentageCardConfig element={element} onChange={onChange} />
+          )}
         </div>
       </PopoverContent>
     </Popover>

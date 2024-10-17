@@ -13,17 +13,13 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
 
   const handleDynamicSortingChanges = (newValue, index) => {
     const updatedData = [...element.config.data];
-
     updatedData[index] = newValue;
-
     onChange({ ...element, config: { ...element.config, data: updatedData } });
   };
 
   const handleDataChange = (index, subIndex, newValue) => {
     const updatedData = [...element.config.data];
-
     updatedData[index][subIndex] = newValue;
-
     onChange({
       ...element,
       config: {
@@ -34,19 +30,38 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
   };
 
   const handleChildChange = (parentIndex, childIndex, key, newValue) => {
-    // Clone the entire config
     const updatedConfig = { ...element.config };
-
-    // Update the specific child element inside the parent at `parentIndex`
     updatedConfig.data[parentIndex].children[childIndex] = {
       ...updatedConfig.data[parentIndex].children[childIndex],
       [key]: newValue,
     };
-
-    // Update the state with the modified data
     onChange({
       ...element,
       config: updatedConfig,
+    });
+  };
+
+  const handleChangePercentageCard2 = (updatedItem) => {
+    const updatedData = element.config.data.map((item, index) => {
+      if (index === updatedItem.index) {
+        return {
+          ...item,
+          [element.config.keys.name]: updatedItem.name,
+          [element.config.keys.data1]: updatedItem.data1 || item[element.config.keys.data1],
+          [element.config.keys.data2]: updatedItem.data2 || item[element.config.keys.data2],
+          [element.config.keys.data3]: updatedItem.data3 || item[element.config.keys.data3],
+          [element.config.keys.data4]: updatedItem.data4 || item[element.config.keys.data4],
+        };
+      }
+      return item;
+    });
+
+    onChange({
+      ...element,
+      config: {
+        ...element.config,
+        data: updatedData,
+      },
     });
   };
 
@@ -58,7 +73,7 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
         </Button>
         <h2 className="text-lg">Chart Data</h2>
       </div>
-      {element.config.name != 'tree-map' && (
+      {element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
         <>
           {Array.isArray(element.config.data) ? (
             element.config.data.slice(0, element.config.bars || element.config.data.length).map((item, index) =>
@@ -140,7 +155,7 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
           )}
         </>
       )}
-      {element.config.data && (
+      {element.config.data && element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
         <TbCirclePlus
           size={30}
           onClick={() => {
@@ -182,6 +197,66 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
                   />
                 </div>
               ))}
+            </div>
+          ))}
+        </div>
+      )}
+      {element.config.name === 'percentage-card-2' && (
+        <div className="flex flex-col space-y-3">
+          {element.config.data.slice(0, element.config.bars).map((item, index) => (
+            <div key={index} className="grid grid-cols-6 gap-2">
+              <div className="text grid col-span-2 ">
+                <Input
+                  value={item[element.config.keys.name]}
+                  placeholder="name"
+                  required
+                  variant="bordered"
+                  classNames={{ input: 'text-base capitalize' }}
+                  onChange={(e) => {
+                    handleChangePercentageCard2({ ...item, name: e.target.value, index });
+                  }}
+                />
+              </div>
+              <Input
+                value={item[element.config.keys.data1]}
+                placeholder="Data"
+                required
+                type="number"
+                variant="bordered"
+                onChange={(e) => {
+                  handleChangePercentageCard2({ ...item, data1: e.target.value, index });
+                }}
+              />
+              <Input
+                value={item[element.config.keys.data2]}
+                placeholder="Data"
+                required
+                type="number"
+                variant="bordered"
+                onChange={(e) => {
+                  handleChangePercentageCard2({ ...item, data2: e.target.value, index });
+                }}
+              />
+              <Input
+                value={item[element.config.keys.data3]}
+                placeholder="Data"
+                required
+                type="number"
+                variant="bordered"
+                onChange={(e) => {
+                  handleChangePercentageCard2({ ...item, data3: e.target.value, index });
+                }}
+              />
+              <Input
+                value={item[element.config.keys.data4]}
+                placeholder="Data"
+                required
+                type="number"
+                variant="bordered"
+                onChange={(e) => {
+                  handleChangePercentageCard2({ ...item, data4: e.target.value, index });
+                }}
+              />
             </div>
           ))}
         </div>

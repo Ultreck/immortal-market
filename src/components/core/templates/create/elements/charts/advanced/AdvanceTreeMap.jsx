@@ -19,9 +19,14 @@ const AdvanceTreeMap = ({ element, active, highlighted, width, onClick, onChange
   );
 };
 
-const CustomizedContent = ({ root, depth, x, y, width, height, index, colors, name }) => {
+const CustomizedContent = ({ element, root, depth, x, y, width, height, index, colors, name }) => {
   return (
-    <g>
+    <g  style={{
+      top: element.config.styles.yPadding,
+      left: element.config.styles.xPadding,
+      bottom: element.config.styles.yPadding,
+      right: element.config.styles.xPadding,
+    }}>
       <rect
         x={x}
         y={y}
@@ -36,10 +41,21 @@ const CustomizedContent = ({ root, depth, x, y, width, height, index, colors, na
       />
       {depth === 1 && (
         <>
-          <text x={x + width / 2} y={y + height / 2 + 7} textAnchor="middle" fill="#fff" fontSize={14}>
+          <text x={x + width / 2} y={y + height / 2 + 7} textAnchor="middle" 
+          fill={element.config.styles.valueAndLableColor} 
+          fontSize={element.config.styles.labelSize}
+          fontWeight={element.config.styles.lFontWeight}
+          fontStyle={element.config.styles.lFontStyle}
+          >
             {name}
           </text>
-          <text x={x + 4} y={y + 18} fill="#fff" fontSize={16} fillOpacity={0.9}>
+          <text x={x + 4} y={y + 18} 
+          fill={element.config.styles.valueAndLableColor} 
+          fontSize={element.config.styles.valueSize}
+          fontWeight={element.config.styles.lFontWeight}
+          fontStyle={element.config.styles.lFontStyle}
+          fillOpacity={0.9}
+          >
             {index + 1}
           </text>
         </>
@@ -58,6 +74,7 @@ CustomizedContent.propTypes = {
   index: PropTypes.number,
   colors: PropTypes.array.isRequired,
   name: PropTypes.string,
+  element: PropTypes.object,
 };
 
 AdvanceTreeMap.propTypes = ElementPropTypes;
@@ -72,7 +89,7 @@ export const AdvanceTreeMapContent = ({ element }) => {
       dataKey="size"
       stroke="#fff"
       fill="#8884d8"
-      content={<CustomizedContent colors={element.config.colors} />}
+      content={<CustomizedContent element={element} colors={element.config.colors} />}
     />
   );
 };

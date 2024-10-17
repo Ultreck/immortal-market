@@ -14,9 +14,9 @@ import {
 import { Input } from '@nextui-org/react';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import { HiOutlineDocumentReport, HiOutlineSwitchHorizontal, HiOutlineViewGrid } from 'react-icons/hi';
-import { ReactTyped } from 'react-typed';
 import { RiFileLine, RiRobot2Line } from 'react-icons/ri';
 import { useState } from 'react';
+import { ReactTyped } from 'react-typed';
 import { SiOracle } from 'react-icons/si';
 import { AnimatePresence, motion } from 'framer-motion';
 

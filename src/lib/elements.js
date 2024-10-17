@@ -23,8 +23,8 @@ export const tools = {
   }, {}),
   list: ['list', 'font', 'opacity', 'animation', 'shadow', 'layout'],
   'count-up-number': ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout'],
-  'chart-s': ['chart', 'chart-data', 'colors', 'opacity', 'animation', 'layout'],
-  'chart-a': ['advanced-chart', 'chart-data', 'colors', 'opacity', 'layout'],
+  'chart-s': ['chart', 'chart-data', 'colors', 'opacity', 'animation', 'layout', 'font'],
+  'chart-a': ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'layout'],
   shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout'],
   frame: (element) => {
     if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow', 'layout'];
@@ -95,8 +95,34 @@ export const getElementTools = (element) => {
   return tools[element.type];
 };
 
+export const getChartsDefaultStyle = ({type, name}) => {
+  const tools = getElementTools({ type, config: { name } }); 
+  let styles = {}; 
+  if (tools.includes('chart-font')) {
+    styles = {
+      ...styles,
+      legendSize: 16,
+      lFontWeight: 'normal',
+      gFontWeight: 'normal',
+      fontFamily: "Roboto",
+      lFontStyle: "normal",
+      gFontStyle: "normal",
+      gridAndLegendColor: '#000000',
+      textAlign: 'left',
+      xPadding: 0,
+      yPadding: 0,
+      labelSize: 16,
+      valueSize: 16,
+      valueAndLableColor: '#000000',
+      xGridSize: 16,
+      yGridSize: 16,
+    };
+  }
+  return styles;
+};
+
 export const getElementDefaultStyle = ({ type, name }) => {
-  const tools = getElementTools({ type, config: { name } });
+  const tools = getElementTools({ type, config: { name } });  
   if (tools.length === 0) return {};
   let styles = {};
   if (tools.includes('font')) {
