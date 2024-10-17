@@ -15,9 +15,10 @@ import NumberInput from '@/components/ui/NumberInput.jsx';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { createElement } from 'react';
 import { Accordion, AccordionItem } from '@nextui-org/react';
+import { chartNames } from '@/lib/utils';
 
 const ChartFont = ({ elements, onChange }) => {
-    console.log(elements[0]);
+  console.log(elements[0]);
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
@@ -44,28 +45,28 @@ const ChartFont = ({ elements, onChange }) => {
                 <TextColor elements={elements} onChange={onChange} />
               </div>
               <LabelSize elements={elements} onChange={onChange} />
-              {elements[0].config.name != "dynamic-sorting" && 
-              <ValueSize elements={elements} onChange={onChange} />
-               }
+              {elements[0].config.name != 'dynamic-sorting' && <ValueSize elements={elements} onChange={onChange} />}
             </div>
           </AccordionItem>
-          <AccordionItem
-            key="grid"
-            aria-label="Grid & Legend styling"
-            title="Grid & Legend styling"
-            startContent={''}
-            indicator={<RiArrowRightSLine size="20" />}
-          >
-            <div className="px-6 py-6 w-full space-y-4">
-              <div className="flex items-center space-x-2">
-                <GridBold elements={elements} onChange={onChange} />
-                <GridColor elements={elements} onChange={onChange} />
+          {chartNames.includes(elements[0].config.name) && (
+            <AccordionItem
+              key="grid"
+              aria-label="Grid & Legend styling"
+              title="Grid & Legend styling"
+              startContent={''}
+              indicator={<RiArrowRightSLine size="20" />}
+            >
+              <div className="px-6 py-6 w-full space-y-4">
+                <div className="flex items-center space-x-2">
+                  <GridBold elements={elements} onChange={onChange} />
+                  <GridColor elements={elements} onChange={onChange} />
+                </div>
+                <XGridSize elements={elements} onChange={onChange} />
+                <YGridSize elements={elements} onChange={onChange} />
+                <LegendSize elements={elements} onChange={onChange} />
               </div>
-              <XGridSize elements={elements} onChange={onChange} />
-              <YGridSize elements={elements} onChange={onChange} />
-              <LegendSize elements={elements} onChange={onChange} />
-            </div>
-          </AccordionItem>
+            </AccordionItem>
+          )}
           <AccordionItem
             key="padding"
             aria-label="Chart Padding"
@@ -199,36 +200,38 @@ const LabelSize = ({ elements, onChange }) => {
   );
 };
 
-const XGridSize = ({ elements, onChange}) => {
-const value = useResolveValue(elements.map((el) => el.config.styles.xGridSize));
+const XGridSize = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((el) => el.config.styles.xGridSize));
 
   const handleChange = (v) => {
     if (v === '') return;
-    onChange(elements.map((el) => ({...el, config: {...el.config, styles: {...el.config.styles, xGridSize: +v } } })));
+    onChange(
+      elements.map((el) => ({ ...el, config: { ...el.config, styles: { ...el.config.styles, xGridSize: +v } } }))
+    );
   };
   return (
     <div className="flex items-center justify-between space-x-4">
-    <p className="text-base opacity-75">X grid size:</p>
-    <AutoCompleteNumberInput onChange={handleChange} value={value} min={5} max={150} step={1} ariaLabel="Font size" />
-  </div>
-  )
-  
+      <p className="text-base opacity-75">X grid size:</p>
+      <AutoCompleteNumberInput onChange={handleChange} value={value} min={5} max={150} step={1} ariaLabel="Font size" />
+    </div>
+  );
 };
 
-const YGridSize = ({ elements, onChange}) => {
-const value = useResolveValue(elements.map((el) => el.config.styles.yGridSize));
+const YGridSize = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((el) => el.config.styles.yGridSize));
 
   const handleChange = (v) => {
     if (v === '') return;
-    onChange(elements.map((el) => ({...el, config: {...el.config, styles: {...el.config.styles, yGridSize: +v } } })));
+    onChange(
+      elements.map((el) => ({ ...el, config: { ...el.config, styles: { ...el.config.styles, yGridSize: +v } } }))
+    );
   };
   return (
     <div className="flex items-center justify-between space-x-4">
-    <p className="text-base opacity-75">Y grid size:</p>
-    <AutoCompleteNumberInput onChange={handleChange} value={value} min={5} max={150} step={1} ariaLabel="Font size" />
-  </div>
-  )
-  
+      <p className="text-base opacity-75">Y grid size:</p>
+      <AutoCompleteNumberInput onChange={handleChange} value={value} min={5} max={150} step={1} ariaLabel="Font size" />
+    </div>
+  );
 };
 
 const ValueSize = ({ elements, onChange }) => {
@@ -271,11 +274,11 @@ const Bold = ({ elements, onChange }) => {
       aria-label="Bold/unbold text"
       onClick={() => {
         const _elements = elements.map((el) => {
-          if (!value) return { ...el, config: { ...el.config, styles:{...el.config.styles, lFontWeight: 'bold' }} };
+          if (!value) return { ...el, config: { ...el.config, styles: { ...el.config.styles, lFontWeight: 'bold' } } };
           const styles = { ...el.config.styles };
           styles.lFontWeight = styles.lFontWeight === 'bold' ? 'normal' : 'bold';
           console.log(styles);
-          return { ...el, config:{...el.config, styles} };
+          return { ...el, config: { ...el.config, styles } };
         });
         onChange(_elements);
       }}
@@ -287,18 +290,18 @@ const Bold = ({ elements, onChange }) => {
 const GridBold = ({ elements, onChange }) => {
   const value = useResolveValue(elements.map((el) => el.config.styles?.gFontWeight));
   return (
-      <Button
+    <Button
       isIconOnly
       variant={value === 'bold' ? 'solid' : 'text'}
       aria-label="Bold/unbold text"
       onClick={() => {
-          const _elements = elements.map((el) => {
-              if (!value) return { ...el, config: { ...el.config, styles:{...el.config.styles, gFontWeight: 'bold' }} };
-              const styles = { ...el.config.styles };
-              styles.gFontWeight = styles.gFontWeight === 'bold' ? 'normal' : 'bold';
-              console.log(styles);
-              
-          return { ...el, config:{...el.config, styles} };
+        const _elements = elements.map((el) => {
+          if (!value) return { ...el, config: { ...el.config, styles: { ...el.config.styles, gFontWeight: 'bold' } } };
+          const styles = { ...el.config.styles };
+          styles.gFontWeight = styles.gFontWeight === 'bold' ? 'normal' : 'bold';
+          console.log(styles);
+
+          return { ...el, config: { ...el.config, styles } };
         });
         onChange(_elements);
       }}
@@ -318,10 +321,10 @@ const Italic = ({ elements, onChange }) => {
       aria-label="Italisize/unitalicize text"
       onClick={() => {
         const _elements = elements.map((el) => {
-          if (!value) return { ...el, config: { ...el.config, styles:{...el.config.styles, lFontStyle: 'italic' }} };
+          if (!value) return { ...el, config: { ...el.config, styles: { ...el.config.styles, lFontStyle: 'italic' } } };
           const styles = { ...el.config.styles };
           styles.lFontStyle = styles.lFontStyle === 'italic' ? 'normal' : 'italic';
-          return { ...el, config:{...el.config, styles} };
+          return { ...el, config: { ...el.config, styles } };
         });
         onChange(_elements);
       }}
@@ -383,7 +386,9 @@ const TextColor = ({ elements, onChange }) => {
 
   const handleChange = (v) => {
     if (!v) return;
-    onChange(elements.map((e) => ({ ...e, config: { ...e.config, styles: { ...e.config.styles, valueAndLableColor: v } } })));
+    onChange(
+      elements.map((e) => ({ ...e, config: { ...e.config, styles: { ...e.config.styles, valueAndLableColor: v } } }))
+    );
   };
 
   return (
@@ -408,7 +413,9 @@ const GridColor = ({ elements, onChange }) => {
 
   const handleChange = (v) => {
     if (!v) return;
-    onChange(elements.map((e) => ({ ...e, config: { ...e.config, styles: { ...e.config.styles, gridAndLegendColor: v } } })));
+    onChange(
+      elements.map((e) => ({ ...e, config: { ...e.config, styles: { ...e.config.styles, gridAndLegendColor: v } } }))
+    );
   };
 
   return (

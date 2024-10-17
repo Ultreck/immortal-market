@@ -193,14 +193,7 @@ export const colors = [
 export const chartNames = [
   'scatter-life-expectancy',
   'dynamic-sorting',
-  '#264A5A',
-  '#E8C22C',
-  '#F6881F',
-  '#2673D9',
-  '#2BA385',
-  '#E6A333',
-  '#AB52D9',
-  '#D93566',
+  
 ];
 
 export const extractColorsFromGradient = (gradient) => {
