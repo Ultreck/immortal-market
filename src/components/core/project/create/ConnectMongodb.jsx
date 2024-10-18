@@ -1,12 +1,15 @@
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Checkbox, Input, Select, SelectItem } from '@nextui-org/react';
+import { Button, Input } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useConnectDatabaseMutation } from '../../../../api/business';
+import { useState } from 'react';
 
-const ConnectSql = ({ onPrev }) => {
+const ConnectMongodb = ({ onPrev }) => {
+  const [databaseType] = useState('mongodb');
+
   const { mutateAsync: connect, isPending: isConnecting } = useConnectDatabaseMutation();
   const toast = useToast();
 
@@ -15,57 +18,29 @@ const ConnectSql = ({ onPrev }) => {
     handleSubmit,
     formState: { errors, isValid },
     reset,
-    setValue,
-  } = useForm({
-    mode: 'onChange',
-  });
+  } = useForm({ mode: 'onChange' });
 
   const onSubmit = async (credentials) => {
     if (!isValid) return;
-    if (!credentials.type) return toast.error('Please select a database type');
     try {
-      const { type, ...payload } = credentials;
-      const { data } = await connect({ payload, type });
+      const { data } = await connect({ payload: credentials, type: databaseType });
       if (data?.success) {
-        console.log(data.tables);
+        console.log(data.collections);
         toast.success('Connection successful');
         reset();
       } else {
-        toast.error('Something went wrong');
-        console.log(data?.message || 'Something went wrong');
+        toast.error(data.message || 'Something went wrong');
       }
     } catch (error) {
-      toast.error('Something went wrong');
-      console.log(error?.response.data.message || error);
+      toast.error('Internal server error');
+      console.log(error);
     }
   };
+
   return (
     <div className="flex flex-col">
-      <Title title="Connect to SQL" sub="Import data from your SQL database" className="mb-10" />
+      <Title title="Connect to Mongodb" sub="Import data from your Mongodb database" className="mb-10" />
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 gap-2">
-          <p>Database type</p>
-          <Select
-            variant="bordered"
-            aria-label="type"
-            size="lg"
-            classNames={{ value: 'px-2' }}
-            placeholder="Select one"
-            onChange={(e) => setValue('type', e.target.value)}
-          >
-            {[
-              { key: 'MySQL', name: 'MySQL', value: 'mysql' },
-              { key: 'PostgreSQL', name: 'PostgreSQL', value: 'postgresql' },
-              { key: 'SQL Server', name: 'SQL Server', value: 'mssql' },
-              { key: 'Oracle', name: 'Oracle', value: 'oracle' },
-            ].map((option) => (
-              <SelectItem key={option.value} classNames={{ title: 'px-2 text-base' }}>
-                {option.name}
-              </SelectItem>
-            ))}
-          </Select>
-          {errors.type && <p className="text-red-500">Database type is required</p>}
-        </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-1 gap-2">
             <p>Host</p>
@@ -87,7 +62,7 @@ const ConnectSql = ({ onPrev }) => {
               classNames={{ input: 'px-2' }}
               {...register('database', { required: 'Database name is required' })}
             />
-            {errors.databaseName && <p className="text-red-500">{errors.databaseName.message}</p>}
+            {errors.database && <p className="text-red-500">{errors.database.message}</p>}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
@@ -117,19 +92,15 @@ const ConnectSql = ({ onPrev }) => {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-1 gap-2">
-            <p>Port</p>
+            <p>Application name</p>
             <Input
-              placeholder="Enter port"
+              placeholder="Enter application name"
               size="lg"
               variant="bordered"
               classNames={{ input: 'px-2' }}
-              {...register('port', { required: 'Port is required', valueAsNumber: true })}
+              {...register('app', { required: 'app name is required' })}
             />
-            {errors.port && <p className="text-red-500">{errors.port.message}</p>}
-          </div>
-          <div className="grid grid-cols-1">
-            <p>SSL</p>
-            <Checkbox {...register('ssl')}>Enable SSL</Checkbox>
+            {errors.app && <p className="text-red-500">{errors.app.message}</p>}
           </div>
         </div>
         <div className="mt-10 space-x-4 flex items-center">
@@ -158,9 +129,9 @@ const ConnectSql = ({ onPrev }) => {
   );
 };
 
-ConnectSql.propTypes = {
+ConnectMongodb.propTypes = {
   onPrev: PropTypes.func,
 };
 
-export default ConnectSql;
+export default ConnectMongodb;
 

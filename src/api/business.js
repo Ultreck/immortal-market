@@ -190,6 +190,16 @@ export const useGetDesignBlocks = ({ business, type, category }) => {
   });
 };
 
+export const useConnectDatabaseMutation = ({ business }) => {
+  return useMutation({
+    mutationFn: ({ payload, type }) => {
+      return http.post(`/businesses/${business}/workspaces/extract/db/${type}/tables/`, {
+        credentials: payload,
+      });
+    },
+  });
+};
+
 export const useCreateComment = () => {
   return useMutation({
     mutationFn: (body) => {
@@ -198,15 +208,14 @@ export const useCreateComment = () => {
   });
 };
 
-// Reply a comment
-export const replyComment =()=> {
+export const useReplyComment = () => {
   return useMutation({
     mutationFn: (body) => {
       return http.post('/businesses/comment/reply', body);
     },
   });
-}
-// get comment and replies
+};
+
 export const useCommentAndReplies = () => {
   return useMutation({
     mutationFn: (body) => {
@@ -215,10 +224,9 @@ export const useCommentAndReplies = () => {
   });
 };
 
-// get comment for design
 export const useGetComments = () => {
   return useQuery({
-    queryKey: ['comments'], 
+    queryKey: ['comments'],
     queryFn: async () => {
       const res = await http.get('/businesses/comment/all');
       return res.data;
@@ -226,14 +234,12 @@ export const useGetComments = () => {
   });
 };
 
-// get comment for element
-export const useGetCommentForElement = () => {
+export const useGetCommentForElement = ({ element }) => {
   return useQuery({
-    queryKey: ['comments', element], 
+    queryKey: ['comments', element],
     queryFn: async () => {
       const res = await http.get(`/businesses/comment/element/${element}`);
       return res.data;
     },
   });
 };
-

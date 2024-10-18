@@ -8,6 +8,7 @@ import { useState } from 'react';
 import UploadFiles from '@/components/core/project/create/UploadFiles.jsx';
 import { cn } from '@/lib/utils.js';
 import ConnectSql from '@/components/core/project/create/ConnectSql.jsx';
+import ConnectMongodb from '@/components/core/project/create/ConnectMongodb.jsx';
 
 const sources = [
   {
@@ -58,7 +59,7 @@ const sources = [
         <TbBrandMongodb size="24" />
       </div>
     ),
-    disabled: true,
+    disabled: false,
   },
 ];
 
@@ -67,6 +68,7 @@ const SelectSource = ({ onNext }) => {
   const [view, setView] = useState(data.source || 'options');
 
   const handleClick = (key) => {
+    console.log(key);
     updateData({ source: key });
     setView(key);
   };
@@ -96,6 +98,7 @@ const SelectSource = ({ onNext }) => {
       )}
       {view === 'files' && <UploadFiles onPrev={() => setView('options')} onNext={onNext} />}
       {view === 'sql' && <ConnectSql onPrev={() => setView('options')} onNext={onNext} />}
+      {view === 'mongodb' && <ConnectMongodb onPrev={() => setView('options')} />}
     </>
   );
 };
@@ -105,3 +108,4 @@ SelectSource.propTypes = {
 };
 
 export default SelectSource;
+
