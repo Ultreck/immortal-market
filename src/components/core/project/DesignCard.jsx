@@ -21,6 +21,7 @@ const DesignCard = ({ id, title, thumbnail }) => {
       </Link>
       <div className="mt-3 px-2 flex items-center justify-between">
         <h4 className="font-medium text-base leading-tight truncate">{title}</h4>
+        <button>jkashjshkshsxjkxhzjkxzhj</button>
       </div>
     </div>
   );

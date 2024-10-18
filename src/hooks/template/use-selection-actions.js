@@ -26,6 +26,7 @@ export const useSelectionActions = ({ id }) => {
     if (action === 'align-top') handleAlignTop();
     if (action === 'align-middle') handleAlignMiddle();
     if (action === 'align-bottom') handleAlignBottom();
+    if (action === 'comment') handleComment();
   };
 
   const handleDuplicate = () => {
@@ -147,6 +148,9 @@ export const useSelectionActions = ({ id }) => {
     updateElements(_elements, page.id, true);
   };
 
+  // const handleComment=()=>{
+  //   let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
+  // }
   return {
     handleAction,
   };

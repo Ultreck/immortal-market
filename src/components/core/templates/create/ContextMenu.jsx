@@ -1,6 +1,7 @@
 import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import { TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbPlus, TbTrash } from 'react-icons/tb';
+import { MdOutlineModeComment } from "react-icons/md";
 import { Listbox, ListboxItem, useDisclosure } from '@nextui-org/react';
 import { createPortal } from 'react-dom';
 import { useEffect, useMemo } from 'react';
@@ -24,6 +25,7 @@ import {
 } from 'react-icons/ri';
 import { useKey } from 'react-use';
 import CreateGroupBlockModal from '@/components/core/templates/CreateGroupBlockModal.jsx';
+import CreateCommentModal from '@/components/core/templates/CreateCommentModal.jsx';
 
 const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
@@ -32,6 +34,8 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
   const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id)).filter(Boolean);
   const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
   const { isOpen: isCreateBlockOpen, onOpen: onCreateBlockOpen, onClose: onCreateBlockClose } = useDisclosure();
+  const {isOpen: isCommentOpen, onOpen: onCommentOpen, onClose: onCommentClose} = useDisclosure();
+  
 
   useKey('Escape', () => {
     onClose();
@@ -51,6 +55,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
     const items = [
       { key: 'copy', label: 'Copy', icon: <TbClipboardCopy size="18" /> },
       { key: 'duplicate', label: 'Duplicate', icon: <TbCopyPlus size="18" /> },
+      { key: 'comment', label: 'Comment', icon: <MdOutlineModeComment size="18" /> },
     ];
     if (selectedElements.length > 1) {
       if (!elements.every((el) => el.group && el.group === elements[0].group)) {
@@ -113,6 +118,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
                   if (menu.find((item) => item.key === key)?.children?.length) return;
                   if (key === 'link') onLinkToolOpen();
                   if (key === 'save-as-block') onCreateBlockOpen();
+                  if (key === 'comment') onCommentOpen();
                   else onAction(key);
                   onClose();
                 }}
@@ -162,6 +168,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
 
       <LinkTool elements={elements} isOpen={isLinkToolOpen} onClose={onLinkToolClose} />
       <CreateGroupBlockModal isOpen={isCreateBlockOpen} onClose={onCreateBlockClose} elements={elements} />
+      <CreateCommentModal isOpen={isCommentOpen} onClose={onCommentClose} elements={elements} />
     </>
   );
 };

@@ -7,6 +7,7 @@ import DesignOptions from '@/components/core/templates/create/footer/DesignOptio
 import DesignTitle from './DesignTitle.jsx';
 import Share from '@/components/core/templates/create/footer/Share.jsx';
 import FullscreenPreview from '@/components/core/templates/create/FullscreenPreview.jsx';
+import CommentBar from '@/components/core/templates/create/footer/CommentBar.jsx';
 
 const StatusBar = () => {
   const status = useTemplateStore((state) => state.template.status);
@@ -31,6 +32,7 @@ const StatusBar = () => {
         <PageIndicator />
         <ZoomSlider />
         <FullscreenPreview />
+        <CommentBar/>
         <div className="flex items-center space-x-3">
           <Share />
           <SaveButton />

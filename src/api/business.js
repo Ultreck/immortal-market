@@ -189,3 +189,19 @@ export const useGetDesignBlocks = ({ business, type, category }) => {
     },
   });
 };
+
+export const useCreateComment = () => {
+  return useMutation({
+    mutationFn: (body) => {
+      return http.post('/businesses/comment/create', body);
+    },
+  });
+};
+
+export const useGetComments = () => {
+  return useQuery({
+    queryKey: ['comments'], // Unique key for the query (for caching)
+    queryFn: () => axios.get('/comments').then((res) => res.data), // Fetches comments from the server
+  });
+};
+

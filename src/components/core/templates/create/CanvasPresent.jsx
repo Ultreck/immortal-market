@@ -30,6 +30,7 @@ const CanvasPresent = ({ page }) => {
       {page.elements.map((element) => {
         return (
           <Fragment key={element.id}>
+      
             {components.present[element.type] ? (
               <ElementWrapperPresent element={element}>
                 {createElement(components.present[element.type], { element })}
