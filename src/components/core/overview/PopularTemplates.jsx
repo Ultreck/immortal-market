@@ -8,21 +8,21 @@ const PopularTemplates = () => {
 
   return (
     <section>
-      <h2 className="font-semibold text-xl mb-4">Start with a template</h2>
-      <div className="mb-6 flex flex-wrap gap-3">
-        <Chip variant="solid" size="md" classNames={{ base: 'cursor-pointer', content: 'font-medium' }} color="primary">
+      <h2 className="font-semibold text-xl mb-5">Start with a template</h2>
+      <div className="mb-8 flex flex-wrap gap-3">
+        <Chip variant="solid" size="lg" classNames={{ base: 'cursor-pointer', content: 'font-medium' }} color="primary">
           All
         </Chip>
-        <Chip variant="flat" size="md" classNames={{ base: 'cursor-pointer', content: 'font-medium' }}>
+        <Chip variant="flat" size="lg" classNames={{ base: 'cursor-pointer', content: 'font-medium' }}>
           Tech
         </Chip>
-        <Chip variant="flat" size="md" classNames={{ base: 'cursor-pointer', content: 'font-medium' }}>
+        <Chip variant="flat" size="lg" classNames={{ base: 'cursor-pointer', content: 'font-medium' }}>
           Customer
         </Chip>
-        <Chip variant="flat" size="md" classNames={{ base: 'cursor-pointer', content: 'font-medium' }}>
+        <Chip variant="flat" size="lg" classNames={{ base: 'cursor-pointer', content: 'font-medium' }}>
           Marketing
         </Chip>
-        <Chip variant="flat" size="md" classNames={{ base: 'cursor-pointer', content: 'font-medium' }}>
+        <Chip variant="flat" size="lg" classNames={{ base: 'cursor-pointer', content: 'font-medium' }}>
           Report
         </Chip>
       </div>

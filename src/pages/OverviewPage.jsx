@@ -102,7 +102,7 @@ const OverviewPage = () => {
             </ul>
           </div>
         </section>
-        <div className="mt-12">
+        <div className="mt-14">
           <AnimatePresence mode="popLayout">
             {view === 'connect' && (
               <motion.div
@@ -112,7 +112,7 @@ const OverviewPage = () => {
                 exit={{ opacity: 0, y: 10 }}
               >
                 <h2 className="font-semibold text-xl mb-6">Connect your data</h2>
-                <div className="flex flex-row justify-between gap-4 mb-10">
+                <div className="flex flex-row justify-between gap-4">
                   <div
                     onClick={() => null}
                     className="flex flex-col items-center justify-center py-4 hover:bg-default-100 rounded-2xl cursor-pointer px-5"
@@ -212,7 +212,7 @@ const OverviewPage = () => {
                 exit={{ opacity: 0, y: 10 }}
               >
                 <h2 className="font-semibold text-xl mb-6">Create new</h2>
-                <div className="grid grid-cols-5 gap-6 mb-10">
+                <div className="grid grid-cols-5 gap-6">
                   <div className="rounded-3xl px-5 py-5 bg-default-100 flex items-center gap-2 hover:bg-default-200/60 cursor-pointer">
                     <div>
                       <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)]">
@@ -264,7 +264,7 @@ const OverviewPage = () => {
                 exit={{ opacity: 0, y: 10 }}
               >
                 <h2 className="font-semibold text-xl mb-6">Analyze</h2>
-                <div className="grid grid-cols-3 gap-6 mb-10">
+                <div className="grid grid-cols-3 gap-6">
                   <div className="flex items-start justify-between rounded-3xl px-6 py-5 bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)] text-black">
                     <div className="py-2 pr-6">
                       <p className="font-semibold leading-tight">Lorem ipsum dolor sit amet,</p>
@@ -303,7 +303,7 @@ const OverviewPage = () => {
                 exit={{ opacity: 0, y: 10 }}
               >
                 <h2 className="font-semibold text-xl mb-6">Apps</h2>
-                <div className="grid grid-cols-5 gap-6 mb-10">
+                <div className="grid grid-cols-5 gap-6">
                   <div className="flex flex-col rounded-3xl bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)] text-black">
                     <div className="w-full px-5 py-4">
                       <img
@@ -378,7 +378,7 @@ const OverviewPage = () => {
               </motion.div>
             )}
           </AnimatePresence>
-          <div className="space-y-16">
+          <div className="space-y-14 mt-14">
             <RecentProjects />
             <PopularTemplates />
           </div>
