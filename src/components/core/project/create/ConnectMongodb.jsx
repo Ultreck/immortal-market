@@ -6,12 +6,14 @@ import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useConnectDatabaseMutation } from '../../../../api/business';
 import { useState } from 'react';
+import useBusiness from '@/hooks/use-business.js';
 
 const ConnectMongodb = ({ onPrev }) => {
   const [databaseType] = useState('mongodb');
 
   const { mutateAsync: connect, isPending: isConnecting } = useConnectDatabaseMutation();
   const toast = useToast();
+  const { id } = useBusiness();
 
   const {
     register,
@@ -23,7 +25,7 @@ const ConnectMongodb = ({ onPrev }) => {
   const onSubmit = async (credentials) => {
     if (!isValid) return;
     try {
-      const { data } = await connect({ payload: credentials, type: databaseType });
+      const { data } = await connect({ payload: credentials, type: databaseType, business: id });
       if (data?.success) {
         console.log(data.collections);
         toast.success('Connection successful');

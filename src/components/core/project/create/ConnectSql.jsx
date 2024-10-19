@@ -5,10 +5,12 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useConnectDatabaseMutation } from '../../../../api/business';
+import useBusiness from '@/hooks/use-business.js';
 
 const ConnectSql = ({ onPrev }) => {
   const { mutateAsync: connect, isPending: isConnecting } = useConnectDatabaseMutation();
   const toast = useToast();
+  const { id } = useBusiness();
 
   const {
     register,
@@ -25,7 +27,7 @@ const ConnectSql = ({ onPrev }) => {
     if (!credentials.type) return toast.error('Please select a database type');
     try {
       const { type, ...payload } = credentials;
-      const { data } = await connect({ payload, type });
+      const { data } = await connect({ payload, type, business: id });
       if (data?.success) {
         console.log(data.tables);
         toast.success('Connection successful');
