@@ -45,7 +45,7 @@ const TemplatesPage = () => {
   };
 
   return (
-    <>
+    <div className="mb-10">
       <DashboardHeader
         content={
           <div className="relative">
@@ -71,7 +71,8 @@ const TemplatesPage = () => {
           <p className="text-lg leading-none mt-3">Immortal&#39;s templates are the best way to start.</p>
         </div>
         {isTemplatesLoading ? (
-          <div className="grid grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-5 gap-4 md:gap-8">
+            <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
@@ -80,7 +81,7 @@ const TemplatesPage = () => {
         ) : (
           <>
             {designs.length > 0 ? (
-              <div className="grid grid-cols-4 gap-4 md:gap-8">
+              <div className="grid grid-cols-5 gap-4 md:gap-8">
                 <button
                   onClick={handleCreateTemplate}
                   disabled={isCreateTemplateLoading}
@@ -109,9 +110,7 @@ const TemplatesPage = () => {
           </>
         )}
       </div>
-      <br />
-      <br />
-    </>
+    </div>
   );
 };
 

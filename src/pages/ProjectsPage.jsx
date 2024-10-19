@@ -14,7 +14,7 @@ const ProjectsPage = () => {
   const updateData = useGlobalStore((state) => state.updateData);
 
   return (
-    <>
+    <div className="mb-10">
       <DashboardHeader
         content={
           <div className="relative">
@@ -47,14 +47,15 @@ const ProjectsPage = () => {
       />
       <div className="container pb-20 min-h-screen flex flex-col space-y-10">
         {isDesignsLoading ? (
-          <div className="grid grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-5 gap-4 md:gap-8">
+            <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
           </div>
         ) : (
-          <div className="grid grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-5 gap-4 md:gap-8">
             <button
               onClick={() => updateData({ isCreateProjectModalOpen: true })}
               className={cn(
@@ -71,7 +72,7 @@ const ProjectsPage = () => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

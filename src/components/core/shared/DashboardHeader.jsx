@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import { Button } from '@nextui-org/react';
 import { LuBell, LuHelpCircle } from 'react-icons/lu';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
+import { cn } from '@/lib/utils.js';
 
-const DashboardHeader = ({ content }) => (
-  <div className="container">
+const DashboardHeader = ({ content, className }) => (
+  <div className={cn('container', className)}>
     <div className="flex pt-8 pb-10 justify-between items-center">
       <div>{content}</div>
       <div className="flex items-center space-x-3">
@@ -24,6 +25,7 @@ const DashboardHeader = ({ content }) => (
 
 DashboardHeader.propTypes = {
   content: PropTypes.element,
+  className: PropTypes.string,
 };
 
 export default DashboardHeader;
