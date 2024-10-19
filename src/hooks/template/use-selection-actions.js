@@ -147,10 +147,7 @@ export const useSelectionActions = ({ id }) => {
     }));
     updateElements(_elements, page.id, true);
   };
-
-  // const handleComment=()=>{
-  //   let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
-  // }
+  
   return {
     handleAction,
   };

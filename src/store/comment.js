@@ -9,6 +9,7 @@ const useCommentStore = createWithEqualityFn(
     },
     updateModal: (payload) => set((state) => ({ data: { ...state.data,  modal:payload } })),
     updateSelectComment: (payload) => set((state) => ({ data: { ...state.data, selectComment:payload } })),
+    
   }),
   shallow
 );

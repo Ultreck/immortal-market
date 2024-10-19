@@ -198,10 +198,42 @@ export const useCreateComment = () => {
   });
 };
 
+// Reply a comment
+export const replyComment =()=> {
+  return useMutation({
+    mutationFn: (body) => {
+      return http.post('/businesses/comment/reply', body);
+    },
+  });
+}
+// get comment and replies
+export const useCommentAndReplies = () => {
+  return useMutation({
+    mutationFn: (body) => {
+      return http.post('/businesses/comment/create', body);
+    },
+  });
+};
+
+// get comment for design
 export const useGetComments = () => {
   return useQuery({
-    queryKey: ['comments'], // Unique key for the query (for caching)
-    queryFn: () => axios.get('/comments').then((res) => res.data), // Fetches comments from the server
+    queryKey: ['comments'], 
+    queryFn: async () => {
+      const res = await http.get('/businesses/comment/all');
+      return res.data;
+    },
+  });
+};
+
+// get comment for element
+export const useGetCommentForElement = () => {
+  return useQuery({
+    queryKey: ['comments', element], 
+    queryFn: async () => {
+      const res = await http.get(`/businesses/comment/element/${element}`);
+      return res.data;
+    },
   });
 };
 
