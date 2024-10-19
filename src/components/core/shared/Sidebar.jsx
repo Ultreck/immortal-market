@@ -1,7 +1,7 @@
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
-import { TbChevronLeft, TbChevronRight, TbCrown, TbSettings2, TbUsers } from 'react-icons/tb';
+import { TbCrown, TbSettings2, TbUsers } from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import Logo from '@/components/core/shared/Logo.jsx';
@@ -38,21 +38,10 @@ NavItem.propTypes = {
 
 const Sidebar = () => {
   const { isDarkMode } = useTernaryDarkMode();
-  const [mini, setMini] = useState(false);
+  const [mini] = useState(false);
 
   return (
-    <div
-      className={cn('w-[260px] relative group transition-width', {
-        'w-[90px]': mini,
-      })}
-    >
-      <button
-        onClick={() => setMini(!mini)}
-        aria-label={mini ? 'Hide' : 'Show'}
-        className="absolute top-1/2 left-[calc(100%)] -translate-y-1/2 z-10 bg-[#eff6fd] dark:bg-gray-950 border border-default-200 dark:border-default-50 h-[70px] rounded-r-full transition-all duration-200"
-      >
-        <div className="">{mini ? <TbChevronRight size="16" /> : <TbChevronLeft size="16" />}</div>
-      </button>
+    <div className={cn('w-[260px] relative group transition-width', { 'w-[90px]': mini })}>
       <div className={cn('w-[260px] h-full overflow-hidden', { 'w-[90px]': mini })}>
         <div className={cn('w-[260px] h-full overflow-hidden')}>
           <div

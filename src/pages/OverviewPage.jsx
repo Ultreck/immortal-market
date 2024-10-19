@@ -378,7 +378,7 @@ const OverviewPage = () => {
               </motion.div>
             )}
           </AnimatePresence>
-          <div className="space-y-12">
+          <div className="space-y-16">
             <RecentProjects />
             <PopularTemplates />
           </div>

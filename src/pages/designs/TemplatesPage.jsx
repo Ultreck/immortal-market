@@ -66,7 +66,7 @@ const TemplatesPage = () => {
         }
       />
       <div className="container min-h-screen flex flex-col space-y-10">
-        <div className="rounded-3xl bg-cover py-12 px-16 bg-gradient-to-r from-emerald-200 dark:from-emerald-400 to-cyan-200 dark:to-cyan-400 text-black">
+        <div className="rounded-3xl bg-cover py-10 px-16 bg-gradient-to-r from-emerald-200 dark:from-emerald-400 to-cyan-200 dark:to-cyan-400 text-black">
           <h1 className="text-4xl font-bold">Templates</h1>
           <p className="text-lg leading-none mt-3">Immortal&#39;s templates are the best way to start.</p>
         </div>
