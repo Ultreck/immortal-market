@@ -64,11 +64,11 @@ const sources = [
 ];
 
 const SelectSource = ({ onNext }) => {
-  const { data, updateData } = useCreateProjectStore();
+  const data = useCreateProjectStore((state) => state.data.source);
+  const updateData = useCreateProjectStore((state) => state.updateData);
   const [view, setView] = useState(data.source || 'options');
 
   const handleClick = (key) => {
-    console.log(key);
     updateData({ source: key });
     setView(key);
   };
@@ -108,4 +108,3 @@ SelectSource.propTypes = {
 };
 
 export default SelectSource;
-

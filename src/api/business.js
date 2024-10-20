@@ -190,7 +190,7 @@ export const useGetDesignBlocks = ({ business, type, category }) => {
   });
 };
 
-export const useConnectDatabaseMutation = (business) => {
+export const useGetDatabaseTables = (business) => {
   return useMutation({
     mutationFn: ({ payload, type }) => {
       return http.post(`/businesses/${business}/workspaces/extract/db/${type}/tables/`, {

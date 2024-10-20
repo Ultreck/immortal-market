@@ -5,7 +5,8 @@ const useCreateProjectStore = createWithEqualityFn(
   (set) => ({
     data: {
       source: '',
-      type: null,
+      credentials: {},
+      tables: [],
       files: [],
       extracted: [],
       review: {

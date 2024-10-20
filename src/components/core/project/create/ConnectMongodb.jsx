@@ -4,14 +4,14 @@ import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast.jsx';
-import { useConnectDatabaseMutation } from '../../../../api/business';
+import { useGetDatabaseTables } from '@/api/business.js';
 import { useState } from 'react';
 import useBusiness from '@/hooks/use-business.js';
 
 const ConnectMongodb = ({ onPrev }) => {
   const [databaseType] = useState('mongodb');
 
-  const { mutateAsync: connect, isPending: isConnecting } = useConnectDatabaseMutation();
+  const { mutateAsync: connect, isPending: isConnecting } = useGetDatabaseTables();
   const toast = useToast();
   const { id } = useBusiness();
 
@@ -136,4 +136,3 @@ ConnectMongodb.propTypes = {
 };
 
 export default ConnectMongodb;
-
