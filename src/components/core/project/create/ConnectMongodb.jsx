@@ -1,41 +1,53 @@
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Input } from '@nextui-org/react';
+import { Button, Checkbox, Input } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useGetDatabaseTables } from '@/api/business.js';
 import { useState } from 'react';
 import useBusiness from '@/hooks/use-business.js';
+import useCreateProjectStore from '@/store/create-project.js';
 
-const ConnectMongodb = ({ onPrev }) => {
-  const [databaseType] = useState('mongodb');
+const ConnectMongodb = ({ onPrev, onNext }) => {
+  const [view, setView] = useState('form');
 
-  const { mutateAsync: connect, isPending: isConnecting } = useGetDatabaseTables();
+  return (
+    <>
+      {view === 'form' && <Form onPrev={onPrev} onNext={() => setView('tables')} />}
+      {view === 'tables' && <Tables onPrev={() => setView('form')} onNext={onNext} />}
+    </>
+  );
+};
+
+const Form = ({ onPrev, onNext }) => {
+  const [type] = useState('mongodb');
+
   const toast = useToast();
-  const { id } = useBusiness();
+  const { id: business } = useBusiness();
+  const credentials = useCreateProjectStore((state) => state.data.credentials);
+  const updateData = useCreateProjectStore((state) => state.updateData);
+  const { mutateAsync: connect, isPending: isConnecting } = useGetDatabaseTables(business);
 
   const {
-    register,
     handleSubmit,
-    formState: { errors, isValid },
-    reset,
-  } = useForm({ mode: 'onChange' });
+    formState: { isValid },
+    control,
+  } = useForm({
+    defaultValues: {
+      type: credentials.type || 'mongodb',
+      ...credentials,
+    },
+  });
 
-  const onSubmit = async (credentials) => {
+  const onSubmit = async (values) => {
     if (!isValid) return;
     try {
-      const { data } = await connect({ payload: credentials, type: databaseType, business: id });
-      if (data?.success) {
-        console.log(data.collections);
-        toast.success('Connection successful');
-        reset();
-      } else {
-        toast.error(data.message || 'Something went wrong');
-      }
+      const res = await connect({ payload: values, type });
+      updateData({ credentials: { ...values, type }, tables: res.data.collections });
+      onNext();
     } catch (error) {
-      toast.error('Internal server error');
-      console.log(error);
+      toast.error(error?.response?.data?.message ?? error.message ?? 'Something went wrong, please try again');
     }
   };
 
@@ -46,63 +58,120 @@ const ConnectMongodb = ({ onPrev }) => {
         <div className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-1 gap-2">
             <p>Host</p>
-            <Input
-              placeholder="Enter host"
-              size="lg"
-              variant="bordered"
-              classNames={{ input: 'px-2' }}
-              {...register('host', { required: 'Host is required' })}
+            <Controller
+              name="host"
+              control={control}
+              rules={{ required: 'Host is required' }}
+              disabled={isConnecting}
+              render={({ field, fieldState: { error } }) => (
+                <Input
+                  placeholder="Enter host"
+                  variant="bordered"
+                  size="lg"
+                  value={field.value}
+                  onChange={field.onChange}
+                  classNames={{ input: 'text-base px-2' }}
+                  errorMessage={error?.message}
+                  isInvalid={!!error?.message}
+                  isDisabled={field.disabled}
+                />
+              )}
             />
-            {errors.host && <p className="text-red-500">{errors.host.message}</p>}
           </div>
           <div className="grid grid-cols-1 gap-2">
             <p>Database name</p>
-            <Input
-              placeholder="Enter database name"
-              size="lg"
-              variant="bordered"
-              classNames={{ input: 'px-2' }}
-              {...register('database', { required: 'Database name is required' })}
+            <Controller
+              name="database"
+              control={control}
+              rules={{ required: 'Database name is required' }}
+              disabled={isConnecting}
+              render={({ field, fieldState: { error } }) => (
+                <Input
+                  placeholder="Enter database name"
+                  variant="bordered"
+                  size="lg"
+                  value={field.value}
+                  onChange={field.onChange}
+                  classNames={{ input: 'text-base px-2' }}
+                  errorMessage={error?.message}
+                  isInvalid={!!error?.message}
+                  isDisabled={field.disabled}
+                />
+              )}
             />
-            {errors.database && <p className="text-red-500">{errors.database.message}</p>}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-1 gap-2">
             <p>Username</p>
-            <Input
-              placeholder="Enter username"
-              size="lg"
-              variant="bordered"
-              classNames={{ input: 'px-2' }}
-              {...register('user', { required: 'Username is required' })}
+            <Controller
+              name="user"
+              control={control}
+              rules={{ required: 'Username is required' }}
+              disabled={isConnecting}
+              render={({ field, fieldState: { error } }) => (
+                <Input
+                  placeholder="Enter username"
+                  variant="bordered"
+                  size="lg"
+                  value={field.value}
+                  onChange={field.onChange}
+                  classNames={{ input: 'text-base px-2' }}
+                  errorMessage={error?.message}
+                  isInvalid={!!error?.message}
+                  isDisabled={field.disabled}
+                  autoComplete="off"
+                />
+              )}
             />
-            {errors.user && <p className="text-red-500">{errors.user.message}</p>}
           </div>
           <div className="grid grid-cols-1 gap-2">
             <p>Password</p>
-            <Input
-              placeholder="Enter password"
-              type="password"
-              size="lg"
-              variant="bordered"
-              classNames={{ input: 'px-2' }}
-              {...register('password', { required: 'Password is required' })}
+            <Controller
+              name="password"
+              control={control}
+              rules={{ required: 'Password is required' }}
+              disabled={isConnecting}
+              render={({ field, fieldState: { error } }) => (
+                <Input
+                  placeholder="Enter password"
+                  type="password"
+                  variant="bordered"
+                  size="lg"
+                  value={field.value}
+                  onChange={field.onChange}
+                  classNames={{ input: 'text-base px-2' }}
+                  errorMessage={error?.message}
+                  isInvalid={!!error?.message}
+                  isDisabled={field.disabled}
+                  autoComplete="new-password"
+                />
+              )}
             />
-            {errors.password && <p className="text-red-500">{errors.password.message}</p>}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="grid grid-cols-1 gap-2">
             <p>Application name</p>
-            <Input
-              placeholder="Enter application name"
-              size="lg"
-              variant="bordered"
-              classNames={{ input: 'px-2' }}
-              {...register('app', { required: 'app name is required' })}
+            <Controller
+              name="app"
+              control={control}
+              rules={{ required: 'Apllication name is required' }}
+              disabled={isConnecting}
+              render={({ field, fieldState: { error } }) => (
+                <Input
+                  placeholder="Enter application name"
+                  variant="bordered"
+                  size="lg"
+                  value={field.value}
+                  onChange={field.onChange}
+                  classNames={{ input: 'text-base px-2' }}
+                  errorMessage={error?.message}
+                  isInvalid={!!error?.message}
+                  isDisabled={field.disabled}
+                />
+              )}
             />
-            {errors.app && <p className="text-red-500">{errors.app.message}</p>}
           </div>
         </div>
         <div className="mt-10 space-x-4 flex items-center">
@@ -113,6 +182,7 @@ const ConnectMongodb = ({ onPrev }) => {
             radius="full"
             className="text-base px-6"
             startContent={<TbChevronLeft size="20" />}
+            isDisabled={isConnecting}
           >
             Back
           </Button>
@@ -122,8 +192,9 @@ const ConnectMongodb = ({ onPrev }) => {
             radius="full"
             className="text-base px-6"
             endContent={<TbChevronRight size="20" />}
+            isLoading={isConnecting}
           >
-            {isConnecting ? 'Connecting...' : 'Connect'}
+            Connect
           </Button>
         </div>
       </form>
@@ -131,8 +202,65 @@ const ConnectMongodb = ({ onPrev }) => {
   );
 };
 
+const Tables = ({ onPrev, onNext }) => {
+  const [selected, setSelected] = useState([]);
+  const tables = useCreateProjectStore((state) => state.data.tables);
+
+  return (
+    <div>
+      <Title title="Select tables" sub="Select the tables you want to include in your analysis" className="mb-10" />
+      <div className="flex flex-wrap gap-6">
+        {tables.map((table, index) => (
+          <div key={index} className="border border-default-200 rounded-2xl px-4 py-2">
+            <Checkbox
+              isSelected={selected.includes(index)}
+              onValueChange={(v) => {
+                if (v) setSelected((s) => [...s, index]);
+                else setSelected((s) => s.filter((i) => i !== index));
+              }}
+            >
+              {table}
+            </Checkbox>
+          </div>
+        ))}
+      </div>
+      <div className="mt-10 space-x-4 flex items-center">
+        <Button
+          onClick={onPrev}
+          color="default"
+          variant="bordered"
+          radius="full"
+          className="text-base px-6"
+          startContent={<TbChevronLeft size="20" />}
+        >
+          Back
+        </Button>
+        <Button
+          onClick={onNext}
+          color="primary"
+          radius="full"
+          className="text-base px-6"
+          endContent={<TbChevronRight size="20" />}
+        >
+          Next
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 ConnectMongodb.propTypes = {
   onPrev: PropTypes.func,
+  onNext: PropTypes.func,
+};
+Tables.propTypes = {
+  onPrev: PropTypes.func,
+  onNext: PropTypes.func,
+};
+Form.propTypes = {
+  onPrev: PropTypes.func,
+  onNext: PropTypes.func,
 };
 
 export default ConnectMongodb;
+
