@@ -6,8 +6,8 @@ import { format, isYesterday } from 'date-fns';
 import EmojiPickerModal from '../../EmojiPickerModal';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import { motion } from 'framer-motion';
+import { Tooltip } from '@nextui-org/react';
 // import { useGetComments } from '@/api/business';
-
 
 const messages = [
   {
@@ -128,26 +128,6 @@ const messages = [
   { comment: 'This is the fifth comment', fullName: 'Bob Brown', timestamp: '2024-10-17 14:00' },
 ];
 
-const CustomTooltip = ({ title, children, placement = "bottom" }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const showTooltip = () => setIsVisible(true);
-  const hideTooltip = () => setIsVisible(false);
-
-  return (
-    <div className="relative inline-block" onMouseEnter={showTooltip} onMouseLeave={hideTooltip}>
-      {children}
-      {isVisible && (
-        <div
-          className={`absolute z-10 text-white text-sm p-2 bg-gray-800 rounded ${placement === 'bottom' ? 'mt-2' : '-mt-10'}`}
-        >
-          {title}
-        </div>
-      )}
-    </div>
-  );
-};
-
 const Avatar = ({ size = 40, className = '' }) => {
   return (
     <div
@@ -198,42 +178,66 @@ const Modal = () => {
         damping: 20,
         duration: 0.5,
       }}
-      className="fixed inset-y-0 right-0 bg-white w-1/4 min-h-[500px] max-h-[50vh] mt-1 rounded-xl h-full z-50 px-4 overflow-y-auto shadow-lg p top-2 "
+      className="fixed inset-y-0 right-0 dark:bg-gray-900 bg-white w-1/3 min-h-[500px] max-h-[80vh] mt-4 rounded-2xl h-full z-50 px-6 overflow-y-auto shadow-2xl"
     >
-      <div className="flex items-center z-50 sticky top-0 justify-between py-3 px-1 bg-white">
-        <button disabled={selectComment === null} onClick={() => updateSelectComment(null)}>
-          <MdKeyboardBackspace size={26} />
+      <div className="flex items-center justify-between sticky top-0 bg-white dark:bg-gray-900 py-4 px-3 rounded-t-2xl shadow-md z-50">
+        <button
+          disabled={selectComment === null}
+          onClick={() => updateSelectComment(null)}
+          className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700"
+        >
+          <MdKeyboardBackspace size={26} className="text-gray-600 dark:text-white" />
         </button>
 
-        {selectComment ? (
-          <div className="flex gap-2 items-center">
-            <CustomTooltip placement="bottom" title={'Previous Button'}>
-              <IoIosArrowBack
-                size={30}
-                onClick={handlePrevious}
-                className={`cursor-pointer ${currentPage === 1 ? 'text-gray-300' : 'text-black'}`}
-              />
-            </CustomTooltip>
+        <div className="flex gap-2 items-center dark:text-white text-gray-800 font-medium">
+          {selectComment ? (
+            <>
+              <>
+                <div className="flex items-center gap-4">
+                  {/* Tooltip for Previous Button */}
+                  <div className="relative">
+                    <Tooltip content="Previous Button" showArrow placement="top">
+                      <div className="inline-block">
+                        <IoIosArrowBack
+                          size={30}
+                          onClick={handlePrevious}
+                          className={`cursor-pointer ${currentPage === 1 ? 'text-gray-300 dark:text-gray-600' : 'text-black dark:text-white'}`}
+                        />
+                      </div>
+                    </Tooltip>
+                  </div>
+                  <div>
+                    Page {currentPage} / {totalPages}
+                  </div>
 
-            <div>
-              Page {currentPage} / {totalPages}
-            </div>
-
-            <CustomTooltip placement="bottom" title={'Next Button'}>
-              <IoIosArrowForward
-                size={30}
-                onClick={handleNext}
-                className={`cursor-pointer ${currentPage === totalPages ? 'text-gray-300' : 'text-black'}`}
-              />
-            </CustomTooltip>
-          </div>
-        ) : (
-          <div className="flex gap-2items-center">{messages?.length} comments</div>
-        )}
-        <button onClick={() => openModal(false)} className="">
-          <CgClose size={26} />
+                  {/* Tooltip for Next Button */}
+                  <div className="relative">
+                    <Tooltip content="Next Button" showArrow placement="top">
+                      <div className="inline-block">
+                        <IoIosArrowForward
+                          size={30}
+                          onClick={handleNext}
+                          className={`cursor-pointer ${currentPage === totalPages ? 'text-gray-300 dark:text-gray-600' : 'text-black dark:text-white'}`}
+                        />
+                      </div>
+                    </Tooltip>
+                  </div>
+                </div>
+              </>
+            </>
+          ) : (
+            <div>{messages?.length} Comments</div>
+          )}
+        </div>
+        <button
+          onClick={() => openModal(false)}
+          className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all"
+        >
+          <CgClose size={26} className="text-gray-600 dark:text-white" />
         </button>
       </div>
+
+      {/* Conditionally render Comments or CommentAndReplies based on selection */}
       {selectComment ? <CommentAndReplies /> : <Comments />}
     </motion.div>
   );
@@ -243,55 +247,54 @@ export default Modal;
 
 const Comments = () => {
   const updateSelectComment = useCommentStore((state) => state.updateSelectComment);
-  // const {data: {comments=[]}, isLoading: isCommentsLoading} = useGetComments();
+
   return (
-    <>
-      <div className="my-5">
-        {/* {isCommentsLoading ? <div className="h-[200px] bg-slate-200 rounded-2xl"></div> : null}
-        {comments.length === 0 ? <div className="col-span-2 border-2 border-dashed border-gray-300 rounded-2xl relative p-5 flex justify-center items-center py-20 text-gray-600">
-          <IconExclamationCircle size="20" className="mr-4" />
-          <p>No comments added yet</p>
-        </div> : null} */}
-        {messages.map((message, index) => (
-          <button
-            onClick={() => updateSelectComment(index + 1)}
-            key={index}
-            className="border-2 w-full hover:bg-gray-100 text-start my-2 py-5 px-2 rounded-lg shadow-md"
-          >
-            <div className="flex gap-5 items-center">
-              <div>
-              <Avatar size={40} className="text-lg" />
-              </div>
-              <div>
-                <p className="font-semi-bold text-xl py-1">{message?.fullName?.toUpperCase()}</p>
-              </div>
+    <div className="my-5">
+      {messages.map((message, index) => (
+        <button
+          onClick={() => updateSelectComment(index + 1)}
+          key={index}
+          className="border-2 dark:border-gray-700 dark:bg-gray-800 bg-white w-full hover:bg-gray-50 dark:hover:bg-gray-700 text-left my-2 py-4 px-4 rounded-xl shadow-sm transition-all"
+        >
+          <div className="flex gap-4 items-center">
+            <Avatar size={40} className="text-lg" />
+            <div>
+              <p className="font-semibold text-lg text-gray-800 dark:text-white">{message?.fullName?.toUpperCase()}</p>
+              <Tooltip
+                className="text-gray-500 dark:text-gray-400"
+                showArrow
+                content={formatTimestamp(message?.timestamp)}
+                placement="right"
+                title={formatTimestamp(message?.timestamp)}
+              >
+                <p className="text-sm text-gray-500 dark:text-gray-400">{formatTimestamp(message?.timestamp)}</p>
+              </Tooltip>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{message?.comment}</p>
             </div>
-            <CustomTooltip className="text-gray-500 px-12" placement="bottom" title={formatTimestamp(message?.timestamp)}>
-              <p className="px-12">{formatTimestamp(message?.timestamp)}</p>
-            </CustomTooltip>
-            <p className="px-12">{message?.comment}</p>
-          </button>
-        ))}
-      </div>
-    </>
+          </div>
+        </button>
+      ))}
+    </div>
   );
 };
+
 const CommentAndReplies = () => {
   const [hasTyped, setHasTyped] = useState(false);
   const [comment, setComment] = useState('');
   const [isEmojiModalOpen, setEmojiModalOpen] = useState(false);
   const [reply, setReply] = useState([]);
 
-
   const handleInputChange = (event) => {
     const { value } = event.target;
     setComment(value);
     setHasTyped(value.length > 0);
   };
+
   const addEmoji = (emoji) => {
     setComment(comment + emoji.native);
     setEmojiModalOpen(false);
   };
+
   const handleSubmit = () => {
     const timestamp = new Date().toLocaleString();
     const data = {
@@ -308,50 +311,69 @@ const CommentAndReplies = () => {
     <>
       <div className="my-5">
         {messages.map((message, index) => (
-          <div key={index} className="border my-2 py-4 px-2 -z-10 hover:bg-gray-100 rounded-lg shadow-md ">
-            <div className="flex gap-5 items-center">
-              <div>
+          <div
+            key={index}
+            className="border dark:border-gray-700 dark:bg-gray-800 bg-white hover:bg-gray-50 dark:hover:bg-gray-700 rounded-xl shadow-sm p-4 mb-3l"
+          >
+            <div className="flex gap-4 items-center">
               <Avatar size={40} className="text-lg" />
-              </div>
               <div>
-                <p className="font-semi-bold text-xl py-1">{message?.fullName?.toUpperCase()}</p>
+                <p className="font-semibold text-lg text-gray-800 dark:text-white">
+                  {message?.fullName?.toUpperCase()}
+                </p>
+                <Tooltip
+                  className="text-gray-500 dark:text-gray-400"
+                  content={formatTimestamp(message?.timestamp)}
+                  placement="right"
+                  title={formatTimestamp(message?.timestamp)}
+                >
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{formatTimestamp(message?.timestamp)}</p>
+                </Tooltip>
+                <p className="text-sm text-gray-600 dark:text-gray-300">{message?.comment}</p>
               </div>
             </div>
-            <CustomTooltip className="text-gray-500 px-12" placement="bottom" title={formatTimestamp(message?.timestamp)}>
-              <p className="px-12">{formatTimestamp(message?.timestamp)}</p>
-            </CustomTooltip>
-            <p className="px-12">{message?.comment}</p>
           </div>
         ))}
       </div>
 
-      <div className="sticky bottom-0 bg-white py-3 shadow-sm  items-center gap-2">
+      <div className="sticky bottom-0 bg-white dark:bg-gray-900 py-3 px-4 shadow-md rounded-b-2xl flex items-center gap-3">
         <input
           type="text"
           placeholder="Reply..."
           value={comment}
           onChange={handleInputChange}
-          className="px-2 mb-2 py-2 w-full text-xl"
+          className="flex-1 px-4 py-2 text-lg dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 bg-gray-100 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
-        <div className="flex items-center justify-between gap-2 mt-3">
-          <CustomTooltip placement="bottom" title="Add Emoji">
-            <IoIosHappy size={30} onClick={() => setEmojiModalOpen(true)} className="cursor-pointer ml-2" />
-          </CustomTooltip>
-          <EmojiPickerModal
-            isOpen={isEmojiModalOpen}
-            onClose={() => setEmojiModalOpen(false)}
-            onEmojiSelect={addEmoji}
-          />
-          <CustomTooltip placement="bottom" title={'Submit Comment'}>
-            {hasTyped ? (
-              <button type="submit" onClick={handleSubmit} className="bg-violet-600 rounded-full" disabled={!hasTyped}>
-                <IoIosArrowRoundUp size={40} color="white" />
-              </button>
-            ) : (
-              <IoIosArrowRoundUp size={40} className="bg-gray-300 rounded-full" />
-            )}
-          </CustomTooltip>
-        </div>
+        <Tooltip content="Add Emoji" showArrow placement="top">
+          <div
+            tabIndex={0}
+            className="flex items-center justify-center py-4 px-3 rounded-2xl cursor-pointer"
+            onClick={() => setEmojiModalOpen(true)}
+          >
+            <IoIosHappy
+              size={30}
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+            />
+          </div>
+        </Tooltip>
+
+        <EmojiPickerModal isOpen={isEmojiModalOpen} onClose={() => setEmojiModalOpen(false)} onEmojiSelect={addEmoji} />
+        <Tooltip content="Submit" showArrow placement="top">
+          {hasTyped ? (
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="flex items-center justify-center bg-violet-600 hover:bg-violet-700 text-white rounded-full p-2 transition-all shadow-lg"
+              disabled={!hasTyped}
+            >
+              <IoIosArrowRoundUp size={26} />
+            </button>
+          ) : (
+            <div className="flex items-center justify-center bg-gray-300 text-white rounded-full p-2">
+              <IoIosArrowRoundUp size={26} />
+            </div>
+          )}
+        </Tooltip>
       </div>
     </>
   );

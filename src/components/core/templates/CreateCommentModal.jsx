@@ -1,31 +1,11 @@
 import PropTypes from 'prop-types';
-import { Modal, ModalBody, ModalContent } from '@nextui-org/react';
+import { Modal, ModalBody, ModalContent, Tooltip } from '@nextui-org/react';
 import { IoIosArrowRoundUp, IoIosHappy } from 'react-icons/io';
 import useCommentStore from '@/store/comment.js';
 import { useState } from 'react';
 import EmojiPickerModal from './EmojiPickerModal';
 import useTemplateStore from '@/store/template';
 import { useCreateComment } from '@/api/business';
-
-const CustomTooltip = ({ title, children, placement = "bottom" }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const showTooltip = () => setIsVisible(true);
-  const hideTooltip = () => setIsVisible(false);
-
-  return (
-    <div className="relative inline-block" onMouseEnter={showTooltip} onMouseLeave={hideTooltip}>
-      {children}
-      {isVisible && (
-        <div
-          className={`absolute z-10 text-white text-sm p-2 bg-gray-800 rounded ${placement === 'bottom' ? 'mt-2' : '-mt-10'}`}
-        >
-          {title}
-        </div>
-      )}
-    </div>
-  );
-};
 
 const CreateCommentModal = ({ elements, isOpen, onClose }) => {
   return (
@@ -64,36 +44,52 @@ const Content = ({ onClose }) => {
 
   return (
     <>
-      <div className="relative items-center gap-2">
+      <div className="relative items-center gap-2 w-full max-w-lg mx-auto p-4 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
         <input
           type="text"
-          placeholder="Add a comment"
+          placeholder="Add a comment..."
           value={comment}
           onChange={handleInputChange}
-          className="px-2 mb-2 border-1 py-2 w-full text-xl"
+          className="px-4 py-3 mb-3 border border-gray-300 dark:border-gray-700 rounded-full w-full text-lg dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
         />
-        <div className="flex items-center justify-between gap-2 mt-3">
-          <CustomTooltip title="Add Emoji">
-            <IoIosHappy size={30} onClick={() => setEmojiModalOpen(true)} className="cursor-pointer ml-2" />
-          </CustomTooltip>
+
+        <div className="flex items-center justify-between mt-4">
+          <Tooltip content="Add Emoji" showArrow placement="right">
+            <div
+              tabIndex={0}
+              className="flex items-center justify-center py-4 px-3 rounded-2xl cursor-pointer"
+              onClick={() => setEmojiModalOpen(true)}
+            >
+              <IoIosHappy size={30} className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors" />
+            </div>
+          </Tooltip>
+
           <EmojiPickerModal
             isOpen={isEmojiModalOpen}
             onClose={() => setEmojiModalOpen(false)}
             onEmojiSelect={addEmoji}
           />
-          <CustomTooltip title="Submit Comment">
+          <Tooltip content="Submit" showArrow placement="top">
             {hasTyped ? (
-              <button type="submit" onClick={handleDone} className="bg-violet-600 rounded-full" disabled={!hasTyped}>
-                <IoIosArrowRoundUp size={40} color="white" />
+              <button
+                type="submit"
+                onClick={handleDone}
+                className="flex items-center justify-center bg-violet-600 hover:bg-violet-700 text-white rounded-full p-2 transition-all shadow-lg"
+                disabled={!hasTyped}
+              >
+                <IoIosArrowRoundUp size={30} />
               </button>
             ) : (
-              <IoIosArrowRoundUp size={40} className="bg-gray-300 rounded-full" />
+              <div className="flex items-center justify-center bg-gray-300 text-white rounded-full p-2">
+                <IoIosArrowRoundUp size={30} />
+              </div>
             )}
-          </CustomTooltip>
+          </Tooltip>
         </div>
 
-        {isLoading && <p>Submitting comment...</p>}
-        {isError && <p>Error submitting comment. Please try again.</p>}
+        {/* Loading/Error States */}
+        {isLoading && <p className="mt-4 text-gray-600 dark:text-gray-400">Submitting comment...</p>}
+        {isError && <p className="mt-4 text-red-600 dark:text-red-400">Error submitting comment. Please try again.</p>}
       </div>
     </>
   );

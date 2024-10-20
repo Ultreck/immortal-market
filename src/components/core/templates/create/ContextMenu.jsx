@@ -1,4 +1,5 @@
 import useTemplateStore from '@/store/template.js';
+import useCommentStore from '@/store/comment.js';
 import PropTypes from 'prop-types';
 import { TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbPlus, TbTrash } from 'react-icons/tb';
 import { MdOutlineModeComment } from "react-icons/md";
@@ -35,6 +36,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
   const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
   const { isOpen: isCreateBlockOpen, onOpen: onCreateBlockOpen, onClose: onCreateBlockClose } = useDisclosure();
   const {isOpen: isCommentOpen, onOpen: onCommentOpen, onClose: onCommentClose} = useDisclosure();
+  const openModal = useCommentStore((state) => state.updateModal);
   
 
   useKey('Escape', () => {
@@ -118,7 +120,10 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
                   if (menu.find((item) => item.key === key)?.children?.length) return;
                   if (key === 'link') onLinkToolOpen();
                   if (key === 'save-as-block') onCreateBlockOpen();
-                  if (key === 'comment') onCommentOpen();
+                  if (key === 'comment') {
+                  onCommentOpen();
+                    openModal(null);
+                  } 
                   else onAction(key);
                   onClose();
                 }}
