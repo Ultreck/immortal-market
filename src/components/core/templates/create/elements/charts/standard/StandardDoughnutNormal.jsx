@@ -42,6 +42,12 @@ export const StandardDoughnutNormalContent = ({ element }) => {
         orient: 'vertical',
         left: 'left',
         show: element.config.showLegend,
+        textStyle: {       
+          fontSize: element.config.styles.labelSize,
+          fontWeight: element.config.styles.lFontWeight,  
+          color: element.config.styles.valueAndLableColor, 
+          fontStyle: element.config.styles.lFontStyle,  
+        },
       },
       color: chartData.map((item) => item.fill),
       series: [
@@ -57,6 +63,10 @@ export const StandardDoughnutNormalContent = ({ element }) => {
           label: {
             position: 'center',
             show: element.config.showLabel,
+            fontSize: element.config.styles.valueSize,
+            fontWeight: element.config.styles.lFontWeight,
+            color: element.config.styles.valueAndLableColor,
+            fontStyle: element.config.styles.lFontStyle,
           },
           emphasis: {
             label: {

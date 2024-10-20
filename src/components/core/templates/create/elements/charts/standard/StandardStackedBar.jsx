@@ -45,6 +45,10 @@ export const StandardStackedBarContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
       }}
     >
       <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
@@ -57,10 +61,29 @@ export const StandardStackedBarContent = ({ element }) => {
           tickFormatter={(value) => capitalize(value)}
           hide={!element.config.showXaxis}
           fontSize={element.config.fontSize}
+          tick={{
+            fontSize: element.config.styles.xGridSize,
+            fontWeight: element.config.styles.gFontWeight,
+            fontStyle: element.config.styles.gFontStyle,
+            fill: element.config.styles.gridAndLegendColor, 
+          }}
         />
-        <YAxis type="number" hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
+        <YAxis 
+        type="number" 
+        hide={!element.config.showYaxis} 
+        tick={{
+          fontSize: element.config.styles.yGridSize,
+          fontWeight: element.config.styles.gFontWeight,
+          fontStyle: element.config.styles.gFontStyle,
+          fill: element.config.styles.gridAndLegendColor, 
+        }} 
+        />
         <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-        {element.config.showLegend && <Legend />}
+        {element.config.showLegend && <Legend 
+         textStyle={{
+          fontSize: element.config.styles.legendSize,
+        }}
+        />}
         {element.config.keys.y.map((key, index) => {
           return (
             <Bar

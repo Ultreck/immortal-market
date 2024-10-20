@@ -35,7 +35,13 @@ export const StandardAltBarContent = ({ element }) => {
           type: 'shadow',
         },
       },
-      legend: element.config.showLegend && { data: element.config.legend },
+      legend: element.config.showLegend && {
+         data: element.config.legend,
+         textStyle: {
+          color: element.config.styles.gridAndLegendColor,  // Text color
+          fontSize: element.config.styles.legendSize,   // Font size
+        },
+       },
       grid: {
         left: '3%',
         right: '4%',
@@ -46,11 +52,24 @@ export const StandardAltBarContent = ({ element }) => {
         {
           type: 'value',
           show: element.config.showXGridline,
+          axisLabel: {
+            fontSize: element.config.styles.xGridSize,
+            fontWeight: element.config.styles.gFontWeight,
+            fontStyle: element.config.styles.gFontStyle,
+            color: element.config.styles.gridAndLegendColor,
+            
+          },
         },
       ],
       yAxis: [
         {
           type: 'category',
+          axisLabel: {
+            fontSize: element.config.styles.yGridSize,
+            fontWeight: element.config.styles.gFontWeight,
+            fontStyle: element.config.styles.gFontStyle,
+            color: element.config.styles.gridAndLegendColor,
+          },
           axisTick: {
             show: false,
           },
@@ -106,6 +125,10 @@ export const StandardAltBarContent = ({ element }) => {
           width: element.width,
           opacity: element.style.opacity,
           transform: `rotate(${element.config.rotation || 0}deg)`,
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
         }}
       />
     </div>

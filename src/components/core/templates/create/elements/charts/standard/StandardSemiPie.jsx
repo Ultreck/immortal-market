@@ -52,10 +52,24 @@ export const StandardSemiPieContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
       }}
     >
-      <PieChart width={element.width} height={element.height}>
-        {element.config.showLegend && <Legend verticalAlign="top" align="center" layout="horizontal" />}
+      <PieChart 
+      width={element.width} 
+      height={element.height}>
+        {element.config.showLegend && <Legend 
+        verticalAlign="top" 
+        align="center" 
+        layout="horizontal" 
+        wrapperStyle={{
+          fontSize: element.config.styles.labelSize, 
+          color: element.config.styles.legendColor,   
+        }} 
+        />}
         {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
         <Pie
           dataKey="value"

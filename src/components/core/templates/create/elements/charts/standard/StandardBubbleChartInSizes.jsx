@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
@@ -31,25 +30,40 @@ export const StandardBubbleChartInSizesContent = ({ element }) => {
         right: '10%',
         top: '3%',
         data: ['1990', '2015'],
+        show: element.config.showLegend,
+        textStyle: {
+          color: element.config.styles.gridAndLegendColor,
+          fontSize: element.config.styles.legendSize,  
+          fontWeight: element.config.styles.gFontWeight,
+        },
       },
       grid: {
         left: '8%',
         top: '10%',
+        containLabel: true,
+        show: element.config.showGridline,  
       },
       xAxis: {
-        splitLine: {
-          lineStyle: {
-            type: 'dashed',
-          },
+        show: element.config.showXaxis,
+        axisLabel: {
+          color: element.config.styles.gridAndLegendColor || '#333',
+          fontSize: element.config.styles.xGridSize || 12, 
+          fontWeight: element.config.styles.gFontWeight || 'normal', 
         },
       },
       yAxis: {
-        splitLine: {
-          lineStyle: {
-            type: 'dashed',
-          },
+        show: element.config.showYaxis, 
+        axisLabel: {
+          color: element.config.styles.gridAndLegendColor || '#333',
+          fontSize: element.config.styles.yGridSize || 12,
+          fontWeight: element.config.styles.gFontWeight || 'normal', 
         },
         scale: true,
+        axisLine: {
+          lineStyle: {
+            color: '#333', 
+          },
+        },
       },
       series: [
         {
@@ -62,11 +76,16 @@ export const StandardBubbleChartInSizesContent = ({ element }) => {
           emphasis: {
             focus: 'series',
             label: {
-              show: true,
+              show: false,
               formatter: function (param) {
                 return param.data[3];
               },
               position: 'top',
+              textStyle: {
+                color: '#000',
+                fontSize: 12,
+                fontWeight: 'bold',
+              },
             },
           },
           itemStyle: {
@@ -87,6 +106,7 @@ export const StandardBubbleChartInSizesContent = ({ element }) => {
         },
       ],
     };
+    
     chart.setOption(option);
     return () => {
       chart.dispose();
@@ -107,6 +127,10 @@ export const StandardBubbleChartInSizesContent = ({ element }) => {
         height: element.height,
         opacity: element.style.opacity,
         transform: `rotate(${element.config.rotation || 0}deg)`,
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
       }}
     />
   </div>

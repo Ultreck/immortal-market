@@ -46,11 +46,26 @@ export const StandardVerticalBarNoSepContent = ({ element }) => {
         width: element.width,
         opacity: element.style.opacity,
         transform: `rotate(${element.config.rotation || 0}deg)`,
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
       }}
     >
       <BarChart accessibilityLayer data={chartData} layout="vertical" barGap={0} barCategoryGap={0}>
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <XAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
+        <XAxis 
+        type="number" 
+        dataKey={element.config.keys.y} 
+        hide={!element.config.showXaxis} 
+        fontSize={element.config.fontSize}
+        tick={{
+          fontSize: element.config.styles.xGridSize,
+          fontWeight: element.config.styles.gFontWeight,
+          fontStyle: element.config.styles.gFontStyle,
+          fill: element.config.styles.gridAndLegendColor,
+        }}
+        />
         <YAxis
           dataKey={element.config.keys.x}
           type="category"
@@ -59,10 +74,19 @@ export const StandardVerticalBarNoSepContent = ({ element }) => {
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
           hide={!element.config.showYaxis}
-          fontSize={element.config.fontSize}
+          tick={{
+            fontSize: element.config.styles.yGridSize,
+            fontWeight: element.config.styles.gFontWeight,
+            fontStyle: element.config.styles.gFontStyle,
+            fill: element.config.styles.gridAndLegendColor, 
+          }}
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-        {element.config.showLegend && <Legend />}
+        {element.config.showLegend && <Legend
+         textStyle={{
+          fontSize: element.config.styles.legendSize,
+        }}
+        />}
         <Bar dataKey={element.config.keys.y} radius={8} />
       </BarChart>
     </ChartContainer>

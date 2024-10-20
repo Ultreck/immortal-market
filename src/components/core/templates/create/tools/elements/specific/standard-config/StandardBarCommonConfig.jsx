@@ -132,7 +132,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                 }
                 value={element.config.bars}
                 min={1}
-                max={20}
+                max={10}
                 ariaLabel="No of Bars to Show"
               />
             </div>

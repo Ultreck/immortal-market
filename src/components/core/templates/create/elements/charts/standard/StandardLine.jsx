@@ -38,6 +38,10 @@ export const StandardLineContent = ({ element }) => {
           height: element.height,
           width: element.width,
           opacity: element.style.opacity,
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
         }}
       >
         <LineChart
@@ -48,15 +52,33 @@ export const StandardLineContent = ({ element }) => {
           }}
         >
           <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-          {element.config.showLegend && <Legend />}
+          {element.config.showLegend && <Legend 
+          textStyle={{
+            fontSize: element.config.styles.legendSize,
+          }}
+          />}
           <XAxis
             dataKey={element.config.keys.x}
             tickMargin={8}
             tickFormatter={(value) => capitalize(value)}
             hide={!element.config.showXaxis}
-            fontSize={element.config.fontSize}
+            tick={{
+              fontSize: element.config.styles.xGridSize,
+              fontWeight: element.config.styles.gFontWeight,
+              fontStyle: element.config.styles.gFontStyle,
+              fill: element.config.styles.gridAndLegendColor,
+            }}
           />
-          <YAxis type="number" hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
+          <YAxis 
+          type="number" 
+          hide={!element.config.showYaxis} 
+          tick={{
+            fontSize: element.config.styles.yGridSize,
+            fontWeight: element.config.styles.gFontWeight,
+            fontStyle: element.config.styles.gFontStyle,
+            fill: element.config.styles.gridAndLegendColor, 
+          }}
+          />
           <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
           <Line
             dataKey={element.config.keys.y}

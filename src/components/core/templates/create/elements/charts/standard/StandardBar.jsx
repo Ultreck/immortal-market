@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { Button, useDisclosure } from '@nextui-org/react';
 import Drawer from '@/components/ui/Drawer.jsx';
 
-const StandardBar = ({ element, active, highlighted, width, onClick, onChange }) => {
+const StandardBar = ({ element, active, highlighted, width, onClick, onChange }) => { 
   return (
     <ElementWrapper
       element={element}
@@ -61,11 +61,15 @@ export const StandardBarContent = ({ element }) => {
       <ChartContainer
         config={{}}
         style={{
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
           height: element.height,
           width: element.width,
           opacity: element.style.opacity,
         }}
-      >
+      >   
         <BarChart
           accessibilityLayer
           data={chartData}
@@ -79,10 +83,29 @@ export const StandardBarContent = ({ element }) => {
             dataKey={element.config.keys.x}
             tickFormatter={(value) => capitalize(value)}
             hide={!element.config.showXaxis}
-            fontSize={12}
+            tick={{
+              fontSize: element.config.styles.xGridSize,
+              fontWeight: element.config.styles.gFontWeight,
+              fontStyle: element.config.styles.gFontStyle,
+              fill: element.config.styles.gridAndLegendColor,
+            }}
           />
-          <YAxis dataKey={element.config.keys.y} hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
-          {element.config.showLegend && <Legend />}
+          <YAxis
+            dataKey={element.config.keys.y}
+            hide={!element.config.showYaxis}
+            tick={{
+              fontSize: element.config.styles.yGridSize,
+              fontWeight: element.config.styles.gFontWeight,
+              fontStyle: element.config.styles.gFontStyle,
+              fill: element.config.styles.gridAndLegendColor, 
+            }}
+          />
+          {element.config.showLegend && <Legend 
+          wrapperStyle={{
+            fontSize: element.config.styles.legendSize, // Dynamic legend font size
+            color: element.config.styles.legendColor,   // Dynamic legend color
+          }} 
+          />}
           <Bar dataKey={element.config.keys.y} radius={8} />
         </BarChart>
       </ChartContainer>
@@ -110,7 +133,8 @@ export const StandardBarContent = ({ element }) => {
         <Drawer isOpen={isOpen} title="Drilldown" onClose={onClose}>
           <p>Label: {customTooltip?.data[element.config.keys.x]}</p>
           <p>Value: {customTooltip?.data[element.config.keys.y]}</p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae placeat voluptates eum modi accusamus, iure exercitationem quis tempore illum alias velit debitis nisi mollitia vero consequatur expedita? Velit, at iure!
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae placeat voluptates eum modi accusamus, iure
+          exercitationem quis tempore illum alias velit debitis nisi mollitia vero consequatur expedita? Velit, at iure!
         </Drawer>
       )}
     </div>
@@ -126,4 +150,3 @@ StandardBarPresent.propTypes = {
 };
 
 export default StandardBar;
-

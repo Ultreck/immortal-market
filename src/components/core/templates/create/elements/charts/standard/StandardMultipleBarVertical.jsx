@@ -36,12 +36,34 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
       }}
     >
       <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)} layout="vertical">
         <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-        <YAxis type="category" dataKey="name" hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
-        <XAxis type="number" hide={!element.config.showXaxis} fontSize={element.config.fontSize} />
+        <YAxis 
+        type="category" 
+        dataKey="name" 
+        hide={!element.config.showYaxis}  
+        tick={{
+          fontSize: element.config.styles.yGridSize,
+          fontWeight: element.config.styles.gFontWeight,
+          fontStyle: element.config.styles.gFontStyle,
+          fill: element.config.styles.gridAndLegendColor, 
+        }}
+        />
+        <XAxis type="number" 
+        hide={!element.config.showXaxis} 
+        tick={{
+          fontSize: element.config.styles.xGridSize,
+          fontWeight: element.config.styles.gFontWeight,
+          fontStyle: element.config.styles.gFontStyle,
+          fill: element.config.styles.gridAndLegendColor,
+        }} 
+        />
         {element.config.showLegend && <ChartLegend content={<ChartLegendContent />} />}
         {element.config.keys.y.slice(0, element.config.noOfBarsPerGroup).map((key, index) => (
           <Bar

@@ -14,7 +14,7 @@ import {
 } from 'react-icons/tb';
 import { MdOutlineStackedBarChart } from 'react-icons/md';
 import { colors } from '../utils.js';
-import { getElementDefaultStyle } from '@/lib/elements.js';
+import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 
 export const standard = [
   {
@@ -32,18 +32,24 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-s', name: 'bar' }),
       config: {
         name: 'bar',
+        styles: getChartsDefaultStyle({type: 'chart-s', name: 'bar' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
           { name: 'Page C', value: 2000 },
           { name: 'Page D', value: 2780 },
           { name: 'Page E', value: 1890 },
+          { name: 'Page E', value: 4000 },
+          { name: 'Page F', value: 3000 },
+          { name: 'Page G', value: 2000 },
+          { name: 'Page H', value: 2780 },
+          { name: 'Page I', value: 1890 },
         ],
         keys: { x: 'name', y: 'value' },
         showXaxis: false,
         showYaxis: false,
         showLegend: false,
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         useGradient: false,
         gradientColor: '#2673D9',
         showXGridline: false,
@@ -73,6 +79,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-not-sep' }),
       config: {
         name: 'bar-not-sep',
+        styles: getChartsDefaultStyle({type: 'chart-a', name: 'bar-not-sep' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -114,6 +121,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'vertical-bar' }),
       config: {
         name: 'vertical-bar',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'vertical-bar' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -155,6 +163,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'vertical-bar-no-sep' }),
       config: {
         name: 'vertical-bar-no-sep',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'vertical-bar-no-sep' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -196,6 +205,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'stacked-bar' }),
       config: {
         name: 'stacked-bar',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'stacked-bar' }),
         data: [
           { month: 'Jan', desktop: 187, mobile: 200 },
           { month: 'Feb', desktop: 275, mobile: 173 },
@@ -242,6 +252,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'stacked-bar-vertical' }),
       config: {
         name: 'stacked-bar-vertical',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'stacked-bar-vertical' }),
         data: [
           { month: 'Jan', desktop: 187, mobile: 200 },
           { month: 'Feb', desktop: 275, mobile: 173 },
@@ -289,6 +300,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'alt-bar' }),
       config: {
         name: 'alt-bar',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'alt-bar' }),
         data: [
           ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
           [320, 302, 341, 374, 90, 450, 420],
@@ -333,6 +345,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple' }),
       config: {
         name: 'bar-multiple',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bar-multiple' }),
         data: [
           {
             name: 'Page A',
@@ -429,6 +442,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple-vertical' }),
       config: {
         name: 'bar-multiple-vertical',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bar-multiple-vertical' }),
         data: [
           {
             name: 'Page A',
@@ -524,6 +538,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'pie' }),
       config: {
         name: 'pie',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'pie' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -531,7 +546,7 @@ export const standard = [
           { name: 'Page D', value: 2780 },
           { name: 'Page E', value: 1890 },
         ],
-        keys: { name: 'name', y: 'value' },
+        keys: { x: 'name', y: 'value' },
         colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         useGradient: false,
         gradientColor: '#2673D9',
@@ -563,6 +578,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut' }),
       config: {
         name: 'doughnut',
+        styles: getChartsDefaultStyle({type: 'chart-a', name: 'doughnut' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -602,6 +618,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut-standard' }),
       config: {
         name: 'doughnut-standard',
+        styles: getChartsDefaultStyle({type: 'chart-a', name: 'doughnut-standard' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -640,6 +657,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut-crazy' }),
       config: {
         name: 'doughnut-crazy',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'doughnut-crazy' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -678,6 +696,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'line' }),
       config: {
         name: 'line',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -724,6 +743,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'line-multiple' }),
       config: {
         name: 'line-multiple',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-multiple' }),
         data: [
           { month: 'Jan', desktop: 187, monitor: 150, smartWatch: 120, ipad: 100, mobile: 200 },
           { month: 'Feb', desktop: 275, monitor: 180, smartWatch: 130, ipad: 120, mobile: 173 },
@@ -765,6 +785,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'area' }),
       config: {
         name: 'area',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -813,6 +834,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'area-multiple' }),
       config: {
         name: 'area-multiple',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area-multiple' }),
         data: [
           { month: 'Jan', desktop: 187, monitor: 150, smartWatch: 120, ipad: 100, mobile: 200 },
           { month: 'Feb', desktop: 275, monitor: 180, smartWatch: 130, ipad: 120, mobile: 173 },
@@ -855,6 +877,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-pie' }),
       config: {
         name: 'semi-pie',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'semi-pie' }),
         data: [
           { name: 'Group E', value: 500 },
           { name: 'Group F', value: 600 },
@@ -893,6 +916,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-circle' }),
       config: {
         name: 'semi-circle',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'semi-circle' }),
         data: [
           { name: 'Group A', value: 400 },
           { name: 'Group D', value: 300 },
@@ -931,6 +955,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'bubble' }),
       config: {
         name: 'bubble',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bubble' }),
         data: [
           [10.0, 8.04],
           [8.07, 6.95],
@@ -988,6 +1013,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'scatter' }),
       config: {
         name: 'scatter',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'scatter' }),
         data: [
           [1777, 57.7, 187060177, 'India', 1990],
           [15161, 68.0, 115460577, 'China', 1990],
@@ -1036,6 +1062,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'line-area' }),
       config: {
         name: 'line-area',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-area' }),
         data: [
           { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
           { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
@@ -1076,6 +1103,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'line-area-vertical' }),
       config: {
         name: 'line-area-vertical',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-area-vertical' }),
         data: [
           { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
           { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
@@ -1117,6 +1145,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'line-bar' }),
       config: {
         name: 'line-bar',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-bar' }),
         data: [
           { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
           { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
@@ -1158,6 +1187,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'line-bar-vertical' }),
       config: {
         name: 'line-bar-vertical',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-bar-vertical' }),
         data: [
           { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
           { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
@@ -1200,6 +1230,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'area-bar' }),
       config: {
         name: 'area-bar',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area-bar' }),
         data: [
           { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
           { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
@@ -1241,6 +1272,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'area-bar-vertical' }),
       config: {
         name: 'area-bar-vertical',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area-bar-vertical' }),
         data: [
           { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
           { name: 'Page B', uv: 868, pv: 967, amt: 1506 },

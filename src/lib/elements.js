@@ -23,7 +23,7 @@ export const tools = {
   }, {}),
   list: ['list', 'font', 'opacity', 'animation', 'shadow', 'layout'],
   'count-up-number': ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout'],
-  'chart-s': ['chart', 'chart-data', 'colors', 'opacity', 'animation', 'layout', 'font'],
+  'chart-s': ['chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'animation', 'layout'],
   'chart-a': ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'layout'],
   shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout'],
   frame: (element) => {

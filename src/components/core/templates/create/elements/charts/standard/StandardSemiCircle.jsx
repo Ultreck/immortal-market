@@ -48,6 +48,12 @@ export const StandardSemiCircleContent = ({ element }) => {
         orient: 'vertical',
         left: 'left',
         show: element.config.showLegend,
+        textStyle: {
+          fontSize: element.config.styles.labelSize,
+          fontWeight: element.config.styles.lFontWeight,
+          fontStyle: element.config.styles.lFontStyle,
+          color: element.config.styles.valueAndLableColor,
+        },
       },
       series: [
         {
@@ -60,6 +66,10 @@ export const StandardSemiCircleContent = ({ element }) => {
           data: element.config.data.slice(0, element.config.pies),
           label: {
             show: element.config.showLabel,
+            fontSize: element.config.styles.valueSize,
+            fontWeight: element.config.styles.lFontWeight,
+            fontStyle: element.config.styles.lFontStyle,
+            color: element.config.styles.valueAndLableColor,
           },
         },
       ],
@@ -72,22 +82,26 @@ export const StandardSemiCircleContent = ({ element }) => {
 
   return (
     <div
-    style={{
-      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-    }}
-  >    
-    <div
-      id="main"
-      ref={chartRef}
       style={{
-        width: element.width,
-        height: element.height,
-        opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
-    />
-  </div>
+    >
+      <div
+        id="main"
+        ref={chartRef}
+        style={{
+          width: element.width,
+          height: element.height,
+          opacity: element.style.opacity,
+          transform: `rotate(${element.config.rotation || 0}deg)`,
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
+        }}
+      />
+    </div>
   );
 };
 
@@ -96,4 +110,3 @@ StandardSemiCircleContent.propTypes = {
 };
 
 export default StandardSemiCircle;
-

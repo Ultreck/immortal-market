@@ -15,7 +15,7 @@ import NumberInput from '@/components/ui/NumberInput.jsx';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { createElement } from 'react';
 import { Accordion, AccordionItem } from '@nextui-org/react';
-import { chartNames } from '@/lib/utils';
+import { gridAndLegendStyling, labelAndValueStyling } from '@/lib/utils';
 
 const ChartFont = ({ elements, onChange }) => {
   console.log(elements[0]);
@@ -31,6 +31,7 @@ const ChartFont = ({ elements, onChange }) => {
           variant=""
           itemClasses={{ base: 'px-3', content: 'pt-4 pb-5', title: 'whitespace-nowrap text-base' }}
         >
+          {labelAndValueStyling.includes(elements[0].config.name) && (
           <AccordionItem
             key="label"
             aria-label="Label & Value styling"
@@ -48,7 +49,8 @@ const ChartFont = ({ elements, onChange }) => {
               {elements[0].config.name != 'dynamic-sorting' && <ValueSize elements={elements} onChange={onChange} />}
             </div>
           </AccordionItem>
-          {chartNames.includes(elements[0].config.name) && (
+        )}
+          {gridAndLegendStyling.includes(elements[0].config.name) && (
             <AccordionItem
               key="grid"
               aria-label="Grid & Legend styling"
@@ -74,7 +76,7 @@ const ChartFont = ({ elements, onChange }) => {
             startContent={''}
             indicator={<RiArrowRightSLine size="20" />}
           >
-            <div className="px-6 py-6 w-full space-y-4">
+            <div className="px-6 py-6 w-full space-y-4">  
               <XPadding elements={elements} onChange={onChange} />
               <YPadding elements={elements} onChange={onChange} />
             </div>

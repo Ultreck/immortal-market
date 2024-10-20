@@ -46,9 +46,29 @@ export const StandardDoughnutContent = ({ element }) => {
         width: element.width,
         opacity: element.style.opacity,
       }}
-    >
-      <PieChart width={element.width} height={element.height}>
-        {element.config.showLegend && <Legend />}
+      >
+      <PieChart 
+      width={element.width} 
+      height={element.height}
+      style={{
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
+        
+      }}
+      textStyle={{
+        fontSize: element.config.styles.valueSize,
+        color: element.config.styles.legendColor,
+        fontWeight: element.config.styles.legendFontWeight,
+        fontFamily: element.config.styles.legendFontFamily,
+      }}
+      >
+        {element.config.showLegend && <Legend
+         textStyle={{
+          fontSize: element.config.styles.legendSize,
+        }}
+        />}
         {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
         <Pie
           data={chartData}
@@ -57,6 +77,12 @@ export const StandardDoughnutContent = ({ element }) => {
           dataKey={element.config.keys.data}
           label={element.config.showLabel}
           labelLine={false}
+          textStyle={{
+            fontSize: element.config.styles.valueSize,
+            color: element.config.styles.legendColor,
+            fontWeight: element.config.styles.legendFontWeight,
+            fontFamily: element.config.styles.legendFontFamily,
+          }}
         />
       </PieChart>
     </ChartContainer>

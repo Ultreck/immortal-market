@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 const StandardMultipleBarConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
+  console.log(element);
+  
 
   const handleImageChange = (e) => {
     const file = e[0];
@@ -96,7 +98,7 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
               </Checkbox>
             </div>
             <div className="flex items-center space-x-4">
-              <p className="text-base opacity-75 whitespace-nowrap">No. of bars:</p>
+              <p className="text-base opacity-75 whitespace-nowrap">Number of bars:</p>
               <AutoCompleteNumberInput
                 onChange={(v) =>
                   onChange({
@@ -110,9 +112,9 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
                 ariaLabel="No of Bars to Show"
               />
             </div>
-            {element.type === 'chart-s-bar-multiple' && (
+            {element.config.name === 'bar-multiple' && (
               <div className="flex items-center space-x-4">
-                <p className="text-base opacity-75 whitespace-nowrap">No. of bars per group:</p>
+                <p className="text-base opacity-75 whitespace-nowrap">No. of bars/group:</p>
                 <AutoCompleteNumberInput
                   onChange={(v) =>
                     onChange({
@@ -127,9 +129,9 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
                 />
               </div>
             )}
-            {element.type === 'chart-s-bar-multiple-vertical' && (
+            {element.config.name === 'bar-multiple-vertical' && (
               <div className="flex items-center space-x-4">
-                <p className="text-base opacity-75 whitespace-nowrap">No. of bars per group:</p>
+                <p className="text-base opacity-75 whitespace-nowrap">No. of bars/group:</p>
                 <AutoCompleteNumberInput
                   onChange={(v) =>
                     onChange({

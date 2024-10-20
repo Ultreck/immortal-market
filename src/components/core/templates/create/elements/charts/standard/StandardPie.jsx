@@ -44,6 +44,12 @@ export const StandardPieContent = ({ element }) => {
         left: 'left',
         top: element.config.legendPosition === 'top' ? 'top' : 'bottom',
         show: element.config.showLegend,
+        textStyle: {
+          fontSize: element.config.styles.valueSize,
+          fontWeight: element.config.styles.lFontWeight,
+          color: element.config.styles.valueAndLableColor,
+          fontStyle: element.config.styles.lFontStyle,
+        },
       },
       series: [
         {
@@ -53,6 +59,10 @@ export const StandardPieContent = ({ element }) => {
           data: chartData,
           label: {
             show: element.config.showLabel,
+            fontSize: element.config.styles.labelSize,
+            fontWeight: element.config.styles.lFontWeight,
+            color: element.config.styles.valueAndLableColor,
+            fontStyle: element.config.styles.lFontStyle,
           },
           emphasis: {
             itemStyle: {
@@ -72,21 +82,25 @@ export const StandardPieContent = ({ element }) => {
 
   return (
     <div
-    style={{
-      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-    }}
-  >    
-    <div
-      className='bg-gray-200'
-      ref={chartRef}
       style={{
-        width: element.width,
-        height: element.height,
-        opacity: element.style.opacity,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
-    />
-  </div>
+    >
+      <div
+        className="bg-gray-200"
+        ref={chartRef}
+        style={{
+          width: element.width,
+          height: element.height,
+          opacity: element.style.opacity,
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
+        }}
+      />
+    </div>
   );
 };
 

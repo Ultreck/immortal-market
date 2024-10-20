@@ -46,6 +46,10 @@ export const StandardBarNotSepContent = ({ element }) => {
         height: element.height,
         width: element.width,
         opacity: element.style.opacity,
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
       }}
     >
       <BarChart accessibilityLayer data={chartData} barGap={0} barCategoryGap={0}>
@@ -53,6 +57,12 @@ export const StandardBarNotSepContent = ({ element }) => {
         <XAxis
           dataKey={element.config.keys.x}
           tickLine={false}
+          tick={{
+            fontSize: element.config.styles.xGridSize,
+            fontWeight: element.config.styles.gFontWeight,
+            fontStyle: element.config.styles.gFontStyle,
+            fill: element.config.styles.gridAndLegendColor,
+          }}
           tickMargin={10}
           axisLine={false}
           tickFormatter={(value) => capitalize(value)}
@@ -60,9 +70,23 @@ export const StandardBarNotSepContent = ({ element }) => {
           hide={!element.config.showXaxis}
           fontSize={element.config.fontSize}
         />
-        <YAxis type="number" dataKey={element.config.keys.y} hide={!element.config.showYaxis} fontSize={element.config.fontSize} />
+        <YAxis 
+        type="number" 
+        dataKey={element.config.keys.y} 
+        hide={!element.config.showYaxis} 
+        tick={{
+          fontSize: element.config.styles.yGridSize,
+          fontWeight: element.config.styles.gFontWeight,
+          fontStyle: element.config.styles.gFontStyle,
+          fill: element.config.styles.gridAndLegendColor, 
+        }}
+        />
         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-        {element.config.showLegend && <Legend />}
+        {element.config.showLegend && <Legend 
+         textStyle={{
+          fontSize: element.config.styles.legendSize,
+        }}
+        />}
         <Bar dataKey={element.config.keys.y} radius={8} />
       </BarChart>
     </ChartContainer>

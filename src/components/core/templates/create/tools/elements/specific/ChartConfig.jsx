@@ -55,6 +55,7 @@ const ChartData = ({ element, onChange }) => {
       )}
       {element.config.name === 'bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
       {element.config.name === 'bubble' && <StandardBubbleChartConfig element={element} onChange={onChange} />}
+      {element.config.name === 'scatter' && <StandardBubbleChartConfig element={element} onChange={onChange} />}
       {element.config.name === 'area' && <StandardBarCommonConfig element={element} onChange={onChange} />}
       {element.config.name === 'area-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
       {element.config.name === 'line' && <StandardBarCommonConfig element={element} onChange={onChange} />}
@@ -72,9 +73,7 @@ const ChartData = ({ element, onChange }) => {
       {element.config.name === 'semi-pie' && <StandardPieCommonConfig element={element} onChange={onChange} />}
       {element.config.name === 'semi-circle' && <StandardPieCommonConfig element={element} onChange={onChange} />}
       {element.config.name === 'doughnut' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'doughnut-standard' && (
-        <StandardPieCommonConfig element={element} onChange={onChange} />
-      )}
+      {element.config.name === 'doughnut-standard' && <StandardPieCommonConfig element={element} onChange={onChange} />}
       {element.config.name === 'doughnut-crazy' && <StandardPieCommonConfig element={element} onChange={onChange} />}
       {element.config.name === 'alt-bar' && <StandardAltBarConfig element={element} onChange={onChange} />}
     </div>
