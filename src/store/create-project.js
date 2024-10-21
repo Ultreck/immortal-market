@@ -6,6 +6,7 @@ const useCreateProjectStore = createWithEqualityFn(
     data: {
       source: '',
       credentials: {},
+      template: null,
       tables: [],
       files: [],
       extracted: [],
@@ -20,3 +21,4 @@ const useCreateProjectStore = createWithEqualityFn(
 );
 
 export default useCreateProjectStore;
+
