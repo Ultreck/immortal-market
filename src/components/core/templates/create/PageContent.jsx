@@ -53,8 +53,8 @@ const PageContent = ({ id }) => {
         className="origin-top-left pointer-events-none"
       >
         {page.elements.map((element) => {
-          const active = selectedElements?.includes(element.id);
-          const highlighted = highlightedElements?.includes(element.id);
+          const active = selectedElements.includes(element.id);
+          const highlighted = highlightedElements.includes(element.id);
           return (
             <Fragment key={element.id}>
               {components.edit[element.type] ? (

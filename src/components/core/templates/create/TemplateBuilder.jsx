@@ -2,11 +2,10 @@ import Editor from './Editor.jsx';
 import { DndContext, MouseSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import useTemplateStore from '@/store/template.js';
-import useCommentStore from '@/store/comment.js';
 import { roundToNearestTen } from '@/lib/utils.js';
 import StatusBar from '@/components/core/templates/create/footer/StatusBar.jsx';
 import Sidebar from '@/components/core/templates/create/sidebar/Sidebar.jsx';
-import CommentModal from './comment/Modal.jsx';
+import CommentModal from './comment/CommentsModal.jsx';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;
@@ -26,7 +25,6 @@ const TemplateBuilder = () => {
   const getElementPage = useTemplateStore((state) => state.getElementPage);
   const addElements = useTemplateStore((state) => state.addElements);
   const updateElements = useTemplateStore((state) => state.updateElements);
-  const modalState = useCommentStore((state) => state.data.modal);
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent, collisions } = event;
@@ -78,7 +76,7 @@ const TemplateBuilder = () => {
         <div className="flex flex-col overflow-hidden relative bg-default-100 dark:bg-zinc-950">
           <Editor />
           <StatusBar />
-          {modalState ?<CommentModal />:null}
+          <CommentModal />
         </div>
       </div>
     </DndContext>

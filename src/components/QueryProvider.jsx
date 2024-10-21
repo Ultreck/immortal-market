@@ -8,8 +8,8 @@ const qc = new QueryClient({
     },
   },
   mutationCache: new MutationCache({
-    onSuccess: (_data, _variables, _context, mutation) => {
-      qc.invalidateQueries({
+    onSuccess: async (_data, _variables, _context, mutation) => {
+      await qc.invalidateQueries({
         queryKey: mutation.options.mutationKey,
       });
     },

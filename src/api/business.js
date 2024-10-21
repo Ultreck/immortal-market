@@ -200,46 +200,40 @@ export const useGetDatabaseTables = (business) => {
   });
 };
 
-export const useCreateComment = () => {
+export const useCreateComment = (business, design) => {
   return useMutation({
     mutationFn: (body) => {
-      return http.post('/businesses/comment/create', body);
+      return http.post(`/businesses/${business}/designs/${design}/comments/`, body);
     },
   });
 };
 
-export const useReplyComment = () => {
-  return useMutation({
-    mutationFn: (body) => {
-      return http.post('/businesses/comment/reply', body);
-    },
-  });
-};
-
-export const useCommentAndReplies = () => {
-  return useMutation({
-    mutationFn: (body) => {
-      return http.post('/businesses/comment/create', body);
-    },
-  });
-};
-
-export const useGetComments = () => {
+export const useGetComments = ({ business, design, resolved, target, targetId, parent }) => {
   return useQuery({
-    queryKey: ['comments'],
+    queryKey: [business, 'designs', design, 'comments', resolved, target, targetId, parent],
     queryFn: async () => {
-      const res = await http.get('/businesses/comment/all');
+      const res = await http.get(`/businesses/${business}/designs/${design}/comments`, {
+        params: { resolved, target, targetId, parent },
+      });
       return res.data;
     },
   });
 };
 
-export const useGetCommentForElement = ({ element }) => {
-  return useQuery({
-    queryKey: ['comments', element],
-    queryFn: async () => {
-      const res = await http.get(`/businesses/comment/element/${element}`);
-      return res.data;
+export const useDeleteComment = (business, design) => {
+  return useMutation({
+    mutationKey: [business, 'designs', design, 'comments'],
+    mutationFn: (id) => {
+      return http.delete(`/businesses/${business}/designs/${design}/comments/${id}`);
+    },
+  });
+};
+
+export const useUpdateComment = (business, design) => {
+  return useMutation({
+    mutationKey: [business, 'designs', design, 'comments'],
+    mutationFn: ({ id, data }) => {
+      return http.patch(`/businesses/${business}/designs/${design}/comments/${id}`, data);
     },
   });
 };
