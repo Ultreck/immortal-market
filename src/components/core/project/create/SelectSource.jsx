@@ -9,7 +9,6 @@ import UploadFiles from '@/components/core/project/create/UploadFiles.jsx';
 import { cn } from '@/lib/utils.js';
 import ConnectSql from '@/components/core/project/create/ConnectSql.jsx';
 import ConnectMongodb from '@/components/core/project/create/ConnectMongodb.jsx';
-import TemplateGallery from '@/components/core/project/create/TemplateGallery.jsx';
 
 const sources = [
   {
@@ -64,10 +63,10 @@ const sources = [
   },
 ];
 
-const SelectSource = ({ onNext }) => {
+const SelectSource = ({ onNext, onPrev }) => {
   const data = useCreateProjectStore((state) => state.data.source);
   const updateData = useCreateProjectStore((state) => state.updateData);
-  const [view, setView] = useState(data.source || 'templates');
+  const [view, setView] = useState(data.source || 'options');
 
   const handleClick = (key) => {
     updateData({ source: key });
@@ -97,7 +96,7 @@ const SelectSource = ({ onNext }) => {
           </div>
           <div className="mt-10">
             <Button
-              onClick={() => setView('templates')}
+              onClick={onPrev}
               color="default"
               variant="bordered"
               radius="full"
@@ -109,7 +108,6 @@ const SelectSource = ({ onNext }) => {
           </div>
         </>
       )}
-      {view === 'templates' && <TemplateGallery onPrev={() => setView('options')} onNext={onNext} />}
       {view === 'files' && <UploadFiles onPrev={() => setView('options')} onNext={onNext} />}
       {view === 'sql' && <ConnectSql onPrev={() => setView('options')} onNext={onNext} />}
       {view === 'mongodb' && <ConnectMongodb onPrev={() => setView('options')} />}
@@ -119,7 +117,7 @@ const SelectSource = ({ onNext }) => {
 
 SelectSource.propTypes = {
   onNext: PropTypes.func,
+  onPrev: PropTypes.func,
 };
 
 export default SelectSource;
-

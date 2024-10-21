@@ -1,14 +1,16 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Image } from '@nextui-org/react';
 import { getImageLink } from '@/lib/utils.js';
 import { TbPhotoCircle } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
-const DesignCard = ({ id, title, thumbnail }) => {
+const DesignCard = ({ id, title, thumbnail, onClick }) => {
+  const navigate = useNavigate();
+
   return (
     <div>
-      <Link
-        to={`/designs/${id}/edit`}
+      <div
+        onClick={() => (onClick ? onClick() : navigate(`/designs/${id}/edit`))}
         className="flex items-center justify-center p-5 bg-black/5 dark:bg-white/5 hover:bg-black/[.07] hover:dark:bg-white/[.07] rounded-2xl aspect-square cursor-pointer"
       >
         {thumbnail ? (
@@ -18,10 +20,9 @@ const DesignCard = ({ id, title, thumbnail }) => {
             <TbPhotoCircle size="48" className="opacity-50" />
           </div>
         )}
-      </Link>
+      </div>
       <div className="mt-3 px-2 flex items-center justify-between">
         <h4 className="font-medium text-base leading-tight truncate">{title}</h4>
-        <button>jkashjshkshsxjkxhzjkxzhj</button>
       </div>
     </div>
   );
@@ -31,6 +32,7 @@ DesignCard.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   thumbnail: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default DesignCard;

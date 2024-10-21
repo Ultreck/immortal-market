@@ -7,8 +7,15 @@ import GenerateReport from './GenerateReport.jsx';
 import PreparingData from './PreparingData.jsx';
 import { TbDatabase, TbEye, TbReport, TbUpload } from 'react-icons/tb';
 import Stepper from '@/components/ui/Stepper.jsx';
+import SelectTemplate from '@/components/core/project/create/SelectTemplate.jsx';
 
 const steps = [
+  {
+    key: 'template',
+    title: 'Select template',
+    icon: <TbDatabase size="16" />,
+    element: SelectTemplate,
+  },
   {
     key: 'data-source',
     title: 'Data Source',
