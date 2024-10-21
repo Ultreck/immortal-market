@@ -1,4 +1,4 @@
-import { Button, Card, Image, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@nextui-org/react';
+import { Button, Card } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import Title from '../../shared/Title.jsx';
 import { RiFileUploadLine } from 'react-icons/ri';
@@ -6,12 +6,10 @@ import { TbBrandGoogleDrive, TbBrandMongodb, TbBrandMysql, TbChevronLeft, TbLink
 import useCreateProjectStore from '@/store/create-project.js';
 import { useState } from 'react';
 import UploadFiles from '@/components/core/project/create/UploadFiles.jsx';
-import { cn, getImageLink } from '@/lib/utils.js';
+import { cn } from '@/lib/utils.js';
 import ConnectSql from '@/components/core/project/create/ConnectSql.jsx';
 import ConnectMongodb from '@/components/core/project/create/ConnectMongodb.jsx';
 import TemplateGallery from '@/components/core/project/create/TemplateGallery.jsx';
-import { TbPhotoCircle } from 'react-icons/tb';
-import ApplyTemplate from '@/components/core/templates/create/sidebar/build/ApplyTemplate.jsx';
 
 const sources = [
   {
@@ -121,47 +119,6 @@ const SelectSource = ({ onNext }) => {
 
 SelectSource.propTypes = {
   onNext: PropTypes.func,
-};
-
-const TemplateItem = ({ design }) => {
-  const { isOpen, onOpenChange } = useDisclosure();
-
-  return (
-    <Popover
-      placement="right"
-      showArrow
-      offset={10}
-      classNames={{ content: 'w-[300px]' }}
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-    >
-      <PopoverTrigger>
-        {design.thumbnail ? (
-          <Image
-            src={getImageLink(design.thumbnail)}
-            alt={design.title}
-            removeWrapper
-            className="w-full h-full object-cover rounded-xl aspect-square cursor-pointer"
-          />
-        ) : (
-          <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
-            <TbPhotoCircle size="32" className="opacity-50" />
-          </div>
-        )}
-      </PopoverTrigger>
-      <PopoverContent className="p-0 shadow border border-default-200">
-        <ApplyTemplate id={design._id} onClose={onOpenChange} />
-      </PopoverContent>
-    </Popover>
-  );
-};
-
-TemplateItem.propTypes = {
-  design: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string,
-  }),
 };
 
 export default SelectSource;
