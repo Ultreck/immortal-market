@@ -60,6 +60,7 @@ const Sidebar = () => {
                 { name: 'Overview', href: '/', icon: <HiOutlineViewGrid size="20" /> },
                 { name: 'Projects', href: '/projects', icon: <HiOutlineViewList size="20" /> },
                 { name: 'Templates', href: '/templates', icon: <HiOutlineTemplate size="20" /> },
+                { name: 'Apps', href: '/apps', icon: <HiOutlineViewGrid size="20" /> },
                 { name: 'Ai Assistant', href: '/assistant', icon: <LuBot size="20" /> },
                 { name: 'Outsource', href: '/outsource', icon: <LuFolderOutput size="20" /> },
               ].map((item) => (
@@ -84,3 +85,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
