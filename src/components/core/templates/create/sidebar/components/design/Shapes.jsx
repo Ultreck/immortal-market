@@ -17,6 +17,9 @@ const items = [
       height: 120,
       style: getElementDefaultStyle({ type: 'shape', name }),
       config: { name },
+      tooltip: {
+        enabled: false,
+      },
     },
     preview: (
       <div
@@ -38,6 +41,9 @@ const items = [
       config: {
         start: null,
         end: null,
+      },
+      tooltip: {
+        enabled: false,
       },
     },
     preview: (

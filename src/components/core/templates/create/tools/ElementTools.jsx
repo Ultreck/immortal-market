@@ -28,6 +28,7 @@ import SummarizerConfig from '@/components/core/templates/create/tools/elements/
 import DataTagConfig from '@/components/core/templates/create/tools/elements/specific/DataTagConfig.jsx';
 import ChartData from './elements/specific/ChartData.jsx';
 import Layout from './elements/generic/Layout.jsx';
+import ElementTooltip from './elements/generic/Tooltip.jsx';
 
 const mapping = {
   font: { type: 'multiple', component: Font },
@@ -57,6 +58,7 @@ const mapping = {
   'chart-data': { type: 'single', component: ChartData },
   'chart-font': { type: 'multiple', component: ChartFont },
   layout: { type: 'single', component: Layout },
+  tooltip: { type: 'single', component: ElementTooltip },
 };
 
 const ElementTools = () => {

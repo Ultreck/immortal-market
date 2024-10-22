@@ -24,6 +24,9 @@ const items = [
           { id: 1, title: 'Tab 2' },
         ],
       },
+      tooltip: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
@@ -43,6 +46,9 @@ const items = [
       config: {
         name: 'carousel',
         slides: 2,
+      },
+      tooltip: {
+        enabled: false,
       },
     },
     preview: (
@@ -66,6 +72,9 @@ const items = [
         slidesPerView: 1,
         speed: 12,
       },
+      tooltip: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
@@ -85,6 +94,9 @@ const items = [
       config: {
         name: 'marquee-text',
         texts: ['fwf', 'wvbetver', 'e4wgwwff'],
+      },
+      tooltip: {
+        enabled: false,
       },
     },
     preview: (
@@ -106,6 +118,9 @@ const items = [
         name: 'typewriter-text',
         texts: ['fwf', 'wvbetver', 'e4wgwwff'],
       },
+      tooltip: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
@@ -124,6 +139,9 @@ const items = [
       style: getElementDefaultStyle({ type: 'frame', name: `shape-${name}` }),
       config: {
         name: `shape-${name}`,
+      },
+      tooltip: {
+        enabled: false,
       },
     },
     preview: (
@@ -199,3 +217,4 @@ Frames.propTypes = {
 };
 
 export default Frames;
+

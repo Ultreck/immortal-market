@@ -4,9 +4,7 @@ import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { useEffect, useState } from 'react';
-import { Button, useDisclosure } from '@nextui-org/react';
-import Drawer from '@/components/ui/Drawer.jsx';
+import { useEffect } from 'react';
 
 const StandardBar = ({ element, active, highlighted, width, onClick, onChange }) => { 
   return (
@@ -30,24 +28,12 @@ export const StandardBarPresent = ({ element }) => {
 
 export const StandardBarContent = ({ element }) => {
   const { useBackgroundImage, backgroundImage, useBackgroundColor, backgroundColor } = element.config;
-  const [customTooltip, setCustomTooltip] = useState({ visible: false, data: null, position: { x: 0, y: 0 } });
-  const { isOpen: isOpen, onOpen: onOpen, onClose: onClose } = useDisclosure();
 
   const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
     const color = element.config.colors?.[index];
     return { ...item, fill: color };
   });
 
-  const handleTooltipShow = (data, e) => {
-    if (data && data.activePayload && data.activePayload.length > 0) {
-      const payload = data.activePayload[0].payload;
-      setCustomTooltip({
-        visible: true,
-        data: payload,
-        position: { x: data.chartX, y: data.chartY },
-      });
-    }
-  };
 
   useEffect(() => {}, [element]);
 
@@ -75,8 +61,6 @@ export const StandardBarContent = ({ element }) => {
           data={chartData}
           barGap={5}
           barCategoryGap={5}
-          onMouseUp={(data, e) => handleTooltipShow(data, e)}
-          // onMouseLeave={handleTooltipHide}
         >
           <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
           <XAxis

@@ -22,30 +22,30 @@ export const tools = {
     return acc;
   }, {}),
   list: ['list', 'font', 'opacity', 'animation', 'shadow', 'layout'],
-  'count-up-number': ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout'],
-  'chart-s': ['chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'animation', 'layout'],
-  'chart-a': ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'layout'],
-  shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout'],
+  'count-up-number': ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+  'chart-s': ['chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'animation', 'layout', 'tooltip'],
+  'chart-a': ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'layout', 'tooltip'],
+  shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
   frame: (element) => {
-    if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow', 'layout'];
-    if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow', 'layout'];
-    if (element.config.name === 'marquee') return ['marquee', 'opacity', 'animation', 'shadow', 'layout'];
+    if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
+    if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
+    if (element.config.name === 'marquee') return ['marquee', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
     if (element.config.name === 'marquee-text') {
-      return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+      return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
     }
     if (element.config.name === 'typewriter-text') {
-      return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+      return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
     }
     return ['opacity', 'animation', 'shadow'];
   },
-  icon: ['icon', 'color', 'opacity', 'animation', 'shadow', 'layout'],
+  icon: ['icon', 'color', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
   map: ['map', 'opacity'],
   table: ['table', 'colors', 'font', 'opacity', 'animation'],
-  line: ['background', 'opacity', 'line', 'animation', 'shadow', 'layout'],
-  image: ['border', 'opacity', 'animation', 'shadow', 'layout'],
+  line: ['background', 'opacity', 'line', 'animation', 'shadow', 'layout', 'tooltip'],
+  image: ['border', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
   infographic: ['infographic', 'opacity'],
   widget: ['summarizer', 'opacity', 'animation'],
-  'data-tag': ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'layout'],
+  'data-tag': ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
 };
 
 export const components = {
@@ -95,18 +95,18 @@ export const getElementTools = (element) => {
   return tools[element.type];
 };
 
-export const getChartsDefaultStyle = ({type, name}) => {
-  const tools = getElementTools({ type, config: { name } }); 
-  let styles = {}; 
+export const getChartsDefaultStyle = ({ type, name }) => {
+  const tools = getElementTools({ type, config: { name } });
+  let styles = {};
   if (tools.includes('chart-font')) {
     styles = {
       ...styles,
       legendSize: 16,
       lFontWeight: 'normal',
       gFontWeight: 'normal',
-      fontFamily: "Roboto",
-      lFontStyle: "normal",
-      gFontStyle: "normal",
+      fontFamily: 'Roboto',
+      lFontStyle: 'normal',
+      gFontStyle: 'normal',
       gridAndLegendColor: '#000000',
       textAlign: 'left',
       xPadding: 0,
@@ -122,7 +122,7 @@ export const getChartsDefaultStyle = ({type, name}) => {
 };
 
 export const getElementDefaultStyle = ({ type, name }) => {
-  const tools = getElementTools({ type, config: { name } });  
+  const tools = getElementTools({ type, config: { name } });
   if (tools.length === 0) return {};
   let styles = {};
   if (tools.includes('font')) {
@@ -156,3 +156,4 @@ export const getElementDefaultStyle = ({ type, name }) => {
   }
   return styles;
 };
+

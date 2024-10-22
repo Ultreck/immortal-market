@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
 import DragResizeRotate from '@/components/ui/DragResizeRotate.jsx';
+import ElementTooltip from '@/components/core/templates/create/ElementTooltip.jsx';
 
 const ElementWrapper = ({
   element,
@@ -66,22 +67,42 @@ const ElementWrapper = ({
       minWidth={minWidth}
       minHeight={minHeight}
     >
-      <div
-        className={cn(
-          'absolute inset-[-1px] border border-transparent z-[10] pointer-events-none',
-          { 'group-hover:border-gray-200': !active && !highlighted },
-          { 'border-gray-200': highlighted },
-          { 'border-primary-500': active },
-          { 'border-purple-500': isEditing }
+      <ElementTooltip tooltipContent="This is a tooltip">
+        <div
+          className={cn(
+            'absolute inset-[-1px] border border-transparent z-[10] pointer-events-none',
+            { 'group-hover:border-gray-200': !active && !highlighted },
+            { 'border-gray-200': highlighted },
+            { 'border-primary-500': active },
+            { 'border-purple-500': isEditing }
+          )}
+        />
+        {fit ? (
+          <div ref={el} className="w-full h-max">
+            {typeof children === 'function' ? children({ isEditing }) : children}
+          </div>
+        ) : (
+          <>{typeof children === 'function' ? children({ isEditing }) : children}</>
         )}
-      />
-      {fit ? (
-        <div ref={el} className="w-full h-max">
-          {typeof children === 'function' ? children({ isEditing }) : children}
-        </div>
-      ) : (
-        <>{typeof children === 'function' ? children({ isEditing }) : children}</>
-      )}
+      </ElementTooltip>
+      {/* <ElementTooltip element={element} onChange={onChange}>
+        <div
+          className={cn(
+            'absolute inset-[-1px] border border-transparent z-[10] pointer-events-none',
+            { 'group-hover:border-gray-200': !active && !highlighted },
+            { 'border-gray-200': highlighted },
+            { 'border-primary-500': active },
+            { 'border-purple-500': isEditing }
+          )}
+        />
+        {fit ? (
+          <div ref={el} className="w-full h-max">
+            {typeof children === 'function' ? children({ isEditing }) : children}
+          </div>
+        ) : (
+          <>{typeof children === 'function' ? children({ isEditing }) : children}</>
+        )}
+      </ElementTooltip> */}
     </DragResizeRotate>
   );
 };
@@ -117,3 +138,4 @@ ElementWrapper.propTypes = {
 };
 
 export default ElementWrapper;
+

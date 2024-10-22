@@ -57,6 +57,9 @@ export const standard = [
         bars: 5,
         fontSize: 12,
       },
+      tooltip: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -1300,3 +1303,4 @@ export const standard = [
     ),
   },
 ];
+
