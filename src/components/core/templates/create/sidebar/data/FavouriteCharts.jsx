@@ -84,6 +84,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-s', name: 'pie' }),
       config: {
         name: 'pie',
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'pie' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -101,6 +102,9 @@ const elements = [
         showToolTip: true,
         legendPosition: 'top',
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
       },
     },
     preview: (
@@ -120,6 +124,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-s', name: 'area' }),
       config: {
         name: 'area',
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'area' }),
         data: [
           { browser: 'chrome', visitors: 187 },
           { browser: 'safari', visitors: 200 },
@@ -146,6 +151,9 @@ const elements = [
           },
         },
       },
+      tooltip: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -159,11 +167,13 @@ const elements = [
     data: {
       type: 'chart-s',
       text: 'Stacked Bar Chart',
+      
       width: 400,
       height: 300,
       style: getElementDefaultStyle({ type: 'chart-s', name: 'stacked-bar' }),
       config: {
         name: 'stacked-bar',
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'stacked-bar' }),
         data: [
           { month: 'Jan', desktop: 187, mobile: 200 },
           { month: 'Feb', desktop: 275, mobile: 173 },
@@ -188,6 +198,9 @@ const elements = [
           },
         },
       },
+      tooltip: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -206,6 +219,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-s', name: 'bar-multiple-vertical' }),
       config: {
         name: 'bar-multiple-vertical',
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'bar-multiple-vertical' }),
         data: [
           {
             name: 'Page A',
@@ -280,6 +294,9 @@ const elements = [
           },
         },
       },
+      tooltip: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -298,6 +315,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-s', name: 'doughnut' }),
       config: {
         name: 'doughnut',
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'doughnut' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -315,6 +333,9 @@ const elements = [
         showLabel: true,
         showToolTip: true,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
       },
     },
     preview: (
@@ -334,6 +355,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-s', name: 'line' }),
       config: {
         name: 'line',
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'line' }),
         data: [
           { browser: 'chrome', visitors: 187 },
           { browser: 'safari', visitors: 200 },
@@ -358,6 +380,9 @@ const elements = [
           },
         },
       },
+      tooltip: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -376,6 +401,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-s', name: 'semi-pie' }),
       config: {
         name: 'semi-pie',
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'semi-pie' }),
         data: [
           { name: 'Group E', value: 500 },
           { name: 'Group F', value: 600 },
@@ -391,6 +417,9 @@ const elements = [
         showLabel: true,
         showLegend: true,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
       },
     },
     preview: (
@@ -410,6 +439,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-s', name: 'line-bar' }),
       config: {
         name: 'line-bar',
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'line-bar' }),
         data: [
           { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
           { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
@@ -428,6 +458,9 @@ const elements = [
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
       },
     },
     preview: (

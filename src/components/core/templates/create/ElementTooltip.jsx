@@ -27,6 +27,8 @@ const ElementTooltip = ({ element, children, onChange }) => {
     return { ...item, fill: color };
   });
 
+  console.log({ chartData });
+
   return (
     <div
       onMouseEnter={handleMouseEnter}
@@ -53,15 +55,44 @@ const ElementTooltip = ({ element, children, onChange }) => {
               <p>Data Drilldown</p>
               <div className="h-full mt-10">
                 <ChartContainer config={{}} style={{ width: '100%', height: '100%' }}>
-                  <BarChart accessibilityLayer data={chartData}>
+                  <BarChart
+                    accessibilityLayer
+                    data={[
+                      {
+                        name: 'Page A',
+                        value: 4000,
+                        fill: '#E66B5B',
+                      },
+                      {
+                        name: 'Page B',
+                        value: 3000,
+                        fill: '#1D9085',
+                      },
+                      {
+                        name: 'Page C',
+                        value: 2000,
+                        fill: '#264A5A',
+                      },
+                      {
+                        name: 'Page D',
+                        value: 2780,
+                        fill: '#E8C22C',
+                      },
+                      {
+                        name: 'Page E',
+                        value: 1890,
+                        fill: '#F6881F',
+                      },
+                    ]}
+                  >
                     <XAxis
-                      dataKey={element.config.keys.x}
+                      dataKey="name"
                       tickLine={false}
                       tickMargin={10}
                       axisLine={false}
                       tickFormatter={(value) => capitalize(value)}
                     />
-                    <Bar dataKey={element.config.keys.y} radius={8} />
+                    <Bar dataKey="value" radius={8} />
                   </BarChart>
                 </ChartContainer>
               </div>
