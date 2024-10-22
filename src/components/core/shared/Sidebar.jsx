@@ -1,7 +1,7 @@
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
-import { TbCrown, TbSettings2, TbUsers } from 'react-icons/tb';
+import { TbChevronLeft, TbChevronRight, TbCrown, TbSettings2, TbUsers } from 'react-icons/tb';
 import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import Logo from '@/components/core/shared/Logo.jsx';
@@ -9,7 +9,8 @@ import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { LuBot, LuFolderOutput } from 'react-icons/lu';
-import { HiOutlineTemplate, HiOutlineViewGrid, HiOutlineViewList } from 'react-icons/hi';
+import { HiOutlineTemplate, HiOutlineViewGrid, HiViewList } from 'react-icons/hi';
+import { HiOutlineViewColumns } from 'react-icons/hi2';
 
 const NavItem = ({ icon, title, href, mini = false }) => {
   return (
@@ -38,10 +39,17 @@ NavItem.propTypes = {
 
 const Sidebar = () => {
   const { isDarkMode } = useTernaryDarkMode();
-  const [mini] = useState(false);
+  const [mini, setMini] = useState(false);
 
   return (
     <div className={cn('w-[260px] relative group transition-width', { 'w-[90px]': mini })}>
+      <button
+        onClick={() => setMini(!mini)}
+        aria-label={mini ? 'Hide' : 'Show'}
+        className="absolute top-1/2 left-[calc(100%)] -translate-y-1/2 z-10 bg-[#eff6fd] dark:bg-gray-950 border border-default-200/70 dark:border-default-50 h-[70px] rounded-r-full transition-all duration-200"
+      >
+        <div className="">{mini ? <TbChevronRight size="16" /> : <TbChevronLeft size="16" />}</div>
+      </button>
       <div className={cn('w-[260px] h-full overflow-hidden', { 'w-[90px]': mini })}>
         <div className={cn('w-[260px] h-full overflow-hidden')}>
           <div
@@ -57,8 +65,8 @@ const Sidebar = () => {
             <CreateDropdown mini={mini} />
             <div className={cn('flex flex-col space-y-2 mt-6', { '-ml-1': mini })}>
               {[
-                { name: 'Overview', href: '/', icon: <HiOutlineViewGrid size="20" /> },
-                { name: 'Projects', href: '/projects', icon: <HiOutlineViewList size="20" /> },
+                { name: 'Overview', href: '/', icon: <HiViewList size="20" /> },
+                { name: 'Projects', href: '/projects', icon: <HiOutlineViewColumns size="20" /> },
                 { name: 'Templates', href: '/templates', icon: <HiOutlineTemplate size="20" /> },
                 { name: 'Apps', href: '/apps', icon: <HiOutlineViewGrid size="20" /> },
                 { name: 'Ai Assistant', href: '/assistant', icon: <LuBot size="20" /> },
@@ -85,4 +93,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-

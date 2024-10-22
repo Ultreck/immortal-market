@@ -37,8 +37,8 @@ import AiAssistantPage from '@/pages/AiAssistantPage.jsx';
 import InvitationPage from '@/pages/InvitationPage.jsx';
 import PresentDesignPage from '@/pages/designs/PresentDesignPage.jsx';
 import SvgShapes from '@/components/core/SvgShapes.jsx';
-import ProjectsPage from './pages/ProjectsPage.jsx';
-import OverviewPage from './pages/OverviewPage.jsx';
+import ProjectsPage from '@/pages/ProjectsPage.jsx';
+import AppsPage from '@/pages/AppsPage.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -67,7 +67,7 @@ const App = () => {
           }
         >
           <Route path="" element={<OverviewPage />} />
-          <Route path="apps" element={<OverviewPage />} />
+          <Route path="apps" element={<AppsPage />} />
           <Route path="/overview" element={<Navigate to="/" replace />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="templates" element={<TemplatesPage />} />
@@ -176,4 +176,3 @@ const App = () => {
 };
 
 export default App;
-
