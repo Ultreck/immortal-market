@@ -9,7 +9,7 @@ import {
 } from 'react-icons/tb';
 import { MdOutlineStackedBarChart } from 'react-icons/md';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { getElementDefaultStyle } from '@/lib/elements.js';
+import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 
 const elements = [
   {
@@ -17,30 +17,54 @@ const elements = [
     category: 'bar',
     data: {
       type: 'chart-s',
+      useBackgroundImage: false,
+      backgroundImage: null,
+      backgroundColor: '#000',
+      useBackgroundColor: false,
       text: 'Bar Chart',
       width: 400,
       height: 300,
       style: getElementDefaultStyle({ type: 'chart-s', name: 'bar' }),
       config: {
         name: 'bar',
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'bar' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
           { name: 'Page C', value: 2000 },
           { name: 'Page D', value: 2780 },
           { name: 'Page E', value: 1890 },
+          { name: 'Page E', value: 4000 },
+          { name: 'Page F', value: 3000 },
+          { name: 'Page G', value: 2000 },
+          { name: 'Page H', value: 2780 },
+          { name: 'Page I', value: 1890 },
         ],
         keys: { x: 'name', y: 'value' },
         showXaxis: false,
         showYaxis: false,
         showLegend: false,
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+        colors: [
+          '#E66B5B',
+          '#1D9085',
+          '#264A5A',
+          '#E8C22C',
+          '#F6881F',
+          '#E66B5B',
+          '#1D9085',
+          '#264A5A',
+          '#E8C22C',
+          '#F6881F',
+        ],
         useGradient: false,
         gradientColor: '#2673D9',
         showXGridline: false,
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
       },
     },
     preview: (
@@ -425,3 +449,4 @@ const FavouriteCharts = () => {
 };
 
 export default FavouriteCharts;
+

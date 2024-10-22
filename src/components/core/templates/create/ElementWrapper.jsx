@@ -67,7 +67,7 @@ const ElementWrapper = ({
       minWidth={minWidth}
       minHeight={minHeight}
     >
-      <ElementTooltip tooltipContent="This is a tooltip">
+      <ElementTooltip element={element} tooltipContent="This is a tooltip" onChange={onChange}>
         <div
           className={cn(
             'absolute inset-[-1px] border border-transparent z-[10] pointer-events-none',
@@ -85,24 +85,6 @@ const ElementWrapper = ({
           <>{typeof children === 'function' ? children({ isEditing }) : children}</>
         )}
       </ElementTooltip>
-      {/* <ElementTooltip element={element} onChange={onChange}>
-        <div
-          className={cn(
-            'absolute inset-[-1px] border border-transparent z-[10] pointer-events-none',
-            { 'group-hover:border-gray-200': !active && !highlighted },
-            { 'border-gray-200': highlighted },
-            { 'border-primary-500': active },
-            { 'border-purple-500': isEditing }
-          )}
-        />
-        {fit ? (
-          <div ref={el} className="w-full h-max">
-            {typeof children === 'function' ? children({ isEditing }) : children}
-          </div>
-        ) : (
-          <>{typeof children === 'function' ? children({ isEditing }) : children}</>
-        )}
-      </ElementTooltip> */}
     </DragResizeRotate>
   );
 };

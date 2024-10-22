@@ -28,6 +28,8 @@ export const StandardBarPresent = ({ element }) => {
 
 export const StandardBarContent = ({ element }) => {
   const { useBackgroundImage, backgroundImage, useBackgroundColor, backgroundColor } = element.config;
+  console.log({element});
+  
 
   const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
     const color = element.config.colors?.[index];
@@ -93,34 +95,6 @@ export const StandardBarContent = ({ element }) => {
           <Bar dataKey={element.config.keys.y} radius={8} />
         </BarChart>
       </ChartContainer>
-
-      {customTooltip.visible && customTooltip.data && (
-        <div
-          className="bg-default-100 rounded-xl absolute px-6 py-4 text-white text-sm"
-          style={{
-            top: customTooltip.position.y + 10,
-            left: customTooltip.position.x + 10,
-            zIndex: 1000,
-          }}
-        >
-          <p>Label: {customTooltip.data[element.config.keys.x]}</p>
-          <p>Value: {customTooltip.data[element.config.keys.y]}</p>
-          <div>
-            <Button className="mt-6" onClick={() => onOpen()}>
-              Drilldown
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {isOpen && customTooltip.data && (
-        <Drawer isOpen={isOpen} title="Drilldown" onClose={onClose}>
-          <p>Label: {customTooltip?.data[element.config.keys.x]}</p>
-          <p>Value: {customTooltip?.data[element.config.keys.y]}</p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae placeat voluptates eum modi accusamus, iure
-          exercitationem quis tempore illum alias velit debitis nisi mollitia vero consequatur expedita? Velit, at iure!
-        </Drawer>
-      )}
     </div>
   );
 };
