@@ -30,6 +30,8 @@ import TeamPage from '@/pages/TeamPage.jsx';
 import PlanPage from './pages/PlanPage.jsx';
 import SettingsLayout from '@/pages/settings/SettingsLayout.jsx';
 import BusinessSettingsPage from '@/pages/settings/BusinessSettingsPage.jsx';
+import ProfileSettingsPage from '@/pages/settings/ProfileSettingsPage.jsx';
+import SecuritySettingsPage from '@/pages/settings/SecuritySettingsPage.jsx';
 import AppearanceSettingsPage from '@/pages/settings/AppearanceSettingsPage.jsx';
 import InvitationPage from '@/pages/InvitationPage.jsx';
 import PresentDesignPage from '@/pages/designs/PresentDesignPage.jsx';
@@ -73,10 +75,11 @@ const App = () => {
           <Route path="reports" element={<ReportPage />} />
           <Route path="settings" element={<SettingsLayout />}>
             <Route path="" element={<Navigate to="/settings/business" replace />} />
+            <Route path="profile" element={<ProfileSettingsPage />} />
             <Route path="business" element={<BusinessSettingsPage />} />
             <Route path="appearance" element={<AppearanceSettingsPage />} />
             <Route path="notifications" element={<></>} />
-            <Route path="security" element={<></>} />
+            <Route path="security" element={<SecuritySettingsPage />} />
           </Route>
         </Route>
         <Route

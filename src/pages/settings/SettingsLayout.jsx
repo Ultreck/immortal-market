@@ -9,6 +9,7 @@ import {
   HiOutlinePaintBrush,
   HiPaintBrush,
 } from 'react-icons/hi2';
+import { RiUser2Fill, RiUser2Line } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
 import { Outlet, useLocation } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
@@ -19,6 +20,12 @@ const SettingsLayout = () => {
   const { pathname } = useLocation();
 
   const items = [
+    {
+      name: 'Profile',
+      icon: <RiUser2Line size="20" className="mr-2" />,
+      activeIcon: <RiUser2Fill size="20" className="mr-2" />,
+      href: '/settings/profile',
+    },
     {
       name: 'Business',
       icon: <HiOutlineBriefcase size="20" className="mr-2" />,
@@ -70,7 +77,6 @@ const SettingsLayout = () => {
             <Listbox classNames={{ list: 'space-y-2', base: 'p-0' }}>
               {items.map((item) => {
                 const active = item.href === pathname;
-
                 return (
                   <ListboxItem
                     key={item.name}
