@@ -39,6 +39,7 @@ import PresentDesignPage from '@/pages/designs/PresentDesignPage.jsx';
 import SvgShapes from '@/components/core/SvgShapes.jsx';
 import ProjectsPage from '@/pages/ProjectsPage.jsx';
 import AppsPage from '@/pages/AppsPage.jsx';
+import ChatWidget from '@/components/core/templates/create/ChatWidget.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -171,6 +172,7 @@ const App = () => {
 
       <GlobalModals />
       <SvgShapes />
+      <ChatWidget />
     </>
   );
 };
