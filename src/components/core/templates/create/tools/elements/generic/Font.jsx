@@ -9,8 +9,6 @@ import { createElement } from 'react';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 
 const Font = ({ elements, onChange }) => {
-  // console.log(elements);
-  
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
@@ -133,7 +131,7 @@ const LineHeight = ({ elements, onChange }) => {
   );
 };
 
-const Bold = ({ elements, onChange }) => {  
+const Bold = ({ elements, onChange }) => {
   const value = useResolveValue(elements.map((el) => el.style?.fontWeight));
 
   return (

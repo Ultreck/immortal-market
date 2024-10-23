@@ -11,7 +11,7 @@ const Present = ({ pages = [] }) => {
   const page = pages[index];
 
   return (
-    <div className="relative inset-0 w-full h-screen overflow-hidden z-[100] text-black">
+    <div className="relative inset-0 w-full h-screen overflow-hidden z-[1] text-black">
       <div className="bg-gray-950 w-full h-screen flex flex-col">
         <CanvasPresent key={page} page={page} />
       </div>

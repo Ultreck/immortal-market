@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Card } from '@nextui-org/react';
 import ElementWrapper from '../../../ElementWrapper';
 import { ElementPropTypes } from '@/lib/prop-types';
 import PropTypes from 'prop-types';
 
 const AdvancedStackedCard = ({ element, active, highlighted, width, onClick, onChange }) => {
-  console.log(element);
   return (
     <ElementWrapper
       element={element}
@@ -30,14 +28,17 @@ export const AdvancedStackedCardContent = ({ element }) => {
 
   useEffect(() => {}, [element]);
   return (
-    <div style={{ 
-      paddingTop: element.config.styles.yPadding,
-      paddingLeft: element.config.styles.xPadding,
-      paddingBottom: element.config.styles.yPadding,
-      paddingRight: element.config.styles.xPadding,
-      width: element.width, height: element.height, opacity: element.style.opacity, 
+    <div
+      style={{
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
+        width: element.width,
+        height: element.height,
+        opacity: element.style.opacity,
       }}
-      >
+    >
       {data.slice(0, bars).map((item, index) => (
         <motion.div
           key={item.range}
@@ -54,15 +55,18 @@ export const AdvancedStackedCardContent = ({ element }) => {
           whileHover={{ scale: 1.1 }}
         >
           <>
-            <div 
-             style={{
-              fontFamily: 'Arial, sans-serif',
-              fontWeight: element.config.styles.lFontWeight,
-              fontStyle: element.config.styles.lFontStyle,
-              fontSize: element.config.styles.labelSize || '18px',
-              color: element.config.styles.valueAndLableColor,
-            }}
-            className="text-sm mb-1 text-black">{item.range}</div>
+            <div
+              style={{
+                fontFamily: 'Arial, sans-serif',
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
+                fontSize: element.config.styles.labelSize || '18px',
+                color: element.config.styles.valueAndLableColor,
+              }}
+              className="text-sm mb-1 text-black"
+            >
+              {item.range}
+            </div>
             <motion.div
               className="font-bold text-black"
               initial={{ scale: 0 }}

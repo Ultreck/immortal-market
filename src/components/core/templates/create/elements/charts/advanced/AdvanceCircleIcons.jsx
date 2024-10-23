@@ -4,8 +4,6 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import PropTypes from 'prop-types';
 
 const AdvanceCircleIcons = ({ element, active, highlighted, width, onClick, onChange }) => {
-  console.log(element);
-
   return (
     <ElementWrapper
       element={element}

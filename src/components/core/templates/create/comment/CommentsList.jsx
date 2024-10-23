@@ -67,19 +67,20 @@ const CommentsList = ({ onClose }) => {
             <Skeleton className="w-full rounded-2xl h-[80px]" />
           </div>
         ) : (
-          <div className="divide-y divide-default-200 -mb-6">
-            {comments.length ? (
-              <>
+          <>
+            {!!comments.length && (
+              <div className="divide-y divide-default-200 -mb-6">
                 {comments.map((comment) => (
                   <CommentItem key={comment._id} comment={comment} onClick={() => handleClick(comment)} />
                 ))}
-              </>
-            ) : (
+              </div>
+            )}
+            {!comments.length && (
               <div className="px-8">
                 <NoData text="No comments" className="py-10" />
               </div>
             )}
-          </div>
+          </>
         )}
       </div>
     </div>

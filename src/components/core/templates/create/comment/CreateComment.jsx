@@ -89,7 +89,7 @@ const CreateComment = ({
 
 CreateComment.propTypes = {
   target: PropTypes.string.isRequired,
-  targetId: PropTypes.string.isRequired,
+  targetId: PropTypes.string,
   onDone: PropTypes.func,
   parent: PropTypes.string,
   placeholder: PropTypes.string,

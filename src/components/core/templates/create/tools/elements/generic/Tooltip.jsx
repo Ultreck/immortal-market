@@ -1,4 +1,4 @@
-import { Button, Checkbox, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Switch } from '@nextui-org/react';
 import { TbBoxMultiple, TbChartBar, TbChartPie } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
@@ -118,76 +118,91 @@ const ElementTooltip = ({ element, onChange }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
-        <div className="px-8 py-6 w-full space-y-5">
-          <div>
-            <Checkbox
-              isSelected={element?.tooltip?.enabled}
-              classNames={{ base: 'py-0' }}
-              onValueChange={(v) => onChange({ ...element, tooltip: { enabled: v } })}
-            >
-              Enable Tooltip
-            </Checkbox>
-          </div>
-          <Checkbox
-            isSelected={element.modal.enabled}
-            classNames={{ base: 'py-0' }}
-            onValueChange={(v) => onChange({ ...element, modal: { enabled: v } })}
-          >
-            Enable Modal
-          </Checkbox>
-          <div className="flex flex-col space-y-2">
-            <div className="flex items-center space-x-2 justify-between">
-              <p className=" text-gray-500">Data Type</p>
-              <Select
-                variant="bordered"
-                classNames={{ value: 'px-2 text-base', base: 'w-[170px]' }}
-                label="Select Data Type"
-                // selectedKeys={[element?.tooltip?.dataType || 'number']}
-                // onChange={(e) => onChange({ ...element, tooltip: { dataType: e.target.value } })}
-              >
-                {[
-                  { key: 'number', name: 'Number' },
-                  { key: 'date', name: 'Date' },
-                  { key: 'text', name: 'Text' },
-                ].map((type) => (
-                  <SelectItem key={type.key} classNames={{ title: 'px-2 text-base text-base' }}>
-                    {type.name}
-                  </SelectItem>
-                ))}
-              </Select>
-            </div>
-          </div>
-          <div className="flex flex-col space-y-2">
-            <div className="flex items-center space-x-2 justify-between">
-              <p className=" text-gray-500">Data Type</p>
-              <Select
-                variant="bordered"
-                label="Select Data Type"
-                classNames={{ value: 'px-2 text-base', base: 'w-[170px]' }}
-                // selectedKeys={[element?.tooltip?.dataType || 'number']}
-                // onChange={(e) => onChange({ ...element, tooltip: { dataType: e.target.value } })}
-              >
-                {['Disbursement by Date', 'Disb by range', '...'].map((type) => (
-                  <SelectItem key={type} classNames={{ title: 'px-2 text-base text-base' }}>
-                    {type}
-                  </SelectItem>
-                ))}
-              </Select>
-            </div>
-          </div>
-          <div className="grid grid-cols-4 gap-6">
-            {elements.map((e) => (
-              <div
-                className="cursor-pointer rounded-2xl"
-                key={e.id}
-                onClick={() => {
-                  onChange({ ...element, config: { ...element.config, name: e.data.config.name } });
+        <div className="px-8 py-6 w-full space-y-3">
+          <div className="border border-default-200 rounded-2xl px-6 py-4">
+            <div className="flex items-center justify-between">
+              <p className="text-base">Enable tooltip</p>
+              <Switch
+                isSelected={!!element.tooltip?.enabled}
+                onValueChange={(v) => {
+                  onChange({ ...element, tooltip: { ...element.tooltip, enabled: v } });
                 }}
-              >
-                {e.preview}
-                <p className="text-center">{e.data.text}</p>
+                size="sm"
+              />
+            </div>
+            {!!element.tooltip.enabled && (
+              <div className="flex flex-col space-y-4 mt-6 mb-1 w-full">
+                <div>
+                  <Select
+                    variant="bordered"
+                    label="Field"
+                    labelPlacement="outside"
+                    classNames={{ value: 'px-2 text-base', label: 'text-base leading-none' }}
+                    placeholder="Select one"
+                    aria-label="Field"
+                    radius="lg"
+                  >
+                    {[{ key: 'default', name: 'Default' }].map((type) => (
+                      <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                        {type.name}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+                <div>
+                  <Select
+                    variant="bordered"
+                    label="Data"
+                    labelPlacement="outside"
+                    classNames={{ value: 'px-2 text-base', label: 'text-base leading-none' }}
+                    placeholder="Select one"
+                    aria-label="Data"
+                    radius="lg"
+                  >
+                    {[
+                      {
+                        key: 'disbursement-by-date',
+                        label: 'Disbursement by date',
+                      },
+                      {
+                        key: 'disbursement-by-range',
+                        label: 'Disbursement by range',
+                      },
+                    ].map((item) => (
+                      <SelectItem key={item.key} classNames={{ title: 'px-2 text-base' }}>
+                        {item.label}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+                <div className="grid grid-cols-4 gap-6 pt-2">
+                  {elements.map((e) => (
+                    <div
+                      className="cursor-pointer rounded-2xl"
+                      key={e.id}
+                      onClick={() => {
+                        onChange({ ...element, config: { ...element.config, name: e.data.config.name } });
+                      }}
+                    >
+                      {e.preview}
+                      <p className="text-center">{e.data.text}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+            )}
+          </div>
+          <div className="border border-default-200 rounded-2xl px-6 py-4">
+            <div className="flex items-center justify-between">
+              <p className="text-base">Enable modal</p>
+              <Switch
+                isSelected={!!element.modal?.enabled}
+                onValueChange={(v) => {
+                  onChange({ ...element, modal: { ...element.modal, enabled: v } });
+                }}
+                size="sm"
+              />
+            </div>
           </div>
         </div>
       </PopoverContent>

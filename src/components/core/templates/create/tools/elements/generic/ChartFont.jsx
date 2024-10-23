@@ -1,4 +1,13 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
+import {
+  Accordion,
+  AccordionItem,
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Select,
+  SelectItem,
+} from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import {
   RiAlignCenter,
@@ -14,11 +23,9 @@ import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { createElement } from 'react';
-import { Accordion, AccordionItem } from '@nextui-org/react';
 import { gridAndLegendStyling, labelAndValueStyling } from '@/lib/utils';
 
 const ChartFont = ({ elements, onChange }) => {
-  console.log(elements[0]);
   return (
     <Popover placement="left" showArrow offset={10}>
       <PopoverTrigger>
@@ -32,24 +39,24 @@ const ChartFont = ({ elements, onChange }) => {
           itemClasses={{ base: 'px-3', content: 'pt-4 pb-5', title: 'whitespace-nowrap text-base' }}
         >
           {labelAndValueStyling.includes(elements[0].config.name) && (
-          <AccordionItem
-            key="label"
-            aria-label="Label & Value styling"
-            title="Label & Value styling"
-            startContent={''}
-            indicator={<RiArrowRightSLine size="20" />}
-          >
-            <div className="px-6 py-6 w-full space-y-4">
-              <div className="flex items-center space-x-2">
-                <Bold elements={elements} onChange={onChange} />
-                <Italic elements={elements} onChange={onChange} />
-                <TextColor elements={elements} onChange={onChange} />
+            <AccordionItem
+              key="label"
+              aria-label="Label & Value styling"
+              title="Label & Value styling"
+              startContent={''}
+              indicator={<RiArrowRightSLine size="20" />}
+            >
+              <div className="px-6 py-6 w-full space-y-4">
+                <div className="flex items-center space-x-2">
+                  <Bold elements={elements} onChange={onChange} />
+                  <Italic elements={elements} onChange={onChange} />
+                  <TextColor elements={elements} onChange={onChange} />
+                </div>
+                <LabelSize elements={elements} onChange={onChange} />
+                {elements[0].config.name !== 'dynamic-sorting' && <ValueSize elements={elements} onChange={onChange} />}
               </div>
-              <LabelSize elements={elements} onChange={onChange} />
-              {elements[0].config.name != 'dynamic-sorting' && <ValueSize elements={elements} onChange={onChange} />}
-            </div>
-          </AccordionItem>
-        )}
+            </AccordionItem>
+          )}
           {gridAndLegendStyling.includes(elements[0].config.name) && (
             <AccordionItem
               key="grid"
@@ -76,7 +83,7 @@ const ChartFont = ({ elements, onChange }) => {
             startContent={''}
             indicator={<RiArrowRightSLine size="20" />}
           >
-            <div className="px-6 py-6 w-full space-y-4">  
+            <div className="px-6 py-6 w-full space-y-4">
               <XPadding elements={elements} onChange={onChange} />
               <YPadding elements={elements} onChange={onChange} />
             </div>
@@ -279,7 +286,6 @@ const Bold = ({ elements, onChange }) => {
           if (!value) return { ...el, config: { ...el.config, styles: { ...el.config.styles, lFontWeight: 'bold' } } };
           const styles = { ...el.config.styles };
           styles.lFontWeight = styles.lFontWeight === 'bold' ? 'normal' : 'bold';
-          console.log(styles);
           return { ...el, config: { ...el.config, styles } };
         });
         onChange(_elements);
@@ -301,8 +307,6 @@ const GridBold = ({ elements, onChange }) => {
           if (!value) return { ...el, config: { ...el.config, styles: { ...el.config.styles, gFontWeight: 'bold' } } };
           const styles = { ...el.config.styles };
           styles.gFontWeight = styles.gFontWeight === 'bold' ? 'normal' : 'bold';
-          console.log(styles);
-
           return { ...el, config: { ...el.config, styles } };
         });
         onChange(_elements);
@@ -461,4 +465,5 @@ LegendSize.propTypes = propTypes;
 GridColor.propTypes = propTypes;
 XGridSize.propTypes = propTypes;
 YGridSize.propTypes = propTypes;
+
 export default ChartFont;

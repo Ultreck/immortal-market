@@ -6,7 +6,7 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useEffect } from 'react';
 
-const StandardBar = ({ element, active, highlighted, width, onClick, onChange }) => { 
+const StandardBar = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
     <ElementWrapper
       element={element}
@@ -28,14 +28,11 @@ export const StandardBarPresent = ({ element }) => {
 
 export const StandardBarContent = ({ element }) => {
   const { useBackgroundImage, backgroundImage, useBackgroundColor, backgroundColor } = element.config;
-  console.log({element});
-  
 
   const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
     const color = element.config.colors?.[index];
     return { ...item, fill: color };
   });
-
 
   useEffect(() => {}, [element]);
 
@@ -57,13 +54,8 @@ export const StandardBarContent = ({ element }) => {
           width: element.width,
           opacity: element.style.opacity,
         }}
-      >   
-        <BarChart
-          accessibilityLayer
-          data={chartData}
-          barGap={5}
-          barCategoryGap={5}
-        >
+      >
+        <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
           <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
           <XAxis
             dataKey={element.config.keys.x}
@@ -83,15 +75,17 @@ export const StandardBarContent = ({ element }) => {
               fontSize: element.config.styles.yGridSize,
               fontWeight: element.config.styles.gFontWeight,
               fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor, 
+              fill: element.config.styles.gridAndLegendColor,
             }}
           />
-          {element.config.showLegend && <Legend 
-          wrapperStyle={{
-            fontSize: element.config.styles.legendSize, // Dynamic legend font size
-            color: element.config.styles.legendColor,   // Dynamic legend color
-          }} 
-          />}
+          {element.config.showLegend && (
+            <Legend
+              wrapperStyle={{
+                fontSize: element.config.styles.legendSize, // Dynamic legend font size
+                color: element.config.styles.legendColor, // Dynamic legend color
+              }}
+            />
+          )}
           <Bar dataKey={element.config.keys.y} radius={8} />
         </BarChart>
       </ChartContainer>

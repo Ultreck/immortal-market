@@ -27,8 +27,6 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    console.log(element);
-
     let chart;
     let data = [...Array(5).fill(null)].map(() => Math.round(Math.random() * 200));
 
@@ -44,7 +42,6 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
               fontSize: element.config.styles.xGridSize,
               fontStyle: element.config.styles.lFontStyle,
             },
-            
           },
           yAxis: {
             type: 'category',
@@ -75,7 +72,7 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
                 color: element.config.styles.valueAndLableColor,
                 fontSize: element.config.styles.labelSize,
                 fontWeight: element.config.styles.lFontWeight,
-                fontStyle: element.config.styles.lFontStyle, 
+                fontStyle: element.config.styles.lFontStyle,
               },
             },
           ],

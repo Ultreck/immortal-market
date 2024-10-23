@@ -1,12 +1,12 @@
-import { Checkbox, Input, Tab, Tabs } from '@nextui-org/react';
+import { Checkbox, Tab, Tabs } from '@nextui-org/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import DndFileInput from '@/components/ui/DndFileInput.jsx';
+import { HexAlphaColorPicker } from 'react-colorful';
 
 const StandardMultipleBarConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
-  console.log(element);
-  
 
   const handleImageChange = (e) => {
     const file = e[0];
@@ -150,7 +150,7 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
         </Tab>
         <Tab key="style" title="Chart Style" className="text-base">
           <div className="space-y-4">
-          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
               <p className="text-base opacity-75 whitespace-nowrap">Label Font Size:</p>
               <AutoCompleteNumberInput
                 onChange={(v) =>
@@ -207,4 +207,3 @@ StandardMultipleBarConfig.propTypes = {
 };
 
 export default StandardMultipleBarConfig;
-

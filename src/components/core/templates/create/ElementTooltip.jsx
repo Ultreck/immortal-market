@@ -3,10 +3,12 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { Bar, BarChart, XAxis } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart.jsx';
-import { capitalize } from '../../../../lib/utils';
+import { capitalize } from '@/lib/utils.js';
+import { useDisclosure } from '@nextui-org/react';
 
 const ElementTooltip = ({ element, children }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleMouseMove = (event) => {
     setPosition({
@@ -15,15 +17,24 @@ const ElementTooltip = ({ element, children }) => {
     });
   };
 
+  const handleMouseEnter = () => {
+    onOpen();
+  };
+
+  const handleMouseLeave = () => {
+    onClose();
+  };
+
   return (
     <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
       style={{ position: 'relative' }}
       className="h-full"
     >
       {children}
-
-      {element?.tooltip?.enabled && (
+      {element?.tooltip?.enabled && isOpen && (
         <>
           {createPortal(
             <div
@@ -92,8 +103,6 @@ const ElementTooltip = ({ element, children }) => {
 ElementTooltip.propTypes = {
   element: PropTypes.object.isRequired,
   children: PropTypes.any.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default ElementTooltip;
-
