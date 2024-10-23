@@ -66,6 +66,9 @@ const elements = [
       tooltip: {
         enabled: false,
       },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -104,6 +107,9 @@ const elements = [
         fontSize: 12,
       },
       tooltip: {
+        enabled: false,
+      },
+      modal: {
         enabled: false,
       },
     },
@@ -154,6 +160,9 @@ const elements = [
       tooltip: {
         enabled: false,
       },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -167,7 +176,7 @@ const elements = [
     data: {
       type: 'chart-s',
       text: 'Stacked Bar Chart',
-      
+
       width: 400,
       height: 300,
       style: getElementDefaultStyle({ type: 'chart-s', name: 'stacked-bar' }),
@@ -199,6 +208,9 @@ const elements = [
         },
       },
       tooltip: {
+        enabled: false,
+      },
+      modal: {
         enabled: false,
       },
     },
@@ -297,6 +309,9 @@ const elements = [
       tooltip: {
         enabled: false,
       },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -335,6 +350,9 @@ const elements = [
         fontSize: 12,
       },
       tooltip: {
+        enabled: false,
+      },
+      modal: {
         enabled: false,
       },
     },
@@ -383,6 +401,9 @@ const elements = [
       tooltip: {
         enabled: false,
       },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -419,6 +440,9 @@ const elements = [
         fontSize: 12,
       },
       tooltip: {
+        enabled: false,
+      },
+      modal: {
         enabled: false,
       },
     },
@@ -460,6 +484,9 @@ const elements = [
         fontSize: 12,
       },
       tooltip: {
+        enabled: false,
+      },
+      modal: {
         enabled: false,
       },
     },

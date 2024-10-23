@@ -32,7 +32,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-s', name: 'bar' }),
       config: {
         name: 'bar',
-        styles: getChartsDefaultStyle({type: 'chart-s', name: 'bar' }),
+        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'bar' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -49,7 +49,18 @@ export const standard = [
         showXaxis: false,
         showYaxis: false,
         showLegend: false,
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
+        colors: [
+          '#E66B5B',
+          '#1D9085',
+          '#264A5A',
+          '#E8C22C',
+          '#F6881F',
+          '#E66B5B',
+          '#1D9085',
+          '#264A5A',
+          '#E8C22C',
+          '#F6881F',
+        ],
         useGradient: false,
         gradientColor: '#2673D9',
         showXGridline: false,
@@ -58,6 +69,9 @@ export const standard = [
         fontSize: 12,
       },
       tooltip: {
+        enabled: false,
+      },
+      modal: {
         enabled: false,
       },
     },
@@ -82,7 +96,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-not-sep' }),
       config: {
         name: 'bar-not-sep',
-        styles: getChartsDefaultStyle({type: 'chart-a', name: 'bar-not-sep' }),
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bar-not-sep' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -101,6 +115,12 @@ export const standard = [
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
       },
     },
     preview: (
@@ -144,6 +164,12 @@ export const standard = [
         bars: 5,
         fontSize: 12,
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -185,6 +211,12 @@ export const standard = [
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
       },
     },
     preview: (
@@ -232,6 +264,12 @@ export const standard = [
             gradient: false,
           },
         },
+      },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
       },
     },
     preview: (
@@ -281,6 +319,12 @@ export const standard = [
           },
         },
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -325,6 +369,12 @@ export const standard = [
             gradient: false,
           },
         },
+      },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
       },
     },
     preview: (
@@ -423,6 +473,12 @@ export const standard = [
           },
         },
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -519,6 +575,12 @@ export const standard = [
           },
         },
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -581,7 +643,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut' }),
       config: {
         name: 'doughnut',
-        styles: getChartsDefaultStyle({type: 'chart-a', name: 'doughnut' }),
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'doughnut' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -621,7 +683,7 @@ export const standard = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut-standard' }),
       config: {
         name: 'doughnut-standard',
-        styles: getChartsDefaultStyle({type: 'chart-a', name: 'doughnut-standard' }),
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'doughnut-standard' }),
         data: [
           { name: 'Page A', value: 4000 },
           { name: 'Page B', value: 3000 },
@@ -858,6 +920,12 @@ export const standard = [
         bars: 5,
         fontSize: 12,
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -897,6 +965,12 @@ export const standard = [
         showLegend: true,
         fontSize: 12,
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -935,6 +1009,12 @@ export const standard = [
         showLabel: true,
         showLegend: true,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
       },
     },
     preview: (
@@ -993,6 +1073,12 @@ export const standard = [
         showXaxis: true,
         showYaxis: true,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
       },
     },
     preview: (
@@ -1084,6 +1170,12 @@ export const standard = [
         gradientColor: '#2673D9',
         fontSize: 12,
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -1126,6 +1218,12 @@ export const standard = [
         bars: 5,
         fontSize: 12,
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -1167,6 +1265,12 @@ export const standard = [
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
       },
     },
     preview: (
@@ -1211,6 +1315,12 @@ export const standard = [
         bars: 5,
         fontSize: 12,
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -1253,6 +1363,12 @@ export const standard = [
         bars: 5,
         fontSize: 12,
       },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
+      },
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
@@ -1294,6 +1410,12 @@ export const standard = [
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      modal: {
+        enabled: false,
       },
     },
     preview: (

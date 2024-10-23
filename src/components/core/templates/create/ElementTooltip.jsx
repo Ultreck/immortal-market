@@ -5,11 +5,8 @@ import { Bar, BarChart, XAxis } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart.jsx';
 import { capitalize } from '../../../../lib/utils';
 
-const ElementTooltip = ({ element, children, onChange }) => {
+const ElementTooltip = ({ element, children }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const handleMouseEnter = () => {
-    onChange({ ...element, tooltip: { enabled: true } });
-  };
 
   const handleMouseMove = (event) => {
     setPosition({
@@ -18,22 +15,9 @@ const ElementTooltip = ({ element, children, onChange }) => {
     });
   };
 
-  const handleMouseLeave = () => {
-    onChange({ ...element, tooltip: { enabled: false } });
-  };
-
-  const chartData = element?.config?.data?.slice(0, element?.config?.bars).map((item, index) => {
-    const color = element.config.colors?.[index];
-    return { ...item, fill: color };
-  });
-
-  console.log({ chartData });
-
   return (
     <div
-      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       style={{ position: 'relative' }}
       className="h-full"
     >
