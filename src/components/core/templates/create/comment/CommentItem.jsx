@@ -45,7 +45,11 @@ const CommentItem = ({ comment, onClick, className }) => {
       <div
         tabIndex="-1"
         onClick={onClick}
-        className={cn('w-full py-4 px-8 transition-all', { 'hover:bg-default-100 cursor-pointer': onClick }, className)}
+        className={cn(
+          'w-full py-4 px-8 transition-all',
+          { 'hover:bg-default-100 dark:hover:bg-default-100/70 cursor-pointer': onClick },
+          className
+        )}
       >
         <div className="flex gap-x-4 items-start">
           <Avatar
@@ -89,7 +93,7 @@ const CommentItem = ({ comment, onClick, className }) => {
             </Button>
           )}
         </Tooltip>
-        <Dropdown>
+        <Dropdown classNames={{ content: 'dark:bg-default-100' }}>
           <DropdownTrigger>
             <Button variant="light" isIconOnly isLoading={isDeleteLoading}>
               <HiDotsHorizontal size="20" variant="bordered" />

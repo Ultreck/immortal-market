@@ -46,7 +46,7 @@ const CommentReplyItem = ({ comment }) => {
         </div>
       </div>
       <div className="absolute top-2 right-2 bg-white dark:bg-default-100 border border-default-100 rounded-2xl shadow opacity-0 group-hover:opacity-100 transition-opacity py-1 px-2">
-        <Dropdown>
+        <Dropdown classNames={{ content: 'dark:bg-default-100' }}>
           <DropdownTrigger>
             <Button variant="light" isIconOnly isLoading={isDeleteLoading}>
               <HiDotsHorizontal size="20" variant="bordered" />

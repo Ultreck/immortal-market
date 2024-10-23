@@ -7,7 +7,11 @@ const CreateCommentModal = ({ target, targetId, isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose} hideCloseButton>
       <ModalContent>
         <ModalBody className="p-0">
-          {!!isOpen && <CreateComment target={target} targetId={targetId} onDone={onClose} />}
+          {!!isOpen && (
+            <div className="pt-2">
+              <CreateComment target={target} targetId={targetId} onDone={onClose} />
+            </div>
+          )}
         </ModalBody>
       </ModalContent>
     </Modal>

@@ -29,7 +29,7 @@ const CommentReplies = ({ onBack }) => {
       </div>
       <div>
         <div className="px-8 mb-4">
-          <div className="border rounded-2xl">
+          <div className="border border-default-200 rounded-2xl">
             <CommentItem comment={activeComment} className="px-6" />
           </div>
         </div>

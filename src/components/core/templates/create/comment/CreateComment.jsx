@@ -48,19 +48,11 @@ const CreateComment = ({
       <AutoResizeTextArea
         value={content}
         onChange={(v) => setContent(v)}
-        className="text-base px-8 py-6"
+        className="text-base px-8 py-4 bg-transparent"
         placeholder={placeholder}
       />
       <div className="flex items-center justify-between px-6 pb-4">
-        <Popover
-          isOpen={isEmojiOpen}
-          onClose={onEmojiClose}
-          placement="bottom"
-          showArrow
-          offset={10}
-          classNames={{ content: 'w-[260px]' }}
-          set="native"
-        >
+        <Popover isOpen={isEmojiOpen} onClose={onEmojiClose} classNames={{ content: 'w-[260px]' }} set="native">
           <PopoverTrigger>
             <Button onClick={onEmojiOpen} isIconOnly radius="full" variant="light">
               <LuSmilePlus size="20" />
