@@ -148,7 +148,7 @@ const ElementTooltip = ({ element, onChange }) => {
               </div>
             </div>
           ))}
-          {['Data 1, Data 2, Data 3'].map((data, i) => (
+          {['Disbursement by Date', 'Disb by range', '...'].map((data, i) => (
             <div key={i} className="flex flex-col space-y-2">
               <div className="flex items-center space-x-2 justify-between">
                 <p className=" text-gray-500">Data Type</p>
