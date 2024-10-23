@@ -1,7 +1,8 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Switch } from '@nextui-org/react';
-import { TbBoxMultiple, TbChartBar, TbChartPie } from 'react-icons/tb';
+import { TbChartBar, TbChartPie } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
+import { GrTooltip } from 'react-icons/gr';
 
 const elements = [
   {
@@ -114,7 +115,7 @@ const ElementTooltip = ({ element, onChange }) => {
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbBoxMultiple size="20" />
+          <GrTooltip size="18" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
@@ -130,7 +131,7 @@ const ElementTooltip = ({ element, onChange }) => {
                 size="sm"
               />
             </div>
-            {!!element.tooltip.enabled && (
+            {!!element.tooltip?.enabled && (
               <div className="flex flex-col space-y-4 mt-6 mb-1 w-full">
                 <div>
                   <Select
