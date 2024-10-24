@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import ElementTooltip from '@/components/core/templates/create/ElementTooltip.jsx';
 import ElementModal from '@/components/core/templates/create/ElementModal.jsx';
 import { useDisclosure } from '@nextui-org/react';
+import { cn } from '@/lib/utils.js';
 
 const ElementWrapperPresent = ({ element, children }) => {
   const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
@@ -13,7 +14,9 @@ const ElementWrapperPresent = ({ element, children }) => {
   return (
     <>
       <div
-        className="absolute cursor-pointer"
+        className={cn('absolute', {
+          '!cursor-pointer transition-all duration-500 hover:scale-[1.02]': element.modal?.enabled,
+        })}
         onClick={handleClick}
         style={{ width: element.width, height: element.height, top: element.y, left: element.x }}
       >
