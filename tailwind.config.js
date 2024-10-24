@@ -64,10 +64,10 @@ export default {
         light: {
           colors: {
             primary: {
-              DEFAULT: '#143C9C',
+              DEFAULT: '#0b62c2',
               foreground: '#fff',
             },
-            focus: '#143C9C',
+            focus: '#0b62c2',
           },
         },
         dark: {
