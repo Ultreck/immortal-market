@@ -8,7 +8,6 @@ import Logo from '@/components/core/shared/Logo.jsx';
 import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { LuBot, LuFolderOutput } from 'react-icons/lu';
 import { HiOutlineTemplate, HiOutlineViewGrid, HiViewList } from 'react-icons/hi';
 import { HiOutlineViewColumns } from 'react-icons/hi2';
 
@@ -69,8 +68,6 @@ const Sidebar = () => {
                 { name: 'Projects', href: '/projects', icon: <HiOutlineViewColumns size="20" /> },
                 { name: 'Templates', href: '/templates', icon: <HiOutlineTemplate size="20" /> },
                 { name: 'Apps', href: '/apps', icon: <HiOutlineViewGrid size="20" /> },
-                { name: 'Ai Assistant', href: '/assistant', icon: <LuBot size="20" /> },
-                { name: 'Outsource', href: '/outsource', icon: <LuFolderOutput size="20" /> },
               ].map((item) => (
                 <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
               ))}
