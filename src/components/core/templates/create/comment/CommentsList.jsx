@@ -12,10 +12,14 @@ import CommentItem from '@/components/core/templates/create/comment/CommentItem.
 
 const CommentsList = ({ onClose }) => {
   const { id: business } = useBusiness();
-  const [target, setTarget] = useState('general');
+  const [filter, setFilter] = useState('pending');
   const design = useTemplateStore((state) => state.template.id);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const { data: { comments = [] } = {}, isLoading: isCommentsLoading } = useGetComments({ business, design });
+  const { data: { comments = [] } = {}, isLoading: isCommentsLoading } = useGetComments({
+    business,
+    design,
+    resolved: filter === 'resolved' ? true : filter === 'pending' ? false : null,
+  });
 
   const handleClick = (comment) => {
     updateTemplate({ activeComment: comment });
@@ -32,7 +36,7 @@ const CommentsList = ({ onClose }) => {
               startContent={<LuListFilter size="20" />}
               endContent={<HiChevronDown size="20" />}
             >
-              {target}
+              {filter}
             </Button>
           </DropdownTrigger>
           <DropdownMenu
@@ -40,19 +44,19 @@ const CommentsList = ({ onClose }) => {
             variant="flat"
             disallowEmptySelection
             selectionMode="single"
-            selectedKeys={[target]}
+            selectedKeys={[filter]}
             onSelectionChange={(e) => {
-              if (e.size) setTarget(Array.from(e)[0]);
+              if (e.size) setFilter(Array.from(e)[0]);
             }}
           >
             <DropdownItem key="all" textValue="All">
               <span className="text-base">All</span>
             </DropdownItem>
+            <DropdownItem key="pending" textValue="Pending">
+              <span className="text-base">Pending</span>
+            </DropdownItem>
             <DropdownItem key="resolved" textValue="Resolved">
               <span className="text-base">Resolved</span>
-            </DropdownItem>
-            <DropdownItem key="current-page" textValue="Current page">
-              <span className="text-base">Current page</span>
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
