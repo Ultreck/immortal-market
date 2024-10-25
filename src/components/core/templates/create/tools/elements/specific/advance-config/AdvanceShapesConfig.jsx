@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Checkbox, Select, SelectItem, Slider } from '@nextui-org/react';
 import { IconWithConfig } from './AdvancedPictogramShapesConfig';
+
 const AdvanceShapesConfig = ({ element, onChange }) => {
   const handleIconChange = (iconKey, newIcon) => {
     onChange({
