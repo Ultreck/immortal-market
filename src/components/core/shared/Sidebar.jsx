@@ -2,7 +2,6 @@ import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { NavLink } from 'react-router-dom';
 import { TbChevronLeft, TbChevronRight, TbCrown, TbSettings2, TbUsers } from 'react-icons/tb';
-import ProductsDropdown from '@/components/core/shared/ProductsDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 import Logo from '@/components/core/shared/Logo.jsx';
 import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
@@ -41,7 +40,7 @@ const Sidebar = () => {
   const [mini, setMini] = useState(false);
 
   return (
-    <div className={cn('w-[260px] relative group transition-width', { 'w-[90px]': mini })}>
+    <div className={cn('w-[250px] relative group transition-width', { 'w-[90px]': mini })}>
       <button
         onClick={() => setMini(!mini)}
         aria-label={mini ? 'Hide' : 'Show'}
@@ -49,10 +48,10 @@ const Sidebar = () => {
       >
         <div className="">{mini ? <TbChevronRight size="16" /> : <TbChevronLeft size="16" />}</div>
       </button>
-      <div className={cn('w-[260px] h-full overflow-hidden', { 'w-[90px]': mini })}>
-        <div className={cn('w-[260px] h-full overflow-hidden')}>
+      <div className={cn('w-[250px] h-full overflow-hidden', { 'w-[90px]': mini })}>
+        <div className={cn('w-[250px] h-full overflow-hidden')}>
           <div
-            className={cn('py-8 px-8 flex flex-col align-stretch w-[260px] relative h-full', { 'items-start': mini })}
+            className={cn('py-6 px-6 flex flex-col align-stretch w-[250px] relative h-full', { 'items-start': mini })}
           >
             {mini ? (
               <LogoIcon light={isDarkMode} className="mb-8" />
@@ -80,7 +79,6 @@ const Sidebar = () => {
               ].map((item) => (
                 <NavItem key={item.href} icon={item.icon} title={item.name} href={item.href} mini={mini} />
               ))}
-              <ProductsDropdown mini={mini} />
             </div>
           </div>
         </div>

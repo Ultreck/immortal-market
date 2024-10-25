@@ -14,17 +14,21 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  useDisclosure,
   User,
 } from '@nextui-org/react';
 import { getImageLink } from '@/lib/utils.js';
 import { format } from 'date-fns';
-import { TbDotsVertical, TbSearch } from 'react-icons/tb';
+import { TbDotsVertical, TbPlus, TbSearch } from 'react-icons/tb';
 import useBusiness from '@/hooks/use-business.js';
 import { useGetMembers } from '@/api/business.js';
+import OnlyRoles from '@/components/core/shared/OnlyRoles.jsx';
+import InviteMemberModal from '@/components/core/team/InviteMemberModal.jsx';
 
 const TeamMembers = () => {
   const { id, business } = useBusiness();
   const { data: { members = [] } = {}, isLoading: isMembersLoading } = useGetMembers(id);
+  const { isOpen: isInviteModalOpen, onOpen: onInviteModalOpen, onClose: onInviteModalClose } = useDisclosure();
 
   return (
     <div>
@@ -32,7 +36,7 @@ const TeamMembers = () => {
         <Skeleton className="w-full h-[300px] rounded-2xl" />
       ) : (
         <Card className="card-shadow py-8">
-          <div className="px-8 mb-8">
+          <div className="px-8 mb-8 flex items-center justify-between">
             <Input
               type="text"
               name="query"
@@ -44,6 +48,17 @@ const TeamMembers = () => {
               radius="full"
               variant="bordered"
             />
+            <OnlyRoles roles={['owner', 'admin']}>
+              <Button
+                startContent={<TbPlus size="20" />}
+                radius="full"
+                className="text-base px-5"
+                color="success"
+                onClick={onInviteModalOpen}
+              >
+                Invite user
+              </Button>
+            </OnlyRoles>
           </div>
           <Table
             classNames={{
@@ -150,6 +165,8 @@ const TeamMembers = () => {
           </div>
         </Card>
       )}
+
+      <InviteMemberModal isOpen={isInviteModalOpen} onClose={onInviteModalClose} />
     </div>
   );
 };

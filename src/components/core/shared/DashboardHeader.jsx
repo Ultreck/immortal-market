@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils.js';
 
 const DashboardHeader = ({ content, className }) => (
   <div className={cn('container', className)}>
-    <div className="flex pt-5 pb-8 justify-between items-center">
+    <div className="flex pt-3 pb-7 justify-between items-center">
       <div>{content}</div>
       <div className="flex items-center space-x-3">
         <div className="flex items-center space-x-2">

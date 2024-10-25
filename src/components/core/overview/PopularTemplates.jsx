@@ -8,7 +8,7 @@ const PopularTemplates = () => {
 
   return (
     <section>
-      <h2 className="font-semibold text-xl mb-5">Start with a template</h2>
+      <h2 className="font-semibold text-2xl mb-6">Start with a template</h2>
       <div className="mb-8 flex flex-wrap gap-3">
         <Chip variant="solid" size="lg" classNames={{ base: 'cursor-pointer', content: 'font-medium' }} color="primary">
           All
@@ -36,7 +36,7 @@ const PopularTemplates = () => {
       ) : (
         <>
           {designs.length > 0 ? (
-            <div className="grid grid-cols-5 gap-4 md:gap-8">
+            <div className="grid grid-cols-5 gap-4 md:gap-x-8 md:gap-y-6">
               {designs.map((design, i) => (
                 <DesignCard key={i} id={design._id} title={design.title} thumbnail={design.thumbnail} />
               ))}

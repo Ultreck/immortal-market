@@ -1,51 +1,57 @@
 import { useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { Button, Input, Skeleton } from '@nextui-org/react';
+import { Input, Skeleton, Tab, Tabs } from '@nextui-org/react';
 import { RiAddLine } from 'react-icons/ri';
 import useGlobalStore from '@/store/global.js';
 import DesignCard from '@/components/core/project/DesignCard.jsx';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import { TbSearch } from 'react-icons/tb';
 import { cn } from '@/lib/utils.js';
+import { useState } from 'react';
 
 const ProjectsPage = () => {
   const { id: business } = useBusiness();
   const { data: { designs = [] } = {}, isLoading: isDesignsLoading } = useGetDesigns({ business, type: 'project' });
   const updateData = useGlobalStore((state) => state.updateData);
+  const [tab, setTab] = useState('templates');
 
   return (
     <div className="mb-10">
       <DashboardHeader
         content={
-          <div className="relative">
+          <div className="flex items-center gap-8">
+            <h2 className="font-semibold text-2xl">Projects</h2>
             <Input
               type="text"
               name="query"
               id="query"
+              variant="flat"
               size="lg"
               classNames={{
                 input: 'text-base',
-                base: 'transition-all duration-300 w-[320px]',
-                inputWrapper: 'h-13 rounded-full',
+                base: 'transition-all duration-300 w-[260px]',
+                inputWrapper: 'rounded-full',
               }}
-              startContent={<TbSearch size="24" className="mx-3 opacity-30" />}
+              startContent={<TbSearch size="24" className="mx-2 opacity-30" />}
               placeholder="Search projects.."
             />
           </div>
         }
-        after={
-          <Button
-            color="primary"
-            radius="2xl"
-            className="text-base"
-            startContent={<RiAddLine size="20" />}
-            onClick={() => updateData({ isCreateProjectModalOpen: true })}
-          >
-            Create project
-          </Button>
-        }
       />
-      <div className="container pb-20 min-h-screen flex flex-col space-y-10">
+      <div className="container pb-20">
+        <Tabs
+          aria-label="Options"
+          variant="bordered"
+          color="primary"
+          radius="full"
+          classNames={{ tab: 'text-base px-4', base: 'mb-6' }}
+          selectedKey={tab}
+          onSelectionChange={setTab}
+        >
+          <Tab key="all" title="All" className="text-base" />
+          <Tab key="engagements" title="Engagements" className="text-base" />
+          <Tab key="designs" title="Designs" className="text-base" />
+        </Tabs>
         {isDesignsLoading ? (
           <div className="grid grid-cols-5 gap-4 md:gap-8">
             <Skeleton className="aspect-square w-full rounded-2xl" />

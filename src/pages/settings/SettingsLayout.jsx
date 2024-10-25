@@ -1,4 +1,3 @@
-import DashboardTitle from '@/components/core/shared/DashboardTitle.jsx';
 import { Card, Listbox, ListboxItem, User } from '@nextui-org/react';
 import {
   HiBell,
@@ -13,6 +12,7 @@ import {
 import { cn } from '@/lib/utils.js';
 import { Outlet, useLocation } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
+import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 
 const SettingsLayout = () => {
   const { business } = useBusiness();
@@ -47,14 +47,8 @@ const SettingsLayout = () => {
 
   return (
     <>
-      <DashboardTitle
-        text="Settings"
-        breadcrumbs={[
-          { text: 'Home', href: '/' },
-          { text: 'Settings', href: '/settings' },
-        ]}
-      />
-      <div className="container py-10">
+      <DashboardHeader content={<h3 className="font-semibold text-2xl">Settings</h3>} />
+      <div className="container mb-10 mt-2">
         <div className="grid grid-cols-[260px_1fr] gap-10 items-start">
           <div>
             <User
@@ -67,7 +61,7 @@ const SettingsLayout = () => {
               }}
               className="mb-8"
               classNames={{
-                base: 'justify-start px-2',
+                base: 'justify-start px-0',
                 name: 'text-lg leading-none truncate',
                 description: 'text-base truncate leading-none mt-1 truncate',
                 wrapper: 'ml-2',

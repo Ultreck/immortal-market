@@ -27,7 +27,6 @@ import EditDesignPage from '@/pages/designs/EditDesignPage.jsx';
 import TemplatesPage from './pages/designs/TemplatesPage.jsx';
 import ReportPage from './pages/ReportPage.jsx';
 import TeamPage from '@/pages/TeamPage.jsx';
-import ProjectDashboardPage from './pages/ProjectDashboard.jsx';
 import PlanPage from './pages/PlanPage.jsx';
 import SettingsLayout from '@/pages/settings/SettingsLayout.jsx';
 import BusinessSettingsPage from '@/pages/settings/BusinessSettingsPage.jsx';
@@ -67,10 +66,8 @@ const App = () => {
         >
           <Route path="" element={<OverviewPage />} />
           <Route path="apps" element={<AppsPage />} />
-          <Route path="/overview" element={<Navigate to="/" replace />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="templates" element={<TemplatesPage />} />
-          <Route path="dashboards" element={<ProjectDashboardPage />} />
           <Route path="plans" element={<PlanPage />} />
           <Route path="team" element={<TeamPage />} />
           <Route path="reports" element={<ReportPage />} />
