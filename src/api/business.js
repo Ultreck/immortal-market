@@ -208,12 +208,12 @@ export const useCreateComment = (business, design) => {
   });
 };
 
-export const useGetComments = ({ business, design, resolved, target, targetId, parent }) => {
+export const useGetComments = ({ business, design, resolved, target, targetId, parent, page }) => {
   return useQuery({
-    queryKey: [business, 'designs', design, 'comments', resolved, target, targetId, parent],
+    queryKey: [business, 'designs', design, 'comments', resolved, target, targetId, parent, page],
     queryFn: async () => {
       const res = await http.get(`/businesses/${business}/designs/${design}/comments`, {
-        params: { resolved, target, targetId, parent },
+        params: { resolved, target, targetId, parent, page },
       });
       return res.data;
     },

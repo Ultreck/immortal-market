@@ -55,6 +55,7 @@ const CommentReplies = ({ onBack }) => {
               target={activeComment.target}
               targetId={activeComment.targetId}
               parent={activeComment._id}
+              page={activeComment.page}
               placeholder="Add a reply"
               buttonText="Add reply"
             />

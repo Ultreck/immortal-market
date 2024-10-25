@@ -14,6 +14,7 @@ const CreateComment = ({
   target,
   targetId,
   parent,
+  page,
   placeholder = 'Add a comment',
   buttonText = 'Add comment',
   onDone,
@@ -29,7 +30,7 @@ const CreateComment = ({
 
   const handleDone = async () => {
     try {
-      await createComment({ content, target, targetId, parent });
+      await createComment({ content, target, targetId, parent, page });
       setContent('');
       onDone?.();
       updateTemplate({ isCommentsOpen: true });
@@ -82,10 +83,11 @@ const CreateComment = ({
 CreateComment.propTypes = {
   target: PropTypes.string.isRequired,
   targetId: PropTypes.string,
-  onDone: PropTypes.func,
   parent: PropTypes.string,
+  page: PropTypes.string,
   placeholder: PropTypes.string,
   buttonText: PropTypes.string,
+  onDone: PropTypes.func,
 };
 
 export default CreateComment;

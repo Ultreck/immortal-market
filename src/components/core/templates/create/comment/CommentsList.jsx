@@ -15,10 +15,12 @@ const CommentsList = ({ onClose }) => {
   const [filter, setFilter] = useState('pending');
   const design = useTemplateStore((state) => state.template.id);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const activePage = useTemplateStore((state) => state.template.activePage);
   const { data: { comments = [] } = {}, isLoading: isCommentsLoading } = useGetComments({
     business,
     design,
     resolved: filter === 'resolved' ? true : filter === 'pending' ? false : null,
+    page: filter === 'page' ? activePage : null,
   });
 
   const handleClick = (comment) => {
@@ -58,6 +60,9 @@ const CommentsList = ({ onClose }) => {
             <DropdownItem key="resolved" textValue="Resolved">
               <span className="text-base">Resolved</span>
             </DropdownItem>
+            <DropdownItem key="page" textValue="Current page">
+              <span className="text-base">Current page</span>
+            </DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <Button onClick={onClose} isIconOnly variant="light" color="danger">
@@ -81,7 +86,7 @@ const CommentsList = ({ onClose }) => {
             )}
             {!comments.length && (
               <div className="px-8">
-                <NoData text="No comments" className="py-10" />
+                <NoData text={filter === 'page' ? 'No comments on this page' : 'No comments'} className="py-10" />
               </div>
             )}
           </>

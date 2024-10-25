@@ -168,7 +168,13 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
 
       <LinkTool elements={elements} isOpen={isLinkToolOpen} onClose={onLinkToolClose} />
       <CreateGroupBlockModal isOpen={isCreateBlockOpen} onClose={onCreateBlockClose} elements={elements} />
-      <CreateCommentModal target="element" targetId={elements[0]?.id} isOpen={isCommentOpen} onClose={onCommentClose} />
+      <CreateCommentModal
+        target="element"
+        targetId={elements[0]?.id}
+        page={page?.id}
+        isOpen={isCommentOpen}
+        onClose={onCommentClose}
+      />
     </>
   );
 };

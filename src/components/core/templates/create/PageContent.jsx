@@ -66,7 +66,8 @@ const PageContent = ({ id }) => {
                   onChange: handleChange,
                   width: page.width,
                   scale,
-                })
+                },
+              )
               ) : (
                 <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
                   Unknown element type: {element.type}

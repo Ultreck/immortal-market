@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
 import DragResizeRotate from '@/components/ui/DragResizeRotate.jsx';
+import ElementCommentBadge from '@/components/core/templates/create/comment/ElementCommentBadge.jsx';
 
 const ElementWrapper = ({
   element,
@@ -82,6 +83,7 @@ const ElementWrapper = ({
       ) : (
         <>{typeof children === 'function' ? children({ isEditing }) : children}</>
       )}
+      <ElementCommentBadge element={element} />
     </DragResizeRotate>
   );
 };

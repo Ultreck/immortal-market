@@ -7,6 +7,8 @@ import { Spinner } from '@nextui-org/react';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useUnmount } from 'react-use';
+import ChatWidget from '@/components/core/templates/create/ChatWidget.jsx';
+
 
 const EditDesignPage = () => {
   const toast = useToast();
@@ -68,6 +70,7 @@ const EditDesignPage = () => {
       ) : (
         <>{!!title && <TemplateBuilder />}</>
       )}
+      <ChatWidget/>
     </>
   );
 };
