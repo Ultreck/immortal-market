@@ -1,6 +1,5 @@
 import { Legend, Pie, PieChart } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
-import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
@@ -55,7 +54,6 @@ export const StandardDoughnutContent = ({ element }) => {
         paddingLeft: element.config.styles.xPadding,
         paddingBottom: element.config.styles.yPadding,
         paddingRight: element.config.styles.xPadding,
-        
       }}
       textStyle={{
         fontSize: element.config.styles.valueSize,
@@ -65,8 +63,9 @@ export const StandardDoughnutContent = ({ element }) => {
       }}
       >
         {element.config.showLegend && <Legend
-         textStyle={{
-          fontSize: element.config.styles.legendSize,
+         wrapperStyle={{
+          fontSize: element.config.styles.labelSize,
+           color: element.config.styles.valueAndLableColor,
         }}
         />}
         {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
@@ -77,7 +76,7 @@ export const StandardDoughnutContent = ({ element }) => {
           dataKey={element.config.keys.data}
           label={element.config.showLabel}
           labelLine={false}
-          textStyle={{
+          style={{
             fontSize: element.config.styles.valueSize,
             color: element.config.styles.legendColor,
             fontWeight: element.config.styles.legendFontWeight,

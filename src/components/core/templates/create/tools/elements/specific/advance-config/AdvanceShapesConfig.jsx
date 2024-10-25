@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-import { Checkbox, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Slider } from '@nextui-org/react';
-import { HexColorPicker } from 'react-colorful';
-import {  IconWithConfig } from './AdvancedPictogramShapesConfig';
+import { Checkbox, Select, SelectItem, Slider } from '@nextui-org/react';
+import { IconWithConfig } from './AdvancedPictogramShapesConfig';
 const AdvanceShapesConfig = ({ element, onChange }) => {
   const handleIconChange = (iconKey, newIcon) => {
     onChange({
@@ -62,16 +61,20 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
       <div>
         <Slider
           label="Gap between shapes"
-          step={2}
-          maxValue={12}
-          minValue={2}
+          step={1}
+          maxValue={10}
+          minValue={1}
           marks={[
-            { value: 2, label: '2' },
-            { value: 4, label: '4' },
-            { value: 6, label: '6' },
-            { value: 8, label: '8' },
-            { value: 10, label: '10' },
-            { value: 12, label: '12' },
+            { value: 1, label: 1 },
+            { value: 2, label: 2 },
+            { value: 3, label: 3 },
+            { value: 4, label: 4 },
+            { value: 5, label: 5 },
+            { value: 6, label: 6 },
+            { value: 7, label: 7 },
+            { value: 8, label: 8 },
+            { value: 9, label: 9 },
+            { value: 10, label: 10 },
           ]}
           className="max-w-md"
           onChange={(e) => onChange({ ...element, config: { ...element.config, gap: e } })}
@@ -80,7 +83,7 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
       </div>
 
       <p>Change Icon</p>
-      <div className="border border-default-400 rounded w-[80px] flex flex-col">
+      <div className="border border-default-400 rounded w-[80px] flex flex-col pt-5">
         <IconWithConfig
           iconKey="icon1"
           colorKey="color1"
@@ -89,29 +92,6 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
           onColorChange={handleColorChange}
           element={element}
         />
-
-        <Popover
-          placement="top"
-          showArrow
-          offset={10}
-          classNames={{ content: 'w-[200px] !max-h-[500px] overflow-y-auto block' }}
-        >
-          <PopoverTrigger>
-            <div className="w-full h-6 mt-5">
-              <div
-                style={{ backgroundColor: element.config.color1 }}
-                className="w-full h-full rounded-none shadow border"
-              ></div>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent className="p-0 shadow border border-default-200">
-            <HexColorPicker
-              color={element.config.color1}
-              onChange={(c) => onChange({ ...element, config: { ...element.config, color1: c } })}
-              className="!w-full mt-4"
-            />
-          </PopoverContent>
-        </Popover>
       </div>
       <div>
         <Checkbox

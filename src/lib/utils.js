@@ -212,6 +212,7 @@ export const labelAndValueStyling = [
   'doughnut-standard',
   'doughnut-crazy',
   "semi-circle",
+  "doughnut"
   // "scatter",
 ];
 export const gridAndLegendStyling = [

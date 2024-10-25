@@ -65,18 +65,18 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
     });
   };
 
-  return (
-    <div className="flex flex-col space-y-3">
-      <div className="flex items-center space-x-1 mb-6">
-        <Button onClick={onBack} variant="bordered" className="mr-2" radius="full" isIconOnly size="sm">
-          <RiArrowLeftSLine size="20" />
-        </Button>
-        <h2 className="text-lg">Chart Data</h2>
-      </div>
-      {element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
-        <>
-          {Array.isArray(element.config.data) ? (
-            element.config.data.slice(0, element.config.bars || element.config.data.length).map((item, index) =>
+  if (Array.isArray(element.config.data)) {
+    return (
+      <div className="flex flex-col space-y-3">
+        <div className="flex items-center space-x-1 mb-6">
+          <Button onClick={onBack} variant="bordered" className="mr-2" radius="full" isIconOnly size="sm">
+            <RiArrowLeftSLine size="20" />
+          </Button>
+          <h2 className="text-lg">Chart Data</h2>
+        </div>
+        {element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
+          <>
+            {element.config.data.slice(0, element.config.bars || element.config.data.length).map((item, index) =>
               Array.isArray(item) ? (
                 <div key={index} className="grid grid-cols-4 gap-2">
                   <Input
@@ -149,120 +149,238 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
                   />
                 </div>
               )
-            )
-          ) : (
-            <div className="text">{"There's no data for this chart"}</div>
-          )}
-        </>
-      )}
-      {element.config.data && element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
-        <TbCirclePlus
-          size={30}
-          onClick={() => {
-            onChange({
-              ...element,
-              config: {
-                ...element.config,
-                data: [...element.config.data, { browser: 'Immortal', visitors: 10 }],
-                colors: [...element.config.colors, '#E66B5B'],
-                bars: element.config.bars + 1,
-              },
-            });
-          }}
-        />
-      )}
+            )}
+          </>
+        )}
+        {element.config.data && element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
+          <TbCirclePlus
+            size={30}
+            onClick={() => {
+              onChange({
+                ...element,
+                config: {
+                  ...element.config,
+                  data: [...element.config.data, { browser: 'Immortal', visitors: 10 }],
+                  colors: [...element.config.colors, '#E66B5B'],
+                  bars: element.config.bars + 1,
+                },
+              });
+            }}
+          />
+        )}
 
-      {element.config.name === 'tree-map' && (
-        <div className="grid grid-cols-4 gap-2">
-          {element.config.data.map((parent, parentIndex) => (
-            <div key={parentIndex}>
-              <Input
-                value={parent.name}
-                placeholder="name"
-                required
-                variant="bordered"
-                classNames={{ input: 'text-base capitalize' }}
-                onChange={(e) => handleChildChange(parentIndex, parentIndex, 'name', e.target.value)}
-              />
-              {parent.children.map((child, childIndex) => (
-                <div key={childIndex} className="child-item">
-                  <Input
-                    value={child.size}
-                    placeholder="Size"
-                    type="number"
-                    required
-                    variant="bordered"
-                    classNames={{ input: 'text-base capitalize' }}
-                    onChange={(e) => handleChildChange(parentIndex, childIndex, 'size', parseInt(e.target.value))}
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
-      {element.config.name === 'percentage-card-2' && (
-        <div className="flex flex-col space-y-3">
-          {element.config.data.slice(0, element.config.bars).map((item, index) => (
-            <div key={index} className="grid grid-cols-6 gap-2">
-              <div className="text grid col-span-2 ">
+        {element.config.name === 'tree-map' && (
+          <div className="grid grid-cols-4 gap-2">
+            {element.config.data.map((parent, parentIndex) => (
+              <div key={parentIndex}>
                 <Input
-                  value={item[element.config.keys.name]}
+                  value={parent.name}
                   placeholder="name"
                   required
                   variant="bordered"
                   classNames={{ input: 'text-base capitalize' }}
+                  onChange={(e) => handleChildChange(parentIndex, parentIndex, 'name', e.target.value)}
+                />
+                {parent.children.map((child, childIndex) => (
+                  <div key={childIndex} className="child-item">
+                    <Input
+                      value={child.size}
+                      placeholder="Size"
+                      type="number"
+                      required
+                      variant="bordered"
+                      classNames={{ input: 'text-base capitalize' }}
+                      onChange={(e) => handleChildChange(parentIndex, childIndex, 'size', parseInt(e.target.value))}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+        {element.config.name === 'percentage-card-2' && (
+          <div className="flex flex-col space-y-3">
+            {element.config.data.slice(0, element.config.bars).map((item, index) => (
+              <div key={index} className="grid grid-cols-6 gap-2">
+                <div className="text grid col-span-2 ">
+                  <Input
+                    value={item[element.config.keys.name]}
+                    placeholder="name"
+                    required
+                    variant="bordered"
+                    classNames={{ input: 'text-base capitalize' }}
+                    onChange={(e) => {
+                      handleChangePercentageCard2({ ...item, name: e.target.value, index });
+                    }}
+                  />
+                </div>
+                <Input
+                  value={item[element.config.keys.data1]}
+                  placeholder="Data"
+                  required
+                  type="number"
+                  variant="bordered"
                   onChange={(e) => {
-                    handleChangePercentageCard2({ ...item, name: e.target.value, index });
+                    handleChangePercentageCard2({ ...item, data1: e.target.value, index });
+                  }}
+                />
+                <Input
+                  value={item[element.config.keys.data2]}
+                  placeholder="Data"
+                  required
+                  type="number"
+                  variant="bordered"
+                  onChange={(e) => {
+                    handleChangePercentageCard2({ ...item, data2: e.target.value, index });
+                  }}
+                />
+                <Input
+                  value={item[element.config.keys.data3]}
+                  placeholder="Data"
+                  required
+                  type="number"
+                  variant="bordered"
+                  onChange={(e) => {
+                    handleChangePercentageCard2({ ...item, data3: e.target.value, index });
+                  }}
+                />
+                <Input
+                  value={item[element.config.keys.data4]}
+                  placeholder="Data"
+                  required
+                  type="number"
+                  variant="bordered"
+                  onChange={(e) => {
+                    handleChangePercentageCard2({ ...item, data4: e.target.value, index });
                   }}
                 />
               </div>
-              <Input
-                value={item[element.config.keys.data1]}
-                placeholder="Data"
-                required
-                type="number"
-                variant="bordered"
-                onChange={(e) => {
-                  handleChangePercentageCard2({ ...item, data1: e.target.value, index });
-                }}
-              />
-              <Input
-                value={item[element.config.keys.data2]}
-                placeholder="Data"
-                required
-                type="number"
-                variant="bordered"
-                onChange={(e) => {
-                  handleChangePercentageCard2({ ...item, data2: e.target.value, index });
-                }}
-              />
-              <Input
-                value={item[element.config.keys.data3]}
-                placeholder="Data"
-                required
-                type="number"
-                variant="bordered"
-                onChange={(e) => {
-                  handleChangePercentageCard2({ ...item, data3: e.target.value, index });
-                }}
-              />
-              <Input
-                value={item[element.config.keys.data4]}
-                placeholder="Data"
-                required
-                type="number"
-                variant="bordered"
-                onChange={(e) => {
-                  handleChangePercentageCard2({ ...item, data4: e.target.value, index });
-                }}
-              />
-            </div>
-          ))}
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  } else {
+    return (
+      <div className="flex flex-col space-y-3">
+        <div className="flex items-center space-x-1 mb-6">
+          <Button onClick={onBack} variant="bordered" className="mr-2" radius="full" isIconOnly size="sm">
+            <RiArrowLeftSLine size="20" />
+          </Button>
+          <h2 className="text-lg">Chart Data</h2>
         </div>
-      )}
-    </div>
-  );
+        {element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
+          <>{<div className="text">{"There's no data for this chart"}</div>}</>
+        )}
+        {element.config.data && element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
+          <TbCirclePlus
+            size={30}
+            onClick={() => {
+              onChange({
+                ...element,
+                config: {
+                  ...element.config,
+                  data: [...element.config.data, { browser: 'Immortal', visitors: 10 }],
+                  colors: [...element.config.colors, '#E66B5B'],
+                  bars: element.config.bars + 1,
+                },
+              });
+            }}
+          />
+        )}
+
+        {element.config.name === 'tree-map' && (
+          <div className="grid grid-cols-4 gap-2">
+            {element.config.data.map((parent, parentIndex) => (
+              <div key={parentIndex}>
+                <Input
+                  value={parent.name}
+                  placeholder="name"
+                  required
+                  variant="bordered"
+                  classNames={{ input: 'text-base capitalize' }}
+                  onChange={(e) => handleChildChange(parentIndex, parentIndex, 'name', e.target.value)}
+                />
+                {parent.children.map((child, childIndex) => (
+                  <div key={childIndex} className="child-item">
+                    <Input
+                      value={child.size}
+                      placeholder="Size"
+                      type="number"
+                      required
+                      variant="bordered"
+                      classNames={{ input: 'text-base capitalize' }}
+                      onChange={(e) => handleChildChange(parentIndex, childIndex, 'size', parseInt(e.target.value))}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+        {element.config.name === 'percentage-card-2' && (
+          <div className="flex flex-col space-y-3">
+            {element.config.data.slice(0, element.config.bars).map((item, index) => (
+              <div key={index} className="grid grid-cols-6 gap-2">
+                <div className="text grid col-span-2 ">
+                  <Input
+                    value={item[element.config.keys.name]}
+                    placeholder="name"
+                    required
+                    variant="bordered"
+                    classNames={{ input: 'text-base capitalize' }}
+                    onChange={(e) => {
+                      handleChangePercentageCard2({ ...item, name: e.target.value, index });
+                    }}
+                  />
+                </div>
+                <Input
+                  value={item[element.config.keys.data1]}
+                  placeholder="Data"
+                  required
+                  type="number"
+                  variant="bordered"
+                  onChange={(e) => {
+                    handleChangePercentageCard2({ ...item, data1: e.target.value, index });
+                  }}
+                />
+                <Input
+                  value={item[element.config.keys.data2]}
+                  placeholder="Data"
+                  required
+                  type="number"
+                  variant="bordered"
+                  onChange={(e) => {
+                    handleChangePercentageCard2({ ...item, data2: e.target.value, index });
+                  }}
+                />
+                <Input
+                  value={item[element.config.keys.data3]}
+                  placeholder="Data"
+                  required
+                  type="number"
+                  variant="bordered"
+                  onChange={(e) => {
+                    handleChangePercentageCard2({ ...item, data3: e.target.value, index });
+                  }}
+                />
+                <Input
+                  value={item[element.config.keys.data4]}
+                  placeholder="Data"
+                  required
+                  type="number"
+                  variant="bordered"
+                  onChange={(e) => {
+                    handleChangePercentageCard2({ ...item, data4: e.target.value, index });
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
 };
 
 ModifyAdvancedChart.propTypes = {

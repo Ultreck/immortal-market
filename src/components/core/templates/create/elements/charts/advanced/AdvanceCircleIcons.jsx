@@ -24,8 +24,7 @@ const AdvanceCircleIcons = ({ element, active, highlighted, width, onClick, onCh
 AdvanceCircleIcons.propTypes = ElementPropTypes;
 
 export const AdvanceCircleIconsContent = ({ element }) => {
-  const percentages = getPercentages(element.config.data.map((item) => +item.value));
-
+  const percentages = getPercentages(element.config.data.slice(0, element.config.circles).map((item) => +item.value));
   return (
     <div
       style={{
@@ -33,7 +32,7 @@ export const AdvanceCircleIconsContent = ({ element }) => {
       }}
       className="flex items-center py-24 w-full px-4"
     >
-      {element.config.data
+      {element.config.data.slice(0, element.config.circles)
         .sort((a, b) => +b.value - +a.value)
         .map((circle, index) => {
           const color = element.config.colors[index % element.config.colors.length];

@@ -29,85 +29,70 @@ const ModifyData = ({ element, onChange, onBack }) => {
       return (
         <>
           <div className="flex flex-col space-y-3">
-            {element.config.data.map((item, index) => 
-            Array.isArray(item) && element.config.name === "bubble" ? (
-              <div key={index} className="grid grid-cols-2 gap-2">
-                <Input
-                  value={item[0]}
-                  placeholder="Number of visitors"
-                  required
-                  type="number"
-                  variant="bordered"
-                  onChange={(e) => handleDataChange(index, 0, parseFloat(e.target.value))}
-                />
-                <Input
-                  value={item[1]}
-                  placeholder="Number of visitors"
-                  required
-                  type="number"
-                  variant="bordered"
-                  onChange={(e) => handleDataChange(index, 1, parseFloat(e.target.value))}
-                />
-              </div>
-            ):element.config.name === "scatter" ? (
-              <div key={index} className="grid grid-cols-4 gap-2">
-              <Input
-                value={item[3]}
-                placeholder="name"
-                required
-                variant="bordered"
-                classNames={{ input: 'text-base capitalize' }}
-                onChange={(e) => handleDataChange(index, 3, e.target.value)}
-              />
-              <Input
-                value={item[0]}
-                placeholder="Number of visitors"
-                required
-                type="number"
-                variant="bordered"
-                onChange={(e) => handleDataChange(index, 0, parseFloat(e.target.value))}
-              />
-              <Input
-                value={item[1]}
-                placeholder="Number of visitors"
-                required
-                type="number"
-                variant="bordered"
-                onChange={(e) => handleDataChange(index, 1, parseFloat(e.target.value))}
-              />
-              <Input
-                value={item[2]}
-                placeholder="Number of visitors"
-                required
-                type="number"
-                variant="bordered"
-                onChange={(e) => handleDataChange(index, 2, parseFloat(e.target.value))}
-              />
-            </div>
-            ) :(
-              <div key={index} className="grid grid-cols-2 gap-2">
-                <Input
-                  value={item[element.config.keys.x]}
-                  placeholder="Browser name"
-                  required
-                  variant="bordered"
-                  classNames={{ input: 'text-base capitalize' }}
-                  onChange={(e) => {
-                    handleChange({ ...item, [element.config.keys.x]: e.target.value, index });
-                  }}
-                />
-                <Input
-                  value={item[element.config.keys.y]}
-                  placeholder="Number of visitors"
-                  required
-                  type="number"
-                  variant="bordered"
-                  onChange={(e) => {
-                    handleChange({ ...item, [element.config.keys.y]: e.target.value, index });
-                  }}
-                />
-              </div>
-            ))}
+            {element.config.data.map((item, index) =>
+              Array.isArray(item) && element.config.name === 'bubble' ? (
+                <div key={index} className="grid grid-cols-2 gap-2">
+                  <Input
+                    value={item[0]}
+                    placeholder="Number of visitors"
+                    required
+                    type="number"
+                    variant="bordered"
+                    onChange={(e) => handleDataChange(index, 0, parseFloat(e.target.value))}
+                  />
+                  <Input
+                    value={item[1]}
+                    placeholder="Number of visitors"
+                    required
+                    type="number"
+                    variant="bordered"
+                    onChange={(e) => handleDataChange(index, 1, parseFloat(e.target.value))}
+                  />
+                </div>
+              ) : element.config.name !== 'scatter' ? (
+                <div key={index} className="grid grid-cols-2 gap-2">
+                  <Input
+                    value={item[element.config.keys.x]}
+                    placeholder="Browser name"
+                    required
+                    variant="bordered"
+                    classNames={{ input: 'text-base capitalize' }}
+                    onChange={(e) => {
+                      handleChange({ ...item, [element.config.keys.x]: e.target.value, index });
+                    }}
+                  />
+                  <Input
+                    value={item[element.config.keys.y]}
+                    placeholder="Number of visitors"
+                    required
+                    type="number"
+                    variant="bordered"
+                    onChange={(e) => {
+                      handleChange({ ...item, [element.config.keys.y]: e.target.value, index });
+                    }}
+                  />
+                </div>
+              ) : (
+                <div key={index} className="grid grid-cols-2 gap-2">
+                  <Input
+                    value={item[3]}
+                    placeholder="name"
+                    required
+                    variant="bordered"
+                    classNames={{ input: 'text-base capitalize' }}
+                    onChange={(e) => handleDataChange(index, 3, e.target.value)}
+                  />
+                  <Input
+                    value={item[2]}
+                    placeholder="Number of visitors"
+                    required
+                    type="number"
+                    variant="bordered"
+                    onChange={(e) => handleDataChange(index, 2, parseFloat(e.target.value))}
+                  />
+                </div>
+              )
+            )}
             <TbCirclePlus
               size={30}
               onClick={() => {

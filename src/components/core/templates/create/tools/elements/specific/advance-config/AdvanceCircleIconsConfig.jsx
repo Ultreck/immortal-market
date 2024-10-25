@@ -1,24 +1,37 @@
-import { isValidJsonArray } from '@/lib/utils.js';
-import { Button, Textarea } from '@nextui-org/react';
-import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
+import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 
 const AdvanceCircleIconsConfig = ({ element, onChange }) => {
-  const { handleSubmit, control } = useForm({
-    defaultValues: {
-      json: JSON.stringify(element.config.data, null, 2),
-    },
-  });
-
-  const onSubmit = async (values) => {
-    const { json } = values;
-    const data = JSON.parse(json);
-    onChange({ ...element, config: { ...element.config, data } });
-  };
+  // const { handleSubmit, control } = useForm({
+  //   defaultValues: {
+  //     json: JSON.stringify(element.config.data, null, 2),
+  //   },
+  // });
+  //
+  // const onSubmit = async (values) => {
+  //   const { json } = values;
+  //   const data = JSON.parse(json);
+  //   onChange({ ...element, config: { ...element.config, data } });
+  // };
 
   return (
-    <div className="grid grid-cols-1 gap-2">
-      <div className="text">{"There's no settings for this chart"}</div>
+    <div>
+      <div className="flex justify-between">
+        <p className="my-auto">Number of Circles: </p>
+        <AutoCompleteNumberInput
+          onChange={(v) =>
+            onChange({
+              ...element,
+              config: { ...element.config, circles: Number(v) },
+            })
+          }
+          value={element.config.circles}
+          min={1}
+          max={element.config.data.length}
+          ariaLabel="No of Circles to Show"
+        />
+      </div>
+      {/*<div className="text">{"There's no settings for this chart"}</div>*/}
       {/* <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <div className="space-y-6">

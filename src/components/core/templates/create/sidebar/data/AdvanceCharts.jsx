@@ -105,6 +105,7 @@ const elements = [
         ],
         keys: { name: 'label', data: 'value' },
         colors,
+        circles: 5
       },
     },
     preview: (

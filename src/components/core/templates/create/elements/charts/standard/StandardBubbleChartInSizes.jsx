@@ -23,6 +23,8 @@ const StandardBubbleChartInSizes = ({ element, active, highlighted, width, onCli
 export const StandardBubbleChartInSizesContent = ({ element }) => {
   const chartRef = useRef(null);
 
+  console.log({element});
+
   useEffect(() => {
     const chart = echarts.init(chartRef.current, 'light');
     const option = {

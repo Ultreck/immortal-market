@@ -3,6 +3,7 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
+import { useEffect } from 'react';
 
 const AdvanceShapes = ({ element, active, highlighted, width, onClick, onChange }) => {
   return (
@@ -54,9 +55,16 @@ const classes = {
 };
 
 export const AdvanceShapesContent = ({ element }) => {
-  const { percentage, shape, noOfShapes, isCountVisible, countFormat, icon1 } = element.config;
+  const { percentage, noOfShapes, isCountVisible, countFormat, icon1 } = element.config;
   const n = Math.floor((percentage / 100) * noOfShapes);
   const Icon1 = icons.find((icon) => icon.name === icon1 || 'circle').filledIcon;
+
+  console.log({icon1, Icon1, element: element.config });
+  console.log(icons.find((icon) => icon.name === 'heart').filledIcon);
+
+  useEffect(() => {
+
+  }, [element]);
 
   return (
     <div className="space-y-6 w-full">
