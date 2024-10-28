@@ -5,6 +5,7 @@ import { InView } from 'react-intersection-observer';
 import PageActions from '@/components/core/templates/create/PageActions.jsx';
 import PageTitle from './PageTitle';
 import PageContent from '@/components/core/templates/create/PageContent.jsx';
+import PageCommentBadge from '@/components/core/templates/create/comment/PageCommentBadge.jsx';
 
 const Page = ({ id }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
@@ -16,7 +17,10 @@ const Page = ({ id }) => {
         <PageTitle id={id} />
         <PageActions id={id} />
       </div>
-      <div className={cn('border-2 border-transparent p-0.5 w-max', { 'border-primary-500': selected })}>
+      <div
+        className={cn('border-2 relative border-transparent p-0.5 w-max radius-5', { 'border-primary-500': selected })}
+      >
+        <PageCommentBadge id={id} />
         <InView
           as="div"
           threshold={0.5}

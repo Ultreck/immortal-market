@@ -201,6 +201,9 @@ const useTemplateStore = createWithEqualityFn(
         };
       });
     },
+    getPage: (id) => {
+      return get().template.pages.find((page) => page.id === id);
+    },
     updatePage: (data, pageId, addToUndoHistory = false) => {
       if (addToUndoHistory) get().addUndoHistory();
       set((state) => ({

@@ -5,7 +5,7 @@ import { useContextMenu } from '@/hooks/template/use-context-menu.jsx';
 import useSelectionBox from '@/hooks/template/use-selection-box.jsx';
 import useTemplateStore from '@/store/template.js';
 import { useDroppable } from '@dnd-kit/core';
-import { useSelectionActions } from '@/hooks/template/use-selection-actions.js';
+import { useActions } from '@/hooks/template/use-actions.js';
 import PropTypes from 'prop-types';
 import { useElementHandlers } from '@/hooks/template/use-element-handlers.js';
 import { useKey } from 'react-use';
@@ -17,7 +17,7 @@ const PageContent = ({ id }) => {
   const activeElement = useTemplateStore((state) => state.template.activeElement);
   const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
   const scale = useTemplateStore((state) => state.template.scale);
-  const { handleAction } = useSelectionActions({ id });
+  const { handleAction } = useActions({ id });
   const { handleContextMenu, renderContextMenu } = useContextMenu({ id, node, onAction: handleAction });
   const { handleMouseDown, handleMouseMove, handleMouseUp, highlightedElements, renderSelectionBox } = useSelectionBox({
     id,

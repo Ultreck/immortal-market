@@ -19,56 +19,44 @@ import {
 import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import CreatePageBlockModal from '@/components/core/templates/create/CreatePageBlockModal.jsx';
+import { useActions } from '@/hooks/template/use-actions.js';
 
 const PageActions = ({ id }) => {
+  const { handleAction } = useActions(id);
   const { isOpen: isSaveAsBlockOpen, onOpen: onSaveAsBlockOpen, onClose: onSaveAsBlockClose } = useDisclosure();
-  const deletePage = useTemplateStore((state) => state.deletePage);
-  const movePageUp = useTemplateStore((state) => state.movePageUp);
-  const movePageDown = useTemplateStore((state) => state.movePageDown);
-  const addPage = useTemplateStore((state) => state.addPage);
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
-  const pages = useTemplateStore(({ template }) => template.pages);
-  const index = pages.findIndex((p) => p.id === id);
-
-  const handleDuplicatePage = () => {
-    const payload = {
-      ...page,
-      id: crypto.randomUUID(),
-      elements: page.elements.map((el) => ({ ...el, id: crypto.randomUUID() })),
-    };
-    addPage(payload, page.id);
-  };
+  const index = useTemplateStore(({ template }) => template.pages.findIndex((p) => p.id === id));
+  const length = useTemplateStore(({ template }) => template.pages.length);
 
   return (
     <div className="flex items-center space-x-1">
       {index > 0 && (
         <Tooltip content="Move page up" showArrow>
-          <Button variant="light" isIconOnly onClick={() => movePageUp(page.id)} size="sm">
+          <Button variant="light" isIconOnly onClick={() => handleAction('page-move-up')} size="sm">
             <TbChevronUp size="18" />
           </Button>
         </Tooltip>
       )}
-      {index < pages.length - 1 && (
+      {index < length - 1 && (
         <Tooltip content="Move page down" showArrow>
-          <Button variant="light" isIconOnly onClick={() => movePageDown(page.id)} size="sm">
+          <Button variant="light" isIconOnly onClick={() => handleAction('page-move-down')} size="sm">
             <TbChevronDown size="18" />
           </Button>
         </Tooltip>
       )}
       <Tooltip content="Duplicate page" showArrow>
-        <Button variant="light" isIconOnly onClick={handleDuplicatePage} size="sm">
+        <Button variant="light" isIconOnly onClick={() => handleAction('page-duplicate')} size="sm">
           <TbCopyPlus size="18" />
         </Button>
       </Tooltip>
-      {pages.length > 1 && (
+      {length > 1 && (
         <Tooltip content="Delete page" showArrow>
-          <Button variant="light" isIconOnly onClick={() => deletePage(page.id)} size="sm">
+          <Button variant="light" isIconOnly onClick={() => handleAction('page-delete')} size="sm">
             <TbTrash size="18" />
           </Button>
         </Tooltip>
       )}
       <Tooltip content="Add page" showArrow>
-        <Button variant="light" isIconOnly onClick={() => addPage(null, page.id)} size="sm">
+        <Button variant="light" isIconOnly onClick={() => handleAction('page-add')} size="sm">
           <TbSquarePlus size="18" />
         </Button>
       </Tooltip>

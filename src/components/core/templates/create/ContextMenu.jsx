@@ -26,8 +26,9 @@ import {
 import { useKey } from 'react-use';
 import CreateGroupBlockModal from '@/components/core/templates/CreateGroupBlockModal.jsx';
 import CreateCommentModal from '@/components/core/templates/CreateCommentModal.jsx';
+import { useActions } from '@/hooks/template/use-actions.js';
 
-const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
+const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
   const pages = useTemplateStore(({ template }) => template.pages);
   const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
@@ -35,10 +36,10 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
   const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
   const { isOpen: isCreateBlockOpen, onOpen: onCreateBlockOpen, onClose: onCreateBlockClose } = useDisclosure();
   const { isOpen: isCommentOpen, onOpen: onCommentOpen, onClose: onCommentClose } = useDisclosure();
+  const { isOpen: isPageCommentOpen, onOpen: onPageCommentOpen, onClose: onPageCommentClose } = useDisclosure();
+  const { handleAction } = useActions({ id });
 
-  useKey('Escape', () => {
-    onClose();
-  });
+  useKey('Escape', () => onClose());
 
   useEffect(() => {
     if (isOpen) {
@@ -51,56 +52,62 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
   }, [isOpen]);
 
   const menu = useMemo(() => {
-    const items = [
-      { key: 'copy', label: 'Copy', icon: <TbClipboardCopy size="18" /> },
-      { key: 'duplicate', label: 'Duplicate', icon: <TbCopyPlus size="18" /> },
-      { key: 'comment', label: 'Comment', icon: <LuMessageSquarePlus size="18" /> },
-    ];
-    if (selectedElements.length > 1) {
-      if (!elements.every((el) => el.group && el.group === elements[0].group)) {
-        items.push({ key: 'group', label: 'Group', icon: <LuGroup size="18" /> });
-      } else {
-        items.push({ key: 'ungroup', label: 'Ungroup', icon: <LuUngroup size="18" /> });
+    if (type === 'page') {
+      return [
+        { key: 'page-duplicate', label: 'Duplicate', icon: <TbCopyPlus size="18" /> },
+        { key: 'page-comment', label: 'Comment', icon: <LuMessageSquarePlus size="18" /> },
+      ];
+    } else if (type === 'element') {
+      const items = [
+        { key: 'copy', label: 'Copy', icon: <TbClipboardCopy size="18" /> },
+        { key: 'duplicate', label: 'Duplicate', icon: <TbCopyPlus size="18" /> },
+        { key: 'comment', label: 'Comment', icon: <LuMessageSquarePlus size="18" /> },
+      ];
+      if (selectedElements.length > 1) {
+        if (!elements.every((el) => el.group && el.group === elements[0].group)) {
+          items.push({ key: 'group', label: 'Group', icon: <LuGroup size="18" /> });
+        } else {
+          items.push({ key: 'ungroup', label: 'Ungroup', icon: <LuUngroup size="18" /> });
+        }
+        items.push({
+          key: 'align',
+          label: 'Align to',
+          icon: <RiAlignItemLeftLine size="18" />,
+          children: [
+            { key: 'align-left', label: 'Align left', icon: <RiAlignItemLeftLine size="18" /> },
+            { key: 'align-center', label: 'Align center', icon: <RiAlignItemHorizontalCenterLine size="18" /> },
+            { key: 'align-right', label: 'Align right', icon: <RiAlignItemVerticalCenterLine size="18" /> },
+            { key: 'align-top', label: 'Align top', icon: <RiAlignItemTopLine size="18" /> },
+            { key: 'align-middle', label: 'Align middle', icon: <RiAlignItemVerticalCenterLine size="18" /> },
+            { key: 'align-bottom', label: 'Align bottom', icon: <RiAlignItemBottomLine size="18" /> },
+          ],
+        });
       }
-
       items.push({
-        key: 'align',
-        label: 'Align to',
-        icon: <RiAlignItemLeftLine size="18" />,
+        key: 'arrange',
+        label: 'Arrange',
+        icon: <LuBringToFront size="18" />,
         children: [
-          { key: 'align-left', label: 'Align left', icon: <RiAlignItemLeftLine size="18" /> },
-          { key: 'align-center', label: 'Align center', icon: <RiAlignItemHorizontalCenterLine size="18" /> },
-          { key: 'align-right', label: 'Align right', icon: <RiAlignItemVerticalCenterLine size="18" /> },
-          { key: 'align-top', label: 'Align top', icon: <RiAlignItemTopLine size="18" /> },
-          { key: 'align-middle', label: 'Align middle', icon: <RiAlignItemVerticalCenterLine size="18" /> },
-          { key: 'align-bottom', label: 'Align bottom', icon: <RiAlignItemBottomLine size="18" /> },
+          { key: 'move-top', label: 'Move to top', icon: <LuBringToFront size="18" /> },
+          { key: 'move-bottom', label: 'Move to bottom', icon: <LuSendToBack size="18" /> },
+          { key: 'move-up', label: 'Move up', icon: <LuChevronUp size="18" /> },
+          { key: 'move-down', label: 'Move down', icon: <LuChevronDown size="18" /> },
         ],
       });
+      if (elements?.length && elements.every((el) => el.href)) {
+        items.push({ key: 'link', label: 'Edit link', icon: <TbLinkPlus size="18" />, showDivider: true });
+      } else {
+        items.push({ key: 'link', label: 'Link', icon: <TbLink size="18" />, showDivider: true });
+      }
+      items.push({ key: 'save-as-block', label: 'Save as block', icon: <TbPlus size="18" />, showDivider: true });
+      items.push(...[{ key: 'delete', label: 'Delete', icon: <TbTrash size="18" />, color: 'danger' }]);
+      return items;
     }
-    items.push({
-      key: 'arrange',
-      label: 'Arrange',
-      icon: <LuBringToFront size="18" />,
-      children: [
-        { key: 'move-top', label: 'Move to top', icon: <LuBringToFront size="18" /> },
-        { key: 'move-bottom', label: 'Move to bottom', icon: <LuSendToBack size="18" /> },
-        { key: 'move-up', label: 'Move up', icon: <LuChevronUp size="18" /> },
-        { key: 'move-down', label: 'Move down', icon: <LuChevronDown size="18" /> },
-      ],
-    });
-    if (elements?.length && elements.every((el) => el.href)) {
-      items.push({ key: 'link', label: 'Edit link', icon: <TbLinkPlus size="18" />, showDivider: true });
-    } else {
-      items.push({ key: 'link', label: 'Link', icon: <TbLink size="18" />, showDivider: true });
-    }
-    items.push({ key: 'save-as-block', label: 'Save as block', icon: <TbPlus size="18" />, showDivider: true });
-    items.push(...[{ key: 'delete', label: 'Delete', icon: <TbTrash size="18" />, color: 'danger' }]);
-    return items;
-  }, [elements, selectedElements.length]);
+  }, [elements, selectedElements.length, type]);
 
   return (
     <>
-      {isOpen && elements?.length > 0 && (
+      {isOpen && (
         <>
           {createPortal(
             <motion.div
@@ -117,9 +124,9 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
                   if (menu.find((item) => item.key === key)?.children?.length) return;
                   if (key === 'link') onLinkToolOpen();
                   if (key === 'save-as-block') onCreateBlockOpen();
-                  if (key === 'comment') {
-                    onCommentOpen();
-                  } else onAction(key);
+                  if (key === 'comment') onCommentOpen();
+                  if (key === 'page-comment') onPageCommentOpen();
+                  else handleAction(key);
                   onClose();
                 }}
                 itemClasses={{ title: 'text-base group' }}
@@ -139,7 +146,7 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
                         <Listbox
                           aria-label="Sub actions"
                           onAction={(key) => {
-                            onAction(key);
+                            handleAction(key);
                             onClose();
                           }}
                           itemClasses={{ title: 'text-base group' }}
@@ -175,15 +182,23 @@ const ContextMenu = ({ position, isOpen, onClose, onAction }) => {
         isOpen={isCommentOpen}
         onClose={onCommentClose}
       />
+      <CreateCommentModal
+        target="page"
+        targetId={id}
+        page={id}
+        isOpen={isPageCommentOpen}
+        onClose={onPageCommentClose}
+      />
     </>
   );
 };
 
 ContextMenu.propTypes = {
+  id: PropTypes.string.isRequired,
   position: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onAction: PropTypes.func.isRequired,
+  type: PropTypes.string,
 };
 
 export default ContextMenu;

@@ -6,11 +6,11 @@ import useTemplateStore from '@/store/template.js';
 import { useGetComments } from '@/api/business.js';
 import PropTypes from 'prop-types';
 
-const ElementCommentBadge = ({ element }) => {
+const PageCommentBadge = ({ id }) => {
   const { id: business } = useBusiness();
   const design = useTemplateStore((state) => state.template.id);
   const { data: { comments = [] } = {} } = useGetComments({ business, design });
-  const _comments = comments.filter((comment) => comment.targetId === element.id && !comment.resolved);
+  const _comments = comments.filter((comment) => comment.targetId === id && !comment.resolved);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const selectElements = useTemplateStore((state) => state.selectElements);
 
@@ -18,9 +18,9 @@ const ElementCommentBadge = ({ element }) => {
     updateTemplate({
       activeComment: _comments[0].id,
       isCommentsOpen: true,
-      commentsTargetId: element.id,
+      commentsTargetId: id,
     });
-    selectElements([element.id]);
+    selectElements([id]);
   };
 
   return (
@@ -56,8 +56,8 @@ const ElementCommentBadge = ({ element }) => {
   );
 };
 
-ElementCommentBadge.propTypes = {
-  element: PropTypes.object.isRequired,
+PageCommentBadge.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
-export default ElementCommentBadge;
+export default PageCommentBadge;

@@ -2,15 +2,16 @@ import { useCallback, useEffect, useState } from 'react';
 import useTemplateStore from '@/store/template.js';
 import ContextMenu from '@/components/core/templates/create/ContextMenu.jsx';
 
-export const useContextMenu = ({ id, node, onAction }) => {
-  const [contextMenu, setContextMenu] = useState({ isOpen: false, position: { x: 0, y: 0 } });
+export const useContextMenu = ({ id, node }) => {
+  const [contextMenu, setContextMenu] = useState({ isOpen: false, position: { x: 0, y: 0 }, type: null });
   const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
   const scale = useTemplateStore((state) => state.template.scale);
   const selectElements = useTemplateStore((state) => state.selectElements);
+  const selectPage = useTemplateStore((state) => state.selectPage);
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
 
   useEffect(() => {
-    const handleClick = () => setContextMenu({ isOpen: false, position: { x: 0, y: 0 } });
+    const handleClick = () => setContextMenu({ isOpen: false, position: { x: 0, y: 0 }, type: null });
     window.addEventListener('click', handleClick);
     window.addEventListener('auxclick', handleClick);
     return () => {
@@ -33,28 +34,35 @@ export const useContextMenu = ({ id, node, onAction }) => {
   const handleContextMenu = useCallback(
     (e) => {
       if (e.type === 'contextmenu') {
-        const targetElement = getElementUnderCursor(e);
-        if (!targetElement) {
-          setContextMenu({ isOpen: false, position: { x: 0, y: 0 } });
+        if (e.target === node.current) {
+          setContextMenu({ isOpen: true, position: { x: e.clientX, y: e.clientY }, type: 'page' });
           selectElements([]);
-          return;
+          selectPage(id);
+        } else {
+          const targetElement = getElementUnderCursor(e);
+          if (!targetElement) {
+            setContextMenu({ isOpen: false, position: { x: 0, y: 0 }, type: null });
+            selectElements([]);
+            return;
+          }
+          if (!selectedElements.includes(targetElement.id)) selectElements([targetElement.id]);
+          setContextMenu({ isOpen: true, position: { x: e.clientX, y: e.clientY }, type: 'element' });
         }
-        if (!selectedElements.includes(targetElement.id)) selectElements([targetElement.id]);
-        setContextMenu({ isOpen: true, position: { x: e.clientX, y: e.clientY } });
         e.preventDefault();
       }
     },
-    [getElementUnderCursor, selectElements, selectedElements]
+    [getElementUnderCursor, id, node, selectElements, selectPage, selectedElements]
   );
 
   const renderContextMenu = () => {
     return (
       <ContextMenu
+        id={id}
         position={contextMenu.position}
         isOpen={contextMenu.isOpen}
-        onAction={onAction}
+        type={contextMenu.type}
         onClose={() => {
-          setContextMenu({ isOpen: false, position: { x: 0, y: 0 } });
+          setContextMenu({ isOpen: false, position: { x: 0, y: 0 }, type: null });
         }}
       />
     );

@@ -6,8 +6,9 @@ import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import { TbChevronLeft } from 'react-icons/tb';
+import { HiX } from 'react-icons/hi';
 
-const ElementComments = ({ onBack }) => {
+const TargetComments = ({ onBack, onClose }) => {
   const { id: business } = useBusiness();
   const design = useTemplateStore((state) => state.template.id);
   const commentsTargetId = useTemplateStore((state) => state.template.commentsTargetId);
@@ -16,7 +17,6 @@ const ElementComments = ({ onBack }) => {
     business,
     design,
     resolved: false,
-    target: 'element',
     targetId: commentsTargetId,
   });
 
@@ -26,11 +26,16 @@ const ElementComments = ({ onBack }) => {
 
   return (
     <div className="py-6">
-      <div className="flex items-center space-x-3 mb-6 px-8">
-        <Button variant="light" color="default" radius="full" size="sm" onClick={onBack} isIconOnly>
-          <TbChevronLeft size="20" />
+      <div className="flex items-center justify-between mb-6 px-8">
+        <div className="flex items-center space-x-3">
+          <Button variant="light" color="default" radius="full" size="sm" onClick={onBack} isIconOnly>
+            <TbChevronLeft size="20" />
+          </Button>
+          <h2 className="text-lg font-medium leading-none">Comments {comments.length ? `(${comments.length})` : ''}</h2>
+        </div>
+        <Button onClick={onClose} isIconOnly variant="light" color="danger">
+          <HiX size="20" />
         </Button>
-        <h2 className="text-lg font-medium leading-none">Comments {comments.length ? `(${comments.length})` : ''}</h2>
       </div>
       <div>
         {isCommentsLoading ? (
@@ -59,8 +64,9 @@ const ElementComments = ({ onBack }) => {
   );
 };
 
-ElementComments.propTypes = {
+TargetComments.propTypes = {
   onBack: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
-export default ElementComments;
+export default TargetComments;

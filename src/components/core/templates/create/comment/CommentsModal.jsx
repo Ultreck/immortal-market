@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import CommentsList from './CommentsList.jsx';
 import CommentReplies from './CommentReplies.jsx';
 import useTemplateStore from '@/store/template';
-import ElementComments from '@/components/core/templates/create/comment/ElementComments.jsx';
+import TargetComments from '@/components/core/templates/create/comment/TargetComments.jsx';
 
 const CommentsModal = () => {
   const isCommentOpen = useTemplateStore((state) => state.template.isCommentsOpen);
@@ -11,7 +11,7 @@ const CommentsModal = () => {
   const commentsTargetId = useTemplateStore((state) => state.template.commentsTargetId);
 
   const handleClose = () => {
-    updateTemplate({ isCommentsOpen: false });
+    updateTemplate({ isCommentsOpen: false, activeComment: null, commentsTargetId: null });
   };
 
   return (
@@ -26,11 +26,11 @@ const CommentsModal = () => {
         >
           <div className="bg-white dark:bg-default-50 border border-default-200 dark:border-default-100 w-full max-h-[500px] rounded-2xl overflow-y-auto shadow">
             {activeComment ? (
-              <CommentReplies onBack={() => updateTemplate({ activeComment: null })} />
+              <CommentReplies onBack={() => updateTemplate({ activeComment: null })} onClose={handleClose} />
             ) : (
               <>
                 {commentsTargetId ? (
-                  <ElementComments onBack={() => updateTemplate({ commentsTargetId: null })} />
+                  <TargetComments onBack={() => updateTemplate({ commentsTargetId: null })} onClose={handleClose} />
                 ) : (
                   <CommentsList onClose={handleClose} />
                 )}

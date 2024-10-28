@@ -1,6 +1,6 @@
 import useTemplateStore from '@/store/template.js';
 
-export const useSelectionActions = ({ id }) => {
+export const useActions = ({ id }) => {
   const deleteElements = useTemplateStore((state) => state.deleteElements);
   const addElements = useTemplateStore((state) => state.addElements);
   const updatePage = useTemplateStore((state) => state.updatePage);
@@ -8,7 +8,11 @@ export const useSelectionActions = ({ id }) => {
   const groupElements = useTemplateStore((state) => state.groupElements);
   const ungroupElements = useTemplateStore((state) => state.ungroupElements);
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
+  const getPage = useTemplateStore((state) => state.getPage);
+  const addPage = useTemplateStore((state) => state.addPage);
+  const deletePage = useTemplateStore((state) => state.deletePage);
+  const movePageUp = useTemplateStore((state) => state.movePageUp);
+  const movePageDown = useTemplateStore((state) => state.movePageDown);
 
   const handleAction = async (action) => {
     if (action === 'copy') await handleCopy();
@@ -26,9 +30,15 @@ export const useSelectionActions = ({ id }) => {
     if (action === 'align-top') handleAlignTop();
     if (action === 'align-middle') handleAlignMiddle();
     if (action === 'align-bottom') handleAlignBottom();
+    if (action === 'page-add') handleAddPage();
+    if (action === 'page-delete') handleDeletePage();
+    if (action === 'page-move-up') handleMovePageUp();
+    if (action === 'page-move-down') handleMovePageDown();
+    if (action === 'page-duplicate') handleDuplicatePage();
   };
 
   const handleDuplicate = () => {
+    const page = getPage(id);
     const _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const duplicatedElements = _elements.map((element) => {
       return { ...element, id: crypto.randomUUID(), x: element.x + 10, y: element.y + 10 };
@@ -36,21 +46,24 @@ export const useSelectionActions = ({ id }) => {
     addElements(duplicatedElements, page.id);
   };
 
-  const handleDelete = () => deleteElements(selectedElements, page.id);
+  const handleDelete = () => deleteElements(selectedElements, id);
 
   const handleMoveToTop = () => {
+    const page = getPage(id);
     const right = page.elements.filter((el) => selectedElements.includes(el.id));
     const left = page.elements.filter((el) => !selectedElements.includes(el.id));
     updatePage({ elements: [...left, ...right] }, page.id, true);
   };
 
   const handleMoveToBottom = () => {
+    const page = getPage(id);
     const left = page.elements.filter((el) => selectedElements.includes(el.id));
     const right = page.elements.filter((el) => !selectedElements.includes(el.id));
     updatePage({ elements: [...left, ...right] }, page.id, true);
   };
 
   const handleMoveUp = () => {
+    const page = getPage(id);
     const _elements = [...page.elements];
     const selectedIndices = selectedElements.map((id) => _elements.findIndex((el) => el.id === id));
     for (let i = selectedIndices.length - 1; i >= 0; i--) {
@@ -63,6 +76,7 @@ export const useSelectionActions = ({ id }) => {
   };
 
   const handleMoveDown = () => {
+    const page = getPage(id);
     const _elements = [...page.elements];
     const selectedIndices = selectedElements.map((id) => _elements.findIndex((el) => el.id === id));
     for (let i = 0; i < selectedIndices.length; i++) {
@@ -75,21 +89,24 @@ export const useSelectionActions = ({ id }) => {
   };
 
   const handleCopy = async () => {
+    const page = getPage(id);
     const _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const textBlob = new Blob([JSON.stringify(_elements)], { type: 'text/plain' });
     await navigator.clipboard.write([new ClipboardItem({ 'text/plain': textBlob })]);
   };
 
   const handleGroup = () => {
-    groupElements(selectedElements, page.id);
+    groupElements(selectedElements, id);
   };
 
   const handleUngroup = () => {
+    const page = getPage(id);
     const group = page.elements.find((el) => el.id === selectedElements[0]).group;
     ungroupElements(group, page.id);
   };
 
   const handleAlignLeft = () => {
+    const page = getPage(id);
     let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const x = Math.min(..._elements.map((el) => el.x));
     _elements = _elements.map((el) => ({ ...el, x }));
@@ -97,6 +114,7 @@ export const useSelectionActions = ({ id }) => {
   };
 
   const handleAlignCenter = () => {
+    const page = getPage(id);
     let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const minX = Math.min(..._elements.map((el) => el.x));
     const maxX = Math.max(..._elements.map((el) => el.x + el.width));
@@ -109,6 +127,7 @@ export const useSelectionActions = ({ id }) => {
   };
 
   const handleAlignRight = () => {
+    const page = getPage(id);
     let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const maxRight = Math.max(..._elements.map((el) => el.x + el.width));
     _elements = _elements.map((el) => ({
@@ -119,6 +138,7 @@ export const useSelectionActions = ({ id }) => {
   };
 
   const handleAlignTop = () => {
+    const page = getPage(id);
     let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const y = Math.min(..._elements.map((el) => el.y));
     _elements = _elements.map((el) => ({ ...el, y }));
@@ -126,6 +146,7 @@ export const useSelectionActions = ({ id }) => {
   };
 
   const handleAlignMiddle = () => {
+    const page = getPage(id);
     let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const minY = Math.min(..._elements.map((el) => el.y));
     const maxY = Math.max(..._elements.map((el) => el.y + el.height));
@@ -138,6 +159,7 @@ export const useSelectionActions = ({ id }) => {
   };
 
   const handleAlignBottom = () => {
+    const page = getPage(id);
     let _elements = page.elements.filter((element) => selectedElements.includes(element.id));
     const maxBottom = Math.max(..._elements.map((el) => el.y + el.height));
     _elements = _elements.map((el) => ({
@@ -145,6 +167,32 @@ export const useSelectionActions = ({ id }) => {
       y: maxBottom - el.height,
     }));
     updateElements(_elements, page.id, true);
+  };
+
+  const handleAddPage = () => {
+    addPage();
+  };
+
+  const handleMovePageUp = () => {
+    movePageUp(id);
+  };
+
+  const handleMovePageDown = () => {
+    movePageDown(id);
+  };
+
+  const handleDeletePage = () => {
+    deletePage(id);
+  };
+
+  const handleDuplicatePage = () => {
+    const page = getPage(id);
+    const payload = {
+      ...page,
+      id: crypto.randomUUID(),
+      elements: page.elements.map((el) => ({ ...el, id: crypto.randomUUID() })),
+    };
+    addPage(payload, page.id);
   };
 
   return {

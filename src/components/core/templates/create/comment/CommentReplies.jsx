@@ -8,24 +8,32 @@ import NoData from '@/components/ui/NoData.jsx';
 import CommentReplyItem from '@/components/core/templates/create/comment/CommentReplyItem.jsx';
 import CreateComment from '@/components/core/templates/create/comment/CreateComment.jsx';
 import CommentItem from '@/components/core/templates/create/comment/CommentItem.jsx';
+import { HiX } from 'react-icons/hi';
 
-const CommentReplies = ({ onBack }) => {
+const CommentReplies = ({ onBack, onClose }) => {
   const activeComment = useTemplateStore((state) => state.template.activeComment);
   const { id: business } = useBusiness();
   const design = useTemplateStore((state) => state.template.id);
   const { data: { comments = [] } = {}, isLoading: isCommentsLoading } = useGetComments({
     business,
     design,
-    parent: activeComment._id,
+    parent: activeComment?._id,
   });
+
+  if (!activeComment) return null;
 
   return (
     <>
-      <div className="flex items-center space-x-3 py-6 px-8">
-        <Button variant="light" color="default" radius="full" size="sm" onClick={onBack} isIconOnly>
-          <TbChevronLeft size="20" />
+      <div className="flex items-center justify-between py-6 px-8">
+        <div className="flex items-center space-x-3">
+          <Button variant="light" color="default" radius="full" size="sm" onClick={onBack} isIconOnly>
+            <TbChevronLeft size="20" />
+          </Button>
+          <h2 className="text-lg font-medium leading-none">Replies</h2>
+        </div>
+        <Button onClick={onClose} isIconOnly variant="light" color="danger">
+          <HiX size="20" />
         </Button>
-        <h2 className="text-lg font-medium leading-none">Replies</h2>
       </div>
       <div>
         <div className="px-8 mb-4">
@@ -68,6 +76,7 @@ const CommentReplies = ({ onBack }) => {
 
 CommentReplies.propTypes = {
   onBack: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default CommentReplies;
