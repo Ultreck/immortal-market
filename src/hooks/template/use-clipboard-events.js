@@ -14,9 +14,11 @@ const useClipboardEvents = () => {
   const addElements = useTemplateStore((state) => state.addElements);
   const activePage = useTemplateStore((state) => state.template.activePage);
   const updateElements = useTemplateStore((state) => state.updateElements);
+  const activeElement = useTemplateStore((state) => state.template.activeElement);
 
   useEffect(() => {
     const handleCopy = (e) => {
+      if (activeElement) return;
       if (selectedElements.length) {
         const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
         const _elements = page.elements.filter((element) => selectedElements.includes(element.id));
@@ -25,6 +27,7 @@ const useClipboardEvents = () => {
       }
     };
     const handleCut = (e) => {
+      if (activeElement) return;
       if (selectedElements.length) {
         const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
         const _elements = page.elements.filter((element) => selectedElements.includes(element.id));
@@ -34,7 +37,7 @@ const useClipboardEvents = () => {
       }
     };
     const handlePaste = (e) => {
-      if (selectedElements.length) return;
+      if (activeElement) return;
       try {
         for (const item of e.clipboardData.items) {
           if (item.type === 'text/plain') {
@@ -138,7 +141,7 @@ const useClipboardEvents = () => {
       window.removeEventListener('copy', handleCopy);
       window.removeEventListener('cut', handleCut);
     };
-  }, [activePage, addElements, deleteElements, getElement, pages, selectedElements, updateElements]);
+  }, [activeElement, activePage, addElements, deleteElements, getElement, pages, selectedElements, updateElements]);
 };
 
 export default useClipboardEvents;
