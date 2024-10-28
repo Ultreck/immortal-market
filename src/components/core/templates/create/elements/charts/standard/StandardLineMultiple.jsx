@@ -3,22 +3,9 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const StandardLineMultiple = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardLineMultipleContent element={element} />
-    </ElementWrapper>
-  );
+const StandardLineMultiple = ({ element }) => {
+  return <StandardLineMultipleContent element={element} />;
 };
 
 StandardLineMultiple.propTypes = ElementPropTypes;
@@ -58,23 +45,25 @@ export const StandardLineMultipleContent = ({ element }) => {
                 fill: element.config.styles.gridAndLegendColor,
               }}
             />
-            <YAxis 
-            type="number" 
-            hide={!element.config.showYaxis} 
-            fontSize={element.config.fontSize} 
-            tick={{
-              fontSize: element.config.styles.yGridSize,
-              fontWeight: element.config.styles.gFontWeight,
-              fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor, 
-            }}
+            <YAxis
+              type="number"
+              hide={!element.config.showYaxis}
+              fontSize={element.config.fontSize}
+              tick={{
+                fontSize: element.config.styles.yGridSize,
+                fontWeight: element.config.styles.gFontWeight,
+                fontStyle: element.config.styles.gFontStyle,
+                fill: element.config.styles.gridAndLegendColor,
+              }}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            {element.config.showLegend && <Legend 
-            textStyle={{
-              fontSize: element.config.styles.legendSize,
-            }}
-            />}
+            {element.config.showLegend && (
+              <Legend
+                textStyle={{
+                  fontSize: element.config.styles.legendSize,
+                }}
+              />
+            )}
             {element.config.keys.y.slice(0, element.config.noOfLines).map((key, index) => {
               return (
                 <Line
@@ -100,4 +89,3 @@ StandardLineMultipleContent.propTypes = {
 };
 
 export default StandardLineMultiple;
-

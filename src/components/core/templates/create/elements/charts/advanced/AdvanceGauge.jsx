@@ -1,25 +1,10 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import ElementWrapper from '../../../ElementWrapper';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
-const AdvanceGauge = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <AdvanceGaugeContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceGauge = ({ element }) => {
+  return <AdvanceGaugeContent element={element} />;
 };
 
 AdvanceGauge.propTypes = ElementPropTypes;
@@ -104,10 +89,16 @@ export const AdvanceGaugeContent = ({ element }) => {
     };
   }, [element]);
 
-  return <div ref={chartRef} style={{
-    padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
-    width: element.width, height: element.height
-  }} />;
+  return (
+    <div
+      ref={chartRef}
+      style={{
+        padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
+        width: element.width,
+        height: element.height,
+      }}
+    />
+  );
 };
 
 AdvanceGaugeContent.propTypes = {

@@ -1,25 +1,10 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import ElementWrapper from '../../../ElementWrapper';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
-const AdvanceSpeedometer = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <AdvanceSpeedometerContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceSpeedometer = ({ element }) => {
+  return <AdvanceSpeedometerContent element={element} />;
 };
 
 AdvanceSpeedometer.propTypes = ElementPropTypes;
@@ -106,10 +91,16 @@ export const AdvanceSpeedometerContent = ({ element }) => {
     };
   }, [element]);
 
-  return <div style={{
-    padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
-    width: element.width, height: element.height
-  }} ref={chartRef} />;
+  return (
+    <div
+      style={{
+        padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
+        width: element.width,
+        height: element.height,
+      }}
+      ref={chartRef}
+    />
+  );
 };
 
 AdvanceSpeedometerContent.propTypes = {

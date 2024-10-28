@@ -1,26 +1,11 @@
 import { motion } from 'framer-motion';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
 import { useEffect } from 'react';
 
-const AdvanceShapes = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <AdvanceShapesContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceShapes = ({ element }) => {
+  return <AdvanceShapesContent element={element} />;
 };
 
 AdvanceShapes.propTypes = ElementPropTypes;
@@ -59,11 +44,7 @@ export const AdvanceShapesContent = ({ element }) => {
   const n = Math.floor((percentage / 100) * noOfShapes);
   const Icon1 = icons.find((icon) => icon.name === icon1 || 'circle').filledIcon;
 
-  console.log({icon1, Icon1, element: element.config });
-  console.log(icons.find((icon) => icon.name === 'heart').filledIcon);
-
   useEffect(() => {
-
   }, [element]);
 
   return (
@@ -99,4 +80,3 @@ AdvanceShapesContent.propTypes = {
 };
 
 export default AdvanceShapes;
-

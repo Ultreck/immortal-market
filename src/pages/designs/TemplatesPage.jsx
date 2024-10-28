@@ -88,7 +88,6 @@ const TemplatesPage = () => {
             'HR',
             'Sales',
             'Operations',
-            'Marketing',
             'Analytics',
             'Lorem',
             'Ipsum',

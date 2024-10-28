@@ -1,30 +1,16 @@
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 
-const List = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-      fit
-    >
-      <ListContent element={element} />
-    </ElementWrapper>
-  );
+export const List = ({ element }) => {
+  return <ListContent element={element} />;
 };
 
 export const ListPresent = ({ element }) => {
   return <ListContent element={element} />;
 };
 
-export const ListContent = ({ element }) => {
+const ListContent = ({ element }) => {
   return (
     <ul
       className={cn(`h-full w-full list-inside`, {
@@ -49,5 +35,3 @@ ListPresent.propTypes = {
 ListContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
-export default List;

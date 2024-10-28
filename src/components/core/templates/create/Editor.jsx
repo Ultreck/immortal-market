@@ -19,7 +19,9 @@ const Editor = () => {
   useHistory();
 
   const handleParentClick = (e) => {
-    if (e.target === root.current) updateTemplate({ selectedElements: [], selectedPage: null });
+    if (e.target === root.current) {
+      updateTemplate({ selectedElements: [], selectedPage: null, activeElement: null });
+    }
   };
 
   return (

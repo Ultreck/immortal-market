@@ -1,23 +1,10 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 
-const AdvanceFunnel = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <AdvanceFunnelChartContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceFunnel = ({ element }) => {
+  return <AdvanceFunnelChartContent element={element} />;
 };
 
 AdvanceFunnel.propTypes = ElementPropTypes;
@@ -84,15 +71,18 @@ export const AdvanceFunnelChartContent = ({ element }) => {
   }, [element.config.data, element.config.colors, element.width, element.height, element.config.styles]);
 
   return (
-    <div ref={chartRef} style={{ 
-      width: element.width, 
-      height: element.height, 
-      opacity: element.style.opacity,
-      paddingTop: element.config.styles.yPadding,
-      paddingLeft: element.config.styles.xPadding,
-      paddingBottom: element.config.styles.yPadding,
-      paddingRight: element.config.styles.xPadding,
-     }} />
+    <div
+      ref={chartRef}
+      style={{
+        width: element.width,
+        height: element.height,
+        opacity: element.style.opacity,
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
+      }}
+    />
   );
 };
 

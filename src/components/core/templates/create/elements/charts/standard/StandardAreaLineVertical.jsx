@@ -1,24 +1,10 @@
 import { Area, CartesianGrid, ComposedChart, Legend, Line, XAxis, YAxis } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart.jsx';
-import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardAreaLineVertical = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardAreaLineVerticalContent element={element} />
-    </ElementWrapper>
-  );
+const StandardAreaLineVertical = ({ element }) => {
+  return <StandardAreaLineVerticalContent element={element} />;
 };
 
 StandardAreaLineVertical.propTypes = ElementPropTypes;

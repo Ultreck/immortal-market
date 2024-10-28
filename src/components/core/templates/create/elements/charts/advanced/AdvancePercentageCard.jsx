@@ -1,25 +1,11 @@
 import { ElementPropTypes } from '@/lib/prop-types';
 import { motion } from 'framer-motion';
-import { Button, Card, Tooltip } from '@nextui-org/react';
+import { Button, Tooltip } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils';
-import ElementWrapper from '../../../ElementWrapper';
-import { useEffect } from 'react';
 
-const AdvancePercentageCard = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <AdvancePercentageCardContent element={element} />
-    </ElementWrapper>
-  );
+const AdvancePercentageCard = ({ element }) => {
+  return <AdvancePercentageCardContent element={element} />;
 };
 
 AdvancePercentageCard.propTypes = ElementPropTypes;
@@ -71,21 +57,24 @@ const AdvancePercentageCardContent = ({ element }) => {
             style={{ backgroundColor: element.config.colors[index] }}
           >
             <span
-            style={{
-              fontSize: `${element.config.styles.labelSize}px`,
-              fontWeight: element.config.styles.lFontWeight,
-              fontStyle: element.config.styles.lFontStyle,
-              color: element.config.styles.valueAndLableColor,
-            }}
-            className="text-gray-800 font-medium">{item.age}</span>
-            <motion.span
-              className="text-gray-800 font-bold"
-              style={{ 
-                fontSize: `${Math.max(item.percentage +element.config.styles.valueSize)}px`,
+              style={{
+                fontSize: `${element.config.styles.labelSize}px`,
                 fontWeight: element.config.styles.lFontWeight,
                 fontStyle: element.config.styles.lFontStyle,
                 color: element.config.styles.valueAndLableColor,
-               }}
+              }}
+              className="text-gray-800 font-medium"
+            >
+              {item.age}
+            </span>
+            <motion.span
+              className="text-gray-800 font-bold"
+              style={{
+                fontSize: `${Math.max(item.percentage + element.config.styles.valueSize)}px`,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
+                color: element.config.styles.valueAndLableColor,
+              }}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}

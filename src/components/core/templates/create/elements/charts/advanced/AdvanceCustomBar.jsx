@@ -3,24 +3,11 @@ import { motion } from 'framer-motion';
 import { Button, Tooltip } from '@nextui-org/react';
 import { Fragment, useMemo } from 'react';
 import { TbCircleFilled } from 'react-icons/tb';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
-const AdvanceCustomBar = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <AdvancedCustomBarContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceCustomBar = ({ element }) => {
+  return <AdvancedCustomBarContent element={element} />;
 };
 
 AdvanceCustomBar.propTypes = ElementPropTypes;
@@ -86,14 +73,15 @@ export const AdvancedCustomBarContent = ({ element }) => {
   return renderCardTooltip(
     <>
       {element.config.orientation === 'vertical' && (
-        <div 
-        style={{
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
-        }}
-        className="w-full h-full">
+        <div
+          style={{
+            paddingTop: element.config.styles.yPadding,
+            paddingLeft: element.config.styles.xPadding,
+            paddingBottom: element.config.styles.yPadding,
+            paddingRight: element.config.styles.xPadding,
+          }}
+          className="w-full h-full"
+        >
           <div
             className="grid gap-3 items-end h-full w-full"
             style={{ gridTemplateColumns: `repeat(${element.config.bars + 1}, 1fr)` }}
@@ -106,14 +94,16 @@ export const AdvancedCustomBarContent = ({ element }) => {
                     <div className="w-full h-full rounded relative flex flex-col items-center justify-end">
                       {element.config.labelPosition === 'start' && (
                         <p
-                        style={{ 
-                          fontSize: element.config.styles.labelSize,
-                          fontWeight: element.config.styles.lFontWeight,
-                          fontStyle: element.config.styles.lFontStyle,
-                          color: element.config.styles.valueAndLableColor,
-                          left: `calc(${percentages[index]}% + 6px)`,
-                        }}
-                        key={index} className="text-sm text-center leading-none font-medium mb-2">
+                          style={{
+                            fontSize: element.config.styles.labelSize,
+                            fontWeight: element.config.styles.lFontWeight,
+                            fontStyle: element.config.styles.lFontStyle,
+                            color: element.config.styles.valueAndLableColor,
+                            left: `calc(${percentages[index]}% + 6px)`,
+                          }}
+                          key={index}
+                          className="text-sm text-center leading-none font-medium mb-2"
+                        >
                           {item.label}
                         </p>
                       )}
@@ -133,14 +123,16 @@ export const AdvancedCustomBarContent = ({ element }) => {
                         className="w-full rounded-2xl"
                       />
                       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white text-md font-medium mix-blend-difference flex flex-col items-center space-y-1">
-                        <p 
-                        style={{ 
-                          fontSize: element.config.styles.labelSize,
-                          fontWeight: element.config.styles.lFontWeight,
-                          fontStyle: element.config.styles.lFontStyle,
-                          color: element.config.styles.valueAndLableColor,
-                        }}
-                        >{item.value}</p>
+                        <p
+                          style={{
+                            fontSize: element.config.styles.labelSize,
+                            fontWeight: element.config.styles.lFontWeight,
+                            fontStyle: element.config.styles.lFontStyle,
+                            color: element.config.styles.valueAndLableColor,
+                          }}
+                        >
+                          {item.value}
+                        </p>
                         {element.config.isIconVisible && <TbCircleFilled size={16} />}
                       </div>
                     </div>
@@ -165,29 +157,33 @@ export const AdvancedCustomBarContent = ({ element }) => {
       )}
       {element.config.orientation === 'horizontal' && (
         <div
-        style={{
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
-        }}
-        className="flex flex-col items-start h-full space-y-2">
+          style={{
+            paddingTop: element.config.styles.yPadding,
+            paddingLeft: element.config.styles.xPadding,
+            paddingBottom: element.config.styles.yPadding,
+            paddingRight: element.config.styles.xPadding,
+          }}
+          className="flex flex-col items-start h-full space-y-2"
+        >
           {data.map((item, index) => (
             <Fragment key={index}>
               {renderBarTooltip(
                 `${item.label}: ${item.value}`,
                 <div className="grid grid-cols-12 gap-2 items-center w-full h-full">
-                  {element.config.labelPosition === 'start' && 
-                  <p
-                  style={{ 
-                    fontSize: element.config.styles.labelSize,
-                    fontWeight: element.config.styles.lFontWeight,
-                    fontStyle: element.config.styles.lFontStyle,
-                    color: element.config.styles.valueAndLableColor,
-                    left: `calc(${percentages[index]}% + 6px)`,
-                  }}
-                   className="col-span-2 leading-none">{item.label}</p>
-                  }
+                  {element.config.labelPosition === 'start' && (
+                    <p
+                      style={{
+                        fontSize: element.config.styles.labelSize,
+                        fontWeight: element.config.styles.lFontWeight,
+                        fontStyle: element.config.styles.lFontStyle,
+                        color: element.config.styles.valueAndLableColor,
+                        left: `calc(${percentages[index]}% + 6px)`,
+                      }}
+                      className="col-span-2 leading-none"
+                    >
+                      {item.label}
+                    </p>
+                  )}
                   <div
                     className={cn(
                       'h-full flex flex-row justify-start items-center rounded w-full relative col-span-12',
@@ -222,26 +218,29 @@ export const AdvancedCustomBarContent = ({ element }) => {
                             {item.label[1]}
                           </div>
                         </div>
-                        <p 
-                        style={{ 
-                          fontSize: element.config.styles.valueSize,
+                        <p
+                          style={{
+                            fontSize: element.config.styles.valueSize,
+                            fontWeight: element.config.styles.lFontWeight,
+                            fontStyle: element.config.styles.lFontStyle,
+                            color: element.config.styles.valueAndLableColor,
+                            left: `calc(${percentages[index]}% + 6px)`,
+                          }}
+                          className="text-black"
+                        >
+                          {item.value}
+                        </p>
+                      </div>
+                    )}
+                    {element.config.labelPosition === 'end' && (
+                      <p
+                        style={{
+                          fontSize: element.config.styles.labelSize,
                           fontWeight: element.config.styles.lFontWeight,
                           fontStyle: element.config.styles.lFontStyle,
                           color: element.config.styles.valueAndLableColor,
                           left: `calc(${percentages[index]}% + 6px)`,
                         }}
-                        className='text-black' >{item.value}</p>
-                      </div>
-                    )}
-                    {element.config.labelPosition === 'end' && (
-                      <p
-                      style={{ 
-                        fontSize: element.config.styles.labelSize,
-                        fontWeight: element.config.styles.lFontWeight,
-                        fontStyle: element.config.styles.lFontStyle,
-                        color: element.config.styles.valueAndLableColor,
-                        left: `calc(${percentages[index]}% + 6px)`,
-                      }}
                         key={index}
                         className={cn('text-sm leading-none font-medium absolute top-1/2 -translate-y-1/2')}
                       >
@@ -264,4 +263,3 @@ AdvancedCustomBarContent.propTypes = {
 };
 
 export default AdvanceCustomBar;
-

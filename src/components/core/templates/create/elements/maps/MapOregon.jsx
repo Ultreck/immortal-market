@@ -1,24 +1,9 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '../../ElementWrapper.jsx';
 import useMapElement from '@/lib/design/use-map-element.jsx';
 import PropTypes from 'prop-types';
 
-const MapOregon = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <MapOregonContent element={element} />
-    </ElementWrapper>
-  );
+const MapOregon = ({ element }) => {
+  return <MapOregonContent element={element} />;
 };
 
 export const MapOregonPresent = ({ element }) => {

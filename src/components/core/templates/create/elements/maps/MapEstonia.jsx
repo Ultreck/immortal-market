@@ -1,24 +1,9 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '../../ElementWrapper.jsx';
 import useMapElement from '@/lib/design/use-map-element.jsx';
 import PropTypes from 'prop-types';
 
-const MapEstonia = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <MapEstoniaContent element={element} />
-    </ElementWrapper>
-  );
+const MapEstonia = ({ element }) => {
+  return <MapEstoniaContent element={element} />;
 };
 
 export const MapEstoniaPresent = ({ element }) => {

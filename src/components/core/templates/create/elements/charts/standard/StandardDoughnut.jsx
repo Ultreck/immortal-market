@@ -2,23 +2,10 @@ import { Legend, Pie, PieChart } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { useEffect } from 'react';
 
-const StandardDoughnut = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardDoughnutContent element={element} />
-    </ElementWrapper>
-  );
+const StandardDoughnut = ({ element }) => {
+  return <StandardDoughnutContent element={element} />;
 };
 
 StandardDoughnut.propTypes = ElementPropTypes;
@@ -33,59 +20,61 @@ export const StandardDoughnutContent = ({ element }) => {
 
   return (
     <div
-    style={{
-      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-    }}
-  >    
-    <ChartContainer
-      config={{}}
       style={{
-        height: element.height,
-        width: element.width,
-        opacity: element.style.opacity,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
-      >
-      <PieChart 
-      width={element.width} 
-      height={element.height}
-      style={{
-        paddingTop: element.config.styles.yPadding,
-        paddingLeft: element.config.styles.xPadding,
-        paddingBottom: element.config.styles.yPadding,
-        paddingRight: element.config.styles.xPadding,
-      }}
-      textStyle={{
-        fontSize: element.config.styles.valueSize,
-        color: element.config.styles.legendColor,
-        fontWeight: element.config.styles.legendFontWeight,
-        fontFamily: element.config.styles.legendFontFamily,
-      }}
-      >
-        {element.config.showLegend && <Legend
-         wrapperStyle={{
-          fontSize: element.config.styles.labelSize,
-           color: element.config.styles.valueAndLableColor,
+    >
+      <ChartContainer
+        config={{}}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
         }}
-        />}
-        {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
-        <Pie
-          data={chartData}
-          innerRadius={Math.min(element.width, element.height) * 0.3}
-          outerRadius={Math.min(element.width, element.height) * 0.43}
-          dataKey={element.config.keys.data}
-          label={element.config.showLabel}
-          labelLine={false}
+      >
+        <PieChart
+          width={element.width}
+          height={element.height}
           style={{
+            paddingTop: element.config.styles.yPadding,
+            paddingLeft: element.config.styles.xPadding,
+            paddingBottom: element.config.styles.yPadding,
+            paddingRight: element.config.styles.xPadding,
+          }}
+          textStyle={{
             fontSize: element.config.styles.valueSize,
             color: element.config.styles.legendColor,
             fontWeight: element.config.styles.legendFontWeight,
             fontFamily: element.config.styles.legendFontFamily,
           }}
-        />
-      </PieChart>
-    </ChartContainer>
-  </div>
+        >
+          {element.config.showLegend && (
+            <Legend
+              wrapperStyle={{
+                fontSize: element.config.styles.labelSize,
+                color: element.config.styles.valueAndLableColor,
+              }}
+            />
+          )}
+          {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
+          <Pie
+            data={chartData}
+            innerRadius={Math.min(element.width, element.height) * 0.3}
+            outerRadius={Math.min(element.width, element.height) * 0.43}
+            dataKey={element.config.keys.data}
+            label={element.config.showLabel}
+            labelLine={false}
+            style={{
+              fontSize: element.config.styles.valueSize,
+              color: element.config.styles.legendColor,
+              fontWeight: element.config.styles.legendFontWeight,
+              fontFamily: element.config.styles.legendFontFamily,
+            }}
+          />
+        </PieChart>
+      </ChartContainer>
+    </div>
   );
 };
 
@@ -94,4 +83,3 @@ StandardDoughnutContent.propTypes = {
 };
 
 export default StandardDoughnut;
-

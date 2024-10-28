@@ -1,24 +1,9 @@
-import ElementWrapper from '../../ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import useMapElement from '@/lib/design/use-map-element.jsx';
 import PropTypes from 'prop-types';
 
-const MapRwanda = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <MapRwandaContent element={element} />
-    </ElementWrapper>
-  );
+const MapRwanda = ({ element }) => {
+  return <MapRwandaContent element={element} />;
 };
 
 export const MapRwandaPresent = ({ element }) => {

@@ -92,7 +92,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'circle-icons' }),
       config: {
         name: 'circle-icons',
-        styles:getChartsDefaultStyle({ type: 'chart-a', name: 'circle-icons'}),
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'circle-icons' }),
         data: [
           { label: 'Bubble 1', value: 30, icon: 'fa fa-user' },
           { label: 'Bubble 2', value: 50, icon: 'fa fa-house' },
@@ -105,7 +105,7 @@ const elements = [
         ],
         keys: { name: 'label', data: 'value' },
         colors,
-        circles: 5
+        circles: 5,
       },
     },
     preview: (
@@ -125,7 +125,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'speedometer' }),
       config: {
         name: 'speedometer',
-        styles: getChartsDefaultStyle({type: 'chart-a', name: 'speedometer'}),
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'speedometer' }),
         data: 20,
         keys: { name: 'name', data: 'value' },
         colors: ['#E66B5B', '#1D9085', '#264A5A'],
@@ -197,8 +197,8 @@ const elements = [
       height: 400,
       style: getElementDefaultStyle({ type: 'chart-a', name: 'dynamic-sorting' }),
       config: {
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'dynamic-sorting' }),
         name: 'dynamic-sorting',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'dynamic-sorting' }),
         data: ['A', 'B', 'C', 'D', 'E'],
         keys: { name: '', data: '' },
         colors,
@@ -225,7 +225,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'scatter-life-expectancy' }),
       config: {
         name: 'scatter-life-expectancy',
-        styles: getChartsDefaultStyle({type: 'chart-a', name: 'scatter-life-expectancy'}),
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'scatter-life-expectancy' }),
         data: starterLifeChartData.series[0],
         keys: { name: 'name', data: 'value' },
         colors,
@@ -283,7 +283,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'percentage-card' }),
       config: {
         name: 'percentage-card',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'percentage-card'  }),
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'percentage-card' }),
         data: [
           { age: '25-34 years...', percentage: 73.1 },
           { age: '35-44 years', percentage: 68.9 },
@@ -327,7 +327,7 @@ const elements = [
           { label: 'Airtel', value: 3200 },
           { label: 'Zenith', value: 778.6 },
         ],
-        keys:{name:"label", data:"value"},
+        keys: { name: 'label', data: 'value' },
         colors,
         bars: 5,
       },
@@ -349,7 +349,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'nested-circles' }),
       config: {
         name: 'nested-circles',
-        styles: getChartsDefaultStyle({type: 'chart-a', name: 'nested-circles' }),
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'nested-circles' }),
         data: [
           { value: 60, name: 'Visit' },
           { value: 40, name: 'Inquiry' },
@@ -362,7 +362,7 @@ const elements = [
           { value: 90, name: 'Click' },
           { value: 30, name: 'Show' },
         ],
-        keys:{name:"name", data:"value"},
+        keys: { name: 'name', data: 'value' },
         colors,
         bars: 4,
       },
@@ -392,7 +392,7 @@ const elements = [
           { value: 80, name: 'Click' },
           { value: 100, name: 'Show' },
         ],
-        keys:{name:"name", data:"value"},
+        keys: { name: 'name', data: 'value' },
         colors,
       },
     },
@@ -663,7 +663,7 @@ const elements = [
       style: getElementDefaultStyle({ type: 'chart-a', name: 'pictogram-shapes' }),
       config: {
         name: 'pictogram-shapes',
-        styles: getChartsDefaultStyle({  type: 'chart-a', name: 'pictogram-shapes' }),
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'pictogram-shapes' }),
         percentage: 65,
         shape: 'circle',
         noOfShapes: 10,
@@ -714,7 +714,7 @@ const elements = [
           { label: 'Lafarge Africa', value: 339.1 },
           { label: 'Access Bank', value: 300.4 },
         ],
-        keys:{name:"label", data:"value"},
+        keys: { name: 'label', data: 'value' },
         orientation: 'horizontal',
         isIconVisible: true,
         labelPosition: 'start',

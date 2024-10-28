@@ -1,98 +1,224 @@
-import Text, { TextPresent } from '@/components/core/templates/create/elements/Text.jsx';
-import List, { ListPresent } from '@/components/core/templates/create/elements/List.jsx';
-import CountUpNumber, { CountUpNumberPresent } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
-import Image, { ImagePresent } from '@/components/core/templates/create/elements/Image.jsx';
-import Line, { LineElementContent } from '@/components/core/templates/create/elements/Line.jsx';
-import Shape, { ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
+import { Text, TextPresent } from '@/components/core/templates/create/elements/Text.jsx';
+import { List, ListPresent } from '@/components/core/templates/create/elements/List.jsx';
+import { CountUpNumber, CountUpNumberPresent } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
+import { ImagePresent } from '@/components/core/templates/create/elements/Image.jsx';
+import { Line, LinePresent } from '@/components/core/templates/create/elements/Line.jsx';
+import { Shape, ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
 import AdvanceCharts from '@/components/core/templates/create/elements/charts/advanced/AdvanceCharts.jsx';
-import Infographic, { InfographicPresent } from '@/components/core/templates/create/elements/Infographic.jsx';
+import { Infographic, InfographicPresent } from '@/components/core/templates/create/elements/Infographic.jsx';
 import Icon, { IconPresent } from '@/components/core/templates/create/elements/Icon.jsx';
 import StandardCharts from '@/components/core/templates/create/elements/charts/standard/StandardCharts.jsx';
 import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
-import Map, { MapPresent } from '@/components/core/templates/create/elements/maps/Map.jsx';
-import Table, { TablePresent } from '@/components/core/templates/create/elements/table/Table.jsx';
+import { Map, MapPresent } from '@/components/core/templates/create/elements/maps/Map.jsx';
+import { Table, TablePresent } from '@/components/core/templates/create/elements/table/Table.jsx';
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
-import Widget from '@/components/core/templates/create/elements/widgets/Widget.jsx';
-import DataTag, { DataPresent } from '@/components/core/templates/create/elements/DataTag.jsx';
+import { DataPresent, DataTag } from '@/components/core/templates/create/elements/DataTag.jsx';
 
-export const tools = {
+export const elements = {
   ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
-    acc[type] = ['font', 'opacity', 'animation', 'shadow', 'layout'];
+    acc[type] = {
+      tools: ['font', 'opacity', 'animation', 'shadow', 'layout'],
+      components: {
+        edit: Text,
+        present: TextPresent,
+      },
+      config: {
+        fit: true,
+        editable: true,
+        resizeHandles: ['e'],
+      },
+    };
     return acc;
   }, {}),
-  list: ['list', 'font', 'opacity', 'animation', 'shadow', 'layout'],
-  'count-up-number': ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
-  'chart-s': ['chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'animation', 'layout', 'tooltip'],
-  'chart-a': ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'layout', 'tooltip'],
-  shape: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
-  frame: (element) => {
-    if (element.config.name === 'tabs') return ['tabs', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
-    if (element.config.name === 'carousel') return ['carousel', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
-    if (element.config.name === 'marquee') return ['marquee', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
-    if (element.config.name === 'marquee-text') {
-      return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
-    }
-    if (element.config.name === 'typewriter-text') {
-      return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
-    }
-    return ['opacity', 'animation', 'shadow'];
+  list: {
+    tools: ['list', 'font', 'opacity', 'animation', 'shadow', 'layout'],
+    components: {
+      edit: List,
+      present: ListPresent,
+    },
+    config: {
+      fit: true,
+      resizeHandles: ['e'],
+    },
   },
-  icon: ['icon', 'color', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
-  map: ['map', 'opacity'],
-  table: ['table', 'colors', 'font', 'opacity', 'animation'],
-  line: ['background', 'opacity', 'line', 'animation', 'shadow', 'layout', 'tooltip'],
-  image: ['border', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
-  infographic: ['infographic', 'opacity'],
-  widget: ['summarizer', 'opacity', 'animation'],
-  'data-tag': ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
-};
-
-export const components = {
-  edit: {
-    ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
-      acc[type] = Text;
-      return acc;
-    }, {}),
-    list: List,
-    'count-up-number': CountUpNumber,
-    'chart-s': StandardCharts,
-    'chart-a': AdvanceCharts,
-    shape: Shape,
-    frame: Frame,
-    icon: Icon,
-    table: Table,
-    map: Map,
-    line: Line,
-    image: Image,
-    infographic: Infographic,
-    widget: Widget,
-    'data-tag': DataTag,
+  'count-up-number': {
+    tools: ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    components: {
+      edit: CountUpNumber,
+      present: CountUpNumberPresent,
+    },
+    config: {
+      fit: true,
+      resizeHandles: ['e'],
+    },
   },
-  present: {
-    ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
-      acc[type] = TextPresent;
-      return acc;
-    }, {}),
-    list: ListPresent,
-    'count-up-number': CountUpNumberPresent,
-    'chart-s': StandardChartsPresent,
-    'chart-a': AdvanceChartsPresent,
-    table: TablePresent,
-    shape: ShapePresent,
-    line: LineElementContent,
-    icon: IconPresent,
-    image: ImagePresent,
-    infographic: InfographicPresent,
-    map: MapPresent,
-    'data-tag': DataPresent,
+  'chart-s': {
+    tools: ['chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'animation', 'layout', 'tooltip'],
+    components: {
+      edit: StandardCharts,
+      present: StandardChartsPresent,
+    },
+    config: () => {
+      return {
+        fit: true,
+        editable: true,
+        resizeHandles: ['e'],
+      };
+    },
+  },
+  'chart-a': {
+    tools: ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'layout', 'tooltip'],
+    components: {
+      edit: AdvanceCharts,
+      present: AdvanceChartsPresent,
+    },
+    config: (element) => {
+      const config = { editable: true };
+      if (element.config.name === 'shapes') config.fit = true;
+      if (element.config.name === 'circle-icons') config.fit = true;
+      if (element.config.name === 'stacked-card') config.fit = true;
+      if (element.config.name === 'percentage-card') config.fit = true;
+      if (element.config.name === 'lollipop') config.fit = true;
+      if (element.config.name === 'nested-circles') config.fit = true;
+      if (element.config.name === 'column-card') config.fit = true;
+      if (element.config.name === 'percentage-card-2') config.fit = true;
+      if (element.config.name === 'pictogram-shapes') config.fit = true;
+      return config;
+    },
+  },
+  shape: {
+    tools: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    components: {
+      edit: Shape,
+      present: ShapePresent,
+    },
+    config: {},
+  },
+  frame: {
+    tools: (element) => {
+      if (element.config.name === 'tabs') {
+        return ['tabs', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
+      }
+      if (element.config.name === 'carousel') {
+        return ['carousel', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
+      }
+      if (element.config.name === 'marquee') {
+        return ['marquee', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
+      }
+      if (element.config.name === 'marquee-text') {
+        return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
+      }
+      if (element.config.name === 'typewriter-text') {
+        return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
+      }
+      return ['opacity', 'animation', 'shadow'];
+    },
+    components: {
+      edit: Frame,
+    },
+    config: {
+      editable: true,
+    },
+  },
+  icon: {
+    tools: ['icon', 'color', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    components: {
+      edit: Icon,
+      present: IconPresent,
+    },
+    config: {
+      fit: true,
+    },
+  },
+  map: {
+    tools: ['map', 'opacity'],
+    components: {
+      edit: Map,
+      present: MapPresent,
+    },
+    config: {
+      fit: true,
+      editable: true,
+      resizeHandles: ['e'],
+    },
+  },
+  table: {
+    tools: ['table', 'colors', 'font', 'opacity', 'animation'],
+    components: {
+      edit: Table,
+      present: TablePresent,
+    },
+    config: {
+      editable: true,
+    },
+  },
+  line: {
+    tools: ['background', 'opacity', 'line', 'animation', 'shadow', 'layout', 'tooltip'],
+    components: {
+      edit: Line,
+      present: LinePresent,
+    },
+    config: {
+      resizeHandles: ['e'],
+    },
+  },
+  image: {
+    tools: ['border', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    components: {
+      edit: Image,
+      present: ImagePresent,
+    },
+    config: {},
+  },
+  infographic: {
+    tools: ['infographic', 'opacity'],
+    components: {
+      edit: Infographic,
+      present: InfographicPresent,
+    },
+    config: {
+      fit: true,
+    },
+  },
+  'data-tag': {
+    tools: ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    components: {
+      edit: DataTag,
+      present: DataPresent,
+    },
+    config: {
+      editable: true,
+      fit: true,
+      resizeHandles: ['e'],
+    },
   },
 };
 
 export const getElementTools = (element) => {
-  if (!tools[element.type]) throw new Error(`No tools found for type ${element.type}`);
-  if (typeof tools[element.type] === 'function') return tools[element.type](element);
-  return tools[element.type];
+  const found = elements[element.type];
+  if (!found) throw new Error(`No tools found for type ${element.type}`);
+  if (typeof found.tools === 'function') return found.tools(element);
+  return found.tools;
+};
+
+export const getElementEditComponent = (element) => {
+  const found = elements[element.type];
+  if (!found) throw new Error(`No components found for type ${element.type}`);
+  return found.components.edit;
+};
+
+export const getElementPresentComponent = (element) => {
+  const found = elements[element.type];
+  if (!found) throw new Error(`No components found for type ${element.type}`);
+  return found.components.present;
+};
+
+export const getElementConfig = (element) => {
+  const found = elements[element.type];
+  if (!found) throw new Error(`No config found for type ${element.type}`);
+  if (typeof found.config === 'function') return found.config(element);
+  return found.config;
 };
 
 export const getChartsDefaultStyle = ({ type, name }) => {
@@ -156,4 +282,3 @@ export const getElementDefaultStyle = ({ type, name }) => {
   }
   return styles;
 };
-

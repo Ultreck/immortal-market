@@ -1,4 +1,3 @@
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -10,26 +9,6 @@ import DeleteOptions from '@/components/core/templates/create/elements/table/Del
 import FontOptions from '@/components/core/templates/create/elements/table/FontOptions.jsx';
 import BackgroundOptions from '@/components/core/templates/create/elements/table/BackgroundOptions.jsx';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
-
-const Table = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      {({ isEditing }) => (
-        <div className="relative w-full h-full">
-          <TableContent element={element} onChange={onChange} active={isEditing} />
-        </div>
-      )}
-    </ElementWrapper>
-  );
-};
 
 const getMaxColumns = (data) => {
   let max = 0;
@@ -61,7 +40,7 @@ const getCellPosition = (rows, rowIndex, cellIndex) => {
   return cellIndex;
 };
 
-const TableContent = ({ element, onChange, active }) => {
+export const Table = ({ element, onChange, active }) => {
   const table = useRef(null);
   const rows = element.config.data;
   const [selection, setSelection] = useState(null);
@@ -114,11 +93,7 @@ const TableContent = ({ element, onChange, active }) => {
           if (typeof rowIndex !== 'number') {
             return [...rows, newRow];
           }
-          return [
-            ...rows.slice(0, rowIndex + 1), 
-            newRow,
-            ...rows.slice(rowIndex + 1), 
-          ];
+          return [...rows.slice(0, rowIndex + 1), newRow, ...rows.slice(rowIndex + 1)];
         })(),
       },
     });
@@ -130,15 +105,11 @@ const TableContent = ({ element, onChange, active }) => {
       config: {
         ...element.config,
         data: rows.map((row) => {
-          const index = typeof cellIndex === 'number' ? cellIndex : row.cells.length - 1; 
+          const index = typeof cellIndex === 'number' ? cellIndex : row.cells.length - 1;
 
           return {
             ...row,
-            cells: [
-              ...row.cells.slice(0, index + 1),
-              { value: '' }, 
-              ...row.cells.slice(index + 1), 
-            ],
+            cells: [...row.cells.slice(0, index + 1), { value: '' }, ...row.cells.slice(index + 1)],
           };
         }),
       },
@@ -383,20 +354,9 @@ export const TablePreview = ({ element }) => {
 };
 
 Table.propTypes = ElementPropTypes;
-
-TableContent.propTypes = {
-  element: PropTypes.object.isRequired,
-  onChange: PropTypes.func,
-  active: PropTypes.bool,
-};
-
 TablePresent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
 TablePreview.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
-export default Table;
-

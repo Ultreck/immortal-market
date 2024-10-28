@@ -1,26 +1,11 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 import { starterLifeChartData } from '@/lib/design/chart-data.js';
 
-const AdvancedScatterLifeExpectancy = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <div>
-      <ElementWrapper
-        element={element}
-        onClick={onClick}
-        onChange={onChange}
-        maxWidth={width}
-        active={active}
-        highlighted={highlighted}
-        editable
-      >
-        <AdvanceDynamicSortingChartContent element={element} />
-      </ElementWrapper>
-    </div>
-  );
+const AdvancedScatterLifeExpectancy = ({ element }) => {
+  return <AdvanceDynamicSortingChartContent element={element} />;
 };
 
 AdvancedScatterLifeExpectancy.propTypes = ElementPropTypes;

@@ -1,24 +1,9 @@
 import { cn, getPercentages } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 
-const AdvanceCircleIcons = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <AdvanceCircleIconsContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceCircleIcons = ({ element }) => {
+  return <AdvanceCircleIconsContent element={element} />;
 };
 
 AdvanceCircleIcons.propTypes = ElementPropTypes;
@@ -32,7 +17,8 @@ export const AdvanceCircleIconsContent = ({ element }) => {
       }}
       className="flex items-center py-24 w-full px-4"
     >
-      {element.config.data.slice(0, element.config.circles)
+      {element.config.data
+        .slice(0, element.config.circles)
         .sort((a, b) => +b.value - +a.value)
         .map((circle, index) => {
           const color = element.config.colors[index % element.config.colors.length];

@@ -1,24 +1,10 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 
-const AdvanceDynamicSorting = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-      fit
-    >
-      <AdvanceDynamicSortingContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceDynamicSorting = ({ element }) => {
+  return <AdvanceDynamicSortingContent element={element} />;
 };
 
 AdvanceDynamicSorting.propTypes = ElementPropTypes;

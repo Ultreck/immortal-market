@@ -9,6 +9,7 @@ const useSelectionBox = ({ id, node }) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
   const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
   const selected = useTemplateStore((state) => state.template.selectedPage === id);
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
 
   const handleMouseDown = (event) => {
     if (event.nativeEvent.button === 0 && event.target === node.current) {
@@ -58,6 +59,7 @@ const useSelectionBox = ({ id, node }) => {
         setHighlightedElements([]);
         if (e.target === node.current && !e.shiftKey && !selected) {
           selectPage(page.id);
+          updateTemplate({ activeElement: null });
         }
         return;
       }

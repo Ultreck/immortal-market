@@ -1,24 +1,9 @@
-import ElementWrapper from '../../ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import useMapElement from '@/lib/design/use-map-element.jsx';
 import PropTypes from 'prop-types';
 
-const MapKosovo = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <MapKosovoContent element={element} />
-    </ElementWrapper>
-  );
+const MapKosovo = ({ element }) => {
+  return <MapKosovoContent element={element} />;
 };
 
 export const MapKosovoPresent = ({ element }) => {

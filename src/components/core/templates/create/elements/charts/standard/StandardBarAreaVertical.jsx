@@ -1,23 +1,10 @@
-import { Area, Bar, CartesianGrid, ComposedChart, Legend, Line, XAxis, YAxis } from 'recharts';
+import { Area, Bar, CartesianGrid, ComposedChart, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardAreaBarVertical = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardAreaBarVerticalContent element={element} />
-    </ElementWrapper>
-  );
+const StandardAreaBarVertical = ({ element }) => {
+  return <StandardAreaBarVerticalContent element={element} />;
 };
 
 StandardAreaBarVertical.propTypes = ElementPropTypes;

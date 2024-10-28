@@ -1,24 +1,9 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '../../ElementWrapper.jsx';
 import useMapElement from '@/lib/design/use-map-element.jsx';
 import PropTypes from 'prop-types';
 
-const MapSouthAmerica = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <MapSouthAmericaContent element={element} />
-    </ElementWrapper>
-  );
+const MapSouthAmerica = ({ element }) => {
+  return <MapSouthAmericaContent element={element} />;
 };
 
 export const MapSouthAmericaPresent = ({ element }) => {

@@ -2,24 +2,11 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { colors, interpolateColor } from '@/lib/utils';
 import { Legend, Pie, PieChart } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
-const StandardSemiPie = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardSemiPieContent element={element} />
-    </ElementWrapper>
-  );
+const StandardSemiPie = ({ element }) => {
+  return <StandardSemiPieContent element={element} />;
 };
 
 StandardSemiPie.propTypes = ElementPropTypes;
@@ -41,49 +28,49 @@ export const StandardSemiPieContent = ({ element }) => {
 
   return (
     <div
-    style={{
-      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-    }}
-  >    
-    <ChartContainer
-      config={{}}
       style={{
-        height: element.height,
-        width: element.width,
-        opacity: element.style.opacity,
-        paddingTop: element.config.styles.yPadding,
-        paddingLeft: element.config.styles.xPadding,
-        paddingBottom: element.config.styles.yPadding,
-        paddingRight: element.config.styles.xPadding,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
     >
-      <PieChart 
-      width={element.width} 
-      height={element.height}>
-        {element.config.showLegend && <Legend 
-        verticalAlign="top" 
-        align="center" 
-        layout="horizontal" 
-        wrapperStyle={{
-          fontSize: element.config.styles.labelSize, 
-          color: element.config.styles.legendColor,   
-        }} 
-        />}
-        {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
-        <Pie
-          dataKey="value"
-          startAngle={180}
-          endAngle={0}
-          data={data}
-          cx="50%"
-          cy="50%"
-          outerRadius={Math.min(element.width, element.height) * 0.35}
-          label={element.config.showLabel}
-        />
-      </PieChart>
-    </ChartContainer>
-  </div>
+      <ChartContainer
+        config={{}}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
+        }}
+      >
+        <PieChart width={element.width} height={element.height}>
+          {element.config.showLegend && (
+            <Legend
+              verticalAlign="top"
+              align="center"
+              layout="horizontal"
+              wrapperStyle={{
+                fontSize: element.config.styles.labelSize,
+                color: element.config.styles.legendColor,
+              }}
+            />
+          )}
+          {element.config.showToolTip && <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />}
+          <Pie
+            dataKey="value"
+            startAngle={180}
+            endAngle={0}
+            data={data}
+            cx="50%"
+            cy="50%"
+            outerRadius={Math.min(element.width, element.height) * 0.35}
+            label={element.config.showLabel}
+          />
+        </PieChart>
+      </ChartContainer>
+    </div>
   );
 };
 
@@ -92,4 +79,3 @@ StandardSemiPieContent.propTypes = {
 };
 
 export default StandardSemiPie;
-

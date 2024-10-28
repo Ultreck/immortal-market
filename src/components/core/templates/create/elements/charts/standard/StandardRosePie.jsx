@@ -2,23 +2,9 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
-import { interpolateColor } from '@/lib/utils';
 
-const StandardRosePie = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardRosePieContent element={element} />
-    </ElementWrapper>
-  );
+const StandardRosePie = ({ element }) => {
+  return <StandardRosePieContent element={element} />;
 };
 
 StandardRosePie.propTypes = ElementPropTypes;
@@ -76,25 +62,25 @@ export const StandardRosePieContent = ({ element }) => {
 
   return (
     <div
-    style={{
-      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-    }}
-  >    
-    <div
-      ref={chartRef}
       style={{
-        height: element.height,
-        width: element.width,
-        opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
-        paddingTop: element.config.styles.yPadding,
-        paddingLeft: element.config.styles.xPadding,
-        paddingBottom: element.config.styles.yPadding,
-        paddingRight: element.config.styles.xPadding,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
-    />
-  </div>
+    >
+      <div
+        ref={chartRef}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+          transform: `rotate(${element.config.rotation || 0}deg)`,
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
+        }}
+      />
+    </div>
   );
 };
 
@@ -103,4 +89,3 @@ StandardRosePieContent.propTypes = {
 };
 
 export default StandardRosePie;
-

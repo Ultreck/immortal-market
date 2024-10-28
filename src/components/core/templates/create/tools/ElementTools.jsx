@@ -24,7 +24,6 @@ import Font from '@/components/core/templates/create/tools/elements/generic/Font
 import ChartFont from '@/components/core/templates/create/tools/elements/generic/ChartFont.jsx';
 import MapConfig from '@/components/core/templates/create/tools/elements/specific/map/MapConfig.jsx';
 import Color from '@/components/core/templates/create/tools/elements/generic/Color.jsx';
-import SummarizerConfig from '@/components/core/templates/create/tools/elements/specific/SummarizerConfig.jsx';
 import DataTagConfig from '@/components/core/templates/create/tools/elements/specific/DataTagConfig.jsx';
 import ChartData from './elements/specific/ChartData.jsx';
 import Layout from './elements/generic/Layout.jsx';
@@ -53,7 +52,6 @@ const mapping = {
   infographic: { type: 'single', component: InfographicConfig },
   colors: { type: 'single', component: Colors },
   map: { type: 'single', component: MapConfig },
-  summarizer: { type: 'single', component: SummarizerConfig },
   'data-tag': { type: 'single', component: DataTagConfig },
   'chart-data': { type: 'single', component: ChartData },
   'chart-font': { type: 'multiple', component: ChartFont },

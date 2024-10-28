@@ -1,7 +1,7 @@
 import { createElement, forwardRef, Fragment } from 'react';
-import { components } from '@/lib/elements.js';
 import ElementWrapperPresent from '@/components/core/templates/create/ElementWrapperPresent.jsx';
 import PropTypes from 'prop-types';
+import { getElementPresentComponent } from '@/lib/elements.js';
 
 const ElementsPreview = forwardRef(({ elements }, ref) => {
   const maxRight = Math.max(...elements.map((el) => el.x + el.width));
@@ -23,11 +23,12 @@ const ElementsPreview = forwardRef(({ elements }, ref) => {
         {!!_elements.length && (
           <div>
             {_elements.map((element) => {
+              const component = getElementPresentComponent(element);
               return (
                 <Fragment key={element.id}>
-                  {components.present[element.type] ? (
+                  {component ? (
                     <ElementWrapperPresent element={element}>
-                      {createElement(components.present[element.type], { element })}
+                      {createElement(component, { element })}
                     </ElementWrapperPresent>
                   ) : (
                     <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">

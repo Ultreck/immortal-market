@@ -2,24 +2,11 @@ import { Area, AreaChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
-const StandardArea = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardAreaContent element={element} />
-    </ElementWrapper>
-  );
+const StandardArea = ({ element }) => {
+  return <StandardAreaContent element={element} />;
 };
 
 StandardArea.propTypes = ElementPropTypes;
@@ -78,7 +65,7 @@ export const StandardAreaContent = ({ element }) => {
               fontStyle: element.config.styles.gFontStyle,
               fill: element.config.styles.gridAndLegendColor,
             }}
-            />
+          />
           <YAxis
             type="number"
             dataKey={element.config.keys.y}
@@ -87,15 +74,17 @@ export const StandardAreaContent = ({ element }) => {
               fontSize: element.config.styles.yGridSize,
               fontWeight: element.config.styles.gFontWeight,
               fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor, 
+              fill: element.config.styles.gridAndLegendColor,
             }}
           />
           <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-          {element.config.showLegend && <Legend 
-           textStyle={{
-            fontSize: element.config.styles.legendSize,
-          }}
-          />}
+          {element.config.showLegend && (
+            <Legend
+              textStyle={{
+                fontSize: element.config.styles.legendSize,
+              }}
+            />
+          )}
           <Area dataKey={element.config.keys.y} fill={element.config.colors[0]} type="natural" fillOpacity={0.4} />
         </AreaChart>
       </ChartContainer>
@@ -108,4 +97,3 @@ StandardAreaContent.propTypes = {
 };
 
 export default StandardArea;
-

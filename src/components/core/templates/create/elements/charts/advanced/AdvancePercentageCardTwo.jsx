@@ -1,24 +1,10 @@
 import React, { useEffect } from 'react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
-const AdvancePercentageCardTwo = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <div>
-      <ElementWrapper
-        element={element}
-        onClick={onClick}
-        onChange={onChange}
-        maxWidth={width}
-        active={active}
-        highlighted={highlighted}
-      >
-        <AdvancePercentageCardTwoElementContent element={element} />
-      </ElementWrapper>
-    </div>
-  );
+const AdvancePercentageCardTwo = ({ element }) => {
+  return <AdvancePercentageCardTwoElementContent element={element} />;
 };
 
 AdvancePercentageCardTwo.propTypes = ElementPropTypes;

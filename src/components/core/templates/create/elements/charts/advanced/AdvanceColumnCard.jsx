@@ -1,23 +1,11 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Button, Card, Tooltip } from '@nextui-org/react';
-import ElementWrapper from '../../../ElementWrapper';
+import { Button, Tooltip } from '@nextui-org/react';
 import { ElementPropTypes } from '@/lib/prop-types';
 import PropTypes from 'prop-types';
 
-const AdvanceColumnCard = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-    >
-      <AdvanceColumnCardElementContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceColumnCard = ({ element }) => {
+  return <AdvanceColumnCardElementContent element={element} />;
 };
 
 AdvanceColumnCard.propTypes = ElementPropTypes;

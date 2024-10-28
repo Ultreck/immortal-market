@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils.js';
 import { createElement, Fragment, useEffect, useState } from 'react';
-import { components } from '@/lib/elements.js';
 import { TbImageInPicture } from 'react-icons/tb';
 import { useDroppable } from '@dnd-kit/core';
 import PropTypes from 'prop-types';
+import { getElementEditComponent } from '@/lib/elements.js';
 
-const FrameContents = ({ id, element, active, isEditing, onChange, overlay, style = {} }) => {
+const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) => {
   const { setNodeRef, isOver, active: _active } = useDroppable({ id });
   const index = id.split('/')[1];
   const elements = element.children.filter((el) => +el.frame === +index);
@@ -19,9 +19,9 @@ const FrameContents = ({ id, element, active, isEditing, onChange, overlay, styl
     <div
       ref={setNodeRef}
       style={{ ...element.style, ...style }}
-      className={cn('overflow-hidden relative w-full h-full', { 'overflow-visible': isEditing })}
+      className={cn('overflow-hidden relative w-full h-full', { 'overflow-visible': active })}
     >
-      {isEditing && overlay}
+      {active && overlay}
       {isOver && _active.data.current.type === 'image' && (
         <div className="absolute inset-0 bg-white text-black flex items-center justify-center z-[1] border-3 border-gray-400 border-dashed rounded-2xl">
           <img src={_active.data.current.config.src} className="w-full h-full object-cover" alt="image to drop" />
@@ -31,10 +31,11 @@ const FrameContents = ({ id, element, active, isEditing, onChange, overlay, styl
         <>
           {elements.map((el) => {
             const active = selectedElements.includes(el.id);
+            const component = getElementEditComponent(el);
             return (
               <Fragment key={el.id}>
-                {components.edit[el.type] ? (
-                  createElement(components.edit[el.type], {
+                {component ? (
+                  createElement(component, {
                     element: el,
                     active,
                     onClick: () => {
@@ -69,7 +70,6 @@ FrameContents.propTypes = {
   id: PropTypes.string.isRequired,
   element: PropTypes.object.isRequired,
   active: PropTypes.bool.isRequired,
-  isEditing: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   overlay: PropTypes.any,
   style: PropTypes.object,

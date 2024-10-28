@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils.js';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
 import DragResizeRotate from '@/components/ui/DragResizeRotate.jsx';
@@ -10,8 +10,7 @@ const ElementWrapper = ({
   onClick,
   onDoubleClick,
   children,
-  onEditStart,
-  active,
+  selected,
   highlighted,
   maxWidth = Infinity,
   minWidth = 10,
@@ -20,22 +19,13 @@ const ElementWrapper = ({
   onChange,
   resizeHandles,
   constrained = false,
-  editable = false,
+  active = false,
   fit = false,
   className,
 }) => {
   const el = useRef(null);
   const scale = useTemplateStore((state) => state.template.scale);
   const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
-  const [isEditing, setIsEditing] = useState(false);
-
-  useEffect(() => {
-    if (!active) setIsEditing(false);
-  }, [active, element]);
-
-  useEffect(() => {
-    if (isEditing) onEditStart?.();
-  }, [isEditing, onEditStart]);
 
   useEffect(() => {
     if (fit && el.current && element.height !== el.current.scrollHeight) {
@@ -47,15 +37,12 @@ const ElementWrapper = ({
     <DragResizeRotate
       values={{ x: element.x, y: element.y, width: element.width, height: element.height, rotate: element.rotate }}
       onChange={(values) => onChange({ ...element, ...values })}
-      resizable={active}
-      rotatable={active}
-      draggable={!isEditing}
+      resizable={selected}
+      rotatable={selected}
+      draggable={!active}
       className={cn('w-max border-2 border-transparent absolute group select-none pointer-events-auto', className)}
       onClick={(e) => onClick(element.id, e)}
-      onDoubleClick={(e) => {
-        if (editable) setIsEditing(true);
-        onDoubleClick?.(element.id, e);
-      }}
+      onDoubleClick={(e) => onDoubleClick?.(element.id, e)}
       handles={resizeHandles}
       constrained={constrained}
       scale={scale}
@@ -70,18 +57,18 @@ const ElementWrapper = ({
       <div
         className={cn(
           'absolute inset-[-1px] border border-transparent z-[10] pointer-events-none',
-          { 'group-hover:border-gray-200': !active && !highlighted },
+          { 'group-hover:border-gray-200': !selected && !highlighted },
           { 'border-gray-200': highlighted },
-          { 'border-primary-500': active },
-          { 'border-purple-500': isEditing }
+          { 'border-primary-500': selected },
+          { 'border-purple-500': active }
         )}
       />
       {fit ? (
         <div ref={el} className="w-full h-max">
-          {typeof children === 'function' ? children({ isEditing }) : children}
+          {typeof children === 'function' ? children({ isEditing: active }) : children}
         </div>
       ) : (
-        <>{typeof children === 'function' ? children({ isEditing }) : children}</>
+        <>{typeof children === 'function' ? children({ isEditing: active }) : children}</>
       )}
       <ElementCommentBadge element={element} />
     </DragResizeRotate>
@@ -103,20 +90,20 @@ ElementWrapper.propTypes = {
   }),
   onClick: PropTypes.func.isRequired,
   onDoubleClick: PropTypes.func,
-  active: PropTypes.bool.isRequired,
+  selected: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   maxWidth: PropTypes.number,
   minWidth: PropTypes.number,
   maxHeight: PropTypes.number,
   minHeight: PropTypes.number,
   children: PropTypes.any.isRequired,
-  onEditStart: PropTypes.func,
   resizeHandles: PropTypes.arrayOf(PropTypes.string),
   constrained: PropTypes.bool,
   className: PropTypes.string,
   highlighted: PropTypes.bool,
   editable: PropTypes.bool,
   fit: PropTypes.bool,
+  active: PropTypes.bool,
 };
 
 export default ElementWrapper;

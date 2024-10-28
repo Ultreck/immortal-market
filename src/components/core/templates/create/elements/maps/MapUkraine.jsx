@@ -1,24 +1,9 @@
-import ElementWrapper from '../../ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import useMapElement from '@/lib/design/use-map-element.jsx';
 import PropTypes from 'prop-types';
 
-const MapUkraine = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <MapUkraineContent element={element} />
-    </ElementWrapper>
-  );
+const MapUkraine = ({ element }) => {
+  return <MapUkraineContent element={element} />;
 };
 
 export const MapUkrainePresent = ({ element }) => {

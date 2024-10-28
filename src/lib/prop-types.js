@@ -14,9 +14,6 @@ export const ElementPropTypes = {
     src: PropTypes.string,
     config: PropTypes.object,
   }),
-  active: PropTypes.bool.isRequired,
-  highlighted: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  width: PropTypes.number,
+  onChange: PropTypes.func,
+  active: PropTypes.bool,
 };

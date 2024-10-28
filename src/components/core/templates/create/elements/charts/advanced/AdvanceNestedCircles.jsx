@@ -1,22 +1,9 @@
 import { cn, getPercentagesMax } from '@/lib/utils';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
-const AdvanceNestedCircles = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <AdvanceNestedCirclesContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceNestedCircles = ({ element }) => {
+  return <AdvanceNestedCirclesContent element={element} />;
 };
 
 AdvanceNestedCircles.propTypes = ElementPropTypes;
@@ -27,13 +14,14 @@ export const AdvanceNestedCirclesContent = ({ element }) => {
 
   return (
     <div
-    style={{
-      paddingTop: element.config.styles.yPadding,
-      paddingLeft: element.config.styles.xPadding,
-      paddingBottom: element.config.styles.yPadding,
-      paddingRight: element.config.styles.xPadding,
-    }}
-    className="relative w-full">
+      style={{
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
+      }}
+      className="relative w-full"
+    >
       {sortElement.map((item, index) => (
         <div
           key={index}
@@ -44,13 +32,16 @@ export const AdvanceNestedCirclesContent = ({ element }) => {
           style={{ width: `${percentage[index]}%`, backgroundColor: element.config.colors[index] }}
         >
           <div
-          style={{
-            fontSize: element.config.styles.labelSize,
-            fontWeight: element.config.styles.lFontWeight,
-            fontStyle: element.config.styles.lFontStyle,
-            color: element.config.styles.valueAndLableColor,
-          }}
-           className="text-center text-white pt-2">{item.name}</div>
+            style={{
+              fontSize: element.config.styles.labelSize,
+              fontWeight: element.config.styles.lFontWeight,
+              fontStyle: element.config.styles.lFontStyle,
+              color: element.config.styles.valueAndLableColor,
+            }}
+            className="text-center text-white pt-2"
+          >
+            {item.name}
+          </div>
         </div>
       ))}
     </div>

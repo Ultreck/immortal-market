@@ -1,4 +1,3 @@
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { Skeleton } from '@nextui-org/react';
 import { useGetSvgCodeFromUrl } from '@/api/misc.js';
@@ -15,7 +14,7 @@ const applyColors = (data, colors) => {
   return coloredSvg;
 };
 
-const Infographic = ({ element, active, highlighted, onClick, onChange }) => {
+export const Infographic = ({ element, onChange }) => {
   const el = useRef(null);
   const { data, isLoading } = useGetSvgCodeFromUrl(element.config.src);
 
@@ -26,28 +25,19 @@ const Infographic = ({ element, active, highlighted, onClick, onChange }) => {
   }, [data, element, isLoading, onChange]);
 
   return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      active={active}
-      highlighted={highlighted}
-      fit
-    >
-      <div ref={el} className="w-full h-max">
-        {isLoading ? (
-          <div className="light w-full" style={{ height: element.height }}>
-            <Skeleton className="rounded-2xl w-full h-full" />
-          </div>
-        ) : (
-          <div
-            style={element.style}
-            className="h-max w-full infographic"
-            dangerouslySetInnerHTML={{ __html: applyColors(data, element.config.colors) }}
-          />
-        )}
-      </div>
-    </ElementWrapper>
+    <div ref={el} className="w-full h-max">
+      {isLoading ? (
+        <div className="light w-full" style={{ height: element.height }}>
+          <Skeleton className="rounded-2xl w-full h-full" />
+        </div>
+      ) : (
+        <div
+          style={element.style}
+          className="h-max w-full infographic"
+          dangerouslySetInnerHTML={{ __html: applyColors(data, element.config.colors) }}
+        />
+      )}
+    </div>
   );
 };
 
@@ -75,13 +65,9 @@ const InfographicContent = ({ element }) => {
 };
 
 Infographic.propTypes = ElementPropTypes;
-
 InfographicContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
 InfographicPresent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
-export default Infographic;

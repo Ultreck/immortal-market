@@ -2,22 +2,9 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const StandardPie = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardPieContent element={element} />
-    </ElementWrapper>
-  );
+const StandardPie = ({ element }) => {
+  return <StandardPieContent element={element} />;
 };
 
 StandardPie.propTypes = ElementPropTypes;

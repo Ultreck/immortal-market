@@ -1,33 +1,15 @@
-import ElementWrapper from '../ElementWrapper';
 import { TbIcons } from 'react-icons/tb';
-import { createElement, useRef } from 'react';
-import { useMount } from 'react-use';
+import { createElement } from 'react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import icons from '@/lib/design/icons.js';
 import PropTypes from 'prop-types';
 
-const Icon = ({ element, active, highlighted, width, onClick, onChange }) => {
-  const el = useRef(null);
+const Icon = ({ element }) => {
+  return <IconContent element={element} />;
+};
 
-  useMount(() => {
-    if (element.height <= 0) {
-      onChange({ ...element, height: el.current.scrollHeight });
-    }
-  });
-
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      fit
-    >
-      <IconContent element={element} />
-    </ElementWrapper>
-  );
+export const IconPresent = ({ element }) => {
+  return <IconContent element={element} />;
 };
 
 export const IconContent = ({ element }) => {
@@ -44,10 +26,6 @@ export const IconContent = ({ element }) => {
       )}
     </>
   );
-};
-
-export const IconPresent = ({ element }) => {
-  return <IconContent element={element} />;
 };
 
 Icon.propTypes = ElementPropTypes;

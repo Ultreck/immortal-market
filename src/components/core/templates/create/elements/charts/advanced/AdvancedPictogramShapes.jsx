@@ -1,24 +1,9 @@
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
 
-const AdvancedPictogramShapes = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <AdvancedPictogramShapesContent element={element} />
-    </ElementWrapper>
-  );
+const AdvancedPictogramShapes = ({ element }) => {
+  return <AdvancedPictogramShapesContent element={element} />;
 };
 
 AdvancedPictogramShapes.propTypes = ElementPropTypes;
@@ -75,23 +60,25 @@ export const AdvancedPictogramShapesContent = ({ element }) => {
   const numberOfIcons = icon1count + icon2count + icon3count;
 
   return (
-    <div 
-    style={{
-      paddingTop: element.config.styles.yPadding,
-      paddingLeft: element.config.styles.xPadding,
-      paddingBottom: element.config.styles.yPadding,
-      paddingRight: element.config.styles.xPadding,
-    }}
-    className="space-y-6 w-full">
+    <div
+      style={{
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
+      }}
+      className="space-y-6 w-full"
+    >
       {showLabel && (
         <div
-        style={{
-          fontSize: element.config.styles.labelSize,
-          fontWeight: element.config.styles.lFontWeight,
-          fontStyle: element.config.styles.lFontStyle,
-          color: element.config.styles.valueAndLableColor,
-        }}
-         className="flex space-x-3 capitalize">
+          style={{
+            fontSize: element.config.styles.labelSize,
+            fontWeight: element.config.styles.lFontWeight,
+            fontStyle: element.config.styles.lFontStyle,
+            color: element.config.styles.valueAndLableColor,
+          }}
+          className="flex space-x-3 capitalize"
+        >
           <>
             {showIcon1 && (
               <p>

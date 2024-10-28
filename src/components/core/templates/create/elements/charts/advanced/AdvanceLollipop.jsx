@@ -1,25 +1,10 @@
 import { motion } from 'framer-motion';
 import { getPercentagesMax } from '@/lib/utils.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
-const AdvanceLollipop = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <AdvanceLollipopContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceLollipop = ({ element }) => {
+  return <AdvanceLollipopContent element={element} />;
 };
 
 AdvanceLollipop.propTypes = ElementPropTypes;
@@ -28,27 +13,31 @@ export const AdvanceLollipopContent = ({ element }) => {
   const percentages = getPercentagesMax(element.config.data.slice(0, element.config.bars).map((item) => item.value));
 
   return (
-    <div 
-    style={{
-      paddingTop: element.config.styles.yPadding,
-      paddingLeft: element.config.styles.xPadding,
-      paddingBottom: element.config.styles.yPadding,
-      paddingRight: element.config.styles.xPadding,
-    }}
-    className="flex flex-col space-y-2 items-start">
+    <div
+      style={{
+        paddingTop: element.config.styles.yPadding,
+        paddingLeft: element.config.styles.xPadding,
+        paddingBottom: element.config.styles.yPadding,
+        paddingRight: element.config.styles.xPadding,
+      }}
+      className="flex flex-col space-y-2 items-start"
+    >
       {element.config.data.slice(0, element.config.bars).map((item, index) => {
         const color = element.config.colors[index % element.config.colors.length];
 
         return (
           <div className="relative w-full" key={index}>
             <div
-             style={{
-              fontSize: element.config.styles.labelSize,
-              fontWeight: element.config.styles.lFontWeight,
-              fontStyle: element.config.styles.lFontStyle,
-              color: element.config.styles.valueAndLableColor,
-            }}
-             className="font-medium text-base text-black absolute left-0 top-0 z-[-1]">{item.label}</div>
+              style={{
+                fontSize: element.config.styles.labelSize,
+                fontWeight: element.config.styles.lFontWeight,
+                fontStyle: element.config.styles.lFontStyle,
+                color: element.config.styles.valueAndLableColor,
+              }}
+              className="font-medium text-base text-black absolute left-0 top-0 z-[-1]"
+            >
+              {item.label}
+            </div>
             <div className="flex items-center justify-start w-full">
               <motion.div
                 initial={{ width: 0 }}
@@ -62,16 +51,15 @@ export const AdvanceLollipopContent = ({ element }) => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 className={`font-bold w-max px-4 aspect-[16/12] flex items-center justify-center rounded-full`}
-                style={{ 
+                style={{
                   backgroundColor: color,
                   fontSize: element.config.styles.valueSize,
                   fontWeight: element.config.styles.lFontWeight,
                   fontStyle: element.config.styles.lFontStyle,
                   color: element.config.styles.valueAndLableColor,
-                 }}
+                }}
               >
-                <span
-                 className="!text-white mix-blend-difference">{item.value}</span>
+                <span className="!text-white mix-blend-difference">{item.value}</span>
               </motion.div>
             </div>
           </div>
@@ -86,4 +74,3 @@ AdvanceLollipopContent.propTypes = {
 };
 
 export default AdvanceLollipop;
-

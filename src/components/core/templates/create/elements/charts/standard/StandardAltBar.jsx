@@ -1,26 +1,11 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import PropTypes from 'prop-types';
 
-const StandardAltBar = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardAltBarContent element={element} />
-    </ElementWrapper>
-  );
+const StandardAltBar = ({ element }) => {
+  return <StandardAltBarContent element={element} />;
 };
-
-StandardAltBar.propTypes = ElementPropTypes;
 
 export const StandardAltBarContent = ({ element }) => {
   const chartRef = useRef(null);
@@ -36,12 +21,12 @@ export const StandardAltBarContent = ({ element }) => {
         },
       },
       legend: element.config.showLegend && {
-         data: element.config.legend,
-         textStyle: {
-          color: element.config.styles.gridAndLegendColor,  // Text color
-          fontSize: element.config.styles.legendSize,   // Font size
+        data: element.config.legend,
+        textStyle: {
+          color: element.config.styles.gridAndLegendColor, // Text color
+          fontSize: element.config.styles.legendSize, // Font size
         },
-       },
+      },
       grid: {
         left: '3%',
         right: '4%',
@@ -57,7 +42,6 @@ export const StandardAltBarContent = ({ element }) => {
             fontWeight: element.config.styles.gFontWeight,
             fontStyle: element.config.styles.gFontStyle,
             color: element.config.styles.gridAndLegendColor,
-            
           },
         },
       ],
@@ -135,9 +119,9 @@ export const StandardAltBarContent = ({ element }) => {
   );
 };
 
+StandardAltBar.propTypes = ElementPropTypes;
 StandardAltBarContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 
 export default StandardAltBar;
-

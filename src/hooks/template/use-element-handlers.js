@@ -1,11 +1,14 @@
 import { useCallback } from 'react';
 import useTemplateStore from '@/store/template.js';
+import { getElementConfig } from '@/lib/elements.js';
 
 export const useElementHandlers = ({ id }) => {
   const updateElements = useTemplateStore((state) => state.updateElements);
   const selectElements = useTemplateStore((state) => state.selectElements);
   const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const getElement = useTemplateStore((state) => state.getElement);
 
   const handleChange = useCallback(
     (element, solo = false) => {
@@ -97,12 +100,20 @@ export const useElementHandlers = ({ id }) => {
           selectElements([id]);
         }
       }
+      updateTemplate({ activeElement: null });
     },
-    [handleAddToSelection, page.elements, selectElements]
+    [handleAddToSelection, page.elements, selectElements, updateTemplate]
   );
+
+  const handleDoubleClick = (id) => {
+    const element = getElement(id);
+    const config = getElementConfig(element);
+    if (config.editable) updateTemplate({ activeElement: id });
+  };
 
   return {
     handleChange,
     handleClick,
+    handleDoubleClick,
   };
 };

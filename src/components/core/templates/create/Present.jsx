@@ -1,4 +1,4 @@
-import CanvasPresent from '@/components/core/templates/create/CanvasPresent.jsx';
+import PageContentPresent from '@/components/core/templates/create/PageContentPresent.jsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Button, Slider } from '@nextui-org/react';
@@ -13,7 +13,7 @@ const Present = ({ pages = [] }) => {
   return (
     <div className="relative inset-0 w-full h-screen overflow-hidden z-[1] text-black">
       <div className="bg-gray-950 w-full h-screen flex flex-col">
-        <CanvasPresent key={page} page={page} />
+        <PageContentPresent key={page} page={page} />
       </div>
       {!!pages.length && (
         <div className="fixed bottom-4 left-1/2 -translate-x-1/2 rounded-full px-8 py-3 bg-default-100 dark text-white flex items-center justify-between space-x-4 max-w-[600px] w-full">

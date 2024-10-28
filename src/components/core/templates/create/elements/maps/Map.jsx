@@ -381,7 +381,7 @@ import MapWestVirginia, {
   MapWestVirginiaPresent,
 } from '@/components/core/templates/create/elements/maps/MapWestVirginia.jsx';
 
-const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
+export const Map = ({ element }) => {
   const components = {
     nigeria: MapNigeria,
     'nigeria-regions': MapNigeriaRegions,
@@ -633,7 +633,7 @@ const Map = ({ element, active, highlighted, width, onClick, onChange }) => {
   };
 
   if (components[element.config.name]) {
-    return createElement(components[element.config.name], { element, active, highlighted, width, onClick, onChange });
+    return createElement(components[element.config.name], { element });
   }
 
   return null;
@@ -900,5 +900,3 @@ Map.propTypes = ElementPropTypes;
 MapPresent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
-export default Map;

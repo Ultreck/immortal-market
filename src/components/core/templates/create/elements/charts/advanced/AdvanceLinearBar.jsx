@@ -1,22 +1,9 @@
 import { motion } from 'framer-motion';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
-const AdvanceLinearBar = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <AdvanceLinearBarContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceLinearBar = ({ element }) => {
+  return <AdvanceLinearBarContent element={element} />;
 };
 
 AdvanceLinearBar.propTypes = ElementPropTypes;

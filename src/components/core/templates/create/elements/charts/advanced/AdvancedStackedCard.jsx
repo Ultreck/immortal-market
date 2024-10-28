@@ -1,24 +1,10 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import ElementWrapper from '../../../ElementWrapper';
 import { ElementPropTypes } from '@/lib/prop-types';
 import PropTypes from 'prop-types';
 
-const AdvancedStackedCard = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-      fit
-    >
-      <AdvancedStackedCardContent element={element} />
-    </ElementWrapper>
-  );
+const AdvancedStackedCard = ({ element }) => {
+  return <AdvancedStackedCardContent element={element} />;
 };
 
 AdvancedStackedCard.propTypes = ElementPropTypes;

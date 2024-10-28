@@ -2,24 +2,11 @@ import { Bar, BarChart, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useEffect } from 'react';
 
-const StandardBarHorizontal = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardBarHorizontalContent element={element} />
-    </ElementWrapper>
-  );
+const StandardBarHorizontal = ({ element }) => {
+  return <StandardBarHorizontalContent element={element} />;
 };
 
 StandardBarHorizontal.propTypes = ElementPropTypes;
@@ -34,35 +21,35 @@ export const StandardBarHorizontalContent = ({ element }) => {
 
   return (
     <div
-    style={{
-      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-    }}
-  >    
-    <ChartContainer
-      config={{}}
       style={{
-        height: element.height,
-        width: element.width,
-        opacity: element.style.opacity,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
     >
-      <BarChart accessibilityLayer data={chartData} layout="vertical">
-        <XAxis type="number" dataKey={element.config.keys.x} hide fontSize={element.config.fontSize} />
-        <YAxis
-          dataKey={element.config.keys.y}
-          type="category"
-          tickLine={false}
-          tickMargin={10}
-          axisLine={false}
-          tickFormatter={(value) => capitalize(value)}
-          fontSize={element.config.fontSize}
-        />
-        <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-        <Bar dataKey={element.config.keys.y} radius={8} />
-      </BarChart>
-    </ChartContainer>
-  </div>
+      <ChartContainer
+        config={{}}
+        style={{
+          height: element.height,
+          width: element.width,
+          opacity: element.style.opacity,
+        }}
+      >
+        <BarChart accessibilityLayer data={chartData} layout="vertical">
+          <XAxis type="number" dataKey={element.config.keys.x} hide fontSize={element.config.fontSize} />
+          <YAxis
+            dataKey={element.config.keys.y}
+            type="category"
+            tickLine={false}
+            tickMargin={10}
+            axisLine={false}
+            tickFormatter={(value) => capitalize(value)}
+            fontSize={element.config.fontSize}
+          />
+          <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+          <Bar dataKey={element.config.keys.y} radius={8} />
+        </BarChart>
+      </ChartContainer>
+    </div>
   );
 };
 

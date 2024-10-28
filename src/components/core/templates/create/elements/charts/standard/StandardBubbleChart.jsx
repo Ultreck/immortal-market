@@ -1,24 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import * as echarts from 'echarts';
-import ElementWrapper from '../../../ElementWrapper';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardBubbleChart = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardBubbleChartContent element={element} />
-    </ElementWrapper>
-  );
+const StandardBubbleChart = ({ element }) => {
+  return <StandardBubbleChartContent element={element} />;
 };
 
 export const StandardBubbleChartContent = ({ element }) => {
@@ -27,21 +13,21 @@ export const StandardBubbleChartContent = ({ element }) => {
   useEffect(() => {
     const chart = echarts.init(chartRef.current, 'light');
     const option = {
-      yAxis: { 
+      yAxis: {
         show: element.config.showYaxis,
         axisLabel: {
           fontSize: element.config.styles.yGridSize,
           fontWeight: element.config.styles.gFontWeight,
           color: element.config.styles.gridAndLegendColor,
-        }, 
+        },
       },
-      xAxis: { 
-        show: element.config.showXaxis, 
+      xAxis: {
+        show: element.config.showXaxis,
         axisLabel: {
           fontSize: element.config.styles.xGridSize,
           fontWeight: element.config.styles.gFontWeight,
           color: element.config.styles.gridAndLegendColor,
-        }, 
+        },
       },
       grid: {
         show: element.config.showGridline,
@@ -68,25 +54,25 @@ export const StandardBubbleChartContent = ({ element }) => {
   }, [element]);
   return (
     <div
-    style={{
-      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-    }}
-  >    
-    <div
-      ref={chartRef}
       style={{
-        width: element.width,
-        height: element.height,
-        opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
-        paddingTop: element.config.styles.yPadding,
-        paddingLeft: element.config.styles.xPadding,
-        paddingBottom: element.config.styles.yPadding,
-        paddingRight: element.config.styles.xPadding,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
-    />
-  </div>
+    >
+      <div
+        ref={chartRef}
+        style={{
+          width: element.width,
+          height: element.height,
+          opacity: element.style.opacity,
+          transform: `rotate(${element.config.rotation || 0}deg)`,
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
+        }}
+      />
+    </div>
   );
 };
 

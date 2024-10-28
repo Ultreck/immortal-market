@@ -1,29 +1,16 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import ElementWrapper from '../../../ElementWrapper';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardBubbleChartInSizes = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardBubbleChartInSizesContent element={element} />
-    </ElementWrapper>
-  );
+const StandardBubbleChartInSizes = ({ element }) => {
+  return <StandardBubbleChartInSizesContent element={element} />;
 };
 
 export const StandardBubbleChartInSizesContent = ({ element }) => {
   const chartRef = useRef(null);
 
-  console.log({element});
+  console.log({ element });
 
   useEffect(() => {
     const chart = echarts.init(chartRef.current, 'light');
@@ -35,7 +22,7 @@ export const StandardBubbleChartInSizesContent = ({ element }) => {
         show: element.config.showLegend,
         textStyle: {
           color: element.config.styles.gridAndLegendColor,
-          fontSize: element.config.styles.legendSize,  
+          fontSize: element.config.styles.legendSize,
           fontWeight: element.config.styles.gFontWeight,
         },
       },
@@ -43,27 +30,27 @@ export const StandardBubbleChartInSizesContent = ({ element }) => {
         left: '8%',
         top: '10%',
         containLabel: true,
-        show: element.config.showGridline,  
+        show: element.config.showGridline,
       },
       xAxis: {
         show: element.config.showXaxis,
         axisLabel: {
           color: element.config.styles.gridAndLegendColor || '#333',
-          fontSize: element.config.styles.xGridSize || 12, 
-          fontWeight: element.config.styles.gFontWeight || 'normal', 
+          fontSize: element.config.styles.xGridSize || 12,
+          fontWeight: element.config.styles.gFontWeight || 'normal',
         },
       },
       yAxis: {
-        show: element.config.showYaxis, 
+        show: element.config.showYaxis,
         axisLabel: {
           color: element.config.styles.gridAndLegendColor || '#333',
           fontSize: element.config.styles.yGridSize || 12,
-          fontWeight: element.config.styles.gFontWeight || 'normal', 
+          fontWeight: element.config.styles.gFontWeight || 'normal',
         },
         scale: true,
         axisLine: {
           lineStyle: {
-            color: '#333', 
+            color: '#333',
           },
         },
       },
@@ -108,7 +95,7 @@ export const StandardBubbleChartInSizesContent = ({ element }) => {
         },
       ],
     };
-    
+
     chart.setOption(option);
     return () => {
       chart.dispose();
@@ -117,25 +104,25 @@ export const StandardBubbleChartInSizesContent = ({ element }) => {
 
   return (
     <div
-    style={{
-      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-    }}
-  >    
-    <div
-      ref={chartRef}
       style={{
-        width: element.width,
-        height: element.height,
-        opacity: element.style.opacity,
-        transform: `rotate(${element.config.rotation || 0}deg)`,
-        paddingTop: element.config.styles.yPadding,
-        paddingLeft: element.config.styles.xPadding,
-        paddingBottom: element.config.styles.yPadding,
-        paddingRight: element.config.styles.xPadding,
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
       }}
-    />
-  </div>
+    >
+      <div
+        ref={chartRef}
+        style={{
+          width: element.width,
+          height: element.height,
+          opacity: element.style.opacity,
+          transform: `rotate(${element.config.rotation || 0}deg)`,
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
+        }}
+      />
+    </div>
   );
 };
 
@@ -146,4 +133,3 @@ StandardBubbleChartInSizesContent.propTypes = {
 };
 
 export default StandardBubbleChartInSizes;
-

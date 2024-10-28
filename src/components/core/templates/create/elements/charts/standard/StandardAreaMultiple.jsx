@@ -1,23 +1,10 @@
 import { Area, AreaChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 
-const StandardAreaMultiple = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardAreaMultipleContent element={element} />
-    </ElementWrapper>
-  );
+const StandardAreaMultiple = ({ element }) => {
+  return <StandardAreaMultipleContent element={element} />;
 };
 
 StandardAreaMultiple.propTypes = ElementPropTypes;
@@ -76,4 +63,3 @@ StandardAreaMultipleContent.propTypes = {
 };
 
 export default StandardAreaMultiple;
-

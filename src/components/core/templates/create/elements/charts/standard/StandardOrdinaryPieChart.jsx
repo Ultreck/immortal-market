@@ -4,22 +4,9 @@ import React, { useEffect } from 'react';
 import { Pie, PieChart } from 'recharts';
 import PropTypes from 'prop-types';
 import { colors, interpolateColor } from '@/lib/utils';
-import ElementWrapper from '../../../ElementWrapper';
 
-const StandardOrdinaryPieChart = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardOrdinaryPieChartContent element={element} />
-    </ElementWrapper>
-  );
+const StandardOrdinaryPieChart = ({ element }) => {
+  return <StandardOrdinaryPieChartContent element={element} />;
 };
 
 StandardOrdinaryPieChart.propTypes = ElementPropTypes;
@@ -41,27 +28,27 @@ export const StandardOrdinaryPieChartContent = ({ element }) => {
 
   return (
     <div
-    style={{
-      backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-      backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-    }}
-  >    
-    <div>
-      <ChartContainer
-        config={{}}
-        style={{
-          height: element.height,
-          width: element.width,
-          opacity: element.style.opacity,
-        }}
-      >
-        <PieChart>
-          <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-          <Pie data={chartData} dataKey={element.config.keys.y} nameKey={element.config.keys.x} label />
-        </PieChart>
-      </ChartContainer>
+      style={{
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+      }}
+    >
+      <div>
+        <ChartContainer
+          config={{}}
+          style={{
+            height: element.height,
+            width: element.width,
+            opacity: element.style.opacity,
+          }}
+        >
+          <PieChart>
+            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+            <Pie data={chartData} dataKey={element.config.keys.y} nameKey={element.config.keys.x} label />
+          </PieChart>
+        </ChartContainer>
+      </div>
     </div>
-  </div>
   );
 };
 

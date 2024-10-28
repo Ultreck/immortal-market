@@ -1,6 +1,6 @@
-import { createElement, Fragment } from 'react';
+import { createElement } from 'react';
 import { cn } from '@/lib/utils.js';
-import { components } from '@/lib/elements.js';
+import { getElementConfig, getElementEditComponent } from '@/lib/elements.js';
 import { useContextMenu } from '@/hooks/template/use-context-menu.jsx';
 import useSelectionBox from '@/hooks/template/use-selection-box.jsx';
 import useTemplateStore from '@/store/template.js';
@@ -9,10 +9,12 @@ import { useSelectionActions } from '@/hooks/template/use-selection-actions.js';
 import PropTypes from 'prop-types';
 import { useElementHandlers } from '@/hooks/template/use-element-handlers.js';
 import { useKey } from 'react-use';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
 const PageContent = ({ id }) => {
   const { setNodeRef, node } = useDroppable({ id: `canvas-${id}` });
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
+  const activeElement = useTemplateStore((state) => state.template.activeElement);
   const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
   const scale = useTemplateStore((state) => state.template.scale);
   const { handleAction } = useSelectionActions({ id });
@@ -21,7 +23,7 @@ const PageContent = ({ id }) => {
     id,
     node,
   });
-  const { handleChange, handleClick } = useElementHandlers({ id });
+  const { handleChange, handleClick, handleDoubleClick } = useElementHandlers({ id });
 
   useKey(
     (e) => e.key.toLowerCase() === 'd' && e.ctrlKey && !e.shiftKey,
@@ -53,27 +55,39 @@ const PageContent = ({ id }) => {
         className="origin-top-left pointer-events-none"
       >
         {page.elements.map((element) => {
-          const active = selectedElements.includes(element.id);
+          const selected = selectedElements.includes(element.id);
           const highlighted = highlightedElements.includes(element.id);
+          const active = activeElement === element.id;
+          const component = getElementEditComponent(element);
+          const config = getElementConfig(element);
+
           return (
-            <Fragment key={element.id}>
-              {components.edit[element.type] ? (
-                createElement(components.edit[element.type], {
+            <ElementWrapper
+              key={element.id}
+              element={element}
+              maxWidth={page.width}
+              editable={config?.editable}
+              fit={config?.fit}
+              resizeHandles={config?.resizeHandles}
+              selected={selected}
+              highlighted={highlighted}
+              active={active}
+              onClick={handleClick}
+              onChange={(el) => handleChange({ ...element, ...el })}
+              onDoubleClick={handleDoubleClick}
+            >
+              {component ? (
+                createElement(component, {
                   element,
                   active,
-                  highlighted,
-                  onClick: handleClick,
                   onChange: handleChange,
-                  width: page.width,
-                  scale,
-                },
-              )
+                })
               ) : (
                 <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
                   Unknown element type: {element.type}
                 </div>
               )}
-            </Fragment>
+            </ElementWrapper>
           );
         })}
       </div>

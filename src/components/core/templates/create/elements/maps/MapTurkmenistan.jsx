@@ -1,24 +1,9 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementWrapper from '../../ElementWrapper.jsx';
 import useMapElement from '@/lib/design/use-map-element.jsx';
 import PropTypes from 'prop-types';
 
-const MapTurkmenistan = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <MapTurkmenistanContent element={element} />
-    </ElementWrapper>
-  );
+const MapTurkmenistan = ({ element }) => {
+  return <MapTurkmenistanContent element={element} />;
 };
 
 export const MapTurkmenistanPresent = ({ element }) => {

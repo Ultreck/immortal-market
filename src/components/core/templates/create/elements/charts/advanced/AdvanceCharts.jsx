@@ -19,7 +19,7 @@ import AdvancePercentageCard from './AdvancePercentageCard.jsx';
 import AdvanceColumnCard from './AdvanceColumnCard.jsx';
 import AdvancePercentageCardTwo from './AdvancePercentageCardTwo.jsx';
 
-const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange }) => {
+const AdvanceCharts = ({ element, active, onChange }) => {
   const components = {
     shapes: AdvanceShapes,
     'linear-bar': AdvanceLinearBar,
@@ -42,7 +42,7 @@ const AdvanceCharts = ({ element, active, highlighted, width, onClick, onChange 
   };
 
   if (components[element.config.name]) {
-    return createElement(components[element.config.name], { element, active, highlighted, width, onClick, onChange });
+    return createElement(components[element.config.name], { element, active, onChange });
   }
 
   return null;

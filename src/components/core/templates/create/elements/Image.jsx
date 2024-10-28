@@ -1,14 +1,9 @@
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { Image as NextImage } from '@nextui-org/react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
-const Image = ({ element, active, highlighted, onClick, onChange }) => {
-  return (
-    <ElementWrapper element={element} onClick={onClick} onChange={onChange} active={active} highlighted={highlighted}>
-      <ImageContent element={element} />
-    </ElementWrapper>
-  );
+export const Image = ({ element }) => {
+  return <ImageContent element={element} />;
 };
 
 export const ImagePresent = ({ element }) => {
@@ -30,13 +25,9 @@ const ImageContent = ({ element }) => {
 };
 
 Image.propTypes = ElementPropTypes;
-
 ImageContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
 ImagePresent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
-export default Image;

@@ -1,29 +1,15 @@
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
-const Line = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      onResize={(size) => {
-        onChange({ ...element, width: size.width, height: size.height });
-      }}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-    >
-      <LineElementContent element={element} />
-    </ElementWrapper>
-  );
+export const Line = ({ element }) => {
+  return <LineContent element={element} />;
 };
 
-Line.propTypes = ElementPropTypes;
+export const LinePresent = ({ element }) => {
+  return <LineContent element={element} />;
+};
 
-export const LineElementContent = ({ element }) => {
+const LineContent = ({ element }) => {
   return (
     <div className="!h-max" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
       <svg id="line" viewBox={`0 0 ${element.width} ${element.height}`} width={element.width} height={element.height}>
@@ -101,8 +87,10 @@ export const LineElementContent = ({ element }) => {
   );
 };
 
-LineElementContent.propTypes = {
+Line.propTypes = ElementPropTypes;
+LinePresent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
-export default Line;
+LineContent.propTypes = {
+  element: PropTypes.object.isRequired,
+};

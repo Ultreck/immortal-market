@@ -23,6 +23,7 @@ const useTemplateStore = createWithEqualityFn(
       selectedElements: [],
       selectedPage: null,
       activePage: null,
+      activeElement: null,
       scale: 1,
       undoHistory: [],
       redoHistory: [],

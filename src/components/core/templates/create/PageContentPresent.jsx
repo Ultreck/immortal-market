@@ -1,9 +1,9 @@
 import { createElement, Fragment, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ElementWrapperPresent from '@/components/core/templates/create/ElementWrapperPresent.jsx';
-import { components } from '@/lib/elements.js';
+import { getElementPresentComponent } from '@/lib/elements.js';
 
-const CanvasPresent = ({ page }) => {
+const PageContentPresent = ({ page }) => {
   const el = useRef(null);
   const [scale, setScale] = useState(1);
 
@@ -28,13 +28,11 @@ const CanvasPresent = ({ page }) => {
       className="origin-top relative overflow-hidden mx-auto"
     >
       {page.elements.map((element) => {
+        const component = getElementPresentComponent(element);
         return (
           <Fragment key={element.id}>
-      
-            {components.present[element.type] ? (
-              <ElementWrapperPresent element={element}>
-                {createElement(components.present[element.type], { element })}
-              </ElementWrapperPresent>
+            {component ? (
+              <ElementWrapperPresent element={element}>{createElement(component, { element })}</ElementWrapperPresent>
             ) : (
               <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
                 Unknown element type: {element.type}
@@ -47,8 +45,8 @@ const CanvasPresent = ({ page }) => {
   );
 };
 
-CanvasPresent.propTypes = {
+PageContentPresent.propTypes = {
   page: PropTypes.object.isRequired,
 };
 
-export default CanvasPresent;
+export default PageContentPresent;

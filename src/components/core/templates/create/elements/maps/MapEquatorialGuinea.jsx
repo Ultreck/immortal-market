@@ -1,24 +1,9 @@
-import ElementWrapper from '../../ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import useMapElement from '@/lib/design/use-map-element.jsx';
 import PropTypes from 'prop-types';
 
-const MapEquatorialGuinea = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      resizeHandles={['e']}
-      editable
-      fit
-    >
-      <MapEquatorialGuineaContent element={element} />
-    </ElementWrapper>
-  );
+const MapEquatorialGuinea = ({ element }) => {
+  return <MapEquatorialGuineaContent element={element} />;
 };
 
 export const MapEquatorialGuineaPresent = ({ element }) => {

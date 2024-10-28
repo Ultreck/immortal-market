@@ -1,25 +1,11 @@
 import { Area, CartesianGrid, ComposedChart, Legend, Line, XAxis, YAxis } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart.jsx';
-import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useEffect } from 'react';
 
-const StandardAreaLine = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <StandardAreaLineContent element={element} />
-    </ElementWrapper>
-  );
+const StandardAreaLine = ({ element }) => {
+  return <StandardAreaLineContent element={element} />;
 };
 
 StandardAreaLine.propTypes = ElementPropTypes;
@@ -52,43 +38,35 @@ export const StandardAreaLineContent = ({ element }) => {
       >
         <ComposedChart data={chartData}>
           <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-          <XAxis 
-          dataKey="name" 
-          scale="band" 
-          hide={!element.config.showXaxis} 
-          tick={{
-            fontSize:element.config.styles.xGridSize,
-            fontWeight: element.config.styles.gFontWeight,
-            fontStyle: element.config.styles.gFontStyle,
-            fill: element.config.styles.gridAndLegendColor,
-          }}
-          
+          <XAxis
+            dataKey="name"
+            scale="band"
+            hide={!element.config.showXaxis}
+            tick={{
+              fontSize: element.config.styles.xGridSize,
+              fontWeight: element.config.styles.gFontWeight,
+              fontStyle: element.config.styles.gFontStyle,
+              fill: element.config.styles.gridAndLegendColor,
+            }}
           />
           <YAxis
-           hide={!element.config.showYaxis} 
-           tick={{
-             fontSize:element.config.styles.yGridSize,
-             fontWeight: element.config.styles.gFontWeight,
-             fontStyle: element.config.styles.gFontStyle,
-             fill: element.config.styles.gridAndLegendColor,
-         }}
+            hide={!element.config.showYaxis}
+            tick={{
+              fontSize: element.config.styles.yGridSize,
+              fontWeight: element.config.styles.gFontWeight,
+              fontStyle: element.config.styles.gFontStyle,
+              fill: element.config.styles.gridAndLegendColor,
+            }}
           />
-          {element.config.showLegend && <Legend 
-          textStyle={{
-            fontSize:element.config.styles.legendSize,
-          }}
-          />}
-          <Area 
-          type="monotone" 
-          dataKey="amt" 
-          fill={element.config.colors?.[0]} 
-          stroke={element.config.colors?.[0]} 
-          />
-          <Line 
-          type="monotone" 
-          dataKey="uv" 
-          stroke={element.config.colors?.[1]} 
-          />
+          {element.config.showLegend && (
+            <Legend
+              textStyle={{
+                fontSize: element.config.styles.legendSize,
+              }}
+            />
+          )}
+          <Area type="monotone" dataKey="amt" fill={element.config.colors?.[0]} stroke={element.config.colors?.[0]} />
+          <Line type="monotone" dataKey="uv" stroke={element.config.colors?.[1]} />
         </ComposedChart>
       </ChartContainer>
     </div>
@@ -100,4 +78,3 @@ StandardAreaLineContent.propTypes = {
 };
 
 export default StandardAreaLine;
-

@@ -1,32 +1,21 @@
 import { Treemap } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
-import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 
-const AdvanceTreeMap = ({ element, active, highlighted, width, onClick, onChange }) => {
-  return (
-    <ElementWrapper
-      element={element}
-      onClick={onClick}
-      onChange={onChange}
-      maxWidth={width}
-      active={active}
-      highlighted={highlighted}
-      editable
-    >
-      <AdvanceTreeMapContent element={element} />
-    </ElementWrapper>
-  );
+const AdvanceTreeMap = ({ element }) => {
+  return <AdvanceTreeMapContent element={element} />;
 };
 
 const CustomizedContent = ({ element, root, depth, x, y, width, height, index, colors, name }) => {
   return (
-    <g  style={{
-      top: element.config.styles.yPadding,
-      left: element.config.styles.xPadding,
-      bottom: element.config.styles.yPadding,
-      right: element.config.styles.xPadding,
-    }}>
+    <g
+      style={{
+        top: element.config.styles.yPadding,
+        left: element.config.styles.xPadding,
+        bottom: element.config.styles.yPadding,
+        right: element.config.styles.xPadding,
+      }}
+    >
       <rect
         x={x}
         y={y}
@@ -41,20 +30,25 @@ const CustomizedContent = ({ element, root, depth, x, y, width, height, index, c
       />
       {depth === 1 && (
         <>
-          <text x={x + width / 2} y={y + height / 2 + 7} textAnchor="middle" 
-          fill={element.config.styles.valueAndLableColor} 
-          fontSize={element.config.styles.labelSize}
-          fontWeight={element.config.styles.lFontWeight}
-          fontStyle={element.config.styles.lFontStyle}
+          <text
+            x={x + width / 2}
+            y={y + height / 2 + 7}
+            textAnchor="middle"
+            fill={element.config.styles.valueAndLableColor}
+            fontSize={element.config.styles.labelSize}
+            fontWeight={element.config.styles.lFontWeight}
+            fontStyle={element.config.styles.lFontStyle}
           >
             {name}
           </text>
-          <text x={x + 4} y={y + 18} 
-          fill={element.config.styles.valueAndLableColor} 
-          fontSize={element.config.styles.valueSize}
-          fontWeight={element.config.styles.lFontWeight}
-          fontStyle={element.config.styles.lFontStyle}
-          fillOpacity={0.9}
+          <text
+            x={x + 4}
+            y={y + 18}
+            fill={element.config.styles.valueAndLableColor}
+            fontSize={element.config.styles.valueSize}
+            fontWeight={element.config.styles.lFontWeight}
+            fontStyle={element.config.styles.lFontStyle}
+            fillOpacity={0.9}
           >
             {index + 1}
           </text>
