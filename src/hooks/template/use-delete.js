@@ -5,16 +5,19 @@ const useDelete = () => {
   const pages = useTemplateStore((state) => state.template.pages);
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
   const deleteElements = useTemplateStore((state) => state.deleteElements);
+  const activeElement = useTemplateStore((state) => state.template.activeElement);
+  const getElementPage = useTemplateStore((state) => state.getElementPage);
 
   useKey(
     'Delete',
     () => {
-      const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
-      if (!selectedElements.length || !page) return;
+      if (activeElement || !selectedElements.length) return;
+      const page = getElementPage(selectedElements[0]);
+      if (!page) return;
       deleteElements(selectedElements, page.id);
     },
     undefined,
-    [selectedElements, pages, deleteElements]
+    [selectedElements, pages, deleteElements, activeElement]
   );
 };
 
