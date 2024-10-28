@@ -1,7 +1,7 @@
 import { Text, TextPresent } from '@/components/core/templates/create/elements/Text.jsx';
 import { List, ListPresent } from '@/components/core/templates/create/elements/List.jsx';
 import { CountUpNumber, CountUpNumberPresent } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
-import { ImagePresent } from '@/components/core/templates/create/elements/Image.jsx';
+import { Image, ImagePresent } from '@/components/core/templates/create/elements/Image.jsx';
 import { Line, LinePresent } from '@/components/core/templates/create/elements/Line.jsx';
 import { Shape, ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
 import AdvanceCharts from '@/components/core/templates/create/elements/charts/advanced/AdvanceCharts.jsx';
