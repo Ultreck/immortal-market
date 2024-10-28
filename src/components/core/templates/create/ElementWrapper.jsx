@@ -11,7 +11,7 @@ const ElementWrapper = ({
   onDoubleClick,
   children,
   selected,
-  highlighted,
+  highlighted = false,
   maxWidth = Infinity,
   minWidth = 10,
   minHeight = 10,

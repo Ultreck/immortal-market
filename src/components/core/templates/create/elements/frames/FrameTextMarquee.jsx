@@ -1,18 +1,7 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { cn } from '@/lib/utils.js';
-import { useEffect } from 'react';
 
-const FrameTextMarquee = ({ element, active, onChange }) => {
-  useEffect(() => {
-    // TODO: check
-    const children = element.children.map((el) => {
-      const w = element.width - element.width;
-      const h = element.height - element.height;
-      return { ...el, width: el.width + w, height: el.height + h };
-    });
-    onChange({ ...element, children });
-  }, [element.width, element.height, element, onChange]);
-
+const FrameTextMarquee = ({ element, active }) => {
   return (
     <div className={cn(`relative flex h-full `, !active ? 'overflow-x-hidden ' : '')}>
       <div

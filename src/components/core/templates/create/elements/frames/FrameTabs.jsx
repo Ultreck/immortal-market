@@ -1,20 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Tab, Tabs } from '@nextui-org/react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import FrameContents from '@/components/core/templates/create/elements/frames/FrameContents.jsx';
 
 const FrameTabs = ({ element, active, onChange }) => {
   const [selected, setSelected] = useState(0);
-
-  useEffect(() => {
-    // TODO: check
-    const children = element.children.map((el) => {
-      const w = element.width - element.width;
-      const h = element.height - element.height;
-      return { ...el, width: el.width + w, height: el.height + h };
-    });
-    onChange({ ...element, children });
-  }, [element.width, element.height, element, onChange]);
 
   return (
     <Tabs

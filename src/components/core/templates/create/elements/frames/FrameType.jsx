@@ -2,22 +2,12 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import { cn } from '@/lib/utils.js';
 import { useEffect, useState } from 'react';
 
-const FrameType = ({ element, active, onChange }) => {
+const FrameType = ({ element, active }) => {
   const words = element.config.texts;
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [letterIndex, setLetterIndex] = useState(0);
-
-  useEffect(() => {
-    // TODO: check
-    const children = element.children.map((el) => {
-      const w = element.width - element.width;
-      const h = element.height - element.height;
-      return { ...el, width: el.width + w, height: el.height + h };
-    });
-    onChange({ ...element, children });
-  }, [element.width, element.height, element, onChange]);
 
   useEffect(() => {
     const handleTyping = () => {

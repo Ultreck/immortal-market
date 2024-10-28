@@ -3,22 +3,47 @@ import { createElement, Fragment, useEffect, useState } from 'react';
 import { TbImageInPicture } from 'react-icons/tb';
 import { useDroppable } from '@dnd-kit/core';
 import PropTypes from 'prop-types';
-import { getElementEditComponent } from '@/lib/elements.js';
+import { getElementConfig, getElementEditComponent } from '@/lib/elements.js';
+import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import { useKey } from 'react-use';
 
 const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) => {
-  const { setNodeRef, isOver, active: _active } = useDroppable({ id });
+  const { setNodeRef, node, isOver, active: _active } = useDroppable({ id });
   const index = id.split('/')[1];
   const elements = element.children.filter((el) => +el.frame === +index);
   const [selectedElements, setSelectedElements] = useState([]);
+  const [activeElement, setActiveElement] = useState(null);
+
+  useKey(
+    'Delete',
+    () => {
+      if (activeElement || !selectedElements.length) return;
+      const children = element.children.filter((el) => !selectedElements.includes(el.id));
+      onChange({ ...element, children });
+    },
+    undefined,
+    [selectedElements, activeElement, element, onChange]
+  );
 
   useEffect(() => {
-    if (!active) setSelectedElements([]);
+    if (!active) {
+      setSelectedElements([]);
+      setActiveElement(null);
+    }
   }, [active]);
+
+  const handleFrameClick = (e) => {
+    if (e.target === node.current) {
+      setSelectedElements([]);
+      setActiveElement(null);
+    }
+  };
 
   return (
     <div
       ref={setNodeRef}
       style={{ ...element.style, ...style }}
+      onClick={handleFrameClick}
       className={cn('overflow-hidden relative w-full h-full', { 'overflow-visible': active })}
     >
       {active && overlay}
@@ -30,24 +55,40 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
       {elements.length > 0 ? (
         <>
           {elements.map((el) => {
-            const active = selectedElements.includes(el.id);
+            const selected = selectedElements.includes(el.id);
             const component = getElementEditComponent(el);
+            const config = getElementConfig(el);
+            const active = activeElement === el.id;
+
+            const handleChange = (e) => {
+              onChange({
+                ...element,
+                children: element.children.map((_el) => (_el.id === el.id ? e : _el)),
+              });
+            };
+
             return (
               <Fragment key={el.id}>
                 {component ? (
-                  createElement(component, {
-                    element: el,
-                    active,
-                    onClick: () => {
+                  <ElementWrapper
+                    element={el}
+                    editable={config?.editable}
+                    fit={config?.fit}
+                    resizeHandles={config?.resizeHandles}
+                    selected={selected}
+                    active={active}
+                    onClick={() => {
                       setSelectedElements((old) => [...old, el.id]);
-                    },
-                    onChange: (e) => {
-                      onChange({
-                        ...element,
-                        children: element.children.map((_el) => (_el.id === el.id ? e : _el)),
-                      });
-                    },
-                  })
+                    }}
+                    onChange={handleChange}
+                    onDoubleClick={() => setActiveElement(el.id)}
+                  >
+                    {createElement(component, {
+                      element: el,
+                      active,
+                      onChange: handleChange,
+                    })}
+                  </ElementWrapper>
                 ) : (
                   <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
                     Unknown element type: {el.type}
