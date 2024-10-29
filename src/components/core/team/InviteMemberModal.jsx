@@ -26,6 +26,7 @@ const InviteMemberModal = ({ isOpen, onClose }) => {
   const roles = [
     { key: 'admin', label: 'Admin' },
     { key: 'member', label: 'Member' },
+    { key: 'guest', label: 'Guest' },
   ];
 
   return (
