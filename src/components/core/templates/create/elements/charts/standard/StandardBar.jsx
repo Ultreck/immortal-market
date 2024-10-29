@@ -120,7 +120,7 @@ export const StandardBarContent = ({ element, isPresentMode = false }) => {
             cursor={false}
             content={(e) => {
               return (
-                <div className="bg-default-100 rounded-2xl px-6 py-4 text-white text-sm w-full max-w-[250px] h-full">
+                <div className="bg-default-100 text-default-900 rounded-2xl px-6 py-4  text-sm w-full max-w-[250px] h-full">
                   {e && e.payload && e.payload.length > 0 && (
                     <div>
                       {isPresentMode ? (
@@ -244,7 +244,33 @@ export const StandardBarContent = ({ element, isPresentMode = false }) => {
         </ModalContent>{' '}
       </Modal>
 
-      {isOpen && <Drawer width="1000" isOpen={isOpen} title="Drilldown" onClose={onClose}></Drawer>}
+      {isOpen && (
+        <Drawer width="1000" isOpen={isOpen} title="Drilldown" onClose={onClose}>
+          <>
+            <ChartContainer config={chartConfig} className="">
+              <BarChart accessibilityLayer data={_chartData}>
+                <XAxis
+                  dataKey="browser"
+                  tickLine={false}
+                  tickMargin={10}
+                  axisLine={false}
+                  tickFormatter={(value) => value.slice(0, 3)}
+                />
+                <Bar dataKey="visitors" fill="#2673D9" radius={8} />
+              </BarChart>
+            </ChartContainer>
+            <p>
+              lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quia quibusdamlorem ipsum dolor sit
+              amet consectetur adipisicing elit. Voluptate quia quibusdamlorem ipsum dolor sit amet consectetur
+              adipisicing elit. Voluptate quia quibusdamlorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptate quia quibusdamlorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quia
+              quibusdamlorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quia quibusdamlorem ipsum
+              consectetur adipisicing elit. Voluptate quia quibusdamlorem ipsum dolor sit amet consectetur adipisicing
+              elit. Voluptate quia quibusdamlorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quia
+            </p>
+          </>
+        </Drawer>
+      )}
     </div>
   );
 };
