@@ -10,6 +10,7 @@ import PageCommentBadge from '@/components/core/templates/create/comment/PageCom
 const Page = ({ id }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const selected = useTemplateStore((state) => state.template.selectedPage === id);
+  const isCommentsVisible = useTemplateStore((state) => state.template.isCommentsVisible);
 
   return (
     <div>
@@ -20,7 +21,7 @@ const Page = ({ id }) => {
       <div
         className={cn('border-2 relative border-transparent p-0.5 w-max radius-5', { 'border-primary-500': selected })}
       >
-        <PageCommentBadge id={id} />
+        {isCommentsVisible && <PageCommentBadge id={id} />}
         <InView
           as="div"
           threshold={0.5}

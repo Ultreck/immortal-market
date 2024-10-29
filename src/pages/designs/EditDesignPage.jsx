@@ -9,7 +9,6 @@ import { useToast } from '@/hooks/use-toast.jsx';
 import { useUnmount } from 'react-use';
 import ChatWidget from '@/components/core/templates/create/ChatWidget.jsx';
 
-
 const EditDesignPage = () => {
   const toast = useToast();
   const { id } = useParams();
@@ -44,6 +43,10 @@ const EditDesignPage = () => {
         updateTemplate(payload);
       } else {
         updateTemplate({
+          isCommentsOpen: false,
+          activeComment: null,
+          commentsTargetId: null,
+          isCommentsVisible: true,
           selectedElements: [],
           undoHistory: [],
           redoHistory: [],
@@ -70,7 +73,7 @@ const EditDesignPage = () => {
       ) : (
         <>{!!title && <TemplateBuilder />}</>
       )}
-      <ChatWidget/>
+      <ChatWidget />
     </>
   );
 };

@@ -30,6 +30,7 @@ const useTemplateStore = createWithEqualityFn(
       isCommentsOpen: false,
       activeComment: null,
       commentsTargetId: null,
+      isCommentsVisible: true,
     },
     addUndoHistory: () => {
       set((state) => {

@@ -26,6 +26,7 @@ const ElementWrapper = ({
   const el = useRef(null);
   const scale = useTemplateStore((state) => state.template.scale);
   const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
+  const isCommentsVisible = useTemplateStore((state) => state.template.isCommentsVisible);
 
   useEffect(() => {
     if (fit && el.current && element.height !== el.current.scrollHeight) {
@@ -70,7 +71,7 @@ const ElementWrapper = ({
       ) : (
         <>{typeof children === 'function' ? children({ isEditing: active }) : children}</>
       )}
-      <ElementCommentBadge element={element} />
+      {isCommentsVisible && <ElementCommentBadge element={element} />}
     </DragResizeRotate>
   );
 };
