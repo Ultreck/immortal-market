@@ -70,7 +70,7 @@ const BorderRadius = ({ elements, onChange }) => {
   const value = useResolveValue(elements.map((e) => e.style.borderRadius));
 
   const handleChange = (v) => {
-    if (!v) return;
+    if (isNaN(v)) return;
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, borderRadius: v } })));
   };
 
