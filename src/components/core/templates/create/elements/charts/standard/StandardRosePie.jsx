@@ -36,10 +36,10 @@ export const StandardRosePieContent = ({ element }) => {
               },
               label: {
                 show: element.config.showLabel,
-                fontSize: element.config.styles.labelSize,
-                fontWeight: element.config.styles.lFontWeight,
-                color: element.config.styles.valueAndLableColor,
-                fontStyle: element.config.styles.lFontStyle,
+                fontSize: element.config.styles?.labelSize,
+                fontWeight: element.config.styles?.lFontWeight,
+                color: element.config.styles?.valueAndLableColor,
+                fontStyle: element.config.styles?.lFontStyle,
               },
               legend: {
                 left: 'center',
@@ -74,10 +74,10 @@ export const StandardRosePieContent = ({ element }) => {
           width: element.width,
           opacity: element.style.opacity,
           transform: `rotate(${element.config.rotation || 0}deg)`,
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
+          paddingTop: element.config.styles?.yPadding,
+          paddingLeft: element.config.styles?.xPadding,
+          paddingBottom: element.config.styles?.yPadding,
+          paddingRight: element.config.styles?.xPadding,
         }}
       />
     </div>
