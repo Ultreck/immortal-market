@@ -1,5 +1,4 @@
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
-import { useState } from 'react';
 import { RiFontFamily } from 'react-icons/ri';
 import { TbArrowsExchange, TbChartPie, TbEye, TbReplace, TbSquareRoundedPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
@@ -8,6 +7,7 @@ import ChangeChart from '@/components/core/templates/create/tools/elements/speci
 import NewConnection from '@/components/core/templates/create/tools/elements/specific/chart-data/NewConnection.jsx';
 import { cn } from '@/lib/utils.js';
 import ModifyAdvancedChart from './chart-data/ModifyAdvancedChart';
+import usePopoverStore from '@/store/popover.js';
 
 const items = [
   {
@@ -48,7 +48,8 @@ const items = [
 ];
 
 const ChartData = ({ element, onChange }) => {
-  const [view, setView] = useState('home');
+  const { isPopoverOpen, view, closePopover, setView } = usePopoverStore();
+  const openPopover = usePopoverStore((state) => state.openPopover);
 
   return (
     <>
@@ -57,6 +58,13 @@ const ChartData = ({ element, onChange }) => {
         showArrow
         offset={10}
         classNames={{ content: 'w-[350px] !max-h-[550px] overflow-y-auto block' }}
+        isOpen={isPopoverOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            return closePopover();
+          }
+          return openPopover('home');
+        }}
       >
         <PopoverTrigger>
           <Button isIconOnly variant="light" aria-label="Configure chart">

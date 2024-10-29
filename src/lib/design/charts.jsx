@@ -70,6 +70,7 @@ export const standard = [
       },
       tooltip: {
         enabled: false,
+        type: 'bar',
       },
       modal: {
         enabled: false,
@@ -1425,4 +1426,3 @@ export const standard = [
     ),
   },
 ];
-

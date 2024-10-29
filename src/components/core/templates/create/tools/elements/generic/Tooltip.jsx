@@ -1,5 +1,5 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Switch } from '@nextui-org/react';
-import { TbChartBar, TbChartPie } from 'react-icons/tb';
+import { TbAbc, TbChartBar, TbChartLine, TbChartPie } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 import { GrTooltip } from 'react-icons/gr';
@@ -103,6 +103,53 @@ const elements = [
       </div>
     ),
   },
+  {
+    id: 'chart-s-line',
+    category: 'line',
+    data: {
+      type: 'chart-s',
+      useBackgroundImage: false,
+      backgroundImage: null,
+      backgroundColor: '#000',
+      useBackgroundColor: false,
+      text: 'Line Chart',
+      width: 400,
+      height: 300,
+      style: getElementDefaultStyle({ type: 'chart-a', name: 'line' }),
+      config: {
+        name: 'line',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line' }),
+        data: [
+          { name: 'Page A', value: 4000 },
+          { name: 'Page B', value: 3000 },
+          { name: 'Page C', value: 2000 },
+          { name: 'Page D', value: 2780 },
+          { name: 'Page E', value: 1890 },
+        ],
+        keys: { x: 'name', y: 'value' },
+        colors: ['#E66B5B'],
+        showXGridline: false,
+        showYGridline: false,
+        fontSize: 12,
+        bars: 5,
+        showLegend: false,
+        showXaxis: false,
+        showYaxis: false,
+        type: 'Natural',
+        tools: {
+          colors: {
+            gradient: false,
+            palettes: false,
+          },
+        },
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+        <TbChartLine className="w-full h-full" />
+      </div>
+    ),
+  },
 ];
 
 const ElementTooltip = ({ element, onChange }) => {
@@ -177,12 +224,24 @@ const ElementTooltip = ({ element, onChange }) => {
                   </Select>
                 </div>
                 <div className="grid grid-cols-4 gap-6 pt-2">
+                  <div>
+                    <div
+                      className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60"
+                      onClick={() => {
+                        onChange({ ...element, tooltip: { ...element.tooltip, type: 'text' } });
+                      }}
+                    >
+                      <TbAbc className="w-full h-full" />
+                    </div>
+                    <p className="text-center">Text</p>
+                  </div>
                   {elements.map((e) => (
                     <div
                       className="cursor-pointer rounded-2xl"
                       key={e.id}
                       onClick={() => {
-                        onChange({ ...element, config: { ...element.config, name: e.data.config.name } });
+                        console.log({ e });
+                        onChange({ ...element, tooltip: { ...element.tooltip, type: e.data.config.name } });
                       }}
                     >
                       {e.preview}

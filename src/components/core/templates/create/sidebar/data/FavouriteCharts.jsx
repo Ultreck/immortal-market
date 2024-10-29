@@ -65,6 +65,7 @@ const elements = [
       },
       tooltip: {
         enabled: false,
+        type: 'bar',
       },
       modal: {
         enabled: false,
@@ -509,4 +510,3 @@ const FavouriteCharts = () => {
 };
 
 export default FavouriteCharts;
-
