@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import { TbCircleCheckFilled } from 'react-icons/tb';
 import { Button } from '@nextui-org/react';
+import plans from '@/lib/plans.js';
+
+let _plans = plans.filter((p) => p.featured);
+_plans = _plans.sort((a) => {
+  return !!a.free && !!a.standard && !!a.premium ? -1 : 1;
+});
 
 const PlanCard = ({ type, amount }) => {
   return (
@@ -12,40 +18,17 @@ const PlanCard = ({ type, amount }) => {
         <span className="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400">/month</span>
       </div>
       <ul role="list" className="space-y-5 my-7">
-        <li className="flex items-center">
-          <TbCircleCheckFilled size="18" className="flex-shrink-0 text-blue-700 dark:text-blue-500" />
-          <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
-            2 team members
-          </span>
-        </li>
-        <li className="flex">
-          <TbCircleCheckFilled size="18" className="flex-shrink-0 text-blue-700 dark:text-blue-500" />
-          <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
-            20GB Cloud storage
-          </span>
-        </li>
-        <li className="flex">
-          <TbCircleCheckFilled size="18" className="flex-shrink-0 text-blue-700 dark:text-blue-500" />
-          <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
-            Integration help
-          </span>
-        </li>
-        <li className="flex line-through decoration-gray-500">
-          <TbCircleCheckFilled size="18" className="flex-shrink-0 text-gray-400 dark:text-gray-500" />
-          <span className="text-base font-normal leading-tight text-gray-500 ms-3">Sketch Files</span>
-        </li>
-        <li className="flex line-through decoration-gray-500">
-          <TbCircleCheckFilled size="18" className="flex-shrink-0 text-gray-400 dark:text-gray-500" />
-          <span className="text-base font-normal leading-tight text-gray-500 ms-3">API Access</span>
-        </li>
-        <li className="flex line-through decoration-gray-500">
-          <TbCircleCheckFilled size="18" className="flex-shrink-0 text-gray-400 dark:text-gray-500" />
-          <span className="text-base font-normal leading-tight text-gray-500 ms-3">Complete documentation</span>
-        </li>
-        <li className="flex line-through decoration-gray-500">
-          <TbCircleCheckFilled size="18" className="flex-shrink-0 text-gray-400 dark:text-gray-500" />
-          <span className="text-base font-normal leading-tight text-gray-500 ms-3">24×7 phone & email support</span>
-        </li>
+        {_plans.slice(0, 6).map((item) => (
+          <li key={item.name} className={`flex ${item[type] ? 'items-center' : 'line-through decoration-gray-500'} `}>
+            <TbCircleCheckFilled
+              size="18"
+              className={`flex-shrink-0 ${item[type] ? 'text-blue-700 dark:text-blue-500' : 'text-gray-400 dark:text-gray-500'}`}
+            />
+            <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
+              {item.feature} {typeof item[type] === 'string' ? item[type] : ''}
+            </span>
+          </li>
+        ))}
       </ul>
       <Button variant="bordered" color="primary" className="text-base px-5 py-2.5 w-full">
         Choose plan

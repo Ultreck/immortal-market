@@ -2,6 +2,24 @@ import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import PlanCard from '@/components/core/plan/PlanCard.jsx';
 import Features from '@/components/core/plan/Features.jsx';
 
+const pricing = [
+  {
+    name: 'Free',
+    key: 'free',
+    price: 0,
+  },
+  {
+    name: 'Standard plan',
+    key: 'standard',
+    price: 10,
+  },
+  {
+    name: 'Premium plan',
+    key: 'premium',
+    price: 15,
+  },
+];
+
 const PlanPage = () => {
   return (
     <>
@@ -9,9 +27,9 @@ const PlanPage = () => {
       <div className="container mb-8">
         <div className="flex flex-col gap-8">
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-            <PlanCard type="Free" amount={0} />
-            <PlanCard type="Standard plan" amount={49} />
-            <PlanCard type="Premium plan" amount={100} />
+            {pricing.map((item, index) => (
+              <PlanCard type={item.key} key={index} amount={item.price} />
+            ))}
           </div>
           <Features />
         </div>
