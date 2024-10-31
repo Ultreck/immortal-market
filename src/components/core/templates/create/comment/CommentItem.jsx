@@ -15,6 +15,7 @@ const CommentItem = ({ comment, onClick, className }) => {
   const toast = useToast();
   const { id: business } = useBusiness();
   const design = useTemplateStore((state) => state.template.id);
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const [isEditing, setIsEditing] = useState(false);
   const { mutateAsync: deleteComment, isPending: isDeleteLoading } = useDeleteComment(business, design);
   const { mutateAsync: updateComment, isPending: isUpdateLoading } = useUpdateComment(business, design);
@@ -22,6 +23,7 @@ const CommentItem = ({ comment, onClick, className }) => {
   const handleDeleteComment = async () => {
     try {
       await deleteComment(comment._id);
+      updateTemplate({ activeComment: null });
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }
@@ -61,18 +63,14 @@ const CommentItem = ({ comment, onClick, className }) => {
             <div className="flex gap-x-4 items-start">
               <Avatar
                 src={getImageLink(comment.author.image)}
-                name={`${comment.author.firstName} ${comment.author.lastName}`}
+                name={`${comment.author.firstName}`}
                 className="text-lg"
                 size="sm"
               />
               <div>
                 <div className="flex items-center space-x-2">
-                  <p className="font-semibold text-base leading-none">
-                    {comment.author.firstName} {comment.author.lastName}
-                  </p>
-                  <p className="text-md opacity-70 italic">
-                    {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
-                  </p>
+                  <p className="font-semibold text-base leading-none">{comment.author.firstName}</p>
+                  <p className="text-md opacity-70 italic">{formatDistanceToNow(new Date(comment.createdAt))}</p>
                 </div>
                 <p className="text-base">{comment.content}</p>
               </div>

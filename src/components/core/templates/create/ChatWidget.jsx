@@ -1,14 +1,26 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const CHATRA_ID = import.meta.env.VITE_CHATRA_ID;
 
 const ChatWidget = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const el = document.getElementById('chatra');
+    if (el) {
+      if (pathname.startsWith('/designs/')) {
+        el.style.display = 'block';
+      } else {
+        el.style.display = 'none';
+      }
+    }
+  }, [pathname]);
+
   useEffect(() => {
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://call.chatra.io/chatra.js';
-    script.onload = () => console.log('Chatra script loaded');
-    script.onerror = (e) => console.error('Chatra script error:', e);
     window.ChatraID = CHATRA_ID;
     window.Chatra =
       window.Chatra ||

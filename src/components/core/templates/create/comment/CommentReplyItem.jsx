@@ -41,12 +41,8 @@ const CommentReplyItem = ({ comment }) => {
               />
               <div>
                 <div className="flex items-center space-x-2">
-                  <p className="font-semibold text-base leading-none">
-                    {comment.author.firstName} {comment.author.lastName}
-                  </p>
-                  <p className="text-md opacity-70 italic">
-                    {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
-                  </p>
+                  <p className="font-semibold text-base leading-none">{comment.author.firstName}</p>
+                  <p className="text-md opacity-70 italic">{formatDistanceToNow(new Date(comment.createdAt))}</p>
                 </div>
                 <p className="text-base">{comment.content}</p>
               </div>

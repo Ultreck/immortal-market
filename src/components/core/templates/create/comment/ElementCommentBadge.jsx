@@ -9,10 +9,10 @@ import PropTypes from 'prop-types';
 const ElementCommentBadge = ({ element }) => {
   const { id: business } = useBusiness();
   const design = useTemplateStore((state) => state.template.id);
-  const { data: { comments = [] } = {} } = useGetComments({ business, design });
-  const _comments = comments.filter((comment) => comment.targetId === element.id && !comment.resolved);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const selectElements = useTemplateStore((state) => state.selectElements);
+  const { data: { comments = [] } = {} } = useGetComments({ business, design });
+  const _comments = comments.filter((comment) => comment.targetId === element.id && !comment.resolved);
 
   const handleClick = () => {
     updateTemplate({
