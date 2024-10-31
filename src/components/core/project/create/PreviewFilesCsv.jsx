@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useCreateProjectStore from '@/store/create-project.js';
 import Title from '@/components/core/shared/Title.jsx';
 import { Button, cn, Radio, RadioGroup, Select, SelectItem, Switch } from '@nextui-org/react';
-import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import { TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useMount } from 'react-use';
 
@@ -37,7 +37,12 @@ const PreviewFilesCsv = ({ onNext, onPrev }) => {
 
   return (
     <div>
-      <Title title="Review Columns" sub="Select headers you want to include in your report" className="mb-10" />
+      <Title
+        title="Review Columns"
+        sub="Select headers you want to include in your report"
+        className="mb-10"
+        onBack={onPrev}
+      />
       <RadioGroup
         orientation="horizontal"
         className="gap-10"
@@ -131,16 +136,6 @@ const PreviewFilesCsv = ({ onNext, onPrev }) => {
         </div>
       )}
       <div className="mt-10 space-x-4 flex items-center">
-        <Button
-          onClick={onPrev}
-          color="default"
-          variant="bordered"
-          radius="full"
-          className="text-base px-6"
-          startContent={<TbChevronLeft size="20" />}
-        >
-          Back
-        </Button>
         <Button
           onClick={handleSubmit}
           color="primary"

@@ -68,7 +68,7 @@ const CreateProjectModal = () => {
       width={1000}
       padding={false}
     >
-      <div className="grid grid-cols-[320px_1fr] h-full">
+      <div className="grid grid-cols-[280px_1fr] h-full">
         <div className="border-r border-default-200 dark:border-default-100 py-12 px-12 h-full bg-[#f4f5f6] dark:bg-[#0b161f]">
           <Stepper
             current={step}

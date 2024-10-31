@@ -4,7 +4,7 @@ import { Button, cn, Radio, RadioGroup, Select, SelectItem, Switch } from '@next
 import { useState } from 'react';
 import useCreateProjectStore from '@/store/create-project.js';
 import { useMount } from 'react-use';
-import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import { TbChevronRight } from 'react-icons/tb';
 
 const PreviewFilesExcel = ({ onNext, onPrev }) => {
   const [current, setCurrent] = useState(0);
@@ -40,7 +40,12 @@ const PreviewFilesExcel = ({ onNext, onPrev }) => {
 
   return (
     <div>
-      <Title title="Review Columns" sub="Select headers you want to include in your report" className="mb-10" />
+      <Title
+        title="Review Columns"
+        sub="Select headers you want to include in your report"
+        className="mb-10"
+        onBack={onPrev}
+      />
       <div className="space-y-2">
         <RadioGroup
           orientation="horizontal"
@@ -155,16 +160,6 @@ const PreviewFilesExcel = ({ onNext, onPrev }) => {
         </div>
       )}
       <div className="mt-10 space-x-4 flex items-center">
-        <Button
-          onClick={onPrev}
-          color="default"
-          variant="bordered"
-          radius="full"
-          className="text-base px-6"
-          startContent={<TbChevronLeft size="20" />}
-        >
-          Back
-        </Button>
         <Button
           onClick={onNext}
           color="primary"

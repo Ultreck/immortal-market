@@ -1,35 +1,164 @@
-import { Button, Card } from '@nextui-org/react';
+import { Card } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import Title from '../../shared/Title.jsx';
-import { RiFileUploadLine } from 'react-icons/ri';
-import { TbBrandGoogleDrive, TbBrandMongodb, TbBrandMysql, TbChevronLeft, TbLink } from 'react-icons/tb';
+import {
+  TbBrandGoogleDrive,
+  TbBrandMongodb,
+  TbBrandMysql,
+  TbDatabase,
+  TbFileTypeCsv,
+  TbFileTypePdf,
+  TbJson,
+  TbLink,
+} from 'react-icons/tb';
 import useCreateProjectStore from '@/store/create-project.js';
 import { useState } from 'react';
 import UploadFiles from '@/components/core/project/create/UploadFiles.jsx';
 import { cn } from '@/lib/utils.js';
 import ConnectSql from '@/components/core/project/create/ConnectSql.jsx';
 import ConnectMongodb from '@/components/core/project/create/ConnectMongodb.jsx';
+import { SiAmazondynamodb, SiMariadb, SiMicrosoftexcel, SiMicrosoftword, SiOracle, SiPostgresql } from 'react-icons/si';
 
 const sources = [
   {
-    key: 'files',
-    name: 'Files',
     icon: (
       <div className="w-14 h-14 grid place-items-center text-teal-500 bg-teal-100/80 dark:bg-teal-800/30 rounded-full">
-        <RiFileUploadLine size="24" />
+        <SiMicrosoftexcel size="24" />
       </div>
     ),
-    disabled: false,
+    name: 'Excel',
+    key: 'xlsx',
+    view: 'files',
   },
   {
-    key: 'sql',
-    name: 'SQL',
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-blue-500 bg-blue-100/80 dark:bg-blue-800/30 rounded-full">
+        <SiMicrosoftword size="24" />
+      </div>
+    ),
+    name: 'Doc',
+    key: 'docx',
+    view: 'files',
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-orange-500 bg-orange-100/80 dark:bg-orange-800/30 rounded-full">
+        <TbJson size="24" />
+      </div>
+    ),
+    name: 'JSON',
+    key: 'json',
+    view: 'files',
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-green-500 bg-green-100/80 dark:bg-green-800/30 rounded-full">
+        <TbFileTypeCsv size="24" />
+      </div>
+    ),
+    name: 'CSV',
+    key: 'csv',
+    view: 'files',
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-red-500 bg-red-100/80 dark:bg-red-800/30 rounded-full">
+        <TbFileTypePdf size="24" />
+      </div>
+    ),
+    name: 'PDF',
+    key: 'pdf',
+    view: 'files',
+  },
+  {
     icon: (
       <div className="w-14 h-14 grid place-items-center text-cyan-500 bg-cyan-100/80 dark:bg-cyan-800/30 rounded-full">
+        <TbLink size="24" />
+      </div>
+    ),
+    name: 'Link',
+    key: 'link',
+    disabled: true,
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-orange-500 bg-orange-100/80 dark:bg-orange-800/30 rounded-full">
+        <TbBrandGoogleDrive size="24" />
+      </div>
+    ),
+    name: 'Google Drive',
+    key: 'google-drive',
+    disabled: true,
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-sky-500 bg-sky-100/80 dark:bg-sky-800/30 rounded-full">
         <TbBrandMysql size="24" />
       </div>
     ),
-    disabled: false,
+    name: 'MySQL',
+    key: 'mysql',
+    view: 'sql',
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-pink-500 bg-pink-100/80 dark:bg-pink-800/30 rounded-full">
+        <SiOracle size="24" />
+      </div>
+    ),
+    name: 'Oracle',
+    key: 'oracle',
+    view: 'sql',
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-teal-500 bg-teal-100/80 dark:bg-teal-800/30 rounded-full">
+        <SiPostgresql size="24" strokeWidth={0.8} />
+      </div>
+    ),
+    name: 'Postgresql',
+    key: 'postgresql',
+    view: 'sql',
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-blue-500 bg-blue-100/80 dark:bg-blue-800/30 rounded-full">
+        <TbDatabase size="24" />
+      </div>
+    ),
+    name: 'MSSQL',
+    key: 'mssql',
+    view: 'sql',
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-emerald-500 bg-emerald-100/80 dark:bg-emerald-800/30 rounded-full">
+        <SiMariadb size="24" />
+      </div>
+    ),
+    name: 'MariaDB',
+    key: 'mariadb',
+    view: 'sql',
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-orange-500 bg-orange-100/80 dark:bg-orange-800/30 rounded-full">
+        <SiAmazondynamodb size="24" strokeWidth={0.4} />
+      </div>
+    ),
+    name: 'Amazon DynamoDB',
+    key: 'amazon-dynamodb',
+    view: 'sql',
+  },
+  {
+    icon: (
+      <div className="w-14 h-14 grid place-items-center text-green-500 bg-green-100/80 dark:bg-green-800/30 rounded-full">
+        <TbBrandMongodb size="24" />
+      </div>
+    ),
+    name: 'MongoDB',
+    key: 'mongodb',
+    view: 'mongodb',
   },
   {
     key: 'urls',
@@ -51,16 +180,6 @@ const sources = [
     ),
     disabled: true,
   },
-  {
-    key: 'mongodb',
-    name: 'MongoDB',
-    icon: (
-      <div className="w-14 h-14 grid place-items-center text-green-500 bg-green-100/80 dark:bg-green-800/30 rounded-full">
-        <TbBrandMongodb size="24" />
-      </div>
-    ),
-    disabled: false,
-  },
 ];
 
 const SelectSource = ({ onNext, onPrev }) => {
@@ -68,43 +187,44 @@ const SelectSource = ({ onNext, onPrev }) => {
   const updateData = useCreateProjectStore((state) => state.updateData);
   const [view, setView] = useState(data.source || 'options');
 
-  const handleClick = (key) => {
-    updateData({ source: key });
-    setView(key);
+  const handleClick = (source) => {
+    const payload = { source: source.key };
+    if (source.view === 'files') {
+      payload.type = source.key;
+    }
+    if (source.view === 'sql') {
+      payload.credentials = { type: source.key };
+    }
+    updateData(payload);
+    setView(source.view);
   };
 
   return (
     <>
       {view === 'options' && (
         <>
-          <Title title="Connect your data" sub="Choose a data source below to continue" className="mb-10" />
-          <div className="grid grid-cols-3 gap-6">
+          <Title
+            title="Connect your data"
+            sub="Choose a data source below to continue"
+            className="mb-10"
+            onBack={onPrev}
+          />
+          <div className="grid grid-cols-5 gap-4">
             {sources.map((source) => (
               <Card
                 key={source.key}
                 isPressable
-                onPress={() => handleClick(source.key)}
+                onPress={() => handleClick(source)}
+                radius="lg"
                 className={cn(
-                  'shadow-none border-2 border-default-200 dark:border-default-200/70 hover:bg-default-100 px-10 py-8 flex items-center justify-center',
+                  'shadow-none border-2 border-default-200 dark:border-default-200/70 hover:bg-default-100 px-10 py-6 flex items-center justify-center',
                   { disabled: source.disabled }
                 )}
               >
                 {source.icon}
-                <div className="text-base font-medium mt-3 leading-tight">{source.name}</div>
+                <div className="text-md font-medium mt-3 leading-tight">{source.name}</div>
               </Card>
             ))}
-          </div>
-          <div className="mt-10">
-            <Button
-              onClick={onPrev}
-              color="default"
-              variant="bordered"
-              radius="full"
-              className="text-base px-6"
-              startContent={<TbChevronLeft size="20" />}
-            >
-              Back
-            </Button>
           </div>
         </>
       )}

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import useCreateProjectStore from '@/store/create-project.js';
-import { Button, Image, Skeleton } from '@nextui-org/react';
+import { Button, Chip, Image, Input, Skeleton } from '@nextui-org/react';
 import { useGetTemplates } from '@/api/business.js';
 import { getImageLink } from '@/lib/utils.js';
-import { TbPhotoCircle } from 'react-icons/tb';
+import { TbPhotoCircle, TbSearch } from 'react-icons/tb';
 import { useState } from 'react';
 import DesignCard from '@/components/core/project/DesignCard.jsx';
 import Title from '@/components/core/shared/Title.jsx';
@@ -13,6 +13,7 @@ const SelectTemplate = ({ onNext }) => {
   const [view, setView] = useState(template ? 'detail' : 'templates');
   const { data: { designs = [] } = {}, isLoading: isDeignsLoading } = useGetTemplates();
   const updateData = useCreateProjectStore((state) => state.updateData);
+  const [category, setCategory] = useState('all');
 
   const handleClick = (template) => {
     updateData({ template });
@@ -26,7 +27,24 @@ const SelectTemplate = ({ onNext }) => {
       )}
       {view === 'templates' && (
         <>
-          <Title title="Choose template" sub="Select a template to get started" className="mb-10" />
+          <div className="flex items-center justify-between mb-10">
+            <Title title="Choose template" sub="Select a template to get started" />
+            <div className="relative">
+              <Input
+                type="text"
+                name="query"
+                id="query"
+                size="lg"
+                classNames={{
+                  input: 'text-base',
+                  base: 'transition-all duration-300 w-[260px]',
+                  inputWrapper: 'min-h-[auto] h-11 rounded-full',
+                }}
+                startContent={<TbSearch size="24" className="mx-3 opacity-30" />}
+                placeholder="Search templates.."
+              />
+            </div>
+          </div>
           {isDeignsLoading ? (
             <div className="grid grid-cols-2 gap-3">
               <Skeleton className="w-full h-full aspect-square rounded-2xl" />
@@ -35,17 +53,47 @@ const SelectTemplate = ({ onNext }) => {
               <Skeleton className="w-full h-full aspect-square rounded-2xl" />
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-7">
-              {designs.map((design) => (
-                <DesignCard
-                  onClick={() => handleClick(design)}
-                  key={design._id}
-                  title={design.title}
-                  id={design._id}
-                  thumbnail={design.thumbnail}
-                />
-              ))}
-            </div>
+            <>
+              <div className="mb-8 flex flex-wrap gap-x-3 gap-y-2">
+                {[
+                  'All',
+                  'Tech',
+                  'Customer',
+                  'Marketing',
+                  'Report',
+                  'Finance',
+                  'HR',
+                  'Sales',
+                  'Operations',
+                  'Analytics',
+                  'Lorem',
+                  'Ipsum',
+                  'Dolor',
+                ].map((item) => (
+                  <Chip
+                    key={item}
+                    variant={category === item.toLowerCase() ? 'solid' : 'flat'}
+                    size="lg"
+                    classNames={{ base: 'cursor-pointer', content: 'font-medium' }}
+                    color={category === item.toLowerCase() ? 'primary' : 'default'}
+                    onClick={() => setCategory(item)}
+                  >
+                    {item}
+                  </Chip>
+                ))}
+              </div>
+              <div className="grid grid-cols-2 gap-7">
+                {designs.map((design) => (
+                  <DesignCard
+                    onClick={() => handleClick(design)}
+                    key={design._id}
+                    title={design.title}
+                    id={design._id}
+                    thumbnail={design.thumbnail}
+                  />
+                ))}
+              </div>
+            </>
           )}
         </>
       )}
@@ -58,13 +106,13 @@ const TemplateDetails = ({ onPrev, onNext }) => {
 
   return (
     <div>
-      <Title title="Preview Template" sub="Confirm your selection" className="mb-10" />
+      <Title title="Preview Template" sub="Confirm your selection" className="mb-10" onBack={onPrev} />
       {template.thumbnail ? (
         <Image
           src={getImageLink(template.thumbnail)}
           alt={template.title}
           removeWrapper
-          className="w-full h-50 object-cover rounded-xl aspect-square cursor-pointer border border-default-200"
+          className="w-full object-cover rounded-xl cursor-pointer border border-default-200"
         />
       ) : (
         <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
@@ -80,9 +128,6 @@ const TemplateDetails = ({ onPrev, onNext }) => {
         </p>
       </div>
       <div className="space-y-2 mt-6 pt-2 space-x-4">
-        <Button onClick={onPrev} variant="bordered" radius="full" className="px-6 text-base">
-          Back
-        </Button>
         <Button onClick={onNext} variant="solid" radius="full" className="px-6 text-base" color="primary">
           Next
         </Button>

@@ -1,6 +1,6 @@
 import Title from '@/components/core/shared/Title.jsx';
 import { Button, Checkbox, Input, Select, SelectItem } from '@nextui-org/react';
-import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import { TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast.jsx';
@@ -51,7 +51,13 @@ const Form = ({ onPrev, onNext }) => {
 
   return (
     <div className="flex flex-col">
-      <Title title="Connect to SQL" sub="Import data from your SQL database" className="mb-10" />
+      <Title
+        title="Connect to SQL"
+        sub="Import data from your SQL database"
+        className="mb-10"
+        onBack={onPrev}
+        isDisabled={isConnecting}
+      />
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <div className="space-y-6">
           <div className="grid grid-cols-1 gap-2">
@@ -80,6 +86,8 @@ const Form = ({ onPrev, onNext }) => {
                     { key: 'PostgreSQL', name: 'PostgreSQL', value: 'postgresql' },
                     { key: 'SQL Server', name: 'SQL Server', value: 'mssql' },
                     { key: 'Oracle', name: 'Oracle', value: 'oracle' },
+                    { key: 'MariaDB', name: 'MariaDB', value: 'mariadb' },
+                    { key: 'Amazon DynamoDB', name: 'Amazon DynamoDB', value: 'amazon-dynamodb' },
                   ].map((option) => (
                     <SelectItem key={option.value} classNames={{ title: 'px-2 text-base' }}>
                       {option.name}
@@ -219,17 +227,6 @@ const Form = ({ onPrev, onNext }) => {
         </div>
         <div className="mt-10 space-x-4 flex items-center">
           <Button
-            onClick={onPrev}
-            color="default"
-            variant="bordered"
-            radius="full"
-            className="text-base px-6"
-            startContent={<TbChevronLeft size="20" />}
-            isDisabled={isConnecting}
-          >
-            Back
-          </Button>
-          <Button
             type="submit"
             color="primary"
             radius="full"
@@ -251,7 +248,12 @@ const Tables = ({ onPrev, onNext }) => {
 
   return (
     <div>
-      <Title title="Select tables" sub="Select the tables you want to include in your analysis" className="mb-10" />
+      <Title
+        title="Select tables"
+        sub="Select the tables you want to include in your analysis"
+        className="mb-10"
+        onBack={onPrev}
+      />
       <div className="flex flex-wrap gap-6">
         {tables.map((table, index) => (
           <div key={index} className="border border-default-200 rounded-2xl px-4 py-2">
@@ -268,16 +270,6 @@ const Tables = ({ onPrev, onNext }) => {
         ))}
       </div>
       <div className="mt-10 space-x-4 flex items-center">
-        <Button
-          onClick={onPrev}
-          color="default"
-          variant="bordered"
-          radius="full"
-          className="text-base px-6"
-          startContent={<TbChevronLeft size="20" />}
-        >
-          Back
-        </Button>
         <Button
           onClick={onNext}
           color="primary"
@@ -306,4 +298,3 @@ Form.propTypes = {
 };
 
 export default ConnectSql;
-

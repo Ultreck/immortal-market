@@ -1,6 +1,6 @@
 import { Accordion, AccordionItem, Button, Checkbox, Radio, RadioGroup } from '@nextui-org/react';
 import Title from '../shared/Title';
-import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import { TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
 const items = [
@@ -20,7 +20,12 @@ const GenerateReport = ({ onNext, onPrev }) => {
 
   return (
     <>
-      <Title title="Generate your report" sub="Select datapoints below for your report" className="mb-10" />
+      <Title
+        title="Generate your report"
+        sub="Select datapoints below for your report"
+        className="mb-10"
+        onBack={onPrev}
+      />
       <RadioGroup
         orientation="horizontal"
         className="gap-10"
@@ -89,16 +94,6 @@ const GenerateReport = ({ onNext, onPrev }) => {
         </Accordion>
       </div>
       <div className="mt-10 space-x-4 flex items-center">
-        <Button
-          onClick={onPrev}
-          color="default"
-          variant="bordered"
-          radius="full"
-          className="text-base px-6"
-          startContent={<TbChevronLeft size="20" />}
-        >
-          Back
-        </Button>
         <Button
           onClick={handleSubmit}
           color="primary"

@@ -28,8 +28,8 @@ const Stepper = ({ current, steps, classNames = {}, onChange, isClickable }) => 
                   className={cn(
                     'relative flex items-center justify-center w-[36px] h-[36px] mr-4',
                     'bg-default-200 rounded-full ring-4 ring-white dark:ring-default-50 dark:bg-default-100 transition-all duration-300',
-                    { 'bg-success-200': isDone },
-                    { 'bg-warning-200': isCurrent },
+                    { '!bg-success-200': isDone },
+                    { '!bg-warning-200': isCurrent },
                     classNames.circle
                   )}
                 >

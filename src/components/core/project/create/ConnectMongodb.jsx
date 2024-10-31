@@ -1,6 +1,6 @@
 import Title from '@/components/core/shared/Title.jsx';
 import { Button, Checkbox, Input } from '@nextui-org/react';
-import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import { TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast.jsx';
@@ -51,7 +51,13 @@ const Form = ({ onPrev, onNext }) => {
 
   return (
     <div className="flex flex-col">
-      <Title title="Connect to Mongodb" sub="Import data from your Mongodb database" className="mb-10" />
+      <Title
+        title="Connect to Mongodb"
+        sub="Import data from your Mongodb database"
+        className="mb-10"
+        onBack={onPrev}
+        isDisabled={isConnecting}
+      />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-6">
           <div className="grid grid-cols-2 gap-4">
@@ -176,17 +182,6 @@ const Form = ({ onPrev, onNext }) => {
         </div>
         <div className="mt-10 space-x-4 flex items-center">
           <Button
-            onClick={onPrev}
-            color="default"
-            variant="bordered"
-            radius="full"
-            className="text-base px-6"
-            startContent={<TbChevronLeft size="20" />}
-            isDisabled={isConnecting}
-          >
-            Back
-          </Button>
-          <Button
             type="submit"
             color="primary"
             radius="full"
@@ -212,6 +207,7 @@ const Collections = ({ onPrev, onNext }) => {
         title="Select collections"
         sub="Select the collections you want to include in your analysis"
         className="mb-10"
+        onBack={onPrev}
       />
       <div className="flex flex-wrap gap-6">
         {tables.map((table, index) => (
@@ -229,16 +225,6 @@ const Collections = ({ onPrev, onNext }) => {
         ))}
       </div>
       <div className="mt-10 space-x-4 flex items-center">
-        <Button
-          onClick={onPrev}
-          color="default"
-          variant="bordered"
-          radius="full"
-          className="text-base px-6"
-          startContent={<TbChevronLeft size="20" />}
-        >
-          Back
-        </Button>
         <Button
           onClick={onNext}
           color="primary"
