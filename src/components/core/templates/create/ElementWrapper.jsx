@@ -57,9 +57,9 @@ const ElementWrapper = ({
     >
       <div
         className={cn(
-          'absolute inset-[-1px] border border-transparent z-[10] pointer-events-none',
-          { 'group-hover:border-gray-200': !selected && !highlighted },
-          { 'border-gray-200': highlighted },
+          'absolute inset-[-1px] border-2 border-transparent z-[10] pointer-events-none',
+          { 'group-hover:border-primary-500 !border': !selected && !highlighted },
+          { 'border-primary-500 !border': highlighted },
           { 'border-primary-500': selected },
           { 'border-purple-500': active }
         )}
