@@ -1,149 +1,146 @@
-// prettier-ignore
 const shapes = {
   rectangle: {
     clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
   },
   circle: {
-    clipPath: 'ellipse(50% 50% at 50% 50%)',
+    clipPath: 'url(#circle-clip)',
   },
   triangle: {
-    clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
+    clipPath: 'url(#triangle-clip)',
   },
   rhombus: {
-    clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
+    clipPath: 'url(#rhombus-clip)',
   },
   heart: {
-    maskBorder: `radial-gradient(#000 69%,#0000 70%) 84.5%/50%`,
-    mask: `radial-gradient(at 70% 31%,#000 29%,#0000 30%), radial-gradient(at 30% 31%,#000 29%,#0000 30%), linear-gradient(#000 0 0) bottom/100% 50% no-repeat`,
-    clipPath: `polygon(-41% 0,50% 91%, 141% 0)`,
+    clipPath: 'url(#heart-clip)',
   },
   'arrow-left': {
-    clipPath: 'polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%)',
+    clipPath: 'url(#arrow-left-clip)',
   },
   'arrow-right': {
-    clipPath: 'polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%)',
+    clipPath: 'url(#arrow-right-clip)',
   },
   'arrow-up': {
-    clipPath: 'polygon(20% 100%, 20% 40%, 0% 40%, 50% 0%, 100% 40%, 80% 40%, 80% 100%)',
+    clipPath: 'url(#arrow-up-clip)',
   },
   'arrow-down': {
-    clipPath: 'polygon(20% 0%, 20% 60%, 0% 60%, 50% 100%, 100% 60%, 80% 60%, 80% 0%)',
-  },
-  'arrow-up-down': {
-    clipPath: 'polygon(50% 0%, 100% 40%, 75% 40%, 75% 60%, 100% 60%, 50% 100%, 0% 60%, 25% 60%, 25% 40%, 0% 40%)',
+    clipPath: 'url(#arrow-down-clip)',
   },
   'four-pointed-star': {
-    clipPath: 'polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%)',
+    clipPath: 'url(#four-pointed-star-clip)',
   },
   'five-pointed-star': {
-    clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
-  },
-  'six-pointed-star': {
-    clipPath: 'polygon(0 22%, 35% 24%, 50% 0, 65% 24%, 100% 22%, 75% 50%, 100% 78%, 65% 76%, 50% 100%, 35% 76%, 0 78%, 25% 50%)',
+    clipPath: 'url(#five-pointed-star-clip)',
   },
   'eight-pointed-star': {
-    clipPath: 'polygon(50% 0%, 60% 25%, 90% 25%, 75% 45%, 85% 75%, 50% 60%, 15% 75%, 25% 45%, 10% 25%, 40% 25%)',
+    clipPath: 'url(#inside-eight-pointed-star-clip)',
   },
-  'parallelogram': {
-    clipPath: 'polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)',
+  'arrow-up-down': {
+    clipPath: 'url(#arrow-up-down-clip)',
   },
-  'trapeziod-up': {
-    clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
+  'six-pointed-star': {
+    clipPath: 'url(#six-pointed-star-clip)',
   },
-  'trapeziod-down': {
-    clipPath: 'polygon(0 0, 100% 0, 80% 100%, 20% 100%)',
+  parallelogram: {
+    clipPath: 'url(#parallelogram-clip)',
   },
-  'pentagon': {
-    clipPath: 'polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)',
+  'trapezoid-up': {
+    clipPath: 'url(#trapezoid-up-clip)',
   },
-  'hexagon': {
-    clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
+  'trapezoid-down': {
+    clipPath: 'url(#trapezoid-down-clip)',
   },
-  'heptagon': {
-    clipPath: 'polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%)',
+  pentagon: {
+    clipPath: 'url(#pentagon-clip)',
   },
-  'octagon': {
-    clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
+  hexagon: {
+    clipPath: 'url(#hexagon-clip)',
+  },
+  heptagon: {
+    clipPath: 'url(#heptagon-clip)',
+  },
+  octagon: {
+    clipPath: 'url(#octagon-clip)',
   },
   'chevron-left': {
-    clipPath: 'polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%)',
+    clipPath: 'url(#chevron-left-clip)',
   },
   'chevron-right': {
-    clipPath: 'polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%)',
+    clipPath: 'url(#chevron-right-clip)',
   },
-  'close': {
-    clipPath: 'polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%)',
+  close: {
+    clipPath: 'url(#close-clip)',
   },
-  'message': {
-    clipPath: 'polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%)',
+  message: {
+    clipPath: 'url(#message-clip)',
   },
-  'cross': {
-    clipPath: 'polygon(10% 25%, 35% 25%, 35% 0%, 65% 0%, 65% 25%, 90% 25%, 90% 50%, 65% 50%, 65% 100%, 35% 100%, 35% 50%, 10% 50%)',
+  plus: {
+    clipPath: 'url(#plus-clip)',
   },
-  'book-mark': {
-    clipPath: 'polygon(0 100%, 50% 80%, 100% 100%, 100% 0, 48% 0, 0 0)',
+  bookmark: {
+    clipPath: 'url(#bookmark-clip)',
   },
-  'banner': {
-    clipPath: 'polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%)',
+  banner: {
+    clipPath: 'url(#banner-clip)',
   },
   'banner-2': {
-    clipPath: 'polygon(0 10%, 50% 0, 100% 10%, 100% 90%, 50% 100%, 0 90%)',
+    clipPath: 'url(#banner-2-clip)',
   },
   'arrow-concave': {
-    clipPath: 'polygon(0 0, 100% 0, 86% 50%, 100% 100%, 0 100%, 16% 50%)',
+    clipPath: 'url(#arrow-concave-clip)',
   },
   'arrow-convex': {
-    clipPath: 'polygon(25% 15%, 75% 15%, 100% 50%, 75% 85%, 25% 85%, 0% 50%)',
+    clipPath: 'url(#arrow-convex-clip)',
   },
-  'rabbet': {
-    clipPath: 'polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%)',
+  rabbet: {
+    clipPath: 'url(#rabbet-clip)',
   },
-  'diamond': {
-    clipPath: 'polygon(70% 0, 100% 30%, 50% 99%, 0 30%, 30% 0)',
+  diamond: {
+    clipPath: 'url(#diamond-clip)',
   },
-  'map': {
-    clipPath: 'polygon(33% 0, 65% 15%, 100% 0, 100% 85%, 66% 100%, 33% 85%, 0 100%, 0 15%)',
+  map: {
+    clipPath: 'url(#map-clip)',
   },
-  'cursor': {
-    clipPath: 'polygon(0 0, 100% 51%, 65% 64%, 50% 100%)',
+  cursor: {
+    clipPath: 'url(#cursor-clip)',
   },
-  'flag': {
-    clipPath: 'polygon(100% 0, 78% 25%, 100% 50%, 18% 50%, 18% 100%, 0 100%, 0 0)',
+  flag: {
+    clipPath: 'url(#flag-clip)',
   },
   'left-point': {
-    clipPath: 'polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%)',
+    clipPath: 'url(#left-point-clip)',
   },
   'right-point': {
-    clipPath: 'polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%)',
+    clipPath: 'url(#right-point-clip)',
   },
-  'home': {
-    clipPath: 'polygon(50% 0%, 100% 30%, 85% 30%, 85% 100%, 15% 100%, 15% 30%, 0 30%)',
+  home: {
+    clipPath: 'url(#home-clip)',
   },
-  'bevel': {
-    clipPath: 'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)',
+  bevel: {
+    clipPath: 'url(#bevel-clip)',
   },
-  'crown': {
-    clipPath: 'polygon(0 0, 25% 15%, 50% 0, 75% 15%, 100% 0, 100% 95%, 0 95%, 0 97%, 100% 97%, 100% 100%, 0 100%)',
+  crown: {
+    clipPath: 'url(#crown-clip)',
   },
-  'rewind': {
-    clipPath: 'polygon(50% 50%, 100% 0, 100% 100%, 50% 50%, 50% 100%, 0 50%, 50% 0)',
+  rewind: {
+    clipPath: 'url(#rewind-clip)',
   },
-  'forward': {
-    clipPath: 'polygon(50% 0, 100% 50%, 50% 100%, 50% 50%, 0 100%, 0 0, 50% 50%)',
+  forward: {
+    clipPath: 'url(#forward-clip)',
   },
-  'envelop-open': {
-    clipPath: 'polygon(50% 0, 100% 32%, 53% 74%, 55% 75%, 100% 35%, 100% 98%, 50% 73%, 50% 75%, 100% 100%, 0 100%, 50% 75%, 50% 73%, 0 98%, 0 35%, 44% 75%, 47% 75%, 0 32%)',
+  'envelope-open': {
+    clipPath: 'url(#envelope-open-clip)',
   },
-  'envelop-close': {
-    clipPath: 'polygon(50% 0, 100% 0, 50% 57%, 50% 59%, 100% 3%, 100% 98%, 53% 55%, 52% 56%, 100% 100%, 0 100%, 48% 57%, 47% 56%, 0 98%, 0 3%, 50% 59%, 50% 57%, 0 0)',
+  'envelope-close': {
+    clipPath: 'url(#envelope-close-clip)',
   },
-  'calendar': {
-    clipPath: 'polygon(100% 0, 100% 10%, 0 10%, 0 16%, 100% 16%, 100% 100%, 0 100%, 0 0)',
+  calendar: {
+    clipPath: 'url(#calendar-clip)',
   },
-  'display': {
-    clipPath: 'polygon(100% 0, 100% 83%, 60% 83%, 62% 92%, 71% 100%, 57% 100%, 46% 100%, 27% 100%, 38% 92%, 40% 83%, 0 83%, 0 0)',
+  display: {
+    clipPath: 'url(#display-clip)',
   },
-  'wave': {
+  wave: {
     clipPath: 'url(#wave-hero)',
   },
   'wave-high-left': {
@@ -161,8 +158,20 @@ const shapes = {
   'chat-bubble': {
     clipPath: 'url(#chat-bubble)',
   },
-  'cloud': {
-    clipPath: 'url(#cloud)',
+  cloud: {
+    clipPath: 'url(#cloud-clip)',
+  },
+  'bidirectional-arrow': {
+    clipPath: 'url(#bidirectional-arrow-clip)',
+  },
+  'stellated-polygon': {
+    clipPath: 'url(#stellated-polygon-clip)',
+  },
+  'half-round-rectangle': {
+    clipPath: 'url(#half-round-rectangle-clip)',
+  },
+  'inverted-triangle': {
+    clipPath: 'url(#inverted-triangle-clip)',
   },
 };
 
