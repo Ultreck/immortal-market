@@ -22,7 +22,7 @@ import CreatePageBlockModal from '@/components/core/templates/create/CreatePageB
 import { useActions } from '@/hooks/template/use-actions.js';
 
 const PageActions = ({ id }) => {
-  const { handleAction } = useActions(id);
+  const { handleAction } = useActions({ id });
   const { isOpen: isSaveAsBlockOpen, onOpen: onSaveAsBlockOpen, onClose: onSaveAsBlockClose } = useDisclosure();
   const index = useTemplateStore(({ template }) => template.pages.findIndex((p) => p.id === id));
   const length = useTemplateStore(({ template }) => template.pages.length);
