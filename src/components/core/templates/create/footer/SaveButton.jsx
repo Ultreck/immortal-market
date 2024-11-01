@@ -6,9 +6,8 @@ import { useGetDesign, useUpdateDesign } from '@/api/business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { useQueryClient } from '@tanstack/react-query';
-import { BsCloudArrowUp } from 'react-icons/bs';
-import { TbCloudCheck } from 'react-icons/tb';
-import { Spinner, Tooltip } from '@nextui-org/react';
+import { BsCloudArrowDown, BsCloudCheck } from 'react-icons/bs';
+import { Button, Tooltip } from '@nextui-org/react';
 import equal from 'fast-deep-equal/es6/react';
 
 const SaveButton = () => {
@@ -18,7 +17,6 @@ const SaveButton = () => {
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
   const id = useTemplateStore((state) => state.template.id);
   const pages = useTemplateStore((state) => state.template.pages);
-  const selectElements = useTemplateStore((state) => state.selectElements);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(business, id);
   const { data: { design } = {} } = useGetDesign(business, id);
   const timeout = useRef(null);
@@ -29,7 +27,6 @@ const SaveButton = () => {
         clearTimeout(timeout.current);
         timeout.current = null;
       }
-      selectElements([]);
       setIsThumbnailLoading(true);
       const blob = await toBlob(document.getElementById(`canvas-${pages[0].id}`), {
         cacheBust: true,
@@ -43,7 +40,7 @@ const SaveButton = () => {
       setIsThumbnailLoading(false);
       toast.error(error?.response?.data?.message || error.message);
     }
-  }, [selectElements, pages, update, toast, business, qc]);
+  }, [pages, update, toast, business, qc]);
 
   useKey(
     (e) => e.key.toLowerCase() === 's' && e.ctrlKey && !e.shiftKey,
@@ -62,7 +59,7 @@ const SaveButton = () => {
         await handleSave();
         timeout.current = null;
         window.onbeforeunload = null;
-      }, 1000);
+      }, 60000);
       return () => {
         clearTimeout(timeout.current);
         timeout.current = null;
@@ -71,13 +68,31 @@ const SaveButton = () => {
   }, [handleSave, pages, design.data.pages]);
 
   return (
-    <Tooltip content="Autosaves">
+    <>
       {isUpdateLoading || isThumbnailLoading ? (
-        <Spinner size="sm" color="warning" />
+        <Button variant="light" isIconOnly onClick={handleSave} size="sm" radius="full" isLoading>
+          <BsCloudArrowDown size="20" />
+        </Button>
       ) : (
-        <>{timeout.current ? <BsCloudArrowUp size="20" /> : <TbCloudCheck size="20" />}</>
+        <>
+          {timeout.current ? (
+            <Tooltip content="Save">
+              <Button variant="light" isIconOnly onClick={handleSave} size="sm" radius="full">
+                <BsCloudArrowDown size="20" />
+              </Button>
+            </Tooltip>
+          ) : (
+            <Tooltip content="Saved" delay={500}>
+              <div>
+                <Button variant="light" isIconOnly size="sm" radius="full" isDisabled>
+                  <BsCloudCheck size="20" strokeWidth={0.2} />
+                </Button>
+              </div>
+            </Tooltip>
+          )}
+        </>
       )}
-    </Tooltip>
+    </>
   );
 };
 

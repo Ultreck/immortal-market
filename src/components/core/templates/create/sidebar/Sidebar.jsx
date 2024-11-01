@@ -3,7 +3,6 @@ import { RiArrowLeftSLine, RiImage2Line, RiPieChartLine, RiShapesLine, RiStackLi
 import { cn, getImageLink } from '@/lib/utils.js';
 import Basics from '@/components/core/templates/create/sidebar/components/Basics.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
-import { Link } from 'react-router-dom';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import Data from '@/components/core/templates/create/sidebar/data/Data.jsx';
 import { Avatar, Tooltip } from '@nextui-org/react';
@@ -48,7 +47,7 @@ const Sidebar = ({ className }) => {
           )}
         >
           <div className="space-y-1 w-full">
-            <Link to="/templates">
+            <a href="/templates">
               <div
                 className={cn(
                   'flex flex-col items-center justify-center py-4 px-3 w-full rounded-l-2xl overflow-hidden',
@@ -59,7 +58,7 @@ const Sidebar = ({ className }) => {
                 <RiArrowLeftSLine size={24} />
                 <p className="text-sm mt-0.5">Back</p>
               </div>
-            </Link>
+            </a>
             {[
               { icon: RiShapesLine, title: 'Basics', key: 'basics' },
               { icon: TbChartBar, title: 'Charts', key: 'charts' },

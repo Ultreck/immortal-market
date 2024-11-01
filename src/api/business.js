@@ -71,7 +71,7 @@ export const useRespondToInvitationMutation = (id) => {
 
 export const useGetUploads = (business) => {
   return useQuery({
-    queryKey: ['business', business, 'uploads'],
+    queryKey: ['business', business, 'designs', 'uploads'],
     queryFn: async () => {
       const res = await http.get(`/businesses/${business}/uploads`);
       return res.data;
@@ -81,7 +81,7 @@ export const useGetUploads = (business) => {
 
 export const useCreateUploadMutation = (business) => {
   return useMutation({
-    mutationKey: ['business', business, 'uploads'],
+    mutationKey: ['business', business, 'designs', 'uploads'],
     mutationFn: (files) => {
       const fd = new FormData();
       files.forEach((file) => fd.append('files', file));
@@ -160,7 +160,7 @@ export const useAddInfographics = (business) => {
 
 export const useGetInfographics = (business) => {
   return useQuery({
-    queryKey: ['infographics'],
+    queryKey: ['business', business, 'designs', 'infographics'],
     queryFn: async () => {
       const res = await http.get(`/businesses/${business}/designs/infographics`);
       return res.data;
@@ -202,6 +202,7 @@ export const useGetDatabaseTables = (business) => {
 
 export const useCreateComment = (business, design) => {
   return useMutation({
+    mutationKey: ['business', business, 'designs', design, 'comments'],
     mutationFn: (body) => {
       return http.post(`/businesses/${business}/designs/${design}/comments/`, body);
     },
@@ -210,7 +211,7 @@ export const useCreateComment = (business, design) => {
 
 export const useGetComments = ({ business, design, resolved, target, targetId, parent, page }) => {
   return useQuery({
-    queryKey: [business, 'designs', design, 'comments', resolved, target, targetId, parent, page],
+    queryKey: ['business', business, 'designs', design, 'comments', resolved, target, targetId, parent, page],
     queryFn: async () => {
       const res = await http.get(`/businesses/${business}/designs/${design}/comments`, {
         params: { resolved, target, targetId, parent, page },
@@ -222,7 +223,7 @@ export const useGetComments = ({ business, design, resolved, target, targetId, p
 
 export const useDeleteComment = (business, design) => {
   return useMutation({
-    mutationKey: [business, 'designs', design, 'comments'],
+    mutationKey: ['business', business, 'designs', design, 'comments'],
     mutationFn: (id) => {
       return http.delete(`/businesses/${business}/designs/${design}/comments/${id}`);
     },
@@ -231,7 +232,7 @@ export const useDeleteComment = (business, design) => {
 
 export const useUpdateComment = (business, design) => {
   return useMutation({
-    mutationKey: [business, 'designs', design, 'comments'],
+    mutationKey: ['business', business, 'designs', design, 'comments'],
     mutationFn: ({ id, data }) => {
       return http.patch(`/businesses/${business}/designs/${design}/comments/${id}`, data);
     },
