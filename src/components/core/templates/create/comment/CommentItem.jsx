@@ -9,10 +9,12 @@ import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useState } from 'react';
+import { useAuth } from '@/hooks/use-auth.jsx';
 import EditComment from '@/components/core/templates/create/comment/EditComment.jsx';
 
 const CommentItem = ({ comment, onClick, className }) => {
   const toast = useToast();
+  const { user } = useAuth();
   const { id: business } = useBusiness();
   const design = useTemplateStore((state) => state.template.id);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
@@ -78,40 +80,42 @@ const CommentItem = ({ comment, onClick, className }) => {
               </div>
             </div>
           </div>
-          <div className="absolute top-2 right-2 bg-white dark:bg-default-100 border border-default-100 rounded-2xl shadow opacity-0 group-hover:opacity-100 transition-opacity py-1 px-2">
-            <Tooltip content={comment.resolved ? 'Restore' : 'Resolve'}>
-              {comment.resolved ? (
-                <Button onClick={handleRestoreComment} isIconOnly variant="light" isLoading={isUpdateLoading}>
-                  <HiReply size="20" />
-                </Button>
-              ) : (
-                <Button onClick={handleResolveComment} isIconOnly variant="light" isLoading={isUpdateLoading}>
-                  <HiCheck size="20" />
-                </Button>
-              )}
-            </Tooltip>
-            <Dropdown classNames={{ content: 'dark:bg-default-100' }}>
-              <DropdownTrigger>
-                <Button variant="light" isIconOnly isLoading={isDeleteLoading}>
-                  <HiDotsHorizontal size="20" variant="bordered" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                aria-label="Static Actions"
-                onAction={(key) => {
-                  if (key === 'delete') handleDeleteComment();
-                  if (key === 'edit') setIsEditing(true);
-                }}
-              >
-                <DropdownItem key="edit" textValue="Edit">
-                  <span className="text-base">Edit</span>
-                </DropdownItem>
-                <DropdownItem key="delete" className="text-danger" color="danger" textValue="Delete">
-                  <span className="text-base">Delete</span>
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
+          {user.id === comment.author.id && (
+            <div className="absolute top-2 right-2 bg-white dark:bg-default-100 border border-default-100 rounded-2xl shadow opacity-0 group-hover:opacity-100 transition-opacity py-1 px-2">
+              <Tooltip content={comment.resolved ? 'Restore' : 'Resolve'}>
+                {comment.resolved ? (
+                  <Button onClick={handleRestoreComment} isIconOnly variant="light" isLoading={isUpdateLoading}>
+                    <HiReply size="20" />
+                  </Button>
+                ) : (
+                  <Button onClick={handleResolveComment} isIconOnly variant="light" isLoading={isUpdateLoading}>
+                    <HiCheck size="20" />
+                  </Button>
+                )}
+              </Tooltip>
+              <Dropdown classNames={{ content: 'dark:bg-default-100' }}>
+                <DropdownTrigger>
+                  <Button variant="light" isIconOnly isLoading={isDeleteLoading}>
+                    <HiDotsHorizontal size="20" variant="bordered" />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label="Static Actions"
+                  onAction={(key) => {
+                    if (key === 'delete') handleDeleteComment();
+                    if (key === 'edit') setIsEditing(true);
+                  }}
+                >
+                  <DropdownItem key="edit" textValue="Edit">
+                    <span className="text-base">Edit</span>
+                  </DropdownItem>
+                  <DropdownItem key="delete" className="text-danger" color="danger" textValue="Delete">
+                    <span className="text-base">Delete</span>
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          )}
         </>
       )}
     </div>
