@@ -30,6 +30,7 @@ const CreateComment = ({
 
   const handleDone = async () => {
     try {
+      if (!content.trim()) return toast.error('Comment cannot be empty');
       await createComment({ content, target, targetId, parent, page });
       setContent('');
       onDone?.();
@@ -51,6 +52,13 @@ const CreateComment = ({
         onChange={(v) => setContent(v)}
         className="text-base px-8 py-4 bg-transparent"
         placeholder={placeholder}
+        autoFocus
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && e.ctrlKey) {
+            e.preventDefault();
+            handleDone();
+          }
+        }}
       />
       <div className="flex items-center justify-between px-6 pb-4">
         <Popover isOpen={isEmojiOpen} onClose={onEmojiClose} classNames={{ content: 'w-[260px]' }} set="native">
@@ -64,7 +72,7 @@ const CreateComment = ({
           </PopoverContent>
         </Popover>
         <Button
-          onClick={handleDone}
+          onPress={handleDone}
           isDisabled={!content.length}
           color="primary"
           variant="solid"

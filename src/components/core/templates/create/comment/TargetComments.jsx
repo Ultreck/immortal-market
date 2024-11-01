@@ -7,6 +7,7 @@ import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import { TbChevronLeft } from 'react-icons/tb';
 import { HiX } from 'react-icons/hi';
+import { useEffect } from 'react';
 
 const TargetComments = ({ onBack, onClose }) => {
   const { id: business } = useBusiness();
@@ -23,6 +24,12 @@ const TargetComments = ({ onBack, onClose }) => {
   const handleClick = (comment) => {
     updateTemplate({ activeComment: comment });
   };
+
+  useEffect(() => {
+    if (commentsTargetId && !isCommentsLoading && comments.length === 0) {
+      updateTemplate({ commentsTargetId: null });
+    }
+  }, [comments.length, commentsTargetId, isCommentsLoading, updateTemplate]);
 
   return (
     <div className="py-6">

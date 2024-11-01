@@ -32,6 +32,7 @@ const CommentItem = ({ comment, onClick, className }) => {
   const handleResolveComment = async () => {
     try {
       await updateComment({ id: comment._id, data: { resolved: true } });
+      updateTemplate({ activeComment: null });
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }
@@ -40,6 +41,7 @@ const CommentItem = ({ comment, onClick, className }) => {
   const handleRestoreComment = async () => {
     try {
       await updateComment({ id: comment._id, data: { resolved: false } });
+      updateTemplate({ activeComment: null });
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }
