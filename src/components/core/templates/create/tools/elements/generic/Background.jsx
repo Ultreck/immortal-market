@@ -10,10 +10,13 @@ import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import { useDeepCompareEffect } from 'react-use';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { RiAddLine, RiCloseLine } from 'react-icons/ri';
+import useTemplateStore from '@/store/template.js';
 
 const Background = ({ elements, onChange }) => {
   const value = useResolveValue(elements.map((e) => e.style.background));
   const [tab, setTab] = useState('solid');
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
 
   useEffect(() => {
     if (value.includes('gradient')) setTab('gradient');
@@ -29,7 +32,13 @@ const Background = ({ elements, onChange }) => {
   };
 
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={openTool === 'background'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'background' : null })}
+    >
       <PopoverTrigger>
         <button
           className="my-2 w-[22px] h-[22px] rounded-full hover:brightness-105 cursor-pointer border-2 border-default-200"

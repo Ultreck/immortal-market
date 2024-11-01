@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
-import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea, useDisclosure } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea } from '@nextui-org/react';
 import { TbSettings2 } from 'react-icons/tb';
 import { Controller, useForm } from 'react-hook-form';
 import { isValidJsonArray } from '@/lib/utils.js';
 import { useState } from 'react';
+import useTemplateStore from '@/store/template.js';
 
 const TableConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
-  const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
   const { handleSubmit, control } = useForm({
     defaultValues: {
       json: JSON.stringify(element.config.data, null, 2),
@@ -18,17 +20,17 @@ const TableConfig = ({ element, onChange }) => {
     const { json } = values;
     const data = JSON.parse(json);
     onChange({ ...element, config: { ...(element?.config || {}), data } });
-    onOpenChange();
+    updateTemplate({ openTool: null });
   };
 
   return (
     <Popover
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
       placement="left"
       showArrow
       offset={10}
       classNames={{ content: 'w-[400px]' }}
+      isOpen={openTool === 'table'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'table' : null })}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">

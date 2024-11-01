@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { RiShadowLine } from 'react-icons/ri';
+import useTemplateStore from '@/store/template.js';
 
 const Shadow = ({ onChange, elements }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
+
   const value = useResolveValue(elements.map((e) => e.style?.shadow));
 
   const x = value ? value.split(' ')?.[0]?.replace('px', '') || '0' : '0';
@@ -13,7 +17,13 @@ const Shadow = ({ onChange, elements }) => {
   const color = value ? value.split(' ')?.[3] || '#00000000' : '#00000000';
 
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={openTool === 'shadow'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'shadow' : null })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <RiShadowLine size="20" />

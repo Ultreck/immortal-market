@@ -24,10 +24,20 @@ import NumberInput from '@/components/ui/NumberInput.jsx';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { createElement } from 'react';
 import { gridAndLegendStyling, labelAndValueStyling } from '@/lib/utils';
+import useTemplateStore from '@/store/template.js';
 
 const ChartFont = ({ elements, onChange }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
+
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      onOpen={() => openTool('chart-font')}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'chart-font' : null })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <RiFontFamily size="20" />

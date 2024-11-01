@@ -6,7 +6,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
 import Drawer from '@/components/ui/Drawer.jsx';
 import { TbEye, TbReplace, TbZoomInArea } from 'react-icons/tb';
-import usePopoverStore from '@/store/popover.js';
+import useTemplateStore from '@/store/template.js';
 
 const StandardBar = ({ element }) => {
   return <StandardBarContent element={element} isPresentMode={false} />;
@@ -19,8 +19,8 @@ export const StandardBarPresent = ({ element }) => {
 export const StandardBarContent = ({ element, isPresentMode = false }) => {
   const { useBackgroundImage, backgroundImage, useBackgroundColor, backgroundColor } = element.config;
   const { isOpen: isOpen, onOpen: onOpen, onClose: onClose } = useDisclosure();
-  const openPopover = usePopoverStore((state) => state.openPopover);
   const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
 
   const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
     const color = element.config.colors?.[index];
@@ -109,11 +109,8 @@ export const StandardBarContent = ({ element, isPresentMode = false }) => {
           barGap={5}
           barCategoryGap={5}
           onClick={() => {
-            if (!isPresentMode) {
-              return openPopover('home');
-            } else {
-              return onModalOpen();
-            }
+            if (!isPresentMode) updateTemplate({ openTool: 'chart-data' });
+            else onModalOpen();
           }}
         >
           <ChartTooltip

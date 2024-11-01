@@ -1,12 +1,14 @@
 import { cn } from '@/lib/utils.js';
-import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import { createElement } from 'react';
 import { TbSettings2 } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons.js';
+import useTemplateStore from '@/store/template.js';
 
 const IconConfig = ({ element, onChange }) => {
-  const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
 
   const handleSelectIcons = (icon) => {
     onChange({ ...element, config: icon });
@@ -14,12 +16,12 @@ const IconConfig = ({ element, onChange }) => {
 
   return (
     <Popover
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
       placement="left"
       showArrow
       offset={10}
       classNames={{ content: 'w-[300px]' }}
+      isOpen={openTool === 'icon'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'icon' : null })}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">

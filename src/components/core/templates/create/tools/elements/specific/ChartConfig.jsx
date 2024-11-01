@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import { TbSettings2 } from 'react-icons/tb';
 import StandardStackedBarConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardStackedBarConfig.jsx';
@@ -7,18 +7,20 @@ import StandardPieCommonConfig from '@/components/core/templates/create/tools/el
 import StandardAltBarConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardAltBarConfig.jsx';
 import StandardMultipleBarConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardMultipleBarConfig.jsx';
 import StandardBubbleChartConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardBubbleChartConfig.jsx';
+import useTemplateStore from '@/store/template.js';
 
 const ChartConfig = ({ element, onChange }) => {
-  const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
 
   return (
     <Popover
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
       placement="left"
       showArrow
       offset={10}
       classNames={{ content: 'w-[400px]' }}
+      isOpen={openTool === 'chart'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'chart' : null })}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
@@ -27,7 +29,7 @@ const ChartConfig = ({ element, onChange }) => {
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-8 py-6 w-full">
-          <ChartData element={element} onChange={onChange} onClose={onOpenChange} />
+          <ChartData element={element} onChange={onChange} onClose={() => updateTemplate({ openTool: null })} />
         </div>
       </PopoverContent>
     </Popover>

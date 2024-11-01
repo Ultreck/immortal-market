@@ -1,22 +1,24 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, useDisclosure } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import MapData from '@/components/core/templates/create/tools/elements/specific/map/MapData.jsx';
 import MapSettings from '@/components/core/templates/create/tools/elements/specific/map/MapSettings.jsx';
 import { TbSettings2 } from 'react-icons/tb';
+import useTemplateStore from '@/store/template.js';
 
 const MapConfig = ({ element, onChange }) => {
-  const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
   const [tab, setTab] = useState('data');
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
 
   return (
     <Popover
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
       placement="left"
       showArrow
       offset={10}
       classNames={{ content: 'w-[400px]' }}
+      isOpen={openTool === 'map'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'map' : null })}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">

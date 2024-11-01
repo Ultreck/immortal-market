@@ -2,10 +2,21 @@ import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@nextui
 import PropTypes from 'prop-types';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
+import useTemplateStore from '@/store/template.js';
 
 const Border = ({ elements, onChange }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
+
   return (
-    <Popover placement="left" showArrow offset={10} classNames={{ content: 'w-[260px]' }}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      classNames={{ content: 'w-[260px]' }}
+      isOpen={openTool === 'border'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'border' : null })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">

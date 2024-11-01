@@ -2,10 +2,20 @@ import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/rea
 import PropTypes from 'prop-types';
 import { TbSettings2 } from 'react-icons/tb';
 import NumberInput from '@/components/ui/NumberInput.jsx';
+import useTemplateStore from '@/store/template.js';
 
 const CountUpNumberConfig = ({ element, onChange }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
+
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={openTool === 'count-up-number'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'count-up-number' : null })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <TbSettings2 size="20" />

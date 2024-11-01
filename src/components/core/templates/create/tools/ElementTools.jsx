@@ -48,7 +48,6 @@ const mapping = {
   'marquee-text': { type: 'single', component: MarqueeTextConfig },
   list: { type: 'single', component: BulletTextConfig },
   'count-up-number': { type: 'single', component: CountUpNumberConfig },
-  typewriterText: { type: 'single', component: MarqueeTextConfig },
   infographic: { type: 'single', component: InfographicConfig },
   colors: { type: 'single', component: Colors },
   map: { type: 'single', component: MapConfig },

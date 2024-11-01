@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import { TbSettings2 } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import AdvancedStackedBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedStackedBarConfig.jsx';
@@ -16,18 +16,20 @@ import AdvancedScatterLifeExpentancyConfig from '@/components/core/templates/cre
 import AdvancedPictogramShapesConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedPictogramShapesConfig.jsx';
 import AdvancedStackedCardConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedStackedCardConfig.jsx';
 import AdvancePercentageCardConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancePercentageCardConfig.jsx';
+import useTemplateStore from '@/store/template.js';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
-  const { isOpen, onOpenChange } = useDisclosure({ defaultOpen: false });
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
 
   return (
     <Popover
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
       placement="left"
       showArrow
       offset={10}
       classNames={{ content: 'w-[400px]' }}
+      isOpen={openTool === 'advanced-chart'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'advanced-chart' : null })}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
@@ -38,9 +40,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
         <div className="px-8 py-6 w-full !max-h-[500px] overflow-y-auto">
           {element.config.name === 'shapes' && <AdvanceShapesConfig element={element} onChange={onChange} />}
           {element.config.name === 'funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}
-          {element.config.name === 'circle-icons' && (
-            <AdvanceCircleIconsConfig element={element} onChange={onChange} />
-          )}
+          {element.config.name === 'circle-icons' && <AdvanceCircleIconsConfig element={element} onChange={onChange} />}
           {element.config.name === 'stackedbar-advanced' && (
             <AdvancedStackedBarConfig element={element} onChange={onChange} />
           )}

@@ -5,12 +5,31 @@ import PropTypes from 'prop-types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HiCheck } from 'react-icons/hi2';
 import Eyedropper from '@/components/ui/Eyedropper.jsx';
+import { useState } from 'react';
 
 const colors = ['#000000', '#800000', '#808000', '#008080', '#808080', '#993366'];
 
-const ColorPicker = ({ color, onChange, size, trigger }) => {
+const ColorPicker = ({ color, onChange, size, trigger, isOpen, onOpenChange, onClose }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpenChange = (v) => {
+    if (typeof onClose === 'function' || typeof onOpenChange === 'function') {
+      if (!v) onClose?.();
+      onOpenChange?.(v);
+      return;
+    }
+    setOpen(v);
+  };
+
   return (
-    <Popover showArrow placement="left" offset={10} classNames={{ content: 'w-[240px]' }}>
+    <Popover
+      showArrow
+      placement="left"
+      offset={10}
+      classNames={{ content: 'w-[240px]' }}
+      isOpen={typeof isOpen === 'boolean' ? isOpen : open}
+      onOpenChange={handleOpenChange}
+    >
       <PopoverTrigger>
         {trigger || (
           <Button
@@ -60,6 +79,9 @@ ColorPicker.propTypes = {
   onChange: PropTypes.func.isRequired,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   trigger: PropTypes.node,
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func,
+  onOpenChange: PropTypes.func,
 };
 
 export default ColorPicker;

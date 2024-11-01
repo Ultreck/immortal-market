@@ -7,10 +7,20 @@ import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import { RiAlignCenter, RiAlignJustify, RiAlignLeft, RiAlignRight, RiFontFamily } from 'react-icons/ri';
 import { createElement } from 'react';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
+import useTemplateStore from '@/store/template.js';
 
 const Font = ({ elements, onChange }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
+
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={openTool === 'font'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'font' : null })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <RiFontFamily size="20" />

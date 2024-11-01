@@ -1,8 +1,12 @@
 import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import { TbPlus, TbSettings2, TbX } from 'react-icons/tb';
+import useTemplateStore from '@/store/template.js';
 
 const FrameTabsConfig = ({ element, onChange }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
+
   const handleChange = (e, id) => {
     onChange({
       ...element,
@@ -34,7 +38,13 @@ const FrameTabsConfig = ({ element, onChange }) => {
   };
 
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={openTool === 'tabs'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'tabs' : null })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <TbSettings2 size="20" />

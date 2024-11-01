@@ -3,6 +3,7 @@ import { TbAbc, TbChartBar, TbChartLine, TbChartPie } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 import { GrTooltip } from 'react-icons/gr';
+import useTemplateStore from '@/store/template.js';
 
 const elements = [
   {
@@ -153,12 +154,17 @@ const elements = [
 ];
 
 const ElementTooltip = ({ element, onChange }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
+
   return (
     <Popover
       placement="left"
       showArrow
       offset={10}
       classNames={{ content: 'w-[350px] !max-h-[550px] overflow-y-auto block' }}
+      isOpen={openTool === 'tooltip'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'tooltip' : null })}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
@@ -240,7 +246,6 @@ const ElementTooltip = ({ element, onChange }) => {
                       className="cursor-pointer rounded-2xl"
                       key={e.id}
                       onClick={() => {
-                        console.log({ e });
                         onChange({ ...element, tooltip: { ...element.tooltip, type: e.data.config.name } });
                       }}
                     >

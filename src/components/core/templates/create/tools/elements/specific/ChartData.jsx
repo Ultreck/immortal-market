@@ -7,7 +7,8 @@ import ChangeChart from '@/components/core/templates/create/tools/elements/speci
 import NewConnection from '@/components/core/templates/create/tools/elements/specific/chart-data/NewConnection.jsx';
 import { cn } from '@/lib/utils.js';
 import ModifyAdvancedChart from './chart-data/ModifyAdvancedChart';
-import usePopoverStore from '@/store/popover.js';
+import { useState } from 'react';
+import useTemplateStore from '@/store/template.js';
 
 const items = [
   {
@@ -48,63 +49,57 @@ const items = [
 ];
 
 const ChartData = ({ element, onChange }) => {
-  const { isPopoverOpen, view, closePopover, setView } = usePopoverStore();
-  const openPopover = usePopoverStore((state) => state.openPopover);
+  const [view, setView] = useState('home');
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
 
   return (
-    <>
-      <Popover
-        placement="left"
-        showArrow
-        offset={10}
-        classNames={{ content: 'w-[350px] !max-h-[550px] overflow-y-auto block' }}
-        isOpen={isPopoverOpen}
-        onOpenChange={(open) => {
-          if (!open) {
-            return closePopover();
-          }
-          return openPopover('home');
-        }}
-      >
-        <PopoverTrigger>
-          <Button isIconOnly variant="light" aria-label="Configure chart">
-            <TbChartPie size="20" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="p-0 shadow border border-default-200 w-[400px]">
-          <div className="px-8 py-6 w-full">
-            {view === 'home' && (
-              <>
-                <h2 className="text-lg mb-6">Configure chart</h2>
-                <div className="grid grid-cols-3 gap-4">
-                  {items.map((item, i) => (
-                    <div
-                      key={i}
-                      onClick={() => setView(item.id)}
-                      className={cn(
-                        'flex flex-col items-center justify-center text-center border border-default-300 rounded-2xl px-4 py-6 cursor-pointer',
-                        { 'opacity-50 cursor-not-allowed': item.disabled }
-                      )}
-                    >
-                      <div>{item.icon}</div>
-                      <div className="leading-[1.1] text-base mt-2">{item.title}</div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-            {view === 'data' && element.type === 'chart-s' && (
-              <ModifyData element={element} onChange={onChange} onBack={() => setView('home')} />
-            )}
-            {view === 'data' && element.type === 'chart-a' && (
-              <ModifyAdvancedChart element={element} onChange={onChange} onBack={() => setView('home')} />
-            )}
-            {view === 'change' && <ChangeChart element={element} onChange={onChange} onBack={() => setView('home')} />}
-            {view === 'connection' && <NewConnection onBack={() => setView('home')} />}
-          </div>
-        </PopoverContent>
-      </Popover>
-    </>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      classNames={{ content: 'w-[350px] !max-h-[550px] overflow-y-auto block' }}
+      isOpen={openTool === 'chart-data'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'chart-data' : null })}
+    >
+      <PopoverTrigger>
+        <Button isIconOnly variant="light" aria-label="Configure chart">
+          <TbChartPie size="20" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="p-0 shadow border border-default-200 w-[400px]">
+        <div className="px-8 py-6 w-full">
+          {view === 'home' && (
+            <>
+              <h2 className="text-lg mb-6">Configure chart</h2>
+              <div className="grid grid-cols-3 gap-4">
+                {items.map((item, i) => (
+                  <div
+                    key={i}
+                    onClick={() => setView(item.id)}
+                    className={cn(
+                      'flex flex-col items-center justify-center text-center border border-default-300 rounded-2xl px-4 py-6 cursor-pointer',
+                      { 'opacity-50 cursor-not-allowed': item.disabled }
+                    )}
+                  >
+                    <div>{item.icon}</div>
+                    <div className="leading-[1.1] text-base mt-2">{item.title}</div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          {view === 'data' && element.type === 'chart-s' && (
+            <ModifyData element={element} onChange={onChange} onBack={() => setView('home')} />
+          )}
+          {view === 'data' && element.type === 'chart-a' && (
+            <ModifyAdvancedChart element={element} onChange={onChange} onBack={() => setView('home')} />
+          )}
+          {view === 'change' && <ChangeChart element={element} onChange={onChange} onBack={() => setView('home')} />}
+          {view === 'connection' && <NewConnection onBack={() => setView('home')} />}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 };
 

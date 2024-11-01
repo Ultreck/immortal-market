@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { TbCheck, TbColorSwatch } from 'react-icons/tb';
 import { capitalize, cn, interpolateColor } from '@/lib/utils.js';
 import { HexColorPicker } from 'react-colorful';
+import useTemplateStore from '@/store/template.js';
 
 const options = [
   ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2673D9', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
@@ -33,6 +34,8 @@ const options = [
 
 const Colors = ({ element, onChange }) => {
   const [tab, setTab] = useState('palettes');
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
 
   const config = {
     palettes: true,
@@ -58,6 +61,8 @@ const Colors = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[350px] !max-h-[500px] overflow-y-auto block' }}
+      isOpen={openTool === 'colors'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'colors' : null })}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
@@ -260,4 +265,3 @@ Gradient.propTypes = {
 };
 
 export default Colors;
-

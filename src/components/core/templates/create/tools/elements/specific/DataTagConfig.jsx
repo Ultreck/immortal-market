@@ -12,6 +12,7 @@ import { RiSettingsLine } from 'react-icons/ri';
 import { Controller, useForm } from 'react-hook-form';
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import PropTypes from 'prop-types';
+import useTemplateStore from '@/store/template.js';
 
 const columns = [{ key: 'default', label: 'Default' }];
 
@@ -52,6 +53,8 @@ const units = [
 ];
 
 const DataTagConfig = ({ element, onChange }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
   const { handleSubmit, control, watch } = useForm({
     defaultValues: {
       column: element.config.column || '',
@@ -81,7 +84,13 @@ const DataTagConfig = ({ element, onChange }) => {
   };
 
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={openTool === 'data-tag'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'data-tag' : null })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Data config" className="text-base">
           <RiSettingsLine size="20" />

@@ -5,6 +5,7 @@ import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/rea
 import { TbSettings2 } from 'react-icons/tb';
 import { HexColorPicker } from 'react-colorful';
 import { cn } from '@/lib/utils.js';
+import useTemplateStore from '@/store/template.js';
 
 const extractColors = (svg) => {
   const fillRegex = /(#[A-Fa-f0-9]{6})/g;
@@ -20,6 +21,8 @@ const InfographicConfig = ({ element, onChange }) => {
   const [colors, setColors] = useState({});
   const { data } = useGetSvgCodeFromUrl(element.config.src);
   const [selected, setSelected] = useState(Object.keys(colors)[0]);
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
 
   const handleChange = useCallback(
     (_colors) => {
@@ -50,7 +53,13 @@ const InfographicConfig = ({ element, onChange }) => {
   };
 
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={openTool === 'infographic'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'infographic' : null })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <TbSettings2 size="20" />

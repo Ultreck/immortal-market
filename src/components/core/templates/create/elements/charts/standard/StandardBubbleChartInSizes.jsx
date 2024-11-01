@@ -10,8 +10,6 @@ const StandardBubbleChartInSizes = ({ element }) => {
 export const StandardBubbleChartInSizesContent = ({ element }) => {
   const chartRef = useRef(null);
 
-  console.log({ element });
-
   useEffect(() => {
     const chart = echarts.init(chartRef.current, 'light');
     const option = {

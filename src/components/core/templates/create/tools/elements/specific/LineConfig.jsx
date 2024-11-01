@@ -6,6 +6,7 @@ import { IoIosRemoveCircleOutline } from 'react-icons/io';
 import { RiArrowRightUpFill } from 'react-icons/ri';
 import { FaCircle, FaSquareFull } from 'react-icons/fa';
 import NumberInput from '@/components/ui/NumberInput.jsx';
+import useTemplateStore from '@/store/template.js';
 
 const options = [
   {
@@ -27,6 +28,9 @@ const options = [
 ];
 
 const LineConfig = ({ elements, onChange }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openTool = useTemplateStore((state) => state.template.openTool);
+
   const lineEndvalues = elements.map((e) => e.lineEnd);
   const sameLineEnd = lineEndvalues.every((v) => v === lineEndvalues[0]);
   const lineEndValue = sameLineEnd ? lineEndvalues[0] : '';
@@ -52,7 +56,13 @@ const LineConfig = ({ elements, onChange }) => {
   };
 
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={openTool === 'line'}
+      onOpenChange={(v) => updateTemplate({ openTool: v ? 'line' : null })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <LuPenLine size="20" />
