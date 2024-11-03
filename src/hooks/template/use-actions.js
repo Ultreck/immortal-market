@@ -170,7 +170,7 @@ export const useActions = ({ id }) => {
   };
 
   const handleAddPage = () => {
-    addPage();
+    addPage(null, id);
   };
 
   const handleMovePageUp = () => {
