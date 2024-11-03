@@ -1,9 +1,18 @@
 import { useEffect } from 'react';
 import useTemplateStore from '@/store/template.js';
+import { useKey } from 'react-use';
 
 const useZoom = (node) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const scale = useTemplateStore((state) => state.template.scale);
+
+  useKey(
+    (e) => e.key === '0' && e.ctrlKey && !e.shiftKey,
+    async (e) => {
+      e.preventDefault();
+      updateTemplate({ scale: 1 });
+    }
+  );
 
   useEffect(() => {
     const el = node.current;
