@@ -30,37 +30,36 @@ const EditDesignPage = () => {
   }, [success, design, navigate, toast]);
 
   useEffect(() => {
-    if (design && !loaded.current) {
-      if (design) {
-        const { _id, title, description, status, type, data } = design;
-        const payload = {
-          id: _id,
-          title,
-          description,
-          status,
-          type,
-          data,
-          pages: data.pages,
-        };
-        if (currentId === _id) {
-          updateTemplate(payload);
-        } else {
-          updateTemplate({
-            isCommentsOpen: false,
-            activeComment: null,
-            commentsTargetId: null,
-            isCommentsVisible: true,
-            selectedElements: [],
-            undoHistory: [],
-            redoHistory: [],
-            selectedPage: null,
-            activePage: null,
-            scale: 1,
-            ...payload,
-          });
-        }
+    if (design) {
+      const { _id, title, description, status, type, data } = design;
+      const payload = {
+        id: _id,
+        title,
+        description,
+        status,
+        type,
+      };
+      if (!loaded.current) {
+        payload.pages = data.pages;
+        loaded.current = true;
       }
-      loaded.current = true;
+      if (currentId === _id) {
+        updateTemplate(payload);
+      } else {
+        updateTemplate({
+          isCommentsOpen: false,
+          activeComment: null,
+          commentsTargetId: null,
+          isCommentsVisible: true,
+          selectedElements: [],
+          undoHistory: [],
+          redoHistory: [],
+          selectedPage: null,
+          activePage: null,
+          scale: 1,
+          ...payload,
+        });
+      }
     }
   }, [currentId, design, updateTemplate]);
 
