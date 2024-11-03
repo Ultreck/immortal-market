@@ -65,7 +65,6 @@ const PageContent = ({ id }) => {
             <ElementWrapper
               key={element.id}
               element={element}
-              maxWidth={page.width}
               editable={config?.editable}
               fit={config?.fit}
               resizeHandles={config?.resizeHandles}
