@@ -12,12 +12,12 @@ import { getElementDefaultStyle } from '@/lib/elements.js';
 const Infographics = () => {
   const toast = useToast();
   const qc = useQueryClient();
-  const { id } = useBusiness();
+  const { id: business } = useBusiness();
   const [files, setFiles] = useState([]);
-  const { data: { infographics = [] } = {}, isLoading: isInfographicsLoading } = useGetInfographics(id);
-  const { mutateAsync: add, isPending: isAddLoading } = useAddInfographics(id);
+  const { data: { infographics = [] } = {}, isLoading: isInfographicsLoading } = useGetInfographics(business);
+  const { mutateAsync: add, isPending: isAddLoading } = useAddInfographics(business);
 
-  const q = qc.getQueryState(['infographics']);
+  const q = qc.getQueryState(['business', business, 'designs', 'infographics']);
   const isFetching = q.isInvalidated && q.fetchStatus === 'fetching';
 
   const handleChange = async (files) => {

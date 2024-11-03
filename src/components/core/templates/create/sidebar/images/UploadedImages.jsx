@@ -17,7 +17,7 @@ const UploadedImages = () => {
   const { data: { uploads = [] } = {}, isLoading: isUploadsLoading } = useGetUploads(id);
   const { mutateAsync: upload, isPending: isCreateUploadLoading } = useCreateUploadMutation(id);
 
-  const query = qc.getQueryState(['business', id, 'uploads']);
+  const query = qc.getQueryState(['business', id, 'designs', 'uploads']);
   const isFetching = query.isInvalidated && query.fetchStatus === 'fetching';
 
   const handleChange = async (files) => {
