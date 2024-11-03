@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { toBlob } from 'html-to-image';
 import { useKey } from 'react-use';
 import useTemplateStore from '@/store/template.js';
@@ -19,7 +19,7 @@ const SaveButton = () => {
   const pages = useTemplateStore((state) => state.template.pages);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(business, id);
   const { data: { design } = {} } = useGetDesign(business, id);
-  const timeout = useRef(null);
+  const [cache, setCache] = useState(0);
 
   const handleSave = useCallback(async () => {
     try {
@@ -36,40 +36,37 @@ const SaveButton = () => {
       setIsThumbnailLoading(false);
       toast.error(error?.response?.data?.message || error.message);
     }
-  }, [pages, update, toast, business, qc]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pages, update, business, qc]);
 
   useKey(
     (e) => e.key.toLowerCase() === 's' && e.ctrlKey && !e.shiftKey,
     async (e) => {
       e.preventDefault();
       await handleSave();
-      handleClearTimeout();
+      handleClearTimeout(cache);
     },
-    [handleSave]
+    [handleSave, cache]
   );
 
-  const handleClearTimeout = () => {
-    if (timeout.current) {
-      clearTimeout(timeout.current);
-      timeout.current = null;
-      window.onbeforeunload = null;
-    }
-  };
+  const handleClearTimeout = useCallback((t) => {
+    clearTimeout(t);
+    setCache(0);
+    window.onbeforeunload = null;
+  }, []);
 
   useEffect(() => {
     const _equal = equal(design.data.pages, pages);
     if (!_equal) {
-      if (timeout.current) clearTimeout(timeout.current);
       window.onbeforeunload = () => true;
-      timeout.current = setTimeout(async () => {
+      const t = setTimeout(async () => {
         await handleSave();
-        handleClearTimeout();
+        handleClearTimeout(t);
       }, 60000);
-      return () => {
-        handleClearTimeout();
-      };
+      setCache(t);
+      return () => handleClearTimeout(t);
     }
-  }, [handleSave, pages, design.data.pages]);
+  }, [handleSave, pages, design.data.pages, handleClearTimeout]);
 
   return (
     <>
@@ -79,7 +76,7 @@ const SaveButton = () => {
         </Button>
       ) : (
         <>
-          {timeout.current ? (
+          {cache ? (
             <Tooltip content="Save">
               <Button variant="light" isIconOnly onClick={handleSave} size="sm" radius="full">
                 <BsCloudArrowDown size="20" />
