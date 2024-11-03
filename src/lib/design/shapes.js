@@ -140,23 +140,17 @@ const shapes = {
   display: {
     clipPath: 'url(#display-clip)',
   },
-  wave: {
-    clipPath: 'url(#wave-hero)',
+  'wave-high-right': {
+    clipPath: 'url(#wave-high-right-clip)',
   },
   'wave-high-left': {
-    clipPath: 'url(#wave-high-left)',
-  },
-  'wave-high-right': {
-    clipPath: 'url(#wave-high-right)',
-  },
-  'wave-high-left-short': {
-    clipPath: 'url(#wave-high-left-short)',
+    clipPath: 'url(#wave-high-left-clip)',
   },
   'wave-higher-left': {
-    clipPath: 'url(#wave-higher-left)',
+    clipPath: 'url(#wave-higher-left-clip)',
   },
   'chat-bubble': {
-    clipPath: 'url(#chat-bubble)',
+    clipPath: 'url(#chat-bubble-clip)',
   },
   cloud: {
     clipPath: 'url(#cloud-clip)',

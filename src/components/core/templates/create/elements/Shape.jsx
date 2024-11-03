@@ -64,6 +64,10 @@ const ShapeContent = ({ element }) => {
   if (element.config.name === 'calendar') return <Calendar element={element} />;
   if (element.config.name === 'bevel') return <Bevel element={element} />;
   if (element.config.name === 'display') return <Display element={element} />;
+  if (element.config.name === 'wave-high-right') return <WaveHighRight element={element} />;
+  if (element.config.name === 'wave-high-left') return <WaveHighLeft element={element} />;
+  if (element.config.name === 'wave-higher-left') return <WaveHigherLeft element={element} />;
+  if (element.config.name === 'chat-bubble') return <ChatBubble element={element} />;
   return (
     <div className="w-full h-full" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
       <div className="w-full h-full" style={{ ...element.style, ...shape }} />
@@ -114,9 +118,6 @@ const Circle = ({ element }) => {
         <clipPath id="inside-circle">
           <use xlinkHref="#circle" />
         </clipPath>
-        <clipPath id="circle-clip" clipPathUnits="objectBoundingBox">
-          <path d="M1.0000 0.5000C1.0000 0.7761 0.7761 1.0000 0.5000 1.0000C0.2239 1.0000 0.0000 0.7761 0.0000 0.5000C0.0000 0.2239 0.2239 0.0000 0.5000 0.0000C0.7761 0.0000 1.0000 0.2239 1.0000 0.5000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#circle"
@@ -143,9 +144,6 @@ const Triangle = ({ element }) => {
         <path id="triangle" d="M50 0L100 100H0L50 0Z" />
         <clipPath id="inside-triangle">
           <use xlinkHref="#triangle" />
-        </clipPath>
-        <clipPath id="triangle-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 0.0000L1.0000 1.0000H0.0000L0.5000 0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -177,9 +175,6 @@ const Heart = ({ element }) => {
         <clipPath id="inside-heart">
           <use xlinkHref="#heart" />
         </clipPath>
-        <clipPath id="heart-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0396 0.1597C-0.0414 0.3123 0.0157 0.4609 0.0875 0.5398L0.5072 1.0000L0.9181 0.5414C0.9848 0.4566 1.0104 0.3666 0.9962 0.2664C0.9766 0.1278 0.8766 0.0202 0.7531 0.0049C0.6774 -0.0044 0.6043 0.0201 0.5472 0.0743C0.5318 0.0889 0.5181 0.1052 0.5061 0.1229C0.4919 0.1027 0.4753 0.0843 0.4564 0.0679C0.3908 0.0109 0.3072 -0.0118 0.2269 0.0058C0.1509 0.0226 0.0826 0.0787 0.0396 0.1597Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#heart"
@@ -206,9 +201,6 @@ const Rhombus = ({ element }) => {
         <path id="rhombus" d="M50 0L100 50L50 100L0 50L50 0Z" />
         <clipPath id="inside-rhombus">
           <use xlinkHref="#rhombus" />
-        </clipPath>
-        <clipPath id="rhombus-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 0.0000L1.0000 0.5000L0.5000 1.0000L0.0000 0.5000L0.5000 0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -240,9 +232,6 @@ const ArrowLeft = ({ element }) => {
         <clipPath id="inside-arrow-left">
           <use xlinkHref="#arrow-left" />
         </clipPath>
-        <clipPath id="arrow-left-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0042 0.5021L0.4992 0.0070V0.2546H0.9943V0.7496H0.4992V0.9971L0.0042 0.5021Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#arrow-left"
@@ -272,9 +261,6 @@ const ArrowRight = ({ element }) => {
         />
         <clipPath id="inside-arrow-right">
           <use xlinkHref="#arrow-right" />
-        </clipPath>
-        <clipPath id="arrow-right-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.9943 0.5021L0.4992 0.0070V0.2546H0.0042V0.7496H0.4992V0.9971L0.9943 0.5021Z" />
         </clipPath>
       </defs>
       <use
@@ -306,9 +292,6 @@ const ArrowUp = ({ element }) => {
         <clipPath id="inside-arrow-up">
           <use xlinkHref="#arrow-up" />
         </clipPath>
-        <clipPath id="arrow-up-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.4992 0.0070L0.0042 0.5021H0.2517V0.9971H0.7467V0.5021H0.9943L0.4992 0.0070Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#arrow-up"
@@ -338,9 +321,6 @@ const ArrowDown = ({ element }) => {
         />
         <clipPath id="inside-arrow-down">
           <use xlinkHref="#arrow-down" />
-        </clipPath>
-        <clipPath id="arrow-down-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.4992 0.9971L0.0042 0.5021H0.2517V0.0070H0.7467V0.5021H0.9943L0.4992 0.9971Z" />
         </clipPath>
       </defs>
       <use
@@ -372,9 +352,6 @@ const FourPointedStar = ({ element }) => {
         <clipPath id="inside-four-pointed-star">
           <use xlinkHref="#four-pointed-star" />
         </clipPath>
-        <clipPath id="four-pointed-star-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.4992 0.0070L0.6567 0.3446L0.9943 0.5021L0.6567 0.6596L0.4992 0.9971L0.3417 0.6596L0.0042 0.5021L0.3417 0.3446L0.4992 0.0070Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#four-pointed-star"
@@ -405,9 +382,6 @@ const FivePointedStar = ({ element }) => {
         <clipPath id="inside-five-pointed-star">
           <use xlinkHref="#five-pointed-star" />
         </clipPath>
-        <clipPath id="five-pointed-star-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 0.0000L0.6180 0.3820H1.0000L0.6910 0.6180L0.8090 1.0000L0.5000 0.7639L0.1910 1.0000L0.3090 0.6180L0.0000 0.3820H0.3820L0.5000 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#five-pointed-star"
@@ -430,9 +404,6 @@ const EightPointedStar = ({ element }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <clipPath id="inside-eight-pointed-star-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 1.0000L0.6435 0.8465L0.8536 0.8536L0.8465 0.6435L1.0000 0.5000L0.8465 0.3565L0.8536 0.1464L0.6435 0.1535L0.5000 0.0000L0.3565 0.1535L0.1464 0.1464L0.1535 0.3565L0.0000 0.5000L0.1535 0.6435L0.1464 0.8536L0.3565 0.8465L0.5000 1.0000Z" />
-        </clipPath>
         <path
           id="eight-pointed-star"
           d="M50 100L64.3502 84.6451L85.3556 85.3556L84.6451 64.3502L100 50L84.6451 35.6498L85.3556 14.6444L64.3502 15.3549L50 0L35.6498 15.3549L14.6444 14.6444L15.3549 35.6498L0 50L15.3549 64.3502L14.6444 85.3556L35.6498 84.6451L50 100Z"
@@ -468,9 +439,6 @@ const TrapezoidUp = ({ element }) => {
         <clipPath id="inside-trapezoid-up">
           <use xlinkHref="#trapezoid-up" />
         </clipPath>
-        <clipPath id="trapezoid-up-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.2500 0.0000H0.7500L1.0000 1.0000H0.0000L0.2500 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#trapezoid-up"
@@ -497,9 +465,6 @@ const TrapezoidDown = ({ element }) => {
         <path id="trapezoid-down" d="M25.0004 100H74.9996L100 0H0L25.0004 100Z" />
         <clipPath id="inside-trapezoid-down">
           <use xlinkHref="#trapezoid-down" />
-        </clipPath>
-        <clipPath id="trapezoid-down-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.2500 1.0000H0.7500L1.0000 0.0000H0.0000L0.2500 1.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -528,9 +493,6 @@ const Pentagon = ({ element }) => {
         <clipPath id="inside-pentagon">
           <use xlinkHref="#pentagon" />
         </clipPath>
-        <clipPath id="pentagon-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 0.0000L1.0000 0.3820L0.8090 1.0000H0.1910L0.0000 0.3820L0.5000 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#pentagon"
@@ -557,9 +519,6 @@ const Hexagon = ({ element }) => {
         <path id="hexagon" d="M50.6987 0L100.699 25V75L50.6987 100L0.69873 75V25L50.6987 0Z" />
         <clipPath id="inside-hexagon">
           <use xlinkHref="#hexagon" />
-        </clipPath>
-        <clipPath id="hexagon-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5070 0.0000L1.0070 0.2500V0.7426L0.5070 1.0000L0.0070 0.7426V0.2500L0.5070 0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -591,9 +550,6 @@ const Heptagon = ({ element }) => {
         <clipPath id="inside-heptagon">
           <use xlinkHref="#heptagon" />
         </clipPath>
-        <clipPath id="heptagon-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5025 0.0000L0.9035 0.1981L1.0025 0.6431L0.7251 1.0000H0.2800L0.0025 0.6431L0.1006 0.1981L0.5025 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#heptagon"
@@ -624,9 +580,6 @@ const Octagon = ({ element }) => {
         <clipPath id="inside-octagon">
           <use xlinkHref="#octagon" />
         </clipPath>
-        <clipPath id="octagon-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 0.0000L0.8536 0.1464L1.0000 0.5000L0.8536 0.8536L0.5000 1.0000L0.1464 0.8536L0.0000 0.5000L0.1464 0.1464L0.5000 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#octagon"
@@ -654,9 +607,6 @@ const Bookmark = ({ element }) => {
         <clipPath id="inside-bookmark">
           <use xlinkHref="#bookmark" />
         </clipPath>
-        <clipPath id="bookmark-clip" clipPathUnits="objectBoundingBox">
-          <path d="M1.0000 0.0000V1.0000L0.5000 0.8437L0.0000 1.0000V0.0000H1.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#bookmark"
@@ -683,9 +633,6 @@ const Banner = ({ element }) => {
         <path id="banner" d="M100 0V85.8543L50 99.9031L0 85.8543V0H100Z" />
         <clipPath id="inside-banner">
           <use xlinkHref="#banner" />
-        </clipPath>
-        <clipPath id="banner-clip" clipPathUnits="objectBoundingBox">
-          <path d="M1.0000 0.0000V0.8585L0.5000 0.9990L0.0000 0.8585V0.0000H1.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -717,9 +664,6 @@ const Banner2 = ({ element }) => {
         <clipPath id="inside-banner-2">
           <use xlinkHref="#banner-2" />
         </clipPath>
-        <clipPath id="banner-2-clip" clipPathUnits="objectBoundingBox">
-          <path d="M1.0000 0.8767V0.8771H0.9983L0.5000 1.0000L0.0017 0.8771H0.0000V0.8767V0.1233V0.1229H0.0017L0.5000 0.0000L0.9983 0.1229H1.0000V0.1233V0.8767Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#banner-2"
@@ -746,9 +690,6 @@ const ArrowConcave = ({ element }) => {
         <path id="arrow-concave" d="M100 0H0L12.5 50L0 100H100L87.5 50L100 0Z" />
         <clipPath id="inside-arrow-concave">
           <use xlinkHref="#arrow-concave" />
-        </clipPath>
-        <clipPath id="arrow-concave-clip" clipPathUnits="objectBoundingBox">
-          <path d="M1.0000 0.0000H0.0000L0.1250 0.5000L0.0000 1.0000H1.0000L0.8750 0.5000L1.0000 0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -777,9 +718,6 @@ const ArrowConvex = ({ element }) => {
         <clipPath id="inside-arrow-convex">
           <use xlinkHref="#arrow-convex" />
         </clipPath>
-        <clipPath id="arrow-convex-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.7500 0.0000H0.2500L0.0000 0.5000L0.2500 1.0000H0.7500L1.0000 0.5000L0.7500 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#arrow-convex"
@@ -806,9 +744,6 @@ const Plus = ({ element }) => {
         <path id="plus" d="M69.0244 0H31.2195V31.2195H0V68.7805H31.2195V100H69.0244V68.7805H100V31.2195H69.0244V0Z" />
         <clipPath id="inside-plus">
           <use xlinkHref="#plus" />
-        </clipPath>
-        <clipPath id="plus-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.6902 0.0000H0.3122V0.3122H0.0000V0.6878H0.3122V1.0000H0.6902V0.6878H1.0000V0.3122H0.6902V0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -840,9 +775,6 @@ const Close = ({ element }) => {
         <clipPath id="inside-close">
           <use xlinkHref="#close" />
         </clipPath>
-        <clipPath id="close-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.9980 0.2765L0.7253 0.0037L0.5000 0.2290L0.2747 0.0037L0.0037 0.2747L0.2290 0.5000L0.0037 0.7253L0.2765 0.9980L0.5018 0.7728L0.7253 0.9963L0.9963 0.7253L0.7728 0.5018L0.9980 0.2765Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#close"
@@ -872,9 +804,6 @@ const Rabbet = ({ element }) => {
         />
         <clipPath id="inside-rabbet">
           <use xlinkHref="#rabbet" />
-        </clipPath>
-        <clipPath id="rabbet-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.9023 0.0000H0.0977C0.0977 0.0538 0.0542 0.0977 0.0000 0.0977V0.9023C0.0538 0.9023 0.0977 0.9458 0.0977 1.0000H0.9023C0.9023 0.9462 0.9458 0.9023 1.0000 0.9023V0.0977C0.9462 0.0977 0.9023 0.0542 0.9023 0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -906,9 +835,6 @@ const Cloud = ({ element }) => {
         <clipPath id="inside-cloud">
           <use xlinkHref="#cloud" />
         </clipPath>
-        <clipPath id="cloud-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5675 0.0000C0.5784 0.0000 0.5895 0.0000 0.6004 0.0000C0.6876 0.0167 0.7421 0.0723 0.7670 0.1633C0.9124 0.1511 1.0181 0.3232 0.9537 0.4920C0.9751 0.5275 0.9930 0.5672 0.9995 0.6204C0.9995 0.6357 0.9995 0.6509 0.9995 0.6661C0.9802 0.8017 0.8974 0.8933 0.7615 0.8686C0.7265 0.9382 0.6643 1.0079 0.5675 0.9993C0.5174 0.9947 0.4826 0.9682 0.4521 0.9361C0.4200 0.9628 0.3853 0.9838 0.3350 0.9840C0.2188 0.9844 0.1410 0.8814 0.1391 0.7402C0.0644 0.7071 0.0138 0.6455 0.0000 0.5399C0.0000 0.5247 0.0000 0.5094 0.0000 0.4942C0.0152 0.3896 0.0631 0.3239 0.1428 0.2961C0.1380 0.1196 0.2974 0.0094 0.4283 0.0871C0.4595 0.0487 0.5036 0.0068 0.5675 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#cloud"
@@ -938,9 +864,6 @@ const BidirectionalArrow = ({ element }) => {
         />
         <clipPath id="inside-bidirectional-arrow">
           <use xlinkHref="#bidirectional-arrow" />
-        </clipPath>
-        <clipPath id="bidirectional-arrow-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.3326 0.0068L0.0000 0.5069L0.3326 1.0069V0.7569H0.6641V1.0069L1.0000 0.5069L0.6641 0.0068V0.2543H0.3326V0.0068Z" />
         </clipPath>
       </defs>
       <use
@@ -972,9 +895,6 @@ const StellatedPolygon = ({ element }) => {
         <clipPath id="inside-stellated-polygon">
           <use xlinkHref="#stellated-polygon" />
         </clipPath>
-        <clipPath id="stellated-polygon-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 0.0000L0.5738 0.1077L0.6814 0.0340L0.7115 0.1613L0.8383 0.1316L0.8206 0.2612L0.9495 0.2795L0.8864 0.3939L1.0000 0.4578L0.9000 0.5415L0.9830 0.6423L0.8596 0.6841L0.9007 0.8082L0.7706 0.8024L0.7643 0.9330L0.6451 0.8805L0.5923 1.0000L0.5000 0.9077L0.4077 1.0000L0.3549 0.8805L0.2357 0.9330L0.2294 0.8024L0.0993 0.8082L0.1404 0.6841L0.0170 0.6423L0.1000 0.5415L0.0000 0.4578L0.1136 0.3939L0.0505 0.2795L0.1794 0.2612L0.1617 0.1316L0.2885 0.1613L0.3186 0.0340L0.4262 0.1077L0.5000 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#stellated-polygon"
@@ -1001,9 +921,6 @@ const HalfRoundRectangle = ({ element }) => {
         <path id="half-round-rectangle" d="M0 50C0 22.3858 22.3858 0 50 0V0C77.6142 0 100 22.3858 100 50V100H0V50Z" />
         <clipPath id="inside-half-round-rectangle">
           <use xlinkHref="#half-round-rectangle" />
-        </clipPath>
-        <clipPath id="half-round-rectangle-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0000 0.5000C0.0000 0.2239 0.2239 0.0000 0.5000 0.0000V0.0000C0.7761 0.0000 1.0000 0.2239 1.0000 0.5000V1.0000H0.0000V0.5000Z" />
         </clipPath>
       </defs>
       <use
@@ -1032,9 +949,6 @@ const InvertedTriangle = ({ element }) => {
         <clipPath id="inside-inverted-triangle">
           <use xlinkHref="#inverted-triangle" />
         </clipPath>
-        <clipPath id="inverted-triangle-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 1.0000L1.0000 0.0000H0.0000L0.5000 1.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#inverted-triangle"
@@ -1061,9 +975,6 @@ const RightPoint = ({ element }) => {
         <path id="right-point" d="M75 0H0V100H75L100 50L75 0Z" />
         <clipPath id="inside-right-point">
           <use xlinkHref="#right-point" />
-        </clipPath>
-        <clipPath id="right-point-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.7500 0.0000H0.0000V1.0000H0.7500L1.0000 0.5000L0.7500 0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -1092,9 +1003,6 @@ const LeftPoint = ({ element }) => {
         <clipPath id="inside-left-point">
           <use xlinkHref="#left-point" />
         </clipPath>
-        <clipPath id="left-point-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.2500 0.0000H1.0000V1.0000H0.2500L0.0000 0.5000L0.2500 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#left-point"
@@ -1121,9 +1029,6 @@ const Parallelogram = ({ element }) => {
         <path id="parallelogram" d="M24.4094 0H100L75.5905 100H0L24.4094 0Z" />
         <clipPath id="inside-parallelogram">
           <use xlinkHref="#parallelogram" />
-        </clipPath>
-        <clipPath id="parallelogram-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.2441 0.0000H1.0000L0.7559 1.0000H0.0000L0.2441 0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -1155,9 +1060,6 @@ const SixPointedStar = ({ element }) => {
         <clipPath id="inside-six-pointed-star">
           <use xlinkHref="#six-pointed-star" />
         </clipPath>
-        <clipPath id="six-pointed-star-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 0.0050L0.6092 0.3362L0.9950 0.2525L0.7183 0.5000L0.9950 0.7475L0.6092 0.6638L0.5000 0.9950L0.3908 0.6638L0.0050 0.7475L0.2817 0.5000L0.0050 0.2525L0.3908 0.3362L0.5000 0.0050Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#six-pointed-star"
@@ -1184,9 +1086,6 @@ const ArrowUpDown = ({ element }) => {
         <path id="arrow-up-down" d="M100 33.5938L50 0L0 33.5938H25V66.4062H0L50 100L100 66.4062H75V33.5938H100Z" />
         <clipPath id="inside-arrow-up-down">
           <use xlinkHref="#arrow-up-down" />
-        </clipPath>
-        <clipPath id="arrow-up-down-clip" clipPathUnits="objectBoundingBox">
-          <path d="M1.0000 0.3359L0.5000 0.0000L0.0000 0.3359H0.2500V0.6641H0.0000L0.5000 1.0000L1.0000 0.6641H0.7500V0.3359H1.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -1215,9 +1114,6 @@ const ChevronLeft = ({ element }) => {
         <clipPath id="inside-chevron-left">
           <use xlinkHref="#chevron-left" />
         </clipPath>
-        <clipPath id="chevron-left-clip" clipPathUnits="objectBoundingBox">
-          <path d="M1.0000 0.0000H0.2479L0.0000 0.5000L0.2479 1.0000H1.0000L0.7521 0.5000L1.0000 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#chevron-left"
@@ -1245,9 +1141,6 @@ const ChevronRight = ({ element }) => {
         <clipPath id="inside-chevron-right">
           <use xlinkHref="#chevron-right" />
         </clipPath>
-        <clipPath id="chevron-right-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0000 0.0000H0.7521L1.0000 0.5000L0.7521 1.0000H0.0000L0.2479 0.5000L0.0000 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#chevron-right"
@@ -1274,9 +1167,6 @@ const Home = ({ element }) => {
         <path id="home" d="M0 100V33.3333L50 0L100 33.3333V100H62.5V61.1111H37.5V100H0Z" />
         <clipPath id="inside-home">
           <use xlinkHref="#home" />
-        </clipPath>
-        <clipPath id="home-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0000 1.0000V0.3333L0.5000 0.0000L1.0000 0.3333V1.0000H0.6250V0.6111H0.3750V1.0000H0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -1308,9 +1198,6 @@ const Map = ({ element }) => {
         <clipPath id="inside-map">
           <use xlinkHref="#map" />
         </clipPath>
-        <clipPath id="map-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0000 0.2463C0.0000 0.2396 0.0036 0.2333 0.0096 0.2293L0.3605 0.0000L0.6395 0.2042L0.9262 0.0168C0.9569 -0.0033 1.0000 0.0165 1.0000 0.0507V0.7537C1.0000 0.7604 0.9964 0.7667 0.9904 0.7707L0.6395 1.0000L0.3605 0.7958L0.0738 0.9832C0.0431 1.0032 0.0000 0.9835 0.0000 0.9493V0.2463Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#map"
@@ -1341,9 +1228,6 @@ const Cursor = ({ element }) => {
         <clipPath id="inside-cursor">
           <use xlinkHref="#cursor" />
         </clipPath>
-        <clipPath id="cursor-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.4980 0.0030L0.9931 0.9931L0.7456 0.9064L0.4980 0.8198L0.0030 0.9931L0.4980 0.0030Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#cursor"
@@ -1370,9 +1254,6 @@ const Diamond = ({ element }) => {
         <path id="diamond" d="M20 0L0 30L50 100L100 30L80 0H20Z" />
         <clipPath id="inside-diamond">
           <use xlinkHref="#diamond" />
-        </clipPath>
-        <clipPath id="diamond-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.2000 0.0000L0.0000 0.3000L0.5000 1.0000L1.0000 0.3000L0.8000 0.0000H0.2000Z" />
         </clipPath>
       </defs>
       <use
@@ -1404,9 +1285,6 @@ const Flag = ({ element }) => {
         <clipPath id="inside-flag">
           <use xlinkHref="#flag" />
         </clipPath>
-        <clipPath id="flag-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0066 0.1308C0.0066 0.1241 0.0082 0.1174 0.0114 0.1111C0.0146 0.1049 0.0193 0.0992 0.0252 0.0945C0.0926 0.0400 0.1827 0.0088 0.2771 0.0071C0.3715 0.0054 0.4632 0.0335 0.5334 0.0855L0.5551 0.1022C0.6003 0.1348 0.6582 0.1527 0.7182 0.1527C0.7782 0.1527 0.8362 0.1348 0.8814 0.1022L0.8968 0.0906C0.9345 0.0660 0.9913 0.0857 0.9964 0.1251L0.9967 0.1308V0.5895C0.9967 0.5963 0.9950 0.6030 0.9919 0.6092C0.9887 0.6155 0.9840 0.6211 0.9781 0.6259C0.9107 0.6803 0.8206 0.7116 0.7262 0.7132C0.6318 0.7149 0.5401 0.6869 0.4699 0.6349L0.4482 0.6181C0.4045 0.5866 0.3487 0.5687 0.2906 0.5677C0.2324 0.5666 0.1757 0.5824 0.1304 0.6123V0.9462C0.1303 0.9592 0.1243 0.9717 0.1135 0.9812C0.1026 0.9906 0.0879 0.9963 0.0721 0.9970C0.0564 0.9978 0.0409 0.9936 0.0288 0.9853C0.0167 0.9769 0.0089 0.9651 0.0070 0.9522L0.0066 0.9462V0.1308Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#flag"
@@ -1436,9 +1314,6 @@ const Crown = ({ element }) => {
         />
         <clipPath id="inside-crown">
           <use xlinkHref="#crown" />
-        </clipPath>
-        <clipPath id="crown-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.1150 0.7492L0.0050 0.0685L0.3075 0.3779L0.5000 0.0066L0.6925 0.3779L0.9950 0.0685L0.8850 0.7492H0.1150ZM0.8850 0.9348C0.8850 0.9719 0.8630 0.9967 0.8300 0.9967H0.1700C0.1370 0.9967 0.1150 0.9719 0.1150 0.9348V0.8729H0.8850V0.9348Z" />
         </clipPath>
       </defs>
       <use
@@ -1470,9 +1345,6 @@ const Message = ({ element }) => {
         <clipPath id="inside-message">
           <use xlinkHref="#message" />
         </clipPath>
-        <clipPath id="message-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.9000 0.0000H0.1000C0.0735 0.0000 0.0480 0.0105 0.0293 0.0293C0.0105 0.0480 0.0000 0.0735 0.0000 0.1000V1.0000L0.2000 0.8000H0.9000C0.9265 0.8000 0.9520 0.7895 0.9707 0.7707C0.9895 0.7520 1.0000 0.7265 1.0000 0.7000V0.1000C1.0000 0.0735 0.9895 0.0480 0.9707 0.0293C0.9520 0.0105 0.9265 0.0000 0.9000 0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#message"
@@ -1502,9 +1374,6 @@ const EnvelopeClose = ({ element }) => {
         />
         <clipPath id="inside-envelope-close">
           <use xlinkHref="#envelope-close" />
-        </clipPath>
-        <clipPath id="envelope-close-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.9926 0.1862V0.1957L0.5346 0.5544C0.5234 0.5631 0.5106 0.5677 0.4975 0.5677C0.4844 0.5677 0.4716 0.5631 0.4605 0.5544L0.0025 0.1957V0.1862C0.0025 0.1385 0.0174 0.0927 0.0439 0.0589C0.0704 0.0252 0.1064 0.0062 0.1439 0.0062H0.8511C0.8886 0.0062 0.9246 0.0252 0.9511 0.0589C0.9777 0.0927 0.9926 0.1385 0.9926 0.1862ZM0.0025 0.8163V0.3014L0.4234 0.6310C0.4457 0.6485 0.4714 0.6577 0.4975 0.6577C0.5237 0.6577 0.5494 0.6485 0.5716 0.6310L0.9926 0.3014V0.8163C0.9926 0.8640 0.9777 0.9098 0.9511 0.9436C0.9246 0.9773 0.8886 0.9963 0.8511 0.9963H0.1439C0.1064 0.9963 0.0704 0.9773 0.0439 0.9436C0.0174 0.9098 0.0025 0.8640 0.0025 0.8163Z" />
         </clipPath>
       </defs>
       <use
@@ -1536,9 +1405,6 @@ const EnvelopeOpen = ({ element }) => {
         <clipPath id="inside-envelope-open">
           <use xlinkHref="#envelope-open" />
         </clipPath>
-        <clipPath id="envelope-open-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5008 0.5556L0.0810 0.2194L0.4518 0.0125C0.4665 0.0043 0.4831 0.0000 0.5000 0.0000C0.5169 0.0000 0.5335 0.0043 0.5482 0.0125L0.9327 0.2270L0.5008 0.5556ZM0.5608 0.6368L1.0000 0.3026V0.8479C1.0000 0.9319 0.9329 1.0000 0.8500 1.0000H0.1500C0.0671 1.0000 -0.0000 0.9319 0.0000 0.8479V0.2946C-0.0000 0.2912 0.0003 0.2879 0.0010 0.2846L0.4388 0.6352C0.4560 0.6491 0.4774 0.6568 0.4995 0.6570C0.5216 0.6573 0.5432 0.6502 0.5608 0.6368Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#envelope-open"
@@ -1566,9 +1432,6 @@ const Rewind = ({ element }) => {
         <clipPath id="inside-rewind">
           <use xlinkHref="#rewind" />
         </clipPath>
-        <clipPath id="rewind-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 0.0000L0.0000 0.5000L0.5000 1.0000L0.5000 0.5000L1.0000 1.0000V0.0000L0.5000 0.5000V0.0000Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#rewind"
@@ -1595,9 +1458,6 @@ const Forward = ({ element }) => {
         <path id="forward" d="M50 0L100 50L50 100L50 50L0 100V0L50 50V0Z" />
         <clipPath id="inside-forward">
           <use xlinkHref="#forward" />
-        </clipPath>
-        <clipPath id="forward-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.5000 0.0000L1.0000 0.5000L0.5000 1.0000L0.5000 0.5000L0.0000 1.0000V0.0000L0.5000 0.5000V0.0000Z" />
         </clipPath>
       </defs>
       <use
@@ -1629,9 +1489,6 @@ const Calendar = ({ element }) => {
         <clipPath id="inside-calendar">
           <use xlinkHref="#calendar" />
         </clipPath>
-        <clipPath id="calendar-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0000 0.2955V0.8523C0.0000 0.8915 0.0156 0.9290 0.0433 0.9567C0.0710 0.9844 0.1085 1.0000 0.1477 1.0000H0.8523C0.8915 1.0000 0.9290 0.9844 0.9567 0.9567C0.9844 0.9290 1.0000 0.8915 1.0000 0.8523V0.2955H0.0000ZM0.7390 0.6591C0.7541 0.6591 0.7686 0.6651 0.7792 0.6758C0.7899 0.6864 0.7959 0.7009 0.7959 0.7160C0.7959 0.7310 0.7899 0.7455 0.7792 0.7561C0.7686 0.7668 0.7541 0.7728 0.7390 0.7728C0.7240 0.7728 0.7095 0.7668 0.6989 0.7561C0.6882 0.7455 0.6822 0.7310 0.6822 0.7160C0.6822 0.7009 0.6882 0.6864 0.6989 0.6758C0.7095 0.6651 0.7240 0.6591 0.7390 0.6591ZM0.5002 0.6591C0.5153 0.6591 0.5297 0.6651 0.5404 0.6758C0.5510 0.6864 0.5570 0.7009 0.5570 0.7160C0.5570 0.7310 0.5510 0.7455 0.5404 0.7561C0.5297 0.7668 0.5153 0.7728 0.5002 0.7728C0.4851 0.7728 0.4707 0.7668 0.4600 0.7561C0.4494 0.7455 0.4434 0.7310 0.4434 0.7160C0.4434 0.7009 0.4494 0.6864 0.4600 0.6758C0.4707 0.6651 0.4851 0.6591 0.5002 0.6591ZM0.7390 0.4319C0.7541 0.4319 0.7686 0.4378 0.7792 0.4485C0.7899 0.4592 0.7959 0.4736 0.7959 0.4887C0.7959 0.5038 0.7899 0.5182 0.7792 0.5289C0.7686 0.5395 0.7541 0.5455 0.7390 0.5455C0.7240 0.5455 0.7095 0.5395 0.6989 0.5289C0.6882 0.5182 0.6822 0.5038 0.6822 0.4887C0.6822 0.4736 0.6882 0.4592 0.6989 0.4485C0.7095 0.4378 0.7240 0.4319 0.7390 0.4319ZM0.5002 0.4319C0.5153 0.4319 0.5297 0.4378 0.5404 0.4485C0.5510 0.4592 0.5570 0.4736 0.5570 0.4887C0.5570 0.5038 0.5510 0.5182 0.5404 0.5289C0.5297 0.5395 0.5153 0.5455 0.5002 0.5455C0.4851 0.5455 0.4707 0.5395 0.4600 0.5289C0.4494 0.5182 0.4434 0.5038 0.4434 0.4887C0.4434 0.4736 0.4494 0.4592 0.4600 0.4485C0.4707 0.4378 0.4851 0.4319 0.5002 0.4319ZM0.2614 0.4319C0.2764 0.4319 0.2909 0.4378 0.3015 0.4485C0.3122 0.4592 0.3182 0.4736 0.3182 0.4887C0.3182 0.5038 0.3122 0.5182 0.3015 0.5289C0.2909 0.5395 0.2764 0.5455 0.2614 0.5455C0.2463 0.5455 0.2318 0.5395 0.2212 0.5289C0.2105 0.5182 0.2045 0.5038 0.2045 0.4887C0.2045 0.4736 0.2105 0.4592 0.2212 0.4485C0.2318 0.4378 0.2463 0.4319 0.2614 0.4319ZM0.1477 0.0000C0.1085 0.0000 0.0710 0.0156 0.0433 0.0433C0.0156 0.0710 0.0000 0.1085 0.0000 0.1477V0.2273H1.0000V0.1477C1.0000 0.1085 0.9844 0.0710 0.9567 0.0433C0.9290 0.0156 0.8915 0.0000 0.8523 0.0000H0.1477Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#calendar"
@@ -1658,9 +1515,6 @@ const Bevel = ({ element }) => {
         <path id="bevel" d="M0 18.41L20.2479 0H79.7521L100 18.41V81.59L79.7521 100H20.2479L0 81.59V18.41Z" />
         <clipPath id="inside-bevel">
           <use xlinkHref="#bevel" />
-        </clipPath>
-        <clipPath id="bevel-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0000 0.1841L0.2025 0.0000H0.7975L1.0000 0.1841V0.8159L0.7975 1.0000H0.2025L0.0000 0.8159V0.1841Z" />
         </clipPath>
       </defs>
       <use
@@ -1692,9 +1546,6 @@ const Display = ({ element }) => {
         <clipPath id="inside-display">
           <use xlinkHref="#display" />
         </clipPath>
-        <clipPath id="display-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0.0008 0.0573C0.0008 0.0425 0.0060 0.0284 0.0153 0.0179C0.0246 0.0075 0.0372 0.0016 0.0503 0.0016H0.9414C0.9546 0.0016 0.9671 0.0075 0.9764 0.0179C0.9857 0.0284 0.9909 0.0425 0.9909 0.0573V0.7804C0.9909 0.7951 0.9857 0.8093 0.9764 0.8197C0.9671 0.8301 0.9546 0.8360 0.9414 0.8360H0.0503C0.0372 0.8360 0.0246 0.8301 0.0153 0.8197C0.0060 0.8093 0.0008 0.7951 0.0008 0.7804V0.0573ZM0.2979 0.9500C0.2979 0.9270 0.3149 0.9083 0.3351 0.9083H0.6566C0.6615 0.9083 0.6664 0.9094 0.6709 0.9114C0.6754 0.9135 0.6795 0.9166 0.6830 0.9205C0.6864 0.9243 0.6892 0.9290 0.6911 0.9340C0.6929 0.9391 0.6939 0.9445 0.6939 0.9500V0.9918H0.2979V0.9500Z" />
-        </clipPath>
       </defs>
       <use
         xlinkHref="#display"
@@ -1702,6 +1553,126 @@ const Display = ({ element }) => {
         stroke={element.style.borderColor}
         strokeWidth={element.style.borderWidth}
         clipPath="url(#inside-display)"
+      />
+    </svg>
+  );
+};
+
+const WaveHighRight = ({ element }) => {
+  return (
+    <svg
+      width={element.width}
+      height={element.height}
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <path
+          id="wave-high-right"
+          d="M49.8579 99.9659C33.8183 99.9659 17.7787 99.9489 1.73906 99.9972C0.39653 100 1.22074 99.9972 0 99.9972C0.0424853 75.3025 0.0339882 48.9008 0.0141618 24.2061C0.557973 23.3511 9.33827 14.4095 14.4337 11.8474C17.7164 10.1971 21.2625 9.41033 24.9134 9.42737C29.7624 9.45293 34.0222 11.3702 38.0866 13.8897C41.7659 16.1705 45.4876 18.3747 49.7644 19.4683C53.7071 20.4738 57.5789 20.15 61.4196 19.1729C63.8412 18.5565 65.8012 16.9999 67.5799 15.2985C70.1064 12.8813 72.5847 10.413 74.9922 7.88218C79.3087 3.34886 84.7695 1.42873 90.7797 0.559564C93.394 0.181787 99.9962 0 99.9962 0C99.9962 0 100.005 0.298245 99.9962 1.3634C99.9481 7.08686 99.9736 12.8132 99.9736 18.5366C99.9736 45.0775 99.9736 73.4278 99.9736 99.9659C98.5829 99.9659 99.9736 99.9659 98.1155 99.9659C82.0278 99.9659 65.9428 99.9659 49.8551 99.9659H49.8579Z"
+        />
+        <clipPath id="inside-wave-high-right">
+          <use xlinkHref="#wave-high-right" />
+        </clipPath>
+      </defs>
+      <use
+        xlinkHref="#wave-high-right"
+        fill={element.style.background}
+        stroke={element.style.borderColor}
+        strokeWidth={element.style.borderWidth}
+        clipPath="url(#inside-wave-high-right)"
+      />
+    </svg>
+  );
+};
+
+const WaveHighLeft = ({ element }) => {
+  return (
+    <svg
+      width={element.width}
+      height={element.height}
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <path
+          id="wave-high-left"
+          d="M49.8795 99.9721C33.7724 99.9721 17.6653 99.9594 1.56072 100C0.355285 100.003 0.00761325 100 0.00761325 100C0.0050755 100 0.0431417 32.3039 0 0.0101505C1.65461 0.0101505 0.403502 -0.0126881 1.63939 0.0101505C7.88732 0.131956 13.9754 1.00236 19.6396 3.78867C22.2865 5.09047 24.8573 6.55467 27.4001 8.05441C31.6787 10.5768 36.305 11.9979 41.1851 12.7236C47.6132 13.6778 53.6506 12.31 59.5077 9.74954C63.9183 7.82094 68.4152 6.10044 73.2521 5.67666C76.975 5.3493 80.6243 6.07252 84.2304 6.99114C88.1639 7.9935 91.7092 9.81551 95.0945 11.9979C96.47 12.8835 99.9975 14.9111 99.9975 14.9111C99.9975 14.9111 100.005 15.4034 99.9975 16.0479C99.9696 18.0349 99.9873 20.0218 99.9873 22.0088C99.9873 47.456 99.9873 74.5248 99.9873 99.9695C99.0204 99.9695 99.9873 99.9695 98.3276 99.9695C82.1799 99.9695 66.0297 99.9695 49.882 99.9695L49.8795 99.9721Z"
+        />
+        <clipPath id="inside-wave-high-left">
+          <use xlinkHref="#wave-high-left" />
+        </clipPath>
+      </defs>
+      <use
+        xlinkHref="#wave-high-left"
+        fill={element.style.background}
+        stroke={element.style.borderColor}
+        strokeWidth={element.style.borderWidth}
+        clipPath="url(#inside-wave-high-left)"
+      />
+    </svg>
+  );
+};
+
+const WaveHigherLeft = ({ element }) => {
+  return (
+    <svg
+      width={element.width}
+      height={element.height}
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <path
+          id="wave-higher-left"
+          d="M40.664 8.93178C43.9434 8.03705 53.372 1.85123 55.5433 1.00734C57.3073 0.32206 66.1289 -2.1059 73.1907 4.45611C76.5108 7.54088 79.5152 10.8168 82.267 14.3774C84.7479 17.5883 87.2838 20.7625 90.2943 23.4996C92.9524 25.9133 96.7817 28.0403 99.998 29.6691C99.998 30.2405 99.998 30.3402 99.998 31.119C99.9735 53.7108 99.9756 77.4048 99.9939 99.9987C99.2158 99.9987 99.8126 99.9987 98.9368 99.9987C66.298 99.9764 33.6613 99.9784 1.02251 99.9987C0.20776 99.9987 0.751604 99.9987 0 99.9987C0.0162949 67.5832 0.0203687 0.700286 0.0203687 0.700286C0.0203687 0.700286 11.3107 8.3136 17.5761 9.51742C18.8349 9.7594 31.8383 12.5107 40.664 8.93178Z"
+        />
+        <clipPath id="inside-wave-higher-left">
+          <use xlinkHref="#wave-higher-left" />
+        </clipPath>
+      </defs>
+      <use
+        xlinkHref="#wave-higher-left"
+        fill={element.style.background}
+        stroke={element.style.borderColor}
+        strokeWidth={element.style.borderWidth}
+        clipPath="url(#inside-wave-higher-left)"
+      />
+    </svg>
+  );
+};
+
+const ChatBubble = ({ element }) => {
+  return (
+    <svg
+      width={element.width}
+      height={element.height}
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <path
+          id="chat-bubble"
+          d="M50 93.7629C77.6125 93.7629 100 72.7734 100 46.8814C100 20.9895 77.6125 0 50 0C22.3875 0 0 20.9895 0 46.8814C0 58.6688 4.64375 69.4515 12.3125 77.6892C11.7063 84.4937 9.70625 91.9546 7.49375 97.5536C7 98.7993 7.95625 100.192 9.2 99.978C23.3 97.5 31.6812 93.6959 35.325 91.7135C40.1111 93.0862 45.0455 93.7753 50 93.7629Z"
+        />
+        <clipPath id="inside-chat-bubble">
+          <use xlinkHref="#chat-bubble" />
+        </clipPath>
+      </defs>
+      <use
+        xlinkHref="#chat-bubble"
+        fill={element.style.background}
+        stroke={element.style.borderColor}
+        strokeWidth={element.style.borderWidth}
+        clipPath="url(#inside-chat-bubble)"
       />
     </svg>
   );
@@ -1760,6 +1731,10 @@ Forward.propTypes = ElementPropTypes;
 Calendar.propTypes = ElementPropTypes;
 Bevel.propTypes = ElementPropTypes;
 Display.propTypes = ElementPropTypes;
+WaveHighRight.propTypes = ElementPropTypes;
+WaveHighLeft.propTypes = ElementPropTypes;
+WaveHigherLeft.propTypes = ElementPropTypes;
+ChatBubble.propTypes = ElementPropTypes;
 ShapeContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
