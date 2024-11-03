@@ -23,10 +23,6 @@ const SaveButton = () => {
 
   const handleSave = useCallback(async () => {
     try {
-      if (timeout.current) {
-        clearTimeout(timeout.current);
-        timeout.current = null;
-      }
       setIsThumbnailLoading(true);
       const blob = await toBlob(document.getElementById(`canvas-${pages[0].id}`), {
         cacheBust: true,
@@ -47,8 +43,18 @@ const SaveButton = () => {
     async (e) => {
       e.preventDefault();
       await handleSave();
-    }
+      handleClearTimeout();
+    },
+    [handleSave]
   );
+
+  const handleClearTimeout = () => {
+    if (timeout.current) {
+      clearTimeout(timeout.current);
+      timeout.current = null;
+      window.onbeforeunload = null;
+    }
+  };
 
   useEffect(() => {
     const _equal = equal(design.data.pages, pages);
@@ -57,12 +63,10 @@ const SaveButton = () => {
       window.onbeforeunload = () => true;
       timeout.current = setTimeout(async () => {
         await handleSave();
-        timeout.current = null;
-        window.onbeforeunload = null;
+        handleClearTimeout();
       }, 60000);
       return () => {
-        clearTimeout(timeout.current);
-        timeout.current = null;
+        handleClearTimeout();
       };
     }
   }, [handleSave, pages, design.data.pages]);
