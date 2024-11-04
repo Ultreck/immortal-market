@@ -61,7 +61,7 @@ const PageContent = ({ id }) => {
           const component = getElementEditComponent(element);
           const config = getElementConfig(element);
 
-          return (
+          return config?.wrapper ? (
             <ElementWrapper
               key={element.id}
               element={element}
@@ -75,18 +75,19 @@ const PageContent = ({ id }) => {
               onChange={(el) => handleChange({ ...element, ...el })}
               onDoubleClick={handleDoubleClick}
             >
-              {component ? (
-                createElement(component, {
-                  element,
-                  active,
-                  onChange: handleChange,
-                })
-              ) : (
-                <div className="text-red-500 border-red-500 border-2 rounded-lg px-2 py-1 w-max">
-                  Unknown element type: {element.type}
-                </div>
-              )}
+              {createElement(component, { element, active, onChange: handleChange })}
             </ElementWrapper>
+          ) : (
+            <span className="pointer-events-auto">
+              {createElement(component, {
+                element,
+                active,
+                selected,
+                onChange: handleChange,
+                onClick: handleClick,
+                onDoubleClick: handleDoubleClick,
+              })}
+            </span>
           );
         })}
       </div>

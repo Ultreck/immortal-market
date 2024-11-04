@@ -42,21 +42,21 @@ const configs = {
 
 const previews = {
   'count-up-number': (
-    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-4 overflow-hidden">
+    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-2 overflow-hidden">
       <div style={{ ...styles[name], color: '#fff' }} className="truncate">
         <CountUpNumberPreview />
       </div>
     </div>
   ),
   marquee: (
-    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl py-4 overflow-hidden">
+    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl py-2 overflow-hidden">
       <div style={{ ...styles[name], color: '#fff' }} className="truncate">
         <TextMarqueePreview />
       </div>
     </div>
   ),
   typewriter: (
-    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-4 overflow-hidden">
+    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-2 overflow-hidden">
       <div style={{ ...styles[name], color: '#fff' }} className="truncate">
         <TextTypewriterPreview />
       </div>
@@ -84,7 +84,7 @@ const texts = [
           },
         },
         preview: previews[name] || (
-          <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-4 overflow-hidden">
+          <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-2 overflow-hidden">
             <div style={{ ...styles[name], color: '#fff' }} className="truncate">
               {kebabToWords(name)}
             </div>

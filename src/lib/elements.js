@@ -35,6 +35,7 @@ export const elements = {
       present: TextPresent,
     },
     config: {
+      wrapper: true,
       fit: true,
       editable: true,
       resizeHandles: ['e'],
@@ -48,6 +49,7 @@ export const elements = {
     },
     config: () => {
       return {
+        wrapper: true,
         fit: true,
         editable: true,
         resizeHandles: ['e'],
@@ -61,7 +63,10 @@ export const elements = {
       present: AdvanceChartsPresent,
     },
     config: (element) => {
-      const config = { editable: true };
+      const config = {
+        wrapper: true,
+        editable: true,
+      };
       if (element.config.name === 'shapes') config.fit = true;
       if (element.config.name === 'circle-icons') config.fit = true;
       if (element.config.name === 'stacked-card') config.fit = true;
@@ -80,7 +85,9 @@ export const elements = {
       edit: Shape,
       present: ShapePresent,
     },
-    config: {},
+    config: {
+      wrapper: true,
+    },
   },
   frame: {
     tools: (element) => {
@@ -96,6 +103,7 @@ export const elements = {
       edit: Frame,
     },
     config: {
+      wrapper: true,
       editable: true,
     },
   },
@@ -106,6 +114,7 @@ export const elements = {
       present: IconPresent,
     },
     config: {
+      wrapper: true,
       fit: true,
     },
   },
@@ -116,6 +125,7 @@ export const elements = {
       present: MapPresent,
     },
     config: {
+      wrapper: true,
       fit: true,
       editable: true,
       resizeHandles: ['e'],
@@ -128,16 +138,18 @@ export const elements = {
       present: TablePresent,
     },
     config: {
+      wrapper: true,
       editable: true,
     },
   },
   line: {
-    tools: ['background', 'opacity', 'line', 'animation', 'shadow', 'layout', 'tooltip'],
+    tools: ['line', 'color', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
     components: {
       edit: Line,
       present: LinePresent,
     },
     config: {
+      wrapper: false,
       resizeHandles: ['e'],
     },
   },
@@ -147,7 +159,9 @@ export const elements = {
       edit: Image,
       present: ImagePresent,
     },
-    config: {},
+    config: {
+      wrapper: true,
+    },
   },
   infographic: {
     tools: ['infographic', 'opacity'],
@@ -156,6 +170,7 @@ export const elements = {
       present: InfographicPresent,
     },
     config: {
+      wrapper: true,
       fit: true,
     },
   },
@@ -166,6 +181,7 @@ export const elements = {
       present: DataPresent,
     },
     config: {
+      wrapper: true,
       editable: true,
       fit: true,
       resizeHandles: ['e'],

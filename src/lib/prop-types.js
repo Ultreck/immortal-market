@@ -14,6 +14,8 @@ export const ElementPropTypes = {
     src: PropTypes.string,
     config: PropTypes.object,
   }),
-  onChange: PropTypes.func,
   active: PropTypes.bool,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  onDoubleClick: PropTypes.func,
 };

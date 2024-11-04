@@ -8,6 +8,28 @@ import PropTypes from 'prop-types';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const items = [
+  {
+    id: 'line',
+    data: {
+      type: 'line',
+      text: 'Line',
+      width: 100,
+      height: 8,
+      style: getElementDefaultStyle({ type: 'line' }),
+      config: {
+        x1: 10,
+        y1: 10,
+        x2: 200,
+        y2: 200,
+        strokeWidth: 1,
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/50 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <TbLine className="w-full h-full" />
+      </div>
+    ),
+  },
   ...(Object.keys(shapes).map((name) => ({
     id: `shape-${name}`,
     data: {
@@ -28,30 +50,6 @@ const items = [
       />
     ),
   })) || []),
-  {
-    id: 'line',
-    type: 'line',
-    name: 'Line',
-    data: {
-      type: 'line',
-      text: 'Line',
-      width: 100,
-      height: 8,
-      style: getElementDefaultStyle({ type: 'line' }),
-      config: {
-        start: null,
-        end: null,
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/50 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <TbLine className="w-full h-full" />
-      </div>
-    ),
-  },
 ];
 
 const ShapesSlider = ({ mini = false, onView, onBack }) => {
