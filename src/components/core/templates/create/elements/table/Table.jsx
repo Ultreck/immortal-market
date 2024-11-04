@@ -48,25 +48,12 @@ export const Table = ({ element, onChange, active }) => {
   const [isSelecting, setIsSelecting] = useState(false);
   const [editing, setEditing] = useState(null);
   const maxCols = getMaxColumns(rows);
-  const [columnSizes, setColumnSizes] = useState(Array(maxCols).fill(100 / maxCols));
-  const [rowSizes, setRowSizes] = useState(Array(rows.length).fill(40));
-
-  console.log({ columnSizes, rowSizes, element: element.width });
+  const [columnSizes, setColumnSizes] = useState(Array(maxCols).fill(element.width / maxCols));
 
   const handleColumnResize = (index, newSize) => {
     const newSizes = [...columnSizes];
-    if (newSizes[index + 1]) {
-      const diff = columnSizes[index] - newSizes[index];
-      console.log({ diff, newSizes });
-    }
     newSizes[index] = newSize;
     setColumnSizes(newSizes);
-  };
-
-  const handleRowResize = (index, newSize) => {
-    const newSizes = [...rowSizes];
-    newSizes[index] = newSize;
-    setRowSizes(newSizes);
   };
 
   useEffect(() => {
@@ -160,7 +147,7 @@ export const Table = ({ element, onChange, active }) => {
   return (
     <>
       {!!selection && (
-        <div className="absolute bottom-[calc(100%+10px)] left-0 space-x-2 flex items-center light">
+        <div className="absolute bottom-[calc(100%+30px)] left-0 space-x-2 flex items-center light">
           {isMultipleSelection && (
             <MergeOptions
               element={element}
@@ -205,12 +192,8 @@ export const Table = ({ element, onChange, active }) => {
           )}
         </div>
       )}
-      <Ruler type="horizontal" sizes={columnSizes} onResize={handleColumnResize} />
-      <table
-        ref={table}
-        style={element.style}
-        className="w-full h-full table-auto border-separate border-spacing-0.5 rounded-lg bg-white"
-      >
+      <Ruler type="horizontal" sizes={columnSizes} onResize={handleColumnResize} width={element.width} />
+      <table ref={table} style={element.style} className="w-full h-full table-auto border-collapse rounded-lg bg-white">
         <tbody>
           {rows.map((row, rowIndex) => {
             return (
@@ -236,15 +219,23 @@ export const Table = ({ element, onChange, active }) => {
                         ...(cell.style || {}),
                       }}
                     >
-                      {editing !== `row,${rowIndex},${cellIndex}` && (
-                        <div
-                          onDoubleClick={() => setEditing(`row,${rowIndex},${cellIndex}`)}
-                          onMouseDown={(e) => handleMouseDown(e, rowIndex, cellIndex)}
-                          onMouseEnter={(e) => handleMouseEnter(e, rowIndex, cellIndex)}
-                          onMouseUp={(e) => handleMouseUp(e, rowIndex, cellIndex)}
-                          className={cn('absolute inset-0 bg-transparent')}
+                      <div style={{ width: `${columnSizes[cellIndex]}px` }} className="relative">
+                        {editing !== `row,${rowIndex},${cellIndex}` && (
+                          <div
+                            onDoubleClick={() => setEditing(`row,${rowIndex},${cellIndex}`)}
+                            onMouseDown={(e) => handleMouseDown(e, rowIndex, cellIndex)}
+                            onMouseEnter={(e) => handleMouseEnter(e, rowIndex, cellIndex)}
+                            onMouseUp={(e) => handleMouseUp(e, rowIndex, cellIndex)}
+                            className={cn('absolute inset-0 bg-transparent h-full')}
+                          />
+                        )}
+                        <AutoResizeTextArea
+                          value={cell.value}
+                          onChange={(v) => handleRowChange(rowIndex, cellIndex, v)}
+                          className="bg-transparent w-full h-full px-3 py-1 leading-tight border border-transparent hover:border-gray-300"
+                          style={{ ...(cell.style || {}) }}
                         />
-                      )}
+                      </div>
                       {selection &&
                         rowIndex >= Math.min(selection.startRow, selection.endRow) &&
                         rowIndex <= Math.max(selection.startRow, selection.endRow) &&
@@ -252,12 +243,6 @@ export const Table = ({ element, onChange, active }) => {
                         cellIndex <= Math.max(selection.startCol, selection.endCol) && (
                           <div className="absolute inset-0 border-blue-500 border-2 pointer-events-none" />
                         )}
-                      <AutoResizeTextArea
-                        value={cell.value}
-                        onChange={(v) => handleRowChange(rowIndex, cellIndex, v)}
-                        className="bg-transparent w-full h-full px-3 py-1 leading-tight border border-transparent hover:border-gray-300"
-                        style={{ ...(cell.style || {}) }}
-                      />
                     </td>
                   );
                 })}
