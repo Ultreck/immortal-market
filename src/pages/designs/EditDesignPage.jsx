@@ -24,7 +24,6 @@ const EditDesignPage = () => {
 
   useEffect(() => {
     if (success && !design) {
-      toast.error('Design not found');
       navigate(`/templates/`);
     }
   }, [success, design, navigate, toast]);

@@ -68,7 +68,7 @@ const SaveButton = () => {
         return () => handleClearTimeout(t);
       }
     }
-  }, [handleSave, pages, design.data.pages, handleClearTimeout]);
+  }, [handleSave, pages, design?.data?.pages, handleClearTimeout]);
 
   return (
     <>
