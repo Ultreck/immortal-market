@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, Skeleton } from '@nextui-org/react';
+import { Button, Image, Skeleton } from '@nextui-org/react';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
@@ -14,7 +14,13 @@ const Infographics = () => {
   const qc = useQueryClient();
   const { id: business } = useBusiness();
   const [files, setFiles] = useState([]);
-  const { data: { infographics = [] } = {}, isLoading: isInfographicsLoading } = useGetInfographics(business);
+  const {
+    data: { infographics = [] } = {},
+    isLoading: isInfographicsLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetInfographics(business);
   const { mutateAsync: add, isPending: isAddLoading } = useAddInfographics(business);
 
   const q = qc.getQueryState(['business', business, 'designs', 'infographics']);
@@ -62,7 +68,6 @@ const Infographics = () => {
         className="mb-8"
         accept={{ 'image/svg+xml': ['.svg'] }}
       />
-
       {isInfographicsLoading ? (
         <div className="grid grid-cols-2 gap-4">
           <Skeleton className="aspect-square w-full rounded-2xl" />
@@ -87,6 +92,17 @@ const Infographics = () => {
             </div>
           )}
         </>
+      )}
+      {!!hasNextPage && (
+        <Button
+          onClick={fetchNextPage}
+          variant="bordered"
+          className="text-base w-full mt-8"
+          radius="full"
+          isLoading={isFetchingNextPage}
+        >
+          Load more
+        </Button>
       )}
     </div>
   );

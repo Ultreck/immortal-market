@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import http from '@/lib/http.js';
 import { objectToFormData } from '@/lib/utils.js';
 
@@ -159,11 +159,23 @@ export const useAddInfographics = (business) => {
 };
 
 export const useGetInfographics = (business) => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ['business', business, 'designs', 'infographics'],
-    queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs/infographics`);
+    queryFn: async ({ pageParam = null }) => {
+      const url = `/businesses/${business}/designs/infographics`;
+      const params = pageParam ? { next: pageParam } : {};
+      const res = await http.get(url, { params });
       return res.data;
+    },
+    getNextPageParam: (lastPage) => lastPage.next || undefined,
+    select: (data) => {
+      return {
+        pages: data.pages,
+        pageParams: data.pageParams,
+        infographics: data.pages.flatMap((page) => page.infographics),
+        total: data.pages[0]?.total,
+        next: data.pages[0]?.next,
+      };
     },
   });
 };
