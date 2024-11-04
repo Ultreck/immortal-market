@@ -31,6 +31,8 @@ import ElementTooltip from './elements/generic/Tooltip.jsx';
 
 const mapping = {
   font: { type: 'multiple', component: Font },
+  'text-marquee': { type: 'single', component: MarqueeTextConfig },
+  'text-list': { type: 'single', component: BulletTextConfig },
   color: { type: 'multiple', component: Color },
   background: { type: 'multiple', component: Background },
   chart: { type: 'single', component: ChartConfig },
@@ -45,8 +47,6 @@ const mapping = {
   tabs: { type: 'single', component: FrameTabsConfig },
   carousel: { type: 'single', component: FrameCarouselConfig },
   marquee: { type: 'single', component: FrameMarqueeConfig },
-  'marquee-text': { type: 'single', component: MarqueeTextConfig },
-  list: { type: 'single', component: BulletTextConfig },
   'count-up-number': { type: 'single', component: CountUpNumberConfig },
   infographic: { type: 'single', component: InfographicConfig },
   colors: { type: 'single', component: Colors },

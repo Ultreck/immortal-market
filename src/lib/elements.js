@@ -1,6 +1,4 @@
-import { Text, TextPresent } from '@/components/core/templates/create/elements/Text.jsx';
-import { List, ListPresent } from '@/components/core/templates/create/elements/List.jsx';
-import { CountUpNumber, CountUpNumberPresent } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
+import { Text, TextPresent } from '@/components/core/templates/create/elements/texts/Text.jsx';
 import { Image, ImagePresent } from '@/components/core/templates/create/elements/Image.jsx';
 import { Line, LinePresent } from '@/components/core/templates/create/elements/Line.jsx';
 import { Shape, ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
@@ -16,40 +14,29 @@ import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx'
 import { DataPresent, DataTag } from '@/components/core/templates/create/elements/DataTag.jsx';
 
 export const elements = {
-  ...['heading', 'subheading', 'paragraph', 'caption'].reduce((acc, type) => {
-    acc[type] = {
-      tools: ['font', 'opacity', 'animation', 'shadow', 'layout'],
-      components: {
-        edit: Text,
-        present: TextPresent,
-      },
-      config: {
-        fit: true,
-        editable: true,
-        resizeHandles: ['e'],
-      },
-    };
-    return acc;
-  }, {}),
-  list: {
-    tools: ['list', 'font', 'opacity', 'animation', 'shadow', 'layout'],
+  text: {
+    tools: (element) => {
+      if (element.config.name === 'list') {
+        return ['text-list', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+      }
+      if (element.config.name === 'count-up-number') {
+        return ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+      }
+      if (element.config.name === 'marquee') {
+        return ['text-marquee', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+      }
+      if (element.config.name === 'typewriter') {
+        return ['text-marquee', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+      }
+      return ['font', 'opacity', 'animation', 'shadow', 'layout'];
+    },
     components: {
-      edit: List,
-      present: ListPresent,
+      edit: Text,
+      present: TextPresent,
     },
     config: {
       fit: true,
-      resizeHandles: ['e'],
-    },
-  },
-  'count-up-number': {
-    tools: ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
-    components: {
-      edit: CountUpNumber,
-      present: CountUpNumberPresent,
-    },
-    config: {
-      fit: true,
+      editable: true,
       resizeHandles: ['e'],
     },
   },
@@ -102,15 +89,6 @@ export const elements = {
       }
       if (element.config.name === 'carousel') {
         return ['carousel', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
-      }
-      if (element.config.name === 'marquee') {
-        return ['marquee', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
-      }
-      if (element.config.name === 'marquee-text') {
-        return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
-      }
-      if (element.config.name === 'typewriter-text') {
-        return ['marquee-text', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
       }
       return ['opacity', 'animation', 'shadow'];
     },

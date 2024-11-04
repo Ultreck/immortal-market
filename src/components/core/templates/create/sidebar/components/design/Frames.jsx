@@ -57,77 +57,6 @@ const items = [
       </div>
     ),
   },
-  {
-    id: 'frame-marquee',
-    data: {
-      type: 'frame',
-      text: 'Frame marquee',
-      width: 300,
-      height: 300,
-      children: [],
-      style: getElementDefaultStyle({ type: 'frame', name: 'marquee' }),
-      config: {
-        name: 'marquee',
-        slides: 3,
-        slidesPerView: 1,
-        speed: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <TbCarouselHorizontalFilled className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'frame-marquee-text',
-    data: {
-      type: 'frame',
-      text: 'Frame marquee text',
-      width: 300,
-      height: 300,
-      children: [],
-      style: getElementDefaultStyle({ type: 'frame', name: 'marquee-text' }),
-      config: {
-        name: 'marquee-text',
-        texts: ['fwf', 'wvbetver', 'e4wgwwff'],
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <TbCarouselHorizontalFilled className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'frame-typewriter-text',
-    data: {
-      type: 'frame',
-      text: 'Frame typewriter Text',
-      width: 300,
-      height: 36,
-      children: [],
-      style: getElementDefaultStyle({ type: 'frame', name: 'typewriter-text' }),
-      config: {
-        name: 'typewriter-text',
-        texts: ['fwf', 'wvbetver', 'e4wgwwff'],
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <TbCarouselHorizontalFilled className="w-full h-full" />
-      </div>
-    ),
-  },
   ...Object.keys(shapes).map((name) => ({
     id: `frame-${name}`,
     data: {
@@ -217,4 +146,3 @@ Frames.propTypes = {
 };
 
 export default Frames;
-

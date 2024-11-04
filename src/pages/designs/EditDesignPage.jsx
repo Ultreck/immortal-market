@@ -40,7 +40,22 @@ const EditDesignPage = () => {
         type,
       };
       if (!loaded.current) {
-        payload.pages = data.pages;
+        payload.pages = data.pages.map((p) => {
+          return {
+            ...p,
+            elements: p.elements.map((e) => {
+              if (e.type.match(/heading|subheading|paragraph|caption|count-up-number/gi)) {
+                return {
+                  ...e,
+                  type: 'text',
+                  config: { ...e.config, name: e.type },
+                };
+              }
+              return e;
+            }),
+          };
+        });
+        console.log(payload);
         loaded.current = true;
       }
       if (currentId === _id) {

@@ -2,7 +2,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 
-export const List = ({ element }) => {
+export const TextList = ({ element }) => {
   return <ListContent element={element} />;
 };
 
@@ -28,7 +28,7 @@ const ListContent = ({ element }) => {
   );
 };
 
-List.propTypes = ElementPropTypes;
+TextList.propTypes = ElementPropTypes;
 ListPresent.propTypes = {
   element: PropTypes.object.isRequired,
 };

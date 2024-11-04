@@ -56,15 +56,17 @@ const SaveButton = () => {
   }, []);
 
   useEffect(() => {
-    const _equal = equal(design.data.pages, pages);
-    if (!_equal) {
-      window.onbeforeunload = () => true;
-      const t = setTimeout(async () => {
-        await handleSave();
-        handleClearTimeout(t);
-      }, 60000);
-      setCache(t);
-      return () => handleClearTimeout(t);
+    if (design?.data?.pages) {
+      const _equal = equal(design.data.pages, pages);
+      if (!_equal) {
+        window.onbeforeunload = () => true;
+        const t = setTimeout(async () => {
+          await handleSave();
+          handleClearTimeout(t);
+        }, 60000);
+        setCache(t);
+        return () => handleClearTimeout(t);
+      }
     }
   }, [handleSave, pages, design.data.pages, handleClearTimeout]);
 

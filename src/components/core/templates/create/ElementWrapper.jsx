@@ -41,7 +41,7 @@ const ElementWrapper = ({
       resizable={selected}
       rotatable={selected}
       draggable={!active}
-      className={cn('w-max border-2 border-transparent absolute group select-none pointer-events-auto', className)}
+      className={cn('w-max absolute group select-none pointer-events-auto', className)}
       onClick={(e) => onClick(element.id, e)}
       onDoubleClick={(e) => onDoubleClick?.(element.id, e)}
       handles={resizeHandles}
@@ -66,10 +66,10 @@ const ElementWrapper = ({
       />
       {fit ? (
         <div ref={el} className="w-full h-max">
-          {typeof children === 'function' ? children({ isEditing: active }) : children}
+          {children}
         </div>
       ) : (
-        <>{typeof children === 'function' ? children({ isEditing: active }) : children}</>
+        children
       )}
       {isCommentsVisible && <ElementCommentBadge element={element} />}
     </DragResizeRotate>

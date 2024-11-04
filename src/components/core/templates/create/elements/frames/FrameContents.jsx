@@ -14,6 +14,8 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
   const [selectedElements, setSelectedElements] = useState([]);
   const [activeElement, setActiveElement] = useState(null);
 
+  console.log(activeElement);
+
   useKey(
     'Delete',
     () => {
@@ -58,7 +60,7 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
             const selected = selectedElements.includes(el.id);
             const component = getElementEditComponent(el);
             const config = getElementConfig(el);
-            const active = activeElement === el.id;
+            const _active = activeElement === el.id;
 
             const handleChange = (e) => {
               onChange({
@@ -76,16 +78,17 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
                     fit={config?.fit}
                     resizeHandles={config?.resizeHandles}
                     selected={selected}
-                    active={active}
+                    active={_active}
                     onClick={() => {
                       setSelectedElements((old) => [...old, el.id]);
                     }}
                     onChange={handleChange}
                     onDoubleClick={() => setActiveElement(el.id)}
+                    className={cn({ 'pointer-events-none': !_active })}
                   >
                     {createElement(component, {
                       element: el,
-                      active,
+                      active: _active,
                       onChange: handleChange,
                     })}
                   </ElementWrapper>
