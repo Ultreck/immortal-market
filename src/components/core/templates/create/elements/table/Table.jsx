@@ -9,6 +9,7 @@ import DeleteOptions from '@/components/core/templates/create/elements/table/Del
 import FontOptions from '@/components/core/templates/create/elements/table/FontOptions.jsx';
 import BackgroundOptions from '@/components/core/templates/create/elements/table/BackgroundOptions.jsx';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import Ruler from '@/components/core/templates/create/elements/table/Ruler.jsx';
 
 const getMaxColumns = (data) => {
   let max = 0;
@@ -46,8 +47,27 @@ export const Table = ({ element, onChange, active }) => {
   const [selection, setSelection] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
   const [editing, setEditing] = useState(null);
-
   const maxCols = getMaxColumns(rows);
+  const [columnSizes, setColumnSizes] = useState(Array(maxCols).fill(100 / maxCols));
+  const [rowSizes, setRowSizes] = useState(Array(rows.length).fill(40));
+
+  console.log({ columnSizes, rowSizes, element: element.width });
+
+  const handleColumnResize = (index, newSize) => {
+    const newSizes = [...columnSizes];
+    if (newSizes[index + 1]) {
+      const diff = columnSizes[index] - newSizes[index];
+      console.log({ diff, newSizes });
+    }
+    newSizes[index] = newSize;
+    setColumnSizes(newSizes);
+  };
+
+  const handleRowResize = (index, newSize) => {
+    const newSizes = [...rowSizes];
+    newSizes[index] = newSize;
+    setRowSizes(newSizes);
+  };
 
   useEffect(() => {
     if (!active) {
@@ -185,6 +205,7 @@ export const Table = ({ element, onChange, active }) => {
           )}
         </div>
       )}
+      <Ruler type="horizontal" sizes={columnSizes} onResize={handleColumnResize} />
       <table
         ref={table}
         style={element.style}
