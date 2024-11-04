@@ -54,7 +54,6 @@ const EditDesignPage = () => {
             }),
           };
         });
-        console.log(payload);
         loaded.current = true;
       }
       if (currentId === _id) {

@@ -14,8 +14,6 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
   const [selectedElements, setSelectedElements] = useState([]);
   const [activeElement, setActiveElement] = useState(null);
 
-  console.log(activeElement);
-
   useKey(
     'Delete',
     () => {
