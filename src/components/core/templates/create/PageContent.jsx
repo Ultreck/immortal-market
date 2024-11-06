@@ -78,7 +78,7 @@ const PageContent = ({ id }) => {
               {createElement(component, { element, active, onChange: handleChange })}
             </ElementWrapper>
           ) : (
-            <span className="pointer-events-auto">
+            <span key={element.id} className="pointer-events-auto">
               {createElement(component, {
                 element,
                 active,
