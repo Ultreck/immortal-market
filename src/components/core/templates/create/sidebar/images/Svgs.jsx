@@ -9,7 +9,7 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import { useAddInfographics, useGetInfographics } from '@/api/business.js';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 
-const Infographics = () => {
+const Svgs = () => {
   const toast = useToast();
   const qc = useQueryClient();
   const { id: business } = useBusiness();
@@ -38,14 +38,12 @@ const Infographics = () => {
 
   const elements = infographics.map((infographic) => ({
     id: infographic.Key,
-    type: 'infographic',
-    name: 'Infographic',
     data: {
-      type: 'infographic',
-      text: 'Infographic',
+      type: 'svg',
+      text: 'Svg',
       width: 400,
       height: 300,
-      style: getElementDefaultStyle({ type: 'infographic' }),
+      style: getElementDefaultStyle({ type: 'svg' }),
       config: {
         src: getImageLink(infographic.Key),
       },
@@ -53,7 +51,7 @@ const Infographics = () => {
     preview: (
       <Image
         src={getImageLink(infographic.Key)}
-        alt="Infographic"
+        alt="Svg"
         className="w-full h-full object-contain rounded-2xl cursor-grab aspect-square"
       />
     ),
@@ -108,4 +106,4 @@ const Infographics = () => {
   );
 };
 
-export default Infographics;
+export default Svgs;

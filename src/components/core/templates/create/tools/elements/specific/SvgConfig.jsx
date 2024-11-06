@@ -17,7 +17,7 @@ const extractColors = (svg) => {
   return uniqueColors;
 };
 
-const InfographicConfig = ({ element, onChange }) => {
+const SvgConfig = ({ element, onChange }) => {
   const [colors, setColors] = useState({});
   const { data } = useGetSvgCodeFromUrl(element.config.src);
   const [selected, setSelected] = useState(Object.keys(colors)[0]);
@@ -99,11 +99,11 @@ const InfographicConfig = ({ element, onChange }) => {
   );
 };
 
-InfographicConfig.propTypes = {
+SvgConfig.propTypes = {
   element: PropTypes.shape({
     config: PropTypes.object,
   }),
   onChange: PropTypes.func.isRequired,
 };
 
-export default InfographicConfig;
+export default SvgConfig;

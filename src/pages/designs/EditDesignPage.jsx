@@ -44,11 +44,10 @@ const EditDesignPage = () => {
             ...p,
             elements: p.elements.map((e) => {
               if (e.type.match(/heading|subheading|paragraph|caption|count-up-number/gi)) {
-                return {
-                  ...e,
-                  type: 'text',
-                  config: { ...e.config, name: e.type },
-                };
+                return { ...e, type: 'text', config: { ...e.config, name: e.type } };
+              }
+              if (e.type === 'infographic') {
+                return { ...e, type: 'svg' };
               }
               return e;
             }),

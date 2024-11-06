@@ -1,5 +1,5 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { Skeleton } from '@nextui-org/react';
+import { Skeleton, Spinner } from '@nextui-org/react';
 import { useGetSvgCodeFromUrl } from '@/api/misc.js';
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
@@ -14,7 +14,7 @@ const applyColors = (data, colors) => {
   return coloredSvg;
 };
 
-export const Infographic = ({ element, onChange }) => {
+export const Svg = ({ element, onChange }) => {
   const el = useRef(null);
   const { data, isLoading } = useGetSvgCodeFromUrl(element.config.src);
 
@@ -27,8 +27,8 @@ export const Infographic = ({ element, onChange }) => {
   return (
     <div ref={el} className="w-full h-max">
       {isLoading ? (
-        <div className="light w-full" style={{ height: element.height }}>
-          <Skeleton className="rounded-2xl w-full h-full" />
+        <div className="w-full flex justify-center items-center" style={{ height: element.height }}>
+          <Spinner size="md" color="warning" />
         </div>
       ) : (
         <div
@@ -41,11 +41,11 @@ export const Infographic = ({ element, onChange }) => {
   );
 };
 
-export const InfographicPresent = ({ element }) => {
-  return <InfographicContent element={element} />;
+export const SvgPresent = ({ element }) => {
+  return <SvgContent element={element} />;
 };
 
-const InfographicContent = ({ element }) => {
+const SvgContent = ({ element }) => {
   const { data, isLoading } = useGetSvgCodeFromUrl(element.config.src);
   return (
     <div className="w-full h-max">
@@ -64,10 +64,10 @@ const InfographicContent = ({ element }) => {
   );
 };
 
-Infographic.propTypes = ElementPropTypes;
-InfographicContent.propTypes = {
+Svg.propTypes = ElementPropTypes;
+SvgContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-InfographicPresent.propTypes = {
+SvgPresent.propTypes = {
   element: PropTypes.object.isRequired,
 };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Accordion, AccordionItem, Tab, Tabs } from '@nextui-org/react';
 import ExternalImages from '@/components/core/templates/create/sidebar/images/ExternalImages.jsx';
 import UploadedImages from '@/components/core/templates/create/sidebar/images/UploadedImages.jsx';
-import Infographics from './Infographics.jsx';
+import Svgs from './Svgs.jsx';
 import { RiArrowRightSLine, RiImage2Line } from 'react-icons/ri';
 import { TbBrush, TbStar } from 'react-icons/tb';
 
@@ -59,7 +59,7 @@ const Images = () => {
         startContent={<TbBrush size="20" />}
         indicator={<RiArrowRightSLine size="20" />}
       >
-        <Infographics />
+        <Svgs />
       </AccordionItem>
     </Accordion>
   );

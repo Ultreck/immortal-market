@@ -6,7 +6,7 @@ import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import Data from '@/components/core/templates/create/sidebar/data/Data.jsx';
 import { Avatar, Tooltip } from '@nextui-org/react';
-import Infographics from '@/components/core/templates/create/sidebar/images/Infographics.jsx';
+import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
 import { TbChartBar, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
 import Charts from './data/Charts.jsx';
@@ -106,7 +106,7 @@ const Sidebar = ({ className }) => {
             {tab === 'basics' && <Basics />}
             {tab === 'templates' && <Build />}
             {tab === 'data' && <Data />}
-            {tab === 'graphics' && <Infographics />}
+            {tab === 'graphics' && <Svgs />}
             {tab === 'layers' && <Layers />}
             {tab === 'images' && <Images />}
             {tab === 'charts' && <Charts />}

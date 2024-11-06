@@ -18,7 +18,7 @@ import FrameMarqueeConfig from './elements/specific/FrameMarqueeConfig.jsx';
 import MarqueeTextConfig from './elements/specific/MarqueeTextConfig.jsx';
 import BulletTextConfig from './elements/specific/BulletTextConfig.jsx';
 import CountUpNumberConfig from './elements/specific/CountUpNumberConfig.jsx';
-import InfographicConfig from '@/components/core/templates/create/tools/elements/specific/InfographicConfig.jsx';
+import SvgConfig from '@/components/core/templates/create/tools/elements/specific/SvgConfig.jsx';
 import Colors from './elements/generic/Colors.jsx';
 import Font from '@/components/core/templates/create/tools/elements/generic/Font.jsx';
 import ChartFont from '@/components/core/templates/create/tools/elements/generic/ChartFont.jsx';
@@ -48,7 +48,7 @@ const mapping = {
   carousel: { type: 'single', component: FrameCarouselConfig },
   marquee: { type: 'single', component: FrameMarqueeConfig },
   'count-up-number': { type: 'single', component: CountUpNumberConfig },
-  infographic: { type: 'single', component: InfographicConfig },
+  svg: { type: 'single', component: SvgConfig },
   colors: { type: 'single', component: Colors },
   map: { type: 'single', component: MapConfig },
   'data-tag': { type: 'single', component: DataTagConfig },

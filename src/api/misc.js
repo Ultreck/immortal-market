@@ -56,8 +56,11 @@ export const useGetSvgCodeFromUrl = (url) => {
   return useQuery({
     queryKey: ['svg', url],
     queryFn: async () => {
-      const res = await axios.get(url);
-      return res.data;
+      const response = await fetch(url, { mode: 'cors' });
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+      return await response.text();
     },
     staleTime: Infinity,
   });

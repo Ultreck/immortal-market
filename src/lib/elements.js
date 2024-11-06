@@ -3,7 +3,7 @@ import { Image, ImagePresent } from '@/components/core/templates/create/elements
 import { Line, LinePresent } from '@/components/core/templates/create/elements/Line.jsx';
 import { Shape, ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
 import AdvanceCharts from '@/components/core/templates/create/elements/charts/advanced/AdvanceCharts.jsx';
-import { Infographic, InfographicPresent } from '@/components/core/templates/create/elements/Infographic.jsx';
+import { Svg, SvgPresent } from '@/components/core/templates/create/elements/Svg.jsx';
 import Icon, { IconPresent } from '@/components/core/templates/create/elements/Icon.jsx';
 import StandardCharts from '@/components/core/templates/create/elements/charts/standard/StandardCharts.jsx';
 import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
@@ -163,11 +163,11 @@ export const elements = {
       wrapper: true,
     },
   },
-  infographic: {
-    tools: ['infographic', 'opacity'],
+  svg: {
+    tools: ['svg', 'opacity'],
     components: {
-      edit: Infographic,
-      present: InfographicPresent,
+      edit: Svg,
+      present: SvgPresent,
     },
     config: {
       wrapper: true,
