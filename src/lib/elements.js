@@ -17,18 +17,18 @@ export const elements = {
   text: {
     tools: (element) => {
       if (element.config.name === 'list') {
-        return ['text-list', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+        return ['text-list', 'font', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
       }
       if (element.config.name === 'count-up-number') {
-        return ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+        return ['count-up-number', 'font', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
       }
       if (element.config.name === 'marquee') {
-        return ['text-marquee', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+        return ['text-marquee', 'font', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
       }
       if (element.config.name === 'typewriter') {
-        return ['text-marquee', 'font', 'opacity', 'animation', 'shadow', 'layout'];
+        return ['text-marquee', 'font', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
       }
-      return ['font', 'opacity', 'animation', 'shadow', 'layout'];
+      return ['font', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
     },
     components: {
       edit: Text,
@@ -42,7 +42,7 @@ export const elements = {
     },
   },
   'chart-s': {
-    tools: ['chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'animation', 'layout', 'tooltip'],
+    tools: ['chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'animation', 'tooltip', 'element-tag', 'layout'],
     components: {
       edit: StandardCharts,
       present: StandardChartsPresent,
@@ -56,7 +56,7 @@ export const elements = {
     },
   },
   'chart-a': {
-    tools: ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'layout', 'tooltip'],
+    tools: ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'tooltip', 'element-tag', 'layout'],
     components: {
       edit: AdvanceCharts,
       present: AdvanceChartsPresent,
@@ -79,7 +79,7 @@ export const elements = {
     },
   },
   shape: {
-    tools: ['background', 'border', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    tools: ['background', 'border', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
     components: {
       edit: Shape,
       present: ShapePresent,
@@ -91,10 +91,10 @@ export const elements = {
   frame: {
     tools: (element) => {
       if (element.config.name === 'tabs') {
-        return ['tabs', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
+        return ['tabs', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'];
       }
       if (element.config.name === 'carousel') {
-        return ['carousel', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'];
+        return ['carousel', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'];
       }
       return ['opacity', 'animation', 'shadow'];
     },
@@ -107,7 +107,7 @@ export const elements = {
     },
   },
   icon: {
-    tools: ['icon', 'color', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    tools: ['icon', 'color', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
     components: {
       edit: Icon,
       present: IconPresent,
@@ -142,7 +142,7 @@ export const elements = {
     },
   },
   line: {
-    tools: ['line', 'color', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    tools: ['line', 'color', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
     components: {
       edit: Line,
       present: LinePresent,
@@ -153,7 +153,7 @@ export const elements = {
     },
   },
   image: {
-    tools: ['border', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    tools: ['border', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
     components: {
       edit: Image,
       present: ImagePresent,
@@ -174,7 +174,7 @@ export const elements = {
     },
   },
   'data-tag': {
-    tools: ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'layout', 'tooltip'],
+    tools: ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
     components: {
       edit: DataTag,
       present: DataPresent,
