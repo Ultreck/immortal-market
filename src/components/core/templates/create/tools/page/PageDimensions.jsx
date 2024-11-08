@@ -1,12 +1,9 @@
-import { Button, Input, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
-import { TbDimensions, TbMinus, TbPlus } from 'react-icons/tb';
-import { useState } from 'react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
+import { TbDimensions } from 'react-icons/tb';
 import PropTypes from 'prop-types';
+import NumberInput from '@/components/ui/NumberInput.jsx';
 
 const PageDimensions = ({ page, onChange }) => {
-  const [width, setWidth] = useState(page.width);
-  const [height, setHeight] = useState(page.height);
-
   const options = [
     { text: 'Default', value: 'default', width: 1920, height: 1920 },
     { text: 'Presentation 16:9', value: 'presentation-16:9', width: 1920, height: 1080 },
@@ -40,6 +37,7 @@ const PageDimensions = ({ page, onChange }) => {
             selectedKeys={[value]}
             className="w-full"
             onChange={handleSelectionChange}
+            variant="bordered"
             classNames={{ label: 'text-base', value: 'text-base px-2' }}
           >
             {options.map((option) => (
@@ -50,77 +48,29 @@ const PageDimensions = ({ page, onChange }) => {
           </Select>
           <div>
             <p className="text-base mb-2">Width</p>
-            <div className="gap-2 w-full justify-between flex items-center">
-              <Button
-                isIconOnly
-                variant="flat"
-                className="text-base"
-                onClick={() => {
-                  const value = page.width - 10;
-                  setWidth(value);
-                  onChange({ width: value });
-                }}
-              >
-                <TbMinus size="20" />
-              </Button>
-              <Input
-                type="number"
-                className="w-full"
-                classNames={{ input: 'appearance-auto' }}
-                value={width}
-                onChange={(e) => setWidth(+e.target.value)}
-                onBlur={() => onChange({ width })}
-              />
-              <Button
-                isIconOnly
-                variant="flat"
-                className="text-base"
-                onClick={() => {
-                  const value = page.width + 10;
-                  setWidth(value);
-                  onChange({ width: value });
-                }}
-              >
-                <TbPlus size="20" />
-              </Button>
-            </div>
+            <NumberInput
+              onChange={(v) => {
+                onChange({ width: v });
+              }}
+              value={page.width}
+              min={200}
+              step={10}
+              ariaLabel="Page width"
+              fullWidth
+            />
           </div>
           <div>
             <p className="text-base mb-2">Height</p>
-            <div className="gap-2 w-full justify-between flex items-center">
-              <Button
-                isIconOnly
-                variant="flat"
-                className="text-base"
-                onClick={() => {
-                  const value = page.height - 10;
-                  setHeight(value);
-                  onChange({ height: value });
-                }}
-              >
-                <TbMinus size="20" />
-              </Button>
-              <Input
-                type="number"
-                className="w-full"
-                classNames={{ input: 'appearance-auto' }}
-                value={height}
-                onChange={(e) => setHeight(+e.target.value)}
-                onBlur={() => onChange({ height })}
-              />
-              <Button
-                isIconOnly
-                variant="flat"
-                className="text-base"
-                onClick={() => {
-                  const value = page.height + 10;
-                  setHeight(value);
-                  onChange({ height: value });
-                }}
-              >
-                <TbPlus size="20" />
-              </Button>
-            </div>
+            <NumberInput
+              onChange={(v) => {
+                onChange({ height: v });
+              }}
+              value={page.height}
+              min={200}
+              step={10}
+              ariaLabel="Page height"
+              fullWidth
+            />
           </div>
         </div>
       </PopoverContent>

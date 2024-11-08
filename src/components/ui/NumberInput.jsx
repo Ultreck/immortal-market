@@ -13,6 +13,7 @@ const NumberInput = ({
   max = Infinity,
   step = 1,
   size = 'md',
+  fullWidth = false,
   ...props
 }) => {
   const interval = useRef(null);
@@ -66,7 +67,7 @@ const NumberInput = ({
         variant={variant}
         step={step}
         isClearable={false}
-        classNames={{ base: cn('w-[80px] text-base', { 'w-[50px]': size === 'sm' }) }}
+        classNames={{ base: cn('w-[80px] text-base', { 'w-[50px]': size === 'sm', 'w-full': fullWidth }) }}
         value={`${!isNaN(value) ? value : ''}`}
         onChange={(e) => handleChange(e.target.value)}
         size={size}
@@ -96,6 +97,7 @@ NumberInput.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   step: PropTypes.number,
+  fullWidth: PropTypes.bool,
 };
 
 export default NumberInput;
