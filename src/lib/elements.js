@@ -52,7 +52,6 @@ export const elements = {
         wrapper: true,
         fit: true,
         editable: true,
-        resizeHandles: ['e'],
       };
     },
   },
@@ -171,7 +170,7 @@ export const elements = {
     },
     config: {
       wrapper: true,
-      fit: true,
+      fit: false,
     },
   },
   'data-tag': {

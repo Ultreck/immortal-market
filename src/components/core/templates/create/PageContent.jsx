@@ -65,8 +65,8 @@ const PageContent = ({ id }) => {
             <ElementWrapper
               key={element.id}
               element={element}
-              editable={config?.editable}
-              fit={config?.fit}
+              editable={!!config?.editable}
+              fit={!!config?.fit}
               resizeHandles={config?.resizeHandles}
               selected={selected}
               highlighted={highlighted}
