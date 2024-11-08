@@ -1,8 +1,83 @@
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Select,SelectItem } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import { TbSettings2 } from 'react-icons/tb';
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import useTemplateStore from '@/store/template.js';
+
+
+const options = [
+  // Common Currency Symbols
+  { value: '$', text: 'Dollar currency symbol', type: 'prefix' },
+  { value: '€', text: 'Euro currency symbol', type: 'prefix' },
+  { value: '£', text: 'Pound Sterling currency symbol', type: 'prefix' },
+  { value: '₹', text: 'Indian Rupee currency symbol', type: 'prefix' },
+  { value: '¥', text: 'Yen currency symbol', type: 'prefix' },
+  { value: '₣', text: 'Franc currency symbol', type: 'prefix' },
+  { value: '₽', text: 'Ruble currency symbol', type: 'prefix' },
+  { value: '₩', text: 'Won currency symbol', type: 'prefix' },
+  { value: '₦', text: 'Naira currency symbol', type: 'prefix' },
+  { value: '₿', text: 'Bitcoin currency symbol', type: 'prefix' },
+
+  // ISO Currency Codes
+  { value: 'USD', text: 'United States Dollar (USD)', type: 'suffix' },
+  { value: 'EUR', text: 'Euro (EUR)', type: 'suffix' },
+  { value: 'GBP', text: 'British Pound Sterling (GBP)', type: 'suffix' },
+  { value: 'INR', text: 'Indian Rupee (INR)', type: 'suffix' },
+  { value: 'JPY', text: 'Japanese Yen (JPY)', type: 'suffix' },
+  { value: 'CHF', text: 'Swiss Franc (CHF)', type: 'suffix' },
+  { value: 'CAD', text: 'Canadian Dollar (CAD)', type: 'suffix' },
+  { value: 'AUD', text: 'Australian Dollar (AUD)', type: 'suffix' },
+  { value: 'CNY', text: 'Chinese Yuan (CNY)', type: 'suffix' },
+  { value: 'NZD', text: 'New Zealand Dollar (NZD)', type: 'suffix' },
+  { value: 'NGN', text: 'Nigerian Naira (NGN)', type: 'suffix' },
+  { value: 'BTC', text: 'Bitcoin (BTC)', type: 'suffix' },
+
+  // Percentage and Ratios
+  { value: '%', text: 'Percentage', type: 'suffix' },
+  { value: '‰', text: 'Per Mille (‰)', type: 'suffix' },
+  { value: '‱', text: 'Per Ten Thousand (‱)', type: 'suffix' },
+
+  // Units of Length
+  { value: 'km', text: 'Kilometers', type: 'suffix' },
+  { value: 'm', text: 'Meters', type: 'suffix' },
+  { value: 'cm', text: 'Centimeters', type: 'suffix' },
+  { value: 'mm', text: 'Millimeters', type: 'suffix' },
+  { value: 'mi', text: 'Miles', type: 'suffix' },
+  { value: 'yd', text: 'Yards', type: 'suffix' },
+  { value: 'ft', text: 'Feet', type: 'suffix' },
+  { value: 'in', text: 'Inches', type: 'suffix' },
+
+  // Units of Mass
+  { value: 'kg', text: 'Kilograms', type: 'suffix' },
+  { value: 'g', text: 'Grams', type: 'suffix' },
+  { value: 'mg', text: 'Milligrams', type: 'suffix' },
+  { value: 'lb', text: 'Pounds', type: 'suffix' },
+  { value: 'oz', text: 'Ounces', type: 'suffix' },
+  { value: 't', text: 'Tonnes', type: 'suffix' },
+
+  // Time Units
+  { value: 's', text: 'Seconds', type: 'suffix' },
+  { value: 'min', text: 'Minutes', type: 'suffix' },
+  { value: 'hr', text: 'Hours', type: 'suffix' },
+  { value: 'd', text: 'Days', type: 'suffix' },
+  { value: 'wk', text: 'Weeks', type: 'suffix' },
+  { value: 'mo', text: 'Months', type: 'suffix' },
+  { value: 'yr', text: 'Years', type: 'suffix' },
+
+  // Digital Storage Units
+  { value: 'B', text: 'Bytes', type: 'suffix' },
+  { value: 'KB', text: 'Kilobytes', type: 'suffix' },
+  { value: 'MB', text: 'Megabytes', type: 'suffix' },
+  { value: 'GB', text: 'Gigabytes', type: 'suffix' },
+  { value: 'TB', text: 'Terabytes', type: 'suffix' },
+
+  { value: 'π', text: 'Pi', type: 'suffix' },
+  { value: '°', text: 'Degrees', type: 'suffix' },
+  { value: '√', text: 'Square Root', type: 'prefix' },
+  { value: 'Δ', text: 'Delta (Change)', type: 'prefix' },
+  { value: '∑', text: 'Summation', type: 'prefix' },
+];
+
 
 const CountUpNumberConfig = ({ element, onChange }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
@@ -66,6 +141,26 @@ const CountUpNumberConfig = ({ element, onChange }) => {
               max={20}
               step={1}
             />
+          </div>
+          <div className="flex items-center justify-between space-x-4">
+            <p className="text-base opacity-75 leading-none">Unit</p>
+            <Select
+              aria-label="Select unit"
+              placeholder="Select unit"
+              classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+              onChange={(event) => {
+                const value =options.find((_)=>_.text === event.target.value)
+                const suffixAndPrefix={ 
+                  suffix:value.type=='suffix'?value.value:undefined,
+                  prefix:value.type=='prefix'?value.value:undefined,
+                }
+                onChange({ ...element, config: { ...element.config, ...suffixAndPrefix } });
+              }}
+            >
+              {options.map((_) => (
+                <SelectItem key={_.text} >{_.text}</SelectItem>
+              ))}
+            </Select>
           </div>
         </div>
       </PopoverContent>

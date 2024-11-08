@@ -8,6 +8,7 @@ import { TextBasic, TextBasicPresent } from '@/components/core/templates/create/
 import PropTypes from 'prop-types';
 import { ListPresent, TextList } from '@/components/core/templates/create/elements/texts/TextList.jsx';
 import { CountUpNumber, CountUpNumberPresent } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
+import { TextStream, TextStreamPresent } from '@/components/core/templates/create/elements/texts/TextStream.jsx';
 
 export const Text = ({ element, active, onChange }) => {
   const components = {
@@ -15,8 +16,8 @@ export const Text = ({ element, active, onChange }) => {
     'count-up-number': CountUpNumber,
     marquee: TextMarquee,
     typewriter: TextTypewriter,
+    stream: TextStream,
   };
-
   if (components[element.config.name]) {
     return createElement(components[element.config.name], { element, active, onChange });
   }
@@ -30,6 +31,7 @@ export const TextPresent = ({ element }) => {
     'count-up-number': CountUpNumberPresent,
     marquee: TextMarqueePresent,
     typewriter: TextTypewriterPresent,
+    stream: TextStreamPresent,
   };
 
   if (components[element.config.name]) {

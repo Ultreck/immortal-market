@@ -17,7 +17,7 @@ export const CountUpNumberPreview = () => {
 export const CountUpNumberContent = ({ element }) => {
   return (
     <div style={{ ...element.style, filter: `drop-shadow(${element.style?.shadow})` }}>
-      <CountUp start={element.config.start} end={element.config.end} duration={element.config.duration} enableScrollSpy>
+      <CountUp start={element.config.start} end={element.config.end} duration={element.config.duration} enableScrollSpy   prefix={element?.config?.prefix || undefined}  suffix={element?.config?.suffix || undefined}>
         {({ countUpRef }) => <span ref={countUpRef} />}
       </CountUp>
     </div>
