@@ -1,9 +1,8 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Select,SelectItem } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import { TbSettings2 } from 'react-icons/tb';
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import useTemplateStore from '@/store/template.js';
-
 
 const options = [
   // Common Currency Symbols
@@ -78,7 +77,6 @@ const options = [
   { value: '∑', text: 'Summation', type: 'prefix' },
 ];
 
-
 const CountUpNumberConfig = ({ element, onChange }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const openTool = useTemplateStore((state) => state.template.openTool);
@@ -145,20 +143,21 @@ const CountUpNumberConfig = ({ element, onChange }) => {
           <div className="flex items-center justify-between space-x-4">
             <p className="text-base opacity-75 leading-none">Unit</p>
             <Select
+              variant="bordered"
               aria-label="Select unit"
               placeholder="Select unit"
               classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
               onChange={(event) => {
-                const value =options.find((_)=>_.text === event.target.value)
-                const suffixAndPrefix={ 
-                  suffix:value.type=='suffix'?value.value:undefined,
-                  prefix:value.type=='prefix'?value.value:undefined,
-                }
+                const value = options.find((_) => _.text === event.target.value);
+                const suffixAndPrefix = {
+                  suffix: value.type === 'suffix' ? value.value : undefined,
+                  prefix: value.type === 'prefix' ? value.value : undefined,
+                };
                 onChange({ ...element, config: { ...element.config, ...suffixAndPrefix } });
               }}
             >
               {options.map((_) => (
-                <SelectItem key={_.text} >{_.text}</SelectItem>
+                <SelectItem key={_.text}>{_.text}</SelectItem>
               ))}
             </Select>
           </div>
