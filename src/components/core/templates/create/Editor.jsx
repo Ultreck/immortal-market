@@ -8,7 +8,6 @@ import { useRef } from 'react';
 import useZoom from '@/hooks/template/use-zoom.js';
 import useHistory from '@/hooks/template/use-history.js';
 import NewPageButton from '@/components/core/templates/create/NewPageButton.jsx';
-import { useMount } from 'react-use';
 
 const Editor = () => {
   const root = useRef(null);
@@ -24,15 +23,6 @@ const Editor = () => {
       updateTemplate({ selectedElements: [], selectedPage: null, activeElement: null });
     }
   };
-
-  useMount(() => {
-    const editorWidth = root.current.clientWidth;
-    const maxPageWidth = Math.max(...pages.map((p) => p.width));
-    if (editorWidth < maxPageWidth) {
-      const scale = Math.max(editorWidth / maxPageWidth - 0.12, 0.2);
-      updateTemplate({ scale });
-    }
-  });
 
   return (
     <div className="flex-1 overflow-y-auto py-10 px-10" ref={root} onClick={handleParentClick} id="scrollable">

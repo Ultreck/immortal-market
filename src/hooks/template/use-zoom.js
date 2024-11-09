@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import useTemplateStore from '@/store/template.js';
-import { useKey } from 'react-use';
+import { useKey, useMount } from 'react-use';
 
 const useZoom = (node) => {
+  const pages = useTemplateStore((state) => state.template.pages);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const scale = useTemplateStore((state) => state.template.scale);
 
@@ -13,6 +14,15 @@ const useZoom = (node) => {
       updateTemplate({ scale: 1 });
     }
   );
+
+  useMount(() => {
+    const editorWidth = node.current.clientWidth;
+    const maxPageWidth = Math.max(...pages.map((p) => p.width));
+    if (editorWidth < maxPageWidth) {
+      const scale = Math.max(editorWidth / maxPageWidth - 0.12, 0.2);
+      updateTemplate({ scale });
+    }
+  });
 
   useEffect(() => {
     const el = node.current;
