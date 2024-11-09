@@ -99,6 +99,15 @@ export const useCreateDesign = (business) => {
   });
 };
 
+export const useTemplate = (business) => {
+  return useMutation({
+    mutationKey: ['business', business, 'designs'],
+    mutationFn: (body) => {
+      return http.post(`/businesses/${business}/designs/templates/use`, body);
+    },
+  });
+};
+
 export const useDeleteDesign = (business) => {
   return useMutation({
     mutationFn: ({ id }) => {
