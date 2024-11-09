@@ -13,6 +13,7 @@ import { Controller, useForm } from 'react-hook-form';
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
+import { capitalize } from '@/lib/utils.js';
 
 const columns = [{ key: 'default', label: 'Default' }];
 
@@ -55,6 +56,7 @@ const units = [
 const DataTagConfig = ({ element, onChange }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const openTool = useTemplateStore((state) => state.template.openTool);
+
   const { handleSubmit, control, watch } = useForm({
     defaultValues: {
       column: element.config.column || '',
@@ -68,6 +70,16 @@ const DataTagConfig = ({ element, onChange }) => {
   });
 
   const onSubmit = (data) => {
+    let content = '';
+    if (data.type === 'text') {
+      const [g1, o1] = data.compare[0].combination.split('/');
+      const [g2, o2] = data.compare[1].combination.split('/');
+      content = `Comparison of ${capitalize(g1)} (${capitalize(o1.replace('-', ' '))}) and ${capitalize(g2)} (${capitalize(o2.replace('-', ' '))})`;
+    }
+    if (data.type === 'number') {
+      const [group, order] = data.combination.split('/');
+      content = `${capitalize(group)} (${capitalize(order.replace('-', ' '))})`;
+    }
     onChange({
       ...element,
       config: {
@@ -79,6 +91,9 @@ const DataTagConfig = ({ element, onChange }) => {
         decimal: data.decimal,
         unit: data.unit,
         characters: data.characters,
+        combination: data.combination || element.config.combination,
+        compare: data.compare || element.config.compare,
+        content,
       },
     });
   };
