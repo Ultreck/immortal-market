@@ -82,7 +82,6 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
                     }}
                     onChange={handleChange}
                     onDoubleClick={() => setActiveElement(el.id)}
-                    className={cn({ 'pointer-events-none': !_active })}
                   >
                     {createElement(component, {
                       element: el,
