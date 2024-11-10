@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import { Button, useDisclosure } from '@nextui-org/react';
 import { HiOutlineEye } from 'react-icons/hi2';
-import { HiOutlineArrowsExpand, HiOutlineDatabase } from 'react-icons/hi';
+import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import ExpandChartModal from '@/components/core/templates/create/elements/charts/standard/helpers/ExpandChartModal.jsx';
+import ChartInsightsModal from '@/components/core/templates/create/elements/charts/standard/helpers/ChartInsightsModal.jsx';
 
 const ElementChartWrapper = ({ element, children, isDisabled = false }) => {
   const { isOpen: isExpandOpen, onOpen: onExpandOpen, onClose: onExpandClose } = useDisclosure();
+  const { isOpen: isInsightsOpen, onOpen: onInsightsOpen, onClose: onInsightsClose } = useDisclosure();
 
   return (
     <div className="group relative">
@@ -24,30 +26,21 @@ const ElementChartWrapper = ({ element, children, isDisabled = false }) => {
               Expand
             </Button>
             <Button
+              onClick={onInsightsOpen}
               variant="flat"
               radius="full"
               className="text-base px-4"
               size="sm"
-              isDisabled
               startContent={<HiOutlineEye size="16" />}
             >
               Insights
-            </Button>
-            <Button
-              variant="flat"
-              radius="full"
-              className="text-base px-4"
-              size="sm"
-              isDisabled
-              startContent={<HiOutlineDatabase size="16" />}
-            >
-              Data
             </Button>
           </div>
         </div>
       )}
 
       <ExpandChartModal isOpen={isExpandOpen} title="Drilldown" onClose={onExpandClose} element={element} />
+      <ChartInsightsModal isOpen={isInsightsOpen} onClose={onInsightsClose} element={element} />
     </div>
   );
 };
