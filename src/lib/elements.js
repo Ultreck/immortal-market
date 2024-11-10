@@ -42,7 +42,7 @@ export const elements = {
     },
   },
   'chart-s': {
-    tools: ['chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'animation', 'tooltip', 'element-tag', 'layout'],
+    tools: ['chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'animation', 'element-tag', 'layout'],
     components: {
       edit: StandardCharts,
       present: StandardChartsPresent,
@@ -56,7 +56,7 @@ export const elements = {
     },
   },
   'chart-a': {
-    tools: ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'tooltip', 'element-tag', 'layout'],
+    tools: ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'element-tag', 'layout'],
     components: {
       edit: AdvanceCharts,
       present: AdvanceChartsPresent,
@@ -79,7 +79,7 @@ export const elements = {
     },
   },
   shape: {
-    tools: ['background', 'border', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
+    tools: ['background', 'border', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
     components: {
       edit: Shape,
       present: ShapePresent,
@@ -91,10 +91,10 @@ export const elements = {
   frame: {
     tools: (element) => {
       if (element.config.name === 'tabs') {
-        return ['tabs', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'];
+        return ['tabs', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
       }
       if (element.config.name === 'carousel') {
-        return ['carousel', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'];
+        return ['carousel', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
       }
       return ['opacity', 'animation', 'shadow'];
     },
@@ -107,7 +107,7 @@ export const elements = {
     },
   },
   icon: {
-    tools: ['icon', 'color', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
+    tools: ['icon', 'color', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
     components: {
       edit: Icon,
       present: IconPresent,
@@ -142,7 +142,7 @@ export const elements = {
     },
   },
   line: {
-    tools: ['line', 'color', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
+    tools: ['line', 'color', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
     components: {
       edit: Line,
       present: LinePresent,
@@ -153,7 +153,7 @@ export const elements = {
     },
   },
   image: {
-    tools: ['border', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
+    tools: ['border', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
     components: {
       edit: Image,
       present: ImagePresent,
@@ -174,7 +174,7 @@ export const elements = {
     },
   },
   'data-tag': {
-    tools: ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'tooltip', 'element-tag', 'layout'],
+    tools: ['data-tag', 'font', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
     components: {
       edit: DataTag,
       present: DataPresent,

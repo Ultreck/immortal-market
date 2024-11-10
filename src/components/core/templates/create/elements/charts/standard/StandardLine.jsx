@@ -1,23 +1,22 @@
 import { CartesianGrid, LabelList, Legend, Line, LineChart, XAxis, YAxis } from 'recharts';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
+import { ChartContainer, ChartTooltip } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
+import ChartTooltipContent from '@/components/core/templates/create/elements/charts/standard/helpers/ChartTooltipContent.jsx';
 
 const StandardLine = ({ element }) => {
   return <StandardLineContent element={element} />;
 };
 
-StandardLine.propTypes = ElementPropTypes;
+export const StandardLinePresent = ({ element, isChartWrapperDisabled }) => {
+  return <StandardLineContent element={element} present isChartWrapperDisabled={isChartWrapperDisabled} />;
+};
 
-export const StandardLineContent = ({ element }) => {
+export const StandardLineContent = ({ element, present = false, isChartWrapperDisabled = false }) => {
   return (
-    <div
-      style={{
-        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-      }}
-    >
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <>
         <ChartContainer
           config={{}}
@@ -68,7 +67,23 @@ export const StandardLineContent = ({ element }) => {
                 fill: element.config.styles.gridAndLegendColor,
               }}
             />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+            <ChartTooltip
+              cursor={false}
+              allowEscapeViewBox={{ x: true, y: true }}
+              content={(e) => {
+                return (
+                  <>
+                    {e && e.payload && e.payload.length > 0 && (
+                      <ChartTooltipContent
+                        label={e?.payload[0].payload.name}
+                        value={e?.payload[0].payload.value}
+                        present={present}
+                      />
+                    )}
+                  </>
+                );
+              }}
+            />
             <Line
               dataKey={element.config.keys.y}
               type={element.config.type}
@@ -82,12 +97,19 @@ export const StandardLineContent = ({ element }) => {
           </LineChart>
         </ChartContainer>
       </>
-    </div>
+    </ElementChartWrapper>
   );
 };
 
+StandardLine.propTypes = ElementPropTypes;
 StandardLineContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
+  isChartWrapperDisabled: PropTypes.bool,
+};
+StandardLinePresent.propTypes = {
+  element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default StandardLine;

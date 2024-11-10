@@ -30,7 +30,7 @@ import StandardBarArea from './StandardBarArea.jsx';
 import StandardAreaBarVertical from './StandardBarAreaVertical.jsx';
 import StandardBubbleChartInSizes from './StandardBubbleChartInSizes.jsx';
 
-const StandardCharts = ({ element, active, onChange }) => {
+const StandardCharts = ({ element, active, onChange, ...props }) => {
   const components = {
     bar: StandardBarChart,
     line: StandardLine,
@@ -64,7 +64,7 @@ const StandardCharts = ({ element, active, onChange }) => {
   };
 
   if (components[element.config.name]) {
-    return createElement(components[element.config.name], { element, active, onChange });
+    return createElement(components[element.config.name], { element, active, onChange, ...props });
   }
 };
 

@@ -21,7 +21,6 @@ const useTemplateStore = createWithEqualityFn(
         },
       ],
       selectedElements: [],
-      selectedFrames:[],
       selectedPage: null,
       activePage: null,
       activeElement: null,

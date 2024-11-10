@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { StandardBarPresent } from '@/components/core/templates/create/elements/charts/standard/StandardBar.jsx';
-import { StandardLineContent } from '@/components/core/templates/create/elements/charts/standard/StandardLine.jsx';
+import { StandardLinePresent } from '@/components/core/templates/create/elements/charts/standard/StandardLine.jsx';
 import { StandardPieContent } from '@/components/core/templates/create/elements/charts/standard/StandardPie.jsx';
 import { StandardDoughnutContent } from '@/components/core/templates/create/elements/charts/standard/StandardDoughnut.jsx';
 import { StandardRosePieContent } from '@/components/core/templates/create/elements/charts/standard/StandardRosePie.jsx';
@@ -28,10 +28,10 @@ import { StandardBubbleChartContent } from './StandardBubbleChart';
 import { StandardBarAreaContent } from './StandardBarArea';
 import { StandardBubbleChartInSizesContent } from './StandardBubbleChartInSizes';
 
-const StandardChartsPresent = ({ element }) => {
+const StandardChartsPresent = ({ element, ...props }) => {
   const components = {
     bar: StandardBarPresent,
-    line: StandardLineContent,
+    line: StandardLinePresent,
     pie: StandardPieContent,
     doughnut: StandardDoughnutContent,
     'doughnut-crazy': StandardRosePieContent,
@@ -60,7 +60,7 @@ const StandardChartsPresent = ({ element }) => {
   };
 
   if (components[element.config.name]) {
-    return createElement(components[element.config.name], { element });
+    return createElement(components[element.config.name], { element, ...props });
   }
 };
 

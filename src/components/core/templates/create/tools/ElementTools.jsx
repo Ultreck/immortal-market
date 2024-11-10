@@ -27,7 +27,6 @@ import Color from '@/components/core/templates/create/tools/elements/generic/Col
 import DataTagConfig from '@/components/core/templates/create/tools/elements/specific/DataTagConfig.jsx';
 import ChartData from './elements/specific/ChartData.jsx';
 import Layout from './elements/generic/Layout.jsx';
-import ElementTooltip from './elements/generic/Tooltip.jsx';
 import ElementTag from './elements/generic/ElementTag.jsx';
 
 const mapping = {
@@ -56,7 +55,6 @@ const mapping = {
   'chart-data': { type: 'single', component: ChartData },
   'chart-font': { type: 'multiple', component: ChartFont },
   layout: { type: 'single', component: Layout },
-  tooltip: { type: 'single', component: ElementTooltip },
   'element-tag': { type: 'single', component: ElementTag },
 };
 
