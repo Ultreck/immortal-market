@@ -1,7 +1,7 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
 import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { TbCheck, TbColorSwatch } from 'react-icons/tb';
+import { TbCheck } from 'react-icons/tb';
 import { capitalize, cn, interpolateColor } from '@/lib/utils.js';
 import { HexColorPicker } from 'react-colorful';
 import useTemplateStore from '@/store/template.js';
@@ -65,9 +65,24 @@ const Colors = ({ element, onChange }) => {
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'colors' : null })}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
-          <TbColorSwatch size="20" />
-        </Button>
+        <button
+          type="button"
+          className="gap-2 text-sm font-medium transition-colors hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-transparent min-w-9 group flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border-2 border-transparent p-0 hover:bg-transparent focus-visible:bg-transparent"
+          tabIndex="0"
+        >
+          <div className="h-6 w-6 overflow-hidden rounded-full">
+            <div className="grid h-12 w-12 -translate-x-1/4 -translate-y-1/4 grid-cols-2 overflow-hidden rounded-md transition-all ease-in-out group-hover:rotate-45 rotate-0 gap-[2px]">
+              {element.config.colors?.slice(0, 4).map((color, index) => (
+                <span key={index} className="flex h-6 w-6 bg-red-500" style={{ backgroundColor: color }} />
+              ))}
+              {element.config.colors?.length < 4 &&
+                Array(4 - element.config.colors?.length)
+                  .fill(null)
+                  .map((_, index) => <span key={index} className="flex h-6 w-6 bg-default-200/70" />)}
+              <span className="sr-only">Default</span>
+            </div>
+          </div>
+        </button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-8 py-6 w-full">
