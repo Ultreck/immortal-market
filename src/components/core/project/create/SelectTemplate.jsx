@@ -89,7 +89,7 @@ const SelectTemplate = ({ onNext }) => {
                     key={design._id}
                     title={design.title}
                     id={design._id}
-                    thumbnail={design.thumbnail}
+                    thumbnail={design.thumbnails[0]}
                   />
                 ))}
               </div>

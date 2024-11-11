@@ -149,8 +149,7 @@ export const useGetDesign = (business, id) => {
 export const useUpdateDesign = (business, id) => {
   return useMutation({
     mutationKey: ['business', business, 'designs', id],
-    mutationFn: (data) => {
-      const fd = objectToFormData(data);
+    mutationFn: (fd) => {
       return http.patch(`/businesses/${business}/designs/${id}`, fd);
     },
   });

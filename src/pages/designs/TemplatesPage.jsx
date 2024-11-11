@@ -22,8 +22,8 @@ const TemplatesPage = () => {
   const { isOpen: isTemplatesOpen, onOpen: onTemplatesOpen, onClose: onTemplatesClose } = useDisclosure();
   const [current, setCurrent] = useState(null);
 
-  const handlePreview = ({ _id, title, thumbnail }) => {
-    const template = { id: _id, title, thumbnail };
+  const handlePreview = ({ _id, title, thumbnail, thumbnails }) => {
+    const template = { id: _id, title, thumbnail, thumbnails };
     setCurrent(template);
     onTemplatesOpen();
   };
@@ -153,7 +153,7 @@ const TemplatesPage = () => {
                       key={i}
                       id={design._id}
                       title={design.title}
-                      thumbnail={design.thumbnail}
+                      thumbnail={design.thumbnails[0]}
                       onClick={() => handlePreview(design)}
                     />
                   ))}

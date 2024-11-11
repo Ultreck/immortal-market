@@ -208,11 +208,11 @@ export const labelAndValueStyling = [
   'custom-bar',
   'stacked-card',
   'pie',
-  "semi-pie",
+  'semi-pie',
   'doughnut-standard',
   'doughnut-crazy',
-  "semi-circle",
-  "doughnut"
+  'semi-circle',
+  'doughnut',
   // "scatter",
 ];
 export const gridAndLegendStyling = [
@@ -230,15 +230,15 @@ export const gridAndLegendStyling = [
   'line',
   'line-multiple',
   'area',
-  "area-multiple",
-  "bubble",
-  "scatter",
-  "line-area",
-  "line-area-vertical",
-  "line-bar",
-  "line-bar-vertical",
-  "area-bar",
-  "area-bar-vertical",
+  'area-multiple',
+  'bubble',
+  'scatter',
+  'line-area',
+  'line-area-vertical',
+  'line-bar',
+  'line-bar-vertical',
+  'area-bar',
+  'area-bar-vertical',
 ];
 
 export const extractColorsFromGradient = (gradient) => {

@@ -9,6 +9,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { BsCloudArrowDown, BsCloudCheck } from 'react-icons/bs';
 import { Button, Tooltip } from '@nextui-org/react';
 import equal from 'fast-deep-equal/es6/react';
+import { objectToFormData } from '@/lib/utils.js';
 
 const SaveButton = () => {
   const qc = useQueryClient();
@@ -24,19 +25,23 @@ const SaveButton = () => {
   const handleSave = useCallback(async () => {
     try {
       setIsThumbnailLoading(true);
-      const blob = await toBlob(document.getElementById(`canvas-${pages[0].id}`), {
-        cacheBust: true,
-        skipFonts: true,
-      });
-      const thumbnail = new File([blob], 'thumbnail.png', { type: 'image/png' });
+      const blobPromises = pages.map((page) =>
+        toBlob(document.getElementById(`canvas-${page.id}`), {
+          cacheBust: true,
+          skipFonts: true,
+        })
+      );
+      const blobs = await Promise.all(blobPromises);
+      const thumbnails = blobs.map((blob, index) => new File([blob], `${pages[index].id}.png`, { type: 'image/png' }));
       setIsThumbnailLoading(false);
-      await update({ data: { pages }, thumbnail });
+      const fd = objectToFormData({ pages });
+      thumbnails.forEach((file) => fd.append('thumbnails', file));
+      await update(fd);
       await qc.invalidateQueries({ queryKey: ['business', business, 'designs'] });
     } catch (error) {
       setIsThumbnailLoading(false);
       toast.error(error?.response?.data?.message || error.message);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pages, update, business, qc]);
 
   useKey(

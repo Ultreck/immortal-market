@@ -54,9 +54,9 @@ const TemplateItem = ({ design }) => {
       onOpenChange={onOpenChange}
     >
       <PopoverTrigger>
-        {design.thumbnail ? (
+        {design.thumbnails.length ? (
           <Image
-            src={getImageLink(design.thumbnail)}
+            src={getImageLink(design.thumbnails[0])}
             alt={design.title}
             removeWrapper
             className="w-full h-full object-cover rounded-xl aspect-square cursor-pointer"
@@ -78,7 +78,7 @@ TemplateItem.propTypes = {
   design: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string,
+    thumbnails: PropTypes.arrayOf(PropTypes.string),
   }),
 };
 

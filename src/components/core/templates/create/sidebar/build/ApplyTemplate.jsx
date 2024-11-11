@@ -77,9 +77,9 @@ const ApplyTemplate = ({ id, onClose }) => {
               <h3 className="text-base font-medium leading-tight mb-4">
                 {design.title} ({design.data.pages.length} pages)
               </h3>
-              {design.thumbnail ? (
+              {design.thumbnails.length ? (
                 <Image
-                  src={getImageLink(design.thumbnail)}
+                  src={getImageLink(design.thumbnails[0])}
                   alt={design.title}
                   removeWrapper
                   className="w-full h-full object-cover rounded-xl aspect-square cursor-pointer"

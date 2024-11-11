@@ -35,13 +35,13 @@ input:-webkit-autofill {
   @apply w-7 h-7 bg-gray-500 rounded-full;
 }
 
-.swiper-button-prev {
-  @apply left-0 -mt-4;
-}
+/*.swiper-button-prev {*/
+/*  @apply left-0 -mt-4;*/
+/*}*/
 
-.swiper-button-next {
-  @apply right-0 -mt-4;
-}
+/*.swiper-button-next {*/
+/*  @apply right-0 -mt-4;*/
+/*}*/
 
 .swiper-button-disabled {
   @apply opacity-10 pointer-events-none;

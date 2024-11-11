@@ -59,7 +59,7 @@ const PopularTemplates = () => {
                     key={i}
                     id={design._id}
                     title={design.title}
-                    thumbnail={design.thumbnail}
+                    thumbnail={design.thumbnails[0]}
                   />
                 ))}
               </div>
