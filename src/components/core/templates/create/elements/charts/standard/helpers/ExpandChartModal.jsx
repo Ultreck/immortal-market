@@ -64,7 +64,10 @@ const ExpandChartModal = ({ element, isOpen, onClose }) => {
               <Table
                 removeWrapper
                 isStriped
-                classNames={{ td: 'text-base px-5', th: 'text-base px-5 capitalize' }}
+                classNames={{
+                  td: 'text-base px-5 py-3 first:before:rounded-s-2xl last:before:rounded-e-2xl',
+                  th: 'text-base px-5 py-3 first:rounded-s-2xl last:rounded-e-2xl capitalize',
+                }}
                 aria-label="Chart data"
               >
                 <TableHeader columns={columns}>
