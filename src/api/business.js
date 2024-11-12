@@ -158,7 +158,7 @@ export const useUpdateDesign = (business, id) => {
 
 export const useAddInfographics = (business) => {
   return useMutation({
-    mutationKey: ['infographics'],
+    mutationKey: ['business', business, 'designs', 'infographics'],
     mutationFn: async (files) => {
       const formData = new FormData();
       files.forEach((file) => formData.append('files', file));

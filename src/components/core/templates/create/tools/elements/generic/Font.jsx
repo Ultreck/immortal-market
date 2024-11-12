@@ -235,7 +235,7 @@ const TextAlign = ({ elements, onChange }) => {
 };
 
 const TextColor = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((e) => e.style?.color));
+  const value = useResolveValue(elements.map((e) => e.style?.color)) || '';
 
   const handleChange = (v) => {
     if (!v) return;

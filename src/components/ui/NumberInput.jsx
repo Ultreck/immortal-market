@@ -91,7 +91,7 @@ const NumberInput = ({
 NumberInput.propTypes = {
   variant: PropTypes.oneOf(['flat', 'bordered', 'faded', 'underlined']),
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onChange: PropTypes.func.isRequired,
   ariaLabel: PropTypes.string.isRequired,
   min: PropTypes.number,

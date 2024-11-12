@@ -57,21 +57,27 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
             dataKey={element.config.keys.x}
             tickFormatter={(value) => capitalize(value)}
             hide={!element.config.showXaxis}
+            tickLine={false}
             tick={{
-              fontSize: element.config.styles.xGridSize,
-              fontWeight: element.config.styles.gFontWeight,
-              fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor,
+              fill: element.style.color,
+              fontSize: element.style.fontSize,
+              fontFamily: element.style.fontFamily,
+              fontWeight: element.style.fontWeight,
+              fontStyle: element.style.fontStyle,
+              textDecoration: element.style.textDecoration,
             }}
           />
           <YAxis
             dataKey={element.config.keys.y}
             hide={!element.config.showYaxis}
+            tickLine={false}
             tick={{
-              fontSize: element.config.styles.yGridSize,
-              fontWeight: element.config.styles.gFontWeight,
-              fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor,
+              fill: element.style.color,
+              fontSize: element.style.fontSize,
+              fontFamily: element.style.fontFamily,
+              fontWeight: element.style.fontWeight,
+              fontStyle: element.style.fontStyle,
+              textDecoration: element.style.textDecoration,
             }}
           />
           {element.config.showLegend && (
@@ -82,7 +88,7 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
               }}
             />
           )}
-          <Bar dataKey={element.config.keys.y} radius={30} />
+          <Bar dataKey={element.config.keys.y} radius={[20, 20, 0, 0]} />
         </BarChart>
       </ChartContainer>
     </ElementChartWrapper>

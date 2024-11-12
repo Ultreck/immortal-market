@@ -1,98 +1,97 @@
-import { useEffect, useRef } from 'react';
-import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
+import { capitalize } from '@/lib/utils.js';
+import { ChartContainer, ChartTooltip } from '@/components/ui/chart.jsx';
+import { Pie, PieChart } from 'recharts';
+import ChartTooltipContent from '@/components/core/templates/create/elements/charts/standard/helpers/ChartTooltipContent.jsx';
 
 const StandardPie = ({ element }) => {
   return <StandardPieContent element={element} />;
 };
 
-StandardPie.propTypes = ElementPropTypes;
+export const StandardPiePresent = ({ element, isChartWrapperDisabled }) => {
+  return <StandardPieContent element={element} present isChartWrapperDisabled={isChartWrapperDisabled} />;
+};
 
-export const StandardPieContent = ({ element }) => {
-  const chartRef = useRef(null);
+export const StandardPieContent = ({ element, present = false, isChartWrapperDisabled = false }) => {
+  const data = element.config.data.map((item, i) => ({
+    ...item,
+    fill: element.config.colors[i],
+  }));
 
-  useEffect(() => {
-    const chart = echarts.init(chartRef.current, 'light');
-
-    const chartData = element.config.data.slice(0, element.config.pies).map((item, index) => {
-      const color = element.config.colors?.[index];
-      return { ...item, fill: color };
-    });
-
-    const option = {
-      tooltip: {
-        trigger: 'item',
-        show: element.config.showToolTip,
-      },
-      color: chartData.map((item) => item.fill),
-      legend: {
-        orient: 'vertical',
-        left: 'left',
-        top: element.config.legendPosition === 'top' ? 'top' : 'bottom',
-        show: element.config.showLegend,
-        textStyle: {
-          fontSize: element.config.styles.valueSize,
-          fontWeight: element.config.styles.lFontWeight,
-          color: element.config.styles.valueAndLableColor,
-          fontStyle: element.config.styles.lFontStyle,
-        },
-      },
-      series: [
-        {
-          name: 'Access From',
-          type: 'pie',
-          radius: '50%',
-          data: chartData,
-          label: {
-            show: element.config.showLabel,
-            fontSize: element.config.styles.labelSize,
-            fontWeight: element.config.styles.lFontWeight,
-            color: element.config.styles.valueAndLableColor,
-            fontStyle: element.config.styles.lFontStyle,
-          },
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)',
-            },
-          },
-        },
-      ],
+  const config = element.config.data.reduce((acc, item, i) => {
+    acc[item[element.config.keys.x]] = {
+      label: capitalize(item[element.config.keys.x]),
+      color: element.config.colors[i],
     };
-    chart.setOption(option);
-    return () => {
-      chart.dispose();
-    };
-  }, [element]);
+    return acc;
+  }, {});
 
   return (
-    <div
-      style={{
-        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
-      }}
-    >
-      <div
-        className="bg-gray-200"
-        ref={chartRef}
-        style={{
-          width: element.width,
-          height: element.height,
-          opacity: element.style.opacity,
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
-        }}
-      />
-    </div>
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <ChartContainer
+        config={config}
+        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+      >
+        <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+          <ChartTooltip
+            cursor={false}
+            allowEscapeViewBox={{ x: true, y: true }}
+            content={(e) => {
+              return (
+                <>
+                  {e && e.payload && e.payload.length > 0 && (
+                    <ChartTooltipContent
+                      label={e?.payload[0].payload.name}
+                      value={e?.payload[0].payload.value}
+                      present={present}
+                    />
+                  )}
+                </>
+              );
+            }}
+          />
+          <Pie
+            data={data}
+            dataKey={element.config.keys.y}
+            nameKey={element.config.keys.x}
+            label={({ payload, ...rest }) => {
+              return (
+                <text
+                  cx={rest.cx}
+                  cy={rest.cy}
+                  x={rest.x}
+                  y={rest.y}
+                  textAnchor={rest.textAnchor}
+                  dominantBaseline={rest.dominantBaseline}
+                  fill={element.style.color}
+                  fontSize={element.style.fontSize}
+                  fontFamily={element.style.fontFamily}
+                  fontWeight={element.style.fontWeight}
+                  fontStyle={element.style.fontStyle}
+                  textDecoration={element.style.textDecoration}
+                >
+                  {payload[element.config.keys.y]}
+                </text>
+              );
+            }}
+          ></Pie>
+        </PieChart>
+      </ChartContainer>
+    </ElementChartWrapper>
   );
 };
 
+StandardPie.propTypes = ElementPropTypes;
+StandardPiePresent.propTypes = {
+  element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
+};
 StandardPieContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default StandardPie;

@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { StandardBarPresent } from '@/components/core/templates/create/elements/charts/standard/StandardBar.jsx';
 import { StandardLinePresent } from '@/components/core/templates/create/elements/charts/standard/StandardLine.jsx';
-import { StandardPieContent } from '@/components/core/templates/create/elements/charts/standard/StandardPie.jsx';
+import { StandardPiePresent } from '@/components/core/templates/create/elements/charts/standard/StandardPie.jsx';
 import { StandardDoughnutContent } from '@/components/core/templates/create/elements/charts/standard/StandardDoughnut.jsx';
 import { StandardRosePieContent } from '@/components/core/templates/create/elements/charts/standard/StandardRosePie.jsx';
 import { StandardDoughnutNormalContent } from '@/components/core/templates/create/elements/charts/standard/StandardDoughnutNormal.jsx';
@@ -32,7 +32,7 @@ const StandardChartsPresent = ({ element, ...props }) => {
   const components = {
     bar: StandardBarPresent,
     line: StandardLinePresent,
-    pie: StandardPieContent,
+    pie: StandardPiePresent,
     doughnut: StandardDoughnutContent,
     'doughnut-crazy': StandardRosePieContent,
     'doughnut-standard': StandardDoughnutNormalContent,
