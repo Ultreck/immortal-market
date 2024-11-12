@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 import * as RechartsPrimitive from 'recharts';
 
@@ -22,6 +21,7 @@ function useChart() {
   return context;
 }
 
+// eslint-disable-next-line react/prop-types
 const ChartContainer = React.forwardRef(({ id, className, children, config, ...props }, ref) => {
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;
@@ -32,7 +32,7 @@ const ChartContainer = React.forwardRef(({ id, className, children, config, ...p
         data-chart={chartId}
         ref={ref}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line-line]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
+          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
           className
         )}
         {...props}
@@ -45,8 +45,9 @@ const ChartContainer = React.forwardRef(({ id, className, children, config, ...p
 });
 ChartContainer.displayName = 'Chart';
 
+// eslint-disable-next-line react/prop-types
 const ChartStyle = ({ id, config }) => {
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars,react/prop-types
   const colorConfig = Object.entries(config).filter(([_, config]) => config.theme || config.color);
 
   if (!colorConfig.length) {
@@ -56,8 +57,9 @@ const ChartStyle = ({ id, config }) => {
   return (
     <style
       dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES).map(
-          ([theme, prefix]) => `
+        __html: Object.entries(THEMES)
+          .map(
+            ([theme, prefix]) => `
 ${prefix} [data-chart=${id}] {
 ${colorConfig
   .map(([key, itemConfig]) => {
@@ -67,7 +69,8 @@ ${colorConfig
   .join('\n')}
 }
 `
-        ),
+          )
+          .join('\n'),
       }}
     />
   );
@@ -78,18 +81,31 @@ const ChartTooltip = RechartsPrimitive.Tooltip;
 const ChartTooltipContent = React.forwardRef(
   (
     {
+      // eslint-disable-next-line react/prop-types
       active,
+      // eslint-disable-next-line react/prop-types
       payload,
+      // eslint-disable-next-line react/prop-types
       className,
+      // eslint-disable-next-line react/prop-types
       indicator = 'dot',
+      // eslint-disable-next-line react/prop-types
       hideLabel = false,
+      // eslint-disable-next-line react/prop-types
       hideIndicator = false,
+      // eslint-disable-next-line react/prop-types
       label,
+      // eslint-disable-next-line react/prop-types
       labelFormatter,
+      // eslint-disable-next-line react/prop-types
       labelClassName,
+      // eslint-disable-next-line react/prop-types
       formatter,
+      // eslint-disable-next-line react/prop-types
       color,
+      // eslint-disable-next-line react/prop-types
       nameKey,
+      // eslint-disable-next-line react/prop-types
       labelKey,
     },
     ref
@@ -97,6 +113,7 @@ const ChartTooltipContent = React.forwardRef(
     const { config } = useChart();
 
     const tooltipLabel = React.useMemo(() => {
+      // eslint-disable-next-line react/prop-types
       if (hideLabel || !payload?.length) {
         return null;
       }
@@ -117,10 +134,12 @@ const ChartTooltipContent = React.forwardRef(
       return <div className={cn('font-medium', labelClassName)}>{value}</div>;
     }, [label, labelFormatter, payload, hideLabel, labelClassName, config, labelKey]);
 
+    // eslint-disable-next-line react/prop-types
     if (!active || !payload?.length) {
       return null;
     }
 
+    // eslint-disable-next-line react/prop-types
     const nestLabel = payload.length === 1 && indicator !== 'dot';
 
     return (
@@ -133,6 +152,7 @@ const ChartTooltipContent = React.forwardRef(
       >
         {!nestLabel ? tooltipLabel : null}
         <div className="grid gap-1.5">
+          {/* eslint-disable-next-line react/prop-types */}
           {payload.map((item, index) => {
             const key = `${nameKey || item.name || item.dataKey || 'value'}`;
             const itemConfig = getPayloadConfigFromPayload(config, item, key);
@@ -142,7 +162,7 @@ const ChartTooltipContent = React.forwardRef(
               <div
                 key={item.dataKey}
                 className={cn(
-                  'flex w-full items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-slate-500 dark:[&>svg]:text-slate-400',
+                  'flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-slate-500 dark:[&>svg]:text-slate-400',
                   indicator === 'dot' && 'items-center'
                 )}
               >
@@ -199,9 +219,11 @@ ChartTooltipContent.displayName = 'ChartTooltip';
 const ChartLegend = RechartsPrimitive.Legend;
 
 const ChartLegendContent = React.forwardRef(
+  // eslint-disable-next-line react/prop-types
   ({ className, hideIcon = false, payload, verticalAlign = 'bottom', nameKey }, ref) => {
     const { config } = useChart();
 
+    // eslint-disable-next-line react/prop-types
     if (!payload?.length) {
       return null;
     }
@@ -211,6 +233,7 @@ const ChartLegendContent = React.forwardRef(
         ref={ref}
         className={cn('flex items-center justify-center gap-4', verticalAlign === 'top' ? 'pb-3' : 'pt-3', className)}
       >
+        {/* eslint-disable-next-line react/prop-types */}
         {payload.map((item) => {
           const key = `${nameKey || item.dataKey || 'value'}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);

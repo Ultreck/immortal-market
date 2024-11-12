@@ -54,7 +54,7 @@
     "react-spinners": "^0.14.1",
     "react-typed": "^2.0.12",
     "react-use": "^17.5.1",
-    "recharts": "^2.13.0-alpha.5",
+    "recharts": "^2.13.3",
     "socket.io-client": "^4.8.0",
     "swiper": "^11.1.14",
     "tailwind-merge": "^2.5.2",
