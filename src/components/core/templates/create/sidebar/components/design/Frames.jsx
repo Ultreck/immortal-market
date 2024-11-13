@@ -46,6 +46,13 @@ const items = [
       config: {
         name: 'carousel',
         slides: 2,
+        speed: 500,
+        slidesPerView: 1,
+        autoplay: {
+          enabled: false,
+          delay: 0,
+        },
+        loop: false,
       },
       tooltip: {
         enabled: false,

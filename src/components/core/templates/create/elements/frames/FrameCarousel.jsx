@@ -11,9 +11,19 @@ const FrameCarousel = ({ element, active, onChange }) => {
     <Swiper
       modules={[Navigation, Pagination]}
       navigation
-      slidesPerView={1}
-      spaceBetween={0}
+      speed={element.config.speed || 500}
+      slidesPerView={element.config.slidesPerView || 1}
+      spaceBetween={element.config.spaceBetween || 1}
+      loop={!!element.config.loop}
       pagination={{ clickable: true }}
+      autoplay={
+        element.config.autoplay?.enabled
+          ? {
+              delay: element.config.autoplay.delay || 0,
+              disableOnInteraction: false,
+            }
+          : false
+      }
       className={cn('h-full', { 'pointer-events-none': !active })}
       allowTouchMove={false}
     >
