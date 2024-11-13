@@ -18,6 +18,8 @@ import AdvancedStackedCard from './AdvancedStackedCard.jsx';
 import AdvancePercentageCard from './AdvancePercentageCard.jsx';
 import AdvanceColumnCard from './AdvanceColumnCard.jsx';
 import AdvancePercentageCardTwo from './AdvancePercentageCardTwo.jsx';
+import AdvanceLinearChart from '@/components/core/templates/create/elements/charts/advanced/AdvanceLinearChart.jsx';
+import AdvanceGlobaBar from '@/components/core/templates/create/elements/charts/advanced/AdvanceGlobaBar.jsx';
 
 const AdvanceCharts = ({ element, active, onChange }) => {
   const components = {
@@ -39,6 +41,8 @@ const AdvanceCharts = ({ element, active, onChange }) => {
     'percentage-card': AdvancePercentageCard,
     'column-card': AdvanceColumnCard,
     'percentage-card-2': AdvancePercentageCardTwo,
+    'linear-advanced-bar': AdvanceLinearChart,
+    'bar-global': AdvanceGlobaBar,
   };
 
   if (components[element.config.name]) {

@@ -3,6 +3,7 @@ import { CgLoadbarAlt } from 'react-icons/cg';
 import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react-icons/lu';
 import { IconChartFunnel } from '@tabler/icons-react';
 import {
+  TbChartBar,
   TbChartScatter,
   TbChartTreemap,
   TbCircleDot,
@@ -82,6 +83,30 @@ const elements = [
     ),
   },
   {
+    id: 'chart-a-linear-advanced-bar',
+    group: 'general',
+    data: {
+      type: 'chart-a',
+      text: 'Linear Bar Chart',
+      width: 500,
+      height: 100,
+      style: getElementDefaultStyle({ type: 'chart-a', name: 'linear-advanced-bar' }),
+      config: {
+        name: 'linear-advanced-bar',
+        colors,
+        data: [
+          { label: 'Data 1', value: '71' },
+          { label: 'Data 2', value: '29' },
+        ],
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <CgLoadbarAlt className="w-full h-full" />
+      </div>
+    ),
+  },
+  {
     id: 'chart-a-circle-icons',
     group: 'general',
     data: {
@@ -111,6 +136,42 @@ const elements = [
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
         <TbCirclesRelation className="w-full h-full" />
+      </div>
+    ),
+  },
+  {
+    id: 'chart-a-bar-global',
+    group: 'general',
+    data: {
+      type: 'chart-a',
+      text: 'Bar Chart Global',
+      width: 500,
+      height: 400,
+      style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-global' }),
+      config: {
+        name: 'bar-global',
+        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bar-global' }),
+        data: [
+          { label: 'Bubble', value: 30, icon: 'fa fa-user' },
+          { label: 'Bubble', value: 50, icon: 'fa fa-house' },
+          { label: 'Bubble', value: 20, icon: 'fa fa-check' },
+          { label: 'Bubble', value: 40, icon: 'fa fa-bell' },
+          { label: 'Bubble', value: 60, icon: 'fa fa-star' },
+          { label: 'Bubble', value: 10, icon: 'fa fa-asterisk' },
+          { label: 'Bubble', value: 70, icon: 'fa fa-gamepad' },
+          { label: 'Bubble', value: 15, icon: 'fa fa-film' },
+        ],
+        keys: { name: 'label', data: 'value' },
+        colors,
+        bars: 5,
+        separated: false,
+        labelPosition: 'below',
+        alignment: 'default',
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <TbChartBar className="w-full h-full" />
       </div>
     ),
   },

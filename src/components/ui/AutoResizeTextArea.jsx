@@ -5,22 +5,36 @@ import { useDeepCompareEffect } from 'react-use';
 
 const AutoResizeTextArea = ({ value, onChange, onHeightChange, className, style = {}, ...props }) => {
   const el = useRef(null);
+  const containerRef = useRef(null);
 
   const updateHeight = useCallback(() => {
     if (el.current) {
-      el.current.style.height = 'auto';
-      el.current.style.height = `${el.current.scrollHeight}px`;
-      onHeightChange?.(el.current.scrollHeight);
+      el.current.style.height = '0px';
+      const lineHeight = parseInt(window.getComputedStyle(el.current).lineHeight, 10);
+      const containerHeight = containerRef.current?.clientHeight || 0;
+      const contentHeight = el.current.scrollHeight;
+      const newHeight = Math.max(contentHeight, containerHeight, lineHeight);
+
+      el.current.style.height = `${newHeight}px`;
+      onHeightChange?.(newHeight);
     }
   }, [onHeightChange]);
 
   useEffect(() => {
-    new ResizeObserver(() => updateHeight()).observe(el.current);
+    if (el.current) {
+      const resizeObserver = new ResizeObserver(() => {
+        updateHeight();
+      });
+      resizeObserver.observe(el.current);
+      if (containerRef.current) {
+        resizeObserver.observe(containerRef.current);
+      }
+      return () => resizeObserver.disconnect();
+    }
   }, [updateHeight]);
 
   useEffect(() => {
-    const textarea = el.current;
-    if (textarea) updateHeight();
+    if (el.current) updateHeight();
   }, [updateHeight, value]);
 
   useDeepCompareEffect(() => {
@@ -34,15 +48,21 @@ const AutoResizeTextArea = ({ value, onChange, onHeightChange, className, style 
   };
 
   return (
-    <textarea
-      ref={el}
-      value={value}
-      onChange={handleChange}
-      rows="1"
-      className={cn('resize-none overflow-hidden w-full', className)}
-      style={style}
-      {...props}
-    />
+    <div ref={containerRef} className="w-full h-full absolute inset-0">
+      <textarea
+        ref={el}
+        value={value}
+        onChange={handleChange}
+        rows="1"
+        className={cn('absolute inset-0', 'w-full h-full', 'resize-none', 'overflow-hidden', 'box-border', className)}
+        style={{
+          ...style,
+          display: 'block',
+          minHeight: '100%',
+        }}
+        {...props}
+      />
+    </div>
   );
 };
 

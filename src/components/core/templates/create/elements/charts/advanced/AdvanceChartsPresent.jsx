@@ -16,6 +16,7 @@ import { AdvancedPictogramShapesContent } from './AdvancedPictogramShapes';
 import MapNorthAmerica from '../../maps/MapNorthAmerica.jsx';
 import { AdvancedStackedCardContent } from './AdvancedStackedCard';
 import { AdvancePercentageCardTwoElementContent } from './AdvancePercentageCardTwo';
+import { AdvanceGlobaBarContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceGlobaBar.jsx';
 
 const AdvanceChartsPresent = ({ element }) => {
   const components = {
@@ -38,6 +39,8 @@ const AdvanceChartsPresent = ({ element }) => {
     'chart-a-percentage-card': AdvancedStackedCardContent,
     'chart-a-column-card': AdvanceDynamicSortingContent,
     'chart-a-percentage-card-2': AdvancePercentageCardTwoElementContent,
+    'chart-a-linear-advanced-bar': AdvanceLinearBarContent,
+    'chart-a-bar-global': AdvanceGlobaBarContent,
   };
 
   if (components[element.config.name]) {
