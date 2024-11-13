@@ -5,6 +5,10 @@ import { cn } from '@/lib/utils.js';
 import { Navigation, Pagination } from 'swiper/modules';
 
 const FrameCarousel = ({ element, active, onChange }) => {
+  return <Carousel key={JSON.stringify(element.config)} element={element} active={active} onChange={onChange} />;
+};
+
+const Carousel = ({ element, active, onChange }) => {
   const slides = Array(element.config.slides).fill(null);
 
   return (
@@ -44,5 +48,6 @@ const FrameCarousel = ({ element, active, onChange }) => {
 };
 
 FrameCarousel.propTypes = ElementPropTypes;
+Carousel.propTypes = ElementPropTypes;
 
 export default FrameCarousel;
