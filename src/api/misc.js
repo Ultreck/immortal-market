@@ -56,7 +56,10 @@ export const useGetSvgCodeFromUrl = (url) => {
   return useQuery({
     queryKey: ['svg', url],
     queryFn: async () => {
-      const response = await axios.get(url, { responseType: 'text', withCredentials: false });
+      const response = await axios.get(`https://proxy-exhb.onrender.com/${url}`, {
+        responseType: 'text',
+        withCredentials: false,
+      });
       return response.data;
     },
     staleTime: Infinity,
