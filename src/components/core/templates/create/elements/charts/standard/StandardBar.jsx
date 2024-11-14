@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, LabelList, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
@@ -88,7 +88,17 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
               }}
             />
           )}
-          <Bar dataKey={element.config.keys.y} radius={[20, 20, 0, 0]} />
+          <Bar dataKey={element.config.keys.y} radius={[20, 20, 0, 0]}>
+            {element.config.showLabel && (
+              <LabelList
+                dataKey={element.config.keys.y}
+                position={element.config.labelPosition}
+                fill={element.config.labelFontColor}
+                fontSize={element.config.labelFontSize}
+                fontFamily={element.config.fontFamily}
+              />
+            )}
+          </Bar>
         </BarChart>
       </ChartContainer>
     </ElementChartWrapper>

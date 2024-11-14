@@ -1,4 +1,4 @@
-import { Checkbox, Tab, Tabs } from '@nextui-org/react';
+import { Checkbox, Select, SelectItem, Tab, Tabs } from '@nextui-org/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -149,22 +149,14 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
           </div>
         </Tab>
         <Tab key="style" title="Chart Style" className="text-base">
-          <div className="space-y-4">
-            <div className="flex items-center space-x-4">
-              <p className="text-base opacity-75 whitespace-nowrap">Label Font Size:</p>
-              <AutoCompleteNumberInput
-                onChange={(v) =>
-                  onChange({
-                    ...element,
-                    config: { ...element.config, fontSize: Number(v) },
-                  })
-                }
-                value={element.config.fontSize}
-                min={1}
-                max={30}
-                ariaLabel="FontSize"
-              />
-            </div>
+          <div className="space-y-4 flex flex-col">
+            <Checkbox
+              isSelected={element.config.showLabel}
+              className={{ base: 'py-0' }}
+              onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+            >
+              Show Label
+            </Checkbox>
             <Checkbox
               isSelected={element.config.useBackgroundImage}
               className={{ base: 'py-0' }}
@@ -179,6 +171,56 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
             >
               Use Background Color
             </Checkbox>
+            {element.config.showLabel && (
+              <div className="border border-gray-700 p-4 rounded-2xl space-y-6">
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">Label Font Size:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, labelFontSize: Number(v) },
+                      })
+                    }
+                    value={element.config.labelFontSize}
+                    min={1}
+                    max={30}
+                    ariaLabel="labelFontSize"
+                  />
+                </div>
+                <div>
+                  <Select
+                    variant="bordered"
+                    size="lg"
+                    name="labelPosition"
+                    label="Label Position"
+                    labelPlacement="outside-left"
+                    classNames={{ value: 'px-2' }}
+                    placeholder="Select one"
+                    value={element.config.labelPosition}
+                    onChange={(e) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, labelPosition: e.target.value },
+                      })
+                    }
+                    disableEmptySelection={true}
+                  >
+                    {[
+                      { key: 'top', name: 'Top' },
+                      { key: 'bottom', name: 'Bottom' },
+                      { key: 'insideTop', name: 'inside Top' },
+                      { key: 'insideBottom', name: 'inside Bottom' },
+                      { key: 'center', name: 'Center' },
+                    ].map((type) => (
+                      <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                        {type.name}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+              </div>
+            )}
             {element.config.useBackgroundImage && (
               <DndFileInput
                 label="Drop images or click to select"

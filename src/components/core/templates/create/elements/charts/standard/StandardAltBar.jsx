@@ -23,8 +23,8 @@ export const StandardAltBarContent = ({ element }) => {
       legend: element.config.showLegend && {
         data: element.config.legend,
         textStyle: {
-          color: element.config.styles.gridAndLegendColor, // Text color
-          fontSize: element.config.styles.legendSize, // Font size
+          color: element.config.styles.gridAndLegendColor,
+          fontSize: element.config.styles.legendSize,
         },
       },
       grid: {

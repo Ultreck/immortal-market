@@ -1,5 +1,4 @@
-import { Checkbox, Input, Tab, Tabs } from '@nextui-org/react';
-import { TbCirclePlus } from 'react-icons/tb';
+import { Checkbox, Select, SelectItem } from '@nextui-org/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { useState } from 'react';
 import { capitalize } from '@/lib/utils.js';
@@ -25,6 +24,53 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
         >
           Show Label
         </Checkbox>
+        {element.config.showLabel && (
+          <div className="border border-gray-700 p-4 rounded-2xl space-y-6">
+            <div className="flex items-center space-x-4">
+              <p className="text-base opacity-75 whitespace-nowrap">Label Font Size:</p>
+              <AutoCompleteNumberInput
+                onChange={(v) =>
+                  onChange({
+                    ...element,
+                    config: { ...element.config, labelFontSize: Number(v) },
+                  })
+                }
+                value={element.config.labelFontSize}
+                min={1}
+                max={30}
+                ariaLabel="labelFontSize"
+              />
+            </div>
+            <div>
+              <Select
+                variant="bordered"
+                size="lg"
+                name="labelPosition"
+                label="Label Position"
+                labelPlacement="outside-left"
+                classNames={{ value: 'px-2' }}
+                placeholder="Select one"
+                value={element.config.labelPosition}
+                onChange={(e) =>
+                  onChange({
+                    ...element,
+                    config: { ...element.config, labelPosition: e.target.value },
+                  })
+                }
+                disableEmptySelection={true}
+              >
+                {[
+                  { key: 'inside', name: 'Inside' },
+                  { key: 'outside', name: 'Outside' },
+                ].map((type) => (
+                  <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                    {type.name}
+                  </SelectItem>
+                ))}
+              </Select>
+            </div>
+          </div>
+        )}
         <Checkbox
           isSelected={element.config.showLegend}
           classNames={{ base: 'py-0' }}
@@ -85,4 +131,3 @@ StandardPieCommonConfig.propTypes = {
 };
 
 export default StandardPieCommonConfig;
-

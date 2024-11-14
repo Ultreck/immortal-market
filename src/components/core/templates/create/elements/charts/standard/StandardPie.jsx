@@ -3,7 +3,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import { capitalize } from '@/lib/utils.js';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart.jsx';
-import { Pie, PieChart } from 'recharts';
+import { LabelList, Pie, PieChart } from 'recharts';
 import ChartTooltipContent from '@/components/core/templates/create/elements/charts/standard/helpers/ChartTooltipContent.jsx';
 
 const StandardPie = ({ element }) => {
@@ -56,27 +56,72 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
             data={data}
             dataKey={element.config.keys.y}
             nameKey={element.config.keys.x}
-            label={({ payload, ...rest }) => {
-              return (
-                <text
-                  cx={rest.cx}
-                  cy={rest.cy}
-                  x={rest.x}
-                  y={rest.y}
-                  textAnchor={rest.textAnchor}
-                  dominantBaseline={rest.dominantBaseline}
-                  fill={element.style.color}
-                  fontSize={element.style.fontSize}
-                  fontFamily={element.style.fontFamily}
-                  fontWeight={element.style.fontWeight}
-                  fontStyle={element.style.fontStyle}
-                  textDecoration={element.style.textDecoration}
-                >
-                  {payload[element.config.keys.y]}
-                </text>
-              );
-            }}
-          ></Pie>
+            labelLine={false}
+            label={
+              element.config.labelPosition === 'outside'
+                ? ({ payload, ...props }) => (
+                    <text
+                      cx={props.cx}
+                      cy={props.cy}
+                      x={props.x}
+                      y={props.y}
+                      textAnchor={props.textAnchor}
+                      dominantBaseline={props.dominantBaseline}
+                      fill="#000000"
+                      fontSize={element.config.labelFontSize}
+                    >
+                      {payload[element.config.keys.y]}
+                    </text>
+                  )
+                : undefined
+            }
+          >
+            {element.config.showLabel && element.config.labelPosition === 'inside' && (
+              <LabelList
+                dataKey={element.config.keys.y}
+                position={element.config.labelPosition}
+                fill={element.config.labelFontColor}
+                fontSize={element.config.labelFontSize}
+                fontFamily={element.config.fontFamily}
+              />
+            )}
+          </Pie>
+          {/*{element.config.labelPosition === 'inside' && (*/}
+          {/*  <Pie data={data} dataKey={element.config.keys.y} nameKey={element.config.keys.x}>*/}
+          {/*    {element.config.showLabel && (*/}
+          {/*      <LabelList*/}
+          {/*        dataKey={element.config.keys.y}*/}
+          {/*        position={element.config.labelPosition}*/}
+          {/*        fill={element.config.labelFontColor}*/}
+          {/*        fontSize={element.config.labelFontSize}*/}
+          {/*        fontFamily={element.config.fontFamily}*/}
+          {/*      />*/}
+          {/*    )}*/}
+          {/*  </Pie>*/}
+          {/*)}*/}
+          {/*{element.config.labelPosition === 'outside' && (*/}
+          {/*  <Pie*/}
+          {/*    data={data}*/}
+          {/*    dataKey={element.config.keys.y}*/}
+          {/*    labelLine={false}*/}
+          {/*    label={({ payload, ...props }) => {*/}
+          {/*      return (*/}
+          {/*        <text*/}
+          {/*          cx={props.cx}*/}
+          {/*          cy={props.cy}*/}
+          {/*          x={props.x}*/}
+          {/*          y={props.y}*/}
+          {/*          textAnchor={props.textAnchor}*/}
+          {/*          dominantBaseline={props.dominantBaseline}*/}
+          {/*          fill="hsla(var(--foreground))"*/}
+          {/*        >*/}
+          {/*          {payload.visitors}*/}
+          {/*        </text>*/}
+          {/*      );*/}
+          {/*    }}*/}
+          {/*    nameKey={element.config.keys.x}*/}
+          {/*  />*/}
+          {/*)}*/}
         </PieChart>
       </ChartContainer>
     </ElementChartWrapper>

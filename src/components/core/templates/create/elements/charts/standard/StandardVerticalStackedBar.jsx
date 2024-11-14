@@ -81,6 +81,7 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
                 stackId="a"
                 fill={element.config.colors[index % element.config.colors.length]}
                 radius={[index === 0 ? 0 : 4, index === 0 ? 4 : 0, index === 1 ? 0 : 4, index === 1 ? 4 : 0]}
+                label
               />
             );
           })}

@@ -67,6 +67,10 @@ export const standard = [
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'top',
+        showLabel: false,
       },
       tooltip: {
         enabled: false,
@@ -116,6 +120,10 @@ export const standard = [
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'top',
+        showLabel: false,
       },
       tooltip: {
         enabled: false,
@@ -164,6 +172,10 @@ export const standard = [
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'center',
+        showLabel: false,
       },
       tooltip: {
         enabled: false,
@@ -212,6 +224,10 @@ export const standard = [
         showYGridline: false,
         bars: 5,
         fontSize: 12,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'center',
+        showLabel: false,
       },
       tooltip: {
         enabled: false,
@@ -259,6 +275,10 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         fontSize: 12,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'center',
+        showLabel: false,
         bars: 5,
         tools: {
           colors: {
@@ -313,6 +333,10 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         fontSize: 12,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'top',
+        showLabel: false,
         bars: 5,
         tools: {
           colors: {
@@ -364,6 +388,10 @@ export const standard = [
         showXGridline: false,
         showYGridline: false,
         fontSize: 12,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'top',
+        showLabel: false,
         bars: 5,
         tools: {
           colors: {
@@ -467,6 +495,10 @@ export const standard = [
         gradientColor: '#2673D9',
         showGridline: false,
         bars: 5,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'center',
+        showLabel: false,
         noOfBarsPerGroup: 2,
         tools: {
           colors: {
@@ -570,6 +602,10 @@ export const standard = [
         showGridline: false,
         bars: 5,
         noOfBarsPerGroup: 2,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'center',
+        showLabel: false,
         tools: {
           colors: {
             gradient: false,
@@ -621,6 +657,9 @@ export const standard = [
         showLegend: false,
         showToolTip: true,
         legendPosition: 'top',
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'inside',
       },
     },
     preview: (
@@ -661,6 +700,9 @@ export const standard = [
         showLegend: true,
         showLabel: true,
         showToolTip: true,
+        labelFontSize: 12,
+        labelFontColor: '#000000',
+        labelPosition: 'inside',
       },
     },
     preview: (

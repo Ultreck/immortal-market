@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, LabelList, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
@@ -76,7 +76,17 @@ export const StandardVerticalBarNoSepContent = ({ element }) => {
               }}
             />
           )}
-          <Bar dataKey={element.config.keys.y} radius={8} />
+          <Bar dataKey={element.config.keys.y} radius={8}>
+            {element.config.showLabel && (
+              <LabelList
+                dataKey={element.config.keys.y}
+                position={element.config.labelPosition}
+                fill={element.config.labelFontColor}
+                fontSize={element.config.labelFontSize}
+                fontFamily={element.config.fontFamily}
+              />
+            )}
+          </Bar>
         </BarChart>
       </ChartContainer>
     </div>

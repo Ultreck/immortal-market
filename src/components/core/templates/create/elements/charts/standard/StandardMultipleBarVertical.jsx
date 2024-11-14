@@ -1,5 +1,5 @@
 import { ElementPropTypes } from '@/lib/prop-types';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartLegend, ChartLegendContent } from '@/components/ui/chart';
 import PropTypes from 'prop-types';
 
@@ -59,7 +59,17 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
               dataKey={key}
               fill={element.config.colors[index % element.config.colors.length]}
               radius={[index === 0 ? 0 : 4, index === 0 ? 4 : 0, index === 1 ? 0 : 4, index === 1 ? 4 : 0]}
-            />
+            >
+              {element.config.showLabel && (
+                <LabelList
+                  dataKey={key}
+                  position={element.config.labelPosition}
+                  fill={element.config.labelFontColor}
+                  fontSize={element.config.labelFontSize}
+                  fontFamily={element.config.fontFamily}
+                />
+              )}
+            </Bar>
           ))}
         </BarChart>
       </ChartContainer>
