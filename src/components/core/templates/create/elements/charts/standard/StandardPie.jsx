@@ -59,14 +59,14 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
             labelLine={false}
             label={
               element.config.labelPosition === 'outside'
-                ? ({ payload, ...props }) => (
+                ? ({ payload, ...args }) => (
                     <text
-                      cx={props.cx}
-                      cy={props.cy}
-                      x={props.x}
-                      y={props.y}
-                      textAnchor={props.textAnchor}
-                      dominantBaseline={props.dominantBaseline}
+                      cx={args.cx}
+                      cy={args.cy}
+                      x={args.x}
+                      y={args.y}
+                      textAnchor={args.textAnchor}
+                      dominantBaseline={args.dominantBaseline}
                       fill="#000000"
                       fontSize={element.config.labelFontSize}
                     >
@@ -86,42 +86,6 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
               />
             )}
           </Pie>
-          {/*{element.config.labelPosition === 'inside' && (*/}
-          {/*  <Pie data={data} dataKey={element.config.keys.y} nameKey={element.config.keys.x}>*/}
-          {/*    {element.config.showLabel && (*/}
-          {/*      <LabelList*/}
-          {/*        dataKey={element.config.keys.y}*/}
-          {/*        position={element.config.labelPosition}*/}
-          {/*        fill={element.config.labelFontColor}*/}
-          {/*        fontSize={element.config.labelFontSize}*/}
-          {/*        fontFamily={element.config.fontFamily}*/}
-          {/*      />*/}
-          {/*    )}*/}
-          {/*  </Pie>*/}
-          {/*)}*/}
-          {/*{element.config.labelPosition === 'outside' && (*/}
-          {/*  <Pie*/}
-          {/*    data={data}*/}
-          {/*    dataKey={element.config.keys.y}*/}
-          {/*    labelLine={false}*/}
-          {/*    label={({ payload, ...props }) => {*/}
-          {/*      return (*/}
-          {/*        <text*/}
-          {/*          cx={props.cx}*/}
-          {/*          cy={props.cy}*/}
-          {/*          x={props.x}*/}
-          {/*          y={props.y}*/}
-          {/*          textAnchor={props.textAnchor}*/}
-          {/*          dominantBaseline={props.dominantBaseline}*/}
-          {/*          fill="hsla(var(--foreground))"*/}
-          {/*        >*/}
-          {/*          {payload.visitors}*/}
-          {/*        </text>*/}
-          {/*      );*/}
-          {/*    }}*/}
-          {/*    nameKey={element.config.keys.x}*/}
-          {/*  />*/}
-          {/*)}*/}
         </PieChart>
       </ChartContainer>
     </ElementChartWrapper>
