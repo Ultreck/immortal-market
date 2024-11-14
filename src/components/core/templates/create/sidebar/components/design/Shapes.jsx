@@ -22,6 +22,9 @@ const items = [
         x2: 200,
         y2: 200,
         strokeWidth: 1,
+        strokeLinecap: 'square',
+        markerStart: '',
+        markerEnd: '',
       },
     },
     preview: (
