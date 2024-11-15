@@ -9,7 +9,6 @@ export const Line = ({ element, selected, onClick, onChange }) => {
   const y1 = useMotionValue(element.config.y1);
   const x2 = useMotionValue(element.config.x2);
   const y2 = useMotionValue(element.config.y2);
-
   const translateX = useMotionValue(element.x);
   const translateY = useMotionValue(element.y);
 
@@ -45,41 +44,95 @@ export const Line = ({ element, selected, onClick, onChange }) => {
 
   const markers = {
     none: '',
-    arrow: {
-      start: 'url(#arrow-start)',
-      end: 'url(#arrow-end)',
-    },
-    circle: {
-      start: 'url(#circle-start)',
-      end: 'url(#circle-end)',
-    },
-    square: {
-      start: 'url(#square-start)',
-      end: 'url(#square-end)',
-    },
+    arrow: { start: 'url(#arrow-start)', end: 'url(#arrow-end)' },
+    'outline-circle': { start: 'url(#outline-circle-start)', end: 'url(#outline-circle-end)' },
+    'outline-square': { start: 'url(#outline-square-start)', end: 'url(#outline-square-end)' },
+    'outline-diamond': { start: 'url(#outline-diamond-start)', end: 'url(#outline-diamond-end)' },
+    bar: { start: 'url(#bar-start)', end: 'url(#bar-end)' },
+    triangle: { start: 'url(#triangle-start)', end: 'url(#triangle-end)' },
+    circle: { start: 'url(#circle-start)', end: 'url(#circle-end)' },
+    square: { start: 'url(#square-start)', end: 'url(#square-end)' },
+    diamond: { start: 'url(#diamond-start)', end: 'url(#diamond-end)' },
   };
 
   return (
     <>
       <svg className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <defs>
-          <marker id="arrow-start" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-            <path d="M10,0 L0,5 L10,10 Z" fill={element.style.color} />
+          {/* Arrow markers */}
+          <marker id="arrow-start" markerWidth="15" markerHeight="15" refX="3" refY="7.5" orient="auto">
+            <path
+              d="M12,2 L3,7.5 L12,13"
+              fill="none"
+              stroke={element.style.color}
+              strokeWidth="1"
+              strokeLinecap={element.config.strokeLinecap}
+            />
           </marker>
-          <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-            <path d="M0,0 L10,5 L0,10 Z" fill={element.style.color} />
+          <marker id="arrow-end" markerWidth="15" markerHeight="15" refX="12" refY="7.5" orient="auto">
+            <path
+              d="M3,2 L12,7.5 L3,13"
+              fill="none"
+              stroke={element.style.color}
+              strokeWidth="1"
+              strokeLinecap={element.config.strokeLinecap}
+            />
           </marker>
+          {/* Outline Circle markers */}
+          <marker id="outline-circle-start" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <circle cx="5" cy="5" r="3" fill="white" stroke={element.style.color} strokeWidth="1" />
+          </marker>
+          <marker id="outline-circle-end" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <circle cx="5" cy="5" r="3" fill="white" stroke={element.style.color} strokeWidth="1" />
+          </marker>
+          {/* Outline Square markers */}
+          <marker id="outline-square-start" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <rect x="2" y="2" width="6" height="6" fill="white" stroke={element.style.color} strokeWidth="1" />
+          </marker>
+          <marker id="outline-square-end" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <rect x="2" y="2" width="6" height="6" fill="white" stroke={element.style.color} strokeWidth="1" />
+          </marker>
+          {/* Outline Diamond markers */}
+          <marker id="outline-diamond-start" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+            <path d="M6,1 L11,6 L6,11 L1,6 Z" fill="white" stroke={element.style.color} strokeWidth="1" />
+          </marker>
+          <marker id="outline-diamond-end" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+            <path d="M6,1 L11,6 L6,11 L1,6 Z" fill="white" stroke={element.style.color} strokeWidth="1" />
+          </marker>
+          {/* Bar markers */}
+          <marker id="bar-start" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <rect x="4" y="0" width="2" height="10" fill={element.style.color} />
+          </marker>
+          <marker id="bar-end" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <rect x="4" y="0" width="2" height="10" fill={element.style.color} />
+          </marker>
+          {/* Triangle markers */}
+          <marker id="triangle-start" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <path d="M10,10 L0,5 L10,0 Z" fill={element.style.color} />
+          </marker>
+          <marker id="triangle-end" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <path d="M0,10 L10,5 L0,0 Z" fill={element.style.color} />
+          </marker>
+          {/* Filled Circle markers */}
           <marker id="circle-start" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
             <circle cx="5" cy="5" r="3" fill={element.style.color} />
           </marker>
           <marker id="circle-end" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
             <circle cx="5" cy="5" r="3" fill={element.style.color} />
           </marker>
+          {/* Filled Square markers */}
           <marker id="square-start" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
             <rect x="2" y="2" width="6" height="6" fill={element.style.color} />
           </marker>
           <marker id="square-end" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
             <rect x="2" y="2" width="6" height="6" fill={element.style.color} />
+          </marker>
+          {/* Filled Diamond markers */}
+          <marker id="diamond-start" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <path d="M5,0 L10,5 L5,10 L0,5 Z" fill={element.style.color} />
+          </marker>
+          <marker id="diamond-end" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <path d="M5,0 L10,5 L5,10 L0,5 Z" fill={element.style.color} />
           </marker>
         </defs>
       </svg>
