@@ -80,6 +80,164 @@ const StrokeLinecap = ({ elements, onChange }) => {
   );
 };
 
+const markers = [
+  { value: '', icon: <TbBan size="20" /> },
+  {
+    value: 'arrow',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="m16.257 6.697 4.773 4.773a.75.75 0 0 1 0 1.06l-4.773 4.773a.75.75 0 0 1-1.06-1.06l3.492-3.493H3.5a.75.75 0 0 1 0-1.5h15.19l-3.493-3.493a.75.75 0 1 1 1.06-1.06z"
+          clipRule="evenodd"
+        ></path>
+      </svg>
+    ),
+  },
+  {
+    value: 'outline-circle',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
+          clipRule="evenodd"
+        ></path>
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M14.5 12a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0zM17 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"
+          clipRule="evenodd"
+        ></path>
+      </svg>
+    ),
+  },
+  {
+    value: 'outline-square',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
+          clipRule="evenodd"
+        ></path>
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M14.5 9.5v5h5v-5h-5zm-1-1.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5h-7z"
+          clipRule="evenodd"
+        ></path>
+      </svg>
+    ),
+  },
+  {
+    value: 'outline-diamond',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M2.75 12a.75.75 0 0 1 .75-.75h8a.75.75 0 0 1 0 1.5h-8a.75.75 0 0 1-.75-.75z"
+          clipRule="evenodd"
+        ></path>
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M16 8.931 12.931 12 16 15.069 19.069 12 16 8.931zm.324-1.797a.459.459 0 0 0-.648 0l-4.542 4.542a.458.458 0 0 0 0 .648l4.542 4.542c.179.179.47.179.648 0l4.542-4.542a.458.458 0 0 0 0-.648l-4.542-4.542z"
+          clipRule="evenodd"
+        ></path>
+      </svg>
+    ),
+  },
+  {
+    value: 'bar',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M2.75 12a.75.75 0 0 1 .75-.75h16a.75.75 0 0 1 0 1.5h-16a.75.75 0 0 1-.75-.75z"
+          clipRule="evenodd"
+        ></path>
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M20.25 8a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0v-6.5a.75.75 0 0 1 .75-.75z"
+          clipRule="evenodd"
+        ></path>
+      </svg>
+    ),
+  },
+  {
+    value: 'triangle',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
+          clipRule="evenodd"
+        ></path>
+        <path
+          fill="currentColor"
+          d="M21.376 11.584a.5.5 0 0 1 0 .832l-7.599 5.066a.5.5 0 0 1-.777-.416V6.934a.5.5 0 0 1 .777-.416l7.599 5.066z"
+        ></path>
+      </svg>
+    ),
+  },
+  {
+    value: 'circle',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
+          clipRule="evenodd"
+        ></path>
+        <path fill="currentColor" d="M13 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"></path>
+      </svg>
+    ),
+  },
+  {
+    value: 'square',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
+          clipRule="evenodd"
+        ></path>
+        <path
+          fill="currentColor"
+          d="M13 8.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-7z"
+        ></path>
+      </svg>
+    ),
+  },
+  {
+    value: 'diamond',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          fillRule="evenodd"
+          d="M3.75 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H4.5a.75.75 0 0 1-.75-.75z"
+          clipRule="evenodd"
+        ></path>
+        <path
+          fill="currentColor"
+          d="M15.676 7.134a.458.458 0 0 1 .648 0l4.542 4.542a.458.458 0 0 1 0 .648l-4.542 4.542a.458.458 0 0 1-.648 0l-4.542-4.542a.459.459 0 0 1 0-.648l4.542-4.542z"
+        ></path>
+      </svg>
+    ),
+  },
+];
+
 const StrokeMarkers = ({ elements, onChange }) => {
   const [active, setActive] = useState('');
   const markerStart = useResolveValue(elements.map((e) => e.config.markerStart));
@@ -88,215 +246,6 @@ const StrokeMarkers = ({ elements, onChange }) => {
   const handelChange = (field, value) => {
     onChange(elements.map((e) => ({ ...e, config: { ...e.config, [field]: value } })));
   };
-
-  const markers = [
-    { value: '', icon: <TbBan size="20" /> },
-    {
-      value: 'arrow',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="m16.257 6.697 4.773 4.773a.75.75 0 0 1 0 1.06l-4.773 4.773a.75.75 0 0 1-1.06-1.06l3.492-3.493H3.5a.75.75 0 0 1 0-1.5h15.19l-3.493-3.493a.75.75 0 1 1 1.06-1.06z"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-      ),
-    },
-    {
-      value: 'outline-circle',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
-            clipRule="evenodd"
-          ></path>
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M14.5 12a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0zM17 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-      ),
-    },
-    {
-      value: 'outline-square',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
-            clipRule="evenodd"
-          ></path>
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M14.5 9.5v5h5v-5h-5zm-1-1.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5h-7z"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-      ),
-    },
-    {
-      value: 'outline-diamond',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M2.75 12a.75.75 0 0 1 .75-.75h8a.75.75 0 0 1 0 1.5h-8a.75.75 0 0 1-.75-.75z"
-            clipRule="evenodd"
-          ></path>
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M16 8.931 12.931 12 16 15.069 19.069 12 16 8.931zm.324-1.797a.459.459 0 0 0-.648 0l-4.542 4.542a.458.458 0 0 0 0 .648l4.542 4.542c.179.179.47.179.648 0l4.542-4.542a.458.458 0 0 0 0-.648l-4.542-4.542z"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-      ),
-    },
-    {
-      value: 'bar',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M2.75 12a.75.75 0 0 1 .75-.75h16a.75.75 0 0 1 0 1.5h-16a.75.75 0 0 1-.75-.75z"
-            clipRule="evenodd"
-          ></path>
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M20.25 8a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0v-6.5a.75.75 0 0 1 .75-.75z"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-      ),
-    },
-    {
-      value: 'triangle',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
-            clipRule="evenodd"
-          ></path>
-          <path
-            fill="currentColor"
-            d="M21.376 11.584a.5.5 0 0 1 0 .832l-7.599 5.066a.5.5 0 0 1-.777-.416V6.934a.5.5 0 0 1 .777-.416l7.599 5.066z"
-          ></path>
-        </svg>
-      ),
-    },
-    {
-      value: 'circle',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
-            clipRule="evenodd"
-          ></path>
-          <path fill="currentColor" d="M13 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"></path>
-        </svg>
-      ),
-    },
-    {
-      value: 'square',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M2.75 12a.75.75 0 0 1 .75-.75H13a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75z"
-            clipRule="evenodd"
-          ></path>
-          <path
-            fill="currentColor"
-            d="M13 8.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-7z"
-          ></path>
-        </svg>
-      ),
-    },
-    {
-      value: 'diamond',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="M3.75 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H4.5a.75.75 0 0 1-.75-.75z"
-            clipRule="evenodd"
-          ></path>
-          <path
-            fill="currentColor"
-            d="M15.676 7.134a.458.458 0 0 1 .648 0l4.542 4.542a.458.458 0 0 1 0 .648l-4.542 4.542a.458.458 0 0 1-.648 0l-4.542-4.542a.459.459 0 0 1 0-.648l4.542-4.542z"
-          ></path>
-        </svg>
-      ),
-    },
-  ];
-  // markerStart: [
-  //   { value: '', icon: <TbBan size="20" /> },
-  //   {
-  //     value: 'arrow',
-  //     icon: (
-  //       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  //         <path
-  //           fill="currentColor"
-  //           fillRule="evenodd"
-  //           d="M9.75 12a.75.75 0 0 1 .75-.75h10a.75.75 0 0 1 0 1.5h-10a.75.75 0 0 1-.75-.75z"
-  //           clipRule="evenodd"
-  //         ></path>
-  //         <path
-  //           fill="currentColor"
-  //           d="M2.624 11.584a.5.5 0 0 0 0 .832l7.599 5.066a.5.5 0 0 0 .777-.416V6.934a.5.5 0 0 0-.777-.416l-7.599 5.066z"
-  //         ></path>
-  //       </svg>
-  //     ),
-  //   },
-  //   {
-  //     value: 'circle',
-  //     icon: (
-  //       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  //         <path
-  //           fill="currentColor"
-  //           fillRule="evenodd"
-  //           d="M9.75 12a.75.75 0 0 1 .75-.75h10a.75.75 0 0 1 0 1.5h-10a.75.75 0 0 1-.75-.75z"
-  //           clipRule="evenodd"
-  //         ></path>
-  //         <path fill="currentColor" d="M3 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"></path>
-  //       </svg>
-  //     ),
-  //   },
-  //   {
-  //     value: 'square',
-  //     icon: (
-  //       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  //         <path
-  //           fill="currentColor"
-  //           fillRule="evenodd"
-  //           d="M9.75 12a.75.75 0 0 1 .75-.75h10a.75.75 0 0 1 0 1.5h-10a.75.75 0 0 1-.75-.75z"
-  //           clipRule="evenodd"
-  //         ></path>
-  //         <path
-  //           fill="currentColor"
-  //           d="M3 8.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-7z"
-  //         ></path>
-  //       </svg>
-  //     ),
-  //   },
-  // ],
 
   return (
     <div className="border border-default-200 rounded-2xl px-4 py-2">
