@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import useCreateProjectStore from '@/store/create-project.js';
-import { Button, Chip, Image, Input, Skeleton } from '@nextui-org/react';
+import { Button, Chip, Input, Skeleton } from '@nextui-org/react';
 import { useGetTemplates } from '@/api/business.js';
-import { getImageLink } from '@/lib/utils.js';
 import { TbPhotoCircle, TbSearch } from 'react-icons/tb';
 import { useState } from 'react';
 import DesignCard from '@/components/core/project/DesignCard.jsx';
 import Title from '@/components/core/shared/Title.jsx';
+import ThumbnailsCarousel from '@/pages/designs/ThumbnailsCarousel.jsx';
 
 const SelectTemplate = ({ onNext }) => {
   const template = useCreateProjectStore((state) => state.data.template);
@@ -107,13 +107,8 @@ const TemplateDetails = ({ onPrev, onNext }) => {
   return (
     <div>
       <Title title="Preview Template" sub="Confirm your selection" className="mb-10" onBack={onPrev} />
-      {template.thumbnail ? (
-        <Image
-          src={getImageLink(template.thumbnail)}
-          alt={template.title}
-          removeWrapper
-          className="w-full object-cover rounded-xl cursor-pointer border border-default-200"
-        />
+      {template.thumbnails.length ? (
+        <ThumbnailsCarousel thumbnails={template.thumbnails} />
       ) : (
         <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
           <TbPhotoCircle size="32" className="opacity-50" />

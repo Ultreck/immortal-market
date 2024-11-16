@@ -1,15 +1,13 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Image } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import { TbPhotoCircle, TbX } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import { useTemplate } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import { getImageLink } from '@/lib/utils.js';
+import ThumbnailsCarousel from '@/pages/designs/ThumbnailsCarousel.jsx';
 
 const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
   const toast = useToast();
@@ -56,20 +54,7 @@ const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
             </div>
             <div className="w-full overflow-hidden">
               {template.thumbnails.length ? (
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  navigation
-                  pagination={{ clickable: true }}
-                  className="w-full"
-                >
-                  {template.thumbnails.map((thumbnail, i) => (
-                    <SwiperSlide key={i} className="w-full">
-                      <div className="flex items-center justify-center p-10 bg-black/5 dark:bg-white/5 rounded-2xl aspect-square">
-                        <Image src={getImageLink(thumbnail)} removeWrapper className="object-contain rounded-lg" />
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                <ThumbnailsCarousel thumbnails={template.thumbnails} />
               ) : (
                 <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
                   <TbPhotoCircle size="32" className="opacity-50" />
