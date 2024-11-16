@@ -28,7 +28,7 @@ const Carousel = ({ element, active, onChange }) => {
             }
           : false
       }
-      className={cn('h-full', { 'pointer-events-none': !active })}
+      className={cn('h-full', { 'pointer-events-none': !active, 'overflow-visible': active })}
       allowTouchMove={false}
     >
       {slides.map((_, i) => (

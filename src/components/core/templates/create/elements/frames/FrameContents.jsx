@@ -48,7 +48,7 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
     >
       {active && overlay}
       {isOver && _active.data.current.type === 'image' && (
-        <div className="absolute inset-0 bg-white text-black flex items-center justify-center z-[1] border-3 border-gray-400 border-dashed rounded-2xl">
+        <div className="absolute inset-0 bg-white text-black flex items-center justify-center z-[1] border-3 border-gray-400 border-dashed">
           <img src={_active.data.current.config.src} className="w-full h-full object-cover" alt="image to drop" />
         </div>
       )}
@@ -78,6 +78,7 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
                     selected={selected}
                     active={_active}
                     onClick={() => {
+                      if (!active) return;
                       setSelectedElements((old) => [...old, el.id]);
                     }}
                     onChange={handleChange}

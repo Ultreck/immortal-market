@@ -210,7 +210,7 @@ const DragResizeRotate = ({
         {draggable && (
           <div
             data-name="drag"
-            className="absolute inset-0 w-full h-full touch-none"
+            className="absolute inset-0 w-full h-full touch-none z-[2]"
             {...bindDrag()}
             onDoubleClick={onDoubleClick}
             onClick={onClick}
