@@ -20,7 +20,6 @@ import AdvanceColumnCard from './AdvanceColumnCard.jsx';
 import AdvancePercentageCardTwo from './AdvancePercentageCardTwo.jsx';
 import AdvanceLinearChart from '@/components/core/templates/create/elements/charts/advanced/AdvanceLinearChart.jsx';
 import AdvanceGlobaBar from '@/components/core/templates/create/elements/charts/advanced/AdvanceGlobaBar.jsx';
-import AdvanceSemiMeter from '@/components/core/templates/create/elements/charts/advanced/AdvanceSemiMeter.jsx';
 
 const AdvanceCharts = ({ element, active, onChange }) => {
   const components = {
@@ -44,7 +43,6 @@ const AdvanceCharts = ({ element, active, onChange }) => {
     'percentage-card-2': AdvancePercentageCardTwo,
     'linear-advanced-bar': AdvanceLinearChart,
     'bar-global': AdvanceGlobaBar,
-    'semi-meter': AdvanceSemiMeter,
   };
 
   if (components[element.config.name]) {

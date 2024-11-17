@@ -280,7 +280,6 @@ export const standard = [
         labelFontColor: '#000000',
         labelPosition: 'center',
         showLabel: false,
-        isSeparated: false,
         bars: 5,
         tools: {
           colors: {
@@ -339,7 +338,6 @@ export const standard = [
         labelFontColor: '#000000',
         labelPosition: 'top',
         showLabel: false,
-        isSeparated: false,
         bars: 5,
         tools: {
           colors: {
@@ -706,7 +704,6 @@ export const standard = [
         labelFontSize: 12,
         labelFontColor: '#000000',
         labelPosition: 'inside',
-        innerRadius: 70,
       },
     },
     preview: (

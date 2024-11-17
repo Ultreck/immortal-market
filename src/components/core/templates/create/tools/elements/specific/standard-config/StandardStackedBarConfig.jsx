@@ -104,20 +104,6 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                 Show Y Grid Line
               </Checkbox>
             </div>
-            <div>
-              <Checkbox
-                isSelected={element.config.isSeparated}
-                classNames={{ base: 'py-0' }}
-                onValueChange={(v) =>
-                  onChange({
-                    ...element,
-                    config: { ...element.config, isSeparated: v },
-                  })
-                }
-              >
-                Is Separated
-              </Checkbox>
-            </div>
             {element.type === 'chart-s-line-multiple' && (
               <>
                 <div className="flex items-center space-x-4">

@@ -48,7 +48,6 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           )}
           {element.config.name === 'custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
           {element.config.name === 'linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
-          {element.config.name === 'semi-meter' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
           {element.config.name === 'lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
           {element.config.name === 'nested-circles' && (
             <AdvancedNestedCirclesConfig element={element} onChange={onChange} />

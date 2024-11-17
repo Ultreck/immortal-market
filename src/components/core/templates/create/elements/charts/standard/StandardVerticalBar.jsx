@@ -1,9 +1,9 @@
-import { Bar, BarChart, CartesianGrid, Cell, LabelList, Legend, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, LabelList, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const StandardVerticalBar = ({ element }) => {
   return <StandardVerticalBarContent element={element} />;
@@ -16,7 +16,6 @@ export const StandardVerticalBarContent = ({ element }) => {
     const color = element.config.colors?.[index];
     return { ...item, fill: color };
   });
-  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {}, [element]);
   return (
@@ -111,3 +110,4 @@ StandardVerticalBarContent.propTypes = {
 };
 
 export default StandardVerticalBar;
+

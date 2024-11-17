@@ -16,76 +16,11 @@ const TableConfig = ({ element, onChange }) => {
     },
   });
 
-  console.log(element.config);
-
   const onSubmit = async (values) => {
     const { json } = values;
     const data = JSON.parse(json);
     onChange({ ...element, config: { ...(element?.config || {}), data } });
     updateTemplate({ openTool: null });
-  };
-
-  const handleCalculation = (type) => {
-    console.log('handleCalculation');
-    const rows = element.config.data;
-
-    // Assuming element.config.selection holds the selected cell position as { rowIndex, colIndex }
-    const { rowIndex, colIndex } = element.config.selection;
-
-    if (rowIndex == null || colIndex == null) {
-      console.warn('No cell selected for calculation');
-      return;
-    }
-
-    // Calculate the result for the selected cell
-    let result = 0;
-    const values = rows
-      .map((row, index) => {
-        // Only include cells up to and including the selected rowIndex
-        if (index <= rowIndex) {
-          const numValue = parseFloat(row.cells[colIndex]?.value);
-          return !isNaN(numValue) ? numValue : null;
-        }
-        return null;
-      })
-      .filter((value) => value !== null);
-
-    // Perform the specified calculation
-    switch (type) {
-      case 'sum':
-        result = values.reduce((acc, curr) => acc + curr, 0);
-        break;
-      case 'average':
-        result = values.length > 0 ? values.reduce((acc, curr) => acc + curr, 0) / values.length : 0;
-        break;
-      case 'total':
-        result = values.length;
-        break;
-    }
-
-    // Update only the selected cell with the result
-    const updatedRows = rows.map((row, index) => {
-      if (index === rowIndex) {
-        return {
-          ...row,
-          cells: row.cells.map((cell, i) => {
-            if (i === colIndex) {
-              return { ...cell, value: result.toFixed(2) };
-            }
-            return cell;
-          }),
-        };
-      }
-      return row;
-    });
-
-    onChange({
-      ...element,
-      config: {
-        ...element.config,
-        data: updatedRows,
-      },
-    });
   };
 
   return (
@@ -146,35 +81,6 @@ const TableConfig = ({ element, onChange }) => {
                   Apply
                 </Button>
               </form>
-            </Tab>
-            <Tab title="Advanced" key="advanced" className="text-base flex justify-between">
-              <Button
-                variant="bordered"
-                radius="full"
-                className="text-base px-4 mt-6"
-                onClick={() => handleCalculation('total')}
-                // disabled={!element.config.selection}
-              >
-                Total
-              </Button>
-              <Button
-                variant="bordered"
-                radius="full"
-                className="text-base px-4 mt-6"
-                onClick={() => handleCalculation('average')}
-                // disabled={!element.config.selection}
-              >
-                Average
-              </Button>
-              <Button
-                variant="bordered"
-                radius="full"
-                className="text-base px-4 mt-6"
-                onClick={() => handleCalculation('sum')}
-                // disabled={!element.config.selection}
-              >
-                Sum
-              </Button>
             </Tab>
           </Tabs>
         </div>
