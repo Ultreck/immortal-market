@@ -134,6 +134,21 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                 ariaLabel="No of Bars to Show"
               />
             </div>
+            <div className="flex items-center space-x-4">
+              <p className="text-base opacity-75 whitespace-nowrap">Border radius:</p>
+              <AutoCompleteNumberInput
+                onChange={(v) =>
+                  onChange({
+                    ...element.config,
+                    styles: { ...element.config.styles, borderRadius: Number(v) },
+                  })
+                }
+                value={element.config.styles.borderRadius}
+                min={1}
+                max={30}
+                ariaLabel="borderRadius"
+              />
+            </div>
           </div>
         </Tab>
         <Tab key="style" title="Chart Style" className="text-base">

@@ -1,4 +1,4 @@
-import { Checkbox, Input, Tab, Tabs } from '@nextui-org/react';
+import { Checkbox, Tab, Tabs } from '@nextui-org/react';
 import { TbChartLine, TbTimeline } from 'react-icons/tb';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { useEffect, useState } from 'react';
@@ -102,6 +102,20 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                 }
               >
                 Show Y Grid Line
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox
+                isSelected={element.config.isSeparated}
+                classNames={{ base: 'py-0' }}
+                onValueChange={(v) =>
+                  onChange({
+                    ...element,
+                    config: { ...element.config, isSeparated: v },
+                  })
+                }
+              >
+                Is Separated
               </Checkbox>
             </div>
             {element.type === 'chart-s-line-multiple' && (
@@ -218,4 +232,3 @@ StandardStackedBarConfig.propTypes = {
 };
 
 export default StandardStackedBarConfig;
-

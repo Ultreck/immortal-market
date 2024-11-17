@@ -38,7 +38,11 @@ export const StandardStackedBarContent = ({ element }) => {
           paddingRight: element.config.styles.xPadding,
         }}
       >
-        <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
+        <BarChart
+          accessibilityLayer
+          data={element.config.data.slice(0, element.config.bars)}
+          barCategoryGap={element.config.isSeparated ? 5 : 0}
+        >
           <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
           <XAxis
             dataKey={element.config.keys.x}

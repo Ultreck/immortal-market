@@ -1,10 +1,11 @@
-import { Bar, BarChart, CartesianGrid, LabelList, Legend, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Cell, LabelList, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import ChartTooltipContent from '@/components/core/templates/create/elements/charts/standard/helpers/ChartTooltipContent.jsx';
+import { useState } from 'react';
 
 const StandardBar = ({ element }) => {
   return <StandardBarContent element={element} />;
@@ -19,6 +20,7 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
     const color = element.config.colors?.[index];
     return { ...item, fill: color };
   });
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
@@ -59,12 +61,12 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
             hide={!element.config.showXaxis}
             tickLine={false}
             tick={{
-              fill: element.style.color,
-              fontSize: element.style.fontSize,
-              fontFamily: element.style.fontFamily,
-              fontWeight: element.style.fontWeight,
-              fontStyle: element.style.fontStyle,
-              textDecoration: element.style.textDecoration,
+              fill: element.config.styles.color,
+              fontSize: element.config.styles.xGridSize,
+              fontFamily: element.config.styles.fontFamily,
+              fontWeight: element.config.styles.fontWeight,
+              fontStyle: element.config.styles.fontStyle,
+              textDecoration: element.config.styles.textDecoration,
             }}
           />
           <YAxis
@@ -72,12 +74,12 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
             hide={!element.config.showYaxis}
             tickLine={false}
             tick={{
-              fill: element.style.color,
-              fontSize: element.style.fontSize,
-              fontFamily: element.style.fontFamily,
-              fontWeight: element.style.fontWeight,
-              fontStyle: element.style.fontStyle,
-              textDecoration: element.style.textDecoration,
+              fill: element.config.styles.color,
+              fontSize: element.config.styles.yGridSize,
+              fontFamily: element.config.styles.fontFamily,
+              fontWeight: element.config.styles.fontWeight,
+              fontStyle: element.config.styles.fontStyle,
+              textDecoration: element.config.styles.textDecoration,
             }}
           />
           {element.config.showLegend && (
@@ -88,7 +90,22 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
               }}
             />
           )}
-          <Bar dataKey={element.config.keys.y} radius={[20, 20, 0, 0]}>
+          <Bar
+            dataKey={element.config.keys.y}
+            radius={8}
+            onMouseEnter={(data, index) => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            {chartData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={
+                  hoveredIndex === index
+                    ? element.config.colors[index % element.config.colors.length]
+                    : `${element.config.colors[index % element.config.colors.length]}80`
+                }
+              />
+            ))}
             {element.config.showLabel && (
               <LabelList
                 dataKey={element.config.keys.y}

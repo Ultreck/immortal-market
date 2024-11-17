@@ -122,6 +122,8 @@ export const Table = ({ element, onChange, active }) => {
   }, [active]);
 
   const handleRowChange = (i, j, v) => {
+    console.log('handleRowChange');
+    setSelection({ startRow: i, startCol: j, endRow: i, endCol: j });
     onChange({
       ...element,
       config: {
@@ -181,6 +183,8 @@ export const Table = ({ element, onChange, active }) => {
   };
 
   const handleMouseDown = (e, rowIndex, cellIndex) => {
+    console.log({ rowIndex, cellIndex });
+    console.log('handleMouseDown');
     setEditing(null);
     setIsSelecting(true);
     if (e.shiftKey) setSelection((prev) => ({ ...prev, endRow: rowIndex, endCol: cellIndex }));
@@ -188,12 +192,15 @@ export const Table = ({ element, onChange, active }) => {
   };
 
   const handleMouseEnter = (e, rowIndex, cellIndex) => {
+    console.log('handleMouseEnter');
     if (isSelecting && selection) {
       setSelection((prev) => ({ ...prev, endRow: rowIndex, endCol: cellIndex }));
     }
   };
 
   const handleMouseUp = () => {
+    console.log('handleMouseEnter');
+
     setIsSelecting(false);
   };
 
@@ -201,6 +208,8 @@ export const Table = ({ element, onChange, active }) => {
     const { startCol, endCol, startRow, endRow } = selection || {};
     return !!selection && (startCol !== endCol || startRow !== endRow);
   }, [selection]);
+
+  console.log({ selection, isMultipleSelection, isResizing, editing, element });
 
   return (
     <>
@@ -301,15 +310,15 @@ export const Table = ({ element, onChange, active }) => {
                           onMouseDown={(e) => handleResizeStart(e, cellPosition)}
                         />
                       )}
-                      {editing !== `row,${rowIndex},${cellIndex}` && (
-                        <div
-                          onDoubleClick={() => setEditing(`row,${rowIndex},${cellIndex}`)}
-                          onMouseDown={(e) => !isResizing && handleMouseDown(e, rowIndex, cellIndex)}
-                          onMouseEnter={(e) => !isResizing && handleMouseEnter(e, rowIndex, cellIndex)}
-                          onMouseUp={(e) => !isResizing && handleMouseUp(e, rowIndex, cellIndex)}
-                          className={cn('absolute inset-0 bg-transparent h-full')}
-                        />
-                      )}
+                      {/*{editing !== `row,${rowIndex},${cellIndex}` && (*/}
+                      <div
+                        onDoubleClick={() => setEditing(`row,${rowIndex},${cellIndex}`)}
+                        onMouseDown={(e) => handleMouseDown(e, rowIndex, cellIndex)}
+                        onMouseEnter={(e) => handleMouseEnter(e, rowIndex, cellIndex)}
+                        onMouseUp={(e) => handleMouseUp(e, rowIndex, cellIndex)}
+                        className={cn('absolute inset-0 bg-transparent h-full')}
+                      />
+                      {/*// )}*/}
                       <AutoResizeTextArea
                         value={cell.value}
                         onChange={(v) => handleRowChange(rowIndex, cellIndex, v)}
