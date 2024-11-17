@@ -34,7 +34,7 @@ const SaveButton = () => {
       const blobs = await Promise.all(blobPromises);
       const thumbnails = blobs.map((blob, index) => new File([blob], `${pages[index].id}.png`, { type: 'image/png' }));
       setIsThumbnailLoading(false);
-      const fd = objectToFormData({ pages });
+      const fd = objectToFormData({ data: { pages } });
       thumbnails.forEach((file) => fd.append('thumbnails', file));
       await update(fd);
       await qc.invalidateQueries({ queryKey: ['business', business, 'designs'] });
