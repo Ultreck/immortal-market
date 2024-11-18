@@ -10,7 +10,7 @@ const ThumbnailsCarousel = ({ thumbnails }) => {
       {thumbnails.map((thumbnail, i) => (
         <SwiperSlide key={i} className="w-full">
           <div className="flex items-center justify-center p-10 bg-black/5 dark:bg-white/5 rounded-2xl aspect-square">
-            <Image src={getImageLink(thumbnail)} removeWrapper className="object-contain rounded-lg" />
+            <Image src={getImageLink(thumbnail)} removeWrapper className="object-contain rounded-lg h-full" />
           </div>
         </SwiperSlide>
       ))}
