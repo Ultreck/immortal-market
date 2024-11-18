@@ -1,24 +1,8 @@
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { Select, SelectItem } from '@nextui-org/react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 const AdvancedStackedCardConfig = ({ element, onChange }) => {
-  const [tab, setTab] = useState('data');
-  const { handleSubmit, control } = useForm({
-    defaultValues: {
-      json: JSON.stringify(element.config.data, null, 2),
-    },
-  });
-
-  const onSubmit = async (values) => {
-    const { json } = values;
-    const data = JSON.parse(json);
-    onChange({ ...element, config: { ...element.config, data } });
-  };
-
-  console.log(element.config);
   return (
     <div className="space-y-6">
       <div className="flex items-center space-x-4">
