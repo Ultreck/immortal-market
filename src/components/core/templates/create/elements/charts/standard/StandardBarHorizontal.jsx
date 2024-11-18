@@ -46,7 +46,7 @@ export const StandardBarHorizontalContent = ({ element }) => {
             fontSize={element.config.fontSize}
           />
           <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-          <Bar dataKey={element.config.keys.y} radius={8} />
+          <Bar dataKey={element.config.keys.y} radius={element.config.styles.borderRadius} />
         </BarChart>
       </ChartContainer>
     </div>

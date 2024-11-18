@@ -92,7 +92,7 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
           )}
           <Bar
             dataKey={element.config.keys.y}
-            radius={8}
+            radius={element.config.styles.borderRadius}
             onMouseEnter={(data, index) => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >

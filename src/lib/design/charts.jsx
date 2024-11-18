@@ -71,6 +71,7 @@ export const standard = [
         labelFontColor: '#000000',
         labelPosition: 'top',
         showLabel: false,
+        borderRadius: 8,
       },
       tooltip: {
         enabled: false,

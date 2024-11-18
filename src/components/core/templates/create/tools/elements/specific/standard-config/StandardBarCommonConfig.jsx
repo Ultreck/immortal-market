@@ -139,8 +139,8 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
               <AutoCompleteNumberInput
                 onChange={(v) =>
                   onChange({
-                    ...element.config,
-                    styles: { ...element.config.styles, borderRadius: Number(v) },
+                    ...element,
+                    config: { ...element.config, styles: { ...element.config.styles, borderRadius: Number(v) } },
                   })
                 }
                 value={element.config.styles.borderRadius}

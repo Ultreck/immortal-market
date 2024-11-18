@@ -76,7 +76,7 @@ export const StandardVerticalBarContent = ({ element }) => {
           )}
           <Bar
             dataKey={element.config.keys.y}
-            radius={8}
+            radius={element.config.styles.borderRadius}
             onMouseEnter={(data, index) => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >

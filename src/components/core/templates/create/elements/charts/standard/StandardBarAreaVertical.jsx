@@ -54,7 +54,7 @@ export const StandardAreaBarVerticalContent = ({ element }) => {
             }}
           />
           {element.config.showLegend && <Legend />}
-          <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={8} />
+          <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={element.config.styles.borderRadius} />
           <Area type="monotone" dataKey="amt" fill={element.config.colors?.[1]} stroke={element.config.colors?.[1]} />
         </ComposedChart>
       </ChartContainer>

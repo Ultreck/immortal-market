@@ -60,7 +60,7 @@ export const StandardLineBarContent = ({ element }) => {
             }}
           />
           {element.config.showLegend && <Legend />}
-          <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={8} />
+          <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={element.config.styles.borderRadius} />
           <Line type="monotone" dataKey="uv" stroke={element.config.colors[1]} />
         </ComposedChart>
       </ChartContainer>
