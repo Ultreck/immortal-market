@@ -1,8 +1,7 @@
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
-import { isValidJsonArray } from '@/lib/utils.js';
-import { Button, Tab, Tabs, Textarea } from '@nextui-org/react';
+import { Select, SelectItem } from '@nextui-org/react';
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 const AdvancedStackedCardConfig = ({ element, onChange }) => {
@@ -18,25 +17,56 @@ const AdvancedStackedCardConfig = ({ element, onChange }) => {
     const data = JSON.parse(json);
     onChange({ ...element, config: { ...element.config, data } });
   };
-  return (
 
-        <div className="space-y-6">
-          <div className="flex items-center space-x-4">
-            <p className="text-base opacity-75 whitespace-nowrap">No. of Cards:</p>
-            <AutoCompleteNumberInput
-              onChange={(v) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, bars: Number(v) },
-                })
-              }
-              value={element.config.bars}
-              min={1}
-              max={element.config.data.length}
-              ariaLabel="No of Bars to Show"
-            />
-          </div>
-        </div>
+  console.log(element.config);
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center space-x-4">
+        <p className="text-base opacity-75 whitespace-nowrap">No. of Cards:</p>
+        <AutoCompleteNumberInput
+          onChange={(v) =>
+            onChange({
+              ...element,
+              config: { ...element.config, bars: Number(v) },
+            })
+          }
+          value={element.config.bars}
+          min={1}
+          max={element.config.data.length}
+          ariaLabel="No of Bars to Show"
+        />
+      </div>
+
+      <div className="flex items-center space-x-4">
+        <Select
+          variant="bordered"
+          size="lg"
+          name="alignment"
+          label="Alignment"
+          labelPlacement="outside-left"
+          classNames={{ value: 'px-2' }}
+          placeholder="Select one"
+          value={element.config.alignment}
+          onChange={(e) =>
+            onChange({
+              ...element,
+              config: { ...element.config, alignment: e.target.value },
+            })
+          }
+          disableEmptySelection={true}
+        >
+          {[
+            { key: 'left', name: 'Left' },
+            { key: 'right', name: 'Right' },
+            { key: 'center', name: 'Center' },
+          ].map((type) => (
+            <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+              {type.name}
+            </SelectItem>
+          ))}
+        </Select>
+      </div>
+    </div>
   );
 };
 

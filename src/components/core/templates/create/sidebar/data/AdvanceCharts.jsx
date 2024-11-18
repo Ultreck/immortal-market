@@ -325,6 +325,7 @@ const elements = [
         keys: { name: 'range', data: 'percentage' },
         colors,
         bars: 5,
+        alignment: 'center',
       },
     },
     preview: (
