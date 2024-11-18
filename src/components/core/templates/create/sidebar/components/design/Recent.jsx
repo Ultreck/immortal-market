@@ -94,7 +94,7 @@ const items = [
   })),
 ];
 
-const FavouriteDesigns = () => {
+const Recent = () => {
   return (
     <>
       <div className="grid grid-cols-3 gap-6">
@@ -106,4 +106,4 @@ const FavouriteDesigns = () => {
   );
 };
 
-export default FavouriteDesigns;
+export default Recent;

@@ -1,21 +1,19 @@
 import { createElement, useState } from 'react';
-import { RiArrowLeftSLine, RiImage2Line, RiPieChartLine, RiShapesLine, RiStackLine } from 'react-icons/ri';
+import { RiArrowLeftSLine, RiImage2Line, RiShapesLine, RiStackLine } from 'react-icons/ri';
 import { cn, getImageLink } from '@/lib/utils.js';
-import Basics from '@/components/core/templates/create/sidebar/components/Basics.jsx';
+import Elements from '@/components/core/templates/create/sidebar/components/Elements.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
-import Data from '@/components/core/templates/create/sidebar/data/Data.jsx';
 import { Avatar, Tooltip } from '@nextui-org/react';
 import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
-import { TbChartBar, TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
+import { TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
-import Charts from './data/Charts.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import MyWork from './my-work/MyWork.jsx';
 import PropTypes from 'prop-types';
 
 const Sidebar = ({ className }) => {
-  const [tab, setTab] = useState('basics');
+  const [tab, setTab] = useState('elements');
   const collapsed = !tab;
   const { user } = useAuth();
 
@@ -60,9 +58,7 @@ const Sidebar = ({ className }) => {
               </div>
             </a>
             {[
-              { icon: RiShapesLine, title: 'Basics', key: 'basics' },
-              { icon: TbChartBar, title: 'Charts', key: 'charts' },
-              { icon: RiPieChartLine, title: 'Data', key: 'data' },
+              { icon: RiShapesLine, title: 'Elements', key: 'elements' },
               { icon: TbTemplate, title: 'Templates', key: 'templates' },
               { icon: RiImage2Line, title: 'Images', key: 'images' },
               { icon: RiStackLine, title: 'Layers', key: 'layers' },
@@ -103,13 +99,11 @@ const Sidebar = ({ className }) => {
         </div>
         {!collapsed && (
           <div className="px-6 py-6 overflow-x-hidden dark:bg-gray-800/50">
-            {tab === 'basics' && <Basics />}
+            {tab === 'elements' && <Elements />}
             {tab === 'templates' && <Build />}
-            {tab === 'data' && <Data />}
             {tab === 'graphics' && <Svgs />}
             {tab === 'layers' && <Layers />}
             {tab === 'images' && <Images />}
-            {tab === 'charts' && <Charts />}
             {tab === 'my-work' && <MyWork />}
           </div>
         )}
