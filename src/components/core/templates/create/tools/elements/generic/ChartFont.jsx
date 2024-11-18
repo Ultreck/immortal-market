@@ -35,7 +35,7 @@ const ChartFont = ({ elements, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      onOpen={() => openTool('chart-font')}
+      isOpen={openTool === 'chart-font'}
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'chart-font' : null })}
     >
       <PopoverTrigger>
