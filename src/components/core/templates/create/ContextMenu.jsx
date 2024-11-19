@@ -111,9 +111,9 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
         <>
           {createPortal(
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               className="w-[220px] border-small border-default-200 px-2 py-2 rounded-xl shadow bg-white dark:bg-default-50 fixed top-0 left-0 z-[99]"
               style={{ top: `${position.y}px`, left: `${position.x}px` }}
               onContextMenu={(e) => e.preventDefault()}

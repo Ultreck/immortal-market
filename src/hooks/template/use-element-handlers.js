@@ -9,6 +9,7 @@ export const useElementHandlers = ({ id }) => {
   const selectedElements = useTemplateStore((state) => state.template.selectedElements);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const getElement = useTemplateStore((state) => state.getElement);
+  const activeElement = useTemplateStore((state) => state.template.activeElement);
 
   const handleChange = useCallback(
     (element, solo = false) => {
@@ -90,6 +91,7 @@ export const useElementHandlers = ({ id }) => {
 
   const handleClick = useCallback(
     (id, e) => {
+      if (activeElement === id) return;
       const el = page.elements.find((el) => el.id === id);
       if (e.shiftKey) handleAddToSelection(id);
       else {
@@ -102,7 +104,7 @@ export const useElementHandlers = ({ id }) => {
       }
       updateTemplate({ activeElement: null });
     },
-    [handleAddToSelection, page.elements, selectElements, updateTemplate]
+    [activeElement, handleAddToSelection, page.elements, selectElements, updateTemplate]
   );
 
   const handleDoubleClick = (id) => {

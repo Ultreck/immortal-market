@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { useElementHandlers } from '@/hooks/template/use-element-handlers.js';
 import { useKey } from 'react-use';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
+import DragResizeRotateWrapper from '@/components/core/templates/create/DragResizeRotateWrapper.jsx';
 
 const PageContent = ({ id }) => {
   const { setNodeRef, node } = useDroppable({ id: `canvas-${id}` });
@@ -91,6 +92,7 @@ const PageContent = ({ id }) => {
           );
         })}
       </div>
+      <DragResizeRotateWrapper id={id} />
       {renderSelectionBox()}
       {renderContextMenu()}
     </div>

@@ -28,7 +28,8 @@ const DragResizeRotate = ({
   minWidth = 20,
   minHeight = 10,
   style = {},
-  scale,
+  scale = 1,
+  ...props
 }) => {
   const root = useRef(null);
   const [{ x, y, width, height, rotate }, api] = useSpring(
@@ -204,6 +205,7 @@ const DragResizeRotate = ({
         rotate,
         ...style,
       }}
+      {...props}
     >
       <>
         {children}
