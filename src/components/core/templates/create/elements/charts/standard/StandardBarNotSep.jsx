@@ -1,9 +1,9 @@
-import { Bar, BarChart, CartesianGrid, LabelList, Legend, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Cell, LabelList, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const StandardBarNotSep = ({ element }) => {
   return <StandardBarNotSepContent element={element} />;
@@ -17,6 +17,8 @@ export const StandardBarNotSepContent = ({ element }) => {
 
     return { ...item, fill: color };
   });
+
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {}, [element]);
 
