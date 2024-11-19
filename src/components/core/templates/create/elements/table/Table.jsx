@@ -3,6 +3,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { RiAddLine, RiArrowDownSLine } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
+import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 import MergeOptions from '@/components/core/templates/create/elements/table/MergeOptions.jsx';
 import DeleteOptions from '@/components/core/templates/create/elements/table/DeleteOptions.jsx';
 import FontOptions from '@/components/core/templates/create/elements/table/FontOptions.jsx';
@@ -81,8 +82,7 @@ export const Table = ({ element, onChange, active }) => {
     const newWidths = [...columnWidths];
     const minWidth = 50;
 
-    const newWidth = Math.max(newWidths[resizingColumn] + deltaX, minWidth);
-    newWidths[resizingColumn] = newWidth;
+    newWidths[resizingColumn] = Math.max(newWidths[resizingColumn] + deltaX, minWidth);
     const newTotalWidth = newWidths.reduce((sum, width) => sum + width, 0);
     setColumnWidths(newWidths);
     setStartX(e.clientX);
@@ -121,8 +121,6 @@ export const Table = ({ element, onChange, active }) => {
   }, [active]);
 
   const handleRowChange = (i, j, v) => {
-    console.log('handleRowChange');
-    setSelection({ startRow: i, startCol: j, endRow: i, endCol: j });
     onChange({
       ...element,
       config: {
@@ -182,8 +180,6 @@ export const Table = ({ element, onChange, active }) => {
   };
 
   const handleMouseDown = (e, rowIndex, cellIndex) => {
-    console.log({ rowIndex, cellIndex });
-    console.log('handleMouseDown');
     setEditing(null);
     setIsSelecting(true);
     if (e.shiftKey) setSelection((prev) => ({ ...prev, endRow: rowIndex, endCol: cellIndex }));
@@ -191,15 +187,12 @@ export const Table = ({ element, onChange, active }) => {
   };
 
   const handleMouseEnter = (e, rowIndex, cellIndex) => {
-    console.log('handleMouseEnter');
     if (isSelecting && selection) {
       setSelection((prev) => ({ ...prev, endRow: rowIndex, endCol: cellIndex }));
     }
   };
 
   const handleMouseUp = () => {
-    console.log('handleMouseEnter');
-
     setIsSelecting(false);
   };
 
@@ -207,77 +200,6 @@ export const Table = ({ element, onChange, active }) => {
     const { startCol, endCol, startRow, endRow } = selection || {};
     return !!selection && (startCol !== endCol || startRow !== endRow);
   }, [selection]);
-
-  const calculateSum = (rows, selection) => {
-    const { startRow, endRow, startCol, endCol } = selection;
-    const minRow = Math.min(startRow, endRow);
-    const maxRow = Math.max(startRow, endRow);
-    const minCol = Math.min(startCol, endCol);
-    const maxCol = Math.max(startCol, endCol);
-
-    let sum = 0;
-    for (let i = minRow; i <= maxRow; i++) {
-      for (let j = minCol; j <= maxCol; j++) {
-        const value = rows[i].cells[j].value;
-        const numValue = parseFloat(value);
-        if (!isNaN(numValue)) {
-          sum += numValue;
-        }
-      }
-    }
-    return sum.toFixed(2);
-  };
-
-  const calculateAverage = (rows, selection) => {
-    const { startRow, endRow, startCol, endCol } = selection;
-    const minRow = Math.min(startRow, endRow);
-    const maxRow = Math.max(startRow, endRow);
-    const minCol = Math.min(startCol, endCol);
-    const maxCol = Math.max(startCol, endCol);
-
-    let sum = 0;
-    let count = 0;
-    for (let i = minRow; i <= maxRow; i++) {
-      for (let j = minCol; j <= maxCol; j++) {
-        const value = rows[i].cells[j].value;
-        const numValue = parseFloat(value);
-        if (!isNaN(numValue)) {
-          sum += numValue;
-          count++;
-        }
-      }
-    }
-    return count > 0 ? (sum / count).toFixed(2) : '0';
-  };
-
-  const handleSumCalculation = (type) => {
-    if (!selection) return;
-
-    const calculatedValue = type === 'sum' ? calculateSum(rows, selection) : calculateAverage(rows, selection);
-
-    onChange({
-      ...element,
-      config: {
-        ...element.config,
-        data: rows.map((row, rowIndex) => {
-          if (rowIndex === selection.startRow) {
-            return {
-              ...row,
-              cells: row.cells.map((cell, cellIndex) => {
-                if (cellIndex === selection.startCol) {
-                  return { ...cell, value: calculatedValue };
-                }
-                return cell;
-              }),
-            };
-          }
-          return row;
-        }),
-      },
-    });
-  };
-
-  console.log({ selection, isMultipleSelection, isResizing, editing, element });
 
   return (
     <>
@@ -295,59 +217,35 @@ export const Table = ({ element, onChange, active }) => {
           <FontOptions element={element} onChange={onChange} selection={selection} />
           <BackgroundOptions element={element} onChange={onChange} selection={selection} />
           {!isMultipleSelection && (
-            <div>
-              <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
-                <DropdownTrigger>
-                  <Button variant="solid" size="sm" className="text-md" endContent={<RiArrowDownSLine size="20" />}>
-                    Insert
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu
-                  aria-label="Delete actions"
-                  onAction={(key) => {
-                    if (key === 'col-before') handleAddColumn(selection.endCol - 1);
-                    if (key === 'col-after') handleAddColumn(selection.endCol);
-                    if (key === 'row-above') handleAddRow(selection.endRow - 1);
-                    if (key === 'row-below') handleAddRow(selection.endRow);
-                  }}
-                >
-                  <DropdownItem key="col-before" classNames={{ title: 'text-base' }}>
-                    Insert Column Before
-                  </DropdownItem>
-                  <DropdownItem key="col-after" classNames={{ title: 'text-base' }}>
-                    Insert Column After
-                  </DropdownItem>
-                  <DropdownItem key="row-above" classNames={{ title: 'text-base' }}>
-                    Insert Row Above
-                  </DropdownItem>
-                  <DropdownItem key="row-below" classNames={{ title: 'text-base' }}>
-                    Insert Row Below
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-
-              <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
-                <DropdownTrigger>
-                  <Button variant="solid" size="sm" className="text-md" endContent={<RiArrowDownSLine size="20" />}>
-                    Calculate
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu
-                  aria-label="Calculation actions"
-                  onAction={(key) => {
-                    if (key === 'sum') handleSumCalculation('sum');
-                    if (key === 'avg') handleSumCalculation('avg');
-                  }}
-                >
-                  <DropdownItem key="sum" classNames={{ title: 'text-base' }}>
-                    Sum
-                  </DropdownItem>
-                  <DropdownItem key="avg" classNames={{ title: 'text-base' }}>
-                    Average
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </div>
+            <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
+              <DropdownTrigger>
+                <Button variant="solid" size="sm" className="text-md" endContent={<RiArrowDownSLine size="20" />}>
+                  Insert
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                aria-label="Delete actions"
+                onAction={(key) => {
+                  if (key === 'col-before') handleAddColumn(selection.endCol - 1);
+                  if (key === 'col-after') handleAddColumn(selection.endCol);
+                  if (key === 'row-above') handleAddRow(selection.endRow - 1);
+                  if (key === 'row-below') handleAddRow(selection.endRow);
+                }}
+              >
+                <DropdownItem key="col-before" classNames={{ title: 'text-base' }}>
+                  Insert Column Before
+                </DropdownItem>
+                <DropdownItem key="col-after" classNames={{ title: 'text-base' }}>
+                  Insert Column After
+                </DropdownItem>
+                <DropdownItem key="row-above" classNames={{ title: 'text-base' }}>
+                  Insert Row Above
+                </DropdownItem>
+                <DropdownItem key="row-below" classNames={{ title: 'text-base' }}>
+                  Insert Row Below
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           )}
         </div>
       )}
@@ -402,27 +300,21 @@ export const Table = ({ element, onChange, active }) => {
                           onMouseDown={(e) => handleResizeStart(e, cellPosition)}
                         />
                       )}
-                      {/*{editing !== `row,${rowIndex},${cellIndex}` && (*/}
-                      <div
-                        onDoubleClick={() => setEditing(`row,${rowIndex},${cellIndex}`)}
-                        onMouseDown={(e) => handleMouseDown(e, rowIndex, cellIndex)}
-                        onMouseEnter={(e) => handleMouseEnter(e, rowIndex, cellIndex)}
-                        onMouseUp={(e) => handleMouseUp(e, rowIndex, cellIndex)}
-                        className={cn('absolute inset-0 bg-transparent h-full')}
-                      />
-                      <textarea
+                      {editing !== `row,${rowIndex},${cellIndex}` && (
+                        <div
+                          onDoubleClick={() => setEditing(`row,${rowIndex},${cellIndex}`)}
+                          onMouseDown={(e) => !isResizing && handleMouseDown(e, rowIndex, cellIndex)}
+                          onMouseEnter={(e) => !isResizing && handleMouseEnter(e, rowIndex, cellIndex)}
+                          onMouseUp={(e) => !isResizing && handleMouseUp(e, rowIndex, cellIndex)}
+                          className={cn('absolute inset-0 bg-transparent h-full')}
+                        />
+                      )}
+                      <AutoResizeTextArea
                         value={cell.value}
                         onChange={(v) => handleRowChange(rowIndex, cellIndex, v)}
                         className="bg-transparent w-full h-full px-3 py-1 leading-tight border border-transparent hover:border-red-300"
                         style={{ ...(cell.style || {}) }}
                       />
-                      {/*// )}*/}
-                      {/*<AutoResizeTextArea*/}
-                      {/*  value={cell.value}*/}
-                      {/*  onChange={(v) => handleRowChange(rowIndex, cellIndex, v)}*/}
-                      {/*  className="bg-transparent w-full h-full px-3 py-1 leading-tight border border-transparent hover:border-red-300"*/}
-                      {/*  style={{ ...(cell.style || {}) }}*/}
-                      {/*/>*/}
                       {selection &&
                         rowIndex >= Math.min(selection.startRow, selection.endRow) &&
                         rowIndex <= Math.max(selection.startRow, selection.endRow) &&
