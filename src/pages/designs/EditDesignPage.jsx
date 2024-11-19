@@ -67,9 +67,10 @@ const EditDesignPage = () => {
           undoHistory: [],
           redoHistory: [],
           selectedPage: null,
-          activePage: null,
+          activePage: payload.pages[0].id,
           scale: 1,
           isModifyReportOpen: false,
+          mode: 'scroll',
           ...payload,
         });
       }

@@ -20,7 +20,7 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
         'border-primary-500 dark:border-primary-400': active,
       })}
       {...props}
-    >
+    > 
       <div
         onClick={() => selectElements([element.id])}
         className={cn(

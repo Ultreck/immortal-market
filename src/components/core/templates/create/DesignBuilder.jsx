@@ -77,10 +77,11 @@ const DesignBuilder = () => {
         <div className="flex flex-col overflow-hidden relative bg-default-100 dark:bg-zinc-950">
           <Editor />
           <StatusBar />
-          <CommentModal />
-          <ModifyReportModal />
         </div>
       </div>
+
+      <CommentModal />
+      <ModifyReportModal />
     </DndContext>
   );
 };

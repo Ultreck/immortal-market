@@ -225,14 +225,16 @@ const useTemplateStore = createWithEqualityFn(
       get().addUndoHistory();
       set((state) => {
         if (state.template.pages.length === 1) return;
+        const index = state.template.pages.findIndex((page) => page.id === id);
         const _pages = state.template.pages.filter((page) => page.id !== id);
+        const nextActivePage = _pages[index]?.id || _pages[_pages.length - 1].id;
         return {
           template: {
             ...state.template,
             pages: _pages,
             selectedElements: [],
             selectedPage: null,
-            activePage: state.template.activePage === id ? null : state.template.activePage,
+            activePage: state.template.activePage === id ? nextActivePage : state.template.activePage,
           },
         };
       });

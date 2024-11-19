@@ -7,19 +7,23 @@ import PageTitle from './PageTitle';
 import PageContent from '@/components/core/templates/create/PageContent.jsx';
 import PageCommentBadge from '@/components/core/templates/create/comment/PageCommentBadge.jsx';
 
-const Page = ({ id }) => {
+const Page = ({ id, showTitle = true }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const selected = useTemplateStore((state) => state.template.selectedPage === id);
   const isCommentsVisible = useTemplateStore((state) => state.template.isCommentsVisible);
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
-        <PageTitle id={id} />
-        <PageActions id={id} />
-      </div>
+      {showTitle && (
+        <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
+          <PageTitle id={id} />
+          <PageActions id={id} />
+        </div>
+      )}
       <div
-        className={cn('border-2 relative border-transparent p-0.5 w-max radius-5', { 'border-primary-500': selected })}
+        className={cn('border-2 relative border-transparent p-0.5 w-max radius-5', {
+          'border-primary-500': selected,
+        })}
       >
         {isCommentsVisible && <PageCommentBadge id={id} />}
         <InView
@@ -41,6 +45,7 @@ const Page = ({ id }) => {
 
 Page.propTypes = {
   id: PropTypes.string.isRequired,
+  showTitle: PropTypes.bool,
 };
 
 export default Page;
