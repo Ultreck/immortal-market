@@ -235,6 +235,7 @@ export const getChartsDefaultStyle = ({ type, name }) => {
       valueAndLableColor: '#000000',
       xGridSize: 16,
       yGridSize: 16,
+      borderRadius: 8,
     };
   }
   return styles;
@@ -275,3 +276,4 @@ export const getElementDefaultStyle = ({ type, name }) => {
   }
   return styles;
 };
+

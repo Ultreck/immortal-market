@@ -3,6 +3,7 @@ import { CgLoadbarAlt } from 'react-icons/cg';
 import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react-icons/lu';
 import { IconChartFunnel } from '@tabler/icons-react';
 import {
+  TbBrandCoinbase,
   TbChartBar,
   TbChartScatter,
   TbChartTreemap,
@@ -79,6 +80,27 @@ const elements = [
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
         <CgLoadbarAlt className="w-full h-full" />
+      </div>
+    ),
+  },
+  {
+    id: 'chart-a-semi-meter',
+    group: 'general',
+    data: {
+      type: 'chart-a',
+      text: 'Semi Meter Chart',
+      width: 400,
+      height: 200,
+      style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-meter' }),
+      config: {
+        name: 'semi-meter',
+        progress: 80,
+        colors,
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <TbBrandCoinbase className="w-full h-full" />
       </div>
     ),
   },
@@ -821,3 +843,4 @@ const AdvancedCharts = () => {
 };
 
 export default AdvancedCharts;
+

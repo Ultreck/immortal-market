@@ -18,8 +18,6 @@ export const AdvancedStackedCardContent = ({ element }) => {
     right: 'flex-end',
   };
 
-  console.log(element.config);
-
   useEffect(() => {}, [element]);
 
   return (
@@ -91,3 +89,4 @@ AdvancedStackedCardContent.propTypes = {
 };
 
 export default AdvancedStackedCard;
+
