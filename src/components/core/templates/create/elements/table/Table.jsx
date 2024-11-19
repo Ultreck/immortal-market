@@ -9,6 +9,7 @@ import DeleteOptions from '@/components/core/templates/create/elements/table/Del
 import FontOptions from '@/components/core/templates/create/elements/table/FontOptions.jsx';
 import BackgroundOptions from '@/components/core/templates/create/elements/table/BackgroundOptions.jsx';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import { useToast } from '@/hooks/use-toast.jsx';
 
 const getMaxColumns = (data) => {
   let max = 0;
@@ -42,6 +43,7 @@ const getCellPosition = (rows, rowIndex, cellIndex) => {
 
 export const Table = ({ element, onChange, active }) => {
   const table = useRef(null);
+  const toast = useToast();
   const rows = element.config.data;
   const [selection, setSelection] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
@@ -198,7 +200,7 @@ export const Table = ({ element, onChange, active }) => {
 
   const handleCalculation = (operation) => {
     if (!selection || selection.startRow !== selection.endRow || selection.startCol !== selection.endCol) {
-      alert('Please select a single cell to perform the calculation.');
+      toast.error('Please select a single cell to perform the calculation.');
       return;
     }
 
@@ -210,7 +212,7 @@ export const Table = ({ element, onChange, active }) => {
     });
 
     if (columnValues.length === 0) {
-      alert('No values found for calculation.');
+      toast.error('No values found for calculation.');
       return;
     }
 
@@ -228,7 +230,7 @@ export const Table = ({ element, onChange, active }) => {
     const { startCol, endCol, startRow, endRow } = selection || {};
     return !!selection && (startCol !== endCol || startRow !== endRow);
   }, [selection]);
-  
+
   return (
     <>
       {!!selection && (
@@ -496,3 +498,4 @@ TablePresent.propTypes = {
 TablePreview.propTypes = {
   element: PropTypes.object.isRequired,
 };
+
