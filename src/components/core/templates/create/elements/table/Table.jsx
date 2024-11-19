@@ -196,11 +196,39 @@ export const Table = ({ element, onChange, active }) => {
     setIsSelecting(false);
   };
 
+  const handleCalculation = (operation) => {
+    if (!selection || selection.startRow !== selection.endRow || selection.startCol !== selection.endCol) {
+      alert('Please select a single cell to perform the calculation.');
+      return;
+    }
+
+    const { startRow, startCol } = selection;
+
+    const columnValues = rows.slice(0, startRow).map((row) => {
+      const cellValue = row.cells[startCol]?.value || '0';
+      return parseFloat(cellValue) || 0;
+    });
+
+    if (columnValues.length === 0) {
+      alert('No values found for calculation.');
+      return;
+    }
+
+    let result = 0;
+    if (operation === 'sum') {
+      result = columnValues.reduce((acc, val) => acc + val, 0);
+    } else if (operation === 'average') {
+      result = columnValues.reduce((acc, val) => acc + val, 0) / columnValues.length;
+    }
+
+    handleRowChange(startRow, startCol, result.toFixed(2));
+  };
+
   const isMultipleSelection = useMemo(() => {
     const { startCol, endCol, startRow, endRow } = selection || {};
     return !!selection && (startCol !== endCol || startRow !== endRow);
   }, [selection]);
-
+  
   return (
     <>
       {!!selection && (
@@ -217,35 +245,58 @@ export const Table = ({ element, onChange, active }) => {
           <FontOptions element={element} onChange={onChange} selection={selection} />
           <BackgroundOptions element={element} onChange={onChange} selection={selection} />
           {!isMultipleSelection && (
-            <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
-              <DropdownTrigger>
-                <Button variant="solid" size="sm" className="text-md" endContent={<RiArrowDownSLine size="20" />}>
-                  Insert
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                aria-label="Delete actions"
-                onAction={(key) => {
-                  if (key === 'col-before') handleAddColumn(selection.endCol - 1);
-                  if (key === 'col-after') handleAddColumn(selection.endCol);
-                  if (key === 'row-above') handleAddRow(selection.endRow - 1);
-                  if (key === 'row-below') handleAddRow(selection.endRow);
-                }}
-              >
-                <DropdownItem key="col-before" classNames={{ title: 'text-base' }}>
-                  Insert Column Before
-                </DropdownItem>
-                <DropdownItem key="col-after" classNames={{ title: 'text-base' }}>
-                  Insert Column After
-                </DropdownItem>
-                <DropdownItem key="row-above" classNames={{ title: 'text-base' }}>
-                  Insert Row Above
-                </DropdownItem>
-                <DropdownItem key="row-below" classNames={{ title: 'text-base' }}>
-                  Insert Row Below
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+            <>
+              <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
+                <DropdownTrigger>
+                  <Button variant="solid" size="sm" className="text-md" endContent={<RiArrowDownSLine size="20" />}>
+                    Insert
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label="Delete actions"
+                  onAction={(key) => {
+                    if (key === 'col-before') handleAddColumn(selection.endCol - 1);
+                    if (key === 'col-after') handleAddColumn(selection.endCol);
+                    if (key === 'row-above') handleAddRow(selection.endRow - 1);
+                    if (key === 'row-below') handleAddRow(selection.endRow);
+                  }}
+                >
+                  <DropdownItem key="col-before" classNames={{ title: 'text-base' }}>
+                    Insert Column Before
+                  </DropdownItem>
+                  <DropdownItem key="col-after" classNames={{ title: 'text-base' }}>
+                    Insert Column After
+                  </DropdownItem>
+                  <DropdownItem key="row-above" classNames={{ title: 'text-base' }}>
+                    Insert Row Above
+                  </DropdownItem>
+                  <DropdownItem key="row-below" classNames={{ title: 'text-base' }}>
+                    Insert Row Below
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+              <Dropdown classNames={{ content: 'shadow border border-default-200' }}>
+                <DropdownTrigger>
+                  <Button variant="solid" size="sm" className="text-md" endContent={<RiArrowDownSLine size="20" />}>
+                    Calculate
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label="Calculate actions"
+                  onAction={(key) => {
+                    if (key === 'sum') handleCalculation('sum');
+                    if (key === 'average') handleCalculation('average');
+                  }}
+                >
+                  <DropdownItem key="sum" classNames={{ title: 'text-base' }}>
+                    Sum
+                  </DropdownItem>
+                  <DropdownItem key="average" classNames={{ title: 'text-base' }}>
+                    Average
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </>
           )}
         </div>
       )}
