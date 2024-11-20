@@ -167,6 +167,114 @@ const SvgShapes = () => {
         <clipPath id="chat-bubble-clip" clipPathUnits="objectBoundingBox">
           <path d="M0.5000 0.9376C0.7761 0.9376 1.0000 0.7277 1.0000 0.4688C1.0000 0.2099 0.7761 0.0000 0.5000 0.0000C0.2239 0.0000 0.0000 0.2099 0.0000 0.4688C0.0000 0.5867 0.0464 0.6945 0.1231 0.7769C0.1171 0.8449 0.0971 0.9195 0.0749 0.9755C0.0700 0.9880 0.0796 1.0019 0.0920 0.9998C0.2330 0.9750 0.3168 0.9370 0.3533 0.9171C0.4011 0.9309 0.4505 0.9378 0.5000 0.9376Z" />
         </clipPath>
+        <clipPath id="letter-a-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.1,1 L0.4,0.1 H0.6 L0.9,1 H0.75 L0.67,0.8 H0.33 L0.25,1 H0.1 Z M0.38,0.65 H0.62 L0.5,0.3 L0.38,0.65 Z" />
+        </clipPath>
+        <clipPath id="letter-b-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.6 C0.8,0.1 0.9,0.2 0.9,0.35 C0.9,0.45 0.85,0.5 0.75,0.52 C0.85,0.55 0.95,0.65 0.95,0.75 C0.95,0.9 0.8,1 0.6,1 H0.2 V0.1 Z M0.35,0.45 H0.6 C0.7,0.45 0.75,0.4 0.75,0.35 C0.75,0.3 0.7,0.25 0.6,0.25 H0.35 V0.45 Z M0.35,0.85 H0.6 C0.7,0.85 0.8,0.8 0.8,0.75 C0.8,0.7 0.7,0.6 0.6,0.6 H0.35 V0.85 Z" />
+        </clipPath>
+        <clipPath id="letter-c-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.8,0.3 C0.75,0.2 0.65,0.15 0.5,0.15 C0.3,0.15 0.2,0.3 0.2,0.5 C0.2,0.7 0.3,0.85 0.5,0.85 C0.65,0.85 0.75,0.8 0.8,0.7 H0.9 C0.85,0.85 0.7,1 0.5,1 C0.25,1 0.05,0.8 0.05,0.5 C0.05,0.2 0.25,0 0.5,0 C0.7,0 0.85,0.15 0.9,0.3 H0.8 Z" />
+        </clipPath>
+        <clipPath id="letter-d-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.5 C0.75,0.1 0.9,0.3 0.9,0.55 C0.9,0.8 0.75,1 0.5,1 H0.2 V0.1 Z M0.35,0.85 H0.5 C0.65,0.85 0.75,0.7 0.75,0.55 C0.75,0.4 0.65,0.25 0.5,0.25 H0.35 V0.85 Z" />
+        </clipPath>
+        <clipPath id="letter-e-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.8 V0.25 H0.35 V0.45 H0.75 V0.6 H0.35 V0.85 H0.8 V1 H0.2 V0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-f-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.8 V0.25 H0.35 V0.45 H0.75 V0.6 H0.35 V1 H0.2 V0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-g-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.8,0.3 C0.75,0.2 0.65,0.15 0.5,0.15 C0.3,0.15 0.2,0.3 0.2,0.5 C0.2,0.7 0.3,0.85 0.5,0.85 C0.65,0.85 0.75,0.75 0.75,0.6 H0.5 V0.45 H0.9 V0.65 C0.85,0.85 0.7,1 0.5,1 C0.25,1 0.05,0.8 0.05,0.5 C0.05,0.2 0.25,0 0.5,0 C0.7,0 0.85,0.15 0.9,0.3 H0.8 Z" />
+        </clipPath>
+        <clipPath id="letter-h-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.35 V0.45 H0.65 V0.1 H0.8 V1 H0.65 V0.6 H0.35 V1 H0.2 V0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-i-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.8 V0.25 H0.575 V0.85 H0.8 V1 H0.2 V0.85 H0.425 V0.25 H0.2 V0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-j-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.4,0.1 H0.8 V0.7 C0.8,0.9 0.65,1 0.5,1 C0.35,1 0.2,0.9 0.2,0.7 V0.6 H0.35 V0.7 C0.35,0.8 0.4,0.85 0.5,0.85 C0.6,0.85 0.65,0.8 0.65,0.7 V0.25 H0.4 V0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-k-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.35 V0.45 L0.75,0.1 H0.95 L0.5,0.5 L0.95,1 H0.75 L0.35,0.55 V1 H0.2 V0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-l-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.35 V0.85 H0.8 V1 H0.2 V0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-m-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,1 V0.1 H0.35 L0.5,0.7 L0.65,0.1 H0.8 V1 H0.7 V0.3 L0.55,0.85 H0.45 L0.3,0.3 V1 H0.2 Z" />
+        </clipPath>
+        <clipPath id="letter-n-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,1 V0.1 H0.35 L0.65,0.7 V0.1 H0.8 V1 H0.65 L0.35,0.4 V1 H0.2 Z" />
+        </clipPath>
+        <clipPath id="letter-o-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.5,0.1 C0.75,0.1 0.9,0.3 0.9,0.55 C0.9,0.8 0.75,1 0.5,1 C0.25,1 0.1,0.8 0.1,0.55 C0.1,0.3 0.25,0.1 0.5,0.1 Z M0.5,0.25 C0.35,0.25 0.25,0.35 0.25,0.55 C0.25,0.75 0.35,0.85 0.5,0.85 C0.65,0.85 0.75,0.75 0.75,0.55 C0.75,0.35 0.65,0.25 0.5,0.25 Z" />
+        </clipPath>
+        <clipPath id="letter-p-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.6 C0.8,0.1 0.9,0.25 0.9,0.4 C0.9,0.55 0.8,0.7 0.6,0.7 H0.35 V1 H0.2 V0.1 Z M0.35,0.55 H0.6 C0.7,0.55 0.75,0.5 0.75,0.4 C0.75,0.3 0.7,0.25 0.6,0.25 H0.35 V0.55 Z" />
+        </clipPath>
+        <clipPath id="letter-q-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.5,0.1 C0.75,0.1 0.9,0.3 0.9,0.55 C0.9,0.7 0.8,0.85 0.65,0.9 L0.85,1 H0.65 L0.5,0.9 C0.25,0.9 0.1,0.7 0.1,0.55 C0.1,0.3 0.25,0.1 0.5,0.1 Z M0.5,0.25 C0.35,0.25 0.25,0.35 0.25,0.55 C0.25,0.7 0.35,0.75 0.5,0.75 C0.65,0.75 0.75,0.7 0.75,0.55 C0.75,0.35 0.65,0.25 0.5,0.25 Z" />
+        </clipPath>
+        <clipPath id="letter-r-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.6 C0.8,0.1 0.9,0.25 0.9,0.4 C0.9,0.5 0.85,0.6 0.7,0.65 L0.9,1 H0.7 L0.5,0.65 H0.35 V1 H0.2 V0.1 Z M0.35,0.5 H0.6 C0.7,0.5 0.75,0.45 0.75,0.4 C0.75,0.3 0.7,0.25 0.6,0.25 H0.35 V0.5 Z" />
+        </clipPath>
+        <clipPath id="letter-s-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.75,0.2 C0.75,0.15 0.7,0.1 0.5,0.1 C0.3,0.1 0.25,0.15 0.25,0.25 C0.25,0.35 0.3,0.4 0.5,0.45 C0.7,0.5 0.85,0.55 0.85,0.75 C0.85,0.9 0.7,1 0.45,1 C0.2,1 0.15,0.9 0.15,0.8 V0.7 H0.3 V0.8 C0.3,0.85 0.35,0.9 0.45,0.9 C0.6,0.9 0.7,0.85 0.7,0.75 C0.7,0.65 0.65,0.6 0.45,0.55 C0.25,0.5 0.1,0.45 0.1,0.25 C0.1,0.1 0.25,0 0.5,0 C0.75,0 0.9,0.1 0.9,0.3 V0.4 H0.75 V0.2 Z" />
+        </clipPath>
+        <clipPath id="letter-t-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.1,0.1 H0.9 V0.25 H0.575 V1 H0.425 V0.25 H0.1 V0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-u-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.35 V0.7 C0.35,0.8 0.4,0.85 0.5,0.85 C0.6,0.85 0.65,0.8 0.65,0.7 V0.1 H0.8 V0.7 C0.8,0.9 0.65,1 0.5,1 C0.35,1 0.2,0.9 0.2,0.7 V0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-v-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.1,0.1 H0.25 L0.5,0.8 L0.75,0.1 H0.9 L0.575,1 H0.425 L0.1,0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-w-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.1,0.1 L0.25,1 L0.5,0.3 L0.75,1 L0.9,0.1 V0.1 L0.75,0.1 L0.5,0.8 L0.25,0.1 H0.1 Z" />
+        </clipPath>
+        <clipPath id="letter-x-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.15,0.1 L0.5,0.5 L0.85,0.1 H0.7 L0.5,0.35 L0.3,0.1 H0.15 Z M0.5,0.65 L0.3,0.9 H0.15 L0.5,0.5 L0.85,0.9 H0.7 L0.5,0.65 Z" />
+        </clipPath>
+        <clipPath id="letter-y-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 L0.5,0.6 L0.8,0.1 H0.65 L0.5,0.4 L0.35,0.1 H0.2 Z M0.42,0.5 V0.9 H0.58 V0.5 L0.5,0.6 Z" />
+        </clipPath>
+        <clipPath id="letter-z-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.15,0.1 H0.85 V0.25 L0.35,0.75 H0.85 V0.9 H0.15 V0.75 L0.65,0.25 H0.15 V0.1 Z" />
+        </clipPath>
+        <clipPath id="number-0-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.5,0.1 C0.75,0.1 0.9,0.3 0.9,0.5 C0.9,0.7 0.75,0.9 0.5,0.9 C0.25,0.9 0.1,0.7 0.1,0.5 C0.1,0.3 0.25,0.1 0.5,0.1 Z M0.5,0.25 C0.35,0.25 0.25,0.35 0.25,0.5 C0.25,0.65 0.35,0.75 0.5,0.75 C0.65,0.75 0.75,0.65 0.75,0.5 C0.75,0.35 0.65,0.25 0.5,0.25 Z" />
+        </clipPath>
+        <clipPath id="number-1-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.6,0.1 L0.6,0.9 H0.4 V0.25 L0.25,0.35 V0.2 L0.55,0.1 H0.6 Z" />
+        </clipPath>
+        <clipPath id="number-2-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.2 C0.3,0.1 0.5,0.1 0.7,0.2 C0.8,0.3 0.75,0.4 0.65,0.5 L0.3,0.8 H0.7 C0.8,0.8 0.85,0.85 0.85,0.9 H0.15 C0.1,0.9 0.05,0.85 0.05,0.8 C0.05,0.75 0.1,0.7 0.15,0.65 L0.5,0.35 C0.6,0.25 0.6,0.2 0.5,0.2 C0.4,0.2 0.3,0.25 0.25,0.3 Z" />
+        </clipPath>
+        <clipPath id="number-3-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.8,0.05 C0.95,0.05 1,0.15 1,0.25 C1,0.35 0.9,0.45 0.75,0.48 C0.9,0.5 1,0.6 1,0.75 C1,0.9 0.85,1 0.65,1 H0.2 V0.9 H0.65 C0.75,0.9 0.85,0.85 0.85,0.75 C0.85,0.65 0.75,0.55 0.6,0.55 H0.3 V0.45 H0.6 C0.75,0.45 0.85,0.35 0.85,0.25 C0.85,0.15 0.75,0.12 0.6,0.12 H0.2 V0.05 H0.8 Z" />
+        </clipPath>
+        <clipPath id="number-4-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.7,0 L0.7,0.4 L0.9,0.4 L0.9,0.5 L0.7,0.5 L0.7,1 L0.55,1 L0.55,0.5 L0.1,0.5 L0.1,0.4 L0.55,0 Z M0.55,0.4 L0.55,0.15 L0.25,0.4 Z" />
+        </clipPath>
+        <clipPath id="number-5-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0 H0.9 V0.15 H0.35 L0.32,0.4 H0.7 C0.85,0.4 1,0.5 1,0.7 C1,0.9 0.85,1 0.65,1 H0.25 C0.15,1 0.1,0.95 0.1,0.85 V0.7 H0.25 V0.82 C0.25,0.85 0.28,0.87 0.32,0.87 H0.6 C0.7,0.87 0.8,0.8 0.8,0.7 C0.8,0.6 0.7,0.53 0.6,0.53 H0.2 V0 Z" />
+        </clipPath>
+        <clipPath id="number-6-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.65,0.1 L0.4,0.4 C0.6,0.35 0.85,0.45 0.85,0.7 C0.85,0.85 0.7,1 0.5,1 C0.3,1 0.15,0.85 0.15,0.7 C0.15,0.6 0.2,0.5 0.3,0.45 L0.6,0.1 H0.65 Z M0.5,0.5 C0.4,0.5 0.3,0.6 0.3,0.7 C0.3,0.8 0.4,0.9 0.5,0.9 C0.6,0.9 0.7,0.8 0.7,0.7 C0.7,0.6 0.6,0.5 0.5,0.5 Z" />
+        </clipPath>
+        <clipPath id="number-7-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.2,0.1 H0.8 C0.85,0.1 0.9,0.15 0.9,0.2 L0.5,0.9 H0.35 L0.75,0.2 H0.2 V0.1 Z" />
+        </clipPath>
+        <clipPath id="number-8-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.5,0.1 C0.7,0.1 0.85,0.2 0.85,0.3 C0.85,0.4 0.75,0.45 0.65,0.47 C0.8,0.5 0.9,0.6 0.9,0.7 C0.9,0.85 0.7,0.95 0.5,0.95 C0.3,0.95 0.1,0.85 0.1,0.7 C0.1,0.6 0.2,0.5 0.35,0.47 C0.25,0.45 0.15,0.4 0.15,0.3 C0.15,0.2 0.3,0.1 0.5,0.1 Z M0.5,0.2 C0.4,0.2 0.3,0.25 0.3,0.3 C0.3,0.35 0.4,0.4 0.5,0.4 C0.6,0.4 0.7,0.35 0.7,0.3 C0.7,0.25 0.6,0.2 0.5,0.2 Z M0.5,0.55 C0.35,0.55 0.25,0.6 0.25,0.7 C0.25,0.8 0.35,0.85 0.5,0.85 C0.65,0.85 0.75,0.8 0.75,0.7 C0.75,0.6 0.65,0.55 0.5,0.55 Z" />
+        </clipPath>
+        <clipPath id="number-9-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0.5,0.1 C0.7,0.1 0.85,0.25 0.85,0.4 C0.85,0.5 0.8,0.6 0.7,0.65 L0.4,0.9 H0.35 L0.6,0.7 C0.4,0.75 0.15,0.65 0.15,0.4 C0.15,0.25 0.3,0.1 0.5,0.1 Z M0.5,0.2 C0.4,0.2 0.3,0.3 0.3,0.4 C0.3,0.5 0.4,0.6 0.5,0.6 C0.6,0.6 0.7,0.5 0.7,0.4 C0.7,0.3 0.6,0.2 0.5,0.2 Z" />
+        </clipPath>
       </defs>
     </svg>
   );
