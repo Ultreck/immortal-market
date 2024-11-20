@@ -2,12 +2,12 @@ import useTemplateStore from '@/store/template.js';
 import { useCreateDesign, useGetDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import PropTypes from 'prop-types';
-import { Button, Image, Skeleton } from '@nextui-org/react';
-import { getImageLink } from '@/lib/utils.js';
+import { Button, Skeleton } from '@nextui-org/react';
 import { TbPhotoCircle } from 'react-icons/tb';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useNavigate } from 'react-router-dom';
 import NoData from '@/components/ui/NoData.jsx';
+import ThumbnailsCarousel from '@/pages/designs/ThumbnailsCarousel.jsx';
 
 const ApplyTemplate = ({ id, onClose }) => {
   const toast = useToast();
@@ -78,12 +78,7 @@ const ApplyTemplate = ({ id, onClose }) => {
                 {design.title} ({design.data.pages.length} pages)
               </h3>
               {design.thumbnails.length ? (
-                <Image
-                  src={getImageLink(design.thumbnails[0])}
-                  alt={design.title}
-                  removeWrapper
-                  className="w-full h-full object-cover rounded-xl aspect-square cursor-pointer"
-                />
+                <ThumbnailsCarousel thumbnails={design.thumbnails} />
               ) : (
                 <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
                   <TbPhotoCircle size="32" className="opacity-50" />
