@@ -13,7 +13,6 @@ const TransitionModal = () => {
   const isTransitionOpen = useTemplateStore((state) => state.template.isTransitionOpen);
   const [element, setElement] = useState(null);
   const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.activePage));
-  console.log(page);
   const updatePage = useTemplateStore((state) => state.updatePage);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const sensors = useSensors(useSensor(PointerSensor));
