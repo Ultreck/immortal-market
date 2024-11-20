@@ -10,9 +10,7 @@ const Layers = () => {
   const [element, setElement] = useState(null);
   const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.activePage));
   const updatePage = useTemplateStore((state) => state.updatePage);
-
   const sensors = useSensors(useSensor(PointerSensor));
-
   const handleDragStart = (event) => {
     setElement(page.elements.find((obj) => obj.id === event.active.id));
   };

@@ -236,6 +236,7 @@ export const getChartsDefaultStyle = ({ type, name }) => {
       xGridSize: 16,
       yGridSize: 16,
       borderRadius: 8,
+      order: null,
     };
   }
   return styles;
@@ -244,7 +245,9 @@ export const getChartsDefaultStyle = ({ type, name }) => {
 export const getElementDefaultStyle = ({ type, name }) => {
   const tools = getElementTools({ type, config: { name } });
   if (tools.length === 0) return {};
-  let styles = {};
+  let styles = {
+    order: null,
+  };
   if (tools.includes('font')) {
     styles = {
       ...styles,

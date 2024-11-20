@@ -1,5 +1,7 @@
 import PageIndicator from '@/components/core/templates/create/footer/PageIndicator.jsx';
 import ZoomSlider from '@/components/core/templates/create/footer/ZoomSlider.jsx';
+import { Button } from '@nextui-org/react';
+import useTemplateStore from '@/store/template.js';
 import SaveButton from '@/components/core/templates/create/footer/SaveButton.jsx';
 import DesignOptions from '@/components/core/templates/create/footer/DesignOptions.jsx';
 import DesignTitle from './DesignTitle.jsx';
@@ -9,6 +11,8 @@ import CommentButton from '@/components/core/templates/create/footer/CommentButt
 import SwitchModeButton from '@/components/core/templates/create/footer/SwitchModeButton.jsx';
 
 const StatusBar = () => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+
   return (
     <div className="h-[50px] w-full dark:bg-default-50/50 border-t border-default-200 dark:border-default-100 flex items-center justify-between px-12">
       <DesignTitle />
@@ -17,6 +21,14 @@ const StatusBar = () => {
         <ZoomSlider />
         <div className="flex items-center space-x-2">
           <FullscreenPreview />
+          <Button
+            className="text-sm"
+            color="default"
+            size="sm"
+            onClick={() => updateTemplate({ isTransitionOpen: true })}
+          >
+            Transition
+          </Button>
           <CommentButton />
           <SwitchModeButton />
         </div>

@@ -7,6 +7,7 @@ import StatusBar from '@/components/core/templates/create/footer/StatusBar.jsx';
 import Sidebar from '@/components/core/templates/create/sidebar/Sidebar.jsx';
 import CommentModal from './comment/CommentsModal.jsx';
 import ModifyReportModal from '@/components/core/templates/create/ModifyReportModal.jsx';
+import TransitionModal from '@/components/core/templates/create/transition/TransitionModal.jsx';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;
@@ -77,6 +78,7 @@ const DesignBuilder = () => {
         <div className="flex flex-col overflow-hidden relative bg-default-100 dark:bg-zinc-950">
           <Editor />
           <StatusBar />
+          <TransitionModal />
         </div>
       </div>
 
@@ -87,3 +89,4 @@ const DesignBuilder = () => {
 };
 
 export default DesignBuilder;
+
