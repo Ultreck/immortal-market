@@ -22,7 +22,6 @@ const TransitionModal = () => {
 
   const handleDragEnd = (event) => {
     setElement(null);
-
     const { active, over } = event;
     if (!over || active.id === over.id) {
       return;

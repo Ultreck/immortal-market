@@ -8,6 +8,7 @@ import DesignTitle from './DesignTitle.jsx';
 import Share from '@/components/core/templates/create/footer/Share.jsx';
 import FullscreenPreview from '@/components/core/templates/create/FullscreenPreview.jsx';
 import CommentButton from '@/components/core/templates/create/footer/CommentButton.jsx';
+import { MdOutlineAnimation } from 'react-icons/md';
 import SwitchModeButton from '@/components/core/templates/create/footer/SwitchModeButton.jsx';
 
 const StatusBar = () => {
@@ -21,15 +22,17 @@ const StatusBar = () => {
         <ZoomSlider />
         <div className="flex items-center space-x-2">
           <FullscreenPreview />
+          <CommentButton />
           <Button
             className="text-sm"
             color="default"
+            variant="light"
             size="sm"
+            isIconOnly
             onClick={() => updateTemplate({ isTransitionOpen: true })}
           >
-            Transition
+            <MdOutlineAnimation size="20" />
           </Button>
-          <CommentButton />
           <SwitchModeButton />
         </div>
         <div className="flex items-center space-x-3">
@@ -43,3 +46,4 @@ const StatusBar = () => {
 };
 
 export default StatusBar;
+

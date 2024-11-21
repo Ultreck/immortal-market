@@ -4,24 +4,6 @@ import ElementWrapperPresent from '@/components/core/templates/create/ElementWra
 import { getElementConfig, getElementPresentComponent } from '@/lib/elements.js';
 import { AnimatePresence, motion } from 'framer-motion';
 
-const elementVariants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.95,
-    y: 20,
-  },
-  visible: (delay) => ({
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      delay,
-      duration: 0.3,
-      ease: 'easeOut',
-    },
-  }),
-};
-
 const PageContentPresent = ({ page }) => {
   const el = useRef(null);
   const [scale, setScale] = useState(1);
@@ -57,11 +39,13 @@ const PageContentPresent = ({ page }) => {
           return (
             <motion.div
               key={element.id}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              custom={index * 0.1} // Stagger delay
-              variants={elementVariants}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                delay: 2 * index,
+                duration: 2,
+              }}
               className="pointer-events-auto"
             >
               {config?.wrapper ? (
