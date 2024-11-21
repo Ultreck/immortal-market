@@ -201,7 +201,6 @@ const Summary = ({ onBack, onDone }) => {
 const Combinations = ({ onBack, onDone }) => {
   const toast = useToast();
   const [selection, setSelection] = useState([]);
-  const [isLoading, setIsLoading] = useState('');
 
   const items = [
     {
