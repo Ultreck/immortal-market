@@ -7,6 +7,7 @@ import { cn, delay } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import Title from '@/components/core/shared/Title.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
+import { useMount } from 'react-use';
 
 const ModifyReportModal = () => {
   const isOpen = useTemplateStore((state) => state.template.isModifyReportOpen);
@@ -20,15 +21,20 @@ const ModifyReportModal = () => {
 
   return (
     <Drawer isOpen={isOpen} onClose={handleClose} padding={false}>
-      {view === 'options' && <Options onDone={() => setView('summary')} />}
+      {view === 'options' && <Options onDone={(option) => setView(option === 'manual' ? 'summary' : 'analyze')} />}
       {view === 'summary' && <Summary onBack={() => setView('options')} onDone={() => setView('combinations')} />}
-      {view === 'combinations' && <Combinations onBack={() => setView('summary')} onDone={handleClose} />}
+      {view === 'combinations' && <Combinations onBack={() => setView('summary')} onDone={() => setView('analyze')} />}
+      {view === 'analyze' && <Analyze onBack={() => setView('combinations')} onDone={handleClose} />}
     </Drawer>
   );
 };
 
 const Options = ({ onDone }) => {
   const [value, setValue] = useState('');
+
+  const handleSubmit = () => {
+    onDone(value);
+  };
 
   return (
     <div className="px-14 py-12">
@@ -85,7 +91,7 @@ const Options = ({ onDone }) => {
       </div>
       <Button
         isDisabled={value === ''}
-        onClick={onDone}
+        onClick={handleSubmit}
         color="primary"
         radius="full"
         className="mt-10 text-base px-6"
@@ -277,87 +283,93 @@ const Combinations = ({ onBack, onDone }) => {
 
   const handleSubmit = async () => {
     if (!selection.length) return toast.error('Please select at least one combination');
-    setIsLoading('Creating summary..');
-    await delay(3000);
-    setIsLoading('Extracting insights from disbursements..');
-    await delay(3000);
-    setIsLoading('Extracting insights from repayments..');
-    await delay(3000);
-    setIsLoading('Almost done..');
-    await delay(3000);
     onDone();
   };
 
   return (
-    <>
-      {isLoading ? (
-        <div className="px-14 py-12 flex flex-col items-center justify-center h-full">
-          <Spinner size="lg" />
-          <p className="mt-6">{isLoading}</p>
+    <div className="px-14 py-12">
+      <Title
+        title="Hi there, I'm here to assist you with your report"
+        sub="Pick an option below to get started"
+        classNames={{
+          base: 'mb-10',
+          title: 'text-3xl font-semibold max-w-sm leading-8',
+          sub: 'mt-4',
+        }}
+      />
+      <div className="mt-10">
+        <div className="mt-6">
+          <Accordion variant="bordered" defaultExpandedKeys={items[0].column}>
+            {items.map((item) => (
+              <AccordionItem
+                key={item.column}
+                aria-label={item.column}
+                title={item.column}
+                className="py-0"
+                classNames={{ heading: 'px-4', title: 'text-base font-medium', content: 'px-4 pb-6' }}
+              >
+                <div className="grid grid-cols-2 gap-3">
+                  {item.combinations.map((combination) => {
+                    const key = `${item.column}/${combination.text}`;
+                    return (
+                      <Checkbox
+                        key={key}
+                        classNames={{ label: 'leading-tight' }}
+                        isSelected={selection.includes(key)}
+                        onValueChange={(v) => {
+                          if (v) setSelection((prev) => [...prev, key]);
+                          else setSelection((prev) => prev.filter((s) => s !== key));
+                        }}
+                      >
+                        {combination.text}
+                      </Checkbox>
+                    );
+                  })}
+                </div>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
-      ) : (
-        <div className="px-14 py-12">
-          <Title
-            title="Hi there, I'm here to assist you with your report"
-            sub="Pick an option below to get started"
-            classNames={{
-              base: 'mb-10',
-              title: 'text-3xl font-semibold max-w-sm leading-8',
-              sub: 'mt-4',
-            }}
-          />
-          <div className="mt-10">
-            <div className="mt-6">
-              <Accordion variant="bordered" defaultExpandedKeys={items[0].column}>
-                {items.map((item) => (
-                  <AccordionItem
-                    key={item.column}
-                    aria-label={item.column}
-                    title={item.column}
-                    className="py-0"
-                    classNames={{ heading: 'px-4', title: 'text-base font-medium', content: 'px-4 pb-6' }}
-                  >
-                    <div className="grid grid-cols-2 gap-3">
-                      {item.combinations.map((combination) => {
-                        const key = `${item.column}/${combination.text}`;
-                        return (
-                          <Checkbox
-                            key={key}
-                            classNames={{ label: 'leading-tight' }}
-                            isSelected={selection.includes(key)}
-                            onValueChange={(v) => {
-                              if (v) setSelection((prev) => [...prev, key]);
-                              else setSelection((prev) => prev.filter((s) => s !== key));
-                            }}
-                          >
-                            {combination.text}
-                          </Checkbox>
-                        );
-                      })}
-                    </div>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          </div>
-          <div className="flex mt-10 space-x-2">
-            <Button onClick={onBack} radius="full" isIconOnly variant="bordered">
-              <TbChevronLeft size="20" />
-            </Button>
-            <Button
-              isDisabled={!selection.length}
-              onClick={handleSubmit}
-              color="primary"
-              radius="full"
-              className="text-base px-6"
-              endContent={<TbChevronRight size="20" />}
-            >
-              Continue
-            </Button>
-          </div>
-        </div>
-      )}
-    </>
+      </div>
+      <div className="flex mt-10 space-x-2">
+        <Button onClick={onBack} radius="full" isIconOnly variant="bordered">
+          <TbChevronLeft size="20" />
+        </Button>
+        <Button
+          isDisabled={!selection.length}
+          onClick={handleSubmit}
+          color="primary"
+          radius="full"
+          className="text-base px-6"
+          endContent={<TbChevronRight size="20" />}
+        >
+          Continue
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+const Analyze = ({ onDone }) => {
+  const [text, setText] = useState('');
+
+  useMount(async () => {
+    setText('Creating summary..');
+    await delay(3000);
+    setText('Extracting insights from disbursements..');
+    await delay(3000);
+    setText('Extracting insights from repayments..');
+    await delay(3000);
+    setText('Almost done..');
+    await delay(3000);
+    onDone();
+  });
+
+  return (
+    <div className="px-14 py-12 flex flex-col items-center justify-center h-full">
+      <Spinner size="lg" />
+      <p className="mt-6">{text}</p>
+    </div>
   );
 };
 
@@ -369,6 +381,10 @@ Summary.propTypes = {
   onDone: PropTypes.func.isRequired,
 };
 Combinations.propTypes = {
+  onBack: PropTypes.func.isRequired,
+  onDone: PropTypes.func.isRequired,
+};
+Analyze.propTypes = {
   onBack: PropTypes.func.isRequired,
   onDone: PropTypes.func.isRequired,
 };
