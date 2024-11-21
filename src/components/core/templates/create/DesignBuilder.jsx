@@ -6,6 +6,7 @@ import { roundToNearestTen } from '@/lib/utils.js';
 import StatusBar from '@/components/core/templates/create/footer/StatusBar.jsx';
 import Sidebar from '@/components/core/templates/create/sidebar/Sidebar.jsx';
 import CommentModal from './comment/CommentsModal.jsx';
+import ModifyReportModal from '@/components/core/templates/create/ModifyReportModal.jsx';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;
@@ -16,7 +17,7 @@ const getElementDistanceFromTop = (element) => {
   return distance;
 };
 
-const TemplateBuilder = () => {
+const DesignBuilder = () => {
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(PointerSensor, { activationConstraint: { distance: 0.01 } })
@@ -77,10 +78,11 @@ const TemplateBuilder = () => {
           <Editor />
           <StatusBar />
           <CommentModal />
+          <ModifyReportModal />
         </div>
       </div>
     </DndContext>
   );
 };
 
-export default TemplateBuilder;
+export default DesignBuilder;

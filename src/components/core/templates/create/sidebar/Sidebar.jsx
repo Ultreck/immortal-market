@@ -1,5 +1,5 @@
 import { createElement, useState } from 'react';
-import { RiArrowLeftSLine, RiImage2Line, RiShapesLine, RiStackLine } from 'react-icons/ri';
+import { RiArrowLeftSLine, RiImage2Line, RiSettings2Line, RiShapesLine, RiStackLine } from 'react-icons/ri';
 import { cn, getImageLink } from '@/lib/utils.js';
 import Elements from '@/components/core/templates/create/sidebar/components/Elements.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
@@ -11,6 +11,7 @@ import Images from '@/components/core/templates/create/sidebar/images/Images.jsx
 import { useAuth } from '@/hooks/use-auth.jsx';
 import MyWork from './my-work/MyWork.jsx';
 import PropTypes from 'prop-types';
+import Project from '@/components/core/templates/create/sidebar/project/Project.jsx';
 
 const Sidebar = ({ className }) => {
   const [tab, setTab] = useState('elements');
@@ -44,7 +45,7 @@ const Sidebar = ({ className }) => {
             collapsed ? 'px-3' : 'pl-3'
           )}
         >
-          <div className="space-y-1 w-full">
+          <div className="space-y-1 w-full flex-1 flex flex-col">
             <a href="/templates">
               <div
                 className={cn(
@@ -84,16 +85,39 @@ const Sidebar = ({ className }) => {
                 </Tooltip>
               );
             })}
-            <div
-              className={cn('cursor-pointer flex items-center justify-center !mt-4', className)}
-              onClick={() => setTab('my-work')}
-            >
-              <Avatar
-                src={getImageLink(user.image)}
-                radius="full"
-                classNames={{ base: 'w-[32px] h-[32px]' }}
-                isBordered
-              />
+            <div className="flex-1"></div>
+            <div className="space-y-4">
+              {[{ icon: RiSettings2Line, title: 'Project', key: 'project' }].map((element) => {
+                const active = tab === element.key;
+                return (
+                  <Tooltip key={element.key} content={element.title} showArrow placement="right">
+                    <div
+                      tabIndex={0}
+                      className={cn(
+                        'flex flex-col items-center justify-center py-4 px-3 w-full rounded-l-2xl overflow-hidden',
+                        {
+                          'bg-primary-500 text-white dark:bg-gray-800/50': active,
+                          'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer': !active,
+                          'rounded-2xl': collapsed,
+                        }
+                      )}
+                      onClick={() => setTab(element.key)}
+                    >
+                      {createElement(element.icon, { size: '24' })}
+                      <p className="text-sm mt-1 truncate overflow text-center w-full">{element.title}</p>
+                    </div>
+                  </Tooltip>
+                );
+              })}
+              <div className={cn('cursor-pointer flex items-center justify-center', className)}>
+                <Avatar
+                  src={getImageLink(user.image)}
+                  radius="full"
+                  classNames={{ base: 'w-[32px] h-[32px] my-2' }}
+                  isBordered
+                  onClick={() => setTab('my-work')}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -105,6 +129,7 @@ const Sidebar = ({ className }) => {
             {tab === 'layers' && <Layers />}
             {tab === 'images' && <Images />}
             {tab === 'my-work' && <MyWork />}
+            {tab === 'project' && <Project />}
           </div>
         )}
       </div>

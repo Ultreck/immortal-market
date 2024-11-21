@@ -1,4 +1,4 @@
-import TemplateBuilder from '@/components/core/templates/create/TemplateBuilder.jsx';
+import DesignBuilder from '@/components/core/templates/create/DesignBuilder.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetDesign } from '@/api/business.js';
 import { useEffect, useRef } from 'react';
@@ -69,6 +69,7 @@ const EditDesignPage = () => {
           selectedPage: null,
           activePage: null,
           scale: 1,
+          isModifyReportOpen: false,
           ...payload,
         });
       }
@@ -88,7 +89,7 @@ const EditDesignPage = () => {
           <p className="mt-6">Loading design..</p>
         </div>
       ) : (
-        <>{!!title && <TemplateBuilder />}</>
+        <>{!!title && <DesignBuilder />}</>
       )}
     </>
   );
