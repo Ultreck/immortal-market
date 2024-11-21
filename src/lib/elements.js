@@ -91,12 +91,12 @@ export const elements = {
   frame: {
     tools: (element) => {
       if (element.config.name === 'tabs') {
-        return ['tabs', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
+        return ['tabs', 'opacity', 'animation', 'shadow', 'element-tag', 'layout', 'photo-animation'];
       }
       if (element.config.name === 'carousel') {
-        return ['carousel', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
+        return ['carousel', 'opacity', 'animation', 'shadow', 'element-tag', 'layout', 'photo-animation'];
       }
-      return ['opacity', 'animation', 'shadow'];
+      return ['opacity', 'animation', 'shadow', 'photo-animation'];
     },
     components: {
       edit: Frame,
@@ -107,7 +107,7 @@ export const elements = {
     },
   },
   icon: {
-    tools: ['icon', 'color', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
+    tools: ['icon', 'color', 'opacity', 'animation', 'shadow', 'element-tag', 'layout', 'photo-animation'],
     components: {
       edit: Icon,
       present: IconPresent,
@@ -153,7 +153,7 @@ export const elements = {
     },
   },
   image: {
-    tools: ['border', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
+    tools: ['image', 'border', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
     components: {
       edit: Image,
       present: ImagePresent,
@@ -268,6 +268,9 @@ export const getElementDefaultStyle = ({ type, name }) => {
   if (tools.includes('animation')) {
     styles = { ...styles, animationName: '', animationDuration: '1s' };
   }
+  if (tools.includes('photo-animation')) {
+    styles = { ...styles, animationName: '', animationDuration: '1s' };
+  }
   if (tools.includes('shadow')) {
     styles = { ...styles, shadow: '' };
   }
@@ -276,4 +279,3 @@ export const getElementDefaultStyle = ({ type, name }) => {
   }
   return styles;
 };
-

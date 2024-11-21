@@ -10,6 +10,7 @@ import LineConfig from './elements/specific/LineConfig.jsx';
 import IconConfig from './elements/specific/IconConfig.jsx';
 import { getElementTools } from '@/lib/elements.js';
 import Animation from './elements/generic/Animation.jsx';
+import ImageConfig from './elements/specific/ImageConfig.jsx';
 import AdvancedChartConfig from './elements/specific/AdvancedChartConfig.jsx';
 import Shadow from './elements/generic/Shadow.jsx';
 import FrameTabsConfig from './elements/specific/FrameTabsConfig.jsx';
@@ -42,6 +43,7 @@ const mapping = {
   opacity: { type: 'multiple', component: Opacity },
   line: { type: 'multiple', component: LineConfig },
   animation: { type: 'multiple', component: Animation },
+  image: { type: 'multiple', component: ImageConfig },
   'advanced-chart': { type: 'single', component: AdvancedChartConfig },
   shadow: { type: 'multiple', component: Shadow },
   tabs: { type: 'single', component: FrameTabsConfig },
