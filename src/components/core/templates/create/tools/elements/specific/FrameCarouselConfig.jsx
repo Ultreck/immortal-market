@@ -21,7 +21,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'carousel' : null })}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Frame carousel config" className="text-base">
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>

@@ -16,7 +16,7 @@ const MarqueeTextConfig = ({ element, onChange }) => {
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'marquee-text' : null })}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Marquee text config" className="text-base">
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>

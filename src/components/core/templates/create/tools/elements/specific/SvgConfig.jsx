@@ -61,7 +61,7 @@ const SvgConfig = ({ element, onChange }) => {
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'infographic' : null })}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Svg config" className="text-base">
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>

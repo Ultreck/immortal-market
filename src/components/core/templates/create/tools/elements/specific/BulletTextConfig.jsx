@@ -16,7 +16,7 @@ const BulletTextConfig = ({ element, onChange }) => {
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'list' : null })}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Bullet text config" className="text-base">
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>

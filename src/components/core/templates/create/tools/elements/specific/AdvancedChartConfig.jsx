@@ -34,7 +34,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'advanced-chart' : null })}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Advance chart config" className="text-base">
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>
@@ -101,4 +101,3 @@ AdvancedChartConfig.propTypes = {
 };
 
 export default AdvancedChartConfig;
-
