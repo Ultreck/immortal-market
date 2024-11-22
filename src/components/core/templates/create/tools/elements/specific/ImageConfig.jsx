@@ -4,18 +4,6 @@ import useTemplateStore from '@/store/template.js';
 import { TbSettings2 } from 'react-icons/tb';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 
-const animations = [
-  { value: 'zoom', text: 'Quick Zoom-In' },
-  { value: 'point', text: 'Point-zoom' },
-  { value: 'rotate', text: 'Zoom-n-rotate' },
-  { value: 'motion', text: 'Zoom in slow-motion' },
-  { value: 'brightness', text: 'Brighten and Zoom-in' },
-  { value: 'horizontal', text: 'Horizontal Zoom-n-pan' },
-  { value: 'vertical', text: 'Vertical Zoom-n-pan' },
-  { value: 'blur', text: 'Blur with zooming-in' },
-  { value: 'colorize', text: 'Colorize with zooming-in' },
-];
-
 const options = [
   {
     name: 'Quick Zoom',
