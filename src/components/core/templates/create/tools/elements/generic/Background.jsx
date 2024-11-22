@@ -1,4 +1,4 @@
-import { Button, Divider, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
+import { Button, Divider, Input, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
 import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
 import { HiCheck } from 'react-icons/hi2';
@@ -93,6 +93,10 @@ const Solid = ({ elements, onChange }) => {
     onChange(elements.map((e) => ({ ...e, style: { ...e.style, background: v } })));
   };
 
+  const handleInputChange = (e) => {
+    handleChange(e.target.value);
+  };
+
   return (
     <>
       <HexAlphaColorPicker color={value} onChange={(color) => handleChange(color)} className="w-full" />
@@ -118,7 +122,17 @@ const Solid = ({ elements, onChange }) => {
           </div>
         ))}
       </div>
-      <Eyedropper value={value} onChange={handleChange} />
+      <div className="flex space-x-2 mt-5">
+        <Input
+          type="text"
+          value={value}
+          onChange={handleInputChange}
+          className="w-full"
+          placeholder="Color"
+          variant="bordered"
+        />
+        <Eyedropper onPick={handleChange} />
+      </div>
     </>
   );
 };

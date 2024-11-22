@@ -4,8 +4,9 @@ import html2canvas from 'html2canvas';
 import Portal from './Portal.js';
 import { Button } from '@nextui-org/react';
 import { TbColorPicker } from 'react-icons/tb';
+import { cn } from '@/lib/utils.js';
 
-const Eyedropper = ({ value, onChange }) => {
+const Eyedropper = ({ onPick, className }) => {
   const [coverUp, setCoverUp] = useState(false);
 
   const takePick = () => {
@@ -31,7 +32,7 @@ const Eyedropper = ({ value, onChange }) => {
       eyeDropper
         .open({ signal: abortController.signal })
         .then((result) => {
-          onChange(result.sRGBHex);
+          onPick(result.sRGBHex);
         })
         .catch(() => {});
     }
@@ -42,18 +43,11 @@ const Eyedropper = ({ value, onChange }) => {
     setCoverUp(false);
   };
 
-  let bgValueText = value?.includes('gradient') ? 'gradient' : value || '';
-
   return (
-    <div className="mt-5">
-      <div className="flex gap-3">
-        <div className="w-full rounded-xl border border-default-200 text-lg flex items-center justify-center">
-          {bgValueText}
-        </div>
-        <Button onClick={getEyeDrop} isIconOnly size="md" variant="bordered">
-          <TbColorPicker size={16} />
-        </Button>
-      </div>
+    <div className={cn(className)}>
+      <Button onClick={getEyeDrop} isIconOnly size="md" variant="bordered">
+        <TbColorPicker size={16} />
+      </Button>
       {coverUp && (
         <Portal>
           <div onClick={(e) => getColorLegacy(e)} />
@@ -64,8 +58,8 @@ const Eyedropper = ({ value, onChange }) => {
 };
 
 Eyedropper.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onPick: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 export default Eyedropper;

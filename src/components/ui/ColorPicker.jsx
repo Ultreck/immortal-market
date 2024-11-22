@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import { cn } from '@/lib/utils.js';
 import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
@@ -19,6 +19,10 @@ const ColorPicker = ({ color, onChange, size, trigger, isOpen, onOpenChange, onC
       return;
     }
     setOpen(v);
+  };
+
+  const handleInputChange = (e) => {
+    onChange(e.target.value);
   };
 
   return (
@@ -68,7 +72,17 @@ const ColorPicker = ({ color, onChange, size, trigger, isOpen, onOpenChange, onC
             </div>
           ))}
         </div>
-        <Eyedropper value={color} onChange={onChange} />
+        <div className="flex space-x-2 mt-5">
+          <Input
+            type="text"
+            value={color}
+            onChange={handleInputChange}
+            className="w-full"
+            placeholder="Color"
+            variant="bordered"
+          />
+          <Eyedropper onPick={onChange} />
+        </div>
       </PopoverContent>
     </Popover>
   );
