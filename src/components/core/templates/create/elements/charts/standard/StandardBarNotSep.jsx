@@ -88,9 +88,11 @@ export const StandardBarNotSepContent = ({ element }) => {
               <Cell
                 key={`cell-${index}`}
                 fill={
-                  hoveredIndex === index
-                    ? element.config.colors[index % element.config.colors.length]
-                    : `${element.config.colors[index % element.config.colors.length]}80`
+                  element.config.styles.isTransparent
+                    ? hoveredIndex === index
+                      ? element.config.colors[index % element.config.colors.length] // Full color on hover
+                      : `${element.config.colors[index % element.config.colors.length]}80` // Transparent color
+                    : element.config.colors[index % element.config.colors.length] // Normal color
                 }
               />
             ))}
@@ -98,9 +100,28 @@ export const StandardBarNotSepContent = ({ element }) => {
               <LabelList
                 dataKey={element.config.keys.y}
                 position={element.config.labelPosition}
+                formatter={(value) => {
+                  const total = chartData.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
+                  switch (element.config.styles.labelFormat) {
+                    case 'value':
+                      return value;
+                    case 'percentage':
+                      return `${((value / total) * 100).toFixed(1)}%`;
+                    case 'both':
+                      return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                    case 'currency':
+                      return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                    case 'wholeNumber':
+                      return Math.round(value);
+                    case 'decimal':
+                      return value.toFixed(2);
+                    default:
+                      return value;
+                  }
+                }}
                 fill={element.config.labelFontColor}
                 fontSize={element.config.labelFontSize}
-                fontFamily={element.config.fontFamily}
+                fontFamily={element.config.styles.labelFontFamily}
               />
             )}
           </Bar>
@@ -115,4 +136,3 @@ StandardBarNotSepContent.propTypes = {
 };
 
 export default StandardBarNotSep;
-

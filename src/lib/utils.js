@@ -207,7 +207,7 @@ export const labelAndValueStyling = [
   'pictogram-shapes',
   'custom-bar',
   'stacked-card',
-  'pie',
+  // 'pie',
   'semi-pie',
   'doughnut-standard',
   'doughnut-crazy',
@@ -239,8 +239,33 @@ export const gridAndLegendStyling = [
   'line-bar-vertical',
   'area-bar',
   'area-bar-vertical',
+  'pie',
 ];
 
 export const extractColorsFromGradient = (gradient) => {
   return gradient.match(/#(?:[0-9a-fA-F]{3}){1,2}\b|rgb(?:a)?\((?:\d{1,3},\s*){2,3}\d{1,3}\)/g) ?? [];
 };
+
+export const fontFamily = [
+  { key: 'Roboto', label: 'Roboto' },
+  { key: 'Playwrite BE VLG', label: 'Playwrite BE VLG' },
+  { key: 'Kanit', label: 'Kanit' },
+  { key: 'Lato', label: 'Lato' },
+  { key: 'Open Sans', label: 'Open Sans' },
+  { key: 'Poppins', label: 'Poppins' },
+  { key: 'Montserrat', label: 'Montserrat' },
+  { key: 'Oswald', label: 'Oswald' },
+  { key: 'Raleway', label: 'Raleway' },
+  { key: 'Inter', label: 'Inter' },
+  { key: 'Noto Sans', label: 'Noto Sans' },
+  { key: 'Playfair Display', label: 'Playfair Display' },
+  { key: 'Rubik', label: 'Rubik' },
+  { key: 'Nunito', label: 'Nunito' },
+  { key: 'PT Sans', label: 'PT Sans' },
+  { key: 'Work Sans', label: 'Work Sans' },
+  { key: 'Libre Baskerville', label: 'Libre Baskerville' },
+  { key: 'Manrope', label: 'Manrope' },
+  { key: 'Source Sans 3', label: 'Source Sans 3' },
+  { key: 'Hahmlet', label: 'Hahmlet' },
+];
+

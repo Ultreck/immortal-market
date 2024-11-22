@@ -1,5 +1,5 @@
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
-import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, LabelList, Legend, XAxis, YAxis } from 'recharts';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
@@ -18,6 +18,8 @@ export const StandardStackedBarContent = ({ element }) => {
     };
     return acc;
   }, {});
+
+  console.log(element.config);
 
   return (
     <div
@@ -77,18 +79,45 @@ export const StandardStackedBarContent = ({ element }) => {
               }}
             />
           )}
-          {element.config.keys.y.map((key, index) => {
-            return (
-              <Bar
-                key={key}
-                dataKey={key}
-                stackId="a"
-                fill={element.config.colors[index % element.config.colors.length]}
-                radius={[index === 0 ? 0 : 4, index === 0 ? 4 : 0, index === 1 ? 0 : 4, index === 1 ? 4 : 0]}
-                label
-              />
-            );
-          })}
+          {element.config.keys.y.map((key, index) => (
+            <Bar
+              key={key}
+              dataKey={key}
+              stackId="a"
+              fill={element.config.colors[index % element.config.colors.length]}
+              radius={element.config.styles.borderRadius || 0}
+            >
+              {element.config.showLabel && (
+                <LabelList
+                  dataKey={key}
+                  position={element.config.labelPosition}
+                  formatter={(value) => {
+                    console.log(value);
+                    const total = element.config.data.reduce((sum, entry) => sum + entry[key], 0);
+                    switch (element.config.styles.labelFormat) {
+                      case 'value':
+                        return value;
+                      case 'percentage':
+                        return `${((value / total) * 100).toFixed(1)}%`;
+                      case 'both':
+                        return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                      case 'currency':
+                        return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                      case 'wholeNumber':
+                        return Math.round(value);
+                      case 'decimal':
+                        return value.toFixed(2);
+                      default:
+                        return value;
+                    }
+                  }}
+                  fill={element.config.labelFontColor}
+                  fontSize={element.config.labelFontSize}
+                  fontFamily={element.config.fontFamily}
+                />
+              )}
+            </Bar>
+          ))}
         </BarChart>
       </ChartContainer>
     </div>
@@ -100,4 +129,3 @@ StandardStackedBarContent.propTypes = {
 };
 
 export default StandardStackedBar;
-

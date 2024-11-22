@@ -5,6 +5,7 @@ import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx
 import PropTypes from 'prop-types';
 import DndFileInput from '@/components/ui/DndFileInput';
 import { HexAlphaColorPicker } from 'react-colorful';
+import { fontFamily } from '@/lib/utils.js';
 
 const StandardBarCommonConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
@@ -96,6 +97,20 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                 }
               >
                 Show Y Grid Line
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox
+                isSelected={element.config.styles.isTransparent}
+                className={{ base: 'py-0' }}
+                onValueChange={(v) =>
+                  onChange({
+                    ...element,
+                    config: { ...element.config, styles: { ...element.config.styles, isTransparent: v } },
+                  })
+                }
+              >
+                Is Transparent
               </Checkbox>
             </div>
             {element.type === 'chart-s-line' && element.type === 'chart-s-area' && (
@@ -211,7 +226,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                   >
                     {[
                       { key: 'top', name: 'Top' },
-                      { key: 'bottom', name: 'Bottom' },
+                      // { key: 'bottom', name: 'Bottom' },
                       { key: 'insideTop', name: 'inside Top' },
                       { key: 'insideBottom', name: 'inside Bottom' },
                       { key: 'center', name: 'Center' },
@@ -222,6 +237,93 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                     ))}
                   </Select>
                 </div>
+                <div>
+                  <Select
+                    variant="bordered"
+                    size="lg"
+                    name="fontFamily"
+                    label="Font Family"
+                    labelPlacement="outside-left"
+                    classNames={{ value: 'px-2' }}
+                    placeholder="Select one"
+                    onChange={(e) =>
+                      onChange({
+                        ...element,
+                        config: {
+                          ...element.config,
+                          styles: { ...element.config.styles, labelFontFamily: e.target.value },
+                        },
+                      })
+                    }
+                    defaultSelectedKeys={[element.config.styles.labelFontFamily] || 'Roboto'}
+                    value={element.config.styles.labelFontFamily || 'Roboto'}
+                  >
+                    {fontFamily.map((font) => (
+                      <SelectItem key={font.key}>{font.label}</SelectItem>
+                    ))}
+                  </Select>
+                </div>
+                <div>
+                  <Select
+                    variant="bordered"
+                    size="lg"
+                    name="labelFormat"
+                    label="Label Format"
+                    labelPlacement="outside-left"
+                    classNames={{ value: 'px-2' }}
+                    placeholder="Select format"
+                    value={element.config.styles.labelFormat}
+                    onChange={(e) =>
+                      onChange({
+                        ...element,
+                        config: {
+                          ...element.config,
+                          styles: { ...element.config.styles, labelFormat: e.target.value },
+                        },
+                      })
+                    }
+                  >
+                    {[
+                      { key: 'value', name: 'Value' },
+                      { key: 'percentage', name: 'Percentage (%)' },
+                      { key: 'both', name: 'Both (Value, %)' },
+                      { key: 'currency', name: 'Currency' },
+                      { key: 'wholeNumber', name: 'Whole Number' },
+                      { key: 'decimal', name: 'Decimal' },
+                    ].map((type) => (
+                      <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                        {type.name}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+                {element.config.styles.labelFormat === 'currency' && (
+                  <div>
+                    <Select
+                      variant="bordered"
+                      size="lg"
+                      name="currency"
+                      label="Select Currency"
+                      labelPlacement="outside-left"
+                      classNames={{ value: 'px-2' }}
+                      placeholder="Choose currency"
+                      value={element.config.styles.selectedCurrency}
+                      onChange={(e) =>
+                        onChange({
+                          ...element,
+                          config: {
+                            ...element.config,
+                            styles: { ...element.config.styles, selectedCurrency: e.target.value },
+                          },
+                        })
+                      }
+                    >
+                      {['N', 'USD', 'EUR', 'JPY', 'GBP', 'AUD'].map((currency) => (
+                        <SelectItem key={currency}>{currency}</SelectItem>
+                      ))}
+                    </Select>
+                  </div>
+                )}
               </div>
             )}
             {element.config.useBackgroundImage && (

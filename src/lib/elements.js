@@ -237,6 +237,10 @@ export const getChartsDefaultStyle = ({ type, name }) => {
       yGridSize: 16,
       borderRadius: 8,
       order: null,
+      isTransparent: false,
+      labelFontFamily: 'Roboto',
+      labelFormat: 'value',
+      selectedCurrency: 'USD',
     };
   }
   return styles;

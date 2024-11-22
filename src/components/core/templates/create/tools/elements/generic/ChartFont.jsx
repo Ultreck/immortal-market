@@ -63,6 +63,7 @@ const ChartFont = ({ elements, onChange }) => {
                   <TextColor elements={elements} onChange={onChange} />
                 </div>
                 <LabelSize elements={elements} onChange={onChange} />
+                <LegendSize elements={elements} onChange={onChange} />
                 {elements[0].config.name !== 'dynamic-sorting' && <ValueSize elements={elements} onChange={onChange} />}
               </div>
             </AccordionItem>
@@ -477,3 +478,4 @@ XGridSize.propTypes = propTypes;
 YGridSize.propTypes = propTypes;
 
 export default ChartFont;
+

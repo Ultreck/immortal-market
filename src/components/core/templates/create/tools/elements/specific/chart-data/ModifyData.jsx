@@ -58,7 +58,7 @@ const ModifyData = ({ element, onChange, onBack }) => {
                     variant="bordered"
                     classNames={{ input: 'text-base capitalize' }}
                     onChange={(e) => {
-                      handleChange({ ...item, [element.config.keys.x]: e.target.value, index });
+                      handleChange({ ...item, [element.config.keys.x]: Number(e.target.value), index });
                     }}
                   />
                   <Input
@@ -68,7 +68,7 @@ const ModifyData = ({ element, onChange, onBack }) => {
                     type="number"
                     variant="bordered"
                     onChange={(e) => {
-                      handleChange({ ...item, [element.config.keys.y]: e.target.value, index });
+                      handleChange({ ...item, [element.config.keys.y]: Number(e.target.value), index });
                     }}
                   />
                 </div>
@@ -88,7 +88,7 @@ const ModifyData = ({ element, onChange, onBack }) => {
                     required
                     type="number"
                     variant="bordered"
-                    onChange={(e) => handleDataChange(index, 2, parseFloat(e.target.value))}
+                    onChange={(e) => handleDataChange(index, 2, Number(e.target.value))}
                   />
                 </div>
               )
@@ -100,9 +100,10 @@ const ModifyData = ({ element, onChange, onBack }) => {
                   ...element,
                   config: {
                     ...element.config,
-                    data: [...element.config.data, { browser: 'Immortal', visitors: 10 }],
-                    colors: [...element.config.colors, '#E66B5B'],
+                    data: [...element.config.data, { name: 'Immortal', value: 100 }],
+                    colors: [...element.config.colors, '#000000'],
                     bars: element.config.bars + 1,
+                    pies: element.config.pies + 1,
                   },
                 });
               }}

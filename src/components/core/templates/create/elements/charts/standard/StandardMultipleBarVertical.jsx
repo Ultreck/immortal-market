@@ -58,15 +58,44 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
               key={key}
               dataKey={key}
               fill={element.config.colors[index % element.config.colors.length]}
-              radius={[index === 0 ? 0 : 4, index === 0 ? 4 : 0, index === 1 ? 0 : 4, index === 1 ? 4 : 0]}
+              radius={element.config.styles.borderRadius}
             >
               {element.config.showLabel && (
                 <LabelList
                   dataKey={key}
-                  position={element.config.labelPosition}
+                  position={
+                    element.config.labelPosition === 'top'
+                      ? 'right'
+                      : element.config.labelPosition === 'bottom'
+                        ? 'left'
+                        : element.config.labelPosition === 'insideTop'
+                          ? 'insideLeft'
+                          : element.config.labelPosition === 'insideBottom'
+                            ? 'insideRight'
+                            : element.config.labelPosition
+                  }
+                  formatter={(value) => {
+                    const total = element.config.data.reduce((sum, entry) => sum + entry[key], 0);
+                    switch (element.config.styles.labelFormat) {
+                      case 'value':
+                        return value;
+                      case 'percentage':
+                        return `${((value / total) * 100).toFixed(1)}%`;
+                      case 'both':
+                        return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                      case 'currency':
+                        return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                      case 'wholeNumber':
+                        return Math.round(value);
+                      case 'decimal':
+                        return value.toFixed(2);
+                      default:
+                        return value;
+                    }
+                  }}
                   fill={element.config.labelFontColor}
                   fontSize={element.config.labelFontSize}
-                  fontFamily={element.config.fontFamily}
+                  fontFamily={element.config.styles.labelFontFamily}
                 />
               )}
             </Bar>
@@ -82,3 +111,4 @@ StandardMultipleBarVerticalContent.propTypes = {
 };
 
 export default StandardMultipleBarVertical;
+

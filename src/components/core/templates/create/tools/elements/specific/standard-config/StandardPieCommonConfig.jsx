@@ -1,19 +1,10 @@
-import { Checkbox, Select, SelectItem, Slider } from '@nextui-org/react';
+import { Checkbox, Select, SelectItem } from '@nextui-org/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
-import { useState } from 'react';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
+import { fontFamily } from '@/lib/utils.js';
 
 const StandardPieCommonConfig = ({ element, onChange }) => {
-  const [tab, setTab] = useState('data');
-
-  const handleChange = (updatedItem) => {
-    const updatedData = element.config.data.map((item, idx) =>
-      idx === updatedItem.index ? { ...item, ...updatedItem } : item
-    );
-    onChange({ ...element, config: { ...element.config, data: updatedData } });
-  };
-
   return (
     <div>
       <div className="flex flex-col gap-2 space-y-6">
@@ -69,6 +60,93 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
                 ))}
               </Select>
             </div>
+            <div>
+              <Select
+                variant="bordered"
+                size="lg"
+                name="fontFamily"
+                label="Font Family"
+                labelPlacement="outside-left"
+                classNames={{ value: 'px-2' }}
+                placeholder="Select one"
+                onChange={(e) =>
+                  onChange({
+                    ...element,
+                    config: {
+                      ...element.config,
+                      styles: { ...element.config.styles, labelFontFamily: e.target.value },
+                    },
+                  })
+                }
+                defaultSelectedKeys={[element.config.styles.labelFontFamily] || 'Roboto'}
+                value={element.config.styles.labelFontFamily || 'Roboto'}
+              >
+                {fontFamily.map((font) => (
+                  <SelectItem key={font.key}>{font.label}</SelectItem>
+                ))}
+              </Select>
+            </div>
+            <div>
+              <Select
+                variant="bordered"
+                size="lg"
+                name="labelFormat"
+                label="Label Format"
+                labelPlacement="outside-left"
+                classNames={{ value: 'px-2' }}
+                placeholder="Select format"
+                value={element.config.styles.labelFormat}
+                onChange={(e) =>
+                  onChange({
+                    ...element,
+                    config: {
+                      ...element.config,
+                      styles: { ...element.config.styles, labelFormat: e.target.value },
+                    },
+                  })
+                }
+              >
+                {[
+                  { key: 'value', name: 'Value' },
+                  { key: 'percentage', name: 'Percentage (%)' },
+                  { key: 'both', name: 'Both (Value, %)' },
+                  { key: 'currency', name: 'Currency' },
+                  { key: 'wholeNumber', name: 'Whole Number' },
+                  { key: 'decimal', name: 'Decimal' },
+                ].map((type) => (
+                  <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                    {type.name}
+                  </SelectItem>
+                ))}
+              </Select>
+            </div>
+            {element.config.styles.labelFormat === 'currency' && (
+              <div>
+                <Select
+                  variant="bordered"
+                  size="lg"
+                  name="currency"
+                  label="Select Currency"
+                  labelPlacement="outside-left"
+                  classNames={{ value: 'px-2' }}
+                  placeholder="Choose currency"
+                  value={element.config.styles.selectedCurrency}
+                  onChange={(e) =>
+                    onChange({
+                      ...element,
+                      config: {
+                        ...element.config,
+                        styles: { ...element.config.styles, selectedCurrency: e.target.value },
+                      },
+                    })
+                  }
+                >
+                  {['N', 'USD', 'EUR', 'JPY', 'GBP', 'AUD'].map((currency) => (
+                    <SelectItem key={currency}>{currency}</SelectItem>
+                  ))}
+                </Select>
+              </div>
+            )}
           </div>
         )}
         <Checkbox
@@ -92,7 +170,7 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
               <Checkbox
                 key={position}
                 isSelected={element.config.legendPosition === position}
-                onValueChange={(v) =>
+                onValueChange={() =>
                   onChange({
                     ...element,
                     config: { ...element.config, legendPosition: position },
@@ -120,32 +198,31 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
             ariaLabel="No of pies to Show"
           />
         </div>
-
-        <div>
-          <div>
-            <Slider
-              label="Inner Radius"
-              step={10}
-              maxValue={100}
-              minValue={10}
-              marks={[
-                { value: 10, label: '10' },
-                { value: 20, label: '20' },
-                { value: 30, label: '30' },
-                { value: 40, label: '40' },
-                { value: 50, label: '50' },
-                { value: 60, label: '60' },
-                { value: 70, label: '70' },
-                { value: 80, label: '80' },
-                { value: 90, label: '90' },
-                { value: 100, label: '100' },
-              ]}
-              className="max-w-md"
-              onChange={(e) => onChange({ ...element, config: { ...element.config, innerRadius: e } })}
-              value={element.config.innerRadius}
-            />
-          </div>
-        </div>
+        {/*<div>*/}
+        {/*  <div>*/}
+        {/*    <Slider*/}
+        {/*      label="Inner Radius"*/}
+        {/*      step={10}*/}
+        {/*      maxValue={100}*/}
+        {/*      minValue={10}*/}
+        {/*      marks={[*/}
+        {/*        { value: 10, label: '10' },*/}
+        {/*        { value: 20, label: '20' },*/}
+        {/*        { value: 30, label: '30' },*/}
+        {/*        { value: 40, label: '40' },*/}
+        {/*        { value: 50, label: '50' },*/}
+        {/*        { value: 60, label: '60' },*/}
+        {/*        { value: 70, label: '70' },*/}
+        {/*        { value: 80, label: '80' },*/}
+        {/*        { value: 90, label: '90' },*/}
+        {/*        { value: 100, label: '100' },*/}
+        {/*      ]}*/}
+        {/*      className="max-w-md"*/}
+        {/*      onChange={(e) => onChange({ ...element, config: { ...element.config, innerRadius: e } })}*/}
+        {/*      value={element.config.innerRadius}*/}
+        {/*    />*/}
+        {/*  </div>*/}
+        {/*</div>*/}
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ const useClipboardEvents = () => {
   const activePage = useTemplateStore((state) => state.template.activePage);
   const updateElements = useTemplateStore((state) => state.updateElements);
   const activeElement = useTemplateStore((state) => state.template.activeElement);
+  const openTool = useTemplateStore((state) => state.template.openTool);
 
   useEffect(() => {
     const handleCopy = (e) => {
@@ -37,13 +38,13 @@ const useClipboardEvents = () => {
       }
     };
     const handlePaste = (e) => {
-      if (activeElement) return;
+      if (activeElement || !!openTool) return;
       try {
         for (const item of e.clipboardData.items) {
           if (item.type === 'text/plain') {
             item.getAsString((text) => {
               const payload = {
-                type: 'heading',
+                type: 'text',
                 text,
                 x: 10,
                 y: 10,
@@ -59,6 +60,9 @@ const useClipboardEvents = () => {
                   fontFamily: 'Roboto',
                   letterSpacing: 0,
                   lineHeight: 1,
+                },
+                config: {
+                  name: 'paragraph',
                 },
               };
               try {
@@ -141,7 +145,17 @@ const useClipboardEvents = () => {
       window.removeEventListener('copy', handleCopy);
       window.removeEventListener('cut', handleCut);
     };
-  }, [activeElement, activePage, addElements, deleteElements, getElement, pages, selectedElements, updateElements]);
+  }, [
+    activeElement,
+    activePage,
+    addElements,
+    deleteElements,
+    getElement,
+    openTool,
+    pages,
+    selectedElements,
+    updateElements,
+  ]);
 };
 
 export default useClipboardEvents;

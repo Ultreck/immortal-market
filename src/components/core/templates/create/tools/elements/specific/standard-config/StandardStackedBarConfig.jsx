@@ -1,10 +1,11 @@
-import { Checkbox, Tab, Tabs } from '@nextui-org/react';
+import { Checkbox, Select, SelectItem, Tab, Tabs } from '@nextui-org/react';
 import { TbChartLine, TbTimeline } from 'react-icons/tb';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DndFileInput from '@/components/ui/DndFileInput';
 import { HexAlphaColorPicker } from 'react-colorful';
+import { fontFamily } from '@/lib/utils.js';
 
 const StandardStackedBarConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
@@ -171,25 +172,169 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                 ariaLabel="No of Bars to Show"
               />
             </div>
-          </div>
-        </Tab>
-        <Tab key="style" title="Chart Style" className="text-base">
-          <div className="space-y-4">
             <div className="flex items-center space-x-4">
-              <p className="text-base opacity-75 whitespace-nowrap">Label Font Size:</p>
+              <p className="text-base opacity-75 whitespace-nowrap">Border radius:</p>
               <AutoCompleteNumberInput
                 onChange={(v) =>
                   onChange({
                     ...element,
-                    config: { ...element.config, fontSize: Number(v) },
+                    config: { ...element.config, styles: { ...element.config.styles, borderRadius: Number(v) } },
                   })
                 }
-                value={element.config.fontSize}
+                value={element.config.styles.borderRadius}
                 min={1}
                 max={30}
-                ariaLabel="FontSize"
+                ariaLabel="borderRadius"
               />
             </div>
+          </div>
+        </Tab>
+        <Tab key="style" title="Chart Style" className="text-base">
+          <div className="space-y-4 flex flex-col">
+            <Checkbox
+              isSelected={element.config.showLabel}
+              className={{ base: 'py-0' }}
+              onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+            >
+              Show Label
+            </Checkbox>
+            {element.config.showLabel && (
+              <div className="border border-gray-700 p-4 rounded-2xl space-y-6">
+                <div className="flex items-center space-x-4">
+                  <p className="text-base opacity-75 whitespace-nowrap">Label Font Size:</p>
+                  <AutoCompleteNumberInput
+                    onChange={(v) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, labelFontSize: Number(v) },
+                      })
+                    }
+                    value={element.config.labelFontSize}
+                    min={1}
+                    max={30}
+                    ariaLabel="labelFontSize"
+                  />
+                </div>
+                <div>
+                  <Select
+                    variant="bordered"
+                    size="lg"
+                    name="labelPosition"
+                    label="Label Position"
+                    labelPlacement="outside-left"
+                    classNames={{ value: 'px-2' }}
+                    placeholder="Select one"
+                    value={element.config.labelPosition}
+                    onChange={(e) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, labelPosition: e.target.value },
+                      })
+                    }
+                    disableEmptySelection={true}
+                  >
+                    {[
+                      { key: 'top', name: 'Top' },
+                      // { key: 'bottom', name: 'Bottom' },
+                      { key: 'insideTop', name: 'inside Top' },
+                      { key: 'insideBottom', name: 'inside Bottom' },
+                      { key: 'center', name: 'Center' },
+                    ].map((type) => (
+                      <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                        {type.name}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+                <div>
+                  <Select
+                    variant="bordered"
+                    size="lg"
+                    name="fontFamily"
+                    label="Font Family"
+                    labelPlacement="outside-left"
+                    classNames={{ value: 'px-2' }}
+                    placeholder="Select one"
+                    onChange={(e) =>
+                      onChange({
+                        ...element,
+                        config: {
+                          ...element.config,
+                          styles: { ...element.config.styles, labelFontFamily: e.target.value },
+                        },
+                      })
+                    }
+                    defaultSelectedKeys={[element.config.styles.labelFontFamily] || 'Roboto'}
+                    value={element.config.styles.labelFontFamily || 'Roboto'}
+                  >
+                    {fontFamily.map((font) => (
+                      <SelectItem key={font.key}>{font.label}</SelectItem>
+                    ))}
+                  </Select>
+                </div>
+                <div>
+                  <Select
+                    variant="bordered"
+                    size="lg"
+                    name="labelFormat"
+                    label="Label Format"
+                    labelPlacement="outside-left"
+                    classNames={{ value: 'px-2' }}
+                    placeholder="Select format"
+                    value={element.config.styles.labelFormat}
+                    onChange={(e) =>
+                      onChange({
+                        ...element,
+                        config: {
+                          ...element.config,
+                          styles: { ...element.config.styles, labelFormat: e.target.value },
+                        },
+                      })
+                    }
+                  >
+                    {[
+                      { key: 'value', name: 'Value' },
+                      { key: 'percentage', name: 'Percentage (%)' },
+                      { key: 'both', name: 'Both (Value, %)' },
+                      { key: 'currency', name: 'Currency' },
+                      { key: 'wholeNumber', name: 'Whole Number' },
+                      { key: 'decimal', name: 'Decimal' },
+                    ].map((type) => (
+                      <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                        {type.name}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+                {element.config.styles.labelFormat === 'currency' && (
+                  <div>
+                    <Select
+                      variant="bordered"
+                      size="lg"
+                      name="currency"
+                      label="Select Currency"
+                      labelPlacement="outside-left"
+                      classNames={{ value: 'px-2' }}
+                      placeholder="Choose currency"
+                      value={element.config.styles.selectedCurrency}
+                      onChange={(e) =>
+                        onChange({
+                          ...element,
+                          config: {
+                            ...element.config,
+                            styles: { ...element.config.styles, selectedCurrency: e.target.value },
+                          },
+                        })
+                      }
+                    >
+                      {['N', 'USD', 'EUR', 'JPY', 'GBP', 'AUD'].map((currency) => (
+                        <SelectItem key={currency}>{currency}</SelectItem>
+                      ))}
+                    </Select>
+                  </div>
+                )}
+              </div>
+            )}
             <Checkbox
               isSelected={element.config.useBackgroundImage}
               className={{ base: 'py-0' }}
@@ -232,4 +377,3 @@ StandardStackedBarConfig.propTypes = {
 };
 
 export default StandardStackedBarConfig;
-

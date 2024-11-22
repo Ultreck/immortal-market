@@ -5,6 +5,7 @@ import { TbCheck } from 'react-icons/tb';
 import { capitalize, cn, interpolateColor } from '@/lib/utils.js';
 import { HexColorPicker } from 'react-colorful';
 import useTemplateStore from '@/store/template.js';
+import ColorPicker from '@/components/ui/ColorPicker';
 
 const options = [
   ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F', '#2673D9', '#2BA385', '#E6A333', '#AB52D9', '#D93566'],
@@ -189,16 +190,39 @@ const Manual = ({ element, onChange }) => {
       {colors.length > 0 ? (
         <div className="flex items-center flex-wrap gap-1">
           {colors.map((color, index) => (
-            <div
-              tabIndex="0"
+            <ColorPicker
               key={`${color}-${index}`}
-              onClick={() => setSelected(index)}
-              className={cn('w-8 h-8 p-[3px] rounded-full border border-transparent', {
-                'border-default-600': selected === index,
-              })}
-            >
-              <div style={{ backgroundColor: color }} className="w-full h-full hover:brightness-125 rounded-full" />
-            </div>
+              color={color}
+              onChange={(color) => onColorChange(color)}
+              trigger={
+                <div
+                  tabIndex="0"
+                  key={`${color}-${index}`}
+                  onClick={() => setSelected(index)}
+                  className={cn('w-8 h-8 p-[3px] rounded-full border border-transparent', {
+                    'border-default-600': selected === index,
+                  })}
+                >
+                  <div style={{ backgroundColor: color }} className="w-full h-full hover:brightness-125 rounded-full" />
+                </div>
+                // <Button variant="text" isIconOnly className="text-base">
+                //   <div className="w-6 flex flex-col items-center justify-center">
+                //     <RiFontFamily size="16" />
+                //     <div className="rounded-2xl h-1.5 mt-0.5 w-full" style={{ background: value }}></div>
+                //   </div>
+                // </Button>
+              }
+            />
+            // <div
+            //   tabIndex="0"
+            //   key={`${color}-${index}`}
+            //   onClick={() => setSelected(index)}
+            //   className={cn('w-8 h-8 p-[3px] rounded-full border border-transparent', {
+            //     'border-default-600': selected === index,
+            //   })}
+            // >
+            //   <div style={{ backgroundColor: color }} className="w-full h-full hover:brightness-125 rounded-full" />
+            // </div>
           ))}
         </div>
       ) : (
@@ -206,9 +230,9 @@ const Manual = ({ element, onChange }) => {
           <span className="opacity-70">No colors found</span>
         </div>
       )}
-      {!isNaN(selected) && (
+      {/* {!isNaN(selected) && (
         <HexColorPicker color={colors[selected]} onChange={(c) => onColorChange(c)} className="!w-full mt-4" />
-      )}
+      )} */}
     </>
   );
 };
@@ -280,3 +304,4 @@ Gradient.propTypes = {
 };
 
 export default Colors;
+
