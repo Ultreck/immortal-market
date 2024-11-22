@@ -23,13 +23,14 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
   ];
 
   if (totalPages > 1) {
-    if (index === 0) {
+    if (index < totalPages - 1) {
       options.unshift({
         key: 'page-move-down',
         label: 'Move down',
         icon: <TbChevronDown size="18" />,
       });
-    } else if (index === totalPages - 1) {
+    }
+    if (index > 0) {
       options.unshift({
         key: 'page-move-up',
         label: 'Move up ',
