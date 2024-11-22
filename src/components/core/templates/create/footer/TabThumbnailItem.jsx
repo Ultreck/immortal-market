@@ -1,7 +1,7 @@
 import useTemplateStore from '@/store/template.js';
 import { Card, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image } from '@nextui-org/react';
 import { cn, getImageLink } from '@/lib/utils.js';
-import { TbChevronDown, TbChevronUp, TbCopyPlus, TbDotsVertical, TbTrash } from 'react-icons/tb';
+import { TbChevronDown, TbChevronUp, TbCopyPlus, TbDots, TbTrash } from 'react-icons/tb';
 import { useActions } from '@/hooks/template/use-actions.js';
 import PropTypes from 'prop-types';
 
@@ -44,7 +44,7 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
       as="div"
       {...props}
       className={cn(
-        'flex border-2 p-1 items-center relative w-[70px] aspect-square justify-center bg-black/5 dark:bg-white/5 rounded-2xl cursor-pointer group',
+        'flex p-2 items-center relative w-[80px] aspect-square justify-center bg-default-200/60 dark:bg-default-100 rounded-2xl cursor-pointer group',
         { 'border-blue-500': active }
       )}
       shadow="none"
@@ -54,8 +54,8 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
     >
       <Dropdown placement="bottom" size="lg">
         <DropdownTrigger>
-          <button className="z-[2] absolute top-1.5 right-1.5 px-0 py-1 rounded-lg bg-primary-100 hover:bg-primary-200 hidden group-hover:block">
-            <TbDotsVertical size={16} />
+          <button className="z-[2] absolute top-1.5 right-1.5 px-1 py-0 rounded-lg bg-primary-100 hover:bg-primary-200 hidden group-hover:block">
+            <TbDots size={16} />
           </button>
         </DropdownTrigger>
         <DropdownMenu
@@ -80,7 +80,9 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
           ))}
         </DropdownMenu>
       </Dropdown>
-      <Image src={getImageLink(thumbnail)} removeWrapper className="object-contain rounded-xl h-full z-[1]" />
+      {!!thumbnail && (
+        <Image src={getImageLink(thumbnail)} removeWrapper className="object-contain rounded-xl h-full z-[1]" />
+      )}
       <Chip className="absolute bottom-1 left-2 z-[2] w-[2] h-[2] p-0" size="sm">
         {index + 1}
       </Chip>

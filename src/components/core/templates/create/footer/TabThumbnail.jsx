@@ -22,7 +22,7 @@ const TabThumbnail = () => {
   };
 
   return (
-    <div className="flex items-center border-t">
+    <div className="flex items-center border-t border-default-200 dark:border-default-200/60">
       <Reorder.Group
         onReorder={(items) => {
           updateTemplate({ pages: items.map((id) => pages.find((p) => p.id === id)) });
@@ -30,7 +30,7 @@ const TabThumbnail = () => {
         values={pages.map((p) => p.id)}
         axis="x"
         layoutScroll
-        className="py-3 px-4 w-full overflow-x-auto"
+        className="py-4 px-4 w-full overflow-x-auto"
       >
         <div className="flex items-center gap-2 mx-auto w-max">
           {pages.map((page, i) => {
@@ -55,7 +55,7 @@ const TabThumbnail = () => {
             isPressable
             onPress={() => addPage()}
             className={cn(
-              'flex items-center relative justify-center w-[70px] aspect-square bg-black/5 dark:bg-white/5 rounded-2xl'
+              'flex items-center relative justify-center w-[80px] aspect-square bg-black/5 dark:bg-white/5 rounded-2xl'
             )}
           >
             <TbPlus size={24} />
