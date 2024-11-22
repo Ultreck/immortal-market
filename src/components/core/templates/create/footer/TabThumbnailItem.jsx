@@ -44,8 +44,8 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
       as="div"
       {...props}
       className={cn(
-        'flex p-2 items-center relative w-[80px] aspect-square justify-center bg-default-200/60 dark:bg-default-100 rounded-2xl cursor-pointer group',
-        { 'border-blue-500': active }
+        'flex p-2 items-center relative w-[80px] aspect-square justify-center bg-default-200/60 dark:bg-default-100 rounded-2xl cursor-pointer group border-0',
+        { '!bg-primary-200': active }
       )}
       shadow="none"
       isPressable
