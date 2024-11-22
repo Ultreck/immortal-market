@@ -30,12 +30,12 @@ const DragResizeRotateWrapper = ({ id }) => {
     );
     const bottomMostElementHeight = document.getElementById(`element-${bottomMostElement?.id}`)?.scrollHeight || 0;
     return {
-      x: leftMostElement.x,
-      y: topMostElement.y,
-      width: rightMostElement.x + rightMostElement.width - leftMostElement.x,
-      height: bottomMostElement.y + bottomMostElementHeight - topMostElement.y,
+      x: leftMostElement.x * scale,
+      y: topMostElement.y * scale,
+      width: (rightMostElement.x + rightMostElement.width - leftMostElement.x) * scale,
+      height: (bottomMostElement.y + bottomMostElementHeight - topMostElement.y) * scale,
     };
-  }, [elements]);
+  }, [elements, scale]);
 
   const handleChange = (values) => {
     const diff = {

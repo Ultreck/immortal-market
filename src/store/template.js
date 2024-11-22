@@ -5,9 +5,6 @@ const useTemplateStore = createWithEqualityFn(
   (set, get) => ({
     template: {
       id: null,
-      title: null,
-      status: '',
-      type: '',
       pages: [
         {
           id: crypto.randomUUID(),

@@ -12,11 +12,19 @@ import { useAuth } from '@/hooks/use-auth.jsx';
 import MyWork from './my-work/MyWork.jsx';
 import PropTypes from 'prop-types';
 import Project from '@/components/core/templates/create/sidebar/project/Project.jsx';
+import { useNavigate } from 'react-router-dom';
+import useTemplateStore from '@/store/template.js';
+import useBusiness from '@/hooks/use-business.js';
+import { useGetDesign } from '@/api/business.js';
 
 const Sidebar = ({ className }) => {
+  const navigate = useNavigate();
   const [tab, setTab] = useState('elements');
   const collapsed = !tab;
   const { user } = useAuth();
+  const { id: business } = useBusiness();
+  const id = useTemplateStore((state) => state.template.id);
+  const { data: { design } = {} } = useGetDesign(business, id);
 
   return (
     <div
@@ -46,18 +54,17 @@ const Sidebar = ({ className }) => {
           )}
         >
           <div className="space-y-1 w-full flex-1 flex flex-col">
-            <a href="/templates">
-              <div
-                className={cn(
-                  'flex flex-col items-center justify-center py-4 px-3 w-full rounded-l-2xl overflow-hidden',
-                  'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer',
-                  { 'rounded-2xl': collapsed }
-                )}
-              >
-                <RiArrowLeftSLine size={24} />
-                <p className="text-sm mt-0.5">Back</p>
-              </div>
-            </a>
+            <button
+              onClick={() => navigate(design.type === 'template' ? '/templates' : '/projects')}
+              className={cn(
+                'flex flex-col items-center justify-center py-4 px-3 w-full rounded-l-2xl overflow-hidden',
+                'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer',
+                { 'rounded-2xl': collapsed }
+              )}
+            >
+              <RiArrowLeftSLine size={24} />
+              <p className="text-sm mt-0.5">Back</p>
+            </button>
             {[
               { icon: RiShapesLine, title: 'Elements', key: 'elements' },
               { icon: TbTemplate, title: 'Templates', key: 'templates' },

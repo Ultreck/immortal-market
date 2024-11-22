@@ -15,7 +15,7 @@ const EditDesignPage = () => {
   const qc = useQueryClient();
   const navigate = useNavigate();
   const { id: business } = useBusiness();
-  const title = useTemplateStore((state) => state.template.title);
+  const _id = useTemplateStore((state) => state.template.id);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const reset = useTemplateStore((state) => state.reset);
   const currentId = useTemplateStore((state) => state.template.id);
@@ -30,14 +30,8 @@ const EditDesignPage = () => {
 
   useEffect(() => {
     if (design) {
-      const { _id, title, description, status, type, data } = design;
-      const payload = {
-        id: _id,
-        title,
-        description,
-        status,
-        type,
-      };
+      const { _id, data } = design;
+      const payload = { id: _id };
       if (!loaded.current) {
         payload.pages = data.pages.map((p) => {
           return {
@@ -90,7 +84,7 @@ const EditDesignPage = () => {
           <p className="mt-6">Loading design..</p>
         </div>
       ) : (
-        <>{!!title && <DesignBuilder />}</>
+        <>{!!_id && <DesignBuilder />}</>
       )}
     </>
   );

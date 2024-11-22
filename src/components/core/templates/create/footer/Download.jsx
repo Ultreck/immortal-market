@@ -7,13 +7,17 @@ import useTemplateStore from '@/store/template.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import PropTypes from 'prop-types';
 import { TbChevronLeft } from 'react-icons/tb';
+import useBusiness from '@/hooks/use-business.js';
+import { useGetDesign } from '@/api/business.js';
 
 const Download = ({ onBack }) => {
   const toast = useToast();
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
   const pages = useTemplateStore((state) => state.template.pages);
   const selectElements = useTemplateStore((state) => state.selectElements);
-  const title = useTemplateStore((state) => state.template.title);
+  const { id: business } = useBusiness();
+  const id = useTemplateStore((state) => state.template.id);
+  const { data: { design } = {} } = useGetDesign(business, id);
   const [ext, setExt] = useState('');
 
   const handleDownload = useCallback(async () => {
@@ -46,13 +50,13 @@ const Download = ({ onBack }) => {
         })
       );
       const zipBlob = await zip.generateAsync({ type: 'blob' });
-      saveAs(zipBlob, `${title}.zip`);
+      saveAs(zipBlob, `${design.title}.zip`);
       setIsThumbnailLoading(false);
     } catch (error) {
       setIsThumbnailLoading(false);
       toast.error(error?.response?.data?.message || error.message);
     }
-  }, [selectElements, pages, title, toast, ext]);
+  }, [selectElements, pages, design.title, toast, ext]);
 
   return (
     <div className="w-full">
