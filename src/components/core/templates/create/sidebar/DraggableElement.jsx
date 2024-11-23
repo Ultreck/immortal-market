@@ -1,6 +1,7 @@
 import { DragOverlay, useDraggable } from '@dnd-kit/core';
 import { mergeRefs } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 
 const DraggableElement = ({ element, content, dragging, className }) => {
   const { attributes, listeners, setNodeRef, isDragging, setActivatorNodeRef } = useDraggable({
@@ -11,9 +12,7 @@ const DraggableElement = ({ element, content, dragging, className }) => {
   return (
     <div className={className} ref={mergeRefs(setNodeRef, setActivatorNodeRef)} {...listeners} {...attributes}>
       {content}
-      <DragOverlay zIndex={1} dropAnimation={null}>
-        {isDragging && dragging}
-      </DragOverlay>
+      {createPortal(<DragOverlay dropAnimation={null}>{isDragging && dragging}</DragOverlay>, document.body)}
     </div>
   );
 };
