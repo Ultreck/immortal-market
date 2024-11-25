@@ -10,12 +10,6 @@ import { fontFamily } from '@/lib/utils.js';
 const StandardStackedBarConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
 
-  const handleChange = (item) => {
-    const newData = [...element.config.data];
-    newData[item.index] = item;
-    onChange({ ...element, config: { ...element.config, data: newData } });
-  };
-
   const handleImageChange = (e) => {
     const file = e[0];
     if (file) {
