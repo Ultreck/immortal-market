@@ -91,7 +91,7 @@ export const StandardLineContent = ({ element, present = false, isChartWrapperDi
           />
           <Line
             dataKey={element.config.keys.y}
-            type={element.config.type}
+            type={element.config.type === 'zig-zag' ? 'step' : element.config.type}
             strokeWidth={2}
             activeDot={{ r: 6 }}
             isAnimationActive={false}

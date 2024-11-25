@@ -57,6 +57,28 @@ export const StandardSemiCircleContent = ({ element }) => {
             fontWeight: element.config.styles.lFontWeight,
             fontStyle: element.config.styles.lFontStyle,
             color: element.config.styles.valueAndLableColor,
+            position: element.config.labelPosition,
+            formatter: (params) => {
+              console.log({ params });
+              const total = option.series[0].data.reduce((sum, entry) => sum + entry.value, 0);
+              const value = params.value;
+              switch (element.config.styles.labelFormat) {
+                case 'value':
+                  return value;
+                case 'percentage':
+                  return `${((value / total) * 100).toFixed(1)}%`;
+                case 'both':
+                  return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                case 'currency':
+                  return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                case 'wholeNumber':
+                  return Math.round(value);
+                case 'decimal':
+                  return value.toFixed(2);
+                default:
+                  return value;
+              }
+            },
           },
         },
       ],

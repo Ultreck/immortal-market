@@ -10,6 +10,8 @@ import { fontFamily } from '@/lib/utils.js';
 const StandardBarCommonConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
 
+  console.log(element.config);
+
   const handleImageChange = (e) => {
     const file = e[0];
     if (file) {
@@ -168,13 +170,48 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
         </Tab>
         <Tab key="style" title="Chart Style" className="text-base">
           <div className="space-y-2 flex flex-col">
-            <Checkbox
-              isSelected={element.config.showLabel}
-              className={{ base: 'py-0' }}
-              onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
-            >
-              Show Label
-            </Checkbox>
+            {element.config.name !== 'line' ||
+              (element.config.name !== 'area' && (
+                <Checkbox
+                  isSelected={element.config.showLabel}
+                  className={{ base: 'py-0' }}
+                  onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+                >
+                  Show Label
+                </Checkbox>
+              ))}
+            {element.config.name === 'line' ||
+              (element.config.name === 'area' && (
+                <div>
+                  <Select
+                    variant="bordered"
+                    size="lg"
+                    name="labelType"
+                    label="Label Type"
+                    labelPlacement="outside-left"
+                    classNames={{ value: 'px-2' }}
+                    placeholder="Select one"
+                    value={element.config.type}
+                    onChange={(e) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, type: e.target.value },
+                      })
+                    }
+                    disableEmptySelection={true}
+                  >
+                    {[
+                      { key: 'natural', name: 'Normal' },
+                      { key: 'zig-zag', name: 'Zig Zag' },
+                      { key: 'linear', name: 'Linear' },
+                    ].map((type) => (
+                      <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                        {type.name}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+              ))}
             <Checkbox
               isSelected={element.config.useBackgroundImage}
               className={{ base: 'py-0' }}

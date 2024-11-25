@@ -44,7 +44,7 @@ export const StandardAreaMultipleContent = ({ element }) => {
               <Area
                 key={key}
                 dataKey={key}
-                type="monotone"
+                type={element.config.type === 'zig-zag' ? 'step' : element.config.type}
                 strokeWidth={2}
                 dot={false}
                 fill={element.config.colors[index % element.config.colors.length]}

@@ -85,7 +85,12 @@ export const StandardAreaContent = ({ element }) => {
               }}
             />
           )}
-          <Area dataKey={element.config.keys.y} fill={element.config.colors[0]} type="natural" fillOpacity={0.4} />
+          <Area
+            dataKey={element.config.keys.y}
+            fill={element.config.colors[0]}
+            type={element.config.type === 'zig-zag' ? 'step' : element.config.type}
+            fillOpacity={0.4}
+          />
         </AreaChart>
       </ChartContainer>
     </div>

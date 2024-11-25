@@ -28,8 +28,6 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
     return acc;
   }, {});
 
-  console.log({ data });
-
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <ChartContainer
@@ -107,24 +105,6 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
                   }
                 : undefined
             }
-            // label={
-            //   element.config.labelPosition === 'outside'
-            //     ? ({ payload, ...args }) => (
-            //         <text
-            //           cx={args.cx}
-            //           cy={args.cy}
-            //           x={args.x}
-            //           y={args.y}
-            //           textAnchor={args.textAnchor}
-            //           dominantBaseline={args.dominantBaseline}
-            //           fill="#000000"
-            //           fontSize={element.config.labelFontSize}
-            //         >
-            //           {payload[element.config.keys.y]}
-            //         </text>
-            //       )
-            //     : undefined
-            // }
           >
             {element.config.showLabel && element.config.labelPosition === 'inside' && (
               <LabelList

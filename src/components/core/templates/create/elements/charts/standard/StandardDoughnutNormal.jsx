@@ -47,12 +47,33 @@ export const StandardDoughnutNormalContent = ({ element }) => {
             borderRadius: 10,
           },
           label: {
-            position: 'center',
+            position: element.config.labelPosition,
             show: element.config.showLabel,
-            fontSize: element.config.styles.valueSize,
+            fontSize: element.config.styles.valueSize || element.config.labelFontSize,
             fontWeight: element.config.styles.lFontWeight,
             color: element.config.styles.valueAndLableColor,
             fontStyle: element.config.styles.lFontStyle,
+            formatter: (params) => {
+              console.log({ params });
+              const total = option.series[0].data.reduce((sum, entry) => sum + entry.value, 0);
+              const value = params.value;
+              switch (element.config.styles.labelFormat) {
+                case 'value':
+                  return value;
+                case 'percentage':
+                  return `${((value / total) * 100).toFixed(1)}%`;
+                case 'both':
+                  return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                case 'currency':
+                  return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                case 'wholeNumber':
+                  return Math.round(value);
+                case 'decimal':
+                  return value.toFixed(2);
+                default:
+                  return value;
+              }
+            },
           },
           emphasis: {
             label: {

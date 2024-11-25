@@ -12,6 +12,8 @@ StandardRosePie.propTypes = ElementPropTypes;
 export const StandardRosePieContent = ({ element }) => {
   const chartRef = useRef(null);
 
+  console.log(element.config);
+
   useEffect(() => {
     const chartData = element.config.data.slice(0, element.config.pies).map((item, index) => {
       const color = element.config.colors?.[index];
@@ -24,6 +26,12 @@ export const StandardRosePieContent = ({ element }) => {
         chart = echarts.init(chartRef.current);
         const option = {
           color: chartData.map((item) => item.fill),
+          legend: {
+            left: 'center',
+            top: 'top',
+            data: chartData.map((item) => item.name),
+            show: element.config.showLegend,
+          },
           series: [
             {
               name: 'Nightingale Chart',
@@ -36,16 +44,32 @@ export const StandardRosePieContent = ({ element }) => {
               },
               label: {
                 show: element.config.showLabel,
-                fontSize: element.config.styles?.labelSize,
+                fontSize: element.config.styles?.labelSize || element.config.labelFontSize,
                 fontWeight: element.config.styles?.lFontWeight,
                 color: element.config.styles?.valueAndLableColor,
                 fontStyle: element.config.styles?.lFontStyle,
-              },
-              legend: {
-                left: 'center',
-                top: 'top',
-                data: ['Page A', 'Page B', 'Page C', 'Page D', 'Page E', 'Page F', 'Page G', 'Page H'],
-                show: element.config.showLegend,
+                position: element.config.labelPosition,
+                formatter: (params) => {
+                  console.log({ params });
+                  const total = option.series[0].data.reduce((sum, entry) => sum + entry.value, 0);
+                  const value = params.value;
+                  switch (element.config.styles.labelFormat) {
+                    case 'value':
+                      return value;
+                    case 'percentage':
+                      return `${((value / total) * 100).toFixed(1)}%`;
+                    case 'both':
+                      return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                    case 'currency':
+                      return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                    case 'wholeNumber':
+                      return Math.round(value);
+                    case 'decimal':
+                      return value.toFixed(2);
+                    default:
+                      return value;
+                  }
+                },
               },
               data: element.config.data.slice(0, element.config.pies),
             },

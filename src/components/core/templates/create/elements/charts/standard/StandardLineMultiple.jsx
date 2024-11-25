@@ -73,7 +73,7 @@ export const StandardLineMultipleContent = ({ element }) => {
                   dot={false}
                   fill={element.config.colors[index % element.config.colors.length]}
                   stroke={element.config.colors[index % element.config.colors.length]}
-                  type={element.config.type}
+                  type={element.config.type === 'zig-zag' ? 'step' : element.config.type}
                 />
               );
             })}

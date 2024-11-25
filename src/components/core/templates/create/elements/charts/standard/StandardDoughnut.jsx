@@ -1,4 +1,4 @@
-import { Legend, Pie, PieChart } from 'recharts';
+import { LabelList, Legend, Pie, PieChart } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
@@ -62,17 +62,43 @@ export const StandardDoughnutContent = ({ element }) => {
             data={chartData}
             innerRadius={Math.min(element.width, element.height) * 0.3}
             outerRadius={Math.min(element.width, element.height) * 0.43}
-            // innerRadius={element.config.innerRadius}
             dataKey={element.config.keys.data}
-            label={element.config.showLabel}
-            labelLine={false}
             style={{
               fontSize: element.config.styles.valueSize,
               color: element.config.styles.legendColor,
               fontWeight: element.config.styles.legendFontWeight,
               fontFamily: element.config.styles.legendFontFamily,
             }}
-          />
+          >
+            {element.config.showLabel && (
+              <LabelList
+                dataKey={element.config.keys.y}
+                position={element.config.labelPosition}
+                formatter={(value) => {
+                  const total = chartData.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
+                  switch (element.config.styles.labelFormat) {
+                    case 'value':
+                      return value;
+                    case 'percentage':
+                      return `${((value / total) * 100).toFixed(1)}%`;
+                    case 'both':
+                      return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                    case 'currency':
+                      return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                    case 'wholeNumber':
+                      return Math.round(value);
+                    case 'decimal':
+                      return value.toFixed(2);
+                    default:
+                      return value;
+                  }
+                }}
+                fill="#000000"
+                fontSize={element.config.labelFontSize}
+                fontFamily={element.config.styles.labelFontFamily}
+              />
+            )}
+          </Pie>
         </PieChart>
       </ChartContainer>
     </div>
@@ -84,4 +110,3 @@ StandardDoughnutContent.propTypes = {
 };
 
 export default StandardDoughnut;
-
