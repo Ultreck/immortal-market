@@ -269,3 +269,9 @@ export const fontFamily = [
   { key: 'Hahmlet', label: 'Hahmlet' },
 ];
 
+export const camelCaseToWords = (str) => {
+  return str
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, (char) => char.toUpperCase())
+    .trim();
+};

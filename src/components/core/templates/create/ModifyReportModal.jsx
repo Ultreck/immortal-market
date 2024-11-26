@@ -3,16 +3,22 @@ import useTemplateStore from '@/store/template.js';
 import { TbChevronLeft, TbChevronRight, TbCircleCheckFilled, TbForms, TbRobot } from 'react-icons/tb';
 import { Accordion, AccordionItem, Button, Card, Checkbox, Chip, Select, SelectItem, Spinner } from '@nextui-org/react';
 import { useState } from 'react';
-import { cn, delay } from '@/lib/utils.js';
+import { camelCaseToWords, cn, delay } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import Title from '@/components/core/shared/Title.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useMount } from 'react-use';
+import useBusiness from '@/hooks/use-business.js';
+import { useGetDesignSource } from '@/api/business.js';
+import NoData from '@/components/ui/NoData.jsx';
 
 const ModifyReportModal = () => {
   const isOpen = useTemplateStore((state) => state.template.isModifyReportOpen);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const [view, setView] = useState('options');
+  const { id: business } = useBusiness();
+  const id = useTemplateStore((state) => state.template.id);
+  const { data: { source = {} } = {}, isLoading } = useGetDesignSource(business, id);
 
   const handleClose = () => {
     setView('options');
@@ -21,10 +27,33 @@ const ModifyReportModal = () => {
 
   return (
     <Drawer isOpen={isOpen} onClose={handleClose} padding={false}>
-      {view === 'options' && <Options onDone={(option) => setView(option === 'manual' ? 'summary' : 'analyze')} />}
-      {view === 'summary' && <Summary onBack={() => setView('options')} onDone={() => setView('combinations')} />}
-      {view === 'combinations' && <Combinations onBack={() => setView('summary')} onDone={() => setView('analyze')} />}
-      {view === 'analyze' && <Analyze onBack={() => setView('combinations')} onDone={handleClose} />}
+      {isLoading ? (
+        <div className="px-14 py-12 flex flex-col items-center justify-center h-full">
+          <Spinner size="lg" />
+          <p className="mt-6">Just a moment</p>
+        </div>
+      ) : (
+        <>
+          {source ? (
+            <>
+              {view === 'options' && (
+                <Options onDone={(option) => setView(option === 'manual' ? 'summary' : 'analyze')} />
+              )}
+              {view === 'summary' && (
+                <Summary onBack={() => setView('options')} onDone={() => setView('combinations')} />
+              )}
+              {view === 'combinations' && (
+                <Combinations onBack={() => setView('summary')} onDone={() => setView('analyze')} />
+              )}
+              {view === 'analyze' && <Analyze onBack={() => setView('combinations')} onDone={handleClose} />}
+            </>
+          ) : (
+            <div className="px-14 py-12">
+              <NoData text="No data source configured for this project" />
+            </div>
+          )}
+        </>
+      )}
     </Drawer>
   );
 };
@@ -105,17 +134,18 @@ const Options = ({ onDone }) => {
 
 const Summary = ({ onBack, onDone }) => {
   const [selection, setSelection] = useState([]);
+  const { id: business } = useBusiness();
+  const id = useTemplateStore((state) => state.template.id);
+  const { data: { source = {} } = {} } = useGetDesignSource(business, id);
 
-  const combinations = [
-    'Disbursement by country',
-    'Disbursement by sector',
-    'Disbursement by type',
-    'Disbursement by year',
-    'Expenditure by country',
-    'Expenditure by sector',
-    'Expenditure by type',
-    'Expenditure by year',
-  ];
+  const columns = Object.keys(source.combinations || {}).filter((key) => Array.isArray(source.combinations[key])) || [];
+
+  const combinations = columns.reduce((acc, key) => {
+    if (Array.isArray(source.combinations[key])) {
+      return [...acc, ...source.combinations[key]];
+    }
+    return acc;
+  }, []);
 
   return (
     <div className="px-14 py-12">
@@ -161,8 +191,8 @@ const Summary = ({ onBack, onDone }) => {
           }}
         >
           {combinations?.map((c) => (
-            <SelectItem key={c} classNames={{ title: 'text-base' }}>
-              {c}
+            <SelectItem key={c.text} classNames={{ title: 'text-base' }}>
+              {c.text}
             </SelectItem>
           ))}
         </Select>
@@ -201,84 +231,18 @@ const Summary = ({ onBack, onDone }) => {
 const Combinations = ({ onBack, onDone }) => {
   const toast = useToast();
   const [selection, setSelection] = useState([]);
+  const { id: business } = useBusiness();
+  const id = useTemplateStore((state) => state.template.id);
+  const { data: { source = {} } = {} } = useGetDesignSource(business, id);
 
-  const items = [
-    {
-      column: 'Disbursement',
-      combinations: [
-        {
-          text: 'Disbursement by Month',
-          column: 'disbursement',
-          ref: 'month',
-        },
-        {
-          text: 'Disbursement by Year',
-          column: 'disbursement',
-          ref: 'year',
-        },
-        {
-          text: 'Disbursement by Month and Year',
-          column: 'disbursement',
-          ref: 'month-year',
-        },
-        {
-          text: 'Paid by Month',
-          column: 'paid',
-          ref: 'month',
-        },
-      ],
-    },
-    {
-      column: 'Repayment',
-      combinations: [
-        {
-          text: 'Disbursement by Month',
-          column: 'disbursement',
-          ref: 'month',
-        },
-        {
-          text: 'Disbursement by Year',
-          column: 'disbursement',
-          ref: 'year',
-        },
-        {
-          text: 'Disbursement by Month and Year',
-          column: 'disbursement',
-          ref: 'month-year',
-        },
-        {
-          text: 'Paid by Month',
-          column: 'paid',
-          ref: 'month',
-        },
-      ],
-    },
-    {
-      column: 'Another column',
-      combinations: [
-        {
-          text: 'Disbursement by Month',
-          column: 'disbursement',
-          ref: 'month',
-        },
-        {
-          text: 'Disbursement by Year',
-          column: 'disbursement',
-          ref: 'year',
-        },
-        {
-          text: 'Disbursement by Month and Year',
-          column: 'disbursement',
-          ref: 'month-year',
-        },
-        {
-          text: 'Paid by Month',
-          column: 'paid',
-          ref: 'month',
-        },
-      ],
-    },
-  ];
+  const columns = Object.keys(source.combinations || {}).filter((key) => Array.isArray(source.combinations[key])) || [];
+
+  const items = columns.map((column) => {
+    return {
+      column: camelCaseToWords(column),
+      combinations: source.combinations[column],
+    };
+  });
 
   const handleSubmit = async () => {
     if (!selection.length) return toast.error('Please select at least one combination');
@@ -288,7 +252,7 @@ const Combinations = ({ onBack, onDone }) => {
   return (
     <div className="px-14 py-12">
       <Title
-        title="Hi there, I'm here to assist you with your report"
+        title="Select the analysis you want to include in your report"
         sub="Pick an option below to get started"
         classNames={{
           base: 'mb-10',
@@ -307,7 +271,7 @@ const Combinations = ({ onBack, onDone }) => {
                 className="py-0"
                 classNames={{ heading: 'px-4', title: 'text-base font-medium', content: 'px-4 pb-6' }}
               >
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3">
                   {item.combinations.map((combination) => {
                     const key = `${item.column}/${combination.text}`;
                     return (

@@ -18,10 +18,7 @@ const Project = () => {
   return (
     <div className="px-2">
       <h2 className="text-lg font-semibold">{design.title}</h2>
-      <p className="mt-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad debitis dicta distinctio est nemo nesciunt
-        perspiciatis porro quam? Placeat, quia.
-      </p>
+      <p className="mt-4 opacity-75 italic">{design.description || 'No description'}</p>
       <div className="space-y-4 mt-4">
         <div className="flex items-center">
           <TbClock size="24" />

@@ -8,7 +8,7 @@ import PreparingData from './PreparingData.jsx';
 import { TbDatabase, TbEye, TbReport, TbUpload } from 'react-icons/tb';
 import Stepper from '@/components/ui/Stepper.jsx';
 import SelectTemplate from '@/components/core/project/create/SelectTemplate.jsx';
-import { useTemplate } from '@/api/business.js';
+import { useCreateProject } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -58,8 +58,9 @@ const CreateProjectModal = () => {
   const [step, setStep] = useState(steps[0].key);
   const isCreateProjectModalOpen = useGlobalStore((state) => state.data.isCreateProjectModalOpen);
   const updateGlobalStore = useGlobalStore((state) => state.updateData);
-  const { mutateAsync: create, isPending: isCreateDesignLoading } = useTemplate(business);
+  const { mutateAsync: create, isPending: isCreateDesignLoading } = useCreateProject(business);
   const template = useCreateProjectStore((state) => state.data.template);
+  const files = useCreateProjectStore((state) => state.data.files);
 
   const onSubmit = async () => {
     await handleCreateProject();
@@ -67,7 +68,10 @@ const CreateProjectModal = () => {
 
   const handleCreateProject = async () => {
     try {
-      const res = await create({ template: template._id });
+      const fd = new FormData();
+      files.forEach((file) => fd.append('files', file));
+      fd.append('title', template.title);
+      const res = await create(fd);
       updateGlobalStore({ isCreateProjectModalOpen: false });
       navigate(`/designs/${res.data.design._id}/edit`);
     } catch (e) {
