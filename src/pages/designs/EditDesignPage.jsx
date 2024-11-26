@@ -18,7 +18,6 @@ const EditDesignPage = () => {
   const _id = useTemplateStore((state) => state.template.id);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const reset = useTemplateStore((state) => state.reset);
-  const currentId = useTemplateStore((state) => state.template.id);
   const { data: { success = false, design } = {}, isLoading: isTemplatesLoading } = useGetDesign(business, id);
   const loaded = useRef(false);
 
@@ -30,29 +29,41 @@ const EditDesignPage = () => {
 
   useEffect(() => {
     if (design) {
-      const { _id, data } = design;
-      const payload = { id: _id };
+      let payload = { id: design._id };
       if (!loaded.current) {
-        payload.pages = data.pages.map((p) => {
-          return {
-            ...p,
-            elements: p.elements.map((e) => {
-              if (e.type.match(/heading|subheading|paragraph|caption|count-up-number/gi)) {
-                return { ...e, type: 'text', config: { ...e.config, name: e.type } };
-              }
-              if (e.type === 'infographic') {
-                return { ...e, type: 'svg' };
-              }
-              return e;
-            }),
-          };
-        });
+        if (design?.data?.pages) {
+          payload.pages = design.data.pages.map((p) => {
+            return {
+              ...p,
+              elements: p.elements.map((e) => {
+                if (e.type.match(/heading|subheading|paragraph|caption|count-up-number/gi)) {
+                  return { ...e, type: 'text', config: { ...e.config, name: e.type } };
+                }
+                if (e.type === 'infographic') {
+                  return { ...e, type: 'svg' };
+                }
+                return e;
+              }),
+            };
+          });
+        } else {
+          payload.pages = [
+            {
+              id: crypto.randomUUID(),
+              title: 'Untitled',
+              width: 600,
+              height: 600,
+              style: {
+                background: '#ffffff',
+              },
+              elements: [],
+            },
+          ];
+        }
         loaded.current = true;
       }
-      if (currentId === _id) {
-        updateTemplate(payload);
-      } else {
-        updateTemplate({
+      if (_id !== design._id) {
+        payload = {
           isCommentsOpen: false,
           activeComment: null,
           commentsTargetId: null,
@@ -66,10 +77,11 @@ const EditDesignPage = () => {
           isModifyReportOpen: false,
           mode: 'scroll',
           ...payload,
-        });
+        };
       }
+      updateTemplate(payload);
     }
-  }, [currentId, design, updateTemplate]);
+  }, [_id, design, updateTemplate]);
 
   useUnmount(() => {
     reset();
