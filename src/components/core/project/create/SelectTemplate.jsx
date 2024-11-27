@@ -2,30 +2,29 @@ import PropTypes from 'prop-types';
 import useCreateProjectStore from '@/store/create-project.js';
 import { Button, Chip, Input, Skeleton } from '@nextui-org/react';
 import { useGetTemplates } from '@/api/business.js';
-import { TbPhotoCircle, TbSearch } from 'react-icons/tb';
+import { TbFileOff, TbPhotoCircle, TbSearch } from 'react-icons/tb';
 import { useState } from 'react';
 import DesignCard from '@/components/core/project/DesignCard.jsx';
 import Title from '@/components/core/shared/Title.jsx';
 import ThumbnailsCarousel from '@/pages/designs/ThumbnailsCarousel.jsx';
+import { cn } from '@/lib/utils.js';
 
 const SelectTemplate = ({ onNext }) => {
   const template = useCreateProjectStore((state) => state.data.template);
-  const [view, setView] = useState(template ? 'detail' : 'templates');
   const { data: { designs = [] } = {}, isLoading: isDeignsLoading } = useGetTemplates();
   const updateData = useCreateProjectStore((state) => state.updateData);
   const [category, setCategory] = useState('all');
 
   const handleClick = (template) => {
     updateData({ template });
-    setView('detail');
+    if (!template) return onNext();
   };
 
   return (
     <>
-      {view === 'detail' && !!template && (
-        <TemplateDetails key={template._id} onPrev={() => setView('templates')} onNext={onNext} />
-      )}
-      {view === 'templates' && (
+      {template ? (
+        <TemplateDetails key={template._id} onPrev={() => updateData({ template: null })} onNext={onNext} />
+      ) : (
         <>
           <div className="flex items-center justify-between mb-10">
             <Title title="Choose template" sub="Select a template to get started" />
@@ -82,7 +81,20 @@ const SelectTemplate = ({ onNext }) => {
                   </Chip>
                 ))}
               </div>
-              <div className="grid grid-cols-2 gap-7">
+              <div className="grid grid-cols-3 gap-7">
+                <div>
+                  <button
+                    onClick={() => handleClick(null)}
+                    className={cn(
+                      'w-full flex items-center justify-center p-5 bg-black/5 dark:bg-white/5 hover:bg-black/[.06] hover:dark:bg-white/[.07] rounded-2xl aspect-square cursor-pointer'
+                    )}
+                  >
+                    <TbFileOff size="48" className="opacity-30" />
+                  </button>
+                  <div className="mt-3 px-2 flex items-center justify-between">
+                    <h4 className="font-medium text-base leading-tight truncate">Blank</h4>
+                  </div>
+                </div>
                 {designs.map((design) => (
                   <DesignCard
                     onClick={() => handleClick(design)}

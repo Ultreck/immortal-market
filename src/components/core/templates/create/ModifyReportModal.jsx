@@ -169,7 +169,7 @@ const Summary = ({ onBack, onDone }) => {
             popoverContent: 'bg-default-100',
           }}
           size="lg"
-          placeholder="Select countries"
+          placeholder="Select analysis"
           isMultiline
           variant="bordered"
           scrollShadowProps={{ isEnabled: false }}
@@ -182,7 +182,10 @@ const Summary = ({ onBack, onDone }) => {
             return (
               <div className="flex flex-wrap gap-2">
                 {items.map((item) => (
-                  <Chip key={item.key} className="bg-default-300 text-md">
+                  <Chip
+                    key={item.key}
+                    className="bg-default-300 text-md w-full whitespace-normal h-auto leading-tight py-1.5 px-2 rounded-2xl"
+                  >
                     {item.textValue}
                   </Chip>
                 ))}
@@ -190,8 +193,8 @@ const Summary = ({ onBack, onDone }) => {
             );
           }}
         >
-          {combinations?.map((c) => (
-            <SelectItem key={c.text} classNames={{ title: 'text-base' }}>
+          {combinations?.map((c, i) => (
+            <SelectItem key={`${c.text}-${i}`} classNames={{ title: 'text-base' }}>
               {c.text}
             </SelectItem>
           ))}
@@ -272,8 +275,8 @@ const Combinations = ({ onBack, onDone }) => {
                 classNames={{ heading: 'px-4', title: 'text-base font-medium', content: 'px-4 pb-6' }}
               >
                 <div className="grid grid-cols-1 gap-3">
-                  {item.combinations.map((combination) => {
-                    const key = `${item.column}/${combination.text}`;
+                  {item.combinations.map((combination, i) => {
+                    const key = `${item.column}/${combination.text}/${i}`;
                     return (
                       <Checkbox
                         key={key}

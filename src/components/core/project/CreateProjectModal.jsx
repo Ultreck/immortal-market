@@ -61,23 +61,9 @@ const CreateProjectModal = () => {
   const { mutateAsync: create, isPending: isCreateDesignLoading } = useCreateProject(business);
   const template = useCreateProjectStore((state) => state.data.template);
   const files = useCreateProjectStore((state) => state.data.files);
+  const updateCreateProjectStore = useCreateProjectStore((state) => state.updateData);
 
-  const onSubmit = async () => {
-    await handleCreateProject();
-  };
-
-  const handleCreateProject = async () => {
-    try {
-      const fd = new FormData();
-      files.forEach((file) => fd.append('files', file));
-      fd.append('title', template.title);
-      const res = await create(fd);
-      updateGlobalStore({ isCreateProjectModalOpen: false });
-      navigate(`/designs/${res.data.design._id}/edit`);
-    } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
-    }
-  };
+  const current = steps.find((s) => s.key === step);
 
   const gotoNextStep = () => {
     const index = steps.findIndex((s) => s.key === step);
@@ -92,15 +78,33 @@ const CreateProjectModal = () => {
     if (prev) setStep(prev.key);
   };
 
-  const current = steps.find((s) => s.key === step);
+  const handleCreateProject = async () => {
+    try {
+      const fd = new FormData();
+      files.forEach((file) => fd.append('files', file));
+      fd.append('title', template ? template.title : 'Untitled');
+      fd.append('description', template ? template.description : '');
+      fd.append('template', template ? template._id : '');
+      const res = await create(fd);
+      handleClose();
+      navigate(`/designs/${res.data.design._id}/edit`);
+    } catch (e) {
+      toast.error(e?.response?.data?.message || e.message);
+    }
+  };
+
+  const onSubmit = async () => {
+    await handleCreateProject();
+  };
+
+  const handleClose = () => {
+    setStep('template');
+    updateCreateProjectStore({ template: null });
+    updateGlobalStore({ isCreateProjectModalOpen: false });
+  };
 
   return (
-    <Drawer
-      isOpen={isCreateProjectModalOpen}
-      onClose={() => updateGlobalStore({ isCreateProjectModalOpen: false })}
-      width={1000}
-      padding={false}
-    >
+    <Drawer isOpen={isCreateProjectModalOpen} onClose={handleClose} width={1000} padding={false}>
       <div className="grid grid-cols-[280px_1fr] h-full">
         <div className="border-r border-default-200 dark:border-default-100 py-12 px-12 h-full bg-[#f4f5f6] dark:bg-[#0b161f]">
           <Stepper

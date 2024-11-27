@@ -21,4 +21,3 @@ const useCreateProjectStore = createWithEqualityFn(
 );
 
 export default useCreateProjectStore;
-
