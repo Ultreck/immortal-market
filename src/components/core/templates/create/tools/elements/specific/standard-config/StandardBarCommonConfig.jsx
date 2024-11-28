@@ -9,9 +9,6 @@ import { fontFamily } from '@/lib/utils.js';
 
 const StandardBarCommonConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
-
-  console.log(element.config);
-
   const handleImageChange = (e) => {
     const file = e[0];
     if (file) {

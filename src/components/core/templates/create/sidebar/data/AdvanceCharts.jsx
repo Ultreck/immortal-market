@@ -3,17 +3,24 @@ import { CgLoadbarAlt } from 'react-icons/cg';
 import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react-icons/lu';
 import { IconChartFunnel } from '@tabler/icons-react';
 import {
+  TbAsterisk,
+  TbBell,
   TbBrandCoinbase,
   TbChartBar,
   TbChartScatter,
   TbChartTreemap,
+  TbCheck,
   TbCircleDot,
   TbCirclesRelation,
+  TbDeviceGamepad,
   TbDice6,
   TbGaugeFilled,
+  TbHome,
   TbIcons,
   TbLayoutList,
   TbReceiptTax,
+  TbStar,
+  TbUser,
 } from 'react-icons/tb';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { starterLifeChartData } from '@/lib/design/chart-data.js';
@@ -54,6 +61,7 @@ const elements = [
         icon1: 'circle',
         color1: '#FF0000',
         gap: 2,
+        size: 20,
       },
     },
     preview: (
@@ -120,6 +128,7 @@ const elements = [
           { label: 'Data 1', value: '71' },
           { label: 'Data 2', value: '29' },
         ],
+        fontSize: 96,
       },
     },
     preview: (
@@ -141,18 +150,18 @@ const elements = [
         name: 'circle-icons',
         styles: getChartsDefaultStyle({ type: 'chart-a', name: 'circle-icons' }),
         data: [
-          { label: 'Bubble 1', value: 30, icon: 'fa fa-user' },
-          { label: 'Bubble 2', value: 50, icon: 'fa fa-house' },
-          { label: 'Bubble 3', value: 20, icon: 'fa fa-check' },
-          { label: 'Bubble 4', value: 40, icon: 'fa fa-bell' },
-          { label: 'Bubble 5', value: 60, icon: 'fa fa-star' },
-          { label: 'Bubble 5', value: 10, icon: 'fa fa-asterisk' },
-          { label: 'Bubble 5', value: 70, icon: 'fa fa-gamepad' },
-          { label: 'Bubble 5', value: 15, icon: 'fa fa-film' },
+          { label: 'Bubble 1', value: 30, icon: TbUser },
+          { label: 'Bubble 2', value: 50, icon: TbHome },
+          { label: 'Bubble 3', value: 20, icon: TbCheck },
+          { label: 'Bubble 4', value: 40, icon: TbBell },
+          { label: 'Bubble 5', value: 60, icon: TbStar },
+          { label: 'Bubble 5', value: 10, icon: TbAsterisk },
+          { label: 'Bubble 5', value: 70, icon: TbDeviceGamepad },
         ],
         keys: { name: 'label', data: 'value' },
         colors,
         circles: 5,
+        shape: 'circle',
       },
     },
     preview: (

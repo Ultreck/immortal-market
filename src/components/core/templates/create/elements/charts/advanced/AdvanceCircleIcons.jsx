@@ -1,6 +1,7 @@
 import { cn, getPercentages } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import { createElement } from 'react';
 
 const AdvanceCircleIcons = ({ element }) => {
   return <AdvanceCircleIconsContent element={element} />;
@@ -10,6 +11,9 @@ AdvanceCircleIcons.propTypes = ElementPropTypes;
 
 export const AdvanceCircleIconsContent = ({ element }) => {
   const percentages = getPercentages(element.config.data.slice(0, element.config.circles).map((item) => +item.value));
+
+  console.log(element.config);
+
   return (
     <div
       style={{
@@ -29,13 +33,21 @@ export const AdvanceCircleIconsContent = ({ element }) => {
               style={{ flex: 10 - index }}
             >
               <div
-                className="w-full aspect-square flex justify-center items-center rounded-full"
+                className={cn(
+                  'w-full aspect-square flex justify-center items-center',
+                  element.config.shape === 'circle' ? 'rounded-full' : ''
+                )}
                 style={{ backgroundColor: color }}
               >
-                <i
-                  className={`scale-50 md:scale-100 text-red-500 mix-blend-difference ${circle.icon}`}
-                  style={{ fontSize: `${Math.max(16, 7 * (7 - index * 1.4))}px`, color: 'white' }}
-                />
+                {/*lorem*/}
+                {createElement(circle.icon, {
+                  className: `scale-50 md:scale-100 text-red-500 mix-blend-difference`,
+                  style: { fontSize: `${Math.max(16, 7 * (7 - index * 1.4))}px`, color: 'white' },
+                })}
+                {/*<i*/}
+                {/*  className={`scale-50 md:scale-100 text-red-500 mix-blend-difference ${circle.icon}`}*/}
+                {/*  style={{ fontSize: `${Math.max(16, 7 * (7 - index * 1.4))}px`, color: 'white' }}*/}
+                {/*/>*/}
               </div>
               {index % 2 === 0 ? (
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center text-center text-black">

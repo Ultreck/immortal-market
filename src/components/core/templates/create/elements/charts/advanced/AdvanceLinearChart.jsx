@@ -25,8 +25,13 @@ const AdvanceLinearChartContent = ({ element }) => {
           }}
         >
           <div className="ml-auto relative">
-            <p className="mt-2 mb-3 mr-2 ">Lorem Ipsum</p>
-            <p className="text-8xl font-extrabold absolute right-[-10px] -bottom-[80px]">{item.value}</p>
+            <p className="mt-2 mb-3 mr-2 ">{item.label}</p>
+            <p
+              style={{ fontSize: element.config.fontSize, lineHeight: '1' }}
+              className="font-extrabold absolute right-[-10px] -bottom-[80px]"
+            >
+              {item.value}
+            </p>
           </div>
         </motion.div>
       ))}

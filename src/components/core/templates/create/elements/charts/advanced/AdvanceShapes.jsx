@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
-import { useEffect } from 'react';
+import { createElement, useEffect } from 'react';
 
 const AdvanceShapes = ({ element }) => {
   return <AdvanceShapesContent element={element} />;
@@ -24,28 +24,14 @@ const classes = {
     100: 'grid-cols-10',
     default: 'grid-cols-5',
   },
-  size: {
-    10: 'w-12 h-12',
-    20: 'w-8 h-8',
-    30: 'w-8 h-8',
-    40: 'w-8 h-6',
-    50: 'w-6 h-6',
-    60: 'w-6 h-6',
-    70: 'w-6 h-6',
-    80: 'w-6 h-6',
-    90: 'w-4 h-4',
-    100: 'w-4 h-4',
-    default: 'w-12 h-12',
-  },
 };
 
 export const AdvanceShapesContent = ({ element }) => {
   const { percentage, noOfShapes, isCountVisible, countFormat, icon1 } = element.config;
   const n = Math.floor((percentage / 100) * noOfShapes);
-  const Icon1 = icons.find((icon) => icon.name === icon1 || 'circle').filledIcon;
+  const icon = icons.find((icon) => icon.name === (icon1 || 'circle')).icon;
 
-  useEffect(() => {
-  }, [element]);
+  useEffect(() => {}, [element]);
 
   return (
     <div className="space-y-6 w-full">
@@ -64,10 +50,10 @@ export const AdvanceShapesContent = ({ element }) => {
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: i * 0.02 }}
           >
-            <Icon1
-              color={i < n ? element.config.color1 : '#ddd'}
-              size={classes.size[noOfShapes] || classes.size.default}
-            />
+            {createElement(icon, {
+              color: i < n ? element.config.color1 : '#ddd',
+              size: element.config.size,
+            })}
           </motion.div>
         ))}
       </div>
