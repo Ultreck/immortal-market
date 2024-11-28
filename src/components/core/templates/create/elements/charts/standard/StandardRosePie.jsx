@@ -12,8 +12,6 @@ StandardRosePie.propTypes = ElementPropTypes;
 export const StandardRosePieContent = ({ element }) => {
   const chartRef = useRef(null);
 
-  console.log(element.config);
-
   useEffect(() => {
     const chartData = element.config.data.slice(0, element.config.pies).map((item, index) => {
       const color = element.config.colors?.[index];
