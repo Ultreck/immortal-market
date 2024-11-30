@@ -11,11 +11,16 @@ export const MapBosniaAndHerzegovinaPresent = ({ element }) => {
 };
 
 export const MapBosniaAndHerzegovinaPreview = () => {
-  return <MapBosniaAndHerzegovinaContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapBosniaAndHerzegovinaContent
+      element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }}
+      present={false}
+    />
+  );
 };
 
-const MapBosniaAndHerzegovinaContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapBosniaAndHerzegovinaContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg width="100%" fill="none" viewBox="0 0 400 386" xmlns="http://www.w3.org/2000/svg" ref={el}>
@@ -26,6 +31,9 @@ const MapBosniaAndHerzegovinaContent = ({ element }) => {
         data-name="Republika Srpska"
         data-x="156"
         data-y="172"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Republika Srpska')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M254.079 29.3229L260.7 20.7209L266.782 26.0479L276.418 24.8929L281.491 31.1839L276.316 36.7489L264.775 36.9649L254.079 29.3229ZM297.269 175.515L297.157 175.473L288.326 187.64L280.024 208.519L274.411 205.808L267.515 213.177L275.817 224.43L291.127 224.205L298.247 230.699L304.369 230.164L310.623 219.017L314.392 216.845L327.869 217.169L333.583 228.755L337.475 231.459L325.72 242.28L314.504 246.062L300.814 238.708L292.94 240.114L279.484 230.699L273.555 241.633L273.505 241.83L269.114 258.016L263.502 259.11L236.335 256.879L232.026 260.893L229.754 270.415L235.683 277.126L232.454 292.056L224.152 299.839L234.929 314.66L228.247 320.946L226.627 328.188L231.486 341.389L264.683 377.37L259.621 379.889L244.382 363.878L228.573 352.252L222.624 350.642L215.055 335.424L212.162 339.388L202.72 334.576L204.686 327.868L195.803 310.769L176.174 298.875L171.56 289.525L165.458 284.111L157.615 269.335L160.64 260.991L154.701 253.129L146.145 253.312L135.755 246.329L121.749 228.051L105.848 214.63L101.773 203.703L84.813 189.324L80.657 179.441L74.107 178.449L73.068 171.474L67.191 171.602L62.658 163.529L53.49 153.218L50.933 132.3L43.528 118.925L43.09 110.158L33.189 104.799L35.776 96.6469L19.61 77.1779L11.39 80.7919L1 67.1329L4.647 59.5039L3.424 51.0919L8.1 40.1639L4.158 31.7029L7.866 24.4599L5.808 16.6039L13.957 8.19092L23.512 11.3289L32.007 11.0399L38.475 26.4519L57.004 39.2999L47.215 43.9379L54.264 60.6539L64.522 66.6589L69.646 59.1449L78.406 62.5789L89.519 61.5019L92.504 66.8599L100.408 66.2279L106.184 70.9369L116.645 98.1639L114.934 109.315L107.243 110.815L80.117 107.815L72.213 109.958L74.25 119.296L83.275 126.142L87.339 132.357L99.94 138.139L132.2 166.439L135.612 172.651L142.244 175.869L154.63 174.154L156.229 172.751L158.817 168.581L158.389 155.079L154.976 151.64L148.131 132.57L152.41 129.136L151.34 121.208L158.817 122.064L163.727 118.639L174.84 126.142L175.268 129.564L195.345 134.707L210.512 123.347L219.7 121.636L227.819 115.842L228.888 109.844L220.77 90.7639L223.123 86.4809L222.95 86.2809L235.51 82.1969L240.847 84.5469L243.842 96.3459L249.393 99.7659L263.064 101.911L266.914 101.053L273.963 100.195L265.844 87.5559L254.527 84.3319L248.538 76.1889L258.154 72.5449L264.989 72.9749L269.695 60.9699L275.032 53.8969L281.867 53.0479L287.419 64.8349L292.186 65.1509L291.911 65.2659L288.275 70.8369L292.339 80.0459L303.656 81.1219L307.293 77.2639L316.053 76.6189L316.246 76.3749L308.362 91.6229L315.411 103.627L323.316 107.272L328.225 105.557L334.419 94.4139L338.483 99.7659L339.074 101.368L338.035 109.029L328.755 125.044L310.644 138.139L316.246 161.67L297.269 175.515ZM305.663 47.7669L313.893 45.4929L301.985 31.6739L295.813 29.1069L283.477 31.7319L289.13 38.4639L305.663 47.7669Z"
@@ -34,6 +42,9 @@ const MapBosniaAndHerzegovinaContent = ({ element }) => {
         data-name="Federacija Bosne i Hercegovine"
         data-x="254"
         data-y="29"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Federacija Bosne i Hercegovine')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M334.521 61.9329L325.872 74.2659L317.112 75.3279L316.053 76.6189L307.293 77.2639L303.656 81.1219L292.339 80.0459L288.275 70.8369L291.911 65.2659L294.254 64.4039L299.816 53.4649L305.663 47.7669L313.893 45.4929L311.693 54.1559L319.791 61.1859L334.521 61.9329Z"
@@ -42,8 +53,11 @@ const MapBosniaAndHerzegovinaContent = ({ element }) => {
         data-name="Brčko distrikt"
         data-x="334"
         data-y="61"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Brčko distrikt')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -55,6 +69,7 @@ MapBosniaAndHerzegovinaPresent.propTypes = {
 };
 MapBosniaAndHerzegovinaContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapBosniaAndHerzegovina;

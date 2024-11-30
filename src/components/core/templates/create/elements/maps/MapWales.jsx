@@ -11,11 +11,11 @@ export const MapWalesPresent = ({ element }) => {
 };
 
 export const MapWalesPreview = () => {
-  return <MapWalesContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return <MapWalesContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />;
 };
 
-export const MapWalesContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+export const MapWalesContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 350 440" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +26,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Powys')}
         data-x="283"
         data-y="118"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Powys')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M243.37 98.0106L244.841 102.702L239.006 109.103L242.257 111.405L239.383 117.408L240.104 123.864L237.176 128.955L226.602 132.018L223.928 138.541L226.99 151.24L222.28 160.109L214.074 160.821L204.043 166.138L197.682 164.309L193.426 170.128L194.222 173.965L191.334 180.984L186.712 186.02L180.499 189.52L163.484 193.262L155.887 178.672L160.27 166.326L165.955 158.746L161.542 148.55L153.82 137.807L157.1 127.628L153.304 119.208L161.278 115.975L155.859 111.671L150.487 115.131L143.454 112.215L131.331 114.55L130 118.136L123.689 117.173L112.994 122.635L108.04 129.774L105.459 139.52L98.0136 134.161L92.8696 132.719L88.5536 138.051L78.5875 137.38L74.5585 134.608L82.0916 124.766L87.8084 115.089L96.9774 108.206L103.624 108.295L111.071 101.963L115.611 95.0038L118.713 95.3505L126.509 87.4697L128.408 83.049L127.416 72.0349L136.073 64.4629L140.84 57.704L144.7 55.2371L146.616 49.0939L156.648 43.1588L164.041 43.92L171.675 41.0387L181.083 48.0248L177.209 54.8834L176.511 59.9347L171.614 63.5075L168.577 71.6403L175.632 79.7752L173.003 86.566L174.463 92.1354L183.73 89.8369L186.187 95.6324L192.295 99.6496L197.013 105.706L205.28 100.308L214.007 97.5762L220.258 93.0649L227.057 101.771L237.295 102.245L243.37 98.0106Z"
@@ -34,6 +37,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Gwynedd')}
         data-x="243"
         data-y="98"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Gwynedd')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M204.207 281.89L201.828 286.382L190.895 278.921L185.976 283.168L180.406 279.719L170.195 288.523L164.847 284.995L159.583 288.727L154.745 288.796L151.218 294.654L142.599 300.708L120.636 301.77L109.02 298.703L99.5947 299.838L98.7369 296.96L91.1241 297.552L88.4062 291.75L86.3727 291.925L83.7783 291.047L84.4837 287.482L82.3486 283.748L89.0398 279.701L99.2819 278.464L104.963 280.454L117.42 270.279L124.922 262.736L130.241 263.717L139.563 256.279L145.562 253.056L154.326 240.481L160.536 224.746L161.945 215.159L165.87 206.449L165.129 195.946L170.773 196.858L182.293 189.495L190.979 189.481L193.406 191.517L192.944 198.831L195.427 206.032L202.363 204.96L202.443 214.924L210.216 221.087L210.413 225.345L217.248 235.134L211.12 236.457L205.915 241.558L208.169 244.064L207.66 251.397L204.816 255.596L205.162 274.185L204.207 281.89Z"
@@ -42,6 +48,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Ceredigion')}
         data-x="204"
         data-y="281"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ceredigion')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M204.207 281.89L209.952 286.834L208.775 291.031L214.182 293.431L218.687 300.884L215.702 308.217L212.076 312.754L208.186 327.702L209.984 333.004L203.341 340.461L197.867 353.949L196.542 351.087L190.244 349.221L187.149 350.521L187.36 357.989L180.926 357.45L172.666 356.861L166.161 369.949L162.441 374.414L162.086 379.925L153.638 381.997L146.98 375.907L138.391 376.901L135.699 379.305L128.843 375.397L129.033 368.784L119.939 360.424L112.245 365.81L99.6694 363.646L90.057 365.076L91.3971 358.132L88.5496 351.911L92.1084 348.897L88.5925 344.965L80.7376 343.149L81.9531 339.369L78.9631 327.655L84.7766 324.269L89.6964 326.35L94.3491 321.622L108.266 317.307L109.075 311.509L101.338 305.07L99.5947 299.838L109.02 298.703L120.636 301.77L142.599 300.708L151.218 294.654L154.745 288.796L159.583 288.727L164.847 284.995L170.195 288.523L180.406 279.719L185.976 283.168L190.895 278.921L201.828 286.382L204.207 281.89Z"
@@ -50,6 +59,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Carmarthenshire')}
         data-x="204"
         data-y="281"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Carmarthenshire')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M84.8304 291.709L88.1591 292.869L88.6025 292.854L88.6891 292.833L91.1241 297.552L98.7369 296.96L99.5947 299.838L101.338 305.069L109.075 311.509L108.266 317.307L94.3492 321.622L89.6964 326.35L84.7766 324.269L78.9632 327.655L81.9531 339.369L80.7376 343.149L88.5925 344.965L92.1085 348.897L88.5496 351.911L91.3971 358.132L90.0571 365.076L83.066 367.757L82.8846 372.719L78.5726 382.684L69.3099 385.293L60.3103 383.612L51.7629 394.335L34.4042 389.191L35.4643 377.538L37.4091 370.342L30.6561 370.897L29.7893 368.035L21.7043 369.787L14.1144 367.499L15.6208 360.789L21.233 357.288L28.6406 355.796L27.2836 343.601L23.942 337.858L7.44114 336.244L1 338.838L2.51439 329.51L22.043 320.067L31.4083 314.573L30.4549 305.865L34.0645 302.371L43.8921 304.254L47.1341 309.159L52.4942 306.009L62.8588 303.864L64.6532 297.653L69.4404 296.667L75.8876 288.169L82.4034 287.626L83.7315 289.037L83.6518 291.148L84.8304 291.709Z"
@@ -58,6 +70,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Pembrokeshire')}
         data-x="84"
         data-y="291"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Pembrokeshire')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M286.221 79.0289L283.849 85.2299L285.876 90.1646L283.722 95.0425L291.352 100.886L290.512 103.566L277.3 106.825L272.15 105.35L264.325 107.093L257.029 111.638L254.197 118.025L252.396 121.568L240.104 123.864L239.383 117.408L242.257 111.405L239.006 109.102L244.841 102.702L243.37 98.0105L243.764 95.2767L239.236 86.5211L242.433 83.2193L235.837 75.2419L224.909 74.8583L233.441 64.3383L242.875 58.9712L241.22 56.4117L242.321 46.7375L233.549 40.4089L238.194 29.2862L239.162 23.9938L255.709 18.0817L251.675 29.0829L260.098 35.3029L257.554 40.0413L262.547 51.1083L267.231 55.8308L267.744 60.5264L278.875 63.8979L280.623 70.6489L286.221 79.0289Z"
@@ -66,6 +81,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Denbighshire')}
         data-x="286"
         data-y="79"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Denbighshire')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M238.194 29.2862L233.549 40.409L242.321 46.7376L241.22 56.4117L242.875 58.9713L233.441 64.3384L224.909 74.8584L235.837 75.242L242.434 83.2194L239.236 86.5212L243.764 95.2768L243.37 98.0106L237.295 102.245L227.057 101.771L220.258 93.065L214.007 97.5762L205.28 100.308L197.013 105.706L192.295 99.6496L186.187 95.6324L183.73 89.8369L174.463 92.1354L173.003 86.566L175.632 79.7752L168.577 71.6403L171.614 63.5075L176.511 59.9347L177.209 54.8834L181.083 48.0248L171.675 41.0387L192.865 30.2208L196.969 24.5239L201.983 23.2695L210.8 30.7996L223.586 31.5359L236.436 26.656L238.194 29.2862Z"
@@ -74,6 +92,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Conwy')}
         data-x="238"
         data-y="29"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Conwy')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M294.345 312.681L299.75 318.159L306.816 329.231L314.066 326.539L317.666 323.202L323.36 325.599L329.632 332.733L334.862 341.715L342.632 341.949L348.758 345.892L344.836 357.962L346.26 363.491L343.876 365.959L346.22 370.928L344.232 379.139L344.917 384.037L347.773 388.868L340.929 396.947L335.963 397.687L326.412 403.161L322.362 399.553L323.05 393.324L328.495 388.532L324.43 383.118L317.95 385.17L315.055 388.524L313.534 387.811L311.971 389.482L310.334 389.052L308.498 387.469L306.075 382.455L306.928 373.772L305.433 369.554L298.713 367.112L299.511 362.927L295.453 354.859L285.626 352.924L282.603 348.019L289.675 342.988L297.441 334.359L296.676 327.861L292.873 325.092L290.989 316.484L294.345 312.681Z"
@@ -82,6 +103,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Monmouthshire')}
         data-x="294"
         data-y="312"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Monmouthshire')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M117.079 1L133.023 4.72819L137.487 9.6649L138.102 16.1698L142.604 16.8393L144.055 25.287L146.662 30.148L153.884 28.3128L157.114 25.2541L165.31 28.7831L161.258 37.4639L144.657 50.1469L144.119 54.3962L135.78 60.8792L125.873 66.1865L119.451 63.3958L117.87 59.1107L106.722 53.898L107.745 49.7872L100.769 41.221L96.6018 33.5614L99.2848 25.8499L98.3324 17.742L100.196 13.3004L97.5413 7.10638L111.614 4.37051L117.079 1ZM88.6253 24.0665L95.3265 34.8426L99.7322 39.4745L95.2906 42.5162L87.6091 32.0978L81.9441 28.0109L88.6253 24.0665Z"
@@ -90,6 +114,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Isle of Anglesey')}
         data-x="117"
         data-y="1L133"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Isle of Anglesey')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M338.782 98.3603L338.559 110.945L335.064 111.063L329.173 117.363L323.883 107.168L316.408 105.51L312.415 108.022L306.682 103.304L302.011 104.142L298.585 109.993L290.614 109.84L287.881 116.459L283.887 118.52L280.379 116.052L274.886 121.406L268.971 123.614L258.029 118.007L254.197 118.025L257.03 111.638L264.326 107.093L272.15 105.35L277.3 106.825L290.512 103.566L291.352 100.886L283.722 95.0426L285.876 90.1647L283.849 85.23L286.221 79.029L298.088 74.8614L303.477 66.6329L307.858 65.9026L314.85 70.2774L321.505 82.9823L321.574 90.4178L324.537 95.3525L338.782 98.3603Z"
@@ -98,6 +125,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Wrexham')}
         data-x="338"
         data-y="98"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Wrexham')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M313.516 55.1474L306.93 59.8051L307.858 65.9026L303.477 66.6329L298.088 74.8614L286.221 79.0289L280.623 70.649L278.876 63.898L267.744 60.5265L267.231 55.8309L262.547 51.1084L257.555 40.0414L260.098 35.3029L251.675 29.083L255.709 18.0817L262.72 17.2657L263.522 21.8378L277.904 31.8617L287.245 40.6999L312.069 55.527L313.516 55.1474ZM293.489 39.5761L298.429 39.9726L309.724 48.8079L313.529 54.979L311.738 55.1643L292.257 42.7683L293.489 39.5761Z"
@@ -106,6 +136,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Flintshire')}
         data-x="313"
         data-y="55"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Flintshire')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M262.174 384.127L265.113 395.176L272.119 403.47L262.636 404.24L258.275 408.232L259.324 412.737L253.745 411.835L246.026 413.121L238.213 411.853L242.714 405.399L239.359 398.928L241.585 393.815L232.913 384.209L229.627 383.957L226.198 376.849L227.625 368.72L225.975 360.98L230.076 356.15L245.169 347.928L248.775 358.14L245.384 360.757L262.174 384.127Z"
@@ -114,6 +147,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Rhondda')}
         data-x="262"
         data-y="384"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Rhondda')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M180.926 357.45L187.19 364.252L189.258 371.17L193.117 372.886L187.406 386.871L187.487 389.832L177.817 390.832L173.359 393.911L173.493 401.261L168.526 399.804L162.965 401.462L153.912 400.036L151.627 402.902L144.432 405.814L134.623 401.271L132.292 391.497L141.82 384.826L149.949 388.391L163.352 379.437L166.161 369.949L172.666 356.861L180.926 357.45Z"
@@ -122,6 +158,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Swansea')}
         data-x="180"
         data-y="357"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Swansea')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M225.974 360.98L227.625 368.72L226.198 376.849L229.627 383.957L224.855 385.486L216.773 383.963L212.647 394.15L217.637 400.967L217.441 406.296L211.184 408.759L203.866 407.047L198.395 397.34L192.071 389.645L187.487 389.833L187.406 386.871L193.117 372.886L189.258 371.17L187.19 364.252L180.926 357.45L187.36 357.989L187.149 350.521L190.244 349.221L196.542 351.087L197.867 353.949L201.299 359.913L205.774 361.237L209.298 356.013L215.657 354.108L224.66 357.364L225.974 360.98Z"
@@ -130,6 +169,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Neath Port Talbot')}
         data-x="225"
         data-y="360"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Neath Port Talbot')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M287.984 374.422L292.119 374.936L293.37 382.536L289.769 386.447L292.458 389.434L294.823 392.367L287.001 396.189L291.362 400.124L287.622 404.932L281.77 401.811L272.118 403.47L265.112 395.176L262.173 384.127L267.39 376.204L263.761 365.849L260.196 360.114L259.489 353.432L262.67 352.609L268.124 357.21L270.065 362.701L277.811 364.215L281.311 370.4L287.984 374.422Z"
@@ -138,6 +180,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Caerphilly')}
         data-x="287"
         data-y="374"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Caerphilly')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M259.324 412.737L264.198 414.521L267.714 421.782L274.657 419.81L281.53 425.794L281.003 434.139L273.891 434.674L268.385 438.065L263.04 436.99L258.65 439.376L250.263 439.344L235.28 435.432L230.195 435.166L225.224 426.815L220.865 423.823L222.274 419.405L230.743 416.017L233.52 416.906L238.213 411.853L246.026 413.121L253.745 411.835L259.324 412.737Z"
@@ -146,6 +191,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Vale of Glamorgan')}
         data-x="259"
         data-y="412"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Vale of Glamorgan')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M229.627 383.957L232.913 384.209L241.585 393.815L239.359 398.928L242.714 405.399L238.213 411.853L233.52 416.906L230.743 416.017L222.274 419.405L219.798 420.749L209.067 418.755L203.866 407.047L211.184 408.759L217.441 406.296L217.637 400.967L212.647 394.15L216.773 383.963L224.855 385.486L229.627 383.957Z"
@@ -154,6 +202,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Bridgend')}
         data-x="229"
         data-y="383"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bridgend')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M326.412 403.161L315.528 407.705L308.312 406.87L306.59 398.745L304.034 395.489L310.221 392.201L313.423 387.948L314.972 388.657L317.95 385.17L324.43 383.118L328.495 388.532L323.05 393.323L322.362 399.553L326.412 403.161ZM308.498 387.469L310.334 389.052L303.999 391.529L303.801 395.347L307.113 402.657L299.541 410.183L292.35 414.121L294.144 410.254L287.622 404.931L291.362 400.124L287.001 396.189L294.823 392.367L292.458 389.434L297.258 392.115L304.53 387.472L308.498 387.469Z"
@@ -162,6 +213,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Newport')}
         data-x="326"
         data-y="403"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Newport')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M308.498 387.469L304.529 387.472L297.258 392.115L292.458 389.434L289.769 386.447L293.37 382.535L292.119 374.936L287.984 374.422L289.253 363.688L285.625 352.924L295.453 354.859L299.511 362.927L298.713 367.112L305.433 369.554L306.928 373.772L306.075 382.455L308.498 387.469Z"
@@ -170,6 +224,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Torfaen')}
         data-x="308"
         data-y="387"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Torfaen')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M287.622 404.931L294.144 410.254L292.35 414.121L287.305 416.493L281.53 425.794L274.657 419.81L267.714 421.782L264.198 414.521L259.324 412.737L258.275 408.232L262.636 404.24L272.119 403.47L281.77 401.811L287.622 404.931Z"
@@ -178,6 +235,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Cardiff')}
         data-x="287"
         data-y="404"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Cardiff')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M259.489 353.432L260.196 360.114L263.762 365.849L267.39 376.204L262.173 384.127L245.384 360.757L248.775 358.14L245.169 347.928L254.479 348.832L259.489 353.432Z"
@@ -186,6 +246,9 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Merthyr Tydfil')}
         data-x="259"
         data-y="353"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Merthyr Tydfil')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M282.603 348.019L285.626 352.924L289.253 363.688L287.984 374.422L281.312 370.4L277.812 364.215L270.065 362.701L268.124 357.21L262.671 352.609L266.149 346.027L271.976 348.799L282.603 348.019Z"
@@ -194,7 +257,11 @@ export const MapWalesContent = ({ element }) => {
         fill={assignColor('Blaenau Gwent')}
         data-x="282"
         data-y="348"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Blaenau Gwent')}
+        onMouseLeave={handleMouseLeave}
       />
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -206,6 +273,7 @@ MapWalesPresent.propTypes = {
 };
 MapWalesContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapWales;

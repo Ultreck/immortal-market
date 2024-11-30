@@ -2,9 +2,8 @@ import { Checkbox } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
-import { TbChartBar, TbChartLine, TbChartPie } from 'react-icons/tb';
 
-const MapSettings = ({ element, onChange }) => {
+const MapPie = ({ element, onChange }) => {
   return (
     <div className="space-y-4">
       <div className="flex items-center space-x-4 w-full">
@@ -64,9 +63,9 @@ const MapSettings = ({ element, onChange }) => {
   );
 };
 
-MapSettings.propTypes = {
+MapPie.propTypes = {
   element: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-export default MapSettings;
+export default MapPie;

@@ -11,11 +11,11 @@ export const MapOregonPresent = ({ element }) => {
 };
 
 export const MapOregonPreview = () => {
-  return <MapOregonContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return <MapOregonContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />;
 };
 
-export const MapOregonContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+export const MapOregonContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 292" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,6 +34,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Harney')}
         data-x="312"
         data-y="153"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Harney')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M361.835
@@ -58,6 +61,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Malheur')}
         data-x="361"
         data-y="135"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Malheur')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M230.037 183.081L229.988 189.797L230.086 212.239L228.021 212.374L228.12
@@ -74,6 +80,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Lake')}
         data-x="230"
         data-y="183"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Lake')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M120.213 194.606L122.081
@@ -103,6 +112,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Douglas')}
         data-x="120"
         data-y="194"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Douglas')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M159.738
@@ -121,6 +133,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Klamath')}
         data-x="159"
         data-y="182"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Klamath')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M136.682 138.572L137.862 143.374L137.518 146.663L138.058
@@ -149,6 +164,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Lane')}
         data-x="136"
         data-y="138"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Lane')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M170.75 129.569L170.602
@@ -169,6 +187,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Deschutes')}
         data-x="170"
         data-y="129"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Deschutes')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M297.829
@@ -191,6 +212,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Grant')}
         data-x="297"
         data-y="87"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Grant')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M324.473 17.2423V27.2073H324.768L324.719 30.3123L321.081
@@ -210,6 +234,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Umatilla')}
         data-x="324"
         data-y="17"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Umatilla')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M383.367 81.8171L382.581
@@ -241,6 +268,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Baker')}
         data-x="383"
         data-y="81"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Baker')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M383.367 81.8171H365.325H359.475L359.524
@@ -262,6 +292,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Wallowa')}
         data-x="383"
         data-y="81"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Wallowa')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M359.475
@@ -286,6 +319,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Union')}
         data-x="359"
         data-y="81"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Union')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M180.09
@@ -314,6 +350,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Wasco')}
         data-x="180"
         data-y="42"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Wasco')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M241.934
@@ -329,6 +368,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Crook')}
         data-x="241"
         data-y="135"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Crook')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M112.643 290.238L109.545 290.172L97.403
@@ -344,6 +386,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Jackson')}
         data-x="112"
         data-y="290"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Jackson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M84.965 69.4051L85.752 68.3581L88.161
@@ -370,6 +415,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Marion')}
         data-x="84"
         data-y="69"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Marion')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M136.583 109.431L136.682 112.057L136.239
@@ -396,6 +444,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Linn')}
         data-x="136"
         data-y="109"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Linn')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M37.772 238.312L38.902 237.642L42.245
@@ -419,6 +470,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Curry')}
         data-x="37"
         data-y="238"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Curry')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M252.995
@@ -435,6 +489,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Morrow')}
         data-x="252"
         data-y="23"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Morrow')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M17.764
@@ -455,6 +512,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Coos')}
         data-x="17"
         data-y="182"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Coos')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M135.551 55.2021L136.092 55.6231L136.878 58.3551L137.911
@@ -476,6 +536,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Clackamas')}
         data-x="59"
         data-y="55"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Clackamas')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M235.494 82.7923L229.496 83.0013L218.632 82.8613L212.585
@@ -498,6 +561,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Gilliam')}
         data-x="235"
         data-y="82"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Gilliam')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M200.836 82.6533L212.585 82.9313L218.632
@@ -513,6 +579,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Wheeler')}
         data-x="200"
         data-y="82"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Wheeler')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M206.489
@@ -529,6 +598,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Jefferson')}
         data-x="206"
         data-y="100"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Jefferson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M66.334
@@ -546,6 +618,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Josephine')}
         data-x="66"
         data-y="243"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Josephine')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M59.795
@@ -565,6 +640,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Tillamook')}
         data-x="59"
         data-y="32"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Tillamook')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M200.295
@@ -587,6 +665,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Sherman')}
         data-x="200"
         data-y="81"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Sherman')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M42.0491 84.3232L41.8031 93.5662V105.557L42.8351 106.802L47.8001
@@ -604,6 +685,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Lincoln')}
         data-x="42"
         data-y="84"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Lincoln')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M59.7949
@@ -622,6 +706,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Washington')}
         data-x="59"
         data-y="32"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Washington')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M84.13 65.3533V69.4053H84.965L84.081
@@ -635,6 +722,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Yamhill')}
         data-x="84"
         data-y="65"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Yamhill')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M130.389 42.0032L130.438 44.7452L131.028 45.6592L130.783
@@ -651,6 +741,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Multnomah')}
         data-x="130"
         data-y="42"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Multnomah')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M70.2171 106.802L72.0361 109.846L73.265
@@ -667,6 +760,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Benton')}
         data-x="70"
         data-y="106"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Benton')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M59.6479 7.25019L59.5 14.3392L59.845
@@ -683,6 +779,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Clatsop')}
         data-x="59"
         data-y="7"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Clatsop')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M88.8 36.5142L88.112
@@ -697,6 +796,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Columbia')}
         data-x="88"
         data-y="36"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Columbia')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M74.199 82.3053L73.855 86.4103L74.347
@@ -710,6 +812,9 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Polk')}
         data-x="74"
         data-y="82"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Polk')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M154.232
@@ -726,7 +831,11 @@ export const MapOregonContent = ({ element }) => {
         fill={assignColor('Hood River')}
         data-x="154"
         data-y="38"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hood River')}
+        onMouseLeave={handleMouseLeave}
       />
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -738,6 +847,7 @@ MapOregonPresent.propTypes = {
 };
 MapOregonContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapOregon;

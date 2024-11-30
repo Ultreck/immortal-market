@@ -11,11 +11,16 @@ export const MapTrinidadAndTobagoPresent = ({ element }) => {
 };
 
 export const MapTrinidadAndTobagoPreview = () => {
-  return <MapTrinidadAndTobagoContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapTrinidadAndTobagoContent
+      element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }}
+      present={false}
+    />
+  );
 };
 
-export const MapTrinidadAndTobagoContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+export const MapTrinidadAndTobagoContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 379" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +31,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Sangre Grande"
         data-x="252"
         data-y="256"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Sangre Grande')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M252.88 256.728L255.825 272.585L257.258 276.502L259.169 280.155L264.224 287.686L274.732 295.141L266.532 303.989L262.99 318.859L262.831 335.683L264.9 350.285L258.81 348.968L252.004 351.037L245.556 355.026L240.58 359.315L235.565 362.664L229.156 365.072L216.419 368.157L213.513 368.42L209.453 323.865L204.796 315.697L202.13 312.422L199.781 311.895L198.706 309.486L196.915 308.206L194.845 301.73L198.905 295.819L201.214 287.987L202.886 271.493L204.199 265.806L207.981 258.8L236.799 255.033L252.88 256.728Z"
@@ -34,6 +42,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Rio Claro-Mayaro"
         data-x="252"
         data-y="256"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Rio Claro-Mayaro')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M116.432 321.005L117.665 322.887L125.348 329.699L128.89 331.92L130.363 334.592L131.119 336.662L131 341.592L129.845 346.86L128.532 349.645L124.989 353.784L123.556 356.23L122.522 359.353L121.128 370.038L109.824 368.157L107.157 368.796L99.117 372.032L95.932 372.37L90.4 373.687L87.534 374.026L83.514 373.424L80.727 371.919L78.14 370L74.876 368.157L69.622 366.577L63.811 365.9L39.291 365.862L32.604 366.652L27.47 369.135L23.33 372.37L17.797 375.643L12.026 377.863L7.09 377.938L1 373.8L3.746 369.887L12.901 365.109L14.215 364.018L17.32 363.078L26.514 361.347L28.385 359.503L31.331 355.214L35.749 351.828L40.486 349.532L62.298 342.984L63.612 342.345L64.527 343.624L67.95 349.118L70.657 348.855L73.881 347.764L79.891 342.683L81.643 340.275L82.757 338.355L85.305 334.78L85.623 333.237L84.867 331.845L83.394 330.301L82.877 329.662L83.036 329.511L82.797 320.854L86.38 318.972L90.678 318.897L105.286 321.419L116.432 321.005Z"
@@ -42,6 +53,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Siparia"
         data-x="116"
         data-y="321"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Siparia')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M207.981 258.8L204.199 265.806L202.886 271.493L201.214 287.987L198.905 295.819L194.845 301.73L192.338 299.358L188.875 297.89L186.606 297.174L184.178 296.045L180.556 295.104L175.62 294.275L167.54 294.426L158.067 296.233L148.394 300.299L142.702 300.902L135.219 301.391L133.706 301.015V300.977L133.269 298.342L131.836 293.673L131.079 288.288L130.562 286.707L128.094 284.636L127.218 283.355L127.099 281.811L127.855 281.397L128.85 281.171L129.328 280.343L129.049 278.083L127.378 272.472L126.343 270.514L125.706 266.371L127.338 260.683L131.079 251.756L132.95 240.831V239.738H132.99L136.931 240.153L138.801 240.642L140.911 241.961L143.578 242.488L145.727 244.297L149.15 245.352L156.395 244.824L158.385 243.016L158.703 240.153L160.654 233.521L159.38 227.417L160.614 225.157H162.007L164.754 225.722L168.296 225.533L171.799 223.951L175.779 223.046L187.999 222.519L196.119 219.919L199.224 222.594L200.418 225.684L201.214 237.817L202.09 240.153L204.319 242.451L204.239 247.047L201.93 253.489L202.09 255.975L202.488 257.255L207.981 258.8Z"
@@ -50,6 +64,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Couva-Tabaquite-Talparo"
         data-x="207"
         data-y="258"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Couva-Tabaquite-Talparo')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M194.845 301.73L196.915 308.206L198.706 309.486L199.781 311.895L202.13 312.422L204.796 315.697L209.453 323.865L213.513 368.42L209.533 368.834L192.179 365.975L185.969 366.539L167.938 370.113L156.514 369.097L158.266 327.554L156.076 324.58L152.972 321.72L138.841 315.546L142.702 300.902L148.394 300.299L158.067 296.233L167.54 294.426L175.62 294.275L180.556 295.104L184.178 296.045L186.606 297.174L188.875 297.89L192.338 299.358L194.845 301.73Z"
@@ -58,6 +75,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Princes Town"
         data-x="194"
         data-y="301"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Princes Town')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M215.225 158.737L216.34 159.642L219.086 163.639L219.365 166.203L219.285 168.767L217.613 170.313L215.185 171.519L213.354 172.839L208.737 178.042L207.105 179.249L204.558 180.078L196.557 180.87L196 182.001L197.194 182.529L198.667 183.019L200.418 183.132L201.652 183.735L203.125 185.017L203.403 187.429L203.324 192.518L202.09 196.891L203.005 201.64L204.08 203.676L206.229 206.465L206.826 208.236V210.309L206.349 212.382L204.597 214.643L203.403 216.452L196.119 219.919L187.999 222.519L175.779 223.046L171.799 223.951L168.296 225.533L164.754 225.722L162.007 225.157H160.614L159.38 227.417L147.837 227.191L144.454 205.221L144.533 198.022L142.503 185.394L143.1 180.38L144.692 177.514L147.12 176.798L154.643 177.854L156.474 177.703L158.544 177.1L160.614 177.25L165.51 178.419L167.221 177.854L169.013 175.705L169.331 172.5L167.022 167.749L164.913 160.547L163.997 158.699L164.992 158.624L179.998 160.434L212.837 160.584L215.225 158.737ZM186.089 215.359L187.442 215.02L188.278 214.681L188.716 213.55L188.676 211.816L187.442 207.784L187.004 205.786L183.024 201.942L182.705 204.505L182.745 205.221L182.984 205.673L183.063 206.012L182.904 206.352L182.665 206.653L182.427 207.105L182.307 207.558V208.085L182.347 208.613L182.427 209.141L182.108 210.761L181.63 211.402L180.556 212.419L180.237 212.909L180.158 213.475L180.317 214.002L180.994 214.454L183.621 215.284L186.089 215.359Z"
@@ -66,6 +86,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Tunapuna/Piarco"
         data-x="215"
         data-y="158"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Tunapuna/Piarco')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M147.837 227.191L139 227.568L133.428 235.292H132.99L133.03 229.528L130.124 218.939L123.357 210.309L125.427 208.538L123.517 207.218L124.671 201.188L124.193 199.906L123.119 197.796L119.059 195.647L124.074 186.826L125.706 180.153L125.228 174.121L125.109 172.952H126.343L129.885 171.331L132.035 168.465L133.507 167.259L134.94 170.803H137.05L137.13 169.86L137.05 166.882H138.801L139 168.315L139.438 169.106L140.115 169.71L140.911 170.803L138.801 172.952L141.15 172.387L142.782 171.067L143.896 169.71L144.613 169.031L150.066 168.842L150.583 169.031L152.892 166.919L158.266 160.584L160.057 159.038L163.997 158.699L164.913 160.547L167.022 167.749L169.331 172.5L169.013 175.705L167.221 177.854L165.51 178.419L160.614 177.25L158.544 177.1L156.474 177.703L154.643 177.854L147.12 176.798L144.692 177.514L143.1 180.38L142.503 185.394L144.533 198.022L144.454 205.221L147.837 227.191Z"
@@ -74,6 +97,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="San Juan-Laventille"
         data-x="147"
         data-y="227"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'San Juan-Laventille')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M363.614 43.379L360.032 43.341L356.609 42.624L353.942 42.548L336.826 51.195L331.811 52.403L324.208 59.011L319.432 60.936L317.402 56.33L313.183 58.482L309.242 57.803L306.933 54.971L307.57 50.591L309.958 49.383L313.899 48.741L317.561 47.268L319.153 43.53L321.979 39.792L345.901 24.005L351.036 18.944L353.942 16.753L357.524 14.902L361.465 13.429L363.654 18.075L358.121 24.912L350.24 30.086L347.454 32.843L354.579 35.638L358.679 39.225L363.614 43.379Z"
@@ -82,6 +108,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Western Tobago"
         data-x="363"
         data-y="43"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Western Tobago')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M156.514 369.097L145.648 368.157L121.447 370.113L121.128 370.038L122.522 359.353L123.556 356.23L124.989 353.784L128.532 349.645L129.845 346.86L131 341.592L131.119 336.662L130.363 334.592L128.89 331.92L125.348 329.699L117.665 322.887L116.432 321.005L117.267 320.967L120.452 320.854L123.636 319.612L125.149 318.37L125.467 318.746L138.841 315.546L152.972 321.72L156.076 324.58L158.266 327.554L156.514 369.097Z"
@@ -90,6 +119,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Penal-Debe"
         data-x="156"
         data-y="369"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Penal-Debe')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M363.614 43.379L358.679 39.225L354.579 35.638L347.454 32.843L350.24 30.086L358.121 24.912L363.654 18.075L361.465 13.429L366.838 11.465L374.799 9.765L378.143 7.876L381.566 7.196L386.064 9.878L388.173 9.613L393.547 3.191L396.612 1L398.721 3.153L399 10.293L398.005 19.17L395.895 25.403L392.751 24.647H390.999L389.248 28.991L386.78 29.444L383.954 28.5L381.168 28.575L380.611 29.822L376.391 35.524L375.356 35.751L368.829 39.829L366.759 41.491L363.614 43.379Z"
@@ -98,6 +130,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Eastern Tobago"
         data-x="363"
         data-y="43"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Eastern Tobago')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M52.1881 190.709L54.4571 193.423L53.8601 194.365L51.9491 193.197L51.2331 193.084L50.3571 193.385L49.6801 194.252L50.0781 195.232L51.7501 196.363L51.1531 197.268L48.8441 197.193L47.2521 197.456L47.1731 196.25L47.8091 192.631L48.1681 191.614L49.5211 190.407L52.1881 190.709ZM68.5471 194.893L67.8711 195.346L65.1241 194.855L64.4081 194.29L66.5571 189.352L68.7461 188.485L70.7761 188.523L71.2941 189.653L70.9361 191.011L70.9751 192.895L68.8661 193.989L68.5471 194.893ZM119.059 195.647L114.919 195.006L112.571 195.195L109.545 197.645L108.431 198.173L100.351 194.479L94.2611 193.159L79.8521 192.179L78.0611 191.614L76.6671 190.068L74.8761 186.713L89.5641 176.534L93.4251 174.913L105.008 175.931L118.024 172.839L125.109 172.952L125.228 174.121L125.706 180.153L124.074 186.826L119.059 195.647Z"
@@ -106,6 +141,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Diego Martin"
         data-x="52"
         data-y="180"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Diego Martin')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M159.38 227.417L160.654 233.521L158.703 240.153L158.385 243.016L156.395 244.824L149.15 245.352L145.727 244.297L143.578 242.488L140.911 241.961L138.801 240.642L136.931 240.153L132.99 239.738H132.95L132.99 235.292H133.428L139 227.568L147.837 227.191L159.38 227.417Z"
@@ -114,6 +152,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Chaguanas"
         data-x="159"
         data-y="227"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Chaguanas')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M63.6121 342.345L74.4781 337.151L82.8771 329.662L83.3941 330.301L84.8671 331.845L85.6231 333.237L85.3051 334.78L82.7571 338.355L81.6431 340.275L79.8911 342.683L73.8811 347.764L70.6571 348.855L67.9501 349.118L64.5271 343.624L63.6121 342.345Z"
@@ -122,6 +163,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Point Fortin"
         data-x="63"
         data-y="342"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Point Fortin')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M138.841 315.546L125.467 318.746L125.149 318.37L127.417 316.525L130.841 312.61L133.03 308.921L134.065 303.161L133.706 301.015L135.219 301.391L142.702 300.902L138.841 315.546Z"
@@ -130,6 +174,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="San Fernando"
         data-x="138"
         data-y="315"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'San Fernando')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M119.059 195.647L123.119 197.796L124.193 199.906L124.671 201.188L123.517 207.218L114.163 200.811L108.431 198.173L109.545 197.645L112.571 195.195L114.919 195.006L119.059 195.647Z"
@@ -138,6 +185,9 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Port of Spain"
         data-x="119"
         data-y="195"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Port of Spain')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M186.089 215.359L183.621 215.284L180.994 214.454L180.317 214.002L180.158 213.475L180.237 212.909L180.556 212.419L181.63 211.402L182.108 210.761L182.427 209.141L182.347 208.613L182.307 208.085V207.558L182.427 207.105L182.665 206.653L182.904 206.352L183.063 206.012L182.984 205.673L182.745 205.221L182.705 204.505L183.024 201.942L187.004 205.786L187.442 207.784L188.676 211.816L188.716 213.55L188.278 214.681L187.442 215.02L186.089 215.359Z"
@@ -146,8 +196,11 @@ export const MapTrinidadAndTobagoContent = ({ element }) => {
         data-name="Arima"
         data-x="186"
         data-y="215"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Arima')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -159,6 +212,7 @@ MapTrinidadAndTobagoPresent.propTypes = {
 };
 MapTrinidadAndTobagoContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapTrinidadAndTobago;

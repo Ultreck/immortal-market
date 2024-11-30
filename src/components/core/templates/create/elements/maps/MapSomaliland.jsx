@@ -11,11 +11,13 @@ export const MapSomalilandPresent = ({ element }) => {
 };
 
 export const MapSomalilandPreview = () => {
-  return <MapSomalilandContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapSomalilandContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />
+  );
 };
 
-export const MapSomalilandContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+export const MapSomalilandContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 230" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +28,9 @@ export const MapSomalilandContent = ({ element }) => {
         fill={assignColor('Somaliland')}
         data-x="100"
         data-y="80"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Somaliland')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M52.9438 7.33305L52.2678 7.90405L52.0288 7.49306L51.5908 6.76206L51.9488 6.26006L52.4268 5.84905L53.2628 6.71706L52.9438 7.33305ZM44.8238 6.21406L44.5058 6.39706L44.4658 6.07706L45.4208 5.48406L45.8188 4.95905L45.8988 4.50205L46.1378 4.22806L46.2168 3.70306L46.3768 2.12805L46.6548 1.83105L46.7748 2.17306L46.5758 2.81306L46.6948 3.33805L46.3768 4.70805L46.2168 5.59805L45.8188 5.73505L44.8238 6.21406Z"
@@ -35,7 +40,7 @@ export const MapSomalilandContent = ({ element }) => {
         data-x="52"
         data-y="7"
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -47,6 +52,7 @@ MapSomalilandPresent.propTypes = {
 };
 MapSomalilandContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapSomaliland;

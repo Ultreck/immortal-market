@@ -11,11 +11,13 @@ export const MapRhodeIslandPresent = ({ element }) => {
 };
 
 export const MapRhodeIslandPreview = () => {
-  return <MapRhodeIslandContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapRhodeIslandContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />
+  );
 };
 
-const MapRhodeIslandContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapRhodeIslandContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 284 442" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +28,9 @@ const MapRhodeIslandContent = ({ element }) => {
         data-name="Washington"
         data-x="29"
         data-y="214"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Washington')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M208.02 124.636L194.386 137.837L182.267 132.253L177.723 127.175L162.953 132.761L155 147.48L29.2671 151.54L26.2371 6.097L184.54 1L183.782 66.184L200.067 62.623L201.96 81.443L198.173 100.252L200.067 113.97L208.02 124.636Z"
@@ -34,6 +39,9 @@ const MapRhodeIslandContent = ({ element }) => {
         data-name="Providence"
         data-x="208"
         data-y="124"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Providence')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M182.267 132.253L190.22 166.759L184.161 179.942L176.208 170.309L159.166 168.28L173.178 186.532L147.426 198.188L144.775 212.372L80.7721 214.398H29.6461L29.2671 151.54L155 147.48L162.953 132.761L177.723 127.175L182.267 132.253Z"
@@ -42,6 +50,9 @@ const MapRhodeIslandContent = ({ element }) => {
         data-name="Kent"
         data-x="182"
         data-y="132"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Kent')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M278.461 216.423L282.626 266.519L261.797 285.221L250.057 265.507L252.329 258.933L245.512 241.228L247.785 194.641L254.223 175.886L278.082 183.998L275.052 211.866L278.461 216.423ZM207.641 221.993L201.96 222.5L203.854 194.641L215.594 206.294L207.641 221.993ZM241.725 248.311L234.908 268.541L207.641 275.619L205.748 256.91L211.428 237.179L223.547 212.372L224.304 203.254L240.21 191.6L235.666 219.462L239.453 226.044L241.725 248.311ZM189.842 268.035L190.978 276.124L177.723 279.662L176.587 270.563L184.161 262.979L179.616 252.358L185.676 228.575L192.114 231.106L189.842 268.035Z"
@@ -50,6 +61,9 @@ const MapRhodeIslandContent = ({ element }) => {
         data-name="Newport"
         data-x="278"
         data-y="216"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Newport')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M208.02 124.636L229.606 137.33L242.104 155.599L236.423 169.294L237.938 177.914L230.364 189.573L219.76 178.421L216.73 152.047L199.688 149.51L194.386 137.837L208.02 124.636Z"
@@ -58,8 +72,11 @@ const MapRhodeIslandContent = ({ element }) => {
         data-name="Bristol"
         data-x="208"
         data-y="124"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bristol')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -71,6 +88,7 @@ MapRhodeIslandPresent.propTypes = {
 };
 MapRhodeIslandContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapRhodeIsland;

@@ -12,12 +12,15 @@ export const MapFrenchSouthernAndAntarcticLandsPresent = ({ element }) => {
 
 export const MapFrenchSouthernAndAntarcticLandsPreview = () => {
   return (
-    <MapFrenchSouthernAndAntarcticLandsContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />
+    <MapFrenchSouthernAndAntarcticLandsContent
+      element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }}
+      present={false}
+    />
   );
 };
 
-const MapFrenchSouthernAndAntarcticLandsContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapFrenchSouthernAndAntarcticLandsContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 362" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,8 +31,11 @@ const MapFrenchSouthernAndAntarcticLandsContent = ({ element }) => {
         data-name="Archipel des Kerguelen"
         data-x="287"
         data-y="312"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Archipel des Kerguelen')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -41,6 +47,7 @@ MapFrenchSouthernAndAntarcticLandsPresent.propTypes = {
 };
 MapFrenchSouthernAndAntarcticLandsContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapFrenchSouthernAndAntarcticLands;

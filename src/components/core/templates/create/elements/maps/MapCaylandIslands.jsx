@@ -11,11 +11,13 @@ export const MapCaylandIslandsPresent = ({ element }) => {
 };
 
 export const MapCaylandIslandsPreview = () => {
-  return <MapCaylandIslandsContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapCaylandIslandsContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />
+  );
 };
 
-const MapCaylandIslandsContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapCaylandIslandsContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg width="100%" ref={el} viewBox="0 0 400 125" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,6 +29,9 @@ const MapCaylandIslandsContent = ({ element }) => {
         data-x="8"
         data-y="90"
         stroke={element.config.stroke}
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Grand Cayman')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M396.258 1.647L397.524 1.722L399 2.06999L398.953 3.017L397.992 4.685L395.321 6.97499L391.805 9.689L389.228 10.536L387.845 10.735L386.837 11.083L385.267 11.257L384.048 11.706L381.049 12.403L378.986 13.149L377.463 13.871L374.581 15.44L373.62 15.863L371.885 16.435L369.214 17.182L368.253 17.829L367.409 18.153L366.027 18.277L365.089 18.725L363.214 18.775L362.605 18.65L359.863 19.546L358.973 19.397L359.09 18.775L359.863 18.028L361.855 16.908L363.308 15.688L365.464 14.519L367.831 13.846L369.026 13.647L370.222 13.274L372.237 12.203L375.096 9.814L375.869 9.04199L377.604 7.996L380.158 7.47299L381.845 7L382.713 6.97499L383.72 6.627L385.244 5.905L387.142 4.909L389.251 2.46899L390.165 1.946L392.016 1.47299L394.454 1L396.258 1.647Z"
@@ -36,6 +41,9 @@ const MapCaylandIslandsContent = ({ element }) => {
         data-x="396"
         data-y="1"
         stroke={element.config.stroke}
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Little Cayman')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M342.756 13.896L342.802 14.967L342.006 15.489L341.021 15.863L338.467 15.514L336.756 15.589L333.967 16.435L332.538 17.132L330.546 17.954L329.632 18.576L329.28 18.501L325.554 20.467L323.984 21.737L323.468 21.811L322.718 21.338L322.086 21.289L321.875 20.915L321.195 20.741L320.234 20.99L318.57 22.234L318.289 23.529L317.235 23.952L315.664 24.773L315.383 25.171L314.586 25.569L313.344 25.793L311.774 25.47H310.579L309.079 25.967H308.235L307.814 25.644L307.626 24.972L308.165 24.3L309.267 23.379L310.017 22.234L311.188 21.463L311.68 21.413L312.969 20.542L314.422 20.019L315.36 19.522L316.625 19.148L317.797 18.103L318.453 16.908L319.695 16.186L321.008 15.912L322.578 15.34L324.851 14.967L325.812 15.066L327.499 14.991L329.515 14.767L332.608 14.145L334.295 13.697L335.584 13L337.084 12.403L338.139 12.104L339.475 11.979L340.881 12.427L342.451 13.249L342.756 13.896ZM318.594 17.978L319.039 18.003L319.836 17.107L319.719 16.311L318.898 16.833L318.594 17.978ZM329.608 17.63L328.46 18.327L327.78 18.352L327.241 17.904L326.562 17.68L325.624 17.829L324.148 18.85H323.679L323.07 19.248L322.39 19.322L321.617 20.044L323.351 21.538L323.984 21.488L325.671 20.044L327.382 19.273L327.593 18.924L328.765 18.352L329.468 18.252L329.608 17.63ZM316.039 23.678L315.852 24.176L318.055 23.329L318.125 22.857H317L316.039 23.678Z"
@@ -45,8 +53,11 @@ const MapCaylandIslandsContent = ({ element }) => {
         data-x="342"
         data-y="13"
         stroke={element.config.stroke}
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Little Cayman')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -58,6 +69,7 @@ MapCaylandIslandsPresent.propTypes = {
 };
 MapCaylandIslandsContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapCaylandIslands;

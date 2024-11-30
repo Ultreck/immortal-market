@@ -11,11 +11,11 @@ export const MapKuwaitPresent = ({ element }) => {
 };
 
 export const MapKuwaitPreview = () => {
-  return <MapKuwaitContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return <MapKuwaitContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />;
 };
 
-const MapKuwaitContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapKuwaitContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 378" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +26,9 @@ const MapKuwaitContent = ({ element }) => {
         data-name="Al Jahrah"
         data-x="347"
         data-y="28"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Al Jahrah')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M315.611 215.365L328.746 214.464L330.577 214.201L332.368 219.082L335.274 223.737L336.388 228.578L341.563 261.281L345.225 269.3L355.693 284.956L358.838 287.989L366.878 290.684L367.515 294.277L366.6 298.993L366.361 303.783L368.072 308.496L373.804 316.612L375.038 319.492L377.227 322.819L382.163 324.913L390.8 326.782L388.731 330.445L387.855 334.668L388.094 339.039L389.367 343.074L386.183 340.87L385.069 339.824L384.79 341.729L385.029 342.924L385.944 343.821L387.934 344.867L386.342 346.884L385.347 347.481L384.551 347.108L383.675 346.324H382.243L382.044 351.328L383.954 352.523L386.82 351.067L389.367 348.116L389.925 350.581L390.8 362.043L391.557 364.992L393.228 368.164L396.532 372.53L398.92 375.142L399 375.179L361.823 375.589L324.567 375.962L287.35 376.335L250.093 376.746L238.869 376.858L237.117 370.515L233.177 366.41L228.4 363.014L223.902 358.908L220.758 353.494L217.892 346.436L215.862 339.151L215.066 326.296L214.111 320.277L202.488 288.363L192.417 271.098L198.269 267.539L208.498 260.381L255.308 253.672L260.164 252.022L261 248.835L263.149 216.566L275.21 201.581L279.309 205.675L282.414 210.859L282.653 221.034L315.611 215.365Z"
@@ -34,6 +37,9 @@ const MapKuwaitContent = ({ element }) => {
         data-name="Al Ahmadi"
         data-x="315"
         data-y="215"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Al Ahmadi')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M306.655 186.172L289.34 188.465L280.066 191.059L278.951 188.691L278.712 187.902L282.573 186.586L287.23 185.007L288.544 179.217L291.649 177.863L295.669 179.179L299.848 176.058L302.038 172.485L305.381 170.943L306.894 172.334L310.118 176.848L304.107 181.134L306.655 186.172ZM388.173 161.273L389.845 163.456L392.034 170.002L391.596 172.447L388.492 171.319L386.502 170.905L384.472 169.551L378.7 164.472L374.72 162.929L369.187 162.063L364.769 162.289L364.928 156.004V155.967L367.236 152.315L370.898 151.826L379.178 154.348L382.481 155.628L384.113 157.021L386.541 159.091L388.173 161.273Z"
@@ -42,6 +48,9 @@ const MapKuwaitContent = ({ element }) => {
         data-name="Al Asimah"
         data-x="306"
         data-y="186"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Al Asimah')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M310.197 194.554L313.342 202.032L315.611 215.365L282.653 221.034L282.414 210.859L279.309 205.675L275.21 201.581L276.085 191.66L280.066 191.059L289.34 188.465L306.655 186.172L310.197 194.554Z"
@@ -50,6 +59,9 @@ const MapKuwaitContent = ({ element }) => {
         data-name="Al Farwaniyah"
         data-x="310"
         data-y="194"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Al Farwaniyah')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M330.577 214.201L328.746 214.464L315.611 215.365L313.342 202.032L310.197 194.554H318.835L328.03 190.946L327.83 192.111L327.631 196.508L328.348 203.609L330.577 214.201Z"
@@ -58,6 +70,9 @@ const MapKuwaitContent = ({ element }) => {
         data-name="Mubarak Al-Kabeer"
         data-x="330"
         data-y="214"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Mubarak Al-Kabeer')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M328.03 190.946L318.835 194.554H310.197L306.655 186.172L304.107 181.134L310.118 176.848L310.556 177.487L313.66 180.27L315.77 181.022L321.621 183.052L329.343 181.473L328.03 190.946Z"
@@ -66,8 +81,11 @@ const MapKuwaitContent = ({ element }) => {
         data-name="Hawalli"
         data-x="323"
         data-y="190"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hawalli')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -79,6 +97,7 @@ MapKuwaitPresent.propTypes = {
 };
 MapKuwaitContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapKuwait;

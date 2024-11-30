@@ -11,11 +11,11 @@ export const MapPalestinePresent = ({ element }) => {
 };
 
 export const MapPalestinePreview = () => {
-  return <MapPalestineContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return <MapPalestineContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />;
 };
 
-const MapPalestineContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapPalestineContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 165 442" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +26,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Israel"
         data-x="127"
         data-y="119"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Israel')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M82.2282 198.963L84.4292 200.027L85.4682 202.266L86.6312 202.927L88.0502 202.502L89.7942 203.453L89.4702 206.822L92.5012 207.437L93.6822 207.023L94.0162 204.572L95.6832 205.904L97.5322 210.86L97.5422 212.236L100.582 215.524L103.126 216.563L104.584 217.76L104.632 220.699L105.508 222.275L107.767 223.425L109.539 223.403L105.461 226.542L102.373 227.916L97.2182 233.464L95.8172 234.301L89.6902 235.25L88.3652 234.937L86.3542 235.986L76.9582 235.306L72.9662 236.31L68.6392 236.879L66.2662 236.243L64.7422 234.971L63.6742 233.23L63.4082 231.008L65.2662 227.268L67.3722 224.531L69.2872 220.889L69.6402 218.944L69.2202 214.394L70.0592 210.189L72.4032 206.52L76.8922 201.975L81.3612 199.826L82.2282 198.963Z"
@@ -34,6 +37,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Al Khalīl"
         data-x="82"
         data-y="198"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Al Khalīl')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M110.13 181.693L107.824 181.726L105.937 178.776L104.298 178.428L102.993 176.947L101.115 176.464L99.2088 177.227L98.1988 176.419L93.1768 176.756L92.8248 178.473L86.1918 178.226L84.5248 177.575L83.6098 178.147L83.2568 179.864L81.8178 181.221L78.7308 183.947L76.3008 184.822L73.6708 184.44L71.8218 183.644L71.0308 180.638L72.2028 178.888L76.9578 178.035L77.8058 175.42L77.3398 173.613L75.1668 171.873L73.7088 169.897L73.4798 167.347L74.7758 164.55L74.5758 161.73L75.3478 160.055L75.2528 157.109L74.2808 155.265L76.1388 155.524L77.3778 156.603L82.3898 157.188L85.0488 156.289L87.1258 154.984L89.0128 155.861L91.0048 155.715L93.2148 157.008L94.9208 156.873L96.9218 155.962L98.2278 156.84L101.592 156.806L102.592 157.514L104.422 157.334L107.281 158.335L108.281 159.245L109.139 161.482L111.245 160.932L113.399 161.1L114.123 161.977L111.988 163.46L114.752 165.303L114.857 166.651L113.475 168.628L113.932 172.614L114.723 174.096L113.742 176.588L113.818 181.277L113.17 182.141L110.13 181.693Z"
@@ -42,6 +48,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Ramallah"
         data-x="110"
         data-y="181"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ramallah')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M109.539 223.403L107.767 223.425L105.508 222.275L104.632 220.699L104.584 217.76L103.126 216.563L100.582 215.524L97.542 212.236L97.532 210.86L95.683 205.904L94.016 204.572L93.682 207.023L92.501 207.437L89.47 206.822L89.794 203.453L88.05 202.502L86.631 202.927L85.468 202.266L84.429 200.027L82.228 198.963L86.345 194.864L90.404 193.206L95.34 192.87L98.228 194.864L100.048 195.021L101.982 194.27L105.213 193.99L107.309 192.959L110.111 193.217L112.35 192.433L116.905 193.139L117.858 192.87L120.326 193.811L124.129 197.676L120.05 211.162L119.793 220.788L113.494 220.688L111.988 221.224L109.539 223.403Z"
@@ -50,6 +59,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Bayt Laḩm"
         data-x="109"
         data-y="223"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bayt Laḩm')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M125.12 194.696L121.451 191.335L120.727 188.992L119.412 188.163L116.705 188.196L114.647 188.992L113.341 188.891L111.359 187.243L111.941 185.988L110.244 184.048L110.13 181.693L113.17 182.141L113.818 181.277L113.742 176.588L114.723 174.096L113.932 172.614L113.475 168.628L114.857 166.651L114.752 165.303L111.988 163.46L114.123 161.977L113.399 161.1L112.703 156.884L112.122 155.648L112.646 153.882L116.667 152.712L115.962 150.057L116.315 148.144L116.038 146.006L116.562 143.991L116.162 142.662L114.104 142.55L115.914 140.072L117.277 136.783L119.783 138.293L120.936 140.117L121.641 142.336L122.937 142.978L124.958 141.412L129.074 141.221L128.245 142.854L126.997 149.911L125.653 151.745L124.557 155.321L124.767 160.156L125.968 162.134L125.082 163.438L126.673 166.965L126.073 170.964L124.348 172.636L125.282 177.362L126.94 178.428L126.015 180.268L127.006 181.861L126.254 183.992L127.426 190.539L125.12 194.696Z"
@@ -58,6 +70,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Arīḩā wal Aghwār"
         data-x="125"
         data-y="194"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Arīḩā wal Aghwār')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M93.2149 157.008L95.6929 154.208L99.8858 152.487L100.324 150.71L99.2569 149.348L96.8269 148.583L93.7109 149.101L92.2239 147.998L90.7659 145.105L92.1479 141.829L92.5099 137.774L90.8708 135.183L89.8039 133.459L90.7279 131.678L90.9279 129.875L89.2509 128.364L88.8599 126.052L91.5569 127.214L92.0619 127.913L96.0269 127.733L96.9129 128.229L100.972 128.522L102.64 127.259L105.947 129.875L110.464 133.549L114.094 132.321L115.952 132.862L117.277 136.783L115.914 140.072L114.104 142.55L116.162 142.662L116.562 143.991L116.038 146.006L116.315 148.144L115.962 150.057L116.667 152.712L112.646 153.882L112.122 155.648L112.703 156.884L113.399 161.1L111.245 160.932L109.139 161.482L108.281 159.245L107.281 158.335L104.422 157.334L102.592 157.514L101.592 156.806L98.2279 156.84L96.9219 155.962L94.9209 156.873L93.2149 157.008Z"
@@ -66,6 +81,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Nāblus"
         data-x="93"
         data-y="157"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Nāblus')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M116.791 117.274L115.657 118.787L113.275 120.186L112.674 121.157L110.349 121.066L107.805 122.251L107.004 125.026L107.195 127.27L105.947 129.875L102.64 127.259L100.972 128.522L96.9129 128.229L96.0269 127.733L92.062 127.913L91.5569 127.214L91.5289 124.97L88.7079 123.639L86.3829 121.958L86.8019 117.184L87.364 115.852L86.202 114.926L82.8759 116.044L82.7329 114.621L84.239 113.91L84.3819 111.855L82.5229 111.121L83.086 110.048L87.6409 108.037L91.8999 105.449L93.368 103.652L95.1209 101.663L96.5509 101.267L99.562 103.765L102.526 105.585L104.393 105.8L109.053 104.93L111.693 105.167L113.237 106.32L114.78 108.952L114.961 113.628L116.791 117.274Z"
@@ -74,6 +92,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Janīn"
         data-x="116"
         data-y="117"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Janīn')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M125.12 194.696L124.129 197.676L120.326 193.811L117.858 192.87L116.905 193.139L112.35 192.433L110.111 193.217L107.309 192.959L105.213 193.99L101.982 194.27L100.048 195.021L98.2279 194.864L95.3399 192.87L96.3309 191.301L96.6169 187.255L94.8829 185.427L90.4609 185.45L84.4289 182.859L81.8179 181.221L83.2569 179.864L83.6099 178.147L84.5249 177.575L86.1919 178.226L92.8249 178.473L93.1769 176.756L98.1989 176.419L99.2089 177.227L101.115 176.464L102.993 176.947L104.298 178.428L105.937 178.776L107.824 181.726L110.13 181.693L110.244 184.048L111.941 185.988L111.359 187.243L113.341 188.891L114.647 188.992L116.705 188.196L119.412 188.163L120.727 188.992L121.451 191.335L125.12 194.696Z"
@@ -82,6 +103,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Al Quds"
         data-x="125"
         data-y="194"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Al Quds')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M127.807 119.475L127.626 121.495L128.56 123.041L127.912 126.424L128.665 128.432L128.169 130.54L128.827 132.174L128.484 134.665L129.313 140.264L129.074 141.221L124.958 141.412L122.937 142.978L121.641 142.336L120.936 140.117L119.783 138.293L117.277 136.783L115.952 132.862L114.094 132.321L110.464 133.549L105.947 129.875L107.195 127.27L107.004 125.026L107.805 122.251L110.349 121.066L112.674 121.157L113.275 120.186L115.657 118.787L116.791 117.274L121.594 117.15L127.807 119.475Z"
@@ -90,6 +114,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Ţūbās"
         data-x="127"
         data-y="119"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ţūbās')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M90.8712 135.183L86.7832 136.118L84.6682 139.025L82.8572 140.207L81.5802 140.298L79.5412 138.935L75.1572 133.076L75.6722 132.095L75.2242 128.871L75.3292 125.838L76.9772 123.12L80.1132 121.36L80.5132 118.493L81.3422 116.179L82.2092 111.719L82.5232 111.121L84.3822 111.855L84.2392 113.91L82.7332 114.621L82.8762 116.044L86.2022 114.926L87.3642 115.852L86.8022 117.184L86.3832 121.958L88.7082 123.639L91.5292 124.97L91.5572 127.214L88.8602 126.052L89.2512 128.364L90.9282 129.875L90.7282 131.678L89.8042 133.459L90.8712 135.183Z"
@@ -98,6 +125,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Ţūlkarm"
         data-x="90"
         data-y="135"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ţūlkarm')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M90.7661 145.105L88.4981 145.297L83.2001 143.518L80.1701 148.741L77.8641 150.282L74.5381 151.34L72.9181 152.746L72.9661 152.296L74.0421 149.652L73.2131 144.993L71.3931 141.953L71.5171 139.34L73.2421 135.42L75.1571 133.076L79.5411 138.935L81.5801 140.298L82.8571 140.207L84.6681 139.025L86.7831 136.118L90.8711 135.183L92.5101 137.774L92.1481 141.829L90.7661 145.105Z"
@@ -106,6 +136,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Qalqīlyah"
         data-x="90"
         data-y="145"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Qalqīlyah')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M93.2148 157.008L91.0048 155.715L89.0128 155.861L87.1258 154.984L85.0488 156.289L82.3898 157.188L77.3778 156.603L76.1388 155.524L74.2808 155.265L74.1568 155.007L72.8608 153.196L72.9178 152.746L74.5378 151.34L77.8638 150.282L80.1698 148.741L83.1998 143.518L88.4978 145.297L90.7658 145.105L92.2238 147.998L93.7108 149.101L96.8268 148.583L99.2568 149.348L100.324 150.71L99.8858 152.487L95.6928 154.208L93.2148 157.008Z"
@@ -114,6 +147,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Salfīt"
         data-x="93"
         data-y="157"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Salfīt')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M9.72897 246.459L8.63297 242.769L7.99397 241.966L4.65897 240.192L1.20996 237.805L8.33696 230.595L9.27097 231.321L12.368 232.449L14.493 233.699L14.036 235.239L14.303 241.464L13.245 243.404L9.72897 246.459Z"
@@ -122,6 +158,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Khān Yūnis"
         data-x="9"
         data-y="246"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Khān Yūnis')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M18.8102 227.603L18.0482 224.286L14.6362 223.649L18.0192 219.671L22.3652 214.048L24.7852 217.637L27.6252 219.023L18.8102 227.603Z"
@@ -130,6 +169,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Ghazzah"
         data-x="18"
         data-y="227"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ghazzah')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M4.716 250.316L1 237.972L1.21 237.805L4.659 240.192L7.994 241.966L8.633 242.769L9.729 246.459L4.716 250.316Z"
@@ -138,6 +180,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Rafaḩ"
         data-x="4"
         data-y="250"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Rafaḩ')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M14.4929 233.699L12.3679 232.449L9.27092 231.321L8.33691 230.595L12.3869 226.374L14.6359 223.649L18.0479 224.286L18.8099 227.603L14.8749 232.449L14.4929 233.699Z"
@@ -146,6 +191,9 @@ const MapPalestineContent = ({ element }) => {
         data-name="Dayr al Balaḩ"
         data-x="14"
         data-y="233"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Dayr al Balaḩ')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M22.3652 214.048L25.7762 208.914L29.9212 212.784L31.2172 214.708L31.2372 216.854L30.3882 218.363L27.6252 219.023L24.7852 217.637L22.3652 214.048Z"
@@ -154,8 +202,11 @@ const MapPalestineContent = ({ element }) => {
         data-name="Shamāl Ghazzah"
         data-x="22"
         data-y="214"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Shamāl Ghazzah')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -167,6 +218,7 @@ MapPalestinePresent.propTypes = {
 };
 MapPalestineContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapPalestine;

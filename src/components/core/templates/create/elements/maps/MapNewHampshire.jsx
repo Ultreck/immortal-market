@@ -11,11 +11,13 @@ export const MapNewHampshirePresent = ({ element }) => {
 };
 
 export const MapNewHampshirePreview = () => {
-  return <MapNewHampshireContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapNewHampshireContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />
+  );
 };
 
-export const MapNewHampshireContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+export const MapNewHampshireContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 225 442" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +28,9 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Coos')}
         data-x="187"
         data-y="176"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Coos')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M96.3899 155.961L104.498 168.318L105.707 167.641L117.688 173.053L119.14 181.504L127.49 179.984L135.234 182.349L138.623 188.598L138.864 196.36L141.89 198.216L143.342 204.286L142.616 207.826L144.43 212.711H146.851L142.494 220.623L145.035 238.613L120.471 242.308L123.012 258.583L124.464 264.449L125.674 275.166L110.428 277.007L110.064 284.2L108.612 290.218L103.045 291.221L100.747 297.569L96.8742 296.901L92.3967 298.237L89.8554 300.741L85.983 289.55L80.9014 295.565L75.6979 303.412L59.7241 300.741L56.8203 303.245L54.8841 299.239L42.4201 293.894L28.02 291.389L28.1408 285.873L31.5289 278.848L31.4081 274.999L35.0388 269.642L39.6372 266.962L43.1461 262.941L45.5666 257.41L45.3239 248.352L46.8976 244.323L53.6738 237.438L54.8841 222.642L62.2654 209.847L61.0551 205.297L62.9913 203.107L62.6289 198.216L59.4824 191.974L61.4186 183.193L59.9667 177.787L64.4442 170.686L71.7047 167.81L79.8119 165.949L83.2 167.641L89.6137 164.934L90.4605 160.364L96.3899 155.961Z"
@@ -34,6 +39,9 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Grafton')}
         data-x="96"
         data-y="155"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Grafton')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M100.747 297.569L105.224 305.248L109.823 309.92L111.516 309.418L113.816 317.589L115.994 318.922L120.955 315.589L140.316 328.915L160.283 344.054L158.952 345.716L151.328 362.986L145.641 374.428L141.163 384.864L141.406 389.83L134.508 387.844L126.159 379.896L111.274 382.215L108.007 365.973L85.1363 372.108L78.2393 356.846L66.743 359.999L62.7498 354.355L62.3863 349.04L59.9668 348.873L57.062 337.236L61.6604 328.749L62.1447 322.921L61.2979 318.089L66.5013 318.755L67.8324 315.255L75.698 303.412L80.9015 295.565L85.9831 289.55L89.8555 300.741L92.3968 298.237L96.8743 296.901L100.747 297.569Z"
@@ -42,6 +50,9 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Merrimack')}
         data-x="100"
         data-y="297"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Merrimack')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M193.319 301.576L185.937 311.087L184.364 303.246L180.734 303.579L175.288 306.916L173.352 296.066L168.996 301.576L164.639 298.237L157.258 296.066L124.464 264.449L123.013 258.583L120.471 242.308L145.036 238.613L142.494 220.623L146.851 212.711H144.43L142.616 207.826L143.342 204.286L141.89 198.216L138.865 196.36L138.623 188.598L141.042 188.091L142.373 193.999L145.762 196.192L147.214 203.781L146.73 208.331L151.087 209.005L151.691 201.251L158.225 183.194L176.982 184.714L183.638 184.376L183.517 176.604L187.631 176.434L188.479 205.803L190.293 253.217L191.988 296.066L194.165 298.738L193.319 301.576Z"
@@ -50,6 +61,9 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Carroll')}
         data-x="193"
         data-y="301"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Carroll')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M141.406 389.83L143.463 401.242L134.266 402.564L137.17 420.067L142.132 420.398L145.157 424.356L146.246 428.809L157.016 431.446L158.952 433.588L152.901 441L112.726 440.012L76.424 438.53L74.4878 426.17L70.8571 426.006L66.9847 400.415H60.2085L60.8136 388.01L62.629 378.736L63.2341 369.787L64.9277 364.646L63.3549 360.995L66.743 359.999L78.2394 356.846L85.1364 372.108L108.007 365.973L111.274 382.215L126.159 379.897L134.508 387.844L141.406 389.83Z"
@@ -58,6 +72,9 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Hillsborough')}
         data-x="141"
         data-y="389"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hillsborough')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M158.952 345.716L185.574 368.294L180.008 377.743L191.261 377.577L196.827 376.252L202.152 377.577L205.903 379.233L206.267 372.108L210.865 372.274L219.577 378.902L218.246 382.215L223.45 384.533L217.883 393.304L213.648 401.738L213.405 405.208L209.896 407.356L210.986 412.311L207.234 414.126L202.636 410.824L198.884 409.833L192.955 412.64L184.969 414.621L183.032 416.438L180.855 423.202L172.747 420.563L165.97 425.676L166.575 434.412L158.952 433.588L157.016 431.446L146.246 428.809L145.157 424.356L142.132 420.398L137.17 420.067L134.266 402.564L143.463 401.242L141.406 389.83L141.163 384.864L145.641 374.428L151.328 362.986L158.952 345.716Z"
@@ -66,6 +83,9 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Rockingham')}
         data-x="158"
         data-y="345"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Rockingham')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M63.2339 369.787L62.6288 378.736L60.8134 388.01L60.2083 400.415H66.9845L70.8569 426.006L74.4876 426.17L76.4238 438.529L12.5304 436.059L9.74745 429.962L6.60101 429.632L3.45557 424.356L0.550781 414.126L4.18152 404.877L3.45557 399.423L11.0785 395.289L13.7407 388.837L11.9263 387.016L11.442 381.552L14.225 378.736L15.1936 371.113L13.2574 364.48L15.556 368.792L22.8165 369.29L22.2114 365.143L48.8338 361.162L46.1717 369.29L63.2339 369.787Z"
@@ -74,6 +94,9 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Cheshire')}
         data-x="63"
         data-y="369"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Cheshire')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M168.996 301.576L165.608 306.249L169.358 332.244L160.283 344.054L140.316 328.915L120.955 315.589L115.993 318.922L113.816 317.589L111.516 309.419L109.822 309.92L105.224 305.248L100.747 297.569L103.045 291.221L108.612 290.218L110.064 284.2L110.428 277.008L125.674 275.166L124.464 264.449L157.258 296.066L164.639 298.237L168.996 301.576Z"
@@ -82,6 +105,9 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Belknap')}
         data-x="168"
         data-y="301"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Belknap')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M75.6978 303.412L67.8322 315.255L66.5012 318.755L61.2977 318.089L62.1445 322.921L61.6602 328.75L57.0618 337.236L59.9666 348.873L62.3861 349.04L62.7496 354.355L66.7428 359.999L63.3547 360.995L64.9274 364.646L63.2339 369.787L46.1716 369.29L48.8338 361.162L22.2113 365.143L22.8165 369.29L15.556 368.791L13.2573 364.48L14.83 357.676L15.3143 348.708L18.4598 344.22L19.9127 338.9L17.8557 330.747L21.6062 311.254L19.67 306.583L21.4854 301.91L22.0905 296.066L28.0199 291.389L42.4201 293.894L54.884 299.239L56.8202 303.245L59.724 300.741L75.6978 303.412Z"
@@ -90,6 +116,9 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Sullivan')}
         data-x="75"
         data-y="303"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Sullivan')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M193.318 301.576L194.165 305.415L192.108 312.254L193.439 313.755L192.592 319.922L190.293 326.918L191.987 332.744L194.165 335.406L199.127 338.068L199.974 342.724L205.661 348.541L210.622 352.03L211.712 354.355L208.807 371.279L204.33 371.61L204.814 375.92L202.152 377.577L196.827 376.252L191.261 377.577L180.008 377.743L185.574 368.294L158.952 345.716L160.283 344.054L169.358 332.244L165.607 306.249L168.996 301.576L173.351 296.066L175.287 306.916L180.734 303.579L184.363 303.246L185.937 311.087L193.318 301.576Z"
@@ -98,8 +127,11 @@ export const MapNewHampshireContent = ({ element }) => {
         fill={assignColor('Strafford')}
         data-x="193"
         data-y="301"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Strafford')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -111,6 +143,7 @@ MapNewHampshirePresent.propTypes = {
 };
 MapNewHampshireContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapNewHampshire;

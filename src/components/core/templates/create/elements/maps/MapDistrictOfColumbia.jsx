@@ -11,11 +11,16 @@ export const MapDistrictOfColumbiaPresent = ({ element }) => {
 };
 
 export const MapDistrictOfColumbiaPreview = () => {
-  return <MapDistrictOfColumbiaContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapDistrictOfColumbiaContent
+      element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }}
+      presen={false}
+    />
+  );
 };
 
-const MapDistrictOfColumbiaContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapDistrictOfColumbiaContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 442" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,8 +31,11 @@ const MapDistrictOfColumbiaContent = ({ element }) => {
         data-name="Washington, District of Columbia"
         data-x="169"
         data-y="144"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Washington, District of Columbia')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -39,6 +47,7 @@ MapDistrictOfColumbiaPresent.propTypes = {
 };
 MapDistrictOfColumbiaContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapDistrictOfColumbia;

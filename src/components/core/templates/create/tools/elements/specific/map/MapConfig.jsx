@@ -3,6 +3,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import MapData from '@/components/core/templates/create/tools/elements/specific/map/MapData.jsx';
 import MapSettings from '@/components/core/templates/create/tools/elements/specific/map/MapSettings.jsx';
+import MapChart from '@/components/core/templates/create/tools/elements/specific/map/MapChart.jsx';
 import { TbSettings2 } from 'react-icons/tb';
 import useTemplateStore from '@/store/template.js';
 
@@ -44,6 +45,9 @@ const MapConfig = ({ element, onChange }) => {
             </Tab>
             <Tab key="setting" title="Setting" className="text-base">
               <MapSettings element={element} onChange={onChange} />
+            </Tab>
+            <Tab key="chart" title="Chart" className="text-base">
+              <MapChart element={element} onChange={onChange} />
             </Tab>
           </Tabs>
         </div>

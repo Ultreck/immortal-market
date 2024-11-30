@@ -11,11 +11,11 @@ export const MapKentuckyPresent = ({ element }) => {
 };
 
 export const MapKentuckyPreview = () => {
-  return <MapKentuckyContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return <MapKentuckyContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />;
 };
 
-const MapKentuckyContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapKentuckyContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 401 177" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +26,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Pike"
         data-x="379"
         data-y="94"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Pike')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M201.674 90.1496L202.198 92.6656L204.657 95.4456L201.884 100.406L200.366 101.133L197.436 105.162L194.506 107.803L193.668 114.728L185.505 114.069L184.616 110.244L182.052 106.351L178.18 106.813L175.511 104.832L173.575 104.634L180.011 91.0105L187.598 89.7525L189.221 85.9086L188.069 77.8145L190.633 77.2166L191.209 77.8145L192.936 78.4126V81.5975L195.762 81.6646L196.965 83.4556L196.389 85.6436L199.843 88.1626L201.674 90.1496Z"
@@ -34,6 +37,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Hardin"
         data-x="201"
         data-y="90"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hardin')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M273.886 146.326L270.903 146.981L262.269 152.15L259.967 150.188L256.88 144.755L252.327 146.391L251.595 145.081L248.874 143.771L245.263 140.494L245.472 135.968L250.129 132.292L254.891 128.021L263.525 120.26L266.298 122.038L277.444 133.736L277.967 136.952L275.613 139.576L273.886 146.326Z"
@@ -42,6 +48,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Pulaski"
         data-x="273"
         data-y="146"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Pulaski')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M231.501 79.5405L232.286 84.4505L230.35 84.8485L229.512 86.7705L226.791 87.6985L224.227 89.6195L223.6 91.8055L219.256 95.5775L216.692 98.4885L213.029 107.209L211.826 106.681L210.413 108.991L208.529 107.605V104.766L210.308 101.661L209 100.009L209.314 97.9595H207.116L204.657 95.4455L202.198 92.6655L201.674 90.1495L203.768 90.2155L207.954 87.5655L209.576 85.9085L209.733 83.5885L212.559 81.1995L212.349 80.0055L214.704 78.2795L219.309 81.6645L231.501 79.5405Z"
@@ -50,6 +59,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Nelson"
         data-x="231"
         data-y="79"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Nelson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M154.528 100.075L154.423 102.917L156.935 106.483L154.475 106.417L153.324 108.001L155.941 117.693L148.248 123.683L146.26 121.643L143.33 127.234L140.87 129.731L139.667 127.76L136.58 125.984L136.37 122.564L134.8 120.458L132.864 119.339L131.033 120.063L130.405 116.309L130.353 111.827L133.597 106.747L138.463 102.058L139.824 102.52L145.161 99.3476L142.597 96.9676L144.9 95.0486L154.528 100.075Z"
@@ -58,6 +70,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Ohio"
         data-x="154"
         data-y="100"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ohio')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M180.011 91.0104L173.575 104.633L168.813 106.02L164.732 105.624L161.801 102.916L159.813 104.963L156.935 106.482L154.423 102.916L154.528 100.074L152.487 91.4074L153.638 88.2284L156.307 86.9694L156.568 84.0524L157.51 82.9244L160.336 83.1234L161.383 81.5314L160.493 79.4074L160.65 75.7554L162.377 74.6924L165.516 77.6814L175.249 85.8424L180.011 91.0104Z"
@@ -66,6 +81,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Breckinridge"
         data-x="180"
         data-y="91"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Breckinridge')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M336.207 44.0985L334.062 48.2415L332.492 49.2435L332.963 54.7845L330.451 56.1185L327.103 56.4525L323.387 51.2475L321.242 52.2485L314.596 49.0435L314.23 45.3015L311.352 42.6935L312.242 36.8715L311.3 35.2635L312.085 32.5835L316.742 30.9075L318.626 31.1085L320.876 32.9185L325.585 33.7225L327.678 35.0625L328.254 37.0715L329.928 37.6745L332.021 35.7995L334.69 36.6035L336.888 36.3355L339.085 32.9855L341.911 31.4435L343.376 29.3645L343.69 32.0475L341.074 35.4645L341.231 38.0095L338.562 41.9575L336.207 44.0985Z"
@@ -74,6 +92,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Lewis"
         data-x="336"
         data-y="44"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Lewis')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M338.405 116.967L339.19 121.576L338.405 125.26L338.876 127.824L341.231 127.364L342.068 129.467L344.894 130.781L341.754 136.034L342.801 138.527L342.068 142.46L339.609 144.033L338.562 143.574L335.37 142.264L335.737 138.133L333.172 133.277L334.324 132.16L327.26 128.087L326.161 123.945L324.068 122.563L321.765 124.734L320.038 124.668L319.62 127.101L318.364 128.153L317.37 126.641L316.062 124.734L316.271 121.642L318.573 121.181L319.986 118.811L324.539 121.51L327.521 118.679L330.818 117.428L333.696 114.463L334.481 116.374L338.405 116.967Z"
@@ -82,6 +103,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Perry"
         data-x="338"
         data-y="116"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Perry')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M118.213 133.343L119.05 136.297L122.085 138.856L118.056 166.977L99.323 167.303L100.317 159.994L100.474 151.628L101.102 145.868L97.23 143.51L98.433 142.199L100.003 133.869L108.218 136.691L110.259 135.313L116.067 134.853L118.213 133.343Z"
@@ -90,6 +114,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Christian"
         data-x="118"
         data-y="133"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Christian')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M120.149 117.89L118.003 121.577L115.753 123.222L115.282 126.773L117.323 129.534L119.312 131.111L118.213 133.343L116.067 134.853L110.259 135.313L108.218 136.691L100.003 133.869L96.549 131.242L96.863 130.125L93.514 127.825L93.985 122.696L93.043 120.656L104.555 113.278L109.631 111.563L116.015 106.153L116.852 107.671L117.166 115.65L120.149 117.89Z"
@@ -98,6 +125,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Hopkins"
         data-x="120"
         data-y="117"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hopkins')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M338.562 143.574L337.097 146.653L344.946 143.967L348.086 142.591L351.853 145.409L352.481 146.718L351.749 150.188L350.545 151.431L346.935 152.739L341.388 153.197L339.766 156.073L337.987 157.707L337.568 160.516L334.69 160.711L327.417 162.996L322.864 165.215L320.876 165.411L320.928 163.453L318.73 161.103L319.515 157.838L318.155 156.269L319.777 153.524L319.306 150.515L321.085 151.3L323.544 150.842L324.852 148.486L329.719 146.784L333.12 143.247L335.37 142.264L338.562 143.574Z"
@@ -106,6 +136,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Harlan"
         data-x="383"
         data-y="143"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Harlan')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M167.086 132.556L173.313 138.331L176.557 136.822L177.918 138.593L181.999 139.642L179.278 147.963L174.831 150.712L174.203 151.955L166.772 158.296L166.982 156.27L157.458 154.767L155.941 151.301L152.696 143.641L155.679 134.066L155.627 131.57L160.388 132.096L162.063 131.176L163.476 133.081L166.406 133.672L167.086 132.556Z"
@@ -114,6 +147,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Warren"
         data-x="167"
         data-y="132"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Warren')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M331.969 99.6125L333.539 101.001L337.045 102.124L338.039 103.775L340.446 102.124L341.963 104.633L344.004 106.285L344.894 108.859L347.667 110.574L343.219 110.243L342.33 109.122L337.882 113.607L338.405 116.967L334.481 116.375L333.696 114.464L330.818 117.428L327.521 118.68L324.539 121.51L319.986 118.812L318.573 121.182L316.271 121.643L316.637 116.112L314.649 110.376L317.579 101.661L319.044 102.917L320.98 102.189L322.602 98.8845L324.486 97.5625L325.899 98.6205L330.922 98.8845L331.969 99.6125Z"
@@ -122,6 +158,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Breathitt"
         data-x="331"
         data-y="99"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Breathitt')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M144.9 95.0484L142.597 96.9674L145.161 99.3474L139.824 102.519L138.463 102.057L133.597 106.746L130.667 106.35L122.556 102.982L114.288 98.6864L114.968 96.0404L118.527 94.9164L120.463 93.5264L119.783 90.2824L118.736 89.6854L119.783 84.5164L123.027 87.1684L126.899 88.3604L128.626 91.7394L131.922 90.8784L132.76 89.0234L133.492 84.3174L136.737 82.3274L136.266 84.5164L139.196 83.6544L140.347 84.2514L141.184 89.0894L143.277 88.2284L145.214 91.4744L144.9 95.0484Z"
@@ -130,6 +169,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Daviess"
         data-x="144"
         data-y="95"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Daviess')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M343.795 77.2164V78.8764L345.522 80.0714L346.882 84.3834L344.684 87.0354L342.853 85.3124L338.091 84.7814L339.033 86.7044L334.114 89.6854L330.765 92.9964L332.178 94.5854L331.236 96.7024L329.981 94.7834L327.887 94.0554L327.05 92.0704L324.748 90.0174L322.55 89.7524L319.044 86.9034L318.992 84.9144L321.713 81.5314L322.236 75.4234L331.184 69.9724L330.922 73.7624L333.329 74.7584L334.638 76.8184L337.254 77.6814L341.283 76.6854L343.795 77.2164Z"
@@ -138,6 +180,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Morgan"
         data-x="343"
         data-y="77"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Morgan')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M163.423 122.563L167.086 132.555L166.406 133.671L163.476 133.08L162.063 131.175L160.388 132.095L155.627 131.569L155.679 134.065L152.696 143.64L143.748 139.969L138.725 139.117L141.027 137.936L140.818 135.509L139.458 133.671L140.87 129.73L143.33 127.233L146.26 121.642L148.248 123.682L155.941 117.692L162.481 119.865L163.423 122.563Z"
@@ -146,6 +191,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Butler"
         data-x="163"
         data-y="122"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Butler')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M371.371 81.3984L369.278 80.1374L366.871 80.7354L365.197 85.7094L362.162 84.9144L358.603 83.1234L353.737 79.8064L347.458 77.6154L345.522 80.0714L343.795 78.8764V77.2164L345.731 74.6924L347.248 74.3604L348.609 71.7684L350.754 70.1724L348.871 66.0474L351.068 64.6484L352.586 65.0484L355.725 61.4514L358.656 61.9184L360.697 60.2524L365.354 60.1194L365.668 61.4514L365.511 65.8474L363.941 68.3094L365.929 69.7734L368.493 72.8984L370.639 77.5484L372.575 80.6024L371.371 81.3984Z"
@@ -154,6 +202,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Lawrence"
         data-x="371"
         data-y="81"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Lawrence')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M86.8161 112.09L86.2411 113.145L86.9731 116.769L88.9101 117.165L91.3171 116.045L91.6311 118.679L93.6711 118.745L80.5901 128.021L78.6531 129.073L78.3391 131.898L74.6241 134.721L73.1591 133.999L71.8511 131.635L72.8451 128.284L71.8511 125.72L67.9261 121.576L66.6711 117.494L64.4731 116.901L66.4611 114.924L69.7581 113.606L73.2111 113.343L78.8631 112.222L79.8051 110.375L83.3111 109.781L85.6651 112.156L86.8161 112.09Z"
@@ -162,6 +213,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Crittenden"
         data-x="86"
         data-y="112"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Crittenden')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M119.783 84.5165L118.736 89.6855L119.783 90.2825L120.463 93.5265L118.527 94.9165L114.968 96.0405L114.288 98.6865L109.683 101L97.2299 101.66L96.1829 99.5455L96.1309 95.9085L95.3459 93.2615L92.9909 93.3945L87.1299 84.1845L89.4849 82.5935L92.1009 85.7095L94.2469 85.9085L96.1829 84.7815L99.7939 84.1185L100.683 84.7815L100.16 88.6925L102.253 89.2885L103.98 88.2285L104.608 84.9805L102.776 82.7255L105.236 79.9385L106.648 82.4605L108.846 83.8535L112.3 81.5315L115.021 81.7305L119.783 84.5165Z"
@@ -170,6 +224,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Henderson"
         data-x="119"
         data-y="84"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Henderson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M215.803 58.7195L219.152 60.1195L218.105 67.9105L217.844 69.8395L211.146 72.7655L203.035 71.9015L194.401 74.8915L191.209 77.8145L190.633 77.2165L192.046 75.9545L193.04 71.5025L192.988 66.5125L195.709 63.0505L197.279 59.0525L199.32 58.4525L201.517 59.7865L204.134 58.3195L206.07 56.0525L206.96 52.4495L215.803 58.7195Z"
@@ -178,6 +235,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Jefferson"
         data-x="215"
         data-y="58"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Jefferson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M248.246 107.604L247.618 112.947L248.089 115.583L250.967 118.021L254.786 119.996L255.676 123.945L254.786 124.866L254.891 128.021L250.129 132.292L245.472 135.968L242.699 136.952L238.042 131.438L237.362 126.772L231.658 123.221L233.332 118.745L236.472 116.44L237.937 116.572L238.251 107.802L240.187 108.594L245.629 108.66L248.246 107.604Z"
@@ -186,6 +246,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Casey"
         data-x="248"
         data-y="107"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Casey')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M188.069 77.8146L189.221 85.9086L187.598 89.7526L180.011 91.0106L175.249 85.8426L165.516 77.6816L162.377 74.6926L165.359 73.0316L163.79 69.9066L165.098 69.3746L167.086 70.7046L168.656 69.1076L169.65 64.7156L173.313 67.7106L173.261 71.1696L174.36 74.2936L179.174 77.0836L183.098 77.1506L184.616 79.4746L188.069 77.8146Z"
@@ -194,6 +257,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Meade"
         data-x="188"
         data-y="77"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Meade')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M277.026 147.177L275.717 150.711L275.979 153.066L274.723 153.785L274.304 158.099L275.717 159.405L276.188 163.975L277.653 166.65L280.636 170.171L265.618 169.845L251.908 169.389L257.298 160.646L262.269 155.158V152.15L270.903 146.98L273.886 146.325L274.514 147.635L277.026 147.177Z"
@@ -202,6 +268,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="McCreary"
         data-x="277"
         data-y="147"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'McCreary')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M299.369 140.035L300.154 140.887L306.015 141.87L306.695 143.116L311.561 146.129L314.073 146.522L315.329 148.093L314.544 149.664L311.718 151.038L311.3 152.346L306.329 156.139L304.026 156.531L302.561 160.124L299.003 164.106L294.817 161.495L293.247 158.752L293.77 156.923L291.154 155.55L288.171 149.337L287.805 146.456L290.892 144.426L294.712 145.147L295.968 143.902L296.7 141.215L299.369 140.035Z"
@@ -210,6 +279,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Knox"
         data-x="299"
         data-y="140"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Knox')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M132.446 166.912L132.864 139.642L136.841 138.79L138.725 139.118L143.748 139.97L152.696 143.641L155.941 151.301L153.638 151.759L151.807 153.786L148.615 161.496L148.039 166.455L132.446 166.912Z"
@@ -218,6 +290,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Logan"
         data-x="132"
         data-y="166"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Logan')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M317.37 126.641L318.364 128.153L318.521 130.256L316.114 132.62L315.852 138.527L318.155 143.116L317.527 143.771L318.312 147.7L314.073 146.522L311.561 146.129L306.695 143.116L306.015 141.87L300.154 140.887L299.369 140.035L299.631 136.821L296.753 136.427L294.241 132.62L295.759 130.19L295.602 127.233L297.747 126.97L298.532 124.8L303.869 120.72L309.364 121.51L311.561 121.049L312.346 122.958L315.591 125.983L317.37 126.641Z"
@@ -226,6 +301,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Clay"
         data-x="317"
         data-y="126"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Clay')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M201.622 153.981L198.012 155.289L189.168 161.756L188.854 160.581L186.133 158.034L183.883 153.131L179.278 147.962L181.999 139.641L184.093 140.166L184.982 132.686L192.884 133.933L201.361 132.555L199.634 134.59L200.68 136.427L201.622 153.981Z"
@@ -234,6 +312,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Barren"
         data-x="201"
         data-y="153"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Barren')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M362.423 43.9645L356.981 48.8435L354.47 52.7825L349.499 51.1135L346.464 51.4475L342.225 46.6385L336.207 44.0985L338.562 41.9575L341.231 38.0095L341.074 35.4645L343.69 32.0475L343.376 29.3645L346.15 29.2975L350.545 27.3525L351.801 29.0295L351.33 31.5775L352.22 33.2535L352.534 36.8715L354.208 39.4155L356.406 40.4185L359.388 40.4855L362.423 43.9645Z"
@@ -242,6 +323,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Greenup"
         data-x="362"
         data-y="43"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Greenup')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M262.269 152.15V155.158L257.298 160.646L251.908 169.389L240.867 168.606L239.245 162.083L240.083 159.602L238.931 156.27L237.205 154.57L236.943 152.935L242.333 149.141L242.804 146.784L245.106 147.177L248.874 143.771L251.595 145.081L252.327 146.391L256.88 144.754L259.967 150.188L262.269 152.15Z"
@@ -250,6 +334,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Wayne"
         data-x="262"
         data-y="152"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Wayne')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M251.49 29.6335L252.118 36.4695L256.88 40.3526L260.072 45.5686L262.217 46.1705L260.019 48.9765L253.897 54.1846L251.124 55.1855L247.094 53.9176L245.577 52.4496L246.571 49.7785L242.228 48.5755L242.594 46.1705L238.774 43.4966L240.135 40.8206L236.42 37.8755L238.984 36.8046L239.978 35.3976L243.693 33.5215L247.199 30.9745L251.49 29.6335Z"
@@ -258,6 +345,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Owen"
         data-x="251"
         data-y="29"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Owen')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M295.602 127.233L295.759 130.19L294.241 132.62L296.753 136.427L299.631 136.821L299.369 140.035L296.7 141.215L295.968 143.902L294.712 145.147L290.892 144.426L287.805 146.456L286.549 145.736L284.09 146.849L280.845 147.111L278.177 146.129L277.026 147.177L274.514 147.635L273.886 146.325L275.613 139.576L277.967 136.952L277.444 133.736L277.915 130.65L280.741 125.983L285.398 122.629L289.636 125.918L292.305 127.035L295.602 127.233Z"
@@ -266,6 +356,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Laurel"
         data-x="295"
         data-y="127"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Laurel')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M238.042 131.438L231.606 141.412L229.669 143.64L228.152 148.551L216.64 147.7L217.163 146.653L213.971 143.181L212.715 136.493L220.303 132.686L221.82 131.044L223.861 127.956L226.164 126.444L229.826 126.049L230.454 123.484L231.658 123.221L237.362 126.772L238.042 131.438Z"
@@ -274,6 +367,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Adair"
         data-x="238"
         data-y="131"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Adair')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M354.47 52.7824L356.353 54.7184L355.725 61.4514L352.586 65.0484L351.068 64.6484L348.871 66.0474L346.15 66.2464L337.934 61.6514L336.312 59.9854L333.486 62.2514L332.178 64.9154L329.405 63.7834L327.417 58.5864L327.103 56.4524L330.451 56.1184L332.963 54.7844L332.492 49.2434L334.062 48.2414L336.207 44.0984L342.225 46.6384L346.464 51.4474L349.499 51.1134L354.47 52.7824Z"
@@ -282,6 +378,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Carter"
         data-x="354"
         data-y="52"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Carter')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M318.312 147.7L319.306 150.515L319.777 153.524L318.155 156.269L319.515 157.838L318.73 161.103L320.928 163.453L320.876 165.411L318.835 165.15L311.038 168.28L308.84 170.822L296.23 170.497L294.869 167.041L299.003 164.106L302.561 160.124L304.026 156.531L306.329 156.139L311.3 152.346L311.718 151.038L314.544 149.664L315.329 148.093L314.073 146.522L318.312 147.7Z"
@@ -290,6 +389,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Bell"
         data-x="318"
         data-y="147"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bell')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M358.97 125.853L361.586 128.68L364.412 127.431L367.656 130.716L364.15 133.343L359.545 135.707L359.598 140.495L356.353 142.986L354.208 143.248L351.853 145.41L348.086 142.592L344.946 143.968L337.097 146.654L338.562 143.575L339.609 144.034L342.068 142.461L342.801 138.528L341.754 136.035L344.894 130.782L346.045 132.359L349.708 130.125L351.487 127.76L354.208 126.182L358.97 125.853Z"
@@ -298,6 +400,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Letcher"
         data-x="358"
         data-y="125"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Letcher')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M130.405 116.309L131.033 120.063L132.864 119.339L134.8 120.458L136.37 122.564L136.58 125.984L139.667 127.76L140.87 129.731L139.458 133.672L140.818 135.51L141.027 137.937L138.725 139.118L136.841 138.79L132.864 139.642L129.463 140.692L122.556 140.954L122.085 138.856L119.05 136.297L118.213 133.343L119.312 131.111L117.323 129.534L115.282 126.773L115.753 123.222L118.003 121.577L120.149 117.89L124.597 118.615L126.637 116.507L130.405 116.309Z"
@@ -306,6 +411,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Muhlenberg"
         data-x="130"
         data-y="116"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Muhlenberg')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M173.575 104.633L175.511 104.831L178.18 106.812L182.052 106.351L184.616 110.243L185.505 114.069L185.715 116.704L184.197 118.615L183.622 120.984L179.697 121.577L163.423 122.564L162.481 119.866L155.941 117.693L153.324 108.001L154.475 106.417L156.935 106.482L159.813 104.964L161.801 102.917L164.732 105.625L168.813 106.021L173.575 104.633Z"
@@ -314,6 +422,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Grayson"
         data-x="173"
         data-y="104"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Grayson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M99.323 167.303L91.003 167.499L91.16 165.542L79.595 164.629L77.45 160.19L75.043 152.347L83.154 149.534L89.014 146.261H89.747L90.741 146.85L95.607 145.279L97.23 143.51L101.102 145.868L100.474 151.628L100.317 159.994L99.323 167.303Z"
@@ -322,6 +433,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Trigg"
         data-x="99"
         data-y="167"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Trigg')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M288.38 87.4334L287.282 88.2284L288.747 90.8784L288.433 94.5194L287.543 95.2474L287.962 99.6784L285.973 101.396L287.857 106.416L283.619 106.944L282.154 109.254L278.857 109.715L276.659 108.33L274.409 108.198L273.101 104.633L271.845 104.171L267.293 96.9674L266.769 94.3864L265.095 92.9304L268.392 90.7454L267.24 88.1624L269.804 87.8304L272.525 84.7154L274.932 84.8484L278.386 83.1904L278.962 84.6494L281.787 86.3064L285.921 86.5714L288.38 87.4334Z"
@@ -330,6 +444,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Madison"
         data-x="288"
         data-y="87"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Madison')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M363.784 96.2394L367.761 98.5544L365.144 99.4794L365.982 101.396L364.673 110.507L366.086 110.771L366.453 114.331L364.883 118.153L360.069 124.931L358.133 122.76L357.086 115.518L354.836 116.638L353.737 112.947L348.818 111.628L350.388 110.045L350.911 107.868L349.865 103.775L349.708 100.934L347.824 98.8184L348.033 96.5044L350.126 97.3634L353.004 95.5774L357.348 93.8574L363.784 96.2394Z"
@@ -338,6 +455,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Floyd"
         data-x="363"
         data-y="96"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Floyd')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M87.1302 84.1846L92.9912 93.3946L95.3462 93.2616L96.1312 95.9086L96.1832 99.5456L97.2302 101.661L92.5202 106.615L86.8162 112.091L85.6652 112.157L83.3112 109.782L79.8052 110.376L79.4382 108.661L76.3512 105.228L75.0952 101.001L77.1362 96.9006L80.5372 94.5856L82.6832 90.7456L85.1942 92.5996L88.0722 90.3486L87.9152 87.8976L86.3982 85.6436L87.1302 84.1846Z"
@@ -346,6 +466,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Union"
         data-x="87"
         data-y="84"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Union')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M287.805 146.457L288.171 149.338L291.154 155.551L293.77 156.924L293.247 158.753L294.817 161.496L299.003 164.107L294.869 167.042L296.23 170.498L280.636 170.172L277.653 166.651L276.188 163.976L275.717 159.406L274.304 158.1L274.723 153.786L275.979 153.067L275.717 150.712L277.026 147.178L278.177 146.13L280.845 147.112L284.09 146.85L286.549 145.737L287.805 146.457Z"
@@ -354,6 +477,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Whitley"
         data-x="287"
         data-y="146"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Whitley')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M311.352 42.6934L314.23 45.3013L314.596 49.0434L321.242 52.2484L318.835 54.4514L317.474 60.7193L311.718 65.2484L308.422 62.8504L307.846 59.8524L306.538 58.9194L301.933 57.7193L300.52 57.9194L301.044 56.3853L297.538 53.3163L295.288 49.5114L293.666 48.4424L294.189 46.7713L296.282 44.9003L299.997 47.3064L307.166 44.0984L311.352 42.6934Z"
@@ -362,6 +488,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Fleming"
         data-x="311"
         data-y="42"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Fleming')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M93.6709 118.745L93.0429 120.655L93.9849 122.695L93.5139 127.824L96.8629 130.124L96.5489 131.241L100.003 133.868L98.4329 142.198L97.2299 143.509L95.6069 145.278L90.7409 146.849L89.7469 146.26L84.6189 139.182L81.1129 132.16L78.3389 131.898L78.6529 129.073L80.5899 128.021L93.6709 118.745Z"
@@ -370,6 +499,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Caldwell"
         data-x="93"
         data-y="118"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Caldwell')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M116.015 106.152L109.631 111.562L104.555 113.277L93.0432 120.655L93.6712 118.745L91.6312 118.679L91.3172 116.045L88.9102 117.165L86.9732 116.769L86.2412 113.145L86.8162 112.09L92.5202 106.614L97.2302 101.66L109.683 101L110.521 104.237L114.968 104.897L116.015 106.152Z"
@@ -378,6 +510,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Webster"
         data-x="116"
         data-y="106"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Webster')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M335.37 142.264L333.12 143.247L329.719 146.784L324.852 148.486L323.544 150.842L321.085 151.3L319.306 150.515L318.312 147.7L317.527 143.771L318.155 143.116L315.852 138.527L316.114 132.62L318.521 130.256L318.364 128.153L319.62 127.101L320.038 124.668L321.765 124.734L324.068 122.563L326.161 123.945L327.26 128.087L334.324 132.16L333.172 133.277L335.737 138.133L335.37 142.264Z"
@@ -386,6 +521,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Leslie"
         data-x="335"
         data-y="142"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Leslie')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M64.4729 116.901L66.6709 117.494L67.9259 121.576L71.8509 125.72L72.8449 128.284L71.8509 131.635L73.1589 133.999L71.1709 138.002L72.0079 140.035L71.4849 141.936L72.3219 143.64L70.7519 144.819L67.0369 140.363L64.4199 139.314L61.2289 140.1L58.0369 141.936L56.2049 141.608L53.6929 138.395L56.3099 139.51L58.9259 138.592L60.9149 134.918L61.0719 133.539L59.7629 130.124L56.4669 125.326L58.0889 120.918L58.5069 118.218L61.7519 115.649L64.4729 116.901Z"
@@ -394,6 +532,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Livingston"
         data-x="64"
         data-y="116"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Livingston')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M239.036 69.1076L237.048 73.5626L234.955 75.2246L228.1 71.7016L218.105 67.9106L219.152 60.1196L215.803 58.7196L216.483 57.7196L223.286 57.0526L225.483 53.8506L240.449 55.3856L242.542 55.5856L240.344 59.3866L239.873 65.9806L239.036 69.1076Z"
@@ -402,6 +543,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Shelby"
         data-x="239"
         data-y="69"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Shelby')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M269.229 111.761L266.298 122.038L263.525 120.261L254.891 128.022L254.786 124.867L255.676 123.946L254.786 119.997L250.967 118.022L248.089 115.584L247.618 112.948L248.246 107.605L251.542 105.757L255.362 104.502L258.188 101.926L260.281 104.568L267.816 111.168L269.229 111.761Z"
@@ -410,6 +554,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Lincoln"
         data-x="269"
         data-y="111"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Lincoln')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M327.103 56.4526L327.417 58.5866L329.405 63.7836L332.178 64.9156L333.539 67.1786L333.277 68.9086L331.184 69.9726L322.236 75.4236L320.666 76.5526L318.835 74.2936L315.695 67.9766L312.817 68.9086L311.718 65.2486L317.474 60.7196L318.835 54.4516L321.242 52.2486L323.387 51.2476L327.103 56.4526Z"
@@ -418,6 +565,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Rowan"
         data-x="327"
         data-y="56"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Rowan')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M245.472 135.968L245.263 140.494L248.874 143.771L245.106 147.177L242.804 146.784L242.333 149.141L236.943 152.935L234.065 154.962L229.983 151.889L229.042 153.197L225.902 150.318L228.152 148.551L229.669 143.641L231.606 141.412L238.042 131.438L242.699 136.952L245.472 135.968Z"
@@ -426,6 +576,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Russell"
         data-x="245"
         data-y="135"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Russell')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M344.684 87.0355L345.836 90.2155L347.562 91.2755L348.033 96.5045L347.824 98.8185L349.708 100.934L349.865 103.775L350.911 107.868L350.388 110.045L348.818 111.628L347.667 110.573L344.894 108.858L344.004 106.284L341.963 104.633L340.446 102.123L338.039 103.775L337.045 102.123L333.539 101L331.969 99.6125L331.236 96.7025L332.178 94.5855L330.765 92.9965L334.114 89.6855L339.033 86.7045L338.091 84.7815L342.853 85.3125L344.684 87.0355Z"
@@ -434,6 +587,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Magoffin"
         data-x="344"
         data-y="87"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Magoffin')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M214.704 78.2794L212.349 80.0054L212.559 81.1994L209.733 83.5883L209.576 85.9084L207.954 87.5654L203.768 90.2153L201.674 90.1494L199.843 88.1624L196.389 85.6434L196.965 83.4554L195.762 81.6644L192.936 81.5974V78.4124L191.209 77.8143L194.401 74.8914L203.035 71.9014L211.146 72.7654L217.844 69.8394L215.698 71.3024L213.5 76.8184L214.704 78.2794Z"
@@ -442,6 +598,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Bullitt"
         data-x="214"
         data-y="78"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bullitt')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M219.256 95.5774L221.925 100.405L226.844 102.123H238.722L238.251 107.802L237.937 116.572L236.472 116.44L233.594 113.87L231.867 113.277L228.466 114.529L227.21 115.979L221.873 112.749L217.791 112.156L215.907 113.013L214.024 107.604L213.029 107.208L216.692 98.4884L219.256 95.5774Z"
@@ -450,6 +609,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Marion"
         data-x="219"
         data-y="95"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Marion')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M204.343 131.701L201.361 132.555L192.884 133.933L184.982 132.686L185.401 129.533L179.697 121.576L183.622 120.984L184.197 118.614L185.715 116.703L185.505 114.068L193.668 114.727L205.913 115.913L206.175 117.955L204.395 119.93L203.82 123.813L204.762 127.233L204.343 131.701Z"
@@ -458,6 +620,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Hart"
         data-x="204"
         data-y="131"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hart')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M347.667 110.574L348.818 111.629L353.737 112.948L354.836 116.639L357.086 115.519L358.133 122.761L360.069 124.932L358.97 125.853L354.208 126.182L351.487 127.76L349.708 130.125L346.045 132.359L344.894 130.782L342.068 129.468L341.231 127.365L338.876 127.825L338.405 125.261L339.19 121.577L338.405 116.968L337.882 113.607L342.33 109.123L343.219 110.244L347.667 110.574Z"
@@ -466,6 +631,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Knott"
         data-x="347"
         data-y="110"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Knott')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M215.907 113.014L217.791 112.157L221.873 112.75L227.21 115.98L228.466 114.53L231.867 113.278L233.594 113.871L236.472 116.441L233.332 118.746L231.658 123.222L230.454 123.485L229.826 126.05L226.164 126.445L223.861 127.957L221.82 131.045L215.227 119.734L209.681 115.255L209.785 112.816L212.611 113.805L214.128 111.893L215.907 113.014Z"
@@ -474,6 +642,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Taylor"
         data-x="215"
         data-y="113"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Taylor')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M57.9321 147.44L57.8801 159.994L57.7231 176.099L40.5591 176.034L40.7691 158.492V147.112L47.0481 147.44H57.9321Z"
@@ -482,6 +653,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Graves"
         data-x="57"
         data-y="147"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Graves')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M282.154 109.254L281.944 111.694L284.299 116.242L283.776 118.35L285.869 120.194L285.398 122.629L280.741 125.983L277.915 130.65L277.444 133.736L266.298 122.037L269.229 111.76L273.049 112.551L274.409 108.198L276.659 108.33L278.857 109.715L282.154 109.254Z"
@@ -490,6 +664,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Rockcastle"
         data-x="282"
         data-y="109"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Rockcastle')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M311.718 65.2485L312.817 68.9085L315.695 67.9765L318.835 74.2935L314.858 73.7625L314.753 76.8185L310.41 75.8215L308.945 76.8845L305.23 77.7485L302.98 74.9585L301.986 72.2995L298.846 68.6425L294.084 67.0455L293.718 64.9155L300.52 57.9195L301.933 57.7195L306.538 58.9195L307.846 59.8525L308.422 62.8505L311.718 65.2485Z"
@@ -498,6 +675,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Bath"
         data-x="311"
         data-y="65"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bath')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M179.278 147.962L183.883 153.131L186.133 158.034L188.854 160.581L189.168 161.756L190.581 166.454L189.325 167.889L166.406 166.389L166.04 164.824L166.772 158.295L174.203 151.954L174.831 150.711L179.278 147.962Z"
@@ -506,6 +686,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Allen"
         data-x="179"
         data-y="147"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Allen')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M293.718 64.9155L293.09 66.0475L288.433 70.0395L277.653 73.2305L272.735 70.2385L273.153 66.9125L274.043 65.8475L271.583 63.8495L269.49 58.8525L272.839 59.1865L276.45 56.8525L278.02 56.7195L282.468 52.9165L283.88 54.0505L287.334 59.9855L293.718 64.9155Z"
@@ -514,6 +697,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Bourbon"
         data-x="293"
         data-y="64"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bourbon')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M297.59 107.934L298.637 109.584L298.689 112.222L300.468 114.199L302.509 119.074L303.869 120.72L298.532 124.8L297.747 126.97L295.602 127.233L292.305 127.035L289.636 125.918L285.398 122.629L285.869 120.194L283.776 118.35L284.299 116.242L281.944 111.694L282.154 109.254L283.619 106.944L287.857 106.416L290.212 106.548L294.45 105.359L297.59 107.934Z"
@@ -522,6 +708,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Jackson"
         data-x="297"
         data-y="107"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Jackson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M265.095 92.9306L266.769 94.3866L267.293 96.9675L271.845 104.172L273.101 104.634L274.409 108.199L273.049 112.552L269.229 111.761L267.816 111.168L260.281 104.568L258.188 101.926L256.042 99.6785L256.095 97.8925L253.635 96.7025L255.676 95.4456L255.781 91.4745L255.153 89.8846L257.298 89.4875L257.351 91.8056L259.81 92.6656L262.688 95.6445L265.095 92.9306Z"
@@ -530,6 +719,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Garrard"
         data-x="265"
         data-y="92"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Garrard')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M284.142 40.7534L283.043 44.5664L287.282 47.1064L282.468 52.9164L278.02 56.7194L276.45 56.8524L272.839 59.1864L269.49 58.8524L268.496 52.4494L264.99 48.8434L263.525 44.8334L267.24 43.7634L267.659 41.5564L269.804 41.8904L271.636 40.2854L281.892 38.8794L281.787 40.9544L284.142 40.7534Z"
@@ -538,6 +730,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Harrison"
         data-x="284"
         data-y="40"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Harrison')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M114.288 98.6865L122.556 102.983L130.667 106.351L133.597 106.747L130.353 111.827L130.405 116.309L126.637 116.507L124.597 118.615L120.149 117.89L117.166 115.65L116.852 107.671L116.015 106.153L114.968 104.898L110.521 104.238L109.683 101.001L114.288 98.6865Z"
@@ -546,6 +741,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="McLean"
         data-x="114"
         data-y="98"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'McLean')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M277.653 73.2304L277.863 76.4194L275.717 77.6154L275.665 80.0054L274.409 83.3224L274.932 84.8484L272.525 84.7154L269.804 87.8304L268.967 83.7204L267.554 81.6644L261.589 78.6114L258.083 77.4164L259.915 69.9064L260.124 69.0414L271.583 63.8494L274.043 65.8474L273.153 66.9124L272.735 70.2384L277.653 73.2304Z"
@@ -554,6 +752,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Fayette"
         data-x="277"
         data-y="73"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Fayette')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M213.029 107.209L214.024 107.605L215.907 113.014L214.128 111.893L212.611 113.805L209.785 112.816L207.116 112.684L205.913 115.914L193.668 114.728L194.506 107.803L197.436 105.162L200.366 101.133L201.884 100.406L204.657 95.4456L207.116 97.9595H209.314L209 100.009L210.308 101.661L208.529 104.766V107.605L210.413 108.991L211.826 106.681L213.029 107.209Z"
@@ -562,6 +763,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Larue"
         data-x="213"
         data-y="107"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Larue')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M53.693 138.395L56.205 141.608L58.037 141.936L57.932 147.439H47.048L40.769 147.111L40.612 146.653L34.437 128.679L41.71 131.701L44.902 134.262L47.676 134.721L51.234 136.296L53.693 138.395Z"
@@ -570,6 +774,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="McCracken"
         data-x="53"
         data-y="138"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'McCracken')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M271.583 63.8495L260.124 69.0415L259.915 69.9065L256.88 65.5815L254.682 64.7155L253.897 54.1845L260.019 48.9765L262.217 46.1705L263.525 44.8335L264.99 48.8435L268.496 52.4495L269.49 58.8525L271.583 63.8495Z"
@@ -578,6 +785,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Scott"
         data-x="271"
         data-y="63"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Scott')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M292.514 88.4276L294.398 87.8976L294.555 90.9446L297.695 93.6586L301.462 93.2616L304.34 93.6586L307.166 96.5046L305.753 96.5706L301.881 100.207L297.59 107.935L294.45 105.36L290.212 106.549L287.857 106.417L285.973 101.397L287.962 99.6786L287.543 95.2476L288.433 94.5196L288.747 90.8786L287.282 88.2286L288.38 87.4336L290.474 88.5596L292.514 88.4276Z"
@@ -586,6 +796,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Estill"
         data-x="292"
         data-y="88"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Estill')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M247.094 53.9175L245.211 52.7165L240.449 55.3855L225.483 53.8505L223.286 50.7805L222.187 47.0395L223.861 44.8335L225.693 44.6325L231.449 38.6785L236.42 37.8755L240.135 40.8205L238.774 43.4965L242.594 46.1705L242.228 48.5755L246.571 49.7785L245.577 52.4495L247.094 53.9175Z"
@@ -594,6 +807,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Henry"
         data-x="247"
         data-y="53"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Henry')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M209.785 112.816L209.681 115.255L215.227 119.734L221.82 131.045L220.303 132.687L212.715 136.494L207.221 135.444L205.704 134.263L204.343 131.702L204.762 127.234L203.82 123.814L204.395 119.931L206.175 117.956L205.913 115.914L207.116 112.684L209.785 112.816Z"
@@ -602,6 +818,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Green"
         data-x="209"
         data-y="112"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Green')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M201.622 153.981L208.163 154.57L209.105 155.485L209.524 158.164L211.931 158.426L213.186 161.038L215.646 161.43L214.285 163.845L217.477 168.476L213.762 168.802L189.325 167.889L190.581 166.454L189.168 161.756L198.012 155.289L201.622 153.981Z"
@@ -610,6 +829,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Monroe"
         data-x="201"
         data-y="153"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Monroe')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M132.864 139.641L132.446 166.911L118.056 166.976L122.085 138.855L122.556 140.953L129.463 140.691L132.864 139.641Z"
@@ -618,6 +840,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Todd"
         data-x="132"
         data-y="139"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Todd')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M212.715 136.493L213.971 143.181L217.163 146.653L216.64 147.7L215.436 150.58L213.762 152.281L210.989 153.393L209.105 155.485L208.163 154.57L201.622 153.981L200.68 136.427L199.634 134.59L201.361 132.555L204.343 131.701L205.704 134.262L207.221 135.443L212.715 136.493Z"
@@ -626,6 +851,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Metcalfe"
         data-x="212"
         data-y="136"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Metcalfe')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M229.042 153.197L227.524 159.993L224.855 168.019L217.477 168.476L214.285 163.845L215.646 161.43L213.186 161.038L211.931 158.426L209.524 158.164L209.105 155.485L210.989 153.393L213.762 152.281L215.436 150.58L216.64 147.7L228.152 148.551L225.902 150.318L229.042 153.197Z"
@@ -634,6 +862,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Cumberland"
         data-x="229"
         data-y="153"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Cumberland')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M77.4499 160.189L57.8799 159.993L57.9319 147.439L58.0369 141.936L61.2289 140.1L64.4199 139.314L67.0369 140.363L70.7519 144.819L73.5779 148.29L75.0429 152.346L77.4499 160.189Z"
@@ -642,6 +873,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Marshall"
         data-x="77"
         data-y="160"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Marshall')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M179.697 121.576L185.401 129.533L184.982 132.686L184.093 140.166L181.999 139.641L177.918 138.592L176.557 136.821L173.313 138.33L167.086 132.555L163.423 122.563L179.697 121.576Z"
@@ -650,6 +884,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Edmonson"
         data-x="179"
         data-y="121"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Edmonson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M365.197 85.7095L362.319 87.3665L363.522 88.8915L361.952 91.8055L363.784 96.2395L357.348 93.8575L353.004 95.5775L350.126 97.3635L348.033 96.5045L347.562 91.2755L345.836 90.2155L344.684 87.0355L346.882 84.3835L345.522 80.0715L347.458 77.6155L353.737 79.8065L358.603 83.1235L362.162 84.9145L365.197 85.7095Z"
@@ -658,6 +895,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Johnson"
         data-x="365"
         data-y="85"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Johnson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M77.4501 160.189L79.5951 164.628L81.1131 170.497L81.5841 173.884L80.3281 176.489L73.9441 176.293L57.7231 176.098L57.8801 159.993L77.4501 160.189Z"
@@ -666,6 +906,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Calloway"
         data-x="77"
         data-y="160"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Calloway')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M311.3 35.2636L312.242 36.8716L311.352 42.6936L307.166 44.0986L299.997 47.3066L296.282 44.9006L294.607 42.1586L294.241 38.8126L293.09 38.0766L297.59 26.4126L299.474 26.8826L300.939 29.4996L303.346 30.7736L305.439 34.3926L310.567 35.9336L311.3 35.2636Z"
@@ -674,6 +917,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Mason"
         data-x="311"
         data-y="35"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Mason')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M40.7691 158.492L40.5591 176.034H39.5651L36.0071 171.28L34.0711 170.302H29.5181L23.2911 166.586L21.6171 166.455L22.2971 165.607L20.4131 161.627L21.8791 159.406L23.9191 159.864L24.3901 157.839L25.5941 156.924L27.4781 158.492H40.7691Z"
@@ -682,6 +928,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Hickman"
         data-x="40"
         data-y="158"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hickman')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M153.638 88.2284L152.487 91.4074L154.528 100.074L144.9 95.0484L145.214 91.4744L143.277 88.2284L141.184 89.0894L140.347 84.2514L139.196 83.6544L136.266 84.5164L136.737 82.3274L140.19 81.5974L142.963 78.6774L146.312 78.5444L148.301 83.3224L149.714 84.7814L153.063 83.4554L153.9 84.4504L153.638 88.2284Z"
@@ -690,6 +939,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Hancock"
         data-x="153"
         data-y="88"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hancock')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M78.339 131.898L81.113 132.16L84.619 139.182L89.747 146.26H89.014L83.154 149.533L75.043 152.346L73.578 148.29L70.752 144.819L72.322 143.64L71.485 141.936L72.008 140.035L71.171 138.002L73.159 133.999L74.624 134.721L78.339 131.898Z"
@@ -698,6 +950,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Lyon"
         data-x="78"
         data-y="131"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Lyon')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M39.565 176.034H33.338L15.338 175.774L9.006 176.425L11.204 168.607L14.291 168.346L16.593 171.605L19.001 171.866L20.152 170.628L20.623 167.629L21.617 166.455L23.291 166.586L29.518 170.302H34.071L36.007 171.28L39.565 176.034ZM5.971 175.122L5.5 176.294H2.622L1 173.299L1.523 171.605L4.872 171.214L6.076 172.387L5.971 175.122Z"
@@ -706,6 +961,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Fulton"
         data-x="39"
         data-y="176"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Fulton')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M40.6119 146.654L38.0999 146.916L31.7159 148.683L25.6459 147.309L21.5649 141.871L22.3489 138.593L25.1229 135.575L26.7969 132.359L29.2039 129.994L31.6639 128.614L34.4369 128.68L40.6119 146.654Z"
@@ -714,6 +972,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Ballard"
         data-x="40"
         data-y="146"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ballard')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M331.236 96.7026L331.969 99.6126L330.922 98.8846L325.899 98.6206L324.486 97.5626L322.602 98.8846L320.98 102.19L319.044 102.917L317.579 101.661L312.66 99.7446L307.899 96.5046L311.928 89.2886L315.643 89.6196L319.044 86.9036L322.55 89.7526L324.748 90.0176L327.05 92.0706L327.887 94.0556L329.981 94.7836L331.236 96.7026Z"
@@ -722,6 +983,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Wolfe"
         data-x="331"
         data-y="96"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Wolfe')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M281.892 38.8795L271.636 40.2855L269.804 41.8905L267.659 41.5565L264.781 24.9365L270.746 23.7945L272.368 23.4585L280.427 19.2935L280.531 22.4515L280.27 22.7205L281.892 38.8795Z"
@@ -730,6 +994,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Pendleton"
         data-x="281"
         data-y="38"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Pendleton')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M238.67 84.8484L240.292 87.3664L239.036 98.9504L238.722 102.123H226.844L221.925 100.405L219.256 95.5774L223.6 91.8055L224.227 89.6194L226.791 87.6984L229.512 86.7704L230.35 84.8484L232.286 84.4504L238.67 84.8484Z"
@@ -738,6 +1005,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Washington"
         data-x="238"
         data-y="84"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Washington')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M294.346 82.2616L293.038 83.1236L292.2 86.9035L292.514 88.4276L290.474 88.5596L288.38 87.4335L285.921 86.5715L281.787 86.3065L278.962 84.6496L278.386 83.1906L274.932 84.8486L274.409 83.3226L275.665 80.0056L275.717 77.6156L277.863 76.4196L277.653 73.2305L288.433 70.0396L294.346 82.2616Z"
@@ -746,6 +1016,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Clark"
         data-x="294"
         data-y="82"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Clark')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M260.438 24.1305L258.083 25.8085L251.124 20.3015L251.385 18.7555L246.885 16.8735L248.926 13.4425L248.821 11.5575L246.153 7.71848V6.43848L252.85 1.31348L254.734 1.44847L256.618 3.87648L259.967 5.83247L261.327 18.9575L260.438 24.1305Z"
@@ -754,6 +1027,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Boone"
         data-x="260"
         data-y="24"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Boone')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M379.901 94.7835L377.598 94.9165L375.662 96.7025L375.4 98.8185L371.633 99.0175L367.761 98.5545L363.784 96.2395L361.952 91.8055L363.522 88.8915L362.319 87.3665L365.197 85.7095L366.871 80.7355L369.278 80.1375L371.371 81.3985L371.79 83.1235L375.296 85.3125L375.4 87.7645L377.703 90.7455L380.999 93.4605L379.901 94.7835Z"
@@ -762,6 +1038,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Martin"
         data-x="379"
         data-y="94"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Martin')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M267.659 41.5564L267.24 43.7634L263.525 44.8334L262.217 46.1704L260.072 45.5684L256.88 40.3524L252.118 36.4694L251.49 29.6334L251.752 26.6144L258.083 25.8084L260.438 24.1304L261.38 24.8694L264.781 24.9364L267.659 41.5564Z"
@@ -770,6 +1049,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Grant"
         data-x="267"
         data-y="41"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Grant')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M348.871 66.0473L350.754 70.1723L348.609 71.7684L347.248 74.3604L345.731 74.6924L343.795 77.2164L341.283 76.6853L337.254 77.6814L334.638 76.8184L333.329 74.7583L330.922 73.7623L331.184 69.9724L333.277 68.9084L333.539 67.1783L332.178 64.9154L333.486 62.2514L336.312 59.9854L337.934 61.6514L346.15 66.2464L348.871 66.0473Z"
@@ -778,6 +1060,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Elliott"
         data-x="348"
         data-y="66"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Elliott')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M314.649 110.376L316.637 116.112L316.271 121.643L316.062 124.735L317.37 126.642L315.591 125.984L312.346 122.959L311.561 121.05L309.364 121.511L303.869 120.721L302.509 119.075L300.468 114.2L298.689 112.223L298.637 109.585L301.567 111.629L306.067 111.168L306.643 109.387L309.311 109.848L310.567 108.331L314.649 110.376Z"
@@ -786,6 +1071,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Owsley"
         data-x="314"
         data-y="110"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Owsley')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M255.467 86.8366L255.153 89.8846L255.781 91.4746L255.676 95.4456L253.635 96.7026L239.036 98.9506L240.292 87.3666L238.67 84.8486L241.391 83.2566L243.536 80.8016L246.362 81.6646L250.967 79.6736L251.281 84.3836L252.536 84.9806L252.798 87.8306L255.467 86.8366Z"
@@ -794,6 +1082,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Mercer"
         data-x="255"
         data-y="86"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Mercer')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M293.666 48.4424L295.288 49.5114L297.538 53.3164L301.044 56.3854L300.52 57.9194L293.718 64.9155L287.334 59.9854L283.88 54.0504L282.468 52.9164L287.282 47.1064L288.799 47.2394L292.671 49.5774L293.666 48.4424Z"
@@ -810,6 +1101,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Montgomery"
         data-x="293"
         data-y="64"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Montgomery')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M297.59 26.4124L293.09 38.0764L287.857 38.0094L286.183 40.1514L284.142 40.7534L281.787 40.9544L281.892 38.8794L280.27 22.7204L280.531 22.4514L281.892 24.0634L288.59 26.0774L294.712 25.1374L297.59 26.4124Z"
@@ -818,6 +1112,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Bracken"
         data-x="297"
         data-y="26"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bracken')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M166.406 166.39L161.33 166.26L158.452 167.499L157.039 166.26L148.039 166.455L148.615 161.496L151.807 153.786L153.638 151.759L155.941 151.301L157.458 154.767L166.982 156.27L166.772 158.296L166.04 164.825L166.406 166.39Z"
@@ -826,6 +1123,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Simpson"
         data-x="166"
         data-y="166"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Simpson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M239.036 69.1074L242.019 69.7734L245.42 71.5024L247.356 69.9064L249.292 72.2334L248.298 74.9584L249.501 78.8764L250.967 79.6734L246.362 81.6644L243.536 80.8014L241.391 83.2564L238.67 84.8484L232.286 84.4504L231.501 79.5404L233.542 77.6814L234.955 75.2244L237.048 73.5624L239.036 69.1074Z"
@@ -834,6 +1134,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Anderson"
         data-x="239"
         data-y="69"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Anderson')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M307.166 96.5044H307.899L312.66 99.7444L317.579 101.66L314.649 110.375L310.567 108.33L309.311 109.847L306.643 109.386L306.067 111.167L301.567 111.628L298.637 109.584L297.59 107.934L301.881 100.206L305.753 96.5704L307.166 96.5044Z"
@@ -842,6 +1145,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Lee"
         data-x="307"
         data-y="96"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Lee')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M280.427 19.2935L272.368 23.4585L270.746 23.7945L268.339 20.8395L269.647 17.7475L268.392 14.3175L270.275 12.2315L267.083 9.47046L266.194 4.48346L268.392 2.59546L269.595 3.40446L269.909 6.10146L271.27 7.71846L274.095 8.12346L275.927 9.33546L277.392 13.6445L280.165 17.8815L280.427 19.2935Z"
@@ -850,6 +1156,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Campbell"
         data-x="280"
         data-y="19"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Campbell')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M231.501 79.5404L219.309 81.6644L214.704 78.2794L213.5 76.8184L215.698 71.3024L217.844 69.8394L218.105 67.9104L228.1 71.7014L234.955 75.2244L233.542 77.6814L231.501 79.5404Z"
@@ -858,6 +1167,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Spencer"
         data-x="231"
         data-y="79"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Spencer')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M217.634 42.7605L220.46 43.0945L223.861 44.8335L222.187 47.0395L223.286 50.7805L225.483 53.8505L223.286 57.0525L216.483 57.7195L215.803 58.7195L206.96 52.4495L209 48.1085L213.867 46.7715L215.907 43.6965L217.634 42.7605Z"
@@ -866,6 +1178,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Oldham"
         data-x="217"
         data-y="42"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Oldham')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M247.094 53.9176L251.124 55.1855L253.897 54.1846L254.682 64.7155L247.408 68.3096L247.356 69.9066L245.42 71.5025L242.019 69.7735L239.036 69.1075L239.873 65.9805L240.344 59.3866L242.542 55.5856L240.449 55.3855L245.211 52.7166L247.094 53.9176Z"
@@ -874,6 +1189,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Franklin"
         data-x="247"
         data-y="53"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Franklin')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M259.915 69.9066L258.083 77.4166L255.467 86.8366L252.798 87.8306L252.536 84.9806L251.281 84.3836L250.967 79.6736L249.501 78.8766L248.298 74.9586L249.292 72.2336L247.356 69.9066L247.408 68.3096L254.682 64.7156L256.88 65.5816L259.915 69.9066Z"
@@ -882,6 +1200,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Woodford"
         data-x="259"
         data-y="69"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Woodford')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M318.835 74.2935L320.666 76.5525L322.236 75.4235L321.713 81.5315L318.992 84.9145L319.044 86.9035L315.643 89.6195L311.928 89.2885L305.805 84.6495L304.707 83.0575L304.34 78.5445L305.23 77.7485L308.945 76.8845L310.41 75.8215L314.753 76.8185L314.858 73.7625L318.835 74.2935Z"
@@ -890,6 +1211,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Menifee"
         data-x="318"
         data-y="74"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Menifee')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M304.707 83.0575L305.805 84.6495L311.928 89.2885L307.899 96.5045H307.166L304.34 93.6585L301.462 93.2615L297.695 93.6585L294.555 90.9445L294.398 87.8975L292.514 88.4275L292.2 86.9035L293.038 83.1235L294.346 82.2615L302.456 84.1185L304.707 83.0575Z"
@@ -898,6 +1222,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Powell"
         data-x="304"
         data-y="83"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Powell')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M236.943 152.935L237.205 154.57L238.931 156.269L240.083 159.601L239.245 162.083L240.867 168.606L226.53 167.954L224.855 168.019L227.524 159.993L229.042 153.197L229.983 151.889L234.065 154.962L236.943 152.935Z"
@@ -906,6 +1233,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Clinton"
         data-x="236"
         data-y="152"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Clinton')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M269.804 87.8305L267.24 88.1625L268.392 90.7455L265.095 92.9305L262.688 95.6445L259.81 92.6655L257.351 91.8055L257.298 89.4875L255.153 89.8845L255.467 86.8365L258.083 77.4165L261.589 78.6115L267.554 81.6645L268.967 83.7205L269.804 87.8305Z"
@@ -914,6 +1244,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Jessamine"
         data-x="269"
         data-y="87"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Jessamine')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M243.693 33.5214L239.978 35.3974L238.984 36.8044L236.42 37.8754L231.449 38.6784L229.199 39.0134L228.309 35.8664L222.867 28.6274L227.21 28.8284L229.094 31.3094L231.867 31.5774L239.036 26.8154L242.228 32.3154L243.693 33.5214Z"
@@ -922,6 +1255,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Carroll"
         data-x="243"
         data-y="33"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Carroll')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M251.124 20.3015L258.083 25.8085L251.752 26.6145L251.49 29.6335L247.199 30.9745L243.693 33.5215L242.228 32.3155L239.036 26.8155L240.71 25.7415H243.745L245.734 24.8695L249.972 25.1375L249.187 22.3845L251.124 20.3015Z"
@@ -930,6 +1266,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Gallatin"
         data-x="251"
         data-y="20"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Gallatin')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M222.867 28.6276L228.309 35.8666L229.199 39.0136L231.449 38.6786L225.693 44.6326L223.861 44.8336L220.46 43.0946L217.634 42.7606L218.419 39.7496L217.53 37.8756L217.425 33.9236L216.535 31.9796L217.268 29.3646L218.471 28.5596L222.867 28.6276Z"
@@ -938,6 +1277,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Trimble"
         data-x="222"
         data-y="28"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Trimble')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M258.188 101.925L255.362 104.501L251.542 105.756L248.246 107.604L245.629 108.66L240.187 108.594L238.251 107.802L238.722 102.123L239.036 98.9504L253.635 96.7024L256.095 97.8924L256.042 99.6784L258.188 101.925Z"
@@ -946,6 +1288,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Boyle"
         data-x="258"
         data-y="101"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Boyle')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M40.6119 146.654L40.7689 147.112V158.492H27.4779L25.5939 156.924L24.3899 157.839L22.5589 157.316L21.6689 154.179L24.1289 152.871L25.6459 147.309L31.7159 148.683L38.0999 146.916L40.6119 146.654Z"
@@ -954,6 +1299,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Carlisle"
         data-x="40"
         data-y="146"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Carlisle')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M365.668 61.4514L365.354 60.1194L360.697 60.2523L358.656 61.9184L355.725 61.4514L356.353 54.7184L354.47 52.7823L356.981 48.8434L362.423 43.9644L364.987 46.0363L366.243 49.7784L366.191 54.6514L367.133 55.7184L367.028 60.9854L365.668 61.4514Z"
@@ -962,6 +1310,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Boyd"
         data-x="365"
         data-y="61"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Boyd')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M266.194 4.48335L267.083 9.47035L270.275 12.2314L268.392 14.3174L269.647 17.7473L268.339 20.8394L270.746 23.7944L264.781 24.9364L261.38 24.8694L260.438 24.1304L261.327 18.9574L259.967 5.83235L264.101 4.21436L266.194 4.48335Z"
@@ -970,6 +1321,9 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Kenton"
         data-x="266"
         data-y="4"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Kenton')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M293.09 38.0765L294.241 38.8125L294.607 42.1585L296.282 44.9005L294.189 46.7715L293.666 48.4425L292.671 49.5775L288.799 47.2395L287.282 47.1065L283.043 44.5665L284.142 40.7535L286.183 40.1515L287.857 38.0095L293.09 38.0765Z"
@@ -978,8 +1332,11 @@ const MapKentuckyContent = ({ element }) => {
         data-name="Robertson"
         data-x="293"
         data-y="38"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Robertson')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -991,6 +1348,7 @@ MapKentuckyPresent.propTypes = {
 };
 MapKentuckyContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapKentucky;

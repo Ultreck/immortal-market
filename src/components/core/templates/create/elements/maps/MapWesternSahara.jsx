@@ -11,11 +11,13 @@ export const MapWesternSaharaPresent = ({ element }) => {
 };
 
 export const MapWesternSaharaPreview = () => {
-  return <MapWesternSaharaContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapWesternSaharaContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />
+  );
 };
 
-const MapWesternSaharaContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapWesternSaharaContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 359" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,8 +28,11 @@ const MapWesternSaharaContent = ({ element }) => {
         data-name="Western Sahara"
         data-x="280"
         data-y="70"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Western Sahara')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -39,6 +44,7 @@ MapWesternSaharaPresent.propTypes = {
 };
 MapWesternSaharaContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapWesternSahara;

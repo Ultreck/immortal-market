@@ -11,11 +11,13 @@ export const MapNorthernIrelandPresent = ({ element }) => {
 };
 
 export const MapNorthernIrelandPreview = () => {
-  return <MapNorthernIrelandContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapNorthernIrelandContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />
+  );
 };
 
-export const MapNorthernIrelandContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+export const MapNorthernIrelandContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 312" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +28,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Fermanagh and Omagh')}
         data-x="179"
         data-y="122"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Fermanagh and Omagh')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M246.827 120.945L249.721 125.764L244.078 137.921L247.974 145.088L257.022 154.264L254.269 174.544L237.472 181.108L230.111 190.816L224.622 190.721L221.667 199.22L214.767 206.162L212.869 215.766L200.682 212.976L199.091 221.843L194.388 232.816L190.455 234.228L184.221 224.395L176.573 217.271L166.372 211.391L154.625 224.671L155.544 227.776L148.372 232.945L143.11 232.34L134.759 235.014L130.998 230.727L129.763 223.869L121.898 223.831L122.678 217.362L117.142 207.348L136.267 203.093L139.088 199.882L152.97 197.84L156.149 191.605L164.879 190.299L174.777 179.401L175.44 167.294L178.203 164.552L170.246 148.562L171.874 131.08L179.258 128.2L179.367 122.796L184.773 120.21L183.437 110.967L187.149 102.713L199.393 104.344L204.396 97.6062L205.953 90.0382L213.248 82.7572L215.755 86.6882L226.363 81.1222L231.093 84.8472L240.898 80.4542L243.498 86.0522L242.567 88.7152L249.708 109.925L246.827 120.945Z"
@@ -34,6 +39,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Mid Ulster')}
         data-x="246"
         data-y="120"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Mid Ulster')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M313.639 224.129L325.27 220.829L324.318 213.137L330.589 201.166L342.07 192.828L346.102 198.42L356.729 204.791L364.818 201.468L372.612 200.726L377.002 204.337L375.292 215.014L382.155 223.306L386.879 235.662L373.358 254.541L365.865 260.301L361.118 253.893L341.159 256.23L331.958 265.332L335.032 274.751L331.367 290.396L323.35 297.083L321.66 300.862L307.208 310.749L303.368 307.348L302.511 300.846L296.115 301.089L289.651 298.112L287.48 292.022L279.322 292.473L262.957 288.176L263.379 298.362L259.331 301.792L251.717 302.38L249.893 298.388L241.953 303.322L238.829 301.589L229.65 305.329L222.962 304.408L220.03 300.814L222.347 292.574L219.994 285.933L224.578 278.333L222.5 271.734L228.929 261.965L239.849 257.409L242.887 260.278L248.328 252.976L257.677 248.497L270.65 249.751L282.986 252.326L289.906 255.67L309.006 255.734L307.624 243.891L301.133 237.117L307.08 235.018L313.639 224.129Z"
@@ -42,6 +50,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Newry, Mourne and Down')}
         data-x="313"
         data-y="224"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Newry, Mourne and Down')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M319.705 51.1202L302.066 69.5092L297.16 68.4302L292.257 57.6362L283.321 61.0162L272.508 62.8402L267.652 68.8072L257.853 73.9132L251.032 74.4122L253.911 81.5242L243.498 86.0522L240.898 80.4542L231.093 84.8472L226.363 81.1222L215.755 86.6882L213.248 82.7572L205.953 90.0382L204.396 97.6062L199.393 104.344L187.149 102.713L183.437 110.967L174.73 108.989L164.96 104.619L166.549 95.1972L165.47 89.6252L157.862 83.8502L156.97 75.8232L158.816 69.0382L152.166 69.1762L147.77 56.4002L149.197 53.5582L161.941 53.3342L168.611 45.8342L175.166 27.7932L177.64 16.3562L188.878 22.6462L206.67 22.5242L213.189 16.1142L235.774 9.36817L245.877 1.20117L256.698 6.25017L262.697 2.78517L274.167 6.76917L278.43 11.1762L285.367 12.5922L296.834 8.35217L305.54 15.0122L311.435 22.2112L312.629 29.6882L308.416 44.6102L310.155 51.9672L319.705 51.1202Z"
@@ -50,6 +61,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Causeway Coast and Glens')}
         data-x="319"
         data-y="61"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Causeway Coast and Glens')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M149.197 53.5582L147.77 56.4002L152.166 69.1762L158.816 69.0382L156.97 75.8232L157.862 83.8502L165.47 89.6252L166.549 95.1972L164.96 104.619L174.73 108.989L183.437 110.967L184.773 120.21L179.367 122.796L169.828 121.215L158.861 124.766L153.534 128.912L137.565 128.277L132.591 133.56L126.05 131.668L124.098 138.014L113.545 143.112L110.088 149.271L103.538 155.303L96.251 153.014L92.957 156.062L74.805 159.844L68.114 164.429L66.223 159.296L60.7081 161.9L56.427 158.171L46.1031 158.523L37.4561 147.433L46.0171 134.593L62.0741 140.059L66.9291 134.787L77.8561 128.375L86.339 130.839L90.834 127.397L90.58 118.812L100.092 110.1L106.056 98.0702L105.438 81.9262L111.571 80.1162L111.522 64.5952L120.176 52.6022L124.234 53.9752L136.698 53.1802L143.887 49.9402L149.197 53.5582Z"
@@ -58,6 +72,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Derry and Strabane')}
         data-x="149"
         data-y="53"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Derry and Strabane')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M313.639 224.129L307.08 235.018L301.133 237.117L307.624 243.891L309.006 255.734L289.906 255.67L282.986 252.326L270.65 249.751L257.677 248.497L248.328 252.976L242.887 260.278L239.849 257.409L228.929 261.965L222.5 271.734L212.865 267.18L208.373 271.183L197.41 260.952L195.728 251.368L190.223 249.315L192.346 243.747L190.455 234.228L194.388 232.816L199.091 221.843L200.682 212.976L212.869 215.766L214.767 206.162L221.667 199.22L224.622 190.721L230.111 190.816L237.472 181.108L254.269 174.544L269.168 168.746L271.954 173.374L275.876 177.256L276.54 186.77L281.2 191.523L278.742 196.811L285.921 205.467L296.838 207.796L305.79 214.01L313.639 224.129Z"
@@ -66,6 +83,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Armagh City, Banbridge and Craigavon')}
         data-x="313"
         data-y="224"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Armagh City, Banbridge and Craigavon')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M319.705 51.1201L321.707 54.2021L318.928 70.7811L328.148 75.1441L334.113 88.8701L339.033 90.6151L340.067 95.7021L345.837 102.924L350.935 101.104L356.395 103.971L361.568 115.18L361.802 124.466L353.614 134.971L346.91 136.087L335.543 144.172L329.364 137.225L332.036 129.94L330.054 124.77L320.146 120.359L314.911 116.094L301.386 117.996L300.104 114.304L291.279 113.114L285.344 118.554L271.339 118.624L266.008 115.843L260.285 121.39L251.802 119.306L246.827 120.945L249.708 109.925L242.567 88.7151L243.498 86.0521L253.911 81.5241L251.032 74.4121L257.853 73.9131L267.652 68.8071L272.508 62.8401L283.321 61.0161L292.257 57.6361L297.16 68.4301L302.066 69.5091L319.705 51.1201Z"
@@ -74,6 +94,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Mid and East Antrim')}
         data-x="319"
         data-y="51"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Mid and East Antrim')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M246.827 120.945L251.802 119.306L260.285 121.39L266.008 115.843L271.339 118.624L285.344 118.554L291.279 113.114L300.104 114.304L301.386 117.996L314.911 116.094L320.146 120.359L330.054 124.77L332.036 129.94L329.364 137.225L335.543 144.172L329.042 154.475L325.446 151.226L318.333 151.582L309.71 165.07L303.615 160.421L294.769 161.331L291.236 165.729L273.428 167.391L271.954 173.374L269.168 168.746L254.269 174.544L257.022 154.264L247.974 145.088L244.078 137.921L249.721 125.764L246.827 120.945Z"
@@ -82,6 +105,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Antrim and Newtownabbey')}
         data-x="246"
         data-y="120"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Antrim and Newtownabbey')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M344.163 162.647L337.459 158.078L344.702 151.687L354.084 147.007L357.05 149.677L368.932 149.632L378.066 147.635L383.164 152.824L386.057 167.148L392.52 175.59L391.279 179.97L394.515 192.067L399 194.855L395.719 206.878L392.113 209.616L395.308 218.501L386.879 235.662L382.155 223.306L375.292 215.014L377.002 204.337L372.612 200.726L364.818 201.468L356.729 204.791L346.102 198.42L342.07 192.828L341.048 186.64L345.61 176.445L351.652 170.363L349.718 163.207L344.163 162.647Z"
@@ -90,6 +116,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Ards and North Down')}
         data-x="344"
         data-y="162"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ards and North Down')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M344.163 162.647L349.718 163.207L351.652 170.363L345.61 176.445L341.048 186.64L342.07 192.828L330.589 201.166L324.318 213.137L325.27 220.829L313.639 224.129L305.79 214.01L296.838 207.796L285.921 205.467L278.742 196.811L281.2 191.523L276.54 186.77L275.876 177.256L271.954 173.374L273.428 167.391L291.236 165.729L294.769 161.331L303.615 160.421L309.71 165.07L310.342 179.933L313.921 178.917L319.868 184.001L329.507 176.281L342.131 171.189L344.163 162.647Z"
@@ -98,6 +127,9 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Lisburn and Castlereagh')}
         data-x="344"
         data-y="162"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Lisburn and Castlereagh')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M329.042 154.475L337.459 158.078L344.163 162.647L342.131 171.189L329.507 176.281L319.868 184.001L313.921 178.917L310.342 179.933L309.71 165.07L318.333 151.582L325.446 151.226L329.042 154.475Z"
@@ -106,7 +138,11 @@ export const MapNorthernIrelandContent = ({ element }) => {
         fill={assignColor('Belfast')}
         data-x="329"
         data-y="154"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Belfast')}
+        onMouseLeave={handleMouseLeave}
       />
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -118,6 +154,7 @@ MapNorthernIrelandPresent.propTypes = {
 };
 MapNorthernIrelandContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapNorthernIreland;

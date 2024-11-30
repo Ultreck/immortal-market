@@ -11,11 +11,13 @@ export const MapMassachusettsPresent = ({ element }) => {
 };
 
 export const MapMassachusettsPreview = () => {
-  return <MapMassachusettsContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapMassachusettsContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />
+  );
 };
 
-const MapMassachusettsContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapMassachusettsContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 249" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +28,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Worcester"
         data-x="226"
         data-y="110"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Worcester')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M251.642 22.8225L253.645 33.2725L251.642 35.2395L265.109 43.8625L273.79 43.1065V47.6415L271.787 54.1375L275.571 54.8925L276.239 57.9125L274.124 62.4405L277.352 67.1175L275.682 73.2995L272.343 78.5735L269.116 81.1345L265.443 78.4225L260.657 81.2845L262.661 84.4465L261.77 88.3605L258.876 91.5195L254.536 85.9525L250.084 84.7475L243.629 87.0055L246.522 96.7835L240.957 102.346L241.848 103.848L232.276 107.153L226.934 110.456L223.595 105.651L215.248 104.75L213.022 101.444L214.803 95.1295L223.929 93.0245L226.044 84.4465L218.921 84.8985L215.025 87.3065L210.462 81.5855L217.919 72.0935L219.588 63.7985L217.808 62.5915L220.924 55.7995L220.145 52.3255L211.13 50.9655L209.349 55.1955L204.563 54.2885L206.121 42.0475L193.879 37.0555L186.088 37.9635L184.752 32.3645L180.078 26.7615L210.128 27.9725L247.079 28.8815L251.642 22.8225Z"
@@ -34,6 +39,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Middlesex"
         data-x="251"
         data-y="22"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Middlesex')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M60.322 50.3615L61.101 52.7785L56.315 76.9165L50.194 75.5605L50.527 84.5975L54.534 87.7585L57.428 87.1565L56.983 96.4825L53.644 112.407L49.637 111.807L49.081 118.109L51.752 128.005L16.804 126.506H2.113L1 121.109L3.894 109.254L13.465 74.3545L27.823 21.7615L54.979 22.5195V28.1245L62.659 27.8215L62.77 30.0935L58.096 32.5155L63.104 37.3585L60.322 50.3615Z"
@@ -42,6 +50,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Berkshire"
         data-x="60"
         data-y="50"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Berkshire')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M320.869 173.306L321.092 169.427L328.437 165.995L331.22 162.71L338.454 169.278L343.796 171.665L362.717 176.736L365.277 173.604L370.285 171.218L378.076 169.875L385.867 167.338L390.987 163.158L390.43 147.767L387.091 144.925L384.197 146.122L382.194 133.25L379.523 128.306L375.961 126.208L371.398 126.358L369.061 129.205L365.499 125.608L366.835 122.16L372.734 122.01L383.53 126.657L387.759 131.602L390.764 137.143L395.438 148.365L398.221 158.977L396.106 163.308L399 164.95L392.656 173.753L392.211 177.034L396.774 178.078L395.772 185.529L390.541 183.145L381.638 184.486L375.516 186.422L369.506 186.571L361.493 191.932L359.935 188.507L356.039 189.996L351.699 188.954L348.582 192.378L346.245 187.912L339.678 198.479L335.894 201.157L317.864 202.495L319.979 197.438L319.2 186.869L321.537 185.827L322.093 176.587L320.869 173.306Z"
@@ -50,6 +61,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Barnstable"
         data-x="320"
         data-y="173"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Barnstable')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M299.389 94.2275L296.384 98.1365L299.389 103.998L303.952 98.8885L306.734 97.0845L311.298 102.796L312.188 112.108L314.303 111.958L320.313 120.81L319.088 126.358L314.636 131.602L313.857 135.945L318.754 141.035L322.427 142.831L326.211 141.783L330.663 144.776L332.889 155.391L331.22 162.71L328.437 165.995L321.092 169.427L320.869 173.306L315.972 174.648L311.965 177.63L311.186 181.953L307.513 180.761L307.068 185.975L302.616 186.124L297.385 189.699V187.018L292.711 169.875L288.815 165.249L277.129 167.04L278.465 164.054L276.128 161.516L283.028 154.793L280.579 145.075L274.458 139.239L271.23 119.61L288.482 110.456L289.595 100.392L288.482 98.8885L299.389 94.2275Z"
@@ -58,6 +72,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Plymouth"
         data-x="299"
         data-y="94"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Plymouth')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M144.24 97.2346L139.788 103.247L139.454 106.402L146.466 109.856L153.812 109.706L153.7 129.355L134.557 129.205L110.294 128.755L105.063 129.505L84.5841 128.606L83.2491 133.4L77.7951 134.298L78.0181 128.306L51.7521 128.006L49.0811 118.11L49.6371 111.808L53.6441 112.408L56.9831 96.4826L57.4281 87.1566L62.6591 82.3386L70.3381 84.1456L70.784 94.2276L67.3331 98.1366L71.7851 101.594L73.3431 97.9866L80.5781 98.4376L81.9131 104.149L92.3751 106.552L91.9301 102.045L95.826 99.9406L98.2741 92.8736L102.058 94.2276L99.4981 98.8886L102.503 102.195L123.984 99.1896L124.874 106.101L131.441 101.143L144.24 97.2346Z"
@@ -66,6 +83,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Hampden"
         data-x="144"
         data-y="97"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hampden')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M297.385 189.699L289.483 190.592L285.365 196.397L288.036 202.793H283.696L281.47 207.401L273.568 206.955L266.667 209.184L265.443 194.462L264.441 193.123L265.332 184.933L258.097 181.804L258.209 178.078L254.758 176.587L251.086 171.218L243.851 167.04L241.848 160.321L242.961 154.793L242.404 149.263L237.619 150.309L237.73 136.245H239.622L271.23 119.61L274.458 139.239L280.579 145.075L283.028 154.793L276.128 161.516L278.465 164.054L277.129 167.04L288.815 165.249L292.711 169.875L297.385 187.018V189.699Z"
@@ -74,6 +94,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Bristol"
         data-x="297"
         data-y="189"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bristol')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M137.339 25.0945L138.564 32.5155L143.238 34.1805L143.461 41.4425L140.456 41.8965L138.007 47.1875L138.898 53.8355L141.569 56.7055L136.338 61.8375L137.339 67.7205L133.778 74.6555L133.889 82.4895L129.549 83.3925L127.1 70.8875L114.969 72.8475L114.301 68.9275L90.4825 72.9985L90.9275 65.9115L84.5835 66.9665L82.8035 63.7985L71.8965 61.2335L71.2285 52.6275L60.3215 50.3615L63.1035 37.3585L58.0955 32.5155L62.7695 30.0935L62.6585 27.8215L54.9785 28.1245V22.5195L137.339 25.0945Z"
@@ -82,6 +105,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Franklin"
         data-x="137"
         data-y="25"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Franklin')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M133.889 82.4896L137.228 81.1346L138.23 88.6616L145.242 87.3066L144.24 97.2346L131.441 101.143L124.874 106.101L123.984 99.1896L102.503 102.195L99.4983 98.8886L102.058 94.2276L98.2743 92.8736L95.8263 99.9406L91.9303 102.045L92.3753 106.552L81.9133 104.149L80.5783 98.4376L73.3433 97.9866L71.7853 101.594L67.3333 98.1366L70.7843 94.2276L70.3383 84.1456L62.6593 82.3386L57.4283 87.1566L54.5343 87.7586L50.5273 84.5976L50.1943 75.5606L56.3153 76.9166L61.1013 52.7786L60.3223 50.3616L71.2293 52.6276L71.8973 61.2336L82.8043 63.7986L84.5843 66.9666L90.9283 65.9116L90.4833 72.9986L114.301 68.9276L114.969 72.8476L127.1 70.8876L129.549 83.3926L133.889 82.4896Z"
@@ -90,6 +116,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Hampshire"
         data-x="133"
         data-y="82"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hampshire')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M285.254 67.2685L282.471 69.0785L277.352 67.1175L274.124 62.4405L276.239 57.9125L275.571 54.8925L271.787 54.1375L273.79 47.6415V43.1065L265.109 43.8625L251.642 35.2395L253.645 33.2725L251.642 22.8225L255.204 21.6095L259.655 22.8225L259.099 14.7875L265.332 10.0845L272.789 12.5125L276.573 4.62054L283.918 2.79853L288.482 0.519531L292.822 1.12753L297.051 4.16454L300.502 2.49454L301.058 10.0845L292.711 10.9945L301.837 16.3035L305.621 26.9125L302.728 28.4275L305.51 32.6665L306.289 37.5095L315.304 36.2995L317.975 31.6075L324.987 34.9375L321.426 42.8035L315.638 43.5595L313.635 47.3385L309.405 47.6415L300.168 50.9655L294.603 51.8725L292.711 56.2525L297.497 56.4035L298.721 60.0265L293.601 62.4405L291.82 65.1565L285.254 67.2685Z"
@@ -98,6 +127,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Essex"
         data-x="285"
         data-y="67"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Essex')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M258.876 91.5196L264.219 98.5876L270.117 93.4756L273.234 93.9266L275.905 91.2186L281.136 94.2276L285.699 94.5286L288.482 98.8886L289.595 100.392L288.482 110.456L271.23 119.61L239.622 136.245H237.73L237.841 131.153L224.708 131.452L224.374 116.31L226.934 114.209V110.456L232.276 107.153L241.848 103.848L240.957 102.346L246.522 96.7836L243.629 87.0056L250.084 84.7476L254.536 85.9526L258.876 91.5196ZM303.952 98.8886L299.389 103.998L296.384 98.1366L299.389 94.2276L302.728 95.5806L303.952 98.8886Z"
@@ -106,6 +138,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Norfolk"
         data-x="258"
         data-y="91"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Norfolk')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M324.431 214.087L327.77 213.047L330.552 221.213L334.225 223.142L334.447 229.52L325.878 231.299L309.183 233.226L305.955 237.968L301.726 236.339L297.831 231.299L305.287 230.855L312.856 219.432L318.087 214.532L323.095 211.859L324.431 214.087ZM341.125 220.471V231.151L335.449 227.889L341.014 226.109L341.125 220.471Z"
@@ -114,6 +149,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Dukes"
         data-x="324"
         data-y="214"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Dukes')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M285.254 67.2684L281.359 72.0934L283.696 76.0124L275.015 88.3604L275.905 91.2184L273.234 93.9264L270.117 93.4754L264.219 98.5874L258.876 91.5194L261.77 88.3604L262.661 84.4464L260.657 81.2844L265.443 78.4224L269.116 81.1344L272.343 78.5734L275.682 73.2994L277.352 67.1174L282.471 69.0784L285.254 67.2684Z"
@@ -122,6 +160,9 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Suffolk"
         data-x="285"
         data-y="67"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Suffolk')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M391.32 231.892L395.995 242.264L394.993 245.373L389.985 247.594L383.864 246.557L379.634 247.298L367.503 242.56L368.95 239.005L379.523 238.709L381.638 241.523L390.653 234.56L391.32 231.892Z"
@@ -130,8 +171,11 @@ const MapMassachusettsContent = ({ element }) => {
         data-name="Nantucket"
         data-x="391"
         data-y="231"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Nantucket')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip}
       {renderLabels()}
     </svg>
   );
@@ -143,6 +187,7 @@ MapMassachusettsPresent.propTypes = {
 };
 MapMassachusettsContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapMassachusetts;

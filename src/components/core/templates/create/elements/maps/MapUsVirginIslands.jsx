@@ -11,11 +11,13 @@ export const MapUsVirginIslandsPresent = ({ element }) => {
 };
 
 export const MapUsVirginIslandsPreview = () => {
-  return <MapUsVirginIslandsContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapUsVirginIslandsContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />
+  );
 };
 
-const MapUsVirginIslandsContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapUsVirginIslandsContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 152" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,8 +28,11 @@ const MapUsVirginIslandsContent = ({ element }) => {
         data-name="US Virgin Islands"
         data-x="193"
         data-y="108"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'US Virgin Islands')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -39,6 +44,7 @@ MapUsVirginIslandsPresent.propTypes = {
 };
 MapUsVirginIslandsContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapUsVirginIslands;

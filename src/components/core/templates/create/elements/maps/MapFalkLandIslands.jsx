@@ -11,11 +11,13 @@ export const MapFalklandIslandsPresent = ({ element }) => {
 };
 
 export const MapFalklandIslandsPreview = () => {
-  return <MapFalklandIslandsContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return (
+    <MapFalklandIslandsContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />
+  );
 };
 
-const MapFalklandIslandsContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapFalklandIslandsContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 400 349" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,8 +28,11 @@ const MapFalklandIslandsContent = ({ element }) => {
         data-name="Falkland Islands"
         data-x="200"
         data-y="207"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Falkland Islands')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -39,6 +44,7 @@ MapFalklandIslandsPresent.propTypes = {
 };
 MapFalklandIslandsContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapFalklandIslands;

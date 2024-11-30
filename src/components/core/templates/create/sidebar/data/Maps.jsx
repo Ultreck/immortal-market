@@ -527,6 +527,10 @@ const elements = {
         showValues: true,
         labelsCount: 1,
       },
+      tooltip: {
+        enabled: true,
+        type: 'bar',
+      },
     },
     preview: (
       <div className="flex flex-col items-center justify-center">
@@ -552,6 +556,10 @@ const elements = {
         showValues: true,
         labelsCount: 1,
       },
+      tooltip: {
+        enabled: true,
+        type: 'bar',
+      },
     },
     preview: (
       <div className="flex flex-col items-center justify-center">
@@ -574,7 +582,7 @@ const Maps = ({ mini, onView, onBack }) => {
             {
               //prettier-ignore
               elements.countries.filter((el) => el.id === 'map-nigeria').map((element) => {
-                return <DraggableElementWrapper key={ element.id } element={ element } />;
+                return <DraggableElementWrapper key={element.id} element={element} />;
               })
             }
           </div>

@@ -11,11 +11,11 @@ export const MapMoldovaPresent = ({ element }) => {
 };
 
 export const MapMoldovaPreview = () => {
-  return <MapMoldovaContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} />;
+  return <MapMoldovaContent element={{ config: { data: [], fill: '#f9fafb', stroke: '#f9fafb' } }} present={false} />;
 };
 
-const MapMoldovaContent = ({ element }) => {
-  const { el, assignColor, renderLabels } = useMapElement(element);
+const MapMoldovaContent = ({ element, present = true }) => {
+  const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
     <svg ref={el} width="100%" viewBox="0 0 351 440" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +26,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Unitatea Teritorială din Stînga Nistrului"
         data-x="322"
         data-y="284"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Unitatea Teritorială din Stînga Nistrului')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M184.501 295.509L188.66 297.756L212.493 303.446L212.502 303.259L219.42 309.808L218.647 315.404L208.383 318.336L206.626 324.901L215.033 324.212L218.835 321.181L228.722 325.835L233.009 330.314L223.768 341.026L225.336 349.935L218.1 354.342L221.416 366.137L212.244 368.122L206.973 358.948L201.018 361.006L203.648 368.75L196.819 370.606L190.754 374.917L183.24 371.592L188.412 365.508L182.258 363.065L186.169 356.602L182.01 354.442L180.779 346.598L178.556 337.887L185.583 336.41L187.142 323.766L181.086 320.147L182.883 313.922L188.948 312.268L188.66 306.182L183.677 300.407L184.501 295.509ZM183.141 404.556L182.456 412.499L177.374 414.658L178.456 424.746L187.459 422.407L183.628 425.1L185.434 431.55L180.164 434.1L162.733 431.182L165.175 427.199L162.823 422.094L165.464 418.959L163.994 401.628L166.149 400.746L176.789 405.253L183.141 404.556ZM207.539 381.493L208.582 386.239L200.789 390.912L191.053 393.246L186.169 389.331L185.97 385.498L207.539 381.493Z"
@@ -34,6 +37,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Unitatea Teritorială Autonomă Găgăuzia (UTAG)"
         data-x="184"
         data-y="295"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Unitatea Teritorială Autonomă Găgăuzia (UTAG)')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M212.244 368.122L206.537 371.106L207.539 381.493L185.97 385.498L186.169 389.331L191.053 393.246L200.789 390.912L197.643 396.819L190.804 397.502L190.129 404.173L185.285 404.357L186.953 400.589L177.97 390.797L172.888 389.815L170.645 382.177L176.64 381.592L178.962 380.009L175.816 375.216L175.33 365.908L176.402 356.702L182.01 354.442L186.169 356.602L182.258 363.065L188.412 365.508L183.24 371.592L190.754 374.917L196.819 370.606L203.648 368.75L201.018 361.006L206.973 358.948L212.244 368.122ZM221.416 366.137L218.1 354.342L225.336 349.935L223.768 341.026L233.009 330.313L238.767 334.301L238.568 338.03L227.828 350.622L232.027 358.161L228.215 363.893L221.416 366.137Z"
@@ -42,6 +48,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Taraclia"
         data-x="212"
         data-y="368"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Taraclia')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M275.046 247.463L282.589 247.043L286.302 250.494H291.89L300.228 247.144L303.85 259.245L299.959 266.757L299.632 266.815L293.755 272.918L288.654 273.019L284.049 277.051L280.713 275.765L275.224 280.099L273.06 285.989L277.974 293.937L269.378 300.796L265.279 295.206L256.484 311.765L252.384 310.197L255.511 303.144L256.861 290.621L254.539 284.532L249.725 286.278L248.613 290.505L238.767 291.688V274.436L229.287 277.08L225.228 265.513L230.756 265.918L239.054 260.143L242.101 255.798L246.915 256.32L251.7 262.199L254.241 255.334L265.179 247.797L275.244 248.087L275.046 247.463Z"
@@ -50,6 +59,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Căuşeni"
         data-x="275"
         data-y="247"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Căuşeni')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M183.151 61.0965L185.077 54.2737L198.764 61.0219L187.539 69.0551L190.566 72.8687L195.35 67.9721L201.405 69.8416L206.973 76.7838L201.306 84.4309V88.9323L192.611 90.7082L188.611 87.8662L179.141 92.07L175.717 101.874L182.258 102.258L185.275 113.909L180.401 119.308L172.758 119.809L171.766 118.821L153.502 105.199L136.053 88.3251L138.316 81.2753L135.745 74.4266L148.708 74.5451L155.845 76.6803L159.974 73.5516L176.252 75.8053L186.774 66.7696L183.151 61.0965Z"
@@ -58,6 +70,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Floreşti"
         data-x="183"
         data-y="61"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Floreşti')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M182.01 354.442L176.402 356.702L175.33 365.908L175.816 375.216L178.962 380.009L176.64 381.592L170.645 382.177L172.888 389.815L177.969 390.797L186.952 400.589L185.285 404.357L183.141 404.556L176.789 405.253L166.148 400.746L163.994 401.628L165.464 418.959L162.823 422.094L165.175 427.199L162.733 431.182L153.185 438.999L150.326 426.419L142.425 421.995L146.256 417.171L151.06 415.453L150.902 403.604L145.274 389.088L145.771 378.384L142.345 360.878L143.705 350.679L149.155 349.247L156.669 350.907L161.066 349.834L164.877 353.856L174.744 353.655L175.717 348.861L180.779 346.598L182.01 354.442ZM187.459 422.407L178.456 424.746L177.374 414.658L182.456 412.499L184.848 413.99L187.459 422.407Z"
@@ -66,6 +81,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Cahul"
         data-x="182"
         data-y="354"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Cahul')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M163.905 210.072L170.635 213.307L178.843 210.757L182.655 212.33L188.859 229.372L197.355 237.507L201.653 236.621L205.455 242.995L201.891 256.479L193.058 262.097L189.434 268.666L180.451 269.057L175.479 264.051L168.739 266.902L170.298 270.431L168.928 277.773L164.54 277.874L160.53 272.874L156.162 274.059L150.605 259.738L149.661 252.552L144.757 245.084L142.872 234.589L145.344 231.087L157.354 232.946L156.768 221.983L163.508 219.524L163.805 210.218L163.905 210.072Z"
@@ -74,6 +92,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Hînceşti"
         data-x="163"
         data-y="210"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Hînceşti')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M94.3435 168.033L98.1252 167.403L101.838 161.627L109.55 157.901L119.903 157.711L121.561 151.341L126.315 151.106L149.413 155.26L154.117 158.121L153.055 166.949L145.731 173.013L137.928 184.294L130.593 188.007L131.377 193.88L128.062 198.683L129.522 206.137L136.559 211.514L138.485 219.83L127.685 214.37L122.226 207.186L114.216 200.287L113.649 194.609L106.106 178.166L98.6618 176.277L94.3435 168.033Z"
@@ -82,6 +103,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Ungheni"
         data-x="94"
         data-y="168"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ungheni')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M242.587 160.498L233.536 167.359L236.563 172.457L232.851 176.262L211.271 184.206L210.586 193.617L205.315 191.952L195.737 178.721L194.665 173.335L188.024 171.753L184.015 167.315L183.777 158.386L184.65 158.107L187.975 155.847L189.444 148.212L196.958 143.114L203.311 141.246L203.896 131.448L204.233 131.153L210.388 138.217L218.1 139.394L224.254 134.686L235.758 144.378L245.774 152.706L242.587 160.498Z"
@@ -90,6 +114,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Orhei"
         data-x="242"
         data-y="160"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Orhei')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M322.611 284.661L328.179 289.625L332.963 290.015L334.323 294.73L339.604 301.575L342.532 299.917L349.659 305.103L340.874 310.499L327.295 308.542L320.854 315L313.965 306.542L312.158 299.428L307.474 302.064L300.575 301.257L301.418 309.621L293.994 311.966L290.272 309.621L289.299 303.547L282.47 301.286L277.974 293.937L273.06 285.989L275.224 280.099L280.713 275.765L284.049 277.051L288.654 273.019L293.756 272.918L299.632 266.815L300.714 266.613L309.936 268.391L307.384 278.524L316.109 279.406L322.611 284.661Z"
@@ -98,6 +125,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Ştefan Vodă"
         data-x="322"
         data-y="284"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ştefan Vodă')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M183.151 61.0964L186.774 66.7695L176.252 75.8052L159.974 73.5515L155.844 76.6802L148.708 74.545L135.745 74.4265L133.432 70.154L139.566 66.1314L141.939 58.8527L138.058 52.6968L129.551 44.2892L122.662 43.6481L119.01 37.6595L119.903 37.2424L126.921 32.6066L119.407 27.8324L124.995 21.6377L128.48 24.639L141.988 26.2058L145.095 38.5693L149.78 33.5154L153.681 39.6564L158.713 40.9674L164.847 35.9015L171.687 38.3304V44.1399L178.396 48.5169L177.722 58.7183L183.151 61.0964Z"
@@ -106,6 +136,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Soroca"
         data-x="183"
         data-y="61"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Soroca')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M53.2305 82.8462L58.4914 79.5711L60.2385 72.7951L72.5064 70.0347L78.0152 70.9107L83.1577 67.6456L86.6418 61.7346L99.3667 67.0215L94.9887 73.7288L96.7357 82.5197L105.63 86.0455L115.019 97.1L124.271 98.4897L125.074 99.9381L119.06 103.633L113.253 104.445L113.184 103.81L107.416 96.0936L97.4106 99.4503L82.9686 94.8215L70.0058 102.48L64.2581 110.338L57.5886 101.283L59.3744 98.1642L56.834 89.0807L53.2305 82.8462Z"
@@ -114,6 +147,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Rîşcani"
         data-x="53"
         data-y="82"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Rîşcani')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M94.3436 168.033L91.0387 160.014L92.5369 154.438L81.9861 148.859L77.6877 136.805L88.2395 128.606L94.8901 129.872L102.136 115.975L106.146 118.409L111.039 112.847L112.548 105.597L125.263 113.836L125.789 113.6L125.074 119.411L129.571 126.559L127.814 138.217L130.94 143.892L129.67 150.357L126.316 151.106L121.561 151.341L119.903 157.711L109.55 157.901L101.838 161.627L98.1254 167.403L94.3436 168.033Z"
@@ -122,6 +158,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Făleşti"
         data-x="94"
         data-y="168"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Făleşti')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M125.789 113.599L126.256 113.392L137.194 113.009L137.631 104.238L130.544 104.681L125.074 99.9379L124.271 98.4895L131.924 96.2119L136.053 88.325L153.502 105.199L171.766 118.821L173.225 120.281L173.91 130.182L170.982 132.832L171.955 139.687L155.547 138.702L148.221 141.452L149.413 155.26L126.315 151.106L129.67 150.357L130.94 143.892L127.814 138.217L129.571 126.559L125.074 119.411L125.789 113.599Z"
@@ -130,6 +169,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Sîngerei"
         data-x="125"
         data-y="113"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Sîngerei')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M235.878 241.573L239.937 239.657L242.766 247.695L242.101 255.798L239.054 260.143L230.756 265.918L225.228 265.513L223.232 257.204L216.88 257.392L216.006 262.778L210.051 258.869L201.891 256.479L205.455 242.995L201.653 236.622L197.355 237.508L188.859 229.372L182.655 212.331L190.079 219.481L197.692 215.855L198.209 214.981L206.775 222.274L207.36 225.213L216.343 229.226L219.867 239.41L224.651 239.714L233.148 244.214L235.878 241.573Z"
@@ -138,6 +180,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Ialoveni"
         data-x="235"
         data-y="241"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ialoveni')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M242.101 255.798L242.766 247.695L239.937 239.657L235.878 241.573L237.049 236.041L229.535 229.473L231.58 220.558L240.86 217.369L246.231 223.831L251.512 217.079L256.683 216.583L257.368 208.658L263.035 201.892L269.963 208.017L269.378 217.908L264.007 220.165L264.206 225.155L270.748 228.979L277.001 225.547L281.686 228.397L281.1 239.758L279.046 235.446L273.775 234.952L271.82 241.137L273.974 244.75L275.244 248.087L265.179 247.796L254.241 255.334L251.7 262.199L246.915 256.319L242.101 255.798Z"
@@ -146,6 +191,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Anenii Noi"
         data-x="242"
         data-y="255"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Anenii Noi')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M81.0235 42.9037L81.4007 45.4202L85.1625 48.5459L85.0331 59.9816L86.6418 61.7346L83.1577 67.6456L78.0152 70.9107L72.5064 70.0347L60.2384 72.7951L58.4914 79.5711L53.2304 82.8462L49.4985 72.2456L44.8039 71.074L39.1756 62.7301L37.8059 52.9498L43.3346 46.4176L43.8403 36.7508L55.8614 40.64L61.7475 35.7374L60.9432 27.8176L63.1173 22.6831L70.7594 19.9197L69.7569 29.0858L71.1366 34.4851L81.0235 42.9037Z"
@@ -154,6 +202,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Edineţ"
         data-x="81"
         data-y="42"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Edineţ')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M123.466 16.4086L116.34 16.9014L111.079 23.1906L102.691 19.4119L98.1749 22.8024L85.4102 24.9366L82.7803 31.5922L81.1228 43.5596L81.0233 42.9036L71.1365 34.485L69.7568 29.0857L70.7592 19.9196L63.1171 22.6829L60.943 27.8175L55.1067 23.5639L56.9134 18.6046L60.2383 17.4548L63.6925 9.62061L69.7468 5.04253L75.0874 9.29112L81.9262 4.26409L92.8652 1L94.88 5.56614L100.875 8.84317L105.858 5.56614L112.746 6.41924L120.985 12.3422L123.466 16.4086Z"
@@ -162,6 +213,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Ocniţa"
         data-x="123"
         data-y="16"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Ocniţa')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M135.745 74.4264L138.316 81.2752L136.053 88.3249L131.924 96.2119L124.271 98.4895L115.019 97.0999L105.63 86.0454L96.7355 82.5195L94.9885 73.7286L99.3665 67.0213L103.376 64.6312L97.3617 57.9756L104.756 52.6967L108.885 43.1573L117.402 38.3752L119.01 37.6594L122.662 43.6481L129.551 44.2891L138.058 52.6967L141.939 58.8526L139.566 66.1313L133.432 70.154L135.745 74.4264Z"
@@ -170,6 +224,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Drochia"
         data-x="135"
         data-y="82"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Drochia')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M203.896 131.448L203.311 141.246L196.958 143.114L189.444 148.212L187.975 155.848L184.65 158.107L182.218 158.885L170.198 161.627L154.117 158.121L149.413 155.26L148.221 141.452L155.547 138.702L171.955 139.687L170.982 132.832L173.91 130.182L173.225 120.281L172.758 119.809L180.401 119.308L185.275 113.909L190.754 114.411L195.35 118.424L195.42 118.364L195.251 122.934L203.748 130.078L203.896 131.448Z"
@@ -178,6 +235,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Teleneşti"
         data-x="203"
         data-y="131"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Teleneşti')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M232.851 176.262L237.933 184.704L244.573 185.872L250.925 183.344L256.296 186.705L250.895 189.629L246.528 197.632L242.617 198.508L238.657 205.218L234.518 207.521L225.336 207.725L222.696 200.769L217.128 200.667L215.271 204.488L208.344 200.273L210.587 193.617L211.271 184.206L232.851 176.262ZM231.58 220.558L229.724 214.88L242.131 213.802L243.352 208.848L253.159 197.923L257.566 195.923L263.035 201.892L257.368 208.658L256.683 216.583L251.512 217.079L246.231 223.831L240.86 217.369L231.58 220.558Z"
@@ -186,6 +246,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Criuleni"
         data-x="232"
         data-y="176"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Criuleni')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M201.891 256.479L210.051 258.869L216.006 262.778L216.88 257.392L223.232 257.203L225.227 265.512L229.287 277.08L238.767 274.436V291.688L235.59 295.998L230.359 290.115L224.701 289.135L218.06 295.898L211.906 299.039L212.591 302.165L212.493 303.446L188.659 297.756L184.5 295.508L188.659 290.707L190.714 281.89L189.434 268.666L193.057 262.097L201.891 256.479Z"
@@ -194,6 +257,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Cimişlia"
         data-x="201"
         data-y="256"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Cimişlia')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M56.9135 18.6047L55.1068 23.564L60.9431 27.8176L61.7475 35.7374L55.8614 40.64L43.8403 36.7507L43.3346 46.4176L37.8058 52.9497L31.7804 51.2843L30.8078 44.6317L25.5369 42.4726L14.9164 34.6941L10.9266 36.7358L1 34.3806L5.02063 27.057L15.5017 28.2954L13.2889 16.5431L18.956 16.0205L20.3257 12.1034L30.8078 20.0092L35.5621 17.3205L39.6614 11.52L46.4414 15.3923L56.9135 18.6047Z"
@@ -202,6 +268,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Briceni"
         data-x="56"
         data-y="18"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Briceni')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M208.344 200.273L206.775 205.567L198.179 208.601L198.279 214.88L197.692 215.855L190.079 219.481L182.655 212.331L178.843 210.757L170.635 213.307L163.905 210.072L164.58 209.038L159.795 205.32L160.183 197.588L167.021 197.88L178.843 191.514L178.556 183.285L182.843 175.926L188.024 171.753L194.665 173.335L195.737 178.721L205.315 191.952L210.586 193.617L208.344 200.273Z"
@@ -210,6 +279,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Străşeni"
         data-x="208"
         data-y="200"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Străşeni')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M81.123 43.5596L82.7805 31.5923L85.4105 24.9367L98.1751 22.8025L102.692 19.412L111.079 23.1907L116.34 16.9014L123.467 16.4087L124.996 21.6378L119.407 27.8325L126.921 32.6067L119.903 37.2425L117.402 38.3753L108.885 43.1575L104.756 52.6969L97.3619 57.9758L103.376 64.6314L99.3667 67.0215L86.6418 61.7346L85.0332 59.9816L85.1626 48.5459L81.4008 45.4201L81.123 43.5596Z"
@@ -218,6 +290,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Donduşeni"
         data-x="81"
         data-y="43"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Donduşeni')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M77.6876 136.804L65.4097 124.099L61.6379 117.11L64.258 110.337L70.0057 102.48L82.9685 94.8213L97.4105 99.4501L107.416 96.0935L113.183 103.81L113.292 104.741L112.548 105.597L111.039 112.847L106.146 118.409L102.136 115.975L94.89 129.872L88.2394 128.606L77.6876 136.804Z"
@@ -226,6 +301,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Glodeni"
         data-x="77"
         data-y="136"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Glodeni')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M185.275 113.909L182.258 102.258L175.717 101.874L179.141 92.0699L188.611 87.8661L192.611 90.7081L201.306 88.9322V84.4308L206.973 76.7837L212.571 76.9917L216.671 83.942L216.383 87.9556L227.48 91.4776L223.183 99.6124L217.227 105.199L209.415 107.459L206.874 114.116L199.162 113.23L196.323 117.538L195.35 118.423L190.754 114.411L185.275 113.909Z"
@@ -234,6 +312,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Şoldăneşti"
         data-x="185"
         data-y="113"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Şoldăneşti')}
+        onMouseLeave={handleMouseLeave}
       />
 
       <path
@@ -243,6 +324,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Rezina"
         data-x="195"
         data-y="118"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Rezina')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M143.705 350.679L146.436 337.113L143.815 331.719L145.522 327.299L152.738 320.434L150.535 315.648L154.942 307.046L164.143 306.772L172.054 310.787L172.838 306.585L182.883 313.922L181.086 320.147L187.142 323.766L185.583 336.41L178.556 337.887L180.779 346.598L175.717 348.861L174.744 353.655L164.877 353.856L161.066 349.834L156.669 350.907L149.155 349.247L143.705 350.679Z"
@@ -251,6 +335,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Cantemir"
         data-x="143"
         data-y="350"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Cantemir')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M243.352 208.848L242.131 213.802L229.724 214.88L231.58 220.558L229.535 229.473L237.049 236.041L235.878 241.573L233.148 244.214L224.651 239.714L219.867 239.41L216.343 229.226L207.36 225.213L206.775 222.274L198.209 214.981L198.279 214.88L198.179 208.6L206.775 205.567L208.344 200.272L215.271 204.488L217.128 200.667L222.696 200.769L225.336 207.725L234.518 207.521L238.657 205.218L243.352 208.848Z"
@@ -259,6 +346,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Chişinău"
         data-x="243"
         data-y="208"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Chişinău')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M183.777 158.386L184.015 167.315L188.025 171.753L182.843 175.926L178.556 183.285L178.844 191.514L167.022 197.879L160.183 197.588L147.984 191.207L141.631 189.161L137.928 184.294L145.731 173.013L153.055 166.949L154.118 158.121L170.198 161.627L182.218 158.885L183.777 158.386Z"
@@ -267,6 +357,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Călăraşi"
         data-x="183"
         data-y="158"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Călăraşi')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M154.942 307.046L156.539 297.022L152.768 291.731L154.842 286.437L156.162 274.06L160.53 272.874L164.54 277.874L168.928 277.774L170.297 270.431L168.739 266.902L175.479 264.051L180.451 269.057L189.434 268.666L190.714 281.89L188.66 290.707L184.501 295.509L183.677 300.407L188.66 306.182L188.948 312.268L182.883 313.922L172.838 306.585L172.053 310.787L164.143 306.772L154.942 307.046Z"
@@ -275,6 +368,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Leova"
         data-x="154"
         data-y="307"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Leova')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M137.928 184.293L141.631 189.161L147.983 191.207L160.183 197.588L159.796 205.319L164.58 209.037L163.805 210.218L163.508 219.524L156.768 221.983L157.354 232.946L145.344 231.087L142.872 234.589L141.373 222.784L138.485 219.83L136.559 211.514L129.522 206.137L128.062 198.683L131.377 193.88L130.593 188.006L137.928 184.293Z"
@@ -283,6 +379,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Nisporeni"
         data-x="137"
         data-y="184"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Nisporeni')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M266.579 163.987L267.194 164.794L267.333 166.524L253.069 173.774L250.925 183.344L244.573 185.872L237.933 184.704L232.851 176.262L236.563 172.457L233.536 167.359L242.587 160.498L249.843 169.263L264.624 166.23L266.579 163.987ZM257.566 195.923L253.159 197.923L243.352 208.848L238.657 205.218L242.617 198.508L246.528 197.632L250.895 189.629L256.296 186.706L264.107 186.224L257.566 195.923Z"
@@ -291,6 +390,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Dubăsari"
         data-x="266"
         data-y="163"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Dubăsari')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M212.591 302.165L211.906 299.039L218.06 295.898L224.701 289.135L230.359 290.115L235.59 295.998L227.143 300.897L228.503 308.24L232.215 316.079L228.722 325.835L218.835 321.181L215.033 324.212L206.625 324.901L208.382 318.336L218.647 315.404L219.42 309.808L212.502 303.259L212.591 302.165Z"
@@ -299,6 +401,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Basarabeasca"
         data-x="212"
         data-y="302"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Basarabeasca')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M113.292 104.741L113.253 104.445L119.06 103.633L125.074 99.938L130.544 104.681L137.631 104.238L137.194 113.009L126.256 113.393L125.263 113.835L112.548 105.597L113.292 104.741Z"
@@ -307,6 +412,9 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Bălţi"
         data-x="113"
         data-y="104"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Bălţi')}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M282.59 247.043L275.046 247.463L273.974 244.75L271.82 241.137L273.775 234.952L279.046 235.446L281.1 239.758L282.59 247.043Z"
@@ -315,8 +423,11 @@ const MapMoldovaContent = ({ element }) => {
         data-name="Tighina"
         data-x="282"
         data-y="247"
+        className="hover:brightness-90"
+        onMouseMove={(e) => handleMouseMove(e, 'Tighina')}
+        onMouseLeave={handleMouseLeave}
       />
-
+      {present && renderTooltip()}
       {renderLabels()}
     </svg>
   );
@@ -328,6 +439,7 @@ MapMoldovaPresent.propTypes = {
 };
 MapMoldovaContent.propTypes = {
   element: PropTypes.object.isRequired,
+  present: PropTypes.bool,
 };
 
 export default MapMoldova;
