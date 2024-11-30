@@ -71,7 +71,6 @@ export const StandardMultipleBarContent = ({ element }) => {
                     position={element.config.labelPosition}
                     formatter={(value) => {
                       const total = element.config.data.reduce((sum, entry) => sum + entry[key], 0);
-                      console.log(total);
                       switch (element.config.styles.labelFormat) {
                         case 'value':
                           return value;
@@ -108,4 +107,3 @@ StandardMultipleBarContent.propTypes = {
 };
 
 export default StandardMultipleBar;
-

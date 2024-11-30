@@ -19,8 +19,6 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
     return acc;
   }, {});
 
-  console.log(element.config);
-
   return (
     <div
       style={{
@@ -105,7 +103,6 @@ export const StandardVerticalStackedBarContent = ({ element }) => {
                               : element.config.labelPosition
                     }
                     formatter={(value) => {
-                      console.log(value);
                       const total = element.config.data.reduce((sum, entry) => sum + entry[key], 0);
                       switch (element.config.styles.labelFormat) {
                         case 'value':

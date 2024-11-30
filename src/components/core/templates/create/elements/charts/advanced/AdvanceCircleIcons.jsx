@@ -12,8 +12,6 @@ AdvanceCircleIcons.propTypes = ElementPropTypes;
 export const AdvanceCircleIconsContent = ({ element }) => {
   const percentages = getPercentages(element.config.data.slice(0, element.config.circles).map((item) => +item.value));
 
-  console.log(element.config);
-
   return (
     <div
       style={{
