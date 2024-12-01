@@ -1,10 +1,47 @@
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
-import { Select, SelectItem } from '@nextui-org/react';
+import { Input, Select, SelectItem } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 
 const AdvancedStackedCardConfig = ({ element, onChange }) => {
   return (
     <div className="space-y-6">
+      <p>Config</p>
+      <div className="grid grid-cols-2 gap-4">
+        {element.config.data.map((item, index) => (
+          <>
+            <Input
+              key={`range-${index}`}
+              value={item.range}
+              onChange={(e) =>
+                onChange({
+                  ...element,
+                  config: {
+                    ...element.config,
+                    data: element.config.data.map((el, i) => (i === index ? { ...el, range: e.target.value } : el)),
+                  },
+                })
+              }
+              classNames={{ label: 'text-base' }}
+            />
+            <Input
+              key={`percentage-${index}`}
+              value={item.percentage}
+              onChange={(e) =>
+                onChange({
+                  ...element,
+                  config: {
+                    ...element.config,
+                    data: element.config.data.map((el, i) =>
+                      i === index ? { ...el, percentage: e.target.value } : el
+                    ),
+                  },
+                })
+              }
+              classNames={{ label: 'text-base' }}
+            />
+          </>
+        ))}
+      </div>
       <div className="flex items-center space-x-4">
         <p className="text-base opacity-75 whitespace-nowrap">No. of Cards:</p>
         <AutoCompleteNumberInput

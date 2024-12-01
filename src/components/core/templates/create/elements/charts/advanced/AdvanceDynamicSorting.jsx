@@ -49,10 +49,8 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
               name: 'X',
               type: 'bar',
               data: data,
-              top: 0,
-              padding: '30px',
               label: {
-                show: true,
+                show: element.config.showLabel,
                 position: 'right',
                 valueAnimation: true,
                 color: element.config.styles.valueAndLableColor,
@@ -60,15 +58,11 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
                 fontWeight: element.config.styles.lFontWeight,
                 fontStyle: element.config.styles.lFontStyle,
               },
+              itemStyle: {
+                color: (params) => element.config.colors[params.dataIndex % element.config.colors.length],
+              },
             },
           ],
-          grid: {
-            show: element.config.showGridline,
-            top: element.config.styles.yPadding || '30px',
-            bottom: element.config.styles.yPadding || '30px',
-            left: element.config.styles.xPadding || '30px',
-            right: element.config.styles.xPadding || '30px',
-          },
           legend: {
             show: element.config.showLegend,
             textStyle: {
@@ -113,7 +107,16 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
     };
   }, [element]);
 
-  return <div ref={chartRef} style={{ width: '100%', height: element.height }} />;
+  return (
+    <div>
+      {element.config.showTitle && (
+        <p className="font-bold" style={{ fontSize: element.config.fontSize }}>
+          {element.config.title}
+        </p>
+      )}
+      <div ref={chartRef} style={{ width: '100%', height: element.height }} />
+    </div>
+  );
 };
 
 AdvanceDynamicSortingContent.propTypes = {
