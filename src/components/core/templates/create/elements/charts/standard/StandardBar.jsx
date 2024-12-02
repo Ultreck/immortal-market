@@ -49,6 +49,7 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
                       label={e?.payload[0].payload.name}
                       value={e?.payload[0].payload.value}
                       present={present}
+                      element={element}
                     />
                   )}
                 </>

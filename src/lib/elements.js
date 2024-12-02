@@ -42,7 +42,18 @@ export const elements = {
     },
   },
   'chart-s': {
-    tools: ['chart', 'chart-data', 'font', 'colors', 'opacity', 'animation', 'element-tag', 'layout', 'chart-font'],
+    tools: [
+      'chart',
+      'chart-data',
+      'font',
+      'colors',
+      'opacity',
+      'animation',
+      'element-tag',
+      'layout',
+      'chart-font',
+      'tooltip',
+    ],
     components: {
       edit: StandardCharts,
       present: StandardChartsPresent,

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { ChartContainer } from '@/components/ui/chart.jsx';
-import { Bar, BarChart, XAxis } from 'recharts';
+import { Bar, BarChart, Line, LineChart, Pie, PieChart, XAxis } from 'recharts';
 
-const ChartTooltipContent = ({ label, value, present = false }) => {
+const ChartTooltipContent = ({ label, value, present = false, element }) => {
   const chartConfig = {
     visitors: {
       label: 'Visitors',
@@ -45,18 +45,34 @@ const ChartTooltipContent = ({ label, value, present = false }) => {
             {label}: {value}
           </p>
           <div className="mt-4">
-            <ChartContainer config={chartConfig} className="w-full h-[100px]">
-              <BarChart accessibilityLayer data={_chartData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-                <XAxis
-                  dataKey="browser"
-                  tickLine={false}
-                  tickMargin={2}
-                  axisLine={false}
-                  tickFormatter={(value) => value.slice(0, 3)}
-                />
-                <Bar dataKey="visitors" fill="#2673D9" radius={20} />
-              </BarChart>
-            </ChartContainer>
+            {element.tooltip.type === 'bar' && (
+              <ChartContainer config={chartConfig} className="w-full h-[100px]">
+                <BarChart accessibilityLayer data={_chartData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+                  <XAxis
+                    dataKey="browser"
+                    tickLine={false}
+                    tickMargin={2}
+                    axisLine={false}
+                    tickFormatter={(value) => value.slice(0, 3)}
+                  />
+                  <Bar dataKey="visitors" fill="#2673D9" radius={20} />
+                </BarChart>
+              </ChartContainer>
+            )}
+            {element.tooltip.type === 'pie' && (
+              <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px] w-full">
+                <PieChart>
+                  <Pie data={_chartData} dataKey="visitors" nameKey="browser" />
+                </PieChart>
+              </ChartContainer>
+            )}
+            {element.tooltip.type === 'line' && (
+              <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px] w-full">
+                <LineChart>
+                  <Line data={_chartData} dataKey="visitors" nameKey="browser" />
+                </LineChart>
+              </ChartContainer>
+            )}
           </div>
         </>
       ) : (
@@ -73,6 +89,7 @@ ChartTooltipContent.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   present: PropTypes.bool,
+  element: PropTypes.object.isRequired,
 };
 
 export default ChartTooltipContent;

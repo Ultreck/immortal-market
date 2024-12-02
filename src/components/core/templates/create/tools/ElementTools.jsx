@@ -29,6 +29,7 @@ import DataTagConfig from '@/components/core/templates/create/tools/elements/spe
 import ChartData from './elements/specific/ChartData.jsx';
 import Layout from './elements/generic/Layout.jsx';
 import ElementTag from './elements/generic/ElementTag.jsx';
+import ElementTooltip from '@/components/core/templates/create/tools/elements/generic/Tooltip.jsx';
 
 const mapping = {
   font: { type: 'multiple', component: Font },
@@ -58,6 +59,7 @@ const mapping = {
   'chart-font': { type: 'multiple', component: ChartFont },
   layout: { type: 'single', component: Layout },
   'element-tag': { type: 'single', component: ElementTag },
+  tooltip: { type: 'single', component: ElementTooltip },
 };
 
 const ElementTools = () => {
