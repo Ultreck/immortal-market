@@ -56,11 +56,18 @@ const PageContent = ({ id }) => {
         className="origin-top-left pointer-events-none"
       >
         {page.elements.map((element) => {
+          const component = getElementEditComponent(element);
+          if (!component) {
+            return (
+              <span key={element.id} className="border border-red-500 text-red-500 rounded-2xl px-6 py-2">
+                {element.type}
+              </span>
+            );
+          }
+          const config = getElementConfig(element);
           const selected = selectedElements.includes(element.id);
           const highlighted = highlightedElements.includes(element.id);
           const active = activeElement === element.id;
-          const component = getElementEditComponent(element);
-          const config = getElementConfig(element);
 
           return config?.wrapper ? (
             <ElementWrapper

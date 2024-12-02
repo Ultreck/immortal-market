@@ -197,7 +197,7 @@ export const getElementTools = (element) => {
 
 export const getElementEditComponent = (element) => {
   const found = elements[element.type];
-  if (!found) throw new Error(`No components found for type ${element.type}`);
+  if (!found) return null;
   return found.components.edit;
 };
 
