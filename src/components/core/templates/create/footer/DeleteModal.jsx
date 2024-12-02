@@ -4,23 +4,18 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast.jsx';
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
-import { useNavigate } from 'react-router-dom';
 
 const DeleteModal = ({ id, isOpen, onClose }) => {
   const toast = useToast();
   const qc = useQueryClient();
-  const navigate = useNavigate();
   const { id: business } = useBusiness();
   const { mutateAsync: deleteTemplate, isPending: isDeleteLoading } = useDeleteDesign(business);
 
   const handleDelete = async () => {
     try {
       await deleteTemplate({ id });
-      await qc.invalidateQueries({
-        queryKey: ['business', id, 'templates'],
-      });
+      await qc.invalidateQueries({ queryKey: ['business', id, 'designs'] });
       toast.success('Project deleted');
-      navigate('/templates');
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
     }

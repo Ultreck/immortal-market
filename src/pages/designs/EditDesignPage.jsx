@@ -5,27 +5,23 @@ import { useEffect, useRef } from 'react';
 import useTemplateStore from '@/store/template.js';
 import { Spinner } from '@nextui-org/react';
 import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useUnmount } from 'react-use';
 import { useQueryClient } from '@tanstack/react-query';
 
 const EditDesignPage = () => {
-  const toast = useToast();
   const { id } = useParams();
   const qc = useQueryClient();
   const navigate = useNavigate();
   const { id: business } = useBusiness();
-  const _id = useTemplateStore((state) => state.template.id);
+  const currentId = useTemplateStore((state) => state.template.id);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const reset = useTemplateStore((state) => state.reset);
   const { data: { success = false, design } = {}, isLoading: isTemplatesLoading } = useGetDesign(business, id);
   const loaded = useRef(false);
 
   useEffect(() => {
-    if (success && !design) {
-      navigate(`/templates/`);
-    }
-  }, [success, design, navigate, toast]);
+    if (success && !design) navigate(`/`);
+  }, [success, design, navigate]);
 
   useEffect(() => {
     if (design) {
@@ -62,7 +58,7 @@ const EditDesignPage = () => {
         }
         loaded.current = true;
       }
-      if (_id !== design._id) {
+      if (currentId !== design._id) {
         payload = {
           isCommentsOpen: false,
           activeComment: null,
@@ -75,13 +71,14 @@ const EditDesignPage = () => {
           activePage: payload.pages[0].id,
           scale: 1,
           isModifyReportOpen: false,
+          isManageDataOpen: false,
           mode: 'scroll',
           ...payload,
         };
       }
       updateTemplate(payload);
     }
-  }, [_id, design, updateTemplate]);
+  }, [currentId, design, updateTemplate]);
 
   useUnmount(() => {
     reset();
@@ -96,7 +93,7 @@ const EditDesignPage = () => {
           <p className="mt-6">Loading design..</p>
         </div>
       ) : (
-        <>{!!_id && <DesignBuilder />}</>
+        <>{!!currentId && !!design && <DesignBuilder />}</>
       )}
     </>
   );
