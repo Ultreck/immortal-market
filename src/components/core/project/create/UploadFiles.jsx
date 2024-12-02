@@ -71,6 +71,7 @@ const UploadFiles = ({ onNext, onPrev }) => {
         className="mt-7"
         isDisabled={!type}
         accept={types[type]}
+        maxSize={10000000}
       />
       <p className="opacity-70 text-md mt-6">
         Ensure the first row of your file is a header row. This will be used to map your data to the correct fields.
