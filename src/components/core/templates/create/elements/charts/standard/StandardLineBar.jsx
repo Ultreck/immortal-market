@@ -31,10 +31,10 @@ export const StandardLineBarContent = ({ element }) => {
           height: element.height,
           width: element.width,
           opacity: element.style.opacity,
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
+          paddingTop: element.config.styles?.yPadding,
+          paddingLeft: element.config.styles?.xPadding,
+          paddingBottom: element.config.styles?.yPadding,
+          paddingRight: element.config.styles?.xPadding,
         }}
       >
         <ComposedChart data={chartData}>
@@ -44,23 +44,23 @@ export const StandardLineBarContent = ({ element }) => {
             scale="band"
             hide={!element.config.showXaxis}
             tick={{
-              fontSize: element.config.styles.xGridSize,
-              fontWeight: element.config.styles.gFontWeight,
-              fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor,
+              fontSize: element.config.styles?.xGridSize,
+              fontWeight: element.config.styles?.gFontWeight,
+              fontStyle: element.config.styles?.gFontStyle,
+              fill: element.config.styles?.gridAndLegendColor,
             }}
           />
           <YAxis
             hide={!element.config.showYaxis}
             tick={{
-              fontSize: element.config.styles.yGridSize,
-              fontWeight: element.config.styles.gFontWeight,
-              fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor,
+              fontSize: element.config.styles?.yGridSize,
+              fontWeight: element.config.styles?.gFontWeight,
+              fontStyle: element.config.styles?.gFontStyle,
+              fill: element.config.styles?.gridAndLegendColor,
             }}
           />
           {element.config.showLegend && <Legend />}
-          <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={element.config.styles.borderRadius} />
+          <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={element.config.styles?.borderRadius} />
           <Line type="monotone" dataKey="uv" stroke={element.config.colors[1]} />
         </ComposedChart>
       </ChartContainer>
