@@ -16,7 +16,7 @@ const NavItem = ({ icon, title, href, mini = false }) => {
       to={href}
       className={({ isActive }) =>
         cn(
-          'flex items-center px-5 py-2 rounded-xl text-base',
+          'flex items-center px-5 py-2 rounded-3xl text-base',
           isActive ? `bg-black/5 dark:bg-white/10 font-semibold` : 'hover:bg-black/5 opacity-80',
           { 'w-12 h-12 p-0 justify-center': mini }
         )

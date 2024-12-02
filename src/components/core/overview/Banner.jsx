@@ -97,7 +97,7 @@ const Banner = () => {
         <AnimatePresence mode="popLayout">
           {view === 'design' && (
             <motion.div key="design" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <h2 className="font-semibold text-2xl mb-6">Create new design</h2>
+              <h2 className="font-semibold text-[1.4rem] mb-6">Create new design</h2>
               <div className="grid grid-cols-5 gap-6">
                 <div
                   onClick={() => updateData({ isCreateProjectModalOpen: true })}
@@ -159,7 +159,7 @@ const Banner = () => {
           )}
           {view === 'analyze' && (
             <motion.div key="analyze" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <h2 className="font-semibold text-xl mb-6">Analyze your files</h2>
+              <h2 className="font-semibold text-[1.4rem] mb-6">Analyze your files</h2>
               <div className="flex flex-row justify-between gap-4">
                 {[
                   { icon: <SiMicrosoftexcel size="24" />, name: 'Excel' },
@@ -188,7 +188,7 @@ const Banner = () => {
           )}
           {view === 'databases' && (
             <motion.div key="databases" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <h2 className="font-semibold text-xl mb-6">Connect your database</h2>
+              <h2 className="font-semibold text-[1.4rem] mb-6">Connect your database</h2>
               <div className="flex flex-row justify-between gap-4">
                 {[
                   { icon: <TbBrandMysql size="24" />, name: 'MySQL' },
@@ -217,7 +217,7 @@ const Banner = () => {
           )}
           {view === 'apps' && (
             <motion.div key="apps" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <h2 className="font-semibold text-xl mb-6">Apps</h2>
+              <h2 className="font-semibold text-[1.4rem] mb-6">Apps</h2>
               <div className="grid grid-cols-4 gap-8">
                 <div className="flex flex-col rounded-3xl bg-default-100 dark:bg-default-50">
                   <div className="w-full">

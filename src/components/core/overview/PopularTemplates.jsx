@@ -19,7 +19,7 @@ const PopularTemplates = () => {
   return (
     <>
       <section>
-        <h2 className="font-semibold text-2xl mb-6">Start with a template</h2>
+        <h2 className="font-semibold text-[1.4rem] mb-4">Start with a template</h2>
         <div className="mb-8 flex flex-wrap gap-3">
           <Chip
             variant="solid"

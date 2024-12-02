@@ -1,5 +1,5 @@
 import { Button, cn, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/react';
-import { RiAddLine, RiBarChart2Line, RiFileAddLine, RiUser6Line } from 'react-icons/ri';
+import { RiAddLine, RiFileAddLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 import useGlobalStore from '@/store/global.js';
 
@@ -17,9 +17,8 @@ const CreateDropdown = ({ className, mini = false }) => {
           ) : (
             <Button
               color="primary"
-              radius="xl"
               size="lg"
-              className="w-full text-base font-medium h-auto py-2.5 px-5 text-start justify-start gap-4"
+              className="w-full text-base font-medium h-auto py-2.5 px-5 text-start justify-start gap-4 rounded-3xl"
               startContent={<RiAddLine size="20" />}
             >
               Create new
@@ -41,22 +40,6 @@ const CreateDropdown = ({ className, mini = false }) => {
               startContent={<RiFileAddLine size="20" className="ml-1" />}
             >
               Project
-            </DropdownItem>
-            <DropdownItem
-              key="report"
-              description="Start exploring banking templates"
-              classNames={{ title: 'text-base', description: 'text-sm', wrapper: 'px-2 py-1', base: 'rounded-xl' }}
-              startContent={<RiBarChart2Line size="20" className="ml-1" />}
-            >
-              Analyze report
-            </DropdownItem>
-            <DropdownItem
-              key="template"
-              description="Start exploring banking templates"
-              classNames={{ title: 'text-base', description: 'text-sm', wrapper: 'px-2 py-1', base: 'rounded-xl' }}
-              startContent={<RiUser6Line size="20" className="ml-1" />}
-            >
-              Custom
             </DropdownItem>
           </DropdownSection>
         </DropdownMenu>
