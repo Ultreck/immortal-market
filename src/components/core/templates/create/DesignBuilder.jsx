@@ -8,6 +8,7 @@ import Sidebar from '@/components/core/templates/create/sidebar/Sidebar.jsx';
 import CommentModal from './comment/CommentsModal.jsx';
 import ModifyReportModal from '@/components/core/templates/create/ModifyReportModal.jsx';
 import TransitionModal from '@/components/core/templates/create/transition/TransitionModal.jsx';
+import ManageDataModal from '@/components/core/templates/create/ManageDataModal.jsx';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;
@@ -84,9 +85,9 @@ const DesignBuilder = () => {
 
       <CommentModal />
       <ModifyReportModal />
+      <ManageDataModal />
     </DndContext>
   );
 };
 
 export default DesignBuilder;
-

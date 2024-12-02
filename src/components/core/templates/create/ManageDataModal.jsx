@@ -4,6 +4,7 @@ import { useGetDesignSource, useGetTableData, useProcessData } from '@/api/busin
 import {
   Button,
   getKeyValue,
+  Pagination,
   Skeleton,
   Spinner,
   Table,
@@ -14,12 +15,13 @@ import {
   TableRow,
 } from '@nextui-org/react';
 import NoData from '@/components/ui/NoData.jsx';
-import { TbDatabaseOff, TbFolder } from 'react-icons/tb';
+import { TbDatabaseOff } from 'react-icons/tb';
 import useBusiness from '@/hooks/use-business.js';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { camelCaseToWords, cn } from '@/lib/utils.js';
 import { useToast } from '@/hooks/use-toast.jsx';
+import { RiFileLine } from 'react-icons/ri';
 
 const ManageDataModal = () => {
   const isOpen = useTemplateStore((state) => state.template.isManageDataOpen);
@@ -74,8 +76,8 @@ const Tables = () => {
               })}
               onClick={() => setCurrent(table.name)}
             >
-              <TbFolder size="24" />
-              <h3 className="text-lg font-semibold">{i + 1}</h3>
+              <RiFileLine size="20" />
+              <p>{i + 1}</p>
             </button>
           ))}
         </div>
@@ -88,7 +90,18 @@ const Tables = () => {
 const TableData = ({ table }) => {
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
-  const { data: { data } = {}, isLoading } = useGetTableData({ business, design: id, table });
+  const [page, setPage] = useState(1);
+  const {
+    data: { data, total } = {},
+    isLoading,
+    isFetching,
+  } = useGetTableData({
+    business,
+    design: id,
+    table,
+    page,
+    limit: 20,
+  });
 
   const keys = data?.length ? Object.keys(data[0]).filter((key) => !key.match(/^_id|__v$/gi)) : [];
   const columns = keys.map((key) => ({ key, label: camelCaseToWords(key) }));
@@ -101,8 +114,27 @@ const TableData = ({ table }) => {
         <>
           {columns.length ? (
             <Table
-              classNames={{ wrapper: 'border shadow-none border-default-200', td: 'text-base', th: 'text-base' }}
+              classNames={{
+                wrapper: 'border shadow-none border-default-200',
+                td: 'text-md whitespace-nowrap',
+                th: 'text-md',
+                table: isFetching ? 'opacity-50' : '',
+              }}
               aria-label="Data table"
+              bottomContent={
+                <div className="flex w-full space-x-4">
+                  <Pagination
+                    isCompact
+                    showControls
+                    color="primary"
+                    page={page}
+                    total={total}
+                    onChange={(page) => setPage(page)}
+                    isDisabled={isFetching}
+                  />
+                  {isFetching && <Spinner size="sm" color="primary" />}
+                </div>
+              }
             >
               <TableHeader columns={columns}>
                 {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}

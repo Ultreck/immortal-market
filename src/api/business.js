@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import http from '@/lib/http.js';
 import { objectToFormData } from '@/lib/utils.js';
 
@@ -268,12 +268,34 @@ export const useUpdateComment = (business, design) => {
   });
 };
 
-export const useGetDesignSource = (business, id) => {
+export const useGetDesignSource = (business, design) => {
   return useQuery({
-    queryKey: ['business', business, 'designs', id, 'source'],
+    queryKey: ['business', business, 'designs', design, 'source'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs/${id}/source`);
+      const res = await http.get(`/businesses/${business}/designs/${design}/source`);
       return res.data;
     },
+  });
+};
+
+export const useProcessData = (business, design) => {
+  return useMutation({
+    mutationKey: ['business', business, 'designs', design, 'data'],
+    mutationFn: async () => {
+      return http.post(`/businesses/${business}/designs/${design}/data/process`);
+    },
+  });
+};
+
+export const useGetTableData = ({ business, design, table, page = 1, limit = 10 }) => {
+  return useQuery({
+    queryKey: ['business', business, 'designs', design, 'data', table, limit, page],
+    queryFn: async () => {
+      const res = await http.get(`/businesses/${business}/designs/${design}/data`, {
+        params: { table, page, limit },
+      });
+      return res.data;
+    },
+    placeholderData: keepPreviousData,
   });
 };

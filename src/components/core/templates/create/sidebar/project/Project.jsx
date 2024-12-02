@@ -1,4 +1,4 @@
-import { TbClock, TbReportAnalytics } from 'react-icons/tb';
+import { TbClock, TbDatabaseCog, TbReportAnalytics } from 'react-icons/tb';
 import useTemplateStore from '@/store/template.js';
 import { useParams } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
@@ -15,6 +15,10 @@ const Project = () => {
     updateTemplate({ isModifyReportOpen: true });
   };
 
+  const handleManageData = () => {
+    updateTemplate({ isManageDataOpen: true });
+  };
+
   return (
     <div className="px-2">
       <h2 className="text-lg font-semibold">{design.title}</h2>
@@ -27,7 +31,7 @@ const Project = () => {
           </span>
         </div>
       </div>
-      <div className="space-y-4 mt-6">
+      <div className="space-y-3 mt-6">
         <div
           onClick={handleModifyReport}
           className="flex items-center space-x-3 text-center leading-tight bg-default-900/5 hover:bg-default-900/10 px-6 py-3 rounded-2xl cursor-pointer"
@@ -35,6 +39,14 @@ const Project = () => {
         >
           <TbReportAnalytics size="24" />
           <span className="text-md">Modify report</span>
+        </div>
+        <div
+          onClick={handleManageData}
+          className="flex items-center space-x-3 text-center leading-tight bg-default-900/5 hover:bg-default-900/10 px-6 py-3 rounded-2xl cursor-pointer"
+          tabIndex={0}
+        >
+          <TbDatabaseCog size="24" />
+          <span className="text-md">Manage data</span>
         </div>
       </div>
     </div>

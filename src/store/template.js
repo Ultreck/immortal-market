@@ -31,6 +31,7 @@ const useTemplateStore = createWithEqualityFn(
       openTool: null,
       isModifyReportOpen: false,
       isTransitionOpen: false,
+      isManageDataOpen: false,
     },
     addUndoHistory: () => {
       set((state) => {
@@ -269,4 +270,3 @@ const useTemplateStore = createWithEqualityFn(
 );
 
 export default useTemplateStore;
-
