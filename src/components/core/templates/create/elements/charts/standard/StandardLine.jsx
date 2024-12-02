@@ -23,10 +23,10 @@ export const StandardLineContent = ({ element, present = false, isChartWrapperDi
           height: element.height,
           width: element.width,
           opacity: element.style.opacity,
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
+          paddingTop: element.config.styles?.yPadding,
+          paddingLeft: element.config.styles?.xPadding,
+          paddingBottom: element.config.styles?.yPadding,
+          paddingRight: element.config.styles?.xPadding,
         }}
       >
         <LineChart
@@ -40,7 +40,7 @@ export const StandardLineContent = ({ element, present = false, isChartWrapperDi
           {element.config.showLegend && (
             <Legend
               textStyle={{
-                fontSize: element.config.styles.legendSize,
+                fontSize: element.config.styles?.legendSize,
               }}
             />
           )}

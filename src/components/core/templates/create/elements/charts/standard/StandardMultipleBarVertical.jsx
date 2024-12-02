@@ -23,10 +23,10 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
           height: element.height,
           width: element.width,
           opacity: element.style.opacity,
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
+          paddingTop: element.config.styles?.yPadding,
+          paddingLeft: element.config.styles?.xPadding,
+          paddingBottom: element.config.styles?.yPadding,
+          paddingRight: element.config.styles?.xPadding,
         }}
       >
         <BarChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)} layout="vertical">
@@ -36,20 +36,20 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
             dataKey="name"
             hide={!element.config.showYaxis}
             tick={{
-              fontSize: element.config.styles.yGridSize,
-              fontWeight: element.config.styles.gFontWeight,
-              fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor,
+              fontSize: element.config.styles?.yGridSize,
+              fontWeight: element.config.styles?.gFontWeight,
+              fontStyle: element.config.styles?.gFontStyle,
+              fill: element.config.styles?.gridAndLegendColor,
             }}
           />
           <XAxis
             type="number"
             hide={!element.config.showXaxis}
             tick={{
-              fontSize: element.config.styles.xGridSize,
-              fontWeight: element.config.styles.gFontWeight,
-              fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor,
+              fontSize: element.config.styles?.xGridSize,
+              fontWeight: element.config.styles?.gFontWeight,
+              fontStyle: element.config.styles?.gFontStyle,
+              fill: element.config.styles?.gridAndLegendColor,
             }}
           />
           {element.config.showLegend && <ChartLegend content={<ChartLegendContent />} />}
@@ -58,7 +58,7 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
               key={key}
               dataKey={key}
               fill={element.config.colors[index % element.config.colors.length]}
-              radius={element.config.styles.borderRadius}
+              radius={element.config.styles?.borderRadius}
             >
               {element.config.showLabel && (
                 <LabelList
@@ -76,7 +76,7 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
                   }
                   formatter={(value) => {
                     const total = element.config.data.reduce((sum, entry) => sum + entry[key], 0);
-                    switch (element.config.styles.labelFormat) {
+                    switch (element.config.styles?.labelFormat) {
                       case 'value':
                         return value;
                       case 'percentage':
@@ -84,7 +84,7 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
                       case 'both':
                         return `${value} (${((value / total) * 100).toFixed(1)}%)`;
                       case 'currency':
-                        return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                        return `${element.config.styles?.selectedCurrency} ${value.toFixed(2)}`;
                       case 'wholeNumber':
                         return Math.round(value);
                       case 'decimal':
@@ -95,7 +95,7 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
                   }}
                   fill={element.config.labelFontColor}
                   fontSize={element.config.labelFontSize}
-                  fontFamily={element.config.styles.labelFontFamily}
+                  fontFamily={element.config.styles?.labelFontFamily}
                 />
               )}
             </Bar>
@@ -111,4 +111,3 @@ StandardMultipleBarVerticalContent.propTypes = {
 };
 
 export default StandardMultipleBarVertical;
-

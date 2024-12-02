@@ -36,10 +36,10 @@ export const StandardSemiCircleContent = ({ element }) => {
         left: 'left',
         show: element.config.showLegend,
         textStyle: {
-          fontSize: element.config.styles.labelSize,
-          fontWeight: element.config.styles.lFontWeight,
-          fontStyle: element.config.styles.lFontStyle,
-          color: element.config.styles.valueAndLableColor,
+          fontSize: element.config.styles?.labelSize,
+          fontWeight: element.config.styles?.lFontWeight,
+          fontStyle: element.config.styles?.lFontStyle,
+          color: element.config.styles?.valueAndLableColor,
         },
       },
       series: [
@@ -53,15 +53,15 @@ export const StandardSemiCircleContent = ({ element }) => {
           data: element.config.data.slice(0, element.config.pies),
           label: {
             show: element.config.showLabel,
-            fontSize: element.config.styles.valueSize,
-            fontWeight: element.config.styles.lFontWeight,
-            fontStyle: element.config.styles.lFontStyle,
-            color: element.config.styles.valueAndLableColor,
+            fontSize: element.config.styles?.valueSize,
+            fontWeight: element.config.styles?.lFontWeight,
+            fontStyle: element.config.styles?.lFontStyle,
+            color: element.config.styles?.valueAndLableColor,
             position: element.config.labelPosition,
             formatter: (params) => {
               const total = option.series[0].data.reduce((sum, entry) => sum + entry.value, 0);
               const value = params.value;
-              switch (element.config.styles.labelFormat) {
+              switch (element.config.styles?.labelFormat) {
                 case 'value':
                   return value;
                 case 'percentage':
@@ -69,7 +69,7 @@ export const StandardSemiCircleContent = ({ element }) => {
                 case 'both':
                   return `${value} (${((value / total) * 100).toFixed(1)}%)`;
                 case 'currency':
-                  return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                  return `${element.config.styles?.selectedCurrency} ${value.toFixed(2)}`;
                 case 'wholeNumber':
                   return Math.round(value);
                 case 'decimal':
@@ -103,10 +103,10 @@ export const StandardSemiCircleContent = ({ element }) => {
           height: element.height,
           opacity: element.style.opacity,
           transform: `rotate(${element.config.rotation || 0}deg)`,
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
+          paddingTop: element.config.styles?.yPadding,
+          paddingLeft: element.config.styles?.xPadding,
+          paddingBottom: element.config.styles?.yPadding,
+          paddingRight: element.config.styles?.xPadding,
         }}
       />
     </div>

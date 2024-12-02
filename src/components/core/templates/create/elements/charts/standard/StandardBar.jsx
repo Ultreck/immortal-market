@@ -28,10 +28,10 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
       <ChartContainer
         config={{}}
         style={{
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
+          paddingTop: element.config.styles?.yPadding,
+          paddingLeft: element.config.styles?.xPadding,
+          paddingBottom: element.config.styles?.yPadding,
+          paddingRight: element.config.styles?.xPadding,
           height: element.height,
           width: element.width,
           opacity: element.style.opacity,
@@ -62,12 +62,12 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
             hide={!element.config.showXaxis}
             tickLine={false}
             tick={{
-              fill: element.config.styles.color,
-              fontSize: element.config.styles.xGridSize,
-              fontFamily: element.config.styles.fontFamily,
-              fontWeight: element.config.styles.fontWeight,
-              fontStyle: element.config.styles.fontStyle,
-              textDecoration: element.config.styles.textDecoration,
+              fill: element.config.styles?.color,
+              fontSize: element.config.styles?.xGridSize,
+              fontFamily: element.config.styles?.fontFamily,
+              fontWeight: element.config.styles?.fontWeight,
+              fontStyle: element.config.styles?.fontStyle,
+              textDecoration: element.config.styles?.textDecoration,
             }}
           />
           <YAxis
@@ -75,25 +75,25 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
             hide={!element.config.showYaxis}
             tickLine={false}
             tick={{
-              fill: element.config.styles.color,
-              fontSize: element.config.styles.yGridSize,
-              fontFamily: element.config.styles.fontFamily,
-              fontWeight: element.config.styles.fontWeight,
-              fontStyle: element.config.styles.fontStyle,
-              textDecoration: element.config.styles.textDecoration,
+              fill: element.config.styles?.color,
+              fontSize: element.config.styles?.yGridSize,
+              fontFamily: element.config.styles?.fontFamily,
+              fontWeight: element.config.styles?.fontWeight,
+              fontStyle: element.config.styles?.fontStyle,
+              textDecoration: element.config.styles?.textDecoration,
             }}
           />
           {element.config.showLegend && (
             <Legend
               wrapperStyle={{
-                fontSize: element.config.styles.legendSize,
-                color: element.config.styles.legendColor,
+                fontSize: element.config.styles?.legendSize,
+                color: element.config.styles?.legendColor,
               }}
             />
           )}
           <Bar
             dataKey={element.config.keys.y}
-            radius={element.config.styles.borderRadius}
+            radius={element.config.styles?.borderRadius}
             onMouseEnter={(data, index) => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
@@ -101,7 +101,7 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
               <Cell
                 key={`cell-${index}`}
                 fill={
-                  element.config.styles.isTransparent
+                  element.config.styles?.isTransparent
                     ? hoveredIndex === index
                       ? element.config.colors[index % element.config.colors.length]
                       : `${element.config.colors[index % element.config.colors.length]}80`
@@ -115,7 +115,7 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
                 position={element.config.labelPosition}
                 formatter={(value) => {
                   const total = chartData.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
-                  switch (element.config.styles.labelFormat) {
+                  switch (element.config.styles?.labelFormat) {
                     case 'value':
                       return value;
                     case 'percentage':
@@ -123,7 +123,7 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
                     case 'both':
                       return `${value} (${((value / total) * 100).toFixed(1)}%)`;
                     case 'currency':
-                      return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                      return `${element.config.styles?.selectedCurrency} ${value.toFixed(2)}`;
                     case 'wholeNumber':
                       return Math.round(value);
                     case 'decimal':
@@ -134,7 +134,7 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
                 }}
                 fill={element.config.labelFontColor}
                 fontSize={element.config.labelFontSize}
-                fontFamily={element.config.styles.labelFontFamily}
+                fontFamily={element.config.styles?.labelFontFamily}
               />
             )}
           </Bar>

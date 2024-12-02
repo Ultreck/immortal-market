@@ -50,7 +50,7 @@ export const StandardRosePieContent = ({ element }) => {
                 formatter: (params) => {
                   const total = option.series[0].data.reduce((sum, entry) => sum + entry.value, 0);
                   const value = params.value;
-                  switch (element.config.styles.labelFormat) {
+                  switch (element.config.styles?.labelFormat) {
                     case 'value':
                       return value;
                     case 'percentage':
