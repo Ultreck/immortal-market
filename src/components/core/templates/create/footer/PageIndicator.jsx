@@ -7,7 +7,7 @@ const PageIndicator = () => {
   const total = useTemplateStore(({ template }) => template.pages.length);
 
   return (
-    <p className="leading-none">
+    <p className="leading-none whitespace-nowrap">
       Page {current}/{total}
     </p>
   );

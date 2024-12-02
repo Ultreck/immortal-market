@@ -15,7 +15,7 @@ const StatusBar = () => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
 
   return (
-    <div className="h-[50px] w-full dark:bg-default-50/50 border-t border-default-200 dark:border-default-100 flex items-center justify-between px-12">
+    <div className="h-[50px] w-full dark:bg-default-50/50 border-t border-default-200 dark:border-default-100 flex items-center justify-between px-12 space-x-6">
       <DesignTitle />
       <div className="flex items-center space-x-6 ml-auto">
         <PageIndicator />
@@ -46,4 +46,3 @@ const StatusBar = () => {
 };
 
 export default StatusBar;
-
