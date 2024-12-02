@@ -18,7 +18,7 @@ const Carousel = ({ element, active, onChange }) => {
       speed={element.config.speed || 500}
       slidesPerView={element.config.slidesPerView || 1}
       spaceBetween={element.config.spaceBetween || 1}
-      loop={!!element.config.loop}
+      loop={!!element.config.loop && slides.length > 1}
       pagination={{ clickable: true }}
       autoplay={
         element.config.autoplay?.enabled
