@@ -116,8 +116,8 @@ const TableData = ({ table }) => {
             <Table
               classNames={{
                 wrapper: 'border shadow-none border-default-200',
-                td: 'text-md whitespace-nowrap',
-                th: 'text-md',
+                td: 'text-base whitespace-nowrap',
+                th: 'text-base',
                 table: isFetching ? 'opacity-50' : '',
               }}
               aria-label="Data table"

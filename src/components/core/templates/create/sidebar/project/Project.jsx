@@ -38,7 +38,7 @@ const Project = () => {
           tabIndex={0}
         >
           <TbReportAnalytics size="24" />
-          <span className="text-md">Modify report</span>
+          <span className="text-base">Modify report</span>
         </div>
         <div
           onClick={handleManageData}
@@ -46,7 +46,7 @@ const Project = () => {
           tabIndex={0}
         >
           <TbDatabaseCog size="24" />
-          <span className="text-md">Manage data</span>
+          <span className="text-base">Manage data</span>
         </div>
       </div>
     </div>
