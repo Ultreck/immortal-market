@@ -14,6 +14,7 @@ const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
   const { id: business } = useBusiness();
   const navigate = useNavigate();
   const { mutateAsync: create, isPending: isCreateDesignLoading } = useTemplate(business);
+
   const handleEditTemplate = () => {
     onClose();
     navigate(`/designs/${template.id}/edit`);

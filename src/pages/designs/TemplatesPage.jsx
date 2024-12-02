@@ -17,7 +17,11 @@ const TemplatesPage = () => {
   const navigate = useNavigate();
   const { id: business } = useBusiness();
   const { mutateAsync: create, isPending: isCreateTemplateLoading } = useCreateDesign(business);
-  const { data: { designs = [] } = {}, isLoading: isTemplatesLoading } = useGetDesigns({ business, type: 'template' });
+  const { data: { designs = [] } = {}, isLoading: isTemplatesLoading } = useGetDesigns({
+    business,
+    type: 'template',
+    limit: 1000,
+  });
   const [category, setCategory] = useState('all');
   const { isOpen: isTemplatesOpen, onOpen: onTemplatesOpen, onClose: onTemplatesClose } = useDisclosure();
   const [current, setCurrent] = useState(null);
