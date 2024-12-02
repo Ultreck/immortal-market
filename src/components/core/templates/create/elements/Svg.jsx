@@ -1,5 +1,5 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { Skeleton, Spinner } from '@nextui-org/react';
+import { Skeleton } from '@nextui-org/react';
 import { useGetSvgCodeFromUrl } from '@/api/misc.js';
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
@@ -27,9 +27,7 @@ export const Svg = ({ element, onChange }) => {
   return (
     <div ref={el} className="w-full h-max">
       {isLoading ? (
-        <div className="w-full flex justify-center items-center" style={{ height: element.height }}>
-          <Spinner size="md" color="warning" />
-        </div>
+        <Skeleton className="w-full rounded-3xl" style={{ height: element.height }} />
       ) : (
         <div
           style={element.style}
