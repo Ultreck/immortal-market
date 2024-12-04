@@ -252,6 +252,7 @@ export const getChartsDefaultStyle = ({ type, name }) => {
       labelFontFamily: 'Roboto',
       labelFormat: 'value',
       selectedCurrency: 'USD',
+      opacity: 100,
     };
   }
   return styles;

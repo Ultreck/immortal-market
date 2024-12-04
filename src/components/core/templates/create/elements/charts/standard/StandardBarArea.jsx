@@ -2,6 +2,7 @@ import { Area, Bar, CartesianGrid, ComposedChart, Legend, XAxis, YAxis } from 'r
 import { ChartContainer } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardBarArea = ({ element }) => {
   return <StandardBarAreaContent element={element} />;
@@ -14,9 +15,10 @@ export const StandardBarAreaContent = ({ element }) => {
     <div
       style={{
         backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+        position: 'relative',
       }}
     >
+      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
       <ChartContainer
         config={{}}
         style={{

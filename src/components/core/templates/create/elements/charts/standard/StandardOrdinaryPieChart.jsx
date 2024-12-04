@@ -1,9 +1,10 @@
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { ElementPropTypes } from '@/lib/prop-types';
-import React, { useEffect } from 'react';
 import { Pie, PieChart } from 'recharts';
 import PropTypes from 'prop-types';
 import { colors, interpolateColor } from '@/lib/utils';
+import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
+import { useEffect } from 'react';
 
 const StandardOrdinaryPieChart = ({ element }) => {
   return <StandardOrdinaryPieChartContent element={element} />;
@@ -30,9 +31,10 @@ export const StandardOrdinaryPieChartContent = ({ element }) => {
     <div
       style={{
         backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+        position: 'relative',
       }}
     >
+      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
       <div>
         <ChartContainer
           config={{}}

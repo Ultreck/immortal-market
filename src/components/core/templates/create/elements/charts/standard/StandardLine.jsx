@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import ChartTooltipContent from '@/components/core/templates/create/elements/charts/standard/helpers/ChartTooltipContent.jsx';
+import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardLine = ({ element }) => {
   return <StandardLineContent element={element} />;
@@ -19,9 +20,10 @@ export const StandardLineContent = ({ element, present = false, isChartWrapperDi
     <div
       style={{
         backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+        position: 'relative',
       }}
     >
+      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
       <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
         <ChartContainer
           config={{}}

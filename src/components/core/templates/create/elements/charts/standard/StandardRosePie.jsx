@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardRosePie = ({ element }) => {
   return <StandardRosePieContent element={element} />;
@@ -85,9 +86,10 @@ export const StandardRosePieContent = ({ element }) => {
     <div
       style={{
         backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+        position: 'relative',
       }}
     >
+      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
       <div
         ref={chartRef}
         style={{

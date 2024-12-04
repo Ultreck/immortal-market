@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardBubbleChart = ({ element }) => {
   return <StandardBubbleChartContent element={element} />;
@@ -56,9 +57,10 @@ export const StandardBubbleChartContent = ({ element }) => {
     <div
       style={{
         backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+        position: 'relative',
       }}
     >
+      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
       <div
         ref={chartRef}
         style={{

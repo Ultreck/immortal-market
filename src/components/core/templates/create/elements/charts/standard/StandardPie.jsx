@@ -5,6 +5,7 @@ import { capitalize } from '@/lib/utils.js';
 import { ChartContainer, ChartLegendContent, ChartTooltip } from '@/components/ui/chart.jsx';
 import { LabelList, Legend, Pie, PieChart } from 'recharts';
 import ChartTooltipContent from '@/components/core/templates/create/elements/charts/standard/helpers/ChartTooltipContent.jsx';
+import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardPie = ({ element }) => {
   return <StandardPieContent element={element} />;
@@ -32,9 +33,10 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
     <div
       style={{
         backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+        position: 'relative',
       }}
     >
+      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
       <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
         <ChartContainer
           config={config}

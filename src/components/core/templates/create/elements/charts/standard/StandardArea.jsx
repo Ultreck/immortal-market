@@ -4,6 +4,7 @@ import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardArea = ({ element }) => {
   return <StandardAreaContent element={element} />;
@@ -29,9 +30,10 @@ export const StandardAreaContent = ({ element }) => {
     <div
       style={{
         backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+        position: 'relative',
       }}
     >
+      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
       <ChartContainer
         config={{}}
         style={{

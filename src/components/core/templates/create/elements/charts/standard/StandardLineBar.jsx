@@ -3,6 +3,7 @@ import { ChartContainer } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useEffect } from 'react';
+import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardLineBar = ({ element }) => {
   return <StandardLineBarContent element={element} />;
@@ -22,9 +23,10 @@ export const StandardLineBarContent = ({ element }) => {
     <div
       style={{
         backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+        position: 'relative',
       }}
     >
+      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
       <ChartContainer
         config={{}}
         style={{

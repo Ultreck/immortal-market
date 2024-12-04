@@ -6,6 +6,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import ChartTooltipContent from '@/components/core/templates/create/elements/charts/standard/helpers/ChartTooltipContent.jsx';
 import { useState } from 'react';
+import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardBar = ({ element }) => {
   return <StandardBarContent element={element} />;
@@ -27,9 +28,10 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
     <div
       style={{
         backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+        position: 'relative',
       }}
     >
+      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
       <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
         <ChartContainer
           config={{}}
@@ -132,9 +134,9 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
                       case 'currency':
                         return `${element.config.styles?.selectedCurrency} ${value.toFixed(2)}`;
                       case 'wholeNumber':
-                        return Math.round(value);
+                        return Math.round(value).toLocaleString();
                       case 'decimal':
-                        return value.toFixed(2);
+                        return value.toFixed(2).toLocaleString();
                       default:
                         return value;
                     }
