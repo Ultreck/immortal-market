@@ -112,11 +112,11 @@ export const StandardBarNotSepContent = ({ element }) => {
                     case 'both':
                       return `${value.toLocaleString()} (${((value / total) * 100).toFixed(1)}%)`;
                     case 'currency':
-                      return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                      return `${element.config.styles.selectedCurrency} ${value.toLocaleString()}`;
                     case 'wholeNumber':
-                      return Math.round(value);
+                      return Math.round(value).toLocaleString();
                     case 'decimal':
-                      return value.toFixed(2);
+                      return value.toLocaleString();
                     default:
                       return value;
                   }

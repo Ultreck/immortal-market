@@ -84,13 +84,13 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
                           formattedValue = `${value.toLocaleString()} (${((value / total) * 100).toFixed(1)}%)`;
                           break;
                         case 'currency':
-                          formattedValue = `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                          formattedValue = `${element.config.styles.selectedCurrency} ${value.toLocaleString()}`;
                           break;
                         case 'wholeNumber':
-                          formattedValue = Math.round(value);
+                          formattedValue = Math.round(value).toLocaleString();
                           break;
                         case 'decimal':
-                          formattedValue = value.toFixed(2);
+                          formattedValue = value.toLocaleString();
                           break;
                         default:
                           formattedValue = value;

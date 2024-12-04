@@ -331,7 +331,7 @@ export const standard = [
         fontSize: 12,
         labelFontSize: 12,
         labelFontColor: '#000000',
-        labelPosition: 'top',
+        labelPosition: 'center',
         showLabel: false,
         isSeparated: false,
         bars: 5,
@@ -388,7 +388,7 @@ export const standard = [
         labelFontSize: 12,
         labelFontColor: '#000000',
         labelPosition: 'top',
-        showLabel: false,
+        showLabel: true,
         bars: 5,
         tools: {
           colors: {
@@ -419,7 +419,7 @@ export const standard = [
       backgroundColor: '#000',
       useBackgroundColor: false,
       text: 'Bar Multiple Chart',
-      width: 600,
+      width: 500,
       height: 400,
       style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple' }),
       config: {
@@ -510,7 +510,7 @@ export const standard = [
       backgroundColor: '#000',
       useBackgroundColor: false,
       text: 'Bar Multiple-vertical Chart',
-      width: 600,
+      width: 500,
       height: 400,
       style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple-vertical' }),
       config: {

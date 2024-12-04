@@ -27,6 +27,15 @@ const StandardAltBarConfig = ({ element, onChange }) => {
         </div>
         <div>
           <Checkbox
+            isSelected={element.config.showLabel}
+            classNames={{ base: 'py-0' }}
+            onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+          >
+            Show Label
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox
             isSelected={element.config.showXGridline}
             classNames={{ base: 'py-0' }}
             onValueChange={(v) =>
@@ -64,4 +73,3 @@ StandardAltBarConfig.propTypes = {
 };
 
 export default StandardAltBarConfig;
-

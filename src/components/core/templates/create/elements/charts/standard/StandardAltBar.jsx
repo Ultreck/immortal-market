@@ -67,7 +67,7 @@ export const StandardAltBarContent = ({ element }) => {
           name: 'Profit',
           type: 'bar',
           label: {
-            show: true,
+            show: element.config.showLabel,
             position: element.config.labelPosition ? 'outside' : 'inside',
           },
           emphasis: {
@@ -80,7 +80,7 @@ export const StandardAltBarContent = ({ element }) => {
           type: 'bar',
           stack: 'Total',
           label: {
-            show: true,
+            show: element.config.showLabel,
             position: element.config.labelPosition ? 'outside' : 'inside',
           },
           emphasis: {

@@ -31,8 +31,8 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
     if (element.config.name.includes('vertical')) {
       return [
         { key: 'top', name: 'Outside End' },
-        { key: 'insideTop', name: 'inside Base' },
-        { key: 'insideBottom', name: 'inside End' },
+        { key: 'insideTop', name: 'Inside Base' },
+        { key: 'insideBottom', name: 'Inside End' },
         { key: 'center', name: 'Inside Center' },
       ];
     } else {
@@ -363,7 +363,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                         })
                       }
                     >
-                      {['N', 'USD', 'EUR', 'JPY', 'GBP', 'AUD'].map((currency) => (
+                      {['N', '$', '€', '¥', '£'].map((currency) => (
                         <SelectItem key={currency}>{currency}</SelectItem>
                       ))}
                     </Select>

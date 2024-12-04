@@ -1,8 +1,7 @@
 import { Checkbox, Select, SelectItem } from '@nextui-org/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
-import { capitalize } from '@/lib/utils.js';
+import { capitalize, fontFamily } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import { fontFamily } from '@/lib/utils.js';
 
 const StandardPieCommonConfig = ({ element, onChange }) => {
   return (
@@ -141,7 +140,7 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
                     })
                   }
                 >
-                  {['N', 'USD', 'EUR', 'JPY', 'GBP', 'AUD'].map((currency) => (
+                  {['N', '$', '€', '¥', '£'].map((currency) => (
                     <SelectItem key={currency}>{currency}</SelectItem>
                   ))}
                 </Select>
@@ -234,4 +233,3 @@ StandardPieCommonConfig.propTypes = {
 };
 
 export default StandardPieCommonConfig;
-

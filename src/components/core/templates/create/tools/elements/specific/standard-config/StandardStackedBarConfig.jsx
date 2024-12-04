@@ -1,4 +1,4 @@
-import { Checkbox, Select, SelectItem, Tab, Tabs } from '@nextui-org/react';
+import { Checkbox, Select, SelectItem, Slider, Tab, Tabs } from '@nextui-org/react';
 import { TbChartLine, TbTimeline } from 'react-icons/tb';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { useEffect, useState } from 'react';
@@ -263,10 +263,10 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                     disableEmptySelection={true}
                   >
                     {[
-                      { key: 'top', name: 'Top' },
+                      // { key: 'top', name: 'Top' },
                       // { key: 'bottom', name: 'Bottom' },
-                      { key: 'insideTop', name: 'inside Top' },
-                      { key: 'insideBottom', name: 'inside Bottom' },
+                      { key: 'insideTop', name: 'Inside Top' },
+                      { key: 'insideBottom', name: 'Inside Bottom' },
                       { key: 'center', name: 'Center' },
                     ].map((type) => (
                       <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
@@ -356,7 +356,7 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                         })
                       }
                     >
-                      {['N', 'USD', 'EUR', 'JPY', 'GBP', 'AUD'].map((currency) => (
+                      {['N', '$', '€', '¥', '£'].map((currency) => (
                         <SelectItem key={currency}>{currency}</SelectItem>
                       ))}
                     </Select>
@@ -397,18 +397,46 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
               Use Background Color
             </Checkbox>
             {element.config.useBackgroundImage && (
-              <DndFileInput
-                label="Drop images or click to select"
-                onChange={handleImageChange}
-                className="mb-8"
-                maxSize={10000000}
-              />
+              <div className="border border-default-200 rounded-2xl px-8 py-6 space-y-6">
+                <Slider
+                  value={(element.config.styles.opacity || 100) * 100}
+                  onChange={(opacity) =>
+                    onChange({
+                      ...element,
+                      config: { ...element.config, styles: { ...element.config.styles, opacity: opacity / 100 } },
+                    })
+                  }
+                  label="Transparency"
+                  maxValue={100}
+                  minValue={0}
+                  classNames={{
+                    thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+                    track: 'border-s-default-300',
+                    filler: 'bg-gradient-to-r from-default-300 to-default-400',
+                    label: 'text-base',
+                    value: 'text-base opacity-60',
+                  }}
+                  size="sm"
+                  showOutline
+                />
+                <DndFileInput
+                  label="Drop images or click to select"
+                  onChange={handleImageChange}
+                  className="mb-8"
+                  maxSize={10000000}
+                />
+              </div>
             )}
             {element.config.useBackgroundColor && (
               <HexAlphaColorPicker
                 className="!w-full"
                 color={element.config.backgroundColor}
-                onChange={(color) => onChange({ ...element, config: { ...element.config, backgroundColor: color } })}
+                onChange={(color) =>
+                  onChange({
+                    ...element,
+                    config: { ...element.config, backgroundColor: color },
+                  })
+                }
               />
             )}
           </div>
