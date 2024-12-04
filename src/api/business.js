@@ -278,6 +278,15 @@ export const useGetDesignSource = (business, design) => {
   });
 };
 
+export const useUpdateDesignSource = (business, design) => {
+  return useMutation({
+    mutationKey: ['business', business, 'designs', design, 'source'],
+    mutationFn: async (data) => {
+      return http.patch(`/businesses/${business}/designs/${design}/source`, data);
+    },
+  });
+};
+
 export const useProcessData = (business, design) => {
   return useMutation({
     mutationKey: ['business', business, 'designs', design, 'data'],
@@ -297,5 +306,6 @@ export const useGetTableData = ({ business, design, table, page = 1, limit = 10 
       return res.data;
     },
     placeholderData: keepPreviousData,
+    staleTime: Infinity,
   });
 };

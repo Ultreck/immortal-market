@@ -1,6 +1,6 @@
 import { RiShapesLine } from 'react-icons/ri';
 import { CgLoadbarAlt } from 'react-icons/cg';
-import { LuBarChartHorizontal, LuBarChartHorizontalBig, LuLollipop } from 'react-icons/lu';
+import { LuChartBar, LuLollipop } from 'react-icons/lu';
 import { IconChartFunnel } from '@tabler/icons-react';
 import {
   TbAsterisk,
@@ -336,7 +336,7 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <LuBarChartHorizontalBig className="w-full h-full" />
+        <LuChartBar className="w-full h-full" />
       </div>
     ),
   },
@@ -729,7 +729,7 @@ const elements = [
     },
     preview: (
       <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <LuBarChartHorizontal className="w-full h-full" />
+        <LuChartBar className="w-full h-full" />
       </div>
     ),
   },

@@ -15,13 +15,14 @@ import {
   TableRow,
 } from '@nextui-org/react';
 import NoData from '@/components/ui/NoData.jsx';
-import { TbDatabaseOff } from 'react-icons/tb';
+import { TbDatabaseOff, TbSettings } from 'react-icons/tb';
 import useBusiness from '@/hooks/use-business.js';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { camelCaseToWords, cn } from '@/lib/utils.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { RiFileLine } from 'react-icons/ri';
+import ConfigureRelationships from '@/components/core/templates/create/project/ConfigureRelationships.jsx';
 
 const ManageDataModal = () => {
   const isOpen = useTemplateStore((state) => state.template.isManageDataOpen);
@@ -29,6 +30,7 @@ const ManageDataModal = () => {
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { data: { source = {} } = {}, isLoading } = useGetDesignSource(business, id);
+  const [view, setView] = useState('tables');
 
   const handleClose = () => {
     updateTemplate({ isManageDataOpen: false });
@@ -45,7 +47,8 @@ const ManageDataModal = () => {
         <>
           {source ? (
             <>
-              <Tables />
+              {view === 'tables' && <Tables onConfigure={() => setView('configure')} />}
+              {view === 'configure' && <ConfigureRelationships onBack={() => setView('tables')} />}
             </>
           ) : (
             <div className="px-14 py-12">
@@ -58,7 +61,7 @@ const ManageDataModal = () => {
   );
 };
 
-const Tables = () => {
+const Tables = ({ onConfigure }) => {
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { data: { source = {} } = {} } = useGetDesignSource(business, id);
@@ -67,24 +70,40 @@ const Tables = () => {
   return (
     <>
       <div className="px-14 py-12">
-        <div className="flex space-x-2">
-          {source.tables.map((table, i) => (
-            <button
-              key={table.name}
-              className={cn('flex items-center space-x-3 bg-default-100 px-4 py-1.5 rounded-2xl', {
-                'bg-primary-500 text-white': current === table.name,
-              })}
-              onClick={() => setCurrent(table.name)}
-            >
-              <RiFileLine size="20" />
-              <p>{i + 1}</p>
-            </button>
-          ))}
+        <div className="flex space-x-2 justify-between items-center">
+          <div className="flex space-x-2">
+            {source.tables.map((table, i) => (
+              <button
+                key={table.name}
+                className={cn('flex items-center space-x-3 bg-default-100 px-4 py-1.5 rounded-2xl', {
+                  'bg-primary-500 text-white': current === table.name,
+                })}
+                onClick={() => setCurrent(table.name)}
+              >
+                <RiFileLine size="20" />
+                <p>{i + 1}</p>
+              </button>
+            ))}
+          </div>
+          <Button
+            onClick={onConfigure}
+            color="default"
+            variant="bordered"
+            className="text-base"
+            radius="full"
+            startContent={<TbSettings size="20" />}
+          >
+            Configure relationships
+          </Button>
         </div>
         <div className="mt-6">{!!current && <TableData table={current} />}</div>
       </div>
     </>
   );
+};
+
+Tables.propTypes = {
+  onConfigure: PropTypes.func,
 };
 
 const TableData = ({ table }) => {
