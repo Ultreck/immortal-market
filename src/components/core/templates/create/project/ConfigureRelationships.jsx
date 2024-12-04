@@ -59,6 +59,8 @@ const ColumnItem = ({ table, column }) => {
   const connected = !!source.relationships?.find((r) => r.column === column.key && r.table === table);
   const { isOpen: isConnectOpen, onOpenChange: onConnectOpenChange } = useDisclosure();
 
+  const reference = source.relationships?.find((r) => r.refColumn === column.key && r.refTable === table);
+
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center space-x-2">
@@ -72,9 +74,24 @@ const ColumnItem = ({ table, column }) => {
           }
         >
           <div className="hover:bg-default-100 rounded-2xl px-0.5 py-0.5 opacity-75">
-            <TbInfoCircle size="12" />
+            <TbInfoCircle size="16" />
           </div>
         </Tooltip>
+        {!!reference && (
+          <Tooltip
+            content={
+              <div className="flex flex-col items-start px-1.5 py-1">
+                <p>Table: {reference.table}</p>
+                <p>Column: {reference.column}</p>
+                <p>Type: {camelCaseToWords(reference.type)}</p>
+              </div>
+            }
+          >
+            <div className="w-[18px] h-[18px] rounded-full flex items-center justify-center bg-orange-500 text-white">
+              <TbLink size="14" />
+            </div>
+          </Tooltip>
+        )}
       </div>
       <Popover placement="right" isOpen={isConnectOpen} onOpenChange={onConnectOpenChange}>
         <PopoverTrigger>
@@ -86,7 +103,7 @@ const ColumnItem = ({ table, column }) => {
             isIconOnly
             className="w-[22px] h-[22px] min-w-[initial]"
           >
-            {connected ? <TbLink size="16" /> : <TbLinkOff size="16" className="opacity-30" />}
+            {connected ? <TbLink size="16" /> : <TbLinkOff size="16" className="opacity-50" />}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="shadow border border-default-200 rounded-2xl w-[360px] items-stretch p-0">
