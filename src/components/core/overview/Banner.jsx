@@ -10,12 +10,14 @@ import {
   TbBrandMysql,
   TbChartInfographic,
   TbDatabase,
+  TbFileExcel,
   TbFileTypeCsv,
   TbFileTypePdf,
+  TbFileWord,
   TbJson,
   TbLink,
 } from 'react-icons/tb';
-import { SiAmazondynamodb, SiMariadb, SiMicrosoftexcel, SiMicrosoftword, SiOracle, SiPostgresql } from 'react-icons/si';
+import { SiAmazondynamodb, SiMariadb, SiOracle, SiPostgresql } from 'react-icons/si';
 import { cn } from '@/lib/utils.js';
 import useGlobalStore from '@/store/global.js';
 
@@ -162,8 +164,8 @@ const Banner = () => {
               <h2 className="font-semibold text-[1.4rem] mb-6">Analyze your files</h2>
               <div className="flex flex-row justify-between gap-4">
                 {[
-                  { icon: <SiMicrosoftexcel size="24" />, name: 'Excel' },
-                  { icon: <SiMicrosoftword size="24" />, name: 'Doc' },
+                  { icon: <TbFileExcel size="24" />, name: 'Excel' },
+                  { icon: <TbFileWord size="24" />, name: 'Doc' },
                   { icon: <TbJson size="24" />, name: 'JSON' },
                   { icon: <TbFileTypeCsv size="24" />, name: 'CSV' },
                   { icon: <TbFileTypePdf size="24" />, name: 'PDF' },

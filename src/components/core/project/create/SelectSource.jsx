@@ -6,8 +6,10 @@ import {
   TbBrandMongodb,
   TbBrandMysql,
   TbDatabase,
+  TbFileExcel,
   TbFileTypeCsv,
   TbFileTypePdf,
+  TbFileWord,
   TbJson,
   TbLink,
 } from 'react-icons/tb';
@@ -17,13 +19,13 @@ import UploadFiles from '@/components/core/project/create/UploadFiles.jsx';
 import { cn } from '@/lib/utils.js';
 import ConnectSql from '@/components/core/project/create/ConnectSql.jsx';
 import ConnectMongodb from '@/components/core/project/create/ConnectMongodb.jsx';
-import { SiAmazondynamodb, SiMariadb, SiMicrosoftexcel, SiMicrosoftword, SiOracle, SiPostgresql } from 'react-icons/si';
+import { SiAmazondynamodb, SiMariadb, SiOracle, SiPostgresql } from 'react-icons/si';
 
 const sources = [
   {
     icon: (
       <div className="w-14 h-14 grid place-items-center text-teal-500 bg-teal-100/80 dark:bg-teal-800/30 rounded-full">
-        <SiMicrosoftexcel size="24" />
+        <TbFileExcel size="24" />
       </div>
     ),
     name: 'Excel',
@@ -33,7 +35,7 @@ const sources = [
   {
     icon: (
       <div className="w-14 h-14 grid place-items-center text-blue-500 bg-blue-100/80 dark:bg-blue-800/30 rounded-full">
-        <SiMicrosoftword size="24" />
+        <TbFileWord size="24" />
       </div>
     ),
     name: 'Doc',

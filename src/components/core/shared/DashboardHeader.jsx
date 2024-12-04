@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Button } from '@nextui-org/react';
-import { LuBell, LuHelpCircle } from 'react-icons/lu';
+import { LuBell, LuCircleHelp } from 'react-icons/lu';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
 import { cn } from '@/lib/utils.js';
 
@@ -14,7 +14,7 @@ const DashboardHeader = ({ content, className }) => (
             <LuBell size="20" />
           </Button>
           <Button isIconOnly variant="light" aria-label="Notifications" className="text-base">
-            <LuHelpCircle size="20" />
+            <LuCircleHelp size="20" />
           </Button>
         </div>
         <AuthDropdown />
