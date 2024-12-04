@@ -93,11 +93,11 @@ export const StandardStackedBarContent = ({ element }) => {
                     const total = element.config.data.reduce((sum, entry) => sum + entry[key], 0);
                     switch (element.config.styles.labelFormat) {
                       case 'value':
-                        return value;
+                        return value.toLocaleString();
                       case 'percentage':
                         return `${((value / total) * 100).toFixed(1)}%`;
                       case 'both':
-                        return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                        return `${value.toLocaleString()} (${((value / total) * 100).toFixed(1)}%)`;
                       case 'currency':
                         return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
                       case 'wholeNumber':

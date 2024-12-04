@@ -75,13 +75,13 @@ export const StandardSemiPieContent = ({ element }) => {
 
                     switch (element.config.styles.labelFormat) {
                       case 'value':
-                        formattedValue = value;
+                        formattedValue = value.toLocaleString();
                         break;
                       case 'percentage':
                         formattedValue = `${((value / total) * 100).toFixed(1)}%`;
                         break;
                       case 'both':
-                        formattedValue = `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                        formattedValue = `${value.toLocaleString()} (${((value / total) * 100).toFixed(1)}%)`;
                         break;
                       case 'currency':
                         formattedValue = `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
