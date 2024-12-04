@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import DndFileInput from '@/components/ui/DndFileInput';
 import { HexAlphaColorPicker } from 'react-colorful';
 import { fontFamily } from '@/lib/utils.js';
+import ColorPicker from '@/components/ui/ColorPicker';
 
 const StandardStackedBarConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
@@ -185,16 +186,15 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
         </Tab>
         <Tab key="style" title="Chart Style" className="text-base">
           <div className="space-y-4 flex flex-col">
-            {element.config.name !== 'line-multiple' ||
-              (element.config.name === 'area-multiple' && (
-                <Checkbox
-                  isSelected={element.config.showLabel}
-                  className={{ base: 'py-0' }}
-                  onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
-                >
-                  Show Label
-                </Checkbox>
-              ))}
+            {element.config.name !== 'line-multiple' && (
+              <Checkbox
+                isSelected={element.config.showLabel}
+                className={{ base: 'py-0' }}
+                onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+              >
+                Show Label
+              </Checkbox>
+            )}
             {element.config.name === 'line-multiple' ||
               (element.config.name === 'area-multiple' && (
                 <div>
@@ -362,6 +362,24 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                     </Select>
                   </div>
                 )}
+                <div className="flex justify-between items-center">
+                  <p>Label Font Color</p>
+                  <ColorPicker
+                    color={element.config.labelFontColor}
+                    onChange={(color) => onChange({ ...element, config: { ...element.config, labelFontColor: color } })}
+                    trigger={
+                      <div
+                        tabIndex="0"
+                        className="w-8 h-8 p-[3px] rounded-full border border-transparent border-default-600"
+                      >
+                        <div
+                          style={{ backgroundColor: element.config.labelFontColor }}
+                          className="w-full h-full hover:brightness-125 rounded-full"
+                        />
+                      </div>
+                    }
+                  />
+                </div>
               </div>
             )}
             <Checkbox

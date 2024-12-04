@@ -24,124 +24,131 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
-      <ChartContainer
-        config={{}}
-        style={{
-          paddingTop: element.config.styles?.yPadding,
-          paddingLeft: element.config.styles?.xPadding,
-          paddingBottom: element.config.styles?.yPadding,
-          paddingRight: element.config.styles?.xPadding,
-          height: element.height,
-          width: element.width,
-          opacity: element.style.opacity,
-        }}
-      >
-        <BarChart accessibilityLayer data={chartData} barGap={5} barCategoryGap={5}>
-          <ChartTooltip
-            cursor={false}
-            allowEscapeViewBox={{ x: true, y: true }}
-            content={(e) => {
-              return (
-                <>
-                  {e && e.payload && e.payload.length > 0 && (
-                    <ChartTooltipContent
-                      label={e?.payload[0].payload.name}
-                      value={e?.payload[0].payload.value}
-                      present={present}
-                      element={element}
-                    />
-                  )}
-                </>
-              );
-            }}
-          />
-          <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-          <XAxis
-            dataKey={element.config.keys.x}
-            tickFormatter={(value) => capitalize(value)}
-            hide={!element.config.showXaxis}
-            tickLine={false}
-            tick={{
-              fill: element.config.styles?.color,
-              fontSize: element.config.styles?.xGridSize,
-              fontFamily: element.config.styles?.fontFamily,
-              fontWeight: element.config.styles?.fontWeight,
-              fontStyle: element.config.styles?.fontStyle,
-              textDecoration: element.config.styles?.textDecoration,
-            }}
-          />
-          <YAxis
-            dataKey={element.config.keys.y}
-            hide={!element.config.showYaxis}
-            tickLine={false}
-            tick={{
-              fill: element.config.styles?.color,
-              fontSize: element.config.styles?.yGridSize,
-              fontFamily: element.config.styles?.fontFamily,
-              fontWeight: element.config.styles?.fontWeight,
-              fontStyle: element.config.styles?.fontStyle,
-              textDecoration: element.config.styles?.textDecoration,
-            }}
-          />
-          {element.config.showLegend && (
-            <Legend
-              wrapperStyle={{
-                fontSize: element.config.styles?.legendSize,
-                color: element.config.styles?.legendColor,
+    <div
+      style={{
+        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
+        backgroundImage: element.config.useBackgroundImage ? `url(${element.config.backgroundImage})` : 'none',
+      }}
+    >
+      <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+        <ChartContainer
+          config={{}}
+          style={{
+            paddingTop: element.config.styles?.yPadding,
+            paddingLeft: element.config.styles?.xPadding,
+            paddingBottom: element.config.styles?.yPadding,
+            paddingRight: element.config.styles?.xPadding,
+            height: element.height,
+            width: element.width,
+            opacity: element.style.opacity,
+          }}
+        >
+          <BarChart accessibilityLayer data={chartData}>
+            <ChartTooltip
+              cursor={false}
+              allowEscapeViewBox={{ x: true, y: true }}
+              content={(e) => {
+                return (
+                  <>
+                    {e && e.payload && e.payload.length > 0 && (
+                      <ChartTooltipContent
+                        label={e?.payload[0].payload.name}
+                        value={e?.payload[0].payload.value}
+                        present={present}
+                        element={element}
+                      />
+                    )}
+                  </>
+                );
               }}
             />
-          )}
-          <Bar
-            dataKey={element.config.keys.y}
-            radius={element.config.styles?.borderRadius}
-            onMouseEnter={(data, index) => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            {chartData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={
-                  element.config.styles?.isTransparent
-                    ? hoveredIndex === index
-                      ? element.config.colors[index % element.config.colors.length]
-                      : `${element.config.colors[index % element.config.colors.length]}80`
-                    : element.config.colors[index % element.config.colors.length]
-                }
-              />
-            ))}
-            {element.config.showLabel && (
-              <LabelList
-                dataKey={element.config.keys.y}
-                position={element.config.labelPosition}
-                formatter={(value) => {
-                  const total = chartData.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
-                  switch (element.config.styles?.labelFormat) {
-                    case 'value':
-                      return value;
-                    case 'percentage':
-                      return `${((value / total) * 100).toFixed(1)}%`;
-                    case 'both':
-                      return `${value} (${((value / total) * 100).toFixed(1)}%)`;
-                    case 'currency':
-                      return `${element.config.styles?.selectedCurrency} ${value.toFixed(2)}`;
-                    case 'wholeNumber':
-                      return Math.round(value);
-                    case 'decimal':
-                      return value.toFixed(2);
-                    default:
-                      return value;
-                  }
+            <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+            <XAxis
+              dataKey={element.config.keys.x}
+              tickFormatter={(value) => capitalize(value)}
+              hide={!element.config.showXaxis}
+              tickLine={false}
+              tick={{
+                fill: element.config.styles?.color,
+                fontSize: element.config.styles?.xGridSize,
+                fontFamily: element.config.styles?.fontFamily,
+                fontWeight: element.config.styles?.fontWeight,
+                fontStyle: element.config.styles?.fontStyle,
+                textDecoration: element.config.styles?.textDecoration,
+              }}
+            />
+            <YAxis
+              dataKey={element.config.keys.y}
+              hide={!element.config.showYaxis}
+              tickLine={false}
+              tick={{
+                fill: element.config.styles?.color,
+                fontSize: element.config.styles?.yGridSize,
+                fontFamily: element.config.styles?.fontFamily,
+                fontWeight: element.config.styles?.fontWeight,
+                fontStyle: element.config.styles?.fontStyle,
+                textDecoration: element.config.styles?.textDecoration,
+              }}
+            />
+            {element.config.showLegend && (
+              <Legend
+                wrapperStyle={{
+                  fontSize: element.config.styles?.legendSize,
+                  color: element.config.styles?.legendColor,
                 }}
-                fill={element.config.labelFontColor}
-                fontSize={element.config.labelFontSize}
-                fontFamily={element.config.styles?.labelFontFamily}
               />
             )}
-          </Bar>
-        </BarChart>
-      </ChartContainer>
-    </ElementChartWrapper>
+            <Bar
+              dataKey={element.config.keys.y}
+              radius={element.config.styles?.borderRadius}
+              onMouseEnter={(data, index) => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              {chartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={
+                    element.config.styles?.isTransparent
+                      ? hoveredIndex === index
+                        ? element.config.colors[index % element.config.colors.length]
+                        : `${element.config.colors[index % element.config.colors.length]}80`
+                      : element.config.colors[index % element.config.colors.length]
+                  }
+                />
+              ))}
+              {element.config.showLabel && (
+                <LabelList
+                  dataKey={element.config.keys.y}
+                  position={element.config.labelPosition}
+                  formatter={(value) => {
+                    const total = chartData.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
+                    switch (element.config.styles?.labelFormat) {
+                      case 'value':
+                        return value.toLocaleString();
+                      case 'percentage':
+                        return `${((value / total) * 100).toFixed(1)}%`;
+                      case 'both':
+                        return `${value.toLocaleString()} (${((value / total) * 100).toFixed(1)}%)`;
+                      case 'currency':
+                        return `${element.config.styles?.selectedCurrency} ${value.toFixed(2)}`;
+                      case 'wholeNumber':
+                        return Math.round(value);
+                      case 'decimal':
+                        return value.toFixed(2);
+                      default:
+                        return value;
+                    }
+                  }}
+                  fill={element.config.labelFontColor}
+                  fontSize={element.config.labelFontSize}
+                  fontFamily={element.config.styles?.labelFontFamily}
+                />
+              )}
+            </Bar>
+          </BarChart>
+        </ChartContainer>
+      </ElementChartWrapper>
+    </div>
   );
 };
 

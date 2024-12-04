@@ -205,24 +205,8 @@ const Manual = ({ element, onChange }) => {
                 >
                   <div style={{ backgroundColor: color }} className="w-full h-full hover:brightness-125 rounded-full" />
                 </div>
-                // <Button variant="text" isIconOnly className="text-base">
-                //   <div className="w-6 flex flex-col items-center justify-center">
-                //     <RiFontFamily size="16" />
-                //     <div className="rounded-2xl h-1.5 mt-0.5 w-full" style={{ background: value }}></div>
-                //   </div>
-                // </Button>
               }
             />
-            // <div
-            //   tabIndex="0"
-            //   key={`${color}-${index}`}
-            //   onClick={() => setSelected(index)}
-            //   className={cn('w-8 h-8 p-[3px] rounded-full border border-transparent', {
-            //     'border-default-600': selected === index,
-            //   })}
-            // >
-            //   <div style={{ backgroundColor: color }} className="w-full h-full hover:brightness-125 rounded-full" />
-            // </div>
           ))}
         </div>
       ) : (
@@ -230,9 +214,6 @@ const Manual = ({ element, onChange }) => {
           <span className="opacity-70">No colors found</span>
         </div>
       )}
-      {/* {!isNaN(selected) && (
-        <HexColorPicker color={colors[selected]} onChange={(c) => onColorChange(c)} className="!w-full mt-4" />
-      )} */}
     </>
   );
 };

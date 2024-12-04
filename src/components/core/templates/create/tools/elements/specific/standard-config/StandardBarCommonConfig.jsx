@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import DndFileInput from '@/components/ui/DndFileInput';
 import { HexAlphaColorPicker } from 'react-colorful';
 import { fontFamily } from '@/lib/utils.js';
+import ColorPicker from '@/components/ui/ColorPicker';
 
 const StandardBarCommonConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
@@ -25,6 +26,26 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
       reader.readAsDataURL(file);
     }
   };
+
+  const dgetData = () => {
+    if (element.config.name.includes('vertical')) {
+      return [
+        { key: 'top', name: 'Outside End' },
+        { key: 'insideTop', name: 'inside Base' },
+        { key: 'insideBottom', name: 'inside End' },
+        { key: 'center', name: 'Inside Center' },
+      ];
+    } else {
+      return [
+        { key: 'top', name: 'Top' },
+        { key: 'insideTop', name: 'inside Top' },
+        { key: 'insideBottom', name: 'inside Bottom' },
+        { key: 'center', name: 'Center' },
+      ];
+    }
+  };
+
+  dgetData();
 
   useEffect(() => {}, [element]);
   return (
@@ -144,7 +165,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                 }
                 value={element.config.bars}
                 min={1}
-                max={10}
+                max={element.config.data.length}
                 ariaLabel="No of Bars to Show"
               />
             </div>
@@ -159,7 +180,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                 }
                 value={element.config.styles.borderRadius}
                 min={1}
-                max={30}
+                max={element.config.data}
                 ariaLabel="borderRadius"
               />
             </div>
@@ -223,13 +244,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                     }
                     disableEmptySelection={true}
                   >
-                    {[
-                      { key: 'top', name: 'Top' },
-                      // { key: 'bottom', name: 'Bottom' },
-                      { key: 'insideTop', name: 'inside Top' },
-                      { key: 'insideBottom', name: 'inside Bottom' },
-                      { key: 'center', name: 'Center' },
-                    ].map((type) => (
+                    {dgetData().map((type) => (
                       <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
                         {type.name}
                       </SelectItem>
@@ -385,6 +400,24 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                     </Select>
                   </div>
                 )}
+                <div className="flex justify-between items-center">
+                  <p>Label Font Color</p>
+                  <ColorPicker
+                    color={element.config.labelFontColor}
+                    onChange={(color) => onChange({ ...element, config: { ...element.config, labelFontColor: color } })}
+                    trigger={
+                      <div
+                        tabIndex="0"
+                        className="w-8 h-8 p-[3px] rounded-full border border-transparent border-default-600"
+                      >
+                        <div
+                          style={{ backgroundColor: element.config.labelFontColor }}
+                          className="w-full h-full hover:brightness-125 rounded-full"
+                        />
+                      </div>
+                    }
+                  />
+                </div>
               </div>
             )}
             {element.config.useBackgroundImage && (
