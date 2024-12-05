@@ -251,7 +251,7 @@ export const getChartsDefaultStyle = ({ type, name }) => {
       isTransparent: false,
       labelFontFamily: 'Roboto',
       labelFormat: 'value',
-      selectedCurrency: 'USD',
+      selectedCurrency: 'N',
       opacity: 100,
     };
   }

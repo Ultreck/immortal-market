@@ -1,9 +1,38 @@
-import { Checkbox, Select, SelectItem } from '@nextui-org/react';
+import { Checkbox, Select, SelectItem, Slider } from '@nextui-org/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { capitalize, fontFamily } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
+import ColorPicker from '@/components/ui/ColorPicker.jsx';
 
 const StandardPieCommonConfig = ({ element, onChange }) => {
+  const getData = () => {
+    if (element.config.name === 'doughnut') {
+      return [
+        { value: 10, label: '10' },
+        { value: 20, label: '20' },
+        { value: 30, label: '30' },
+        { value: 40, label: '40' },
+        { value: 50, label: '50' },
+        { value: 60, label: '60' },
+        { value: 70, label: '70' },
+        { value: 80, label: '80' },
+        { value: 90, label: '90' },
+        { value: 100, label: '100' },
+      ];
+    } else if (element.config.name === 'doughnut-standard') {
+      return [
+        { value: 10, label: '10' },
+        { value: 20, label: '20' },
+        { value: 30, label: '30' },
+        { value: 40, label: '40' },
+        { value: 50, label: '50' },
+        { value: 60, label: '60' },
+      ];
+    } else if (element.config.name === 'pie-2') {
+      console.log('Hello');
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-col gap-2 space-y-6">
@@ -146,6 +175,24 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
                 </Select>
               </div>
             )}
+            <div className="flex justify-between items-center">
+              <p>Label Font Color</p>
+              <ColorPicker
+                color={element.config.labelFontColor}
+                onChange={(color) => onChange({ ...element, config: { ...element.config, labelFontColor: color } })}
+                trigger={
+                  <div
+                    tabIndex="0"
+                    className="w-8 h-8 p-[3px] rounded-full border border-transparent border-default-600"
+                  >
+                    <div
+                      style={{ backgroundColor: element.config.labelFontColor }}
+                      className="w-full h-full hover:brightness-125 rounded-full"
+                    />
+                  </div>
+                }
+              />
+            </div>
           </div>
         )}
         <Checkbox
@@ -197,31 +244,20 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
             ariaLabel="No of pies to Show"
           />
         </div>
-        {/*<div>*/}
-        {/*  <div>*/}
-        {/*    <Slider*/}
-        {/*      label="Inner Radius"*/}
-        {/*      step={10}*/}
-        {/*      maxValue={100}*/}
-        {/*      minValue={10}*/}
-        {/*      marks={[*/}
-        {/*        { value: 10, label: '10' },*/}
-        {/*        { value: 20, label: '20' },*/}
-        {/*        { value: 30, label: '30' },*/}
-        {/*        { value: 40, label: '40' },*/}
-        {/*        { value: 50, label: '50' },*/}
-        {/*        { value: 60, label: '60' },*/}
-        {/*        { value: 70, label: '70' },*/}
-        {/*        { value: 80, label: '80' },*/}
-        {/*        { value: 90, label: '90' },*/}
-        {/*        { value: 100, label: '100' },*/}
-        {/*      ]}*/}
-        {/*      className="max-w-md"*/}
-        {/*      onChange={(e) => onChange({ ...element, config: { ...element.config, innerRadius: e } })}*/}
-        {/*      value={element.config.innerRadius}*/}
-        {/*    />*/}
-        {/*  </div>*/}
-        {/*</div>*/}
+        {element.config.name !== 'pie' && (
+          <div>
+            <Slider
+              label="Inner Radius"
+              step={10}
+              maxValue={element.config.name === 'doughnut-standard' ? 60 : 100}
+              minValue={10}
+              marks={getData()}
+              className="max-w-md"
+              onChange={(e) => onChange({ ...element, config: { ...element.config, innerRadius: e } })}
+              value={element.config.innerRadius}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

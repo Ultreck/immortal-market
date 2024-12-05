@@ -29,6 +29,8 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
     return acc;
   }, {});
 
+  console.log(element.config);
+
   return (
     <div
       style={{
@@ -104,7 +106,7 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
                           y={args.y}
                           textAnchor={args.textAnchor}
                           dominantBaseline={args.dominantBaseline}
-                          fill="#000000"
+                          fill={element.config.labelFontColor}
                           fontSize={element.config.labelFontSize}
                           fontFamily={element.config.fontFamily}
                         >
@@ -121,24 +123,24 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
                   position={element.config.labelPosition}
                   fill={element.config.labelFontColor}
                   fontSize={element.config.labelFontSize}
-                  fontFamily={element.config.fontFamily}
+                  // fontFamily={element.config.fontFamily}
                   formatter={(value) => {
                     const total = data.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
                     switch (element.config.styles.labelFormat) {
                       case 'value':
-                        return value;
+                        return value.toLocaleString();
                       case 'percentage':
                         return `${((value / total) * 100).toFixed(1)}%`;
                       case 'both':
-                        return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                        return `${value.toLocaleString()} (${((value / total) * 100).toFixed(1)}%)`;
                       case 'currency':
-                        return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                        return `${element.config.styles.selectedCurrency} ${value.toLocaleString()}`;
                       case 'wholeNumber':
-                        return Math.round(value);
+                        return Math.round(value).toLocaleString();
                       case 'decimal':
-                        return value.toFixed(2);
+                        return value.toLocaleString();
                       default:
-                        return value;
+                        return value.toLocaleString();
                     }
                   }}
                 />

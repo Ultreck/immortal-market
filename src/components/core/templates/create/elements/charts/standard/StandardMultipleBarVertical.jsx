@@ -90,7 +90,7 @@ export const StandardMultipleBarVerticalContent = ({ element }) => {
                       case 'wholeNumber':
                         return Math.round(value).toLocaleString();
                       case 'decimal':
-                        return value.toLocaleString;
+                        return value.toLocaleString();
                       default:
                         return value;
                     }

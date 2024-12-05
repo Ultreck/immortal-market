@@ -668,7 +668,7 @@ export const standard = [
         labelFontSize: 12,
         labelFontColor: '#000000',
         labelPosition: 'inside',
-        innerRadius: 50,
+        innerRadius: 80,
       },
     },
     preview: (
@@ -708,6 +708,7 @@ export const standard = [
         pies: 5,
         showLegend: true,
         showLabel: true,
+        innerRadius: 40,
       },
     },
     preview: (

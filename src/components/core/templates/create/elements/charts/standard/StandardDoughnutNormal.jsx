@@ -41,7 +41,7 @@ export const StandardDoughnutNormalContent = ({ element }) => {
         {
           name: 'Access From',
           type: 'pie',
-          radius: ['40%', '70%'],
+          radius: [`${element.config.innerRadius}%`, '70%'],
           avoidLabelOverlap: false,
           padAngle: 5,
           itemStyle: {
