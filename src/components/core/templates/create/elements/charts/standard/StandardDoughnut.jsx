@@ -65,8 +65,6 @@ export const StandardDoughnutContent = ({ element }) => {
           <Pie
             data={chartData}
             innerRadius={element.config.innerRadius}
-            // innerRadius={Math.min(element.width, element.height) * 0.3}
-            // outerRadius={Math.min(element.width, element.height) * 0.43}
             dataKey={element.config.keys.data}
             style={{
               fontSize: element.config.styles.valueSize,
@@ -79,6 +77,7 @@ export const StandardDoughnutContent = ({ element }) => {
               <LabelList
                 dataKey={element.config.keys.y}
                 position={element.config.labelPosition}
+                stroke="none"
                 formatter={(value) => {
                   const total = chartData.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
                   switch (element.config.styles.labelFormat) {

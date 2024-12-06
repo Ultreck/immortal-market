@@ -974,6 +974,9 @@ export const standard = [
         showLabel: true,
         showLegend: true,
         fontSize: 12,
+        labelPosition: 'inside',
+        labelFontColor: '#000000',
+        labelFontSize: 12,
       },
       tooltip: {
         enabled: false,
@@ -1193,54 +1196,54 @@ export const standard = [
       </div>
     ),
   },
-  {
-    id: 'chart-s-line-area-vertical',
-    category: 'combination',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Line area-vertical Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'line-area-vertical' }),
-      config: {
-        name: 'line-area-vertical',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-area-vertical' }),
-        data: [
-          { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
-          { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
-          { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
-          { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
-          { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-        ],
-        keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
-        colors: ['#E66B5B', '#1D9085'],
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        bars: 5,
-        fontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartPpf className="w-full h-full" />
-      </div>
-    ),
-  },
+  // {
+  //   id: 'chart-s-line-area-vertical',
+  //   category: 'combination',
+  //   data: {
+  //     type: 'chart-s',
+  //     useBackgroundImage: false,
+  //     backgroundImage: null,
+  //     backgroundColor: '#000',
+  //     useBackgroundColor: false,
+  //     text: 'Line area-vertical Chart',
+  //     width: 400,
+  //     height: 300,
+  //     style: getElementDefaultStyle({ type: 'chart-a', name: 'line-area-vertical' }),
+  //     config: {
+  //       name: 'line-area-vertical',
+  //       styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-area-vertical' }),
+  //       data: [
+  //         { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+  //         { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+  //         { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+  //         { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+  //         { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+  //       ],
+  //       keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
+  //       colors: ['#E66B5B', '#1D9085'],
+  //       showXaxis: false,
+  //       showYaxis: false,
+  //       showLegend: false,
+  //       useGradient: false,
+  //       gradientColor: '#2673D9',
+  //       showXGridline: false,
+  //       showYGridline: false,
+  //       bars: 5,
+  //       fontSize: 12,
+  //     },
+  //     tooltip: {
+  //       enabled: false,
+  //     },
+  //     modal: {
+  //       enabled: false,
+  //     },
+  //   },
+  //   preview: (
+  //     <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+  //       <TbChartPpf className="w-full h-full" />
+  //     </div>
+  //   ),
+  // },
   {
     id: 'chart-s-line-bar',
     category: 'combination',
@@ -1289,148 +1292,148 @@ export const standard = [
       </div>
     ),
   },
-  {
-    id: 'chart-s-line-bar-vertical',
-    category: 'combination',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Line Bar Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'line-bar-vertical' }),
-      config: {
-        name: 'line-bar-vertical',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-bar-vertical' }),
-        data: [
-          { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
-          { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
-          { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
-          { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
-          { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-        ],
-        keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
-        colors: ['#E66B5B', '#1D9085'],
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        bars: 5,
-        fontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartHistogram className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-area-bar',
-    category: 'combination',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'area Bar Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'area-bar' }),
-      config: {
-        name: 'area-bar',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area-bar' }),
-        data: [
-          { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
-          { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
-          { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
-          { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
-          { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-        ],
-        keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
-        colors: ['#E66B5B', '#1D9085'],
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        bars: 5,
-        fontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartHistogram className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-area-bar-vertical',
-    category: 'combination',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'area Bar Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'area-bar-vertical' }),
-      config: {
-        name: 'area-bar-vertical',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area-bar-vertical' }),
-        data: [
-          { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
-          { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
-          { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
-          { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
-          { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-        ],
-        keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
-        colors: ['#E66B5B', '#1D9085'],
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        bars: 5,
-        fontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartHistogram className="w-full h-full" />
-      </div>
-    ),
-  },
+  // {
+  //   id: 'chart-s-line-bar-vertical',
+  //   category: 'combination',
+  //   data: {
+  //     type: 'chart-s',
+  //     useBackgroundImage: false,
+  //     backgroundImage: null,
+  //     backgroundColor: '#000',
+  //     useBackgroundColor: false,
+  //     text: 'Line Bar Chart',
+  //     width: 400,
+  //     height: 300,
+  //     style: getElementDefaultStyle({ type: 'chart-a', name: 'line-bar-vertical' }),
+  //     config: {
+  //       name: 'line-bar-vertical',
+  //       styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-bar-vertical' }),
+  //       data: [
+  //         { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+  //         { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+  //         { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+  //         { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+  //         { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+  //       ],
+  //       keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
+  //       colors: ['#E66B5B', '#1D9085'],
+  //       showXaxis: false,
+  //       showYaxis: false,
+  //       showLegend: false,
+  //       useGradient: false,
+  //       gradientColor: '#2673D9',
+  //       showXGridline: false,
+  //       showYGridline: false,
+  //       bars: 5,
+  //       fontSize: 12,
+  //     },
+  //     tooltip: {
+  //       enabled: false,
+  //     },
+  //     modal: {
+  //       enabled: false,
+  //     },
+  //   },
+  //   preview: (
+  //     <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+  //       <TbChartHistogram className="w-full h-full" />
+  //     </div>
+  //   ),
+  // },
+  // {
+  //   id: 'chart-s-area-bar',
+  //   category: 'combination',
+  //   data: {
+  //     type: 'chart-s',
+  //     useBackgroundImage: false,
+  //     backgroundImage: null,
+  //     backgroundColor: '#000',
+  //     useBackgroundColor: false,
+  //     text: 'area Bar Chart',
+  //     width: 400,
+  //     height: 300,
+  //     style: getElementDefaultStyle({ type: 'chart-a', name: 'area-bar' }),
+  //     config: {
+  //       name: 'area-bar',
+  //       styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area-bar' }),
+  //       data: [
+  //         { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+  //         { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+  //         { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+  //         { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+  //         { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+  //       ],
+  //       keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
+  //       colors: ['#E66B5B', '#1D9085'],
+  //       showXaxis: false,
+  //       showYaxis: false,
+  //       showLegend: false,
+  //       useGradient: false,
+  //       gradientColor: '#2673D9',
+  //       showXGridline: false,
+  //       showYGridline: false,
+  //       bars: 5,
+  //       fontSize: 12,
+  //     },
+  //     tooltip: {
+  //       enabled: false,
+  //     },
+  //     modal: {
+  //       enabled: false,
+  //     },
+  //   },
+  //   preview: (
+  //     <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+  //       <TbChartHistogram className="w-full h-full" />
+  //     </div>
+  //   ),
+  // },
+  // {
+  //   id: 'chart-s-area-bar-vertical',
+  //   category: 'combination',
+  //   data: {
+  //     type: 'chart-s',
+  //     useBackgroundImage: false,
+  //     backgroundImage: null,
+  //     backgroundColor: '#000',
+  //     useBackgroundColor: false,
+  //     text: 'area Bar Chart',
+  //     width: 400,
+  //     height: 300,
+  //     style: getElementDefaultStyle({ type: 'chart-a', name: 'area-bar-vertical' }),
+  //     config: {
+  //       name: 'area-bar-vertical',
+  //       styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area-bar-vertical' }),
+  //       data: [
+  //         { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
+  //         { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
+  //         { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
+  //         { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
+  //         { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
+  //       ],
+  //       keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
+  //       colors: ['#E66B5B', '#1D9085'],
+  //       showXaxis: false,
+  //       showYaxis: false,
+  //       showLegend: false,
+  //       useGradient: false,
+  //       gradientColor: '#2673D9',
+  //       showXGridline: false,
+  //       showYGridline: false,
+  //       bars: 5,
+  //       fontSize: 12,
+  //     },
+  //     tooltip: {
+  //       enabled: false,
+  //     },
+  //     modal: {
+  //       enabled: false,
+  //     },
+  //   },
+  //   preview: (
+  //     <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+  //       <TbChartHistogram className="w-full h-full" />
+  //     </div>
+  //   ),
+  // },
 ];

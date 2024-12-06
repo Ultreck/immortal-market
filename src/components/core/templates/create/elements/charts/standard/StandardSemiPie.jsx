@@ -106,7 +106,7 @@ export const StandardSemiPieContent = ({ element }) => {
                         y={args.y}
                         textAnchor={args.textAnchor}
                         dominantBaseline={args.dominantBaseline}
-                        fill="#000000"
+                        fill={element.config.labelFontColor}
                         fontSize={element.config.labelFontSize}
                         fontFamily={element.config.fontFamily}
                       >
@@ -124,6 +124,7 @@ export const StandardSemiPieContent = ({ element }) => {
                 fill={element.config.labelFontColor}
                 fontSize={element.config.labelFontSize}
                 fontFamily={element.config.fontFamily}
+                stroke="none"
                 formatter={(value) => {
                   const total = data.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
                   switch (element.config.styles.labelFormat) {
@@ -132,13 +133,13 @@ export const StandardSemiPieContent = ({ element }) => {
                     case 'percentage':
                       return `${((value / total) * 100).toFixed(1)}%`;
                     case 'both':
-                      return `${value} (${((value / total) * 100).toFixed(1)}%)`;
+                      return `${value.toLocaleString()} (${((value / total) * 100).toFixed(1)}%)`;
                     case 'currency':
-                      return `${element.config.styles.selectedCurrency} ${value.toFixed(2)}`;
+                      return `${element.config.styles.selectedCurrency} ${value.toLocaleString()}`;
                     case 'wholeNumber':
-                      return Math.round(value);
+                      return Math.round(value).toLocaleString();
                     case 'decimal':
-                      return value.toFixed(2);
+                      return value.toLocaleString();
                     default:
                       return value;
                   }

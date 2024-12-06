@@ -29,7 +29,7 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
         { value: 60, label: '60' },
       ];
     } else if (element.config.name === 'pie-2') {
-      console.log('Hello');
+      return [];
     }
   };
 
@@ -209,7 +209,6 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
         >
           Show Tooltip
         </Checkbox>
-
         {element.type === 'chart-s-pie' && (
           <div className="flex items-center space-x-4">
             {['top', 'bottom'].map((position) => (
@@ -228,7 +227,6 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
             ))}
           </div>
         )}
-
         <div className="flex items-center space-x-4">
           <p className="text-base opacity-75 whitespace-nowrap">No. of Pie:</p>
           <AutoCompleteNumberInput
@@ -244,7 +242,21 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
             ariaLabel="No of pies to Show"
           />
         </div>
-        {element.config.name !== 'pie' && (
+        {element.config.name === 'doughnut-standard' && (
+          <div>
+            <Slider
+              label="Inner Radius"
+              step={10}
+              maxValue={element.config.name === 'doughnut-standard' ? 60 : 100}
+              minValue={10}
+              marks={getData()}
+              className="max-w-md"
+              onChange={(e) => onChange({ ...element, config: { ...element.config, innerRadius: e } })}
+              value={element.config.innerRadius}
+            />
+          </div>
+        )}{' '}
+        {element.config.name === 'doughnut' && (
           <div>
             <Slider
               label="Inner Radius"

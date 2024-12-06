@@ -121,9 +121,10 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
                 <LabelList
                   dataKey={element.config.keys.y}
                   position={element.config.labelPosition}
+                  stroke="none"
                   fill={element.config.labelFontColor}
                   fontSize={element.config.labelFontSize}
-                  // fontFamily={element.config.fontFamily}
+                  fontFamily={element.config.fontFamily}
                   formatter={(value) => {
                     const total = data.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
                     switch (element.config.styles.labelFormat) {
