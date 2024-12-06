@@ -17,8 +17,6 @@ export const StandardDoughnutContent = ({ element }) => {
     return { ...item, fill: color };
   });
 
-  console.log(element.config);
-
   useEffect(() => {}, [element]);
 
   return (

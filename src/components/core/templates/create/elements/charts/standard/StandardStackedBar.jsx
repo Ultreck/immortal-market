@@ -91,8 +91,8 @@ export const StandardStackedBarContent = ({ element }) => {
                 <LabelList
                   dataKey={key}
                   position={element.config.labelPosition}
-                  formatter={(value) => {
-                    const total = element.config.data.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
+                  formatter={(value, index) => {
+                    const total = element.config.data.reduce((sum, entry) => sum + entry[key], 0);
                     switch (element.config.styles?.labelFormat) {
                       case 'value':
                         return value.toLocaleString();

@@ -29,8 +29,6 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
     return acc;
   }, {});
 
-  console.log(element.config);
-
   return (
     <div
       style={{
