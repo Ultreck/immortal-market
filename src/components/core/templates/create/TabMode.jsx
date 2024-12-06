@@ -17,8 +17,8 @@ const TabMode = () => {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex-1 overflow-y-auto p-10" id="scrollable" onClick={handleParentClick} ref={root}>
-        <div className="mx-auto w-max">
+      <div className="flex flex-col flex-1 overflow-y-auto p-10" id="scrollable" onClick={handleParentClick} ref={root}>
+        <div className="mx-auto my-auto w-max">
           <Page key={page.id} id={page.id} showTitle={false} />
         </div>
       </div>
