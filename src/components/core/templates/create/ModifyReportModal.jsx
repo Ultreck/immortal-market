@@ -1,32 +1,59 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import useTemplateStore from '@/store/template.js';
 import { TbChevronLeft, TbChevronRight, TbCircleCheckFilled, TbForms, TbRobot } from 'react-icons/tb';
-import { Accordion, AccordionItem, Button, Card, Checkbox, Chip, Select, SelectItem, Spinner } from '@nextui-org/react';
-import { useState } from 'react';
-import { camelCaseToWords, cn, delay } from '@/lib/utils.js';
+import { Accordion, AccordionItem, Button, Card, Checkbox, Spinner } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
+import { camelCaseToWords, cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import Title from '@/components/core/shared/Title.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';
-import { useMount } from 'react-use';
 import useBusiness from '@/hooks/use-business.js';
-import { useGetDesignSource } from '@/api/business.js';
+import { useGetDesignSource, useUpdateDesignSource } from '@/api/business.js';
 import NoData from '@/components/ui/NoData.jsx';
 
 const ModifyReportModal = () => {
+  const toast = useToast();
   const isOpen = useTemplateStore((state) => state.template.isModifyReportOpen);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const [view, setView] = useState('options');
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { data: { source = {} } = {}, isLoading } = useGetDesignSource(business, id);
+  const [data, setData] = useState({ type: '', summary: [], combinations: [] });
+  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (!source?.selection) {
+        updateTemplate({ isModifyReportOpen: true });
+      } else {
+        setView('combinations');
+        setData(source?.selection);
+      }
+    }
+  }, [isLoading, source?.selection, updateTemplate]);
 
   const handleClose = () => {
-    setView('options');
+    if (source?.selection) setView('combinations');
+    else setView('options');
     updateTemplate({ isModifyReportOpen: false });
   };
 
+  const handleSubmit = async (payload) => {
+    await handleSaveSelection(payload);
+  };
+
+  const handleSaveSelection = async (payload) => {
+    try {
+      await update({ selection: payload });
+      handleClose();
+    } catch (e) {
+      toast.error(e?.response?.data?.message || e.message);
+    }
+  };
+
   return (
-    <Drawer isOpen={isOpen} onClose={handleClose} padding={false}>
+    <Drawer isOpen={isOpen} onClose={handleClose} padding={false} width={700}>
       {isLoading ? (
         <div className="px-14 py-12 flex flex-col items-center justify-center h-full">
           <Spinner size="lg" />
@@ -34,23 +61,51 @@ const ModifyReportModal = () => {
         </div>
       ) : (
         <>
-          {source ? (
-            <>
-              {view === 'options' && (
-                <Options onDone={(option) => setView(option === 'manual' ? 'summary' : 'analyze')} />
-              )}
-              {view === 'summary' && (
-                <Summary onBack={() => setView('options')} onDone={() => setView('combinations')} />
-              )}
-              {view === 'combinations' && (
-                <Combinations onBack={() => setView('summary')} onDone={() => setView('analyze')} />
-              )}
-              {view === 'analyze' && <Analyze onBack={() => setView('combinations')} onDone={handleClose} />}
-            </>
-          ) : (
-            <div className="px-14 py-12">
-              <NoData text="No data source configured for this project" />
+          {isUpdateLoading ? (
+            <div className="px-14 py-12 flex flex-col items-center justify-center h-full">
+              <Spinner size="lg" />
+              <p className="mt-6">Processing..</p>
             </div>
+          ) : (
+            <>
+              {source ? (
+                <>
+                  {view === 'options' && (
+                    <Options
+                      value={data.type}
+                      onDone={(type) => {
+                        setData((v) => ({ ...v, type }));
+                        setView('summary');
+                      }}
+                    />
+                  )}
+                  {view === 'summary' && (
+                    <Summary
+                      value={data.summary}
+                      onBack={() => setView('options')}
+                      onDone={(summary) => {
+                        setData((v) => ({ ...v, summary }));
+                        setView('combinations');
+                      }}
+                    />
+                  )}
+                  {view === 'combinations' && (
+                    <Combinations
+                      value={data.combinations}
+                      onBack={() => setView('summary')}
+                      onDone={(combinations) => {
+                        setData((v) => ({ ...v, combinations }));
+                        handleSubmit({ ...data, combinations });
+                      }}
+                    />
+                  )}
+                </>
+              ) : (
+                <div className="px-14 py-12">
+                  <NoData text="No data source configured for this project" />
+                </div>
+              )}
+            </>
           )}
         </>
       )}
@@ -58,11 +113,11 @@ const ModifyReportModal = () => {
   );
 };
 
-const Options = ({ onDone }) => {
-  const [value, setValue] = useState('');
+const Options = ({ value, onDone }) => {
+  const [type, setType] = useState(value);
 
   const handleSubmit = () => {
-    onDone(value);
+    onDone(type);
   };
 
   return (
@@ -80,12 +135,12 @@ const Options = ({ onDone }) => {
         <Card
           isPressable
           onPress={() => {
-            setValue('manual');
+            setType('manual');
           }}
           shadow="none"
           className={cn(
             'text-left border border-default-900/10 hover:bg-default-900/5 rounded-2xl px-8 py-10 cursor-pointer relative transition-all duration-300',
-            { 'border-2 border-green-500': value === 'manual' }
+            { 'border-2 border-green-500': type === 'manual' }
           )}
         >
           <TbForms size="40" />
@@ -94,17 +149,18 @@ const Options = ({ onDone }) => {
           <TbCircleCheckFilled
             size="28"
             className={cn('absolute top-4 right-4 text-green-500 opacity-0 transition-opacity duration-300', {
-              'opacity-100': value === 'manual',
+              'opacity-100': type === 'manual',
             })}
           />
         </Card>
         <Card
           isPressable
-          onPress={() => setValue('auto')}
+          onPress={() => setType('auto')}
           shadow="none"
+          isDisabled
           className={cn(
-            'text-left border border-default-900/10 hover:bg-default-900/5 rounded-2xl px-8 py-10 cursor-pointer relative transition-all duration-300',
-            { 'border-2 border-green-500': value === 'auto' }
+            'text-left border border-default-900/10 hover:bg-default-900/5 rounded-2xl px-8 py-10 cursor-pointer relative transition-all duration-300 disabled',
+            { 'border-2 border-green-500': type === 'auto' }
           )}
         >
           <TbRobot size="40" />
@@ -113,13 +169,13 @@ const Options = ({ onDone }) => {
           <TbCircleCheckFilled
             size="28"
             className={cn('absolute top-4 right-4 text-green-500 opacity-0 transition-opacity duration-300', {
-              'opacity-100': value === 'auto',
+              'opacity-100': type === 'auto',
             })}
           />
         </Card>
       </div>
       <Button
-        isDisabled={value === ''}
+        isDisabled={type === ''}
         onClick={handleSubmit}
         color="primary"
         radius="full"
@@ -132,8 +188,9 @@ const Options = ({ onDone }) => {
   );
 };
 
-const Summary = ({ onBack, onDone }) => {
-  const [selection, setSelection] = useState([]);
+const Summary = ({ value, onBack, onDone }) => {
+  const toast = useToast();
+  const [selection, setSelection] = useState(value || []);
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { data: { source = {} } = {} } = useGetDesignSource(business, id);
@@ -142,10 +199,15 @@ const Summary = ({ onBack, onDone }) => {
 
   const combinations = columns.reduce((acc, key) => {
     if (Array.isArray(source.combinations[key])) {
-      return [...acc, ...source.combinations[key]];
+      return [...acc, ...source.combinations[key].filter((c) => c.category === 'number-aggregate')];
     }
     return acc;
   }, []);
+
+  const handleSubmit = async () => {
+    if (!selection.length) return toast.error('Please select at least one combination');
+    onDone(selection);
+  };
 
   return (
     <div className="px-14 py-12">
@@ -159,66 +221,33 @@ const Summary = ({ onBack, onDone }) => {
         }}
       />
       <div className="mt-10">
-        <p className="mb-2">What fields do you want to include in the summary?</p>
-        <Select
-          aria-label="Select fields"
-          labelPlacement="outside"
-          classNames={{
-            trigger: 'px-4 py-3 h-auto',
-            label: 'text-base',
-            popoverContent: 'bg-default-100',
-          }}
-          size="lg"
-          placeholder="Select analysis"
-          isMultiline
-          variant="bordered"
-          scrollShadowProps={{ isEnabled: false }}
-          selectionMode="multiple"
-          selectedKeys={selection}
-          onSelectionChange={(e) => {
-            setSelection(Array.from(e));
-          }}
-          renderValue={(items) => {
-            return (
-              <div className="flex flex-wrap gap-2">
-                {items.map((item) => (
-                  <Chip
-                    key={item.key}
-                    className="bg-default-300 text-md w-full whitespace-normal h-auto leading-tight py-1.5 px-2 rounded-2xl"
-                  >
-                    {item.textValue}
-                  </Chip>
-                ))}
-              </div>
-            );
-          }}
-        >
-          {combinations?.map((c, i) => (
-            <SelectItem key={`${c.text}-${i}`} classNames={{ title: 'text-base' }}>
-              {c.text}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
-      <div className="mt-4">
-        <Accordion variant="bordered" className="rounded-2xl px-6 py-0">
-          <AccordionItem
-            key="data"
-            aria-label="Filter"
-            title="Filter"
-            classNames={{ content: 'pb-6', trigger: 'py-3' }}
-          >
-            <p>Filter here</p>
-          </AccordionItem>
-        </Accordion>
+        <p className="mb-2 px-1">What fields do you want to include in the summary?</p>
+        <div className="border border-default-200 rounded-2xl px-8 py-6">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+            {combinations.map((combination) => {
+              return (
+                <Checkbox
+                  key={combination.id}
+                  classNames={{ label: 'leading-tight' }}
+                  isSelected={selection.includes(combination.id)}
+                  onValueChange={(v) => {
+                    if (v) setSelection((prev) => [...prev, combination.id]);
+                    else setSelection((prev) => prev.filter((s) => s !== combination.id));
+                  }}
+                >
+                  {combination.text}
+                </Checkbox>
+              );
+            })}
+          </div>
+        </div>
       </div>
       <div className="flex mt-10 space-x-2">
         <Button onClick={onBack} radius="full" isIconOnly variant="bordered">
           <TbChevronLeft size="20" />
         </Button>
         <Button
-          isDisabled={!selection.length}
-          onClick={onDone}
+          onClick={handleSubmit}
           color="primary"
           radius="full"
           className="text-base px-6"
@@ -231,9 +260,9 @@ const Summary = ({ onBack, onDone }) => {
   );
 };
 
-const Combinations = ({ onBack, onDone }) => {
+const Combinations = ({ value, onBack, onDone }) => {
   const toast = useToast();
-  const [selection, setSelection] = useState([]);
+  const [selection, setSelection] = useState(value || []);
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { data: { source = {} } = {} } = useGetDesignSource(business, id);
@@ -249,7 +278,7 @@ const Combinations = ({ onBack, onDone }) => {
 
   const handleSubmit = async () => {
     if (!selection.length) return toast.error('Please select at least one combination');
-    onDone();
+    onDone(selection);
   };
 
   return (
@@ -265,7 +294,7 @@ const Combinations = ({ onBack, onDone }) => {
       />
       <div className="mt-10">
         <div className="mt-6">
-          <Accordion variant="bordered" defaultExpandedKeys={items[0].column}>
+          <Accordion variant="bordered" defaultExpandedKeys={[items[0].column]}>
             {items.map((item) => (
               <AccordionItem
                 key={item.column}
@@ -274,17 +303,16 @@ const Combinations = ({ onBack, onDone }) => {
                 className="py-0"
                 classNames={{ heading: 'px-4', title: 'text-base font-medium', content: 'px-4 pb-6' }}
               >
-                <div className="grid grid-cols-1 gap-3">
-                  {item.combinations.map((combination, i) => {
-                    const key = `${item.column}/${combination.text}/${i}`;
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                  {item.combinations.map((combination) => {
                     return (
                       <Checkbox
-                        key={key}
+                        key={combination.id}
                         classNames={{ label: 'leading-tight' }}
-                        isSelected={selection.includes(key)}
+                        isSelected={selection.includes(combination.id)}
                         onValueChange={(v) => {
-                          if (v) setSelection((prev) => [...prev, key]);
-                          else setSelection((prev) => prev.filter((s) => s !== key));
+                          if (v) setSelection((prev) => [...prev, combination.id]);
+                          else setSelection((prev) => prev.filter((s) => s !== combination.id));
                         }}
                       >
                         {combination.text}
@@ -302,7 +330,6 @@ const Combinations = ({ onBack, onDone }) => {
           <TbChevronLeft size="20" />
         </Button>
         <Button
-          isDisabled={!selection.length}
           onClick={handleSubmit}
           color="primary"
           radius="full"
@@ -316,41 +343,17 @@ const Combinations = ({ onBack, onDone }) => {
   );
 };
 
-const Analyze = ({ onDone }) => {
-  const [text, setText] = useState('');
-
-  useMount(async () => {
-    setText('Creating summary..');
-    await delay(3000);
-    setText('Extracting insights from disbursements..');
-    await delay(3000);
-    setText('Extracting insights from repayments..');
-    await delay(3000);
-    setText('Almost done..');
-    await delay(3000);
-    onDone();
-  });
-
-  return (
-    <div className="px-14 py-12 flex flex-col items-center justify-center h-full">
-      <Spinner size="lg" />
-      <p className="mt-6">{text}</p>
-    </div>
-  );
-};
-
 Options.propTypes = {
+  value: PropTypes.string.isRequired,
   onDone: PropTypes.func.isRequired,
 };
 Summary.propTypes = {
+  value: PropTypes.array.isRequired,
   onBack: PropTypes.func.isRequired,
   onDone: PropTypes.func.isRequired,
 };
 Combinations.propTypes = {
-  onBack: PropTypes.func.isRequired,
-  onDone: PropTypes.func.isRequired,
-};
-Analyze.propTypes = {
+  value: PropTypes.array.isRequired,
   onBack: PropTypes.func.isRequired,
   onDone: PropTypes.func.isRequired,
 };
