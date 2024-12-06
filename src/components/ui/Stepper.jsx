@@ -8,7 +8,7 @@ const Stepper = ({ current, steps, classNames = {}, onChange, isClickable }) => 
   return (
     <div className={cn('relative select-none', classNames.base)}>
       <div className="absolute h-[95%] top-1/2 -translate-y-1/2 border-s border-default-200 left-[18px]"></div>
-      <ol className="relative space-y-10">
+      <ol className="relative space-y-6">
         {steps?.map((step, i) => {
           const isDone = index > i;
           const isCurrent = current === step.key;

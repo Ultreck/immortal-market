@@ -6,9 +6,9 @@ import { roundToNearestTen } from '@/lib/utils.js';
 import StatusBar from '@/components/core/templates/create/footer/StatusBar.jsx';
 import Sidebar from '@/components/core/templates/create/sidebar/Sidebar.jsx';
 import CommentModal from './comment/CommentsModal.jsx';
-import ModifyReportModal from '@/components/core/templates/create/ModifyReportModal.jsx';
+import ModifyReportModal from '@/components/core/templates/create/project/modify-report/ModifyReportModal.jsx';
 import TransitionModal from '@/components/core/templates/create/transition/TransitionModal.jsx';
-import ManageDataModal from '@/components/core/templates/create/ManageDataModal.jsx';
+import ManageDataModal from '@/components/core/templates/create/project/ManageDataModal.jsx';
 import { useGetDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 
