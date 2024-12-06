@@ -54,10 +54,10 @@ export const StandardSemiCircleContent = ({ element }) => {
           data: element.config.data.slice(0, element.config.pies),
           label: {
             show: element.config.showLabel,
-            fontSize: element.config.styles?.valueSize,
+            fontSize: element.config.labelFontSize,
             fontWeight: element.config.styles?.lFontWeight,
             fontStyle: element.config.styles?.lFontStyle,
-            color: element.config.styles?.valueAndLableColor,
+            color: element.config.labelFontColor,
             position: element.config.labelPosition,
             formatter: (params) => {
               const total = option.series[0].data.reduce((sum, entry) => sum + entry.value, 0);

@@ -374,8 +374,8 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                     <Select
                       variant="bordered"
                       size="lg"
-                      name="labelType"
-                      label="Label Type"
+                      name="lineType"
+                      label="Line Type"
                       labelPlacement="outside-left"
                       classNames={{ value: 'px-2' }}
                       placeholder="Select one"

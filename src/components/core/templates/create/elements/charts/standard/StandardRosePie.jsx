@@ -43,9 +43,9 @@ export const StandardRosePieContent = ({ element }) => {
               },
               label: {
                 show: element.config.showLabel,
-                fontSize: element.config.styles?.labelSize || element.config.labelFontSize,
+                fontSize: element.config.labelFontSize,
                 fontWeight: element.config.styles?.lFontWeight,
-                color: element.config.styles?.valueAndLableColor,
+                color: element.config.labelFontColor,
                 fontStyle: element.config.styles?.lFontStyle,
                 position: element.config.labelPosition,
                 formatter: (params) => {

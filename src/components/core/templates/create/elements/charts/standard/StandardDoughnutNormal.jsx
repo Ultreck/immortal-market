@@ -50,9 +50,9 @@ export const StandardDoughnutNormalContent = ({ element }) => {
           label: {
             position: element.config.labelPosition,
             show: element.config.showLabel,
-            fontSize: element.config.styles.valueSize || element.config.labelFontSize,
+            fontSize: element.config.labelFontSize,
             fontWeight: element.config.styles.lFontWeight,
-            color: element.config.styles.valueAndLableColor,
+            color: element.config.labelFontColor,
             fontStyle: element.config.styles.lFontStyle,
             formatter: (params) => {
               const total = option.series[0].data.reduce((sum, entry) => sum + entry.value, 0);

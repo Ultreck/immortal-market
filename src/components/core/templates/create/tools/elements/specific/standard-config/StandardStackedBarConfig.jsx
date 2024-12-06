@@ -28,6 +28,24 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
     }
   };
 
+  const dgetData = () => {
+    if (element.config.name.includes('vertical')) {
+      return [
+        { key: 'top', name: 'Outside End' },
+        { key: 'insideTop', name: 'Inside Base' },
+        { key: 'insideBottom', name: 'Inside End' },
+        { key: 'center', name: 'Inside Center' },
+      ];
+    } else {
+      return [
+        { key: 'top', name: 'Top' },
+        { key: 'insideTop', name: 'inside Top' },
+        { key: 'insideBottom', name: 'inside Bottom' },
+        { key: 'center', name: 'Center' },
+      ];
+    }
+  };
+
   useEffect(() => {}, [element]);
   return (
     <>
@@ -196,13 +214,22 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                   Show Label
                 </Checkbox>
               ))}
+            {element.config.name.includes('stacked-bar') && (
+              <Checkbox
+                isSelected={element.config.showLabel}
+                className={{ base: 'py-0' }}
+                onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+              >
+                Show Label
+              </Checkbox>
+            )}
             {element.config.name === 'line-multiple' && (
               <div>
                 <Select
                   variant="bordered"
                   size="lg"
-                  name="labelType"
-                  label="Label Type"
+                  name="lineType"
+                  label="Line Type"
                   labelPlacement="outside-left"
                   classNames={{ value: 'px-2' }}
                   placeholder="Select one"
@@ -293,13 +320,7 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                     }
                     disableEmptySelection={true}
                   >
-                    {[
-                      // { key: 'top', name: 'Top' },
-                      // { key: 'bottom', name: 'Bottom' },
-                      { key: 'insideTop', name: 'Inside Top' },
-                      { key: 'insideBottom', name: 'Inside Bottom' },
-                      { key: 'center', name: 'Center' },
-                    ].map((type) => (
+                    {dgetData().map((type) => (
                       <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
                         {type.name}
                       </SelectItem>

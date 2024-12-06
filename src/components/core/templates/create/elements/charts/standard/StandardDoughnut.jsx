@@ -67,7 +67,6 @@ export const StandardDoughnutContent = ({ element }) => {
             innerRadius={element.config.innerRadius}
             dataKey={element.config.keys.data}
             style={{
-              fontSize: element.config.styles.valueSize,
               color: element.config.styles.legendColor,
               fontWeight: element.config.styles.legendFontWeight,
               fontFamily: element.config.styles.legendFontFamily,
