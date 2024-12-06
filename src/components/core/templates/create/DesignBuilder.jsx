@@ -9,6 +9,8 @@ import CommentModal from './comment/CommentsModal.jsx';
 import ModifyReportModal from '@/components/core/templates/create/ModifyReportModal.jsx';
 import TransitionModal from '@/components/core/templates/create/transition/TransitionModal.jsx';
 import ManageDataModal from '@/components/core/templates/create/ManageDataModal.jsx';
+import { useGetDesign } from '@/api/business.js';
+import useBusiness from '@/hooks/use-business.js';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;
@@ -28,6 +30,9 @@ const DesignBuilder = () => {
   const getElementPage = useTemplateStore((state) => state.getElementPage);
   const addElements = useTemplateStore((state) => state.addElements);
   const updateElements = useTemplateStore((state) => state.updateElements);
+  const { id: business } = useBusiness();
+  const id = useTemplateStore((state) => state.template.id);
+  const { data: { design } = {} } = useGetDesign(business, id);
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent, collisions } = event;
@@ -84,8 +89,12 @@ const DesignBuilder = () => {
       </div>
 
       <CommentModal />
-      <ModifyReportModal />
-      <ManageDataModal />
+      {design.type === 'project' && (
+        <>
+          <ModifyReportModal />
+          <ManageDataModal />
+        </>
+      )}
     </DndContext>
   );
 };
