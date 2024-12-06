@@ -20,7 +20,7 @@ const DesignTitle = () => {
 
   useEffect(() => {
     setValue(design.title);
-  }, [design.title]);
+  }, [design]);
 
   const handleSave = useCallback(async () => {
     if (value === design.title) return setIsEditing(false);
