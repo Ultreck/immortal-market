@@ -72,7 +72,7 @@ const EditDesignPage = () => {
           scale: 1,
           isModifyReportOpen: false,
           isManageDataOpen: false,
-          mode: 'scroll',
+          mode: design.type === 'project' ? 'tab' : 'scroll',
           ...payload,
         };
       }
