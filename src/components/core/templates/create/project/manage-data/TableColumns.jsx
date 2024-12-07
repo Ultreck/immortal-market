@@ -17,7 +17,7 @@ const TableColumns = ({ table }) => {
   const references = source.relationships?.filter((r) => r.refTable === table.name) || [];
 
   return (
-    <div className="border border-default-200 px-8 py-6 rounded-2xl">
+    <div className="bg-default-100 px-8 py-6 rounded-2xl">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <TbDatabase size="16" />

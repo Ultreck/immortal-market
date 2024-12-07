@@ -50,9 +50,9 @@ const TableData = ({ table }) => {
           {columns.length ? (
             <Table
               classNames={{
-                wrapper: 'border shadow-none border-default-200',
+                wrapper: 'bg-default-100 shadow-none',
                 td: 'text-base whitespace-nowrap',
-                th: 'text-base',
+                th: 'text-base bg-default-200',
                 table: isFetching ? 'opacity-50' : '',
               }}
               aria-label="Data table"
