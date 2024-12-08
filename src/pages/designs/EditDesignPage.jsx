@@ -1,84 +1,73 @@
 import DesignBuilder from '@/components/core/templates/create/DesignBuilder.jsx';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useGetDesign } from '@/api/business.js';
+import { useParams } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import useTemplateStore from '@/store/template.js';
 import { Spinner } from '@nextui-org/react';
+import { useQueryClient } from '@tanstack/react-query';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useUnmount } from 'react-use';
-import { useQueryClient } from '@tanstack/react-query';
+
+const patchPages = (pages) => {
+  return pages.map((p) => {
+    return {
+      ...p,
+      elements: p.elements.map((e) => {
+        if (e.type.match(/heading|subheading|paragraph|caption|count-up-number/gi)) {
+          return { ...e, type: 'text', config: { ...e.config, name: e.type } };
+        }
+        if (e.type === 'infographic') {
+          return { ...e, type: 'svg' };
+        }
+        return e;
+      }),
+    };
+  });
+};
+
+const initPages = () => {
+  return [
+    {
+      id: crypto.randomUUID(),
+      title: 'Untitled',
+      width: 600,
+      height: 600,
+      style: {
+        background: '#ffffff',
+      },
+      elements: [],
+    },
+  ];
+};
 
 const EditDesignPage = () => {
-  const { id } = useParams();
+  const params = useParams();
   const qc = useQueryClient();
-  const navigate = useNavigate();
-  const { id: business } = useBusiness();
-  const currentId = useTemplateStore((state) => state.template.id);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const reset = useTemplateStore((state) => state.reset);
-  const { data: { success = false, design } = {}, isLoading: isTemplatesLoading } = useGetDesign(business, id);
+  const { id: business } = useBusiness();
+  const ready = useTemplateStore((state) => state.template.ready);
+  const { design, isDesignLoading, isSourceLoading } = useCurrentDesign();
   const loaded = useRef(false);
 
   useEffect(() => {
-    if (success && !design) navigate(`/`);
-  }, [success, design, navigate]);
+    updateTemplate({ id: params.id });
+  }, [params.id, updateTemplate]);
 
   useEffect(() => {
-    if (design) {
-      let payload = { id: design._id };
-      if (!loaded.current) {
-        if (design?.data?.pages) {
-          payload.pages = design.data.pages.map((p) => {
-            return {
-              ...p,
-              elements: p.elements.map((e) => {
-                if (e.type.match(/heading|subheading|paragraph|caption|count-up-number/gi)) {
-                  return { ...e, type: 'text', config: { ...e.config, name: e.type } };
-                }
-                if (e.type === 'infographic') {
-                  return { ...e, type: 'svg' };
-                }
-                return e;
-              }),
-            };
-          });
-        } else {
-          payload.pages = [
-            {
-              id: crypto.randomUUID(),
-              title: 'Untitled',
-              width: 600,
-              height: 600,
-              style: {
-                background: '#ffffff',
-              },
-              elements: [],
-            },
-          ];
-        }
-        loaded.current = true;
-      }
-      if (currentId !== design._id) {
-        payload = {
-          isCommentsOpen: false,
-          activeComment: null,
-          commentsTargetId: null,
-          isCommentsVisible: true,
-          selectedElements: [],
-          undoHistory: [],
-          redoHistory: [],
-          selectedPage: null,
-          activePage: payload.pages[0].id,
-          scale: 1,
-          isModifyReportOpen: false,
-          isManageDataOpen: false,
-          mode: design.type === 'project' ? 'tab' : 'scroll',
-          ...payload,
-        };
-      }
+    if (design && !loaded.current) {
+      let payload = { ready: true };
+      loaded.current = true;
+      if (design?.data?.pages?.length) payload.pages = patchPages(design.data.pages);
+      else payload.pages = initPages();
+      payload = {
+        activePage: payload.pages[0].id,
+        mode: design.type === 'project' ? 'tab' : 'scroll',
+        ...payload,
+      };
       updateTemplate(payload);
     }
-  }, [currentId, design, updateTemplate]);
+  }, [design, updateTemplate, params.id]);
 
   useUnmount(() => {
     reset();
@@ -87,13 +76,13 @@ const EditDesignPage = () => {
 
   return (
     <>
-      {isTemplatesLoading ? (
+      {isDesignLoading || isSourceLoading ? (
         <div className="h-screen w-full flex flex-col justify-center items-center text-center">
           <Spinner size="lg" />
           <p className="mt-6">Loading design..</p>
         </div>
       ) : (
-        <>{!!currentId && !!design && <DesignBuilder />}</>
+        <>{ready && <DesignBuilder />}</>
       )}
     </>
   );

@@ -1,16 +1,12 @@
 import { TbDatabase, TbTablePlus } from 'react-icons/tb';
 import { Button, Chip, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@nextui-org/react';
 import CreateRelationship from '@/components/core/templates/create/project/manage-data/CreateRelationship.jsx';
-import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
-import { useGetDesignSource } from '@/api/business.js';
 import PropTypes from 'prop-types';
 import TableColumnItem from '@/components/core/templates/create/project/manage-data/TableColumnItem.jsx';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const TableColumns = ({ table }) => {
-  const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
-  const { data: { source = {} } = {} } = useGetDesignSource(business, id);
+  const { source } = useCurrentDesign();
   const { isOpen: isConnectOpen, onOpenChange: onConnectOpenChange } = useDisclosure();
 
   const relationships = source.relationships?.filter((r) => r.table === table.name) || [];

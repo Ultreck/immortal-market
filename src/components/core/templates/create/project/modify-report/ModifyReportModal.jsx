@@ -4,13 +4,14 @@ import { Spinner } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
-import { useGetDesignSource, useUpdateDesignSource } from '@/api/business.js';
+import { useUpdateDesignSource } from '@/api/business.js';
 import NoData from '@/components/ui/NoData.jsx';
 import Stepper from '@/components/ui/Stepper.jsx';
 import Options from '@/components/core/templates/create/project/modify-report/Options.jsx';
 import Summary from '@/components/core/templates/create/project/modify-report/Summary.jsx';
 import Combinations from '@/components/core/templates/create/project/modify-report/Combinations.jsx';
 import { LuCombine, LuOption, LuText } from 'react-icons/lu';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const ModifyReportModal = () => {
   const toast = useToast();
@@ -19,7 +20,7 @@ const ModifyReportModal = () => {
   const [view, setView] = useState('options');
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
-  const { data: { source = {} } = {}, isLoading } = useGetDesignSource(business, id);
+  const { source, isSourceLoading } = useCurrentDesign();
   const [data, setData] = useState({ type: '', summary: [], combinations: [] });
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
 
@@ -42,7 +43,7 @@ const ModifyReportModal = () => {
   ];
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isSourceLoading) {
       if (!source?.selection) {
         updateTemplate({ isModifyReportOpen: true });
       } else {
@@ -50,7 +51,7 @@ const ModifyReportModal = () => {
         setData(source?.selection);
       }
     }
-  }, [isLoading, source?.selection, updateTemplate]);
+  }, [isSourceLoading, source?.selection, updateTemplate]);
 
   const handleClose = () => {
     if (source?.selection) setView('combinations');
@@ -73,7 +74,7 @@ const ModifyReportModal = () => {
 
   return (
     <Drawer isOpen={isOpen} onClose={handleClose} padding={false} width={1000}>
-      {isLoading ? (
+      {isSourceLoading ? (
         <div className="px-14 py-12 flex flex-col items-center justify-center h-full">
           <Spinner size="lg" />
           <p className="mt-6">Just a moment</p>

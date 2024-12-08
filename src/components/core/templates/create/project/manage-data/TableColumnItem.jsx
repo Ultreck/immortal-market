@@ -1,19 +1,20 @@
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
-import { useGetDesignSource, useUpdateDesignSource } from '@/api/business.js';
+import { useUpdateDesignSource } from '@/api/business.js';
 import { Button, Popover, PopoverContent, PopoverTrigger, Tooltip, useDisclosure } from '@nextui-org/react';
 import { camelCaseToWords } from '@/lib/utils.js';
 import { TbInfoCircle, TbLink } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useToast } from '@/hooks/use-toast.jsx';
 import Title from '@/components/core/shared/Title.jsx';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const TableColumnItem = ({ table, column }) => {
   const toast = useToast();
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { isOpen: isConnectOpen, onOpenChange: onConnectOpenChange } = useDisclosure();
-  const { data: { source = {} } = {} } = useGetDesignSource(business, id);
+  const { source } = useCurrentDesign();
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
   const relationship = source.relationships?.find((r) => r.column === column.key && r.table === table);
 

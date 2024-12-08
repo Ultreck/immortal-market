@@ -1,17 +1,18 @@
 import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
-import { useGetDesignSource, useUpdateDesignSource } from '@/api/business.js';
+import { useUpdateDesignSource } from '@/api/business.js';
 import { Controller, useForm } from 'react-hook-form';
 import Title from '@/components/core/shared/Title.jsx';
 import { Button, Select, SelectItem } from '@nextui-org/react';
 import PropTypes from 'prop-types';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const CreateRelationship = ({ table, onClose }) => {
   const toast = useToast();
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
-  const { data: { source = {} } = {} } = useGetDesignSource(business, id);
+  const { source } = useCurrentDesign();
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
   const { handleSubmit, control, watch } = useForm();
 

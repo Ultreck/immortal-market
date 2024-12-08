@@ -1,19 +1,15 @@
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast.jsx';
-import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
-import { useGetDesignSource } from '@/api/business.js';
 import Title from '@/components/core/shared/Title.jsx';
 import { Button, Checkbox } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const Summary = ({ value, onBack, onDone }) => {
   const toast = useToast();
+  const { source } = useCurrentDesign();
   const [selection, setSelection] = useState(value || []);
-  const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
-  const { data: { source = {} } = {} } = useGetDesignSource(business, id);
 
   const columns = Object.keys(source.combinations || {}).filter((key) => Array.isArray(source.combinations[key])) || [];
 

@@ -1,38 +1,30 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 import { shallow } from 'zustand/shallow';
 
+const value = {
+  ready: false,
+  id: null,
+  pages: [],
+  selectedElements: [],
+  selectedPage: null,
+  activePage: null,
+  activeElement: null,
+  scale: 1,
+  undoHistory: [],
+  redoHistory: [],
+  isCommentsOpen: false,
+  activeComment: null,
+  commentsTargetId: null,
+  isCommentsVisible: true,
+  openTool: null,
+  isModifyReportOpen: false,
+  isTransitionOpen: false,
+  isManageDataOpen: false,
+};
+
 const useTemplateStore = createWithEqualityFn(
   (set, get) => ({
-    template: {
-      id: null,
-      pages: [
-        {
-          id: crypto.randomUUID(),
-          title: 'Untitled',
-          width: 600,
-          height: 600,
-          style: {
-            background: '#ffffff',
-          },
-          elements: [],
-        },
-      ],
-      selectedElements: [],
-      selectedPage: null,
-      activePage: null,
-      activeElement: null,
-      scale: 1,
-      undoHistory: [],
-      redoHistory: [],
-      isCommentsOpen: false,
-      activeComment: null,
-      commentsTargetId: null,
-      isCommentsVisible: true,
-      openTool: null,
-      isModifyReportOpen: false,
-      isTransitionOpen: false,
-      isManageDataOpen: false,
-    },
+    template: value,
     addUndoHistory: () => {
       set((state) => {
         return {
@@ -262,7 +254,7 @@ const useTemplateStore = createWithEqualityFn(
     },
     reset: () => {
       set(() => ({
-        template: {},
+        template: value,
       }));
     },
   }),

@@ -1,39 +1,36 @@
 import useTemplateStore from '@/store/template.js';
 import Drawer from '@/components/ui/Drawer.jsx';
-import { useGetDesignSource } from '@/api/business.js';
 import { Chip, Spinner } from '@nextui-org/react';
 import NoData from '@/components/ui/NoData.jsx';
-import useBusiness from '@/hooks/use-business.js';
 import Title from '@/components/core/shared/Title.jsx';
 import { cn } from '@/lib/utils.js';
 import { TbLayoutList, TbLink } from 'react-icons/tb';
 import { AnimatePresence } from 'framer-motion';
 import TableDetails from '@/components/core/templates/create/project/manage-data/TableDetails.jsx';
 import { useEffect, useState } from 'react';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const ManageDataModal = () => {
+  const { source, isSourceLoading } = useCurrentDesign();
   const isOpen = useTemplateStore((state) => state.template.isManageDataOpen);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
-  const { data: { source = {} } = {}, isLoading } = useGetDesignSource(business, id);
-  const [current, setCurrent] = useState(source.tables?.[0]?.name);
+  const [current, setCurrent] = useState(source?.tables?.[0]?.name);
 
-  const table = source.tables?.find((t) => t.name === current);
+  const table = source?.tables?.find((t) => t.name === current);
 
   const handleClose = () => {
     updateTemplate({ isManageDataOpen: false });
   };
 
   useEffect(() => {
-    if (source.tables?.length && !current) {
-      setCurrent(source.tables[0].name);
+    if (source?.tables?.length && !current) {
+      setCurrent(source?.tables[0].name);
     }
-  }, [current, source.tables]);
+  }, [current, source?.tables]);
 
   return (
     <Drawer isOpen={isOpen} onClose={handleClose} padding={false} width={1100}>
-      {isLoading ? (
+      {isSourceLoading ? (
         <div className="px-14 py-12 flex flex-col items-center justify-center h-full">
           <Spinner size="lg" />
           <p className="mt-6">Just a moment</p>
@@ -45,7 +42,7 @@ const ManageDataModal = () => {
               <Title title="Manage tables" className="mb-8" classNames={{ title: 'text-xl' }} />
               <div className="grid grid-cols-[260px_1fr] gap-6">
                 <div className="flex flex-col space-y-3">
-                  {source.tables?.map((t) => {
+                  {source?.tables?.map((t) => {
                     const relationships = source.relationships?.filter((r) => r.table === t.name) || [];
                     const references = source.relationships?.filter((r) => r.refTable === t.name) || [];
                     return (

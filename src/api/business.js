@@ -152,6 +152,7 @@ export const useGetDesign = (business, id) => {
       const res = await http.get(`/businesses/${business}/designs/${id}`);
       return res.data;
     },
+    enabled: !!business && !!id,
   });
 };
 
@@ -268,13 +269,14 @@ export const useUpdateComment = (business, design) => {
   });
 };
 
-export const useGetDesignSource = (business, design) => {
+export const useGetDesignSource = (business, design, enabled = true) => {
   return useQuery({
     queryKey: ['business', business, 'designs', design, 'source'],
     queryFn: async () => {
       const res = await http.get(`/businesses/${business}/designs/${design}/source`);
       return res.data;
     },
+    enabled,
   });
 };
 
