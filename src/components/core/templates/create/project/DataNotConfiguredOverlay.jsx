@@ -11,7 +11,7 @@ const DataNotConfiguredOverlay = () => {
     <>
       {!source?.selection && (
         <div className="absolute inset-0 z-20 group hover:bg-default-50/90 transition-background flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity dark:text-white">
             <RiAlertLine size="32" />
             <p className="max-w-[200px] text-center mt-6">
               Data source not configured. Please configure the data source for this project to unlock the editor.
