@@ -1,4 +1,4 @@
-import { cn, getPercentagesMax } from '@/lib/utils';
+import { cn, formatChartValue, getPercentagesMax } from '@/lib/utils';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
@@ -33,14 +33,14 @@ export const AdvanceNestedCirclesContent = ({ element }) => {
         >
           <div
             style={{
-              fontSize: element.config.styles.labelSize,
+              fontSize: element.config.labelFontSize,
               fontWeight: element.config.styles.lFontWeight,
               fontStyle: element.config.styles.lFontStyle,
-              color: element.config.styles.valueAndLableColor,
+              color: element.config.labelFontColor,
             }}
-            className="text-center text-white pt-2"
+            className="text-center pt-2"
           >
-            {item.name}
+            {element.config.showLabel && formatChartValue(item.value, element)}
           </div>
         </div>
       ))}

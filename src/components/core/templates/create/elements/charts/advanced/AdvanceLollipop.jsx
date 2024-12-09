@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { getPercentagesMax } from '@/lib/utils.js';
+import { formatChartValue, getPercentagesMax } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 
@@ -53,13 +53,13 @@ export const AdvanceLollipopContent = ({ element }) => {
                 className={`font-bold w-max px-4 aspect-[16/12] flex items-center justify-center rounded-full`}
                 style={{
                   backgroundColor: color,
-                  fontSize: element.config.styles.valueSize,
+                  fontSize: element.config.labelFontSize,
                   fontWeight: element.config.styles.lFontWeight,
                   fontStyle: element.config.styles.lFontStyle,
-                  color: element.config.styles.valueAndLableColor,
+                  color: element.config.labelFontColor,
                 }}
               >
-                <span className="!text-white mix-blend-difference">{item.value}</span>
+                <span>{formatChartValue(item.value, element)}</span>
               </motion.div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ElementPropTypes } from '@/lib/prop-types';
 import PropTypes from 'prop-types';
+import { formatChartValue } from '@/lib/utils.js';
 
 const AdvancedStackedCard = ({ element }) => {
   return <AdvancedStackedCardContent element={element} />;
@@ -60,11 +61,11 @@ export const AdvancedStackedCardContent = ({ element }) => {
                   fontWeight: element.config.styles.lFontWeight,
                   fontStyle: element.config.styles.lFontStyle,
                   fontSize: element.config.styles.labelSize || '18px',
-                  color: element.config.styles.valueAndLableColor,
+                  color: element.config.labelFontColor,
                 }}
                 className="text-sm mb-1 text-black"
               >
-                {item.range}
+                {element.config.showLabel && item.range}
               </div>
               <motion.div
                 className="font-bold text-black"
@@ -76,10 +77,10 @@ export const AdvancedStackedCardContent = ({ element }) => {
                   fontWeight: element.config.styles.lFontWeight,
                   fontStyle: element.config.styles.lFontStyle,
                   fontSize: element.config.styles.valueSize || '18px',
-                  color: element.config.styles.valueAndLableColor,
+                  color: element.config.labelFontColor,
                 }}
               >
-                {item.percentage}%
+                {element.config.showLabel && formatChartValue(item.percentage, element)}
               </motion.div>
             </>
           </motion.div>

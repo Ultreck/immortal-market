@@ -12,6 +12,8 @@ AdvanceDynamicSorting.propTypes = ElementPropTypes;
 export const AdvanceDynamicSortingContent = ({ element }) => {
   const chartRef = useRef(null);
 
+  console.log(element.config);
+
   useEffect(() => {
     let chart;
     let data = [...Array(5).fill(null)].map(() => Math.round(Math.random() * 200));
@@ -53,10 +55,30 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
                 show: element.config.showLabel,
                 position: 'right',
                 valueAnimation: true,
-                color: element.config.styles.valueAndLableColor,
-                fontSize: element.config.styles.labelSize,
+                color: element.config.labelFontColor,
+                fontSize: element.config.labelFontSize,
                 fontWeight: element.config.styles.lFontWeight,
                 fontStyle: element.config.styles.lFontStyle,
+                formatter: (params) => {
+                  const value = params.value;
+                  const total = params.value;
+                  switch (element.config.labelFormat) {
+                    case 'value':
+                      return value.toLocaleString();
+                    case 'percentage':
+                      return `${value}%`;
+                    case 'both':
+                      return `${value.toLocaleString()} (${((value / total) * 100).toFixed(1)}%)`;
+                    case 'currency':
+                      return `${element.config.selectedCurrency} ${value.toLocaleString()}`;
+                    case 'wholeNumber':
+                      return Math.round(value).toLocaleString();
+                    case 'decimal':
+                      return value.toLocaleString();
+                    default:
+                      return value;
+                  }
+                },
               },
               itemStyle: {
                 color: (params) => element.config.colors[params.dataIndex % element.config.colors.length],
