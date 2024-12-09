@@ -1,58 +1,30 @@
-import { TbDatabase, TbTablePlus } from 'react-icons/tb';
-import { Button, Chip, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@nextui-org/react';
-import CreateRelationship from '@/components/core/templates/create/project/manage-data/CreateRelationship.jsx';
+import { TbDatabase, TbInfoCircle, TbLink, TbTablePlus } from 'react-icons/tb';
+import { Button, Tooltip } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-import TableColumnItem from '@/components/core/templates/create/project/manage-data/TableColumnItem.jsx';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
+import { camelCaseToWords } from '@/lib/utils.js';
+import Title from '@/components/core/shared/Title.jsx';
 
 const TableColumns = ({ table }) => {
-  const { source } = useCurrentDesign();
-  const { isOpen: isConnectOpen, onOpenChange: onConnectOpenChange } = useDisclosure();
-
-  const relationships = source.relationships?.filter((r) => r.table === table.name) || [];
-  const references = source.relationships?.filter((r) => r.refTable === table.name) || [];
-
   return (
-    <div className="bg-default-100 px-8 py-6 rounded-2xl">
-      <div className="flex items-center justify-between">
+    <div className="border border-default-200 pt-4 pb-2 rounded-2xl">
+      <div className="flex items-center justify-between px-8">
         <div className="flex items-center space-x-3">
           <TbDatabase size="16" />
           <p className="text-base font-semibold">{table.slug}</p>
         </div>
-        <Popover placement="bottom-end" isOpen={isConnectOpen} onOpenChange={onConnectOpenChange}>
-          <PopoverTrigger>
-            <Button
-              variant="bordered"
-              size="sm"
-              radius="full"
-              className="text-base"
-              startContent={<TbTablePlus size="16" />}
-            >
-              New relationship
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="shadow border border-default-200 rounded-2xl w-[360px] items-stretch p-0">
-            <CreateRelationship table={table.name} onClose={onConnectOpenChange} />
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div className="flex items-center space-x-2 mt-2">
-        <Chip size="sm" variant="flat" className="text-md px-2">
-          {table.columns.length} columns
-        </Chip>
-        <Chip
+        <Button
+          variant="bordered"
           size="sm"
-          variant="flat"
-          className="text-md px-2"
-          color={relationships.length > 0 ? 'success' : 'default'}
+          radius="full"
+          className="text-base"
+          startContent={<TbTablePlus size="16" />}
+          isDisabled
         >
-          {relationships.length} relationships
-        </Chip>
-        <Chip size="sm" variant="flat" className="text-md px-2" color={references.length > 0 ? 'warning' : 'default'}>
-          {references.length} references
-        </Chip>
+          Add column
+        </Button>
       </div>
-      <div className="space-y-2 mt-5">
+      <div className="mt-4">
         {table.columns.map((column, j) => {
           return <TableColumnItem key={j} table={table.name} column={column} />;
         })}
@@ -61,8 +33,87 @@ const TableColumns = ({ table }) => {
   );
 };
 
+const TableColumnItem = ({ table, column }) => {
+  const { source } = useCurrentDesign();
+  const relationship = source.relationships?.find((r) => r.column === column.key && r.table === table);
+  const reference = source.relationships?.find((r) => r.refColumn === column.key && r.refTable === table);
+
+  return (
+    <div className="flex justify-between items-center px-8 py-[5px]">
+      <div className="flex items-center space-x-1">
+        <p className="text-base">{column.key}</p>
+        <Tooltip
+          content={
+            <div className="flex flex-col items-start px-2 py-2 text-base">
+              <p>Type: {camelCaseToWords(column.type)}</p>
+              <p>Category: {camelCaseToWords(column.category)}</p>
+            </div>
+          }
+        >
+          <div className="hover:bg-default-100 rounded-2xl px-0.5 py-0.5 opacity-75">
+            <TbInfoCircle size="16" />
+          </div>
+        </Tooltip>
+        {!!reference && (
+          <Tooltip
+            content={
+              <div>
+                <div className="flex flex-col items-start px-2 py-2 text-base">
+                  <h4 className="font-semibold mb-2">Referenced in</h4>
+                  <p>Table: {source.tables.find((t) => t.name === reference.table)?.slug}</p>
+                  <p>Column: {reference.column}</p>
+                  <p>Type: {camelCaseToWords(reference.type)}</p>
+                </div>
+              </div>
+            }
+          >
+            <div className="w-[18px] h-[18px] rounded-full flex items-center justify-center bg-default-200 text-default-500">
+              <TbLink size="13" />
+            </div>
+          </Tooltip>
+        )}
+        {!!relationship && (
+          <Tooltip
+            content={
+              <div className="pt-4 pb-2">
+                <div className="flex items-center justify-between space-x-3 mb-3 px-4">
+                  <Title title="Relationship" classNames={{ title: 'text-base', base: 'mb-0' }} />
+                </div>
+                <div className="divide-y divide-default-200">
+                  <div className="space-x-2 px-4 py-2 flex items-center justify-between">
+                    <p className="opacity-75">Ref table</p>
+                    <p className="text-base text-right">
+                      {source.tables.find((t) => t.name === relationship.refTable)?.slug}
+                    </p>
+                  </div>
+                  <div className="space-x-2 px-4 py-2 flex items-center justify-between">
+                    <p className="opacity-75">Ref column</p>
+                    <p className="text-base text-right">{relationship.refColumn}</p>
+                  </div>
+                  <div className="space-x-2 px-4 py-2 flex items-center justify-between">
+                    <p className="opacity-75">Type</p>
+                    <p className="text-base text-right">{relationship.type}</p>
+                  </div>
+                </div>
+              </div>
+            }
+          >
+            <div className="w-[18px] h-[18px] rounded-full flex items-center justify-center bg-green-500 text-white">
+              <TbLink size="13" />
+            </div>
+          </Tooltip>
+        )}
+      </div>
+    </div>
+  );
+};
+
 TableColumns.propTypes = {
   table: PropTypes.object.isRequired,
+};
+TableColumnItem.propTypes = {
+  table: PropTypes.string,
+  column: PropTypes.object,
 };
 
 export default TableColumns;

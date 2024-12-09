@@ -22,7 +22,7 @@ import NoData from '@/components/ui/NoData.jsx';
 
 const limit = 10;
 
-const TableData = ({ table }) => {
+const TableRecords = ({ table }) => {
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const [page, setPage] = useState(1);
@@ -50,7 +50,7 @@ const TableData = ({ table }) => {
           {columns.length ? (
             <Table
               classNames={{
-                wrapper: 'bg-default-100 shadow-none',
+                wrapper: 'border border-default-200 shadow-none',
                 td: 'text-base whitespace-nowrap',
                 th: 'text-base bg-default-200',
                 table: isFetching ? 'opacity-50' : '',
@@ -130,8 +130,8 @@ const InsertData = () => {
   );
 };
 
-TableData.propTypes = {
+TableRecords.propTypes = {
   table: PropTypes.string.isRequired,
 };
 
-export default TableData;
+export default TableRecords;

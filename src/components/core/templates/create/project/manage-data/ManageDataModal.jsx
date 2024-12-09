@@ -38,20 +38,23 @@ const ManageDataModal = () => {
       ) : (
         <>
           {source ? (
-            <div className="px-12 py-8">
-              <Title title="Manage tables" className="mb-8" classNames={{ title: 'text-xl' }} />
-              <div className="grid grid-cols-[260px_1fr] gap-6">
+            <div className="grid grid-cols-[310px_1fr] gap-0 h-full">
+              <div className="border-r border-default-200 dark:border-default-200/60 py-10 h-full overflow-y-auto">
                 <div className="flex flex-col space-y-3">
+                  <Title
+                    title="Manage tables"
+                    className="mb-5"
+                    classNames={{ title: 'text-xl font-semibold', base: 'px-10' }}
+                  />
                   {source?.tables?.map((t) => {
                     const relationships = source.relationships?.filter((r) => r.table === t.name) || [];
                     const references = source.relationships?.filter((r) => r.refTable === t.name) || [];
                     return (
                       <div
                         key={t.name}
-                        className={cn(
-                          'bg-default-100 px-6 py-4 rounded-2xl cursor-pointer transition-all duration-100',
-                          { 'bg-primary-500 dark:bg-primary-100 text-white': current === t.name }
-                        )}
+                        className={cn('py-4 cursor-pointer transition-all duration-100 px-10', {
+                          'bg-default-200/50': current === t.name,
+                        })}
                         onClick={() => setCurrent(t.name)}
                         tabIndex={0}
                       >
@@ -91,6 +94,8 @@ const ManageDataModal = () => {
                     );
                   })}
                 </div>
+              </div>
+              <div className="h-full overflow-y-auto">
                 <AnimatePresence mode="wait">{!!table && <TableDetails table={table} />}</AnimatePresence>
               </div>
             </div>

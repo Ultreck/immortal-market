@@ -23,14 +23,16 @@ const CreateRelationship = ({ table, onClose }) => {
         toast.error('Relationship already exists for this column');
         return;
       }
-      const relationships = source.relationships?.filter((r) => r.table !== table && r.column !== values.column) || [];
-      relationships.push({
-        table,
-        column: values.column,
-        refTable: values.refTable,
-        refColumn: values.refColumn,
-        type: values.type,
-      });
+      const relationships = [
+        ...source.relationships,
+        {
+          table,
+          column: values.column,
+          refTable: values.refTable,
+          refColumn: values.refColumn,
+          type: values.type,
+        },
+      ];
       await update({ relationships });
       onClose();
     } catch (e) {
