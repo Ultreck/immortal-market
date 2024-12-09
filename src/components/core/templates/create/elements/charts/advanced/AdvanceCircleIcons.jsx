@@ -1,7 +1,8 @@
-import { cn, getPercentages } from '@/lib/utils.js';
+import { cn, formatChartValue } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { createElement } from 'react';
+import { TbUser } from 'react-icons/tb';
 
 const AdvanceCircleIcons = ({ element }) => {
   return <AdvanceCircleIconsContent element={element} />;
@@ -10,8 +11,6 @@ const AdvanceCircleIcons = ({ element }) => {
 AdvanceCircleIcons.propTypes = ElementPropTypes;
 
 export const AdvanceCircleIconsContent = ({ element }) => {
-  const percentages = getPercentages(element.config.data.slice(0, element.config.circles).map((item) => +item.value));
-
   return (
     <div
       style={{
@@ -37,40 +36,35 @@ export const AdvanceCircleIconsContent = ({ element }) => {
                 )}
                 style={{ backgroundColor: color }}
               >
-                {/*lorem*/}
-                {createElement(circle.icon, {
+                {createElement(circle.icon || TbUser, {
                   className: `scale-50 md:scale-100 text-red-500 mix-blend-difference`,
                   style: { fontSize: `${Math.max(16, 7 * (7 - index * 1.4))}px`, color: 'white' },
                 })}
-                {/*<i*/}
-                {/*  className={`scale-50 md:scale-100 text-red-500 mix-blend-difference ${circle.icon}`}*/}
-                {/*  style={{ fontSize: `${Math.max(16, 7 * (7 - index * 1.4))}px`, color: 'white' }}*/}
-                {/*/>*/}
               </div>
               {index % 2 === 0 ? (
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center text-center text-black">
                   <div className="mb-2">
                     <div
                       style={{
-                        fontSize: `${element.config.styles.valueSize}px`,
+                        fontSize: `${element.config.labelFontSize}px`,
                         fontWeight: element.config.styles.lFontWeight,
                         fontStyle: element.config.styles.lFontStyle,
-                        color: element.config.styles.valueAndLableColor,
+                        color: element.config.labelFontColor,
                       }}
                       className={`font-bold leading-none`}
                     >
-                      {percentages[index]}%
+                      {element.config.showValue && formatChartValue(circle.value, element)}
                     </div>
                     <p
                       style={{
-                        fontSize: `${element.config.styles.labelSize}px`,
+                        fontSize: `${element.config.labelFontSize}px`,
                         fontWeight: element.config.styles.lFontWeight,
                         fontStyle: element.config.styles.lFontStyle,
-                        color: element.config.styles.valueAndLableColor,
+                        color: element.config.labelFontColor,
                       }}
                       className={`text-sm  leading-none mt-1`}
                     >
-                      {circle.label}
+                      {element.config.showLabel && circle.label}
                     </p>
                   </div>
                   <div className="flex flex-col w-[1px] h-[20px] bg-red-900"></div>
@@ -81,25 +75,25 @@ export const AdvanceCircleIconsContent = ({ element }) => {
                   <div className="mt-2">
                     <div
                       style={{
-                        fontSize: `${element.config.styles.valueSize}px`,
+                        fontSize: `${element.config.labelFontSize}px`,
                         fontWeight: element.config.styles.lFontWeight,
                         fontStyle: element.config.styles.lFontStyle,
-                        color: element.config.styles.valueAndLableColor,
+                        color: element.config.labelFontColor,
                       }}
                       className={`font-bold leading-none`}
                     >
-                      {percentages[index]}%
+                      {element.config.showValue && formatChartValue(circle.value, element)}
                     </div>
                     <p
                       style={{
-                        fontSize: `${element.config.styles.labelSize}px`,
+                        fontSize: `${element.config.labelFontSize}px`,
                         fontWeight: element.config.styles.lFontWeight,
-                        color: element.config.styles.valueAndLableColor,
                         fontStyle: element.config.styles.lFontStyle,
+                        color: element.config.labelFontColor,
                       }}
                       className={`text-sm leading-none mt-1`}
                     >
-                      {circle.label}
+                      {element.config.showLabel && circle.label}
                     </p>
                   </div>
                 </div>

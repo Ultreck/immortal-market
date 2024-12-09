@@ -3,6 +3,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
 import { createElement, useEffect } from 'react';
+import { formatChartValue } from '@/lib/utils.js';
 
 const AdvanceShapes = ({ element }) => {
   return <AdvanceShapesContent element={element} />;
@@ -27,7 +28,7 @@ const classes = {
 };
 
 export const AdvanceShapesContent = ({ element }) => {
-  const { percentage, noOfShapes, isCountVisible, countFormat, icon1 } = element.config;
+  const { percentage, noOfShapes, isCountVisible, icon1 } = element.config;
   const n = Math.floor((percentage / 100) * noOfShapes);
   const icon = icons.find((icon) => icon.name === (icon1 || 'circle')).icon;
 
@@ -36,9 +37,11 @@ export const AdvanceShapesContent = ({ element }) => {
   return (
     <div className="space-y-6 w-full">
       {isCountVisible && (
-        <p className="text-5xl font-bold px-2" style={{ color: element.config.colors[0] }}>
-          {countFormat === 'percentage' && `${Math.round((n / noOfShapes) * 100)}%`}
-          {countFormat === 'fraction' && `${n}/${noOfShapes}`}
+        <p
+          className="font-bold px-2"
+          style={{ color: element.config.labelFontColor, fontSize: element.config.labelFontSize }}
+        >
+          {formatChartValue(noOfShapes, element)}
         </p>
       )}
       <div className={`grid ${classes.grid[noOfShapes] || classes.grid.default} gap-${element.config.gap}`}>

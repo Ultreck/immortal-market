@@ -3,6 +3,7 @@ import { Checkbox, Select, SelectItem, Slider, Tab, Tabs } from '@nextui-org/rea
 import { IconWithConfig } from './AdvancedPictogramShapesConfig';
 import { useState } from 'react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
+import ColorPicker from '@/components/ui/ColorPicker.jsx';
 
 const AdvanceShapesConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
@@ -113,7 +114,7 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
         </div>
       </Tab>
       <Tab key="style" title="Chart Style" className="text-base">
-        <div className="space-y-10">
+        <div className="space-y-4">
           <div>
             <Checkbox
               isSelected={element.config.isCountVisible}
@@ -122,28 +123,106 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
               Show Label
             </Checkbox>
           </div>
-          <div>
-            <Select
-              name="countFormat"
-              label="Count format"
-              variant="bordered"
-              labelPlacement="outside"
-              placeholder="Select one"
-              size="lg"
-              selectedKeys={element.config.countFormat ? [element.config.countFormat] : []}
-              onChange={(e) => onChange({ ...element, config: { ...element.config, countFormat: e.target.value } })}
-              disableEmptySelection={true}
-            >
-              <SelectItem key="fraction" classNames={{ title: 'text-base px-2' }}>
-                Fraction (n/10)
-              </SelectItem>
-              <SelectItem key="percentage" classNames={{ title: 'text-base px-2' }}>
-                Percentage (n%)
-              </SelectItem>
-            </Select>
-          </div>
+          {element.config.isCountVisible && (
+            <div className="border border-gray-700 p-4 rounded-2xl space-y-6">
+              <div>
+                <Select
+                  variant="bordered"
+                  size="lg"
+                  name="labelFormat"
+                  label="Label Format"
+                  labelPlacement="outside-left"
+                  classNames={{ value: 'px-2' }}
+                  placeholder="Select format"
+                  value={element.config.labelFormat || 'value'}
+                  onChange={(e) =>
+                    onChange({
+                      ...element,
+                      config: {
+                        ...element.config,
+                        labelFormat: e.target.value,
+                      },
+                    })
+                  }
+                >
+                  {[
+                    { key: 'value', name: 'Value' },
+                    { key: 'percentage', name: 'Percentage (%)' },
+                    { key: 'both', name: 'Both (Value, %)' },
+                    { key: 'currency', name: 'Currency' },
+                    { key: 'wholeNumber', name: 'Whole Number' },
+                    { key: 'decimal', name: 'Decimal' },
+                  ].map((type) => (
+                    <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                      {type.name}
+                    </SelectItem>
+                  ))}
+                </Select>
+              </div>
+              {element.config.labelFormat === 'currency' && (
+                <div>
+                  <Select
+                    variant="bordered"
+                    size="lg"
+                    name="currency"
+                    label="Select Currency"
+                    labelPlacement="outside-left"
+                    classNames={{ value: 'px-2' }}
+                    placeholder="Choose currency"
+                    value={element.config.selectedCurrency}
+                    onChange={(e) =>
+                      onChange({
+                        ...element,
+                        config: {
+                          ...element.config,
+                          selectedCurrency: e.target.value,
+                        },
+                      })
+                    }
+                  >
+                    {['N', '$', '€', '¥', '£'].map((currency) => (
+                      <SelectItem key={currency}>{currency}</SelectItem>
+                    ))}
+                  </Select>
+                </div>
+              )}
+              <div className="flex justify-between items-center">
+                <p>Label Font Color</p>
+                <ColorPicker
+                  color={element.config.labelFontColor}
+                  onChange={(color) => onChange({ ...element, config: { ...element.config, labelFontColor: color } })}
+                  trigger={
+                    <div
+                      tabIndex="0"
+                      className="w-8 h-8 p-[3px] rounded-full border border-transparent border-default-600"
+                    >
+                      <div
+                        style={{ backgroundColor: element.config.labelFontColor }}
+                        className="w-full h-full hover:brightness-125 rounded-full"
+                      />
+                    </div>
+                  }
+                />
+              </div>
+              <div className="flex items-center space-x-4">
+                <p className="text-base opacity-75 whitespace-nowrap">Label Font Size:</p>
+                <AutoCompleteNumberInput
+                  onChange={(v) =>
+                    onChange({
+                      ...element,
+                      config: { ...element.config, labelFontSize: Number(v) },
+                    })
+                  }
+                  value={element.config.labelFontSize || 40}
+                  min={1}
+                  max={100}
+                  ariaLabel="labelFontSize"
+                />
+              </div>
+            </div>
+          )}
           <div className="flex items-center space-x-4">
-            <p className="text-base opacity-75 whitespace-nowrap">Size of Shapes:</p>
+            <p className="text-base opacity-75 whitespace-nowrap">Shape Size:</p>
             <AutoCompleteNumberInput
               className="max-w-md"
               onChange={(v) =>

@@ -1,6 +1,7 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import { formatChartValue } from '@/lib/utils.js';
 
 const AdvanceLinearChart = ({ element }) => {
   return <AdvanceLinearChartContent element={element} />;
@@ -24,13 +25,15 @@ const AdvanceLinearChartContent = ({ element }) => {
             backgroundColor: element.config.colors[i],
           }}
         >
-          <div className="ml-auto relative">
-            <p className="mt-2 mb-3 mr-2 ">{item.label}</p>
+          <div className="ml-auto relative" style={{ color: element.config.labelFontColor }}>
+            <p style={{ fontSize: element.config.labelFontSize, lineHeight: '1' }} className="mt-2 mb-3 mr-2">
+              {item.label}
+            </p>
             <p
               style={{ fontSize: element.config.fontSize, lineHeight: '1' }}
               className="font-extrabold absolute right-[-10px] -bottom-[80px]"
             >
-              {item.value}
+              {formatChartValue(item.value, element)}
             </p>
           </div>
         </motion.div>

@@ -275,3 +275,22 @@ export const camelCaseToWords = (str) => {
     .replace(/^./, (char) => char.toUpperCase())
     .trim();
 };
+
+export const formatChartValue = (value, element) => {
+  switch (element.config.labelFormat) {
+    case 'value':
+      return value.toLocaleString();
+    case 'percentage':
+      return `${Math.round((value / 100) * 100)}%`;
+    case 'both':
+      return `${value.toLocaleString()} (${Math.round((value / 100) * 100)}%)`;
+    case 'currency':
+      return `${element.config.selectedCurrency || 'N'} ${value.toLocaleString()}`;
+    case 'wholeNumber':
+      return Math.round(value).toLocaleString();
+    case 'decimal':
+      return value.toLocaleString();
+    default:
+      return value;
+  }
+};

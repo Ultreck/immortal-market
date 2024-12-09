@@ -1,21 +1,22 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { motion } from 'framer-motion';
+import { formatChartValue } from '@/lib/utils.js';
 
 function AdvanceSemiMeter({ element }) {
   const radius = 50;
   const percentage = element.config.progress;
-  const circumference = radius * Math.PI; // Half of the full circumference for semi-circle
+  const circumference = radius * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="relative flex justify-center items-center">
+    <div className="relative flex justify-center items-center" style={{ height: element.height, width: element.width }}>
       <svg className="w-full h-48" viewBox="0 0 100 50">
-        <path d="M 0,50 A 50,50 0 0,1 100,50" stroke={element.config.colors[0]} strokeWidth="10" fill="transparent" />
+        <path d="M 0,50 A 50,50 0 0,1 100,60" stroke={element.config.colors[0]} strokeWidth="10" fill="transparent" />
       </svg>
 
       <svg className="w-full h-48 absolute" viewBox="0 0 100 50">
         <motion.path
-          d="M 0,50 A 50,50 0 0,1 100,50"
+          d="M 0,50 A 50,50 0 0,1 100,60"
           stroke={element.config.colors[1]}
           strokeWidth="10"
           fill="transparent"
@@ -27,7 +28,16 @@ function AdvanceSemiMeter({ element }) {
         />
       </svg>
 
-      <div className="absolute -bottom-1 text-8xl font-bold">{percentage}%</div>
+      <div
+        className="absolute -bottom-1 font-bold"
+        style={{
+          fontSize: element.config.labelFontSize,
+          color: element.config.labelFontColor,
+          lineHeight: '1',
+        }}
+      >
+        {formatChartValue(percentage, element)}
+      </div>
     </div>
   );
 }
@@ -35,4 +45,3 @@ function AdvanceSemiMeter({ element }) {
 AdvanceSemiMeter.propTypes = ElementPropTypes;
 
 export default AdvanceSemiMeter;
-
