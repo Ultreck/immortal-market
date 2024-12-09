@@ -57,4 +57,3 @@ const AdvanceCharts = ({ element, active, onChange }) => {
 AdvanceCharts.propTypes = ElementPropTypes;
 
 export default AdvanceCharts;
-
