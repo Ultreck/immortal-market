@@ -1,26 +1,22 @@
 import { RiAlertLine } from 'react-icons/ri';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import { Button } from '@nextui-org/react';
-import useTemplateStore from '@/store/template.js';
+import useProjectStore from '@/store/project.js';
 
 const DataNotConfiguredOverlay = () => {
   const { source } = useCurrentDesign();
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const openProjectModal = useProjectStore((state) => state.openModal);
 
   return (
     <>
       {!source?.selection && (
-        <div className="absolute inset-0 z-20 group hover:bg-default-50/90 transition-background flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity dark:text-white">
+        <div className="absolute inset-0 z-20 flex items-end bg-gradient-to-b from-transparent to-white/100 text-black py-12 opacity-0 hover:opacity-100 transition-all duration-300">
+          <div className="w-full flex items-center justify-center space-x-4">
             <RiAlertLine size="32" />
-            <p className="max-w-[200px] text-center mt-6">
+            <p className="max-w-[300px] ml-6">
               Data source not configured. Please configure the data source for this project to unlock the editor.
             </p>
-            <Button
-              onClick={() => updateTemplate({ isModifyReportOpen: true })}
-              radius="full"
-              className="mt-6 text-base px-4"
-            >
+            <Button onClick={() => openProjectModal(true)} radius="full" className="text-base px-4">
               Configure
             </Button>
           </div>

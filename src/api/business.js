@@ -298,6 +298,15 @@ export const useProcessData = (business, design) => {
   });
 };
 
+export const useGenerateCombinations = (business, design) => {
+  return useMutation({
+    mutationKey: ['business', business, 'designs', design, 'source'],
+    mutationFn: async () => {
+      return http.post(`/businesses/${business}/designs/${design}/source/combinations`);
+    },
+  });
+};
+
 export const useGetTableData = ({ business, design, table, page = 1, limit = 10 }) => {
   return useQuery({
     queryKey: ['business', business, 'designs', design, 'data', table, limit, page],

@@ -24,7 +24,7 @@ const Sidebar = ({ className }) => {
   const { user } = useAuth();
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
-  const { data: { design } = {} } = useGetDesign(business, id);
+  const { data: { design = {} } = {} } = useGetDesign(business, id);
 
   return (
     <div
@@ -93,7 +93,7 @@ const Sidebar = ({ className }) => {
               );
             })}
             <div className="flex-1"></div>
-            {design.type === 'project' && (
+            {design?.type === 'project' && (
               <div className="space-y-4">
                 {[{ icon: RiSettings2Line, title: 'Project', key: 'project' }].map((element) => {
                   const active = tab === element.key;

@@ -17,7 +17,6 @@ const TableDetails = ({ table }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
       transition={{ duration: 0.2 }}
-      className="w-full overflow-hidden px-12 py-8"
     >
       <Tabs aria-label="Table details" radius="full" variant="bordered" color="primary" classNames={{ panel: 'pt-5' }}>
         <Tab key="columns" title={`Columns (${table.columns.length})`} className="text-base">
@@ -26,9 +25,11 @@ const TableDetails = ({ table }) => {
         <Tab key="records" title="Records" className="text-base">
           <TableRecords table={table} />
         </Tab>
-        <Tab key="relationships" title={`Relationships (${relationships.length})`} className="text-base">
-          <TableRelationships table={table} />
-        </Tab>
+        {source.tables.length > 1 && (
+          <Tab key="relationships" title={`Relationships (${relationships.length})`} className="text-base">
+            <TableRelationships table={table} />
+          </Tab>
+        )}
       </Tabs>
     </motion.div>
   );

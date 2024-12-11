@@ -1,7 +1,7 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 import { shallow } from 'zustand/shallow';
 
-const value = {
+const initial = {
   ready: false,
   id: null,
   pages: [],
@@ -17,14 +17,12 @@ const value = {
   commentsTargetId: null,
   isCommentsVisible: true,
   openTool: null,
-  isModifyReportOpen: false,
   isTransitionOpen: false,
-  isManageDataOpen: false,
 };
 
 const useTemplateStore = createWithEqualityFn(
   (set, get) => ({
-    template: value,
+    template: initial,
     addUndoHistory: () => {
       set((state) => {
         return {
@@ -254,7 +252,7 @@ const useTemplateStore = createWithEqualityFn(
     },
     reset: () => {
       set(() => ({
-        template: value,
+        template: initial,
       }));
     },
   }),

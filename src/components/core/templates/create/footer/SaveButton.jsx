@@ -19,7 +19,7 @@ const SaveButton = () => {
   const id = useTemplateStore((state) => state.template.id);
   const pages = useTemplateStore((state) => state.template.pages);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(business, id);
-  const { data: { design } = {} } = useGetDesign(business, id);
+  const { data: { design = {} } = {} } = useGetDesign(business, id);
   const [cache, setCache] = useState(0);
 
   const handleSave = useCallback(async () => {

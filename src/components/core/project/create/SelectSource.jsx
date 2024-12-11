@@ -1,10 +1,11 @@
-import { Card } from '@nextui-org/react';
+import { Button, Card, Spinner } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import Title from '../../shared/Title.jsx';
 import {
   TbBrandGoogleDrive,
   TbBrandMongodb,
   TbBrandMysql,
+  TbChevronLeft,
   TbDatabase,
   TbFileExcel,
   TbFileTypeCsv,
@@ -13,13 +14,18 @@ import {
   TbJson,
   TbLink,
 } from 'react-icons/tb';
-import useCreateProjectStore from '@/store/create-project.js';
+import useProjectStore from '@/store/project.js';
 import { useState } from 'react';
 import UploadFiles from '@/components/core/project/create/UploadFiles.jsx';
 import { cn } from '@/lib/utils.js';
 import ConnectSql from '@/components/core/project/create/ConnectSql.jsx';
 import ConnectMongodb from '@/components/core/project/create/ConnectMongodb.jsx';
 import { SiAmazondynamodb, SiMariadb, SiOracle, SiPostgresql } from 'react-icons/si';
+import { useToast } from '@/hooks/use-toast.jsx';
+import { useNavigate } from 'react-router-dom';
+import useBusiness from '@/hooks/use-business.js';
+import { useCreateProject } from '@/api/business.js';
+import useTemplateStore from '@/store/template.js';
 
 const sources = [
   {
@@ -185,9 +191,16 @@ const sources = [
 ];
 
 const SelectSource = ({ onNext, onPrev }) => {
-  const data = useCreateProjectStore((state) => state.data.source);
-  const updateData = useCreateProjectStore((state) => state.updateData);
+  const toast = useToast();
+  const navigate = useNavigate();
+  const { id: business } = useBusiness();
+  const data = useProjectStore((state) => state.data.source);
+  const updateData = useProjectStore((state) => state.updateData);
   const [view, setView] = useState(data.source || 'options');
+  const { mutateAsync: create, isPending: isCreateDesignLoading } = useCreateProject(business);
+  const template = useProjectStore((state) => state.data.template);
+  const files = useProjectStore((state) => state.data.files);
+  const updateTemplateStore = useTemplateStore((state) => state.updateTemplate);
 
   const handleClick = (source) => {
     const payload = { source: source.key };
@@ -201,39 +214,76 @@ const SelectSource = ({ onNext, onPrev }) => {
     setView(source.view);
   };
 
+  const handleCreateProject = async () => {
+    try {
+      const fd = new FormData();
+      files.forEach((file) => fd.append('files', file));
+      fd.append('title', template ? template.title : 'Untitled');
+      fd.append('description', template ? template.description : '');
+      fd.append('template', template ? template._id : '');
+      const res = await create(fd);
+      onNext();
+      updateTemplateStore({ id: res.data.design._id });
+      navigate(`/designs/${res.data.design._id}/edit`);
+    } catch (e) {
+      toast.error(e?.response?.data?.message || e.message);
+    }
+  };
+
+  const onSubmit = async () => {
+    await handleCreateProject();
+  };
+
   return (
-    <>
-      {view === 'options' && (
+    <div className="h-full flex flex-col">
+      {isCreateDesignLoading ? (
+        <div className="flex flex-col items-center justify-center h-full">
+          <Spinner size="lg" />
+          <p className="mt-8">Creating project..</p>
+        </div>
+      ) : (
         <>
-          <Title
-            title="Connect your data"
-            sub="Choose a data source below to continue"
-            className="mb-10"
-            onBack={onPrev}
-          />
-          <div className="grid grid-cols-5 gap-4">
-            {sources.map((source) => (
-              <Card
-                key={source.key}
-                isPressable
-                onPress={() => handleClick(source)}
-                radius="lg"
-                className={cn(
-                  'shadow-none border-2 border-default-200 dark:border-default-200/70 hover:bg-default-100 px-10 py-6 flex items-center justify-center',
-                  { disabled: source.disabled }
-                )}
-              >
-                {source.icon}
-                <div className="text-md font-medium mt-3 leading-tight">{source.name}</div>
-              </Card>
-            ))}
-          </div>
+          {view === 'options' && (
+            <>
+              <div className="flex-1 overflow-y-auto px-12 py-10">
+                <Title title="Connect your data" sub="Choose a data source below to continue" className="mb-10" />
+                <div className="grid grid-cols-5 gap-4">
+                  {sources.map((source) => (
+                    <Card
+                      key={source.key}
+                      isPressable
+                      onPress={() => handleClick(source)}
+                      radius="lg"
+                      className={cn(
+                        'shadow-none border-2 border-default-200 dark:border-default-200/70 hover:bg-default-100 px-10 py-6 flex items-center justify-center',
+                        { disabled: source.disabled }
+                      )}
+                    >
+                      {source.icon}
+                      <div className="text-md font-medium mt-3 leading-tight">{source.name}</div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+              <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
+                <Button
+                  onClick={onPrev}
+                  radius="full"
+                  variant="bordered"
+                  className="text-base px-6"
+                  startContent={<TbChevronLeft size="20" />}
+                >
+                  Back
+                </Button>
+              </div>
+            </>
+          )}
+          {view === 'files' && <UploadFiles onPrev={() => setView('options')} onNext={onSubmit} />}
+          {view === 'sql' && <ConnectSql onPrev={() => setView('options')} onNext={onSubmit} />}
+          {view === 'mongodb' && <ConnectMongodb onPrev={() => setView('options')} onNext={onSubmit} />}
         </>
       )}
-      {view === 'files' && <UploadFiles onPrev={() => setView('options')} onNext={onNext} />}
-      {view === 'sql' && <ConnectSql onPrev={() => setView('options')} onNext={onNext} />}
-      {view === 'mongodb' && <ConnectMongodb onPrev={() => setView('options')} />}
-    </>
+    </div>
   );
 };
 

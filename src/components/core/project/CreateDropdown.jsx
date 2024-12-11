@@ -1,10 +1,10 @@
 import { Button, cn, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/react';
 import { RiAddLine, RiFileAddLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
-import useGlobalStore from '@/store/global.js';
+import useProjectStore from '@/store/project.js';
 
 const CreateDropdown = ({ className, mini = false }) => {
-  const updateData = useGlobalStore((state) => state.updateData);
+  const openProjectModal = useProjectStore((state) => state.openModal);
 
   return (
     <div className={className}>
@@ -29,7 +29,7 @@ const CreateDropdown = ({ className, mini = false }) => {
           variant="faded"
           aria-label="Dropdown menu with description"
           onAction={(key) => {
-            if (key === 'project') updateData({ isCreateProjectModalOpen: true });
+            if (key === 'project') openProjectModal();
           }}
         >
           <DropdownSection classNames={{ base: 'p-1', heading: 'px-2' }}>

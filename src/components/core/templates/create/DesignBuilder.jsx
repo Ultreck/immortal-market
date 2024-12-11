@@ -6,10 +6,7 @@ import { roundToNearestTen } from '@/lib/utils.js';
 import StatusBar from '@/components/core/templates/create/footer/StatusBar.jsx';
 import Sidebar from '@/components/core/templates/create/sidebar/Sidebar.jsx';
 import CommentModal from './comment/CommentsModal.jsx';
-import ModifyReportModal from '@/components/core/templates/create/project/modify-report/ModifyReportModal.jsx';
 import TransitionModal from '@/components/core/templates/create/transition/TransitionModal.jsx';
-import ManageDataModal from '@/components/core/templates/create/project/manage-data/ManageDataModal.jsx';
-import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const getElementDistanceFromTop = (element) => {
   let distance = 0;
@@ -29,7 +26,6 @@ const DesignBuilder = () => {
   const getElementPage = useTemplateStore((state) => state.getElementPage);
   const addElements = useTemplateStore((state) => state.addElements);
   const updateElements = useTemplateStore((state) => state.updateElements);
-  const { design } = useCurrentDesign();
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent, collisions } = event;
@@ -86,12 +82,6 @@ const DesignBuilder = () => {
       </div>
 
       <CommentModal />
-      {design.type === 'project' && (
-        <>
-          <ModifyReportModal />
-          <ManageDataModal />
-        </>
-      )}
     </DndContext>
   );
 };

@@ -1,132 +1,80 @@
-import { createElement, useState } from 'react';
+import { createElement } from 'react';
 import SelectSource from './create/SelectSource.jsx';
 import Drawer from '@/components/ui/Drawer.jsx';
-import useGlobalStore from '@/store/global.js';
-import PreviewFiles from './create/PreviewFiles.jsx';
-import GenerateReport from './GenerateReport.jsx';
-import PreparingData from './PreparingData.jsx';
-import { TbDatabase, TbEye, TbReport, TbUpload } from 'react-icons/tb';
+import { TbDatabase, TbTemplate } from 'react-icons/tb';
 import Stepper from '@/components/ui/Stepper.jsx';
 import SelectTemplate from '@/components/core/project/create/SelectTemplate.jsx';
-import { useCreateProject } from '@/api/business.js';
-import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
-import { useNavigate } from 'react-router-dom';
-import useCreateProjectStore from '@/store/create-project.js';
-import { Spinner } from '@nextui-org/react';
+import useProjectStore from '@/store/project.js';
+import { LuCombine, LuWorkflow } from 'react-icons/lu';
+import ModelData from '@/components/core/project/create/ModelData.jsx';
+import ModifyReport from '@/components/core/templates/create/project/modify-report/ModifyReport.jsx';
 
 const steps = [
   {
     key: 'template',
     title: 'Select template',
-    icon: <TbDatabase size="16" />,
+    icon: <TbTemplate size="18" />,
     element: SelectTemplate,
   },
   {
     key: 'data-source',
-    title: 'Data Source',
-    icon: <TbDatabase size="16" />,
+    title: 'Data source',
+    icon: <TbDatabase size="18" />,
     element: SelectSource,
   },
   {
-    key: 'preview-data',
-    title: 'Preview Data',
-    icon: <TbEye size="16" />,
-    element: PreviewFiles,
-    disabled: true,
+    key: 'model',
+    title: 'Data model',
+    icon: <LuWorkflow size="18" />,
+    element: ModelData,
   },
   {
-    key: 'generate-report',
-    title: 'Generate Report',
-    icon: <TbReport size="16" />,
-    element: GenerateReport,
-    disabled: true,
-  },
-  {
-    key: 'report-staging',
-    title: 'Report Staging',
-    icon: <TbUpload size="16" />,
-    element: PreparingData,
-    disabled: true,
+    key: 'modify-report',
+    title: 'Modify report',
+    icon: <LuCombine size="16" />,
+    element: ModifyReport,
   },
 ].filter((i) => !i.disabled);
 
 const CreateProjectModal = () => {
-  const toast = useToast();
-  const navigate = useNavigate();
-  const { id: business } = useBusiness();
-  const [step, setStep] = useState(steps[0].key);
-  const isCreateProjectModalOpen = useGlobalStore((state) => state.data.isCreateProjectModalOpen);
-  const updateGlobalStore = useGlobalStore((state) => state.updateData);
-  const { mutateAsync: create, isPending: isCreateDesignLoading } = useCreateProject(business);
-  const template = useCreateProjectStore((state) => state.data.template);
-  const files = useCreateProjectStore((state) => state.data.files);
-  const updateCreateProjectStore = useCreateProjectStore((state) => state.updateData);
+  const step = useProjectStore((state) => state.data.step);
+  const isOpen = useProjectStore((state) => state.data.isOpen);
+  const updateProjectStore = useProjectStore((state) => state.updateData);
 
   const current = steps.find((s) => s.key === step);
 
   const gotoNextStep = () => {
     const index = steps.findIndex((s) => s.key === step);
     const next = steps[index + 1];
-    if (next) return setStep(next.key);
-    onSubmit();
+    if (next) return updateProjectStore({ step: next.key });
+    handleClose();
   };
 
   const gotoPreviousStep = () => {
     const index = steps.findIndex((s) => s.key === step);
     const prev = steps[index - 1];
-    if (prev) setStep(prev.key);
-  };
-
-  const handleCreateProject = async () => {
-    try {
-      const fd = new FormData();
-      files.forEach((file) => fd.append('files', file));
-      fd.append('title', template ? template.title : 'Untitled');
-      fd.append('description', template ? template.description : '');
-      fd.append('template', template ? template._id : '');
-      const res = await create(fd);
-      handleClose();
-      navigate(`/designs/${res.data.design._id}/edit`);
-    } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
-    }
-  };
-
-  const onSubmit = async () => {
-    await handleCreateProject();
+    if (prev) updateProjectStore({ step: prev.key });
   };
 
   const handleClose = () => {
-    setStep('template');
-    updateCreateProjectStore({ template: null });
-    updateGlobalStore({ isCreateProjectModalOpen: false });
+    updateProjectStore({ step: 'template', template: null, isOpen: false });
   };
 
   return (
-    <Drawer isOpen={isCreateProjectModalOpen} onClose={handleClose} width={1000} padding={false}>
-      <div className="grid grid-cols-[280px_1fr] h-full">
+    <Drawer isOpen={isOpen} onClose={handleClose} width={1100} padding={false}>
+      <div className="grid grid-cols-[260px_1fr] h-full">
         <div className="border-r border-default-200 dark:border-default-100 py-12 px-12 h-full bg-[#f4f5f6] dark:bg-[#0b161f]">
           <Stepper
             current={step}
             steps={steps}
-            onChange={(key) => setStep(key)}
+            onChange={(key) => updateProjectStore({ step: key })}
             classNames={{ circle: 'ring-[#f4f5f6] dark:ring-[#0b161f]' }}
           />
         </div>
-        {isCreateDesignLoading ? (
-          <div className="py-40 flex flex-col items-center justify-center">
-            <Spinner size="lg" />
-            <p className="mt-8">Creating project..</p>
+        {!!current && (
+          <div className="flex flex-col overflow-y-auto h-full">
+            {createElement(current.element, { onNext: gotoNextStep, onPrev: gotoPreviousStep, onClose: handleClose })}
           </div>
-        ) : (
-          <>
-            {!!current && (
-              <div className="flex flex-col overflow-y-auto px-12 py-10">
-                {createElement(current.element, { onNext: gotoNextStep, onPrev: gotoPreviousStep })}
-              </div>
-            )}
-          </>
         )}
       </div>
     </Drawer>

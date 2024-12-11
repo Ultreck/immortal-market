@@ -14,7 +14,7 @@ const TabThumbnail = () => {
   const activePage = useTemplateStore((state) => state.template.activePage);
   const { id } = useParams();
   const { id: business } = useBusiness();
-  const { data: { design } = {} } = useGetDesign(business, id);
+  const { data: { design = {} } = {} } = useGetDesign(business, id);
   const addPage = useTemplateStore((state) => state.addPage);
 
   const handleClick = (page) => {
@@ -35,7 +35,7 @@ const TabThumbnail = () => {
         <div className="flex items-center gap-2 mx-auto w-max">
           {pages.map((page, i) => {
             const active = activePage === page.id;
-            const thumbnail = design.thumbnails.find((t) => t.includes(page.id));
+            const thumbnail = design?.thumbnails.find((t) => t.includes(page.id));
             return (
               <Reorder.Item value={page.id} key={page.id}>
                 <TabThumbnailItem

@@ -4,7 +4,6 @@ import { shallow } from 'zustand/shallow';
 const useGlobalStore = createWithEqualityFn(
   (set) => ({
     data: {
-      isCreateProjectModalOpen: false,
       isChatModalOpen: false,
     },
     updateData: (payload) => set((state) => ({ data: { ...state.data, ...payload } })),

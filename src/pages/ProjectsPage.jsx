@@ -2,11 +2,11 @@ import { useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { Input, Skeleton } from '@nextui-org/react';
 import { RiAddLine } from 'react-icons/ri';
-import useGlobalStore from '@/store/global.js';
 import DesignCard from '@/components/core/project/DesignCard.jsx';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import { TbSearch } from 'react-icons/tb';
 import { cn } from '@/lib/utils.js';
+import useProjectStore from '@/store/project.js';
 
 const ProjectsPage = () => {
   const { id: business } = useBusiness();
@@ -15,7 +15,7 @@ const ProjectsPage = () => {
     type: 'project',
     limit: 1000,
   });
-  const updateData = useGlobalStore((state) => state.updateData);
+  const openProjectModal = useProjectStore((state) => state.openModal);
 
   return (
     <div className="mb-10">
@@ -53,7 +53,7 @@ const ProjectsPage = () => {
         ) : (
           <div className="grid grid-cols-5 gap-4 md:gap-8">
             <button
-              onClick={() => updateData({ isCreateProjectModalOpen: true })}
+              onClick={() => openProjectModal()}
               className={cn(
                 'flex items-center justify-center p-5 bg-black/5 dark:bg-white/5 hover:bg-black/[.06] hover:dark:bg-white/[.07] rounded-2xl aspect-square cursor-pointer'
               )}

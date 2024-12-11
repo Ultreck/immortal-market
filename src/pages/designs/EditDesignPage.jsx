@@ -47,17 +47,18 @@ const EditDesignPage = () => {
   const reset = useTemplateStore((state) => state.reset);
   const { id: business } = useBusiness();
   const ready = useTemplateStore((state) => state.template.ready);
+  const id = useTemplateStore((state) => state.template.id);
   const { design, isDesignLoading, isSourceLoading } = useCurrentDesign();
   const loaded = useRef(false);
 
   useEffect(() => {
-    updateTemplate({ id: params.id });
-  }, [params.id, updateTemplate]);
+    if (params.id !== id) updateTemplate({ id: params.id });
+  }, [params.id, id, updateTemplate]);
 
   useEffect(() => {
     if (design && !loaded.current) {
-      let payload = { ready: true };
       loaded.current = true;
+      let payload = { ready: true };
       if (design?.data?.pages?.length) payload.pages = patchPages(design.data.pages);
       else payload.pages = initPages();
       payload = {
@@ -71,7 +72,9 @@ const EditDesignPage = () => {
 
   useUnmount(() => {
     reset();
-    qc.removeQueries({ queryKey: ['business', business, 'designs'] });
+    setTimeout(() => {
+      qc.removeQueries({ queryKey: ['business', business, 'designs'] });
+    });
   });
 
   return (
@@ -82,7 +85,7 @@ const EditDesignPage = () => {
           <p className="mt-6">Loading design..</p>
         </div>
       ) : (
-        <>{ready && <DesignBuilder />}</>
+        <>{ready && design && <DesignBuilder />}</>
       )}
     </>
   );

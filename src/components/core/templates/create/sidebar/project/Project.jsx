@@ -1,22 +1,18 @@
-import { TbClock, TbDatabaseCog, TbReportAnalytics } from 'react-icons/tb';
-import useTemplateStore from '@/store/template.js';
+import { TbClock, TbDatabaseCog } from 'react-icons/tb';
 import { useParams } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
 import { useGetDesign } from '@/api/business.js';
 import { formatDistanceToNow } from 'date-fns';
+import useProjectStore from '@/store/project.js';
 
 const Project = () => {
   const { id } = useParams();
   const { id: business } = useBusiness();
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const { data: { design } = {} } = useGetDesign(business, id);
+  const openProjectModal = useProjectStore((state) => state.openModal);
+  const { data: { design = {} } = {} } = useGetDesign(business, id);
 
   const handleModifyReport = () => {
-    updateTemplate({ isModifyReportOpen: true });
-  };
-
-  const handleManageData = () => {
-    updateTemplate({ isManageDataOpen: true });
+    openProjectModal(true);
   };
 
   return (
@@ -34,19 +30,13 @@ const Project = () => {
       <div className="space-y-3 mt-6">
         <div
           onClick={handleModifyReport}
-          className="flex items-center space-x-3 text-center leading-tight bg-default-900/5 hover:bg-default-900/10 px-6 py-3 rounded-2xl cursor-pointer"
+          className="flex items-center space-x-3 leading-tight bg-warning-400 text-black hover:brightness-110 px-5 py-4 rounded-2xl cursor-pointer"
           tabIndex={0}
         >
-          <TbReportAnalytics size="24" />
-          <span className="text-base">Modify report</span>
-        </div>
-        <div
-          onClick={handleManageData}
-          className="flex items-center space-x-3 text-center leading-tight bg-default-900/5 hover:bg-default-900/10 px-6 py-3 rounded-2xl cursor-pointer"
-          tabIndex={0}
-        >
-          <TbDatabaseCog size="24" />
-          <span className="text-base">Manage data</span>
+          <div>
+            <TbDatabaseCog size="32" />
+          </div>
+          <span className="text-base text-left leading-[1.2]">Click here to finish setting up your data</span>
         </div>
       </div>
     </div>

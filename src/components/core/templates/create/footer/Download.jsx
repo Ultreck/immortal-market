@@ -17,7 +17,7 @@ const Download = ({ onBack }) => {
   const selectElements = useTemplateStore((state) => state.selectElements);
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
-  const { data: { design } = {} } = useGetDesign(business, id);
+  const { data: { design = {} } = {} } = useGetDesign(business, id);
   const [ext, setExt] = useState('');
 
   const handleDownload = useCallback(async () => {

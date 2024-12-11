@@ -19,7 +19,7 @@ import {
 } from 'react-icons/tb';
 import { SiAmazondynamodb, SiMariadb, SiOracle, SiPostgresql } from 'react-icons/si';
 import { cn } from '@/lib/utils.js';
-import useGlobalStore from '@/store/global.js';
+import useProjectStore from '@/store/project.js';
 
 const gradients = [
   'bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)]',
@@ -34,7 +34,7 @@ const gradients = [
 
 const Banner = () => {
   const [view, setView] = useState('design');
-  const updateData = useGlobalStore((state) => state.updateData);
+  const openProjectModal = useProjectStore((state) => state.openModal);
 
   return (
     <>
@@ -102,7 +102,7 @@ const Banner = () => {
               <h2 className="font-semibold text-[1.4rem] mb-6">Create new design</h2>
               <div className="grid grid-cols-5 gap-6">
                 <div
-                  onClick={() => updateData({ isCreateProjectModalOpen: true })}
+                  onClick={() => openProjectModal()}
                   className="rounded-3xl px-5 py-5 bg-default-100 dark:bg-default-50 flex items-center gap-2 hover:!bg-default-200/60 cursor-pointer"
                 >
                   <div>
@@ -113,7 +113,7 @@ const Banner = () => {
                   <p className="leading-tight">Report</p>
                 </div>
                 <div
-                  onClick={() => updateData({ isCreateProjectModalOpen: true })}
+                  onClick={() => openProjectModal()}
                   className="rounded-3xl px-5 py-5 bg-default-100 dark:bg-default-50 flex items-center gap-2 hover:!bg-default-200/60 cursor-pointer"
                 >
                   <div>
@@ -124,7 +124,7 @@ const Banner = () => {
                   <p className="leading-tight">Chart</p>
                 </div>
                 <div
-                  onClick={() => updateData({ isCreateProjectModalOpen: true })}
+                  onClick={() => openProjectModal()}
                   className="rounded-3xl px-5 py-5 bg-default-100 dark:bg-default-50 flex items-center gap-2 hover:!bg-default-200/60 cursor-pointer"
                 >
                   <div>
@@ -135,7 +135,7 @@ const Banner = () => {
                   <p className="leading-tight">Presentation</p>
                 </div>
                 <div
-                  onClick={() => updateData({ isCreateProjectModalOpen: true })}
+                  onClick={() => openProjectModal()}
                   className="rounded-3xl px-5 py-5 bg-default-100 dark:bg-default-50 flex items-center gap-2 hover:!bg-default-200/60 cursor-pointer"
                 >
                   <div>
@@ -146,7 +146,7 @@ const Banner = () => {
                   <p className="leading-tight">Infographic</p>
                 </div>
                 <div
-                  onClick={() => updateData({ isCreateProjectModalOpen: true })}
+                  onClick={() => openProjectModal()}
                   className="rounded-3xl px-5 py-5 bg-default-100 dark:bg-default-50 flex items-center gap-2 hover:!bg-default-200/60 cursor-pointer"
                 >
                   <div>

@@ -13,7 +13,7 @@ const DesignTitle = () => {
   const qc = useQueryClient();
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
-  const { data: { design } = {} } = useGetDesign(business, id);
+  const { data: { design = {} } = {} } = useGetDesign(business, id);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(business, id);
   const [value, setValue] = useState('');
   const [isEditing, setIsEditing] = useState(false);
