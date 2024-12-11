@@ -1,18 +1,14 @@
 import { TbClock, TbDatabaseCog } from 'react-icons/tb';
-import { useParams } from 'react-router-dom';
-import useBusiness from '@/hooks/use-business.js';
-import { useGetDesign } from '@/api/business.js';
 import { formatDistanceToNow } from 'date-fns';
 import useProjectStore from '@/store/project.js';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const Project = () => {
-  const { id } = useParams();
-  const { id: business } = useBusiness();
+  const { design, source } = useCurrentDesign();
   const openProjectModal = useProjectStore((state) => state.openModal);
-  const { data: { design = {} } = {} } = useGetDesign(business, id);
 
   const handleModifyReport = () => {
-    openProjectModal(true);
+    openProjectModal({ restore: true, source });
   };
 
   return (

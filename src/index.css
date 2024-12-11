@@ -51,7 +51,7 @@ input:-webkit-autofill {
 }
 
 .container {
-  @apply mx-auto max-w-[1150px] px-4;
+  @apply mx-auto max-w-[1150px];
 }
 
 .card-shadow {

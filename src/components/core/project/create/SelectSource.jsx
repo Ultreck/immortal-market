@@ -26,6 +26,7 @@ import { useNavigate } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
 import { useCreateProject } from '@/api/business.js';
 import useTemplateStore from '@/store/template.js';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const sources = [
   {
@@ -194,24 +195,24 @@ const SelectSource = ({ onNext, onPrev }) => {
   const toast = useToast();
   const navigate = useNavigate();
   const { id: business } = useBusiness();
-  const data = useProjectStore((state) => state.data.source);
   const updateData = useProjectStore((state) => state.updateData);
-  const [view, setView] = useState(data.source || 'options');
+  const [view, setView] = useState('options');
   const { mutateAsync: create, isPending: isCreateDesignLoading } = useCreateProject(business);
   const template = useProjectStore((state) => state.data.template);
   const files = useProjectStore((state) => state.data.files);
   const updateTemplateStore = useTemplateStore((state) => state.updateTemplate);
+  const { design } = useCurrentDesign();
 
-  const handleClick = (source) => {
-    const payload = { source: source.key };
-    if (source.view === 'files') {
-      payload.type = source.key;
+  const handleClick = (item) => {
+    const payload = { source: item.key };
+    if (item.view === 'files') {
+      payload.type = item.key;
     }
-    if (source.view === 'sql') {
-      payload.credentials = { type: source.key };
+    if (item.view === 'sql') {
+      payload.credentials = { type: item.key };
     }
     updateData(payload);
-    setView(source.view);
+    setView(item.view);
   };
 
   const handleCreateProject = async () => {
@@ -221,6 +222,7 @@ const SelectSource = ({ onNext, onPrev }) => {
       fd.append('title', template ? template.title : 'Untitled');
       fd.append('description', template ? template.description : '');
       fd.append('template', template ? template._id : '');
+      if (design) fd.append('design', design._id);
       const res = await create(fd);
       onNext();
       updateTemplateStore({ id: res.data.design._id });
@@ -239,7 +241,7 @@ const SelectSource = ({ onNext, onPrev }) => {
       {isCreateDesignLoading ? (
         <div className="flex flex-col items-center justify-center h-full">
           <Spinner size="lg" />
-          <p className="mt-8">Creating project..</p>
+          <p className="mt-8">Preparing data..</p>
         </div>
       ) : (
         <>
@@ -265,17 +267,19 @@ const SelectSource = ({ onNext, onPrev }) => {
                   ))}
                 </div>
               </div>
-              <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
-                <Button
-                  onClick={onPrev}
-                  radius="full"
-                  variant="bordered"
-                  className="text-base px-6"
-                  startContent={<TbChevronLeft size="20" />}
-                >
-                  Back
-                </Button>
-              </div>
+              {!design && (
+                <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
+                  <Button
+                    onClick={onPrev}
+                    radius="full"
+                    variant="bordered"
+                    className="text-base px-6"
+                    startContent={<TbChevronLeft size="20" />}
+                  >
+                    Back
+                  </Button>
+                </div>
+              )}
             </>
           )}
           {view === 'files' && <UploadFiles onPrev={() => setView('options')} onNext={onSubmit} />}

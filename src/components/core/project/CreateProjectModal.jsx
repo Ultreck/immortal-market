@@ -17,7 +17,7 @@ const steps = [
     element: SelectTemplate,
   },
   {
-    key: 'data-source',
+    key: 'source',
     title: 'Data source',
     icon: <TbDatabase size="18" />,
     element: SelectSource,

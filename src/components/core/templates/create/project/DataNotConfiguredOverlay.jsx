@@ -16,7 +16,11 @@ const DataNotConfiguredOverlay = () => {
             <p className="max-w-[300px] ml-6">
               Data source not configured. Please configure the data source for this project to unlock the editor.
             </p>
-            <Button onClick={() => openProjectModal(true)} radius="full" className="text-base px-4">
+            <Button
+              onClick={() => openProjectModal({ restore: true, source })}
+              radius="full"
+              className="text-base px-4"
+            >
               Configure
             </Button>
           </div>

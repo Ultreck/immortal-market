@@ -15,10 +15,10 @@ const useProjectStore = createWithEqualityFn(
   (set) => ({
     data: initial,
     updateData: (payload) => set((state) => ({ data: { ...state.data, ...payload } })),
-    openModal: (restore = false) => {
+    openModal: ({ restore = false, source } = {}) => {
       set((state) => {
         if (restore) {
-          return { data: { ...state.data, isOpen: true, step: 'model' } };
+          return { data: { ...state.data, isOpen: true, step: source ? 'model' : 'source' } };
         } else {
           return { data: { ...initial, isOpen: true, step: 'template' } };
         }
