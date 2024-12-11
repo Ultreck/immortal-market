@@ -11,13 +11,14 @@ import {
 } from 'react-icons/hi2';
 import { RiUser2Fill, RiUser2Line } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 
 const SettingsLayout = () => {
   const { business } = useBusiness();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const items = [
     {
@@ -74,13 +75,12 @@ const SettingsLayout = () => {
                 wrapper: 'ml-2',
               }}
             />
-            <Listbox classNames={{ list: 'space-y-2', base: 'p-0' }}>
+            <Listbox classNames={{ list: 'space-y-2', base: 'p-0' }} onAction={(key) => navigate(`${key}`)}>
               {items.map((item) => {
                 const active = item.href === pathname;
                 return (
                   <ListboxItem
-                    key={item.name}
-                    href={item.href}
+                    key={item.href}
                     classNames={{
                       base: cn('px-5 py-2.5 rounded-full', { 'bg-default-200': active }),
                       title: cn('text-base flex items-center', { 'font-semibold': active }),
