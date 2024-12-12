@@ -33,20 +33,40 @@ export const AdvanceFunnelChartContent = ({ element }) => {
               sort: 'descending',
               gap: 6,
               label: {
-                show: true,
+                show: element.config.showLabel,
                 position: 'inside',
-                fontSize: element.config.styles.labelSize,
+                fontSize: element.config.labelFontSize,
                 fontWeight: element.config.styles.lFontWeight,
                 fontStyle: element.config.styles.lFontStyle,
-                color: element.config.styles.valueAndLableColor,
-              },
-              labelLine: {
-                length: 10,
-                lineStyle: {
-                  width: 1,
-                  type: 'solid',
+                color: element.config.labelFontColor,
+                formatter: (params) => {
+                  const total = option.series[0].data.reduce((sum, entry) => sum + entry.value, 0);
+                  const value = params.value;
+                  switch (element.config.labelFormat) {
+                    case 'value':
+                      return value.toLocaleString();
+                    case 'percentage':
+                      return `${((value / total) * 100).toFixed(1)}%`;
+                    case 'both':
+                      return `${value.toLocaleString()} (${((value / total) * 100).toFixed(1)}%)`;
+                    case 'currency':
+                      return `${element.config.selectedCurrency} ${value.toLocaleString()}`;
+                    case 'wholeNumber':
+                      return Math.round(value).toLocaleString();
+                    case 'decimal':
+                      return value.toLocaleString();
+                    default:
+                      return value;
+                  }
                 },
               },
+              // labelLine: {
+              //   length: 10,
+              //   lineStyle: {
+              //     width: 1,
+              //     type: 'solid',
+              //   },
+              // },
               itemStyle: {
                 borderColor: '#fff',
                 borderWidth: 1,
@@ -68,7 +88,7 @@ export const AdvanceFunnelChartContent = ({ element }) => {
     return () => {
       if (chart) chart.dispose();
     };
-  }, [element.config.data, element.config.colors, element.width, element.height, element.config.styles]);
+  }, [element]);
 
   return (
     <div
