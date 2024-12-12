@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 
 const ModifyData = ({ element, onChange, onBack }) => {
+  console.log({ element });
   const handleChange = (updatedItem) => {
     const updatedData = element.config.data.map((item, idx) =>
       idx === updatedItem.index ? { ...item, ...updatedItem } : item
@@ -181,7 +182,6 @@ const ModifyData = ({ element, onChange, onBack }) => {
         </Button>
         <h2 className="text-lg">Chart Data</h2>
       </div>
-
       {getConfig()}
     </div>
   );

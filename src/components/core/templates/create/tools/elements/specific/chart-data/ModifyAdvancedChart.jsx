@@ -4,6 +4,7 @@ import { RiArrowLeftSLine } from 'react-icons/ri';
 import { TbCirclePlus } from 'react-icons/tb';
 
 const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
+  console.log(element);
   const handleChange = (updatedItem) => {
     const updatedData = element.config.data.map((item, idx) =>
       idx === updatedItem.index ? { ...item, ...updatedItem } : item
@@ -170,9 +171,9 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
         )}
 
         {element.config.name === 'tree-map' && (
-          <div className="grid grid-cols-4 gap-2">
+          <div>
             {element.config.data.map((parent, parentIndex) => (
-              <div key={parentIndex}>
+              <div className="grid grid-cols-2 gap-4" key={parentIndex}>
                 <Input
                   value={parent.name}
                   placeholder="name"
@@ -289,35 +290,28 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
           />
         )}
 
-        {element.config.name === 'tree-map' && (
-          <div className="grid grid-cols-4 gap-2">
-            {element.config.data.map((parent, parentIndex) => (
-              <div key={parentIndex}>
-                <Input
-                  value={parent.name}
-                  placeholder="name"
-                  required
-                  variant="bordered"
-                  classNames={{ input: 'text-base capitalize' }}
-                  onChange={(e) => handleChildChange(parentIndex, parentIndex, 'name', e.target.value)}
-                />
-                {parent.children.map((child, childIndex) => (
-                  <div key={childIndex} className="child-item">
-                    <Input
-                      value={child.size}
-                      placeholder="Size"
-                      type="number"
-                      required
-                      variant="bordered"
-                      classNames={{ input: 'text-base capitalize' }}
-                      onChange={(e) => handleChildChange(parentIndex, childIndex, 'size', parseInt(e.target.value))}
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        )}
+        {/*{element.config.name === 'tree-map' &&*/}
+        {/*  element.config.data.map((parent, parentIndex) => (*/}
+        {/*    <div className="grid grid-cols-4 gap-2" key={parentIndex}>*/}
+        {/*      <Input*/}
+        {/*        value={parent.name}*/}
+        {/*        placeholder="name"*/}
+        {/*        required*/}
+        {/*        variant="bordered"*/}
+        {/*        classNames={{ input: 'text-base capitalize' }}*/}
+        {/*        onChange={(e) => handleChildChange(parentIndex, parentIndex, 'name', e.target.value)}*/}
+        {/*      />*/}
+        {/*      <Input*/}
+        {/*        value={parent.children[0].size}*/}
+        {/*        placeholder="Size"*/}
+        {/*        type="number"*/}
+        {/*        required*/}
+        {/*        variant="bordered"*/}
+        {/*        classNames={{ input: 'text-base capitalize' }}*/}
+        {/*        onChange={(e) => handleChildChange(parentIndex, childIndex, 'size', parseInt(e.target.value))}*/}
+        {/*      />*/}
+        {/*    </div>*/}
+        {/*  ))}*/}
         {element.config.name === 'percentage-card-2' && (
           <div className="flex flex-col space-y-3">
             {element.config.data.slice(0, element.config.bars).map((item, index) => (

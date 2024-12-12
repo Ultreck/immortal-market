@@ -56,10 +56,10 @@ const AdvanceColumnCardElementContent = ({ element }) => {
             {showLabel && (
               <div
                 style={{
-                  fontSize: element.config.styles.labelSize,
+                  fontSize: element.config.labelFontSize,
                   fontWeight: element.config.styles.lFontWeight,
                   fontStyle: element.config.styles.lFontStyle,
-                  color: element.config.styles.valueAndLableColor,
+                  color: element.config.labelFontColor,
                 }}
                 className="w-32 text-black"
               >

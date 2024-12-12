@@ -1,12 +1,15 @@
 import { Treemap } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import { formatChartValue } from '@/lib/utils.js';
+import { useEffect } from 'react';
 
 const AdvanceTreeMap = ({ element }) => {
   return <AdvanceTreeMapContent element={element} />;
 };
 
 const CustomizedContent = ({ element, root, depth, x, y, width, height, index, colors, name }) => {
+  const getValueFromName = element.config.data.find((item) => item.name === name);
   return (
     <g
       style={{
@@ -34,23 +37,13 @@ const CustomizedContent = ({ element, root, depth, x, y, width, height, index, c
             x={x + width / 2}
             y={y + height / 2 + 7}
             textAnchor="middle"
-            fill={element.config.styles.valueAndLableColor}
-            fontSize={element.config.styles.labelSize}
+            fill={element.config.labelFontColor}
+            fontSize={element.config.labelFontSize}
             fontWeight={element.config.styles.lFontWeight}
             fontStyle={element.config.styles.lFontStyle}
+            color={element.config.labelFontColor}
           >
-            {name}
-          </text>
-          <text
-            x={x + 4}
-            y={y + 18}
-            fill={element.config.styles.valueAndLableColor}
-            fontSize={element.config.styles.valueSize}
-            fontWeight={element.config.styles.lFontWeight}
-            fontStyle={element.config.styles.lFontStyle}
-            fillOpacity={0.9}
-          >
-            {index + 1}
+            {element.config.showLabel && formatChartValue(getValueFromName.children[0].size, element)}
           </text>
         </>
       )}
@@ -74,6 +67,8 @@ CustomizedContent.propTypes = {
 AdvanceTreeMap.propTypes = ElementPropTypes;
 
 export const AdvanceTreeMapContent = ({ element }) => {
+  useEffect(() => {}, [element]);
+  console.log(element.config.data);
   return (
     <Treemap
       width={element.width}
@@ -82,7 +77,6 @@ export const AdvanceTreeMapContent = ({ element }) => {
       className="space"
       dataKey="size"
       stroke="#fff"
-      fill="#8884d8"
       content={<CustomizedContent element={element} colors={element.config.colors} />}
     />
   );

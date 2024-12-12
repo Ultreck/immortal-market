@@ -1,6 +1,7 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
+import { formatChartValue } from '@/lib/utils.js';
 
 const AdvancedPictogramShapes = ({ element }) => {
   return <AdvancedPictogramShapesContent element={element} />;
@@ -56,7 +57,7 @@ export const AdvancedPictogramShapesContent = ({ element }) => {
 
   const Icon1 = icons.find((icon) => icon.name === icon1).filledIcon;
   const Icon2 = icons.find((icon) => icon.name === icon2).filledIcon;
-  const Icon3 = icons.find((icon) => icon.name === icon3 || 'triangle').filledIcon;
+  const Icon3 = icons.find((icon) => icon.name === icon3).filledIcon;
   const numberOfIcons = icon1count + icon2count + icon3count;
 
   return (
@@ -72,27 +73,27 @@ export const AdvancedPictogramShapesContent = ({ element }) => {
       {showLabel && (
         <div
           style={{
-            fontSize: element.config.styles.labelSize,
+            fontSize: element.config.labelFontSize,
             fontWeight: element.config.styles.lFontWeight,
             fontStyle: element.config.styles.lFontStyle,
-            color: element.config.styles.valueAndLableColor,
+            color: element.config.labelFontColor,
           }}
           className="flex space-x-3 capitalize"
         >
           <>
             {showIcon1 && (
               <p>
-                {icon1} - {icon1count}
+                {icon1} - {formatChartValue(icon1count, element)}
               </p>
             )}
             {showIcon2 && (
               <p>
-                {icon2} - {icon2count}
+                {icon2} - {formatChartValue(icon2count, element)}
               </p>
             )}
             {showIcon3 && (
               <p>
-                {icon3} - {icon3count}
+                {icon3} - {formatChartValue(icon3count, element)}
               </p>
             )}
           </>
