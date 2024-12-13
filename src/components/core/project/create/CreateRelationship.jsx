@@ -191,6 +191,7 @@ const CreateRelationship = ({ table, onClose }) => {
             className="text-base px-6"
             isLoading={isUpdateLoading}
             isDisabled={isUpdateLoading}
+            size="sm"
           >
             Save
           </Button>

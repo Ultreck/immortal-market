@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import TableDetails from '@/components/core/project/create/TableDetails.jsx';
 import { useEffect, useState } from 'react';
 import { Button, Popover, PopoverContent, PopoverTrigger, Spinner, useDisclosure } from '@nextui-org/react';
-import { TbChevronRight } from 'react-icons/tb';
+import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useGenerateCombinations } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
@@ -90,20 +90,20 @@ const PreviewData = ({ onNext }) => {
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="shadow border border-default-200 rounded-2xl w-[360px] px-6 py-12 flex flex-col items-center justify-center text-center">
-                      <RiAlertLine size="40" className="opacity-50" />
-                      <div className="text-base font-semibold mt-4">No relationship configured</div>
-                      <div className="mt-1 text-md max-w-xs opacity-80">
-                        We recommend you to setup relationships between tables to improve analysis accuracy. Click
-                        continue below to continue without setting up relationships.
+                      <RiAlertLine size="52" className="opacity-50 mb-6" />
+                      <div className="text-lg font-semibold">No relationship configured</div>
+                      <div className="mt-2 text-base max-w-xs opacity-80">
+                        We recommend setting up relationships between tables to improve analysis accuracy. Click
+                        &#34;Continue&#34; below to proceed without setting up relationships.
                       </div>
-                      <div className="flex items-center space-x-2 mt-6">
+                      <div className="flex flex-col items-center space-y-3 mt-6">
                         <Button
                           onClick={onContinuePopoverOpenChange}
                           isLoading={isGenerateLoading}
                           variant="bordered"
                           radius="full"
-                          size="sm"
                           className="text-base px-4"
+                          startContent={<TbChevronLeft size="20" />}
                         >
                           Go back
                         </Button>
@@ -112,8 +112,8 @@ const PreviewData = ({ onNext }) => {
                           isLoading={isGenerateLoading}
                           color="primary"
                           radius="full"
-                          size="sm"
                           className="text-base px-4"
+                          endContent={<TbChevronRight size="20" />}
                         >
                           Continue
                         </Button>
