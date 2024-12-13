@@ -4,7 +4,7 @@ import useTemplateStore from '@/store/template.js';
 import { useUpdateDesignSource } from '@/api/business.js';
 import { Controller, useForm } from 'react-hook-form';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Select, SelectItem } from '@nextui-org/react';
+import { Button, Divider, Select, SelectItem } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
@@ -41,16 +41,15 @@ const CreateRelationship = ({ table, onClose }) => {
   };
 
   return (
-    <div className="px-8 py-6">
+    <div className="py-6">
       <Title
         title="Setup relationship"
-        onBack={onClose}
-        classNames={{ title: 'text-base', base: 'mb-6 items-center space-x-3' }}
+        classNames={{ title: 'text-base', base: 'mb-6 items-center space-x-3 px-8' }}
         isDisabled={isUpdateLoading}
       />
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <div className="space-y-3">
-          <div className="space-y-1">
+          <div className="space-y-1 px-8">
             <p className="text-base">Column</p>
             <Controller
               name="column"
@@ -82,7 +81,10 @@ const CreateRelationship = ({ table, onClose }) => {
               }}
             />
           </div>
-          <div className="space-y-1">
+          <div className="py-1">
+            <Divider />
+          </div>
+          <div className="space-y-1 px-8">
             <p className="text-base">Reference table</p>
             <Controller
               name="refTable"
@@ -114,7 +116,7 @@ const CreateRelationship = ({ table, onClose }) => {
               }}
             />
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 px-8">
             <p className="text-base">Reference column</p>
             <Controller
               name="refColumn"
@@ -146,7 +148,7 @@ const CreateRelationship = ({ table, onClose }) => {
               }}
             />
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 px-8">
             <p className="text-base">Relationship type</p>
             <Controller
               name="type"
@@ -170,8 +172,6 @@ const CreateRelationship = ({ table, onClose }) => {
                     {[
                       { key: 'one-to-one', title: 'One to One' },
                       { key: 'one-to-many', title: 'One to Many' },
-                      { key: 'many-to-one', title: 'Many to One' },
-                      { key: 'many-to-many', title: 'Many to Many' },
                     ].map((option) => (
                       <SelectItem key={option.key} classNames={{ title: 'px-2 text-base' }}>
                         {option.title}
@@ -183,7 +183,7 @@ const CreateRelationship = ({ table, onClose }) => {
             />
           </div>
         </div>
-        <div className="mt-6 space-x-2 flex items-center">
+        <div className="mt-6 space-x-2 flex items-center px-8">
           <Button
             type="submit"
             color="success"

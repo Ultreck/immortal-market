@@ -7,6 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useUnmount } from 'react-use';
+import useProjectStore from '@/store/project.js';
 
 const patchPages = (pages) => {
   return pages.map((p) => {
@@ -50,6 +51,7 @@ const EditDesignPage = () => {
   const id = useTemplateStore((state) => state.template.id);
   const { design, isDesignLoading, isSourceLoading } = useCurrentDesign();
   const loaded = useRef(false);
+  const updateProjectStore = useProjectStore((state) => state.updateData);
 
   useEffect(() => {
     if (params.id !== id) updateTemplate({ id: params.id });
@@ -72,9 +74,8 @@ const EditDesignPage = () => {
 
   useUnmount(() => {
     reset();
-    setTimeout(() => {
-      qc.removeQueries({ queryKey: ['business', business, 'designs'] });
-    });
+    qc.removeQueries({ queryKey: ['business', business, 'designs'] });
+    updateProjectStore({ isOpen: false });
   });
 
   return (

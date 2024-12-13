@@ -81,6 +81,8 @@ const SettingsLayout = () => {
                 return (
                   <ListboxItem
                     key={item.href}
+                    textValue={item.name}
+                    aria-label={item.name}
                     classNames={{
                       base: cn('px-5 py-2.5 rounded-full', { 'bg-default-200': active }),
                       title: cn('text-base flex items-center', { 'font-semibold': active }),

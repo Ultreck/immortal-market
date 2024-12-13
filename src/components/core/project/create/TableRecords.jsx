@@ -18,6 +18,7 @@ import {
 import PropTypes from 'prop-types';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { TbDatabaseOff } from 'react-icons/tb';
+import NoData from '@/components/ui/NoData.jsx';
 
 const limit = 10;
 
@@ -46,7 +47,7 @@ const TableRecords = ({ table }) => {
         <Skeleton className="h-[300px] rounded-2xl" />
       ) : (
         <>
-          {columns.length && (
+          {columns.length ? (
             <Table
               classNames={{
                 wrapper: 'border border-default-200 shadow-none',
@@ -71,6 +72,8 @@ const TableRecords = ({ table }) => {
                 ))}
               </TableBody>
             </Table>
+          ) : (
+            <NoData text="No data" />
           )}
           {!data.length && !isLoading && !total && <InsertData text="No data available for this table" />}
           {!!total && (
@@ -78,7 +81,7 @@ const TableRecords = ({ table }) => {
               <Pagination
                 isCompact
                 showControls
-                color="primary"
+                color="default"
                 page={page}
                 total={Math.ceil(total / limit)}
                 onChange={(page) => setPage(page)}

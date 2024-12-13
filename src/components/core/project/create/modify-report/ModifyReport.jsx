@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { useUpdateDesignSource } from '@/api/business.js';
-import Options from '@/components/core/templates/create/project/modify-report/Options.jsx';
-import Summary from '@/components/core/templates/create/project/modify-report/Summary.jsx';
-import Combinations from '@/components/core/templates/create/project/modify-report/Combinations.jsx';
+import Options from '@/components/core/project/create/modify-report/Options.jsx';
+import Summary from '@/components/core/project/create/modify-report/Summary.jsx';
+import Combinations from '@/components/core/project/create/modify-report/Combinations.jsx';
 import PropTypes from 'prop-types';
 
 const ModifyReport = ({ onNext, onPrev }) => {

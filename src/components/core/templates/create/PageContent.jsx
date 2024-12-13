@@ -12,7 +12,7 @@ import { useKey } from 'react-use';
 import ElementWrapper from '@/components/core/templates/create/ElementWrapper.jsx';
 import DragResizeRotateWrapper from '@/components/core/templates/create/DragResizeRotateWrapper.jsx';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
-import DataNotConfiguredOverlay from '@/components/core/templates/create/project/DataNotConfiguredOverlay.jsx';
+import DataNotConfiguredOverlay from '@/components/core/templates/create/DataNotConfiguredOverlay.jsx';
 
 const PageContent = ({ id }) => {
   const { setNodeRef, node } = useDroppable({ id: `canvas-${id}` });
