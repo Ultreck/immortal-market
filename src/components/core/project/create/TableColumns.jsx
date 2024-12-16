@@ -91,6 +91,12 @@ const TableColumnItem = ({ table, column }) => {
           <span>Category:</span>
           <p className="text-sm">{camelCaseToWords(column.category)}</p>
         </div>
+        {!!column.unit && (
+          <div className="flex items-center justify-between px-4 py-1.5">
+            <span>Unit:</span>
+            <p className="text-sm">{camelCaseToWords(column.unit)}</p>
+          </div>
+        )}
       </div>
       {!!reference && (
         <div className="border border-default-200 rounded-2xl px-4 py-2">

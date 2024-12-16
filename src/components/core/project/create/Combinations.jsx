@@ -5,18 +5,29 @@ import { Accordion, AccordionItem, Button, Checkbox } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
+import useBusiness from '@/hooks/use-business.js';
+import useTemplateStore from '@/store/template.js';
+import { useUpdateDesignSource } from '@/api/business.js';
 
-const Combinations = ({ value, onNext, onPrev }) => {
+const Combinations = ({ onNext, onPrev }) => {
   const toast = useToast();
   const { source } = useCurrentDesign();
-  const [selection, setSelection] = useState(value || []);
-
-  const columns = Array.from(new Set(source.combinations.map((c) => [...c.columns]).flat()));
+  const [selection, setSelection] = useState(source?.selection?.combinations || []);
+  const { id: business } = useBusiness();
+  const id = useTemplateStore((state) => state.template.id);
+  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
 
   const handleSubmit = async () => {
     if (!selection.length) return toast.error('Please select at least one combination');
-    onNext(selection);
+    try {
+      await update({ selection: { ...source.selection, combinations: selection } });
+      onNext();
+    } catch (e) {
+      toast.error(e?.response?.data?.message || e.message);
+    }
   };
+
+  const columns = Array.from(new Set(source.combinations.map((c) => [...c.columns]).flat()));
 
   return (
     <>
@@ -70,6 +81,7 @@ const Combinations = ({ value, onNext, onPrev }) => {
       <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
         <Button
           onClick={onPrev}
+          isDisabled={isUpdateLoading}
           radius="full"
           variant="bordered"
           className="text-base px-6"
@@ -79,6 +91,8 @@ const Combinations = ({ value, onNext, onPrev }) => {
         </Button>
         <Button
           onClick={handleSubmit}
+          isLoading={isUpdateLoading}
+          isDisabled={!selection.length}
           color="primary"
           radius="full"
           className="text-base px-6"

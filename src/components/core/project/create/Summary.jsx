@@ -5,18 +5,29 @@ import { Button, Checkbox } from '@nextui-org/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
+import { useUpdateDesignSource } from '@/api/business.js';
+import useBusiness from '@/hooks/use-business.js';
+import useTemplateStore from '@/store/template.js';
 
-const Summary = ({ value, onPrev, onNext }) => {
+const Summary = ({ onPrev, onNext }) => {
   const toast = useToast();
   const { source } = useCurrentDesign();
-  const [selection, setSelection] = useState(value || []);
-
-  const combinations = source.combinations.filter((c) => c.category === 'number-aggregate');
+  const [selection, setSelection] = useState(source?.selection?.summary || []);
+  const { id: business } = useBusiness();
+  const id = useTemplateStore((state) => state.template.id);
+  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
 
   const handleSubmit = async () => {
     if (!selection.length) return toast.error('Please select at least one combination');
-    onNext(selection);
+    try {
+      await update({ selection: { ...source.selection, summary: selection } });
+      onNext();
+    } catch (e) {
+      toast.error(e?.response?.data?.message || e.message);
+    }
   };
+
+  const combinations = source.combinations.filter((c) => c.category === 'number-aggregate');
 
   return (
     <>
@@ -44,6 +55,7 @@ const Summary = ({ value, onPrev, onNext }) => {
                       if (v) setSelection((prev) => [...prev, combination._id]);
                       else setSelection((prev) => prev.filter((s) => s !== combination._id));
                     }}
+                    isDisabled={isUpdateLoading}
                   >
                     {combination.text}
                   </Checkbox>
@@ -56,6 +68,7 @@ const Summary = ({ value, onPrev, onNext }) => {
       <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
         <Button
           onClick={onPrev}
+          isDisabled={isUpdateLoading}
           radius="full"
           variant="bordered"
           className="text-base px-6"
@@ -65,6 +78,8 @@ const Summary = ({ value, onPrev, onNext }) => {
         </Button>
         <Button
           onClick={handleSubmit}
+          isLoading={isUpdateLoading}
+          isDisabled={!selection.length}
           color="primary"
           radius="full"
           className="text-base px-6"

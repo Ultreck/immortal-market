@@ -18,7 +18,10 @@ const useProjectStore = createWithEqualityFn(
     openModal: ({ restore = false, source } = {}) => {
       set((state) => {
         if (restore) {
-          return { data: { ...state.data, isOpen: true, step: source ? 'model' : 'source' } };
+          let step = 'option';
+          if (!source) step = 'source';
+          if (source.selection?.type) step = 'model';
+          return { data: { ...state.data, isOpen: true, step } };
         } else {
           return { data: { ...initial, isOpen: true, step: 'template' } };
         }

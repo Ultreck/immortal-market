@@ -51,7 +51,7 @@ const PreviewData = ({ onNext }) => {
               <div className="flex-1 overflow-y-auto h-full">
                 <div className="grid grid-cols-[260px_1fr] h-full">
                   <div className="py-6 px-8 border-r border-default-200 overflow-y-auto">
-                    <h3 className="font-semibold font-semibold mb-4 text-lg">Tables</h3>
+                    <h3 className="font-semibold mb-4 text-lg">Tables</h3>
                     <div className="flex flex-col space-y-3">
                       {source?.tables?.map((t) => {
                         return (

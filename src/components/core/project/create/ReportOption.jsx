@@ -2,21 +2,36 @@ import { useState } from 'react';
 import Title from '@/components/core/shared/Title.jsx';
 import { Button, Card } from '@nextui-org/react';
 import { cn } from '@/lib/utils.js';
-import { TbChevronLeft, TbChevronRight, TbCircleCheckFilled, TbForms, TbRobot } from 'react-icons/tb';
+import { TbChevronRight, TbCircleCheckFilled, TbForms, TbRobot } from 'react-icons/tb';
 import PropTypes from 'prop-types';
+import useBusiness from '@/hooks/use-business.js';
+import useTemplateStore from '@/store/template.js';
+import { useUpdateDesignSource } from '@/api/business.js';
+import { useToast } from '@/hooks/use-toast.jsx';
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
-const Options = ({ value, onPrev, onNext }) => {
-  const [type, setType] = useState(value);
+const ReportOption = ({ onNext }) => {
+  const toast = useToast();
+  const { source } = useCurrentDesign();
+  const [type, setType] = useState(source?.selection?.type || '');
+  const { id: business } = useBusiness();
+  const id = useTemplateStore((state) => state.template.id);
+  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
 
-  const handleSubmit = () => {
-    onNext(type);
+  const handleSubmit = async () => {
+    try {
+      await update({ selection: { type } });
+      onNext();
+    } catch (e) {
+      toast.error(e?.response?.data?.message || e.message);
+    }
   };
 
   return (
     <>
       <div className="flex-1 overflow-y-auto px-12 py-10">
         <Title
-          title="Hi there, I'm here to assist you with your report"
+          title="How would you like to generate your report?"
           sub="Pick an option below to get started"
           classNames={{
             base: 'mb-10',
@@ -27,6 +42,7 @@ const Options = ({ value, onPrev, onNext }) => {
         <div className="mt-10 grid grid-cols-2 gap-6">
           <Card
             isPressable
+            isDisabled={isUpdateLoading}
             onPress={() => {
               setType('manual');
             }}
@@ -38,7 +54,7 @@ const Options = ({ value, onPrev, onNext }) => {
           >
             <TbForms size="40" />
             <h4 className="text-xl font-semibold mt-4 leading-tight">Configure report manually</h4>
-            <p className="mt-2 opacity-80">This is the most flexible option, but requires more technical</p>
+            <p className="mt-2 opacity-80">This is the most flexible option, but requires more technical knowledge</p>
             <TbCircleCheckFilled
               size="28"
               className={cn('absolute top-4 right-4 text-green-500 opacity-0 transition-opacity duration-300', {
@@ -57,7 +73,7 @@ const Options = ({ value, onPrev, onNext }) => {
             )}
           >
             <TbRobot size="40" />
-            <h4 className="text-xl font-semibold mt-4 leading-tight">Generate a quick report</h4>
+            <h4 className="text-xl font-semibold mt-4 leading-tight">Generate with AI</h4>
             <p className="mt-2 opacity-80">Let Immortal AI do the heavy lifting for you, but requires more time</p>
             <TbCircleCheckFilled
               size="28"
@@ -70,17 +86,9 @@ const Options = ({ value, onPrev, onNext }) => {
       </div>
       <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
         <Button
-          onClick={onPrev}
-          radius="full"
-          variant="bordered"
-          className="text-base px-6"
-          startContent={<TbChevronLeft size="20" />}
-        >
-          Back
-        </Button>
-        <Button
-          isDisabled={type === ''}
+          isDisabled={!type}
           onClick={handleSubmit}
+          isLoading={isUpdateLoading}
           color="primary"
           radius="full"
           className="text-base px-6"
@@ -93,10 +101,10 @@ const Options = ({ value, onPrev, onNext }) => {
   );
 };
 
-Options.propTypes = {
+ReportOption.propTypes = {
   value: PropTypes.string.isRequired,
   onPrev: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
 };
 
-export default Options;
+export default ReportOption;

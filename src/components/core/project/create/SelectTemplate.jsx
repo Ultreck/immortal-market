@@ -45,7 +45,7 @@ const SelectTemplate = ({ onNext }) => {
             </div>
           </div>
           {isDeignsLoading ? (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               <Skeleton className="w-full h-full aspect-square rounded-2xl" />
               <Skeleton className="w-full h-full aspect-square rounded-2xl" />
               <Skeleton className="w-full h-full aspect-square rounded-2xl" />
