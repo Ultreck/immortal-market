@@ -75,7 +75,7 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
           </Button>
           <h2 className="text-lg">Chart Data</h2>
         </div>
-        {element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
+        {element.config.name !== 'tree-map' && element.config.name !== 'percentage-card-2' && (
           <>
             {element.config.data.slice(0, element.config.bars || element.config.data.length).map((item, index) =>
               Array.isArray(item) ? (
@@ -153,7 +153,7 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
             )}
           </>
         )}
-        {element.config.data && element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
+        {element.config.data && element.config.name !== 'tree-map' && element.config.name !== 'percentage-card-2' && (
           <TbCirclePlus
             size={30}
             onClick={() => {
@@ -161,9 +161,10 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
                 ...element,
                 config: {
                   ...element.config,
-                  data: [...element.config.data, { browser: 'Immortal', visitors: 10 }],
+                  data: [...element.config.data, { name: 'Immortal', value: 10 }],
                   colors: [...element.config.colors, '#E66B5B'],
                   bars: element.config.bars + 1,
+                  noOfStacks: element.config.noOfStacks + 1,
                 },
               });
             }}
@@ -270,10 +271,10 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
           </Button>
           <h2 className="text-lg">Chart Data</h2>
         </div>
-        {element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
+        {element.config.name !== 'tree-map' && element.config.name !== 'percentage-card-2' && (
           <>{<div className="text">{"There's no data for this chart"}</div>}</>
         )}
-        {element.config.data && element.config.name != 'tree-map' && element.config.name != 'percentage-card-2' && (
+        {element.config.data && element.config.name !== 'tree-map' && element.config.name !== 'percentage-card-2' && (
           <TbCirclePlus
             size={30}
             onClick={() => {

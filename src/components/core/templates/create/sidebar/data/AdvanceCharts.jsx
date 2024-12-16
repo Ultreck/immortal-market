@@ -568,6 +568,7 @@ const elements = [
         selectedCurrency: 'N',
         labelFormat: 'value',
         showLabel: true,
+        noOfStacks: 4,
       },
     },
     preview: (

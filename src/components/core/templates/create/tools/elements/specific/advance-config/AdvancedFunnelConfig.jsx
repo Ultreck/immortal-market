@@ -5,7 +5,19 @@ import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx
 
 const AdvancedFunnelConfig = ({ element, onChange }) => {
   return (
-    <div className="grid grid-cols-1 gap-2">
+    <div className="grid grid-cols-1 gap-2 space-y-6">
+      <div className="flex justify-between items-center">
+        <p>No of Stacks:</p>
+        <div>
+          <AutoCompleteNumberInput
+            onChange={(v) => onChange({ ...element, config: { ...element.config, noOfStacks: Number(v) } })}
+            value={element.config.noOfStacks}
+            min={1}
+            max={element.config.data.length}
+            ariaLabel="No of Stacks"
+          />
+        </div>
+      </div>
       <div>
         <Checkbox
           isSelected={element.config.showLabel}

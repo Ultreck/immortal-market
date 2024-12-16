@@ -76,7 +76,7 @@ export const AdvanceFunnelChartContent = ({ element }) => {
                   fontSize: 20,
                 },
               },
-              data: element.config.data,
+              data: element.config.data.slice(0, element.config.noOfStacks),
               color: element.config.colors,
             },
           ],
