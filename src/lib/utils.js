@@ -277,13 +277,23 @@ export const camelCaseToWords = (str) => {
 };
 
 export const formatChartValue = (value, element) => {
+  let total = 0;
+
+  console.log({ element, value });
+
+  if (element.config.name === 'pictogram-shapes') {
+    total = element.config.icon1count + element.config.icon2count + element.config.icon3count;
+  } else {
+    total = element.config.data.reduce((sum, item) => sum + item.value, 0);
+  }
+
   switch (element.config.labelFormat) {
     case 'value':
       return value.toLocaleString();
     case 'percentage':
-      return `${Math.round((value / 100) * 100)}%`;
+      return `${((value / total) * 100).toFixed(1)}%`;
     case 'both':
-      return `${value.toLocaleString()} (${Math.round((value / 100) * 100)}%)`;
+      return `${value.toLocaleString()} (${Math.round((value / total) * 100)}%)`;
     case 'currency':
       return `${element.config.selectedCurrency || 'N'} ${value.toLocaleString()}`;
     case 'wholeNumber':

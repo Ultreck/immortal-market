@@ -4,7 +4,6 @@ import { RiArrowLeftSLine } from 'react-icons/ri';
 import { TbCirclePlus } from 'react-icons/tb';
 
 const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
-  console.log(element);
   const handleChange = (updatedItem) => {
     const updatedData = element.config.data.map((item, idx) =>
       idx === updatedItem.index ? { ...item, ...updatedItem } : item

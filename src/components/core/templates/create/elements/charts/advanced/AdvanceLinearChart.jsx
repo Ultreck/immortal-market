@@ -1,13 +1,31 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { formatChartValue } from '@/lib/utils.js';
 
 const AdvanceLinearChart = ({ element }) => {
   return <AdvanceLinearChartContent element={element} />;
 };
 
 const AdvanceLinearChartContent = ({ element }) => {
+  const formatChartValue = (value, element) => {
+    switch (element.config.labelFormat) {
+      case 'value':
+        return value.toLocaleString();
+      case 'percentage':
+        return `${value}%`;
+      case 'both':
+        return `${value.toLocaleString()} (${Math.round(value)}%)`;
+      case 'currency':
+        return `${element.config.selectedCurrency || 'N'} ${value.toLocaleString()}`;
+      case 'wholeNumber':
+        return Math.round(value).toLocaleString();
+      case 'decimal':
+        return value.toLocaleString();
+      default:
+        return value;
+    }
+  };
+
   return (
     <div
       className="flex h-28 rounded-2xl overflow-hidden"

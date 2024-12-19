@@ -1,12 +1,30 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { motion } from 'framer-motion';
-import { formatChartValue } from '@/lib/utils.js';
 
 function AdvanceSemiMeter({ element }) {
   const radius = 50;
   const percentage = element.config.progress;
   const circumference = radius * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+  const formatChartValue = (value, element) => {
+    switch (element.config.labelFormat) {
+      case 'value':
+        return value.toLocaleString();
+      case 'percentage':
+        return `${value}%`;
+      case 'both':
+        return `${value.toLocaleString()} (${Math.round(value)}%)`;
+      case 'currency':
+        return `${element.config.selectedCurrency || 'N'} ${value.toLocaleString()}`;
+      case 'wholeNumber':
+        return Math.round(value).toLocaleString();
+      case 'decimal':
+        return value.toLocaleString();
+      default:
+        return value;
+    }
+  };
 
   return (
     <div className="relative flex justify-center items-center" style={{ height: element.height, width: element.width }}>

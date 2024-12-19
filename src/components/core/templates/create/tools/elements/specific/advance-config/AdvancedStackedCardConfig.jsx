@@ -26,15 +26,13 @@ const AdvancedStackedCardConfig = ({ element, onChange }) => {
             />
             <Input
               key={`percentage-${index}`}
-              value={item.percentage}
+              value={item.value}
               onChange={(e) =>
                 onChange({
                   ...element,
                   config: {
                     ...element.config,
-                    data: element.config.data.map((el, i) =>
-                      i === index ? { ...el, percentage: e.target.value } : el
-                    ),
+                    data: element.config.data.map((el, i) => (i === index ? { ...el, value: e.target.value } : el)),
                   },
                 })
               }

@@ -5,13 +5,23 @@ import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx
 
 const AdvancedTreeMapConfig = ({ element, onChange }) => {
   return (
-    <div className="text">
+    <div className="space-y-4">
+      <p className="text-base">Chart Settings</p>
+      <div>
+        <Checkbox
+          isSelected={element.config.showLabel}
+          className={{ base: 'py-0' }}
+          onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+        >
+          Show Label
+        </Checkbox>
+      </div>
       <Checkbox
-        isSelected={element.config.showLabel}
+        isSelected={element.config.showValue}
         className={{ base: 'py-0' }}
-        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showLabel: v } })}
+        onValueChange={(v) => onChange({ ...element, config: { ...element.config, showValue: v } })}
       >
-        Show Label
+        Show Value
       </Checkbox>
       {element.config.showLabel && (
         <div className="border border-gray-700 p-4 rounded-2xl space-y-6">

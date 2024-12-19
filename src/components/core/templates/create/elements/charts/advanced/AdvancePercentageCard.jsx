@@ -24,9 +24,12 @@ const AdvancePercentageCardContent = ({ element }) => {
       }}
     >
       {data
-        .sort((a, b) => a.percentage - b.percentage)
+        .sort((a, b) => a.value - b.value)
         .map((item, index) => {
-          const cardHeight = (item.percentage / 100) * element.height - 50;
+          const cardHeight = (item.value / 100) * element.height - 50;
+          const baseFontSize = element.config.labelFontSize || 14;
+          const dynamicFontSize = Math.max(baseFontSize, cardHeight * 0.1);
+
           return (
             <motion.div
               key={index}
@@ -41,8 +44,8 @@ const AdvancePercentageCardContent = ({ element }) => {
               }}
             >
               <p className="p-2">{item.age}</p>
-              <p style={{ fontSize: element.config.labelFontSize, lineHeight: '1' }} className="text-sm">
-                {formatChartValue(item.percentage, element)}
+              <p style={{ fontSize: `${dynamicFontSize * 0.8}px`, lineHeight: '1' }} className="text-sm">
+                {formatChartValue(item.value, element)}
               </p>
             </motion.div>
           );

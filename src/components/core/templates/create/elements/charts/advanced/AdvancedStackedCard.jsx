@@ -38,7 +38,7 @@ export const AdvancedStackedCardContent = ({ element }) => {
     >
       {data
         .slice(0, bars)
-        .sort((a, b) => a.percentage - b.percentage)
+        .sort((a, b) => a.value - b.value)
         .map((item, index) => (
           <motion.div
             key={item.range}
@@ -48,7 +48,7 @@ export const AdvancedStackedCardContent = ({ element }) => {
             transition={{ duration: 0.2 }}
             style={{
               width: `${85 + index * 5}%`,
-              height: `${(item.percentage / 100) * 400}px`,
+              height: `${(item.value / 100) * 400}px`,
               backgroundColor: colors[index],
               fontFamily: 'Arial, sans-serif',
             }}
@@ -76,11 +76,11 @@ export const AdvancedStackedCardContent = ({ element }) => {
                   fontFamily: 'Verdana, sans-serif',
                   fontWeight: element.config.styles.lFontWeight,
                   fontStyle: element.config.styles.lFontStyle,
-                  fontSize: element.config.styles.valueSize || '18px',
+                  fontSize: element.config.labelFontSize || '18px',
                   color: element.config.labelFontColor,
                 }}
               >
-                {element.config.showLabel && formatChartValue(item.percentage, element)}
+                {element.config.showLabel && formatChartValue(item.value, element)}
               </motion.div>
             </>
           </motion.div>

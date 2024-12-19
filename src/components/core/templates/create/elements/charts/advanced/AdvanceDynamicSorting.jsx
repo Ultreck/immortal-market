@@ -12,8 +12,6 @@ AdvanceDynamicSorting.propTypes = ElementPropTypes;
 export const AdvanceDynamicSortingContent = ({ element }) => {
   const chartRef = useRef(null);
 
-  console.log(element.config);
-
   useEffect(() => {
     let chart;
     let data = [...Array(5).fill(null)].map(() => Math.round(Math.random() * 200));
@@ -37,7 +35,7 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
             inverse: true,
             animationDuration: 300,
             animationDurationUpdate: 300,
-            max: 3,
+            max: element.config.noOfBars - 1,
             show: element.config.showYaxis,
             axisLabel: {
               color: element.config.styles.gridAndLegendColor,

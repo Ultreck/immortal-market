@@ -9,12 +9,12 @@ const AdvancePercentageCardTwo = ({ element }) => {
 
 AdvancePercentageCardTwo.propTypes = ElementPropTypes;
 
-// eslint-disable-next-line react/prop-types
 const Dot = ({ active, color }) => (
   <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: active ? color : '#ddd' }} />
 );
 
 export const AdvancePercentageCardTwoElementContent = ({ element }) => {
+  console.log(element);
   const { data, seasons, colors, bars } = element.config;
   useEffect(() => {}, [element]);
   return (
@@ -32,10 +32,10 @@ export const AdvancePercentageCardTwoElementContent = ({ element }) => {
           {element.config.showLabel && (
             <div
               style={{
-                fontSize: element.config.styles.labelSize,
+                fontSize: element.config.labelFontSize,
                 fontWeight: element.config.styles.lFontWeight,
                 fontStyle: element.config.styles.lFontStyle,
-                color: element.config.styles.valueAndLableColor,
+                color: element.config.labelFontColor,
               }}
               key={season}
               className="text-center font-bold text-black"

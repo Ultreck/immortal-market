@@ -1,7 +1,6 @@
 import { Treemap } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
-import { formatChartValue } from '@/lib/utils.js';
 import { useEffect } from 'react';
 
 const AdvanceTreeMap = ({ element }) => {
@@ -10,6 +9,29 @@ const AdvanceTreeMap = ({ element }) => {
 
 const CustomizedContent = ({ element, root, depth, x, y, width, height, index, colors, name }) => {
   const getValueFromName = element.config.data.find((item) => item.name === name);
+
+  const formatChartValue = (value, element) => {
+    console.log({ value, element });
+    const total = element.config.data.reduce((sum, item) => sum + item.children[0].size, 0);
+
+    switch (element.config.labelFormat) {
+      case 'value':
+        return value.toLocaleString();
+      case 'percentage':
+        return `${((value / total) * 100).toFixed(1)}%`;
+      case 'both':
+        return `${value.toLocaleString()} (${Math.round((value / total) * 100)}%)`;
+      case 'currency':
+        return `${element.config.selectedCurrency || 'N'} ${value.toLocaleString()}`;
+      case 'wholeNumber':
+        return Math.round(value).toLocaleString();
+      case 'decimal':
+        return value.toLocaleString();
+      default:
+        return value;
+    }
+  };
+
   return (
     <g
       style={{
@@ -33,18 +55,34 @@ const CustomizedContent = ({ element, root, depth, x, y, width, height, index, c
       />
       {depth === 1 && (
         <>
-          <text
-            x={x + width / 2}
-            y={y + height / 2 + 7}
-            textAnchor="middle"
-            fill={element.config.labelFontColor}
-            fontSize={element.config.labelFontSize}
-            fontWeight={element.config.styles.lFontWeight}
-            fontStyle={element.config.styles.lFontStyle}
-            color={element.config.labelFontColor}
-          >
-            {element.config.showLabel && formatChartValue(getValueFromName.children[0].size, element)}
-          </text>
+          {element.config.showValue && (
+            <text
+              x={x + width / 2}
+              y={y + height / 2}
+              textAnchor="middle"
+              fill={element.config.labelFontColor}
+              fontSize={element.config.labelFontSize}
+              fontWeight={element.config.styles.lFontWeight}
+              fontStyle={element.config.styles.lFontStyle}
+              color={element.config.labelFontColor}
+            >
+              {name}
+            </text>
+          )}
+          {element.config.showLabel && (
+            <text
+              x={x + width / 2}
+              y={y + height / 2 + 20}
+              textAnchor="middle"
+              fill={element.config.labelFontColor}
+              fontSize={element.config.labelFontSize}
+              fontWeight={element.config.styles.lFontWeight}
+              fontStyle={element.config.styles.lFontStyle}
+              color={element.config.labelFontColor}
+            >
+              {formatChartValue(getValueFromName.children[0].size, element)}
+            </text>
+          )}
         </>
       )}
     </g>
@@ -68,7 +106,6 @@ AdvanceTreeMap.propTypes = ElementPropTypes;
 
 export const AdvanceTreeMapContent = ({ element }) => {
   useEffect(() => {}, [element]);
-  console.log(element.config.data);
   return (
     <Treemap
       width={element.width}
