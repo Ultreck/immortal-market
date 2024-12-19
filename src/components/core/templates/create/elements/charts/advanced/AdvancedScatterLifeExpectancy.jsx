@@ -69,9 +69,8 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
                 left: '63%',
                 top: '55%',
                 textStyle: {
-                  fontSize: element.config.styles.valueSize || 100,
+                  fontSize: 100,
                   color: element.config.styles.valueAndLableColor,
-                  fontWeight: element.config.styles.lFontWeight,
                   fontStyle: element.config.styles.lFontStyle,
                 },
               },
@@ -96,13 +95,6 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
                           ${schema[0].text}：${value[0]}${schema[0].unit}<br>
                           ${schema[2].text}：${value[2]}<br>`;
               },
-            },
-            grid: {
-              top: element.config.styles.yPadding || 100,
-              containLabel: true,
-              left: element.config.styles.xPadding || 30,
-              right: element.config.styles.xPadding || '110',
-              show: element.config.showGridline,
             },
             xAxis: {
               type: 'log',
@@ -150,7 +142,7 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
             },
             visualMap: [
               {
-                show: false,
+                show: true,
                 dimension: 3,
                 categories: starterLifeChartData.counties,
                 inRange: {
