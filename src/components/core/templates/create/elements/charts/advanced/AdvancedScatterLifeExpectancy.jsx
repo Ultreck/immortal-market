@@ -142,7 +142,7 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
             },
             visualMap: [
               {
-                show: false,
+                show: true,
                 dimension: 3,
                 categories: starterLifeChartData.counties,
                 inRange: {

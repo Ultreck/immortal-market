@@ -159,6 +159,7 @@ export const objectToFormData = (obj, formData = new FormData(), namespace = '')
 };
 
 export const interpolateColor = (color1, color2, factor) => {
+  console.log({ color1, color2 });
   const hex = (color) => {
     color = color.replace('#', '');
     if (color.length === 3) {
@@ -279,8 +280,6 @@ export const camelCaseToWords = (str) => {
 export const formatChartValue = (value, element) => {
   let total = 0;
 
-  console.log({ element, value });
-
   if (element.config.name === 'pictogram-shapes') {
     total = element.config.icon1count + element.config.icon2count + element.config.icon3count;
   } else {
@@ -304,3 +303,4 @@ export const formatChartValue = (value, element) => {
       return value;
   }
 };
+

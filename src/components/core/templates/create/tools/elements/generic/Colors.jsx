@@ -248,6 +248,20 @@ const Gradient = ({ element, onChange }) => {
       });
       return;
     }
+    if (element.config.name === 'dynamic-sorting') {
+      const data = [106, 70, 82, 134, 71].sort((a, b) => a - b);
+      const maxVisitors = Math.max(...data);
+      const chartData = data.map((item, index) => {
+        const factor = 1 - item / maxVisitors;
+        return interpolateColor(element.config.gradientColor, '#FFFFFF', factor);
+      });
+
+      onChange({
+        ...element,
+        config: { ...element.config, colors: chartData },
+      });
+      return;
+    }
 
     const key = Array.isArray(element.config.keys.y)
       ? element.config.keys.y.find((k) => k === 'uv')
@@ -302,3 +316,4 @@ Gradient.propTypes = {
 };
 
 export default Colors;
+
