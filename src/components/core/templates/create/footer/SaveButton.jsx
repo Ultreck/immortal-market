@@ -37,7 +37,7 @@ const SaveButton = () => {
       const fd = objectToFormData({ data: { pages } });
       thumbnails.forEach((file) => fd.append('thumbnails', file));
       await update(fd);
-      await qc.invalidateQueries({ queryKey: ['business', business, 'designs'] });
+      await qc.invalidateQueries({ queryKey: ['businesses', business, 'designs'] });
     } catch (error) {
       setIsThumbnailLoading(false);
       toast.error(error?.response?.data?.message || error.message);

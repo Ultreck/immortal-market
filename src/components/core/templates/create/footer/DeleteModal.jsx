@@ -14,7 +14,7 @@ const DeleteModal = ({ id, isOpen, onClose }) => {
   const handleDelete = async () => {
     try {
       await deleteTemplate({ id });
-      await qc.invalidateQueries({ queryKey: ['business', id, 'designs'] });
+      await qc.invalidateQueries({ queryKey: ['businesses', id, 'designs'] });
       toast.success('Project deleted');
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');

@@ -4,9 +4,9 @@ import { objectToFormData } from '@/lib/utils.js';
 
 export const useGetUserBusiness = ({ enabled = true } = {}) => {
   return useQuery({
-    queryKey: ['business'],
+    queryKey: ['businesses'],
     queryFn: async () => {
-      const res = await http.get('/businesses');
+      const res = await http.immortal.get('/businesses');
       return res.data;
     },
     enabled,
@@ -15,17 +15,18 @@ export const useGetUserBusiness = ({ enabled = true } = {}) => {
 
 export const useCreateBusinessMutation = () => {
   return useMutation({
+    mutationKey: ['businesses'],
     mutationFn: (body) => {
-      return http.post('/businesses', body);
+      return http.immortal.post('/businesses', body);
     },
   });
 };
 
 export const useGetMembers = (business) => {
   return useQuery({
-    queryKey: ['business', business, 'members'],
+    queryKey: ['businesses', business, 'members'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/members`);
+      const res = await http.immortal.get(`/businesses/${business}/members`);
       return res.data;
     },
   });
@@ -33,18 +34,18 @@ export const useGetMembers = (business) => {
 
 export const useSendInvitationMutation = (business) => {
   return useMutation({
-    mutationKey: ['business', business, 'invitations'],
+    mutationKey: ['businesses', business, 'invitations'],
     mutationFn: ({ email, role }) => {
-      return http.post(`/businesses/${business}/invitations`, { email, role });
+      return http.immortal.post(`/businesses/${business}/invitations`, { email, role });
     },
   });
 };
 
 export const useGetPendingInvitations = (business) => {
   return useQuery({
-    queryKey: ['business', business, 'invitations'],
+    queryKey: ['businesses', business, 'invitations'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/invitations`);
+      const res = await http.immortal.get(`/businesses/${business}/invitations`);
       return res.data;
     },
   });
@@ -54,7 +55,7 @@ export const useGetInvitation = (id) => {
   return useQuery({
     queryKey: ['invitations', id],
     queryFn: async () => {
-      const res = await http.get(`/businesses/invitations/${id}`);
+      const res = await http.immortal.get(`/businesses/invitations/${id}`);
       return res.data;
     },
   });
@@ -64,16 +65,16 @@ export const useRespondToInvitationMutation = (id) => {
   return useMutation({
     mutationKey: ['invitations', id],
     mutationFn: ({ response }) => {
-      return http.post(`/businesses/invitations/${id}/response`, { response });
+      return http.immortal.post(`/businesses/invitations/${id}/response`, { response });
     },
   });
 };
 
 export const useGetUploads = (business) => {
   return useQuery({
-    queryKey: ['business', business, 'designs', 'uploads'],
+    queryKey: ['businesses', business, 'designs', 'uploads'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/uploads`);
+      const res = await http.immortal.get(`/businesses/${business}/uploads`);
       return res.data;
     },
   });
@@ -81,38 +82,38 @@ export const useGetUploads = (business) => {
 
 export const useCreateUploadMutation = (business) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs', 'uploads'],
+    mutationKey: ['businesses', business, 'designs', 'uploads'],
     mutationFn: (files) => {
       const fd = new FormData();
       files.forEach((file) => fd.append('files', file));
-      return http.post(`/businesses/${business}/uploads`, fd);
+      return http.immortal.post(`/businesses/${business}/uploads`, fd);
     },
   });
 };
 
 export const useCreateDesign = (business) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs'],
+    mutationKey: ['businesses', business, 'designs'],
     mutationFn: (body) => {
-      return http.post(`/businesses/${business}/designs`, body);
+      return http.immortal.post(`/businesses/${business}/designs`, body);
     },
   });
 };
 
 export const useTemplate = (business) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs'],
+    mutationKey: ['businesses', business, 'designs'],
     mutationFn: (body) => {
-      return http.post(`/businesses/${business}/designs/templates/use`, body);
+      return http.immortal.post(`/businesses/${business}/designs/templates/use`, body);
     },
   });
 };
 
 export const useCreateProject = (business) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs'],
+    mutationKey: ['businesses', business, 'designs'],
     mutationFn: (body) => {
-      return http.post(`/businesses/${business}/designs/projects`, body);
+      return http.immortal.post(`/businesses/${business}/designs/projects`, body);
     },
   });
 };
@@ -120,16 +121,23 @@ export const useCreateProject = (business) => {
 export const useDeleteDesign = (business) => {
   return useMutation({
     mutationFn: ({ id }) => {
-      return http.delete(`/businesses/${business}/designs/${id}`);
+      return http.immortal.delete(`/businesses/${business}/designs/${id}`);
     },
   });
 };
 
 export const useGetDesigns = ({ business, status, type, page, limit }) => {
   return useQuery({
-    queryKey: ['business', business, 'designs', status, type, page, limit],
+    queryKey: ['businesses', business, 'designs', status, type, page, limit],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs`, { params: { status, type, limit, page } });
+      const res = await http.immortal.get(`/businesses/${business}/designs`, {
+        params: {
+          status,
+          type,
+          limit,
+          page,
+        },
+      });
       return res.data;
     },
   });
@@ -137,9 +145,9 @@ export const useGetDesigns = ({ business, status, type, page, limit }) => {
 
 export const useGetTemplates = () => {
   return useQuery({
-    queryKey: ['business', 'designs', 'templates'],
+    queryKey: ['businesses', 'designs', 'templates'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/designs/templates`);
+      const res = await http.immortal.get(`/businesses/designs/templates`);
       return res.data;
     },
   });
@@ -147,9 +155,9 @@ export const useGetTemplates = () => {
 
 export const useGetDesign = (business, id) => {
   return useQuery({
-    queryKey: ['business', business, 'designs', id],
+    queryKey: ['businesses', business, 'designs', id],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs/${id}`);
+      const res = await http.immortal.get(`/businesses/${business}/designs/${id}`);
       return res.data;
     },
     enabled: !!business && !!id,
@@ -158,31 +166,31 @@ export const useGetDesign = (business, id) => {
 
 export const useUpdateDesign = (business, id) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs', id],
+    mutationKey: ['businesses', business, 'designs', id],
     mutationFn: (fd) => {
-      return http.patch(`/businesses/${business}/designs/${id}`, fd);
+      return http.immortal.patch(`/businesses/${business}/designs/${id}`, fd);
     },
   });
 };
 
 export const useAddInfographics = (business) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs', 'infographics'],
+    mutationKey: ['businesses', business, 'designs', 'infographics'],
     mutationFn: async (files) => {
       const formData = new FormData();
       files.forEach((file) => formData.append('files', file));
-      return http.post(`/businesses/${business}/designs/infographics`, formData);
+      return http.immortal.post(`/businesses/${business}/designs/infographics`, formData);
     },
   });
 };
 
 export const useGetInfographics = (business) => {
   return useInfiniteQuery({
-    queryKey: ['business', business, 'designs', 'infographics'],
+    queryKey: ['businesses', business, 'designs', 'infographics'],
     queryFn: async ({ pageParam = null }) => {
       const url = `/businesses/${business}/designs/infographics`;
       const params = pageParam ? { next: pageParam } : {};
-      const res = await http.get(url, { params });
+      const res = await http.immortal.get(url, { params });
       return res.data;
     },
     getNextPageParam: (lastPage) => lastPage.next || undefined,
@@ -203,7 +211,7 @@ export const useCreateDesignBlock = (business) => {
     mutationKey: ['designs', 'blocks'],
     mutationFn: (data) => {
       const fd = objectToFormData(data);
-      return http.post(`/businesses/${business}/designs/blocks`, fd);
+      return http.immortal.post(`/businesses/${business}/designs/blocks`, fd);
     },
   });
 };
@@ -212,7 +220,7 @@ export const useGetDesignBlocks = ({ business, type, category }) => {
   return useQuery({
     queryKey: ['designs', 'blocks', type, category],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs/blocks`, {
+      const res = await http.immortal.get(`/businesses/${business}/designs/blocks`, {
         params: { type, category },
       });
       return res.data;
@@ -223,7 +231,7 @@ export const useGetDesignBlocks = ({ business, type, category }) => {
 export const useGetDatabaseTables = (business) => {
   return useMutation({
     mutationFn: ({ payload, type }) => {
-      return http.post(`/businesses/${business}/workspaces/extract/db/${type}/tables/`, {
+      return http.immortal.post(`/businesses/${business}/workspaces/extract/db/${type}/tables/`, {
         credentials: payload,
       });
     },
@@ -232,18 +240,18 @@ export const useGetDatabaseTables = (business) => {
 
 export const useCreateComment = (business, design) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs', design, 'comments'],
+    mutationKey: ['businesses', business, 'designs', design, 'comments'],
     mutationFn: (body) => {
-      return http.post(`/businesses/${business}/designs/${design}/comments/`, body);
+      return http.immortal.post(`/businesses/${business}/designs/${design}/comments/`, body);
     },
   });
 };
 
 export const useGetComments = ({ business, design, resolved, target, targetId, parent, page }) => {
   return useQuery({
-    queryKey: ['business', business, 'designs', design, 'comments', resolved, target, targetId, parent, page],
+    queryKey: ['businesses', business, 'designs', design, 'comments', resolved, target, targetId, parent, page],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs/${design}/comments`, {
+      const res = await http.immortal.get(`/businesses/${business}/designs/${design}/comments`, {
         params: { resolved, target, targetId, parent, page },
       });
       return res.data;
@@ -253,27 +261,27 @@ export const useGetComments = ({ business, design, resolved, target, targetId, p
 
 export const useDeleteComment = (business, design) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs', design, 'comments'],
+    mutationKey: ['businesses', business, 'designs', design, 'comments'],
     mutationFn: (id) => {
-      return http.delete(`/businesses/${business}/designs/${design}/comments/${id}`);
+      return http.immortal.delete(`/businesses/${business}/designs/${design}/comments/${id}`);
     },
   });
 };
 
 export const useUpdateComment = (business, design) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs', design, 'comments'],
+    mutationKey: ['businesses', business, 'designs', design, 'comments'],
     mutationFn: ({ id, data }) => {
-      return http.patch(`/businesses/${business}/designs/${design}/comments/${id}`, data);
+      return http.immortal.patch(`/businesses/${business}/designs/${design}/comments/${id}`, data);
     },
   });
 };
 
 export const useGetDesignSource = (business, design, enabled = true) => {
   return useQuery({
-    queryKey: ['business', business, 'designs', design, 'source'],
+    queryKey: ['businesses', business, 'designs', design, 'source'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs/${design}/source`);
+      const res = await http.immortal.get(`/businesses/${business}/designs/${design}/source`);
       return res.data;
     },
     enabled,
@@ -282,36 +290,36 @@ export const useGetDesignSource = (business, design, enabled = true) => {
 
 export const useUpdateDesignSource = (business, design) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs', design, 'source'],
+    mutationKey: ['businesses', business, 'designs', design, 'source'],
     mutationFn: async (data) => {
-      return http.patch(`/businesses/${business}/designs/${design}/source`, data);
+      return http.immortal.patch(`/businesses/${business}/designs/${design}/source`, data);
     },
   });
 };
 
 export const useProcessData = (business, design) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs', design, 'data'],
+    mutationKey: ['businesses', business, 'designs', design, 'data'],
     mutationFn: async () => {
-      return http.post(`/businesses/${business}/designs/${design}/data/process`);
+      return http.immortal.post(`/businesses/${business}/designs/${design}/data/process`);
     },
   });
 };
 
 export const useGenerateCombinations = (business, design) => {
   return useMutation({
-    mutationKey: ['business', business, 'designs', design, 'source'],
+    mutationKey: ['businesses', business, 'designs', design, 'source'],
     mutationFn: async () => {
-      return http.post(`/businesses/${business}/designs/${design}/source/combinations`);
+      return http.immortal.post(`/businesses/${business}/designs/${design}/source/combinations`);
     },
   });
 };
 
 export const useGetTableData = ({ business, design, table, page = 1, limit = 10 }) => {
   return useQuery({
-    queryKey: ['business', business, 'designs', design, 'data', table, limit, page],
+    queryKey: ['businesses', business, 'designs', design, 'data', table, limit, page],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/designs/${design}/data`, {
+      const res = await http.immortal.get(`/businesses/${business}/designs/${design}/data`, {
         params: { table, page, limit },
       });
       return res.data;

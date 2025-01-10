@@ -35,7 +35,7 @@ const PageTitle = ({ id }) => {
         },
       });
       toast.success('Page Title updated');
-      await qc.invalidateQueries({ queryKey: ['business', business, 'designs'] });
+      await qc.invalidateQueries({ queryKey: ['businesses', business, 'designs'] });
     } catch (error) {
       toast.error(error?.response?.data?.message || error.message);
     }

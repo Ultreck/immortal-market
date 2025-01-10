@@ -74,7 +74,7 @@ const EditDesignPage = () => {
 
   useUnmount(() => {
     reset();
-    qc.removeQueries({ queryKey: ['business', business, 'designs'] });
+    qc.removeQueries({ queryKey: ['businesses', business, 'designs'] });
     updateProjectStore({ isOpen: false });
   });
 

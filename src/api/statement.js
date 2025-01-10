@@ -5,7 +5,7 @@ import axios from 'axios';
 export const useAnalyzeStatement = () => {
   return useMutation({
     mutationFn: (fd) => {
-      return http.post('https://lendnode.creditclan.com/bs/api/extraction/upload/single', fd);
+      return axios.post('https://lendnode.creditclan.com/bs/api/extraction/upload/single', fd);
     },
   });
 };
@@ -13,7 +13,7 @@ export const useAnalyzeStatement = () => {
 export const useCreateStatement = (business) => {
   return useMutation({
     mutationFn: (body) => {
-      return http.post(`/businesses/${business}/banking/statement`, body);
+      return http.immortal.post(`/businesses/${business}/banking/statement`, body);
     },
   });
 };
@@ -22,7 +22,7 @@ export const useGetStatements = (business) => {
   return useQuery({
     queryKey: ['statements'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/banking/statement`);
+      const res = await http.immortal.get(`/businesses/${business}/banking/statement`);
       return res.data;
     },
     enabled: !!business,
@@ -33,7 +33,7 @@ export const useGetStatement = (business, id) => {
   return useQuery({
     queryKey: ['statements', id],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/banking/statement/${id}`);
+      const res = await http.immortal.get(`/businesses/${business}/banking/statement/${id}`);
       return res.data;
     },
     enabled: !!business && !!id,
@@ -55,7 +55,7 @@ export const useGetStatementOverview = (business) => {
   return useQuery({
     queryKey: ['banking', 'overview'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/banking/overview`);
+      const res = await http.immortal.get(`/businesses/${business}/banking/overview`);
       return res.data;
     },
     enabled: !!business,
@@ -124,7 +124,7 @@ export const useGetMonoTransactions = ({ key }) => {
           headers: { 'mono-sec-key': key },
         }
       );
-      const res = await http.get(`https://api.withmono.com/accounts/${id}/transactions`, {
+      const res = await axios.get(`https://api.withmono.com/accounts/${id}/transactions`, {
         params: { paginate: false },
         headers: { 'mono-sec-key': key },
       });
@@ -149,7 +149,7 @@ export const useGetBankingSettings = (business) => {
   return useQuery({
     queryKey: ['statement', 'settings'],
     queryFn: async () => {
-      const res = await http.get(`/businesses/${business}/banking/settings`);
+      const res = await http.immortal.get(`/businesses/${business}/banking/settings`);
       return res.data;
     },
     enabled: !!business,
@@ -159,7 +159,7 @@ export const useGetBankingSettings = (business) => {
 export const useCreateBankingSettings = (business) => {
   return useMutation({
     mutationFn: (body = {}) => {
-      return http.post(`/businesses/${business}/banking/settings`, body);
+      return http.immortal.post(`/businesses/${business}/banking/settings`, body);
     },
   });
 };
@@ -167,7 +167,7 @@ export const useCreateBankingSettings = (business) => {
 export const useUpdateBankingSettings = (business) => {
   return useMutation({
     mutationFn: (body) => {
-      return http.patch(`/businesses/${business}/banking/settings`, body);
+      return http.immortal.patch(`/businesses/${business}/banking/settings`, body);
     },
   });
 };
@@ -175,7 +175,7 @@ export const useUpdateBankingSettings = (business) => {
 export const useInitializeMbs = (business) => {
   return useMutation({
     mutationFn: ({ ...body }) => {
-      return http.post(`/businesses/${business}/banking/statement/analysis/mbs/initialize`, body);
+      return http.immortal.post(`/businesses/${business}/banking/statement/analysis/mbs/initialize`, body);
     },
   });
 };
@@ -183,7 +183,7 @@ export const useInitializeMbs = (business) => {
 export const useCheckMbsStatus = (business) => {
   return useMutation({
     mutationFn: (requestId) => {
-      return http.post(`/businesses/${business}/banking/statement/analysis/mbs/status`, { requestId });
+      return http.immortal.post(`/businesses/${business}/banking/statement/analysis/mbs/status`, { requestId });
     },
   });
 };
@@ -191,7 +191,10 @@ export const useCheckMbsStatus = (business) => {
 export const useSubmitMbsTicket = (business) => {
   return useMutation({
     mutationFn: ({ ticketNo, password }) => {
-      return http.post(`/businesses/${business}/banking/statement/analysis/mbs/submit`, { ticketNo, password });
+      return http.immortal.post(`/businesses/${business}/banking/statement/analysis/mbs/submit`, {
+        ticketNo,
+        password,
+      });
     },
   });
 };
@@ -199,7 +202,7 @@ export const useSubmitMbsTicket = (business) => {
 export const useRetrieveMbsPdf = (business) => {
   return useMutation({
     mutationFn: ({ ticketNo }) => {
-      return http.post(`/businesses/${business}/banking/statement/analysis/mbs/retrieve`, { ticketNo });
+      return http.immortal.post(`/businesses/${business}/banking/statement/analysis/mbs/retrieve`, { ticketNo });
     },
   });
 };

@@ -1,11 +1,11 @@
-import { useQuery,useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import http from '@/lib/http.js';
 
 export const useGetProfile = () => {
   return useQuery({
     queryKey: ['profile'],
     queryFn: () => {
-      return http.get('/auth/profile');
+      return http.main.get('/auth/profile');
     },
     enabled: false,
     retry: false,
@@ -15,7 +15,7 @@ export const useGetProfile = () => {
 export const useUpdateAccount = () => {
   return useMutation({
     mutationFn: (data) => {
-      return http.patch(`/auth/profile`, data, {
+      return http.main.patch(`/auth/profile`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Accept: '*/*',
@@ -28,7 +28,7 @@ export const useUpdateAccount = () => {
 export const useChangePassword = () => {
   return useMutation({
     mutationFn: ({ currentPassword, newPassword }) => {
-      return http.post('/auth/password/change', { currentPassword, newPassword });
+      return http.main.post('/auth/password/change', { currentPassword, newPassword });
     },
   });
 };

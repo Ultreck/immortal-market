@@ -23,7 +23,7 @@ const Svgs = () => {
   } = useGetInfographics(business);
   const { mutateAsync: add, isPending: isAddLoading } = useAddInfographics(business);
 
-  const q = qc.getQueryState(['business', business, 'designs', 'infographics']);
+  const q = qc.getQueryState(['businesses', business, 'designs', 'infographics']);
   const isFetching = q.isInvalidated && q.fetchStatus === 'fetching';
 
   const handleChange = async (files) => {
