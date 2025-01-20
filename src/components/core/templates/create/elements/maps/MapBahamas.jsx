@@ -303,8 +303,8 @@ const MapBahamasContent = ({ element, present = true }) => {
         data-x="93"
         data-y="66"
         className="hover:brightness-90"
-        onMouseMove={ (e) => handleMouseMove(e, "Moore's Island") }
-        onMo'Moore\'s Island'MouseLeave}
+        onMouseMove={(e) => handleMouseMove(e, "Moore's Island")}
+        onMouseLeave={handleMouseLeave}
       />
       <path
         d="M26.3034 51.0098L25.6677 51.4123L24.3495 52.0829L23.2255 52.887L22.5908 51.77L23.9091 49.9366H25.3748L26.3034 51.0098Z"

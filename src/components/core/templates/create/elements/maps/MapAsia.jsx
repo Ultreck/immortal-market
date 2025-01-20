@@ -307,7 +307,7 @@ const MapAsiaContent = ({ element, present = true }) => {
         data-name="Laos people's democratic republic"
         data-x="151"
         data-y="276"
-        onMouseMove={(e) => handleMouseMove(e, "'Laos people\'s democratic republic'}
+        onMouseMove={(e) => handleMouseMove(e, `Laos people's democratic republic`)}
         onMouseLeave={handleMouseLeave}
       />
       <path
