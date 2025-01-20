@@ -317,7 +317,7 @@ export const useGenerateCombinations = (business, design) => {
 
 export const useGetTableData = ({ business, design, table, page = 1, limit = 10 }) => {
   return useQuery({
-    queryKey: ['businesses', business, 'designs', design, 'data', table, limit, page],
+    queryKey: ['businesses', business, 'designs', design, 'source', 'data', table, limit, page],
     queryFn: async () => {
       const res = await http.immortal.get(`/businesses/${business}/designs/${design}/data`, {
         params: { table, page, limit },
@@ -326,5 +326,16 @@ export const useGetTableData = ({ business, design, table, page = 1, limit = 10 
     },
     placeholderData: keepPreviousData,
     staleTime: Infinity,
+  });
+};
+
+export const useDeleteTableColumn = (business, design) => {
+  return useMutation({
+    mutationKey: ['businesses', business, 'designs', design, 'source'],
+    mutationFn: ({ table, column }) => {
+      return http.immortal.delete(`/businesses/${business}/designs/${design}/data/columns/`, {
+        params: { table, column },
+      });
+    },
   });
 };

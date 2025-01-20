@@ -1,4 +1,4 @@
-import { TbLink } from 'react-icons/tb';
+import { TbLink, TbTrash } from 'react-icons/tb';
 import {
   Accordion,
   AccordionItem,
@@ -8,13 +8,14 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Spinner,
 } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import { camelCaseToWords, kebabToWords } from '@/lib/utils.js';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
-import { useUpdateDesignSource } from '@/api/business.js';
+import { useDeleteTableColumn, useUpdateDesignSource } from '@/api/business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { RiMore2Line } from 'react-icons/ri';
 
@@ -66,6 +67,7 @@ const TableColumnItem = ({ table, column }) => {
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
+  const { mutateAsync: deleteColumn, isPending: isDeleteColumnLoading } = useDeleteTableColumn(business, id);
   const relationship = source.relationships?.find((r) => r.column === column.key && r.table === table);
   const reference = source.relationships?.find((r) => r.refColumn === column.key && r.refTable === table);
 
@@ -75,6 +77,14 @@ const TableColumnItem = ({ table, column }) => {
       const index = source.relationships.findIndex((r) => r.column === column && r.table === table);
       const relationships = source.relationships.filter((r, i) => i !== index);
       await update({ relationships });
+    } catch (e) {
+      toast.error(e?.response?.data?.message || e.message);
+    }
+  };
+
+  const handleDeleteColumn = async () => {
+    try {
+      await deleteColumn({ table, column: column.key });
     } catch (e) {
       toast.error(e?.response?.data?.message || e.message);
     }
@@ -97,6 +107,16 @@ const TableColumnItem = ({ table, column }) => {
             <p className="text-sm">{camelCaseToWords(column.unit)}</p>
           </div>
         )}
+      </div>
+      <div className="grid grid-cols-2">
+        <button
+          onClick={handleDeleteColumn}
+          className="border border-default-200 rounded-2xl py-4 flex flex-col items-center justify-center text-center hover:bg-default-100 disabled:opacity-50 disabled:pointer-events-none"
+          disabled={isDeleteColumnLoading}
+        >
+          {isDeleteColumnLoading ? <Spinner size="sm" color="danger" /> : <TbTrash size="20" />}
+          <span className="mt-1.5">Delete</span>
+        </button>
       </div>
       {!!reference && (
         <div className="border border-default-200 rounded-2xl px-4 py-2">
