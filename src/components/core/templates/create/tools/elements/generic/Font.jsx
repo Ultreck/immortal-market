@@ -39,6 +39,7 @@ const Font = ({ elements, onChange }) => {
           <FontSize elements={elements} onChange={onChange} />
           <LetterSpacing elements={elements} onChange={onChange} />
           <LineHeight elements={elements} onChange={onChange} />
+          {elements.every((e) => e.config.name === 'basic') && <TextEffect elements={elements} onChange={onChange} />}
         </div>
       </PopoverContent>
     </Popover>
@@ -260,6 +261,39 @@ const TextColor = ({ elements, onChange }) => {
   );
 };
 
+const effects = [
+  { key: '', label: 'None' },
+  { key: 'revolveScale', label: 'Flipping' },
+  { key: 'ballDrop', label: 'Ball Drop' },
+  { key: 'sideSlide', label: 'Side slide' },
+  { key: 'revolveDrop', label: 'Resolve drop' },
+  { key: 'dropVanish', label: 'Drop vanish' },
+];
+
+const TextEffect = ({ elements, onChange }) => {
+  const value = useResolveValue(elements.map((e) => e.config?.effect)) || '';
+
+  const handleChange = (event) => {
+    onChange(elements.map((e) => ({ ...e, config: { ...e.config, effect: event.target.value } })));
+  };
+
+  return (
+    <div className="flex flex-col space-y-2">
+      <p className="text-base opacity-75 whitespace-nowrap">Effect:</p>
+      <Select
+        aria-label="Effect"
+        placeholder="Select effect"
+        classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+        onChange={handleChange}
+        defaultSelectedKeys={[value]}
+        items={effects}
+      >
+        {(effect) => <SelectItem key={effect.key}>{effect.label}</SelectItem>}
+      </Select>
+    </div>
+  );
+};
+
 const propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
@@ -275,5 +309,6 @@ Italic.propTypes = propTypes;
 Underline.propTypes = propTypes;
 TextAlign.propTypes = propTypes;
 TextColor.propTypes = propTypes;
+TextEffect.propTypes = propTypes;
 
 export default Font;

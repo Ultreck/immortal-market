@@ -5,12 +5,6 @@ import { TextMarqueePreview } from '@/components/core/templates/create/elements/
 import { TextTypewriterPreview } from '@/components/core/templates/create/elements/texts/TextTypewriter.jsx';
 import { CountUpNumberPreview } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
 import { TextAnimationPreview } from '@/components/core/templates/create/elements/texts/TextStream.jsx';
-import {
-  TextBallDropPreview,
-  TextFlipPreview,
-  TextRevolveDropPreview,
-  TextSideSlidePreview,
-} from '@/components/core/templates/create/elements/texts/TextFlip.jsx';
 
 const styles = {
   heading: {
@@ -28,21 +22,6 @@ const styles = {
     fontSize: 24,
   },
   stream: {
-    fontSize: 30,
-  },
-  flip: {
-    fontSize: 30,
-  },
-  balldrop: {
-    fontSize: 30,
-  },
-  sideslide: {
-    fontSize: 30,
-  },
-  revolvedrop: {
-    fontSize: 30,
-  },
-  dropVanish: {
     fontSize: 30,
   },
 };
@@ -112,41 +91,6 @@ const previews = {
       </div>
     </div>
   ),
-  flip: (
-    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-2 overflow-hidden">
-      <div style={{ ...styles[name], color: '#fff' }} className="truncate">
-        <TextFlipPreview />
-      </div>
-    </div>
-  ),
-  balldrop: (
-    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-2 overflow-hidden">
-      <div style={{ ...styles[name], color: '#fff' }} className="truncate">
-        <TextBallDropPreview />
-      </div>
-    </div>
-  ),
-  sideslide: (
-    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-2 overflow-hidden">
-      <div style={{ ...styles[name], color: '#fff' }} className="truncate">
-        <TextSideSlidePreview />
-      </div>
-    </div>
-  ),
-  revolvedrop: (
-    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-2 overflow-hidden">
-      <div style={{ ...styles[name], color: '#fff' }} className="truncate">
-        <TextRevolveDropPreview />
-      </div>
-    </div>
-  ),
-  dropVanish: (
-    <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-2 overflow-hidden">
-      <div style={{ ...styles[name], color: '#fff' }} className="truncate">
-        <TextRevolveDropPreview />
-      </div>
-    </div>
-  ),
 };
 
 const texts = [
@@ -160,11 +104,6 @@ const texts = [
     'marquee',
     'typewriter',
     'stream',
-    'flip',
-    'balldrop',
-    'sideslide',
-    'revolvedrop',
-    'dropVanish',
   ].map((name) => {
     return {
       id: name,
@@ -178,7 +117,7 @@ const texts = [
           ...(styles[name] || {}),
         },
         config: {
-          name,
+          name: name.match(/^heading|subheading|paragraph|caption$/) ? 'basic' : name,
           ...(configs[name] || {}),
         },
       },

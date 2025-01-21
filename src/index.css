@@ -401,7 +401,6 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .dropVanish span {
-  color: #dd3f0f;
   opacity: 0;
   transform: translate(0, -100px) rotate(360deg) scale(0);
   animation: dropVanish 0.5s forwards;
@@ -426,4 +425,14 @@ input[type='number']::-webkit-outer-spin-button {
     transform: translate(0) scale(1) rotate(0deg);
     opacity: 1;
   }
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
 }

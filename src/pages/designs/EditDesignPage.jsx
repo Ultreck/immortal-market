@@ -14,8 +14,9 @@ const patchPages = (pages) => {
     return {
       ...p,
       elements: p.elements.map((e) => {
-        if (e.type.match(/heading|subheading|paragraph|caption|count-up-number/gi)) {
-          return { ...e, type: 'text', config: { ...e.config, name: e.type } };
+        const regex = /heading|subheading|paragraph|caption/gi;
+        if (e.type.match(regex) || e.config?.name.match(regex)) {
+          return { ...e, type: 'text', config: { ...e.config, name: 'basic' } };
         }
         if (e.type === 'infographic') {
           return { ...e, type: 'svg' };

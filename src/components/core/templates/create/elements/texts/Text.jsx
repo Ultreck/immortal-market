@@ -9,18 +9,6 @@ import PropTypes from 'prop-types';
 import { ListPresent, TextList } from '@/components/core/templates/create/elements/texts/TextList.jsx';
 import { CountUpNumber, CountUpNumberPresent } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
 import { TextStream, TextStreamPresent } from '@/components/core/templates/create/elements/texts/TextStream.jsx';
-import {
-  TextBallDrop,
-  TextBallDropPresent,
-  TextDropVanish,
-  TextDropVanishPresent,
-  TextFlip,
-  TextFlipPresent,
-  TextRevolveDrop,
-  TextRevolveDropPresent,
-  TextSideSlide,
-  TextSideSlidePresent,
-} from '@/components/core/templates/create/elements/texts/TextFlip.jsx';
 
 export const Text = ({ element, active, onChange }) => {
   const components = {
@@ -29,12 +17,8 @@ export const Text = ({ element, active, onChange }) => {
     marquee: TextMarquee,
     typewriter: TextTypewriter,
     stream: TextStream,
-    flip: TextFlip,
-    balldrop: TextBallDrop,
-    sideslide: TextSideSlide,
-    revolvedrop: TextRevolveDrop,
-    dropVanish: TextDropVanish,
   };
+
   if (components[element.config.name]) {
     return createElement(components[element.config.name], { element, active, onChange });
   }
@@ -49,11 +33,6 @@ export const TextPresent = ({ element }) => {
     marquee: TextMarqueePresent,
     typewriter: TextTypewriterPresent,
     stream: TextStreamPresent,
-    flip: TextFlipPresent,
-    balldrop: TextBallDropPresent,
-    sideslide: TextSideSlidePresent,
-    revolvedrop: TextRevolveDropPresent,
-    dropVanish: TextDropVanishPresent,
   };
 
   if (components[element.config.name]) {
