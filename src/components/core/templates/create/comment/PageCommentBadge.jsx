@@ -16,7 +16,7 @@ const PageCommentBadge = ({ id }) => {
 
   const handleClick = () => {
     updateTemplate({
-      activeComment: _comments[0].id,
+      activeComment: _comments[0],
       isCommentsOpen: true,
       commentsTargetId: id,
     });
