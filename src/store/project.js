@@ -20,10 +20,10 @@ const useProjectStore = createWithEqualityFn(
         if (restore) {
           let step = 'option';
           if (!source) step = 'source';
-          if (source.selection?.type) step = 'model';
+          else if (source.selection?.type) step = 'model';
           return { data: { ...state.data, isOpen: true, step } };
         } else {
-          return { data: { ...initial, isOpen: true, step: 'template' } };
+          return { data: { ...initial, isOpen: true, step: 'source' } };
         }
       });
     },
