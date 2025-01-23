@@ -122,6 +122,7 @@ export const getKeysFromJson = (jsonString) => {
   try {
     const parsedValue = JSON.parse(jsonString);
     return Array.isArray(parsedValue) ? Object.keys(parsedValue[0]) : [];
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
     return [];
   }
@@ -131,6 +132,7 @@ export const isValidJsonArray = (jsonString) => {
   try {
     const parsedValue = JSON.parse(jsonString);
     return Array.isArray(parsedValue);
+    // eslint-disable-next-line no-unused-vars
   } catch (e) {
     return false;
   }
