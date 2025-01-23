@@ -159,7 +159,6 @@ export const objectToFormData = (obj, formData = new FormData(), namespace = '')
 };
 
 export const interpolateColor = (color1, color2, factor) => {
-  console.log({ color1, color2 });
   const hex = (color) => {
     color = color.replace('#', '');
     if (color.length === 3) {

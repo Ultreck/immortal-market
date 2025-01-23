@@ -11,7 +11,6 @@ const CustomizedContent = ({ element, root, depth, x, y, width, height, index, c
   const getValueFromName = element.config.data.find((item) => item.name === name);
 
   const formatChartValue = (value, element) => {
-    console.log({ value, element });
     const total = element.config.data.reduce((sum, item) => sum + item.children[0].size, 0);
 
     switch (element.config.labelFormat) {
