@@ -278,7 +278,8 @@ export const camelCaseToWords = (str) => {
 };
 
 export const formatChartValue = (value, element) => {
-  let total = 0;
+  if (!value) return null;
+  let total;
 
   if (element.config.name === 'pictogram-shapes') {
     total = element.config.icon1count + element.config.icon2count + element.config.icon3count;
@@ -303,4 +304,3 @@ export const formatChartValue = (value, element) => {
       return value;
   }
 };
-
