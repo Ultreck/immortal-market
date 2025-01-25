@@ -1,6 +1,4 @@
-import { Card } from '@heroui/react';
-import React from 'react';
-import { Treemap, ResponsiveContainer } from 'recharts';
+import { ResponsiveContainer, Treemap } from 'recharts';
 
 const data = [
   {
@@ -159,6 +157,7 @@ const data = [
 
 const COLORS = ['#8889DD', '#9597E4', '#8DC77B', '#A5D297', '#E2CF45', '#F8C12D', '#FF0000'];
 
+// eslint-disable-next-line react/prop-types
 const CustomizedContent = ({ root, depth, x, y, width, height, index, colors, name }) => {
   return (
     <g>
@@ -168,6 +167,7 @@ const CustomizedContent = ({ root, depth, x, y, width, height, index, colors, na
         width={width}
         height={height}
         style={{
+          // eslint-disable-next-line react/prop-types
           fill: depth < 2 ? colors[Math.floor((index / root.children.length) * 7)] : '#ffffff00',
           stroke: '#fff',
           strokeWidth: 2 / (depth + 1e-10),
@@ -191,7 +191,6 @@ const CustomizedContent = ({ root, depth, x, y, width, height, index, colors, na
 const TreeMap = () => {
   return (
     <div className="h-[400px] w-full space-y-10">
-      {/* <p className="text-5xl font-bold text-black">How many things we do?</p> */}
       <ResponsiveContainer width="100%" height="80%">
         <Treemap
           width={400}
@@ -203,12 +202,8 @@ const TreeMap = () => {
           content={<CustomizedContent colors={COLORS} />}
         />
       </ResponsiveContainer>
-      {/* <div>
-        <p className='text-black'>Alot of business can not do the needful so we must find a good way to do it.</p>
-      </div> */}
     </div>
   );
 };
 
 export default TreeMap;
-

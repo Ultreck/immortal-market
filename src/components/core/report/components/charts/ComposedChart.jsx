@@ -1,18 +1,5 @@
 import { Card } from '@heroui/react';
-import React from 'react';
-import {
-  ComposedChart,
-  Line,
-  Area,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  Scatter,
-  ResponsiveContainer,
-} from 'recharts';
+import { Bar, ComposedChart, Legend, Line, ResponsiveContainer, Scatter, Tooltip, XAxis, YAxis } from 'recharts';
 
 const data = [
   {
@@ -63,9 +50,7 @@ const ComposedCharts = () => {
   return (
     <Card className="w-full bg-white space-y-6 px-8 py-6 mt-10 h-[500px]">
       <ResponsiveContainer width="100%" height="100%">
-        <ComposedChart
-          data={data}
-        >
+        <ComposedChart data={data}>
           <XAxis dataKey="name" scale="band" />
           <YAxis />
           <Tooltip />
@@ -81,4 +66,3 @@ const ComposedCharts = () => {
 };
 
 export default ComposedCharts;
-

@@ -266,7 +266,9 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
                         },
                       })
                     }
-                    defaultSelectedKeys={[element.config.styles.labelFontFamily] || 'Roboto'}
+                    defaultSelectedKeys={
+                      element.config.styles.labelFontFamily ? [element.config.styles.labelFontFamily] : 'Roboto'
+                    }
                     value={element.config.styles.labelFontFamily || 'Roboto'}
                   >
                     {fontFamily.map((font) => (
@@ -339,7 +341,12 @@ const StandardMultipleBarConfig = ({ element, onChange }) => {
                   <p>Label Font Color</p>
                   <ColorPicker
                     color={element.config.labelFontColor}
-                    onChange={(color) => onChange({ ...element, config: { ...element.config, labelFontColor: color } })}
+                    onChange={(color) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, labelFontColor: color },
+                      })
+                    }
                     trigger={
                       <div
                         tabIndex="0"

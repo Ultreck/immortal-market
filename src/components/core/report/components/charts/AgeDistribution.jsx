@@ -1,7 +1,6 @@
-import React from 'react';
 import { motion } from 'motion/react';
 import { Button, Card, Tooltip } from '@heroui/react';
-import { cn } from '../../../../../lib/utils';
+import { cn } from '@/lib/utils.js';
 
 const AgeDistribution = () => {
   const data = [

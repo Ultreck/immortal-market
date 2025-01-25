@@ -1,6 +1,6 @@
-import React from 'react';
 import { motion } from 'motion/react';
 import { Card } from '@heroui/react';
+import { Fragment } from 'react';
 
 const data = [
   { age: '18-34', spring: 20, summer: 30, fall: 26, winter: 13, color: 'bg-red-500' },
@@ -10,6 +10,7 @@ const data = [
 
 const seasons = ['SPRING', 'SUMMER', 'FALL', 'WINTER'];
 
+// eslint-disable-next-line react/prop-types
 const Dot = ({ active, color }) => <div className={`w-3 h-3 rounded-full ${active ? color : 'bg-gray-200'}`} />;
 
 const SeasonalChart = () => {
@@ -22,7 +23,7 @@ const SeasonalChart = () => {
           </div>
         ))}
         {data.map((row, rowIndex) => (
-          <React.Fragment key={row.age}>
+          <Fragment key={row.age}>
             {seasons.map((season) => (
               <motion.div
                 key={`${row.age}-${season}`}
@@ -43,7 +44,7 @@ const SeasonalChart = () => {
                 </div>
               </motion.div>
             ))}
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
     </Card>

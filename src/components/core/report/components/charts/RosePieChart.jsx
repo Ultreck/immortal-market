@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@heroui/react';
 
@@ -62,7 +62,7 @@ const RosePieChart = () => {
   }, []);
 
   return (
-    <Card className='w-full bg-white space-y-6 px-8 py-6'>
+    <Card className="w-full bg-white space-y-6 px-8 py-6">
       <div ref={chartRef} style={{ width: '100%', height: '600px' }} />
     </Card>
   );

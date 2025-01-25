@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Card } from '@heroui/react';
 
@@ -57,4 +57,3 @@ const TangentialPolarBarChart = () => {
 };
 
 export default TangentialPolarBarChart;
-

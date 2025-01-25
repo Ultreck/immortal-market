@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'motion/react';
 import { Card } from '@heroui/react';
 
@@ -8,9 +7,8 @@ const data = [
   { size: 100, color: 'bg-red-500' },
 ];
 
-const THreeCircles = () => {
+const ThreeCircles = () => {
   if (data.length !== 3) {
-    console.error('Data array must contain exactly 3 items.');
     return null;
   }
 
@@ -43,4 +41,4 @@ const THreeCircles = () => {
   );
 };
 
-export default THreeCircles;
+export default ThreeCircles;

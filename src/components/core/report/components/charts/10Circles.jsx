@@ -1,5 +1,6 @@
 import { Button, Card, Tooltip } from '@heroui/react';
 import { motion } from 'motion/react';
+import PropTypes from 'prop-types';
 
 const TenCircles = ({ percentage = 65 }) => {
   const circles = [];
@@ -46,6 +47,10 @@ const TenCircles = ({ percentage = 65 }) => {
       </Card>
     </Tooltip>
   );
+};
+
+TenCircles.propTypes = {
+  percentage: PropTypes.number,
 };
 
 export default TenCircles;

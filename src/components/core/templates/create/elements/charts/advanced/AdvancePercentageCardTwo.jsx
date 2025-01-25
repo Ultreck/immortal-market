@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { motion } from 'motion/react';
@@ -46,7 +46,7 @@ export const AdvancePercentageCardTwoElementContent = ({ element }) => {
         </>
       ))}
       {data.slice(0, bars).map((row, rowIndex) => (
-        <React.Fragment key={row.age}>
+        <Fragment key={row.age}>
           {seasons.map((season, index) => (
             <motion.div
               key={`${row.age}-${season}`}
@@ -83,7 +83,7 @@ export const AdvancePercentageCardTwoElementContent = ({ element }) => {
               </div>
             </motion.div>
           ))}
-        </React.Fragment>
+        </Fragment>
       ))}
     </div>
   );

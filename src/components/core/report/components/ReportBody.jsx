@@ -70,8 +70,7 @@ const ReportBody = () => {
                   <NewVerticalBar title="Top 25 result" caption="Top 25 result" data={data} unit="%" />
                 </swiper-slide>
                 <swiper-slide>
-                  {' '}
-                  <CircleIcons data={data} />{' '}
+                  <CircleIcons data={data} />
                 </swiper-slide>
                 <swiper-slide>
                   <NewVerticalBar title="Top 25 result" caption="Top 25 result" data={data} unit="%" />
@@ -95,8 +94,6 @@ const ReportBody = () => {
       <MultipleBars />
       <CandyBarChart />
       <AreaCharts />
-      {/*<VennDiagramChart />*/}
-      {/*<TwoCircleVennDiagram />*/}
       <AgeDistribution />
       <MultiSquare />
       <SeasonalChart />

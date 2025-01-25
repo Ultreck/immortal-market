@@ -106,7 +106,9 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
                     },
                   })
                 }
-                defaultSelectedKeys={[element.config.styles.labelFontFamily] || 'Roboto'}
+                defaultSelectedKeys={
+                  element.config.styles.labelFontFamily ? [element.config.styles.labelFontFamily] : 'Roboto'
+                }
                 value={element.config.styles.labelFontFamily || 'Roboto'}
               >
                 {fontFamily.map((font) => (

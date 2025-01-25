@@ -1,6 +1,6 @@
 import { Card } from '@heroui/react';
-import React, { useMemo } from 'react';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Cell, ResponsiveContainer } from 'recharts';
+import { useMemo } from 'react';
+import { Cell, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 
 const data = [
   { x: 10, y: 200, z: 200 },
@@ -26,22 +26,22 @@ const ScatterCharts = () => {
 
   return (
     <Card>
-    <ResponsiveContainer width="100%" height={400}>
-      <ScatterChart
-        margin={{
+      <ResponsiveContainer width="100%" height={400}>
+        <ScatterChart
+          margin={{
             top: 20,
             right: 20,
             bottom: 20,
             left: 20,
-        }}
+          }}
         >
-        <XAxis type="number" dataKey="x" name="stature" unit="cm" />
-        <YAxis type="number" dataKey="y" name="weight" unit="kg" />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-        {renderScatter}
-      </ScatterChart>
-    </ResponsiveContainer>
-          </Card>
+          <XAxis type="number" dataKey="x" name="stature" unit="cm" />
+          <YAxis type="number" dataKey="y" name="weight" unit="kg" />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+          {renderScatter}
+        </ScatterChart>
+      </ResponsiveContainer>
+    </Card>
   );
 };
 

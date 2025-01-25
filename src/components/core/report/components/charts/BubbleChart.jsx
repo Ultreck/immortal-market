@@ -1,9 +1,8 @@
-import React from 'react';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
+// eslint-disable-next-line react/prop-types
 const BubbleChart = ({ data }) => {
-  const maxValue = Math.max(...data.map((item) => item.value));
   const sortedData = [...data].sort((a, b) => b.value - a.value);
 
   const radius = 150;

@@ -1,7 +1,7 @@
 import { motion, stagger } from 'motion/react';
 import PropTypes from 'prop-types';
 import Card from '@/components/ui/Card.jsx';
-import { cn, getPercentages } from '../../../../../lib/utils';
+import { cn, getPercentages } from '@/lib/utils.js';
 
 const CircleIcons = ({ data }) => {
   const percentages = getPercentages(data.map((item) => +item.value));
@@ -60,8 +60,6 @@ const CircleIcons = ({ data }) => {
 
 CircleIcons.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })).isRequired,
-  title: PropTypes.string.isRequired,
-  caption: PropTypes.string.isRequired,
 };
 
 export default CircleIcons;

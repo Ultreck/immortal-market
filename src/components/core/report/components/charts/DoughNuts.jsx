@@ -1,6 +1,5 @@
 import { Card } from '@heroui/react';
-import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { Cell, Pie, PieChart } from 'recharts';
 
 const data = [
   { name: 'Group A', value: 400 },
@@ -10,10 +9,12 @@ const data = [
   { name: 'Group D', value: 200 },
   { name: 'Group D', value: 50 },
 ];
+
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-const DoughNuts = ({ title, caption }) => {
+
+const DoughNuts = () => {
   return (
-    <Card className='w-full bg-white space-y-6 px-8 py-6 mt-10'>
+    <Card className="w-full bg-white space-y-6 px-8 py-6 mt-10">
       <div className="flex">
         <div>
           <PieChart width={300} height={400}>
@@ -33,8 +34,8 @@ const DoughNuts = ({ title, caption }) => {
             </Pie>
           </PieChart>
         </div>
-        <div className='my-auto space-y-5 text-black'>
-          <p className='font-bold text-5xl'>How many things we do? </p>
+        <div className="my-auto space-y-5 text-black">
+          <p className="font-bold text-5xl">How many things we do? </p>
           <p>Alot of business can not do the needful so we must find a good way to do it.</p>
         </div>
       </div>

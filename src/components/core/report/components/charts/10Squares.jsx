@@ -1,6 +1,7 @@
 import { Button, Card, Tooltip } from '@heroui/react';
 import { motion } from 'motion/react';
 
+// eslint-disable-next-line react/prop-types
 const TenSquares = ({ percentage = 35 }) => {
   const squares = [];
   const coloredSquares = Math.floor(percentage / 10);

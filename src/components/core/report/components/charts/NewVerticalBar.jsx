@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import PropTypes from 'prop-types';
-import { getPercentagesMax } from '../../../../../lib/utils';
+import { getPercentagesMax } from '@/lib/utils.js';
 import { Button, Card, Tooltip } from '@heroui/react';
 
 const colors = [
@@ -16,7 +16,7 @@ const colors = [
   '#e3f2fd',
 ];
 
-const NewVerticalBar = ({ title, data }) => {
+const NewVerticalBar = ({ data }) => {
   const percentages = getPercentagesMax(data.map((i) => +i.value));
 
   return (

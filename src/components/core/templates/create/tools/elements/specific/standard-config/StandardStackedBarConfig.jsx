@@ -142,7 +142,7 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                     <Checkbox
                       key={i}
                       isSelected={element.config.type === position.name}
-                      onValueChange={(v) =>
+                      onValueChange={() =>
                         onChange({
                           ...element,
                           config: { ...element.config, type: position.name },
@@ -345,7 +345,9 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                         },
                       })
                     }
-                    defaultSelectedKeys={[element.config.styles.labelFontFamily] || 'Roboto'}
+                    defaultSelectedKeys={
+                      element.config.styles.labelFontFamily ? [element.config.styles.labelFontFamily] : 'Roboto'
+                    }
                     value={element.config.styles.labelFontFamily || 'Roboto'}
                   >
                     {fontFamily.map((font) => (
@@ -418,7 +420,12 @@ const StandardStackedBarConfig = ({ element, onChange }) => {
                   <p>Label Font Color</p>
                   <ColorPicker
                     color={element.config.labelFontColor}
-                    onChange={(color) => onChange({ ...element, config: { ...element.config, labelFontColor: color } })}
+                    onChange={(color) =>
+                      onChange({
+                        ...element,
+                        config: { ...element.config, labelFontColor: color },
+                      })
+                    }
                     trigger={
                       <div
                         tabIndex="0"

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Button, Tooltip } from '@heroui/react';
 import { ElementPropTypes } from '@/lib/prop-types';

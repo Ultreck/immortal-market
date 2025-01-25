@@ -1,5 +1,4 @@
 import { Button, Card } from '@heroui/react';
-import React from 'react';
 import { Bar, BarChart, Legend, Tooltip } from 'recharts';
 
 const data = [
@@ -47,7 +46,8 @@ const data = [
   },
 ];
 
-export const CustomTooltip = ({ active, payload, label }) => {
+// eslint-disable-next-line react/prop-types
+export const CustomTooltip = ({ active, payload = [] }) => {
   if (active && payload && payload.length) {
     return (
       <Card className="px-8 py-6 w-56 text-sm">

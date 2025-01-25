@@ -1,10 +1,10 @@
-import React from 'react';
 import { Tab, Tabs } from '@heroui/react';
 import Layouts from '@/components/core/templates/create/sidebar/build/Layouts.jsx';
 import Templates from '@/components/core/templates/create/sidebar/build/Templates.jsx';
+import { useState } from 'react';
 
 const Build = () => {
-  const [tab, setTab] = React.useState('templates');
+  const [tab, setTab] = useState('templates');
 
   return (
     <div>

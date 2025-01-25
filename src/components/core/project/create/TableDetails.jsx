@@ -3,13 +3,13 @@ import TableColumns from '@/components/core/project/create/TableColumns.jsx';
 import PropTypes from 'prop-types';
 import Title from '@/components/core/shared/Title.jsx';
 import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, useDisclosure } from '@heroui/react';
-import React from 'react';
 import TableRecords from '@/components/core/project/create/TableRecords.jsx';
 import CreateRelationship from '@/components/core/project/create/CreateRelationship.jsx';
 import { TbPlus } from 'react-icons/tb';
+import { useState } from 'react';
 
 const TableDetails = ({ table }) => {
-  const [tab, setTab] = React.useState('columns');
+  const [tab, setTab] = useState('columns');
   const { isOpen: isConnectOpen, onOpenChange: onConnectOpenChange } = useDisclosure();
 
   return (
