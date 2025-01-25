@@ -269,6 +269,13 @@ export const getElementDefaultStyle = ({ type, name }) => {
   if (tools.length === 0) return {};
   let styles = {
     order: null,
+    transitionGroup: {
+      duration: null,
+      delay: null,
+      type: null,
+      name: null,
+      elements: [],
+    },
   };
   if (tools.includes('font')) {
     styles = {

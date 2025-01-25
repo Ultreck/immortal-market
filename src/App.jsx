@@ -39,6 +39,7 @@ import SvgShapes from '@/components/core/SvgShapes.jsx';
 import ProjectsPage from '@/pages/ProjectsPage.jsx';
 import AppsPage from '@/pages/AppsPage.jsx';
 import ChatWidget from '@/components/core/templates/create/ChatWidget.jsx';
+import MarketPage from '@/pages/market/MarketPage.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -82,6 +83,14 @@ const App = () => {
             <Route path="security" element={<SecuritySettingsPage />} />
           </Route>
         </Route>
+        <Route
+          path="markets"
+          element={
+            <RequireAuthBusiness>
+              <MarketPage />
+            </RequireAuthBusiness>
+          }
+        />
         <Route
           path="designs/:id/edit"
           element={

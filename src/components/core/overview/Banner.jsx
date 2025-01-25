@@ -20,6 +20,7 @@ import {
 import { SiAmazondynamodb, SiMariadb, SiOracle, SiPostgresql } from 'react-icons/si';
 import { cn } from '@/lib/utils.js';
 import useProjectStore from '@/store/project.js';
+import { useNavigate } from 'react-router-dom';
 
 const gradients = [
   'bg-[linear-gradient(270deg,_rgb(169,_223,_246)_1.69%,_rgb(195,_241,_250)_100%)]',
@@ -35,6 +36,7 @@ const gradients = [
 const Banner = () => {
   const [view, setView] = useState('design');
   const openProjectModal = useProjectStore((state) => state.openModal);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -247,7 +249,10 @@ const Banner = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col rounded-3xl bg-default-100 dark:bg-default-50">
+                <div
+                  className="flex flex-col rounded-3xl bg-default-100 dark:bg-default-50"
+                  onClick={() => navigate('/markets')}
+                >
                   <div className="w-full">
                     <img
                       src="https://picsum.photos/152"
