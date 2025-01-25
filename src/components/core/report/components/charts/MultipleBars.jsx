@@ -1,5 +1,5 @@
 import { Button, Card, Tooltip } from '@nextui-org/react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const MultipleBars = () => {
   const data = [
@@ -27,7 +27,7 @@ const MultipleBars = () => {
                   <div className="px-2 py-4 w-[150px]">
                     <div className="font-bold text-5xl">
                       {' '}
-                      {item.value1 } <span></span>{' '}
+                      {item.value1} <span></span>{' '}
                     </div>
                     <div className="mt-5">
                       <p className="text-xs">
@@ -63,7 +63,7 @@ const MultipleBars = () => {
                   <div className="px-2 py-4 w-[150px]">
                     <div className="font-bold text-5xl">
                       {' '}
-                      {item.value2 } <span></span>{' '}
+                      {item.value2} <span></span>{' '}
                     </div>
                     <div className="mt-5">
                       <p className="text-xs">
@@ -81,16 +81,16 @@ const MultipleBars = () => {
                 }
                 placement="top"
               >
-              <motion.div
-                className="bg-red-500"
-                style={{
-                  width: `${(item.value2 / maxValue) * 800}px`,
-                  height: '2.5rem',
-                }}
-                initial={{ width: 0 }}
-                animate={{ width: `${(item.value2 / maxValue) * 800}px` }}
-                transition={{ duration: 0.5 }}
-              />
+                <motion.div
+                  className="bg-red-500"
+                  style={{
+                    width: `${(item.value2 / maxValue) * 800}px`,
+                    height: '2.5rem',
+                  }}
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(item.value2 / maxValue) * 800}px` }}
+                  transition={{ duration: 0.5 }}
+                />
               </Tooltip>
             </div>
           </div>
@@ -102,4 +102,3 @@ const MultipleBars = () => {
 };
 
 export default MultipleBars;
-

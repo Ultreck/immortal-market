@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Card } from '@nextui-org/react';
 
 const colors = [
@@ -28,7 +28,7 @@ const CandyBarChart = () => {
       <div className="flex flex-col items-start">
         {data.map((item, index) => (
           <>
-          <div className='font-medium text-xl text-black'>{item.name}</div>
+            <div className="font-medium text-xl text-black">{item.name}</div>
             <div key={index} className="flex items-center w-full">
               <motion.div
                 initial={{ width: 0 }}
@@ -55,4 +55,3 @@ const CandyBarChart = () => {
 };
 
 export default CandyBarChart;
-

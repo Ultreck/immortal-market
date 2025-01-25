@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Button, Card, Tooltip } from '@nextui-org/react';
 
 const data = [
@@ -23,9 +23,7 @@ const MultiSquare = () => {
             size="lg"
             content={
               <div className="px-2 py-4 w-[150px]">
-                <div className="font-bold text-4xl">
-                  {item.setting}
-                </div>
+                <div className="font-bold text-4xl">{item.setting}</div>
                 <div className="mt-5">
                   <p className="text-xs">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci, autem.</p>
                   <p className="text-xs mt-3">
@@ -62,4 +60,3 @@ const MultiSquare = () => {
 };
 
 export default MultiSquare;
-

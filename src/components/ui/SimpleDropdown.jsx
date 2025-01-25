@@ -1,6 +1,6 @@
 import { Menu } from '@headlessui/react';
 import classNames from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import PropTypes from 'prop-types';
 
 const SimpleDropdown = ({ trigger, items, direction = 'bottom-right' }) => {

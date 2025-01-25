@@ -2,7 +2,7 @@ import { Button, Divider, Input, Popover, PopoverContent, PopoverTrigger, Tab, T
 import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
 import { HiCheck } from 'react-icons/hi2';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import Eyedropper from '../../../../../../ui/Eyedropper.jsx';
 import { extractColorsFromGradient } from '@/lib/utils.js';
 import { useEffect, useState } from 'react';

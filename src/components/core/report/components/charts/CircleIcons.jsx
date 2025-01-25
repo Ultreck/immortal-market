@@ -1,4 +1,4 @@
-import { motion, stagger } from 'framer-motion';
+import { motion, stagger } from 'motion/react';
 import PropTypes from 'prop-types';
 import Card from '@/components/ui/Card.jsx';
 import { cn, getPercentages } from '../../../../../lib/utils';
@@ -8,7 +8,7 @@ const CircleIcons = ({ data }) => {
 
   return (
     <Card className="space-y-6 w-full bg-default-300 px-20 py-16 mt-10">
-      <p className='text-black'>Alot of business can not do the needful so we must find a good way to do it.</p>
+      <p className="text-black">Alot of business can not do the needful so we must find a good way to do it.</p>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} layout className="flex items-center pt-40 pb-36">
         {data
           .sort((a, b) => +b.value - +a.value)
@@ -65,4 +65,3 @@ CircleIcons.propTypes = {
 };
 
 export default CircleIcons;
-

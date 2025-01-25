@@ -6,7 +6,7 @@ import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useQueryClient } from '@tanstack/react-query';
 import { Spinner } from '@nextui-org/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import PropTypes from 'prop-types';
 
 const PageTitle = ({ id }) => {

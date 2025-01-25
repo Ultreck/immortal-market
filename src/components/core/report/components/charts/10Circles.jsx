@@ -1,5 +1,5 @@
 import { Button, Card, Tooltip } from '@nextui-org/react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const TenCircles = ({ percentage = 65 }) => {
   const circles = [];
@@ -15,7 +15,7 @@ const TenCircles = ({ percentage = 65 }) => {
         className={`w-8 h-8 rounded-full mx-2 mb-4 ${isColored ? 'bg-green-800' : 'bg-gray-500'}`}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 0.2, }}
+        transition={{ duration: 0.2 }}
         whileHover={{ scale: 1.5 }}
       />
     );

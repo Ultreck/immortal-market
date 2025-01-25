@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Backdrop from './Backdrop.jsx';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { useMediaQuery } from 'react-responsive';
 import { Button, cn } from '@nextui-org/react';
 import { TbX } from 'react-icons/tb';

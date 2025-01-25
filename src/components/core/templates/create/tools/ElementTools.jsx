@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import Background from './elements/generic/Background.jsx';
 import ChartConfig from './elements/specific/ChartConfig.jsx';
 import useTemplateStore from '@/store/template.js';

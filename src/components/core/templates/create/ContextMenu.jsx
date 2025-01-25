@@ -15,7 +15,7 @@ import {
   LuSendToBack,
   LuUngroup,
 } from 'react-icons/lu';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import {
   RiAlignItemBottomLine,
   RiAlignItemHorizontalCenterLine,

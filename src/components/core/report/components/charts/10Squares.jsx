@@ -1,5 +1,5 @@
 import { Button, Card, Tooltip } from '@nextui-org/react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const TenSquares = ({ percentage = 35 }) => {
   const squares = [];
@@ -16,7 +16,6 @@ const TenSquares = ({ percentage = 35 }) => {
         animate={{ scale: 1 }}
         transition={{ duration: 0.2 }}
         whileHover={{ scale: 1.5 }}
-
       />
     );
   }
@@ -49,4 +48,3 @@ const TenSquares = ({ percentage = 35 }) => {
 };
 
 export default TenSquares;
-

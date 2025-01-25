@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import PropTypes from 'prop-types';
 import { getPercentagesMax } from '../../../../../lib/utils';
 import { Button, Card, Tooltip } from '@nextui-org/react';
@@ -32,7 +32,7 @@ const NewVerticalBar = ({ title, data }) => {
                 content={
                   <div className="px-1 py-2">
                     <div className="font-bold">Custom Content</div>
-                    <div className="">This is {percentages[index]}% </div>
+                    <div className="">This is {percentages[index]}%</div>
                     <Button size="sm" className="mt-10 bg-white text-black">
                       View
                     </Button>

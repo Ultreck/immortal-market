@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ReactTyped } from 'react-typed';
 import { HiOutlineChartBar, HiOutlinePlus, HiOutlinePresentationChartBar } from 'react-icons/hi2';
 import { HiOutlineDocumentReport, HiOutlineSwitchHorizontal, HiOutlineViewGrid } from 'react-icons/hi';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { RiRobot2Line } from 'react-icons/ri';
 import {
   TbBrandGoogleDrive,

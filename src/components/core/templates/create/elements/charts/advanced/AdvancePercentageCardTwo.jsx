@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const AdvancePercentageCardTwo = ({ element }) => {
   return <AdvancePercentageCardTwoElementContent element={element} />;

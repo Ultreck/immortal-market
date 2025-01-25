@@ -1,5 +1,5 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 function AdvanceSemiMeter({ element }) {
   const radius = 50;

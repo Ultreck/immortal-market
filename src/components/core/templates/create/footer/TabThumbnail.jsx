@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { cn } from '@/lib/utils.js';
 import { TbPlus } from 'react-icons/tb';
 import { Card } from '@nextui-org/react';
-import { Reorder } from 'framer-motion';
+import { Reorder } from 'motion/react';
 
 const TabThumbnail = () => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);

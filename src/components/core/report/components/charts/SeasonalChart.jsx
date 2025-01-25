@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Card } from '@nextui-org/react';
 
 const data = [
@@ -51,4 +51,3 @@ const SeasonalChart = () => {
 };
 
 export default SeasonalChart;
-

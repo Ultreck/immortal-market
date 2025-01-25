@@ -1,6 +1,6 @@
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import { cn } from '@/lib/utils.js';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import TableDetails from '@/components/core/project/create/TableDetails.jsx';
 import { useEffect, useState } from 'react';
 import { Button, Popover, PopoverContent, PopoverTrigger, Spinner, useDisclosure } from '@nextui-org/react';

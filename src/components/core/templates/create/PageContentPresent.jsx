@@ -2,7 +2,7 @@ import { createElement, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ElementWrapperPresent from '@/components/core/templates/create/ElementWrapperPresent.jsx';
 import { getElementConfig, getElementPresentComponent } from '@/lib/elements.js';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
 const PageContentPresent = ({ page }) => {
   const el = useRef(null);

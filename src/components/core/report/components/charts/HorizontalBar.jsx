@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Card from '@/components/ui/Card.jsx';
 import PropTypes from 'prop-types';
 import { getPercentagesMax } from '@/lib/utils.js';

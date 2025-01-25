@@ -1,5 +1,5 @@
 import { cn, getPercentagesMax } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Button, Tooltip } from '@nextui-org/react';
 import { Fragment, useMemo } from 'react';
 import { TbCircleFilled } from 'react-icons/tb';

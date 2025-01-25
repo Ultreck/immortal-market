@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import PropTypes from 'prop-types';
 import Card from '@/components/ui/Card.jsx';
 import { getPercentages, getRandomCoolColors } from '@/lib/utils.js';

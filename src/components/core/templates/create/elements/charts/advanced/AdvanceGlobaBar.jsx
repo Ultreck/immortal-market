@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const AdvanceGlobaBar = ({ element, onChange }) => {
   return <AdvanceGlobaBarContent element={element} onChange={onChange} />;

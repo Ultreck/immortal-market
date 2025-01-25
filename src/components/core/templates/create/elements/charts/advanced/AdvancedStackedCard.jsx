@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ElementPropTypes } from '@/lib/prop-types';
 import PropTypes from 'prop-types';
 import { formatChartValue } from '@/lib/utils.js';

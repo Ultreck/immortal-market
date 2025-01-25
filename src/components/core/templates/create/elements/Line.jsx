@@ -1,7 +1,7 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { useDrag } from '@use-gesture/react';
-import { motion, useMotionValue } from 'framer-motion';
+import { motion, useMotionValue } from 'motion/react';
 import { cn } from '@/lib/utils.js';
 
 export const Line = ({ element, selected, onClick, onChange }) => {

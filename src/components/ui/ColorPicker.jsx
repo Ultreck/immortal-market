@@ -2,7 +2,7 @@ import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@nextui-
 import { cn } from '@/lib/utils.js';
 import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { HiCheck } from 'react-icons/hi2';
 import Eyedropper from '@/components/ui/Eyedropper.jsx';
 import { useState } from 'react';

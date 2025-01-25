@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import PageDimensions from '@/components/core/templates/create/tools/page/PageDimensions.jsx';
 import PageBackground from '@/components/core/templates/create/tools/page/PageBackground.jsx';
 import useTemplateStore from '@/store/template.js';

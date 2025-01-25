@@ -1,4 +1,4 @@
-import { animate, useMotionValue } from 'framer-motion';
+import { animate, useMotionValue } from 'motion/react';
 import { useEffect, useState } from 'react';
 
 let delimiter = '';

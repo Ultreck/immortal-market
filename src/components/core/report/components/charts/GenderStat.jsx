@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Button, Card, Tooltip } from '@nextui-org/react';
 import { IoMan, IoWoman } from 'react-icons/io5';
 
@@ -17,11 +17,15 @@ const GenderStats = () => {
           size="lg"
           content={
             <div className="px-2 py-4 w-[150px]">
-              <div className="font-bold text-5xl"> {i + 1} <span></span> </div>
+              <div className="font-bold text-5xl">
+                {' '}
+                {i + 1} <span></span>
+              </div>
               <div className="mt-5">
-
-              <p className="text-xs">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci, autem.</p>
-              <p className="text-xs mt-3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci, autem.</p>
+                <p className="text-xs">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci, autem.</p>
+                <p className="text-xs mt-3">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci, autem.
+                </p>
               </div>
 
               <Button size="sm" className="mt-10 bg-white text-black">
@@ -71,4 +75,3 @@ const GenderStats = () => {
 };
 
 export default GenderStats;
-

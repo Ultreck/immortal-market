@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import CommentsList from './CommentsList.jsx';
 import CommentReplies from './CommentReplies.jsx';
 import useTemplateStore from '@/store/template';
