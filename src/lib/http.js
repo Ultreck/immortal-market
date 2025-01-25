@@ -9,6 +9,10 @@ const immortal = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL_IMMORTAL,
 });
 
+const market = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL_MARKET,
+});
+
 main.interceptors.request.use((config) => {
   const { intercept = true } = config;
   if (!intercept) return config;
@@ -25,7 +29,16 @@ immortal.interceptors.request.use((config) => {
   return config;
 });
 
+market.interceptors.request.use((config) => {
+  const { intercept = true } = config;
+  if (!intercept) return config;
+  const token = getCrossSubdomainCookie('token');
+  if (token) config.headers.authorization = `Bearer ${token}`;
+  return config;
+});
+
 export default {
   main,
   immortal,
+  market,
 };

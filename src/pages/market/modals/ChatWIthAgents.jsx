@@ -2,15 +2,12 @@ import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import { Avatar, Badge, Button, Input } from '@nextui-org/react';
 import { getImageLink } from '@/lib/utils.js';
-import { RiArrowRightLine, RiUser3Fill } from 'react-icons/ri';
-import { useCallback, useRef, useState } from 'react';
+import { RiUser3Fill } from 'react-icons/ri';
+import { useRef, useState } from 'react';
 import { TbDotsVertical, TbSend } from 'react-icons/tb';
 import { useToast } from '@/hooks/use-toast.jsx';
-import { useCreateChat, useGetChat } from '@/api/chat.js';
 import { useQueryClient } from '@tanstack/react-query';
-import { useIsomorphicLayoutEffect, useMount, useUnmount } from 'react-use';
 import { useAuth } from '@/hooks/use-auth.jsx';
-import { io } from 'socket.io-client';
 
 const ChatWIthAgentsModal = ({ isOpen, onClose, writers }) => {
   const [writer, setWriter] = useState(writers[0]);
@@ -193,8 +190,8 @@ const ChatWIthAgentsModal = ({ isOpen, onClose, writers }) => {
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-[1fr_100px] gap-4 absolute bottom-0 w-full px-6 py-4">
-            <div className="mx-auto flex max-w-4xl items-center space-x-2 px-8 md:px-10">
+          <div className="gap-4 absolute bottom-0 w-full px-6 py-4">
+            <div className="flex w-full items-center space-x-2 px-8 md:px-10">
               <Input
                 radius="full"
                 color="default"

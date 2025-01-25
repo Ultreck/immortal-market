@@ -1,27 +1,11 @@
-import axios from 'axios';
 import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query';
-import { getCrossSubdomainCookie } from '@/lib/utils.js';
-// import { getCrossSubdomainCookie } from '@/lib/utils';
-
-const baseURL = import.meta.env.VITE_PUBLIC_MARKET_API_URL;
-
-const http = axios.create({
-  baseURL,
-});
-
-http.interceptors.request.use((config) => {
-  const { intercept = true } = config;
-  if (!intercept) return config;
-  const token = getCrossSubdomainCookie('token');
-  if (token) config.headers.authorization = `Bearer ${token}`;
-  return config;
-});
+import http from '@/lib/http.js';
 
 export const useGetStocks = ({ country, search, enabled = true }) => {
   return useQuery({
     queryKey: ['market', country, 'stocks', search],
     queryFn: async () => {
-      const res = await http.get('/companies/stocks', {
+      const res = await http.market.get('/companies/stocks', {
         params: { country, search },
       });
       return res.data;
@@ -34,7 +18,7 @@ export const useGetStocksPaginated = ({ search, page = 1, limit = 10, country, e
   return useQuery({
     queryKey: ['market', country, 'stocks', search, page],
     queryFn: async () => {
-      const res = await http.get('/companies/stocks', {
+      const res = await http.market.get('/companies/stocks', {
         params: { page, search, limit, country },
       });
       return res.data;
@@ -48,11 +32,9 @@ export const useGetBullsRun = ({ page = 1, limit = 10, selectedQuery, enabled = 
   return useQuery({
     queryKey: ['market', 'stocks', page, 'bull-runs', selectedQuery.key],
     queryFn: async () => {
-      const res = await http.get(`http://localhost:2000/prices/${selectedQuery.key}`, {
+      const res = await http.market.get(`/prices/${selectedQuery.key}`, {
         params: { page, limit },
       });
-
-      console.log(res);
       return res.data;
     },
     enabled,
@@ -64,7 +46,7 @@ export const useGetStock = ({ id }) => {
   return useQuery({
     queryKey: ['market', 'stocks', id],
     queryFn: async () => {
-      const res = await http.get(`/companies/stocks/${id}`);
+      const res = await http.market.get(`/companies/stocks/${id}`);
       return res.data;
     },
     enabled: !!id,
@@ -75,7 +57,7 @@ export const useGetTopPerformingStocks = ({ country, period, limit }) => {
   return useQuery({
     queryKey: ['market', country, 'companies', 'top', period, limit],
     queryFn: async () => {
-      const res = await http.get('/companies/stocks/top', { params: { country, period, limit } });
+      const res = await http.market.get('/companies/stocks/top', { params: { country, period, limit } });
       return res.data;
     },
     enabled: !!country,
@@ -86,7 +68,7 @@ export const useGetBottomPerformingStocks = ({ country, period, limit }) => {
   return useQuery({
     queryKey: ['market', country, 'companies', 'bottom', period, limit],
     queryFn: async () => {
-      const res = await http.get('/companies/stocks/bottom', { params: { country, period, limit } });
+      const res = await http.market.get('/companies/stocks/bottom', { params: { country, period, limit } });
       return res.data;
     },
     enabled: !!country,
@@ -97,7 +79,7 @@ export const useGetStockPrices = ({ stock, period }) => {
   return useQuery({
     queryKey: ['market', 'companies', stock, 'prices', period],
     queryFn: async () => {
-      const res = await http.get(`/companies/stocks/${stock}/prices`, { params: { period } });
+      const res = await http.market.get(`/companies/stocks/${stock}/prices`, { params: { period } });
       return res.data;
     },
     enabled: !!stock,
@@ -108,7 +90,7 @@ export const useGetStockFinancials = ({ stock }) => {
   return useQuery({
     queryKey: ['market', 'companies', stock, 'financials'],
     queryFn: async () => {
-      const res = await http.get(`/companies/stocks/${stock}/financials`);
+      const res = await http.market.get(`/companies/stocks/${stock}/financials`);
       return res.data;
     },
     enabled: !!stock,
@@ -118,7 +100,7 @@ export const useGetStockFinancials = ({ stock }) => {
 export const useAddToWatchList = () => {
   return useMutation({
     mutationFn: async ({ stock }) => {
-      return http.post(`/companies/watchlist`, { stock });
+      return http.post('/companies/watchlist', { stock });
     },
   });
 };
@@ -135,7 +117,7 @@ export const useGetWatchList = () => {
   return useQuery({
     queryKey: ['market', 'watchlist'],
     queryFn: async () => {
-      const res = await http.get('/companies/watchlist');
+      const res = await http.market.get('/companies/watchlist');
       return res.data;
     },
   });
