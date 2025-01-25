@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import SvgText from '@/components/ui/SvgText.jsx';
-import { Card, Tooltip } from '@nextui-org/react';
+import { Card, Tooltip } from '@heroui/react';
 import { cn } from '@/lib/utils.js';
 import { createPortal } from 'react-dom';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 
 const data = [
   { age: '18-34', spring: 20, summer: 30, fall: 26, winter: 13, color: 'bg-red-500' },

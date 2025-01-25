@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@heroui/react';
 import PropTypes from 'prop-types';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Checkbox, Select, SelectItem, Slider, Tab, Tabs } from '@nextui-org/react';
+import { Checkbox, Select, SelectItem, Slider, Tab, Tabs } from '@heroui/react';
 import { IconWithConfig } from './AdvancedPictogramShapesConfig';
 import { useState } from 'react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';

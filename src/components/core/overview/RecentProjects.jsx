@@ -1,6 +1,6 @@
 import { useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { Button, Skeleton } from '@nextui-org/react';
+import { Button, Skeleton } from '@heroui/react';
 import DesignCard from '@/components/core/project/DesignCard.jsx';
 import NoData from '@/components/ui/NoData.jsx';
 import { useNavigate } from 'react-router-dom';

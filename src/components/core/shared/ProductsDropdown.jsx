@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import { TbChevronRight, TbGridDots } from 'react-icons/tb';
 import { cn } from '@/lib/utils.js';
 import { RiBarChartLine, RiEarthLine, RiNewsLine } from 'react-icons/ri';

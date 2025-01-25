@@ -1,5 +1,5 @@
 import { isValidJsonArray } from '@/lib/utils.js';
-import { Textarea } from '@nextui-org/react';
+import { Textarea } from '@heroui/react';
 import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 

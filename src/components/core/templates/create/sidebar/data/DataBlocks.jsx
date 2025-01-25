@@ -1,6 +1,6 @@
 import { useGetDesignBlocks } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { Image, Skeleton } from '@nextui-org/react';
+import { Image, Skeleton } from '@heroui/react';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { getImageLink } from '@/lib/utils.js';
 

@@ -1,4 +1,4 @@
-import { Chip, Skeleton, useDisclosure } from '@nextui-org/react';
+import { Chip, Skeleton, useDisclosure } from '@heroui/react';
 import DesignCard from '@/components/core/project/DesignCard.jsx';
 import NoData from '@/components/ui/NoData.jsx';
 import { useGetTemplates } from '@/api/business.js';

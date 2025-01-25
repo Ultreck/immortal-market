@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Popover } from '@nextui-org/react';
+import { Popover } from '@heroui/react';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import PropTypes from 'prop-types';

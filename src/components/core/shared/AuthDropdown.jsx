@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownSection,
-  DropdownTrigger,
-  User,
-} from '@nextui-org/react';
+import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, User } from '@heroui/react';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import { cn, getImageLink } from '@/lib/utils.js';
 import { TbCheck, TbHelp, TbLogout, TbUser } from 'react-icons/tb';

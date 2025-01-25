@@ -1,4 +1,4 @@
-import { Checkbox } from '@nextui-org/react';
+import { Checkbox } from '@heroui/react';
 import PropTypes from 'prop-types';
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';

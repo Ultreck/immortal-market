@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import { formatDistanceToNow } from 'date-fns';
 import { HiDotsHorizontal } from 'react-icons/hi';

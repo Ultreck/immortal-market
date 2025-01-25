@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Backdrop from './Backdrop.jsx';
 import { AnimatePresence, motion } from 'motion/react';
 import { useMediaQuery } from 'react-responsive';
-import { Button, cn } from '@nextui-org/react';
+import { Button, cn } from '@heroui/react';
 import { TbX } from 'react-icons/tb';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';

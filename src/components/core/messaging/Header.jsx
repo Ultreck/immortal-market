@@ -3,7 +3,7 @@
 
 import { HiChevronLeft } from 'react-icons/hi'
 import { IoClose } from 'react-icons/io5';
-import { Avatar } from '@nextui-org/react';
+import { Avatar } from '@heroui/react';
 import clsx from 'clsx';
 
 
@@ -15,32 +15,32 @@ const Header = ({onClose, setshowchatContainer, selectedUserData}) => {
 
   return (
   <>
-    <div 
+    <div
       className="
-        bg-white 
+        bg-white
         dark:bg-zinc-800
-        w-full 
-        flex 
-        border-b-[1px] 
+        w-full
+        flex
+        border-b-[1px]
         dark:border-b-zinc-700
-        sm:px-4 
-        py-3 
-        px-4 
-        lg:px-6 
-        justify-between 
-        items-center 
+        sm:px-4
+        py-3
+        px-4
+        lg:px-6
+        justify-between
+        items-center
         shadow-sm
       "
-    > 
+    >
       <div className="flex gap-2 items-center">
         <div
         onClick={setshowchatContainer}
           className="
-            md:hidden 
-            block 
-            text-sky-500 
-            hover:text-sky-600 
-            transition 
+            md:hidden
+            block
+            text-sky-500
+            hover:text-sky-600
+            transition
             cursor-pointer
           "
         >
@@ -48,7 +48,7 @@ const Header = ({onClose, setshowchatContainer, selectedUserData}) => {
         </div>
 
           <div className='relative'>
-           
+
                 <Avatar
                   size="md"
                  name='N'
@@ -61,11 +61,11 @@ const Header = ({onClose, setshowchatContainer, selectedUserData}) => {
                   />
                 </div>
           </div>
-        
+
         <div className="flex flex-col">
           <div className='text-[0.82rem]'>{selectedUserData?.name}</div>
           <div className='text-[0.59rem] text-slate-500 flex gap-x-3 flex-wrap'>
-           
+
             <div className='flex gap-x-1 items-center'>
               <div className='w-1 h-1 rounded-full bg-slate-500'></div>
               <span>{selectedUserData?.name}</span>
@@ -83,14 +83,14 @@ const Header = ({onClose, setshowchatContainer, selectedUserData}) => {
         </div>
       </div>
 
-      
+
       <div className="flex gap-4">
-       
+
           <div></div>
           <IoClose
             size={32}
             onClick={onClose}
-            className=" 
+            className="
               cursor-pointer
               rounded-md bg-white dark:bg-zinc-700/60 text-gray-400 hover:text-gray-500 outline-none hover:border-btnColor hover:border-2
               transition
@@ -104,5 +104,5 @@ const Header = ({onClose, setshowchatContainer, selectedUserData}) => {
     </>
   );
 }
- 
+
 export default Header;

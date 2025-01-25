@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea } from '@heroui/react';
 import { TbSettings2 } from 'react-icons/tb';
 import { Controller, useForm } from 'react-hook-form';
 import { isValidJsonArray } from '@/lib/utils.js';

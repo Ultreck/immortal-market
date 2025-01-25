@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button, Modal, ModalBody, ModalContent } from '@nextui-org/react';
+import { Button, Modal, ModalBody, ModalContent } from '@heroui/react';
 import { useUpdateDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';

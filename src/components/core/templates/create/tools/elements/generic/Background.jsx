@@ -1,4 +1,4 @@
-import { Button, Divider, Input, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
+import { Button, Divider, Input, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@heroui/react';
 import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';
 import { HiCheck } from 'react-icons/hi2';

@@ -1,4 +1,4 @@
-import { Button, Card } from '@nextui-org/react';
+import { Button, Card } from '@heroui/react';
 import React from 'react';
 import { Bar, BarChart, Legend, Tooltip } from 'recharts';
 

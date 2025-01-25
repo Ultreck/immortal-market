@@ -1,6 +1,6 @@
 import { useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { Input, Skeleton } from '@nextui-org/react';
+import { Input, Skeleton } from '@heroui/react';
 import { RiAddLine } from 'react-icons/ri';
 import DesignCard from '@/components/core/project/DesignCard.jsx';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';

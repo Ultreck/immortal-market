@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { isValidJsonArray } from '@/lib/utils.js';
-import { Button, Tab, Tabs, Textarea } from '@nextui-org/react';
+import { Button, Tab, Tabs, Textarea } from '@heroui/react';
 import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 

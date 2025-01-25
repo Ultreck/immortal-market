@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import QueryProvider from '@/components/QueryProvider.jsx';
 import { AuthProvider } from '@/hooks/use-auth.jsx';
 import { ToastProvider } from '@/hooks/use-toast.jsx';
-import { NextUIProvider } from '@nextui-org/react';
+import { HeroUIProvider } from '@heroui/react';
 import PropTypes from 'prop-types';
 
 const Providers = ({ children }) => {
@@ -12,7 +12,7 @@ const Providers = ({ children }) => {
     <QueryProvider>
       <AuthProvider>
         <ToastProvider>
-          <NextUIProvider navigate={navigate}>{children}</NextUIProvider>
+          <HeroUIProvider navigate={navigate}>{children}</HeroUIProvider>
         </ToastProvider>
       </AuthProvider>
     </QueryProvider>

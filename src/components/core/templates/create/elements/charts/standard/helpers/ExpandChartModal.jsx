@@ -13,7 +13,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from '@nextui-org/react';
+} from '@heroui/react';
 
 const ExpandChartModal = ({ element, isOpen, onClose }) => {
   const columns = Object.keys(element.config.data[0]).map((key) => ({ key, label: key }));

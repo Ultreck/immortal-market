@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Tab, Tabs } from '@nextui-org/react';
+import { Tab, Tabs } from '@heroui/react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import FrameContents from '@/components/core/templates/create/elements/frames/FrameContents.jsx';
 

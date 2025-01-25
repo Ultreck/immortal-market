@@ -1,5 +1,5 @@
 import { HiColorSwatch } from 'react-icons/hi';
-import { Button, ButtonGroup, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import { Button, ButtonGroup, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { HiChevronDown } from 'react-icons/hi2';
 import { useTernaryDarkMode } from 'usehooks-ts';
 

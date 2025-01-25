@@ -1,4 +1,4 @@
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@nextui-org/react';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@heroui/react';
 import { TbBookDownload, TbBookUpload, TbDotsVertical, TbTrash } from 'react-icons/tb';
 import DeleteModal from '@/components/core/templates/create/footer/DeleteModal.jsx';
 import PublishModal from '@/components/core/templates/create/footer/PublishModal.jsx';

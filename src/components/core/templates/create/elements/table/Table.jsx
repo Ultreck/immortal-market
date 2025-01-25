@@ -8,7 +8,7 @@ import MergeOptions from '@/components/core/templates/create/elements/table/Merg
 import DeleteOptions from '@/components/core/templates/create/elements/table/DeleteOptions.jsx';
 import FontOptions from '@/components/core/templates/create/elements/table/FontOptions.jsx';
 import BackgroundOptions from '@/components/core/templates/create/elements/table/BackgroundOptions.jsx';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { useToast } from '@/hooks/use-toast.jsx';
 
 const getMaxColumns = (data) => {

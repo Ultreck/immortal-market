@@ -1,5 +1,4 @@
-
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 

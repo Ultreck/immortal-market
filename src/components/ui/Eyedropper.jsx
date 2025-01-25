@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import html2canvas from 'html2canvas';
 import Portal from './Portal.js';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { TbColorPicker } from 'react-icons/tb';
 import { cn } from '@/lib/utils.js';
 

@@ -6,7 +6,7 @@ import SelectTemplate from '@/components/core/project/create/SelectTemplate.jsx'
 import useProjectStore from '@/store/project.js';
 import { LuCombine, LuWorkflow } from 'react-icons/lu';
 import PreviewData from '@/components/core/project/create/PreviewData.jsx';
-import { Drawer, DrawerContent } from '@nextui-org/react';
+import { Drawer, DrawerContent } from '@heroui/react';
 import ReportOption from '@/components/core/project/create/ReportOption.jsx';
 import Summary from '@/components/core/project/create/Summary.jsx';
 import Combinations from '@/components/core/project/create/Combinations.jsx';

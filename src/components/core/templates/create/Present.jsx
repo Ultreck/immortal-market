@@ -1,7 +1,7 @@
 import PageContentPresent from '@/components/core/templates/create/PageContentPresent.jsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Button, Slider } from '@nextui-org/react';
+import { Button, Slider } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 
 const Present = ({ pages = [] }) => {

@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbBold, TbItalic, TbUnderline } from 'react-icons/tb';
 import NumberInput from '@/components/ui/NumberInput.jsx';

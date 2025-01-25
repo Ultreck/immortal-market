@@ -1,4 +1,4 @@
-import { Button, Input } from '@nextui-org/react';
+import { Button, Input } from '@heroui/react';
 import { TbMinus, TbPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils.js';

@@ -1,7 +1,7 @@
 import RecentProjects from '@/components/core/overview/RecentProjects.jsx';
 import PopularTemplates from '@/components/core/overview/PopularTemplates.jsx';
 import { TbSearch } from 'react-icons/tb';
-import { Input } from '@nextui-org/react';
+import { Input } from '@heroui/react';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import Banner from '@/components/core/overview/Banner.jsx';
 

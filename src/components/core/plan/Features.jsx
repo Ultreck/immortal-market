@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from '@nextui-org/react';
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from '@heroui/react';
 import { IconInfoCircle } from '@tabler/icons-react';
 import { TbCircleCheckFilled } from 'react-icons/tb';
 import plans from '@/lib/plans.js';

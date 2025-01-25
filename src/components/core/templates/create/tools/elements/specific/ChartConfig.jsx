@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbSettings2 } from 'react-icons/tb';
 import StandardStackedBarConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardStackedBarConfig.jsx';

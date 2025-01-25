@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { LuMessageCircle } from 'react-icons/lu';
 import useTemplateStore from '@/store/template.js';
 import useBusiness from '@/hooks/use-business';

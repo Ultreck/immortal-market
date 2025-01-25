@@ -1,4 +1,4 @@
-import { Card, Listbox, ListboxItem, User } from '@nextui-org/react';
+import { Card, Listbox, ListboxItem, User } from '@heroui/react';
 import {
   HiBell,
   HiBriefcase,

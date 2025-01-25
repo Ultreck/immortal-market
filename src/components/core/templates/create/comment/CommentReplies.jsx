@@ -1,7 +1,7 @@
 import { useGetComments } from '@/api/business';
 import useBusiness from '@/hooks/use-business';
 import useTemplateStore from '@/store/template';
-import { Button, Skeleton } from '@nextui-org/react';
+import { Button, Skeleton } from '@heroui/react';
 import { TbChevronLeft } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import NoData from '@/components/ui/NoData.jsx';

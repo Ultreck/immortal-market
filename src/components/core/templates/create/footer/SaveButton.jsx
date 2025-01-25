@@ -7,7 +7,7 @@ import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { useQueryClient } from '@tanstack/react-query';
 import { BsCloudArrowDown, BsCloudCheck } from 'react-icons/bs';
-import { Button, Tooltip } from '@nextui-org/react';
+import { Button, Tooltip } from '@heroui/react';
 import equal from 'fast-deep-equal/es6/react';
 import { objectToFormData } from '@/lib/utils.js';
 

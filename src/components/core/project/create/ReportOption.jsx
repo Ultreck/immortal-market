@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Card } from '@nextui-org/react';
+import { Button, Card } from '@heroui/react';
 import { cn } from '@/lib/utils.js';
 import { TbChevronRight, TbCircleCheckFilled, TbForms, TbRobot } from 'react-icons/tb';
 import PropTypes from 'prop-types';

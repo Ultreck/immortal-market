@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { getImageLink } from '@/lib/utils.js';
 import { Navigation, Pagination } from 'swiper/modules';
-import { Image } from '@nextui-org/react';
+import { Image } from '@heroui/react';
 import PropTypes from 'prop-types';
 
 const ThumbnailsCarousel = ({ thumbnails }) => {

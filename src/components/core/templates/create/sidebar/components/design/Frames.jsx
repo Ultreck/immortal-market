@@ -1,7 +1,7 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import BasicCarousel from '@/components/ui/BasicCarousel';
 import shapes from '@/lib/design/shapes.js';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { RiCheckboxMultipleBlankFill } from 'react-icons/ri';
 import { TbCarouselHorizontalFilled, TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';

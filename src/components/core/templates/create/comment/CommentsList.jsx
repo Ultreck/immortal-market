@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Skeleton, Tooltip } from '@nextui-org/react';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Skeleton, Tooltip } from '@heroui/react';
 import useBusiness from '@/hooks/use-business';
 import useTemplateStore from '@/store/template';
 import { useGetComments } from '@/api/business';

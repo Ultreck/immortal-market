@@ -1,6 +1,6 @@
 import { RiAlertLine } from 'react-icons/ri';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import useProjectStore from '@/store/project.js';
 
 const DataNotConfiguredOverlay = () => {

@@ -4,7 +4,7 @@ import useTemplateStore from '@/store/template.js';
 import { useUpdateDesignSource } from '@/api/business.js';
 import { Controller, useForm } from 'react-hook-form';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Divider, Select, SelectItem } from '@nextui-org/react';
+import { Button, Divider, Select, SelectItem } from '@heroui/react';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 

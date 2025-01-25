@@ -1,4 +1,4 @@
-import { Button, Select, SelectItem } from '@nextui-org/react';
+import { Button, Select, SelectItem } from '@heroui/react';
 import Title from '../../shared/Title.jsx';
 import PropTypes from 'prop-types';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';

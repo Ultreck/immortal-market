@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@heroui/react';
 import { RiFontFamily } from 'react-icons/ri';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import { TbBold, TbItalic, TbUnderline } from 'react-icons/tb';

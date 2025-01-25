@@ -1,7 +1,7 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 

@@ -5,7 +5,7 @@ import useBusiness from '@/hooks/use-business.js';
 import { useParams } from 'react-router-dom';
 import { cn } from '@/lib/utils.js';
 import { TbPlus } from 'react-icons/tb';
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 import { Reorder } from 'motion/react';
 
 const TabThumbnail = () => {

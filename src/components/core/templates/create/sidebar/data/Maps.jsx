@@ -2,7 +2,7 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import { capitalize } from '@/lib/utils.js';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 import PropTypes from 'prop-types';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import { MapOceanicPreview } from '@/components/core/templates/create/elements/maps/MapOceanic.jsx';
 import { MapNorthAmericaPreview } from '@/components/core/templates/create/elements/maps/MapNorthAmerica.jsx';

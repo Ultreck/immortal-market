@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import useTemplateStore from '@/store/template.js';
 import { cn } from '@/lib/utils.js';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { RiCloseFill } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 
@@ -20,7 +20,7 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
         'border-primary-500 dark:border-primary-400': active,
       })}
       {...props}
-    > 
+    >
       <div
         onClick={() => selectElements([element.id])}
         className={cn(

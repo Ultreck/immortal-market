@@ -1,12 +1,5 @@
 import { TbDotsVertical, TbPlus, TbTemplate } from 'react-icons/tb';
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownSection,
-  DropdownTrigger,
-  useDisclosure,
-} from '@nextui-org/react';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, useDisclosure } from '@heroui/react';
 import useTemplateStore from '@/store/template.js';
 import PageBlocksModal from '@/components/core/templates/create/PageBlocksModal.jsx';
 

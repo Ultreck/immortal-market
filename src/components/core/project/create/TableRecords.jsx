@@ -14,7 +14,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import PropTypes from 'prop-types';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { TbDatabaseOff } from 'react-icons/tb';

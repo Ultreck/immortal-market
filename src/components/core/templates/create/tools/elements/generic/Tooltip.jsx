@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@heroui/react';
 import { TbAbc, TbChartBar, TbChartLine, TbChartPie, TbCircleLetterT } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';

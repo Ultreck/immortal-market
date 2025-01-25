@@ -1,4 +1,4 @@
-import { Input, Select, SelectItem, Slider } from '@nextui-org/react';
+import { Input, Select, SelectItem, Slider } from '@heroui/react';
 import PropTypes from 'prop-types';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';

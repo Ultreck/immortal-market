@@ -1,6 +1,6 @@
 import PageIndicator from '@/components/core/templates/create/footer/PageIndicator.jsx';
 import ZoomSlider from '@/components/core/templates/create/footer/ZoomSlider.jsx';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import useTemplateStore from '@/store/template.js';
 import SaveButton from '@/components/core/templates/create/footer/SaveButton.jsx';
 import DesignOptions from '@/components/core/templates/create/footer/DesignOptions.jsx';

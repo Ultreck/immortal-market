@@ -1,5 +1,5 @@
 import useBusiness from '@/hooks/use-business.js';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { HiOutlineExternalLink } from 'react-icons/hi';
 
 const BusinessSettingsPage = () => {

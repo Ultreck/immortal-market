@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { standard } from '@/lib/design/charts.jsx';
 import PropTypes from 'prop-types';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 
 const ChangeChart = ({ element, onChange, onBack }) => {

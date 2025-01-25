@@ -1,10 +1,10 @@
-import { nextui } from '@nextui-org/react';
+import { heroui } from '@heroui/react';
 import tailwindAnimate from 'tailwindcss-animate';
 
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}'],
   prefix: '',
   theme: {
     container: {
@@ -59,7 +59,7 @@ export default {
   },
   plugins: [
     tailwindAnimate,
-    nextui({
+    heroui({
       themes: {
         light: {
           colors: {

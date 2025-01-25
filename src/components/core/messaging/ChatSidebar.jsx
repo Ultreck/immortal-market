@@ -2,8 +2,8 @@
 
 
 import { MdCancel } from "react-icons/md";
-import allUser from "./data";
-import { Avatar } from "@nextui-org/react";
+import allUser from './data';
+import { Avatar } from '@heroui/react';
 import { IconSearch } from "@tabler/icons-react";
 
 
@@ -74,10 +74,10 @@ const ChatSidebar = ({
 
       <div className="py-4 text-gray-400">
         <div className="flex flex-col space-y-4">
-         
+
           <div className=" max-h-[90vh]  overflow-y-auto px-3 pb-10 scrollbar-hide ">
 
-            
+
             {
 
 
@@ -96,21 +96,21 @@ const ChatSidebar = ({
                           name={user.name[0]}
                           className=" cursor-pointer"
                         />
-                    
+
                     </div>
 
                     {/* <span className=" truncate w-[8.5rem] text-gray-700 font-medium text-[0.85rem]">{user?.name}</span> */}
 
-                   
+
                        <div className="flex flex-col gap-y-1 w-[8rem]">
                           <span className=" truncate w-[8rem] text-xs font-medium text-slate-200/80">{user.name}</span>
                           <span className=" truncate w-[8rem] text-[0.55rem] ">Ada, Siji and 27 others</span>
-                  
+
                         </div>
                   </div>
                 </div>
               ))
-                  
+
             }
 
 

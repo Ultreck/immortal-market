@@ -1,4 +1,4 @@
-import { Button, Image, Input, Skeleton } from '@nextui-org/react';
+import { Button, Image, Input, Skeleton } from '@heroui/react';
 import { useState } from 'react';
 import { useDebounce } from 'react-use';
 import { useGetImagesFromUnsplash, useSearchImagesFromUnsplash } from '@/api/misc.js';

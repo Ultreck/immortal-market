@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/use-auth.jsx';
 import PropTypes from 'prop-types';
 import Button from '@/components/ui/Button.jsx';
 import { TbNetworkOff } from 'react-icons/tb';
-import { Spinner } from '@nextui-org/react';
+import { Spinner } from '@heroui/react';
 
 const ACCOUNT_URL = import.meta.env.VITE_ACCOUNT_URL;
 

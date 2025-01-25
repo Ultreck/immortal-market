@@ -2,7 +2,7 @@ import Texts from '@/components/core/templates/create/sidebar/components/design/
 import Shapes from '@/components/core/templates/create/sidebar/components/design/Shapes.jsx';
 import Frames from '@/components/core/templates/create/sidebar/components/design/Frames.jsx';
 import Icons from '@/components/core/templates/create/sidebar/components/design/Icons.jsx';
-import { Accordion, AccordionItem } from '@nextui-org/react';
+import { Accordion, AccordionItem } from '@heroui/react';
 import {
   TbAbc,
   TbChartBar,

@@ -1,13 +1,4 @@
-import {
-  Button,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Radio,
-  RadioGroup,
-  Select,
-  SelectItem,
-} from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Radio, RadioGroup, Select, SelectItem } from '@heroui/react';
 import { RiSettingsLine } from 'react-icons/ri';
 import { Controller, useForm } from 'react-hook-form';
 import NumberInput from '@/components/ui/NumberInput.jsx';

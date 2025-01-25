@@ -1,5 +1,5 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { Skeleton } from '@nextui-org/react';
+import { Skeleton } from '@heroui/react';
 import { useGetSvgCodeFromUrl } from '@/api/misc.js';
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';

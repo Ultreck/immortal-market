@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
-import { Checkbox, Input, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
+import { Checkbox, Input, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@heroui/react';
 import { createElement, useState } from 'react';
 import icons from '@/lib/design/icons.js';
 import { TbUser } from 'react-icons/tb';

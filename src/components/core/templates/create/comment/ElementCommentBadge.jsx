@@ -1,4 +1,4 @@
-import { Avatar, Tooltip } from '@nextui-org/react';
+import { Avatar, Tooltip } from '@heroui/react';
 import { RiChat3Fill } from 'react-icons/ri';
 import { getImageLink } from '@/lib/utils.js';
 import useBusiness from '@/hooks/use-business.js';

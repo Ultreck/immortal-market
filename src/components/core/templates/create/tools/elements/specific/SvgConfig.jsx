@@ -1,7 +1,7 @@
 import { useGetSvgCodeFromUrl } from '@/api/misc.js';
 import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import { TbSettings2 } from 'react-icons/tb';
 import { HexColorPicker } from 'react-colorful';
 import { cn } from '@/lib/utils.js';

@@ -1,4 +1,4 @@
-import { Button, Card, Spinner } from '@nextui-org/react';
+import { Button, Card, Spinner } from '@heroui/react';
 import PropTypes from 'prop-types';
 import Title from '../../shared/Title.jsx';
 import {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Checkbox, Select, SelectItem, Slider, Tab, Tabs } from '@nextui-org/react';
+import { Checkbox, Select, SelectItem, Slider, Tab, Tabs } from '@heroui/react';
 import { TbChartLine, TbTimeline } from 'react-icons/tb';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import PropTypes from 'prop-types';

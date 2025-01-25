@@ -16,7 +16,7 @@ import {
   TableRow,
   useDisclosure,
   User,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import { format } from 'date-fns';
 import { TbDotsVertical, TbPlus, TbSearch } from 'react-icons/tb';

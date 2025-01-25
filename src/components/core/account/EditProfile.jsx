@@ -7,7 +7,7 @@ import { useToast } from '@/hooks/use-toast.jsx';
 import 'react-advanced-cropper/dist/style.css';
 import { imageFileToBase64 } from '@/lib/utils.js';
 import Image from '@/components/core/shared/Image.jsx';
-import { Button, Input, Modal, ModalBody, ModalContent, Select, SelectItem, Textarea } from '@nextui-org/react';
+import { Button, Input, Modal, ModalBody, ModalContent, Select, SelectItem, Textarea } from '@heroui/react';
 import { useUpdateAccount } from '@/api/auth.js';
 
 const MAX_FILE_SIZE_IN_MB = 5;
@@ -279,7 +279,6 @@ const EditProfile = ({ onClose }) => {
           </Button>
         </div>
       </form>
-
       <Modal size="md" isOpen={isCropperModalOpen} onClose={() => setIsCropperModalOpen(false)} hideCloseButton>
         <ModalContent>
           <ModalBody className="p-6">

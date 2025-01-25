@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteItem, Button } from '@nextui-org/react';
+import { Autocomplete, AutocompleteItem, Button } from '@heroui/react';
 import { TbMinus, TbPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useRef } from 'react';

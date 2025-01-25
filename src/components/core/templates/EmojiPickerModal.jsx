@@ -1,7 +1,7 @@
 import Picker from '@emoji-mart/react';
 import data from '@emoji-mart/data';
 import PropTypes from 'prop-types';
-import { Modal, ModalBody, ModalContent } from '@nextui-org/react';
+import { Modal, ModalBody, ModalContent } from '@heroui/react';
 
 const EmojiPickerModal = ({ isOpen, onClose, onEmojiSelect }) => {
   if (!isOpen) return null; // Don't render if the modal is closed
@@ -10,12 +10,12 @@ const EmojiPickerModal = ({ isOpen, onClose, onEmojiSelect }) => {
     <Modal isOpen={isOpen} onClose={onClose} hideCloseButton>
       <ModalContent>
         <ModalBody className="p-4">
-          <Picker 
-            data={data} 
+          <Picker
+            data={data}
             onEmojiSelect={(emoji) => {
               onEmojiSelect(emoji);
               onClose(); // Close modal after emoji selection
-            }} 
+            }}
           />
         </ModalBody>
       </ModalContent>

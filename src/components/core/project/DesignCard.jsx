@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Image } from '@nextui-org/react';
+import { Image } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import { TbPhotoCircle } from 'react-icons/tb';
 import PropTypes from 'prop-types';

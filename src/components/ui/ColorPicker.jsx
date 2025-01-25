@@ -1,4 +1,4 @@
-import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import { cn } from '@/lib/utils.js';
 import { HexAlphaColorPicker } from 'react-colorful';
 import PropTypes from 'prop-types';

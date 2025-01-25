@@ -1,4 +1,4 @@
-import { Button, cn } from '@nextui-org/react';
+import { Button, cn } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { HiChevronLeft } from 'react-icons/hi';
 

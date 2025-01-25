@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 
 const AltPieChart = () => {
   const chartRef = useRef(null);

@@ -1,4 +1,4 @@
-import { Button, Card, Tooltip } from '@nextui-org/react';
+import { Button, Card, Tooltip } from '@heroui/react';
 import { motion } from 'motion/react';
 
 const TenSquares = ({ percentage = 35 }) => {

@@ -2,7 +2,7 @@ import DesignBuilder from '@/components/core/templates/create/DesignBuilder.jsx'
 import { useParams } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import useTemplateStore from '@/store/template.js';
-import { Spinner } from '@nextui-org/react';
+import { Spinner } from '@heroui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import useBusiness from '@/hooks/use-business.js';

@@ -1,4 +1,4 @@
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 import React, { useMemo } from 'react';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Cell, ResponsiveContainer } from 'recharts';
 

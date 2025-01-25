@@ -2,7 +2,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useCreateBusinessMutation } from '@/api/business.js';
 import { industries, sizes } from '@/lib/options.js';
-import { Button, Input, Select, SelectItem, Textarea } from '@nextui-org/react';
+import { Button, Input, Select, SelectItem, Textarea } from '@heroui/react';
 import { useNavigate } from 'react-router-dom';
 
 const CreateBusiness = () => {

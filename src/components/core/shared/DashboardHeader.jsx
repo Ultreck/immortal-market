@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { LuBell, LuCircleHelp } from 'react-icons/lu';
 import AuthDropdown from '@/components/core/shared/AuthDropdown.jsx';
 import { cn } from '@/lib/utils.js';

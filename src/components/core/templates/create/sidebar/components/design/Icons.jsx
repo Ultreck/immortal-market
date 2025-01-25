@@ -3,7 +3,7 @@ import { createElement } from 'react';
 import icons from '@/lib/design/icons.js';
 import BasicCarousel from '@/components/ui/BasicCarousel';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 

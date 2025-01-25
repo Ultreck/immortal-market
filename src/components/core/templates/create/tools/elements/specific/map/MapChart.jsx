@@ -1,4 +1,4 @@
-import { Checkbox, Tooltip } from '@nextui-org/react';
+import { Checkbox, Tooltip } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbChartBar, TbChartLine, TbChartPie } from 'react-icons/tb';
 

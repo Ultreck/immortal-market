@@ -2,7 +2,7 @@ import useTemplateStore from '@/store/template.js';
 import { useCreateDesign, useGetDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import PropTypes from 'prop-types';
-import { Button, Skeleton } from '@nextui-org/react';
+import { Button, Skeleton } from '@heroui/react';
 import { TbPhotoCircle } from 'react-icons/tb';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { useNavigate } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Image, Skeleton } from '@nextui-org/react';
+import { Button, Image, Skeleton } from '@heroui/react';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';

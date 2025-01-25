@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Accordion, AccordionItem, Tab, Tabs } from '@nextui-org/react';
+import { Accordion, AccordionItem, Tab, Tabs } from '@heroui/react';
 import ExternalImages from '@/components/core/templates/create/sidebar/images/ExternalImages.jsx';
 import UploadedImages from '@/components/core/templates/create/sidebar/images/UploadedImages.jsx';
 import Svgs from './Svgs.jsx';

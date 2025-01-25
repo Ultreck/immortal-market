@@ -4,7 +4,7 @@ import { cn, getImageLink } from '@/lib/utils.js';
 import Elements from '@/components/core/templates/create/sidebar/components/Elements.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
-import { Avatar, Tooltip } from '@nextui-org/react';
+import { Avatar, Tooltip } from '@heroui/react';
 import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
 import { TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';

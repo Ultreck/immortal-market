@@ -1,4 +1,4 @@
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 import { ClockIcon } from '../../icons/clock';
 import { ArrowUpIcon } from '../../icons/arrowUp';
 import { DollarIcon } from '../../icons/dollar';

@@ -3,7 +3,7 @@ import Drawer from '@/components/ui/Drawer.jsx';
 import { useChangePassword } from '@/api/auth.js';
 import { useToast } from '@/hooks/use-toast';
 import PropTypes from 'prop-types';
-import { Button, Input } from '@nextui-org/react';
+import { Button, Input } from '@heroui/react';
 import { useState } from 'react';
 import Success from '@/components/ui/Success.jsx';
 

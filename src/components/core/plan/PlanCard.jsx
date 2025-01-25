@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { TbCircleCheckFilled } from 'react-icons/tb';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import plans from '@/lib/plans.js';
 
 let _plans = plans.filter((p) => p.featured);

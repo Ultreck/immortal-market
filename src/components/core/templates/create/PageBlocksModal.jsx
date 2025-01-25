@@ -1,7 +1,7 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import { useGetDesignBlocks } from '@/api/business.js';
-import { Chip, Image, Skeleton } from '@nextui-org/react';
+import { Chip, Image, Skeleton } from '@heroui/react';
 import useBusiness from '@/hooks/use-business.js';
 import { getImageLink } from '@/lib/utils.js';
 import useTemplateStore from '@/store/template.js';

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Modal, ModalBody, ModalContent } from '@nextui-org/react';
+import { Modal, ModalBody, ModalContent } from '@heroui/react';
 import CreateComment from '@/components/core/templates/create/comment/CreateComment.jsx';
 
 const CreateCommentModal = ({ target, targetId, page, isOpen, onClose }) => {

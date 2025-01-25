@@ -1,10 +1,9 @@
-import { Image } from '@nextui-org/react';
+import { Image } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import { TbPhotoCircle } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
 const TemplateCard = ({ title, thumbnail, onClick }) => {
-
   return (
     <div>
       <div

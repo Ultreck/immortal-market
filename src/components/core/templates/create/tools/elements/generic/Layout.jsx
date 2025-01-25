@@ -1,5 +1,5 @@
 import NumberInput from '@/components/ui/NumberInput';
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { RxDimensions } from 'react-icons/rx';
 import useTemplateStore from '@/store/template.js';

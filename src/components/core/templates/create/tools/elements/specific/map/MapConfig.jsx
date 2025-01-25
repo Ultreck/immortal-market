@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@heroui/react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import MapData from '@/components/core/templates/create/tools/elements/specific/map/MapData.jsx';

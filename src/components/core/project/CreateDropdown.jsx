@@ -1,4 +1,4 @@
-import { Button, cn, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/react';
+import { Button, cn, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@heroui/react';
 import { RiAddLine, RiFileAddLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 import useProjectStore from '@/store/project.js';

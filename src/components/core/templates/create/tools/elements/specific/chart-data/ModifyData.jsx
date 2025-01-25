@@ -1,4 +1,4 @@
-import { Button, Input } from '@nextui-org/react';
+import { Button, Input } from '@heroui/react';
 import { TbCirclePlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { RiArrowLeftSLine } from 'react-icons/ri';

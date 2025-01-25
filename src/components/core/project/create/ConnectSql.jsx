@@ -1,5 +1,5 @@
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Checkbox, Input, Select, SelectItem } from '@nextui-org/react';
+import { Button, Checkbox, Input, Select, SelectItem } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';

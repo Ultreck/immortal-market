@@ -1,5 +1,5 @@
 import useTemplateStore from '@/store/template.js';
-import { Slider } from '@nextui-org/react';
+import { Slider } from '@heroui/react';
 
 const ZoomSlider = () => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);

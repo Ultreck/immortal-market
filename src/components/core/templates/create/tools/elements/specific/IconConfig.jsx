@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils.js';
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import { createElement } from 'react';
 import { TbSettings2 } from 'react-icons/tb';
 import PropTypes from 'prop-types';

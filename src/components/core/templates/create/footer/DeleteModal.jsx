@@ -1,4 +1,4 @@
-import { Button, Modal, ModalBody, ModalContent } from '@nextui-org/react';
+import { Button, Modal, ModalBody, ModalContent } from '@heroui/react';
 import { useDeleteDesign } from '@/api/business.js';
 import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast.jsx';

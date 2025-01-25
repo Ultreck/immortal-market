@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast.jsx';
 import Title from '@/components/core/shared/Title.jsx';
-import { Accordion, AccordionItem, Button, Checkbox } from '@nextui-org/react';
+import { Accordion, AccordionItem, Button, Checkbox } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';

@@ -1,5 +1,5 @@
 import { isValidJsonArray } from '@/lib/utils.js';
-import { Button, Checkbox, Tab, Tabs, Textarea } from '@nextui-org/react';
+import { Button, Checkbox, Tab, Tabs, Textarea } from '@heroui/react';
 import { Controller, useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { useState } from 'react';

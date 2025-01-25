@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Tooltip } from '@nextui-org/react';
+import { Avatar, AvatarGroup, Tooltip } from '@heroui/react';
 import { TbPlus } from 'react-icons/tb';
 import CreateDropdown from '../project/CreateDropdown';
 

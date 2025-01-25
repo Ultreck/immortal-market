@@ -14,7 +14,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { TbDotsVertical } from 'react-icons/tb';
 import useBusiness from '@/hooks/use-business.js';
 import { format } from 'date-fns';

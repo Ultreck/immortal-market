@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 
 const data = [
   { size: 500, color: 'bg-blue-500' },

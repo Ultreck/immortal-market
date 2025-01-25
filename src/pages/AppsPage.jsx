@@ -1,6 +1,6 @@
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import { TbSearch } from 'react-icons/tb';
-import { Input, ScrollShadow } from '@nextui-org/react';
+import { Input, ScrollShadow } from '@heroui/react';
 import { FaPlusSquare, FaRegBookmark, FaRegHeart } from 'react-icons/fa';
 import { FiShare2 } from 'react-icons/fi';
 import { ReactTyped } from 'react-typed';

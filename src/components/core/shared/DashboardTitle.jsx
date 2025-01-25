@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils.js';
-import { BreadcrumbItem, Breadcrumbs, Divider } from '@nextui-org/react';
+import { BreadcrumbItem, Breadcrumbs, Divider } from '@heroui/react';
 import { useNavigate } from 'react-router-dom';
 
 const DashboardTitle = ({ text, breadcrumbs = [], className, after, ...props }) => {

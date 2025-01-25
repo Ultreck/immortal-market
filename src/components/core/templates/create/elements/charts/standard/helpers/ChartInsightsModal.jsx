@@ -1,7 +1,7 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import StandardChartsPresent from '@/components/core/templates/create/elements/charts/standard/StandardChartsPresent.jsx';
-import { Button, Select, SelectItem } from '@nextui-org/react';
+import { Button, Select, SelectItem } from '@heroui/react';
 import { HiX } from 'react-icons/hi';
 import { HiOutlineChartPie } from 'react-icons/hi2';
 

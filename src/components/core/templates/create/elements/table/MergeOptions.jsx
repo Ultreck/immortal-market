@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 

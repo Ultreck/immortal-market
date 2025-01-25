@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Checkbox } from '@nextui-org/react';
+import { Checkbox } from '@heroui/react';
 import PropTypes from 'prop-types';
 
 const StandardAltBarConfig = ({ element, onChange }) => {

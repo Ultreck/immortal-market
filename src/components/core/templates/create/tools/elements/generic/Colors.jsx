@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs } from '@heroui/react';
 import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TbCheck } from 'react-icons/tb';

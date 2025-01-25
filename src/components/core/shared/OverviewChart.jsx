@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import DoughnutChart from './DoughnutChart';
-import { Card, Tab, Tabs } from '@nextui-org/react';
+import { Card, Tab, Tabs } from '@heroui/react';
 
 const data = {
   traffic: [

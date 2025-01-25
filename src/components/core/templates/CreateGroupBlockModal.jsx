@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button, Modal, ModalBody, ModalContent, Select, SelectItem } from '@nextui-org/react';
+import { Button, Modal, ModalBody, ModalContent, Select, SelectItem } from '@heroui/react';
 import ElementsPreview from '@/components/core/templates/create/ElementsPreview.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { Controller, useForm } from 'react-hook-form';

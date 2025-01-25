@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { LuGalleryThumbnails } from 'react-icons/lu';
 import useTemplateStore from '@/store/template.js';
 import { TbLayoutList } from 'react-icons/tb';

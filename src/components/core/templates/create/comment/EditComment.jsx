@@ -3,7 +3,7 @@ import useBusiness from '@/hooks/use-business.js';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { useState } from 'react';
 import useTemplateStore from '@/store/template.js';
-import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@heroui/react';
 import { useUpdateComment } from '@/api/business.js';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 import { LuSmilePlus } from 'react-icons/lu';

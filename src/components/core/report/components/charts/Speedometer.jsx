@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 
 const SpeedometerGauge = () => {
   const chartRef = useRef(null);

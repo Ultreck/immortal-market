@@ -1,4 +1,4 @@
-import { Card, Chip } from '@nextui-org/react';
+import { Card, Chip } from '@heroui/react';
 import { RiFileExcel2Line } from 'react-icons/ri';
 import {
   TbBrandGoogleDrive,

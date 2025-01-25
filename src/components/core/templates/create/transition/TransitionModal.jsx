@@ -5,7 +5,7 @@ import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } 
 import NoData from '@/components/ui/NoData.jsx';
 import { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { cn } from '@nextui-org/react';
+import { cn } from '@heroui/react';
 import { CSS } from '@dnd-kit/utilities';
 import { RiCloseFill } from 'react-icons/ri';
 

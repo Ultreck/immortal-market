@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import TableColumns from '@/components/core/project/create/TableColumns.jsx';
 import PropTypes from 'prop-types';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, useDisclosure } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, useDisclosure } from '@heroui/react';
 import React from 'react';
 import TableRecords from '@/components/core/project/create/TableRecords.jsx';
 import CreateRelationship from '@/components/core/project/create/CreateRelationship.jsx';

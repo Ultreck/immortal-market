@@ -1,7 +1,7 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { TbPhotoCircle, TbX } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import { useTemplate } from '@/api/business.js';

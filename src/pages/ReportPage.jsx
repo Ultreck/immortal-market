@@ -9,7 +9,7 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { TbChevronDown, TbLayout2, TbRefresh, TbUpload } from 'react-icons/tb';
 
 const ReportPage = () => {

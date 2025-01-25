@@ -1,6 +1,6 @@
 import { useCreateUploadMutation, useGetUploads } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { Image, Skeleton } from '@nextui-org/react';
+import { Image, Skeleton } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import { useToast } from '@/hooks/use-toast.jsx';

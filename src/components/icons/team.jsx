@@ -1,4 +1,4 @@
-import { cn } from '@nextui-org/react';
+import { cn } from '@heroui/react';
 import PropTypes from 'prop-types'
 const Team = ({big= false}) => {
   return (

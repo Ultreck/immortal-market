@@ -9,7 +9,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
   Spinner,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import { camelCaseToWords, kebabToWords } from '@/lib/utils.js';

@@ -1,4 +1,4 @@
-import { Chip, Input, Skeleton, Spinner, useDisclosure } from '@nextui-org/react';
+import { Chip, Input, Skeleton, Spinner, useDisclosure } from '@heroui/react';
 import { useCreateDesign, useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';

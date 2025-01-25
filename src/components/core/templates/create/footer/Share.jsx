@@ -1,12 +1,4 @@
-import {
-  Button,
-  Listbox,
-  ListboxItem,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  useDisclosure,
-} from '@nextui-org/react';
+import { Button, Listbox, ListboxItem, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@heroui/react';
 import { TbDownload, TbShare, TbShare2 } from 'react-icons/tb';
 import { RiArrowRightSLine, RiLink, RiVideoLine } from 'react-icons/ri';
 import { useToast } from '@/hooks/use-toast.jsx';

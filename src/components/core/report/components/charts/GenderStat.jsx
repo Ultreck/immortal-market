@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Button, Card, Tooltip } from '@nextui-org/react';
+import { Button, Card, Tooltip } from '@heroui/react';
 import { IoMan, IoWoman } from 'react-icons/io5';
 
 const GenderStats = () => {

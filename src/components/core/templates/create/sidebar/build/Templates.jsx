@@ -1,5 +1,5 @@
 import { useGetTemplates } from '@/api/business.js';
-import { Image, Input, Popover, PopoverContent, PopoverTrigger, Skeleton, useDisclosure } from '@nextui-org/react';
+import { Image, Input, Popover, PopoverContent, PopoverTrigger, Skeleton, useDisclosure } from '@heroui/react';
 import { TbPhotoCircle, TbSearch } from 'react-icons/tb';
 import { getImageLink } from '@/lib/utils.js';
 import ApplyTemplate from '@/components/core/templates/create/sidebar/build/ApplyTemplate.jsx';

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
 import axios from 'axios';
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 import { lifeChartData } from '@/lib/design/chart-data.js';
 
 const countryColors = {

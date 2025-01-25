@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import ElementModal from '@/components/core/templates/create/ElementModal.jsx';
-import { useDisclosure } from '@nextui-org/react';
+import { useDisclosure } from '@heroui/react';
 import { cn } from '@/lib/utils.js';
 
 const ElementWrapperPresent = ({ element, children }) => {

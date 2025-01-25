@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils.js';
 import { AnimatePresence } from 'motion/react';
 import TableDetails from '@/components/core/project/create/TableDetails.jsx';
 import { useEffect, useState } from 'react';
-import { Button, Popover, PopoverContent, PopoverTrigger, Spinner, useDisclosure } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Spinner, useDisclosure } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useGenerateCombinations } from '@/api/business.js';

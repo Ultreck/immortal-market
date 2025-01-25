@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@heroui/react';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
 import { HiOutlineTag, HiTag } from 'react-icons/hi2';

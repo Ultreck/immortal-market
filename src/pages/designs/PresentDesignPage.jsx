@@ -1,7 +1,7 @@
 import { useGetDesign } from '@/api/business.js';
 import { useParams } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
-import { Spinner } from '@nextui-org/react';
+import { Spinner } from '@heroui/react';
 import Present from '@/components/core/templates/create/Present.jsx';
 
 const PresentDesignPage = () => {

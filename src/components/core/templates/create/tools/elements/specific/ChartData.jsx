@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import { RiFontFamily } from 'react-icons/ri';
 import { TbArrowsExchange, TbChartPie, TbEye, TbReplace, TbSquareRoundedPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';

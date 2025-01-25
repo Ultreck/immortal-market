@@ -2,7 +2,7 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import BasicCarousel from '@/components/ui/BasicCarousel';
 import shapes from '@/lib/design/shapes.js';
 import { capitalize } from '@/lib/utils.js';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight, TbLine } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { getElementDefaultStyle } from '@/lib/elements.js';

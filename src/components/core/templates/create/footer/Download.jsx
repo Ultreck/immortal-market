@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Button, Select, SelectItem } from '@nextui-org/react';
+import { Button, Select, SelectItem } from '@heroui/react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { toBlob } from 'html-to-image';

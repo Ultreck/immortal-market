@@ -1,6 +1,6 @@
-import { capitalize, getKeysFromJson, isValidJsonArray } from '@/lib/utils.js';
-import { Button, Select, SelectItem, Slider, Textarea } from '@nextui-org/react';
-import { Controller, useForm } from 'react-hook-form';
+import { getKeysFromJson } from '@/lib/utils.js';
+import { Slider } from '@heroui/react';
+import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 const AdvanceSpeedometerConfig = ({ element, onChange }) => {
@@ -51,7 +51,7 @@ const AdvanceSpeedometerConfig = ({ element, onChange }) => {
         />
       )}
       {element.config.name === 'speedometer-multiple' && (
-         <div className="text">{"There's no settings for this chart"}</div>
+        <div className="text">{"There's no settings for this chart"}</div>
         // <form onSubmit={handleSubmit(onSubmit)}>
         //   <Controller
         //     name="json"

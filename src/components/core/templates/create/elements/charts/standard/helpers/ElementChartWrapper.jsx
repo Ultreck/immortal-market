@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button, useDisclosure } from '@nextui-org/react';
+import { Button, useDisclosure } from '@heroui/react';
 import { HiOutlineEye } from 'react-icons/hi2';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import ExpandChartModal from '@/components/core/templates/create/elements/charts/standard/helpers/ExpandChartModal.jsx';

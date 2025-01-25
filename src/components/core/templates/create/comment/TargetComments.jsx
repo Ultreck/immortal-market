@@ -1,4 +1,4 @@
-import { Button, Skeleton } from '@nextui-org/react';
+import { Button, Skeleton } from '@heroui/react';
 import CommentItem from '@/components/core/templates/create/comment/CommentItem.jsx';
 import NoData from '@/components/ui/NoData.jsx';
 import { useGetComments } from '@/api/business.js';

@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useGetInvitation, useRespondToInvitationMutation } from '@/api/business.js';
-import { Button, Card, CardBody, Skeleton } from '@nextui-org/react';
+import { Button, Card, CardBody, Skeleton } from '@heroui/react';
 import Logo from '@/components/core/shared/Logo.jsx';
 import { useDarkMode } from 'usehooks-ts';
 import { format, formatDistanceToNow, isBefore } from 'date-fns';

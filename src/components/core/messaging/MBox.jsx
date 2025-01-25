@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { format } from 'date-fns';
-import { Avatar } from '@nextui-org/react';
+import { Avatar } from '@heroui/react';
 import { ImFilePdf } from 'react-icons/im';
 import { BsFiletypeDoc, BsFiletypeDocx } from 'react-icons/bs';
 import { GrDocumentCsv, GrDocumentZip } from 'react-icons/gr';

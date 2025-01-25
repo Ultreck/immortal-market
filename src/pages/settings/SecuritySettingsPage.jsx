@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ChangePasswordModal from '@/components/core/account/ChangePasswordModal';
 import { LuKeyRound } from 'react-icons/lu';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { TbAuth2Fa } from 'react-icons/tb';
 
 const SecuritySettings = () => {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Checkbox, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@nextui-org/react';
+import { Checkbox, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@heroui/react';
 import icons from '@/lib/design/icons.js';
 import { HexColorPicker } from 'react-colorful';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';

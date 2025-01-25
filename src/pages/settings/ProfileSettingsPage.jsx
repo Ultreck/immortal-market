@@ -3,7 +3,7 @@ import { useState } from 'react';
 import EditProfile from '@/components/core/account/EditProfile.jsx';
 import Image from '@/components/core/shared/Image.jsx';
 import { TbEdit } from 'react-icons/tb';
-import { Button, Chip } from '@nextui-org/react';
+import { Button, Chip } from '@heroui/react';
 
 const ProfileSettingsPage = () => {
   const { user } = useAuth();

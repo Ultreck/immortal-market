@@ -1,7 +1,7 @@
 import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import { TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbPlus, TbTrash } from 'react-icons/tb';
-import { Listbox, ListboxItem, useDisclosure } from '@nextui-org/react';
+import { Listbox, ListboxItem, useDisclosure } from '@heroui/react';
 import { createPortal } from 'react-dom';
 import { useEffect, useMemo } from 'react';
 import LinkTool from './LinkModal.jsx';

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Autocomplete, AutocompleteItem, Button, Modal, ModalBody, ModalContent } from '@nextui-org/react';
+import { Autocomplete, AutocompleteItem, Button, Modal, ModalBody, ModalContent } from '@heroui/react';
 import { TbLinkOff } from 'react-icons/tb';
 import useTemplateStore from '@/store/template.js';
 import { useState } from 'react';

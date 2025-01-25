@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import { useGetUserBusiness } from '@/api/business.js';
 import PropTypes from 'prop-types';
-import { Button, Spinner } from '@nextui-org/react';
+import { Button, Spinner } from '@heroui/react';
 import { TbNetworkOff } from 'react-icons/tb';
 import useBusinessStore from '@/store/business.js';
 

@@ -1,4 +1,4 @@
-import { Button, cn, Popover, PopoverContent, PopoverTrigger, Switch } from '@nextui-org/react';
+import { Button, cn, Popover, PopoverContent, PopoverTrigger, Switch } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbSettings2 } from 'react-icons/tb';
 import useTemplateStore from '@/store/template.js';

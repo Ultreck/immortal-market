@@ -1,12 +1,4 @@
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  Tooltip,
-  useDisclosure,
-} from '@nextui-org/react';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip, useDisclosure } from '@heroui/react';
 import {
   TbChevronDown,
   TbChevronUp,

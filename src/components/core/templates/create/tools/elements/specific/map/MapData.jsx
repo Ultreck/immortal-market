@@ -1,4 +1,4 @@
-import { Input } from '@nextui-org/react';
+import { Input } from '@heroui/react';
 import PropTypes from 'prop-types';
 import fields from '@/lib/design/map.js';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';

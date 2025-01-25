@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab, Tabs } from '@nextui-org/react';
+import { Tab, Tabs } from '@heroui/react';
 import Layouts from '@/components/core/templates/create/sidebar/build/Layouts.jsx';
 import Templates from '@/components/core/templates/create/sidebar/build/Templates.jsx';
 

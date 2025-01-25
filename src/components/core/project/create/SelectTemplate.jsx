@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import useProjectStore from '@/store/project.js';
-import { Button, Chip, Input, Skeleton } from '@nextui-org/react';
+import { Button, Chip, Input, Skeleton } from '@heroui/react';
 import { useGetTemplates } from '@/api/business.js';
 import { TbChevronLeft, TbChevronRight, TbFileOff, TbPhotoCircle, TbSearch } from 'react-icons/tb';
 import { useState } from 'react';

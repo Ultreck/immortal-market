@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import PropTypes from 'prop-types';
 import { getPercentagesMax } from '../../../../../lib/utils';
-import { Button, Card, Tooltip } from '@nextui-org/react';
+import { Button, Card, Tooltip } from '@heroui/react';
 
 const colors = [
   '#0d47a1',

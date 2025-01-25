@@ -1,4 +1,4 @@
-import { Checkbox, Select, SelectItem, Slider } from '@nextui-org/react';
+import { Checkbox, Select, SelectItem, Slider } from '@heroui/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { capitalize, fontFamily } from '@/lib/utils.js';
 import PropTypes from 'prop-types';

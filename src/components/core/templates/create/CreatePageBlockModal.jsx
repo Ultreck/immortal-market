@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
-import { Button, Card, CardBody, Modal, ModalBody, ModalContent, Select, SelectItem } from '@nextui-org/react';
+import { Button, Card, CardBody, Modal, ModalBody, ModalContent, Select, SelectItem } from '@heroui/react';
 import { Controller, useForm } from 'react-hook-form';
 import { useCreateDesignBlock } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';

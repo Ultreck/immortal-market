@@ -1,5 +1,5 @@
 import useTemplateStore from '@/store/template.js';
-import { Card, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image } from '@nextui-org/react';
+import { Card, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image } from '@heroui/react';
 import { cn, getImageLink } from '@/lib/utils.js';
 import { TbChevronDown, TbChevronUp, TbCopyPlus, TbDots, TbTrash } from 'react-icons/tb';
 import { useActions } from '@/hooks/template/use-actions.js';

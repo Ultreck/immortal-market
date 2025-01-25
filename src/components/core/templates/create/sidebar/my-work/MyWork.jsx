@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem } from '@nextui-org/react';
+import { Accordion, AccordionItem } from '@heroui/react';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { TbDatabase, TbFolders, TbTemplate } from 'react-icons/tb';
 

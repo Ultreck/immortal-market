@@ -1,7 +1,7 @@
 import TenSquares from './charts/10Squares';
 import TenCircles from './charts/10Circles';
 import PercentageAlone from './charts/PercentageAlone';
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 import { register } from 'swiper/element/bundle';
 import NewVerticalBar from './charts/NewVerticalBar';
 import CircleIcons from './charts/CircleIcons';
