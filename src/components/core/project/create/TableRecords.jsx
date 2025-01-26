@@ -117,7 +117,7 @@ const InsertData = () => {
         No data available, click the button below to insert data for all files
       </p>
       <Button
-        onClick={handleClick}
+        onPress={handleClick}
         isLoading={isProcessDataLoading}
         color="default"
         variant="bordered"

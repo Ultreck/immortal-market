@@ -176,7 +176,7 @@ const ModifyData = ({ element, onChange, onBack }) => {
   return (
     <div>
       <div className="flex items-center space-x-1 mb-6">
-        <Button onClick={onBack} variant="bordered" className="mr-2" radius="full" isIconOnly size="sm">
+        <Button onPress={onBack} variant="bordered" className="mr-2" radius="full" isIconOnly size="sm">
           <RiArrowLeftSLine size="20" />
         </Button>
         <h2 className="text-lg">Chart Data</h2>

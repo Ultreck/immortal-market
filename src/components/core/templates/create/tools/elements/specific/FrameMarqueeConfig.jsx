@@ -41,7 +41,7 @@ const FrameMarqueeConfig = ({ element, onChange }) => {
               isIconOnly
               variant="flat"
               className="text-base"
-              onClick={() => {
+              onPress={() => {
                 handleChange(Math.max(2, +element.config.slides - 1));
               }}
             >
@@ -52,7 +52,7 @@ const FrameMarqueeConfig = ({ element, onChange }) => {
               isIconOnly
               variant="flat"
               className="text-base"
-              onClick={() => {
+              onPress={() => {
                 handleChange(Math.max(2, +element.config.slides + 1));
               }}
             >
@@ -65,7 +65,7 @@ const FrameMarqueeConfig = ({ element, onChange }) => {
               isIconOnly
               variant="flat"
               className="text-base"
-              onClick={() => {
+              onPress={() => {
                 handleSlidesPerViewChange(Math.max(2, +element.config.slidesPerView - 1));
               }}
             >
@@ -81,7 +81,7 @@ const FrameMarqueeConfig = ({ element, onChange }) => {
               isIconOnly
               variant="flat"
               className="text-base"
-              onClick={() => {
+              onPress={() => {
                 handleSlidesPerViewChange(Math.max(2, +element.config.slidesPerView + 1));
               }}
             >
@@ -94,7 +94,7 @@ const FrameMarqueeConfig = ({ element, onChange }) => {
               isIconOnly
               variant="flat"
               className="text-base"
-              onClick={() => {
+              onPress={() => {
                 handleSlideSpeedChange(Math.max(2, +element.config.speed - 1));
               }}
             >
@@ -105,7 +105,7 @@ const FrameMarqueeConfig = ({ element, onChange }) => {
               isIconOnly
               variant="flat"
               className="text-base"
-              onClick={() => {
+              onPress={() => {
                 handleSlideSpeedChange(Math.max(2, +element.config.speed + 1));
               }}
             >

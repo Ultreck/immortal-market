@@ -109,7 +109,7 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
                     ) : (
                       <>
                         <Button
-                          onClick={handleNotify}
+                          onPress={handleNotify}
                           size="sm"
                           color="black"
                           variant="subtle"

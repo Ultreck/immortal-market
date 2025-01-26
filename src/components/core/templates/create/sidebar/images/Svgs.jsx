@@ -93,7 +93,7 @@ const Svgs = () => {
       )}
       {!!hasNextPage && (
         <Button
-          onClick={fetchNextPage}
+          onPress={fetchNextPage}
           variant="bordered"
           className="text-base w-full mt-8"
           radius="full"

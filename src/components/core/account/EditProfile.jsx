@@ -265,7 +265,7 @@ const EditProfile = ({ onClose }) => {
         <div className="mt-10 flex space-x-3">
           <Button
             type="button"
-            onClick={onClose}
+            onPress={onClose}
             isDisabled={isUpdateLoading}
             color="danger"
             variant="bordered"
@@ -290,10 +290,10 @@ const EditProfile = ({ onClose }) => {
               imageRestriction={ImageRestriction.fitArea}
             />
             <div className="mt-2 flex items-center justify-center space-x-4">
-              <Button onClick={onCancelCrop} color="danger" variant="bordered" radius="full" className="text-base">
+              <Button onPress={onCancelCrop} color="danger" variant="bordered" radius="full" className="text-base">
                 Cancel
               </Button>
-              <Button onClick={onCrop} color="success" radius="full" className="text-base">
+              <Button onPress={onCrop} color="success" radius="full" className="text-base">
                 Crop
               </Button>
             </div>

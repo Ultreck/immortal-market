@@ -63,7 +63,7 @@ const Drawer = ({ isOpen, title, padding = true, round = true, onClose, children
                   {!!title && (
                     <div className="mb-10 flex items-center justify-between">
                       <h3 className="text-xl font-semibold">{title}</h3>
-                      <Button onClick={onClose} isIconOnly size="sm" color="danger" variant="bordered" radius="full">
+                      <Button onPress={onClose} isIconOnly size="sm" color="danger" variant="bordered" radius="full">
                         <TbX size="20" />
                       </Button>
                     </div>

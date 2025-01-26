@@ -21,7 +21,7 @@ const Receipts = () => {
     <DashboardContent>
       <div className="flex items-center justify-between mb-10">
         <DashboardTitle text="Receipts" className="!m-0" />
-        <Button onClick={() => setIsNewOpen(true)} variant="outlined" color="primary" leftIcon={<IconPlus size="20" />}>
+        <Button onPress={() => setIsNewOpen(true)} variant="outlined" color="primary" leftIcon={<IconPlus size="20" />}>
           New receipt
         </Button>
       </div>

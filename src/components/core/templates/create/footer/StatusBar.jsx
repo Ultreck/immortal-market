@@ -29,7 +29,7 @@ const StatusBar = () => {
             variant="light"
             size="sm"
             isIconOnly
-            onClick={() => updateTemplate({ isTransitionOpen: true })}
+            onPress={() => updateTemplate({ isTransitionOpen: true })}
           >
             <MdOutlineAnimation size="20" />
           </Button>

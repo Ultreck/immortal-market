@@ -86,7 +86,7 @@ const NewCustomReport = ({ isOpen, onClose }) => {
                 <IconCircleCheckFilled size="80" className="text-green-600" />
                 <h6 className="text-xl mt-8 font-semibold max-w-xs">Analysis successful</h6>
                 <p className="max-w-xs mt-2">Click the button below to view analysis results</p>
-                <Button onClick={handleClose} variant="outlined" className="mt-8">
+                <Button onPress={handleClose} variant="outlined" className="mt-8">
                   Close
                 </Button>
               </div>
@@ -101,7 +101,7 @@ const NewCustomReport = ({ isOpen, onClose }) => {
                   <div className="h-full flex flex-col">
                     <div className="my-auto">
                       <Button
-                        onClick={handleChangeFile}
+                        onPress={handleChangeFile}
                         leftIcon={<IconArrowLeft size="18" />}
                         variant="outlined"
                         color="black"

@@ -84,11 +84,11 @@ const CommentItem = ({ comment, onClick, className }) => {
             <div className="absolute top-2 right-2 bg-white dark:bg-default-100 border border-default-100 rounded-2xl shadow opacity-0 group-hover:opacity-100 transition-opacity py-1 px-2">
               <Tooltip content={comment.resolved ? 'Restore' : 'Resolve'}>
                 {comment.resolved ? (
-                  <Button onClick={handleRestoreComment} isIconOnly variant="light" isLoading={isUpdateLoading}>
+                  <Button onPress={handleRestoreComment} isIconOnly variant="light" isLoading={isUpdateLoading}>
                     <HiReply size="20" />
                   </Button>
                 ) : (
-                  <Button onClick={handleResolveComment} isIconOnly variant="light" isLoading={isUpdateLoading}>
+                  <Button onPress={handleResolveComment} isIconOnly variant="light" isLoading={isUpdateLoading}>
                     <HiCheck size="20" />
                   </Button>
                 )}

@@ -61,7 +61,7 @@ const Download = ({ onBack }) => {
   return (
     <div className="w-full">
       <div className="flex items-center space-x-3 mb-6">
-        <Button variant="bordered" radius="full" size="sm" isIconOnly onClick={() => onBack()}>
+        <Button variant="bordered" radius="full" size="sm" isIconOnly onPress={() => onBack()}>
           <TbChevronLeft size="20" />
         </Button>
         <h2 className="text-base font-semibold">Download</h2>
@@ -86,7 +86,7 @@ const Download = ({ onBack }) => {
         className="mt-6 text-base"
         isLoading={isThumbnailLoading}
         isDisabled={isThumbnailLoading || !ext}
-        onClick={handleDownload}
+        onPress={handleDownload}
       >
         Download
       </Button>

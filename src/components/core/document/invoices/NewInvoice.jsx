@@ -81,7 +81,7 @@ const NewInvoice = ({ isOpen, onClose }) => {
                 <Link to={`/documents/invoices/${response.current._id}`}>
                   <Button variant="outlined">View result</Button>
                 </Link>
-                <Button onClick={reset} variant="text">
+                <Button onPress={reset} variant="text">
                   Upload another invoice
                 </Button>
               </div>

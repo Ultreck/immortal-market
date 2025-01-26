@@ -56,7 +56,7 @@ const EditComment = ({ comment, onClose }) => {
               set="native"
             >
               <PopoverTrigger>
-                <Button onClick={onEmojiOpen} isIconOnly radius="full" variant="light">
+                <Button onPress={onEmojiOpen} isIconOnly radius="full" variant="light">
                   <LuSmilePlus size="20" />
                 </Button>
               </PopoverTrigger>
@@ -67,7 +67,7 @@ const EditComment = ({ comment, onClose }) => {
           </div>
           <div className="flex items-center space-x-2">
             <Button
-              onClick={handleDone}
+              onPress={handleDone}
               isDisabled={!content.length}
               color="success"
               variant="solid"
@@ -78,7 +78,7 @@ const EditComment = ({ comment, onClose }) => {
             >
               Save
             </Button>
-            <Button onClick={onClose} isIconOnly variant="light" radius="full" aria-label="Close">
+            <Button onPress={onClose} isIconOnly variant="light" radius="full" aria-label="Close">
               <HiX size="20" />
             </Button>
           </div>

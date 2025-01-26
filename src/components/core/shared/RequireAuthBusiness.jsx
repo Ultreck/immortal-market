@@ -49,7 +49,7 @@ const RequireAuthBusiness = ({ children }) => {
         <div className="h-screen w-full flex flex-col justify-center items-center text-center">
           <TbNetworkOff className="text-6xl text-red-500 opacity-50" />
           <p className="max-w-[300px] mt-10">A network error occurred while fetching data, please try again</p>
-          <Button variant="bordered" onClick={() => window.location.reload()} className="mt-8">
+          <Button variant="bordered" onPress={() => window.location.reload()} className="mt-8">
             Reload
           </Button>
         </div>

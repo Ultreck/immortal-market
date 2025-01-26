@@ -71,13 +71,13 @@ const CommentsList = ({ onClose }) => {
             <Button
               isIconOnly
               variant="light"
-              onClick={() => updateTemplate({ isCommentsVisible: !isCommentsVisible })}
+              onPress={() => updateTemplate({ isCommentsVisible: !isCommentsVisible })}
             >
               {isCommentsVisible ? <HiOutlineEyeOff size="20" /> : <HiOutlineEye size="20" />}
             </Button>
           </Tooltip>
         </div>
-        <Button onClick={onClose} isIconOnly variant="light" color="danger">
+        <Button onPress={onClose} isIconOnly variant="light" color="danger">
           <HiX size="20" />
         </Button>
       </div>

@@ -385,7 +385,7 @@ const AnalyzeMonoLogin = ({ institution, onBack }) => {
                     </div>
                   ))}
                 </div>
-                <Button onClick={() => handleAccountSubmit()} className="mt-8" loading={isCommitSessionLoading}>
+                <Button onPress={() => handleAccountSubmit()} className="mt-8" loading={isCommitSessionLoading}>
                   Submit
                 </Button>
               </div>

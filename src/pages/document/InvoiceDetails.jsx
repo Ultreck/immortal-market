@@ -104,7 +104,7 @@ const InvoiceDetails = () => {
         <p className="mt-1">Are you sure you want to continue?</p>
         <div className="mt-5 flex items-center space-x-2 justify-end">
           <Button
-            onClick={() => setIsDeleteOpen(false)}
+            onPress={() => setIsDeleteOpen(false)}
             color="black"
             size="sm"
             variant="outlined"
@@ -112,7 +112,7 @@ const InvoiceDetails = () => {
           >
             Go back
           </Button>
-          <Button onClick={handleDelete} color="red" size="sm" variant="outlined" loading={isDeleteLoading}>
+          <Button onPress={handleDelete} color="red" size="sm" variant="outlined" loading={isDeleteLoading}>
             Yes delete
           </Button>
         </div>

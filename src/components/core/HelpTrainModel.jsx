@@ -88,7 +88,7 @@ const HelpTrainModel = ({ isOpen, onClose, category }) => {
                 <div className="h-full flex flex-col">
                   <div className="my-auto">
                     <Button
-                      onClick={() => setFile(null)}
+                      onPress={() => setFile(null)}
                       leftIcon={<IconArrowLeft size="18" />}
                       variant="outlined"
                       size="sm"
@@ -143,10 +143,10 @@ const HelpTrainModel = ({ isOpen, onClose, category }) => {
             <IconCircleCheckFilled size="80" className="text-green-600" />
             <h6 className="text-xl mt-8 font-semibold max-w-xs">File submitted</h6>
             <p className="max-w-xs mt-2">Thank you, we have received your file</p>
-            <Button onClick={clear} variant="outlined" className="mt-8">
+            <Button onPress={clear} variant="outlined" className="mt-8">
               Upload another file
             </Button>
-            <Button onClick={handleClose} variant="outlined" color="red" className="mt-2.5">
+            <Button onPress={handleClose} variant="outlined" color="red" className="mt-2.5">
               Close
             </Button>
           </div>

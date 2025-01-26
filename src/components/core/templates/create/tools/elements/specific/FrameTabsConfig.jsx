@@ -61,7 +61,7 @@ const FrameTabsConfig = ({ element, onChange }) => {
                   classNames={{ input: 'text-base' }}
                 />
                 {element.config.tabs.length > 1 && (
-                  <Button isIconOnly onClick={() => handleRemove(tab.id)} size="sm" variant="light" color="danger">
+                  <Button isIconOnly onPress={() => handleRemove(tab.id)} size="sm" variant="light" color="danger">
                     <TbX size="20" />
                   </Button>
                 )}
@@ -69,7 +69,7 @@ const FrameTabsConfig = ({ element, onChange }) => {
             ))}
           </div>
           <Button
-            onClick={handleAdd}
+            onPress={handleAdd}
             className="text-base mt-6"
             radius="full"
             variant="bordered"

@@ -47,7 +47,7 @@ const BulletTextConfig = ({ element, onChange }) => {
                 isIconOnly
                 variant="flat"
                 className="text-base"
-                onClick={() => {
+                onPress={() => {
                   const texts = [...element.config.texts];
                   texts.splice(i, 1);
                   onChange({ ...element, config: { ...element.config, texts } });
@@ -62,7 +62,7 @@ const BulletTextConfig = ({ element, onChange }) => {
               isIconOnly
               variant="flat"
               className="text-base"
-              onClick={() => {
+              onPress={() => {
                 const texts = [...element.config.texts, ''];
                 onChange({ ...element, config: { ...element.config, texts } });
               }}

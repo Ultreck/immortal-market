@@ -20,7 +20,7 @@ const SecuritySettings = () => {
                 <p className="text-[.95rem] opacity-70">Set a new password to protect your account</p>
               </div>
               <Button
-                onClick={() => setIsChangePasswordOpen(true)}
+                onPress={() => setIsChangePasswordOpen(true)}
                 variant="bordered"
                 className="text-base"
                 size="sm"

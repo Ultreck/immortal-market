@@ -23,7 +23,7 @@ const Present = ({ pages = [] }) => {
               isIconOnly
               radius="full"
               variant="flat"
-              onClick={() => setIndex((v) => Math.max(v - 1, 0))}
+              onPress={() => setIndex((v) => Math.max(v - 1, 0))}
               isDisabled={index === 0}
             >
               <TbChevronLeft size="20" />
@@ -35,7 +35,7 @@ const Present = ({ pages = [] }) => {
               isIconOnly
               radius="full"
               variant="flat"
-              onClick={() => setIndex((v) => Math.min(v + 1, pages.length - 1))}
+              onPress={() => setIndex((v) => Math.min(v + 1, pages.length - 1))}
               isDisabled={index === pages.length - 1}
             >
               <TbChevronRight size="20" />

@@ -85,7 +85,7 @@ const UploadFiles = ({ onNext, onPrev }) => {
                   radius="full"
                   className="ml-4"
                   isIconOnly
-                  onClick={() => updateData({ files: files.filter((f) => f.name !== file.name) })}
+                  onPress={() => updateData({ files: files.filter((f) => f.name !== file.name) })}
                 >
                   <TbX size="16" />
                 </Button>
@@ -96,7 +96,7 @@ const UploadFiles = ({ onNext, onPrev }) => {
       </div>
       <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
         <Button
-          onClick={onPrev}
+          onPress={onPrev}
           radius="full"
           variant="bordered"
           className="text-base px-6"
@@ -105,7 +105,7 @@ const UploadFiles = ({ onNext, onPrev }) => {
           Back
         </Button>
         <Button
-          onClick={handleSubmit}
+          onPress={handleSubmit}
           color="primary"
           radius="full"
           className="text-base px-6"

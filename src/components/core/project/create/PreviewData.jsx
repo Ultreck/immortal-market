@@ -98,7 +98,7 @@ const PreviewData = ({ onNext }) => {
                       </div>
                       <div className="flex flex-col items-center space-y-3 mt-6">
                         <Button
-                          onClick={onContinuePopoverOpenChange}
+                          onPress={onContinuePopoverOpenChange}
                           isLoading={isGenerateLoading}
                           variant="bordered"
                           radius="full"
@@ -108,7 +108,7 @@ const PreviewData = ({ onNext }) => {
                           Go back
                         </Button>
                         <Button
-                          onClick={handleSubmit}
+                          onPress={handleSubmit}
                           isLoading={isGenerateLoading}
                           color="primary"
                           radius="full"
@@ -122,7 +122,7 @@ const PreviewData = ({ onNext }) => {
                   </Popover>
                 ) : (
                   <Button
-                    onClick={handleSubmit}
+                    onPress={handleSubmit}
                     isLoading={isGenerateLoading}
                     color="primary"
                     radius="full"

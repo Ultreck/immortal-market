@@ -27,7 +27,7 @@ const ExternalImages = () => {
         startContent={<TbSearch size="24" className="mx-1 opacity-30" />}
         endContent={
           query.length > 0 && (
-            <Button onClick={() => setQuery('')} variant="light" radius="full" isIconOnly size="sm">
+            <Button onPress={() => setQuery('')} variant="light" radius="full" isIconOnly size="sm">
               <TbX size="24" className="mx-1 opacity-30" onClick={() => setQuery('')} />
             </Button>
           )

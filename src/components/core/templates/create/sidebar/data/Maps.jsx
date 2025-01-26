@@ -582,12 +582,12 @@ const Maps = ({ mini, onView, onBack }) => {
             {
               //prettier-ignore
               elements.countries.filter((el) => el.id === 'map-nigeria').map((element) => {
-                return <DraggableElementWrapper key={element.id} element={element} />;
+                return <DraggableElementWrapper key={ element.id } element={ element } />;
               })
             }
           </div>
           <Button
-            onClick={onView}
+            onPress={onView}
             variant="bordered"
             className="text-md mt-8"
             endContent={<TbChevronRight size={16} />}
@@ -600,7 +600,7 @@ const Maps = ({ mini, onView, onBack }) => {
       ) : (
         <>
           <div className="flex items-center space-x-3 mb-8">
-            <Button onClick={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+            <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm">
               <TbChevronLeft size="20" />
             </Button>
             <h2 className="text-xl font-semibold">Maps</h2>

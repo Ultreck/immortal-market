@@ -149,7 +149,7 @@ const Bold = ({ elements, onChange }) => {
       isIconOnly
       variant={value === 'bold' ? 'solid' : 'text'}
       aria-label="Bold/unbold text"
-      onClick={() => {
+      onPress={() => {
         const _elements = elements.map((el) => {
           if (!value) return { ...el, style: { ...el.style, fontWeight: 'bold' } };
           const style = { ...el.style };
@@ -172,7 +172,7 @@ const Italic = ({ elements, onChange }) => {
       isIconOnly
       variant={value === 'italic' ? 'solid' : 'text'}
       aria-label="Italisize/unitalicize text"
-      onClick={() => {
+      onPress={() => {
         const _elements = elements.map((el) => {
           if (!value) return { ...el, style: { ...el.style, fontStyle: 'italic' } };
           const style = { ...el.style };
@@ -195,7 +195,7 @@ const Underline = ({ elements, onChange }) => {
       isIconOnly
       variant={value === 'underline' ? 'solid' : 'text'}
       aria-label="Underline/unbold text"
-      onClick={() => {
+      onPress={() => {
         const _elements = elements.map((el) => {
           if (!value) return { ...el, style: { ...el.style, textDecoration: 'underline' } };
           const style = { ...el.style };
@@ -228,7 +228,7 @@ const TextAlign = ({ elements, onChange }) => {
   };
 
   return (
-    <Button variant="text" isIconOnly className="text-base" onClick={() => handleChange()}>
+    <Button variant="text" isIconOnly className="text-base" onPress={() => handleChange()}>
       {createElement(selected.icon, { size: 20 })}
     </Button>
   );

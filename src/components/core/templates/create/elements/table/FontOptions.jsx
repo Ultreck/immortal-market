@@ -98,7 +98,7 @@ const Italic = ({ selectedCells, onStyleChange }) => {
       isIconOnly
       variant={value === 'italic' ? 'solid' : 'text'}
       aria-label="Italicize/unitalicize text"
-      onClick={() => {
+      onPress={() => {
         const newStyle = {
           fontStyle: value === 'italic' ? 'normal' : 'italic',
         };
@@ -118,7 +118,7 @@ const Underline = ({ selectedCells, onStyleChange }) => {
       isIconOnly
       variant={value === 'underline' ? 'solid' : 'text'}
       aria-label="Underline/unbold text"
-      onClick={() => {
+      onPress={() => {
         const newStyle = {
           textDecoration: value === 'underline' ? 'none' : 'underline',
         };
@@ -138,7 +138,7 @@ const Bold = ({ selectedCells, onStyleChange }) => {
       isIconOnly
       variant={value === 'bold' ? 'solid' : 'text'}
       aria-label="Bold/unbold text"
-      onClick={() => {
+      onPress={() => {
         const newStyle = {
           fontWeight: value === 'bold' ? 'normal' : 'bold',
         };

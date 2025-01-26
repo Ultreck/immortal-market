@@ -77,7 +77,7 @@ const StatementDetails = () => {
                   <h3 className="text-xl font-medium">Analysis details</h3>
                 </div>
                 <div className="flex items-center space-x-2 md:space-x-4">
-                  <Button onClick={() => setIsChatOpen(true)} color="primary" leftIcon={<IconSparkles size="20" />}>
+                  <Button onPress={() => setIsChatOpen(true)} color="primary" leftIcon={<IconSparkles size="20" />}>
                     Chat
                   </Button>
                   <SimpleDropdown

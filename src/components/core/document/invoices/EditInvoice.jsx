@@ -203,7 +203,7 @@ const EditInvoice = ({ invoice, onBack }) => {
                     <div className="flex items-center justify-between">
                       <p className="text-md font-medium">Item #{i + 1}</p>
                       <Button
-                        onClick={() => remove(i)}
+                        onPress={() => remove(i)}
                         size="xs"
                         variant="outlined"
                         color="red"

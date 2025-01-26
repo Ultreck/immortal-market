@@ -76,14 +76,14 @@ const SaveButton = () => {
   return (
     <>
       {isUpdateLoading || isThumbnailLoading ? (
-        <Button variant="light" isIconOnly onClick={handleSave} size="sm" radius="full" isLoading>
+        <Button variant="light" isIconOnly onPress={handleSave} size="sm" radius="full" isLoading>
           <BsCloudArrowDown size="20" />
         </Button>
       ) : (
         <>
           {cache ? (
             <Tooltip content="Save">
-              <Button variant="light" isIconOnly onClick={handleSave} size="sm" radius="full">
+              <Button variant="light" isIconOnly onPress={handleSave} size="sm" radius="full">
                 <BsCloudArrowDown size="20" />
               </Button>
             </Tooltip>

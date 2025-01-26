@@ -25,7 +25,7 @@ const FullscreenPreview = () => {
 
   return (
     <>
-      <Button variant="light" color="default" radius="full" size="sm" onClick={onOpen} isIconOnly>
+      <Button variant="light" color="default" radius="full" size="sm" onPress={onOpen} isIconOnly>
         <RiExpandDiagonalLine size="18" />
       </Button>
       {createPortal(<div ref={root}>{isOpen && <Present pages={template.pages} />}</div>, document.body)}

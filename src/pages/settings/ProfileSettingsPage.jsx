@@ -74,7 +74,7 @@ const ProfileSettingsPage = () => {
       <div>
         {!isEditing && (
           <Button
-            onClick={() => setIsEditing(true)}
+            onPress={() => setIsEditing(true)}
             variant="bordered"
             color="default"
             startContent={<TbEdit size="20" />}

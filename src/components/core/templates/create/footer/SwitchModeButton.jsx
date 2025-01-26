@@ -15,7 +15,7 @@ const SwitchModeButton = () => {
           color="default"
           radius="full"
           size="sm"
-          onClick={() => updateTemplate({ mode: 'tab' })}
+          onPress={() => updateTemplate({ mode: 'tab' })}
           isIconOnly
           className="relative"
         >
@@ -28,7 +28,7 @@ const SwitchModeButton = () => {
           color="default"
           radius="full"
           size="sm"
-          onClick={() => updateTemplate({ mode: 'scroll' })}
+          onPress={() => updateTemplate({ mode: 'scroll' })}
           isIconOnly
           className="relative"
         >

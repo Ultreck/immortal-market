@@ -45,7 +45,7 @@ const Eyedropper = ({ onPick, className }) => {
 
   return (
     <div className={cn(className)}>
-      <Button onClick={getEyeDrop} isIconOnly size="md" variant="bordered">
+      <Button onPress={getEyeDrop} isIconOnly size="md" variant="bordered">
         <TbColorPicker size={16} />
       </Button>
       {coverUp && (

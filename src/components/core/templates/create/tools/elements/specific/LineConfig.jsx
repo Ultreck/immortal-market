@@ -258,7 +258,7 @@ const StrokeMarkers = ({ elements, onChange }) => {
                 isIconOnly
                 variant={markerStart ? 'solid' : 'bordered'}
                 color={markerStart ? 'primary' : 'default'}
-                onClick={() => setActive('markerStart')}
+                onPress={() => setActive('markerStart')}
               >
                 <span className="rotate-180">
                   {markers.find((m) => !!m.value && m.value === markerStart)?.icon || <HiArrowRight size="20" />}
@@ -274,7 +274,7 @@ const StrokeMarkers = ({ elements, onChange }) => {
                       isIconOnly
                       variant={markerStart === item.value ? 'solid' : 'bordered'}
                       color={markerStart === item.value ? 'primary' : 'default'}
-                      onClick={() => handelChange(active, item.value)}
+                      onPress={() => handelChange(active, item.value)}
                     >
                       <span className="rotate-180">{item.icon}</span>
                     </Button>
@@ -289,7 +289,7 @@ const StrokeMarkers = ({ elements, onChange }) => {
                 isIconOnly
                 variant={markerEnd ? 'solid' : 'bordered'}
                 color={markerEnd ? 'primary' : 'default'}
-                onClick={() => setActive('markerEnd')}
+                onPress={() => setActive('markerEnd')}
               >
                 {markers.find((m) => !!m.value && m.value === markerEnd)?.icon || <HiArrowRight size="20" />}
               </Button>
@@ -303,7 +303,7 @@ const StrokeMarkers = ({ elements, onChange }) => {
                       isIconOnly
                       variant={markerEnd === item.value ? 'solid' : 'bordered'}
                       color={markerEnd === item.value ? 'primary' : 'default'}
-                      onClick={() => handelChange(active, item.value)}
+                      onPress={() => handelChange(active, item.value)}
                     >
                       {item.icon}
                     </Button>

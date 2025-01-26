@@ -189,7 +189,7 @@ const Form = ({ onPrev, onNext }) => {
           Back
         </Button>
         <Button
-          onClick={handleSubmit(onSubmit)}
+          onPress={handleSubmit(onSubmit)}
           isLoading={isConnecting}
           color="primary"
           radius="full"
@@ -233,7 +233,7 @@ const Collections = ({ onPrev, onNext }) => {
       </div>
       <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
         <Button
-          onClick={onPrev}
+          onPress={onPrev}
           radius="full"
           variant="bordered"
           className="text-base px-6"
@@ -242,7 +242,7 @@ const Collections = ({ onPrev, onNext }) => {
           Back
         </Button>
         <Button
-          onClick={onNext}
+          onPress={onNext}
           color="primary"
           radius="full"
           className="text-base px-6"

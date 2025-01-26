@@ -29,7 +29,7 @@ const Custom = () => {
       <div>
         <div className="flex justify-between items-center mb-8 md:mb-10">
           <DashboardTitle text="Custom documents" className="!mb-0" />
-          <Button onClick={() => setIsNewReportOpen(true)} variant="outlined" leftIcon={<IconPlus size="20" />}>
+          <Button onPress={() => setIsNewReportOpen(true)} variant="outlined" leftIcon={<IconPlus size="20" />}>
             Upload document
           </Button>
         </div>

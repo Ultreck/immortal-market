@@ -40,7 +40,7 @@ const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
                 <Button
                   isLoading={isCreateDesignLoading}
                   disabled={isCreateDesignLoading}
-                  onClick={handleCreateNewDesign}
+                  onPress={handleCreateNewDesign}
                   variant="solid"
                   radius="full"
                   className="px-6 text-base"
@@ -48,7 +48,7 @@ const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
                 >
                   Use this template
                 </Button>
-                <Button onClick={onClose} isIconOnly size="sm" variant="bordered" radius="full">
+                <Button onPress={onClose} isIconOnly size="sm" variant="bordered" radius="full">
                   <TbX size="20" />
                 </Button>
               </div>
@@ -72,7 +72,7 @@ const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
             </div>
             <div className="space-y-2 mt-6 pt-2 space-x-4">
               <Button
-                onClick={handleEditTemplate}
+                onPress={handleEditTemplate}
                 variant="bordered"
                 radius="full"
                 color="default"

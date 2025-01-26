@@ -26,12 +26,12 @@ const CommentReplies = ({ onBack, onClose }) => {
     <>
       <div className="flex items-center justify-between py-6 px-8">
         <div className="flex items-center space-x-3">
-          <Button variant="light" color="default" radius="full" size="sm" onClick={onBack} isIconOnly>
+          <Button variant="light" color="default" radius="full" size="sm" onPress={onBack} isIconOnly>
             <TbChevronLeft size="20" />
           </Button>
           <h2 className="text-lg font-medium leading-none">Replies</h2>
         </div>
-        <Button onClick={onClose} isIconOnly variant="light" color="danger">
+        <Button onPress={onClose} isIconOnly variant="light" color="danger">
           <HiX size="20" />
         </Button>
       </div>

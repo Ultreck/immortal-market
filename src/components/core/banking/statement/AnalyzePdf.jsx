@@ -142,7 +142,7 @@ const AnalyzePdf = ({ onBack }) => {
                   </div>
                   <div className="my-auto">
                     <Button
-                      onClick={handleChangeFile}
+                      onPress={handleChangeFile}
                       leftIcon={<IconArrowLeft size="18" />}
                       variant="outlined"
                       size="sm"

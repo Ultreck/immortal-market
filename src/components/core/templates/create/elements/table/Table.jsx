@@ -498,4 +498,3 @@ TablePresent.propTypes = {
 TablePreview.propTypes = {
   element: PropTypes.object.isRequired,
 };
-

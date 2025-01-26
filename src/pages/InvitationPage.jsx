@@ -97,7 +97,7 @@ const InvitationPage = () => {
                         </Card>
                         <div className="flex mt-8 space-x-3">
                           <Button
-                            onClick={() => handleRespond('accept')}
+                            onPress={() => handleRespond('accept')}
                             isLoading={(isRespondLoading || isInvitationFetching) && response === 'accept'}
                             isDisabled={isRespondLoading || isInvitationFetching}
                             variant="solid"
@@ -108,7 +108,7 @@ const InvitationPage = () => {
                             Accept
                           </Button>
                           <Button
-                            onClick={() => handleRespond('reject')}
+                            onPress={() => handleRespond('reject')}
                             isLoading={(isRespondLoading || isInvitationFetching) && response === 'reject'}
                             isDisabled={isRespondLoading || isInvitationFetching}
                             variant="bordered"
@@ -140,7 +140,7 @@ const InvitationPage = () => {
           <p>
             Logged in as <span className="italic">{user.email}</span>
           </p>
-          <Button variant="bordered" color="default" size="sm" className="text-sm ml-3" radius="full" onClick={logout}>
+          <Button variant="bordered" color="default" size="sm" className="text-sm ml-3" radius="full" onPress={logout}>
             Logout
           </Button>
         </div>

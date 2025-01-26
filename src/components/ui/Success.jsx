@@ -8,7 +8,7 @@ const Success = ({ text, subtext, buttonText = 'Close', onButtonClick, ...props 
       <RiCheckboxCircleFill size="70" className="text-teal-500" />
       <h2 className="text-2xl mt-10 font-medium">{text}</h2>
       <p className="mt-2 opacity-80 mx-auto">{subtext}</p>
-      <Button color="black" onClick={onButtonClick} className="mt-10">
+      <Button color="black" onPress={onButtonClick} className="mt-10">
         {buttonText}
       </Button>
     </div>

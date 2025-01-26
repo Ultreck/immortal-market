@@ -178,7 +178,7 @@ const Gradient = ({ elements, onChange }) => {
                 variant="solid"
                 aria-label="Remove color"
                 radius="full"
-                onClick={() => setColors((prev) => prev.filter((c, i) => i !== index))}
+                onPress={() => setColors((prev) => prev.filter((c, i) => i !== index))}
                 className="w-5 h-5 min-w-[auto] min-h-[auto] absolute -right-0 -top-2 z-[11] opacity-0 group-hover:opacity-100"
                 color="default"
               >
@@ -188,7 +188,7 @@ const Gradient = ({ elements, onChange }) => {
             <ColorPicker color={color} onChange={(c) => handleGradientColorChange(index, c)} />
           </div>
         ))}
-        <Button isIconOnly variant="bordered" radius="full" onClick={() => setColors((prev) => [...prev, '#000000'])}>
+        <Button isIconOnly variant="bordered" radius="full" onPress={() => setColors((prev) => [...prev, '#000000'])}>
           <RiAddLine size={20} />
         </Button>
       </div>

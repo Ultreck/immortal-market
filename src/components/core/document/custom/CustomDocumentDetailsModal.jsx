@@ -32,7 +32,7 @@ const CustomDocumentDetailsModal = ({ isOpen, onClose, document }) => {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias at atque dicta doloremque iste labore
                 modi numquam officia tempora ullam.
               </p>
-              <Button onClick={handleGenerateReport} loading={isPending || isFetching} className="mt-6" size="sm">
+              <Button onPress={handleGenerateReport} loading={isPending || isFetching} className="mt-6" size="sm">
                 Generate report
               </Button>
             </Card>

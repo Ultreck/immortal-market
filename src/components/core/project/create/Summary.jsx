@@ -67,7 +67,7 @@ const Summary = ({ onPrev, onNext }) => {
       </div>
       <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
         <Button
-          onClick={onPrev}
+          onPress={onPrev}
           isDisabled={isUpdateLoading}
           radius="full"
           variant="bordered"
@@ -77,7 +77,7 @@ const Summary = ({ onPrev, onNext }) => {
           Back
         </Button>
         <Button
-          onClick={handleSubmit}
+          onPress={handleSubmit}
           isLoading={isUpdateLoading}
           isDisabled={!selection.length}
           color="primary"

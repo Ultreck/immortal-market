@@ -281,11 +281,11 @@ const ProductCard = ({ product, onClick, onTrain, style = 'normal', className })
                 })}
               >
                 <div className="h-full flex flex-col items-center justify-center space-y-2 px-4 py-6 rounded-3xl bg-white/95 backdrop-blur-sm">
-                  <Button onClick={() => onClick(product)} variant="outlined" color="black">
+                  <Button onPress={() => onClick(product)} variant="outlined" color="black">
                     Preview
                   </Button>
                   <Button
-                    onClick={() => onTrain?.(product)}
+                    onPress={() => onTrain?.(product)}
                     variant="outlined"
                     leftIcon={<IconRobot size="20" />}
                     color="black"
@@ -347,10 +347,10 @@ const FeaturedProductCard = ({ product, onClick, onTrain, gradient = false, clas
               })}
             >
               <div className="h-full flex flex-col items-center justify-center space-y-2 px-4 py-6 rounded-3xl bg-black/20">
-                <Button onClick={() => onClick(product)} color="white">
+                <Button onPress={() => onClick(product)} color="white">
                   Preview
                 </Button>
-                <Button onClick={() => onTrain?.(product)} color="white" leftIcon={<IconRobot size="20" />}>
+                <Button onPress={() => onTrain?.(product)} color="white" leftIcon={<IconRobot size="20" />}>
                   Train model
                 </Button>
               </div>

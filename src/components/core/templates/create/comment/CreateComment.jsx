@@ -63,7 +63,7 @@ const CreateComment = ({
       <div className="flex items-center justify-between px-6 pb-4">
         <Popover isOpen={isEmojiOpen} onClose={onEmojiClose} classNames={{ content: 'w-[260px]' }} set="native">
           <PopoverTrigger>
-            <Button onClick={onEmojiOpen} isIconOnly radius="full" variant="light">
+            <Button onPress={onEmojiOpen} isIconOnly radius="full" variant="light">
               <LuSmilePlus size="20" />
             </Button>
           </PopoverTrigger>

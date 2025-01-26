@@ -1,9 +1,9 @@
 import { createElement } from 'react';
 import classNames from 'classnames';
-import Button from '@/components/ui/Button.jsx';
 import Card from '@/components/ui/Card.jsx';
 import PropTypes from 'prop-types';
 import { IconArrowRight } from '@tabler/icons-react';
+import { Button } from '@heroui/react';
 
 const ProductOnboarding = ({ product, onStart, isLoading }) => {
   return (
@@ -38,7 +38,15 @@ const ProductOnboarding = ({ product, onStart, isLoading }) => {
             </div>
             <p className="mt-6 max-w-lg text-[1.04rem]">{product.summary}</p>
             {!!onStart && product.status === 'active' && (
-              <Button onClick={onStart} className="mt-8" loading={isLoading} rightIcon={<IconArrowRight size="20" />}>
+              <Button
+                onPress={onStart}
+                color="primary"
+                variant="solid"
+                className="text-base mt-8"
+                radius="full"
+                loading={isLoading}
+                rightIcon={<IconArrowRight size="20" />}
+              >
                 Start
               </Button>
             )}

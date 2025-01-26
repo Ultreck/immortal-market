@@ -86,7 +86,7 @@ const ApplyTemplate = ({ id, onClose }) => {
               )}
               <div className="space-y-2 mt-6">
                 <Button
-                  onClick={() => handleReplace(design)}
+                  onPress={() => handleReplace(design)}
                   variant="solid"
                   radius="full"
                   className="px-6 text-base"
@@ -96,7 +96,7 @@ const ApplyTemplate = ({ id, onClose }) => {
                   Replace current project
                 </Button>
                 <Button
-                  onClick={() => handleCreate(design)}
+                  onPress={() => handleCreate(design)}
                   variant="bordered"
                   radius="full"
                   className="px-6 text-base"

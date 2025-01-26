@@ -23,32 +23,32 @@ const PageActions = ({ id }) => {
     <div className="flex items-center space-x-1">
       {index > 0 && (
         <Tooltip content="Move page up" showArrow>
-          <Button variant="light" isIconOnly onClick={() => handleAction('page-move-up')} size="sm">
+          <Button variant="light" isIconOnly onPress={() => handleAction('page-move-up')} size="sm">
             <TbChevronUp size="18" />
           </Button>
         </Tooltip>
       )}
       {index < length - 1 && (
         <Tooltip content="Move page down" showArrow>
-          <Button variant="light" isIconOnly onClick={() => handleAction('page-move-down')} size="sm">
+          <Button variant="light" isIconOnly onPress={() => handleAction('page-move-down')} size="sm">
             <TbChevronDown size="18" />
           </Button>
         </Tooltip>
       )}
       <Tooltip content="Duplicate page" showArrow>
-        <Button variant="light" isIconOnly onClick={() => handleAction('page-duplicate')} size="sm">
+        <Button variant="light" isIconOnly onPress={() => handleAction('page-duplicate')} size="sm">
           <TbCopyPlus size="18" />
         </Button>
       </Tooltip>
       {length > 1 && (
         <Tooltip content="Delete page" showArrow>
-          <Button variant="light" isIconOnly onClick={() => handleAction('page-delete')} size="sm">
+          <Button variant="light" isIconOnly onPress={() => handleAction('page-delete')} size="sm">
             <TbTrash size="18" />
           </Button>
         </Tooltip>
       )}
       <Tooltip content="Add page" showArrow>
-        <Button variant="light" isIconOnly onClick={() => handleAction('page-add')} size="sm">
+        <Button variant="light" isIconOnly onPress={() => handleAction('page-add')} size="sm">
           <TbSquarePlus size="18" />
         </Button>
       </Tooltip>

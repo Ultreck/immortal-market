@@ -82,7 +82,7 @@ const Content = ({ elements, onClose }) => {
           <Button
             color="danger"
             type="button"
-            onClick={handleRemoveLink}
+            onPress={handleRemoveLink}
             startContent={<TbLinkOff />}
             className="text-base"
             radius="full"
@@ -91,7 +91,7 @@ const Content = ({ elements, onClose }) => {
             Remove link
           </Button>
         )}
-        <Button color="success" type="submit" onClick={handleDone} className="text-base" radius="full">
+        <Button color="success" type="submit" onPress={handleDone} className="text-base" radius="full">
           Done
         </Button>
       </div>

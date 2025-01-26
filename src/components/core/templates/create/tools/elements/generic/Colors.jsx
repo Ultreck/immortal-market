@@ -293,7 +293,7 @@ const Gradient = ({ element, onChange }) => {
         onChange={(c) => onChange({ ...element, config: { ...element.config, gradientColor: c } })}
         className="!w-full"
       />
-      <Button className="mt-6 text-base" radius="full" onClick={handleGenerateGradient}>
+      <Button className="mt-6 text-base" radius="full" onPress={handleGenerateGradient}>
         Apply
       </Button>
     </>

@@ -87,7 +87,7 @@ const ReportOption = ({ onNext }) => {
       <div className="px-12 py-4 border-t border-default-200 flex items-center space-x-3">
         <Button
           isDisabled={!type}
-          onClick={handleSubmit}
+          onPress={handleSubmit}
           isLoading={isUpdateLoading}
           color="primary"
           radius="full"

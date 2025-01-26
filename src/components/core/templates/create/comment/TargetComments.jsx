@@ -35,12 +35,12 @@ const TargetComments = ({ onBack, onClose }) => {
     <div className="py-6">
       <div className="flex items-center justify-between mb-6 px-8">
         <div className="flex items-center space-x-3">
-          <Button variant="light" color="default" radius="full" size="sm" onClick={onBack} isIconOnly>
+          <Button variant="light" color="default" radius="full" size="sm" onPress={onBack} isIconOnly>
             <TbChevronLeft size="20" />
           </Button>
           <h2 className="text-lg font-medium leading-none">Comments {comments.length ? `(${comments.length})` : ''}</h2>
         </div>
-        <Button onClick={onClose} isIconOnly variant="light" color="danger">
+        <Button onPress={onClose} isIconOnly variant="light" color="danger">
           <HiX size="20" />
         </Button>
       </div>

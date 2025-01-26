@@ -116,7 +116,7 @@ const Frames = ({ mini = false, onView, onBack }) => {
           </div>
           <div className="flex items-center justify-between mb-4 mt-6">
             <Button
-              onClick={onView}
+              onPress={onView}
               variant="bordered"
               size="sm"
               className="text-md"
@@ -130,7 +130,7 @@ const Frames = ({ mini = false, onView, onBack }) => {
       ) : (
         <>
           <div className="flex items-center space-x-3 mb-8">
-            <Button onClick={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+            <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm">
               <TbChevronLeft size="20" />
             </Button>
             <h2 className="text-xl font-semibold">Frames</h2>

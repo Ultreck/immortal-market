@@ -17,7 +17,7 @@ const InvoiceSummary = ({ invoice }) => {
           <>
             <div className="flex mb-10 items-center justify-between">
               <h3 className="font-medium">Invoice details</h3>
-              <Button onClick={() => setEdit(true)} leftIcon={<IconPencil size="20" />} size="sm" variant="outlined">
+              <Button onPress={() => setEdit(true)} leftIcon={<IconPencil size="20" />} size="sm" variant="outlined">
                 Edit
               </Button>
             </div>

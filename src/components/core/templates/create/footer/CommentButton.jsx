@@ -22,7 +22,7 @@ const CommentButton = () => {
       color="default"
       radius="full"
       size="sm"
-      onClick={handleClick}
+      onPress={handleClick}
       isIconOnly
       className="relative"
     >

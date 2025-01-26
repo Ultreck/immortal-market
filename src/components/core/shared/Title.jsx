@@ -6,7 +6,7 @@ const Title = ({ title, sub, className, classNames = {}, onBack, isDisabled }) =
   return (
     <div className={cn('flex items-center space-x-4', className, classNames.base || '')}>
       {!!onBack && (
-        <Button onClick={onBack} variant="bordered" radius="full" isIconOnly size="sm" isDisabled={isDisabled}>
+        <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm" isDisabled={isDisabled}>
           <HiChevronLeft size="20" />
         </Button>
       )}
