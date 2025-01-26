@@ -54,7 +54,7 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
     >
       <Dropdown placement="bottom" size="lg">
         <DropdownTrigger>
-          <button className="z-[2] absolute top-1.5 right-1.5 px-1 py-0 rounded-lg bg-primary-100 hover:bg-primary-50 hidden group-hover:block">
+          <button className="z-[2] absolute top-1.5 right-1.5 px-1 py-0 rounded-lg bg-primary-100 hover:bg-primary-50 opacity-0 group-hover:opacity-100">
             <TbDots size={16} />
           </button>
         </DropdownTrigger>
