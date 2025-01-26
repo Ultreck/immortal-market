@@ -13,6 +13,12 @@ import Combinations from '@/components/core/project/create/Combinations.jsx';
 
 const steps = [
   {
+    key: 'template',
+    title: 'Select template',
+    icon: <TbTemplate size="18" />,
+    element: SelectTemplate,
+  },
+  {
     key: 'source',
     title: 'Data source',
     icon: <TbDatabase size="18" />,
@@ -23,12 +29,6 @@ const steps = [
     title: 'Analysis mode',
     icon: <TbSettings size="18" />,
     element: ReportOption,
-  },
-  {
-    key: 'template',
-    title: 'Select template',
-    icon: <TbTemplate size="18" />,
-    element: SelectTemplate,
   },
   {
     key: 'model',
