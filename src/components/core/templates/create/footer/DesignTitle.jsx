@@ -51,7 +51,7 @@ const DesignTitle = () => {
               onChange={(e) => setValue(e.target.value)}
               onBlur={() => handleSave()}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') handleSave();
+                if (e.key === 'Enter') e.currentTarget.blur();
               }}
               disabled={isUpdateLoading}
               autoFocus
