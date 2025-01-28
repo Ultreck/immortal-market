@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import { Checkbox, Select, SelectItem } from '@heroui/react';
 
-AdvanceGlobaBarConfig.propTypes = {
+AdvanceGlobalBarConfig.propTypes = {
   element: PropTypes.shape({
     config: PropTypes.object,
   }).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-function AdvanceGlobaBarConfig({ element, onChange }) {
+function AdvanceGlobalBarConfig({ element, onChange }) {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -85,4 +85,4 @@ function AdvanceGlobaBarConfig({ element, onChange }) {
   );
 }
 
-export default AdvanceGlobaBarConfig;
+export default AdvanceGlobalBarConfig;

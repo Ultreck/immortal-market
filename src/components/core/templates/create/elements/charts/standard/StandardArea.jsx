@@ -4,6 +4,7 @@ import { capitalize, colors, interpolateColor } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardArea = ({ element }) => {
@@ -12,7 +13,7 @@ const StandardArea = ({ element }) => {
 
 StandardArea.propTypes = ElementPropTypes;
 
-export const StandardAreaContent = ({ element }) => {
+export const StandardAreaContent = ({ element, isChartWrapperDisabled = false }) => {
   const maxVisitors = Math.max(...element.config.data.map((d) => d[element.config.keys.y]));
 
   const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
@@ -34,73 +35,76 @@ export const StandardAreaContent = ({ element }) => {
       }}
     >
       {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
-      <ChartContainer
-        config={{}}
-        style={{
-          height: element.height,
-          width: element.width,
-          opacity: element.style.opacity,
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
-        }}
-      >
-        <AreaChart
-          accessibilityLayer
-          data={chartData}
+      <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+        <ChartContainer
+          config={{}}
           style={{
+            height: element.height,
+            width: element.width,
             opacity: element.style.opacity,
+            paddingTop: element.config.styles.yPadding,
+            paddingLeft: element.config.styles.xPadding,
+            paddingBottom: element.config.styles.yPadding,
+            paddingRight: element.config.styles.xPadding,
           }}
         >
-          <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-          <XAxis
-            dataKey={element.config.keys.x}
-            tickLine={false}
-            axisLine={false}
-            tickMargin={8}
-            tickFormatter={(value) => capitalize(value)}
-            hide={!element.config.showXaxis}
-            tick={{
-              fontSize: element.config.styles.xGridSize,
-              fontWeight: element.config.styles.gFontWeight,
-              fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor,
+          <AreaChart
+            accessibilityLayer
+            data={chartData}
+            style={{
+              opacity: element.style.opacity,
             }}
-          />
-          <YAxis
-            type="number"
-            dataKey={element.config.keys.y}
-            hide={!element.config.showYaxis}
-            tick={{
-              fontSize: element.config.styles.yGridSize,
-              fontWeight: element.config.styles.gFontWeight,
-              fontStyle: element.config.styles.gFontStyle,
-              fill: element.config.styles.gridAndLegendColor,
-            }}
-          />
-          <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-          {element.config.showLegend && (
-            <Legend
-              textStyle={{
-                fontSize: element.config.styles.legendSize,
+          >
+            <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+            <XAxis
+              dataKey={element.config.keys.x}
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={(value) => capitalize(value)}
+              hide={!element.config.showXaxis}
+              tick={{
+                fontSize: element.config.styles.xGridSize,
+                fontWeight: element.config.styles.gFontWeight,
+                fontStyle: element.config.styles.gFontStyle,
+                fill: element.config.styles.gridAndLegendColor,
               }}
             />
-          )}
-          <Area
-            dataKey={element.config.keys.y}
-            fill={element.config.colors[0]}
-            type={element.config.type === 'zig-zag' ? 'step' : element.config.type}
-            fillOpacity={0.4}
-          />
-        </AreaChart>
-      </ChartContainer>
+            <YAxis
+              type="number"
+              dataKey={element.config.keys.y}
+              hide={!element.config.showYaxis}
+              tick={{
+                fontSize: element.config.styles.yGridSize,
+                fontWeight: element.config.styles.gFontWeight,
+                fontStyle: element.config.styles.gFontStyle,
+                fill: element.config.styles.gridAndLegendColor,
+              }}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+            {element.config.showLegend && (
+              <Legend
+                textStyle={{
+                  fontSize: element.config.styles.legendSize,
+                }}
+              />
+            )}
+            <Area
+              dataKey={element.config.keys.y}
+              fill={element.config.colors[0]}
+              type={element.config.type === 'zig-zag' ? 'step' : element.config.type}
+              fillOpacity={0.4}
+            />
+          </AreaChart>
+        </ChartContainer>
+      </ElementChartWrapper>
     </div>
   );
 };
 
 StandardAreaContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default StandardArea;

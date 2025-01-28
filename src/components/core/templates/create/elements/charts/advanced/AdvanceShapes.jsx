@@ -3,6 +3,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
 import { createElement, useEffect } from 'react';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvanceShapes = ({ element }) => {
   return <AdvanceShapesContent element={element} />;
@@ -26,7 +27,7 @@ const classes = {
   },
 };
 
-export const AdvanceShapesContent = ({ element }) => {
+export const AdvanceShapesContent = ({ element,isChartWrapperDisabled=false }) => {
   const { percentage, noOfShapes, isCountVisible, icon1 } = element.config;
   const n = Math.floor((percentage / 100) * noOfShapes);
   const icon = icons.find((icon) => icon.name === (icon1 || 'circle')).icon;
@@ -53,37 +54,40 @@ export const AdvanceShapesContent = ({ element }) => {
   };
 
   return (
-    <div className="space-y-6 w-full">
-      {isCountVisible && (
-        <p
-          className="font-bold px-2"
-          style={{ color: element.config.labelFontColor, fontSize: element.config.labelFontSize }}
-        >
-          {formatChartValue()}
-        </p>
-      )}
-      <div className={`grid ${classes.grid[noOfShapes] || classes.grid.default} gap-${element.config.gap}`}>
-        {Array.from({ length: noOfShapes }, (_, i) => (
-          <motion.div
-            key={i}
-            className={`flex items-center justify-center`}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, delay: i * 0.02 }}
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div className="space-y-6 w-full" style={{width: element.width, height: element.height}}>
+        {isCountVisible && (
+          <p
+            className="font-bold px-2"
+            style={{ color: element.config.labelFontColor, fontSize: element.config.labelFontSize }}
           >
-            {createElement(icon, {
-              color: i < n ? element.config.color1 : '#ddd',
-              size: element.config.size,
-            })}
-          </motion.div>
-        ))}
+            {formatChartValue()}
+          </p>
+        )}
+        <div className={`grid ${classes.grid[noOfShapes] || classes.grid.default} gap-${element.config.gap}`}>
+          {Array.from({ length: noOfShapes }, (_, i) => (
+            <motion.div
+              key={i}
+              className={`flex items-center justify-center`}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: i * 0.02 }}
+            >
+              {createElement(icon, {
+                color: i < n ? element.config.color1 : '#ddd',
+                size: element.config.size,
+              })}
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+    </ElementChartWrapper>
   );
 };
 
 AdvanceShapesContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvanceShapes;

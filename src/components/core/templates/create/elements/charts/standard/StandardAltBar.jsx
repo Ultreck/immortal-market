@@ -2,13 +2,14 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardAltBar = ({ element }) => {
   return <StandardAltBarContent element={element} />;
 };
 
-export const StandardAltBarContent = ({ element }) => {
+export const StandardAltBarContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
   const yAxisValues = element.config.data[0];
   useEffect(() => {
@@ -104,19 +105,21 @@ export const StandardAltBarContent = ({ element }) => {
       }}
     >
       {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
-      <div
-        ref={chartRef}
-        style={{
-          height: element.height,
-          width: element.width,
-          opacity: element.style.opacity,
-          transform: `rotate(${element.config.rotation || 0}deg)`,
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
-        }}
-      />
+      <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+        <div
+          ref={chartRef}
+          style={{
+            height: element.height,
+            width: element.width,
+            opacity: element.style.opacity,
+            transform: `rotate(${element.config.rotation || 0}deg)`,
+            paddingTop: element.config.styles.yPadding,
+            paddingLeft: element.config.styles.xPadding,
+            paddingBottom: element.config.styles.yPadding,
+            paddingRight: element.config.styles.xPadding,
+          }}
+        />
+      </ElementChartWrapper>
     </div>
   );
 };
@@ -124,6 +127,7 @@ export const StandardAltBarContent = ({ element }) => {
 StandardAltBar.propTypes = ElementPropTypes;
 StandardAltBarContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default StandardAltBar;

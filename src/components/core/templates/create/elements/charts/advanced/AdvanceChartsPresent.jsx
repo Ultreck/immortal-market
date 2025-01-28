@@ -15,10 +15,14 @@ import { AdvanceMultipleGaugeContent } from '@/components/core/templates/create/
 import { AdvancedPictogramShapesContent } from './AdvancedPictogramShapes';
 import MapNorthAmerica from '../../maps/MapNorthAmerica.jsx';
 import { AdvancedStackedCardContent } from './AdvancedStackedCard';
+import AdvanceSemiMeter from './AdvanceSemiMeter';
+import { AdvancePercentageCardContent } from './AdvancePercentageCard.jsx';
+import { AdvanceColumnCardElementContent } from './AdvanceColumnCard.jsx';
 import { AdvancePercentageCardTwoElementContent } from './AdvancePercentageCardTwo';
-import { AdvanceGlobaBarContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceGlobaBar.jsx';
+import { AdvanceDynamicSortingChartContent } from './AdvancedScatterLifeExpectancy.jsx';
+import { AdvanceGlobalBarContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceGlobalBar.jsx';
 
-const AdvanceChartsPresent = ({ element }) => {
+const AdvanceChartsPresent = ({ element, active, onChange, ...props }) => {
   const components = {
     shapes: AdvanceShapesContent,
     'linear-bar': AdvanceLinearBarContent,
@@ -32,19 +36,20 @@ const AdvanceChartsPresent = ({ element }) => {
     speedometer: AdvanceSpeedometerContent,
     'speedometer-simple': AdvanceGaugeContent,
     'speedometer-multiple': AdvanceMultipleGaugeContent,
-    'scatter-life-expectancy': AdvanceDynamicSortingContent,
+    'scatter-life-expectancy': AdvanceDynamicSortingChartContent,
     'pictogram-shapes': AdvancedPictogramShapesContent,
     'north-america-map': MapNorthAmerica,
-    'stacked-card': AdvanceDynamicSortingContent,
-    'percentage-card': AdvancedStackedCardContent,
-    'column-card': AdvanceDynamicSortingContent,
+    'stacked-card': AdvancedStackedCardContent,
+    'percentage-card': AdvancePercentageCardContent,
+    'column-card': AdvanceColumnCardElementContent,
     'percentage-card-2': AdvancePercentageCardTwoElementContent,
     'linear-advanced-bar': AdvanceLinearBarContent,
-    'bar-global': AdvanceGlobaBarContent,
+    'bar-global': AdvanceGlobalBarContent,
+    'semi-meter': AdvanceSemiMeter,
   };
 
   if (components[element.config.name]) {
-    return createElement(components[element.config.name], { element });
+    return createElement(components[element.config.name], { element, active, onChange, ...props });
   }
 
   return null;

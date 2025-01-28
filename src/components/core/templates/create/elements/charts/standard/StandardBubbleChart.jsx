@@ -2,13 +2,14 @@ import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardBubbleChart = ({ element }) => {
   return <StandardBubbleChartContent element={element} />;
 };
 
-export const StandardBubbleChartContent = ({ element }) => {
+export const StandardBubbleChartContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -61,19 +62,21 @@ export const StandardBubbleChartContent = ({ element }) => {
       }}
     >
       {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
-      <div
-        ref={chartRef}
-        style={{
-          width: element.width,
-          height: element.height,
-          opacity: element.style.opacity,
-          transform: `rotate(${element.config.rotation || 0}deg)`,
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
-        }}
-      />
+      <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+        <div
+          ref={chartRef}
+          style={{
+            width: element.width,
+            height: element.height,
+            opacity: element.style.opacity,
+            transform: `rotate(${element.config.rotation || 0}deg)`,
+            paddingTop: element.config.styles.yPadding,
+            paddingLeft: element.config.styles.xPadding,
+            paddingBottom: element.config.styles.yPadding,
+            paddingRight: element.config.styles.xPadding,
+          }}
+        />
+      </ElementChartWrapper>
     </div>
   );
 };
@@ -82,6 +85,7 @@ StandardBubbleChart.propTypes = ElementPropTypes;
 
 StandardBubbleChartContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default StandardBubbleChart;

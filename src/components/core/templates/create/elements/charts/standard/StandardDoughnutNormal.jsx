@@ -3,6 +3,7 @@ import * as echarts from 'echarts';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 
 const StandardDoughnutNormal = ({ element }) => {
   return <StandardDoughnutNormalContent element={element} />;
@@ -10,7 +11,7 @@ const StandardDoughnutNormal = ({ element }) => {
 
 StandardDoughnutNormal.propTypes = ElementPropTypes;
 
-export const StandardDoughnutNormalContent = ({ element }) => {
+export const StandardDoughnutNormalContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -103,21 +104,24 @@ export const StandardDoughnutNormalContent = ({ element }) => {
       }}
     >
       {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
-      <div
-        ref={chartRef}
-        style={{
-          height: element.height,
-          width: element.width,
-          opacity: element.style.opacity,
-          transform: `rotate(${element.config.rotation || 0}deg)`,
-        }}
-      />
+      <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+        <div
+          ref={chartRef}
+          style={{
+            height: element.height,
+            width: element.width,
+            opacity: element.style.opacity,
+            transform: `rotate(${element.config.rotation || 0}deg)`,
+          }}
+        />
+      </ElementChartWrapper>
     </div>
   );
 };
 
 StandardDoughnutNormalContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default StandardDoughnutNormal;

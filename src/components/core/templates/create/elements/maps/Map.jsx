@@ -380,6 +380,7 @@ import MapWyoming, { MapWyomingPresent } from '@/components/core/templates/creat
 import MapWestVirginia, {
   MapWestVirginiaPresent,
 } from '@/components/core/templates/create/elements/maps/MapWestVirginia.jsx';
+import ElementMapWrapper from '@/components/core/templates/create/elements/maps/helpers/ElementMapWrapper.jsx';
 
 export const Map = ({ element }) => {
   const components = {
@@ -633,13 +634,18 @@ export const Map = ({ element }) => {
   };
 
   if (components[element.config.name]) {
-    return createElement(components[element.config.name], { element });
+    const Component = () => (
+      <ElementMapWrapper element={element}>
+        {createElement(components[element.config.name], { element })}
+      </ElementMapWrapper>
+    );
+    return <Component />;
   }
 
   return null;
 };
 
-export const MapPresent = ({ element }) => {
+export const MapPresent = ({ element, isMapWrapperDisabled = false }) => {
   const components = {
     nigeria: MapNigeriaPresent,
     'nigeria-regions': MapNigeriaRegionsPresent,
@@ -890,7 +896,12 @@ export const MapPresent = ({ element }) => {
   };
 
   if (components[element.config.name]) {
-    return createElement(components[element.config.name], { element });
+    const Component = () => (
+      <ElementMapWrapper element={element} isDisabled={isMapWrapperDisabled}>
+        {createElement(components[element.config.name], { element })}
+      </ElementMapWrapper>
+    );
+    return <Component />;
   }
 
   return null;
@@ -899,4 +910,5 @@ export const MapPresent = ({ element }) => {
 Map.propTypes = ElementPropTypes;
 MapPresent.propTypes = {
   element: PropTypes.object.isRequired,
+  isMapWrapperDisabled: PropTypes.bool,
 };

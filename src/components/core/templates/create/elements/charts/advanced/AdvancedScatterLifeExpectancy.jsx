@@ -3,6 +3,7 @@ import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { starterLifeChartData } from '@/lib/design/chart-data.js';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvancedScatterLifeExpectancy = ({ element }) => {
   return <AdvanceDynamicSortingChartContent element={element} />;
@@ -10,7 +11,7 @@ const AdvancedScatterLifeExpectancy = ({ element }) => {
 
 AdvancedScatterLifeExpectancy.propTypes = ElementPropTypes;
 
-export const AdvanceDynamicSortingChartContent = ({ element }) => {
+export const AdvanceDynamicSortingChartContent = ({ element,isChartWrapperDisabled=false }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -197,12 +198,15 @@ export const AdvanceDynamicSortingChartContent = ({ element }) => {
   }, [element]);
 
   return (
-    <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
+    </ElementChartWrapper>
   );
 };
 
 AdvanceDynamicSortingChartContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvancedScatterLifeExpectancy;

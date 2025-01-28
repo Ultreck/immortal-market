@@ -3,6 +3,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardLineMultiple = ({ element }) => {
@@ -11,7 +12,7 @@ const StandardLineMultiple = ({ element }) => {
 
 StandardLineMultiple.propTypes = ElementPropTypes;
 
-export const StandardLineMultipleContent = ({ element }) => {
+export const StandardLineMultipleContent = ({ element, isChartWrapperDisabled = false }) => {
   return (
     <>
       <div
@@ -21,66 +22,68 @@ export const StandardLineMultipleContent = ({ element }) => {
         }}
       >
         {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
-        <ChartContainer
-          config={{}}
-          style={{
-            height: element.height,
-            width: element.width,
-            opacity: element.style.opacity,
-            paddingTop: element.config.styles?.yPadding,
-            paddingLeft: element.config.styles?.xPadding,
-            paddingBottom: element.config.styles?.yPadding,
-            paddingRight: element.config.styles?.xPadding,
-          }}
-        >
-          <LineChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
-            <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-            <XAxis
-              dataKey={element.config.keys.x}
-              tickMargin={8}
-              tickFormatter={(value) => capitalize(value)}
-              hide={!element.config.showXaxis}
-              tick={{
-                fontSize: element.config.styles?.xGridSize,
-                fontWeight: element.config.styles?.gFontWeight,
-                fontStyle: element.config.styles?.gFontStyle,
-                fill: element.config.styles?.gridAndLegendColor,
-              }}
-            />
-            <YAxis
-              type="number"
-              hide={!element.config.showYaxis}
-              fontSize={element.config.fontSize}
-              tick={{
-                fontSize: element.config.styles?.yGridSize,
-                fontWeight: element.config.styles?.gFontWeight,
-                fontStyle: element.config.styles?.gFontStyle,
-                fill: element.config.styles?.gridAndLegendColor,
-              }}
-            />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            {element.config.showLegend && (
-              <Legend
-                textStyle={{
-                  fontSize: element.config.styles?.legendSize,
+        <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+          <ChartContainer
+            config={{}}
+            style={{
+              height: element.height,
+              width: element.width,
+              opacity: element.style.opacity,
+              paddingTop: element.config.styles?.yPadding,
+              paddingLeft: element.config.styles?.xPadding,
+              paddingBottom: element.config.styles?.yPadding,
+              paddingRight: element.config.styles?.xPadding,
+            }}
+          >
+            <LineChart accessibilityLayer data={element.config.data.slice(0, element.config.bars)}>
+              <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+              <XAxis
+                dataKey={element.config.keys.x}
+                tickMargin={8}
+                tickFormatter={(value) => capitalize(value)}
+                hide={!element.config.showXaxis}
+                tick={{
+                  fontSize: element.config.styles?.xGridSize,
+                  fontWeight: element.config.styles?.gFontWeight,
+                  fontStyle: element.config.styles?.gFontStyle,
+                  fill: element.config.styles?.gridAndLegendColor,
                 }}
               />
-            )}
-            {element.config.keys.y.slice(0, element.config.noOfLines).map((key, index) => {
-              return (
-                <Line
-                  key={key}
-                  dataKey={key}
-                  strokeWidth={2}
-                  dot={false}
-                  fill={element.config.colors[index % element.config.colors.length]}
-                  stroke={element.config.colors[index % element.config.colors.length]}
-                  type={element.config.type === 'zig-zag' ? 'step' : element.config.type}
+              <YAxis
+                type="number"
+                hide={!element.config.showYaxis}
+                fontSize={element.config.fontSize}
+                tick={{
+                  fontSize: element.config.styles?.yGridSize,
+                  fontWeight: element.config.styles?.gFontWeight,
+                  fontStyle: element.config.styles?.gFontStyle,
+                  fill: element.config.styles?.gridAndLegendColor,
+                }}
+              />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              {element.config.showLegend && (
+                <Legend
+                  textStyle={{
+                    fontSize: element.config.styles?.legendSize,
+                  }}
                 />
-              );
-            })}
-          </LineChart>
-        </ChartContainer>
+              )}
+              {element.config.keys.y.slice(0, element.config.noOfLines).map((key, index) => {
+                return (
+                  <Line
+                    key={key}
+                    dataKey={key}
+                    strokeWidth={2}
+                    dot={false}
+                    fill={element.config.colors[index % element.config.colors.length]}
+                    stroke={element.config.colors[index % element.config.colors.length]}
+                    type={element.config.type === 'zig-zag' ? 'step' : element.config.type}
+                  />
+                );
+              })}
+            </LineChart>
+          </ChartContainer>
+        </ElementChartWrapper>
       </div>
     </>
   );
@@ -88,6 +91,7 @@ export const StandardLineMultipleContent = ({ element }) => {
 
 StandardLineMultipleContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default StandardLineMultiple;

@@ -2,6 +2,7 @@ import { Treemap } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvanceTreeMap = ({ element }) => {
   return <AdvanceTreeMapContent element={element} />;
@@ -103,23 +104,26 @@ CustomizedContent.propTypes = {
 
 AdvanceTreeMap.propTypes = ElementPropTypes;
 
-export const AdvanceTreeMapContent = ({ element }) => {
+export const AdvanceTreeMapContent = ({ element, isChartWrapperDisabled = false }) => {
   useEffect(() => {}, [element]);
   return (
-    <Treemap
-      width={element.width}
-      height={element.height}
-      data={element.config.data}
-      className="space"
-      dataKey="size"
-      stroke="#fff"
-      content={<CustomizedContent element={element} colors={element.config.colors} />}
-    />
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <Treemap
+        width={element.width}
+        height={element.height}
+        data={element.config.data}
+        className="space"
+        dataKey="size"
+        stroke="#fff"
+        content={<CustomizedContent element={element} colors={element.config.colors} />}
+      />
+    </ElementChartWrapper>
   );
 };
 
 AdvanceTreeMapContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvanceTreeMap;

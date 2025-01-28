@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvanceGauge = ({ element }) => {
   return <AdvanceGaugeContent element={element} />;
@@ -9,7 +10,7 @@ const AdvanceGauge = ({ element }) => {
 
 AdvanceGauge.propTypes = ElementPropTypes;
 
-export const AdvanceGaugeContent = ({ element }) => {
+export const AdvanceGaugeContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -90,19 +91,22 @@ export const AdvanceGaugeContent = ({ element }) => {
   }, [element]);
 
   return (
-    <div
-      ref={chartRef}
-      style={{
-        padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
-        width: element.width,
-        height: element.height,
-      }}
-    />
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div
+        ref={chartRef}
+        style={{
+          padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
+          width: element.width,
+          height: element.height,
+        }}
+      />
+    </ElementChartWrapper>
   );
 };
 
 AdvanceGaugeContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvanceGauge;

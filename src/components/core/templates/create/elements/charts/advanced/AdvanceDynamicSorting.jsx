@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvanceDynamicSorting = ({ element }) => {
   return <AdvanceDynamicSortingContent element={element} />;
@@ -9,7 +10,7 @@ const AdvanceDynamicSorting = ({ element }) => {
 
 AdvanceDynamicSorting.propTypes = ElementPropTypes;
 
-export const AdvanceDynamicSortingContent = ({ element }) => {
+export const AdvanceDynamicSortingContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -128,19 +129,22 @@ export const AdvanceDynamicSortingContent = ({ element }) => {
   }, [element]);
 
   return (
-    <div>
-      {element.config.showTitle && (
-        <p className="font-bold" style={{ fontSize: element.config.fontSize }}>
-          {element.config.title}
-        </p>
-      )}
-      <div ref={chartRef} style={{ width: '100%', height: element.height }} />
-    </div>
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div style={{width:element.width,height:element.height}}>
+        {element.config.showTitle && (
+          <p className="font-bold" style={{ fontSize: element.config.fontSize }}>
+            {element.config.title}
+          </p>
+        )}
+        <div ref={chartRef} style={{ width: '100%', height: element.height }} />
+      </div>
+    </ElementChartWrapper>
   );
 };
 
 AdvanceDynamicSortingContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvanceDynamicSorting;

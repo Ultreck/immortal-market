@@ -2,6 +2,7 @@ import { ElementPropTypes } from '@/lib/prop-types';
 import { motion } from 'motion/react';
 import PropTypes from 'prop-types';
 import { formatChartValue } from '@/lib/utils';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvancePercentageCard = ({ element }) => {
   return <AdvancePercentageCardContent element={element} />;
@@ -9,53 +10,56 @@ const AdvancePercentageCard = ({ element }) => {
 
 AdvancePercentageCard.propTypes = ElementPropTypes;
 
-const AdvancePercentageCardContent = ({ element }) => {
+export const AdvancePercentageCardContent = ({ element, isChartWrapperDisabled = false }) => {
   const data = element.config.data.slice(0, element.config.bars);
   return (
-    <div
-      style={{
-        paddingTop: element.config.styles.yPadding,
-        paddingLeft: element.config.styles.xPadding,
-        paddingBottom: element.config.styles.yPadding,
-        paddingRight: element.config.styles.xPadding,
-        width: element.width,
-        height: element.height,
-        opacity: element.style.opacity,
-      }}
-    >
-      {data
-        .sort((a, b) => a.value - b.value)
-        .map((item, index) => {
-          const cardHeight = (item.value / 100) * element.height - 50;
-          const baseFontSize = element.config.labelFontSize || 14;
-          const dynamicFontSize = Math.max(baseFontSize, cardHeight * 0.1);
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div
+        style={{
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
+          width: element.width,
+          height: element.height,
+          opacity: element.style.opacity,
+        }}
+      >
+        {data
+          .sort((a, b) => a.value - b.value)
+          .map((item, index) => {
+            const cardHeight = (item.value / 100) * element.height - 50;
+            const baseFontSize = element.config.labelFontSize || 14;
+            const dynamicFontSize = Math.max(baseFontSize, cardHeight * 0.1);
 
-          return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className={`w-full text-white text-center flex flex-col items-center justify-center`}
-              style={{
-                height: `${cardHeight}px`,
-                backgroundColor: element.config.colors[index],
-                color: element.config.labelFontColor,
-              }}
-            >
-              <p className="p-2">{item.age}</p>
-              <p style={{ fontSize: `${dynamicFontSize * 0.8}px`, lineHeight: '1' }} className="text-sm">
-                {formatChartValue(item.value, element)}
-              </p>
-            </motion.div>
-          );
-        })}
-    </div>
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className={`w-full text-white text-center flex flex-col items-center justify-center`}
+                style={{
+                  height: `${cardHeight}px`,
+                  backgroundColor: element.config.colors[index],
+                  color: element.config.labelFontColor,
+                }}
+              >
+                <p className="p-2">{item.age}</p>
+                <p style={{ fontSize: `${dynamicFontSize * 0.8}px`, lineHeight: '1' }} className="text-sm">
+                  {formatChartValue(item.value, element)}
+                </p>
+              </motion.div>
+            );
+          })}
+      </div>
+    </ElementChartWrapper>
   );
 };
 
 AdvancePercentageCardContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvancePercentageCard;

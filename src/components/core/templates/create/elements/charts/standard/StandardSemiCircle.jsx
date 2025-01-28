@@ -3,6 +3,7 @@ import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { interpolateColor } from '@/lib/utils';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardSemiCircle = ({ element }) => {
@@ -11,7 +12,7 @@ const StandardSemiCircle = ({ element }) => {
 
 StandardSemiCircle.propTypes = ElementPropTypes;
 
-export const StandardSemiCircleContent = ({ element }) => {
+export const StandardSemiCircleContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
 
   const dataKey = element.config.keys?.data || 'value';
@@ -97,26 +98,29 @@ export const StandardSemiCircleContent = ({ element }) => {
       }}
     >
       {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
-      <div
-        id="main"
-        ref={chartRef}
-        style={{
-          width: element.width,
-          height: element.height,
-          opacity: element.style.opacity,
-          transform: `rotate(${element.config.rotation || 0}deg)`,
-          paddingTop: element.config.styles?.yPadding,
-          paddingLeft: element.config.styles?.xPadding,
-          paddingBottom: element.config.styles?.yPadding,
-          paddingRight: element.config.styles?.xPadding,
-        }}
-      />
+      <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+        <div
+          id="main"
+          ref={chartRef}
+          style={{
+            width: element.width,
+            height: element.height,
+            opacity: element.style.opacity,
+            transform: `rotate(${element.config.rotation || 0}deg)`,
+            paddingTop: element.config.styles?.yPadding,
+            paddingLeft: element.config.styles?.xPadding,
+            paddingBottom: element.config.styles?.yPadding,
+            paddingRight: element.config.styles?.xPadding,
+          }}
+        />
+      </ElementChartWrapper>
     </div>
   );
 };
 
 StandardSemiCircleContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default StandardSemiCircle;

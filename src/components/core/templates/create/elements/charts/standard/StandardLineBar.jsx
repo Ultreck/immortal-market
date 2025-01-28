@@ -3,6 +3,7 @@ import { ChartContainer } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { useEffect } from 'react';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
 import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardLineBar = ({ element }) => {
@@ -11,7 +12,7 @@ const StandardLineBar = ({ element }) => {
 
 StandardLineBar.propTypes = ElementPropTypes;
 
-export const StandardLineBarContent = ({ element }) => {
+export const StandardLineBarContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartData = element.config.data.slice(0, element.config.bars).map((item, index) => {
     const color = element.config.colors?.[index];
     return { ...item, fill: color };
@@ -27,51 +28,59 @@ export const StandardLineBarContent = ({ element }) => {
       }}
     >
       {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
-      <ChartContainer
-        config={{}}
-        style={{
-          height: element.height,
-          width: element.width,
-          opacity: element.style.opacity,
-          paddingTop: element.config.styles?.yPadding,
-          paddingLeft: element.config.styles?.xPadding,
-          paddingBottom: element.config.styles?.yPadding,
-          paddingRight: element.config.styles?.xPadding,
-        }}
-      >
-        <ComposedChart data={chartData}>
-          <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
-          <XAxis
-            dataKey="name"
-            scale="band"
-            hide={!element.config.showXaxis}
-            tick={{
-              fontSize: element.config.styles?.xGridSize,
-              fontWeight: element.config.styles?.gFontWeight,
-              fontStyle: element.config.styles?.gFontStyle,
-              fill: element.config.styles?.gridAndLegendColor,
-            }}
-          />
-          <YAxis
-            hide={!element.config.showYaxis}
-            tick={{
-              fontSize: element.config.styles?.yGridSize,
-              fontWeight: element.config.styles?.gFontWeight,
-              fontStyle: element.config.styles?.gFontStyle,
-              fill: element.config.styles?.gridAndLegendColor,
-            }}
-          />
-          {element.config.showLegend && <Legend />}
-          <Bar dataKey="pv" barSize={50} fill={element.config.colors[0]} radius={element.config.styles?.borderRadius} />
-          <Line type="monotone" dataKey="uv" stroke={element.config.colors[1]} />
-        </ComposedChart>
-      </ChartContainer>
+      <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+        <ChartContainer
+          config={{}}
+          style={{
+            height: element.height,
+            width: element.width,
+            opacity: element.style.opacity,
+            paddingTop: element.config.styles?.yPadding,
+            paddingLeft: element.config.styles?.xPadding,
+            paddingBottom: element.config.styles?.yPadding,
+            paddingRight: element.config.styles?.xPadding,
+          }}
+        >
+          <ComposedChart data={chartData}>
+            <CartesianGrid vertical={element.config.showYGridline} horizontal={element.config.showXGridline} />
+            <XAxis
+              dataKey="name"
+              scale="band"
+              hide={!element.config.showXaxis}
+              tick={{
+                fontSize: element.config.styles?.xGridSize,
+                fontWeight: element.config.styles?.gFontWeight,
+                fontStyle: element.config.styles?.gFontStyle,
+                fill: element.config.styles?.gridAndLegendColor,
+              }}
+            />
+            <YAxis
+              hide={!element.config.showYaxis}
+              tick={{
+                fontSize: element.config.styles?.yGridSize,
+                fontWeight: element.config.styles?.gFontWeight,
+                fontStyle: element.config.styles?.gFontStyle,
+                fill: element.config.styles?.gridAndLegendColor,
+              }}
+            />
+            {element.config.showLegend && <Legend />}
+            <Bar
+              dataKey="pv"
+              barSize={50}
+              fill={element.config.colors[0]}
+              radius={element.config.styles?.borderRadius}
+            />
+            <Line type="monotone" dataKey="uv" stroke={element.config.colors[1]} />
+          </ComposedChart>
+        </ChartContainer>
+      </ElementChartWrapper>
     </div>
   );
 };
 
 StandardLineBarContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default StandardLineBar;

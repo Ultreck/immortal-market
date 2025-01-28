@@ -18,7 +18,7 @@ import AdvancedStackedCardConfig from '@/components/core/templates/create/tools/
 import AdvancePercentageCardConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancePercentageCardConfig.jsx';
 import useTemplateStore from '@/store/template.js';
 import AdvanceLinearChartConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceLinearChartConfig.jsx';
-import AdvanceGlobaBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceGlobaBarConfig.jsx';
+import AdvanceGlobalBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceGlobalBarConfig.jsx';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
@@ -85,7 +85,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
           {element.config.name === 'linear-advanced-bar' && (
             <AdvanceLinearChartConfig element={element} onChange={onChange} />
           )}
-          {element.config.name === 'bar-global' && <AdvanceGlobaBarConfig element={element} onChange={onChange} />}
+          {element.config.name === 'bar-global' && <AdvanceGlobalBarConfig element={element} onChange={onChange} />}
         </div>
       </PopoverContent>
     </Popover>

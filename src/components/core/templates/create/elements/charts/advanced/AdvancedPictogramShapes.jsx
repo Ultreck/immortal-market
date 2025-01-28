@@ -2,6 +2,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
 import { formatChartValue } from '@/lib/utils.js';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvancedPictogramShapes = ({ element }) => {
   return <AdvancedPictogramShapesContent element={element} />;
@@ -38,7 +39,7 @@ const classes = {
   },
 };
 
-export const AdvancedPictogramShapesContent = ({ element }) => {
+export const AdvancedPictogramShapesContent = ({ element,isChartWrapperDisabled=false }) => {
   const {
     icon1,
     icon2,
@@ -61,58 +62,63 @@ export const AdvancedPictogramShapesContent = ({ element }) => {
   const numberOfIcons = icon1count + icon2count + icon3count;
 
   return (
-    <div
-      style={{
-        paddingTop: element.config.styles.yPadding,
-        paddingLeft: element.config.styles.xPadding,
-        paddingBottom: element.config.styles.yPadding,
-        paddingRight: element.config.styles.xPadding,
-      }}
-      className="space-y-6 w-full"
-    >
-      {showLabel && (
-        <div
-          style={{
-            fontSize: element.config.labelFontSize,
-            fontWeight: element.config.styles.lFontWeight,
-            fontStyle: element.config.styles.lFontStyle,
-            color: element.config.labelFontColor,
-          }}
-          className="flex space-x-3 capitalize"
-        >
-          <>
-            {showIcon1 && (
-              <p>
-                {icon1} - {formatChartValue(icon1count, element)}
-              </p>
-            )}
-            {showIcon2 && (
-              <p>
-                {icon2} - {formatChartValue(icon2count, element)}
-              </p>
-            )}
-            {showIcon3 && (
-              <p>
-                {icon3} - {formatChartValue(icon3count, element)}
-              </p>
-            )}
-          </>
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div
+        style={{
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
+          width: element.width,
+          height: element.height,
+        }}
+        className="space-y-6 w-full"
+      >
+        {showLabel && (
+          <div
+            style={{
+              fontSize: element.config.labelFontSize,
+              fontWeight: element.config.styles.lFontWeight,
+              fontStyle: element.config.styles.lFontStyle,
+              color: element.config.labelFontColor,
+            }}
+            className="flex space-x-3 capitalize"
+          >
+            <>
+              {showIcon1 && (
+                <p>
+                  {icon1} - {formatChartValue(icon1count, element)}
+                </p>
+              )}
+              {showIcon2 && (
+                <p>
+                  {icon2} - {formatChartValue(icon2count, element)}
+                </p>
+              )}
+              {showIcon3 && (
+                <p>
+                  {icon3} - {formatChartValue(icon3count, element)}
+                </p>
+              )}
+            </>
+          </div>
+        )}
+        <div className={`grid ${classes.grid[numberOfIcons] || classes.grid.default} gap-3`}>
+          {showIcon1 &&
+            Array.from({ length: icon1count }, () => <Icon1 key={crypto.randomUUID()} size={48} color={color1} />)}
+          {showIcon2 &&
+            Array.from({ length: icon2count }, () => <Icon2 key={crypto.randomUUID()} size={48} color={color2} />)}
+          {showIcon3 &&
+            Array.from({ length: icon3count }, () => <Icon3 key={crypto.randomUUID()} size={48} color={color3} />)}
         </div>
-      )}
-      <div className={`grid ${classes.grid[numberOfIcons] || classes.grid.default} gap-3`}>
-        {showIcon1 &&
-          Array.from({ length: icon1count }, () => <Icon1 key={crypto.randomUUID()} size={48} color={color1} />)}
-        {showIcon2 &&
-          Array.from({ length: icon2count }, () => <Icon2 key={crypto.randomUUID()} size={48} color={color2} />)}
-        {showIcon3 &&
-          Array.from({ length: icon3count }, () => <Icon3 key={crypto.randomUUID()} size={48} color={color3} />)}
       </div>
-    </div>
+    </ElementChartWrapper>
   );
 };
 
 AdvancedPictogramShapesContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvancedPictogramShapes;

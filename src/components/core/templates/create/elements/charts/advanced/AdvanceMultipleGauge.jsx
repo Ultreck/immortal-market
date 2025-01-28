@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvanceMultipleGauge = ({ element }) => {
   return <AdvanceMultipleGaugeContent element={element} />;
@@ -9,7 +10,7 @@ const AdvanceMultipleGauge = ({ element }) => {
 
 AdvanceMultipleGauge.propTypes = ElementPropTypes;
 
-export const AdvanceMultipleGaugeContent = ({ element }) => {
+export const AdvanceMultipleGaugeContent = ({ element,isChartWrapperDisabled }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -105,6 +106,7 @@ export const AdvanceMultipleGaugeContent = ({ element }) => {
   }, [element]);
 
   return (
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}> 
     <div
       ref={chartRef}
       style={{
@@ -113,11 +115,13 @@ export const AdvanceMultipleGaugeContent = ({ element }) => {
         height: element.height,
       }}
     />
+    </ElementChartWrapper>
   );
 };
 
 AdvanceMultipleGaugeContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled:PropTypes.bool
 };
 
 export default AdvanceMultipleGauge;

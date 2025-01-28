@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvanceFunnel = ({ element }) => {
   return <AdvanceFunnelChartContent element={element} />;
@@ -9,7 +10,7 @@ const AdvanceFunnel = ({ element }) => {
 
 AdvanceFunnel.propTypes = ElementPropTypes;
 
-export const AdvanceFunnelChartContent = ({ element }) => {
+export const AdvanceFunnelChartContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -91,23 +92,26 @@ export const AdvanceFunnelChartContent = ({ element }) => {
   }, [element]);
 
   return (
-    <div
-      ref={chartRef}
-      style={{
-        width: element.width,
-        height: element.height,
-        opacity: element.style.opacity,
-        paddingTop: element.config.styles.yPadding,
-        paddingLeft: element.config.styles.xPadding,
-        paddingBottom: element.config.styles.yPadding,
-        paddingRight: element.config.styles.xPadding,
-      }}
-    />
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div
+        ref={chartRef}
+        style={{
+          width: element.width,
+          height: element.height,
+          opacity: element.style.opacity,
+          paddingTop: element.config.styles.yPadding,
+          paddingLeft: element.config.styles.xPadding,
+          paddingBottom: element.config.styles.yPadding,
+          paddingRight: element.config.styles.xPadding,
+        }}
+      />
+    </ElementChartWrapper>
   );
 };
 
 AdvanceFunnelChartContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvanceFunnel;

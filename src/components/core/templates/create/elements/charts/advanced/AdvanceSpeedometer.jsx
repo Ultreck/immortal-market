@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvanceSpeedometer = ({ element }) => {
   return <AdvanceSpeedometerContent element={element} />;
@@ -9,7 +10,7 @@ const AdvanceSpeedometer = ({ element }) => {
 
 AdvanceSpeedometer.propTypes = ElementPropTypes;
 
-export const AdvanceSpeedometerContent = ({ element }) => {
+export const AdvanceSpeedometerContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -92,19 +93,22 @@ export const AdvanceSpeedometerContent = ({ element }) => {
   }, [element]);
 
   return (
-    <div
-      style={{
-        padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
-        width: element.width,
-        height: element.height,
-      }}
-      ref={chartRef}
-    />
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div
+        style={{
+          padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
+          width: element.width,
+          height: element.height,
+        }}
+        ref={chartRef}
+      />
+    </ElementChartWrapper>
   );
 };
 
 AdvanceSpeedometerContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvanceSpeedometer;

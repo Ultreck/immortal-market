@@ -5,6 +5,7 @@ import { Fragment, useMemo } from 'react';
 import { TbCircleFilled } from 'react-icons/tb';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
+import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
 
 const AdvanceCustomBar = ({ element }) => {
   return <AdvancedCustomBarContent element={element} />;
@@ -12,7 +13,7 @@ const AdvanceCustomBar = ({ element }) => {
 
 AdvanceCustomBar.propTypes = ElementPropTypes;
 
-export const AdvancedCustomBarContent = ({ element }) => {
+export const AdvancedCustomBarContent = ({ element, isChartWrapperDisabled = false }) => {
   const data = useMemo(() => {
     if (element.config.data.length <= element.config.bars) return element.config.data;
     const visibleData = element.config.data.slice(0, element.config.bars);
@@ -44,30 +45,36 @@ export const AdvancedCustomBarContent = ({ element }) => {
   const renderCardTooltip = (children) => {
     if (element.config.cardTooltip) {
       return (
-        <Tooltip
-          content={
-            <div>
-              <div className="w-[150px] p-3">
-                <div className="space-y-4">
-                  <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, cumque vel. Distinctio nam aliquid
-                    tenetur! Sit fuga tenetur non deleniti necessitatibus ea maiores libero? Voluptas ut quisquam fugiat
-                    reprehenderit mollitia?
+        <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+          <Tooltip
+            content={
+              <div>
+                <div className="w-[150px] p-3">
+                  <div className="space-y-4">
+                    <div>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, cumque vel. Distinctio nam aliquid
+                      tenetur! Sit fuga tenetur non deleniti necessitatibus ea maiores libero? Voluptas ut quisquam
+                      fugiat reprehenderit mollitia?
+                    </div>
                   </div>
+                  <Button size="sm" className="bg-white text-black mt-5">
+                    Details
+                  </Button>
                 </div>
-                <Button size="sm" className="bg-white text-black mt-5">
-                  Details
-                </Button>
               </div>
-            </div>
-          }
-          placement="right-start"
-        >
-          {children}
-        </Tooltip>
+            }
+            placement="right-start"
+          >
+            {children}
+          </Tooltip>
+        </ElementChartWrapper>
       );
     }
-    return children;
+    return(
+      <ElementChartWrapper element={element} className='w-full h-full' isDisabled={isChartWrapperDisabled}>
+       { children}
+      </ElementChartWrapper>
+      )
   };
 
   return renderCardTooltip(
@@ -79,6 +86,8 @@ export const AdvancedCustomBarContent = ({ element }) => {
             paddingLeft: element.config.styles.xPadding,
             paddingBottom: element.config.styles.yPadding,
             paddingRight: element.config.styles.xPadding,
+            width: element.width,
+            height: element.height,
           }}
           className="w-full h-full"
         >
@@ -162,6 +171,8 @@ export const AdvancedCustomBarContent = ({ element }) => {
             paddingLeft: element.config.styles.xPadding,
             paddingBottom: element.config.styles.yPadding,
             paddingRight: element.config.styles.xPadding,
+            width: element.width, 
+            height: element.height,
           }}
           className="flex flex-col items-start h-full space-y-2"
         >
@@ -260,6 +271,7 @@ export const AdvancedCustomBarContent = ({ element }) => {
 
 AdvancedCustomBarContent.propTypes = {
   element: PropTypes.object.isRequired,
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvanceCustomBar;
