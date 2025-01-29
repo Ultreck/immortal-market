@@ -87,7 +87,7 @@ const EditDesignTitleButton = () => {
                         classNames={{ input: 'text-base px-2' }}
                         {...field}
                         isInvalid={!!error?.message}
-                        error={error?.message}
+                        errorMessage={error?.message}
                         isDisabled={field.disabled}
                       />
                     </div>
