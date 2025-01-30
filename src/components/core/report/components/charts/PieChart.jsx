@@ -8,10 +8,10 @@ const PieChart = ({ title, caption, data }) => {
   const pieChartRef = useRef();
 
   useEffect(() => {
-    if(google) {
+    if (google) {
       google.charts.load('current', { packages: ['corechart'] });
       google.charts.setOnLoadCallback(drawChart);
-  
+
       function drawChart() {
         const _data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
@@ -35,7 +35,7 @@ const PieChart = ({ title, caption, data }) => {
         };
         const chart = new google.visualization.PieChart(pieChartRef.current);
         chart.draw(_data, options);
-    }
+      }
     }
   }, [data]);
 

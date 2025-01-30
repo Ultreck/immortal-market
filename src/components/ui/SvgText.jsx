@@ -32,4 +32,3 @@ SvgText.propTypes = {
 };
 
 export default SvgText;
-

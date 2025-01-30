@@ -1,13 +1,13 @@
 import { cn } from '@heroui/react';
-import PropTypes from 'prop-types'
-const Team = ({big= false}) => {
+import PropTypes from 'prop-types';
+const Team = ({ big = false }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="524.67004"
       height="531.39694"
       viewBox="0 0 524.67004 531.39694"
-      className={cn("max-w-44 lg:max-w-60", {"max-w-72 lg:max-w-[40rem]": big})}
+      className={cn('max-w-44 lg:max-w-60', { 'max-w-72 lg:max-w-[40rem]': big })}
     >
       <polygon
         points="117.67523 88.74385 113.67523 109.74385 133.61763 115.36589 131.1398 92.94604 117.67523 88.74385"
@@ -206,9 +206,7 @@ const Team = ({big= false}) => {
   );
 };
 
-
 Team.propTypes = {
-  big: PropTypes.bool
-}
+  big: PropTypes.bool,
+};
 export default Team;
-

@@ -24,7 +24,6 @@ export default function NotfoundIcon() {
         />
         <polygon
           points="385.16196 70.18643 394.16196 43.18643 411.70447 43.18643 412.62653 70.18643 385.16196 70.18643"
-         
           opacity=".1"
         />
         <path
@@ -101,4 +100,3 @@ export default function NotfoundIcon() {
     </svg>
   );
 }
-

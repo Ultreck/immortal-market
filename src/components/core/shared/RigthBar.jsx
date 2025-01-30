@@ -20,7 +20,7 @@ const RigthBar = () => {
         <AvatarGroup>
           {users?.map((tr) => (
             <Tooltip key={tr.name} showArrow={true} placement="bottom" content={tr?.name}>
-              <Avatar size="md" src={tr?.image} name={tr?.name} className=' cursor-pointer' />
+              <Avatar size="md" src={tr?.image} name={tr?.name} className=" cursor-pointer" />
             </Tooltip>
           ))}
         </AvatarGroup>
@@ -39,4 +39,3 @@ const RigthBar = () => {
 };
 
 export default RigthBar;
-

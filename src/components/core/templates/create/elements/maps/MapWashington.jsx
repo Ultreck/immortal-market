@@ -462,7 +462,7 @@ MapWashingtonPresent.propTypes = {
 };
 MapWashingtonContent.propTypes = {
   element: PropTypes.object.isRequired,
-    present: PropTypes.bool,
+  present: PropTypes.bool,
 };
 
 export default MapWashington;

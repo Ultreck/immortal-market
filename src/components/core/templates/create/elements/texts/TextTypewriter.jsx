@@ -14,7 +14,6 @@ export const TextTypewriterPreview = () => {
   return <TextTypewriterContent element={{ config: { texts: ['Hello', 'World', 'This'] } }} />;
 };
 
-
 const TextTypewriterContent = ({ element }) => {
   return (
     <ReactTyped

@@ -20,16 +20,16 @@ import { AdvanceGlobaBarContent } from '@/components/core/templates/create/eleme
 
 const AdvanceChartsPresent = ({ element }) => {
   const components = {
-    'shapes': AdvanceShapesContent,
+    shapes: AdvanceShapesContent,
     'linear-bar': AdvanceLinearBarContent,
     'custom-bar': AdvancedCustomBarContent,
-    'lollipop': AdvanceLollipopContent,
-    'funnel': AdvanceFunnelChartContent,
+    lollipop: AdvanceLollipopContent,
+    funnel: AdvanceFunnelChartContent,
     'tree-map': AdvanceTreeMapContent,
     'nested-circles': AdvanceNestedCirclesContent,
     'circle-icons': AdvanceCircleIconsContent,
     'dynamic-sorting': AdvanceDynamicSortingContent,
-    'speedometer': AdvanceSpeedometerContent,
+    speedometer: AdvanceSpeedometerContent,
     'speedometer-simple': AdvanceGaugeContent,
     'speedometer-multiple': AdvanceMultipleGaugeContent,
     'scatter-life-expectancy': AdvanceDynamicSortingContent,

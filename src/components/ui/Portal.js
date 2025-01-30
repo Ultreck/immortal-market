@@ -19,7 +19,7 @@ const Portal = ({ children }) => {
     };
     //eslint-disable-next-line
   }, [id]);
-  
+
   return createPortal(children, el.current);
 };
 
