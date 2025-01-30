@@ -4,7 +4,7 @@ import { getElementDefaultStyle } from '@/lib/elements.js';
 import { TextMarqueePreview } from '@/components/core/templates/create/elements/texts/TextMarquee.jsx';
 import { TextTypewriterPreview } from '@/components/core/templates/create/elements/texts/TextTypewriter.jsx';
 import { CountUpNumberPreview } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
-import { TextAnimationPreview } from '@/components/core/templates/create/elements/texts/TextStream.jsx';
+import { TextStreamPreview } from '@/components/core/templates/create/elements/texts/TextStream.jsx';
 
 const styles = {
   heading: {
@@ -87,7 +87,7 @@ const previews = {
   stream: (
     <div className="border border-black/10 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/10 rounded-2xl px-5 py-2 overflow-hidden">
       <div style={{ ...styles[name], color: '#fff' }} className="truncate">
-        <TextAnimationPreview />
+        <TextStreamPreview />
       </div>
     </div>
   ),

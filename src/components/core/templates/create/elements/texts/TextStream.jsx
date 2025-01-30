@@ -11,7 +11,7 @@ export const TextStreamPresent = ({ element }) => {
   return <TextStreamContent element={element} />;
 };
 
-export const TextAnimationPreview = () => {
+export const TextStreamPreview = () => {
   return <TextStreamContent element={{ style: {}, config: { content: 'This text is being streamed' } }} />;
 };
 
