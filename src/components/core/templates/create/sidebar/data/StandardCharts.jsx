@@ -30,11 +30,11 @@ const StandardCharts = ({ mini = false, onBack }) => {
         </div>
       ) : (
         <div>
-          <div className="flex items-center space-x-3 mb-8">
-            <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+          <div className="flex items-center space-x-3 mb-6 bg-white/5 rounded-full px-2 py-1">
+            <Button onPress={onBack} variant="light" radius="full" isIconOnly size="sm">
               <TbChevronLeft size="20" />
             </Button>
-            <h2 className="text-xl font-semibold">Standard charts</h2>
+            <h2 className="text-base font-semibold">Standard charts</h2>
           </div>
           <div className="space-y-8">
             {[

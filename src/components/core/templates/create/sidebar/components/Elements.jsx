@@ -33,28 +33,28 @@ const Elements = () => {
     shapes: <Shapes onBack={() => setView('all')} />,
     frames: <Frames onBack={() => setView('all')} />,
     icons: <Icons onBack={() => setView('all')} />,
-    maps: <Maps onBack={() => setView('all')} />,
     'data-tags': <DataTags onBack={() => setView('all')} />,
     'data-blocks': <DataBlocks onBack={() => setView('all')} />,
     'standard-charts': <StandardCharts onBack={() => setView('all')} />,
     'advanced-charts': <AdvancedCharts onBack={() => setView('all')} />,
+    maps: <Maps onBack={() => setView('all')} />,
     tables: <Tables onBack={() => setView('all')} />,
   };
 
   return (
     <>
       {view === 'all' && (
-        <div className="space-y-10">
+        <div className="space-y-8">
           {items.map((item, index) => (
             <div key={index}>
-              <div className="flex items-center justify-between mb-6">
-                <h4 className="text-base font-medium">{item.name}</h4>
+              <div className="flex items-center justify-between mb-4 bg-white/5 rounded-2xl px-4 py-1.5">
+                <h4 className="text-base font-semibold">{item.name}</h4>
                 {item.view && (
                   <Button
                     onPress={() => setView(item.view)}
-                    variant="flat"
+                    variant="light"
                     size="sm"
-                    className="text-sm h-auto py-[2px]"
+                    className="text-sm h-auto py-[2px] pr-[2px]"
                     radius="full"
                     endContent={<HiChevronRight size="16" />}
                   >

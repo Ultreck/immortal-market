@@ -290,11 +290,11 @@ const Tables = ({ mini = false, onBack }) => {
         </div>
       ) : (
         <div>
-          <div className="flex items-center space-x-3 mb-8">
-            <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+          <div className="flex items-center space-x-3 mb-6 bg-white/5 rounded-full px-2 py-1">
+            <Button onPress={onBack} variant="light" radius="full" isIconOnly size="sm">
               <TbChevronLeft size="20" />
             </Button>
-            <h2 className="text-xl font-semibold">Tables</h2>
+            <h2 className="text-base font-semibold">Tables</h2>
           </div>
           <div className="grid grid-cols-1 gap-4">
             {elements.map((element) => {
