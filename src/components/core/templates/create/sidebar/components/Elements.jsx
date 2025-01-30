@@ -47,7 +47,7 @@ const Elements = () => {
         <div className="space-y-8">
           {items.map((item, index) => (
             <div key={index}>
-              <div className="flex items-center justify-between mb-4 bg-white/5 rounded-2xl px-4 py-1.5">
+              <div className="flex items-center justify-between mb-4 bg-white/5 rounded-full px-5 py-2">
                 <h4 className="text-base font-semibold">{item.name}</h4>
                 {item.view && (
                   <Button
