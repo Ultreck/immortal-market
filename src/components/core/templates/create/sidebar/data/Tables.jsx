@@ -3,6 +3,7 @@ import { TablePreview } from '@/components/core/templates/create/elements/table/
 import { getElementDefaultStyle } from '@/lib/elements.js';
 import { Button } from '@heroui/react';
 import { TbChevronLeft } from 'react-icons/tb';
+import PropTypes from 'prop-types';
 
 const colors = [
   '#E66B5B',
@@ -308,6 +309,11 @@ const Tables = ({ mini = false, onBack }) => {
       )}
     </>
   );
+};
+
+Tables.propTypes = {
+  mini: PropTypes.bool,
+  onBack: PropTypes.func,
 };
 
 export default Tables;
