@@ -67,7 +67,10 @@ const NumberInput = ({
         variant={variant}
         step={step}
         isClearable={false}
-        classNames={{ base: cn('w-[80px] text-base', { 'w-[50px]': size === 'sm', 'w-full': fullWidth }) }}
+        classNames={{
+          base: cn('w-[80px] text-base', { 'w-[50px]': size === 'sm', 'w-full': fullWidth }),
+          input: 'appearance-none',
+        }}
         value={`${!isNaN(value) ? value : ''}`}
         onChange={(e) => handleChange(e.target.value)}
         size={size}
