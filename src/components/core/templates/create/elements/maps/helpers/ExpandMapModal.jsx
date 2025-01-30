@@ -34,7 +34,7 @@ const ExpandChartModal = ({ element, isOpen, onClose }) => {
       <div className="px-14 py-12">
         <div className="mb-8 flex items-center justify-between">
           <h3 className="text-xl font-semibold max-w-lg">Expand map</h3>
-          <Button onClick={onClose} isIconOnly radius="full" variant="bordered">
+          <Button onPress={onClose} isIconOnly radius="full" variant="bordered">
             <HiX size="20" />
           </Button>
         </div>

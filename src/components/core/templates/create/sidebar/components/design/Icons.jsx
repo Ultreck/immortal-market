@@ -2,7 +2,7 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import { createElement } from 'react';
 import icons from '@/lib/design/icons.js';
 import BasicCarousel from '@/components/ui/BasicCarousel';
-import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import { TbChevronLeft } from 'react-icons/tb';
 import { Button } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { getElementDefaultStyle } from '@/lib/elements.js';
@@ -28,46 +28,31 @@ const items = icons.map((icon) => ({
   ),
 }));
 
-const IconsSlider = ({ mini = false, onView, onBack }) => {
+const IconsSlider = ({ mini = false, onBack }) => {
   return (
-    <div>
+    <>
       {mini ? (
-        <>
-          <div className="relative">
-            <BasicCarousel
-              shadow
-              classNames={{ next: 'right-0', prev: 'left-0', base: 'overflow-hidden' }}
-              slides={Array(2)
-                .fill(null)
-                .map((_, index) => {
-                  return {
-                    id: index,
-                    content: (
-                      <div className="grid grid-cols-3 gap-6">
-                        {items.slice(index * 9, index * 9 + 9).map((element) => (
-                          <DraggableElementWrapper key={element.id} element={element} />
-                        ))}
-                      </div>
-                    ),
-                  };
-                })}
-            />
-          </div>
-          <div className="flex items-center justify-between mb-4 mt-6">
-            <Button
-              onPress={onView}
-              variant="bordered"
-              size="sm"
-              className="text-md"
-              endContent={<TbChevronRight size={16} />}
-              radius="full"
-            >
-              View All
-            </Button>
-          </div>
-        </>
+        <div className="relative">
+          <BasicCarousel
+            classNames={{ next: 'right-0', prev: 'left-0', base: 'overflow-hidden' }}
+            slides={Array(2)
+              .fill(null)
+              .map((_, index) => {
+                return {
+                  id: index,
+                  content: (
+                    <div className="grid grid-cols-4 gap-4">
+                      {items.slice(index * 8, index * 8 + 8).map((element) => (
+                        <DraggableElementWrapper key={element.id} element={element} />
+                      ))}
+                    </div>
+                  ),
+                };
+              })}
+          />
+        </div>
       ) : (
-        <>
+        <div>
           <div className="flex items-center space-x-3 mb-8">
             <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm">
               <TbChevronLeft size="20" />
@@ -79,15 +64,14 @@ const IconsSlider = ({ mini = false, onView, onBack }) => {
               <DraggableElementWrapper key={element.id} element={element} />
             ))}
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
 IconsSlider.propTypes = {
   mini: PropTypes.bool,
-  onView: PropTypes.func,
   onBack: PropTypes.func,
 };
 

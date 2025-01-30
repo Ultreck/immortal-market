@@ -3,7 +3,7 @@ import { capitalize } from '@/lib/utils.js';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 import PropTypes from 'prop-types';
 import { Button } from '@heroui/react';
-import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import { TbChevronLeft } from 'react-icons/tb';
 import { MapOceanicPreview } from '@/components/core/templates/create/elements/maps/MapOceanic.jsx';
 import { MapNorthAmericaPreview } from '@/components/core/templates/create/elements/maps/MapNorthAmerica.jsx';
 import { MapNigeriaRegionsPreview } from '@/components/core/templates/create/elements/maps/MapNigeriaRegions.jsx';
@@ -251,6 +251,7 @@ import { MapUtahPreview } from '@/components/core/templates/create/elements/maps
 import { MapWashingtonPreview } from '@/components/core/templates/create/elements/maps/MapWashington.jsx';
 import { MapWyomingPreview } from '@/components/core/templates/create/elements/maps/MapWyoming.jsx';
 import { MapWestVirginiaPreview } from '@/components/core/templates/create/elements/maps/MapWestVirginia.jsx';
+import BasicCarousel from '@/components/ui/BasicCarousel';
 
 const previews = {
   continents: {
@@ -570,35 +571,35 @@ const elements = {
   })),
 };
 
-const Maps = ({ mini, onView, onBack }) => {
+const Maps = ({ mini, onBack }) => {
   return (
     <>
       {mini ? (
-        <>
-          <div className="grid grid-cols-2 gap-4">
-            {elements.continents.map((element) => {
-              return <DraggableElementWrapper key={element.id} element={element} />;
-            })}
-            {
-              //prettier-ignore
-              elements.countries.filter((el) => el.id === 'map-nigeria').map((element) => {
-                return <DraggableElementWrapper key={ element.id } element={ element } />;
-              })
-            }
-          </div>
-          <Button
-            onPress={onView}
-            variant="bordered"
-            className="text-md mt-8"
-            endContent={<TbChevronRight size={16} />}
-            radius="full"
-            fullWidth
-          >
-            View All
-          </Button>
-        </>
+        <div className="relative">
+          <BasicCarousel
+            classNames={{ next: 'right-0', prev: 'left-0', base: 'overflow-hidden' }}
+            slides={Array(2)
+              .fill(null)
+              .map((_, index) => {
+                return {
+                  id: index,
+                  content: (
+                    <div className="grid grid-cols-4 gap-4">
+                      {elements.countries
+                        .filter((el) => el.id === 'map-nigeria')
+                        .concat(elements.continents)
+                        .slice(index * 8, index * 8 + 8)
+                        .map((element) => {
+                          return <DraggableElementWrapper key={element.id} element={element} />;
+                        })}
+                    </div>
+                  ),
+                };
+              })}
+          />
+        </div>
       ) : (
-        <>
+        <div>
           <div className="flex items-center space-x-3 mb-8">
             <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm">
               <TbChevronLeft size="20" />
@@ -619,7 +620,7 @@ const Maps = ({ mini, onView, onBack }) => {
               );
             })}
           </div>
-        </>
+        </div>
       )}
     </>
   );
@@ -627,7 +628,6 @@ const Maps = ({ mini, onView, onBack }) => {
 
 Maps.propTypes = {
   mini: PropTypes.bool,
-  onView: PropTypes.func,
   onBack: PropTypes.func,
 };
 

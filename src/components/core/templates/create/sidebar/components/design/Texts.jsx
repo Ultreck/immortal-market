@@ -5,6 +5,9 @@ import { TextMarqueePreview } from '@/components/core/templates/create/elements/
 import { TextTypewriterPreview } from '@/components/core/templates/create/elements/texts/TextTypewriter.jsx';
 import { CountUpNumberPreview } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
 import { TextStreamPreview } from '@/components/core/templates/create/elements/texts/TextStream.jsx';
+import { Button } from '@heroui/react';
+import { TbChevronLeft } from 'react-icons/tb';
+import PropTypes from 'prop-types';
 
 const styles = {
   heading: {
@@ -132,14 +135,39 @@ const texts = [
   }),
 ];
 
-const Texts = () => {
+const Texts = ({ mini = false, onBack }) => {
   return (
-    <div className="grid grid-cols-1 gap-4">
-      {texts.map((element) => (
-        <DraggableElementWrapper key={element.id} element={element} />
-      ))}
-    </div>
+    <>
+      {mini ? (
+        <div className="relative">
+          <div className="grid grid-cols-1 gap-2">
+            {texts.slice(0, 3).map((element) => (
+              <DraggableElementWrapper key={element.id} element={element} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="flex items-center space-x-3 mb-8">
+            <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+              <TbChevronLeft size="20" />
+            </Button>
+            <h2 className="text-xl font-semibold">Texts</h2>
+          </div>
+          <div className="grid grid-cols-1 gap-3">
+            {texts.map((element) => (
+              <DraggableElementWrapper key={element.id} element={element} />
+            ))}
+          </div>
+        </>
+      )}
+    </>
   );
+};
+
+Texts.propTypes = {
+  mini: PropTypes.bool,
+  onBack: PropTypes.func,
 };
 
 export default Texts;

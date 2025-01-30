@@ -2,7 +2,7 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import { capitalize } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { Button } from '@heroui/react';
-import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
+import { TbChevronLeft } from 'react-icons/tb';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const groups = [
@@ -57,7 +57,7 @@ const numbers = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 border border-default-200 rounded-2xl p-6">
+      <div className="text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 border border-default-200 rounded-2xl px-5 py-2">
         {content}
       </div>
     ),
@@ -99,7 +99,7 @@ const texts = [
       },
     },
     preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 border border-default-200 rounded-2xl p-6">
+      <div className="text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 border border-default-200 rounded-2xl px-5 py-2">
         {content}
       </div>
     ),
@@ -108,31 +108,19 @@ const texts = [
 
 const elements = [...texts, ...numbers];
 
-const DataTags = ({ mini = false, onView, onBack }) => {
+const DataTags = ({ mini = false, onBack }) => {
   return (
     <>
       {mini ? (
         <div>
           <div className="grid grid-cols-1 gap-4">
-            {[...texts.slice(0, 2), ...numbers.slice(0, 2)].map((element) => {
+            {[...texts.slice(0, 1), ...numbers.slice(0, 2)].map((element) => {
               return (
                 <div key={element.id}>
                   <DraggableElementWrapper element={element} />
                 </div>
               );
             })}
-          </div>
-          <div className="flex items-center justify-between mb-4 mt-6">
-            <Button
-              onPress={onView}
-              variant="bordered"
-              className="text-md"
-              endContent={<TbChevronRight size={16} />}
-              radius="full"
-              fullWidth
-            >
-              View All
-            </Button>
           </div>
         </div>
       ) : (
@@ -143,7 +131,7 @@ const DataTags = ({ mini = false, onView, onBack }) => {
             </Button>
             <h2 className="text-xl font-semibold">Data tags</h2>
           </div>
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-3">
             {elements.map((element) => {
               return <DraggableElementWrapper key={element.id} element={element} />;
             })}
@@ -156,7 +144,6 @@ const DataTags = ({ mini = false, onView, onBack }) => {
 
 DataTags.propTypes = {
   mini: PropTypes.bool,
-  onView: PropTypes.func,
   onBack: PropTypes.func,
 };
 

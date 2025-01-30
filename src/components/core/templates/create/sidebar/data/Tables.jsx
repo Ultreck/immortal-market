@@ -1,6 +1,8 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { TablePreview } from '@/components/core/templates/create/elements/table/Table.jsx';
 import { getElementDefaultStyle } from '@/lib/elements.js';
+import { Button } from '@heroui/react';
+import { TbChevronLeft } from 'react-icons/tb';
 
 const colors = [
   '#E66B5B',
@@ -270,17 +272,41 @@ const elements = [
   };
 });
 
-const Tables = () => {
+const Tables = ({ mini = false, onBack }) => {
   return (
-    <div className="grid grid-cols-1 gap-4">
-      {elements.map((element) => {
-        return (
-          <div key={element.id} className="aspect-[16/8]">
-            <DraggableElementWrapper element={element} />
+    <>
+      {mini ? (
+        <div>
+          <div className="grid grid-cols-1 gap-4">
+            {elements.slice(0, 2).map((element) => {
+              return (
+                <div key={element.id} className="aspect-[16/8]">
+                  <DraggableElementWrapper element={element} />
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
-    </div>
+        </div>
+      ) : (
+        <div>
+          <div className="flex items-center space-x-3 mb-8">
+            <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+              <TbChevronLeft size="20" />
+            </Button>
+            <h2 className="text-xl font-semibold">Tables</h2>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            {elements.map((element) => {
+              return (
+                <div className="aspect-[16/8]" key={element.id}>
+                  <DraggableElementWrapper key={element.id} element={element} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -17,7 +17,7 @@ const ElementChartWrapper = ({ element, children, isDisabled = false, className 
         <div className="absolute bottom-full left-0 opacity-0 pointer-events-none transition-all duration-500 group-hover:opacity-100 group-hover:pointer-events-auto">
           <div className="bg-white dark:bg-default-100 shadow border border-default-200 rounded-3xl px-3 py-2 space-x-2 mb-2">
             <Button
-              onClick={onExpandOpen}
+              onPress={onExpandOpen}
               variant="flat"
               radius="full"
               className="text-base px-4"
@@ -27,7 +27,7 @@ const ElementChartWrapper = ({ element, children, isDisabled = false, className 
               Expand
             </Button>
             <Button
-              onClick={onInsightsOpen}
+              onPress={onInsightsOpen}
               variant="flat"
               radius="full"
               className="text-base px-4"

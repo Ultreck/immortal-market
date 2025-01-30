@@ -9,6 +9,7 @@ import {
   TbChartScatter,
   TbChartTreemap,
   TbCheck,
+  TbChevronLeft,
   TbCircleDot,
   TbCirclesRelation,
   TbDice6,
@@ -24,6 +25,9 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import { starterLifeChartData } from '@/lib/design/chart-data.js';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 import { kebabToWords } from '@/lib/utils.js';
+import BasicCarousel from '@/components/ui/BasicCarousel';
+import { Button } from '@heroui/react';
+import PropTypes from 'prop-types';
 
 const colors = [
   '#E66B5B',
@@ -758,7 +762,7 @@ const elements = [
   },
 ];
 
-const AdvancedCharts = () => {
+const AdvancedCharts = ({ mini = false, onBack }) => {
   const groups = elements.reduce((acc, el) => {
     if (!acc.find((item) => item.id === el.group)) {
       acc.push({ id: el.group, title: kebabToWords(el.group) });
@@ -767,21 +771,58 @@ const AdvancedCharts = () => {
   }, []);
 
   return (
-    <div className="space-y-8">
-      {groups.map((group) => (
-        <div key={group.id}>
-          <h5 className="mb-4 opacity-75">{group.title}</h5>
-          <div className="grid grid-cols-3 gap-4">
-            {elements
-              .filter((el) => el.group === group.id)
-              .map((element) => (
-                <DraggableElementWrapper key={element.id} element={element} />
-              ))}
+    <>
+      {mini ? (
+        <div className="relative">
+          <BasicCarousel
+            classNames={{ next: 'right-0', prev: 'left-0', base: 'overflow-hidden' }}
+            slides={Array(2)
+              .fill(null)
+              .map((_, index) => {
+                return {
+                  id: index,
+                  content: (
+                    <div className="grid grid-cols-4 gap-4">
+                      {elements.slice(index * 8, index * 8 + 8).map((element) => (
+                        <DraggableElementWrapper key={element.id} element={element} />
+                      ))}
+                    </div>
+                  ),
+                };
+              })}
+          />
+        </div>
+      ) : (
+        <div>
+          <div className="flex items-center space-x-3 mb-8">
+            <Button onPress={onBack} variant="bordered" radius="full" isIconOnly size="sm">
+              <TbChevronLeft size="20" />
+            </Button>
+            <h2 className="text-xl font-semibold">Advanced charts</h2>
+          </div>
+          <div className="space-y-8">
+            {groups.map((group) => (
+              <div key={group.id}>
+                <h5 className="mb-4 opacity-75">{group.title}</h5>
+                <div className="grid grid-cols-3 gap-4">
+                  {elements
+                    .filter((el) => el.group === group.id)
+                    .map((element) => (
+                      <DraggableElementWrapper key={element.id} element={element} />
+                    ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
+};
+
+AdvancedCharts.propTypes = {
+  mini: PropTypes.bool,
+  onBack: PropTypes.func,
 };
 
 export default AdvancedCharts;
