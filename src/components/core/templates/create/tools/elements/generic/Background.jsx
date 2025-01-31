@@ -40,10 +40,12 @@ const Background = ({ elements, onChange }) => {
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'background' : null })}
     >
       <PopoverTrigger>
-        <button
-          className="my-2 w-[22px] h-[22px] rounded-full hover:brightness-105 cursor-pointer border-2 border-default-200"
-          style={{ background: value }}
-        />
+        <div className="pb-2">
+          <button
+            className="w-[22px] h-[22px] rounded-full hover:brightness-105 cursor-pointer border-2 border-default-200"
+            style={{ background: value }}
+          />
+        </div>
       </PopoverTrigger>
       <PopoverContent className="px-8 py-6 shadow border border-default-200 w-[260px] items-stretch">
         <Tabs

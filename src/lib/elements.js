@@ -102,7 +102,7 @@ export const elements = {
     },
   },
   shape: {
-    tools: ['background', 'border', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
+    tools: ['shape', 'background', 'border', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
     components: {
       edit: Shape,
       present: ShapePresent,
@@ -112,15 +112,7 @@ export const elements = {
     },
   },
   frame: {
-    tools: (element) => {
-      if (element.config.name === 'tabs') {
-        return ['tabs', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
-      }
-      if (element.config.name === 'carousel') {
-        return ['carousel', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'];
-      }
-      return ['opacity', 'animation', 'shadow'];
-    },
+    tools: ['frame', 'opacity', 'animation', 'shadow', 'element-tag', 'layout'],
     components: {
       edit: Frame,
     },

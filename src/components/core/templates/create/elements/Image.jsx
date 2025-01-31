@@ -44,7 +44,10 @@ const ImageContent = ({ element }) => {
   return (
     <div
       className={cn('h-full w-full relative overflow-hidden group')}
-      style={{ filter: `drop-shadow(${element.style.shadow})` }}
+      style={{
+        ...element.style,
+        filter: `drop-shadow(${element.style.shadow})`,
+      }}
     >
       <img
         src={element.config.src}

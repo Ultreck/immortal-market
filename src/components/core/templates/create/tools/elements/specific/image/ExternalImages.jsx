@@ -1,12 +1,11 @@
-import { Button, Image, Input, Skeleton } from '@heroui/react';
 import { useState } from 'react';
 import { useDebounce } from 'react-use';
-import { useGetImagesFromUnsplash } from '@/api/misc.js';
+import { Button, Image, Input, Skeleton } from '@heroui/react';
 import { TbSearch, TbX } from 'react-icons/tb';
-import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import { getElementDefaultStyle } from '@/lib/elements.js';
+import { useGetImagesFromUnsplash } from '@/api/misc.js';
+import PropTypes from 'prop-types';
 
-const ExternalImages = () => {
+const ExternalImages = ({ onClick }) => {
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const {
@@ -19,29 +18,6 @@ const ExternalImages = () => {
 
   useDebounce(() => setDebouncedQuery(query), 2000, [query]);
 
-  const elements = images.map((i) => {
-    return {
-      id: `${i.id}`,
-      data: {
-        type: 'image',
-        text: 'Image',
-        width: 400,
-        height: 300,
-        style: getElementDefaultStyle({ type: 'image' }),
-        config: {
-          src: i.urls.regular,
-        },
-      },
-      preview: (
-        <Image
-          src={i.urls.thumb}
-          alt={i.slug}
-          className="w-full h-full object-cover rounded-2xl cursor-grab aspect-square"
-        />
-      ),
-    };
-  });
-
   return (
     <>
       <Input
@@ -51,7 +27,7 @@ const ExternalImages = () => {
         classNames={{
           input: 'text-base',
           base: 'transition-all duration-300 w-full mb-6',
-          inputWrapper: 'h-12 bg-white/[.1] group-hover:bg-white/15 focus-within:!bg-white/15',
+          inputWrapper: 'h-10 bg-white/[.1] group-hover:bg-white/15 focus-within:!bg-white/15',
         }}
         startContent={<TbSearch size="24" className="mx-1 opacity-30" />}
         endContent={
@@ -61,17 +37,25 @@ const ExternalImages = () => {
             </Button>
           )
         }
+        size="sm"
         placeholder="Search.."
         radius="full"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
+
       <div className="space-y-6">
-        {!!elements.length && (
+        {!!images.length && (
           <>
             <div className="grid grid-cols-2 gap-4">
-              {elements.map((element) => (
-                <DraggableElementWrapper key={element.id} element={element} />
+              {images.map((i) => (
+                <Image
+                  key={i.id}
+                  onClick={() => onClick(i.urls.regular)}
+                  src={i.urls.thumb}
+                  alt={i.slug}
+                  className="w-full h-full object-cover rounded-2xl cursor-pointer hover:brightness-125 aspect-square"
+                />
               ))}
             </div>
             {!isFetchingNextPage && (
@@ -95,6 +79,10 @@ const ExternalImages = () => {
       </div>
     </>
   );
+};
+
+ExternalImages.propTypes = {
+  onClick: PropTypes.func,
 };
 
 export default ExternalImages;

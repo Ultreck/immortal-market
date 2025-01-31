@@ -10,12 +10,11 @@ import LineConfig from './elements/specific/LineConfig.jsx';
 import IconConfig from './elements/specific/IconConfig.jsx';
 import { getElementTools } from '@/lib/elements.js';
 import Animation from './elements/generic/Animation.jsx';
-import ImageConfig from './elements/specific/ImageConfig.jsx';
+import ImageConfig from './elements/specific/image/ImageConfig.jsx';
+import FrameConfig from '@/components/core/templates/create/tools/elements/specific/FrameConfig.jsx';
+import ShapeConfig from '@/components/core/templates/create/tools/elements/specific/ShapeConfig.jsx';
 import AdvancedChartConfig from './elements/specific/AdvancedChartConfig.jsx';
 import Shadow from './elements/generic/Shadow.jsx';
-import FrameTabsConfig from './elements/specific/FrameTabsConfig.jsx';
-import FrameCarouselConfig from './elements/specific/FrameCarouselConfig.jsx';
-import FrameMarqueeConfig from './elements/specific/FrameMarqueeConfig.jsx';
 import MarqueeTextConfig from './elements/specific/MarqueeTextConfig.jsx';
 import BulletTextConfig from './elements/specific/BulletTextConfig.jsx';
 import CountUpNumberConfig from './elements/specific/CountUpNumberConfig.jsx';
@@ -44,12 +43,12 @@ const mapping = {
   opacity: { type: 'multiple', component: Opacity },
   line: { type: 'multiple', component: LineConfig },
   animation: { type: 'multiple', component: Animation },
-  image: { type: 'multiple', component: ImageConfig },
+  image: { type: 'single', component: ImageConfig },
+  frame: { type: 'single', component: FrameConfig },
+  shape: { type: 'single', component: ShapeConfig },
   'advanced-chart': { type: 'single', component: AdvancedChartConfig },
   shadow: { type: 'multiple', component: Shadow },
-  tabs: { type: 'single', component: FrameTabsConfig },
-  carousel: { type: 'single', component: FrameCarouselConfig },
-  marquee: { type: 'single', component: FrameMarqueeConfig },
+  // marquee: { type: 'single', component: FrameMarqueeConfig },
   'count-up-number': { type: 'single', component: CountUpNumberConfig },
   svg: { type: 'single', component: SvgConfig },
   colors: { type: 'single', component: Colors },

@@ -66,36 +66,21 @@ export const useGetSvgCodeFromUrl = (url) => {
   });
 };
 
-export const useSearchImagesFromUnsplash = (query) => {
+export const useGetImagesFromUnsplash = (query) => {
   return useInfiniteQuery({
-    queryKey: ['unsplash', query],
+    queryKey: query ? ['unsplash', query] : ['unsplash'],
     queryFn: async ({ pageParam }) => {
-      const res = await axios.get(`https://api.unsplash.com/search/photos`, {
-        params: { query, page: pageParam, per_page: 20 },
+      let url = 'https://api.unsplash.com/photos';
+      if (query) url = 'https://api.unsplash.com/search/photos';
+      const params = { page: pageParam, per_page: 20 };
+      if (query) params.query = query;
+      const res = await axios.get(url, {
+        params,
         headers: {
           Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_ACCESS_KEY}`,
         },
       });
-      return res.data;
-    },
-    staleTime: Infinity,
-    enabled: !!query,
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) => pages.length + 1,
-  });
-};
-
-export const useGetImagesFromUnsplash = () => {
-  return useInfiniteQuery({
-    queryKey: ['unsplash'],
-    queryFn: async ({ pageParam }) => {
-      const res = await axios.get(`https://api.unsplash.com/photos`, {
-        params: { page: pageParam, per_page: 20 },
-        headers: {
-          Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_ACCESS_KEY}`,
-        },
-      });
-      return res.data;
+      return query ? res.data.results : res.data;
     },
     staleTime: Infinity,
     initialPageParam: 1,
