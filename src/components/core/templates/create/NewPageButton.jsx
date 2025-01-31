@@ -1,5 +1,5 @@
 import { TbDotsVertical, TbPlus, TbTemplate } from 'react-icons/tb';
-import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, useDisclosure } from '@heroui/react';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@heroui/react';
 import useTemplateStore from '@/store/template.js';
 import PageBlocksModal from '@/components/core/templates/create/PageBlocksModal.jsx';
 
@@ -34,20 +34,18 @@ const NewPageButton = () => {
               if (key === 'templates') onTemplatesOpen();
             }}
           >
-            <DropdownSection classNames={{ base: 'p-1', heading: 'px-2' }}>
-              <DropdownItem
-                key="templates"
-                classNames={{
-                  title: 'text-base',
-                  description: 'text-sm',
-                  wrapper: 'px-2 py-1',
-                  base: 'rounded-xl',
-                }}
-                startContent={<TbTemplate size="20" className="ml-1" />}
-              >
-                Add new page from template
-              </DropdownItem>
-            </DropdownSection>
+            <DropdownItem
+              key="templates"
+              classNames={{
+                title: 'text-base',
+                description: 'text-sm',
+                wrapper: 'px-2 py-1',
+                base: 'rounded-xl',
+              }}
+              startContent={<TbTemplate size="20" className="ml-1" />}
+            >
+              Add new page from template
+            </DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </div>

@@ -1,5 +1,6 @@
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip, useDisclosure } from '@heroui/react';
 import {
+  TbBoxMultiple,
   TbChevronDown,
   TbChevronUp,
   TbCopyPlus,
@@ -12,12 +13,14 @@ import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import CreatePageBlockModal from '@/components/core/templates/create/CreatePageBlockModal.jsx';
 import { useActions } from '@/hooks/template/use-actions.js';
+import { CgMenuBoxed } from 'react-icons/cg';
 
 const PageActions = ({ id }) => {
   const { handleAction } = useActions({ id });
   const { isOpen: isSaveAsBlockOpen, onOpen: onSaveAsBlockOpen, onClose: onSaveAsBlockClose } = useDisclosure();
   const index = useTemplateStore(({ template }) => template.pages.findIndex((p) => p.id === id));
   const length = useTemplateStore(({ template }) => template.pages.length);
+  const page = useTemplateStore(({ template }) => template.pages.find((p) => p.id === id));
 
   return (
     <div className="flex items-center space-x-1">
@@ -61,18 +64,32 @@ const PageActions = ({ id }) => {
         <DropdownMenu
           variant="faded"
           aria-label="Dropdown menu with description"
-          onAction={(key) => {
+          onAction={async (key) => {
             if (key === 'save') onSaveAsBlockOpen();
+            if (key === 'convert-to-modal') await handleAction('page-convert-to-modal');
+            if (key === 'convert-to-page') await handleAction('page-convert-to-page');
           }}
         >
-          <DropdownItem
-            key="save"
-            classNames={{}}
-            startContent={<TbFolderPlus size="20" className="ml-1" />}
-            textValue="Save as block"
-          >
+          <DropdownItem key="save" startContent={<TbFolderPlus size="20" className="ml-1" />} textValue="Save as block">
             <span className="text-base">Save as block</span>
           </DropdownItem>
+          {page.type !== 'modal' ? (
+            <DropdownItem
+              key="convert-to-modal"
+              startContent={<TbBoxMultiple size="20" className="ml-1" />}
+              textValue="Convert to modal"
+            >
+              <span className="text-base">Convert to modal</span>
+            </DropdownItem>
+          ) : (
+            <DropdownItem
+              key="convert-to-page"
+              startContent={<CgMenuBoxed size="20" className="ml-1" />}
+              textValue="Convert to page"
+            >
+              <span className="text-base">Convert to page</span>
+            </DropdownItem>
+          )}
         </DropdownMenu>
       </Dropdown>
 

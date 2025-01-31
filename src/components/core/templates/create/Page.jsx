@@ -6,8 +6,10 @@ import PageActions from '@/components/core/templates/create/PageActions.jsx';
 import PageTitle from './PageTitle';
 import PageContent from '@/components/core/templates/create/PageContent.jsx';
 import PageCommentBadge from '@/components/core/templates/create/comment/PageCommentBadge.jsx';
+import { Chip } from '@heroui/react';
 
 const Page = ({ id, showTitle = true }) => {
+  const type = useTemplateStore((state) => state.template.pages.find((p) => p.id === id).type);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const selected = useTemplateStore((state) => state.template.selectedPage === id);
   const isCommentsVisible = useTemplateStore((state) => state.template.isCommentsVisible);
@@ -17,7 +19,14 @@ const Page = ({ id, showTitle = true }) => {
       {showTitle && (
         <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
           <PageTitle id={id} />
-          <PageActions id={id} />
+          <div className="flex items-center space-x-2">
+            {type === 'modal' && (
+              <Chip variant="solid" color="danger" classNames={{ content: 'font-semibold' }}>
+                Modal
+              </Chip>
+            )}
+            <PageActions id={id} />
+          </div>
         </div>
       )}
       <div

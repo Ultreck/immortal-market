@@ -35,6 +35,8 @@ export const useActions = ({ id }) => {
     if (action === 'page-move-up') handleMovePageUp();
     if (action === 'page-move-down') handleMovePageDown();
     if (action === 'page-duplicate') handleDuplicatePage();
+    if (action === 'page-convert-to-modal') handleConvertToModal();
+    if (action === 'page-convert-to-page') handleConvertToPage();
   };
 
   const handleDuplicate = () => {
@@ -193,6 +195,16 @@ export const useActions = ({ id }) => {
       elements: page.elements.map((el) => ({ ...el, id: crypto.randomUUID() })),
     };
     addPage(payload, page.id);
+  };
+
+  const handleConvertToModal = () => {
+    const page = getPage(id);
+    updatePage({ type: 'modal' }, page.id, true);
+  };
+
+  const handleConvertToPage = () => {
+    const page = getPage(id);
+    updatePage({ type: 'page' }, page.id, true);
   };
 
   return {
