@@ -1,6 +1,5 @@
 import useTemplateStore from '@/store/template.js';
 import Page from '@/components/core/templates/create/Page.jsx';
-import TabThumbnail from '@/components/core/templates/create/footer/TabThumbnail.jsx';
 import { useRef } from 'react';
 
 const TabMode = () => {
@@ -22,7 +21,6 @@ const TabMode = () => {
           <Page key={page.id} id={page.id} showTitle={false} />
         </div>
       </div>
-      <TabThumbnail />
     </div>
   );
 };

@@ -44,7 +44,7 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
       as="div"
       {...props}
       className={cn(
-        'flex p-2 items-center relative w-[80px] aspect-square justify-center bg-default-200/60 dark:bg-default-100 rounded-2xl cursor-pointer group border-0',
+        'flex p-2 items-center relative w-[200px] aspect-square justify-center bg-default-200/60 dark:bg-default-100 rounded-2xl cursor-pointer group border-0',
         { '!bg-primary-200': active }
       )}
       shadow="none"
@@ -54,8 +54,8 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
     >
       <Dropdown placement="bottom" size="lg">
         <DropdownTrigger>
-          <button className="z-[2] absolute top-1.5 right-1.5 px-1 py-0 rounded-lg bg-primary-100 hover:bg-primary-50 opacity-0 group-hover:opacity-100">
-            <TbDots size={16} />
+          <button className="z-[2] absolute top-2 right-1.5 px-1 py-0 rounded-full bg-primary-100 hover:bg-primary-50 opacity-0 group-hover:opacity-100">
+            <TbDots size={20} />
           </button>
         </DropdownTrigger>
         <DropdownMenu
@@ -83,7 +83,7 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
       {!!thumbnail && (
         <Image src={getImageLink(thumbnail)} removeWrapper className="object-contain rounded-xl h-full z-[1]" />
       )}
-      <Chip className="absolute bottom-1 left-2 z-[2] w-[2] h-[2] p-0" size="sm">
+      <Chip className="absolute bottom-1 left-2 z-[2] w-[5] h-[5] p-0" size="lg">
         {index + 1}
       </Chip>
     </Card>

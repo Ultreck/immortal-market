@@ -9,7 +9,6 @@ import Share from '@/components/core/templates/create/footer/Share.jsx';
 import FullscreenPreview from '@/components/core/templates/create/FullscreenPreview.jsx';
 import CommentButton from '@/components/core/templates/create/footer/CommentButton.jsx';
 import { MdOutlineAnimation } from 'react-icons/md';
-import SwitchModeButton from '@/components/core/templates/create/footer/SwitchModeButton.jsx';
 
 const StatusBar = () => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
@@ -33,7 +32,6 @@ const StatusBar = () => {
           >
             <MdOutlineAnimation size="20" />
           </Button>
-          <SwitchModeButton />
         </div>
         <div className="flex items-center space-x-3">
           <Share />

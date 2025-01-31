@@ -1,7 +1,8 @@
-import { createElement, useState } from 'react';
+import { createElement, useEffect, useState } from 'react';
 import { RiArrowLeftSLine, RiImage2Line, RiSettings2Line, RiShapesLine, RiStackLine } from 'react-icons/ri';
 import { cn, getImageLink } from '@/lib/utils.js';
 import Elements from '@/components/core/templates/create/sidebar/components/Elements.jsx';
+import Pages from '@/components/core/templates/create/sidebar/pages/Pages.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import { Avatar, Tooltip } from '@heroui/react';
@@ -16,8 +17,10 @@ import { useNavigate } from 'react-router-dom';
 import useTemplateStore from '@/store/template.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useGetDesign } from '@/api/business.js';
+import { BsViewList } from 'react-icons/bs';
 
 const Sidebar = ({ className }) => {
+  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const navigate = useNavigate();
   const [tab, setTab] = useState('elements');
   const collapsed = !tab;
@@ -25,6 +28,11 @@ const Sidebar = ({ className }) => {
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { data: { design = {} } = {} } = useGetDesign(business, id);
+
+  useEffect(() => {
+    if (tab === 'pages') updateTemplate({ mode: 'tab' });
+    else updateTemplate({ mode: 'scroll' });
+  }, [tab, updateTemplate]);
 
   return (
     <div
@@ -70,6 +78,7 @@ const Sidebar = ({ className }) => {
               { icon: TbTemplate, title: 'Templates', key: 'templates' },
               { icon: RiImage2Line, title: 'Images', key: 'images' },
               { icon: RiStackLine, title: 'Layers', key: 'layers' },
+              { icon: BsViewList, title: 'Pages', key: 'pages' },
             ].map((element) => {
               const active = tab === element.key;
               return (
@@ -139,6 +148,7 @@ const Sidebar = ({ className }) => {
             {tab === 'images' && <Images />}
             {tab === 'my-work' && <MyWork />}
             {tab === 'project' && <Project />}
+            {tab === 'pages' && <Pages />}
           </div>
         )}
       </div>
