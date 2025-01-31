@@ -12,8 +12,20 @@ import { Map, MapPresent } from '@/components/core/templates/create/elements/map
 import { Table, TablePresent } from '@/components/core/templates/create/elements/table/Table.jsx';
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
 import { DataPresent, DataTag } from '@/components/core/templates/create/elements/DataTag.jsx';
+import { Button, ButtonPresent } from '@/components/core/templates/create/elements/Button.jsx';
 
 export const elements = {
+  button: {
+    tools: ['background', 'font', 'opacity', 'animation', 'border', 'shadow'],
+    components: {
+      edit: Button,
+      present: ButtonPresent,
+    },
+    config: {
+      wrapper: true,
+      editable: true,
+    },
+  },
   text: {
     tools: (element) => {
       if (element.config.name === 'list') {

@@ -15,7 +15,7 @@ const patchPages = (pages) => {
       ...p,
       elements: p.elements.map((e) => {
         const regex = /heading|subheading|paragraph|caption/gi;
-        if (e.type.match(regex) || e.config?.name.match(regex)) {
+        if (e.type.match(regex) || e.config.name?.match(regex)) {
           return { ...e, type: 'text', config: { ...e.config, name: 'basic' } };
         }
         if (e.type === 'infographic') {

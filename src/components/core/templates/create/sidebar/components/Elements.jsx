@@ -11,6 +11,7 @@ import Tables from '@/components/core/templates/create/sidebar/data/Tables.jsx';
 import DataTags from '@/components/core/templates/create/sidebar/data/DataTags.jsx';
 import DataBlocks from '@/components/core/templates/create/sidebar/data/DataBlocks.jsx';
 import { HiChevronRight } from 'react-icons/hi2';
+import Buttons from '@/components/core/templates/create/sidebar/components/design/Buttons.jsx';
 
 const items = [
   { name: 'Texts', view: 'texts', component: <Texts mini /> },
@@ -23,6 +24,7 @@ const items = [
   { name: 'Advanced charts', view: 'advanced-charts', component: <AdvancedCharts mini /> },
   { name: 'Maps', view: 'maps', component: <Maps mini /> },
   { name: 'Tables', view: 'tables', component: <Tables mini /> },
+  { name: 'Buttons', view: 'buttons', component: <Buttons mini /> },
 ];
 
 const Elements = () => {
@@ -39,6 +41,7 @@ const Elements = () => {
     'advanced-charts': <AdvancedCharts onBack={() => setView('all')} />,
     maps: <Maps onBack={() => setView('all')} />,
     tables: <Tables onBack={() => setView('all')} />,
+    buttons: <Buttons onBack={() => setView('all')} />,
   };
 
   return (

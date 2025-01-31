@@ -38,7 +38,7 @@ const Border = ({ elements, onChange }) => {
 };
 
 const BorderWeight = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((e) => e.style.borderWidth));
+  const value = useResolveValue(elements.map((e) => e.style.borderWidth)) || 0;
 
   const handleWidthChange = (v) => {
     if (isNaN(v)) return;
