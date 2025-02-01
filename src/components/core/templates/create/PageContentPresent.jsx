@@ -1,21 +1,12 @@
-import { createElement, useEffect, useRef, useState } from 'react';
+import { createElement, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ElementWrapperPresent from '@/components/core/templates/create/ElementWrapperPresent.jsx';
 import { getElementConfig, getElementPresentComponent } from '@/lib/elements.js';
 import { AnimatePresence, motion } from 'motion/react';
+import { cn } from '@/lib/utils.js';
 
-const PageContentPresent = ({ page }) => {
+const PageContentPresent = ({ page, scale = 1, className = '' }) => {
   const el = useRef(null);
-  const [scale, setScale] = useState(1);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const ph = el.current.parentElement.clientHeight;
-      const h = el.current.clientHeight;
-      const scale = ph / h;
-      setScale(scale);
-    }, 50);
-  }, [page]);
 
   return (
     <motion.div
@@ -29,10 +20,10 @@ const PageContentPresent = ({ page }) => {
         background: page.style.background || '#fff',
         transform: `scale(${scale})`,
       }}
-      className="origin-top relative overflow-hidden mx-auto"
+      className={cn('origin-top relative overflow-hidden mx-auto', className)}
     >
       <AnimatePresence>
-        {page.elements.map((element, index) => {
+        {page.elements.map((element) => {
           const component = getElementPresentComponent(element);
           const config = getElementConfig(element);
 
@@ -42,10 +33,6 @@ const PageContentPresent = ({ page }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{
-                delay: 2 * index,
-                duration: 2,
-              }}
               className="pointer-events-auto"
             >
               {config?.wrapper ? (
@@ -63,6 +50,8 @@ const PageContentPresent = ({ page }) => {
 
 PageContentPresent.propTypes = {
   page: PropTypes.object.isRequired,
+  scale: PropTypes.number,
+  className: PropTypes.string,
 };
 
 export default PageContentPresent;

@@ -23,7 +23,7 @@ const Content = ({ elements, onClose }) => {
   const pages = useTemplateStore(({ template }) => template.pages);
   const values = elements.map((e) => e.href);
   const same = values.every((v) => v === values[0]);
-  const [value, setValue] = useState(same ? values[0] : '');
+  const [value, setValue] = useState(same ? values[0] || '' : '');
 
   const onChange = (elements) => {
     updateElements(elements, page.id, true);
@@ -40,7 +40,7 @@ const Content = ({ elements, onClose }) => {
   };
 
   const options = pages.map((page, index) => ({
-    label: `Page ${index + 1} - ${page.title}`,
+    label: `Page ${index + 1} ${page.type === 'modal' ? '(Modal)' : ''} - ${page.title}`,
     value: `#page-${page.id}`,
   }));
 
