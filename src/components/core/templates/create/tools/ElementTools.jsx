@@ -48,7 +48,6 @@ const mapping = {
   shape: { type: 'single', component: ShapeConfig },
   'advanced-chart': { type: 'single', component: AdvancedChartConfig },
   shadow: { type: 'multiple', component: Shadow },
-  // marquee: { type: 'single', component: FrameMarqueeConfig },
   'count-up-number': { type: 'single', component: CountUpNumberConfig },
   svg: { type: 'single', component: SvgConfig },
   colors: { type: 'single', component: Colors },
