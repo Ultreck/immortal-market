@@ -27,7 +27,7 @@ const classes = {
   },
 };
 
-export const AdvanceShapesContent = ({ element,isChartWrapperDisabled=false }) => {
+export const AdvanceShapesContent = ({ element, isChartWrapperDisabled = false }) => {
   const { percentage, noOfShapes, isCountVisible, icon1 } = element.config;
   const n = Math.floor((percentage / 100) * noOfShapes);
   const icon = icons.find((icon) => icon.name === (icon1 || 'circle')).icon;
@@ -55,7 +55,7 @@ export const AdvanceShapesContent = ({ element,isChartWrapperDisabled=false }) =
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
-      <div className="space-y-6 w-full" style={{width: element.width, height: element.height}}>
+      <div className="space-y-6 w-full" style={{ width: element.width, height: element.height }}>
         {isCountVisible && (
           <p
             className="font-bold px-2"

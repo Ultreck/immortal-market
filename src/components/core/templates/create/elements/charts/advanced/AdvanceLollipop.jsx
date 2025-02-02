@@ -21,8 +21,8 @@ export const AdvanceLollipopContent = ({ element, isChartWrapperDisabled }) => {
           paddingLeft: element.config.styles.xPadding,
           paddingBottom: element.config.styles.yPadding,
           paddingRight: element.config.styles.xPadding,
-          width:element.width,
-          height:element.height
+          width: element.width,
+          height: element.height,
         }}
         className="flex flex-col space-y-2 items-start"
       >

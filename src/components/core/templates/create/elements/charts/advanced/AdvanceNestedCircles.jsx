@@ -21,7 +21,7 @@ export const AdvanceNestedCirclesContent = ({ element, isChartWrapperDisabled = 
           paddingLeft: element.config.styles.xPadding,
           paddingBottom: element.config.styles.yPadding,
           paddingRight: element.config.styles.xPadding,
-          width:element.width,
+          width: element.width,
         }}
         className="relative w-full h-full"
       >

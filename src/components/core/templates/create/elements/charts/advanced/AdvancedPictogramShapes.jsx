@@ -39,7 +39,7 @@ const classes = {
   },
 };
 
-export const AdvancedPictogramShapesContent = ({ element,isChartWrapperDisabled=false }) => {
+export const AdvancedPictogramShapesContent = ({ element, isChartWrapperDisabled = false }) => {
   const {
     icon1,
     icon2,

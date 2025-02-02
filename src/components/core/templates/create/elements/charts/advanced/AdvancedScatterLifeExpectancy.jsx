@@ -11,7 +11,7 @@ const AdvancedScatterLifeExpectancy = ({ element }) => {
 
 AdvancedScatterLifeExpectancy.propTypes = ElementPropTypes;
 
-export const AdvanceDynamicSortingChartContent = ({ element,isChartWrapperDisabled=false }) => {
+export const AdvanceDynamicSortingChartContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {

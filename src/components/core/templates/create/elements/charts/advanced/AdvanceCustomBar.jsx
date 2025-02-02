@@ -70,11 +70,11 @@ export const AdvancedCustomBarContent = ({ element, isChartWrapperDisabled = fal
         </ElementChartWrapper>
       );
     }
-    return(
-      <ElementChartWrapper element={element} className='w-full h-full' isDisabled={isChartWrapperDisabled}>
-       { children}
+    return (
+      <ElementChartWrapper element={element} className="w-full h-full" isDisabled={isChartWrapperDisabled}>
+        {children}
       </ElementChartWrapper>
-      )
+    );
   };
 
   return renderCardTooltip(
@@ -171,7 +171,7 @@ export const AdvancedCustomBarContent = ({ element, isChartWrapperDisabled = fal
             paddingLeft: element.config.styles.xPadding,
             paddingBottom: element.config.styles.yPadding,
             paddingRight: element.config.styles.xPadding,
-            width: element.width, 
+            width: element.width,
             height: element.height,
           }}
           className="flex flex-col items-start h-full space-y-2"

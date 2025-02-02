@@ -13,7 +13,10 @@ export const AdvanceLinearBarContent = ({ element, isChartWrapperDisabled = fals
   const progress = element.config.progress;
   return (
     <ElementChartWrapper className="w-full h-full" element={element} isDisabled={isChartWrapperDisabled}>
-      <div className="w-full h-full rounded-full overflow-hidden" style={{ backgroundColor: element.config.colors[0],width: element.width, }}>
+      <div
+        className="w-full h-full rounded-full overflow-hidden"
+        style={{ backgroundColor: element.config.colors[0], width: element.width }}
+      >
         <motion.div
           className="h-full rounded-full"
           style={{ backgroundColor: element.config.colors[1] }}

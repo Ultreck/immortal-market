@@ -17,8 +17,8 @@ export const AdvanceCircleIconsContent = ({ element, isChartWrapperDisabled = fa
       <div
         style={{
           padding: `${element.config.styles.yPadding || '96'}px ${element.config.styles.xPadding || '16'}px`,
-          width:element.width,
-          height:element.height
+          width: element.width,
+          height: element.height,
         }}
         className="flex items-center py-24 w-full px-4"
       >

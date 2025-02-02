@@ -10,7 +10,7 @@ const AdvanceMultipleGauge = ({ element }) => {
 
 AdvanceMultipleGauge.propTypes = ElementPropTypes;
 
-export const AdvanceMultipleGaugeContent = ({ element,isChartWrapperDisabled }) => {
+export const AdvanceMultipleGaugeContent = ({ element, isChartWrapperDisabled }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -106,22 +106,22 @@ export const AdvanceMultipleGaugeContent = ({ element,isChartWrapperDisabled }) 
   }, [element]);
 
   return (
-    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}> 
-    <div
-      ref={chartRef}
-      style={{
-        padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
-        width: element.width,
-        height: element.height,
-      }}
-    />
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div
+        ref={chartRef}
+        style={{
+          padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
+          width: element.width,
+          height: element.height,
+        }}
+      />
     </ElementChartWrapper>
   );
 };
 
 AdvanceMultipleGaugeContent.propTypes = {
   element: PropTypes.object.isRequired,
-  isChartWrapperDisabled:PropTypes.bool
+  isChartWrapperDisabled: PropTypes.bool,
 };
 
 export default AdvanceMultipleGauge;

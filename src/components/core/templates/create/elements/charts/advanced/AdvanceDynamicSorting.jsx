@@ -130,7 +130,7 @@ export const AdvanceDynamicSortingContent = ({ element, isChartWrapperDisabled =
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
-      <div style={{width:element.width,height:element.height}}>
+      <div style={{ width: element.width, height: element.height }}>
         {element.config.showTitle && (
           <p className="font-bold" style={{ fontSize: element.config.fontSize }}>
             {element.config.title}
