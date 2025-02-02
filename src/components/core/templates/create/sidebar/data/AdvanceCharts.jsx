@@ -794,7 +794,7 @@ const AdvancedCharts = ({ mini = false, onBack }) => {
         </div>
       ) : (
         <div>
-          <div className="flex items-center space-x-3 mb-6 bg-white/5 rounded-full px-2 py-1">
+          <div className="flex items-center space-x-3 mb-6 bg-white/[.07] rounded-full px-2 py-1">
             <Button onPress={onBack} variant="light" radius="full" isIconOnly size="sm">
               <TbChevronLeft size="20" />
             </Button>
