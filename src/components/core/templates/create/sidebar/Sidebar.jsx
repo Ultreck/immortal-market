@@ -7,7 +7,7 @@ import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import { Avatar, Tooltip } from '@heroui/react';
 import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
-import { TbChevronLeft, TbChevronRight, TbTemplate } from 'react-icons/tb';
+import { TbChevronLeft, TbChevronRight, TbLayoutDistributeHorizontal, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import MyWork from './my-work/MyWork.jsx';
@@ -17,7 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import useTemplateStore from '@/store/template.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useGetDesign } from '@/api/business.js';
-import { BsViewList } from 'react-icons/bs';
 
 const Sidebar = ({ className }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
@@ -78,7 +77,7 @@ const Sidebar = ({ className }) => {
               { icon: TbTemplate, title: 'Templates', key: 'templates' },
               { icon: RiImage2Line, title: 'Images', key: 'images' },
               { icon: RiStackLine, title: 'Layers', key: 'layers' },
-              { icon: BsViewList, title: 'Pages', key: 'pages' },
+              { icon: TbLayoutDistributeHorizontal, title: 'Pages', key: 'pages' },
             ].map((element) => {
               const active = tab === element.key;
               return (
