@@ -85,20 +85,22 @@ export const elements = {
       present: AdvanceChartsPresent,
     },
     config: (element) => {
-      const config = {
+      const fit = [
+        'shapes',
+        'circle-icons',
+        'stacked-card',
+        'percentage-card',
+        'lollipop',
+        'nested-circles',
+        'column-card',
+        'percentage-card-2',
+        'pictogram-shapes',
+      ].includes(element.config.name);
+      return {
         wrapper: true,
         editable: true,
+        fit,
       };
-      if (element.config.name === 'shapes') config.fit = true;
-      if (element.config.name === 'circle-icons') config.fit = true;
-      if (element.config.name === 'stacked-card') config.fit = true;
-      if (element.config.name === 'percentage-card') config.fit = true;
-      if (element.config.name === 'lollipop') config.fit = true;
-      if (element.config.name === 'nested-circles') config.fit = true;
-      if (element.config.name === 'column-card') config.fit = true;
-      if (element.config.name === 'percentage-card-2') config.fit = true;
-      if (element.config.name === 'pictogram-shapes') config.fit = true;
-      return config;
     },
   },
   shape: {
