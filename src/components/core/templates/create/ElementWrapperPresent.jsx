@@ -24,7 +24,7 @@ const ElementWrapperPresent = ({ element, children }) => {
     <>
       <div
         className={cn('absolute', {
-          '!cursor-pointer transition-all duration-500': element.modal?.enabled,
+          '!cursor-pointer transition-all duration-500': element.modal?.enabled || !!element.href,
         })}
         onClick={handleClick}
         style={{ width: element.width, height: element.height, top: element.y, left: element.x }}
