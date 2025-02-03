@@ -4,11 +4,13 @@ import DeleteModal from '@/components/core/templates/create/footer/DeleteModal.j
 import PublishModal from '@/components/core/templates/create/footer/PublishModal.jsx';
 import UnpublishModal from '@/components/core/templates/create/footer/UnpublishModal.jsx';
 import useTemplateStore from '@/store/template.js';
+import useBusiness from '@/hooks/use-business.js';
+import { useGetDesign } from '@/api/business.js';
 
 const DesignOptions = () => {
+  const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
-  const type = useTemplateStore((state) => state.template.type);
-  const status = useTemplateStore((state) => state.template.status);
+  const { data: { design = {} } = {} } = useGetDesign(business, id);
   const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
   const { isOpen: isPublishOpen, onOpen: onPublishOpen, onClose: onPublishClose } = useDisclosure();
   const { isOpen: isUnpublishOpen, onOpen: onUnpublishOpen, onClose: onUnpublishClose } = useDisclosure();
@@ -22,15 +24,15 @@ const DesignOptions = () => {
     },
   ];
 
-  if (type === 'template') {
-    if (status === 'draft') {
+  if (design.type === 'template') {
+    if (design.status === 'draft') {
       options.unshift({
         key: 'publish',
         label: 'Publish template',
         icon: <TbBookUpload size="16" />,
         color: 'default',
       });
-    } else if (status === 'published') {
+    } else if (design.status === 'published') {
       options.unshift({
         key: 'unpublish',
         label: 'Unpublish template',
