@@ -10,9 +10,8 @@ const PopularTemplates = () => {
   const { isOpen: isTemplatesOpen, onOpen: onTemplatesOpen, onClose: onTemplatesClose } = useDisclosure();
   const [current, setCurrent] = useState(null);
 
-  const handlePreview = ({ _id, title, thumbnail }) => {
-    const template = { id: _id, title, thumbnail };
-    setCurrent(template);
+  const handlePreview = (design) => {
+    setCurrent(design);
     onTemplatesOpen();
   };
 
@@ -69,6 +68,7 @@ const PopularTemplates = () => {
           </>
         )}
       </section>
+
       <TemplatePreviewModal isOpen={isTemplatesOpen} onClose={onTemplatesClose} template={current} />
     </>
   );
