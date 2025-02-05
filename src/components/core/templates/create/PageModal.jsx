@@ -1,7 +1,7 @@
 import { Drawer, DrawerContent } from '@heroui/react';
 import usePresentStore from '@/store/present.js';
 import PropTypes from 'prop-types';
-import PageContentPresent from '@/components/core/templates/create/PageContentPresent.jsx';
+import PagePresent from '@/components/core/templates/create/PagePresent.jsx';
 
 const PageModal = ({ pages }) => {
   const modal = usePresentStore((state) => state.data.modal);
@@ -15,8 +15,8 @@ const PageModal = ({ pages }) => {
 
   return (
     <Drawer isOpen={modal.isOpen} onClose={handleClose} hideCloseButton classNames={{ base: 'w-[1200px]' }}>
-      <DrawerContent className="h-full w-[800px] max-w-[auto] p-0">
-        {!!page && <PageContentPresent page={page} className="m-auto rounded-2xl" />}
+      <DrawerContent className="h-full w-[1300px] max-w-[auto] p-0">
+        {!!page && <PagePresent page={page} className="m-auto rounded-2xl" />}
       </DrawerContent>
     </Drawer>
   );

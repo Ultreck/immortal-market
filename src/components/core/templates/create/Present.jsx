@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Button, Slider } from '@heroui/react';
+import { Button } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PageModal from '@/components/core/templates/create/PageModal.jsx';
 import PagePresent from '@/components/core/templates/create/PagePresent.jsx';
 
 const Present = ({ pages = [] }) => {
   const [index, setIndex] = useState(0);
-  const [scale, setScale] = useState(1);
 
-  const page = pages[index];
+  const _pages = pages.filter((p) => p.type !== 'modal');
+  const page = _pages[index];
 
   return (
     <>
-      <div className="relative inset-0 w-full h-screen overflow-hidden z-[1] text-black">
-        <div className="bg-gray-950 w-full h-screen flex flex-col">
+      <div className="relative inset-0 w-full h-screen overflow-hidden z-[1]">
+        <div className="bg-gray-950 w-full h-screen overflow-y-auto flex flex-col">
           <PagePresent key={page} page={page} />
         </div>
         {!!pages.length && (
@@ -42,26 +42,6 @@ const Present = ({ pages = [] }) => {
               >
                 <TbChevronRight size="20" />
               </Button>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Slider
-                aria-label="zoom"
-                color="foreground"
-                className="w-40"
-                value={scale * 100}
-                onChange={(v) => setScale(v / 100)}
-                maxValue={150}
-                minValue={100}
-                showOutline
-                isDisabled
-                classNames={{
-                  thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
-                  track: 'border-s-default-300',
-                  filler: 'bg-gradient-to-r from-default-300 to-default-400',
-                }}
-                size="sm"
-              />
-              <p>{Math.ceil(scale * 100)}%</p>
             </div>
           </div>
         )}
