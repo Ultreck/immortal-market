@@ -43,8 +43,8 @@ const TemplatesPage = () => {
             {
               id: crypto.randomUUID(),
               title: 'Untitled',
-              width: 600,
-              height: 600,
+              width: 800,
+              height: 450,
               style: {
                 background: '#ffffff',
               },
