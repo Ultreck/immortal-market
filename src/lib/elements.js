@@ -3,7 +3,7 @@ import { Image, ImagePresent } from '@/components/core/templates/create/elements
 import { Line, LinePresent } from '@/components/core/templates/create/elements/Line.jsx';
 import { Shape, ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
 import AdvanceCharts from '@/components/core/templates/create/elements/charts/advanced/AdvanceCharts.jsx';
-import { Svg, SvgPresent } from '@/components/core/templates/create/elements/Svg.jsx';
+import { Svg, SvgPresent } from '@/components/core/templates/create/elements/Svg/Svg.jsx';
 import Icon, { IconPresent } from '@/components/core/templates/create/elements/Icon.jsx';
 import StandardCharts from '@/components/core/templates/create/elements/charts/standard/StandardCharts.jsx';
 import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';

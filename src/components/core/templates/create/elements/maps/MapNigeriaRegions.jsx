@@ -20,7 +20,14 @@ const MapNigeriaRegionsContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg width="100%" viewBox="0 0 366 294" fill="none" xmlns="http://www.w3.org/2000/svg" ref={el}>
+    <svg
+      style={{ width: element.width, height: element.height }}
+      width="100%"
+      viewBox="0 0 366 294"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      ref={el}
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"

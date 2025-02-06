@@ -18,7 +18,14 @@ export const MapOregonContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 292" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 292"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M312.134 153.713L312.085 171.454L311.938 176.966L311.79
       200.628H312.085L312.232 221.195L312.183 229.997H312.724L312.773

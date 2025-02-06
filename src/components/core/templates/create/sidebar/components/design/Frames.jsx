@@ -8,62 +8,6 @@ import PropTypes from 'prop-types';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const items = [
-  {
-    id: 'frame-tabs',
-    data: {
-      type: 'frame',
-      text: 'Frame tabs',
-      width: 300,
-      height: 300,
-      children: [],
-      style: getElementDefaultStyle({ type: 'frame', name: 'tabs' }),
-      config: {
-        name: 'tabs',
-        tabs: [
-          { id: 0, title: 'Tab 1' },
-          { id: 1, title: 'Tab 2' },
-        ],
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <RiCheckboxMultipleBlankFill className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'frame-carousel',
-    data: {
-      type: 'frame',
-      text: 'Frame carousel',
-      width: 300,
-      height: 300,
-      children: [],
-      style: getElementDefaultStyle({ type: 'frame', name: 'carousel' }),
-      config: {
-        name: 'carousel',
-        slides: 2,
-        speed: 500,
-        slidesPerView: 1,
-        autoplay: {
-          enabled: false,
-          delay: 0,
-        },
-        loop: false,
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
-        <TbCarouselHorizontalFilled className="w-full h-full" />
-      </div>
-    ),
-  },
   ...Object.keys(shapes).map((name) => ({
     id: `frame-${name}`,
     data: {

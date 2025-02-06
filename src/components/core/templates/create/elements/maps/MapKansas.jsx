@@ -18,7 +18,14 @@ const MapKansasContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 208" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 208"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M74.0099 121.133L97.4909 121.269H98.4539V138.949H75.0799V150.542L75.6679 156.904L52.2939 156.836L51.5989 150.542L51.5459 121.065L74.0099 121.133Z"
         fill={assignColor('Finney')}

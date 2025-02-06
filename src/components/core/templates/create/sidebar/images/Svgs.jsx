@@ -8,8 +8,9 @@ import { getImageLink } from '@/lib/utils.js';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { useAddInfographics, useGetInfographics } from '@/api/business.js';
 import { getElementDefaultStyle } from '@/lib/elements.js';
+import { TbChevronLeft } from 'react-icons/tb';
 
-const Svgs = () => {
+const Svgs = ({ mini = false, onBack }) => {
   const toast = useToast();
   const qc = useQueryClient();
   const { id: business } = useBusiness();
@@ -58,51 +59,69 @@ const Svgs = () => {
   }));
 
   return (
-    <div>
-      <DndFileInput
-        label="Drop SVG file here"
-        error="Only SVG files are allowed"
-        onChange={handleChange}
-        className="mb-8"
-        accept={{ 'image/svg+xml': ['.svg'] }}
-      />
-      {isInfographicsLoading ? (
+    <>
+      {mini ? (
+        <div className="relative">
+          <div className="grid grid-cols-2 gap-4">
+            {elements.slice(0, 8).map((element) => (
+              <DraggableElementWrapper key={element.id} element={element} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="flex items-center space-x-3 mb-6 bg-white/[.07] rounded-full px-2 py-1">
+            <Button onPress={onBack} variant="light" radius="full" isIconOnly size="sm">
+              <TbChevronLeft size="20" />
+            </Button>
+            <h2 className="text-base font-semibold">Svgs</h2>
+          </div>
+          <DndFileInput
+            label="Drop SVG file here"
+            error="Only SVG files are allowed"
+            onChange={handleChange}
+            className="mb-8"
+            accept={{ 'image/svg+xml': ['.svg'] }}
+          />
+
+          <>
+            {infographics.length > 0 && (
+              <div className="grid grid-cols-2 gap-4">
+                {(isAddLoading || isFetching) && files.length > 0 && (
+                  <>
+                    {files.map((_, i) => (
+                      <Skeleton key={i} className="aspect-square w-full rounded-2xl" />
+                    ))}
+                  </>
+                )}
+                {elements.map((element) => (
+                  <DraggableElementWrapper key={element.id} element={element} />
+                ))}
+              </div>
+            )}
+          </>
+          {!!hasNextPage && (
+            <Button
+              onPress={fetchNextPage}
+              variant="bordered"
+              className="text-base w-full mt-8"
+              radius="full"
+              isLoading={isFetchingNextPage}
+            >
+              Load more
+            </Button>
+          )}
+        </div>
+      )}
+      {isInfographicsLoading && (
         <div className="grid grid-cols-2 gap-4">
           <Skeleton className="aspect-square w-full rounded-2xl" />
           <Skeleton className="aspect-square w-full rounded-2xl" />
           <Skeleton className="aspect-square w-full rounded-2xl" />
           <Skeleton className="aspect-square w-full rounded-2xl" />
         </div>
-      ) : (
-        <>
-          {infographics.length > 0 && (
-            <div className="grid grid-cols-2 gap-4">
-              {(isAddLoading || isFetching) && files.length > 0 && (
-                <>
-                  {files.map((_, i) => (
-                    <Skeleton key={i} className="aspect-square w-full rounded-2xl" />
-                  ))}
-                </>
-              )}
-              {elements.map((element) => (
-                <DraggableElementWrapper key={element.id} element={element} />
-              ))}
-            </div>
-          )}
-        </>
       )}
-      {!!hasNextPage && (
-        <Button
-          onPress={fetchNextPage}
-          variant="bordered"
-          className="text-base w-full mt-8"
-          radius="full"
-          isLoading={isFetchingNextPage}
-        >
-          Load more
-        </Button>
-      )}
-    </div>
+    </>
   );
 };
 

@@ -18,7 +18,14 @@ export const MapVirginiaContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 402 179" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 402 179"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M229.584 44.8443L240.185 54.4232L239.333 55.8763L238.102 59.5672L238.434 60.8372L240.847 61.0793L241.983 63.2552L244.397 64.0412L245.296 64.8262L247.52 65.4913L245.722 68.6313L244.255 70.5023L242.646 71.4062L241.936 72.3112L239.38 74.1803L238.386 75.5672L236.825 76.1693L235.026 78.3983L229.821 73.9393L228.496 72.5522L226.934 72.2513L212.737 61.9252L213.494 60.7773L213.541 59.5072L215.529 55.7552L215.907 54.1203L217.327 51.3333L218.841 51.1512L218.983 48.6053L219.457 46.6042L220.356 45.2083L220.64 43.3873L221.917 43.0833L223.479 39.5002L229.584 44.8443ZM229.111 61.6232L227.596 64.7052L227.786 65.9743L228.827 66.0952L231.335 65.6123L231.098 63.4973L229.111 61.6232Z"
         stroke={element.config.stroke}

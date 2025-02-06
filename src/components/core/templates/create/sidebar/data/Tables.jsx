@@ -278,8 +278,8 @@ const Tables = ({ mini = false, onBack }) => {
     <>
       {mini ? (
         <div>
-          <div className="grid grid-cols-1 gap-4">
-            {elements.slice(0, 2).map((element) => {
+          <div className="grid grid-cols-2 gap-2">
+            {elements.slice(0, 4).map((element) => {
               return (
                 <div key={element.id} className="aspect-[16/8]">
                   <DraggableElementWrapper element={element} />

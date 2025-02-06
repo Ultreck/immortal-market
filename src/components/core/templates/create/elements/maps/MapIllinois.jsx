@@ -18,7 +18,14 @@ const MapIllinoisContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 246 441" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 246 441"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M229.381 30.1331L230.72 32.5939L234.248 36.8579L235.891 44.2286L237.351 48.0739L238.75 56.0825L241.792 62.4475L243.192 63.508L243.556 66.2789L243.374 85.965L227.435 85.8833L227.252 78.8146L220.256 78.8963L220.013 71.8187L212.773 71.9811L212.712 68.3979L216.606 68.3162L219.831 65.953L219.586 57.6334V43.3286L205.655 43.8189H198.598V37.2675H200.119V30.1331H202.492H229.381Z"
         fill={assignColor('Cook')}

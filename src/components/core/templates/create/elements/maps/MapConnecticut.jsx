@@ -20,7 +20,14 @@ export const MapConnecticutContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 289" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 289"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M87.076 160.88L96.094 169.631L105.931 171.817L126.835 198.312L137.082 207.043L128.065 226.129L125.606 237.57L128.475 242.472L124.786 248.46L117.818 244.65L91.79 253.631L77.854 260.432L73.755 258.8L61.458 273.482L40.964 279.189L33.381 287.881L15.961 285.436L1 261.248L51.416 230.488L37.48 208.953L44.038 106.369L48.547 114.323L59.204 145.557L59.614 154.589L71.091 148.295L73.55 155.409L87.076 160.88Z"
         stroke={element.config.stroke}

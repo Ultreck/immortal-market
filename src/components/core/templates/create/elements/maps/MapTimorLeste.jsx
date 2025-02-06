@@ -20,7 +20,14 @@ const MapTimorLesteContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 170"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M328.109 77.708L328.069 73.452L328.945 70.385L329.383 69.799L330.895 67.772L333.403 64.119L336.707 61.69L338.219 60.45L337.304 58.44L333.96 55.023L329.701 51.154L327.87 49.345L328.865 47.703L329.224 45.627L327.273 44.454L325.96 43.064L325.084 40L323.213 37.287L323.81 37.12L326.119 35.496L327.114 35.027H328.467L330.497 35.68L331.413 35.797L336.707 34.692L341.881 32.365L354.3 23.492L357.047 22.304L359.077 22.789L360.947 24.162L369.465 28.263L371.814 28.899L374.799 29.167L377.745 28.899L379.894 27.845L383.596 25.183L384.432 24.848L386.024 25.2L386.581 25.986L386.939 27.074L387.735 28.263L390.323 29.803L395.816 31.31L398.124 32.867L399 35.328L397.806 37.421L388.93 44.069L383.357 49.68L372.252 58.356L364.41 65.996L363.574 67.252L362.142 67.369L353.663 69.28L345.862 74.943L342.399 76.669L328.109 77.708Z"
         stroke={element.config.stroke}

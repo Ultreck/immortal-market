@@ -18,7 +18,14 @@ const MapVermontContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 275 441" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 275 441"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M172.724 242.082L168.712 246.678L163.455 249.742L159.304 255.867L159.443 260.268L155.569 268.298L154.186 275.942L148.652 279.952L145.886 291.975L148.237 294.836L143.81 319.601L146.162 328.921L144.502 335.005L140.905 340.134V344.312L124.58 343.933L106.042 346.591L87.5043 340.325V331.964L80.8638 331.773L81.1403 322.836L82.8002 318.269L86.6738 316.556L94.4212 320.743L98.8478 308.559L100.37 299.603L94.2824 297.887L91.5157 294.645L94.006 276.323L95.9433 277.088L103.967 258.737L87.5043 252.231L87.642 246.678L92.6226 235.566L90.6862 230.773L80.0334 228.855V225.21L68.2737 231.348L66.4751 223.292L79.6182 216.765L81.1403 224.635L88.0572 210.043L91.5157 205.239L92.6226 211.58L121.813 222.332L137.308 229.047L154.325 234.415L172.724 242.082Z"
         fill={assignColor('Windsor')}

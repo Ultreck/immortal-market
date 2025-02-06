@@ -5,9 +5,6 @@ import { TextMarqueePreview } from '@/components/core/templates/create/elements/
 import { TextTypewriterPreview } from '@/components/core/templates/create/elements/texts/TextTypewriter.jsx';
 import { CountUpNumberPreview } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
 import { TextStreamPreview } from '@/components/core/templates/create/elements/texts/TextStream.jsx';
-import { Button } from '@heroui/react';
-import { TbChevronLeft } from 'react-icons/tb';
-import PropTypes from 'prop-types';
 
 const styles = {
   heading: {
@@ -97,7 +94,7 @@ const previews = {
 };
 
 const texts = [
-  ...['text', 'heading', 'subheading', 'caption', 'list', 'count-up-number', 'marquee', 'typewriter', 'stream'].map(
+  ...['heading', 'subheading', 'text', 'caption', 'list', 'count-up-number', 'marquee', 'typewriter', 'stream'].map(
     (name) => {
       return {
         id: name,
@@ -127,39 +124,19 @@ const texts = [
   ),
 ];
 
-const Texts = ({ mini = false, onBack }) => {
+const Texts = () => {
   return (
     <>
-      {mini ? (
-        <div className="relative">
-          <div className="grid grid-cols-1 gap-2">
-            {texts.slice(0, 3).map((element) => (
-              <DraggableElementWrapper key={element.id} element={element} />
-            ))}
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="flex items-center space-x-3 mb-4 bg-white/[.07] rounded-full px-2 py-1">
-            <Button onPress={onBack} variant="light" radius="full" isIconOnly size="sm">
-              <TbChevronLeft size="20" />
-            </Button>
-            <h2 className="text-base font-semibold">Texts</h2>
-          </div>
-          <div className="grid grid-cols-1 gap-3">
-            {texts.map((element) => (
-              <DraggableElementWrapper key={element.id} element={element} />
-            ))}
-          </div>
-        </>
-      )}
+      <div className="flex items-center justify-between mb-4 bg-white/[.07] rounded-full px-5 py-2">
+        <h4 className="text-base font-semibold">Texts</h4>
+      </div>
+      <div className="grid grid-cols-1 gap-3">
+        {texts.map((element) => (
+          <DraggableElementWrapper key={element.id} element={element} />
+        ))}
+      </div>
     </>
   );
-};
-
-Texts.propTypes = {
-  mini: PropTypes.bool,
-  onBack: PropTypes.func,
 };
 
 export default Texts;

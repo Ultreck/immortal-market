@@ -18,7 +18,14 @@ const MapIndianaContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 281 441" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 281 441"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M84.9118 317.893L82.4583 320.284L81.3587 324.738L78.4835 324.629L74.4229 328.429L71.8009 334.398L72.3083 337.109L69.6016 341.12L72.5616 346.428L72.731 357.144L68.7552 360.712L65.1183 358.982L53.9524 358.549L50.9077 362.549L44.1404 363.738L41.5184 367.735L37.711 366.547L35.5965 369.354L30.3525 371.298L30.7752 364.278L33.2288 364.062L38.388 360.17L36.6114 357.251L39.0649 353.465L40.8415 346.753L43.5482 343.504L47.7773 342.203L51.161 335.699L50.823 330.384L48.7084 327.344L47.1851 319.631L49.3844 318.11L63.0875 318.219L72.731 317.567L84.9118 317.893Z"
         fill={assignColor('Knox')}

@@ -31,12 +31,12 @@ const TabThumbnail = () => {
       layoutScroll
       className="py-4 px-4 w-full"
     >
-      <div className="flex flex-col items-center gap-2 mx-auto w-max">
+      <div className="items-center gap-5 mx-auto w-max">
         {pages.map((page, i) => {
           const active = activePage === page.id;
           const thumbnail = design?.thumbnails.find((t) => t.includes(page.id));
           return (
-            <Reorder.Item value={page.id} key={page.id}>
+            <Reorder.Item value={page.id} key={page.id} className="flex h-[130px] my-2">
               <TabThumbnailItem
                 page={page}
                 active={active}
@@ -54,7 +54,7 @@ const TabThumbnail = () => {
           isPressable
           onPress={() => addPage()}
           className={cn(
-            'flex items-center relative justify-center w-[200px] aspect-square bg-black/5 dark:bg-white/5 rounded-2xl'
+            'flex items-center relative justify-center w-[220px] h-[130px] aspect-square bg-black/5 dark:bg-white/5 rounded-2xl'
           )}
         >
           <TbPlus size={24} />

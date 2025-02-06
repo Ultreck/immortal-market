@@ -3,6 +3,8 @@ import { TbAbc, TbChartBar, TbChartLine, TbChartPie, TbCircleLetterT } from 'rea
 import PropTypes from 'prop-types';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 import useTemplateStore from '@/store/template.js';
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 const elements = [
   {
@@ -161,7 +163,7 @@ const ElementTooltip = ({ element, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      classNames={{ content: 'w-[350px] !max-h-[550px] overflow-y-auto block' }}
+      classNames={{ content: 'w-[400px] !max-h-[550px] overflow-y-auto block' }}
       isOpen={openTool === 'tooltip'}
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'tooltip' : null })}
     >
@@ -215,8 +217,12 @@ const ElementTooltip = ({ element, onChange }) => {
                   ))}
                 </Select>
               </div>
-              <div className="grid grid-cols-4 gap-6 pt-2">
-                <div>
+              <div className="grid grid-cols-4 gap-4 pt-2">
+                <div
+                  className={cn('cursor-pointer rounded', {
+                    'border-2 border-[#2563eb]': element.tooltip.type === 'text',
+                  })}
+                >
                   <div
                     className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60"
                     onClick={() => {
@@ -229,14 +235,16 @@ const ElementTooltip = ({ element, onChange }) => {
                 </div>
                 {elements.map((e) => (
                   <div
-                    className="cursor-pointer rounded-2xl"
+                    className={cn('cursor-pointer rounded', {
+                      'border-2 border-[#2563eb]': element.tooltip.type === e.data.config.name,
+                    })}
                     key={e.id}
                     onClick={() => {
                       onChange({ ...element, tooltip: { ...element.tooltip, type: e.data.config.name } });
                     }}
                   >
                     {e.preview}
-                    <p className="text-center">{e.data.text}</p>
+                    <p className="text-center">{e.data.text.split(' ')[0]}</p>
                   </div>
                 ))}
               </div>

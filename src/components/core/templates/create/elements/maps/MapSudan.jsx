@@ -18,7 +18,14 @@ export const MapSudanContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 318" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 318"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M251.162 124.566L238.988 142.141L233.428 144.795L230.333 145.18L218.685 145.296L209.259 144.745L134.699 144.827L135.111 57.7979L75.8604 57.7069V6.84787L79.1723 6.71487L110.975 6.63987L186.877 6.68387L194.814 6.69387L226.182 6.66388L227.095 3.87587L229.893 1.04688L230.807 2.18587L228.965 4.74388L228.409 6.61988L252.644 6.71688L252.67 7.48687L249.889 58.5089L249.953 66.5679L248.516 86.9699L257.252 95.9469L251.026 101.698L249.156 104.263L246.611 111.85L251.162 124.566Z"
         stroke={element.config.stroke}

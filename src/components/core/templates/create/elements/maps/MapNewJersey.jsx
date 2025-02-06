@@ -18,7 +18,14 @@ export const MapNewJerseyContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 232 441" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 232 441"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M134.962 223.052L140.349 234.067L158.579 278.928L163.689 290.792L162.722 320.939L161.202 325.598L158.993 327.747L151.121 328.822L143.801 324.343L140.763 321.476L137.035 320.58L130.682 315.74L125.71 314.126L125.986 308.027L123.5 303.362L115.075 296.539L111.485 294.204L108.032 289.534L103.888 286.659L93.8071 287.377L92.288 286.12L88.4209 269.572L83.4491 262.552L76.406 257.869L75.577 249.759L70.3286 249.399L71.572 246.695L76.8204 243.99L82.2057 238.939L87.7307 235.51L97.1219 232.804L104.165 225.038L107.341 226.303L113.28 223.774L116.594 220.884L119.08 218.535L119.633 215.1L130.682 222.69L134.962 223.052Z"
         stroke={element.config.stroke}

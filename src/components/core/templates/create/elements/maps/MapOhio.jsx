@@ -18,7 +18,14 @@ export const MapOhioContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 436" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 436"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M328.209 291.666L332.003 294.908L351.251 295.748L350.973 299.589L342.275 310.861L338.759 311.7L334.039 318.167L329.135 318.407L322.102 322.955L318.863 323.075L314.329 315.533L303.225 323.075L302.114 331.805L294.249 330.968L290.917 332.403L287.678 338.377L287.771 331.805L278.702 331.566L275.464 326.185L276.204 310.382L278.425 305.107L288.974 306.546L288.049 294.908L290.64 293.467L299.986 293.948L310.535 294.428L312.571 288.663L317.845 292.266L328.209 291.666Z"
         stroke={element.config.stroke}

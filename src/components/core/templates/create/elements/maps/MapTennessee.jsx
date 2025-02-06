@@ -18,7 +18,14 @@ const MapTennesseeContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 98"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M355.584 34.2149L356.273 35.2949L355.125 37.4549L353.655 35.9769L347.085 40.0109L346.626 42.4519L345.063 43.9839L343.042 42.4519L341.664 43.0189L333.118 33.7599L330.913 32.7369L328.892 30.7449L329.213 29.4359L333.027 25.9629L337.621 23.1709L339.688 20.6619L340.883 21.0039L344.145 18.6089L345.431 19.0649L350.485 16.3259L353.884 15.8689L353.012 31.0869L355.584 34.2149Z"
         fill={assignColor('Greene')}

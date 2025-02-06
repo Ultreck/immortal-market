@@ -18,7 +18,14 @@ export const MapMissouriContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 354" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 354"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M338.393 141.603L337.021 139.765L333.442 140.225L329.923 137.927L328.312 135.552L326.582 134.786L325.329 135.552L324.852 138.234L323.898 139.842L322.347 140.378L320.199 139.842L318.589 140.531L316.441 144.817L313.638 147.647L313.757 149.94L311.788 150.857H308.686L306.897 150.399L305.107 151.24L301.767 153.913L298.665 159.105L297.293 158.341L294.668 159.105L294.131 160.02L291.208 162.08L287.927 161.393L288.405 136.319L289.836 135.246L297.174 135.092L297.77 132.869L301.111 131.873L302.721 133.253L304.093 131.412L305.823 131.566L306.3 132.793L308.269 135.246L311.251 136.778L313.101 136.012L315.248 134.019L316.561 131.949L317.396 129.725L318.708 129.111L322.585 129.802L326.165 132.026L330.221 132.716L333.74 135.246L338.632 138.157L338.93 139.153L338.393 141.603Z"
         stroke={element.config.stroke}

@@ -18,7 +18,14 @@ export const MapNewMexicoContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 388 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 388 440"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M326.908 229.95L333.615 230.028L333.679 250.206L341.537 250.436L341.664 262.574L355.079 262.727L354.952 269.478L341.728 269.555L341.537 282.806H338.662L338.406 315.628L335.467 315.703H301.099H270.051L269.796 349.578L269.157 349.654L250.695 349.275L236.896 349.426L237.088 315.932H239.452V303.052L265.58 302.823L265.644 289.306L266.474 282.346L266.538 249.897L266.346 229.487H272.926L272.99 236.503L313.555 236.735L313.492 230.028L326.908 229.95Z"
         stroke={element.config.stroke}

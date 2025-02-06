@@ -18,7 +18,14 @@ const MapIowaContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 259" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 259"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M352.66 70.584L352.537 73.085H338.132L309.139 73.168L309.262 36.54L335.374 36.707L335.497 39.979L337.335 46.684L337.458 50.954L340.155 53.883L341.565 57.06L341.626 60.152L343.097 65.162L349.104 69.584L352.66 70.584Z"
         fill={assignColor('Clayton')}

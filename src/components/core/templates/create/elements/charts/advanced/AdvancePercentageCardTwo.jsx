@@ -1,3 +1,4 @@
+import React from 'react';
 import { Fragment, useEffect } from 'react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';

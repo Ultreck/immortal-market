@@ -20,7 +20,14 @@ const MapWestVirginiaContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 360"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M267.361 177.851L268.01 178.581L265.901 182.335L259.412 181.918L260.466 184.211L257.384 185.774L254.708 185.149V188.483L253.248 190.149L253.653 193.273L255.519 195.979L253.167 200.14L251.22 202.116L250.247 204.403L245.542 209.287L242.704 206.274L241.487 208.975L238.567 206.897L236.134 206.585L237.107 203.987L235.161 201.596L233.295 201.076L228.104 213.129L226.888 216.762L226.725 220.185L225.509 221.326L213.018 230.343L205.556 228.789L195.255 237.694L200.284 223.711L192.497 205.754L196.066 200.556H204.826L207.421 190.462L206.529 184.941L208.07 182.439L208.314 179.624L223.886 176.703L226.644 166.054L229.483 162.082L231.592 162.814L233.701 166.158L232.727 170.232L255.762 177.016L258.358 176.286L267.361 177.851Z"
         fill={assignColor('Randolph')}

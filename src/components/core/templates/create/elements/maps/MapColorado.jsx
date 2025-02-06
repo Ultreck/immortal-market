@@ -18,7 +18,14 @@ export const MapColoradoContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 295" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 295"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M284.573 240.727L284.63 247.032L321.77 247.175H340.312L340.539 265.833H340.085L339.802 293.023L287.578 293.165L269.206 293.449H229.401L223.163 293.236L222.369 272.394L224.864 272.037L230.194 267.83L235.581 264.976L237.906 265.547L245.391 264.191L248.68 261.621L249.02 258.192L251.231 257.906L252.592 255.618L256.448 252.472L256.505 249.824L262.459 239.579L268.016 234.772L284.573 240.727Z"
         stroke={element.config.stroke}

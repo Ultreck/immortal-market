@@ -20,7 +20,14 @@ const MapSouthDakotaContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 254" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 254"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M108.349 107.555L107.983 119.478L107.879 144.967H107.252L107.304 165.612L105.319 167.129L100.983 166.263L99.05 167.202L66.088 167.346L66.506 165.829L72.043 159.393L72.514 155.121H57.103L26.231 154.976L1.104 155.193V134.207L32.604 134.426L56.111 134.353H87.976L87.454 131.804L89.7 127.432L89.23 124.15L90.536 119.332L92.73 117.067L92.364 113.191L93.827 111.874L96.7 111.655L98.215 113.484L103.909 111.582L106.05 108.287L108.349 107.555Z"
         fill={assignColor('Pennington')}

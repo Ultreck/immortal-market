@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { Button } from '@heroui/react';
-import { TbChevronLeft } from 'react-icons/tb';
+import { TbCarouselHorizontalFilled, TbChevronLeft } from 'react-icons/tb';
 import { ButtonPreview } from '@/components/core/templates/create/elements/Button.jsx';
+import { getElementDefaultStyle } from '@/lib/elements';
+import { RiCheckboxMultipleBlankFill } from 'react-icons/ri';
 
 const styles = [
   {
-    background: '#ee2345',
+    background: '#E66B5B',
     color: '#fff',
     borderRadius: 20,
     paddingTop: 4,
@@ -47,8 +49,65 @@ const styles = [
     paddingRight: 25,
   },
 ];
-
-const items = styles.map((style, i) => {
+const sliders = [
+  {
+    id: 'frame-tabs',
+    data: {
+      type: 'frame',
+      text: 'Frame tabs',
+      width: 300,
+      height: 300,
+      children: [],
+      style: getElementDefaultStyle({ type: 'frame', name: 'tabs' }),
+      config: {
+        name: 'tabs',
+        tabs: [
+          { id: 0, title: 'Tab 1' },
+          { id: 1, title: 'Tab 2' },
+        ],
+      },
+      tooltip: {
+        enabled: false,
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <RiCheckboxMultipleBlankFill className="w-full h-full" />
+      </div>
+    ),
+  },
+  {
+    id: 'frame-carousel',
+    data: {
+      type: 'frame',
+      text: 'Frame carousel',
+      width: 300,
+      height: 300,
+      children: [],
+      style: getElementDefaultStyle({ type: 'frame', name: 'carousel' }),
+      config: {
+        name: 'carousel',
+        slides: 2,
+        speed: 500,
+        slidesPerView: 1,
+        autoplay: {
+          enabled: false,
+          delay: 0,
+        },
+        loop: false,
+      },
+      tooltip: {
+        enabled: false,
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <TbCarouselHorizontalFilled className="w-full h-full" />
+      </div>
+    ),
+  },
+];
+const buttons = styles.map((style, i) => {
   return {
     id: `button-${i}`,
     data: {
@@ -64,6 +123,7 @@ const items = styles.map((style, i) => {
     preview: <ButtonPreview element={{ width: '100%', height: 48, style, config: { text: 'Button' } }} />,
   };
 });
+const items = [...buttons, ...sliders];
 
 const Buttons = ({ mini = false, onBack }) => {
   return (
@@ -82,7 +142,7 @@ const Buttons = ({ mini = false, onBack }) => {
             <Button onPress={onBack} variant="light" radius="full" isIconOnly size="sm">
               <TbChevronLeft size="20" />
             </Button>
-            <h2 className="text-base font-semibold">Buttons</h2>
+            <h2 className="text-base font-semibold">Ui elements</h2>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {items.map((element) => {

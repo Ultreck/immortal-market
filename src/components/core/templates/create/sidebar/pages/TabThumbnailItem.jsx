@@ -44,7 +44,7 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
       as="div"
       {...props}
       className={cn(
-        'flex p-2 items-center relative w-[200px] aspect-square justify-center bg-default-200/60 dark:bg-default-100 rounded-2xl cursor-pointer group border-0',
+        'flex p-2 items-center relative w-full border-0 aspect-square justify-center bg-default-200/60 dark:bg-default-100 rounded-2xl cursor-pointer group ',
         { '!bg-primary-200': active }
       )}
       shadow="none"
@@ -81,7 +81,7 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
         </DropdownMenu>
       </Dropdown>
       {!!thumbnail && (
-        <Image src={getImageLink(thumbnail)} removeWrapper className="object-contain rounded-xl h-full z-[1]" />
+        <Image src={getImageLink(thumbnail)} removeWrapper className="object-cover rounded-xl h-full z-[1] w-full" />
       )}
       <Chip className="absolute bottom-1 left-2 z-[2] w-[5] h-[5] p-0" size="lg">
         {index + 1}

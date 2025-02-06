@@ -3,6 +3,7 @@ import { Skeleton } from '@heroui/react';
 import { useGetSvgCodeFromUrl } from '@/api/misc.js';
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import ElementSvgWrapper from '@/components/core/templates/create/elements/Svg/helpers/ElementSvgWrapper.jsx';
 
 const applyColors = (data, colors) => {
   if (!data) return data;
@@ -25,17 +26,26 @@ export const Svg = ({ element, onChange }) => {
   }, [data, element, isLoading, onChange]);
 
   return (
-    <div ref={el} className="w-full h-max">
-      {isLoading ? (
-        <Skeleton className="w-full rounded-3xl" style={{ height: element.height }} />
-      ) : (
-        <div
-          style={element.style}
-          className="h-max w-full infographic"
-          dangerouslySetInnerHTML={{ __html: applyColors(data, element.config.colors) }}
-        />
-      )}
-    </div>
+    <ElementSvgWrapper element={element}>
+      <div
+        ref={el}
+        className="w-full h-max"
+        style={{
+          height: element.height,
+          width: element.width,
+        }}
+      >
+        {isLoading ? (
+          <Skeleton className="w-full rounded-3xl" style={{ height: element.height }} />
+        ) : (
+          <div
+            style={element.style}
+            className="h-max w-full infographic"
+            dangerouslySetInnerHTML={{ __html: applyColors(data, element.config.colors) }}
+          />
+        )}
+      </div>
+    </ElementSvgWrapper>
   );
 };
 

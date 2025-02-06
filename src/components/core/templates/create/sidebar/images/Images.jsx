@@ -1,67 +1,49 @@
 import { useState } from 'react';
-import { Accordion, AccordionItem, Tab, Tabs } from '@heroui/react';
 import ExternalImages from '@/components/core/templates/create/sidebar/images/ExternalImages.jsx';
 import UploadedImages from '@/components/core/templates/create/sidebar/images/UploadedImages.jsx';
 import Svgs from './Svgs.jsx';
-import { RiArrowRightSLine, RiImage2Line } from 'react-icons/ri';
-import { TbBrush, TbStar } from 'react-icons/tb';
+import { HiChevronRight } from 'react-icons/hi2';
+import { Button } from '@heroui/react';
 
+const items = [
+  { name: 'Images', view: 'images', component: <ExternalImages mini /> },
+  { name: 'Svgs', view: 'svgs', component: <Svgs mini /> },
+];
 const Images = () => {
-  const [tab, setTab] = useState('uploads');
+  const [view, setView] = useState('all');
+  const views = {
+    images: <ExternalImages onBack={() => setView('all')} />,
+    svgs: <Svgs onBack={() => setView('all')} />,
+  };
 
   return (
-    <Accordion
-      variant="bordered"
-      itemClasses={{ base: 'px-3', content: 'pt-4 pb-5', title: 'whitespace-nowrap text-base' }}
-    >
-      <AccordionItem
-        key="3"
-        aria-label="Favourites"
-        title="Favourites"
-        startContent={<TbStar size="20" />}
-        indicator={<RiArrowRightSLine size="20" />}
-      >
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente delectus quas in exercitationem fugit
-        voluptate libero, assumenda sed, laudantium autem enim molestias repudiandae pariatur architecto consequatur
-        dicta, ratione tempore alias!
-      </AccordionItem>
-      <AccordionItem
-        key="1"
-        aria-label="Images"
-        title="Images"
-        startContent={<RiImage2Line size="20" />}
-        indicator={<RiArrowRightSLine size="20" />}
-      >
-        <div>
-          <Tabs
-            variant="bordered"
-            aria-label="Options"
-            color="primary"
-            radius="full"
-            classNames={{
-              base: 'mb-6',
-              tab: 'text-base px-4',
-            }}
-            selectedKey={tab}
-            onSelectionChange={setTab}
-          >
-            <Tab key="uploads" title="Uploads" className="text-base" />
-            <Tab key="search" title="Search" className="text-base" />
-          </Tabs>
-          {tab === 'search' && <ExternalImages />}
-          {tab === 'uploads' && <UploadedImages />}
+    <>
+      {view === 'all' && (
+        <div className="space-y-8">
+          {items.map((item, index) => (
+            <div key={index}>
+              <div className="flex items-center justify-between mb-4 bg-white/[.07] rounded-full px-5 py-2">
+                <h4 className="text-base font-semibold">{item.name}</h4>
+                {item.view && (
+                  <Button
+                    onPress={() => setView(item.view)}
+                    variant="light"
+                    size="sm"
+                    className="text-sm h-auto py-[2px] pr-[2px]"
+                    radius="full"
+                    endContent={<HiChevronRight size="16" />}
+                  >
+                    View All
+                  </Button>
+                )}
+              </div>
+              {item.component}
+            </div>
+          ))}
         </div>
-      </AccordionItem>
-      <AccordionItem
-        key="2"
-        aria-label="Specials"
-        title="Specials"
-        startContent={<TbBrush size="20" />}
-        indicator={<RiArrowRightSLine size="20" />}
-      >
-        <Svgs />
-      </AccordionItem>
-    </Accordion>
+      )}
+      {views[view]}
+    </>
   );
 };
 

@@ -18,7 +18,14 @@ export const MapDelawareContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 184 442" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 184 442"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M118.985 284.784L120.457 294.56L131.986 304.647L138.364 317.248L147.441 327.954L158.48 334.564L175.406 337.082L176.142 355.011L179.086 371.356L179.576 384.234L175.161 386.432L176.142 374.812L174.18 363.499L161.669 365.385L164.367 378.895L170.5 382.978L166.575 388.316L158.48 389.572L152.347 394.594H144.743L147.441 405.577L160.688 395.536L167.311 396.164L172.462 400.557L177.123 395.85L183.011 414.36V441L113.834 440.374L54.2226 438.807L24.0496 437.867L20.8606 394.281L17.1816 321.343L58.1476 319.138L66.2436 313.469L69.9226 305.592L76.5466 298.028L81.2066 295.506L95.9256 293.614L96.6616 284.469L101.323 280.368L116.532 281.946L118.985 284.784Z"
         stroke={element.config.stroke}

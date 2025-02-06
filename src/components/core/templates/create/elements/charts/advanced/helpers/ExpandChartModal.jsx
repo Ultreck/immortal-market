@@ -39,7 +39,7 @@ const ExpandChartModal = ({ element, isOpen, onClose }) => {
         </div>
         <div className="grid grid-cols-[auto_1fr] gap-10">
           <div className="border border-default-200 bg-default-100/50 rounded-3xl px-10 py-10">
-            <AdvanedChartsPresent element={{ ...element, width: 600, height: 400 }} isChartWrapperDisabled />
+            <AdvanedChartsPresent element={{ ...element, width: 600, height: 600 }} isChartWrapperDisabled />
           </div>
           <div className="py-2">
             <h3 className="text-2xl font-semibold max-w-xs">

@@ -18,7 +18,14 @@ export const MapOklahomaContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 195"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M326.21 1.41895V34.681V50.011L313.389 49.838L314.736 47.651L313.9 46.097L310.556 46.039L308.419 43.793L305.864 42.5829L304.285 40.047L301.73 42.0069L299.732 41.603L300.011 39.181L296.713 34.681L294.297 34.7959L292.579 33.4099L293.043 30.8109L290.813 26.5329L289.002 27.2849L285.75 31.909L281.802 32.7749L279.201 30.06L279.386 29.2509L284.403 27.2849L283.66 24.6239L280.408 25.608L277.11 25.0289L276.924 19.2979L282.173 19.761L284.821 15.821L291.139 14.0229L291.232 1.41895H326.21Z"
         stroke={element.config.stroke}

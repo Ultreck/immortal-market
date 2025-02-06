@@ -18,7 +18,14 @@ const MapWyomingContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 314" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 314"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M100.173 95.9683L104.663 99.8263L108.187 104.86L108.016 110.987L121.599 111.301L128.305 112.557L128.362 114.676H135.012L135.125 117.97H141.775V120.556H148.595V122.749L155.358 123.767L165.758 122.749L197.585 122.828V120.634L201.108 120.713L202.415 122.828L202.245 149.535L202.927 156.306L203.097 176.636H200.597L200.71 203.508L201.847 203.431V216.811L160.871 216.657L115.234 216.504L115.348 203.508H113.87L113.699 183.214L110.63 183.291L105.345 174.778L102.503 173.538L95.911 164.541L88.181 158.638L85.397 152.105L82.328 149.146L79.316 142.288L79.429 135.888L77.781 130.418L74.996 131.043L75.11 123.454L57.89 123.219L57.833 80.8223L61.243 85.0873L68.233 84.9293L72.041 96.6773L79.77 93.9993L80.85 87.7703L86.533 84.5343L94.49 88.5593L96.65 93.1323L100.173 95.9683Z"
         fill={assignColor('Fremont')}

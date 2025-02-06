@@ -18,7 +18,14 @@ export const MapNebraskaContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 401 184" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 401 184"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M176.448 0.95018L176.402 10.3352L177.085 14.2432V35.8242L177.813 35.7632L177.859 57.1022L173.262 57.1632L147.047 56.9792L120.605 56.7342L103.401 56.7952L94.1619 56.6112H92.6609L92.6149 35.1462H91.3859V13.9952L90.5669 14.0572L90.6579 0.888184L109.136 1.07419H129.571H151.28L176.448 0.95018Z"
         stroke={element.config.stroke}

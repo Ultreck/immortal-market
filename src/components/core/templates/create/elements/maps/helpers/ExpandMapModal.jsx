@@ -40,7 +40,7 @@ const ExpandChartModal = ({ element, isOpen, onClose }) => {
         </div>
         <div className="grid grid-cols-[auto_1fr] gap-10">
           <div className="border border-default-200 bg-default-100/50 rounded-3xl px-10 py-10">
-            <MapPresent element={{ ...element, width: 600, height: 400 }} isMapWrapperDisabled={true} />
+            <MapPresent element={{ ...element, width: 600, height: 600 }} isMapWrapperDisabled={true} />
           </div>
           <div className="py-2">
             <h3 className="text-2xl font-semibold max-w-xs">
@@ -62,7 +62,7 @@ const ExpandChartModal = ({ element, isOpen, onClose }) => {
         </div>
         <div className="mt-10">
           <Accordion variant="bordered" className="rounded-3xl px-10 py-1.5">
-            <AccordionItem key="data" aria-label="Chart data" title="Chart data" classNames={{ content: 'pb-6' }}>
+            <AccordionItem key="data" aria-label="Chart data" title="Map data" classNames={{ content: 'pb-6' }}>
               {!!element?.config?.data?.length && (
                 <Table
                   removeWrapper

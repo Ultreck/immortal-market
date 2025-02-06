@@ -20,7 +20,14 @@ const MapRhodeIslandContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 284 442" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 284 442"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M29.646 214.398H80.772L144.775 212.372L147.426 198.188L173.178 186.532L175.829 207.307L174.314 219.968L158.787 225.031L165.604 234.143L169.77 249.829L168.634 279.157L163.71 293.811L155.757 299.368V310.983L142.502 334.707L130.384 327.642L91.755 334.707L58.428 350.345L38.356 352.362L2 358.918L13.361 344.292L10.331 334.707L9.953 310.478L26.237 305.429L29.646 214.398ZM115.235 424.902L116.75 439.491L94.784 441L96.678 425.908L115.992 404.768L115.235 424.902Z"
         fill={assignColor('Washington')}

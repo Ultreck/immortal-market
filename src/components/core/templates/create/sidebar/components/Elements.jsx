@@ -1,47 +1,38 @@
-import Texts from '@/components/core/templates/create/sidebar/components/design/Texts.jsx';
 import Shapes from '@/components/core/templates/create/sidebar/components/design/Shapes.jsx';
 import Frames from '@/components/core/templates/create/sidebar/components/design/Frames.jsx';
 import Icons from '@/components/core/templates/create/sidebar/components/design/Icons.jsx';
 import { Button } from '@heroui/react';
 import { useState } from 'react';
-import StandardCharts from '@/components/core/templates/create/sidebar/data/StandardCharts.jsx';
-import AdvancedCharts from '@/components/core/templates/create/sidebar/data/AdvanceCharts.jsx';
+import Chart from '@/components/core/templates/create/sidebar/data/Charts.jsx';
 import Maps from '@/components/core/templates/create/sidebar/data/Maps.jsx';
 import Tables from '@/components/core/templates/create/sidebar/data/Tables.jsx';
 import DataTags from '@/components/core/templates/create/sidebar/data/DataTags.jsx';
-import DataBlocks from '@/components/core/templates/create/sidebar/data/DataBlocks.jsx';
 import { HiChevronRight } from 'react-icons/hi2';
 import Buttons from '@/components/core/templates/create/sidebar/components/design/Buttons.jsx';
 
 const items = [
-  { name: 'Texts', view: 'texts', component: <Texts mini /> },
   { name: 'Shapes', view: 'shapes', component: <Shapes mini /> },
   { name: 'Frames', view: 'frames', component: <Frames mini /> },
   { name: 'Icons', view: 'icons', component: <Icons mini /> },
   { name: 'Data tags', view: 'data-tags', component: <DataTags mini /> },
-  { name: 'Data blocks', view: 'data-blocks', component: <DataBlocks mini /> },
-  { name: 'Standard charts', view: 'standard-charts', component: <StandardCharts mini /> },
-  { name: 'Advanced charts', view: 'advanced-charts', component: <AdvancedCharts mini /> },
+  { name: 'Charts', view: 'charts', component: <Chart mini /> },
   { name: 'Maps', view: 'maps', component: <Maps mini /> },
   { name: 'Tables', view: 'tables', component: <Tables mini /> },
-  { name: 'Buttons', view: 'buttons', component: <Buttons mini /> },
+  { name: 'Ui element', view: 'ui-element', component: <Buttons mini /> },
 ];
 
 const Elements = () => {
   const [view, setView] = useState('all');
 
   const views = {
-    texts: <Texts onBack={() => setView('all')} />,
     shapes: <Shapes onBack={() => setView('all')} />,
     frames: <Frames onBack={() => setView('all')} />,
     icons: <Icons onBack={() => setView('all')} />,
     'data-tags': <DataTags onBack={() => setView('all')} />,
-    'data-blocks': <DataBlocks onBack={() => setView('all')} />,
-    'standard-charts': <StandardCharts onBack={() => setView('all')} />,
-    'advanced-charts': <AdvancedCharts onBack={() => setView('all')} />,
+    charts: <Chart onBack={() => setView('all')} />,
     maps: <Maps onBack={() => setView('all')} />,
     tables: <Tables onBack={() => setView('all')} />,
-    buttons: <Buttons onBack={() => setView('all')} />,
+    'ui-element': <Buttons onBack={() => setView('all')} />,
   };
 
   return (

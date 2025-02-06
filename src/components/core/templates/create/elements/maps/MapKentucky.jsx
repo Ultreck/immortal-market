@@ -18,7 +18,14 @@ const MapKentuckyContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 401 177" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 401 177"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M379.901 94.7834L382.098 99.4794L385.604 100.603L386.232 102.387L388.325 102.123L391.779 106.746L393.977 108.198L399 108.33L378.854 126.049L374.563 127.298L367.656 130.715L364.412 127.43L361.586 128.679L358.97 125.852L360.069 124.931L364.883 118.153L366.453 114.331L366.086 110.771L364.673 110.507L365.982 101.396L365.144 99.4794L367.761 98.5544L371.633 99.0174L375.4 98.8185L375.662 96.7024L377.598 94.9164L379.901 94.7834Z"
         fill={assignColor('Pike')}

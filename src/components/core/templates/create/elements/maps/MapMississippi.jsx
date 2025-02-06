@@ -20,7 +20,14 @@ export const MapMississippiContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 275 441" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 275 441"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M130.972 197.165L127.059 204.105L124.757 210.036L120.998 213.228L119.003 213.046L113.019 216.51L106.881 217.239L102.814 221.703L97.2136 224.708H93.9147L92.2264 227.529L87.2392 231.169L85.9348 230.624L83.327 227.439L78.3398 227.165L78.263 223.433L75.6542 223.342L73.2758 220.701L73.1222 216.783L76.9586 216.327L77.4951 213.957L71.6643 210.493L74.0427 203.74L70.3599 200.819L78.3398 193.145L93.9915 193.236V185.098L100.589 184.914H102.431L130.281 196.709L130.972 197.165Z"
         stroke={element.config.stroke}

@@ -2,12 +2,13 @@ import { createElement, useEffect, useState } from 'react';
 import { RiArrowLeftSLine, RiImage2Line, RiSettings2Line, RiShapesLine, RiStackLine } from 'react-icons/ri';
 import { cn, getImageLink } from '@/lib/utils.js';
 import Elements from '@/components/core/templates/create/sidebar/components/Elements.jsx';
+import Texts from '@/components/core/templates/create/sidebar/components/design/Texts.jsx';
 import Pages from '@/components/core/templates/create/sidebar/pages/Pages.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
 import { Avatar, Tooltip } from '@heroui/react';
 import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
-import { TbChevronLeft, TbChevronRight, TbLayoutDistributeHorizontal, TbTemplate } from 'react-icons/tb';
+import { TbAbc, TbChevronLeft, TbChevronRight, TbLayoutDistributeHorizontal, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import MyWork from './my-work/MyWork.jsx';
@@ -21,7 +22,7 @@ import { useGetDesign } from '@/api/business.js';
 const Sidebar = ({ className }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const navigate = useNavigate();
-  const [tab, setTab] = useState('elements');
+  const [tab, setTab] = useState('texts');
   const collapsed = !tab;
   const { user } = useAuth();
   const { id: business } = useBusiness();
@@ -73,6 +74,7 @@ const Sidebar = ({ className }) => {
               <p className="text-sm mt-0.5">Back</p>
             </button>
             {[
+              { icon: TbAbc, title: 'Texts', key: 'texts' },
               { icon: RiShapesLine, title: 'Elements', key: 'elements' },
               { icon: TbTemplate, title: 'Templates', key: 'templates' },
               { icon: RiImage2Line, title: 'Images', key: 'images' },
@@ -94,7 +96,7 @@ const Sidebar = ({ className }) => {
                     )}
                     onClick={() => setTab(element.key)}
                   >
-                    {createElement(element.icon, { size: '24' })}
+                    {createElement(element.icon, { size: '22' })}
                     <p className="text-sm mt-1 truncate overflow text-center w-full">{element.title}</p>
                   </div>
                 </Tooltip>
@@ -140,6 +142,7 @@ const Sidebar = ({ className }) => {
         </div>
         {!collapsed && (
           <div className="px-6 py-6 overflow-x-hidden dark:bg-gray-800/50">
+            {tab === 'texts' && <Texts />}
             {tab === 'elements' && <Elements />}
             {tab === 'templates' && <Build />}
             {tab === 'graphics' && <Svgs />}

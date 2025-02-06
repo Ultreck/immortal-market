@@ -18,7 +18,14 @@ export const MapArkansasContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 343" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 343"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M136.707 132.325L131.906 137.511L127.185 138.294L127.105 141.618L124.865 142.694L119.184 148.362L119.104 150.022L113.023 154.221L107.341 159.881V171.188H98.8602V174.013L73.5752 173.623L74.0552 146.994L73.8952 135.75L77.4152 134.086L88.0572 134.184L91.7382 129.192L93.8992 127.723L108.062 128.212L108.142 117.824L110.862 121.648L115.663 122.922L118.624 127.331L119.584 130.563L125.585 137.511L127.585 136.826L128.466 133.108L136.707 132.325Z"
         stroke={element.config.stroke}

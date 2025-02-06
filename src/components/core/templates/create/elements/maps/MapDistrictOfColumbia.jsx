@@ -23,7 +23,14 @@ const MapDistrictOfColumbiaContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 400 442" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 400 442"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M357.094 206.635L398.484 247.732L244.213 402.364L191.535 441L180.247 407.194L187.772 300.903L121.925 228.394L54.1956 213.888L1.51758 148.598L152.026 1L357.094 206.635Z"
         fill={assignColor('Washington, District of Columbia')}

@@ -18,7 +18,14 @@ const MapChadContent = ({ element, present = true }) => {
   const { el, assignColor, renderLabels, handleMouseMove, handleMouseLeave, renderTooltip } = useMapElement(element);
 
   return (
-    <svg ref={el} width="100%" viewBox="0 0 279 442" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: element.width, height: element.height }}
+      ref={el}
+      width="100%"
+      viewBox="0 0 279 442"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M188.889 220.264L179.637 219.936L174.155 216.87L161.398 214.103L157.26 207.578L153.888 207.139L153.335 214.484L147.376 223.821L141.419 227.485L133.406 228.714L126.58 227.238L121.65 224.149L116.142 216.76L85.6993 203.161L53.1797 186.627L54.7686 180.229L100.304 97.4274L104.205 89.5077L104.653 85.1764L115.46 81.7988L126.801 76.1381L139.956 71.6011L142.713 67.6961L140.92 50.6244L144.479 44.2637L148.535 42.485L199.579 69.5457L175.475 122.023L178.48 133.979L186.81 156.498L183.172 190.321L191.438 211.708L191.814 216.626L188.889 220.264Z"
         stroke={element.config.stroke}
