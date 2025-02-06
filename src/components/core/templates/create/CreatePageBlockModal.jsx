@@ -1,12 +1,25 @@
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
-import { Button, Card, CardBody, Input, Modal, ModalBody, ModalContent, Select, SelectItem } from '@heroui/react';
+import {
+  Autocomplete,
+  AutocompleteItem,
+  Button,
+  Card,
+  CardBody,
+  Chip,
+  Modal,
+  ModalBody,
+  ModalContent,
+  Select,
+  SelectItem,
+} from '@heroui/react';
 import { Controller, useForm } from 'react-hook-form';
 import { useCreateDesignBlock } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import { toBlob } from 'html-to-image';
 import { useState } from 'react';
+import { capitalize } from '@/lib/utils.js';
 
 const sections = [
   { key: 'cover', label: 'Cover' },
@@ -14,6 +27,64 @@ const sections = [
   { key: 'body', label: 'Body' },
   { key: 'modal', label: 'Modal' },
   { key: 'footer', label: 'Footer' },
+];
+
+const options = [
+  'chart',
+  'infographic',
+  'map',
+  'table',
+  'image',
+  'svg',
+  'data-tag',
+  'frame',
+  'button',
+  'text',
+  'shape',
+  'shapes',
+  'linear-bar',
+  'semi-meter',
+  'linear-advanced-bar',
+  'circle-icons',
+  'bar-global',
+  'speedometer',
+  'speedometer-simple',
+  'speedometer-multiple',
+  'dynamic-sorting',
+  'scatter-life-expectancy',
+  'stacked-card',
+  'percentage-card',
+  'lollipop',
+  'nested-circles',
+  'funnel',
+  'tree-map',
+  'column-card',
+  'percentage-card-2',
+  'pictogram-shapes',
+  'custom-bar',
+  'bar',
+  'bar-not-sep',
+  'vertical-bar',
+  'vertical-bar-no-sep',
+  'stacked-bar',
+  'stacked-bar-vertical',
+  'alt-bar',
+  'bar-multiple',
+  'bar-multiple-vertical',
+  'pie',
+  'doughnut',
+  'doughnut-standard',
+  'doughnut-crazy',
+  'line',
+  'line-multiple',
+  'area',
+  'area-multiple',
+  'semi-pie',
+  'semi-circle',
+  'bubble',
+  'scatter',
+  'line-area',
+  'line-bar',
 ];
 
 const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
@@ -25,9 +96,30 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
   const pages = useTemplateStore(({ template }) => template.pages);
   const index = pages.findIndex((p) => p.id === id);
   const { mutateAsync: create, isPending: isCreateLoading } = useCreateDesignBlock(business);
+  const [tag, setTag] = useState('');
+  const [tags, setTags] = useState([]);
+
+  const handleAddTag = () => {
+    if (!tag) return;
+    if (tags.includes(tag)) return toast.error('Tag already exists');
+    setTags((prev) => [...prev, tag]);
+    setTag('');
+  };
+
+  const handleRemoveTag = (tag) => {
+    setTags((prev) => prev.filter((t) => t !== tag));
+  };
+
+  const handleClose = () => {
+    reset();
+    setTags([]);
+    setTag('');
+    onClose();
+  };
 
   const submit = async (values) => {
     try {
+      if (!tags.length) return toast.error('Tags is required');
       setIsThumbnailLoading(true);
       const blob = await toBlob(document.getElementById(`canvas-${page.id}`), {
         cacheBust: true,
@@ -44,14 +136,13 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
       };
       const payload = {
         ...values,
-        tags: values.tags.split(','),
+        tags,
         data,
         thumbnail,
         type: 'page',
       };
       await create(payload);
-      onClose();
-      reset();
+      handleClose();
       toast.success('Block saved');
     } catch (e) {
       toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
@@ -59,7 +150,7 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} hideCloseButton>
+    <Modal isOpen={isOpen} onClose={handleClose} hideCloseButton>
       <ModalContent>
         <ModalBody className="px-8 py-8">
           <h2 className="text-lg mb-6">Save page as block</h2>
@@ -101,29 +192,61 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
                   </div>
                 )}
               />
-              <Controller
-                name="tags"
-                control={control}
-                rules={{ required: 'Tags is required' }}
-                disabled={isCreateLoading || isThumbnailLoading}
-                render={({ field, fieldState: { error } }) => (
-                  <div>
-                    <p className="mb-1 px-1">Tags</p>
-                    <Input
-                      variant="bordered"
-                      labelPlacement="outside"
-                      placeholder="Tags"
+              <div>
+                <p className="mb-1 px-1">Tags</p>
+                <div className="border border-default-200 rounded-2xl p-4">
+                  {!!tags.length && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {tags.map((tag, i) => (
+                        <Chip key={i} onClose={() => handleRemoveTag(tag)}>
+                          {tag}
+                        </Chip>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex items-center space-x-2">
+                    <Autocomplete
+                      aria-label="Tags"
+                      isClearable={false}
+                      type="text"
+                      classNames={{ base: 'text-base' }}
+                      inputProps={{ classNames: { input: 'text-base px-1' } }}
                       className="text-base"
-                      size="lg"
-                      classNames={{ input: 'text-base px-2' }}
-                      {...field}
-                      isInvalid={!!error?.message}
-                      errorMessage={error?.message}
-                      isDisabled={field.disabled}
-                    />
+                      placeholder="Enter tag"
+                      allowsEmptyCollection={false}
+                      allowsCustomValue={true}
+                      inputValue={tag}
+                      onInputChange={(v) => setTag(v)}
+                      onSelectionChange={(v) => {
+                        if (v) setTag(`${v}`);
+                      }}
+                      variant="bordered"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') e.preventDefault();
+                      }}
+                    >
+                      {options.map((t) => (
+                        <AutocompleteItem
+                          key={t}
+                          value={t}
+                          textValue={t.toString()}
+                          classNames={{ title: 'text-base' }}
+                        >
+                          {capitalize(t)}
+                        </AutocompleteItem>
+                      ))}
+                    </Autocomplete>
+                    <Button
+                      variant="bordered"
+                      className="px-3 text-base"
+                      onPress={() => handleAddTag()}
+                      isDisabled={!tag}
+                    >
+                      Add tag
+                    </Button>
                   </div>
-                )}
-              />
+                </div>
+              </div>
             </div>
             <Button
               type="submit"
