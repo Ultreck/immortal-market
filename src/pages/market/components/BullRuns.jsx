@@ -19,9 +19,6 @@ const BullRunsStocks = ({ selectedQuery }) => {
         <Skeleton className="min-h-[200px] rounded-2xl" />
       ) : (
         <Card className="card-shadow px-8 py-7">
-          <div className="mb-8 flex items-center space-x-3">
-            <h3 className="text-lg font-semibold">{selectedQuery.name}</h3>
-          </div>
           <BullRunTable stocks={stockData} selectedQuery={selectedQuery} />
         </Card>
       )}

@@ -10,7 +10,8 @@ const BullRunTable = ({ stocks, selectedQuery }) => {
   const [id, setId] = useState(null);
   const { isOpen: isDetailsOpen, onOpen: onDetailsOpen, onClose: onDetailsClose } = useDisclosure();
 
-  console.log({ stocks, selectedQuery });
+  let max = stocks?.length ? `${Math.round(Math.max(...stocks.map((d) => d.change)))}` : '';
+  if (max.length === 1) max = `${(+max).toFixed(1)}`;
 
   const handleClick = (_id) => {
     setId(_id);
@@ -31,9 +32,6 @@ const BullRunTable = ({ stocks, selectedQuery }) => {
             <TableColumn>Current Price</TableColumn>
             <TableColumn>Change</TableColumn>
             <TableColumn>Volume</TableColumn>
-            {/*{(selectedQuery.key === '"on-a-bulls"' || selectedQuery.key === 'on-a-bears') && (*/}
-            {/*  <TableColumn>No of days</TableColumn>*/}
-            {/*)}*/}
           </TableHeader>
           <TableBody>
             {stocks.map((c) => {
@@ -56,9 +54,6 @@ const BullRunTable = ({ stocks, selectedQuery }) => {
                     </div>
                   </TableCell>
                   <TableCell>{formatCurrency(c.volume, c.currency)}</TableCell>
-                  {/*{(selectedQuery.key === 'on-a-bulls' || selectedQuery.key === 'on-a-bears') && (*/}
-                  {/*  <TableCell>{c.runDays}</TableCell>*/}
-                  {/*)}*/}
                 </TableRow>
               );
             })}

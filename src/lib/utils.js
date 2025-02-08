@@ -1,32 +1,5 @@
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import {
-  RiAlertLine,
-  RiArrowDownCircleLine,
-  RiArrowDownLine,
-  RiArrowUpLine,
-  RiBriefcase4Line,
-  RiBriefcaseFill,
-  RiBuildingLine,
-  RiCalendar2Line,
-  RiCalendarLine,
-  RiFileTextLine,
-  RiFireLine,
-  RiGhostLine,
-  RiLineChartFill,
-  RiLineChartLine,
-  RiMoneyDollarCircleLine,
-  RiNewspaperLine,
-  RiQuestionLine,
-  RiScalesLine,
-  RiTeamLine,
-  RiTrophyLine,
-  RiUserFollowLine,
-  RiUserLine,
-  RiVolumeUpLine,
-} from 'react-icons/ri';
-import { TbChartLine } from 'react-icons/tb';
-import { FcStatistics } from 'react-icons/fc';
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -531,4 +504,3 @@ export const writers = [
     id: '65bc334c3c9594f510958497',
   },
 ];
-

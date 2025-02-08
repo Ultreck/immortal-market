@@ -40,6 +40,7 @@ import ProjectsPage from '@/pages/ProjectsPage.jsx';
 import AppsPage from '@/pages/AppsPage.jsx';
 import ChatWidget from '@/components/core/templates/create/ChatWidget.jsx';
 import MarketPage from '@/pages/market/MarketPage.jsx';
+import MarketAnalyticsPage from '@/pages/market/MarketAnalyticsPage.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -91,6 +92,7 @@ const App = () => {
             </RequireAuthBusiness>
           }
         />
+        <Route path="markets/analytics" element={<MarketAnalyticsPage />} />
         <Route
           path="designs/:id/edit"
           element={
