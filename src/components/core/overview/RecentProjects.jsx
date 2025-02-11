@@ -26,7 +26,7 @@ const RecentProjects = () => {
           radius="full"
           size="sm"
           endContent={<TbChevronRight size="20" />}
-          onClick={() => navigate(`/projects`)}
+          onPress={() => navigate(`/projects`)}
         >
           View all
         </Button>
