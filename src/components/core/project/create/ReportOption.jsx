@@ -6,22 +6,34 @@ import { TbChevronRight, TbCircleCheckFilled, TbForms, TbRobot } from 'react-ico
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
-import { useUpdateDesignSource } from '@/api/business.js';
+import { useAutoAnalyze, useUpdateDesignSource } from '@/api/business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
-const ReportOption = ({ onNext }) => {
+const ReportOption = ({ onNext, onClose }) => {
   const toast = useToast();
   const { source } = useCurrentDesign();
   const [type, setType] = useState(source?.selection?.type || '');
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
+  const { mutateAsync: autoAnalyze, isPending: isAutoAnalyzeLoading } = useAutoAnalyze(business, id);
 
   const handleSubmit = async () => {
     try {
       await update({ selection: { type } });
+      if (type === 'auto') await handleAnalyze();
       onNext();
+    } catch (e) {
+      toast.error(e?.response?.data?.message || e.message);
+    }
+  };
+
+  const handleAnalyze = async () => {
+    try {
+      await autoAnalyze();
+      onClose();
+      window.location.reload();
     } catch (e) {
       toast.error(e?.response?.data?.message || e.message);
     }
@@ -42,10 +54,8 @@ const ReportOption = ({ onNext }) => {
         <div className="mt-10 grid grid-cols-2 gap-6">
           <Card
             isPressable
-            isDisabled={isUpdateLoading}
-            onPress={() => {
-              setType('manual');
-            }}
+            isDisabled={isUpdateLoading || isAutoAnalyzeLoading}
+            onPress={() => setType('manual')}
             shadow="none"
             className={cn(
               'text-left border border-default-900/10 hover:bg-default-900/5 rounded-2xl px-8 py-10 cursor-pointer relative transition-all duration-300',
@@ -64,11 +74,11 @@ const ReportOption = ({ onNext }) => {
           </Card>
           <Card
             isPressable
+            isDisabled={isUpdateLoading || isAutoAnalyzeLoading}
             onPress={() => setType('auto')}
             shadow="none"
-            isDisabled
             className={cn(
-              'text-left border border-default-900/10 hover:bg-default-900/5 rounded-2xl px-8 py-10 cursor-pointer relative transition-all duration-300 disabled',
+              'text-left border border-default-900/10 hover:bg-default-900/5 rounded-2xl px-8 py-10 cursor-pointer relative transition-all duration-300',
               { 'border-2 border-green-500': type === 'auto' }
             )}
           >
@@ -88,7 +98,7 @@ const ReportOption = ({ onNext }) => {
         <Button
           isDisabled={!type}
           onPress={handleSubmit}
-          isLoading={isUpdateLoading}
+          isLoading={isUpdateLoading || isAutoAnalyzeLoading}
           color="primary"
           radius="full"
           className="text-base px-6"
@@ -102,9 +112,9 @@ const ReportOption = ({ onNext }) => {
 };
 
 ReportOption.propTypes = {
-  value: PropTypes.string.isRequired,
   onPrev: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ReportOption;

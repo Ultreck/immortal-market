@@ -13,12 +13,6 @@ import Combinations from '@/components/core/project/create/Combinations.jsx';
 
 const steps = [
   {
-    key: 'template',
-    title: 'Select template',
-    icon: <TbTemplate size="18" />,
-    element: SelectTemplate,
-  },
-  {
     key: 'source',
     title: 'Data source',
     icon: <TbDatabase size="18" />,
@@ -29,6 +23,12 @@ const steps = [
     title: 'Analysis mode',
     icon: <TbSettings size="18" />,
     element: ReportOption,
+  },
+  {
+    key: 'template',
+    title: 'Select template',
+    icon: <TbTemplate size="18" />,
+    element: SelectTemplate,
   },
   {
     key: 'model',
@@ -57,7 +57,8 @@ const CreateProjectModal = () => {
 
   const current = steps.find((s) => s.key === step);
 
-  const gotoNextStep = () => {
+  const gotoNextStep = (key) => {
+    if (key) return updateProjectStore({ step: key });
     const index = steps.findIndex((s) => s.key === step);
     const next = steps[index + 1];
     if (next) return updateProjectStore({ step: next.key });

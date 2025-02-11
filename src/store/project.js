@@ -23,7 +23,7 @@ const useProjectStore = createWithEqualityFn(
           if (source.selection?.type) step = 'model';
           return { data: { ...state.data, isOpen: true, step } };
         } else {
-          return { data: { ...initial, isOpen: true, step: 'template' } };
+          return { data: { ...initial, isOpen: true, step: 'source' } };
         }
       });
     },
