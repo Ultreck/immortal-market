@@ -1,12 +1,14 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
-import { useGetDesignBlocks } from '@/api/business.js';
-import { Chip, Image, Skeleton } from '@heroui/react';
+import { useDeleteDesignBlock, useGetDesignBlocks } from '@/api/business.js';
+import { Button, Chip, Image, Skeleton } from '@heroui/react';
 import useBusiness from '@/hooks/use-business.js';
-import { getImageLink } from '@/lib/utils.js';
+import { cn, getImageLink } from '@/lib/utils.js';
 import useTemplateStore from '@/store/template.js';
 import NoData from '@/components/ui/NoData.jsx';
 import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast.jsx';
+import { TbTrash } from 'react-icons/tb';
 
 const categories = [
   { key: 'headlines', label: 'Headlines' },
@@ -76,15 +78,7 @@ const PageBlocksModal = ({ isOpen, onClose }) => {
           {blocks.length ? (
             <div className="columns-2 gap-6 [column-fill:_balance] box-border mx-auto before:box-inherit after:box-inherit">
               {blocks.map((block) => {
-                return (
-                  <div key={block._id} className="break-inside-avoid mb-6">
-                    <Image
-                      onClick={() => handleClick(block)}
-                      src={getImageLink(block.thumbnail)}
-                      className="w-full object-cover rounded-2xl cursor-pointer hover:brightness-90 border"
-                    />
-                  </div>
-                );
+                return <PageBlockItem block={block} key={block._id} onClick={() => handleClick(block)} />;
               })}
             </div>
           ) : (
@@ -96,9 +90,53 @@ const PageBlocksModal = ({ isOpen, onClose }) => {
   );
 };
 
+const PageBlockItem = ({ block, onClick }) => {
+  const toast = useToast();
+  const { mutateAsync: deleteBlock, isPending: isDeleteBlockPending } = useDeleteDesignBlock();
+
+  const handleDelete = async () => {
+    try {
+      await deleteBlock(block.id);
+    } catch (e) {
+      toast.error(e?.response?.data?.message || 'Something went wrong, please try again');
+    }
+  };
+
+  return (
+    <div key={block._id} className="break-inside-avoid mb-6 relative group">
+      <div
+        className={cn(
+          'absolute top-4 right-4 z-[2] group-hover:opacity-100 opacity-0 transition-opacity duration-300',
+          { 'opacity-100': isDeleteBlockPending }
+        )}
+      >
+        <Button
+          onPress={handleDelete}
+          isIconOnly
+          radius="full"
+          size="sm"
+          isLoading={isDeleteBlockPending}
+          color="danger"
+        >
+          <TbTrash size="18" />
+        </Button>
+      </div>
+      <Image
+        onClick={onClick}
+        src={getImageLink(block.thumbnail)}
+        className="w-full object-cover rounded-2xl cursor-pointer hover:brightness-90 border z-[1] relative"
+      />
+    </div>
+  );
+};
+
 PageBlocksModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+};
+PageBlockItem.propTypes = {
+  block: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default PageBlocksModal;

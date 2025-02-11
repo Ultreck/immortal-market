@@ -228,6 +228,15 @@ export const useGetDesignBlocks = ({ business, type, category }) => {
   });
 };
 
+export const useDeleteDesignBlock = () => {
+  return useMutation({
+    mutationKey: ['designs', 'blocks'],
+    mutationFn: (id) => {
+      return http.immortal.delete(`/businesses/designs/blocks/${id}`);
+    },
+  });
+};
+
 export const useGetDatabaseTables = (business) => {
   return useMutation({
     mutationFn: ({ payload, type }) => {
@@ -293,6 +302,15 @@ export const useUpdateDesignSource = (business, design) => {
     mutationKey: ['businesses', business, 'designs', design, 'source'],
     mutationFn: async (data) => {
       return http.immortal.patch(`/businesses/${business}/designs/${design}/source`, data);
+    },
+  });
+};
+
+export const useAutoAnalyze = (business, design) => {
+  return useMutation({
+    mutationKey: ['businesses', business, 'designs', design],
+    mutationFn: async () => {
+      return http.immortal.post(`/businesses/${business}/designs/${design}/data/auto`);
     },
   });
 };
