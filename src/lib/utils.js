@@ -272,8 +272,10 @@ export const fontFamily = [
 ];
 
 export const camelCaseToWords = (str) => {
+  if (!str) return str;
   return str
     .replace(/([A-Z])/g, ' $1')
+    .toLowerCase()
     .replace(/^./, (char) => char.toUpperCase())
     .trim();
 };
