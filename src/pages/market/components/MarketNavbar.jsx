@@ -2,7 +2,7 @@ import { TbDotsVertical } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 
 const linkItems = [
-  { name: 'Markets', href: '/markets' },
+  { name: 'Home', href: '/markets' },
   { name: 'Analytics', href: '/markets/analytics' },
   { name: 'Virtuals', href: '/markets/virtuals' },
   { name: 'Gaming', href: '/markets/gaming' },
@@ -10,7 +10,7 @@ const linkItems = [
 
 const MarketNavbar = () => {
   return (
-    <div className="flex justify-between h-[80px] px-10 py-6">
+    <div className="flex justify-between h-[80px] container py-6">
       <div className="">
         <p className="text-2xl font-bold">Global Markets</p>
         <p className="opacity-70 my-auto">23 Nov 2025</p>

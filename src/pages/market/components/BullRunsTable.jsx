@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, useDisclosure } from '@nextui-org/react';
-import { formatCurrency } from '@/lib/utils';
-import { RiArrowDownLine, RiArrowUpLine } from 'react-icons/ri';
-import NoData from '@/components/ui/NoData';
-import StockDetailsModal from '@/pages/market/StockDetailsModal.jsx';
 import PropTypes from 'prop-types';
+import { IconArrowUpRight } from '@tabler/icons-react';
+import StockDetailsModal from '@/pages/market/StockDetailsModal.jsx';
 
 const BullRunTable = ({ stocks, selectedQuery }) => {
   const [id, setId] = useState(null);
@@ -13,56 +11,60 @@ const BullRunTable = ({ stocks, selectedQuery }) => {
   let max = stocks?.length ? `${Math.round(Math.max(...stocks.map((d) => d.change)))}` : '';
   if (max.length === 1) max = `${(+max).toFixed(1)}`;
 
-  const handleClick = (_id) => {
-    setId(_id);
-    onDetailsOpen();
-  };
-
   return (
     <>
-      {stocks.length ? (
-        <Table
-          aria-label="Top performing stocks"
-          isStriped
-          removeWrapper
-          classNames={{ th: 'text-base', td: 'text-base' }}
-        >
-          <TableHeader>
-            <TableColumn>Symbol</TableColumn>
-            <TableColumn>Current Price</TableColumn>
-            <TableColumn>Change</TableColumn>
-            <TableColumn>Volume</TableColumn>
-          </TableHeader>
-          <TableBody>
-            {stocks.map((c) => {
-              return (
-                <TableRow key={c._id}>
-                  <TableCell>
-                    <div
-                      tabIndex={1}
-                      className="w-min cursor-pointer rounded-2xl transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1"
-                      onClick={() => handleClick(c._id)}
-                    >
-                      {c.symbol}
+      <Table
+        aria-label="Top performing stocks"
+        isStriped
+        removeWrapper
+        classNames={{ th: 'text-base', td: 'text-base' }}
+      >
+        <TableHeader>
+          <TableColumn>Symbol</TableColumn>
+          <TableColumn>5 days</TableColumn>
+          <TableColumn>7 Days</TableColumn>
+          <TableColumn>14 Days</TableColumn>
+          <TableColumn>Form</TableColumn>
+        </TableHeader>
+        <TableBody>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <TableRow key={i}>
+              <TableCell>
+                <div className="w-min cursor-pointer rounded-2xl transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1">
+                  TESLA
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="rounded-2xl px-3 py-1 flex items-center justify-center bg-green-900/20 space-x-1">
+                  <IconArrowUpRight color="green" />
+                  <div className="text-base font-bold">25%</div>
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="rounded-2xl px-3 py-1 flex items-center justify-center bg-green-900/20 space-x-1">
+                  <IconArrowUpRight color="green" />
+                  <div className="text-base font-bold">35%</div>
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="rounded-2xl px-3 py-1 items-center flex bg-green-900/20 justify-center space-x-1">
+                  <IconArrowUpRight color="green" />
+                  <div className="text-base font-bold">55%</div>
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="grid grid-cols-5 gap-1">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="bg-green-800 p-0.5 rounded">
+                      <p className="font-semibold text-center text-sm">W</p>
                     </div>
-                  </TableCell>
-                  <TableCell>{formatCurrency(c.price, c.currency)}</TableCell>
-                  <TableCell className={c.change >= 0 ? 'text-teal-500' : 'text-red-500'}>
-                    <div className="flex items-center space-x-1">
-                      {c.change >= 0 ? <RiArrowUpLine /> : <RiArrowDownLine />}
-                      <span>{c.change.toFixed(2)}%</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>{formatCurrency(c.volume, c.currency)}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      ) : (
-        <NoData text="No stocks available" />
-      )}
-
+                  ))}
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
       <StockDetailsModal isOpen={isDetailsOpen} onClose={onDetailsClose} id={id} />
     </>
   );

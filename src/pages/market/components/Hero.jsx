@@ -19,7 +19,7 @@ const MarketHero = () => {
   const { isOpen: isChatWithAgentOpen, onOpen: onChatWithAgentOpen, onClose: onChatWithAgentClose } = useDisclosure();
 
   return (
-    <div className="relative overflow-y-auto flex">
+    <div className="relative overflow-y-auto flex container">
       <ComposableMap>
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
@@ -46,7 +46,7 @@ const MarketHero = () => {
           </Marker>
         ))}
       </ComposableMap>
-      <div className="absolute bottom-0 left-0 right-0 p-10">
+      <div className="container absolute bottom-0 left-0 right-0 ">
         <div className="w-full bg-default-100 px-10 py-4 rounded-2xl flex justify-between items-center">
           <div className="space-y-2">
             <p className="text-3xl font-bold">Chat with Immortal Agents</p>
@@ -54,56 +54,54 @@ const MarketHero = () => {
               Start chatting
             </Button>
           </div>
-          <div>
-            <div className="grid grid-cols-4 items-center gap-6 mt-6">
-              {writers?.slice(0, 8).map((writer, i) => (
-                <Tooltip
-                  placement="bottom"
-                  key={i}
-                  classNames={{ content: 'dark:bg-default-100' }}
-                  content={
-                    <Card shadow="none" className="w-[250px] border-none bg-transparent">
-                      <CardHeader className="justify-between">
-                        <div className="mr-2 flex items-center gap-3">
-                          <Badge content="AI" isInvisible={writer.type !== 'ai'} placement="bottom-right">
-                            <Avatar
-                              radius="full"
-                              src={getImageLink(writer.image)}
-                              showFallback
-                              fallback={<RiUser3Fill size="24" />}
-                              className="!h-[40px] !w-[40px]"
-                            />
-                          </Badge>
-                          <h4 className="text-base font-medium leading-none text-default-600">
-                            {writer.firstName} {writer.lastName}
-                          </h4>
-                        </div>
-                      </CardHeader>
-                      <CardBody className="px-3 py-0 pb-4">
-                        <p className="pl-px text-base text-default-500">{writer.bio}</p>
-                        <Button
-                          color="primary"
-                          radius="full"
-                          size="sm"
-                          className="mt-6 text-base"
-                          onClick={() => onChatWithAgentOpen()}
-                        >
-                          Chat with {writer.firstName}
-                        </Button>
-                      </CardBody>
-                    </Card>
-                  }
-                >
-                  <Avatar
-                    radius="full"
-                    src={getImageLink(writer.image)}
-                    showFallback
-                    fallback={<RiUser3Fill size="24" />}
-                    className="!h-[42px] !w-[42px]"
-                  />
-                </Tooltip>
-              ))}
-            </div>
+          <div className="grid grid-cols-4 items-center gap-6 mt-6">
+            {writers?.slice(0, 8).map((writer, i) => (
+              <Tooltip
+                placement="bottom"
+                key={i}
+                classNames={{ content: 'dark:bg-default-100' }}
+                content={
+                  <Card shadow="none" className="w-[250px] border-none bg-transparent">
+                    <CardHeader className="justify-between">
+                      <div className="mr-2 flex items-center gap-3">
+                        <Badge content="AI" isInvisible={writer.type !== 'ai'} placement="bottom-right">
+                          <Avatar
+                            radius="full"
+                            src={getImageLink(writer.image)}
+                            showFallback
+                            fallback={<RiUser3Fill size="24" />}
+                            className="!h-[40px] !w-[40px]"
+                          />
+                        </Badge>
+                        <h4 className="text-base font-medium leading-none text-default-600">
+                          {writer.firstName} {writer.lastName}
+                        </h4>
+                      </div>
+                    </CardHeader>
+                    <CardBody className="px-3 py-0 pb-4">
+                      <p className="pl-px text-base text-default-500">{writer.bio}</p>
+                      <Button
+                        color="primary"
+                        radius="full"
+                        size="sm"
+                        className="mt-6 text-base"
+                        onClick={() => onChatWithAgentOpen()}
+                      >
+                        Chat with {writer.firstName}
+                      </Button>
+                    </CardBody>
+                  </Card>
+                }
+              >
+                <Avatar
+                  radius="full"
+                  src={getImageLink(writer.image)}
+                  showFallback
+                  fallback={<RiUser3Fill size="24" />}
+                  className="!h-[42px] !w-[42px]"
+                />
+              </Tooltip>
+            ))}
           </div>
         </div>
       </div>

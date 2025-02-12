@@ -13,12 +13,17 @@ const BullRunsStocks = ({ selectedQuery }) => {
     return { ...stock, ...stock.stock };
   });
 
+  console.log(stockData);
+
   return (
     <>
       {isLoading ? (
         <Skeleton className="min-h-[200px] rounded-2xl" />
       ) : (
         <Card className="card-shadow px-8 py-7">
+          <div className="mb-8 flex items-center space-x-3">
+            <p className="text-lg font-semibold">{selectedQuery.name}</p>
+          </div>
           <BullRunTable stocks={stockData} selectedQuery={selectedQuery} />
         </Card>
       )}
@@ -27,7 +32,6 @@ const BullRunsStocks = ({ selectedQuery }) => {
 };
 
 BullRunsStocks.propTypes = {
-  country: PropTypes.string.isRequired,
   selectedQuery: PropTypes.object.isRequired,
 };
 

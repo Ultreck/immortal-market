@@ -104,9 +104,9 @@ const MarketAnalyticsPage = () => {
       <Sidebar source="market" />
       <div className="h-screen flex-1 overflow-y-auto bg-white dark:bg-black/80 border-l border-default-200/50 dark:border-default-50">
         <MarketNavbar />
-        <div className="px-10 py-6">
+        <div className="container mt-10">
           <div className={cn('flex items-stretch justify-between space-x-3')}>
-            {stockQueriesList.slice(0, 6).map((c) => {
+            {stockQueriesList.slice(0, 5).map((c) => {
               return (
                 <>
                   <StockQueryItem
