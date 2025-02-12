@@ -13,7 +13,6 @@ import { AdvanceGaugeContent } from '@/components/core/templates/create/elements
 import { AdvanceSpeedometerContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceSpeedometer.jsx';
 import { AdvanceMultipleGaugeContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceMultipleGauge.jsx';
 import { AdvancedPictogramShapesContent } from './AdvancedPictogramShapes';
-import MapNorthAmerica from '../../maps/MapNorthAmerica.jsx';
 import { AdvancedStackedCardContent } from './AdvancedStackedCard';
 import AdvanceSemiMeter from './AdvanceSemiMeter';
 import { AdvancePercentageCardContent } from './AdvancePercentageCard.jsx';
@@ -38,7 +37,6 @@ const AdvanceChartsPresent = ({ element, active, onChange, ...props }) => {
     'speedometer-multiple': AdvanceMultipleGaugeContent,
     'scatter-life-expectancy': AdvanceDynamicSortingChartContent,
     'pictogram-shapes': AdvancedPictogramShapesContent,
-    'north-america-map': MapNorthAmerica,
     'stacked-card': AdvancedStackedCardContent,
     'percentage-card': AdvancePercentageCardContent,
     'column-card': AdvanceColumnCardElementContent,

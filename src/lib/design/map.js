@@ -822,7 +822,7 @@ const fields = {
     'Punakha',
   ],
   bolivia: ['Santa Cruz', 'El Beni', 'Potosí', 'La Paz', 'Pando', 'Chuquisaca', 'Cochabamba', 'Oruro', 'Tarija'],
-  'bosnia-and-aerzegovina': ['Republika Srpska', 'Federacija Bosne i Hercegovine', 'Brčko distrikt'],
+  'bosnia-and-herzegovina': ['Republika Srpska', 'Federacija Bosne i Hercegovine', 'Brčko distrikt'],
   brazil: [
     'Amazonas',
     'Pará',

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import SvgText from '@/components/ui/SvgText.jsx';
-import { Card, Tooltip } from '@heroui/react';
+import { Card } from '@heroui/react';
 import { cn } from '@/lib/utils.js';
 import { createPortal } from 'react-dom';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
@@ -157,6 +157,7 @@ const useMapElement = (element) => {
   };
 
   const renderTooltip = () => {
+    if (!element.tooltip) return null;
     if (!hoverData) return null;
     return createPortal(
       <Card
@@ -183,27 +184,25 @@ const useMapElement = (element) => {
                   <div className="p-1 text-gray-700 cursor-pointer">
                     <div className="relative">
                       <div className="absolute w-3 h-3 border-2 border-black rounded-sm -top-1 -left-1"></div>
-                      <Tooltip content={item.label} offset={-7}>
-                        <div
-                          className={cn('shadow border border-black rounded-xl px-3 py-1.5 w-max relative text-white', {
-                            'max-w-[310px]': +state.x > 900,
-                          })}
-                          style={{ background: item.color || element.config.fill }}
-                        >
-                          <p className="leading-none text-[10px] grid truncate">
-                            {element.config.showLabels && (
-                              <span className="font-medium text-white capitalize mix-blend-difference">
-                                {item.label}
-                              </span>
-                            )}
-                            {element.config.showValues && (
-                              <span className="mt-1 font-medium text-center text-white mix-blend-difference">
-                                {item.value}
-                              </span>
-                            )}
-                          </p>
-                        </div>
-                      </Tooltip>
+                      <div
+                        className={cn('shadow border border-black rounded-xl px-3 py-1.5 w-max relative text-white', {
+                          'max-w-[310px]': +state.x > 900,
+                        })}
+                        style={{ background: item.color || element.config.fill }}
+                      >
+                        <p className="leading-none text-[10px] grid truncate">
+                          {element.config.showLabels && (
+                            <span className="font-medium leading-none text-white capitalize mix-blend-difference">
+                              {item.label}
+                            </span>
+                          )}
+                          {element.config.showValues && (
+                            <span className="mt-[2px] font-medium leading-none text-center text-white mix-blend-difference">
+                              {item.value}
+                            </span>
+                          )}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </SvgText>
