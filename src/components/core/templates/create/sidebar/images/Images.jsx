@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import ExternalImages from '@/components/core/templates/create/sidebar/images/ExternalImages.jsx';
-import UploadedImages from '@/components/core/templates/create/sidebar/images/UploadedImages.jsx';
 import Svgs from './Svgs.jsx';
 import { HiChevronRight } from 'react-icons/hi2';
 import { Button } from '@heroui/react';
@@ -9,6 +8,7 @@ const items = [
   { name: 'Images', view: 'images', component: <ExternalImages mini /> },
   { name: 'Svgs', view: 'svgs', component: <Svgs mini /> },
 ];
+
 const Images = () => {
   const [view, setView] = useState('all');
   const views = {

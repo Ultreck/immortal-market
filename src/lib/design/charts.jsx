@@ -1,6 +1,9 @@
 import {
+  TbBell,
+  TbBrandCoinbase,
   TbChartArea,
   TbChartAreaLine,
+  TbChartBar,
   TbChartBubble,
   TbChartDonut,
   TbChartDonut2,
@@ -8,14 +11,11 @@ import {
   TbChartHistogram,
   TbChartLine,
   TbChartPpf,
-  TbCircleHalf,
-  TbBell,
-  TbBrandCoinbase,
-  TbChartBar,
   TbChartScatter,
   TbChartTreemap,
   TbCheck,
   TbCircleDot,
+  TbCircleHalf,
   TbCirclesRelation,
   TbDice6,
   TbGaugeFilled,
@@ -33,7 +33,7 @@ import { IconChartFunnel } from '@tabler/icons-react';
 import { AiOutlineLineChart } from 'react-icons/ai';
 import { BiPieChart } from 'react-icons/bi';
 import { MdOutlineStackedBarChart } from 'react-icons/md';
-import { colors, kebabToWords } from '../utils.js';
+import { colors } from '../utils.js';
 import { starterLifeChartData } from '@/lib/design/chart-data.js';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 

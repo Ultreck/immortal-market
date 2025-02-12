@@ -21,7 +21,7 @@ import { AdvancePercentageCardTwoElementContent } from './AdvancePercentageCardT
 import { AdvanceDynamicSortingChartContent } from './AdvancedScatterLifeExpectancy.jsx';
 import { AdvanceGlobalBarContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceGlobalBar.jsx';
 
-const AdvanceChartsPresent = ({ element, active, onChange, ...props }) => {
+const AdvanceChartsPresent = ({ element, ...props }) => {
   const components = {
     shapes: AdvanceShapesContent,
     'linear-bar': AdvanceLinearBarContent,
@@ -47,7 +47,7 @@ const AdvanceChartsPresent = ({ element, active, onChange, ...props }) => {
   };
 
   if (components[element.config.name]) {
-    return createElement(components[element.config.name], { element, active, onChange, ...props });
+    return createElement(components[element.config.name], { element, ...props });
   }
 
   return null;
