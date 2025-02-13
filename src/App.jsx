@@ -41,6 +41,8 @@ import AppsPage from '@/pages/AppsPage.jsx';
 import ChatWidget from '@/components/core/templates/create/ChatWidget.jsx';
 import MarketPage from '@/pages/market/MarketPage.jsx';
 import MarketAnalyticsPage from '@/pages/market/MarketAnalyticsPage.jsx';
+import MarketVirtualPage from '@/pages/market/MarketVirtualPage.jsx';
+import VirtualStockDetails from '@/pages/market/components/Virtuals/VitrualStockDetails.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -92,7 +94,30 @@ const App = () => {
             </RequireAuthBusiness>
           }
         />
-        <Route path="markets/analytics" element={<MarketAnalyticsPage />} />
+        <Route
+          path="markets/analytics"
+          element={
+            <RequireAuthBusiness>
+              <MarketAnalyticsPage />
+            </RequireAuthBusiness>
+          }
+        />
+        <Route
+          path="markets/virtuals"
+          element={
+            <RequireAuthBusiness>
+              <MarketVirtualPage />
+            </RequireAuthBusiness>
+          }
+        />{' '}
+        <Route
+          path="markets/virtuals/:id"
+          element={
+            <RequireAuthBusiness>
+              <VirtualStockDetails />
+            </RequireAuthBusiness>
+          }
+        />
         <Route
           path="designs/:id/edit"
           element={
