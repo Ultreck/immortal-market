@@ -6,26 +6,7 @@ import { useGetStock } from '@/api/market.js';
 import { useState } from 'react';
 import VirtualStockChart from '@/pages/market/components/Virtuals/VirtualStockChart.jsx';
 import VirtualStockSocket from '@/pages/market/components/Virtuals/VirtualSotckSocket.jsx';
-import { motion } from 'framer-motion';
-import { IconArrowUp } from '@tabler/icons-react';
-
-const items = [
-  { name: 'TESLA', email: 'john@example.com' },
-  { name: 'GTB', email: 'jane@example.com' },
-  { name: 'ACCESS', email: 'mike@example.com' },
-  { name: 'UBA ', email: 'emily@example.com' },
-  { name: 'COKE', email: 'chris@example.com' },
-  { name: 'TESLA', email: 'john@example.com' },
-  { name: 'GTB', email: 'jane@example.com' },
-  { name: 'ACCESS', email: 'mike@example.com' },
-  { name: 'UBA ', email: 'emily@example.com' },
-  { name: 'COKE', email: 'chris@example.com' },
-  { name: 'TESLA', email: 'john@example.com' },
-  { name: 'GTB', email: 'jane@example.com' },
-  { name: 'ACCESS', email: 'mike@example.com' },
-  { name: 'UBA ', email: 'emily@example.com' },
-  { name: 'COKE', email: 'chris@example.com' },
-];
+import VirtualStockTradeMarquee from '@/pages/market/components/Virtuals/VirtualStockTradeMarquee.jsx';
 
 const VirtualStockDetails = () => {
   const params = useParams();
@@ -62,61 +43,61 @@ const VirtualStockDetails = () => {
                           <div className="flex space-x-4">
                             <div>
                               <div className="flex items-center space-x-3">
-                                {/*<Avatar className="h-[60px] w-[60px] text-2xl" name={stock.symbol.slice(0, 2)} />*/}
                                 <div>
                                   <h1 className="text-md">{stock.symbol}</h1>
                                   <p className="mt-1 text-4xl font-bold">25%</p>
                                 </div>
                               </div>
-                              <div className="space-x-2 mt-4">
-                                <Button color="primary" radius="full">
-                                  Buy
-                                </Button>
-                                <Button variant="bordered" radius="full">
-                                  Sell
-                                </Button>
+                              <div className="mt-6">
+                                <Tabs
+                                  selectedKey={tab}
+                                  onSelectionChange={setTab}
+                                  aria-label="Options"
+                                  radius="full"
+                                  color="primary"
+                                  variant="bordered"
+                                >
+                                  <Tab
+                                    key="day"
+                                    title={
+                                      <div className="flex items-center space-x-2">
+                                        <span>Day</span>
+                                      </div>
+                                    }
+                                  />
+                                  <Tab
+                                    key="1hr"
+                                    title={
+                                      <div className="flex items-center space-x-2">
+                                        <span>1hr</span>
+                                      </div>
+                                    }
+                                  />
+                                  <Tab
+                                    key="30min"
+                                    title={
+                                      <div className="flex items-center space-x-2">
+                                        <span>30min</span>
+                                      </div>
+                                    }
+                                  />
+                                </Tabs>
                               </div>
                             </div>
                           </div>
-                          <Tabs
-                            selectedKey={tab}
-                            onSelectionChange={setTab}
-                            aria-label="Options"
-                            radius="full"
-                            color="primary"
-                            size="lg"
-                            variant="bordered"
-                          >
-                            <Tab
-                              key="day"
-                              title={
-                                <div className="flex items-center space-x-2">
-                                  <span>Day</span>
-                                </div>
-                              }
-                            />
-                            <Tab
-                              key="1hr"
-                              title={
-                                <div className="flex items-center space-x-2">
-                                  <span>1hr</span>
-                                </div>
-                              }
-                            />
-                            <Tab
-                              key="30min"
-                              title={
-                                <div className="flex items-center space-x-2">
-                                  <span>30min</span>
-                                </div>
-                              }
-                            />
-                          </Tabs>
+                          <div className="space-x-2">
+                            <Button color="primary" radius="full">
+                              Buy
+                            </Button>
+                            <Button variant="bordered" radius="full">
+                              Sell
+                            </Button>
+                          </div>
                         </div>
                         <VirtualStockChart stock={stock} />
                       </div>
                     </Card>
-                    <Card className="card-shadow px-6 py-4 border border-default-200 my-10">
+                    <Card className="card-shadow px-10 py-10 border border-default-200 my-10">
                       <div>
                         <Tabs
                           selectedKey={summaryOrder}
@@ -124,7 +105,6 @@ const VirtualStockDetails = () => {
                           aria-label="Options"
                           radius="full"
                           color="primary"
-                          size="lg"
                           variant="bordered"
                         >
                           <Tab
@@ -140,19 +120,19 @@ const VirtualStockDetails = () => {
                                 <div className="grid grid-cols-2 gap-10">
                                   <div className="border-r dark:border-default-200 ">
                                     <p className="text-2xl font-bold">N34.22</p>
-                                    <p className="text-sm">High</p>
+                                    <p className="text-sm opacity-70">High</p>
                                   </div>
                                   <div className="">
                                     <p className="text-2xl font-bold">N34.22</p>
-                                    <p className="text-sm">22,000 Units</p>
+                                    <p className="text-sm opacity-70">22,000 Units</p>
                                   </div>
                                   <div className="border-r dark:border-default-200 ">
                                     <p className="text-2xl font-bold">N34.22</p>
-                                    <p className="text-sm">Low</p>
+                                    <p className="text-sm opacity-70">Low</p>
                                   </div>
                                   <div className="">
                                     <p className="text-2xl font-bold">N34.22</p>
-                                    <p className="text-sm">22,000 Units</p>
+                                    <p className="text-sm opacity-70">22,000 Units</p>
                                   </div>
                                 </div>
                               </div>
@@ -169,15 +149,35 @@ const VirtualStockDetails = () => {
                             </div>
                           </Tab>
                           <Tab
-                            key="1hr"
+                            key="orders"
                             title={
                               <div className="flex items-center space-x-2">
                                 <span>Orders</span>
                               </div>
                             }
-                          />
+                          >
+                            <div className="mt-4 flex justify-between">
+                              <div className="flex space-x-4">
+                                <img src="/images/accessbank.png" alt="" width="50" />
+                                <div>
+                                  <p className="text-2xl font-bold">Access Bank</p>
+                                  <p className="text-sm">ACB</p>
+                                </div>
+                              </div>
+                              <div>
+                                <p className="text-2xl font-bold">N34.22</p>
+                                <p className="text-sm">22,000 Units</p>
+                              </div>
+                              <Button radius="full" color="primary">
+                                View Details
+                              </Button>
+                            </div>
+                          </Tab>
                         </Tabs>
                       </div>
+                    </Card>
+                    <Card className="card-shadow px-10 py-10 border border-default-200 my-10 mb-36">
+                      <p className="text-xl font-bold">Comments</p>
                     </Card>
                   </div>
                 </div>
@@ -187,37 +187,7 @@ const VirtualStockDetails = () => {
           )}
         </>
       )}
-      <div className="fixed bottom-0 left-0 w-full bg-white shadow-lg py-4 overflow-hidden dark:bg-gray-900">
-        <div className="relative w-full overflow-hidden">
-          <motion.div
-            className="flex gap-8 w-max"
-            initial={{ x: 0 }}
-            animate={{ x: '-50%' }}
-            transition={{
-              repeat: Infinity,
-              repeatType: 'loop',
-              duration: 100,
-              ease: 'linear',
-            }}
-          >
-            {[...items, ...items, ...items].map((item, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <Avatar
-                  className="h-[40px] w-[40px] text-xl font-bold bg-green-300 text-green-600"
-                  icon={<IconArrowUp />}
-                />
-                <div className="text-sm">
-                  <p className="font-semibold text-gray-800 dark:text-gray-200">{item.name}</p>
-                  <p className="text-gray-500 text-xs">29753 / 23853</p>
-                </div>
-                <Button color="primary" size="xs" radius="full" className="ml-10">
-                  Trade
-                </Button>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
+      <VirtualStockTradeMarquee />
     </div>
   );
 };

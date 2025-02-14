@@ -19,25 +19,33 @@ const VirtualStockSocket = ({ stock }) => {
           </div>
         </div>
       </div>
-      <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-4">
+      <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-6">
         <p className="text-2xl font-bold text-green-600">N34.33</p>
-        <p className="text-sm">22,000 units</p>
-        <div className="mt-4 flex justify-end text-xs">10:02:00 am</div>
+        <div className="flex justify-between items-center mt-1">
+          <p className="text-sm opacity-70">22,000 units</p>
+          <div className="text-xs">10:02:00 am</div>
+        </div>
       </Card>
       <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-4">
         <p className="text-2xl font-bold text-green-600">N34.33</p>
-        <p className="text-sm">22,000 units</p>
-        <div className="mt-4 flex justify-end text-xs">10:02:00 am</div>
+        <div className="flex justify-between items-center mt-1">
+          <p className="text-sm opacity-70">22,000 units</p>
+          <div className="text-xs">10:02:00 am</div>
+        </div>
       </Card>
       <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-4">
         <p className="text-2xl font-bold text-red-600">N34.33</p>
-        <p className="text-sm">22,000 units</p>
-        <div className="mt-4 flex justify-end text-xs">10:02:00 am</div>
+        <div className="flex justify-between items-center mt-1">
+          <p className="text-sm opacity-70">22,000 units</p>
+          <div className="text-xs">10:02:00 am</div>
+        </div>
       </Card>
       <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-4">
         <p className="text-2xl font-bold text-yellow-300 dark:text-yellow-100">N34.33</p>
-        <p className="text-sm">22,000 units</p>
-        <div className="mt-4 flex justify-end text-xs">10:02:00 am</div>
+        <div className="flex justify-between items-center mt-1">
+          <p className="text-sm opacity-70">22,000 units</p>
+          <div className="text-xs">10:02:00 am</div>
+        </div>
       </Card>
     </div>
   );

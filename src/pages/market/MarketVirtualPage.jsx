@@ -5,8 +5,8 @@ import { Avatar, AvatarGroup, Card, CardBody, cn, Tooltip } from '@nextui-org/re
 import { useState } from 'react';
 import countries from '@/lib/countries.js';
 import SimpleBar from 'simplebar-react';
-import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
+import { TbArrowUpRight } from 'react-icons/tb';
 
 const MarketVirtualPage = () => {
   const [code, setCode] = useState('NG');
@@ -28,31 +28,33 @@ const MarketVirtualPage = () => {
                 </h3>
                 {[1, 2].map((i) => (
                   <div className="grid grid-cols-3 gap-x-4 gap-y-10" key={i}>
-                    <Card className="flex px-6 py-4 dark:border dark:border-default-100 mb-5">
-                      <div className="flex items-center space-x-4">
-                        <div>
-                          <IconTrendingUp color="green" />
+                    <Card
+                      className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5"
+                      shadow="none"
+                    >
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <TbArrowUpRight size={28} color="green" />
+                          <p className="text-[1.7rem] font-semibold text-green-600">23%</p>
                         </div>
-                        <div className="space-y-2">
-                          <p className="text-3xl font-semibold text-green-600">23%</p>
-                          <p className="text-base opacity-70">Lorem Ipsum</p>
+                        <p className="text-base opacity-70">Lorem Ipsum</p>
+                      </div>
+                    </Card>{' '}
+                    <Card
+                      className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5"
+                      shadow="none"
+                    >
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <TbArrowUpRight size={28} color="green" />
+                          <p className="text-[1.7rem] font-semibold text-green-600">23%</p>
                         </div>
+                        <p className="text-base opacity-70">Lorem Ipsum</p>
                       </div>
                     </Card>
-                    <Card className="flex px-6 py-4 dark:border dark:border-default-100 mb-5">
-                      <div className="flex space-x-4 items-center">
-                        <div>
-                          <IconTrendingDown color="red" />
-                        </div>
-                        <div className="space-y-2">
-                          <p className="text-3xl font-semibold text-red-600">23%</p>
-                          <p className="text-base opacity-70">Lorem Ipsum</p>
-                        </div>
-                      </div>
-                    </Card>
-                    <Card className="px-6 py-4 dark:border dark:border-default-100 mb-5">
+                    <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
                       <div className="flex items-center mt-3">
-                        <AvatarGroup isBordered max={3}>
+                        <AvatarGroup isBordered max={3} size="sm">
                           <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
                           <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
                           <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
