@@ -1,11 +1,13 @@
-import { useTheme } from 'next-themes';
-import React from 'react';
 import PredictionButton from './PredictionButton';
+import { useTernaryDarkMode } from 'usehooks-ts';
+
 const dummyData = ['NGX ASI', 'NASDAQ', 'DAX', 'NGX ASI', 'NASDAQ'];
+
 const ExchangeMarketPrediction = () => {
-  const { resolvedTheme: theme } = useTheme();
+  const { isDarkMode } = useTernaryDarkMode();
+
   return (
-    <div className={`mt-5 w-full border-2 p-5 ${theme === 'dark' ? 'border-gray-500' : ''}`}>
+    <div className={`mt-5 w-full border-2 p-5 ${isDarkMode ? 'border-gray-500' : ''}`}>
       <div className="text-xl">Exchange</div>
       <div className="text">
         {dummyData.map((value, index) => (

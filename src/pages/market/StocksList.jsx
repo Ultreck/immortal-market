@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { useGetStocksPaginated } from '@/api/market';
 import NoData from '@/components/ui/NoData';
 import { formatCurrency } from '@/lib/utils';

@@ -1,18 +1,15 @@
-// import PredictionCarousel from "../carousel/PredictionCarousel";
-// import MarketInsightHome from "./MarketInsightHome";
-// import StandAloneCard from "./StandAloneCard";
-const names = ['Accessbank', 'Gtbank', 'Firstbank'];
+import PredictionCarousel from '@/pages/market/components/carousel/PredictionCarousel.jsx';
+import MarketInsightHome from '@/pages/market/components/gaming/MarketInsightHome.jsx';
+import StandAloneCard from '@/pages/market/components/gaming/StandAloneCard.jsx';
+
 const PredictionHomePage = () => {
-const options = {};
-  
   return (
     <div className="">
-    <PredictionCarousel options={options} slides={names}/>
-    <MarketInsightHome/>
-    <StandAloneCard/>
+      <PredictionCarousel />
+      <MarketInsightHome />
+      <StandAloneCard />
     </div>
-  
-  )
-}
+  );
+};
 
-export default PredictionHomePage
+export default PredictionHomePage;

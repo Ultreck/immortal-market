@@ -10,11 +10,12 @@ import {
   TableHeader,
   TableRow,
   Tabs,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { useGetStockFinancials } from '@/api/market';
 import { format } from 'date-fns';
 import numeral from 'numeral';
 import { camelCaseToWords } from '@/lib/utils';
+import PropTypes from 'prop-types';
 
 const StockFinancials = ({ stock }) => {
   const [tab, setTab] = useState('quarterly');
@@ -175,6 +176,10 @@ const StockFinancials = ({ stock }) => {
       )}
     </div>
   );
+};
+
+StockFinancials.propTypes = {
+  stock: PropTypes.object.isRequired,
 };
 
 export default StockFinancials;

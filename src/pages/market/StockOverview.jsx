@@ -1,4 +1,4 @@
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 import { currencyToSymbol, formatCurrency } from '@/lib/utils';
 import CountryFlag from '@/components/ui/CountryFlag';
 import countries from '@/lib/countries';

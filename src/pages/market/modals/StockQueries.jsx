@@ -1,8 +1,9 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
-import { cn, Input } from '@nextui-org/react';
+import { Input } from '@heroui/react';
 import { TbSearch } from 'react-icons/tb';
 import { useState } from 'react';
+import { cn } from '@/lib/utils.js';
 
 const StockQueries = ({ isOpen, onClose, stocks }) => {
   const [query, setQuery] = useState('');

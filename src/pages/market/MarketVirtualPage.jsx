@@ -1,16 +1,17 @@
 import Sidebar from '@/components/core/shared/Sidebar.jsx';
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
-import { Avatar, AvatarGroup, Card, CardBody, cn, Tooltip } from '@nextui-org/react';
+import { Avatar, AvatarGroup, Card, CardBody, cn, Tooltip } from '@heroui/react';
 import { useState } from 'react';
 import countries from '@/lib/countries.js';
 import SimpleBar from 'simplebar-react';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
 
+const tab = 'africa';
+
 const MarketVirtualPage = () => {
   const [code, setCode] = useState('NG');
-  const [tab, setTab] = useState('africa');
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
 
   return (
@@ -72,11 +73,11 @@ const MarketVirtualPage = () => {
                   <h3 className="text-lg font-semibold">Summary</h3>
                 </div>
                 <p className="opacity-80">
-                  Stocks are versatile financial assets that allow traders to potentially profit from the company's
-                  growth through rising share prices or dividend payments. Whether you're a seasoned investor or just
-                  starting out, exploring the diverse range of Nigerian stocks can open up new opportunities. Take a
-                  look at the alphabetically sorted list below to discover companies that align with your interests and
-                  investment goals. Happy investing!
+                  Stocks are versatile financial assets that allow traders to potentially profit from the company&#39;s
+                  growth through rising share prices or dividend payments. Whether you&#39;re a seasoned investor or
+                  just starting out, exploring the diverse range of Nigerian stocks can open up new opportunities. Take
+                  a look at the alphabetically sorted list below to discover companies that align with your interests
+                  and investment goals. Happy investing!
                 </p>
               </Card>
               <VirtualStockTable country={country.slug} />

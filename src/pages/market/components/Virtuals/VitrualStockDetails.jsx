@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import Sidebar from '@/components/core/shared/Sidebar.jsx';
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
-import { Avatar, AvatarGroup, Button, Card, Skeleton, Tab, Tabs } from '@nextui-org/react';
+import { Avatar, AvatarGroup, Button, Card, Skeleton, Tab, Tabs } from '@heroui/react';
 import { useGetStock } from '@/api/market.js';
 import { useState } from 'react';
 import VirtualStockChart from '@/pages/market/components/Virtuals/VirtualStockChart.jsx';
@@ -158,7 +158,7 @@ const VirtualStockDetails = () => {
                           >
                             <div className="mt-4 flex justify-between">
                               <div className="flex space-x-4">
-                                <img src="/images/accessbank.png" alt="" width="50" />
+                                <img src="/images/accessbank.png" alt="" className="w-[50px]" />
                                 <div>
                                   <p className="text-2xl font-bold">Access Bank</p>
                                   <p className="text-sm">ACB</p>

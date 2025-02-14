@@ -1,5 +1,5 @@
 import { useGetBottomPerformingStocks } from '@/api/market';
-import { Card, Skeleton } from '@nextui-org/react';
+import { Card, Skeleton } from '@heroui/react';
 import StocksTable from '@/pages/market/StocksTable.jsx';
 import PropTypes from 'prop-types';
 

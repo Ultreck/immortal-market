@@ -1,4 +1,4 @@
-import { Avatar } from '@nextui-org/react';
+import { Avatar } from '@heroui/react';
 import ReactCountryFlag from 'react-country-flag';
 import { cn } from '@/lib/utils';
 import PropTypes from 'prop-types';

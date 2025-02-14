@@ -1,23 +1,19 @@
-import React from 'react';
 import ChartRadian from './ChartRadian';
 import PredictionButton from './PredictionButton';
-import { useTheme } from 'next-themes';
-import imgAc from '@/assets/images/accessbank.png';
-import Image from 'next/image';
+// import imgAc from '@/assets/images/accessbank.png';
 import { Avatar } from '@heroui/react';
 
 const StandAloneCard = () => {
-  const { resolvedTheme: theme } = useTheme();
   return (
     <div className="text w-full">
-      <div className={`mt-10 border-2 p-8 ${theme === 'dark' ? 'border-gray-500' : ''}`}>
+      <div className="mt-10 border-2 p-8 dark:border-gray-500">
         <div className="text flex items-center space-x-2">
-          <Image src={imgAc} alt="accesssbank" width={30} height={30} />
-          <p className="text-xl">Accessbank</p>
+          {/*<Image src={imgAc} alt="accesssbank" width={30} height={30} /> TODO: fix image*/}
+          <p className="text-xl">Access bank</p>
         </div>
         <div className="text grid grid-cols-2">
           <div className="">
-            <div className="text mt-16 text-xl">When will Accessbank reach N34.5?</div>
+            <div className="text mt-16 text-xl">When will Access bank reach N34.5?</div>
             <div className="text mt-10">
               <div className="text space-y-5">
                 <div className="flex w-full items-center justify-between">

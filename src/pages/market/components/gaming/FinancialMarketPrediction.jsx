@@ -1,18 +1,15 @@
-'use client'
-import React from 'react';
 import FinancialCarousel from '../carousel/FinancialCarousel';
-import { useTheme } from 'next-themes';
+import { useTernaryDarkMode } from 'usehooks-ts';
 
 const FinancialMarketPrediction = () => {
-    const { resolvedTheme: theme } = useTheme();
+  const { isDarkMode } = useTernaryDarkMode();
+
   return (
-    <div className="">
-      <div className={`w-full border-2 mt-5 p-5 ${theme === 'dark' ? 'border-gray-500' : ''}`}>
+    <div className={`w-full border-2 mt-5 p-5 ${isDarkMode ? 'border-gray-500' : ''}`}>
       <div className="px-5 py-4 font-semibold">
         <h1 className="text-2xl">Financials</h1>
       </div>
-        <FinancialCarousel />
-      </div>
+      <FinancialCarousel />
     </div>
   );
 };

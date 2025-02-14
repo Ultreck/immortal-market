@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGetStock } from '@/api/market';
-import { Button, Skeleton, Tab, Tabs } from '@nextui-org/react';
+import { Button, Skeleton, Tab, Tabs } from '@heroui/react';
 import { HiOutlineX } from 'react-icons/hi';
 import Drawer from '@/components/ui/Drawer.jsx';
 import WatchlistButton from '@/pages/market/WatchlistButton.jsx';
@@ -9,48 +9,6 @@ import StockFinancials from '@/pages/market/StockFinancials.jsx';
 import NoData from '@/components/ui/NoData.jsx';
 import StockOverview from '@/pages/market/StockOverview.jsx';
 import PropTypes from 'prop-types';
-import Stepper from '@/components/ui/Stepper.jsx';
-import { TbDatabase, TbList, TbSettings, TbTemplate } from 'react-icons/tb';
-import { LuCombine, LuWorkflow } from 'react-icons/lu';
-
-const steps = [
-  {
-    key: 'template',
-    title: 'Lorem ipsum',
-    icon: <TbTemplate size="18" />,
-    element: <div>SelectTemplate</div>,
-  },
-  {
-    key: 'source',
-    title: 'Lorem ipsum',
-    icon: <TbDatabase size="18" />,
-    element: <div>SelectSource</div>,
-  },
-  {
-    key: 'option',
-    title: 'Lorem ipsum',
-    icon: <TbSettings size="18" />,
-    element: <div>ReportOption</div>,
-  },
-  {
-    key: 'model',
-    title: 'Lorem ipsum',
-    icon: <LuWorkflow size="18" />,
-    element: <div>PreviewData</div>,
-  },
-  {
-    key: 'summary',
-    title: 'Lorem ipsum',
-    icon: <TbList size="18" />,
-    element: <div>Summary</div>,
-  },
-  {
-    key: 'combinations',
-    title: 'Lorem ipsum',
-    icon: <LuCombine size="16" />,
-    element: <div>Combinations</div>,
-  },
-].filter((i) => !i.disabled);
 
 const StockDetailsModal = ({ isOpen, onClose, id }) => {
   return (
@@ -63,7 +21,6 @@ const StockDetailsModal = ({ isOpen, onClose, id }) => {
 const StockDetails = ({ id, onClose }) => {
   const { data: { stock } = {}, isLoading } = useGetStock({ id });
   const [tab, setTab] = useState('overview');
-  const step = steps[0];
 
   return (
     <div>
@@ -73,15 +30,7 @@ const StockDetails = ({ id, onClose }) => {
           <Skeleton className="h-[200px] rounded-2xl" />
         </div>
       ) : (
-        <div className="grid grid-cols-[250px_1fr] h-screen max-w-[auto] p-0">
-          <div className="border-r border-default-200 dark:border-default-100 py-9 px-10 h-full bg-[#f4f5f6] dark:bg-[#0b161f]">
-            <Stepper
-              current={step}
-              steps={steps}
-              // onChange={(key) => updateProjectStore({ step: key })}
-              classNames={{ circle: 'ring-[#f4f5f6] dark:ring-[#0b161f]' }}
-            />
-          </div>
+        <div className="grid h-screen max-w-[auto] p-0">
           <div className="py-9 px-10">
             {!!stock && (
               <>

@@ -1,11 +1,11 @@
-import { Card } from '@nextui-org/react';
+import { Card } from '@heroui/react';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
-import { useState } from 'react';
 import countries from '@/lib/countries.js';
+import PropTypes from 'prop-types';
+
+const code = 'NG';
 
 const VirtualStockSocket = ({ stock }) => {
-  const [code, setCode] = useState('NG');
-  const [tab, setTab] = useState('africa');
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
 
   return (
@@ -49,6 +49,10 @@ const VirtualStockSocket = ({ stock }) => {
       </Card>
     </div>
   );
+};
+
+VirtualStockSocket.propTypes = {
+  stock: PropTypes.object.isRequired,
 };
 
 export default VirtualStockSocket;

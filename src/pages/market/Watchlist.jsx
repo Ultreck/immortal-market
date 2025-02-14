@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import StockDetailsModal from './StockDetailsModal';
 import { useGetWatchList } from '@/api/market';
 import numeral from 'numeral';
@@ -83,4 +83,3 @@ const Watchlist = () => {
 };
 
 export default Watchlist;
-

@@ -1,4 +1,4 @@
-import { Card, LinkIcon, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react';
+import { Card, LinkIcon, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 

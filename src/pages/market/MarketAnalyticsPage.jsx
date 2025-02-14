@@ -13,7 +13,7 @@ import {
   Tabs,
   Tooltip,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { HiChevronDown } from 'react-icons/hi2';
 import StockQueries from '@/pages/market/modals/StockQueries.jsx';
 import { useState } from 'react';
@@ -267,7 +267,7 @@ const MarketAnalyticsPage = () => {
                                   radius="full"
                                   size="sm"
                                   className="mt-6 text-base"
-                                  onClick={() => onChatWithAgentOpen()}
+                                  onPress={() => onChatWithAgentOpen()}
                                 >
                                   Chat with {writer.firstName}
                                 </Button>

@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { useAddInsightComment } from '@/api/insights';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/hooks/use-auth';
-import { Button, Textarea } from '@nextui-org/react';
+import { Button, Textarea } from '@heroui/react';
 import useGlobalStore from '@/store/global';
 import { useShallow } from 'zustand/react/shallow';
 
-const AddMarketComment = ({comment}) => {
+const AddMarketComment = ({ comment }) => {
   const toast = useToast();
   const { user } = useAuth();
   const updateData = useGlobalStore(useShallow((s) => s.updateData));

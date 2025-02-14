@@ -1,5 +1,5 @@
 import { useGetBullsRun } from '@/api/market';
-import { Card, Skeleton } from '@nextui-org/react';
+import { Card, Skeleton } from '@heroui/react';
 import PropTypes from 'prop-types';
 import BullRunTable from '@/pages/market/components/BullRunsTable.jsx';
 
@@ -9,7 +9,7 @@ const BullRunsStocks = ({ selectedQuery }) => {
     selectedQuery,
   });
 
-  const stockData = stocks.map((stock, i) => {
+  const stockData = stocks.map((stock) => {
     return { ...stock, ...stock.stock };
   });
 

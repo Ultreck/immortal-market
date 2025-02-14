@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, useDisclosure } from '@nextui-org/react';
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, useDisclosure } from '@heroui/react';
 import { formatCurrency } from '@/lib/utils';
 import { RiArrowDownLine, RiArrowUpLine } from 'react-icons/ri';
 import NoData from '@/components/ui/NoData';

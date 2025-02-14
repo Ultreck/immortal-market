@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Button, Tab, Tabs } from '@nextui-org/react';
+import { Avatar, AvatarGroup, Button, Tab, Tabs } from '@heroui/react';
 
 const PredictVirtual = () => {
   return (
@@ -66,7 +66,7 @@ const PredictVirtual = () => {
           <div className="space-y-6">
             <div className="bg-default-100 px-8 py-6 rounded-2xl">
               <div className="flex space-x-4">
-                <img src="/images/accessbank.png" alt="" width="60" />
+                <img src="/images/accessbank.png" alt="" className="w-[60px]" />
                 <p>Will access do a big volume tomorrow more than 50% or so</p>
               </div>
               <div className="mt-10 space-y-4">
@@ -96,7 +96,7 @@ const PredictVirtual = () => {
             </div>
             <div className="bg-default-100 px-8 py-6 rounded-2xl">
               <div className="flex space-x-4">
-                <img src="/images/accessbank.png" alt="" width="60" />
+                <img src="/images/accessbank.png" alt="" className="w-[60px]" />
                 <p>Will access do a big volume tomorrow more than 50% or so</p>
               </div>
               <div className="mt-10 space-y-4">
@@ -126,7 +126,7 @@ const PredictVirtual = () => {
             </div>
             <div className="bg-default-100 px-8 py-6 rounded-2xl">
               <div className="flex space-x-4">
-                <img src="/images/accessbank.png" alt="" width="60" />
+                <img src="/images/accessbank.png" alt="" className="w-[60px]" />
                 <p>Will access do a big volume tomorrow more than 50% or so</p>
               </div>
               <div className="mt-10 space-y-4">

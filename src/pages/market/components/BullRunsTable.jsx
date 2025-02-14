@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, useDisclosure } from '@nextui-org/react';
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, useDisclosure } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { IconArrowUpRight } from '@tabler/icons-react';
 import StockDetailsModal from '@/pages/market/StockDetailsModal.jsx';
 
-const BullRunTable = ({ stocks, selectedQuery }) => {
+const BullRunTable = ({ stocks }) => {
   const [id, setId] = useState(null);
   const { isOpen: isDetailsOpen, onOpen: onDetailsOpen, onClose: onDetailsClose } = useDisclosure();
 
@@ -65,6 +65,7 @@ const BullRunTable = ({ stocks, selectedQuery }) => {
           ))}
         </TableBody>
       </Table>
+
       <StockDetailsModal isOpen={isDetailsOpen} onClose={onDetailsClose} id={id} />
     </>
   );

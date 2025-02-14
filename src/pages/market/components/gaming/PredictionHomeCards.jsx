@@ -1,8 +1,8 @@
-'use client';
 import ChartRadian from './ChartRadian';
 import PredictionButton from './PredictionButton';
+import PropTypes from 'prop-types';
 
-const PredictionHomeCards = ({name}) => {
+const PredictionHomeCards = ({ name }) => {
   return (
     <div className="text w-full">
       <div className={`grid p-5 grid-cols-2`}>
@@ -13,22 +13,22 @@ const PredictionHomeCards = ({name}) => {
               <div className="flex justify-between items-center w-full">
                 <div className="text-lg">Above N20b</div>
                 <div className="text space-x-0.5 flex">
-                  <PredictionButton type="yes" text='Yes' />
-                  <PredictionButton type="no" text='No' />
+                  <PredictionButton type="yes" text="Yes" />
+                  <PredictionButton type="no" text="No" />
                 </div>
               </div>
               <div className="flex justify-between items-center w-full">
                 <div className="text-lg">Above N35b</div>
                 <div className="text space-x-0.5 flex">
-                  <PredictionButton type="yes" text='Yes' />
-                  <PredictionButton type="no" text='No' />
+                  <PredictionButton type="yes" text="Yes" />
+                  <PredictionButton type="no" text="No" />
                 </div>
               </div>
               <div className="flex justify-between items-center w-full">
                 <div className="text-lg">Above N50b</div>
                 <div className="text space-x-0.5 flex">
-                  <PredictionButton type="yes" text='Yes' />
-                  <PredictionButton type="no" text='No' />
+                  <PredictionButton type="yes" text="Yes" />
+                  <PredictionButton type="no" text="No" />
                 </div>
               </div>
             </div>
@@ -39,6 +39,10 @@ const PredictionHomeCards = ({name}) => {
       </div>
     </div>
   );
+};
+
+PredictionHomeCards.propTypes = {
+  name: PropTypes.string.isRequired,
 };
 
 export default PredictionHomeCards;

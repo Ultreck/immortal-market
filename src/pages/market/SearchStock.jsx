@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Button, Card, Input, Spinner, useDisclosure } from '@nextui-org/react';
+import { Button, Card, Input, Spinner, useDisclosure } from '@heroui/react';
 import { TbX } from 'react-icons/tb';
 import { RiBarChartBoxLine, RiHistoryLine } from 'react-icons/ri';
 // import { useGetStocks } from '@/api/market';
@@ -70,7 +70,7 @@ const SearchStock = ({ country }) => {
               <Button
                 isIconOnly
                 rounded
-                onClick={() => setQuery('')}
+                onPress={() => setQuery('')}
                 color="danger"
                 variant="light"
                 radius="full"

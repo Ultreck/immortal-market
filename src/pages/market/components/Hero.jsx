@@ -1,4 +1,4 @@
-import { Avatar, Badge, Button, Card, CardBody, CardHeader, Tooltip, useDisclosure } from '@nextui-org/react';
+import { Avatar, Badge, Button, Card, CardBody, CardHeader, Tooltip, useDisclosure } from '@heroui/react';
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
 import { getImageLink, writers } from '@/lib/utils.js';
 import { RiUser3Fill } from 'react-icons/ri';
@@ -50,7 +50,7 @@ const MarketHero = () => {
         <div className="w-full bg-default-100 px-10 py-4 rounded-2xl flex justify-between items-center">
           <div className="space-y-2">
             <p className="text-3xl font-bold">Chat with Immortal Agents</p>
-            <Button size="lg" radius="full" color="primary" onClick={onChatWithAgentOpen}>
+            <Button size="lg" radius="full" color="primary" onPress={onChatWithAgentOpen}>
               Start chatting
             </Button>
           </div>
@@ -85,7 +85,7 @@ const MarketHero = () => {
                         radius="full"
                         size="sm"
                         className="mt-6 text-base"
-                        onClick={() => onChatWithAgentOpen()}
+                        onPress={() => onChatWithAgentOpen()}
                       >
                         Chat with {writer.firstName}
                       </Button>

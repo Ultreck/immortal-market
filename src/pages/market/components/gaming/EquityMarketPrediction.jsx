@@ -1,8 +1,5 @@
-import React from 'react';
 import PredictionButton from './PredictionButton';
-import { useTheme } from 'next-themes';
-import Image from 'next/image';
-import imgNg from '@/assets/images/ng.png';
+// import imgNg from '@/assets/images/ng.png';
 
 const dummyData = [
   { name: 'Tesla', flag: false },
@@ -11,10 +8,10 @@ const dummyData = [
   { name: 'NGX ASI', flag: true },
   { name: 'NASDAQ', flag: false },
 ];
+
 const EquityMarketPrediction = () => {
-  const { resolvedTheme: theme } = useTheme();
   return (
-    <div className={`mt-5 w-full border-2 p-5 ${theme === 'dark' ? 'border-gray-500' : ''}`}>
+    <div className="mt-5 w-full border-2 p-5 dark:border-gray-500">
       <div className="text-xl">Equities</div>
       <div className="text">
         {dummyData.map((value, index) => (
@@ -23,7 +20,7 @@ const EquityMarketPrediction = () => {
             <div className="text flex items-center space-x-0.5">
               {value.flag && (
                 <div className="text px-2">
-                  <Image src={imgNg} className="" layout="reponsive" width={30} height={30} alt="flag" />
+                  {/*<Image src={imgNg} className="" layout="reponsive" width={30} height={30} alt="flag" /> TODO: fix image*/}
                 </div>
               )}
               <PredictionButton type="yes" text="Yes" className={'border-green-500 hover:bg-green-500'} />

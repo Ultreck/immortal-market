@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Avatar, Button } from '@nextui-org/react';
+import { Avatar, Button } from '@heroui/react';
 import { IconArrowUp } from '@tabler/icons-react';
 
 const items = [

@@ -1,6 +1,6 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
-import { Avatar, Badge, Button, Input } from '@nextui-org/react';
+import { Avatar, Badge, Button, Input } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import { RiUser3Fill } from 'react-icons/ri';
 import { useState } from 'react';
@@ -124,14 +124,7 @@ const ChatWIthAgentsModal = ({ isOpen, onClose, writers }) => {
                 classNames={{ input: 'text-base px-4' }}
               />
               <div>
-                <Button
-                  onClick={() => {
-                    // return handleSend(value);
-                  }}
-                  isIconOnly
-                  radius="full"
-                  color="primary"
-                >
+                <Button isIconOnly radius="full" color="primary">
                   <TbSend size="20" />
                 </Button>
               </div>

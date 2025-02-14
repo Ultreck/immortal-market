@@ -10,7 +10,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { formatCurrency } from '@/lib/utils.js';
 import { RiArrowDownLine, RiArrowUpLine } from 'react-icons/ri';
 import NoData from '@/components/ui/NoData.jsx';

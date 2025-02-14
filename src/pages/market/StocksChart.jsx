@@ -1,19 +1,19 @@
 import { useMemo, useState } from 'react';
 import { Area, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { Card, Skeleton, Tab, Tabs } from '@nextui-org/react';
+import { Card, Skeleton, Tab, Tabs } from '@heroui/react';
 import { format, isSameMonth } from 'date-fns';
-import { useTheme } from 'next-themes';
 import { formatCurrency } from '@/lib/utils';
 import { useGetStockPrices } from '@/api/market';
 import NoData from '@/components/ui/NoData';
 import { useShallow } from 'zustand/react/shallow';
 import usePreferencesStore from '@/store/preferences.js';
 import PropTypes from 'prop-types';
+import { useTernaryDarkMode } from 'usehooks-ts';
 
 const filters = ['5D', '1MO', '3MO', '6MO', 'YTD', '1Y', '2Y', '5Y', 'MAX'];
 
 const StocksChart = ({ stock }) => {
-  const { resolvedTheme: theme } = useTheme();
+  const { isDarkMode } = useTernaryDarkMode();
   const [period, setPeriod] = useState('1MO');
   const { data: { prices = [] } = {}, isLoading } = useGetStockPrices({ stock: stock._id, period });
   const chart = usePreferencesStore(useShallow((state) => state.data.chart));
@@ -71,12 +71,12 @@ const StocksChart = ({ stock }) => {
                     <stop offset="95%" stopColor={color} stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeOpacity={theme === 'dark' ? 0.1 : 0.5} vertical={false} />
+                <CartesianGrid strokeOpacity={isDarkMode ? 0.1 : 0.5} vertical={false} />
                 <XAxis
                   dataKey="date"
                   tickSize={3}
                   strokeOpacity={0.5}
-                  axisLine={{ opacity: theme === 'dark' ? 0.1 : 0.5 }}
+                  axisLine={{ opacity: isDarkMode ? 0.1 : 0.5 }}
                   minTickGap={15}
                   tickCount={5}
                   tickFormatter={(v) => {
@@ -95,7 +95,7 @@ const StocksChart = ({ stock }) => {
                   axisLine={false}
                 />
                 <Tooltip
-                  cursor={{ strokeDasharray: '5 5', opacity: theme === 'dark' ? 0.3 : 0.5 }}
+                  cursor={{ strokeDasharray: '5 5', opacity: isDarkMode ? 0.3 : 0.5 }}
                   content={(args) => {
                     const payload = args.payload[0]?.payload;
                     if (!args.active || !payload) return null;
