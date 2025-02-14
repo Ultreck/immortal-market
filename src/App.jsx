@@ -42,6 +42,7 @@ import ChatWidget from '@/components/core/templates/create/ChatWidget.jsx';
 import MarketPage from '@/pages/market/MarketPage.jsx';
 import MarketAnalyticsPage from '@/pages/market/MarketAnalyticsPage.jsx';
 import MarketVirtualPage from '@/pages/market/MarketVirtualPage.jsx';
+import MarketGamingPage from '@/pages/market/MarketGamingPage.jsx';
 import VirtualStockDetails from '@/pages/market/components/Virtuals/VitrualStockDetails.jsx';
 
 const App = () => {
@@ -107,6 +108,14 @@ const App = () => {
           element={
             <RequireAuthBusiness>
               <MarketVirtualPage />
+            </RequireAuthBusiness>
+          }
+        />{' '}
+        <Route
+          path="markets/gaming"
+          element={
+            <RequireAuthBusiness>
+              < MarketGamingPage/>
             </RequireAuthBusiness>
           }
         />{' '}
