@@ -6,8 +6,8 @@ const slides = ['Accessbank', 'Gtbank', 'Firstbank'];
 
 const PredictionCarousel = () => {
   return (
-    <div className="relative mx-auto border-2 dark:border-gray-500 my-8 border">
-      <div className=" px-5 m-8 py-4 text-2xl font-semibold">
+    <div className="relative mx-auto dark:border-default-200 my-8 border">
+      <div className=" px-5 py-4 text-2xl font-semibold">
         <h1 className="text-sky-500">Prediction Home</h1>
       </div>
       <Swiper
@@ -23,9 +23,6 @@ const PredictionCarousel = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      {/*<div className="py-2 absolute bottom-5 right-10 text-center text-sm text-muted-foreground">*/}
-      {/*  Slide {current} of {count}*/}
-      {/*</div>*/}
     </div>
   );
 };

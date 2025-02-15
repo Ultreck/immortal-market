@@ -1,12 +1,12 @@
 import PredictionButton from './PredictionButton';
 import PropTypes from 'prop-types';
 
-const FinancialCard = ({ item }) => {
+const FinancialCard = ({ item }) => {  
   return (
-    <div className="w-full border-2 h-full dark:border-gray-500">
+    <div className="w-full border-2 h-full dark:border-default-200">
       <div className="p-8">
         <div className="text flex items-center space-x-2 py-3 ">
-          <img src={item.url.src} alt="Bank logos" className="w-[30px] h-[30px] object-contain" />
+          <img src={item.url} alt="Bank logos" className="w-[40px] h-[40px] object-contain" />
           <div className="text-2xl">{item.name}</div>
         </div>
         <div className="">

@@ -1,21 +1,19 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import FinancialCard from '@/pages/market/components/gaming/FinancialCard.jsx';
-// import imgAc from '@/assets/images/accessbank.png';
-// import imgGt from '@/assets/images/gtbank.png';
-// import imgFr from '@/assets/images/firstbank.png';
+
 
 const names = [
-  { name: 'Accessbank', url: '' },
-  { name: 'Gtbank', url: '' },
-  { name: 'Firstbank', url: '' },
+  { name: 'Accessbank', url: '/images/accessbank.png' },
+  { name: 'Gtbank', url: '/images/Gtb.png' },
+  { name: 'Firstbank', url: '/images/Firstb.png' },
 ];
 
 const FinancialCarousel = () => {
   return (
     <div className="relative mx-auto p-5">
       <Swiper
-        slidesPerView={1}
+        slidesPerView={2}
         spaceBetween={10}
         loop
         navigation
@@ -23,7 +21,7 @@ const FinancialCarousel = () => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
       >
         {names.map((item) => (
-          <SwiperSlide key={item.name} className="md:basis-1/2">
+          <SwiperSlide key={item.name} className="">
             <FinancialCard item={item} />
           </SwiperSlide>
         ))}

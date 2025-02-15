@@ -21,24 +21,22 @@ const chartData = [
 const chartConfig = {
   desktop: {
     label: 'Above N20b',
-    color: 'hsl(var(--chart-1))',
+    color: '#22c55e',
   },
   mobile: {
     label: 'Above N35b',
-    color: 'hsl(var(--chart-2))',
+    color: '#0ea5e9',
   },
   ipad: {
     label: 'Above N50b',
-    color: 'hsl(var(--chart-3))',
+    color: '#f43f5e',
   },
 };
 
 const ChartRadian = () => {
-  const { isDarkMode } = useTernaryDarkMode();
-
   return (
-    <Card className="flex flex-col border-0 shadow-none">
-      <CardBody className={`flex flex-1 items-center pb-0 ${isDarkMode ? 'bg-[#020817]' : ''}`}>
+    <Card className="w-[80%] shadow-none">
+      <CardBody className="flex flex-1 items-center pb-0 dark:bg-[#020817]">
         <ChartContainer config={chartConfig} className="mx-auto aspect-square bg-transparent w-full">
           <RadialBarChart data={chartData} endAngle={360} barGap={8} innerRadius={100} outerRadius={170} barSize={30}>
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />

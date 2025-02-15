@@ -6,7 +6,7 @@ const PredictionHomeCards = ({ name }) => {
   return (
     <div className="text w-full">
       <div className={`grid p-5 grid-cols-2`}>
-        <div className="">
+        <div className="p-5">
           <div className="text-xl text mt-16">Will {name} surpass N20b rev in 2025 Q2 alone</div>
           <div className="text mt-10">
             <div className="text space-y-5">
@@ -35,7 +35,9 @@ const PredictionHomeCards = ({ name }) => {
             <div className="text space-y-2"></div>
           </div>
         </div>
-        <ChartRadian />
+        <div className="text flex justify-center items-center">
+          <ChartRadian />
+        </div>
       </div>
     </div>
   );

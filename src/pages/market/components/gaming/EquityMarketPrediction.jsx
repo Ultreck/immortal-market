@@ -11,7 +11,7 @@ const dummyData = [
 
 const EquityMarketPrediction = () => {
   return (
-    <div className="mt-5 w-full border-2 p-5 dark:border-gray-500">
+    <div className="mt-5 w-full border-2 p-5 dark:border-default-200">
       <div className="text-xl">Equities</div>
       <div className="text">
         {dummyData.map((value, index) => (
@@ -20,7 +20,7 @@ const EquityMarketPrediction = () => {
             <div className="text flex items-center space-x-0.5">
               {value.flag && (
                 <div className="text px-2">
-                  {/*<Image src={imgNg} className="" layout="reponsive" width={30} height={30} alt="flag" /> TODO: fix image*/}
+                  <img src={'/images/nijaflag1.png'} className="w-[30px] h-[30px]" alt="flag" />
                 </div>
               )}
               <PredictionButton type="yes" text="Yes" className={'border-green-500 hover:bg-green-500'} />

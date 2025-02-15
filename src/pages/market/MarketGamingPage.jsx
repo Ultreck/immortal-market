@@ -5,18 +5,20 @@ import PredictionHomePage from '@/pages/market/components/gaming/PredictionHomeP
 
 const MarketGamingPage = () => {
   return (
-    <div className="h-screen overflow-hidden flex">
-    <Sidebar source="market" />
-    <div className="h-screen flex-1 overflow-y-auto bg-white dark:bg-black/80 border-l border-default-200/50 dark:border-default-50 pr-[400px]">
-      <div className="h-[100vh] overflow-hidden flex flex-col">
-        <MarketNavbar />
-        {/* <MarketHero /> */}
-       <PredictionHomePage/>
+    <div className="h-screen overflow-hidden border flex">
+      <Sidebar source="market" />
+      <div className="h-screen flex-1 overflow-y-auto bg-white dark:bg-black/80 border-l border-default-200/50 dark:border-default-50 pr-[335px]">
+        <div className="h-[100vh] w-full flex flex-col">
+          <MarketNavbar />
+          {/* <MarketHero /> */}
+          <div className="text px-4">
+            <PredictionHomePage />
+          </div>
+        </div>
       </div>
+      <PredictVirtual />
     </div>
-    <PredictVirtual />
-  </div>
-  )
+  );
 };
 
 export default MarketGamingPage;

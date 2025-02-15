@@ -4,10 +4,8 @@ import { useTernaryDarkMode } from 'usehooks-ts';
 const dummyData = ['NGX ASI', 'NASDAQ', 'DAX', 'NGX ASI', 'NASDAQ'];
 
 const ExchangeMarketPrediction = () => {
-  const { isDarkMode } = useTernaryDarkMode();
-
   return (
-    <div className={`mt-5 w-full border-2 p-5 ${isDarkMode ? 'border-gray-500' : ''}`}>
+    <div className={`mt-5 w-full border-2 px-10 py-5 dark:border-default-200`}>
       <div className="text-xl">Exchange</div>
       <div className="text">
         {dummyData.map((value, index) => (

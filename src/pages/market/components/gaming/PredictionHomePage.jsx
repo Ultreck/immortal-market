@@ -4,9 +4,10 @@ import StandAloneCard from '@/pages/market/components/gaming/StandAloneCard.jsx'
 
 const PredictionHomePage = () => {
   return (
-    <div className="">
+    <div className="mb-16">
       <PredictionCarousel />
       <MarketInsightHome />
+      <StandAloneCard />
       <StandAloneCard />
     </div>
   );
