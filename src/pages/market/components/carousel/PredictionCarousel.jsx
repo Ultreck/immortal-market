@@ -1,20 +1,19 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import PredictionHomeCards from '@/pages/market/components/gaming/PredictionHomeCards.jsx';
+import { Card } from '@heroui/react';
 
 const slides = ['Accessbank', 'Gtbank', 'Firstbank'];
 
 const PredictionCarousel = () => {
   return (
-    <div className="relative mx-auto dark:border-default-200 my-8 border">
-      <div className=" px-5 py-4 text-2xl font-semibold">
-        <h1 className="text-sky-500">Prediction Home</h1>
-      </div>
+    <Card className="mb-6 w-full overflow-visible rounded-2xl border px-6 py-6 pb-8 shadow dark:border-0 dark:shadow-none md:px-8">
+      <div className="text-2xl font-bold">Prediction Home</div>
       <Swiper
         slidesPerView={1}
-        navigation
-        pagination
-        modules={[Autoplay, Navigation, Pagination]}
+        // navigation
+        // pagination
+        modules={[Autoplay]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
       >
         {slides.map((name, index) => (
@@ -23,7 +22,7 @@ const PredictionCarousel = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </Card>
   );
 };
 
