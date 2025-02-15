@@ -71,6 +71,7 @@ export const useGetMonoInstitutions = ({ key }) => {
       });
       return res.data;
     },
+    enabled: !!key,
   });
 };
 

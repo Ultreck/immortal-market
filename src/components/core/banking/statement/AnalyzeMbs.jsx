@@ -72,7 +72,7 @@ const InitializeForm = ({ onTicket, onBack }) => {
   const result = useRef(null);
 
   const hasCredentials =
-    settings.statement.mbsUsername || settings.statement.mbsClientId || settings.statement.mbsClientSecret;
+    settings?.statement?.mbsUsername || settings?.statement?.mbsClientId || settings?.statement?.mbsClientSecret;
 
   const onSubmit = async (values) => {
     setError('');
@@ -133,116 +133,114 @@ const InitializeForm = ({ onTicket, onBack }) => {
         />
         <h2 className="font-medium ml-4">Provide account details</h2>
       </div>
-      <div className="my-auto">
-        {!hasCredentials && (
-          <div className="bg-red-500 text-white rounded-2xl px-8 py-4 mb-6 flex items-start space-x-4">
-            <p>Your MBS credentials has not been configured, please setup your credentials to proceed</p>
-            <Link to={'/statement/settings'}>
-              <Button color="white" variant="outlined" size="sm" className="mt-1.5">
-                Setup
-              </Button>
-            </Link>
+      {!hasCredentials && (
+        <div className="bg-red-500 text-white rounded-2xl px-8 py-4 mb-6 flex items-start space-x-4">
+          <p>Your MBS credentials has not been configured, please setup your credentials to proceed</p>
+          <Link to={'/statement/settings'}>
+            <Button color="white" variant="outlined" size="sm" className="mt-1.5">
+              Setup
+            </Button>
+          </Link>
+        </div>
+      )}
+      <form onSubmit={handleSubmit(onSubmit)} className={classNames({ disabled: !hasCredentials })}>
+        {!!error && <div className="px-6 py-3 rounded-2xl bg-red-500 text-white mb-6">{error}</div>}
+        <div className="space-y-3">
+          <Input
+            label="Name"
+            bordered
+            {...register('name', { required: 'Name is required' })}
+            error={errors?.name?.message}
+            disabled={isInitializeLoading || isFeedbackLoading || loading}
+          />
+          <Input
+            label="Phone number"
+            bordered
+            {...register('phone', { required: 'Phone is required' })}
+            error={errors?.phone?.message}
+            disabled={isInitializeLoading || isFeedbackLoading || loading}
+          />
+          <div className="grid grid-cols-2 gap-3">
+            <Input
+              label="Start date"
+              bordered
+              type="date"
+              {...register('startDate', { required: 'Start date is required' })}
+              error={errors?.startDate?.message}
+              disabled={isInitializeLoading || isFeedbackLoading || loading}
+            />
+            <Input
+              label="End date"
+              bordered
+              type="date"
+              {...register('endDate', { required: 'End date is required' })}
+              error={errors?.endDate?.message}
+              disabled={isInitializeLoading || isFeedbackLoading || loading}
+            />
           </div>
-        )}
-        <form onSubmit={handleSubmit(onSubmit)} className={classNames({ disabled: !hasCredentials })}>
-          {!!error && <div className="px-6 py-3 rounded-2xl bg-red-500 text-white mb-6">{error}</div>}
-          <div className="space-y-3">
-            <Input
-              label="Name"
-              bordered
-              {...register('name', { required: 'Name is required' })}
-              error={errors?.name?.message}
-              disabled={isInitializeLoading || isFeedbackLoading || loading}
-            />
-            <Input
-              label="Phone number"
-              bordered
-              {...register('phone', { required: 'Phone is required' })}
-              error={errors?.phone?.message}
-              disabled={isInitializeLoading || isFeedbackLoading || loading}
-            />
-            <div className="grid grid-cols-2 gap-3">
-              <Input
-                label="Start date"
-                bordered
-                type="date"
-                {...register('startDate', { required: 'Start date is required' })}
-                error={errors?.startDate?.message}
-                disabled={isInitializeLoading || isFeedbackLoading || loading}
-              />
-              <Input
-                label="End date"
-                bordered
-                type="date"
-                {...register('endDate', { required: 'End date is required' })}
-                error={errors?.endDate?.message}
-                disabled={isInitializeLoading || isFeedbackLoading || loading}
-              />
+          <Select
+            label="Account type"
+            bordered
+            placeholder="Select one"
+            {...register('type', { required: 'Account type is required' })}
+            error={errors?.type?.message}
+            disabled={isInitializeLoading || isFeedbackLoading || loading}
+            options={[
+              { text: 'Personal', value: 'personal' },
+              { text: 'Business', value: 'business' },
+            ]}
+          />
+          <Input
+            label="Account number"
+            bordered
+            {...register('account', {
+              required: 'Account number is required',
+              minLength: {
+                value: 10,
+                message: 'Account number cannot be less than 10 characters',
+              },
+              maxLength: {
+                value: 10,
+                message: 'Account number cannot be more than 10 characters',
+              },
+            })}
+            error={errors?.account?.message}
+            disabled={isInitializeLoading || isFeedbackLoading || loading}
+          />
+          <Select
+            label="Bank"
+            bordered
+            placeholder="Select bank"
+            options={mbsBanks.map((b) => ({ text: b.name, value: b.sortCode }))}
+            {...register('bank', { required: 'Bank is required' })}
+            error={errors?.bank?.message}
+            disabled={isInitializeLoading || isFeedbackLoading || loading}
+          />
+        </div>
+        <div className="mt-4">
+          {isGetAccountNameLoading && <BeatLoader size="6px" />}
+          {!isGetAccountNameLoading && accountName && (
+            <div className="text-teal-700 flex items-center">
+              <IconUserCheck size="18" className="mr-2" /> {accountName}
             </div>
-            <Select
-              label="Account type"
-              bordered
-              placeholder="Select one"
-              {...register('type', { required: 'Account type is required' })}
-              error={errors?.type?.message}
-              disabled={isInitializeLoading || isFeedbackLoading || loading}
-              options={[
-                { text: 'Personal', value: 'personal' },
-                { text: 'Business', value: 'business' },
-              ]}
-            />
-            <Input
-              label="Account number"
-              bordered
-              {...register('account', {
-                required: 'Account number is required',
-                minLength: {
-                  value: 10,
-                  message: 'Account number cannot be less than 10 characters',
-                },
-                maxLength: {
-                  value: 10,
-                  message: 'Account number cannot be more than 10 characters',
-                },
-              })}
-              error={errors?.account?.message}
-              disabled={isInitializeLoading || isFeedbackLoading || loading}
-            />
-            <Select
-              label="Bank"
-              bordered
-              placeholder="Select bank"
-              options={mbsBanks.map((b) => ({ text: b.name, value: b.sortCode }))}
-              {...register('bank', { required: 'Bank is required' })}
-              error={errors?.bank?.message}
-              disabled={isInitializeLoading || isFeedbackLoading || loading}
-            />
-          </div>
-          <div className="mt-4">
-            {isGetAccountNameLoading && <BeatLoader size="6px" />}
-            {!isGetAccountNameLoading && accountName && (
-              <div className="text-teal-700 flex items-center">
-                <IconUserCheck size="18" className="mr-2" /> {accountName}
-              </div>
-            )}
-            {resolveError ? (
-              <div className="text-red-600 text-md">
-                {resolveError?.response?.data?.message || 'Failed to get account name'}
-              </div>
-            ) : (
-              ''
-            )}
-          </div>
-          <Button
-            type="submit"
-            className="mt-10"
-            disabled={!accountName}
-            loading={isInitializeLoading || isFeedbackLoading || loading}
-          >
-            Continue
-          </Button>
-        </form>
-      </div>
+          )}
+          {resolveError ? (
+            <div className="text-red-600 text-md">
+              {resolveError?.response?.data?.message || 'Failed to get account name'}
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
+        <Button
+          type="submit"
+          className="mt-10"
+          disabled={!accountName}
+          loading={isInitializeLoading || isFeedbackLoading || loading}
+        >
+          Continue
+        </Button>
+      </form>
     </>
   );
 };
