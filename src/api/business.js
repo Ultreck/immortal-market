@@ -306,12 +306,32 @@ export const useUpdateDesignSource = (business, design) => {
   });
 };
 
-export const useAutoAnalyze = (business, design) => {
+export const useAutoGenerate = (business, design) => {
   return useMutation({
     mutationKey: ['businesses', business, 'designs', design],
     mutationFn: async () => {
       return http.immortal.post(`/businesses/${business}/designs/${design}/data/auto`);
     },
+  });
+};
+
+export const useAnalyze = (business, design) => {
+  return useMutation({
+    mutationKey: ['businesses', business, 'designs', design],
+    mutationFn: async () => {
+      return http.immortal.post(`/businesses/${business}/designs/${design}/data/analyze`);
+    },
+  });
+};
+
+export const useGetAnalysis = (business, design) => {
+  return useQuery({
+    queryKey: ['businesses', business, 'designs', design, 'analysis'],
+    queryFn: async () => {
+      const res = await http.immortal.get(`/businesses/${business}/designs/${design}/data/analysis`);
+      return res.data;
+    },
+    enabled: !!business && !!design,
   });
 };
 
@@ -353,6 +373,16 @@ export const useDeleteTableColumn = (business, design) => {
     mutationFn: ({ table, column }) => {
       return http.immortal.delete(`/businesses/${business}/designs/${design}/data/columns/`, {
         params: { table, column },
+      });
+    },
+  });
+};
+
+export const useGenerateCombinationComparison = (business, design) => {
+  return useMutation({
+    mutationFn: (ids) => {
+      return http.immortal.get(`/businesses/${business}/designs/${design}/data/generate/comparison`, {
+        params: { combinations: ids },
       });
     },
   });

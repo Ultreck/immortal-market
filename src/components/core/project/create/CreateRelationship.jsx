@@ -108,7 +108,7 @@ const CreateRelationship = ({ table, onClose }) => {
                   >
                     {tables.map((option) => (
                       <SelectItem key={option.name} classNames={{ title: 'px-2 text-base' }}>
-                        {option.slug}
+                        {option.name}
                       </SelectItem>
                     ))}
                   </Select>

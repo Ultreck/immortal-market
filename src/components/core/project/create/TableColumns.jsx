@@ -122,7 +122,7 @@ const TableColumnItem = ({ table, column }) => {
         <div className="border border-default-200 rounded-2xl px-4 py-2">
           <div className="flex flex-col items-start px-2 py-2 text-base">
             <h4 className="font-semibold mb-2">Referenced in</h4>
-            <p>Table: {source.tables.find((t) => t.name === reference.table)?.slug}</p>
+            <p>Table: {source.tables.find((t) => t.name === reference.table)?.name}</p>
             <p>Column: {reference.column}</p>
             <p>Type: {camelCaseToWords(reference.type)}</p>
           </div>
@@ -159,7 +159,7 @@ const TableColumnItem = ({ table, column }) => {
           </div>
           <div className="space-x-2 flex items-center justify-between">
             <p className="opacity-75">Ref table</p>
-            <p className="text-base text-right">{source.tables.find((t) => t.name === relationship.refTable)?.slug}</p>
+            <p className="text-base text-right">{relationship.refTable}</p>
           </div>
           <div className="space-x-2 flex items-center justify-between">
             <p className="opacity-75">Ref column</p>

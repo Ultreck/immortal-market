@@ -64,7 +64,7 @@ const PreviewData = ({ onNext }) => {
                             onClick={() => setCurrent(t.name)}
                             tabIndex={0}
                           >
-                            <h3 className="text-base leading-tight">{t.slug}</h3>
+                            <h3 className="text-base leading-tight">{t.name}</h3>
                           </div>
                         );
                       })}

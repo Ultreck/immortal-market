@@ -6,7 +6,7 @@ import { TbChevronRight, TbCircleCheckFilled, TbForms, TbRobot } from 'react-ico
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
-import { useAutoAnalyze, useUpdateDesignSource } from '@/api/business.js';
+import { useAnalyze, useAutoGenerate, useUpdateDesignSource } from '@/api/business.js';
 import { useToast } from '@/hooks/use-toast.jsx';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
@@ -17,7 +17,8 @@ const ReportOption = ({ onNext, onClose }) => {
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
-  const { mutateAsync: autoAnalyze, isPending: isAutoAnalyzeLoading } = useAutoAnalyze(business, id);
+  const { mutateAsync: autoGenerate, isPending: isAutoGenerateLoading } = useAutoGenerate(business, id);
+  const { mutateAsync: analyze, isPending: isAnalyzing } = useAnalyze(business, id);
 
   const handleSubmit = async () => {
     try {
@@ -31,7 +32,8 @@ const ReportOption = ({ onNext, onClose }) => {
 
   const handleAnalyze = async () => {
     try {
-      await autoAnalyze();
+      await autoGenerate(null);
+      await analyze(null);
       onClose();
       window.location.reload();
     } catch (e) {
@@ -54,7 +56,7 @@ const ReportOption = ({ onNext, onClose }) => {
         <div className="mt-10 grid grid-cols-2 gap-6">
           <Card
             isPressable
-            isDisabled={isUpdateLoading || isAutoAnalyzeLoading}
+            isDisabled={isUpdateLoading || isAutoGenerateLoading || isAnalyzing}
             onPress={() => setType('manual')}
             shadow="none"
             className={cn(
@@ -74,7 +76,7 @@ const ReportOption = ({ onNext, onClose }) => {
           </Card>
           <Card
             isPressable
-            isDisabled={isUpdateLoading || isAutoAnalyzeLoading}
+            isDisabled={isUpdateLoading || isAutoGenerateLoading || isAnalyzing}
             onPress={() => setType('auto')}
             shadow="none"
             className={cn(
@@ -98,7 +100,7 @@ const ReportOption = ({ onNext, onClose }) => {
         <Button
           isDisabled={!type}
           onPress={handleSubmit}
-          isLoading={isUpdateLoading || isAutoAnalyzeLoading}
+          isLoading={isUpdateLoading || isAutoGenerateLoading || isAnalyzing}
           color="primary"
           radius="full"
           className="text-base px-6"

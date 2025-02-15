@@ -1,4 +1,4 @@
-import { useGetDesign, useGetDesignSource } from '@/api/business.js';
+import { useGetAnalysis, useGetDesign, useGetDesignSource } from '@/api/business.js';
 import useTemplateStore from '@/store/template.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useNavigate } from 'react-router-dom';
@@ -14,12 +14,20 @@ const useCurrentDesign = () => {
     id,
     design?.type === 'project'
   );
+  const { data: { analysis = {} } = {}, isLoading: isAnalysisLoading } = useGetAnalysis(business, id);
 
   useEffect(() => {
     if (success && !design) navigate(`/`);
   }, [success, design, navigate]);
 
-  return { design, source, isDesignLoading, isSourceLoading };
+  return {
+    design,
+    source,
+    analysis: analysis?.analysis || [],
+    isDesignLoading,
+    isSourceLoading,
+    isAnalysisLoading,
+  };
 };
 
 export default useCurrentDesign;

@@ -4,42 +4,12 @@ import { Controller, useForm } from 'react-hook-form';
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
-import { capitalize } from '@/lib/utils.js';
-
-const columns = [{ key: 'default', label: 'Default' }];
-
-const groups = [
-  { key: 'rank', label: 'Rank' },
-  { key: 'sum', label: 'Sum' },
-  { key: 'average', label: 'Average' },
-  { key: 'min', label: 'Min' },
-  { key: 'max', label: 'Max' },
-];
-
-const orders = [
-  { key: 'all', label: 'All' },
-  { key: 'top-1', label: 'Top 1' },
-  { key: 'top-2', label: 'Top 2' },
-  { key: 'top-3', label: 'Top 3' },
-  { key: 'top-4', label: 'Top 4' },
-  { key: 'top-5', label: 'Top 5' },
-  { key: 'top-6', label: 'Top 6' },
-  { key: 'top-7', label: 'Top 7' },
-  { key: 'bottom-3', label: 'Bottom 3' },
-  { key: 'bottom-2', label: 'Bottom 2' },
-  { key: 'bottom-1', label: 'Bottom 1' },
-];
-
-const combinations = groups
-  .map((group) => {
-    return orders.map((order) => ({
-      key: `${group.key}/${order.key}`,
-      label: `${group.label} (${order.label})`,
-    }));
-  })
-  .flat();
+import useCurrentDesign from '@/hooks/template/use-current-design.js';
+import { useGenerateCombinationComparison } from '@/api/business.js';
+import useBusiness from '@/hooks/use-business.js';
 
 const units = [
+  { key: 'none', label: 'None' },
   { key: 'percent', label: 'Percent (%)' },
   { key: 'currency', label: 'Currency ($)' },
 ];
@@ -47,43 +17,69 @@ const units = [
 const DataTagConfig = ({ element, onChange }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const openTool = useTemplateStore((state) => state.template.openTool);
-
+  const { id: business } = useBusiness();
+  const { source, analysis, design } = useCurrentDesign();
   const { handleSubmit, control, watch } = useForm({
     defaultValues: {
+      table: element.config.table || '',
       column: element.config.column || '',
       type: element.config.type || '',
-      decimal: element.config.decimal || 2,
+      decimal: element.config.decimal || 0,
       unit: element.config.unit || '',
       characters: element.config.characters || 150,
       combination: element.config.combination || '',
       compare: element.config.compare || [],
     },
   });
+  const { mutateAsync: generateComparison, isPending: isGenerateComparisonPending } = useGenerateCombinationComparison(
+    business,
+    design.id
+  );
 
-  const onSubmit = (data) => {
+  const selection = [...(source.selection.combinations || []), ...(source.selection.summary || [])];
+  const tables = source.tables.map((table) => ({ key: table.id, label: table.name })) || [];
+  const table = source.tables.find((table) => table.id === watch().table);
+  const _columns = table?.columns.map((column) => ({ key: column.key, label: column.key, type: column.type })) || [];
+  const columns = _columns.filter((column) => column.type === 'number');
+  const _combinations = source.combinations.filter(
+    (c) => selection.includes(c._id.toString()) && c.table === table?.name
+  );
+  const combinations = _combinations.map((combination) => ({
+    key: combination.id,
+    label: combination.text,
+    category: combination.category,
+  }));
+
+  const getContent = async (data) => {
+    if (!analysis.length) return 'Dynamic content here';
     let content = '';
-    if (data.type === 'text') {
-      const [g1, o1] = data.compare[0].combination.split('/');
-      const [g2, o2] = data.compare[1].combination.split('/');
-      content = `Comparison of ${capitalize(g1)} (${capitalize(o1.replace('-', ' '))}) and ${capitalize(g2)} (${capitalize(o2.replace('-', ' '))})`;
-    }
     if (data.type === 'number') {
-      const [group, order] = data.combination.split('/');
-      content = `${capitalize(group)} (${capitalize(order.replace('-', ' '))})`;
+      const combination = analysis.find((c) => c.combination === data.combination);
+      if (combination) {
+        content = combination.result[combination.metrics[0]];
+      }
+      content = Number(content).toLocaleString('en-US', { maximumFractionDigits: data.decimal });
+    } else if (data.type === 'text') {
+      const res = await generateComparison(data.compare.map((c) => c.combination).join(','));
+      content = res.data.content;
     }
+    return content;
+  };
+
+  const onSubmit = async (data) => {
+    const content = await getContent(data);
     onChange({
       ...element,
       config: {
         ...element.config,
+        table: data.table,
         column: data.column,
-        group: data.group,
-        order: data.order,
         type: data.type,
+        combination: data.combination || element.config.combination,
+        compare: data.compare || element.config.compare,
         decimal: data.decimal,
         unit: data.unit,
         characters: data.characters,
-        combination: data.combination || element.config.combination,
-        compare: data.compare || element.config.compare,
         content,
       },
     });
@@ -104,7 +100,34 @@ const DataTagConfig = ({ element, onChange }) => {
       </PopoverTrigger>
       <PopoverContent className="px-8 py-8 shadow border border-default-200 w-[350px] items-stretch">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col space-y-6">
+          <div className="flex flex-col space-y-4">
+            <Controller
+              name="table"
+              control={control}
+              rules={{ required: 'Table is required' }}
+              render={({ field, fieldState: { error } }) => (
+                <div>
+                  <Select
+                    label="Table"
+                    labelPlacement="outside"
+                    variant="bordered"
+                    placeholder="Select table"
+                    selectedKeys={field.value ? [field.value] : []}
+                    onChange={(e) => field.onChange(e)}
+                    errorMessage={error?.message}
+                    isInvalid={!!error?.message}
+                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                    disableEmptySelection={true}
+                  >
+                    {tables.map((table) => (
+                      <SelectItem key={table.key} classNames={{ title: 'text-base px-2' }}>
+                        {table.label}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </div>
+              )}
+            />
             <Controller
               name="column"
               control={control}
@@ -116,7 +139,6 @@ const DataTagConfig = ({ element, onChange }) => {
                     labelPlacement="outside"
                     variant="bordered"
                     placeholder="Select column"
-                    size="lg"
                     selectedKeys={field.value ? [field.value] : []}
                     onChange={(e) => field.onChange(e)}
                     errorMessage={error?.message}
@@ -170,7 +192,6 @@ const DataTagConfig = ({ element, onChange }) => {
                           labelPlacement="outside"
                           variant="bordered"
                           placeholder="Select one"
-                          size="lg"
                           selectedKeys={field.value ? [field.value] : []}
                           onChange={(e) => field.onChange(e)}
                           errorMessage={error?.message}
@@ -199,7 +220,6 @@ const DataTagConfig = ({ element, onChange }) => {
                           labelPlacement="outside"
                           variant="bordered"
                           placeholder="Select one"
-                          size="lg"
                           selectedKeys={field.value ? [field.value] : []}
                           onChange={(e) => field.onChange(e)}
                           errorMessage={error?.message}
@@ -260,7 +280,6 @@ const DataTagConfig = ({ element, onChange }) => {
                         labelPlacement="outside"
                         variant="bordered"
                         placeholder="Select one"
-                        size="lg"
                         selectedKeys={field.value ? [field.value] : []}
                         onChange={(e) => field.onChange(e)}
                         errorMessage={error?.message}
@@ -268,11 +287,13 @@ const DataTagConfig = ({ element, onChange }) => {
                         classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
                         disableEmptySelection={true}
                       >
-                        {combinations.map((role) => (
-                          <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
-                            {role.label}
-                          </SelectItem>
-                        ))}
+                        {combinations
+                          .filter((c) => c.category === 'number-aggregate')
+                          .map((role) => (
+                            <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
+                              {role.label}
+                            </SelectItem>
+                          ))}
                       </Select>
                     </div>
                   )}
@@ -285,7 +306,7 @@ const DataTagConfig = ({ element, onChange }) => {
                     control={control}
                     rules={{
                       required: 'Decimal is required',
-                      validate: (value) => value > 0,
+                      validate: (value) => value >= 0,
                     }}
                     render={({ field, fieldState: { error } }) => {
                       const message = error?.type === 'validate' ? 'Decimal is required' : error?.message;
@@ -295,8 +316,8 @@ const DataTagConfig = ({ element, onChange }) => {
                           value={field.value}
                           onChange={field.onChange}
                           ariaLabel="Decimal"
-                          min={1}
-                          max={100}
+                          min={0}
+                          max={10}
                           step={1}
                           errorMessage={message}
                           isInvalid={!!message}
@@ -318,7 +339,6 @@ const DataTagConfig = ({ element, onChange }) => {
                           aria-label="Unit"
                           variant="bordered"
                           placeholder="Select unit"
-                          size="lg"
                           selectedKeys={field.value ? [field.value] : []}
                           onChange={(e) => field.onChange(e)}
                           errorMessage={message}
@@ -343,7 +363,13 @@ const DataTagConfig = ({ element, onChange }) => {
               </>
             )}
           </div>
-          <Button type="submit" variant="solid" radius="full" className="text-base px-4 mt-6">
+          <Button
+            type="submit"
+            variant="solid"
+            radius="full"
+            className="text-base px-4 mt-6"
+            isLoading={isGenerateComparisonPending}
+          >
             Apply
           </Button>
         </form>
