@@ -1445,7 +1445,6 @@ export const advanced = [
     ),
   },
 ];
-
 export const charts = [...standard, ...advanced];
 
 export const chartCategories = [

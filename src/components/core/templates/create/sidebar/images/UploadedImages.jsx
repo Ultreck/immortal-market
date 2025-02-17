@@ -1,14 +1,15 @@
 import { useCreateUploadMutation, useGetUploads } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { addToast, Image, Skeleton } from '@heroui/react';
+import { addToast, Image, Skeleton, Button } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { getElementDefaultStyle } from '@/lib/elements.js';
+import { TbChevronLeft } from 'react-icons/tb';
 
-const UploadedImages = () => {
+const UploadedImages = ({ mini = false, onBack }) => {
   const qc = useQueryClient();
   const { id } = useBusiness();
   const [files, setFiles] = useState([]);
@@ -52,8 +53,34 @@ const UploadedImages = () => {
     ),
   }));
 
+  if (mini) {
+    return (
+      <div className="relative">
+        <div className="grid grid-cols-2 gap-4">
+          {elements.slice(0, 10).map((element) => (
+            <DraggableElementWrapper key={element.id} element={element} />
+          ))}
+        </div>
+        {isUploadsLoading && (
+          <div className="grid grid-cols-2 gap-4">
+            <Skeleton className="aspect-square w-full rounded-2xl" />
+            <Skeleton className="aspect-square w-full rounded-2xl" />
+            <Skeleton className="aspect-square w-full rounded-2xl" />
+            <Skeleton className="aspect-square w-full rounded-2xl" />
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div>
+      <div className="flex items-center space-x-3 mb-6 bg-white/[.07] rounded-full px-2 py-1">
+        <Button onPress={onBack} variant="light" radius="full" isIconOnly size="sm">
+          <TbChevronLeft size="20" />
+        </Button>
+        <h2 className="text-base font-semibold">Upload</h2>
+      </div>
       <DndFileInput
         label="Drop images or click to select"
         onChange={handleChange}

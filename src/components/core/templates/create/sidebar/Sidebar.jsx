@@ -18,6 +18,8 @@ import { useNavigate } from 'react-router-dom';
 import useTemplateStore from '@/store/template.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useGetDesign } from '@/api/business.js';
+import Froms from '@/components/core/templates/create/sidebar/forms/Forms.jsx';
+import { FaWpforms } from "react-icons/fa";
 
 const Sidebar = ({ className }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
@@ -74,12 +76,13 @@ const Sidebar = ({ className }) => {
               <p className="text-sm mt-0.5">Back</p>
             </button>
             {[
-              { icon: TbAbc, title: 'Texts', key: 'texts' },
-              { icon: RiShapesLine, title: 'Elements', key: 'elements' },
-              { icon: TbTemplate, title: 'Templates', key: 'templates' },
-              { icon: RiImage2Line, title: 'Images', key: 'images' },
-              { icon: RiStackLine, title: 'Layers', key: 'layers' },
               { icon: TbLayoutDistributeHorizontal, title: 'Pages', key: 'pages' },
+              { icon: RiShapesLine, title: 'Elements', key: 'elements' },
+              { icon: TbAbc, title: 'Texts', key: 'texts' },
+              { icon: RiImage2Line, title: 'Images', key: 'images' },
+              { icon: TbTemplate, title: 'Templates', key: 'templates' },
+              { icon: RiStackLine, title: 'Layers', key: 'layers' },
+              { icon: FaWpforms, title: 'Forms', key: 'forms' },
             ].map((element) => {
               const active = tab === element.key;
               return (
@@ -112,7 +115,7 @@ const Sidebar = ({ className }) => {
                       <div
                         tabIndex={0}
                         className={cn(
-                          'flex flex-col items-center justify-center py-4 px-3 w-full rounded-l-2xl overflow-hidden',
+                          'flex flex-col items-center justify-center py-[13px] px-3 w-full rounded-l-2xl overflow-hidden',
                           {
                             'bg-primary-500 text-white dark:bg-gray-800/50': active,
                             'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer': !active,
@@ -121,7 +124,7 @@ const Sidebar = ({ className }) => {
                         )}
                         onClick={() => setTab(element.key)}
                       >
-                        {createElement(element.icon, { size: '24' })}
+                        {createElement(element.icon, { size: '20' })}
                         <p className="text-sm mt-1 truncate overflow text-center w-full">{element.title}</p>
                       </div>
                     </Tooltip>
@@ -151,6 +154,7 @@ const Sidebar = ({ className }) => {
             {tab === 'my-work' && <MyWork />}
             {tab === 'project' && <Project />}
             {tab === 'pages' && <Pages />}
+            {tab === 'forms' && <Froms />}
           </div>
         )}
       </div>

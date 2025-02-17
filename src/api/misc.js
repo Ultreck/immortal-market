@@ -87,3 +87,24 @@ export const useGetImagesFromUnsplash = (query) => {
     getNextPageParam: (lastPage, pages) => pages.length + 1,
   });
 };
+
+export const useGetImagesFromFreepik = (query) => {
+  return useInfiniteQuery({
+    queryKey: query ? ['freepik', query] : ['freepik'],
+    queryFn: async ({ pageParam }) => {
+      const params = {
+        page: pageParam,
+        type: 'photos',
+        limit: 20,
+        'filters[content_type][photo]': 1,
+        'filters[license][premium]': 1,
+      };
+      if (query) params.term = query;
+      const res = await http.immortal.get('/misc/freepik', { params });
+      return res.data;
+    },
+    staleTime: Infinity,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) => pages.length + 1,
+  });
+};

@@ -59,7 +59,7 @@ const IconsSlider = ({ mini = false, onBack }) => {
             </Button>
             <h2 className="text-base font-semibold">Icons</h2>
           </div>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-4 gap-4">
             {items.map((element) => (
               <DraggableElementWrapper key={element.id} element={element} />
             ))}

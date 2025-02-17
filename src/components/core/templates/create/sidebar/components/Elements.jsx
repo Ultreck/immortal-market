@@ -11,13 +11,13 @@ import { HiChevronRight } from 'react-icons/hi2';
 import Buttons from '@/components/core/templates/create/sidebar/components/design/Buttons.jsx';
 
 const items = [
-  { name: 'Shapes', view: 'shapes', component: <Shapes mini /> },
-  { name: 'Frames', view: 'frames', component: <Frames mini /> },
-  { name: 'Icons', view: 'icons', component: <Icons mini /> },
-  { name: 'Data tags', view: 'data-tags', component: <DataTags mini /> },
   { name: 'Charts', view: 'charts', component: <Chart mini /> },
+  { name: 'Shapes', view: 'shapes', component: <Shapes mini /> },
   { name: 'Maps', view: 'maps', component: <Maps mini /> },
   { name: 'Tables', view: 'tables', component: <Tables mini /> },
+  { name: 'Icons', view: 'icons', component: <Icons mini /> },
+  { name: 'Frames', view: 'frames', component: <Frames mini /> },
+  { name: 'Data tags', view: 'data-tags', component: <DataTags mini /> },
   { name: 'Ui element', view: 'ui-element', component: <Buttons mini /> },
 ];
 

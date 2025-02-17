@@ -13,6 +13,7 @@ import { Table, TablePresent } from '@/components/core/templates/create/elements
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
 import { DataPresent, DataTag } from '@/components/core/templates/create/elements/DataTag.jsx';
 import { Button, ButtonPresent } from '@/components/core/templates/create/elements/Button.jsx';
+import Form, { FormPresent } from '@/components/core/templates/create/elements/forms/FormPresent.jsx';
 
 export const elements = {
   button: {
@@ -190,6 +191,17 @@ export const elements = {
       editable: true,
       fit: true,
       resizeHandles: ['e'],
+    },
+  },
+  form: {
+    tools: ['poll','border'],
+    components: {
+      edit: Form,
+      present: FormPresent,
+    },
+    config: {
+      wrapper: true,
+      fit: true,
     },
   },
 };

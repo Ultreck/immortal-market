@@ -4,6 +4,7 @@ import BasicCarousel from '@/components/ui/BasicCarousel';
 import { TbChevronLeft } from 'react-icons/tb';
 import { Button } from '@heroui/react';
 import PropTypes from 'prop-types';
+const lists = [27, 3, 10, 39, 34, 40, 17, 29, 22, 14, 5, 20, 16, 9, 33, 37];
 
 const StandardCharts = ({ mini = false, onBack }) => {
   return (
@@ -19,9 +20,10 @@ const StandardCharts = ({ mini = false, onBack }) => {
                   id: index,
                   content: (
                     <div className="grid grid-cols-4 gap-4">
-                      {charts.slice(index * 8, index * 8 + 8).map((element) => (
-                        <DraggableElementWrapper key={element.id} element={element} />
-                      ))}
+                      {lists.slice(index * 8, index * 8 + 8).map((val) => {
+                        const element = charts[val];
+                        return <DraggableElementWrapper key={element.id} element={element} />;
+                      })}
                     </div>
                   ),
                 };
