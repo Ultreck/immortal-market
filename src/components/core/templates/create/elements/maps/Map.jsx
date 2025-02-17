@@ -1,36 +1,26 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
-import maps from '@/lib/design/maps';
 import useMapElement from '@/lib/design/use-map-element.jsx';
 import ElementMapWrapper from '@/components/core/templates/create/elements/maps/helpers/ElementMapWrapper.jsx';
+import { useGetMap } from '@/api/design.js';
 
 export const Map = ({ element }) => {
-  if (maps[element.config.name]) {
-    return <MapWrapper element={element} config={maps[element.config.name]} />;
-  }
-  return null;
+  return <MapWrapper element={element} />;
 };
 
 export const MapPresent = ({ element, isMapWrapperDisabled = false }) => {
-  if (maps[element.config.name]) {
-    return (
-      <MapWrapper element={element} config={maps[element.config.name]} isMapWrapperDisabled={isMapWrapperDisabled} />
-    );
-  }
-  return null;
+  return <MapWrapper element={element} isMapWrapperDisabled={isMapWrapperDisabled} />;
 };
 
 export const MapPreview = ({ element }) => {
-  if (maps[element.config.name]) {
-    return <MapWrapper element={element} config={maps[element.config.name]} />;
-  }
-  return null;
+  return <MapWrapper element={element} />;
 };
 
-const MapWrapper = ({ element, config, isMapWrapperDisabled }) => {
-  if (maps[element.config.name]) {
-    return <MapContent element={element} config={config} isMapWrapperDisabled={isMapWrapperDisabled} />;
-  }
+const MapWrapper = ({ element, isMapWrapperDisabled }) => {
+  const { data: { map } = {}, isLoading: isMapLoading } = useGetMap(element.config.name);
+
+  if (isMapLoading) return <p>Loading...</p>;
+  if (map) return <MapContent element={element} config={map} isMapWrapperDisabled={isMapWrapperDisabled} />;
   return null;
 };
 
@@ -78,7 +68,6 @@ MapPreview.propTypes = {
 };
 MapWrapper.propTypes = {
   element: PropTypes.object.isRequired,
-  config: PropTypes.object.isRequired,
   isMapWrapperDisabled: PropTypes.bool,
 };
 MapContent.propTypes = {
