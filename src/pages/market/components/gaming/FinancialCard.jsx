@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const FinancialCard = ({ item }) => {  
   return (
-    <div className="w-full border-2 h-full dark:border-default-200">
+    <div className="w-full border rounded-lg h-full dark:border-default-200">
       <div className="p-8">
         <div className="text flex items-center space-x-2 py-3 ">
           <img src={item.url} alt="Bank logos" className="w-[40px] h-[40px] object-contain" />
@@ -16,22 +16,22 @@ const FinancialCard = ({ item }) => {
               <div className="flex justify-between items-center w-full">
                 <div className="text-lg">Above N20b</div>
                 <div className="text space-x-0.5 flex">
-                  <PredictionButton type="yes" text="Yes" />
-                  <PredictionButton type="no" text="No" />
+                  <PredictionButton type="yes"  className="rounded-tl-lg rounded-bl-lg" text="Yes" />
+                  <PredictionButton type="no"  className="rounded-tr-lg rounded-br-lg" text="No" />
                 </div>
               </div>
               <div className="flex justify-between items-center w-full">
                 <div className="text-lg">Above N35b</div>
                 <div className="text space-x-0.5 flex">
-                  <PredictionButton type="yes" text="Yes" />
-                  <PredictionButton type="no" text="No" />
+                <PredictionButton type="yes"  className="rounded-tl-lg rounded-bl-lg" text="Yes" />
+                <PredictionButton type="no"  className="rounded-tr-lg rounded-br-lg" text="No" />
                 </div>
               </div>
               <div className="flex justify-between items-center w-full">
                 <div className="text-lg">Above N50b</div>
                 <div className="text space-x-0.5 flex">
-                  <PredictionButton type="yes" text="Yes" />
-                  <PredictionButton type="no" text="No" />
+                <PredictionButton type="yes"  className="rounded-tl-lg rounded-bl-lg" text="Yes" />
+                <PredictionButton type="no"  className="rounded-tr-lg rounded-br-lg" text="No" />
                 </div>
               </div>
             </div>
