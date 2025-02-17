@@ -22,7 +22,6 @@ const DataTagConfig = ({ element, onChange }) => {
   const { handleSubmit, control, watch } = useForm({
     defaultValues: {
       table: element.config.table || '',
-      column: element.config.column || '',
       type: element.config.type || '',
       decimal: element.config.decimal || 0,
       unit: element.config.unit || '',
@@ -36,18 +35,13 @@ const DataTagConfig = ({ element, onChange }) => {
     design.id
   );
 
-  const selection = [...(source.selection.combinations || []), ...(source.selection.summary || [])];
   const tables = source.tables.map((table) => ({ key: table.id, label: table.name })) || [];
   const table = source.tables.find((table) => table.id === watch().table);
-  const _columns = table?.columns.map((column) => ({ key: column.key, label: column.key, type: column.type })) || [];
-  const columns = _columns.filter((column) => column.type === 'number');
-  const _combinations = source.combinations.filter(
-    (c) => selection.includes(c._id.toString()) && c.table === table?.name
-  );
-  const combinations = _combinations.map((combination) => ({
-    key: combination.id,
-    label: combination.text,
-    category: combination.category,
+  const _analysis = analysis.filter((analysis) => analysis.table === table?.name) || [];
+  const combinations = _analysis.map((analysis) => ({
+    key: analysis.combination,
+    label: analysis.text,
+    category: analysis.category,
   }));
 
   const getContent = async (data) => {
@@ -112,7 +106,7 @@ const DataTagConfig = ({ element, onChange }) => {
                     labelPlacement="outside"
                     variant="bordered"
                     placeholder="Select table"
-                    selectedKeys={field.value ? [field.value] : []}
+                    selectedKeys={tables.find((t) => t.key === field.value)?.key ? [field.value] : []}
                     onChange={(e) => field.onChange(e)}
                     errorMessage={error?.message}
                     isInvalid={!!error?.message}
@@ -122,33 +116,6 @@ const DataTagConfig = ({ element, onChange }) => {
                     {tables.map((table) => (
                       <SelectItem key={table.key} classNames={{ title: 'text-base px-2' }}>
                         {table.label}
-                      </SelectItem>
-                    ))}
-                  </Select>
-                </div>
-              )}
-            />
-            <Controller
-              name="column"
-              control={control}
-              rules={{ required: 'Column is required' }}
-              render={({ field, fieldState: { error } }) => (
-                <div>
-                  <Select
-                    label="Column"
-                    labelPlacement="outside"
-                    variant="bordered"
-                    placeholder="Select column"
-                    selectedKeys={field.value ? [field.value] : []}
-                    onChange={(e) => field.onChange(e)}
-                    errorMessage={error?.message}
-                    isInvalid={!!error?.message}
-                    classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                    disableEmptySelection={true}
-                  >
-                    {columns.map((role) => (
-                      <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
-                        {role.label}
                       </SelectItem>
                     ))}
                   </Select>
@@ -192,16 +159,16 @@ const DataTagConfig = ({ element, onChange }) => {
                           labelPlacement="outside"
                           variant="bordered"
                           placeholder="Select one"
-                          selectedKeys={field.value ? [field.value] : []}
+                          selectedKeys={combinations.find((c) => c.key === field.value)?.key ? [field.value] : []}
                           onChange={(e) => field.onChange(e)}
                           errorMessage={error?.message}
                           isInvalid={!!error?.message}
                           classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
                           disableEmptySelection={true}
                         >
-                          {combinations.map((role) => (
-                            <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
-                              {role.label}
+                          {combinations.map((c) => (
+                            <SelectItem key={c.key} classNames={{ title: 'text-base px-2' }}>
+                              {c.label}
                             </SelectItem>
                           ))}
                         </Select>
@@ -220,7 +187,7 @@ const DataTagConfig = ({ element, onChange }) => {
                           labelPlacement="outside"
                           variant="bordered"
                           placeholder="Select one"
-                          selectedKeys={field.value ? [field.value] : []}
+                          selectedKeys={combinations.find((c) => c.key === field.value)?.key ? [field.value] : []}
                           onChange={(e) => field.onChange(e)}
                           errorMessage={error?.message}
                           isInvalid={!!error?.message}
@@ -273,30 +240,31 @@ const DataTagConfig = ({ element, onChange }) => {
                   name="combination"
                   control={control}
                   rules={{ required: 'Combination is required' }}
-                  render={({ field, fieldState: { error } }) => (
-                    <div className="flex-1">
-                      <Select
-                        label="Combination"
-                        labelPlacement="outside"
-                        variant="bordered"
-                        placeholder="Select one"
-                        selectedKeys={field.value ? [field.value] : []}
-                        onChange={(e) => field.onChange(e)}
-                        errorMessage={error?.message}
-                        isInvalid={!!error?.message}
-                        classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                        disableEmptySelection={true}
-                      >
-                        {combinations
-                          .filter((c) => c.category === 'number-aggregate')
-                          .map((role) => (
+                  render={({ field, fieldState: { error } }) => {
+                    const filtered = combinations.filter((c) => c.category === 'number-aggregate');
+                    return (
+                      <div className="flex-1">
+                        <Select
+                          label="Combination"
+                          labelPlacement="outside"
+                          variant="bordered"
+                          placeholder="Select one"
+                          selectedKeys={filtered.find((c) => c.key === field.value)?.key ? [field.value] : []}
+                          onChange={(e) => field.onChange(e)}
+                          errorMessage={error?.message}
+                          isInvalid={!!error?.message}
+                          classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+                          disableEmptySelection={true}
+                        >
+                          {filtered.map((role) => (
                             <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
                               {role.label}
                             </SelectItem>
                           ))}
-                      </Select>
-                    </div>
-                  )}
+                        </Select>
+                      </div>
+                    );
+                  }}
                 />
                 <hr className="border-default-200 dark:border-default-100" />
                 <div className="flex flex-row justify-between items-center space-x-4">
@@ -339,7 +307,7 @@ const DataTagConfig = ({ element, onChange }) => {
                           aria-label="Unit"
                           variant="bordered"
                           placeholder="Select unit"
-                          selectedKeys={field.value ? [field.value] : []}
+                          selectedKeys={units.find((u) => u.key === field.value)?.key ? [field.value] : []}
                           onChange={(e) => field.onChange(e)}
                           errorMessage={message}
                           isInvalid={!!message}

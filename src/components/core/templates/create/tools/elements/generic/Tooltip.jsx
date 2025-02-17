@@ -3,7 +3,6 @@ import { TbAbc, TbChartBar, TbChartLine, TbChartPie, TbCircleLetterT } from 'rea
 import PropTypes from 'prop-types';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 import useTemplateStore from '@/store/template.js';
-import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const elements = [
@@ -87,7 +86,7 @@ const elements = [
           { name: 'Page D', value: 2780 },
           { name: 'Page E', value: 1890 },
         ],
-        keys: { name: 'name', y: 'value' },
+        keys: { name: 'name', value: 'value' },
         colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         useGradient: false,
         gradientColor: '#2673D9',
@@ -220,7 +219,7 @@ const ElementTooltip = ({ element, onChange }) => {
               <div className="grid grid-cols-4 gap-4 pt-2">
                 <div
                   className={cn('cursor-pointer rounded', {
-                    'border-2 border-[#2563eb]': element.tooltip.type === 'text',
+                    'border-2 border-[#2563eb]': element.tooltip?.type === 'text',
                   })}
                 >
                   <div
@@ -236,7 +235,7 @@ const ElementTooltip = ({ element, onChange }) => {
                 {elements.map((e) => (
                   <div
                     className={cn('cursor-pointer rounded', {
-                      'border-2 border-[#2563eb]': element.tooltip.type === e.data.config.name,
+                      'border-2 border-[#2563eb]': element.tooltip?.type === e.data.config.name,
                     })}
                     key={e.id}
                     onClick={() => {

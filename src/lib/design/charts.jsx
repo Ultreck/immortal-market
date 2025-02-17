@@ -634,7 +634,7 @@ export const standard = [
           { name: 'Page D', value: 2780 },
           { name: 'Page E', value: 1890 },
         ],
-        keys: { x: 'name', y: 'value' },
+        keys: { name: 'name', value: 'value' },
         colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
         useGradient: false,
         gradientColor: '#2673D9',

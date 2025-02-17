@@ -1,29 +1,21 @@
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
-import { RiFontFamily } from 'react-icons/ri';
-import { TbArrowsExchange, TbChartPie, TbEye, TbReplace, TbSquareRoundedPlus } from 'react-icons/tb';
+import { TbArrowsExchange, TbChartPie, TbEye, TbReplace } from 'react-icons/tb';
 import PropTypes from 'prop-types';
-import ModifyData from '@/components/core/templates/create/tools/elements/specific/chart-data/ModifyData.jsx';
+import ConfigureData from '@/components/core/templates/create/tools/elements/specific/chart-data/ConfigureData.jsx';
 import ChangeChart from '@/components/core/templates/create/tools/elements/specific/chart-data/ChangeChart.jsx';
 import NewConnection from '@/components/core/templates/create/tools/elements/specific/chart-data/NewConnection.jsx';
 import { cn } from '@/lib/utils.js';
 import ModifyAdvancedChart from './chart-data/ModifyAdvancedChart';
 import { useState } from 'react';
 import useTemplateStore from '@/store/template.js';
+import DataSource from '@/components/core/templates/create/tools/elements/specific/chart-data/DataSource.jsx';
 
 const items = [
   {
     id: 'source',
-    title: 'Change Source',
+    title: 'Data Source',
     icon: <TbArrowsExchange size="24" />,
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    disabled: true,
-  },
-  {
-    id: 'connection',
-    title: 'New Connection',
-    icon: <TbSquareRoundedPlus size="24" />,
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    disabled: false,
   },
   {
     id: 'data',
@@ -31,13 +23,6 @@ const items = [
     icon: <TbEye size="24" />,
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     disabled: false,
-  },
-  {
-    id: 'drill-down',
-    title: 'Drill down',
-    icon: <RiFontFamily size="24" />,
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    disabled: true,
   },
   {
     id: 'change',
@@ -89,9 +74,8 @@ const ChartData = ({ element, onChange }) => {
               </div>
             </>
           )}
-          {view === 'data' && element.type === 'chart-s' && (
-            <ModifyData element={element} onChange={onChange} onBack={() => setView('home')} />
-          )}
+          {view === 'source' && <DataSource element={element} onChange={onChange} onBack={() => setView('home')} />}
+          {view === 'data' && <ConfigureData element={element} onChange={onChange} onBack={() => setView('home')} />}
           {view === 'data' && element.type === 'chart-a' && (
             <ModifyAdvancedChart element={element} onChange={onChange} onBack={() => setView('home')} />
           )}

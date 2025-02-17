@@ -22,8 +22,8 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
   }));
 
   const config = element.config.data.reduce((acc, item, i) => {
-    acc[item[element.config.keys.x]] = {
-      label: capitalize(item[element.config.keys.x]),
+    acc[item[element.config.keys.name]] = {
+      label: capitalize(item[element.config.keys.name]),
       color: element.config.colors[i],
     };
     return acc;
@@ -63,15 +63,15 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
             />
             <Pie
               data={data}
-              dataKey={element.config.keys.y}
-              nameKey={element.config.keys.x}
+              dataKey={element.config.keys.value}
+              nameKey={element.config.keys.name}
               labelLine={false}
               label={
                 element.config.labelPosition === 'outside'
                   ? ({ payload, ...args }) => {
-                      const total = data.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
+                      const total = data.reduce((sum, entry) => sum + entry[element.config.keys.value], 0);
                       let formattedValue;
-                      const value = payload[element.config.keys.y];
+                      const value = payload[element.config.keys.value];
 
                       switch (element.config.styles.labelFormat) {
                         case 'value':
@@ -117,14 +117,14 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
             >
               {element.config.showLabel && element.config.labelPosition === 'inside' && (
                 <LabelList
-                  dataKey={element.config.keys.y}
+                  dataKey={element.config.keys.value}
                   position={element.config.labelPosition}
                   stroke="none"
                   fill={element.config.labelFontColor}
                   fontSize={element.config.labelFontSize}
                   fontFamily={element.config.fontFamily}
                   formatter={(value) => {
-                    const total = data.reduce((sum, entry) => sum + entry[element.config.keys.y], 0);
+                    const total = data.reduce((sum, entry) => sum + entry[element.config.keys.value], 0);
                     switch (element.config.styles.labelFormat) {
                       case 'value':
                         return value.toLocaleString();
@@ -147,7 +147,7 @@ export const StandardPieContent = ({ element, present = false, isChartWrapperDis
             </Pie>
             {element.config.showLegend && (
               <Legend
-                content={<ChartLegendContent nameKey={element.config.keys.x} />}
+                content={<ChartLegendContent nameKey={element.config.keys.name} />}
                 className="-translate-y-2 flex-wrap gap-3"
                 wrapperStyle={{
                   fontSize: element.config.styles.legendSize,
