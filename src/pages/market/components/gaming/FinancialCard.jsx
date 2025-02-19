@@ -1,11 +1,13 @@
+import useMarketHook from '@/hooks/useMarketHook';
 import PredictionButton from './PredictionButton';
 import PropTypes from 'prop-types';
 
 const FinancialCard = ({ item }) => {  
+  const {handleSelectedBet} = useMarketHook();
   return (
     <div className="w-full border rounded-lg h-full dark:border-default-200">
-      <div className="p-8">
-        <div className="text flex items-center space-x-2 py-3 ">
+      <div className="p-3">
+        <div className="text-base flex items-center space-x-2 py-3 ">
           <img src={item.url} alt="Bank logos" className="w-[40px] h-[40px] object-contain" />
           <div className="text-2xl">{item.name}</div>
         </div>

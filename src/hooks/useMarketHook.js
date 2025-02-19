@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 const timeFrames = [
   '30s',
@@ -33,8 +34,14 @@ const useMarketHook = () => {
     updatedTabs[updatedTabs.length - 1] = key;
     setVisibleTimeFrames(updatedTabs);
   };
+
+  const handleSelectedExchange = (item) => {
+    console.log(item);
+  };
+  
   return {
     handleTimeFrameChange,
+    handleSelectedExchange,
     setTimeTab,
     setIsOpen,
     timeTab,

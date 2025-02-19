@@ -6,8 +6,7 @@ import { Card } from '@heroui/react';
 
 const PredictionHomeCards = ({ name }) => {
   return (
-    <Card>
-
+    <Card className='shadow-none border dark:border-default-50'>
     <div className="text w-full h-full">
     <div className={`grid p-8 grid-cols-2`}>
       <div className="pl-6">

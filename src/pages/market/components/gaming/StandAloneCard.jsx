@@ -4,9 +4,9 @@ import { Avatar, Card } from '@heroui/react';
 
 const StandAloneCard = () => {
   return (
-    <Card className='container'>
+    <Card className='container mx-auto shadow-none border dark:border-default-50'>
       <div className="text w-full">
-        <div className="mx-2 my-6 p-8 border border-default-200 rounded-lg">
+        <div className="my-6 p-3 border border-default-200 rounded-lg">
           <div className="text flex items-center space-x-2 ">
             <img src="/images/accessbank.png" alt="" className="text w-[60px] h-[60px] " />
             <p className="text-2xl">Access bank</p>

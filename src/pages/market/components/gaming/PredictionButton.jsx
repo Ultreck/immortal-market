@@ -1,19 +1,19 @@
 import { cn } from '@/lib/utils';
-import { Button } from '@heroui/react';
 import PropTypes from 'prop-types';
 
-const PredictionButton = ({text, className }) => {
+const PredictionButton = ({text, className, onClick }) => {
   return (
     <div>
       {(
-        <Button
+        <button
           className={cn(
-            'w-24 text-white bg-green-600 hover:bg-green-400 rounded-none',
+            'w-[65px] p-2 text-white bg-green-600 hover:bg-green-400 rounded-none',
             className
           )}
+          onClick={onClick}
         >
           {text}
-        </Button>
+        </button>
       )}
     </div>
   );
