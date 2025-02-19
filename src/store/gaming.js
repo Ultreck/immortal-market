@@ -1,17 +1,23 @@
-const { createStore } = require("zustand");
+import { create } from "zustand";
 
+const useOddsStore = create((set) => ({
+  selectedOdds: [],
+  
+  addOdd: (odd) =>
+    set((state) => ({
+      selectedOdds: [...state.selectedOdds, odd],
+    })),
 
-const useBetStore =  createStore((set) => ({
-    bets: [],
-    addBet: (bet) => {
-        set((state) => ({ bets: [...state.bets, bet] }));
-    },
-    removeBet: (id) => {
-        set((state) => ({ bets: state.bets.filter((b) => b.id!==id) }));
-    },
-    updateBet: (id, updatedBet) => {
-        set((state) => ({ bets: state.bets.map((b) => b.id === id? updatedBet : b) }));
-    }
+  removeOdd: (odd) =>
+    set((state) => ({
+      selectedOdds: state.selectedOdds.filter(
+        (item) =>
+          !(
+            item.rowId === odd.rowId &&
+            item.section === odd.section &&
+            item.key === odd.key
+          )
+      ),
+    })),
 }));
-
-export default useBetStore;
+export default useOddsStore;

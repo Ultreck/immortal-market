@@ -7,7 +7,7 @@ const PredictionButton = ({text, className, onClick }) => {
       {(
         <button
           className={cn(
-            'w-[65px] p-2 text-white bg-green-600 hover:bg-green-400 rounded-none',
+            'w-[69px] p-2 text-white bg-green-600 hover:bg-green-400 rounded-none',
             className
           )}
           onClick={onClick}
