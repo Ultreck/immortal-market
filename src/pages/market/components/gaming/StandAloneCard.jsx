@@ -2,15 +2,17 @@ import ChartRadian from './ChartRadian';
 import PredictionButton from './PredictionButton';
 import { Avatar, Card } from '@heroui/react';
 
-const StandAloneCard = () => {
+const StandAloneCard = ({icon = true}) => {
   return (
     <Card className='container mx-auto shadow-none border dark:border-default-50'>
       <div className="text w-full">
         <div className="my-6 p-3 border border-default-200 rounded-lg">
+          {icon && 
           <div className="text flex items-center space-x-2 ">
             <img src="/images/accessbank.png" alt="" className="text w-[60px] h-[60px] " />
             <p className="text-2xl">Access bank</p>
           </div>
+          }
           <div className="text grid grid-cols-2">
             <div className="p-5">
               <div className="text mt-7 text-xl">When will Access bank reach N34.5?</div>

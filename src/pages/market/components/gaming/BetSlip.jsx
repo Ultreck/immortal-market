@@ -6,7 +6,7 @@ import { TbCurrencyNaira } from 'react-icons/tb';
 import { RxCross2 } from 'react-icons/rx';
 
 const BetSlip = () => {
-  const [selected, setSelected] = React.useState('login');
+  const [selected, setSelected] = React.useState('Betslip');
   const { selectedOdds, removeOdd } = useOddsStore();
   const [stakingPrice, setstakingPrice] = useState(100);
 
@@ -29,7 +29,7 @@ const BetSlip = () => {
 
   return (
     <div className="flex flex-col w-full mt-6 sticky top-5 items-center">
-      <Card className="max-w-full w-[340px] min-h-[300px] max-h-[680px]">
+      <Card className="max-w-full w-[340px] min-h-[250px] max-h-[680px]">
         <CardBody className="overflow-hidden">
           <Tabs
             fullWidth
@@ -40,9 +40,9 @@ const BetSlip = () => {
             centered
             onSelectionChange={setSelected}
           >
-            <Tab key="betslip" title="Betslip" className="h-auto overflow-y-auto overflow-x-hidden">
+            <Tab key="betslip" title="Betslip" className="h-auto py-2 overflow-y-auto overflow-x-hidden">
               {selectedData.length === 0 && (
-                <div className="w-full min-h-[300px] bg-slate-600/50 flex rounded-lg justify-center items-center">
+                <div className="w-full min-h-[250px] bg-gray-800/0 flex rounded-lg justify-center items-center">
                   <p className="text-gray-500">No bet available</p>
                 </div>
               )}
@@ -98,11 +98,14 @@ const BetSlip = () => {
                       </div>
                     </div>
                   </div>
+                  <div className="text w-full">
+                    <Button className='w-full mt-2 bg-green-600 h-12 font-semibold text-base text-white'>Place a bet</Button>
+                  </div>
                 </div>
               )}
             </Tab>
-            <Tab key="cash-out" title="Cash out" className="h-full w-full flex items-center">
-              <div className="w-full min-h-[300px] bg-slate-600/50 flex rounded-lg justify-center items-center">
+            <Tab key="cash-out" title="Cash out" className="h-full py-2 w-full flex items-center">
+              <div className="w-full min-h-[250px] bg-gray-800/0 flex rounded-lg justify-center items-center">
                 <p className="text-gray-500">No bet available</p>
               </div>
             </Tab>

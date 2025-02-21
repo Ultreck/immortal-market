@@ -43,6 +43,7 @@ import MarketPage from '@/pages/market/MarketPage.jsx';
 import MarketAnalyticsPage from '@/pages/market/MarketAnalyticsPage.jsx';
 import MarketVirtualPage from '@/pages/market/MarketVirtualPage.jsx';
 import MarketGamingPage from '@/pages/market/MarketGamingPage.jsx';
+import MarketGamingDetailsPage from '@/pages/market/MarketGamingDetailsPage.jsx';
 import VirtualStockDetails from '@/pages/market/components/Virtuals/VitrualStockDetails.jsx';
 
 const App = () => {
@@ -116,6 +117,14 @@ const App = () => {
           element={
             <RequireAuthBusiness>
               < MarketGamingPage/>
+            </RequireAuthBusiness>
+          }
+        />{' '}
+        <Route
+          path="markets/gaming/:id"
+          element={
+            <RequireAuthBusiness>
+              < MarketGamingDetailsPage/>
             </RequireAuthBusiness>
           }
         />{' '}

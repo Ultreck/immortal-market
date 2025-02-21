@@ -1,15 +1,15 @@
-import useMarketHook from '@/hooks/useMarketHook';
 import PredictionButton from './PredictionButton';
-import { useState } from 'react';
 import useOddsStore from '@/store/gaming';
 import { tableData } from '@/lib/gaming';
+import { FaChevronRight } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 
 const ExchangeMarketPrediction = () => {
   const { selectedOdds, addOdd, removeOdd } = useOddsStore();
+  const navigate = useNavigate();
 
   const handleClick = (rowId, section, key) => {
     const newOdd = { rowId, section, key };
-
     if (selectedOdds.some((item) => JSON.stringify(item) === JSON.stringify(newOdd))) {
       removeOdd(newOdd);
     } else {
@@ -34,7 +34,7 @@ const ExchangeMarketPrediction = () => {
             <th className="p-2"></th>
             <th className="p-2"></th>
             <th className="p-2"></th>
-            <th className="p-2"></th>
+            <th className="p-1"></th>
           </tr>
         </thead>
         <tbody>
@@ -65,7 +65,18 @@ const ExchangeMarketPrediction = () => {
                   />
                 </td>
               ))}
-              <td className="p-2">{row.score}</td>
+              <td className="p-1 text-sm">
+                <PredictionButton
+                  onClick={() => navigate(`/markets/gaming/${row.id}`, {state: row})}
+                  text={
+                    <span className="text flex items-center justify-around">
+                      {row.score}
+                      <FaChevronRight size={12} />
+                    </span>
+                  }
+                  className="bg-transparent rounded-full hover:bg-default-100 hover:text-green-500"
+                />
+              </td>
             </tr>
           ))}
         </tbody>

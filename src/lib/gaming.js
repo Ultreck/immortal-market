@@ -1,7 +1,7 @@
 
 export const tableData = [
     {
-      id: 1,
+      id: "370d6088-16f5-4b04-920c-89f2a748dcc6",
       exchange: 'NGX ASI',
       rank: 2,
       threeWay: { 1: 4.7, X: 1.3, 2: 15.3 },
@@ -9,7 +9,7 @@ export const tableData = [
       score: '12+',
     },
     {
-      id: 2,
+      id: "79cd7d52-c695-49df-bce4-c4a9e09d08a2",
       exchange: 'NASDAQ',
       rank: 1,
       threeWay: { 1: 2.1, X: 5.1, 2: 8.2 },
@@ -17,7 +17,7 @@ export const tableData = [
       score: '27+',
     },
     {
-      id: 3,
+      id: "0e628476-a3a2-481c-9b0b-08721ed7a9c0",
       exchange: 'DAX',
       rank: 4,
       threeWay: { 1: 3.5, X: 1.2, 2: 10.3 },
@@ -25,7 +25,7 @@ export const tableData = [
       score: '82+',
     },
     {
-      id: 4,
+      id: "59d458f4-d4a6-4121-ab6d-3ad264fbec3d",
       exchange: 'NGX ASI',
       rank: 3,
       threeWay: { 1: 1.3, X: 5.3, 2: 5.8 },
@@ -33,7 +33,7 @@ export const tableData = [
       score: '65+',
     },
     {
-      id: 5,
+      id: "a1611252-e1d1-4efa-b525-c8785ab82213",
       exchange: 'NASDAQ',
       rank: 5,
       threeWay: { 1: 2.5, X: 7.1, 2: 8.3 },
@@ -41,7 +41,7 @@ export const tableData = [
       score: '51+',
     },
     {
-        id: 6,
+        id: "f9a5e8e1-14cc-454c-86ac-1d73dcf929fb",
         exchange: 'FTSE 100',
         rank: 6,
         threeWay: { 1: 3.2, X: 2.4, 2: 9.1 },
@@ -49,7 +49,7 @@ export const tableData = [
         score: '43+',
       },
       {
-        id: 7,
+        id: "8aba750b-7f43-4d4b-ac44-484d74acfc64",
         exchange: 'S&P 500',
         rank: 7,
         threeWay: { 1: 4.5, X: 3.1, 2: 6.8 },
@@ -57,7 +57,7 @@ export const tableData = [
         score: '19+',
       },
       {
-        id: 8,
+        id: "8c866b61-60dd-4256-8d86-278954fa6bda",
         exchange: 'HANG SENG',
         rank: 8,
         threeWay: { 1: 2.9, X: 1.5, 2: 7.2 },
@@ -65,7 +65,7 @@ export const tableData = [
         score: '78+',
       },
       {
-        id: 9,
+        id: "686b5e62-042f-4b97-9967-804431074825",
         exchange: 'CAC 40',
         rank: 9,
         threeWay: { 1: 5.1, X: 2.7, 2: 8.6 },
@@ -73,7 +73,7 @@ export const tableData = [
         score: '35+',
       },
       {
-        id: 10,
+        id: "3ef6e2aa-0dd7-4f9e-99b6-f8c7ed4231fa",
         exchange: 'NIKKEI 225',
         rank: 10,
         threeWay: { 1: 3.8, X: 4.2, 2: 6.3 },
@@ -81,46 +81,30 @@ export const tableData = [
         score: '90+',
       },
   ];
-
-  export const equityData = [
+export const tradingData = [
     {
-        id: 6,
-        exchange: 'FTSE 100',
-        rank: 6,
-        threeWay: { 1: 3.2, X: 2.4, 2: 9.1 },
-        overUnder: { goals: 2.9, over: 4.1, under: 5.2 },
-        score: '43+',
+        id: "1",
+        label: 'Closing price',
+        overUnder: { goals: 2.5, over: 4.8, under: 6.7 },
       },
-      {
-        id: 7,
-        exchange: 'S&P 500',
-        rank: 7,
-        threeWay: { 1: 4.5, X: 3.1, 2: 6.8 },
-        overUnder: { goals: 1.8, over: 3.9, under: 6.1 },
-        score: '19+',
+    {
+        id: "2",
+        label: 'Opening price',
+        overUnder: { goals: 2.5, over: 4.8, under: 6.7 },
       },
-      {
-        id: 8,
-        exchange: 'HANG SENG',
-        rank: 8,
-        threeWay: { 1: 2.9, X: 1.5, 2: 7.2 },
-        overUnder: { goals: 3.2, over: 2.5, under: 4.3 },
-        score: '78+',
+    {
+        id: "3",
+        label: 'Details',
+        overUnder: { goals: 2.5, over: 4.8, under: 6.7 },
       },
-      {
-        id: 9,
-        exchange: 'CAC 40',
-        rank: 9,
-        threeWay: { 1: 5.1, X: 2.7, 2: 8.6 },
-        overUnder: { goals: 2.3, over: 1.8, under: 3.9 },
-        score: '35+',
+    {
+        id: "4",
+        label: 'Heigh',
+        overUnder: { goals: 2.5, over: 4.8, under: 6.7 },
       },
-      {
-        id: 10,
-        exchange: 'NIKKEI 225',
-        rank: 10,
-        threeWay: { 1: 3.8, X: 4.2, 2: 6.3 },
-        overUnder: { goals: 1.5, over: 2.1, under: 4.6 },
-        score: '90+',
+    {
+        id: "5",
+        label: 'Volume',
+        overUnder: { goals: 2.5, over: 4.8, under: 6.7 },
       },
-  ];
+]  
