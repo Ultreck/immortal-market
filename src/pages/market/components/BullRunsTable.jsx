@@ -56,7 +56,7 @@ const BullRunTable = ({ stocks }) => {
                 <div className="grid grid-cols-5 gap-1">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <div key={i} className="bg-green-800 p-0.5 rounded">
-                      <p className="font-semibold text-center text-sm">W</p>
+                      <p className="font-semibold text-center text-sm text-white">W</p>
                     </div>
                   ))}
                 </div>

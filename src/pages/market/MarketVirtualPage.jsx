@@ -1,12 +1,12 @@
 import Sidebar from '@/components/core/shared/Sidebar.jsx';
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
-import { Avatar, AvatarGroup, Card, CardBody, cn, Tooltip } from '@heroui/react';
+import { Avatar, AvatarGroup, Card } from '@heroui/react';
 import { useState } from 'react';
 import countries from '@/lib/countries.js';
-import SimpleBar from 'simplebar-react';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
+import CountryList from '@/pages/market/shared/CountryList.jsx';
 
 const tab = 'africa';
 
@@ -82,38 +82,7 @@ const MarketVirtualPage = () => {
               </Card>
               <VirtualStockTable country={country.slug} />
             </div>
-            <div className="hidden lg:mb-4 lg:block">
-              <div className="sticky top-[50px] space-y-10">
-                <Card className="card-shadow rounded-2xl">
-                  <SimpleBar style={{ maxHeight: 270 }}>
-                    <CardBody className="px-8 pb-6">
-                      <div className="mt-4 grid grid-cols-4 items-center justify-center gap-4">
-                        {countries[tab].map((c) => (
-                          <div key={c.code}>
-                            <div
-                              tabIndex={1}
-                              onClick={() => setCode(c.code)}
-                              className={cn(
-                                'w-fit rounded-full border-2 transition-all duration-300',
-                                code === c.code ? 'border-default-500 p-1' : 'border-transparent hover:brightness-50'
-                              )}
-                            >
-                              <Tooltip content={<span className="capitalize">{c.name}</span>} placement="bottom">
-                                <Avatar
-                                  size="md"
-                                  className="aspect-square h-10 w-10"
-                                  icon={<CountryFlag code={c.code} className="h-full w-full cursor-pointer" rounded />}
-                                />
-                              </Tooltip>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardBody>
-                  </SimpleBar>
-                </Card>
-              </div>
-            </div>
+            <CountryList />
           </div>
         </div>
       </div>

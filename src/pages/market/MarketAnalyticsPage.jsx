@@ -30,7 +30,6 @@ import {
   RiFileTextLine,
   RiFireLine,
   RiGhostLine,
-  RiGlobalLine,
   RiLineChartFill,
   RiLineChartLine,
   RiMoneyDollarCircleLine,
@@ -55,10 +54,10 @@ import BullRunsStocks from '@/pages/market/components/BullRuns.jsx';
 import TopPerformingStocks from '@/pages/market/TopPerformingStocks.jsx';
 import BottomPerformingStocks from '@/pages/market/BottomPerformingStocks.jsx';
 import StocksList from '@/pages/market/StocksList.jsx';
-import SimpleBar from 'simplebar-react';
-import { BsGlobeEuropeAfrica } from 'react-icons/bs';
 import { getImageLink, writers } from '@/lib/utils.js';
 import ChatWIthAgentsModal from '@/pages/market/modals/ChatWIthAgents.jsx';
+import { Link } from 'react-router-dom';
+import CountryList from '@/pages/market/shared/CountryList.jsx';
 
 const stockQueriesList = [
   { key: 'on-a-bulls', name: 'On a bulls', icon: <RiLineChartLine size="20" /> },
@@ -94,6 +93,7 @@ const stockQueriesList = [
 const MarketAnalyticsPage = () => {
   const [code, setCode] = useState('NG');
   const [tab, setTab] = useState('africa');
+  const [summaryOrder, setSummaryOrder] = useState('top');
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
   const { isOpen: isStockQueriesOpen, onOpen: onStockQueriesOpen, onClose: onStockQueriesClose } = useDisclosure();
   const { isOpen: isChatWithAgentOpen, onOpen: onChatWithAgentOpen, onClose: onChatWithAgentClose } = useDisclosure();
@@ -106,24 +106,22 @@ const MarketAnalyticsPage = () => {
         <MarketNavbar />
         <div className="container mt-10">
           <div className={cn('flex items-stretch justify-between space-x-3')}>
-            {stockQueriesList.slice(0, 5).map((c) => {
+            {[
+              { key: 'research', name: 'Research', icon: <RiLineChartLine size="20" /> },
+              { key: 'trade', name: 'Trade', icon: <RiLineChartLine size="20" />, href: '/markets/analytics/trade' },
+              { key: 'orders', name: 'My Orders', icon: <RiLineChartLine size="20" /> },
+              { key: 'lorem', name: 'Lorem Ipsum', icon: <RiLineChartLine size="20" /> },
+              { key: 'lorem', name: 'Lorem Ipsum', icon: <RiLineChartLine size="20" /> },
+              { key: 'lorem', name: 'Lorem Ipsum', icon: <RiLineChartLine size="20" /> },
+            ].map((c, i) => {
               return (
                 <>
-                  <StockQueryItem
-                    key={c.key}
-                    onClick={() => updateData(c)}
-                    active={c.key === data.key}
-                    before={c.icon}
-                    name={c.name}
-                  />
+                  <Link key={i} to={c.href}>
+                    <StockQueryItem active={c.key === 'trade'} before={c.icon} name={c.name} />
+                  </Link>
                 </>
               );
             })}
-            <StockQueryItem
-              name="More"
-              onClick={onStockQueriesOpen}
-              after={<HiChevronDown className="h-[20px] w-[20px]" />}
-            />
           </div>
           <div className="gap-8 lg:grid lg:grid-cols-[1fr_350px] mt-10">
             <div className="w-full overflow-hidden">
@@ -154,85 +152,120 @@ const MarketAnalyticsPage = () => {
                   <div className="mb-4 flex items-center space-x-3">
                     <h3 className="text-lg font-semibold">Summary</h3>
                   </div>
-                  <p className="opacity-80">
-                    Stocks are versatile financial assets that allow traders to potentially profit from the company's
-                    growth through rising share prices or dividend payments. Whether you're a seasoned investor or just
-                    starting out, exploring the diverse range of Nigerian stocks can open up new opportunities. Take a
-                    look at the alphabetically sorted list below to discover companies that align with your interests
-                    and investment goals. Happy investing!
-                  </p>
+                  <div className="space-y-10">
+                    <div>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-base font-medium text-primary-700 dark:text-white">Bull Runs</span>
+                        <span className="text-sm font-medium text-primary-700 dark:text-white">45%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div className="bg-primary-600 h-2.5 rounded-full w-[45%]"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-base font-medium text-primary-700 dark:text-white">Bear Runs</span>
+                        <span className="text-sm font-medium text-primary-700 dark:text-white">25%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div className="bg-primary-600 h-2.5 rounded-full w-[25%]"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-base font-medium text-primary-700 dark:text-white">Severe Bull runs</span>
+                        <span className="text-sm font-medium text-primary-700 dark:text-white">88%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div className="bg-primary-600 h-2.5 rounded-full w-[88%]"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-base font-medium text-primary-700 dark:text-white">Severe Bear runs</span>
+                        <span className="text-sm font-medium text-primary-700 dark:text-white">34%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div className="bg-primary-600 h-2.5 rounded-full w-[34%]"></div>
+                      </div>
+                    </div>
+                  </div>
+                  {/*<p className="opacity-80">*/}
+                  {/*  Stocks are versatile financial assets that allow traders to potentially profit from the company's*/}
+                  {/*  growth through rising share prices or dividend payments. Whether you're a seasoned investor or just*/}
+                  {/*  starting out, exploring the diverse range of Nigerian stocks can open up new opportunities. Take a*/}
+                  {/*  look at the alphabetically sorted list below to discover companies that align with your interests*/}
+                  {/*  and investment goals. Happy investing!*/}
+                  {/*</p>*/}
                 </Card>
+                <div className={cn('flex items-stretch justify-between space-x-3')}>
+                  {stockQueriesList.slice(0, 3).map((c) => {
+                    return (
+                      <>
+                        <StockQueryItem
+                          key={c.key}
+                          onClick={() => updateData(c)}
+                          active={c.key === data.key}
+                          before={c.icon}
+                          name={c.name}
+                        />
+                      </>
+                    );
+                  })}
+                  <StockQueryItem
+                    name="More"
+                    onClick={onStockQueriesOpen}
+                    after={<HiChevronDown className="h-[20px] w-[20px]" />}
+                  />
+                </div>
                 <Watchlist />
                 <BullRunsStocks selectedQuery={data} />
-                <TopPerformingStocks country={country.slug} />
-                <BottomPerformingStocks country={country.slug} />
-                <StocksList country={country.slug} />
+                <Card className="card-shadow px-8 py-7">
+                  <Tabs
+                    selectedKey={summaryOrder}
+                    onSelectionChange={setSummaryOrder}
+                    aria-label="Options"
+                    radius="full"
+                    color="primary"
+                    variant="bordered"
+                  >
+                    <Tab
+                      key="top"
+                      title={
+                        <div className="flex items-center space-x-2">
+                          <span>Top Performing</span>
+                        </div>
+                      }
+                    >
+                      <TopPerformingStocks country={country.slug} />
+                    </Tab>
+                    <Tab
+                      key="bottom"
+                      title={
+                        <div className="flex items-center space-x-2">
+                          <span>Bottom Performing</span>
+                        </div>
+                      }
+                    >
+                      <BottomPerformingStocks country={country.slug} />
+                    </Tab>
+                    <Tab
+                      key="all"
+                      title={
+                        <div className="flex items-center space-x-2">
+                          <span>All Stocks</span>
+                        </div>
+                      }
+                    >
+                      <StocksList country={country.slug} />
+                    </Tab>
+                  </Tabs>
+                </Card>
               </div>
             </div>
             <div className="hidden lg:mb-4 lg:block">
               <div className="sticky top-[50px] space-y-10">
-                <Card className="card-shadow rounded-2xl">
-                  <SimpleBar style={{ maxHeight: 340 }}>
-                    <CardHeader className="sticky top-0 px-7 pb-3 pt-6">
-                      <Tabs aria-label="Categories" radius="full" selectedKey={tab} onSelectionChange={setTab}>
-                        <Tab
-                          key="special"
-                          title={
-                            <div className="flex items-center space-x-2">
-                              <BsGlobeEuropeAfrica size="20" />
-                              <span>Special</span>
-                            </div>
-                          }
-                          className="text-base"
-                        />{' '}
-                        <Tab
-                          key="africa"
-                          title={
-                            <div className="flex items-center space-x-2">
-                              <BsGlobeEuropeAfrica size="20" />
-                              <span>Africa</span>
-                            </div>
-                          }
-                          className="text-base"
-                        />
-                        <Tab
-                          key="global"
-                          title={
-                            <div className="flex items-center space-x-2">
-                              <RiGlobalLine size="20" />
-                              <span>World</span>
-                            </div>
-                          }
-                          className="text-base"
-                        />
-                      </Tabs>
-                    </CardHeader>
-                    <CardBody className="px-8 pb-6 pt-0">
-                      <div className="mt-4 grid grid-cols-4 items-center justify-center gap-4">
-                        {countries[tab].map((c) => (
-                          <div key={c.code}>
-                            <div
-                              tabIndex={1}
-                              onClick={() => setCode(c.code)}
-                              className={cn(
-                                'w-fit rounded-full border-2 transition-all duration-300',
-                                code === c.code ? 'border-default-500 p-1' : 'border-transparent hover:brightness-50'
-                              )}
-                            >
-                              <Tooltip content={<span className="capitalize">{c.name}</span>} placement="bottom">
-                                <Avatar
-                                  size="md"
-                                  className="aspect-square h-10 w-10"
-                                  icon={<CountryFlag code={c.code} className="h-full w-full cursor-pointer" rounded />}
-                                />
-                              </Tooltip>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardBody>
-                  </SimpleBar>
-                </Card>
+                <CountryList />
                 <Card className="rounded-2xl border shadow dark:border-0 dark:shadow-none">
                   <CardBody className="px-8 py-6">
                     <p>Chat with Immortal Agents</p>

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  Card,
   Pagination,
   Skeleton,
   Spinner,
@@ -46,7 +45,7 @@ const StocksList = ({ country }) => {
           <Skeleton className="min-h-[200px] rounded-2xl" />
         </div>
       ) : (
-        <Card className="card-shadow px-8 py-7">
+        <div className="mt-4">
           <h3 className="mb-8 text-lg font-semibold">All stocks {!!stocks.length && `(${total})`}</h3>
           {stocks.length ? (
             <>
@@ -97,7 +96,7 @@ const StocksList = ({ country }) => {
           ) : (
             <NoData text="No stocks available" />
           )}
-        </Card>
+        </div>
       )}
 
       <StockDetailsModal isOpen={isDetailsOpen} onClose={onDetailsClose} id={id} />

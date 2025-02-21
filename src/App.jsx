@@ -45,6 +45,8 @@ import MarketVirtualPage from '@/pages/market/MarketVirtualPage.jsx';
 import MarketGamingPage from '@/pages/market/MarketGamingPage.jsx';
 import MarketGamingDetailsPage from '@/pages/market/MarketGamingDetailsPage.jsx';
 import VirtualStockDetails from '@/pages/market/components/Virtuals/VitrualStockDetails.jsx';
+import Trade from '@/pages/market/components/analytics/Trade.jsx';
+import NewTrade from '@/pages/market/components/analytics/NewTrade.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -105,6 +107,22 @@ const App = () => {
           }
         />
         <Route
+          path="markets/analytics/trade"
+          element={
+            <RequireAuthBusiness>
+              <Trade />
+            </RequireAuthBusiness>
+          }
+        />
+        <Route
+          path="markets/trade/new"
+          element={
+            <RequireAuthBusiness>
+              <NewTrade />
+            </RequireAuthBusiness>
+          }
+        />
+        <Route
           path="markets/virtuals"
           element={
             <RequireAuthBusiness>
@@ -116,7 +134,7 @@ const App = () => {
           path="markets/gaming"
           element={
             <RequireAuthBusiness>
-              < MarketGamingPage/>
+              <MarketGamingPage />
             </RequireAuthBusiness>
           }
         />{' '}
@@ -124,7 +142,7 @@ const App = () => {
           path="markets/gaming/:id"
           element={
             <RequireAuthBusiness>
-              < MarketGamingDetailsPage/>
+              <MarketGamingDetailsPage />
             </RequireAuthBusiness>
           }
         />{' '}

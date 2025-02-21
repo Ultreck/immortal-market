@@ -14,7 +14,7 @@ const filters = ['5D', '1MO', '3MO', '6MO', 'YTD', '1Y', '2Y', '5Y', 'MAX'];
 
 const StocksChart = ({ stock }) => {
   const { isDarkMode } = useTernaryDarkMode();
-  const [period, setPeriod] = useState('1MO');
+  const [period, setPeriod] = useState('1Y');
   const { data: { prices = [] } = {}, isLoading } = useGetStockPrices({ stock: stock._id, period });
   const chart = usePreferencesStore(useShallow((state) => state.data.chart));
 
