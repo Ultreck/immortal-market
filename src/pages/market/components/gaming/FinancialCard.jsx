@@ -11,11 +11,11 @@ const FinancialCard = ({ item, className }) => {
         {item.url && (
           <div className="text-base flex items-center space-x-2 py-3 ">
             <img src={item.url} alt="Bank logos" className="w-[40px] h-[40px] object-contain" />
-            <div className="text-2xl">{item.name}</div>
+            <div className="text-2xl">{item.name || item}</div>
           </div>
         )}
         <div className="">
-          <div className="text-xl text my-5 pb-3">Will {item.name} surpass N20b rev in 2025 Q2 alone</div>
+          <div className="text-xl text my-5 pb-3">Will {item.name || item} surpass N20b rev in 2025 Q2 alone</div>
           <div className="text">
             <div className="text space-y-3">
               <div className="flex justify-between items-center w-full">
