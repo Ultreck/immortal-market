@@ -15,7 +15,7 @@ const ExpandChartModal = ({ element, isOpen, onClose }) => {
             <HiX size="20" />
           </Button>
         </div>
-        <div className="grid grid-cols-1 gap-10">
+        <div className="grid grid-cols-[auto_1fr] gap-10">
           <div className="border border-default-200 bg-default-100/50 rounded-3xl px-10 py-10">
             <SvgPresent element={{ ...element, width: 600, height: 400 }} isMapWrapperDisabled={true} />
           </div>

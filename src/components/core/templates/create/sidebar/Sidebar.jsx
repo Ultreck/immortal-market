@@ -19,10 +19,9 @@ import useTemplateStore from '@/store/template.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useGetDesign } from '@/api/business.js';
 import Froms from '@/components/core/templates/create/sidebar/forms/Forms.jsx';
-import { FaWpforms } from "react-icons/fa";
+import { FaWpforms } from 'react-icons/fa';
 
 const Sidebar = ({ className }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const navigate = useNavigate();
   const [tab, setTab] = useState('texts');
   const collapsed = !tab;
@@ -30,11 +29,6 @@ const Sidebar = ({ className }) => {
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { data: { design = {} } = {} } = useGetDesign(business, id);
-
-  useEffect(() => {
-    if (tab === 'pages') updateTemplate({ mode: 'tab' });
-    else updateTemplate({ mode: 'scroll' });
-  }, [tab, updateTemplate]);
 
   return (
     <div
@@ -81,8 +75,6 @@ const Sidebar = ({ className }) => {
               { icon: TbAbc, title: 'Texts', key: 'texts' },
               { icon: RiImage2Line, title: 'Images', key: 'images' },
               { icon: TbTemplate, title: 'Templates', key: 'templates' },
-              { icon: RiStackLine, title: 'Layers', key: 'layers' },
-              { icon: FaWpforms, title: 'Forms', key: 'forms' },
             ].map((element) => {
               const active = tab === element.key;
               return (
@@ -106,6 +98,35 @@ const Sidebar = ({ className }) => {
               );
             })}
             <div className="flex-1"></div>
+            {design?.type === 'template' && (
+              <div className="space-y-4">
+                {[
+                  { icon: RiStackLine, title: 'Layers', key: 'layers' },
+                  { icon: FaWpforms, title: 'Forms', key: 'forms' },
+                ].map((element) => {
+                  const active = tab === element.key;
+                  return (
+                    <Tooltip key={element.key} content={element.title} showArrow placement="right">
+                      <div
+                        tabIndex={0}
+                        className={cn(
+                          'flex flex-col items-center justify-center py-[13px] px-3 w-full rounded-l-2xl overflow-hidden',
+                          {
+                            'bg-primary-500 text-white dark:bg-gray-800/50': active,
+                            'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer': !active,
+                            'rounded-2xl': collapsed,
+                          }
+                        )}
+                        onClick={() => setTab(element.key)}
+                      >
+                        {createElement(element.icon, { size: '20' })}
+                        <p className="text-sm mt-1 truncate overflow text-center w-full">{element.title}</p>
+                      </div>
+                    </Tooltip>
+                  );
+                })}
+              </div>
+            )}
             {design?.type === 'project' && (
               <div className="space-y-4">
                 {[{ icon: RiSettings2Line, title: 'Project', key: 'project' }].map((element) => {
@@ -141,6 +162,7 @@ const Sidebar = ({ className }) => {
                 </div>
               </div>
             )}
+          
           </div>
         </div>
         {!collapsed && (

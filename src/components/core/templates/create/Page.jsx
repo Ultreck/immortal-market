@@ -7,15 +7,26 @@ import PageTitle from './PageTitle';
 import PageContent from '@/components/core/templates/create/PageContent.jsx';
 import PageCommentBadge from '@/components/core/templates/create/comment/PageCommentBadge.jsx';
 import { Chip } from '@heroui/react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 const Page = ({ id, showTitle = true }) => {
   const type = useTemplateStore((state) => state.template.pages.find((p) => p.id === id).type);
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const selected = useTemplateStore((state) => state.template.selectedPage === id);
   const isCommentsVisible = useTemplateStore((state) => state.template.isCommentsVisible);
+  const activePage = useTemplateStore((state) => state.template.activePage);
+  const mode = useTemplateStore((state) => state.template.mode);
+  const ref=useRef(null);
+  useEffect(() => {
+    if(activePage===id&& mode==='scroll') {
+      ref.current.scrollIntoView({ behavior: 'smooth' });
+      updateTemplate({ mode:"tab" });
+    }
+  }, [activePage]);
 
   return (
-    <div>
+    <div ref={ref}>
       {showTitle && (
         <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
           <PageTitle id={id} />
@@ -39,7 +50,7 @@ const Page = ({ id, showTitle = true }) => {
           as="div"
           threshold={0.5}
           onChange={(inView) => {
-            if (inView) {
+            if (inView&& (mode==='tab')) {
               updateTemplate({ activePage: id });
             }
           }}

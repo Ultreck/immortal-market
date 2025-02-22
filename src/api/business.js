@@ -408,3 +408,24 @@ export const useGetPolls = ({ business, design,element }) => {
     },
   });
 };
+
+export const useCreateForm = (business, design) => {
+  return useMutation({
+    mutationKey: ['businesses', business, 'designs', design, 'forms'],
+    mutationFn: (body) => {
+      return http.immortal.post(`/businesses/${business}/designs/${design}/form/`, body);
+    },
+  });
+};
+
+export const useGetForms = ({ business, design,element }) => {
+  return useQuery({
+    queryKey: ['businesses', business, 'designs', design, 'forms',element ],
+    queryFn: async () => {
+      const res = await http.immortal.get(`/businesses/${business}/designs/${design}/form`, {
+        params: { element},
+      });
+      return res.data;
+    },
+  });
+};

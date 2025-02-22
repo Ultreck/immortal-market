@@ -13,7 +13,7 @@ import { Table, TablePresent } from '@/components/core/templates/create/elements
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
 import { DataPresent, DataTag } from '@/components/core/templates/create/elements/DataTag.jsx';
 import { Button, ButtonPresent } from '@/components/core/templates/create/elements/Button.jsx';
-import Form, { FormPresent } from '@/components/core/templates/create/elements/forms/FormPresent.jsx';
+import Forms, { FormPresents } from '@/components/core/templates/create/elements/forms/FormPresent.jsx';
 
 export const elements = {
   button: {
@@ -194,10 +194,15 @@ export const elements = {
     },
   },
   form: {
-    tools: ['poll','border'],
+    tools: (element) => {
+      if (element.config.name === 'poll') {
+        return ['poll', 'border'];
+      }
+      return ['form', 'border'];
+    },
     components: {
-      edit: Form,
-      present: FormPresent,
+      edit: Forms,
+      present: FormPresents,
     },
     config: {
       wrapper: true,

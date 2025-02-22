@@ -1,4 +1,5 @@
 import { clsx } from 'clsx';
+import { TbCheckbox } from 'react-icons/tb';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs) {
@@ -298,3 +299,58 @@ export const formatChartValue = (value, element) => {
       return value;
   }
 };
+
+export const options = [{ text: 'Option 1' }, { text: 'Option 2' }, { text: 'Option 3' }];
+
+export const FORMFIELDTYPE = {
+  shortText: {
+    text: 'Question',
+    type: 'shortText',
+    required: false,
+  },
+  paragraph: {
+    text: 'Paragraph',
+    type: 'paragraph',
+    required: false,
+  },
+  checkbox: {
+    text: 'Checkbox',
+    type: 'checkbox',
+    required: false,
+    options: options.map((val) => ({ ...val, id: crypto.randomUUID() })),
+  },
+  multipleChoice: {
+    text: 'Radio',
+    type: 'radio',
+    required: false,
+    options: options.map((val) => ({ ...val, id: crypto.randomUUID() })),
+  },
+  dropdown: {
+    text: 'Dropdown',
+    type: 'dropdown',
+    required: false,
+    options: options.map((val) => ({ ...val, id: crypto.randomUUID() })),
+  },
+};
+export const FORMFIELD = [
+  {
+    text: 'Short Text',
+    value: 'shortText',
+  },
+  {
+    text: 'Paragraph',
+    value: 'paragraph',
+  },
+  {
+    text: 'Check box',
+    value: 'checkbox',
+  },
+  {
+    text: 'Radio',
+    value: 'radio',
+  },
+  {
+    text: 'Drop down',
+    value: 'dropdown',
+  },
+];

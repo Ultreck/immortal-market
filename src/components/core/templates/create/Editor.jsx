@@ -19,8 +19,7 @@ const Editor = () => {
 
   return (
     <div className="h-screen w-full overflow-hidden" ref={root}>
-      {mode === 'scroll' && <ScrollMode />}
-      {mode === 'tab' && <TabMode />}
+      <ScrollMode />
       <ElementTools />
       <PageTools />
     </div>

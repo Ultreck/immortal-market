@@ -43,6 +43,7 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
     <Card
       as="div"
       {...props}
+
       className={cn(
         'flex p-2 items-center relative w-full border-0 aspect-square justify-center bg-default-200/60 dark:bg-default-100 rounded-2xl cursor-pointer group ',
         { '!bg-primary-200': active }

@@ -29,6 +29,7 @@ import Layout from './elements/generic/Layout.jsx';
 import ElementTag from './elements/generic/ElementTag.jsx';
 import ElementTooltip from '@/components/core/templates/create/tools/elements/generic/Tooltip.jsx';
 import PollTools from "@/components/core/templates/create/tools/elements/generic/PollTools.jsx"
+import FormTools from "@/components/core/templates/create/tools/elements/generic/FormTools.jsx"
 
 const mapping = {
   font: { type: 'multiple', component: Font },
@@ -58,6 +59,7 @@ const mapping = {
   'element-tag': { type: 'single', component: ElementTag },
   tooltip: { type: 'single', component: ElementTooltip },
   poll: { type: 'single', component: PollTools },
+  form: { type: 'single', component: FormTools },
 };
 
 const ElementTools = () => {
