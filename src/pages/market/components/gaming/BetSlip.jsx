@@ -1,6 +1,6 @@
 import { tableData } from '@/lib/gaming';
 import useOddsStore from '@/store/gaming';
-import { Tabs, Tab, Input, Button, Card, CardBody } from '@heroui/react';
+import { Button, Card, CardBody, Input, Tab, Tabs } from '@heroui/react';
 import React, { useState } from 'react';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { RxCross2 } from 'react-icons/rx';
@@ -8,7 +8,7 @@ import { RxCross2 } from 'react-icons/rx';
 const BetSlip = () => {
   const [selected, setSelected] = React.useState('Betslip');
   const { selectedOdds, removeOdd } = useOddsStore();
-  const [stakingPrice, setstakingPrice] = useState(100);
+  const [stakingPrice, setStakingPrice] = useState(100);
 
   const selectedData = selectedOdds.flatMap(({ rowId, section, key }) =>
     tableData
@@ -22,9 +22,9 @@ const BetSlip = () => {
         key: key,
       }))
   );
-  console.log(selectedOdds);
+
   const handlePrice = (e) => {
-    setstakingPrice(Number(e.target.value));
+    setStakingPrice(Number(e.target.value));
   };
 
   return (
@@ -50,7 +50,7 @@ const BetSlip = () => {
                 <div className="text overflow-y-auto w-auto px-3">
                   <div className="text">
                     {selectedData.map((row, index) => (
-                      <div className="py-2 border-t dark:border-default-200 mt-3">
+                      <div key={index} className="py-2 border-t dark:border-default-200 mt-3">
                         <div key={index} className="text grid grid-cols-2">
                           <div className="text my-3">{row.exchange}</div>
                           <div
@@ -94,12 +94,14 @@ const BetSlip = () => {
                     <div className="text">
                       <div className="pointer-events-none flex items-center">
                         <TbCurrencyNaira className="text-default-500 text-lg" />
-                      {stakingPrice * Number(selectedData.length)}
+                        {stakingPrice * Number(selectedData.length)}
                       </div>
                     </div>
                   </div>
                   <div className="text w-full">
-                    <Button className='w-full mt-2 bg-green-600 h-12 font-semibold text-base text-white'>Place a bet</Button>
+                    <Button className="w-full mt-2 bg-green-600 h-12 font-semibold text-base text-white">
+                      Place a bet
+                    </Button>
                   </div>
                 </div>
               )}

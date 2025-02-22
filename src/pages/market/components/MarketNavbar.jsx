@@ -10,7 +10,7 @@ const linkItems = [
 
 const MarketNavbar = () => {
   return (
-    <div className="flex justify-between h-[80px] container py-6">
+    <div className="flex justify-between h-[80px] container py-6 mb-8">
       <div className="">
         <p className="text-2xl font-bold">Global Markets</p>
         <p className="opacity-70 my-auto">23 Nov 2025</p>

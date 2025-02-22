@@ -3,11 +3,9 @@ import MarketInsightHome from '@/pages/market/components/gaming/MarketInsightHom
 
 const PredictionHomePage = () => {
   return (
-    <div className="text">
-    <div className="space-y-8 mt-6">
+    <div className="space-y-8">
       <PredictionCarousel />
       <MarketInsightHome />
-    </div>
     </div>
   );
 };

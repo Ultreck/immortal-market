@@ -1,6 +1,6 @@
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useTernaryDarkMode } from 'usehooks-ts';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { TbChevronLeft, TbChevronRight, TbCrown, TbSettings2, TbUsers } from 'react-icons/tb';
 import { cn } from '@/lib/utils.js';
 import Logo from '@/components/core/shared/Logo.jsx';
@@ -35,28 +35,24 @@ NavItem.propTypes = {
   mini: PropTypes.bool,
 };
 
-const Sidebar = ({ source = 'default' }) => {
+const Sidebar = () => {
   const { isDarkMode } = useTernaryDarkMode();
   const [mini, setMini] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    if (source === 'market') {
-      setMini(true);
-    }
-  }, [source]);
+    if (location.pathname.startsWith('/markets')) setMini(true);
+  }, [location.pathname]);
 
   return (
     <div className={cn('w-[260px] relative group transition-width', { 'w-[90px]': mini })}>
-      {source !== 'market' && (
-        <button
-          onClick={() => setMini(!mini)}
-          aria-label={mini ? 'Hide' : 'Show'}
-          className="absolute top-1/2 left-[calc(100%)] -translate-y-1/2 z-10 bg-[#eff6fd] dark:bg-gray-950 border border-default-200/50 dark:border-default-50 h-[56px] rounded-r-full transition-all duration-200"
-        >
-          <div className="">{mini ? <TbChevronRight size="16" /> : <TbChevronLeft size="16" />}</div>
-        </button>
-      )}
-
+      <button
+        onClick={() => setMini(!mini)}
+        aria-label={mini ? 'Hide' : 'Show'}
+        className="absolute top-1/2 left-[calc(100%)] -translate-y-1/2 z-10 bg-[#eff6fd] dark:bg-gray-950 border border-default-200/50 dark:border-default-50 h-[56px] rounded-r-full transition-all duration-200"
+      >
+        <div className="">{mini ? <TbChevronRight size="16" /> : <TbChevronLeft size="16" />}</div>
+      </button>
       <div className={cn('w-[260px] h-full overflow-hidden', { 'w-[90px]': mini })}>
         <div className={cn('w-[260px] h-full overflow-hidden')}>
           <div

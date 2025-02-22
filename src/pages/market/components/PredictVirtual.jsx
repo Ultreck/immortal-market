@@ -1,8 +1,44 @@
 import { Avatar, AvatarGroup, Button, Tab, Tabs } from '@heroui/react';
 
+const items = [
+  {
+    bank: 'Access Bank',
+    time: '01:23:00',
+    percentage: '12%',
+    percentageColor: 'text-green-600',
+    avatars: [
+      'https://i.pravatar.cc/150?u=a042581f4e29026024d',
+      'https://i.pravatar.cc/150?u=a04258a2462d826712d',
+      'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+    ],
+  },
+  {
+    bank: 'GTB',
+    time: '01:23:00',
+    percentage: '42%',
+    percentageColor: 'text-red-600',
+    avatars: [
+      'https://i.pravatar.cc/150?u=a042581f4e29026024d',
+      'https://i.pravatar.cc/150?u=a04258a2462d826712d',
+      'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+    ],
+  },
+  {
+    bank: 'GTB',
+    time: '01:23:00',
+    percentage: '42%',
+    percentageColor: 'text-red-600',
+    avatars: [
+      'https://i.pravatar.cc/150?u=a042581f4e29026024d',
+      'https://i.pravatar.cc/150?u=a04258a2462d826712d',
+      'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+    ],
+  },
+];
+
 const PredictVirtual = () => {
   return (
-    <div className="flex flex-col px-8 py-4 fixed top-0 right-0 h-screen w-[350px] overflow-y-auto border-l border-default-200/50 dark:border-default-50 bg-default-50">
+    <div className="px-8 py-6 h-screen w-[350px] overflow-y-auto border-l border-default-200/50 dark:border-default-50 bg-default-50">
       <Tabs
         aria-label="Options"
         variant="bordered"
@@ -12,54 +48,24 @@ const PredictVirtual = () => {
       >
         <Tab key="photos" title="Predict">
           <div className="space-y-6">
-            <div className="bg-default-100 px-8 py-6 rounded-2xl border border-default-200 shadow">
-              <div className="flex justify-between">
-                <div>
-                  <div className="text-xl font-medium">Access Bank</div>
-                  <div className="opacity-70">01:23:00</div>
+            {items.map((data, index) => (
+              <div key={index} className="bg-default-100 px-8 py-6 rounded-2xl border border-default-200 shadow">
+                <div className="flex justify-between">
+                  <div>
+                    <div className="text-xl font-medium">{data.bank}</div>
+                    <div className="opacity-70">{data.time}</div>
+                  </div>
+                  <div className={`text-3xl font-semibold ${data.percentageColor}`}>{data.percentage}</div>
                 </div>
-                <div className="text-3xl font-semibold text-green-600">12%</div>
-              </div>
-              <div className="mt-10">
-                <AvatarGroup isBordered max={3}>
-                  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-                  <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-                </AvatarGroup>
-              </div>
-            </div>
-            <div className="bg-default-100 px-8 py-6 rounded-2xl border border-default-200 shadow">
-              <div className="flex justify-between">
-                <div>
-                  <div className="text-xl font-medium">GTB</div>
-                  <div className="opacity-70">01:23:00</div>
+                <div className="mt-10">
+                  <AvatarGroup isBordered max={3}>
+                    {data.avatars.map((avatar, i) => (
+                      <Avatar key={i} src={avatar} />
+                    ))}
+                  </AvatarGroup>
                 </div>
-                <div className="text-3xl font-semibold text-red-600">42%</div>
               </div>
-              <div className="mt-10">
-                <AvatarGroup isBordered max={3}>
-                  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-                  <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-                </AvatarGroup>
-              </div>
-            </div>
-            <div className="bg-default-100 px-8 py-6 rounded-2xl border border-default-200 shadow">
-              <div className="flex justify-between">
-                <div>
-                  <div className="text-xl font-medium">GTB</div>
-                  <div className="opacity-70">01:23:00</div>
-                </div>
-                <div className="text-3xl font-semibold text-red-600">42%</div>
-              </div>
-              <div className="mt-10">
-                <AvatarGroup isBordered max={3}>
-                  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-                  <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-                </AvatarGroup>
-              </div>
-            </div>
+            ))}
           </div>
         </Tab>
         <Tab key="music" title="Virtuals">

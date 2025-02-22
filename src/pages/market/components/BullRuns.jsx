@@ -13,8 +13,6 @@ const BullRunsStocks = ({ selectedQuery }) => {
     return { ...stock, ...stock.stock };
   });
 
-  console.log(stockData);
-
   return (
     <>
       {isLoading ? (

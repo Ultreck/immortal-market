@@ -49,7 +49,6 @@ const StocksChart = ({ stock }) => {
           onSelectionChange={setPeriod}
           size="sm"
           variant="bordered"
-          fullWidth
           classNames={{ tab: 'text-md' }}
         >
           {filters.map((i) => (

@@ -20,12 +20,10 @@ export const useGetChats = () => {
 };
 
 export const useGetChat = (id) => {
-  console.log({ id });
   return useQuery({
     queryKey: ['chats', id],
     queryFn: async () => {
       const res = await http.market.get(`/chats/${id}`);
-      console.log({ res });
       return res.data;
     },
     enabled: !!id,
