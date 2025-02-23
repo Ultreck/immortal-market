@@ -2,13 +2,12 @@ import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import { useForm } from 'react-hook-form';
 import { useGetBankingSettings, useUpdateBankingSettings } from '@/api/statement';
-import { useToast } from '@/hooks/use-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import Card from '@/components/ui/Card';
 import useBusiness from '@/hooks/use-business.js';
+import { addToast } from '@heroui/react';
 
 const MbsCredentials = () => {
-  const toast = useToast();
   const qc = useQueryClient();
   const { business } = useBusiness();
   const {
@@ -30,12 +29,16 @@ const MbsCredentials = () => {
   const onSubmit = async (values) => {
     try {
       await updateSettings({ statement: { ...(settings?.statement || {}), ...values } });
-      toast.success('Settings updated');
+      addToast({ title: 'Settings updated', color: 'success' });
       await qc.invalidateQueries({
         queryKey: ['statement', 'settings'],
       });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

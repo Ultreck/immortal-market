@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
-import { Button, Modal, ModalBody, ModalContent, Select, SelectItem } from '@heroui/react';
+import { addToast, Button, Modal, ModalBody, ModalContent, Select, SelectItem } from '@heroui/react';
 import ElementsPreview from '@/components/core/templates/create/ElementsPreview.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { Controller, useForm } from 'react-hook-form';
 import { toBlob } from 'html-to-image';
 import { useRef, useState } from 'react';
 import { useCreateDesignBlock } from '@/api/business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 
 const categories = [
   { key: 'data', label: 'Data' },
@@ -16,7 +15,6 @@ const categories = [
 
 const CreateGroupBlockModal = ({ isOpen, onClose, elements }) => {
   const el = useRef(null);
-  const toast = useToast();
   const { id: business } = useBusiness();
   const { control, handleSubmit, reset } = useForm();
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
@@ -38,9 +36,13 @@ const CreateGroupBlockModal = ({ isOpen, onClose, elements }) => {
       await create({ ...values, data, thumbnail, type: 'group' });
       onClose();
       reset();
-      toast.success('Block saved');
+      addToast({ title: 'Block saved', color: 'success' });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

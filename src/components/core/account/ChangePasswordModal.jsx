@@ -1,14 +1,12 @@
 import { useForm } from 'react-hook-form';
 import Drawer from '@/components/ui/Drawer.jsx';
 import { useChangePassword } from '@/api/auth.js';
-import { useToast } from '@/hooks/use-toast';
 import PropTypes from 'prop-types';
-import { Button, Input } from '@heroui/react';
+import { Button, Input, addToast } from '@heroui/react';
 import { useState } from 'react';
 import Success from '@/components/ui/Success.jsx';
 
 const ChangePasswordModal = ({ isOpen, onClose }) => {
-  const toast = useToast();
   const [view, setView] = useState('form');
   const {
     register,
@@ -21,11 +19,22 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
   const onSubmit = async (values) => {
     try {
       const { currentPassword, newPassword, confirmPassword } = values;
-      if (newPassword !== confirmPassword) return toast.error('New passwords do not match');
+      if (newPassword !== confirmPassword) {
+        addToast({
+          title: 'Error',
+          description: 'New passwords do not match',
+          color: 'danger'
+        });
+        return;
+      }
       await change({ currentPassword, newPassword });
       setView('success');
     } catch (e) {
-      toast.error(e?.response?.data?.message || 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message || 'Something went wrong, please try again',
+        color: 'danger'
+      });
     }
   };
 

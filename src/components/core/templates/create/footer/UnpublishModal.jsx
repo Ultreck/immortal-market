@@ -1,21 +1,26 @@
 import PropTypes from 'prop-types';
-import { Button, Modal, ModalBody, ModalContent } from '@heroui/react';
+import { Button, Modal, ModalBody, ModalContent, addToast } from '@heroui/react';
 import { useUpdateDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 
 const UnpublishModal = ({ id, isOpen, onClose }) => {
-  const toast = useToast();
   const { id: business } = useBusiness();
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(business, id);
 
   const handleUnpublish = async () => {
     try {
       await update({ status: 'draft' });
-      toast.success('Unpublished');
+      addToast({ 
+        title: 'Unpublished',
+        color: 'success'
+      });
       onClose();
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'danger'
+      });
     }
   };
 

@@ -4,6 +4,7 @@ import useTemplateStore from '@/store/template.js';
 import { useGetTableData, useProcessData } from '@/api/business.js';
 import { camelCaseToWords } from '@/lib/utils.js';
 import {
+  addToast,
   Button,
   Pagination,
   Skeleton,
@@ -16,7 +17,6 @@ import {
   TableRow,
 } from '@heroui/react';
 import PropTypes from 'prop-types';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { TbDatabaseOff } from 'react-icons/tb';
 
 const limit = 10;
@@ -94,7 +94,6 @@ const TableRecords = ({ table }) => {
 };
 
 const InsertData = () => {
-  const toast = useToast();
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { mutateAsync: process, isPending: isProcessDataLoading } = useProcessData(business, id);
@@ -103,7 +102,11 @@ const InsertData = () => {
     try {
       await process();
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
+import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, addToast } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import { formatDistanceToNow } from 'date-fns';
 import { HiDotsHorizontal } from 'react-icons/hi';
@@ -6,12 +6,10 @@ import PropTypes from 'prop-types';
 import { useDeleteComment } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useState } from 'react';
 import EditComment from '@/components/core/templates/create/comment/EditComment.jsx';
 
 const CommentReplyItem = ({ comment }) => {
-  const toast = useToast();
   const { id: business } = useBusiness();
   const [isEditing, setIsEditing] = useState(false);
   const design = useTemplateStore((state) => state.template.id);
@@ -21,7 +19,11 @@ const CommentReplyItem = ({ comment }) => {
     try {
       await deleteComment(id);
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'danger'
+      });
     }
   };
 

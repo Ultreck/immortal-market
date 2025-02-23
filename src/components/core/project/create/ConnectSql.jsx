@@ -1,9 +1,8 @@
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Checkbox, Input, Select, SelectItem } from '@heroui/react';
+import { addToast, Button, Checkbox, Input, Select, SelectItem } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useGetDatabaseTables } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import useProjectStore from '@/store/project.js';
@@ -21,7 +20,6 @@ const ConnectSql = ({ onPrev, onNext }) => {
 };
 
 const Form = ({ onPrev, onNext }) => {
-  const toast = useToast();
   const { id: business } = useBusiness();
   const credentials = useProjectStore((state) => state.data.credentials);
   const updateData = useProjectStore((state) => state.updateData);
@@ -44,8 +42,12 @@ const Form = ({ onPrev, onNext }) => {
       const res = await connect({ payload, type });
       updateData({ credentials: { ...payload, type }, tables: res.data.tables });
       onNext();
-    } catch (error) {
-      toast.error(error?.response?.data?.message ?? error.message ?? 'Something went wrong, please try again');
+    } catch (e) {
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

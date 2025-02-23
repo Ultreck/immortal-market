@@ -1,16 +1,14 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useGetInvitation, useRespondToInvitationMutation } from '@/api/business.js';
-import { Button, Card, CardBody, Skeleton } from '@heroui/react';
+import { Button, Card, CardBody, Skeleton, addToast } from '@heroui/react';
 import Logo from '@/components/core/shared/Logo.jsx';
 import { useDarkMode } from 'usehooks-ts';
 import { format, formatDistanceToNow, isBefore } from 'date-fns';
 import { TbMailExclamation, TbMailOff, TbMailX } from 'react-icons/tb';
 import { useState } from 'react';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
 
 const InvitationPage = () => {
-  const toast = useToast();
   const { id } = useParams();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -29,7 +27,11 @@ const InvitationPage = () => {
       await respond({ response: r });
       navigate('/');
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e.message ?? 'An unknown error occurred, please try again later');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e.message ?? 'An unknown error occurred, please try again later',
+        color: 'danger'
+      });
     }
   };
 

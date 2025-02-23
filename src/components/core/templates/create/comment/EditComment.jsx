@@ -1,9 +1,8 @@
-import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { useState } from 'react';
 import useTemplateStore from '@/store/template.js';
-import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@heroui/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure, addToast } from '@heroui/react';
 import { useUpdateComment } from '@/api/business.js';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 import { LuSmilePlus } from 'react-icons/lu';
@@ -12,7 +11,6 @@ import { HiX } from 'react-icons/hi';
 import PropTypes from 'prop-types';
 
 const EditComment = ({ comment, onClose }) => {
-  const toast = useToast();
   const { id: business } = useBusiness();
   const { isDarkMode } = useTernaryDarkMode();
   const [content, setContent] = useState(comment.content);
@@ -26,7 +24,11 @@ const EditComment = ({ comment, onClose }) => {
       setContent('');
       onClose();
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e.message ?? 'Something went wrong, please try again',
+        color: 'danger',
+      });
     }
   };
 

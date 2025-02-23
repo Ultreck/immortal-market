@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
 import {
+  addToast,
   Autocomplete,
   AutocompleteItem,
   Button,
@@ -16,7 +17,6 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import { useCreateDesignBlock } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { toBlob } from 'html-to-image';
 import { useState } from 'react';
 import { capitalize } from '@/lib/utils.js';
@@ -80,7 +80,6 @@ const options = [
 ];
 
 const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
-  const toast = useToast();
   const { id: business } = useBusiness();
   const { control, handleSubmit, reset } = useForm();
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
@@ -93,7 +92,10 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
 
   const handleAddTag = () => {
     if (!tag) return;
-    if (tags.includes(tag)) return toast.error('Tag already exists');
+    if (tags.includes(tag)) {
+      addToast({ title: 'Tag already exists', color: 'error' });
+      return;
+    }
     setTags((prev) => [...prev, tag]);
     setTag('');
   };
@@ -111,7 +113,10 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
 
   const submit = async (values) => {
     try {
-      if (!tags.length) return toast.error('Tags is required');
+      if (!tags.length) {
+        addToast({ title: 'Tags is required', color: 'error' });
+        return;
+      }
       setIsThumbnailLoading(true);
       const blob = await toBlob(document.getElementById(`canvas-${page.id}`), {
         cacheBust: true,
@@ -135,9 +140,13 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
       };
       await create(payload);
       handleClose();
-      toast.success('Block saved');
+      addToast({ title: 'Block saved', color: 'success' });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

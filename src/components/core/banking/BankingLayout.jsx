@@ -16,11 +16,11 @@ import Loader from '@/components/ui/Loader.jsx';
 import AppDashboardLayout from '@/components/core/shared/AppDashboardLayout.jsx';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
 import ProductOnboarding from '@/components/core/shared/ProductOnboarding.jsx';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useCreateBankingSettings, useGetBankingSettings } from '@/api/statement.js';
 import { Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
+import { addToast } from '@heroui/react';
 
 const product = categories.find((p) => p.id === 'banking');
 
@@ -51,7 +51,6 @@ Logo.propTypes = {
 };
 
 const BankingLayout = () => {
-  const toast = useToast();
   const qc = useQueryClient();
   const [isFetching, setIsFetching] = useState(false);
   const { business } = useBusiness();
@@ -67,7 +66,11 @@ const BankingLayout = () => {
       });
       setIsFetching(false);
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

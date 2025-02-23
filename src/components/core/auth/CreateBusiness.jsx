@@ -1,12 +1,10 @@
 import { Controller, useForm } from 'react-hook-form';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useCreateBusinessMutation } from '@/api/business.js';
 import { industries, sizes } from '@/lib/options.js';
-import { Button, Input, Select, SelectItem, Textarea } from '@heroui/react';
+import { addToast, Button, Input, Select, SelectItem, Textarea } from '@heroui/react';
 import { useNavigate } from 'react-router-dom';
 
 const CreateBusiness = () => {
-  const toast = useToast();
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm();
   const { mutateAsync: create, isPending: isCreateLoading } = useCreateBusinessMutation();
@@ -16,7 +14,11 @@ const CreateBusiness = () => {
       await create(values);
       navigate('/');
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

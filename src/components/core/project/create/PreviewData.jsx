@@ -3,18 +3,16 @@ import { cn } from '@/lib/utils.js';
 import { AnimatePresence } from 'motion/react';
 import TableDetails from '@/components/core/project/create/TableDetails.jsx';
 import { useEffect, useState } from 'react';
-import { Button, Popover, PopoverContent, PopoverTrigger, Spinner, useDisclosure } from '@heroui/react';
+import { addToast, Button, Popover, PopoverContent, PopoverTrigger, Spinner, useDisclosure } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useGenerateCombinations } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import NoData from '@/components/ui/NoData.jsx';
 import { RiAlertLine } from 'react-icons/ri';
 
 const PreviewData = ({ onNext }) => {
-  const toast = useToast();
   const { source, isSourceLoading, isDesignLoading } = useCurrentDesign();
   const [current, setCurrent] = useState(source?.tables?.[0]?.name);
   const table = source?.tables?.find((t) => t.name === current);
@@ -33,7 +31,11 @@ const PreviewData = ({ onNext }) => {
       await generate(null);
       onNext();
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip } from '@heroui/react';
+import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip, addToast } from '@heroui/react';
 import { cn, getImageLink } from '@/lib/utils.js';
 import { formatDistanceToNow } from 'date-fns';
 import { HiDotsHorizontal, HiReply } from 'react-icons/hi';
@@ -7,13 +7,11 @@ import PropTypes from 'prop-types';
 import { useDeleteComment, useUpdateComment } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import EditComment from '@/components/core/templates/create/comment/EditComment.jsx';
 
 const CommentItem = ({ comment, onClick, className }) => {
-  const toast = useToast();
   const { user } = useAuth();
   const { id: business } = useBusiness();
   const design = useTemplateStore((state) => state.template.id);
@@ -27,7 +25,11 @@ const CommentItem = ({ comment, onClick, className }) => {
       await deleteComment(comment._id);
       updateTemplate({ activeComment: null });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'danger'
+      });
     }
   };
 
@@ -36,7 +38,11 @@ const CommentItem = ({ comment, onClick, className }) => {
       await updateComment({ id: comment._id, data: { resolved: true } });
       updateTemplate({ activeComment: null });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'danger'
+      });
     }
   };
 
@@ -45,7 +51,11 @@ const CommentItem = ({ comment, onClick, className }) => {
       await updateComment({ id: comment._id, data: { resolved: false } });
       updateTemplate({ activeComment: null });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'danger'
+      });
     }
   };
 

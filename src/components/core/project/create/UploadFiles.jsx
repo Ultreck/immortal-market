@@ -1,10 +1,9 @@
-import { Button, Select, SelectItem } from '@heroui/react';
+import { Button, Select, SelectItem, addToast } from '@heroui/react';
 import Title from '../../shared/Title.jsx';
 import PropTypes from 'prop-types';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import { TbChevronLeft, TbChevronRight, TbX } from 'react-icons/tb';
 import useProjectStore from '@/store/project.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 
 const types = {
   json: { 'application/json': ['.json'] },
@@ -14,13 +13,19 @@ const types = {
 };
 
 const UploadFiles = ({ onNext, onPrev }) => {
-  const toast = useToast();
   const updateData = useProjectStore((state) => state.updateData);
   const files = useProjectStore((state) => state.data.files);
   const type = useProjectStore((state) => state.data.type);
 
   const handleSubmit = async () => {
-    if (!files.length) return toast.error('Please upload at least one file');
+    if (!files.length) {
+      addToast({
+        title: 'Error',
+        description: 'Please upload at least one file',
+        color: 'danger'
+      });
+      return;
+    }
     onNext();
   };
 

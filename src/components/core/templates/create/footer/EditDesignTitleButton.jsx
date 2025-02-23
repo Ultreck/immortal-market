@@ -1,5 +1,4 @@
-import { Button, Input, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@heroui/react';
-import { useToast } from '@/hooks/use-toast.jsx';
+import { Button, Input, Popover, PopoverContent, PopoverTrigger, useDisclosure, addToast } from '@heroui/react';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
 import { useGetDesign, useUpdateDesign } from '@/api/business.js';
@@ -7,7 +6,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { RiPencilLine } from 'react-icons/ri';
 
 const EditDesignTitleButton = () => {
-  const toast = useToast();
   const { isOpen, onOpenChange } = useDisclosure();
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
@@ -24,10 +22,14 @@ const EditDesignTitleButton = () => {
     try {
       if (values.tags) values.tags = values.tags.split(',');
       await update(values);
-      toast.success('Title updated');
+      addToast({ title: 'Title updated', color: 'success' });
       onOpenChange();
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'danger',
+      });
     }
   };
 

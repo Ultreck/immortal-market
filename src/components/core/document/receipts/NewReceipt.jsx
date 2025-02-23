@@ -4,15 +4,14 @@ import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInpu
 import { useCreateReceipt } from '@/api/document.js';
 import { GridLoader } from 'react-spinners';
 import { useQueryClient } from '@tanstack/react-query';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 import Button from '@/components/ui/Button.jsx';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
+import { addToast } from '@heroui/react';
 
 const NewReceipt = ({ isOpen, onClose }) => {
-  const toast = useToast();
   const qc = useQueryClient();
   const response = useRef(null);
   const [success, setSuccess] = useState(false);
@@ -36,7 +35,11 @@ const NewReceipt = ({ isOpen, onClose }) => {
       response.current = res.data.receipt;
       setSuccess(true);
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

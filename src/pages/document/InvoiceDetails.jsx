@@ -1,4 +1,3 @@
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useDeleteInvoice, useGetInvoice } from '@/api/document.js';
@@ -13,9 +12,9 @@ import Image from '@/components/core/shared/Image.jsx';
 import InvoiceSummary from '@/components/core/document/invoices/InvoiceSummary.jsx';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
 import useBusiness from '@/hooks/use-business.js';
+import { addToast } from '@heroui/react';
 
 const InvoiceDetails = () => {
-  const toast = useToast();
   const { id } = useParams();
   const qc = useQueryClient();
   const navigate = useNavigate();
@@ -35,7 +34,11 @@ const InvoiceDetails = () => {
         queryKey: ['invoices', 'overview'],
       });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

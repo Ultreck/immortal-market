@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { standard } from '@/lib/design/charts.jsx';
 import PropTypes from 'prop-types';
-import { Button } from '@heroui/react';
+import { Button, addToast } from '@heroui/react';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 
 const ChangeChart = ({ element, onChange, onBack }) => {
@@ -37,6 +37,10 @@ const ChangeChart = ({ element, onChange, onBack }) => {
             key={e.id}
             onClick={() => {
               onChange({ ...element, config: { ...element.config, name: e.data.config.name } });
+              addToast({ 
+                title: 'Chart updated',
+                color: 'success'
+              });
             }}
           >
             {e.preview}

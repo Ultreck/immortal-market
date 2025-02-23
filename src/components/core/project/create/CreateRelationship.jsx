@@ -1,15 +1,13 @@
-import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
 import { useUpdateDesignSource } from '@/api/business.js';
 import { Controller, useForm } from 'react-hook-form';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Divider, Select, SelectItem } from '@heroui/react';
+import { addToast, Button, Divider, Select, SelectItem } from '@heroui/react';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const CreateRelationship = ({ table, onClose }) => {
-  const toast = useToast();
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
   const { source } = useCurrentDesign();
@@ -20,7 +18,7 @@ const CreateRelationship = ({ table, onClose }) => {
     try {
       const relationship = source.relationships?.find((r) => r.table === table && r.column === values.column);
       if (relationship) {
-        toast.error('Relationship already exists for this column');
+        addToast({ title: 'Error', description: 'Relationship already exists for this column' });
         return;
       }
       const relationships = [
@@ -36,7 +34,11 @@ const CreateRelationship = ({ table, onClose }) => {
       await update({ relationships });
       onClose();
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

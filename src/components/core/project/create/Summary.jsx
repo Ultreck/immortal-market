@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useToast } from '@/hooks/use-toast.jsx';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Checkbox } from '@heroui/react';
+import { addToast, Button, Checkbox } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
@@ -10,7 +9,6 @@ import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
 
 const Summary = ({ onPrev, onNext }) => {
-  const toast = useToast();
   const { source } = useCurrentDesign();
   const [selection, setSelection] = useState(source?.selection?.summary || []);
   const { id: business } = useBusiness();
@@ -18,12 +16,16 @@ const Summary = ({ onPrev, onNext }) => {
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
 
   const handleSubmit = async () => {
-    if (!selection.length) return toast.error('Please select at least one combination');
+    if (!selection.length) return addToast({ title: 'Error', description: 'Please select at least one combination' });
     try {
       await update({ selection: { ...source.selection, summary: selection } });
       onNext();
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

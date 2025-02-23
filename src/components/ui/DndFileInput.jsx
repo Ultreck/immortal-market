@@ -1,8 +1,8 @@
 import Dropzone from 'react-dropzone';
 import { IconCloudUpload } from '@tabler/icons-react';
-import { useToast } from '@/hooks/use-toast.jsx';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils.js';
+import { addToast } from '@heroui/react';
 
 const DndFileInput = ({
   onChange,
@@ -13,8 +13,6 @@ const DndFileInput = ({
   className,
   isDisabled = false,
 }) => {
-  const toast = useToast();
-
   return (
     <>
       <Dropzone
@@ -25,9 +23,17 @@ const DndFileInput = ({
         onDropRejected={(fileRejections) => {
           const exceedsMaxSize = fileRejections.some((f) => f.errors.some((j) => j.code === 'file-too-large'));
           const invalidType = fileRejections.some((f) => f.errors.some((j) => j.code === 'file-invalid-type'));
-          if (invalidType) return toast.error(`One or more files are not of the correct type`);
+          if (invalidType) {
+            return addToast({
+              title: 'Error',
+              description: 'One or more files are not of the correct type',
+            });
+          }
           if (exceedsMaxSize) {
-            return toast.error(`One or more files exceeds the maximum file size of ${maxSize / 1000000}mb`);
+            return addToast({
+              title: 'Error',
+              description: `One or more files exceeds the maximum file size of ${maxSize / 1000000}mb`,
+            });
           }
         }}
         maxSize={maxSize}

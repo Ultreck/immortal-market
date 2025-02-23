@@ -3,17 +3,15 @@ import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 import { useRef, useState } from 'react';
 import { Cropper, ImageRestriction } from 'react-advanced-cropper';
-import { useToast } from '@/hooks/use-toast.jsx';
 import 'react-advanced-cropper/dist/style.css';
 import { imageFileToBase64 } from '@/lib/utils.js';
 import Image from '@/components/core/shared/Image.jsx';
-import { Button, Input, Modal, ModalBody, ModalContent, Select, SelectItem, Textarea } from '@heroui/react';
+import { addToast, Button, Input, Modal, ModalBody, ModalContent, Select, SelectItem, Textarea } from '@heroui/react';
 import { useUpdateAccount } from '@/api/auth.js';
 
 const MAX_FILE_SIZE_IN_MB = 5;
 
 const EditProfile = ({ onClose }) => {
-  const toast = useToast();
   const { user, reloadUser } = useAuth();
   const cropperRef = useRef(null);
   const [file, setFile] = useState(null);
@@ -47,7 +45,11 @@ const EditProfile = ({ onClose }) => {
     let fileSizeInMB = file.size / 1024 / 1024;
     if (!file) return;
     if (fileSizeInMB > MAX_FILE_SIZE_IN_MB) {
-      toast.error('File is too large, Upload a file less than 5mb');
+      addToast({
+        title: 'File is too large',
+        description: 'Upload a file less than 5mb',
+        color: 'error',
+      });
       event.target.value = '';
       return;
     }
@@ -70,11 +72,15 @@ const EditProfile = ({ onClose }) => {
         if (values[key] !== user[key]) fd.append(key, values[key]);
       });
       await update(fd);
-      toast.success('Account updated');
+      addToast({ title: 'Account updated', color: 'success' });
       reloadUser();
       onClose();
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

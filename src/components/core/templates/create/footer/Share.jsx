@@ -1,13 +1,20 @@
-import { Button, Listbox, ListboxItem, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@heroui/react';
+import {
+  addToast,
+  Button,
+  Listbox,
+  ListboxItem,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  useDisclosure,
+} from '@heroui/react';
 import { TbDownload, TbShare, TbShare2 } from 'react-icons/tb';
 import { RiArrowRightSLine, RiLink, RiVideoLine } from 'react-icons/ri';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useState } from 'react';
 import useTemplateStore from '@/store/template.js';
 import Download from '@/components/core/templates/create/footer/Download.jsx';
 
 const Share = () => {
-  const toast = useToast();
   const [view, setView] = useState('home');
   const { isOpen, onOpenChange } = useDisclosure();
   const id = useTemplateStore((state) => state.template.id);
@@ -19,7 +26,7 @@ const Share = () => {
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(`${window.location.origin}/designs/${id}/present`);
-    toast.success('Link copied to clipboard');
+    addToast({ title: 'Link copied to clipboard', color: 'success' });
   };
 
   return (

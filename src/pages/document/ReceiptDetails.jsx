@@ -1,4 +1,3 @@
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useDeleteReceipt, useGetReceipt } from '@/api/document.js';
@@ -13,10 +12,10 @@ import Button from '@/components/ui/Button.jsx';
 import ReceiptSummary from '@/components/core/document/receipts/ReceiptSummary.jsx';
 import DashboardContent from '@/components/core/shared/DashboardContent.jsx';
 import useBusiness from '@/hooks/use-business.js';
+import { addToast } from '@heroui/react';
 
 const ReceiptDetails = () => {
   const { id } = useParams();
-  const toast = useToast();
   const navigate = useNavigate();
   const qc = useQueryClient();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -35,7 +34,11 @@ const ReceiptDetails = () => {
         queryKey: ['invoices', 'overview'],
       });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

@@ -1,13 +1,11 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
-import { Button, Input, Select, SelectItem } from '@heroui/react';
+import { Button, Input, Select, SelectItem, addToast } from '@heroui/react';
 import { Controller, useForm } from 'react-hook-form';
 import { useSendInvitationMutation } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 
 const InviteMemberModal = ({ isOpen, onClose }) => {
-  const toast = useToast();
   const { id } = useBusiness();
   const { control, handleSubmit, reset } = useForm();
   const { mutateAsync: send, isPending: isSendLoading } = useSendInvitationMutation(id);
@@ -15,11 +13,18 @@ const InviteMemberModal = ({ isOpen, onClose }) => {
   const submit = async (data) => {
     try {
       await send({ business: id, ...data });
-      toast.success(`Invitation sent to ${data.email}`);
+      addToast({ 
+        title: `Invitation sent to ${data.email}`,
+        color: 'success'
+      });
       onClose();
       reset();
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e.message,
+        color: 'danger'
+      });
     }
   };
 

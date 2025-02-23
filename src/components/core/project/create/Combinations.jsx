@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useToast } from '@/hooks/use-toast.jsx';
 import Title from '@/components/core/shared/Title.jsx';
-import { Accordion, AccordionItem, Button, Checkbox } from '@heroui/react';
+import { Accordion, AccordionItem, Button, Checkbox, addToast } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
@@ -10,7 +9,6 @@ import useTemplateStore from '@/store/template.js';
 import { useUpdateDesignSource } from '@/api/business.js';
 
 const Combinations = ({ onNext, onPrev }) => {
-  const toast = useToast();
   const { source } = useCurrentDesign();
   const [selection, setSelection] = useState(source?.selection?.combinations || []);
   const { id: business } = useBusiness();
@@ -18,12 +16,23 @@ const Combinations = ({ onNext, onPrev }) => {
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
 
   const handleSubmit = async () => {
-    if (!selection.length) return toast.error('Please select at least one combination');
+    if (!selection.length) {
+      addToast({
+        title: 'Error',
+        description: 'Please select at least one combination',
+        color: 'danger'
+      });
+      return;
+    }
     try {
       await update({ selection: { ...source.selection, combinations: selection } });
       onNext();
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message || e.message,
+        color: 'danger'
+      });
     }
   };
 

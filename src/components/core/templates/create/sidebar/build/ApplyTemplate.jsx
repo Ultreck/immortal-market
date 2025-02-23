@@ -2,15 +2,13 @@ import useTemplateStore from '@/store/template.js';
 import { useCreateDesign, useGetDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import PropTypes from 'prop-types';
-import { Button, Skeleton } from '@heroui/react';
+import { addToast, Button, Skeleton } from '@heroui/react';
 import { TbPhotoCircle } from 'react-icons/tb';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useNavigate } from 'react-router-dom';
 import NoData from '@/components/ui/NoData.jsx';
 import ThumbnailsCarousel from '@/pages/designs/ThumbnailsCarousel.jsx';
 
 const ApplyTemplate = ({ id, onClose }) => {
-  const toast = useToast();
   const navigate = useNavigate();
   const { id: business } = useBusiness();
   const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
@@ -55,7 +53,11 @@ const ApplyTemplate = ({ id, onClose }) => {
       const res = await create(payload);
       navigate(`/templates/${res.data.design._id}/edit`);
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

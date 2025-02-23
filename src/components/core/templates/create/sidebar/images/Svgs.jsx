@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Button, Image, Skeleton } from '@heroui/react';
+import { Button, Image, Skeleton, addToast } from '@heroui/react';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useQueryClient } from '@tanstack/react-query';
 import { getImageLink } from '@/lib/utils.js';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
@@ -11,7 +10,6 @@ import { getElementDefaultStyle } from '@/lib/elements.js';
 import { TbChevronLeft } from 'react-icons/tb';
 
 const Svgs = ({ mini = false, onBack }) => {
-  const toast = useToast();
   const qc = useQueryClient();
   const { id: business } = useBusiness();
   const [files, setFiles] = useState([]);
@@ -33,7 +31,11 @@ const Svgs = ({ mini = false, onBack }) => {
       if (!files || files.length === 0) return;
       await add(files);
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message || e.message,
+        color: 'danger'
+      });
     }
   };
 

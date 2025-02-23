@@ -3,14 +3,12 @@ import { cn } from '@/lib/utils.js';
 import { useCallback, useEffect, useState } from 'react';
 import { useUpdateDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useQueryClient } from '@tanstack/react-query';
-import { Spinner } from '@heroui/react';
+import { Spinner, addToast } from '@heroui/react';
 import { AnimatePresence, motion } from 'motion/react';
 import PropTypes from 'prop-types';
 
 const PageTitle = ({ id }) => {
-  const toast = useToast();
   const qc = useQueryClient();
   const { id: business } = useBusiness();
   const pages = useTemplateStore(({ template }) => template.pages);
@@ -34,13 +32,20 @@ const PageTitle = ({ id }) => {
           }),
         },
       });
-      toast.success('Page Title updated');
+      addToast({ 
+        title: 'Page Title updated',
+        color: 'success'
+      });
       await qc.invalidateQueries({ queryKey: ['businesses', business, 'designs'] });
     } catch (error) {
-      toast.error(error?.response?.data?.message || error.message);
+      addToast({
+        title: 'Error',
+        description: error?.response?.data?.message || error.message,
+        color: 'danger'
+      });
     }
     setIsEditing(false);
-  }, [value, title, update, toast, qc, business, id, pages]);
+  }, [value, title, update, qc, business, id, pages]);
 
   return (
     <div className="relative flex items-center space-x-2">

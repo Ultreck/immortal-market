@@ -1,7 +1,6 @@
-import { Chip, Input, Skeleton, Spinner, useDisclosure } from '@heroui/react';
+import { addToast, Chip, Input, Skeleton, Spinner, useDisclosure } from '@heroui/react';
 import { useCreateDesign, useGetDesigns } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useNavigate } from 'react-router-dom';
 import NoData from '@/components/ui/NoData.jsx';
 import DesignCard from '@/components/core/project/DesignCard.jsx';
@@ -13,7 +12,6 @@ import { useState } from 'react';
 import TemplatePreviewModal from '@/pages/designs/TemplatePreviewModal.jsx';
 
 const TemplatesPage = () => {
-  const toast = useToast();
   const navigate = useNavigate();
   const { id: business } = useBusiness();
   const { mutateAsync: create, isPending: isCreateTemplateLoading } = useCreateDesign(business);
@@ -55,7 +53,11 @@ const TemplatesPage = () => {
       });
       navigate(`/designs/${res.data.design._id}/edit`);
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

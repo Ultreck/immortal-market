@@ -5,14 +5,13 @@ import Drawer from '@/components/ui/Drawer.jsx';
 import CircleUploadFileInput from '@/components/core/shared/CircleUploadFileInput.jsx';
 import { useCreateInvoice } from '@/api/document.js';
 import { GridLoader } from 'react-spinners';
-import { useToast } from '@/hooks/use-toast.jsx';
 import Button from '@/components/ui/Button.jsx';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
+import { addToast } from '@heroui/react';
 
 const NewInvoice = ({ isOpen, onClose }) => {
-  const toast = useToast();
   const qc = useQueryClient();
   const response = useRef(null);
   const [success, setSuccess] = useState(false);
@@ -36,7 +35,11 @@ const NewInvoice = ({ isOpen, onClose }) => {
       response.current = res.data.invoice;
       setSuccess(true);
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

@@ -1,17 +1,15 @@
 import { useCallback, useState } from 'react';
-import { Button, Select, SelectItem } from '@heroui/react';
+import { addToast, Button, Select, SelectItem } from '@heroui/react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { toBlob } from 'html-to-image';
 import useTemplateStore from '@/store/template.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import PropTypes from 'prop-types';
 import { TbChevronLeft } from 'react-icons/tb';
 import useBusiness from '@/hooks/use-business.js';
 import { useGetDesign } from '@/api/business.js';
 
 const Download = ({ onBack }) => {
-  const toast = useToast();
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
   const pages = useTemplateStore((state) => state.template.pages);
   const selectElements = useTemplateStore((state) => state.selectElements);
@@ -52,11 +50,15 @@ const Download = ({ onBack }) => {
       const zipBlob = await zip.generateAsync({ type: 'blob' });
       saveAs(zipBlob, `${design.title}.zip`);
       setIsThumbnailLoading(false);
-    } catch (error) {
+    } catch (e) {
       setIsThumbnailLoading(false);
-      toast.error(error?.response?.data?.message || error.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
-  }, [selectElements, pages, design.title, toast, ext]);
+  }, [selectElements, pages, design.title, ext]);
 
   return (
     <div className="w-full">

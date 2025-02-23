@@ -1,16 +1,14 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button } from '@heroui/react';
+import { Button, addToast } from '@heroui/react';
 import { TbPhotoCircle, TbX } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import { useTemplate } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import ThumbnailsCarousel from '@/pages/designs/ThumbnailsCarousel.jsx';
 
 const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
-  const toast = useToast();
   const { id: business } = useBusiness();
   const navigate = useNavigate();
   const { mutateAsync: create, isPending: isCreateDesignLoading } = useTemplate(business);
@@ -25,7 +23,11 @@ const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
       const res = await create({ template: template.id });
       navigate(`/designs/${res.data.design._id}/edit`);
     } catch (e) {
-      toast.error(e?.response?.data?.message || e?.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message || e?.message,
+        color: 'danger'
+      });
     }
   };
 

@@ -1,4 +1,4 @@
-import { Button, Card, Spinner } from '@heroui/react';
+import { addToast, Button, Card, Spinner } from '@heroui/react';
 import PropTypes from 'prop-types';
 import Title from '../../shared/Title.jsx';
 import {
@@ -21,7 +21,6 @@ import { cn } from '@/lib/utils.js';
 import ConnectSql from '@/components/core/project/create/ConnectSql.jsx';
 import ConnectMongodb from '@/components/core/project/create/ConnectMongodb.jsx';
 import { SiAmazondynamodb, SiMariadb, SiOracle, SiPostgresql } from 'react-icons/si';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useNavigate } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
 import { useCreateProject } from '@/api/business.js';
@@ -192,7 +191,6 @@ const sources = [
 ];
 
 const SelectSource = ({ onNext, onPrev }) => {
-  const toast = useToast();
   const navigate = useNavigate();
   const { id: business } = useBusiness();
   const updateData = useProjectStore((state) => state.updateData);
@@ -228,7 +226,11 @@ const SelectSource = ({ onNext, onPrev }) => {
       updateTemplateStore({ id: res.data.design._id });
       navigate(`/designs/${res.data.design._id}/edit`);
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

@@ -8,8 +8,7 @@ import MergeOptions from '@/components/core/templates/create/elements/table/Merg
 import DeleteOptions from '@/components/core/templates/create/elements/table/DeleteOptions.jsx';
 import FontOptions from '@/components/core/templates/create/elements/table/FontOptions.jsx';
 import BackgroundOptions from '@/components/core/templates/create/elements/table/BackgroundOptions.jsx';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
-import { useToast } from '@/hooks/use-toast.jsx';
+import { addToast, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 
 const getMaxColumns = (data) => {
   let max = 0;
@@ -43,7 +42,6 @@ const getCellPosition = (rows, rowIndex, cellIndex) => {
 
 export const Table = ({ element, onChange, active }) => {
   const table = useRef(null);
-  const toast = useToast();
   const rows = element.config.data;
   const [selection, setSelection] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
@@ -200,7 +198,7 @@ export const Table = ({ element, onChange, active }) => {
 
   const handleCalculation = (operation) => {
     if (!selection || selection.startRow !== selection.endRow || selection.startCol !== selection.endCol) {
-      toast.error('Please select a single cell to perform the calculation.');
+      addToast({ title: 'Error', description: 'Please select a single cell to perform the calculation.' });
       return;
     }
 
@@ -212,7 +210,7 @@ export const Table = ({ element, onChange, active }) => {
     });
 
     if (columnValues.length === 0) {
-      toast.error('No values found for calculation.');
+      addToast({ title: 'Error', description: 'No values found for calculation.' });
       return;
     }
 

@@ -1,16 +1,14 @@
 import { useCreateUploadMutation, useGetUploads } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { Image, Skeleton } from '@heroui/react';
+import { addToast, Image, Skeleton } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 
 const UploadedImages = () => {
-  const toast = useToast();
   const qc = useQueryClient();
   const { id } = useBusiness();
   const [files, setFiles] = useState([]);
@@ -25,7 +23,11 @@ const UploadedImages = () => {
     try {
       await upload(files);
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

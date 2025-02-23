@@ -9,6 +9,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
   Spinner,
+  addToast,
 } from '@heroui/react';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
@@ -16,7 +17,6 @@ import { camelCaseToWords, kebabToWords } from '@/lib/utils.js';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
 import { useDeleteTableColumn, useUpdateDesignSource } from '@/api/business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { RiMore2Line } from 'react-icons/ri';
 
 const TableColumns = ({ table }) => {
@@ -62,7 +62,6 @@ const TableColumns = ({ table }) => {
 };
 
 const TableColumnItem = ({ table, column }) => {
-  const toast = useToast();
   const { source } = useCurrentDesign();
   const { id: business } = useBusiness();
   const id = useTemplateStore((state) => state.template.id);
@@ -78,7 +77,11 @@ const TableColumnItem = ({ table, column }) => {
       const relationships = source.relationships.filter((r, i) => i !== index);
       await update({ relationships });
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message || e.message,
+        color: 'danger'
+      });
     }
   };
 
@@ -86,7 +89,11 @@ const TableColumnItem = ({ table, column }) => {
     try {
       await deleteColumn({ table, column: column.key });
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message || e.message,
+        color: 'danger'
+      });
     }
   };
 

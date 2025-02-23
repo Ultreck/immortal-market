@@ -25,12 +25,11 @@ import Card from '@/components/ui/Card.jsx';
 import IconButton from '@/components/ui/IconButton.jsx';
 import { useAddLaunchSubscriber, useGetLaunchSubscriptions } from '@/api/misc.js';
 import { useQueryClient } from '@tanstack/react-query';
-import { useToast } from '@/hooks/use-toast.jsx';
 import Loader from '@/components/ui/Loader.jsx';
 import { format } from 'date-fns';
+import { addToast } from '@heroui/react';
 
 const ProductSummary = ({ product, isOpen, onClose }) => {
-  const toast = useToast();
   const qc = useQueryClient();
   const timer = useCountdown(product?.date);
   const [isFetching, setIsFetching] = useState(false);
@@ -48,7 +47,11 @@ const ProductSummary = ({ product, isOpen, onClose }) => {
       });
       setIsFetching(false);
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

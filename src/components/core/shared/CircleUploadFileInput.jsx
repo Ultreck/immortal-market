@@ -1,8 +1,8 @@
 import Dropzone from 'react-dropzone';
 import classNames from 'classnames';
 import { IconCloudUpload } from '@tabler/icons-react';
-import { useToast } from '@/hooks/use-toast.jsx';
 import PropTypes from 'prop-types';
+import { addToast } from '@heroui/react';
 
 const CircleUploadFileInput = ({
   onChange,
@@ -11,8 +11,6 @@ const CircleUploadFileInput = ({
   maxSize = 1000000,
   error = 'File not allowed',
 }) => {
-  const toast = useToast();
-
   return (
     <>
       <Dropzone
@@ -23,8 +21,13 @@ const CircleUploadFileInput = ({
         onDropRejected={(fileRejections) => {
           const exceedsMaxSize = fileRejections.some((f) => f.errors.some((j) => j.code === 'file-too-large'));
           const invalidType = fileRejections.some((f) => f.errors.some((j) => j.code === 'file-invalid-type'));
-          if (invalidType) return toast.error(`File not allowed`);
-          if (exceedsMaxSize) toast.error(`File size exceeds max of ${maxSize / 1000000}mb`);
+          if (invalidType) return addToast({ title: 'Error', description: 'File not allowed' });
+          if (exceedsMaxSize) {
+            addToast({
+              title: 'Error',
+              description: `File size exceeds max of ${maxSize / 1000000}mb`,
+            });
+          }
         }}
         maxSize={maxSize}
       >

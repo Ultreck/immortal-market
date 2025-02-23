@@ -1,13 +1,12 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
 import { useDeleteDesignBlock, useGetDesignBlocks } from '@/api/business.js';
-import { Button, Chip, Image, Skeleton } from '@heroui/react';
+import { addToast, Button, Chip, Image, Skeleton } from '@heroui/react';
 import useBusiness from '@/hooks/use-business.js';
 import { cn, getImageLink } from '@/lib/utils.js';
 import useTemplateStore from '@/store/template.js';
 import NoData from '@/components/ui/NoData.jsx';
 import { useState } from 'react';
-import { useToast } from '@/hooks/use-toast.jsx';
 import { TbTrash } from 'react-icons/tb';
 
 const categories = [
@@ -91,14 +90,17 @@ const PageBlocksModal = ({ isOpen, onClose }) => {
 };
 
 const PageBlockItem = ({ block, onClick }) => {
-  const toast = useToast();
   const { mutateAsync: deleteBlock, isPending: isDeleteBlockPending } = useDeleteDesignBlock();
 
   const handleDelete = async () => {
     try {
       await deleteBlock(block.id);
     } catch (e) {
-      toast.error(e?.response?.data?.message || 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

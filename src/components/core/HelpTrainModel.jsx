@@ -10,10 +10,9 @@ import { useForm } from 'react-hook-form';
 import products from '@/lib/products.js';
 import TextArea from '@/components/ui/TextArea.jsx';
 import { useCreateSampleDocument } from '@/api/misc.js';
-import { useToast } from '@/hooks/use-toast.jsx';
+import { addToast } from '@heroui/react';
 
 const HelpTrainModel = ({ isOpen, onClose, category }) => {
-  const toast = useToast();
   const [file, setFile] = useState(null);
   const [success, setSuccess] = useState(false);
   const {
@@ -39,7 +38,11 @@ const HelpTrainModel = ({ isOpen, onClose, category }) => {
       await create(fd);
       setSuccess(true);
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

@@ -1,12 +1,10 @@
-import { Button, Modal, ModalBody, ModalContent } from '@heroui/react';
+import { addToast, Button, Modal, ModalBody, ModalContent } from '@heroui/react';
 import { useDeleteDesign } from '@/api/business.js';
 import { useQueryClient } from '@tanstack/react-query';
-import { useToast } from '@/hooks/use-toast.jsx';
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
 
 const DeleteModal = ({ id, isOpen, onClose }) => {
-  const toast = useToast();
   const qc = useQueryClient();
   const { id: business } = useBusiness();
   const { mutateAsync: deleteTemplate, isPending: isDeleteLoading } = useDeleteDesign(business);
@@ -15,9 +13,16 @@ const DeleteModal = ({ id, isOpen, onClose }) => {
     try {
       await deleteTemplate({ id });
       await qc.invalidateQueries({ queryKey: ['businesses', id, 'designs'] });
-      toast.success('Project deleted');
+      addToast({
+        title: 'Project deleted',
+        color: 'success',
+      });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'danger'
+      });
     }
   };
 

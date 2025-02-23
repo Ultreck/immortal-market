@@ -10,10 +10,10 @@ import Input from '@/components/ui/Input.jsx';
 import TextArea from '@/components/ui/TextArea.jsx';
 import Button from '@/components/ui/Button.jsx';
 import { useUpdateReceipt } from '@/api/document.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import Select from '@/components/ui/Select.jsx';
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
+import { addToast } from '@heroui/react';
 
 const schema = yup.object({
   number: yup.string().required('Receipt number is required'),
@@ -41,7 +41,6 @@ const schema = yup.object({
 });
 
 const EditReceipt = ({ receipt, onBack }) => {
-  const toast = useToast();
   const qc = useQueryClient();
   const { business } = useBusiness();
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateReceipt(business._id, receipt._id);
@@ -83,9 +82,13 @@ const EditReceipt = ({ receipt, onBack }) => {
       await qc.invalidateQueries({
         queryKey: ['receipts'],
       });
-      toast.success('Receipt updated');
+      addToast({ title: 'Receipt updated', color: 'success' });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

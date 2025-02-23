@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import Title from '@/components/core/shared/Title.jsx';
-import { Button, Card } from '@heroui/react';
+import { addToast, Button, Card } from '@heroui/react';
 import { cn } from '@/lib/utils.js';
 import { TbChevronRight, TbCircleCheckFilled, TbForms, TbRobot } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
 import useTemplateStore from '@/store/template.js';
 import { useAnalyze, useAutoGenerate, useUpdateDesignSource } from '@/api/business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const ReportOption = ({ onNext, onClose }) => {
-  const toast = useToast();
   const { source } = useCurrentDesign();
   const [type, setType] = useState(source?.selection?.type || '');
   const { id: business } = useBusiness();
@@ -26,7 +24,11 @@ const ReportOption = ({ onNext, onClose }) => {
       if (type === 'auto') await handleAnalyze();
       onNext();
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 
@@ -37,7 +39,11 @@ const ReportOption = ({ onNext, onClose }) => {
       onClose();
       window.location.reload();
     } catch (e) {
-      toast.error(e?.response?.data?.message || e.message);
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

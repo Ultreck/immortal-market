@@ -3,17 +3,15 @@ import { toBlob } from 'html-to-image';
 import { useKey } from 'react-use';
 import useTemplateStore from '@/store/template.js';
 import { useGetDesign, useUpdateDesign } from '@/api/business.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { useQueryClient } from '@tanstack/react-query';
 import { BsCloudArrowDown, BsCloudCheck } from 'react-icons/bs';
-import { Button, Tooltip } from '@heroui/react';
+import { Button, Tooltip, addToast } from '@heroui/react';
 import equal from 'fast-deep-equal/es6/react';
 import { objectToFormData } from '@/lib/utils.js';
 
 const SaveButton = () => {
   const qc = useQueryClient();
-  const toast = useToast();
   const { id: business } = useBusiness();
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
   const id = useTemplateStore((state) => state.template.id);
@@ -40,7 +38,11 @@ const SaveButton = () => {
       await qc.invalidateQueries({ queryKey: ['businesses', business, 'designs'] });
     } catch (error) {
       setIsThumbnailLoading(false);
-      toast.error(error?.response?.data?.message || error.message);
+      addToast({
+        title: 'Error',
+        description: error?.response?.data?.message || error.message,
+        color: 'danger'
+      });
     }
   }, [pages, update, business, qc]);
 
