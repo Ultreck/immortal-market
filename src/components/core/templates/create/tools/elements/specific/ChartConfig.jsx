@@ -1,13 +1,10 @@
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbSettings2 } from 'react-icons/tb';
-import StandardStackedBarConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardStackedBarConfig.jsx';
 import StandardBarCommonConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardBarCommonConfig.jsx';
 import StandardPieCommonConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardPieCommonConfig.jsx';
-import StandardAltBarConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardAltBarConfig.jsx';
-import StandardMultipleBarConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardMultipleBarConfig.jsx';
-import StandardBubbleChartConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardBubbleChartConfig.jsx';
 import useTemplateStore from '@/store/template.js';
+import ErrorBoundary from '@/components/ErrorBoundary.jsx';
 
 const ChartConfig = ({ element, onChange }) => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
@@ -18,7 +15,7 @@ const ChartConfig = ({ element, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      classNames={{ content: 'w-[400px]' }}
+      classNames={{ content: 'w-[450px]' }}
       isOpen={openTool === 'chart'}
       onOpenChange={(v) => updateTemplate({ openTool: v ? 'chart' : null })}
     >
@@ -27,9 +24,11 @@ const ChartConfig = ({ element, onChange }) => {
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 shadow border border-default-200">
+      <PopoverContent className="p-0 shadow border border-default-200 h-full max-h-[500px] overflow-y-auto block">
         <div className="px-8 py-6 w-full">
-          <ChartData element={element} onChange={onChange} onClose={() => updateTemplate({ openTool: null })} />
+          <ErrorBoundary>
+            <ChartData element={element} onChange={onChange} onClose={() => updateTemplate({ openTool: null })} />
+          </ErrorBoundary>
         </div>
       </PopoverContent>
     </Popover>
@@ -39,45 +38,23 @@ const ChartConfig = ({ element, onChange }) => {
 const ChartData = ({ element, onChange }) => {
   return (
     <div>
-      {element.config.name === 'stacked-bar' && <StandardStackedBarConfig element={element} onChange={onChange} />}
-      {element.config.name === 'stacked-bar-vertical' && (
-        <StandardStackedBarConfig element={element} onChange={onChange} />
+      {['pie', 'pie-2', 'semi-pie', 'semi-pie-2'].includes(element.config.name) && (
+        <StandardPieCommonConfig element={element} onChange={onChange} />
       )}
-      {element.config.name === 'line-area' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
-      {element.config.name === 'line-area-vertical' && (
-        <StandardMultipleBarConfig element={element} onChange={onChange} />
-      )}
-      {element.config.name === 'line-bar' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
-      {element.config.name === 'area-bar' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
-      {element.config.name === 'area-bar-vertical' && (
-        <StandardMultipleBarConfig element={element} onChange={onChange} />
-      )}
-      {element.config.name === 'line-bar-vertical' && (
-        <StandardMultipleBarConfig element={element} onChange={onChange} />
-      )}
-      {element.config.name === 'bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'bubble' && <StandardBubbleChartConfig element={element} onChange={onChange} />}
-      {element.config.name === 'scatter' && <StandardBubbleChartConfig element={element} onChange={onChange} />}
-      {element.config.name === 'area' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'area-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
-      {element.config.name === 'line' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'line-multiple' && <StandardStackedBarConfig element={element} onChange={onChange} />}
-      {element.config.name === 'bar-not-sep' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'vertical-bar' && <StandardBarCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'vertical-bar-no-sep' && (
-        <StandardBarCommonConfig element={element} onChange={onChange} />
-      )}
-      {element.config.name === 'bar-multiple' && <StandardMultipleBarConfig element={element} onChange={onChange} />}
-      {element.config.name === 'bar-multiple-vertical' && (
-        <StandardMultipleBarConfig element={element} onChange={onChange} />
-      )}
-      {element.config.name === 'pie' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'semi-pie' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'semi-circle' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'doughnut' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'doughnut-standard' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'doughnut-crazy' && <StandardPieCommonConfig element={element} onChange={onChange} />}
-      {element.config.name === 'alt-bar' && <StandardAltBarConfig element={element} onChange={onChange} />}
+      {[
+        'bar',
+        'bar-stacked',
+        'bar-multiple',
+        'line',
+        'line-multiple',
+        'area',
+        'area-multiple',
+        'line-area',
+        'line-bar',
+        'alt-bar',
+        'bubble',
+        'scatter',
+      ].includes(element.config.name) && <StandardBarCommonConfig element={element} onChange={onChange} />}
     </div>
   );
 };

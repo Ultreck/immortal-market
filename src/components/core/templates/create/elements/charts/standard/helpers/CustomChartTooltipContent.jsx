@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { ChartContainer } from '@/components/ui/chart.jsx';
 import { Bar, BarChart, Line, LineChart, Pie, PieChart, XAxis } from 'recharts';
 
-const ChartTooltipContent = ({ label, value, present = false, element }) => {
+const CustomChartTooltipContent = ({ label, value, present = false, element }) => {
   const chartConfig = {
     visitors: {
       label: 'Visitors',
@@ -36,6 +36,7 @@ const ChartTooltipContent = ({ label, value, present = false, element }) => {
     { browser: 'edge', visitors: 173, fill: '#E66B5B' },
     { browser: 'other', visitors: 90, fill: '#1D9085' },
   ];
+
   return (
     <div className="relative z-[1] bg-white shadow border border-default-200 dark:bg-default-100 text-default-900 rounded-2xl px-6 py-4 text-sm w-full max-w-[200px] h-full">
       {present ? (
@@ -84,11 +85,11 @@ const ChartTooltipContent = ({ label, value, present = false, element }) => {
   );
 };
 
-ChartTooltipContent.propTypes = {
+CustomChartTooltipContent.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   present: PropTypes.bool,
   element: PropTypes.object.isRequired,
 };
 
-export default ChartTooltipContent;
+export default CustomChartTooltipContent;

@@ -2,6 +2,8 @@ import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import useTemplateStore from '@/store/template.js';
 import ElementCommentBadge from '@/components/core/templates/create/comment/ElementCommentBadge.jsx';
+import ErrorBoundary from '@/components/ErrorBoundary.jsx';
+import { RiAlertLine } from 'react-icons/ri';
 
 const ElementWrapper = ({
   element,
@@ -37,7 +39,18 @@ const ElementWrapper = ({
         onMouseDown={(e) => onClick(element.id, e)}
         onDoubleClick={() => onDoubleClick(element.id)}
       />
-      {fit ? <div className="w-full h-max">{children}</div> : <div className="w-full h-full">{children}</div>}
+      <ErrorBoundary
+        fallback={
+          <div className="bg-red-800 text-white rounded-2xl p-10 h-full w-full flex flex-col items-center justify-center">
+            <RiAlertLine size="28" />
+            <p className="mt-4 max-w-[200px] leading-[1.1] text-center">
+              Something went wrong while rendering this component
+            </p>
+          </div>
+        }
+      >
+        {fit ? <div className="w-full h-max">{children}</div> : <div className="w-full h-full">{children}</div>}
+      </ErrorBoundary>
       {isCommentsVisible && <ElementCommentBadge element={element} />}
     </div>
   );

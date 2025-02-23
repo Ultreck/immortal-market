@@ -63,18 +63,10 @@ const options = [
   'pictogram-shapes',
   'custom-bar',
   'bar',
-  'bar-not-sep',
-  'vertical-bar',
-  'vertical-bar-no-sep',
-  'stacked-bar',
-  'stacked-bar-vertical',
-  'alt-bar',
+  'bar-stacked',
   'bar-multiple',
-  'bar-multiple-vertical',
+  'alt-bar',
   'pie',
-  'doughnut',
-  'doughnut-standard',
-  'doughnut-crazy',
   'line',
   'line-multiple',
   'area',
@@ -154,7 +146,7 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
       <ModalContent>
         <ModalBody className="px-8 py-8">
           <h2 className="text-lg mb-6">Save page as block</h2>
-          <Card className="border border-default-200 rounded-2xl mb-4">
+          <Card className="border border-default-200 rounded-2xl mb-4" shadow="none">
             <CardBody className="p-0 divide-y divide-default-200">
               <div className="px-4 py-2">
                 Page {index + 1} - {page.title}

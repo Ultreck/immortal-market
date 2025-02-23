@@ -21,7 +21,6 @@ import CountUpNumberConfig from './elements/specific/CountUpNumberConfig.jsx';
 import SvgConfig from '@/components/core/templates/create/tools/elements/specific/SvgConfig.jsx';
 import Colors from './elements/generic/Colors.jsx';
 import Font from '@/components/core/templates/create/tools/elements/generic/Font.jsx';
-import ChartFont from '@/components/core/templates/create/tools/elements/generic/ChartFont.jsx';
 import MapConfig from '@/components/core/templates/create/tools/elements/specific/map/MapConfig.jsx';
 import Color from '@/components/core/templates/create/tools/elements/generic/Color.jsx';
 import DataTagConfig from '@/components/core/templates/create/tools/elements/specific/DataTagConfig.jsx';
@@ -54,7 +53,6 @@ const mapping = {
   map: { type: 'single', component: MapConfig },
   'data-tag': { type: 'single', component: DataTagConfig },
   'chart-data': { type: 'single', component: ChartData },
-  'chart-font': { type: 'multiple', component: ChartFont },
   layout: { type: 'single', component: Layout },
   'element-tag': { type: 'single', component: ElementTag },
   tooltip: { type: 'single', component: ElementTooltip },

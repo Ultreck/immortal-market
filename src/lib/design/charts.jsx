@@ -33,1318 +33,699 @@ import { IconChartFunnel } from '@tabler/icons-react';
 import { AiOutlineLineChart } from 'react-icons/ai';
 import { BiPieChart } from 'react-icons/bi';
 import { MdOutlineStackedBarChart } from 'react-icons/md';
-import { colors } from '../utils.js';
 import { starterLifeChartData } from '@/lib/design/chart-data.js';
 import { getChartsDefaultStyle, getElementDefaultStyle } from '@/lib/elements.js';
 
-export const standard = [
-  {
-    id: 'chart-s-bar',
-    category: 'bar',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Bar Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-s', name: 'bar' }),
-      config: {
-        name: 'bar',
-        styles: getChartsDefaultStyle({ type: 'chart-s', name: 'bar' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        colors: [
-          '#E66B5B',
-          '#1D9085',
-          '#264A5A',
-          '#E8C22C',
-          '#F6881F',
-          '#E66B5B',
-          '#1D9085',
-          '#264A5A',
-          '#E8C22C',
-          '#F6881F',
-        ],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        bars: 5,
-        fontSize: 12,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'top',
-        showLabel: false,
-        borderRadius: 8,
-      },
-      tooltip: {
-        enabled: false,
-        type: 'bar',
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartBar className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-bar-not-sep',
-    category: 'bar',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Bar Chart (Not Separated)',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-not-sep' }),
-      config: {
-        name: 'bar-not-sep',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bar-not-sep' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        bars: 5,
-        fontSize: 12,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'top',
-        showLabel: false,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartBar className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-vertical-bar',
-    category: 'bar',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Vertical Bar Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'vertical-bar' }),
-      config: {
-        name: 'vertical-bar',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'vertical-bar' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        bars: 5,
-        fontSize: 12,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'center',
-        showLabel: false,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartBar className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-vertical-bar-no-sep',
-    category: 'bar',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Vertical Bar-no-sep Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'vertical-bar-no-sep' }),
-      config: {
-        name: 'vertical-bar-no-sep',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'vertical-bar-no-sep' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        bars: 5,
-        fontSize: 12,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'center',
-        showLabel: false,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartBar className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-stacked-bar',
-    category: 'bar',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Stacked Bar Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'stacked-bar' }),
-      config: {
-        name: 'stacked-bar',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'stacked-bar' }),
-        data: [
-          { month: 'Jan', desktop: 187, mobile: 200 },
-          { month: 'Feb', desktop: 275, mobile: 173 },
-          { month: 'Mar', desktop: 200, mobile: 90 },
-          { month: 'Apr', desktop: 275, mobile: 173 },
-          { month: 'May', desktop: 187, mobile: 90 },
-        ],
-        keys: { x: 'month', y: ['desktop', 'mobile'] },
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        colors: ['#E66B5B', '#1D9085'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        fontSize: 12,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'center',
-        showLabel: false,
-        isSeparated: false,
-        bars: 5,
-        tools: {
-          colors: {
-            gradient: false,
-          },
-        },
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <MdOutlineStackedBarChart className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-stacked-bar-vertical',
-    category: 'bar',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Stacked Bar-vertical Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'stacked-bar-vertical' }),
-      config: {
-        name: 'stacked-bar-vertical',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'stacked-bar-vertical' }),
-        data: [
-          { month: 'Jan', desktop: 187, mobile: 200 },
-          { month: 'Feb', desktop: 275, mobile: 173 },
-          { month: 'Mar', desktop: 200, mobile: 90 },
-          { month: 'Apr', desktop: 275, mobile: 173 },
-          { month: 'May', desktop: 187, mobile: 90 },
-        ],
-        keys: { x: 'month', y: ['desktop', 'mobile'] },
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        colors: ['#E66B5B', '#1D9085'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        fontSize: 12,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'center',
-        showLabel: false,
-        isSeparated: false,
-        bars: 5,
-        tools: {
-          colors: {
-            gradient: false,
-          },
-        },
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <MdOutlineStackedBarChart className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-alt-bar',
-    category: 'bar',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Alt Bar Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'alt-bar' }),
-      config: {
-        name: 'alt-bar',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'alt-bar' }),
-        data: [
-          ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-          [320, 302, 341, 374, 90, 450, 420],
-          [-120, -132, -101, -134, -190, -230, -310],
-        ],
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        keys: { x: 'browser', y: 'visitors' },
-        colors: ['#E66B5B', '#1D9085'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        fontSize: 12,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'top',
-        showLabel: true,
-        bars: 5,
-        tools: {
-          colors: {
-            gradient: false,
-          },
-        },
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartBar className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-bar-multiple',
-    category: 'bar',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Bar Multiple Chart',
-      width: 500,
-      height: 400,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple' }),
-      config: {
-        name: 'bar-multiple',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bar-multiple' }),
-        data: [
-          {
-            name: 'Page A',
-            uv: 4000,
-            pv: 1400,
-            amt: 2100,
-            pt: 2500,
-            ut: 2800,
-          },
-          {
-            name: 'Page B',
-            uv: 3000,
-            pv: 1398,
-            amt: 2000,
-            pt: 5000,
-            ut: 1800,
-          },
-          {
-            name: 'Page C',
-            uv: 2000,
-            pv: 9800,
-            amt: 2290,
-            pt: 1000,
-            ut: 3100,
-          },
-          {
-            name: 'Page D',
-            uv: 2780,
-            pv: 3908,
-            amt: 2000,
-            pt: 4000,
-            ut: 3100,
-          },
-          {
-            name: 'Page E',
-            uv: 1890,
-            pv: 4800,
-            amt: 2100,
-            pt: 2000,
-            ut: 4100,
-          },
-        ],
-        orientation: 'vertical',
-        showXYaxis: false,
-        showLegend: false,
-        keys: { x: 'name', y: ['pv', 'uv', 'amt', 'pt', 'ut'] },
-        colors: ['#E66B5B', '#1D9085', '#F28C75', '#E84C3D ', '#2A9E90'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showGridline: false,
-        bars: 5,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'center',
-        showLabel: false,
-        noOfBarsPerGroup: 2,
-        tools: {
-          colors: {
-            gradient: false,
-          },
-        },
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartBar className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-bar-multiple-vertical',
-    category: 'bar',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Bar Multiple-vertical Chart',
-      width: 500,
-      height: 400,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple-vertical' }),
-      config: {
-        name: 'bar-multiple-vertical',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bar-multiple-vertical' }),
-        data: [
-          {
-            name: 'Page A',
-            uv: 4000,
-            pv: 1400,
-            amt: 2100,
-            pt: 2500,
-            ut: 2800,
-          },
-          {
-            name: 'Page B',
-            uv: 3000,
-            pv: 1398,
-            amt: 2000,
-            pt: 5000,
-            ut: 1800,
-          },
-          {
-            name: 'Page C',
-            uv: 2000,
-            pv: 9800,
-            amt: 2290,
-            pt: 1000,
-            ut: 3100,
-          },
-          {
-            name: 'Page D',
-            uv: 2780,
-            pv: 3908,
-            amt: 2000,
-            pt: 4000,
-            ut: 3100,
-          },
-          {
-            name: 'Page E',
-            uv: 1890,
-            pv: 4800,
-            amt: 2100,
-            pt: 2000,
-            ut: 4100,
-          },
-        ],
-        keys: { x: 'name', y: ['pv', 'uv', 'amt', 'pt', 'ut'] },
-        colors: ['#E66B5B', '#1D9085', '#F28C75', '#E84C3D ', '#2A9E90'],
-        useGradient: false,
-        showXYaxis: false,
-        showLegend: false,
-        gradientColor: '#2673D9',
-        showGridline: false,
-        bars: 5,
-        noOfBarsPerGroup: 2,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'center',
-        showLabel: false,
-        tools: {
-          colors: {
-            gradient: false,
-          },
-        },
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartBar className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-pie',
-    category: 'doughnut',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Pie Chart',
-      width: 500,
-      height: 400,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'pie' }),
-      config: {
-        name: 'pie',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'pie' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { name: 'name', value: 'value' },
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showLabel: true,
-        pies: 5,
-        showLegend: false,
-        showToolTip: true,
-        legendPosition: 'top',
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'inside',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <BiPieChart className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-doughnut',
-    category: 'doughnut',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Doughnut Chart',
-      width: 400,
-      height: 400,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut' }),
-      config: {
-        name: 'doughnut',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'doughnut' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        type: 'normal',
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        pies: 5,
-        showLegend: true,
-        showLabel: true,
-        showToolTip: true,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'inside',
-        innerRadius: 80,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartDonut2 className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-doughnut-standard',
-    category: 'doughnut',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Doughnut-standard Chart',
-      width: 500,
-      height: 500,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut-standard' }),
-      config: {
-        name: 'doughnut-standard',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'doughnut-standard' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        type: 'normal',
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        pies: 5,
-        showLegend: true,
-        showLabel: true,
-        innerRadius: 40,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'inside',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartDonut4 className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-doughnut-crazy',
-    category: 'doughnut',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Doughnut-crazy Chart',
-      width: 550,
-      height: 500,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut-crazy' }),
-      config: {
-        name: 'doughnut-crazy',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'doughnut-crazy' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        type: 'normal',
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        pies: 5,
-        showLegend: true,
-        showLabel: true,
-        labelFontSize: 12,
-        labelFontColor: '#000000',
-        labelPosition: 'inside',
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartDonut className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-line',
-    category: 'area',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Line Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'line' }),
-      config: {
-        name: 'line',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        colors: ['#E66B5B'],
-        showXGridline: false,
-        showYGridline: false,
-        fontSize: 12,
-        bars: 5,
-        showLegend: false,
-        showXaxis: false,
-        showYaxis: false,
-        type: 'Natural',
-        tools: {
-          colors: {
-            gradient: false,
-            palettes: false,
-          },
-        },
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartLine className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-line-multiple',
-    category: 'area',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Line Multiple Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'line-multiple' }),
-      config: {
-        name: 'line-multiple',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-multiple' }),
-        data: [
-          { month: 'Jan', desktop: 187, monitor: 150, smartWatch: 120, ipad: 100, mobile: 200 },
-          { month: 'Feb', desktop: 275, monitor: 180, smartWatch: 130, ipad: 120, mobile: 173 },
-          { month: 'Mar', desktop: 200, monitor: 250, smartWatch: 220, ipad: 300, mobile: 90 },
-          { month: 'Apr', desktop: 275, monitor: 100, smartWatch: 130, ipad: 230, mobile: 173 },
-          { month: 'May', desktop: 187, monitor: 225, smartWatch: 280, ipad: 190, mobile: 90 },
-        ],
-        keys: { x: 'month', y: ['desktop', 'mobile', 'monitor', 'ipad', 'smartWatch'] },
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        bars: 5,
-        showLegend: false,
-        showXaxis: false,
-        showYaxis: false,
-        showXGridline: false,
-        showYGridline: false,
-        fontSize: 12,
-        type: 'Natural',
-        noOfLines: 2,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <AiOutlineLineChart className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-area',
-    category: 'area',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Area Chart',
-      width: 500,
-      height: 400,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'area' }),
-      config: {
-        name: 'area',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area' }),
-        data: [
-          { name: 'Page A', value: 4000 },
-          { name: 'Page B', value: 3000 },
-          { name: 'Page C', value: 2000 },
-          { name: 'Page D', value: 2780 },
-          { name: 'Page E', value: 1890 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        type: 'multiple',
-        colors: ['#E66B5B'],
-        showXGridline: false,
-        showYGridline: false,
-        fontSize: 12,
-        bars: 5,
-        showLegend: false,
-        showXaxis: false,
-        showYaxis: false,
-        useGradient: false,
-        gradientColor: '#2673D9',
-        tools: {
-          colors: {
-            gradient: false,
-            palettes: false,
-          },
-        },
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartArea className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-area-multiple',
-    category: 'area',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Area Chart',
-      width: 500,
-      height: 400,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'area-multiple' }),
-      config: {
-        name: 'area-multiple',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'area-multiple' }),
-        data: [
-          { month: 'Jan', desktop: 187, monitor: 150, smartWatch: 120, ipad: 100, mobile: 200 },
-          { month: 'Feb', desktop: 275, monitor: 180, smartWatch: 130, ipad: 120, mobile: 173 },
-          { month: 'Mar', desktop: 200, monitor: 250, smartWatch: 220, ipad: 300, mobile: 90 },
-          { month: 'Apr', desktop: 275, monitor: 100, smartWatch: 130, ipad: 230, mobile: 173 },
-          { month: 'May', desktop: 187, monitor: 225, smartWatch: 280, ipad: 190, mobile: 90 },
-        ],
-        keys: { x: 'month', y: ['desktop', 'mobile', 'monitor', 'ipad', 'smartWatch'] },
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        noOfLines: 2,
-        bars: 5,
-        fontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartAreaLine className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-semi-pie',
-    category: 'doughnut',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Semi Pie Chart',
-      width: 450,
-      height: 450,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-pie' }),
-      config: {
-        name: 'semi-pie',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'semi-pie' }),
-        data: [
-          { name: 'Group E', value: 500 },
-          { name: 'Group F', value: 600 },
-          { name: 'Group A', value: 400 },
-          { name: 'Group D', value: 300 },
-          { name: 'Group B', value: 200 },
-        ],
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        keys: { x: 'name', y: 'value' },
-        useGradient: false,
-        gradientColor: '#2673D9',
-        pies: 5,
-        showLabel: true,
-        showLegend: true,
-        fontSize: 12,
-        labelPosition: 'inside',
-        labelFontColor: '#000000',
-        labelFontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbCircleHalf className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-semi-circle',
-    category: 'doughnut',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Semi Circle Chart',
-      width: 500,
-      height: 400,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-circle' }),
-      config: {
-        name: 'semi-circle',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'semi-circle' }),
-        data: [
-          { name: 'Group A', value: 400 },
-          { name: 'Group D', value: 300 },
-          { name: 'Group B', value: 200 },
-          { name: 'Group C', value: 100 },
-          { name: 'Group G', value: 700 },
-        ],
-        keys: { x: 'name', y: 'value' },
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        pies: 5,
-        showLabel: true,
-        showLegend: true,
-        fontSize: 12,
-        labelPosition: 'inside',
-        labelFontColor: '#000000',
-        labelFontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbCircleHalf className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-bubble',
-    category: 'bubble',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Bubble Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'bubble' }),
-      config: {
-        name: 'bubble',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bubble' }),
-        data: [
-          [10.0, 8.04],
-          [8.07, 6.95],
-          [13.0, 7.58],
-          [9.05, 8.81],
-          [11.0, 8.33],
-          [14.0, 7.66],
-          [13.4, 6.81],
-          [10.0, 6.33],
-          [14.0, 8.96],
-          [12.5, 6.82],
-          [9.15, 7.2],
-          [11.5, 7.2],
-          [3.03, 4.23],
-          [12.2, 7.83],
-          [2.02, 4.47],
-          [1.05, 3.33],
-          [4.05, 4.96],
-          [6.03, 7.24],
-          [12.0, 6.26],
-          [12.0, 8.84],
-          [7.08, 5.82],
-          [5.02, 5.68],
-        ],
-        keys: { x: 'x', y: 'y' },
-        colors: ['#E66B5B', '#1D9085', '#264A5A', '#E8C22C', '#F6881F'],
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showGridline: true,
-        bubbles: 20,
-        showLegend: true,
-        showXaxis: true,
-        showYaxis: true,
-        fontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartBubble className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-scatter',
-    category: 'bubble',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Scatter Chart',
-      width: 550,
-      height: 400,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'scatter' }),
-      config: {
-        name: 'scatter',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'scatter' }),
-        data: [
-          [1777, 57.7, 187060177, 'India', 1990],
-          [15161, 68.0, 115460577, 'China', 1990],
-          [29550, 79.1, 122249285, 'Japan', 1990],
-          [19349, 69.6, 147568552, 'Russia', 1990],
-          [37062, 75.4, 252847810, 'United States', 1990],
-          [26424, 75.7, 57110117, 'United Kingdom', 1990],
-          [10088, 70.8, 38195258, 'Poland', 1990],
-          [10670, 67.3, 53994605, 'Turkey', 1990],
-          [31476, 75.4, 78958237, 'Germany', 1990],
-        ],
-        keys: { x: 'x', y: 'y' },
-        colors,
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showGridline: true,
-        bubbles: 20,
-        showLegend: true,
-        showXaxis: true,
-        showYaxis: true,
-      },
-      showLegend: true,
-      showTooltip: true,
-      showXaxis: true,
-      showYaxis: true,
-      fontSize: 12,
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartBubble className="w-full h-full" />
-      </div>
-    ),
-  },
-  {
-    id: 'chart-s-line-area',
-    category: 'combination',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Line area Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'line-area' }),
-      config: {
-        name: 'line-area',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-area' }),
-        data: [
-          { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
-          { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
-          { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
-          { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
-          { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-        ],
-        keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
-        colors: [
-          '#E66B5B',
-          '#1D9085',
-          '#264A5A',
-          '#E8C22C',
-          '#F6881F',
-          '#E66B5B',
-          '#1D9085',
-          '#264A5A',
-          '#E8C22C',
-          '#F6881F',
-        ],
-        bars: 5,
-        numberOfArea: 3,
-        numberOfLines: 4,
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        gradientColor: '#2673D9',
-        fontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartPpf className="w-full h-full" />
-      </div>
-    ),
-  },
-  // {
-  //   id: 'chart-s-line-area-vertical',
-  //   category: 'combination',
-  //   data: {
-  //     type: 'chart-s',
-  //     useBackgroundImage: false,
-  //     backgroundImage: null,
-  //     backgroundColor: '#000',
-  //     useBackgroundColor: false,
-  //     text: 'Line area-vertical Chart',
-  //     width: 400,
-  //     height: 300,
-  //     style: getElementDefaultStyle({ type: 'chart-a', name: 'line-area-vertical' }),
-  //     config: {
-  //       name: 'line-area-vertical',
-  //       styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-area-vertical' }),
-  //       data: [
-  //         { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
-  //         { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
-  //         { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
-  //         { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
-  //         { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-  //       ],
-  //       keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
-  //       colors: ['#E66B5B', '#1D9085'],
-  //       showXaxis: false,
-  //       showYaxis: false,
-  //       showLegend: false,
-  //       useGradient: false,
-  //       gradientColor: '#2673D9',
-  //       showXGridline: false,
-  //       showYGridline: false,
-  //       bars: 5,
-  //       fontSize: 12,
-  //     },
-  //     tooltip: {
-  //       enabled: false,
-  //     },
-  //     modal: {
-  //       enabled: false,
-  //     },
-  //   },
-  //   preview: (
-  //     <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-  //       <TbChartPpf className="w-full h-full" />
-  //     </div>
-  //   ),
-  // },
-  {
-    id: 'chart-s-line-bar',
-    category: 'combination',
-    data: {
-      type: 'chart-s',
-      useBackgroundImage: false,
-      backgroundImage: null,
-      backgroundColor: '#000',
-      useBackgroundColor: false,
-      text: 'Line Bar Chart',
-      width: 400,
-      height: 300,
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'line-bar' }),
-      config: {
-        name: 'line-bar',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'line-bar' }),
-        data: [
-          { name: 'Page A', uv: 590, pv: 800, amt: 1400 },
-          { name: 'Page B', uv: 868, pv: 967, amt: 1506 },
-          { name: 'Page C', uv: 1397, pv: 1098, amt: 989 },
-          { name: 'Page D', uv: 1480, pv: 1200, amt: 1228 },
-          { name: 'Page E', uv: 1520, pv: 1108, amt: 1100 },
-        ],
-        keys: { x: 'name', y: ['pv', 'uv', 'amt'] },
-        colors: [
-          '#E66B5B',
-          '#1D9085',
-          '#264A5A',
-          '#E8C22C',
-          '#F6881F',
-          '#E66B5B',
-          '#1D9085',
-          '#264A5A',
-          '#E8C22C',
-          '#F6881F',
-        ],
-        showXaxis: false,
-        showYaxis: false,
-        showLegend: false,
-        useGradient: false,
-        gradientColor: '#2673D9',
-        showXGridline: false,
-        showYGridline: false,
-        bars: 5,
-        fontSize: 12,
-      },
-      tooltip: {
-        enabled: false,
-      },
-      modal: {
-        enabled: false,
-      },
-    },
-    preview: (
-      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
-        <TbChartHistogram className="w-full h-full" />
-      </div>
-    ),
-  },
+const colors = [
+  '#E66B5B',
+  '#1D9085',
+  '#264A5A',
+  '#E8C22C',
+  '#F6881F',
+  '#E66B5B',
+  '#1D9085',
+  '#264A5A',
+  '#E8C22C',
+  '#F6881F',
 ];
+
+const _standard = [];
+
+// Pies and Doughnuts
+{
+  const config = {
+    data: [
+      { name: 'Page A', value: 4000 },
+      { name: 'Page B', value: 3000 },
+      { name: 'Page C', value: 2000 },
+      { name: 'Page D', value: 2780 },
+      { name: 'Page E', value: 1890 },
+    ],
+    keys: { name: 'name', value: 'value' },
+    colors: colors.slice(0, 5),
+    label: { enabled: true, fontSize: 12, color: '#000000', position: 'inside' },
+    legend: { enabled: false, fontSize: 12, color: '#000000' },
+    tooltip: { enabled: true },
+    points: 5,
+  };
+  _standard.push(
+    ...[
+      {
+        id: 'chart-s-pie',
+        category: 'doughnut',
+        data: {
+          type: 'chart-s',
+          text: 'Pie chart',
+          width: 500,
+          height: 400,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'pie' }),
+          config: {
+            ...config,
+            name: 'pie',
+            innerRadius: 0,
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <BiPieChart className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-pie-doughnut',
+        category: 'doughnut',
+        data: {
+          type: 'chart-s',
+          text: 'Pie doughnut chart',
+          width: 500,
+          height: 400,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'pie' }),
+          config: {
+            ...config,
+            name: 'pie',
+            innerRadius: 40,
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartDonut2 className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-pie-2',
+        category: 'doughnut',
+        data: {
+          type: 'chart-s',
+          text: 'Pie chart 2',
+          width: 500,
+          height: 500,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut-standard' }),
+          config: {
+            ...config,
+            name: 'pie-2',
+            innerRadius: 0,
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartDonut4 className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-pie-2-doughnut',
+        category: 'doughnut',
+        data: {
+          type: 'chart-s',
+          text: 'Pie doughnut chart 2',
+          width: 550,
+          height: 500,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'pie-2' }),
+          config: {
+            ...config,
+            name: 'pie-2',
+            innerRadius: 20,
+            roseType: 'area',
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartDonut className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-semi-pie',
+        category: 'doughnut',
+        data: {
+          type: 'chart-s',
+          text: 'Semi pie chart',
+          width: 450,
+          height: 450,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-pie' }),
+          config: {
+            ...config,
+            name: 'semi-pie',
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbCircleHalf className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-semi-pie-2',
+        category: 'doughnut',
+        data: {
+          type: 'chart-s',
+          text: 'Semi pie chart 2',
+          width: 500,
+          height: 400,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-circle' }),
+          config: {
+            ...config,
+            name: 'semi-pie-2',
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbCircleHalf className="w-full h-full" />
+          </div>
+        ),
+      },
+    ]
+  );
+}
+
+// Bars
+{
+  const config = {
+    data: [
+      { month: 'Jan', desktop: 187, monitor: 150, smartWatch: 120, ipad: 100, mobile: 200 },
+      { month: 'Feb', desktop: 275, monitor: 180, smartWatch: 130, ipad: 120, mobile: 173 },
+      { month: 'Mar', desktop: 200, monitor: 250, smartWatch: 220, ipad: 300, mobile: 90 },
+      { month: 'Apr', desktop: 275, monitor: 100, smartWatch: 130, ipad: 230, mobile: 173 },
+      { month: 'May', desktop: 187, monitor: 225, smartWatch: 280, ipad: 190, mobile: 90 },
+    ],
+    keys: { x: 'month', y: 'desktop' },
+    xAxis: { enabled: true, fontSize: 12, color: '#000000', grid: false },
+    yAxis: { enabled: true, fontSize: 12, color: '#000000', grid: false },
+    legend: { enabled: true, fontSize: 12, position: 'top', color: '#000' },
+    label: { enabled: false, fontSize: 12, color: '#000', position: 'top' },
+    tooltip: { enabled: false, type: 'bar' },
+    colors: colors,
+    points: 5,
+    radius: 8,
+  };
+  _standard.push(
+    ...[
+      {
+        id: 'chart-s-bar',
+        category: 'bar',
+        data: {
+          type: 'chart-s',
+          text: 'Bar chart',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-s', name: 'bar' }),
+          config: {
+            ...config,
+            name: 'bar',
+            gap: 10,
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartBar className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-bar-not-separated',
+        category: 'bar',
+        data: {
+          type: 'chart-s',
+          text: 'Bar chart (Not separated)',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'bar' }),
+          config: {
+            ...config,
+            name: 'bar',
+            gap: 0,
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartBar className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-vertical-bar',
+        category: 'bar',
+        data: {
+          type: 'chart-s',
+          text: 'Bar chart (Vertical)',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'bar' }),
+          config: {
+            ...config,
+            name: 'bar',
+            gap: 10,
+            layout: 'vertical',
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartBar className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-vertical-bar-not-separated',
+        category: 'bar',
+        data: {
+          type: 'chart-s',
+          text: 'Bar chart (Vertical, Not separated)',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'bar' }),
+          config: {
+            ...config,
+            name: 'bar',
+            gap: 0,
+            layout: 'vertical',
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartBar className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-stacked-bar',
+        category: 'bar',
+        data: {
+          type: 'chart-s',
+          text: 'Stacked bar chart',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-stacked' }),
+          config: {
+            ...config,
+            name: 'bar-stacked',
+            keys: { x: 'month', y: ['desktop', 'mobile'] },
+            colors: colors.slice(0, 2),
+            gap: 0,
+          },
+          tools: {
+            colors: {
+              gradient: false,
+            },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <MdOutlineStackedBarChart className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-stacked-bar-vertical',
+        category: 'bar',
+        data: {
+          type: 'chart-s',
+          text: 'Stacked bar chart (Vertical)',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-stacked' }),
+          config: {
+            ...config,
+            name: 'bar-stacked',
+            keys: { x: 'month', y: ['desktop', 'mobile'] },
+            colors: colors.slice(0, 2),
+            gap: 0,
+            layout: 'vertical',
+          },
+          tools: {
+            colors: {
+              gradient: false,
+            },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <MdOutlineStackedBarChart className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-bar-multiple',
+        category: 'bar',
+        data: {
+          type: 'chart-s',
+          text: 'Multiple bar chart',
+          width: 500,
+          height: 400,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple' }),
+          config: {
+            ...config,
+            name: 'bar-multiple',
+            keys: { x: 'month', y: ['desktop', 'mobile', 'monitor', 'ipad', 'smartWatch'] },
+            barsPerGroup: 2,
+          },
+          tools: {
+            colors: {
+              gradient: false,
+            },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartBar className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-bar-multiple-vertical',
+        category: 'bar',
+        data: {
+          type: 'chart-s',
+          text: 'Multiple bar chart (Vertical)',
+          width: 500,
+          height: 400,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple' }),
+          config: {
+            ...config,
+            name: 'bar-multiple',
+            keys: { x: 'month', y: ['desktop', 'mobile', 'monitor', 'ipad', 'smartWatch'] },
+            barsPerGroup: 2,
+            layout: 'vertical',
+          },
+          tools: {
+            colors: {
+              gradient: false,
+            },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartBar className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-alt-bar',
+        category: 'bar',
+        data: {
+          type: 'chart-s',
+          text: 'Alt Bar Chart',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'alt-bar' }),
+          config: {
+            ...config,
+            name: 'alt-bar',
+            data: [
+              ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+              [320, 302, 341, 374, 90, 450, 420],
+              [-120, -132, -101, -134, -190, -230, -310],
+            ],
+            keys: { x: 'browser', y: 'visitors' },
+          },
+          tools: {
+            colors: {
+              gradient: false,
+            },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartBar className="w-full h-full" />
+          </div>
+        ),
+      },
+    ]
+  );
+}
+
+// Line and area
+{
+  const config = {
+    data: [
+      { month: 'Jan', desktop: 187, monitor: 150, smartWatch: 120, ipad: 100, mobile: 200 },
+      { month: 'Feb', desktop: 275, monitor: 180, smartWatch: 130, ipad: 120, mobile: 173 },
+      { month: 'Mar', desktop: 200, monitor: 250, smartWatch: 220, ipad: 300, mobile: 90 },
+      { month: 'Apr', desktop: 275, monitor: 100, smartWatch: 130, ipad: 230, mobile: 173 },
+      { month: 'May', desktop: 187, monitor: 225, smartWatch: 280, ipad: 190, mobile: 90 },
+    ],
+    keys: { x: 'month', y: 'desktop' },
+    xAxis: { enabled: true, fontSize: 12, color: '#000000', grid: false },
+    yAxis: { enabled: true, fontSize: 12, color: '#000000', grid: false },
+    legend: { enabled: true, fontSize: 12, position: 'top', color: '#000' },
+    label: { enabled: false, fontSize: 12, color: '#000', position: 'top' },
+    tooltip: { enabled: false, type: 'bar' },
+    colors,
+    type: 'natural',
+    points: 5,
+  };
+  _standard.push(
+    ...[
+      {
+        id: 'chart-s-line',
+        category: 'area',
+        data: {
+          type: 'chart-s',
+          text: 'Line Chart',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'line' }),
+          config: {
+            ...config,
+            name: 'line',
+            colors: colors.slice(0, 1),
+          },
+          tools: {
+            colors: {
+              gradient: false,
+              palettes: false,
+            },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartLine className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-line-multiple',
+        category: 'area',
+        data: {
+          type: 'chart-s',
+          text: 'Line Multiple Chart',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'line-multiple' }),
+          config: {
+            ...config,
+            name: 'line-multiple',
+            keys: { x: 'month', y: ['desktop', 'mobile', 'monitor', 'ipad', 'smartWatch'] },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <AiOutlineLineChart className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-area',
+        category: 'area',
+        data: {
+          type: 'chart-s',
+          text: 'Area Chart',
+          width: 500,
+          height: 400,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'area' }),
+          config: {
+            ...config,
+            name: 'area',
+            colors: colors.slice(0, 1),
+          },
+          tools: {
+            colors: {
+              gradient: false,
+              palettes: false,
+            },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartArea className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-area-multiple',
+        category: 'area',
+        data: {
+          type: 'chart-s',
+          text: 'Area Chart',
+          width: 500,
+          height: 400,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'area-multiple' }),
+          config: {
+            ...config,
+            name: 'area-multiple',
+            keys: { x: 'month', y: ['desktop', 'mobile', 'monitor', 'ipad', 'smartWatch'] },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartAreaLine className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-line-area',
+        category: 'combination',
+        data: {
+          type: 'chart-s',
+          text: 'Line area Chart',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'line-area' }),
+          config: {
+            ...config,
+            name: 'line-area',
+            keys: { x: 'month', yLine: 'desktop', yArea: 'mobile' },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartPpf className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-line-bar',
+        category: 'combination',
+        data: {
+          type: 'chart-s',
+          text: 'Line Bar Chart',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'line-bar' }),
+          config: {
+            ...config,
+            name: 'line-bar',
+            keys: { x: 'month', yLine: 'desktop', yBar: 'mobile' },
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartHistogram className="w-full h-full" />
+          </div>
+        ),
+      },
+    ]
+  );
+}
+
+// Bubble
+{
+  const config = {
+    data: [
+      { month: 'Jan', desktop: 187, monitor: 150, smartWatch: 120, ipad: 100, mobile: 200 },
+      { month: 'Feb', desktop: 275, monitor: 180, smartWatch: 130, ipad: 120, mobile: 173 },
+      { month: 'Mar', desktop: 200, monitor: 250, smartWatch: 220, ipad: 300, mobile: 90 },
+      { month: 'Apr', desktop: 275, monitor: 100, smartWatch: 130, ipad: 230, mobile: 173 },
+      { month: 'May', desktop: 187, monitor: 225, smartWatch: 280, ipad: 190, mobile: 90 },
+    ],
+    keys: { x: 'month', y: 'desktop' },
+    xAxis: { enabled: true, fontSize: 12, color: '#000000', grid: false },
+    yAxis: { enabled: true, fontSize: 12, color: '#000000', grid: false },
+    legend: { enabled: true, fontSize: 12, position: 'top', color: '#000' },
+    label: { enabled: false, fontSize: 12, color: '#000', position: 'top' },
+    tooltip: { enabled: false, type: 'bar' },
+    colors,
+    type: 'natural',
+    points: 5,
+  };
+  _standard.push(
+    ...[
+      {
+        id: 'chart-s-bubble',
+        category: 'bubble',
+        data: {
+          type: 'chart-s',
+          text: 'Bubble Chart',
+          width: 400,
+          height: 300,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'bubble' }),
+          config: {
+            ...config,
+            name: 'bubble',
+            data: [
+              [10.0, 8.04],
+              [8.07, 6.95],
+              [13.0, 7.58],
+              [9.05, 8.81],
+              [11.0, 8.33],
+              [14.0, 7.66],
+              [13.4, 6.81],
+              [10.0, 6.33],
+              [14.0, 8.96],
+              [12.5, 6.82],
+              [9.15, 7.2],
+              [11.5, 7.2],
+              [3.03, 4.23],
+              [12.2, 7.83],
+              [2.02, 4.47],
+              [1.05, 3.33],
+              [4.05, 4.96],
+              [6.03, 7.24],
+              [12.0, 6.26],
+              [12.0, 8.84],
+              [7.08, 5.82],
+              [5.02, 5.68],
+            ],
+            keys: { x: 'x', y: 'y' },
+            colors,
+            points: 20,
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartBubble className="w-full h-full" />
+          </div>
+        ),
+      },
+      {
+        id: 'chart-s-scatter',
+        category: 'bubble',
+        data: {
+          type: 'chart-s',
+          text: 'Scatter Chart',
+          width: 550,
+          height: 400,
+          style: getElementDefaultStyle({ type: 'chart-a', name: 'scatter' }),
+          config: {
+            ...config,
+            name: 'scatter',
+            data: [
+              [1777, 57.7, 187060177, 'India', 1990],
+              [15161, 68.0, 115460577, 'China', 1990],
+              [29550, 79.1, 122249285, 'Japan', 1990],
+              [19349, 69.6, 147568552, 'Russia', 1990],
+              [37062, 75.4, 252847810, 'United States', 1990],
+              [26424, 75.7, 57110117, 'United Kingdom', 1990],
+              [10088, 70.8, 38195258, 'Poland', 1990],
+              [10670, 67.3, 53994605, 'Turkey', 1990],
+              [31476, 75.4, 78958237, 'Germany', 1990],
+            ],
+            keys: { x: 'x', y: 'y' },
+            colors,
+            points: 20,
+          },
+        },
+        preview: (
+          <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60">
+            <TbChartBubble className="w-full h-full" />
+          </div>
+        ),
+      },
+    ]
+  );
+}
+
+export const standard = [..._standard];
 
 export const advanced = [
   {
@@ -1628,7 +1009,6 @@ export const advanced = [
         selectedCurrency: 'N',
         labelFormat: 'value',
         noOfBars: 3,
-        gradientColor: '#2673D9',
       },
     },
     preview: (

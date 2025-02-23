@@ -1,61 +1,42 @@
 import { createElement } from 'react';
-import { StandardBarPresent } from '@/components/core/templates/create/elements/charts/standard/StandardBar.jsx';
-import { StandardLinePresent } from '@/components/core/templates/create/elements/charts/standard/StandardLine.jsx';
-import { StandardPiePresent } from '@/components/core/templates/create/elements/charts/standard/StandardPie.jsx';
-import { StandardDoughnutContent } from '@/components/core/templates/create/elements/charts/standard/StandardDoughnut.jsx';
-import { StandardRosePieContent } from '@/components/core/templates/create/elements/charts/standard/StandardRosePie.jsx';
-import { StandardDoughnutNormalContent } from '@/components/core/templates/create/elements/charts/standard/StandardDoughnutNormal.jsx';
-import { StandardBarHorizontalContent } from '@/components/core/templates/create/elements/charts/standard/StandardBarHorizontal.jsx';
-import { StandardAreaContent } from '@/components/core/templates/create/elements/charts/standard/StandardArea.jsx';
-import { StandardAreaMultipleContent } from '@/components/core/templates/create/elements/charts/standard/StandardAreaMultiple.jsx';
-import { StandardStackedBarContent } from '@/components/core/templates/create/elements/charts/standard/StandardStackedBar.jsx';
-import { StandardLineBarContent } from '@/components/core/templates/create/elements/charts/standard/StandardLineBar.jsx';
-import { StandardAreaLineContent } from '@/components/core/templates/create/elements/charts/standard/StandardAreaLine.jsx';
-import { StandardSemiCircleContent } from '@/components/core/templates/create/elements/charts/standard/StandardSemiCircle.jsx';
-import { StandardVerticalBarContent } from '@/components/core/templates/create/elements/charts/standard/StandardVerticalBar.jsx';
-import { StandardSemiPieContent } from '@/components/core/templates/create/elements/charts/standard/StandardSemiPie.jsx';
-import { StandardAltBarContent } from '@/components/core/templates/create/elements/charts/standard/StandardAltBar.jsx';
-import { StandardBarNotSepContent } from '@/components/core/templates/create/elements/charts/standard/StandardBarNotSep.jsx';
+import { StandardBarPresent } from '@/components/core/templates/create/elements/charts/standard/bar/StandardBar.jsx';
+import { StandardLinePresent } from '@/components/core/templates/create/elements/charts/standard/line/StandardLine.jsx';
+import { StandardPiePresent } from '@/components/core/templates/create/elements/charts/standard/pie/StandardPie.jsx';
+import { StandardPie2Content } from '@/components/core/templates/create/elements/charts/standard/pie/StandardPie2.jsx';
+import { StandardAreaContent } from '@/components/core/templates/create/elements/charts/standard/line/StandardArea.jsx';
+import { StandardAreaMultipleContent } from '@/components/core/templates/create/elements/charts/standard/line/StandardAreaMultiple.jsx';
+import { StandardStackedBarContent } from '@/components/core/templates/create/elements/charts/standard/bar/StandardStackedBar.jsx';
+import { StandardLineBarContent } from '@/components/core/templates/create/elements/charts/standard/line/StandardLineBar.jsx';
+import { StandardAreaLineContent } from '@/components/core/templates/create/elements/charts/standard/line/StandardAreaLine.jsx';
+import { StandardSemiPie2Content } from '@/components/core/templates/create/elements/charts/standard/pie/StandardSemiPie2.jsx';
+import { StandardSemiPieContent } from '@/components/core/templates/create/elements/charts/standard/pie/StandardSemiPie.jsx';
+import { StandardAltBarContent } from '@/components/core/templates/create/elements/charts/standard/bar/StandardAltBar.jsx';
 import PropTypes from 'prop-types';
-import StandardMultipleBar from './StandardMultipleBar';
-import { StandardVerticalStackedBarContent } from './StandardVerticalStackedBar';
-import { StandardMultipleBarVerticalContent } from './StandardMultipleBarVertical';
-import { StandardVerticalBarNoSepContent } from './StandardVerticalBarNoSep';
-import { StandardLineMultipleContent } from './StandardLineMultiple';
-import { StandardAreaLineVerticalContent } from './StandardAreaLineVertical';
-import { StandardLineBarVerticalContent } from './StandardLineBarVertical';
-import { StandardBubbleChartContent } from './StandardBubbleChart';
-import { StandardBarAreaContent } from './StandardBarArea';
-import { StandardBubbleChartInSizesContent } from './StandardBubbleChartInSizes';
+import StandardMultipleBar from './bar/StandardMultipleBar.jsx';
+import { StandardLineMultipleContent } from './line/StandardLineMultiple.jsx';
+import { StandardBubbleChartContent } from './bubble/StandardBubbleChart.jsx';
+import { StandardBubbleChartInSizesContent } from './bubble/StandardBubbleChartInSizes.jsx';
 
 const StandardChartsPresent = ({ element, ...props }) => {
   const components = {
-    bar: StandardBarPresent,
-    line: StandardLinePresent,
     pie: StandardPiePresent,
-    doughnut: StandardDoughnutContent,
-    'doughnut-crazy': StandardRosePieContent,
-    'doughnut-standard': StandardDoughnutNormalContent,
-    'bar-horizontal': StandardBarHorizontalContent,
+    'pie-2': StandardPie2Content,
+    'semi-pie': StandardSemiPieContent,
+    'semi-pie-2': StandardSemiPie2Content,
+
+    bar: StandardBarPresent,
+    'bar-stacked': StandardStackedBarContent,
+    'bar-multiple': StandardMultipleBar,
+    'alt-bar': StandardAltBarContent,
+
+    line: StandardLinePresent,
+    'line-multiple': StandardLineMultipleContent,
     area: StandardAreaContent,
     'area-multiple': StandardAreaMultipleContent,
-    'stacked-bar': StandardStackedBarContent,
     'line-bar': StandardLineBarContent,
     'line-area': StandardAreaLineContent,
-    'semi-circle': StandardSemiCircleContent,
-    'vertical-bar': StandardVerticalBarContent,
-    'semi-pie': StandardSemiPieContent,
-    'alt-bar': StandardAltBarContent,
-    'bar-not-sep': StandardBarNotSepContent,
-    'bar-multiple': StandardMultipleBar,
-    'vertical-bar-no-sep': StandardVerticalBarNoSepContent,
-    'stacked-bar-vertical': StandardVerticalStackedBarContent,
-    'bar-multiple-vertical': StandardMultipleBarVerticalContent,
-    'line-multiple': StandardLineMultipleContent,
-    'line-area-vertical': StandardAreaLineVerticalContent,
-    'line-bar-vertical': StandardLineBarVerticalContent,
+
     bubble: StandardBubbleChartContent,
-    'area-bar': StandardBarAreaContent,
     scatter: StandardBubbleChartInSizesContent,
   };
 

@@ -13,8 +13,8 @@ const ElementChartWrapper = ({ element, children, isDisabled = false }) => {
     <div className="group relative">
       {children}
       {!isDisabled && (
-        <div className="absolute bottom-full left-0 opacity-0 pointer-events-none transition-all duration-500 group-hover:opacity-100 group-hover:pointer-events-auto">
-          <div className="bg-white dark:bg-default-100 shadow border border-default-200 rounded-3xl px-3 py-2 space-x-2 mb-2">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 opacity-0 pointer-events-none transition-all duration-500 group-hover:opacity-100 group-hover:pointer-events-auto">
+          <div className="bg-white dark:bg-default-100 shadow border border-default-200 rounded-3xl px-2 py-1.5 space-x-1 mb-2 flex items-center">
             <Button
               onPress={onExpandOpen}
               variant="flat"

@@ -3,7 +3,6 @@ import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
-import ChartBackgroundImage from '@/components/core/templates/create/elements/charts/standard/helpers/ChartBackgroundImage.jsx';
 
 const StandardAltBar = ({ element }) => {
   return <StandardAltBarContent element={element} />;
@@ -12,6 +11,7 @@ const StandardAltBar = ({ element }) => {
 export const StandardAltBarContent = ({ element, isChartWrapperDisabled = false }) => {
   const chartRef = useRef(null);
   const yAxisValues = element.config.data[0];
+
   useEffect(() => {
     const chartDom = chartRef.current;
     const myChart = echarts.init(chartDom);
@@ -22,11 +22,10 @@ export const StandardAltBarContent = ({ element, isChartWrapperDisabled = false 
           type: 'shadow',
         },
       },
-      legend: element.config.showLegend && {
-        data: element.config.legend,
+      legend: element.config.legend.enabled && {
         textStyle: {
-          color: element.config.styles.gridAndLegendColor,
-          fontSize: element.config.styles.legendSize,
+          color: element.config.legend.color,
+          fontSize: element.config.legend.fontSize,
         },
       },
       grid: {
@@ -38,12 +37,12 @@ export const StandardAltBarContent = ({ element, isChartWrapperDisabled = false 
       xAxis: [
         {
           type: 'value',
-          show: element.config.showXGridline,
+          show: element.config.xAxis.enabled,
           axisLabel: {
-            fontSize: element.config.styles.xGridSize,
-            fontWeight: element.config.styles.gFontWeight,
-            fontStyle: element.config.styles.gFontStyle,
-            color: element.config.styles.gridAndLegendColor,
+            fontSize: element.config.xAxis.fontSize,
+            fontWeight: element.config.xAxis.fontWeight,
+            fontStyle: element.config.xAxis.fontStyle,
+            color: element.config.xAxis.color,
           },
         },
       ],
@@ -51,15 +50,15 @@ export const StandardAltBarContent = ({ element, isChartWrapperDisabled = false 
         {
           type: 'category',
           axisLabel: {
-            fontSize: element.config.styles.yGridSize,
-            fontWeight: element.config.styles.gFontWeight,
-            fontStyle: element.config.styles.gFontStyle,
-            color: element.config.styles.gridAndLegendColor,
+            fontSize: element.config.yAxis.fontSize,
+            fontWeight: element.config.yAxis.fontWeight,
+            fontStyle: element.config.yAxis.fontStyle,
+            color: element.config.yAxis.color,
           },
           axisTick: {
             show: false,
           },
-          data: element.config.showYaxis ? yAxisValues : { yAxisValues },
+          data: element.config.yAxis.enabled ? yAxisValues : { yAxisValues },
         },
       ],
       color: element.config.colors,
@@ -68,8 +67,12 @@ export const StandardAltBarContent = ({ element, isChartWrapperDisabled = false 
           name: 'Profit',
           type: 'bar',
           label: {
-            show: element.config.showLabel,
-            position: element.config.labelPosition ? 'outside' : 'inside',
+            show: element.config.label?.enabled,
+            position: element.config.label?.position,
+            fontSize: element.config.label?.fontSize,
+            fontWeight: element.config.label?.fontWeight,
+            color: element.config.label?.color,
+            fontStyle: element.config.label?.fontStyle,
           },
           emphasis: {
             focus: 'series',
@@ -81,8 +84,12 @@ export const StandardAltBarContent = ({ element, isChartWrapperDisabled = false 
           type: 'bar',
           stack: 'Total',
           label: {
-            show: element.config.showLabel,
-            position: element.config.labelPosition ? 'outside' : 'inside',
+            show: element.config.label?.enabled,
+            position: element.config.label?.position,
+            fontSize: element.config.label?.fontSize,
+            fontWeight: element.config.label?.fontWeight,
+            color: element.config.label?.color,
+            fontStyle: element.config.label?.fontStyle,
           },
           emphasis: {
             focus: 'series',
@@ -98,29 +105,9 @@ export const StandardAltBarContent = ({ element, isChartWrapperDisabled = false 
   }, [element, yAxisValues]);
 
   return (
-    <div
-      style={{
-        backgroundColor: element.config.useBackgroundColor ? element.config.backgroundColor : 'none',
-        position: 'relative',
-      }}
-    >
-      {element.config.useBackgroundImage && <ChartBackgroundImage element={element} />}
-      <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
-        <div
-          ref={chartRef}
-          style={{
-            height: element.height,
-            width: element.width,
-            opacity: element.style.opacity,
-            transform: `rotate(${element.config.rotation || 0}deg)`,
-            paddingTop: element.config.styles.yPadding,
-            paddingLeft: element.config.styles.xPadding,
-            paddingBottom: element.config.styles.yPadding,
-            paddingRight: element.config.styles.xPadding,
-          }}
-        />
-      </ElementChartWrapper>
-    </div>
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
+      <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }} />
+    </ElementChartWrapper>
   );
 };
 

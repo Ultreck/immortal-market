@@ -54,18 +54,7 @@ export const elements = {
     },
   },
   'chart-s': {
-    tools: [
-      'chart',
-      'chart-data',
-      'font',
-      'colors',
-      'opacity',
-      'animation',
-      'element-tag',
-      'layout',
-      'chart-font',
-      'tooltip',
-    ],
+    tools: ['chart', 'chart-data', 'colors', 'opacity', 'animation', 'element-tag', 'layout', 'tooltip'],
     components: {
       edit: StandardCharts,
       present: StandardChartsPresent,
@@ -79,7 +68,7 @@ export const elements = {
     },
   },
   'chart-a': {
-    tools: ['advanced-chart', 'chart-data', 'chart-font', 'colors', 'opacity', 'element-tag', 'layout'],
+    tools: ['advanced-chart', 'chart-data', 'colors', 'opacity', 'element-tag', 'layout'],
     components: {
       edit: AdvanceCharts,
       present: AdvanceChartsPresent,
