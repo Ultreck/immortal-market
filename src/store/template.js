@@ -8,6 +8,7 @@ const initial = {
   selectedElements: [],
   selectedPage: null,
   activePage: null,
+  pendingActivePage: null,
   activeElement: null,
   scale: 1,
   undoHistory: [],

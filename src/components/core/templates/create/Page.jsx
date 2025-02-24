@@ -16,10 +16,14 @@ const Page = ({ id, showTitle = true }) => {
   const selected = useTemplateStore((state) => state.template.selectedPage === id);
   const isCommentsVisible = useTemplateStore((state) => state.template.isCommentsVisible);
   const activePage = useTemplateStore((state) => state.template.activePage);
+  const pendingActivePage = useTemplateStore((state) => state.template.pendingActivePage);
 
   useEffect(() => {
-    if (activePage === id) ref.current.scrollIntoView({ behavior: 'smooth' });
-  }, [activePage, id, updateTemplate]);
+    if (pendingActivePage === id && activePage !== id) {
+      ref.current.scrollIntoView({ behavior: 'smooth' });
+      updateTemplate({ pendingActivePage: null });
+    }
+  }, [activePage, id, pendingActivePage, updateTemplate]);
 
   return (
     <div ref={ref}>

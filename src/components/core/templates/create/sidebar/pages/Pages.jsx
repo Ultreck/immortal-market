@@ -18,7 +18,7 @@ const Pages = () => {
   const addPage = useTemplateStore((state) => state.addPage);
 
   const handleClick = (page) => {
-    updateTemplate({ activePage: page.id });
+    updateTemplate({ pendingActivePage: page.id });
   };
 
   return (
