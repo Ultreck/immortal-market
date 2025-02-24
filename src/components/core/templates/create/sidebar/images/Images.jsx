@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ExternalImages from '@/components/core/templates/create/sidebar/images/ExternalImages.jsx';
 import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
 import UploadedImages from '@/components/core/templates/create/sidebar/images/UploadedImages.jsx';
-import Recommended from "@/components/core/templates/create/sidebar/images/Recommended.jsx";
+import Recommended from '@/components/core/templates/create/sidebar/images/Recommended.jsx';
 import { HiChevronRight } from 'react-icons/hi2';
 import { Button } from '@heroui/react';
 
@@ -15,6 +15,7 @@ const items = [
 
 const Images = () => {
   const [view, setView] = useState('all');
+
   const views = {
     images: <ExternalImages onBack={() => setView('all')} />,
     svgs: <Svgs onBack={() => setView('all')} />,

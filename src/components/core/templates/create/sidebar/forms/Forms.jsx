@@ -4,7 +4,7 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 const options = [{ text: 'Option 1' }, { text: 'Option 2' }, { text: 'Option 3' }];
 const styles = ['#05805F', '#0079A9'];
 
-const polls = styles.map((style, i) => {
+const polls = styles.map((style) => {
   return {
     id: crypto.randomUUID(),
     data: {
@@ -18,7 +18,7 @@ const polls = styles.map((style, i) => {
         name: 'poll',
       },
       style: {
-        background:style,
+        background: style,
         color: '#fff',
         borderRadius: 10,
         paddingTop: 4,
@@ -38,7 +38,8 @@ const polls = styles.map((style, i) => {
     ),
   };
 });
-const forms = styles.map((style, i) => {
+
+const forms = styles.map((style) => {
   return {
     id: crypto.randomUUID(),
     data: {
@@ -50,7 +51,7 @@ const forms = styles.map((style, i) => {
           type: 'shortText',
           id: crypto.randomUUID(),
           required: false,
-          dataType:'text',
+          dataType: 'text',
           options: [],
         },
         {
@@ -58,7 +59,7 @@ const forms = styles.map((style, i) => {
           type: 'paragraph',
           id: crypto.randomUUID(),
           required: false,
-          dataType:'text',
+          dataType: 'text',
           options: [],
         },
         {
@@ -66,7 +67,7 @@ const forms = styles.map((style, i) => {
           type: 'dropdown',
           id: crypto.randomUUID(),
           required: false,
-          dataType:'text',
+          dataType: 'text',
           options: options.map((val) => ({ ...val, id: crypto.randomUUID() })),
         },
       ],
@@ -91,7 +92,6 @@ const forms = styles.map((style, i) => {
         <div className="bg-gray-100 h-3 w-full rounded"></div>
         <div className="bg-gray-100 h-3 w-full rounded"></div>
         <div className="bg-gray-100 h-3 w-full rounded"></div>
-        {/* Button skeleton */}
         <div className="bg-gray-200 h-3 w-full rounded"></div>
       </div>
     ),
@@ -99,6 +99,7 @@ const forms = styles.map((style, i) => {
 });
 
 const items = [...forms, ...polls];
+
 const Form = () => {
   return (
     <>
@@ -106,7 +107,6 @@ const Form = () => {
         <div className="flex items-center space-x-3 mb-6 bg-white/[.07] rounded-full px-2 py-1">
           <h2 className="text-base font-semibold">Forms</h2>
         </div>
-
         <div className="grid grid-cols-2 gap-4">
           {items.map((element) => {
             return <DraggableElementWrapper key={element.id} element={element} />;

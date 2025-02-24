@@ -1,6 +1,6 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { PollPresent, Poll } from '@/components/core/templates/create/elements/forms/Poll.jsx';
-import { FormPresent, Form } from '@/components/core/templates/create/elements/forms/Form.jsx';
+import { Poll, PollPresent } from '@/components/core/templates/create/elements/forms/Poll.jsx';
+import { Form, FormPresent } from '@/components/core/templates/create/elements/forms/Form.jsx';
 import { createElement } from 'react';
 
 export const FormPresents = ({ element, active, onChange, ...props }) => {
@@ -24,6 +24,7 @@ const Forms = ({ element, active, onChange, ...props }) => {
   }
 };
 
-FormPresent.propTypes = ElementPropTypes;
+FormPresents.propTypes = ElementPropTypes;
+Forms.propTypes = ElementPropTypes;
 
 export default Forms;

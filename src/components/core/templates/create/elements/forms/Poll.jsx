@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils.js';
-import { useToast } from '@/hooks/use-toast.jsx';
 import useBusiness from '@/hooks/use-business';
 import useTemplateStore from '@/store/template';
-import { useGetPolls, useCreatePoll } from '@/api/business.js';
+import { useCreatePoll, useGetPolls } from '@/api/business.js';
 import { useAuth } from '@/hooks/use-auth.jsx';
+import { addToast } from '@heroui/react';
 
 export const Poll = ({ element }) => {
   return <PollContent element={element} className="cursor-auto" />;
@@ -13,7 +13,6 @@ export const Poll = ({ element }) => {
 export const PollPresent = ({ element }) => {
   const { user } = useAuth();
   const { id: business } = useBusiness();
-  const toast = useToast();
   const design = useTemplateStore((state) => state.template.id);
   const { data: { polls = [] } = {} } = useGetPolls({ business, design, element: element.id });
   const { mutateAsync: createPoll, isPending: isCreatePollLoading } = useCreatePoll(business, design);
@@ -23,7 +22,11 @@ export const PollPresent = ({ element }) => {
     try {
       await createPoll({ element: pollId, option: optionId });
     } catch (e) {
-      toast.error(e?.response?.data?.message ?? e.message ?? 'Something went wrong, please try again');
+      addToast({
+        title: 'Error',
+        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
+        color: 'error',
+      });
     }
   };
 

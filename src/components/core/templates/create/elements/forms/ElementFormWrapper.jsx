@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Button, useDisclosure } from '@heroui/react';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
-import ExpandFormModal from '@/components/core/templates/create/elements/forms/ExpandFormModal.jsx'
+import ExpandFormModal from '@/components/core/templates/create/elements/forms/ExpandFormModal.jsx';
 import { cn } from '@/lib/utils.js';
 
 const ElementFormWrapper = ({ element, children, isDisabled = false, className }) => {

@@ -66,7 +66,6 @@ const EditDesignPage = () => {
       else payload.pages = initPages();
       payload = {
         activePage: payload.pages[0].id,
-        mode: design.type === 'project' ? 'tab' : 'scroll',
         ...payload,
       };
       updateTemplate(payload);

@@ -1,6 +1,6 @@
 import { useCreateUploadMutation, useGetUploads } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import { addToast, Image, Skeleton, Button } from '@heroui/react';
+import { addToast, Button, Image, Skeleton } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 import { TbChevronLeft } from 'react-icons/tb';
+import PropTypes from 'prop-types';
 
 const UploadedImages = ({ mini = false, onBack }) => {
   const qc = useQueryClient();
@@ -123,6 +124,11 @@ const UploadedImages = ({ mini = false, onBack }) => {
       )}
     </div>
   );
+};
+
+UploadedImages.propTypes = {
+  mini: PropTypes.bool,
+  onBack: PropTypes.func,
 };
 
 export default UploadedImages;

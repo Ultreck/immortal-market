@@ -1,4 +1,4 @@
-import { createElement, useEffect, useState } from 'react';
+import { createElement, useState } from 'react';
 import { RiArrowLeftSLine, RiImage2Line, RiSettings2Line, RiShapesLine, RiStackLine } from 'react-icons/ri';
 import { cn, getImageLink } from '@/lib/utils.js';
 import Elements from '@/components/core/templates/create/sidebar/components/Elements.jsx';
@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import useTemplateStore from '@/store/template.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useGetDesign } from '@/api/business.js';
-import Froms from '@/components/core/templates/create/sidebar/forms/Forms.jsx';
+import Forms from '@/components/core/templates/create/sidebar/forms/Forms.jsx';
 import { FaWpforms } from 'react-icons/fa';
 
 const Sidebar = ({ className }) => {
@@ -162,7 +162,6 @@ const Sidebar = ({ className }) => {
                 </div>
               </div>
             )}
-          
           </div>
         </div>
         {!collapsed && (
@@ -176,7 +175,7 @@ const Sidebar = ({ className }) => {
             {tab === 'my-work' && <MyWork />}
             {tab === 'project' && <Project />}
             {tab === 'pages' && <Pages />}
-            {tab === 'forms' && <Froms />}
+            {tab === 'forms' && <Forms />}
           </div>
         )}
       </div>

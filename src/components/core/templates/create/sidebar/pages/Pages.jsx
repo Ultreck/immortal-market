@@ -8,7 +8,7 @@ import { TbPlus } from 'react-icons/tb';
 import { Card } from '@heroui/react';
 import { Reorder } from 'motion/react';
 
-const TabThumbnail = () => {
+const Pages = () => {
   const updateTemplate = useTemplateStore((state) => state.updateTemplate);
   const pages = useTemplateStore((state) => state.template.pages);
   const activePage = useTemplateStore((state) => state.template.activePage);
@@ -18,7 +18,7 @@ const TabThumbnail = () => {
   const addPage = useTemplateStore((state) => state.addPage);
 
   const handleClick = (page) => {
-    updateTemplate({ activePage: page.id, mode:"scroll" });
+    updateTemplate({ activePage: page.id });
   };
 
   return (
@@ -36,7 +36,7 @@ const TabThumbnail = () => {
           const active = activePage === page.id;
           const thumbnail = design?.thumbnails.find((t) => t.includes(page.id));
           return (
-            <Reorder.Item  value={page.id} key={page.id} className="flex h-[130px] my-2">
+            <Reorder.Item value={page.id} key={page.id} className="flex h-[130px] my-2">
               <TabThumbnailItem
                 page={page}
                 active={active}
@@ -64,4 +64,4 @@ const TabThumbnail = () => {
   );
 };
 
-export default TabThumbnail;
+export default Pages;
