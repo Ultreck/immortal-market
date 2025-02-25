@@ -3,6 +3,8 @@ import ElementModal from '@/components/core/templates/create/ElementModal.jsx';
 import { useDisclosure } from '@heroui/react';
 import { cn } from '@/lib/utils.js';
 import usePresentStore from '@/store/present.js';
+import { RiAlertLine } from 'react-icons/ri';
+import ErrorBoundary from '@/components/ErrorBoundary.jsx';
 
 const ElementWrapperPresent = ({ element, children }) => {
   const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
@@ -29,7 +31,18 @@ const ElementWrapperPresent = ({ element, children }) => {
         onClick={handleClick}
         style={{ width: element.width, height: element.height, top: element.y, left: element.x }}
       >
-        {children}
+        <ErrorBoundary
+          fallback={
+            <div className="bg-red-800 text-white rounded-2xl p-10 h-full w-full flex flex-col items-center justify-center">
+              <RiAlertLine size="28" />
+              <p className="mt-4 max-w-[200px] leading-[1.1] text-center">
+                Something went wrong while rendering this component
+              </p>
+            </div>
+          }
+        >
+          {children}
+        </ErrorBoundary>
       </div>
 
       <ElementModal element={element} isOpen={isModalOpen} onClose={onModalClose} />
