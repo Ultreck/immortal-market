@@ -20,6 +20,7 @@ import useBusiness from '@/hooks/use-business.js';
 import { useGetDesign } from '@/api/business.js';
 import Forms from '@/components/core/templates/create/sidebar/forms/Forms.jsx';
 import { FaWpforms } from 'react-icons/fa';
+import DataTags from './data/DataTags.jsx';
 
 const Sidebar = ({ className }) => {
   const navigate = useNavigate();
@@ -166,7 +167,16 @@ const Sidebar = ({ className }) => {
         </div>
         {!collapsed && (
           <div className="px-6 py-6 overflow-x-hidden dark:bg-gray-800/50">
-            {tab === 'texts' && <Texts />}
+            {tab === 'texts' && (
+              <div className="space-y-10">
+                <div>
+                  <Texts />
+                </div>
+                <div>
+                  <DataTags />
+                </div>
+              </div>
+            )}
             {tab === 'elements' && <Elements />}
             {tab === 'templates' && <Build />}
             {tab === 'graphics' && <Svgs />}

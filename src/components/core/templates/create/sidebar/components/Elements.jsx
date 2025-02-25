@@ -6,7 +6,6 @@ import { useState } from 'react';
 import Chart from '@/components/core/templates/create/sidebar/data/Charts.jsx';
 import Maps from '@/components/core/templates/create/sidebar/data/Maps.jsx';
 import Tables from '@/components/core/templates/create/sidebar/data/Tables.jsx';
-import DataTags from '@/components/core/templates/create/sidebar/data/DataTags.jsx';
 import { HiChevronRight } from 'react-icons/hi2';
 import Buttons from '@/components/core/templates/create/sidebar/components/design/Buttons.jsx';
 
@@ -17,7 +16,6 @@ const items = [
   { name: 'Tables', view: 'tables', component: <Tables mini /> },
   { name: 'Icons', view: 'icons', component: <Icons mini /> },
   { name: 'Frames', view: 'frames', component: <Frames mini /> },
-  { name: 'Data tags', view: 'data-tags', component: <DataTags mini /> },
   { name: 'Ui element', view: 'ui-element', component: <Buttons mini /> },
 ];
 
@@ -28,7 +26,6 @@ const Elements = () => {
     shapes: <Shapes onBack={() => setView('all')} />,
     frames: <Frames onBack={() => setView('all')} />,
     icons: <Icons onBack={() => setView('all')} />,
-    'data-tags': <DataTags onBack={() => setView('all')} />,
     charts: <Chart onBack={() => setView('all')} />,
     maps: <Maps onBack={() => setView('all')} />,
     tables: <Tables onBack={() => setView('all')} />,
