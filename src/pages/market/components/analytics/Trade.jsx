@@ -102,7 +102,7 @@ const Trade = () => {
               </div>
             </div>
             <div className="mt-10">
-              <Table shadow="none">
+              <Table shadow="none" removeWrapper>
                 <TableHeader>
                   <TableColumn className="px-6 py-4 text-left text-md uppercase">Created ON</TableColumn>
                   <TableColumn className="px-6 py-4 text-left text-md uppercase">Symbol</TableColumn>
