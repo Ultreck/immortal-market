@@ -129,6 +129,7 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
                   else handleAction(key);
                   onClose();
                 }}
+                classNames={{ base: 'overflow-visible' }}
                 itemClasses={{ title: 'text-base group' }}
               >
                 {menu.map((item) => (
