@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Button } from '@heroui/react';
 import { TbChevronLeft } from 'react-icons/tb';
 import { getElementDefaultStyle } from '@/lib/elements.js';
-import { Description } from '@headlessui/react';
 import { cn } from '@/lib/utils';
 
 const styles = {
