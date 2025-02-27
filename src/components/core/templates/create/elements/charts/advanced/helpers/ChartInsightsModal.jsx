@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import AdvancedChartsPresent from '../AdvanceChartsPresent';
 import { Button, Select, SelectItem } from '@heroui/react';
 import { HiX } from 'react-icons/hi';
-import { HiOutlineChartPie } from 'react-icons/hi2';
 
 const options = [
   { text: 'Bar', value: 'bar' },
@@ -24,98 +23,77 @@ const ChartInsightsModal = ({ element, isOpen, onClose }) => {
         </div>
         <div className="grid grid-cols-[1fr_auto] gap-10">
           <div className="py-2">
-            <div className="space-y-5">
-              <div className="flex flex-col">
-                <Select
-                  label="Chart type"
-                  placeholder="Select a chart type"
-                  className="w-full"
-                  size="lg"
-                  variant="bordered"
-                  radius="full"
-                  selectedKeys={['bar']}
-                  classNames={{
-                    label: 'text-base px-2',
-                    value: 'text-base px-2',
-                    popoverContent: 'dark:bg-default-100',
-                  }}
-                >
-                  {options.map((option) => (
-                    <SelectItem key={option.value} value={option.value} classNames={{ title: 'text-base px-2' }}>
-                      {option.text}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex flex-col">
-                <Select
-                  label="Field"
-                  placeholder="Select field"
-                  className="w-full"
-                  size="lg"
-                  variant="bordered"
-                  radius="full"
-                  classNames={{
-                    label: 'text-base px-2',
-                    value: 'text-base px-2',
-                    popoverContent: 'dark:bg-default-100',
-                  }}
-                >
-                  {options.map((option) => (
-                    <SelectItem key={option.value} value={option.value} classNames={{ title: 'text-base px-2' }}>
-                      {option.text}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex flex-col">
-                <Select
-                  label="Compare with"
-                  placeholder="Select field"
-                  className="w-full"
-                  size="lg"
-                  variant="bordered"
-                  radius="full"
-                  classNames={{
-                    label: 'text-base px-2',
-                    value: 'text-base px-2',
-                    popoverContent: 'dark:bg-default-100',
-                  }}
-                >
-                  {options.map((option) => (
-                    <SelectItem key={option.value} value={option.value} classNames={{ title: 'text-base px-2' }}>
-                      {option.text}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-            </div>
-            <Button variant="solid" className="text-base px-4 mt-8" color="primary" radius="full">
-              Apply
-            </Button>
+            <h3 className="text-xl font-semibold max-w-xs">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias consequatur illo impedit.
+            </h3>
+            <ul className="list-disc ml-4 opacity-75 mt-6 space-y-4">
+              <li>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa deserunt dolorem dolorum fugit incidunt
+                nam vero? Deserunt fugit laudantium pariatur!
+              </li>
+              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum incidunt qui repudiandae.</li>
+            </ul>
           </div>
-          <div className="border border-default-200 bg-default-100/50 rounded-3xl px-10 py-10">
-            <AdvancedChartsPresent element={{ ...element, width: 700, height: 400 }} isChartWrapperDisabled />
-          </div>
-        </div>
-        <div className="mt-10">
-          <h3 className="text-lg mb-6">Explore combinations</h3>
-          <div className="grid grid-cols-4 gap-6">
-            <div className="border border-default-200 rounded-3xl px-8 py-6 cursor-pointer hover:bg-default-100">
-              <HiOutlineChartPie size="24" className="mb-4 opacity-70" />
-              <p>Compare distribution of visitors by country</p>
+          <div>
+            <div className="flex items-end space-x-3 mb-6">
+              <Select
+                label="Chart type"
+                labelPlacement="outside"
+                placeholder="Select a chart type"
+                className="w-full"
+                variant="bordered"
+                selectedKeys={['bar']}
+                classNames={{
+                  value: 'text-base px-2',
+                  popoverContent: 'dark:bg-default-100',
+                }}
+              >
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value} classNames={{ title: 'text-base px-2' }}>
+                    {option.text}
+                  </SelectItem>
+                ))}
+              </Select>
+              <Select
+                label="Field"
+                labelPlacement="outside"
+                placeholder="Select field"
+                className="w-full"
+                variant="bordered"
+                classNames={{
+                  value: 'text-base px-2',
+                  popoverContent: 'dark:bg-default-100',
+                }}
+              >
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value} classNames={{ title: 'text-base px-2' }}>
+                    {option.text}
+                  </SelectItem>
+                ))}
+              </Select>
+              <Select
+                label="Compare with"
+                labelPlacement="outside"
+                placeholder="Select field"
+                className="w-full"
+                variant="bordered"
+                classNames={{
+                  value: 'text-base px-2',
+                  popoverContent: 'dark:bg-default-100',
+                }}
+              >
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value} classNames={{ title: 'text-base px-2' }}>
+                    {option.text}
+                  </SelectItem>
+                ))}
+              </Select>
+              <Button variant="solid" className="text-base px-4" color="primary" radius="full" size="sm">
+                Apply
+              </Button>
             </div>
-            <div className="border border-default-200 rounded-3xl px-8 py-6 cursor-pointer hover:bg-default-100">
-              <HiOutlineChartPie size="24" className="mb-4 opacity-70" />
-              <p>Compare distribution of visitors by device</p>
-            </div>
-            <div className="border border-default-200 rounded-3xl px-8 py-6 cursor-pointer hover:bg-default-100">
-              <HiOutlineChartPie size="24" className="mb-4 opacity-70" />
-              <p>Compare distribution of visitors by browser</p>
-            </div>
-            <div className="border border-default-200 rounded-3xl px-8 py-6 cursor-pointer hover:bg-default-100">
-              <HiOutlineChartPie size="24" className="mb-4 opacity-70" />
-              <p>Compare distribution of visitors by OS</p>
+            <div className="border border-default-200 bg-white rounded-3xl px-10 py-10">
+              <AdvancedChartsPresent element={{ ...element, width: 700, height: 400 }} isChartWrapperDisabled />
             </div>
           </div>
         </div>
