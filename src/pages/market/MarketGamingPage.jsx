@@ -6,7 +6,7 @@ const MarketGamingPage = () => {
   return (
     <>
       <MarketNavbar />
-      <div className="container grid gap-5 grid-cols-12 mx-auto">
+    <div className="container grid gap-5 grid-cols-12 mx-auto">
         <div className="col-span-8 overflow-y-auto">
           <PredictionHomePage />
         </div>
