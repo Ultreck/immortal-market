@@ -52,14 +52,14 @@ const StockDetails = ({ id, onClose }) => {
                         </div>
                       }
                     />
-                    <Tab
-                      key="profile"
-                      title={
-                        <div className="flex items-center space-x-2 text-base">
-                          <span>Profile</span>
-                        </div>
-                      }
-                    />
+                    {/*<Tab*/}
+                    {/*  key="profile"*/}
+                    {/*  title={*/}
+                    {/*    <div className="flex items-center space-x-2 text-base">*/}
+                    {/*      <span>Profile</span>*/}
+                    {/*    </div>*/}
+                    {/*  }*/}
+                    {/*/>*/}
                     <Tab
                       key="financials"
                       title={
@@ -77,7 +77,12 @@ const StockDetails = ({ id, onClose }) => {
                       }
                     />
                   </Tabs>
-                  <WatchlistButton stock={stock} />
+                  <div className="space-x-4 flex items-center ">
+                    <WatchlistButton stock={stock} />
+                    <Button color="primary" radius="full" className='text-base'>
+                      Trade
+                    </Button>
+                  </div>
                 </div>
                 {tab === 'overview' && <StockOverview stock={stock} />}
                 {tab === 'profile' && <StockCompanyProfile stock={stock} />}

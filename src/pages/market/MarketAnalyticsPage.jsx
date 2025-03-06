@@ -101,7 +101,7 @@ const MarketAnalyticsPage = () => {
             return (
               <>
                 <Link key={i} to={c.href}>
-                  <StockQueryItem active={c.key === 'trade'} before={c.icon} name={c.name} />
+                  <StockQueryItem active={c.key === 'research'} before={c.icon} name={c.name} />
                 </Link>
               </>
             );

@@ -1,8 +1,11 @@
 import { Avatar, Badge, Button, Card, CardBody, CardHeader, Tooltip, useDisclosure } from '@heroui/react';
-import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { getImageLink, writers } from '@/lib/utils.js';
-import { RiUser3Fill } from 'react-icons/ri';
 import ChatWIthAgentsModal from '@/pages/market/modals/ChatWIthAgents.jsx';
+import { useMemo } from 'react';
+import { RiUser3Fill } from 'react-icons/ri';
+import WordCloud from 'react-d3-cloud';
+import CountryFlag from '@/components/ui/CountryFlag.jsx';
 
 const markers = [
   { name: 'New York, USA', coordinates: [-74.006, 40.7128], color: 'fill-blue-500' }, // North America
@@ -13,40 +16,137 @@ const markers = [
   { name: 'Lagos, Nigeria', coordinates: [3.3792, 6.5244], color: 'fill-orange-500' }, // Africa
 ];
 
+const words = [
+  { text: 'Zenith', size: 'text-3xl', value: '800' },
+  { text: 'Linkage', size: 'text-4xl', value: '800' },
+  { text: 'Union', size: 'text-3xl', value: '800' },
+  { text: 'Access', size: 'text-4xl', value: '800' },
+  { text: 'MTN', size: 'text-xl', value: '800' },
+  { text: 'GTB', size: 'text-sm', value: '800' },
+  { text: 'UBA', size: 'text-lg', value: '800' },
+  { text: 'Stanbic', size: 'text-base', value: '800' },
+  { text: 'UCAP', size: 'text-xl', value: '800' },
+  { text: 'Zenith', size: 'text-3xl', value: '800' },
+  { text: 'Linkage', size: 'text-4xl', value: '800' },
+  { text: 'Union', size: 'text-3xl', value: '800' },
+  { text: 'Access', size: 'text-4xl', value: '800' },
+  { text: 'MTN', size: 'text-xl', value: '800' },
+  { text: 'GTB', size: 'text-sm', value: '800' },
+  { text: 'UBA', size: 'text-lg', value: '800' },
+  { text: 'Stanbic', size: 'text-base', value: '800' },
+  { text: 'UCAP', size: 'text-xl', value: '800' },
+  { text: 'Zenith', size: 'text-3xl', value: '800' },
+  { text: 'Linkage', size: 'text-4xl', value: '800' },
+  { text: 'Union', size: 'text-3xl', value: '800' },
+  { text: 'Access', size: 'text-4xl', value: '800' },
+  { text: 'MTN', size: 'text-xl', value: '800' },
+  { text: 'GTB', size: 'text-sm', value: '800' },
+  { text: 'UBA', size: 'text-lg', value: '800' },
+  { text: 'Stanbic', size: 'text-base', value: '800' },
+  { text: 'UCAP', size: 'text-xl', value: '800' },
+  { text: 'Zenith', size: 'text-3xl', value: '800' },
+  { text: 'Linkage', size: 'text-4xl', value: '800' },
+  { text: 'Union', size: 'text-3xl', value: '800' },
+  { text: 'Access', size: 'text-4xl', value: '800' },
+  { text: 'MTN', size: 'text-xl', value: '800' },
+  { text: 'GTB', size: 'text-sm', value: '800' },
+  { text: 'UBA', size: 'text-lg', value: '800' },
+  { text: 'Stanbic', size: 'text-base', value: '800' },
+  { text: 'UCAP', size: 'text-xl', value: '800' },
+  { text: 'Zenith', size: 'text-3xl', value: '800' },
+  { text: 'Linkage', size: 'text-4xl', value: '800' },
+  { text: 'Union', size: 'text-3xl', value: '800' },
+  { text: 'Access', size: 'text-4xl', value: '800' },
+  { text: 'MTN', size: 'text-xl', value: '800' },
+  { text: 'GTB', size: 'text-sm', value: '800' },
+  { text: 'UBA', size: 'text-lg', value: '800' },
+  { text: 'Stanbic', size: 'text-base', value: '800' },
+  { text: 'UCAP', size: 'text-xl', value: '800' },
+];
+
+const data = [
+  { text: 'Hey', value: 1000 },
+  { text: 'lol', value: 1000 },
+  { text: 'first impression', value: 800 },
+  { text: 'very cool', value: 100 },
+  { text: 'duck', value: 100 },
+];
+
 const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
+const getRandomColor = () => {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
 const MarketHero = () => {
+  const countryColors = useMemo(() => ({}), []);
+
   const { isOpen: isChatWithAgentOpen, onOpen: onChatWithAgentOpen, onClose: onChatWithAgentClose } = useDisclosure();
 
+  const getRandomPosition = () => ({
+    top: `${Math.random() * 80}%`,
+    left: `${Math.random() * 80}%`,
+  });
+
   return (
-    <div className="relative overflow-y-auto flex container">
+    <div className="">
       <ComposableMap>
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
-            geographies.map((geo) => (
-              <Geography key={geo.rsmKey} geography={geo} fill="rgba(255, 255, 255, 0.3)" stroke="#000" />
-            ))
+            geographies.map((geo) => {
+              if (!countryColors[geo.rsmKey]) {
+                countryColors[geo.rsmKey] = getRandomColor();
+              }
+              return (
+                <Tooltip
+                  key={geo.rsmKey}
+                  content={
+                    <div className="space-y-2 w-[100px] px-4 py-2">
+                      <p>name</p>
+                      <p>coordinates</p>
+                      <Button variant="bordered" size="sm">
+                        Details
+                      </Button>
+                    </div>
+                  }
+                  closeDelay={100}
+                  showArrow
+                >
+                  <Geography
+                    geography={geo}
+                    fill={countryColors[geo.rsmKey]}
+                    stroke="#000"
+                    style={{
+                      default: { outline: 'none' },
+                      hover: { fill: '#f00', outline: 'none' },
+                      pressed: { fill: '#fff', outline: 'none' },
+                    }}
+                  />
+                </Tooltip>
+              );
+            })
           }
         </Geographies>
-        {markers.map(({ name, coordinates, color }, index) => (
-          <Marker key={index} coordinates={coordinates}>
-            <Tooltip
-              className="p-4"
-              content={
-                <div className="space-y-2">
-                  <p>{name}</p>
-                  <p>{coordinates}</p>
-                  <Button variant="bordered">Details</Button>
-                </div>
-              }
-              placement="top"
-            >
-              <circle r={10} className={`${color} cursor-pointer hover:scale-125 transition-transform`} />
-            </Tooltip>
-          </Marker>
-        ))}
       </ComposableMap>
-      <div className="container absolute bottom-0 left-0 right-0 ">
+      <Card className="card-shadow px-10 py-4">
+        <div className="grid grid-cols-6">
+          <div className="flex items-center space-x-4 col-span-2">
+            <CountryFlag code={'NG'} className="" rounded />
+            <p className="text-2xl">
+              20 Most <br /> Active
+            </p>
+          </div>
+          <div className="col-span-4">
+            <WordCloud data={words} height={200} spiral="archimedean" onWordClick={() => console.log('clicked')} />
+          </div>
+        </div>
+      </Card>
+      <div className="mt-5">
         <div className="w-full bg-default-100 px-10 py-4 rounded-2xl flex justify-between items-center">
           <div className="space-y-2">
             <p className="text-3xl font-bold">Chat with Immortal Agents</p>
