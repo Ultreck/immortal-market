@@ -128,16 +128,11 @@ const texts = [
 
 const Texts = () => {
   return (
-    <>
-      <div className="flex items-center justify-between mb-4 bg-white/[.07] rounded-full px-5 py-2">
-        <h4 className="text-base font-semibold">Texts</h4>
-      </div>
-      <div className="grid grid-cols-1 gap-3">
-        {texts.map((element) => (
-          <DraggableElementWrapper key={element.id} element={element} />
-        ))}
-      </div>
-    </>
+    <div className="grid grid-cols-1 gap-3">
+      {texts.map((element) => (
+        <DraggableElementWrapper key={element.id} element={element} />
+      ))}
+    </div>
   );
 };
 

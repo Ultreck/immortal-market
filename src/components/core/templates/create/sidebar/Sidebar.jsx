@@ -5,7 +5,7 @@ import Elements from '@/components/core/templates/create/sidebar/components/Elem
 import Texts from '@/components/core/templates/create/sidebar/components/design/Texts.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layout/layers/Layers.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
-import { Tooltip } from '@heroui/react';
+import { Tooltip, Tabs, Tab } from '@heroui/react';
 import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
 import { TbAbc, TbChevronLeft, TbChevronRight, TbLayoutDistributeHorizontal, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
@@ -152,13 +152,21 @@ const Sidebar = ({ className }) => {
         {!collapsed && (
           <div className="px-6 py-6 overflow-x-hidden dark:bg-gray-800/50">
             {tab === 'texts' && (
-              <div className="space-y-10">
-                <div>
-                  <Texts />
-                </div>
-                <div>
-                  <DataTags />
-                </div>
+              <div>
+                <Tabs
+                  aria-label="Options"
+                  variant="bordered"
+                  color="primary"
+                  radius="full"
+                  classNames={{ tab: 'text-base px-4', base: 'mb-2' }}
+                >
+                  <Tab key="texts" title="Texts" className="text-base">
+                    <Texts />
+                  </Tab>
+                  <Tab key="data-tags" title="Data Tags" className="text-base">
+                    <DataTags />
+                  </Tab>
+                </Tabs>
               </div>
             )}
             {tab === 'elements' && <Elements />}

@@ -1,9 +1,5 @@
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import PropTypes from 'prop-types';
-import { Button } from '@heroui/react';
-import { TbChevronLeft } from 'react-icons/tb';
 import { getElementDefaultStyle } from '@/lib/elements.js';
-import { cn } from '@/lib/utils';
 
 const styles = {
   title: {
@@ -72,49 +68,14 @@ const elements = [
   };
 });
 
-const DataTags = ({ mini = false, onBack }) => {
+const DataTags = () => {
   return (
-    <>
-      {mini ? (
-        <div>
-          <div className="grid grid-cols-1 gap-4">
-            {elements.slice(0, 4).map((element) => {
-              return (
-                <div key={element.id}>
-                  <DraggableElementWrapper element={element} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ) : (
-        <>
-          <div
-            className={cn('flex items-center space-x-3 mb-4 bg-white/[.07] rounded-full px-2 py-1', {
-              'px-5 py-2': !onBack,
-            })}
-          >
-            {!!onBack && (
-              <Button onPress={onBack} variant="light" radius="full" isIconOnly size="sm">
-                <TbChevronLeft size="20" />
-              </Button>
-            )}
-            <h2 className="text-base font-semibold">Data tags</h2>
-          </div>
-          <div className="grid grid-cols-1 gap-3">
-            {elements.map((element) => {
-              return <DraggableElementWrapper key={element.id} element={element} />;
-            })}
-          </div>
-        </>
-      )}
-    </>
+    <div className="grid grid-cols-1 gap-3">
+      {elements.map((element) => {
+        return <DraggableElementWrapper key={element.id} element={element} />;
+      })}
+    </div>
   );
-};
-
-DataTags.propTypes = {
-  mini: PropTypes.bool,
-  onBack: PropTypes.func,
 };
 
 export default DataTags;
