@@ -1,7 +1,6 @@
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import StockQueryItem from '@/pages/market/components/Items.jsx';
 import { Button, Card, cn, Tab, Tabs, useDisclosure } from '@heroui/react';
-import { HiChevronDown } from 'react-icons/hi2';
 import StockQueries from '@/pages/market/modals/StockQueries.jsx';
 import { useState } from 'react';
 import {
@@ -106,10 +105,7 @@ const MarketAnalyticsPage = () => {
               </>
             );
           })}
-          <StockQueryItem
-            name="Stock Screener"
-            onClick={onScreenersOpen}
-          />
+          <StockQueryItem name="Stock Screener" onClick={onScreenersOpen} />
         </div>
         <div className="gap-8 lg:grid lg:grid-cols-[1fr_350px] mt-10">
           <div className="w-full overflow-hidden">
@@ -137,28 +133,8 @@ const MarketAnalyticsPage = () => {
             </Card>
             <div className="space-y-6">
               <StockSummary />
-              <div className={cn('flex items-stretch space-x-3')}>
-                {stockQueriesList.slice(0, 3).map((c) => {
-                  return (
-                    <>
-                      <StockQueryItem
-                        key={c.key}
-                        onClick={() => updateData(c)}
-                        active={c.key === data.key}
-                        before={c.icon}
-                        name={c.name}
-                      />
-                    </>
-                  );
-                })}
-                <StockQueryItem
-                  name="More"
-                  onClick={onStockQueriesOpen}
-                  after={<HiChevronDown className="h-[20px] w-[20px]" />}
-                />
-              </div>
               <Watchlist />
-              <BullRunsStocks selectedQuery={data} />
+              {/*<BullRunsStocks selectedQuery={data} />*/}
               <Card className="card-shadow px-8 py-7">
                 <Tabs
                   selectedKey={summaryOrder}

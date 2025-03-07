@@ -30,7 +30,10 @@ const StockDetails = ({ id, onClose }) => {
           <Skeleton className="h-[200px] rounded-2xl" />
         </div>
       ) : (
-        <div className="grid h-screen max-w-[auto] p-0">
+        <div className="grid grid-cols-[350px_1fr] h-screen max-w-[auto] p-0">
+          <div className="border-r border-default-200 dark:border-default-100 h-full bg-[#f4f5f6] dark:bg-[#0b161f] py-8 px-10">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspend
+          </div>
           <div className="py-9 px-10">
             {!!stock && (
               <>
@@ -79,7 +82,7 @@ const StockDetails = ({ id, onClose }) => {
                   </Tabs>
                   <div className="space-x-4 flex items-center ">
                     <WatchlistButton stock={stock} />
-                    <Button color="primary" radius="full" className='text-base'>
+                    <Button color="primary" radius="full" className="text-base">
                       Trade
                     </Button>
                   </div>

@@ -1,4 +1,4 @@
-import { Card } from '@heroui/react';
+import { Button, Card } from '@heroui/react';
 import { generateRandomPercentage } from '@/lib/utils.js';
 
 const data = [
@@ -87,19 +87,47 @@ const StockSummary = () => {
     <>
       {data.map((d, i) => (
         <Card className="card-shadow px-10 py-8" key={i}>
-          <div key={i}>
-            <div key={i} className="mb-8 flex items-center space-x-3">
+          <div>
+            <div className="mb-8 flex items-center space-x-3">
               <h3 className="text-lg font-semibold">{d.name}</h3>
             </div>
-            <div key={i} className="space-y-10 mb-2">
-              {d.data.map((data, i) => (
-                <div key={i}>
+            <div className="space-y-10 mb-2">
+              {d.data.map((data, index) => (
+                <div key={index} className="group">
                   <div className="flex justify-between mb-1">
                     <span className="text-base font-medium text-primary-700 dark:text-white">{data.title}</span>
                     <span className="text-sm font-medium text-primary-700 dark:text-white">{data.percentage}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+
+                  <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 group-hover:hidden">
                     <div className="bg-primary-600 h-2.5 rounded-full" style={{ width: `${data.percentage}%` }}></div>
+                  </div>
+
+                  <div className="hidden group-hover:flex space-x-2 mt-2">
+                    <Button
+                      radius="full"
+                      className="w-min cursor-pointer transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1"
+                    >
+                      TESLA
+                    </Button>
+                    <Button
+                      radius="full"
+                      className="w-min cursor-pointer transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1"
+                    >
+                      ACCESS
+                    </Button>
+                    <Button
+                      radius="full"
+                      className="w-min cursor-pointer transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1"
+                    >
+                      ZENITH
+                    </Button>
+                    <Button
+                      radius="full"
+                      className="w-min cursor-pointer transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1"
+                    >
+                      More
+                    </Button>
                   </div>
                 </div>
               ))}
