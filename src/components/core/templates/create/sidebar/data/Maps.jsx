@@ -8,9 +8,8 @@ import { useGetMaps } from '@/api/design.js';
 import { capitalize, getImageLink } from '@/lib/utils.js';
 
 const Maps = ({ mini, onBack }) => {
-  const { data: { maps = [] } = {}, isLoading: isMapsLoading } = useGetMaps();
   const [search, setSearch] = useState('');
-
+  const { data: { maps = [] } = {}, isLoading: isMapsLoading } = useGetMaps();
   const filtered = maps.filter((map) => map.name.toLowerCase().includes(search.toLowerCase()));
 
   const elements = filtered.map((map) => ({
@@ -18,8 +17,10 @@ const Maps = ({ mini, onBack }) => {
     data: {
       type: 'map',
       text: map.name,
-      width: 400,
-      height: 400,
+      size: {
+        width: 400,
+        height: 400,
+      },
       style: getElementDefaultStyle({ type: 'map' }),
       config: {
         data: [],
@@ -31,6 +32,7 @@ const Maps = ({ mini, onBack }) => {
         labelsCount: 1,
       },
       tooltip: {
+        // TODO: resolve tooltip
         enabled: true,
         type: 'bar',
       },

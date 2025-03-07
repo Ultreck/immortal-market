@@ -4,13 +4,13 @@ import ColorPicker from '@/components/ui/ColorPicker.jsx';
 const PageBackground = ({ page, onChange }) => {
   return (
     <ColorPicker
-      color={page.style.background || '#fff'}
-      onChange={(color) => onChange({ style: { ...page.style, background: color } })}
+      color={page.background.value}
+      onChange={(color) => onChange({ background: { ...page.background, color } })}
       size="sm"
       trigger={
         <button
           className="my-2 w-[20px] h-[20px] rounded-full hover:brightness-105 cursor-pointer border-2"
-          style={{ background: page.style.background || '#fff' }}
+          style={{ background: page.background.value }}
         />
       }
     />

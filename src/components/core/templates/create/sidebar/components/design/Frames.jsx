@@ -2,8 +2,7 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import BasicCarousel from '@/components/ui/BasicCarousel';
 import shapes from '@/lib/design/shapes.js';
 import { Button } from '@heroui/react';
-import { RiCheckboxMultipleBlankFill } from 'react-icons/ri';
-import { TbCarouselHorizontalFilled, TbChevronLeft } from 'react-icons/tb';
+import { TbChevronLeft } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 
@@ -13,8 +12,10 @@ const items = [
     data: {
       type: 'frame',
       text: `Frame ${name}`,
-      width: 300,
-      height: 300,
+      size: {
+        width: 300,
+        height: 300,
+      },
       children: [],
       style: getElementDefaultStyle({ type: 'frame', name: `shape-${name}` }),
       config: {

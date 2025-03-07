@@ -1,20 +1,11 @@
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { cn } from '@/lib/utils.js';
 import { useCallback, useEffect, useState } from 'react';
-import { useUpdateDesign } from '@/api/business.js';
-import useBusiness from '@/hooks/use-business.js';
-import { useQueryClient } from '@tanstack/react-query';
-import { Spinner, addToast } from '@heroui/react';
 import { AnimatePresence, motion } from 'motion/react';
 import PropTypes from 'prop-types';
 
-const PageTitle = ({ id }) => {
-  const qc = useQueryClient();
-  const { id: business } = useBusiness();
-  const pages = useTemplateStore(({ template }) => template.pages);
-  const title = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id).title);
-  const templateId = useTemplateStore((state) => state.template.id);
-  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(business, templateId);
+const PageTitle = ({ id, title }) => {
+  const updatePage = useDesignStore((state) => state.updatePage);
   const [value, setValue] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
@@ -24,28 +15,9 @@ const PageTitle = ({ id }) => {
 
   const handleSave = useCallback(async () => {
     if (value === title) return setIsEditing(false);
-    try {
-      await update({
-        data: {
-          pages: pages.map((page) => {
-            return page.id === id ? { ...page, title: value } : page;
-          }),
-        },
-      });
-      addToast({ 
-        title: 'Page Title updated',
-        color: 'success'
-      });
-      await qc.invalidateQueries({ queryKey: ['businesses', business, 'designs'] });
-    } catch (error) {
-      addToast({
-        title: 'Error',
-        description: error?.response?.data?.message || error.message,
-        color: 'danger'
-      });
-    }
+    await updatePage(id, { title: value });
     setIsEditing(false);
-  }, [value, title, update, qc, business, id, pages]);
+  }, [value, title, updatePage, id]);
 
   return (
     <div className="relative flex items-center space-x-2">
@@ -65,7 +37,6 @@ const PageTitle = ({ id }) => {
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleSave();
             }}
-            disabled={isUpdateLoading}
             autoFocus
           />
         ) : (
@@ -80,7 +51,6 @@ const PageTitle = ({ id }) => {
           </motion.p>
         )}
       </AnimatePresence>
-      {isUpdateLoading && <Spinner size="sm" />}
     </div>
   );
 };

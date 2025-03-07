@@ -97,8 +97,8 @@ export const AdvanceSpeedometerContent = ({ element, isChartWrapperDisabled = fa
       <div
         style={{
           padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
-          width: element.width,
-          height: element.height,
+          width: element.size.width,
+          height: element.size.height,
         }}
         ref={chartRef}
       />

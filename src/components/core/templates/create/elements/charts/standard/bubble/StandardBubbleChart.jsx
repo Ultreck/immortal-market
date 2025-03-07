@@ -68,7 +68,7 @@ export const StandardBubbleChartContent = ({ element, isChartWrapperDisabled = f
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
-      <div ref={chartRef} style={{ width: element.width, height: element.height, opacity: element.style.opacity }} />
+      <div ref={chartRef} style={{ width: element.size.width, height: element.size.height, opacity: element.style.opacity }} />
     </ElementChartWrapper>
   );
 };

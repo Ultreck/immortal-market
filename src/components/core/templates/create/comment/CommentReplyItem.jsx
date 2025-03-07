@@ -5,14 +5,14 @@ import { HiDotsHorizontal } from 'react-icons/hi';
 import PropTypes from 'prop-types';
 import { useDeleteComment } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { useState } from 'react';
 import EditComment from '@/components/core/templates/create/comment/EditComment.jsx';
 
 const CommentReplyItem = ({ comment }) => {
   const { id: business } = useBusiness();
   const [isEditing, setIsEditing] = useState(false);
-  const design = useTemplateStore((state) => state.template.id);
+  const design = useDesignStore((state) => state.id);
   const { mutateAsync: deleteComment, isPending: isDeleteLoading } = useDeleteComment(business, design);
 
   const handleDeleteComment = async (id) => {
@@ -22,7 +22,7 @@ const CommentReplyItem = ({ comment }) => {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
-        color: 'danger'
+        color: 'danger',
       });
     }
   };

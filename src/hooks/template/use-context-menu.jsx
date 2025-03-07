@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import ContextMenu from '@/components/core/templates/create/ContextMenu.jsx';
 
 export const useContextMenu = ({ id, node }) => {
   const [contextMenu, setContextMenu] = useState({ isOpen: false, position: { x: 0, y: 0 }, type: null });
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
-  const scale = useTemplateStore((state) => state.template.scale);
-  const selectElements = useTemplateStore((state) => state.selectElements);
-  const selectPage = useTemplateStore((state) => state.selectPage);
-  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
+  const elements = useDesignStore((state) => state.elements.filter((e) => e.page === id));
+  const scale = useDesignStore((state) => state.scale);
+  const selectElements = useDesignStore((state) => state.selectElements);
+  const selectPage = useDesignStore((state) => state.selectPage);
+  const selectedElements = useDesignStore((state) => state.selectedElements);
 
   useEffect(() => {
     const handleClick = () => setContextMenu({ isOpen: false, position: { x: 0, y: 0 }, type: null });
@@ -25,10 +25,17 @@ export const useContextMenu = ({ id, node }) => {
       const canvasRect = node.current.getBoundingClientRect();
       const x = (event.clientX - canvasRect.left) / scale;
       const y = (event.clientY - canvasRect.top) / scale;
-      const pages = [...page.elements].reverse();
-      return pages.find((el) => x >= el.x && x <= el.x + el.width && y >= el.y && y <= el.y + el.height);
+      const pages = [...elements].reverse();
+      return pages.find((el) => {
+        return (
+          x >= el.position.x &&
+          x <= el.position.x + el.size.width &&
+          y >= el.position.y &&
+          y <= el.position.y + el.size.height
+        );
+      });
     },
-    [node, page.elements, scale]
+    [node, elements, scale]
   );
 
   const handleContextMenu = useCallback(
@@ -54,7 +61,7 @@ export const useContextMenu = ({ id, node }) => {
     [getElementUnderCursor, id, node, selectElements, selectPage, selectedElements]
   );
 
-  const renderContextMenu = () => {
+  const renderContextMenu = useCallback(() => {
     return (
       <ContextMenu
         id={id}
@@ -66,7 +73,7 @@ export const useContextMenu = ({ id, node }) => {
         }}
       />
     );
-  };
+  }, [contextMenu]);
 
   return {
     handleContextMenu,

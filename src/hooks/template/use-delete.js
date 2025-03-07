@@ -1,23 +1,19 @@
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { useKey } from 'react-use';
 
 const useDelete = () => {
-  const pages = useTemplateStore((state) => state.template.pages);
-  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
-  const deleteElements = useTemplateStore((state) => state.deleteElements);
-  const activeElement = useTemplateStore((state) => state.template.activeElement);
-  const getElementPage = useTemplateStore((state) => state.getElementPage);
+  const selectedElements = useDesignStore((state) => state.selectedElements);
+  const deleteElements = useDesignStore((state) => state.deleteElements);
+  const activeElement = useDesignStore((state) => state.activeElement);
 
   useKey(
     'Delete',
     () => {
       if (activeElement || !selectedElements.length) return;
-      const page = getElementPage(selectedElements[0]);
-      if (!page) return;
-      deleteElements(selectedElements, page.id);
+      deleteElements(selectedElements);
     },
     undefined,
-    [selectedElements, pages, deleteElements, activeElement]
+    [selectedElements, deleteElements, activeElement]
   );
 };
 

@@ -27,8 +27,8 @@ export const AdvancePercentageCardTwoElementContent = ({ element, isChartWrapper
           paddingLeft: element.config.styles.xPadding,
           paddingBottom: element.config.styles.yPadding,
           paddingRight: element.config.styles.xPadding,
-          width: element.width,
-          height: element.height,
+          width: element.size.width,
+          height: element.size.height,
         }}
         className="grid grid-cols-4 gap-4"
       >

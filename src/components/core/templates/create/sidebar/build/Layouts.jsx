@@ -1,85 +1,76 @@
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
+
+const options = [
+  {
+    name: 'Default',
+    size: {
+      width: 800,
+      height: 450,
+    },
+  },
+  {
+    name: 'Instagram Story',
+    size: {
+      width: 1080,
+      height: 1920,
+    },
+  },
+  {
+    name: 'Instagram Post',
+    size: {
+      width: 1080,
+      height: 1350,
+    },
+  },
+  {
+    name: 'Facebook Post (Landscape)',
+    size: {
+      width: 1200,
+      height: 630,
+    },
+  },
+  {
+    name: 'Presentation (16:9)',
+    size: {
+      width: 1920,
+      height: 1080,
+    },
+  },
+  {
+    name: 'Presentation (4:3)',
+    size: {
+      width: 1280,
+      height: 720,
+    },
+  },
+  {
+    name: 'Document (A4)',
+    size: {
+      width: 595,
+      height: 842,
+    },
+  },
+  {
+    name: 'Document (Letter)',
+    size: {
+      width: 612,
+      height: 792,
+    },
+  },
+  {
+    name: 'Twitter Post',
+    size: {
+      width: 1600,
+      height: 900,
+    },
+  },
+];
 
 const Layouts = () => {
-  const template = useTemplateStore((state) => state.template);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
-
-  const options = [
-    {
-      name: 'Default',
-      size: {
-        width: 800,
-        height: 800,
-      },
-    },
-    {
-      name: 'Instagram Story',
-      size: {
-        width: 1080,
-        height: 1920,
-      },
-    },
-    {
-      name: 'Instagram Post',
-      size: {
-        width: 1080,
-        height: 1350,
-      },
-    },
-    {
-      name: 'Facebook Post (Landscape)',
-      size: {
-        width: 1200,
-        height: 630,
-      },
-    },
-    {
-      name: 'Presentation (16:9)',
-      size: {
-        width: 1920,
-        height: 1080,
-      },
-    },
-    {
-      name: 'Presentation (4:3)',
-      size: {
-        width: 1280,
-        height: 720,
-      },
-    },
-    {
-      name: 'Document (A4)',
-      size: {
-        width: 595,
-        height: 842,
-      },
-    },
-    {
-      name: 'Document (Letter)',
-      size: {
-        width: 612,
-        height: 792,
-      },
-    },
-    {
-      name: 'Twitter Post',
-      size: {
-        width: 1600,
-        height: 900,
-      },
-    },
-  ];
+  const resize = useDesignStore((state) => state.resize);
 
   const handleClick = (option) => {
-    addUndoHistory();
-    updateTemplate({
-      pages: template.pages.map((page) => ({
-        ...page,
-        width: option.size.width,
-        height: option.size.height,
-      })),
-    });
+    resize(option.size.width, option.size.height);
   };
 
   return (

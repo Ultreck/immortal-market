@@ -78,8 +78,8 @@ const ShapeContent = ({ element }) => {
 const Rectangle = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -103,8 +103,8 @@ const Rectangle = ({ element }) => {
 const Circle = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -133,8 +133,8 @@ const Circle = ({ element }) => {
 const Triangle = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -160,8 +160,8 @@ const Triangle = ({ element }) => {
 const Heart = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -190,8 +190,8 @@ const Heart = ({ element }) => {
 const Rhombus = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -217,8 +217,8 @@ const Rhombus = ({ element }) => {
 const ArrowLeft = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -247,8 +247,8 @@ const ArrowLeft = ({ element }) => {
 const ArrowRight = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -277,8 +277,8 @@ const ArrowRight = ({ element }) => {
 const ArrowUp = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -307,8 +307,8 @@ const ArrowUp = ({ element }) => {
 const ArrowDown = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -337,8 +337,8 @@ const ArrowDown = ({ element }) => {
 const FourPointedStar = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -367,8 +367,8 @@ const FourPointedStar = ({ element }) => {
 const FivePointedStar = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -397,8 +397,8 @@ const FivePointedStar = ({ element }) => {
 const EightPointedStar = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -427,8 +427,8 @@ const EightPointedStar = ({ element }) => {
 const TrapezoidUp = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -454,8 +454,8 @@ const TrapezoidUp = ({ element }) => {
 const TrapezoidDown = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -481,8 +481,8 @@ const TrapezoidDown = ({ element }) => {
 const Pentagon = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -508,8 +508,8 @@ const Pentagon = ({ element }) => {
 const Hexagon = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -535,8 +535,8 @@ const Hexagon = ({ element }) => {
 const Heptagon = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -565,8 +565,8 @@ const Heptagon = ({ element }) => {
 const Octagon = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -595,8 +595,8 @@ const Octagon = ({ element }) => {
 const Bookmark = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -622,8 +622,8 @@ const Bookmark = ({ element }) => {
 const Banner = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -649,8 +649,8 @@ const Banner = ({ element }) => {
 const Banner2 = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -679,8 +679,8 @@ const Banner2 = ({ element }) => {
 const ArrowConcave = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -706,8 +706,8 @@ const ArrowConcave = ({ element }) => {
 const ArrowConvex = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -733,8 +733,8 @@ const ArrowConvex = ({ element }) => {
 const Plus = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -760,8 +760,8 @@ const Plus = ({ element }) => {
 const Close = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 98 98"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -790,8 +790,8 @@ const Close = ({ element }) => {
 const Rabbet = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -820,8 +820,8 @@ const Rabbet = ({ element }) => {
 const Cloud = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -850,8 +850,8 @@ const Cloud = ({ element }) => {
 const BidirectionalArrow = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -880,8 +880,8 @@ const BidirectionalArrow = ({ element }) => {
 const StellatedPolygon = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -910,8 +910,8 @@ const StellatedPolygon = ({ element }) => {
 const HalfRoundRectangle = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -937,8 +937,8 @@ const HalfRoundRectangle = ({ element }) => {
 const InvertedTriangle = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -964,8 +964,8 @@ const InvertedTriangle = ({ element }) => {
 const RightPoint = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -991,8 +991,8 @@ const RightPoint = ({ element }) => {
 const LeftPoint = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1018,8 +1018,8 @@ const LeftPoint = ({ element }) => {
 const Parallelogram = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1045,8 +1045,8 @@ const Parallelogram = ({ element }) => {
 const SixPointedStar = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1075,8 +1075,8 @@ const SixPointedStar = ({ element }) => {
 const ArrowUpDown = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1102,8 +1102,8 @@ const ArrowUpDown = ({ element }) => {
 const ChevronLeft = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1129,8 +1129,8 @@ const ChevronLeft = ({ element }) => {
 const ChevronRight = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1156,8 +1156,8 @@ const ChevronRight = ({ element }) => {
 const Home = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1183,8 +1183,8 @@ const Home = ({ element }) => {
 const Map = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1213,8 +1213,8 @@ const Map = ({ element }) => {
 const Cursor = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1243,8 +1243,8 @@ const Cursor = ({ element }) => {
 const Diamond = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1270,8 +1270,8 @@ const Diamond = ({ element }) => {
 const Flag = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1300,8 +1300,8 @@ const Flag = ({ element }) => {
 const Crown = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1330,8 +1330,8 @@ const Crown = ({ element }) => {
 const Message = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1360,8 +1360,8 @@ const Message = ({ element }) => {
 const EnvelopeClose = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1390,8 +1390,8 @@ const EnvelopeClose = ({ element }) => {
 const EnvelopeOpen = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1420,8 +1420,8 @@ const EnvelopeOpen = ({ element }) => {
 const Rewind = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1447,8 +1447,8 @@ const Rewind = ({ element }) => {
 const Forward = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1474,8 +1474,8 @@ const Forward = ({ element }) => {
 const Calendar = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1504,8 +1504,8 @@ const Calendar = ({ element }) => {
 const Bevel = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1531,8 +1531,8 @@ const Bevel = ({ element }) => {
 const Display = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 101 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1561,8 +1561,8 @@ const Display = ({ element }) => {
 const WaveHighRight = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1591,8 +1591,8 @@ const WaveHighRight = ({ element }) => {
 const WaveHighLeft = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1621,8 +1621,8 @@ const WaveHighLeft = ({ element }) => {
 const WaveHigherLeft = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1651,8 +1651,8 @@ const WaveHigherLeft = ({ element }) => {
 const ChatBubble = ({ element }) => {
   return (
     <svg
-      width={element.width}
-      height={element.height}
+      width={element.size.width}
+      height={element.size.height}
       viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

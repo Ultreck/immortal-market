@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { toBlob } from 'html-to-image';
 import { useKey } from 'react-use';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { useGetDesign, useUpdateDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import { useQueryClient } from '@tanstack/react-query';
@@ -10,12 +10,13 @@ import { Button, Tooltip, addToast } from '@heroui/react';
 import equal from 'fast-deep-equal/es6/react';
 import { objectToFormData } from '@/lib/utils.js';
 
+// TODO: remove this component
 const SaveButton = () => {
   const qc = useQueryClient();
   const { id: business } = useBusiness();
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
-  const id = useTemplateStore((state) => state.template.id);
-  const pages = useTemplateStore((state) => state.template.pages);
+  const id = useDesignStore((state) => state.id);
+  const pages = useDesignStore((state) => state.pages);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(business, id);
   const { data: { design = {} } = {} } = useGetDesign(business, id);
   const [cache, setCache] = useState(0);
@@ -41,7 +42,7 @@ const SaveButton = () => {
       addToast({
         title: 'Error',
         description: error?.response?.data?.message || error.message,
-        color: 'danger'
+        color: 'danger',
       });
     }
   }, [pages, update, business, qc]);

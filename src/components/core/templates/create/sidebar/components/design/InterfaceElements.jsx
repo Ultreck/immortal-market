@@ -55,8 +55,10 @@ const sliders = [
     data: {
       type: 'frame',
       text: 'Frame tabs',
-      width: 300,
-      height: 300,
+      size: {
+        width: 300,
+        height: 300,
+      },
       children: [],
       style: getElementDefaultStyle({ type: 'frame', name: 'tabs' }),
       config: {
@@ -81,8 +83,10 @@ const sliders = [
     data: {
       type: 'frame',
       text: 'Frame carousel',
-      width: 300,
-      height: 300,
+      size: {
+        width: 300,
+        height: 300,
+      },
       children: [],
       style: getElementDefaultStyle({ type: 'frame', name: 'carousel' }),
       config: {
@@ -113,19 +117,21 @@ const buttons = styles.map((style, i) => {
     data: {
       type: 'button',
       text: 'Button',
-      width: 120,
-      height: 48,
+      size: {
+        width: 120,
+        height: 48,
+      },
       style,
       config: {
         text: 'Button',
       },
     },
-    preview: <ButtonPreview element={{ width: '100%', height: 48, style, config: { text: 'Button' } }} />,
+    preview: <ButtonPreview element={{ size: { width: '100%', height: 48 }, style, config: { text: 'Button' } }} />,
   };
 });
 const items = [...buttons, ...sliders];
 
-const Buttons = ({ mini = false, onBack }) => {
+const InterfaceElements = ({ mini = false, onBack }) => {
   return (
     <>
       {mini ? (
@@ -155,9 +161,9 @@ const Buttons = ({ mini = false, onBack }) => {
   );
 };
 
-Buttons.propTypes = {
+InterfaceElements.propTypes = {
   mini: PropTypes.bool,
   onBack: PropTypes.func,
 };
 
-export default Buttons;
+export default InterfaceElements;

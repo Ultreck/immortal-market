@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { TbSettings2 } from 'react-icons/tb';
 import StandardBarCommonConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardBarCommonConfig.jsx';
 import StandardPieCommonConfig from '@/components/core/templates/create/tools/elements/specific/standard-config/StandardPieCommonConfig.jsx';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import ErrorBoundary from '@/components/ErrorBoundary.jsx';
 
 const ChartConfig = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
@@ -16,8 +17,8 @@ const ChartConfig = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[450px]' }}
-      isOpen={openTool === 'chart'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'chart' : null })}
+      isOpen={tool === 'chart'}
+      onOpenChange={(v) => (v ? openTool('chart') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Chart config" className="text-base">
@@ -27,7 +28,7 @@ const ChartConfig = ({ element, onChange }) => {
       <PopoverContent className="p-0 shadow border border-default-200 h-full max-h-[500px] overflow-y-auto block">
         <div className="px-8 py-6 w-full">
           <ErrorBoundary>
-            <ChartData element={element} onChange={onChange} onClose={() => updateTemplate({ openTool: null })} />
+            <ChartData element={element} onChange={onChange} onClose={() => closeTool()} />
           </ErrorBoundary>
         </div>
       </PopoverContent>

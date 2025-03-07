@@ -1,28 +1,25 @@
 import DraggableElement from '@/components/core/templates/create/sidebar/DraggableElement.jsx';
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const DraggableElementWrapper = ({ element }) => {
-  const addElements = useTemplateStore((state) => state.addElements);
-  const activePage = useTemplateStore((state) => state.template.activePage);
+  const createElements = useDesignStore((state) => state.createElements);
+  const activePage = useDesignStore((state) => state.activePage);
 
   const handleClick = () => {
     if (Array.isArray(element.data)) {
-      const elements = element.data.map((el) => ({ ...el, id: crypto.randomUUID() }));
-      addElements(elements, activePage);
+      createElements(activePage, element.data);
     } else {
-      addElements(
-        [
-          {
-            id: crypto.randomUUID(),
-            ...element.data,
+      createElements(activePage, [
+        {
+          ...element.data,
+          position: {
             x: 10,
             y: 10,
-            rotate: 0,
           },
-        ],
-        activePage
-      );
+          rotation: 0,
+        },
+      ]);
     }
   };
 

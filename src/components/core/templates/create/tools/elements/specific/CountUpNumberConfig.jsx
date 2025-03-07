@@ -2,7 +2,7 @@ import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } f
 import PropTypes from 'prop-types';
 import { TbSettings2 } from 'react-icons/tb';
 import NumberInput from '@/components/ui/NumberInput.jsx';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const options = [
   // Common Currency Symbols
@@ -78,19 +78,20 @@ const options = [
 ];
 
 const CountUpNumberConfig = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'count-up-number'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'count-up-number' : null })}
+      isOpen={tool === 'count-up-number'}
+      onOpenChange={(v) => (v ? openTool('count-up-number') : closeTool())}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Count up number" className="text-base">
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>

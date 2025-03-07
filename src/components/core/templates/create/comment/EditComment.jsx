@@ -1,7 +1,7 @@
 import useBusiness from '@/hooks/use-business.js';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { useState } from 'react';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
 import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure, addToast } from '@heroui/react';
 import { useUpdateComment } from '@/api/business.js';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
@@ -12,11 +12,11 @@ import PropTypes from 'prop-types';
 
 const EditComment = ({ comment, onClose }) => {
   const { id: business } = useBusiness();
+  const id = useDesignStore((state) => state.id);
   const { isDarkMode } = useTernaryDarkMode();
   const [content, setContent] = useState(comment.content);
-  const design = useTemplateStore((state) => state.template.id);
   const { isOpen: isEmojiOpen, onOpen: onEmojiOpen, onClose: onEmojiClose } = useDisclosure();
-  const { mutateAsync: updateComment, isPending: isUpdateCommentLoading } = useUpdateComment(business, design);
+  const { mutateAsync: updateComment, isPending: isUpdateCommentLoading } = useUpdateComment(business, id);
 
   const handleDone = async () => {
     try {

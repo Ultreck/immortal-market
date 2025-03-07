@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Autocomplete, AutocompleteItem, Button, Modal, ModalBody, ModalContent } from '@heroui/react';
 import { TbLinkOff } from 'react-icons/tb';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { useState } from 'react';
 
 const LinkModal = ({ elements, isOpen, onClose }) => {
@@ -15,18 +15,17 @@ const LinkModal = ({ elements, isOpen, onClose }) => {
 };
 
 const Content = ({ elements, onClose }) => {
-  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
-  const updateElements = useTemplateStore((state) => state.updateElements);
-  const page = useTemplateStore(({ template }) => {
-    return template.pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
-  });
-  const pages = useTemplateStore(({ template }) => template.pages);
+  const updateElements = useDesignStore((state) => state.updateElements);
+  const pages = useDesignStore((state) => state.pages);
   const values = elements.map((e) => e.href);
   const same = values.every((v) => v === values[0]);
   const [value, setValue] = useState(same ? values[0] || '' : '');
 
   const onChange = (elements) => {
-    updateElements(elements, page.id, true);
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { href: e.href } })),
+      true
+    );
   };
 
   const handleDone = () => {

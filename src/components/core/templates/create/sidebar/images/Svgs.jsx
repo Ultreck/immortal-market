@@ -34,7 +34,7 @@ const Svgs = ({ mini = false, onBack }) => {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message || e.message,
-        color: 'danger'
+        color: 'danger',
       });
     }
   };
@@ -44,8 +44,10 @@ const Svgs = ({ mini = false, onBack }) => {
     data: {
       type: 'svg',
       text: 'Svg',
-      width: 400,
-      height: 300,
+      size: {
+        width: 400,
+        height: 300,
+      },
       style: getElementDefaultStyle({ type: 'svg' }),
       config: {
         src: getImageLink(infographic.Key),

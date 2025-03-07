@@ -10,13 +10,14 @@ import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import { useDeepCompareEffect } from 'react-use';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { RiAddLine, RiCloseLine } from 'react-icons/ri';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const Background = ({ elements, onChange }) => {
-  const value = useResolveValue(elements.map((e) => e.style.background));
   const [tab, setTab] = useState('solid');
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
+  const value = useResolveValue(elements.map((e) => e.style.background));
 
   useEffect(() => {
     if (value.includes('gradient')) setTab('gradient');
@@ -36,11 +37,11 @@ const Background = ({ elements, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'background'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'background' : null })}
+      isOpen={tool === 'background'}
+      onOpenChange={(v) => (v ? openTool('background') : closeTool())}
     >
       <PopoverTrigger>
-        <div className="pb-2">
+        <div className="py-2 flex items-center justify-center">
           <button
             className="w-[22px] h-[22px] rounded-full hover:brightness-105 cursor-pointer border-2 border-default-200"
             style={{ background: value }}

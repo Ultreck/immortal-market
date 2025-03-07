@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import { getElementPresentComponent } from '@/lib/elements.js';
 
 const ElementsPreview = forwardRef(({ elements }, ref) => {
-  const maxRight = Math.max(...elements.map((el) => el.x + el.width));
-  const minLeft = Math.min(...elements.map((el) => el.x));
-  const minTop = Math.min(...elements.map((el) => el.y));
-  const maxBottom = Math.max(...elements.map((el) => el.y + el.height));
+  const maxRight = Math.max(...elements.map((el) => el.position.x + el.size.width));
+  const minLeft = Math.min(...elements.map((el) => el.position.x));
+  const minTop = Math.min(...elements.map((el) => el.position.y));
+  const maxBottom = Math.max(...elements.map((el) => el.position.y + el.size.height));
 
   const _elements = elements.map((el) => {
-    return { ...el, x: el.x - minLeft, y: el.y - minTop };
+    return { ...el, position: { x: el.position.x - minLeft, y: el.position.y - minTop } };
   });
 
   return (
-    <div className="border rounded-2xl px-6 py-5">
+    <div className="border rounded-2xl px-6 py-5 bg-white">
       <div
         ref={ref}
         style={{ width: maxRight - minLeft, height: maxBottom - minTop }}

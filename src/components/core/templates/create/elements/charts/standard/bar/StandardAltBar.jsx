@@ -106,7 +106,7 @@ export const StandardAltBarContent = ({ element, isChartWrapperDisabled = false 
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
-      <div ref={chartRef} style={{ height: element.height, width: element.width, opacity: element.style.opacity }} />
+      <div ref={chartRef} style={{ height: element.size.height, width: element.size.width, opacity: element.style.opacity }} />
     </ElementChartWrapper>
   );
 };

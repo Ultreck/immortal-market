@@ -21,8 +21,8 @@ export const AdvanceColumnCardElementContent = ({ element, isChartWrapperDisable
       <div
         className="flex flex-col"
         style={{
-          width: element.width,
-          height: element.height,
+          width: element.size.width,
+          height: element.size.height,
           paddingTop: element.config.styles.yPadding,
           paddingLeft: element.config.styles.xPadding,
           paddingBottom: element.config.styles.yPadding,
@@ -53,7 +53,7 @@ export const AdvanceColumnCardElementContent = ({ element, isChartWrapperDisable
             <div
               key={index}
               className="flex items-center space-x-4"
-              style={{ width: element.width, height: element.height }}
+              style={{ width: element.size.width, height: element.size.height }}
             >
               {showLabel && (
                 <div

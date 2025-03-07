@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react';
-import useTemplateStore from '@/store/template';
+import useDesignStore from '@/store/design.js';
 import { closestCenter, DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import NoData from '@/components/ui/NoData.jsx';
 import { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -10,14 +10,15 @@ import { CSS } from '@dnd-kit/utilities';
 import { RiCloseFill } from 'react-icons/ri';
 
 const TransitionModal = () => {
-  const isTransitionOpen = useTemplateStore((state) => state.template.isTransitionOpen);
+  const isTransitionOpen = useDesignStore((state) => state.isTransitionOpen);
   const [element, setElement] = useState(null);
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.activePage));
-  const updatePage = useTemplateStore((state) => state.updatePage);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const page = useDesignStore((state) => state.pages.find((page) => page.id === state.activePage));
+  const elements = useDesignStore((state) => state.elements.filter((el) => el.page === state.activePage));
+  // const updatePage = useDesignStore((state) => state.updatePage);
+  // const updateStore = useDesignStore((state) => state.updateStore);
   const sensors = useSensors(useSensor(PointerSensor));
   const handleDragStart = (event) => {
-    setElement(page.elements.find((obj) => obj.id === event.active.id));
+    setElement(elements.find((obj) => obj.id === event.active.id));
   };
 
   const handleDragEnd = (event) => {
@@ -26,22 +27,22 @@ const TransitionModal = () => {
     if (!over || active.id === over.id) {
       return;
     }
-    const oldIndex = page.elements.findIndex((obj) => obj.id === active.id);
-    const newIndex = page.elements.findIndex((obj) => obj.id === over.id);
-    const reorderedElements = arrayMove(page.elements, oldIndex, newIndex);
-    const updatedElements = reorderedElements.map((el, index) => ({
-      ...el,
-      style: {
-        ...el.style,
-        order: index + 1,
-      },
-    }));
-    updatePage({ elements: updatedElements }, page.id);
+    // const oldIndex = page.elements.findIndex((obj) => obj.id === active.id);
+    // const newIndex = page.elements.findIndex((obj) => obj.id === over.id);
+    // // const reorderedElements = arrayMove(page.elements, oldIndex, newIndex);
+    // // // const updatedElements = reorderedElements.map((el, index) => ({
+    // // //   ...el,
+    // // //   style: {
+    // // //     ...el.style,
+    // // //     order: index + 1,
+    // // //   },
+    // // // }));
+    // updatePage({ elements: updatedElements }, page.id);
   };
 
   return (
     <AnimatePresence>
-      {isTransitionOpen && (
+      {true && (
         <motion.div
           initial={{ x: '100%', opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -61,9 +62,9 @@ const TransitionModal = () => {
               collisionDetection={closestCenter}
             >
               <SortableContext items={page?.elements || []} strategy={verticalListSortingStrategy}>
-                {page?.elements?.length > 0 ? (
+                {elements?.length > 0 ? (
                   <div className="space-y-1">
-                    {page.elements.map((element) => (
+                    {elements.map((element) => (
                       <TransitionElement key={element.id} element={element} />
                     ))}
                   </div>
@@ -112,8 +113,8 @@ TransitionElement.propTypes = {
 };
 
 const TransitionItem = forwardRef(({ element, className, ...props }, ref) => {
-  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
-  const selectElements = useTemplateStore((state) => state.selectElements);
+  const selectedElements = useDesignStore((state) => state.selectedElements);
+  const selectElements = useDesignStore((state) => state.selectElements);
   const active = selectedElements.includes(element.id);
 
   return (

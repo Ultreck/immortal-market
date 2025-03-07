@@ -10,7 +10,7 @@ import { ListPresent, TextList } from '@/components/core/templates/create/elemen
 import { CountUpNumber, CountUpNumberPresent } from '@/components/core/templates/create/elements/CountUpNumber.jsx';
 import { TextStream, TextStreamPresent } from '@/components/core/templates/create/elements/texts/TextStream.jsx';
 
-export const Text = ({ element, active, onChange }) => {
+export const Text = ({ element, active }) => {
   const components = {
     list: TextList,
     'count-up-number': CountUpNumber,
@@ -20,10 +20,10 @@ export const Text = ({ element, active, onChange }) => {
   };
 
   if (components[element.config.name]) {
-    return createElement(components[element.config.name], { element, active, onChange });
+    return createElement(components[element.config.name], { element, active });
   }
 
-  return <TextBasic element={element} active={active} onChange={onChange} />;
+  return <TextBasic element={element} active={active} />;
 };
 
 export const TextPresent = ({ element }) => {

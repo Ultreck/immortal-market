@@ -5,14 +5,14 @@ import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
 import { useUpdateDesignSource } from '@/api/business.js';
+import useDesignStore from '@/store/design';
 
 const Combinations = ({ onNext, onPrev }) => {
   const { source } = useCurrentDesign();
   const [selection, setSelection] = useState(source?.selection?.combinations || []);
   const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
+  const id = useDesignStore((state) => state.design.id);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
 
   const handleSubmit = async () => {
@@ -20,7 +20,7 @@ const Combinations = ({ onNext, onPrev }) => {
       addToast({
         title: 'Error',
         description: 'Please select at least one combination',
-        color: 'danger'
+        color: 'danger',
       });
       return;
     }
@@ -31,7 +31,7 @@ const Combinations = ({ onNext, onPrev }) => {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message || e.message,
-        color: 'danger'
+        color: 'danger',
       });
     }
   };

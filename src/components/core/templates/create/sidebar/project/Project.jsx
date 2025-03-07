@@ -3,7 +3,7 @@ import { formatDistanceToNow } from 'date-fns';
 import useProjectStore from '@/store/project.js';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import { Button } from '@heroui/react';
-import useTemplateStore from '@/store/template';
+import useDesignStore from '@/store/design';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import {
   formInitialData,
@@ -16,17 +16,17 @@ import useBusiness from '@/hooks/use-business';
 import { useGetComments } from '@/api/business';
 
 const Project = () => {
-  const { design, source } = useCurrentDesign();
+  const { source } = useCurrentDesign();
+  const design = useDesignStore((state) => state.design);
   const openProjectModal = useProjectStore((state) => state.openModal);
   const { id: business } = useBusiness();
-  const activePage = useTemplateStore((state) => state.template.activePage);
+  const activePage = useDesignStore((state) => state.activePage);
   const { data: { comments = [] } = {} } = useGetComments({ business, design: design.id });
   const _comments = comments.filter((comment) => comment.targetId === activePage && !comment.resolved);
+  const elements = useDesignStore((state) => state.elements.filter((element) => element.page === state.activePage));
 
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.activePage));
-
-  const poll = page?.elements?.find((e) => e.type === 'form' && e.config.name === 'poll');
-  const form = page?.elements?.find((e) => e.type === 'form' && e.config.name === 'form');
+  const poll = elements?.find((e) => e.type === 'form' && e.config.name === 'poll');
+  const form = elements?.find((e) => e.type === 'form' && e.config.name === 'form');
 
   const handleModifyReport = () => {
     openProjectModal({ restore: true, source });
@@ -102,12 +102,6 @@ const Project = () => {
           className="border-2 w-full rounded-sm text-start justify-start bg-transparent border-default-300 py-7 px-3 "
         >
           Transition (0)
-        </Button>
-        <Button
-          radius="none"
-          className="border-2 w-full rounded-sm text-start justify-start bg-transparent border-default-300 py-7 px-3 "
-        >
-          Layers ({page.elements.length})
         </Button>
       </div>
     </div>

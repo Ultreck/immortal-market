@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
 import { useSortable } from '@dnd-kit/sortable';
-import LayerItem from '@/components/core/templates/create/sidebar/layers/LayerItem.jsx';
+import LayerItem from '@/components/core/templates/create/sidebar/layout/layers/LayerItem.jsx';
 import { CSS } from '@dnd-kit/utilities';
 import { cn } from '@/lib/utils.js';
 
 const LayerElement = ({ element, className }) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: element.id,
-    data: element.data,
-  });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: element.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),

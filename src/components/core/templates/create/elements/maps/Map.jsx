@@ -30,7 +30,7 @@ const MapContent = ({ element, config, isMapWrapperDisabled }) => {
   return (
     <ElementMapWrapper element={element} isDisabled={isMapWrapperDisabled}>
       <svg
-        style={{ width: element.width }}
+        style={{ width: element.size.width }}
         ref={el}
         width="100%"
         viewBox={config.viewBox}

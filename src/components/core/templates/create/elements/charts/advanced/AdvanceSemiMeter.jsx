@@ -31,7 +31,7 @@ function AdvanceSemiMeter({ element, isChartWrapperDisabled = false }) {
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <div
         className="relative flex justify-center items-center"
-        style={{ height: element.height, width: element.width }}
+        style={{ height: element.size.height, width: element.size.width }}
       >
         <svg className="w-full h-48" viewBox="0 0 100 50">
           <path d="M 0,50 A 50,50 0 0,1 100,60" stroke={element.config.colors[0]} strokeWidth="10" fill="transparent" />

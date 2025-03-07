@@ -33,7 +33,7 @@ export const AdvancedStackedCardContent = ({ element, isChartWrapperDisabled = f
           paddingLeft: element.config.styles.xPadding,
           paddingBottom: element.config.styles.yPadding,
           paddingRight: element.config.styles.xPadding,
-          width: element.width,
+          width: element.size.width,
           opacity: element.style.opacity,
         }}
       >

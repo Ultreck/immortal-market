@@ -1,18 +1,18 @@
 import { TbDotsVertical, TbPlus, TbTemplate } from 'react-icons/tb';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@heroui/react';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import PageBlocksModal from '@/components/core/templates/create/PageBlocksModal.jsx';
 
 const NewPageButton = () => {
-  const addPage = useTemplateStore((state) => state.addPage);
-  const { isOpen: isTemplatesOpen, onOpen: onTemplatesOpen, onClose: onTemplatesClose } = useDisclosure();
+  const createPage = useDesignStore((state) => state.createPage);
+  const { isOpen: isBlocksOpen, onOpen: onBlocksOpen, onClose: onBlocksClose } = useDisclosure();
 
   return (
     <>
       <div className="w-full flex items-center space-x-4 mt-10">
         <div
           tabIndex={0}
-          onClick={() => addPage()}
+          onClick={() => createPage()}
           className="w-full flex items-center border border-default-200 rounded-2xl px-6 py-4 space-x-4 hover:bg-default-200/60 dark:hover:bg-default-100/60 cursor-pointer"
         >
           <TbPlus className="text-2xl" />
@@ -31,11 +31,11 @@ const NewPageButton = () => {
             variant="faded"
             aria-label="Dropdown menu with description"
             onAction={(key) => {
-              if (key === 'templates') onTemplatesOpen();
+              if (key === 'blocks') onBlocksOpen();
             }}
           >
             <DropdownItem
-              key="templates"
+              key="blocks"
               classNames={{
                 title: 'text-base',
                 description: 'text-sm',
@@ -44,13 +44,13 @@ const NewPageButton = () => {
               }}
               startContent={<TbTemplate size="20" className="ml-1" />}
             >
-              Add new page from template
+              Add new page from blocks
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </div>
 
-      <PageBlocksModal isOpen={isTemplatesOpen} onClose={onTemplatesClose} />
+      <PageBlocksModal isOpen={isBlocksOpen} onClose={onBlocksClose} />
     </>
   );
 };

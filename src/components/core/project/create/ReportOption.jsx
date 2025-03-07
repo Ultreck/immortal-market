@@ -5,15 +5,15 @@ import { cn } from '@/lib/utils.js';
 import { TbChevronRight, TbCircleCheckFilled, TbForms, TbRobot } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
 import { useAnalyze, useAutoGenerate, useUpdateDesignSource } from '@/api/business.js';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const ReportOption = ({ onNext, onClose }) => {
+  const { id: business } = useBusiness();
+  const id = useDesignStore((state) => state.id);
   const { source } = useCurrentDesign();
   const [type, setType] = useState(source?.selection?.type || '');
-  const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
   const { mutateAsync: autoGenerate, isPending: isAutoGenerateLoading } = useAutoGenerate(business, id);
   const { mutateAsync: analyze, isPending: isAnalyzing } = useAnalyze(business, id);

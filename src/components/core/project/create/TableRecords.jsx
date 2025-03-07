@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
 import { useGetTableData, useProcessData } from '@/api/business.js';
 import { camelCaseToWords } from '@/lib/utils.js';
 import {
@@ -23,7 +23,7 @@ const limit = 10;
 
 const TableRecords = ({ table }) => {
   const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
+  const id = useDesignStore((state) => state.id);
   const [page, setPage] = useState(1);
   const {
     data: { data, total } = {},
@@ -95,7 +95,7 @@ const TableRecords = ({ table }) => {
 
 const InsertData = () => {
   const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
+  const id = useDesignStore((state) => state.id);
   const { mutateAsync: process, isPending: isProcessDataLoading } = useProcessData(business, id);
 
   const handleClick = async () => {
@@ -105,7 +105,7 @@ const InsertData = () => {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
-        color: 'error',
+        color: 'danger',
       });
     }
   };

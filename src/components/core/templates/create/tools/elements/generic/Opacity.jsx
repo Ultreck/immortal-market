@@ -1,12 +1,13 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@heroui/react';
 import PropTypes from 'prop-types';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const Opacity = ({ elements, onChange }) => {
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
   const value = useResolveValue(elements.map((e) => e?.style?.opacity ?? 1));
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
 
   const handleChange = (v) => {
     if (isNaN(v)) return;
@@ -18,8 +19,8 @@ const Opacity = ({ elements, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'opacity'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'opacity' : null })}
+      isOpen={tool === 'opacity'}
+      onOpenChange={(v) => (v ? openTool('opacity') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">

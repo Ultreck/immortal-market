@@ -76,8 +76,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Pie chart',
-          width: 500,
-          height: 400,
+          size: {
+            width: 500,
+            height: 400,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'pie' }),
           config: {
             ...config,
@@ -97,8 +99,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Pie doughnut chart',
-          width: 500,
-          height: 400,
+          size: {
+            width: 500,
+            height: 400,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'pie' }),
           config: {
             ...config,
@@ -118,8 +122,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Pie chart 2',
-          width: 500,
-          height: 500,
+          size: {
+            width: 500,
+            height: 500,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'doughnut-standard' }),
           config: {
             ...config,
@@ -139,8 +145,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Pie doughnut chart 2',
-          width: 550,
-          height: 500,
+          size: {
+            width: 550,
+            height: 500,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'pie-2' }),
           config: {
             ...config,
@@ -161,8 +169,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Semi pie chart',
-          width: 450,
-          height: 450,
+          size: {
+            width: 450,
+            height: 450,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-pie' }),
           config: {
             ...config,
@@ -181,8 +191,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Semi pie chart 2',
-          width: 500,
-          height: 400,
+          size: {
+            width: 500,
+            height: 400,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-circle' }),
           config: {
             ...config,
@@ -227,8 +239,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Bar chart',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-s', name: 'bar' }),
           config: {
             ...config,
@@ -248,8 +262,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Bar chart (Not separated)',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'bar' }),
           config: {
             ...config,
@@ -269,8 +285,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Bar chart (Vertical)',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'bar' }),
           config: {
             ...config,
@@ -291,8 +309,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Bar chart (Vertical, Not separated)',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'bar' }),
           config: {
             ...config,
@@ -313,8 +333,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Stacked bar chart',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-stacked' }),
           config: {
             ...config,
@@ -341,8 +363,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Stacked bar chart (Vertical)',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-stacked' }),
           config: {
             ...config,
@@ -370,8 +394,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Multiple bar chart',
-          width: 500,
-          height: 400,
+          size: {
+            width: 500,
+            height: 400,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple' }),
           config: {
             ...config,
@@ -397,8 +423,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Multiple bar chart (Vertical)',
-          width: 500,
-          height: 400,
+          size: {
+            width: 500,
+            height: 400,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-multiple' }),
           config: {
             ...config,
@@ -425,8 +453,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Alt Bar Chart',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'alt-bar' }),
           config: {
             ...config,
@@ -482,8 +512,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Line Chart',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'line' }),
           config: {
             ...config,
@@ -509,8 +541,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Line Multiple Chart',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'line-multiple' }),
           config: {
             ...config,
@@ -530,8 +564,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Area Chart',
-          width: 500,
-          height: 400,
+          size: {
+            width: 500,
+            height: 400,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'area' }),
           config: {
             ...config,
@@ -557,8 +593,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Area Chart',
-          width: 500,
-          height: 400,
+          size: {
+            width: 500,
+            height: 400,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'area-multiple' }),
           config: {
             ...config,
@@ -578,8 +616,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Line area Chart',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'line-area' }),
           config: {
             ...config,
@@ -599,8 +639,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Line Bar Chart',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'line-bar' }),
           config: {
             ...config,
@@ -646,8 +688,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Bubble Chart',
-          width: 400,
-          height: 300,
+          size: {
+            width: 400,
+            height: 300,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'bubble' }),
           config: {
             ...config,
@@ -693,8 +737,10 @@ const _standard = [];
         data: {
           type: 'chart-s',
           text: 'Scatter Chart',
-          width: 550,
-          height: 400,
+          size: {
+            width: 550,
+            height: 400,
+          },
           style: getElementDefaultStyle({ type: 'chart-a', name: 'scatter' }),
           config: {
             ...config,
@@ -734,8 +780,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: '10 Circles',
-      width: 400,
-      height: 300,
+      size: {
+        width: 400,
+        height: 300,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'shapes' }),
       config: {
         name: 'shapes',
@@ -767,8 +815,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Linear Bar Chart',
-      width: 400,
-      height: 100,
+      size: {
+        width: 400,
+        height: 100,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'linear-bar' }),
       config: {
         name: 'linear-bar',
@@ -788,8 +838,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Semi Meter Chart',
-      width: 400,
-      height: 200,
+      size: {
+        width: 400,
+        height: 200,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'semi-meter' }),
       config: {
         name: 'semi-meter',
@@ -813,8 +865,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Linear Bar Chart',
-      width: 500,
-      height: 100,
+      size: {
+        width: 500,
+        height: 100,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'linear-advanced-bar' }),
       config: {
         name: 'linear-advanced-bar',
@@ -842,8 +896,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'circle-icons Chart',
-      width: 400,
-      height: 400,
+      size: {
+        width: 400,
+        height: 400,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'circle-icons' }),
       config: {
         name: 'circle-icons',
@@ -879,8 +935,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Bar Chart Global',
-      width: 500,
-      height: 400,
+      size: {
+        width: 500,
+        height: 400,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-global' }),
       config: {
         name: 'bar-global',
@@ -915,8 +973,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Speedometer Chart',
-      width: 500,
-      height: 500,
+      size: {
+        width: 500,
+        height: 500,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'speedometer' }),
       config: {
         name: 'speedometer',
@@ -938,8 +998,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Speedometer-simple Chart',
-      width: 500,
-      height: 500,
+      size: {
+        width: 500,
+        height: 500,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'speedometer-simple' }),
       config: {
         name: 'speedometer-simple',
@@ -961,8 +1023,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Speedometer-multiple Chart',
-      width: 500,
-      height: 500,
+      size: {
+        width: 500,
+        height: 500,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'speedometer-multiple' }),
       config: {
         name: 'speedometer-multiple',
@@ -988,8 +1052,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'dynamic-sorting Chart',
-      width: 500,
-      height: 400,
+      size: {
+        width: 500,
+        height: 400,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'dynamic-sorting' }),
       config: {
         name: 'dynamic-sorting',
@@ -1023,8 +1089,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Scatter Life Expectancy Chart',
-      width: 600,
-      height: 500,
+      size: {
+        width: 600,
+        height: 500,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'scatter-life-expectancy' }),
       config: {
         name: 'scatter-life-expectancy',
@@ -1051,8 +1119,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Stacked Card Chart',
-      width: 500,
-      height: 300,
+      size: {
+        width: 500,
+        height: 300,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'stacked-card' }),
       config: {
         name: 'stacked-card',
@@ -1087,8 +1157,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Percentage Card Chart',
-      width: 500,
-      height: 300,
+      size: {
+        width: 500,
+        height: 300,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'percentage-card' }),
       config: {
         name: 'percentage-card',
@@ -1123,8 +1195,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Lollipop Chart',
-      width: 400,
-      height: 300,
+      size: {
+        width: 400,
+        height: 300,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'lollipop' }),
       config: {
         name: 'lollipop',
@@ -1158,8 +1232,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'nested-circles Chart',
-      width: 400,
-      height: 400,
+      size: {
+        width: 400,
+        height: 400,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'nested-circles' }),
       config: {
         name: 'nested-circles',
@@ -1192,8 +1268,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Funnel Chart',
-      width: 400,
-      height: 500,
+      size: {
+        width: 400,
+        height: 500,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'funnel' }),
       config: {
         name: 'funnel',
@@ -1227,8 +1305,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Tree Map Chart',
-      width: 500,
-      height: 400,
+      size: {
+        width: 500,
+        height: 400,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'tree-map' }),
       config: {
         name: 'tree-map',
@@ -1285,8 +1365,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Column Chart',
-      width: 550,
-      height: 500,
+      size: {
+        width: 550,
+        height: 500,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'column-card' }),
       config: {
         name: 'column-card',
@@ -1325,8 +1407,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Column Chart',
-      width: 550,
-      height: 500,
+      size: {
+        width: 550,
+        height: 500,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'percentage-card-2' }),
       config: {
         name: 'percentage-card-2',
@@ -1368,8 +1452,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Pictogram Shapes Chart',
-      width: 400,
-      height: 300,
+      size: {
+        width: 400,
+        height: 300,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'pictogram-shapes' }),
       config: {
         name: 'pictogram-shapes',
@@ -1410,8 +1496,10 @@ export const advanced = [
     data: {
       type: 'chart-a',
       text: 'Custom Bar Chart',
-      width: 500,
-      height: 400,
+      size: {
+        width: 500,
+        height: 400,
+      },
       style: getElementDefaultStyle({ type: 'chart-a', name: 'custom-bar' }),
       config: {
         name: 'custom-bar',
@@ -1445,6 +1533,7 @@ export const advanced = [
     ),
   },
 ];
+
 export const charts = [...standard, ...advanced];
 
 export const chartCategories = [

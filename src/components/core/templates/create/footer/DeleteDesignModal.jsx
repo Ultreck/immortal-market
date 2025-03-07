@@ -1,27 +1,23 @@
 import { addToast, Button, Modal, ModalBody, ModalContent } from '@heroui/react';
 import { useDeleteDesign } from '@/api/business.js';
-import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import useBusiness from '@/hooks/use-business.js';
 
-const DeleteModal = ({ id, isOpen, onClose }) => {
-  const qc = useQueryClient();
+const DeleteDesignModal = ({ id, isOpen, onClose, onDeleted }) => {
   const { id: business } = useBusiness();
-  const { mutateAsync: deleteTemplate, isPending: isDeleteLoading } = useDeleteDesign(business);
+  const { mutateAsync: deleteDesign, isPending: isDeleteLoading } = useDeleteDesign(business);
 
   const handleDelete = async () => {
     try {
-      await deleteTemplate({ id });
-      await qc.invalidateQueries({ queryKey: ['businesses', id, 'designs'] });
-      addToast({
-        title: 'Project deleted',
-        color: 'success',
-      });
+      await deleteDesign({ id });
+      addToast({ title: 'Design deleted', color: 'success' });
+      onClose();
+      onDeleted?.();
     } catch (e) {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
-        color: 'danger'
+        color: 'danger',
       });
     }
   };
@@ -58,10 +54,11 @@ const DeleteModal = ({ id, isOpen, onClose }) => {
   );
 };
 
-DeleteModal.propTypes = {
+DeleteDesignModal.propTypes = {
   id: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onDeleted: PropTypes.func,
 };
 
-export default DeleteModal;
+export default DeleteDesignModal;

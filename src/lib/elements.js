@@ -14,6 +14,7 @@ import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx'
 import { DataPresent, DataTag } from '@/components/core/templates/create/elements/DataTag.jsx';
 import { Button, ButtonPresent } from '@/components/core/templates/create/elements/Button.jsx';
 import Forms, { FormPresents } from '@/components/core/templates/create/elements/forms/FormPresent.jsx';
+import { Group, GroupPresent } from '@/components/core/templates/create/elements/Group.jsx';
 
 export const elements = {
   button: {
@@ -21,6 +22,17 @@ export const elements = {
     components: {
       edit: Button,
       present: ButtonPresent,
+    },
+    config: {
+      wrapper: true,
+      editable: true,
+    },
+  },
+  group: {
+    tools: [],
+    components: {
+      edit: Group,
+      present: GroupPresent,
     },
     config: {
       wrapper: true,

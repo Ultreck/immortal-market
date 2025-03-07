@@ -3,7 +3,7 @@ import CommentItem from '@/components/core/templates/create/comment/CommentItem.
 import NoData from '@/components/ui/NoData.jsx';
 import { useGetComments } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import PropTypes from 'prop-types';
 import { TbChevronLeft } from 'react-icons/tb';
 import { HiX } from 'react-icons/hi';
@@ -11,9 +11,9 @@ import { useEffect } from 'react';
 
 const TargetComments = ({ onBack, onClose }) => {
   const { id: business } = useBusiness();
-  const design = useTemplateStore((state) => state.template.id);
-  const commentsTargetId = useTemplateStore((state) => state.template.commentsTargetId);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const design = useDesignStore((state) => state.id);
+  const commentsTargetId = useDesignStore((state) => state.commentsTargetId);
+  const updateStore = useDesignStore((state) => state.updateStore);
   const { data: { comments = [] } = {}, isLoading: isCommentsLoading } = useGetComments({
     business,
     design,
@@ -22,14 +22,14 @@ const TargetComments = ({ onBack, onClose }) => {
   });
 
   const handleClick = (comment) => {
-    updateTemplate({ activeComment: comment });
+    updateStore({ activeComment: comment });
   };
 
   useEffect(() => {
     if (commentsTargetId && !isCommentsLoading && comments.length === 0) {
-      updateTemplate({ commentsTargetId: null });
+      updateStore({ commentsTargetId: null });
     }
-  }, [comments.length, commentsTargetId, isCommentsLoading, updateTemplate]);
+  }, [comments.length, commentsTargetId, isCommentsLoading, updateStore]);
 
   return (
     <div className="py-6">

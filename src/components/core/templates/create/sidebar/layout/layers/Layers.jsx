@@ -1,29 +1,32 @@
-import useTemplateStore from '@/store/template.js';
 import { closestCenter, DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import LayerElement from './LayerElement.jsx';
-import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useState } from 'react';
-import LayerItem from '@/components/core/templates/create/sidebar/layers/LayerItem.jsx';
+import LayerItem from '@/components/core/templates/create/sidebar/layout/layers/LayerItem.jsx';
 import NoData from '@/components/ui/NoData.jsx';
+import useDesignStore from '@/store/design';
 
 const Layers = () => {
   const [element, setElement] = useState(null);
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.activePage));
-  const updatePage = useTemplateStore((state) => state.updatePage);
+  const page = useDesignStore((state) => state.pages.find((page) => page.id === state.activePage));
+  const elements = useDesignStore((state) => state.elements.filter((el) => el.page === page.id));
+  const moveElementTo = useDesignStore((state) => state.moveElementTo);
   const sensors = useSensors(useSensor(PointerSensor));
+
   const handleDragStart = (event) => {
-    setElement(page.elements.find((obj) => obj.id === event.active.id));
+    setElement(elements.find((obj) => obj.id === event.active.id));
   };
 
   const handleDragEnd = (event) => {
     setElement(null);
     const { active, over } = event;
     if (active.id !== over.id) {
-      const oldIndex = page.elements.findIndex((obj) => obj.id === active.id);
-      const newIndex = page.elements.findIndex((obj) => obj.id === over.id);
-      updatePage({ elements: arrayMove(page.elements, oldIndex, newIndex) }, page.id);
+      const overElement = elements.find((obj) => obj.id === over.id);
+      moveElementTo(active.id, overElement.order);
     }
   };
+
+  const sortedElements = [...elements].sort((a, b) => a.order - b.order);
 
   return (
     <DndContext
@@ -32,10 +35,10 @@ const Layers = () => {
       onDragStart={handleDragStart}
       collisionDetection={closestCenter}
     >
-      <SortableContext items={page?.elements || []} strategy={verticalListSortingStrategy}>
-        {page?.elements?.length > 0 ? (
-          <div className="space-y-1">
-            {page.elements.map((element) => (
+      <SortableContext items={sortedElements.map((el) => el.id)} strategy={verticalListSortingStrategy}>
+        {elements?.length > 0 ? (
+          <div className="space-y-2.5">
+            {sortedElements.map((element) => (
               <LayerElement key={element.id} element={element} />
             ))}
           </div>

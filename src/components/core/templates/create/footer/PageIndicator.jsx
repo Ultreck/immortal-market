@@ -1,10 +1,10 @@
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const PageIndicator = () => {
-  const current = useTemplateStore(({ template }) => {
-    return template.pages.findIndex((p) => p.id === template.activePage) + 1;
+  const current = useDesignStore((state) => {
+    return state.pages.findIndex((p) => p.id === state.activePage) + 1;
   });
-  const total = useTemplateStore(({ template }) => template.pages.length);
+  const total = useDesignStore((state) => state.pages.length);
 
   return (
     <p className="leading-none whitespace-nowrap">

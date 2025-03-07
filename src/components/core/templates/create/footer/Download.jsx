@@ -3,19 +3,15 @@ import { addToast, Button, Select, SelectItem } from '@heroui/react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { toBlob } from 'html-to-image';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
 import PropTypes from 'prop-types';
 import { TbChevronLeft } from 'react-icons/tb';
-import useBusiness from '@/hooks/use-business.js';
-import { useGetDesign } from '@/api/business.js';
 
 const Download = ({ onBack }) => {
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
-  const pages = useTemplateStore((state) => state.template.pages);
-  const selectElements = useTemplateStore((state) => state.selectElements);
-  const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
-  const { data: { design = {} } = {} } = useGetDesign(business, id);
+  const pages = useDesignStore((state) => state.pages);
+  const selectElements = useDesignStore((state) => state.selectElements);
+  const design = useDesignStore((state) => state.design);
   const [ext, setExt] = useState('');
 
   const handleDownload = useCallback(async () => {
@@ -55,7 +51,7 @@ const Download = ({ onBack }) => {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
-        color: 'error',
+        color: 'danger',
       });
     }
   }, [selectElements, pages, design.title, ext]);

@@ -2,11 +2,12 @@ import { Button, Popover, PopoverContent, PopoverTrigger, Slider } from '@heroui
 import PropTypes from 'prop-types';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const Border = ({ elements, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
@@ -14,8 +15,8 @@ const Border = ({ elements, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[260px]' }}
-      isOpen={openTool === 'border'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'border' : null })}
+      isOpen={tool === 'border'}
+      onOpenChange={(v) => (v ? openTool('border') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">

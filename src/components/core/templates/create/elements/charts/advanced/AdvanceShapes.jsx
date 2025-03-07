@@ -55,7 +55,7 @@ export const AdvanceShapesContent = ({ element, isChartWrapperDisabled = false }
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
-      <div className="space-y-6 w-full" style={{ width: element.width, height: element.height }}>
+      <div className="space-y-6 w-full" style={{ width: element.size.width, height: element.size.height }}>
         {isCountVisible && (
           <p
             className="font-bold px-2"

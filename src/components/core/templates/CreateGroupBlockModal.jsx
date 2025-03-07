@@ -31,7 +31,7 @@ const CreateGroupBlockModal = ({ isOpen, onClose, elements }) => {
       setIsThumbnailLoading(false);
       const group = crypto.randomUUID();
       const data = {
-        elements: elements.map((el) => ({ ...el, group })),
+        elements: elements.map(({ _id, id, ...el }) => ({ ...el, group })),
       };
       await create({ ...values, data, thumbnail, type: 'group' });
       onClose();

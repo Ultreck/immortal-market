@@ -1,28 +1,38 @@
 import { useEffect } from 'react';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
+import { useKey } from 'react-use';
 
 const isValidElement = (element) => {
-  const validKeys = ['type', 'id', 'x', 'y', 'width', 'height'];
+  const validKeys = ['type', 'id', 'size', 'position'];
   return validKeys.every((key) => Object.keys(element).includes(key));
 };
 
 const useClipboardEvents = () => {
-  const pages = useTemplateStore((state) => state.template.pages);
-  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
-  const deleteElements = useTemplateStore((state) => state.deleteElements);
-  const getElement = useTemplateStore((state) => state.getElement);
-  const addElements = useTemplateStore((state) => state.addElements);
-  const activePage = useTemplateStore((state) => state.template.activePage);
-  const updateElements = useTemplateStore((state) => state.updateElements);
-  const activeElement = useTemplateStore((state) => state.template.activeElement);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const selectedElements = useDesignStore((state) => state.selectedElements);
+  const deleteElements = useDesignStore((state) => state.deleteElements);
+  const getElement = useDesignStore((state) => state.getElement);
+  const getPageElements = useDesignStore((state) => state.getPageElements);
+  const getElementPage = useDesignStore((state) => state.getElementPage);
+  const createElements = useDesignStore((state) => state.createElements);
+  const activePage = useDesignStore((state) => state.activePage);
+  const activeElement = useDesignStore((state) => state.activeElement);
+  const tool = useDesignStore((state) => state.tool);
+  const duplicateElements = useDesignStore((state) => state.duplicateElements);
+
+  useKey(
+    (e) => e.key.toLowerCase() === 'd' && e.ctrlKey && !e.shiftKey,
+    async (e) => {
+      e.preventDefault();
+      await duplicateElements(selectedElements);
+    }
+  );
 
   useEffect(() => {
     const handleCopy = (e) => {
       if (activeElement) return;
       if (selectedElements.length) {
-        const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
-        const _elements = page.elements.filter((element) => selectedElements.includes(element.id));
+        const page = getElementPage(selectedElements[0]);
+        const _elements = getPageElements(page.id).filter((element) => selectedElements.includes(element.id));
         e.clipboardData.setData('text/plain', JSON.stringify(_elements));
         e.preventDefault();
       }
@@ -30,15 +40,15 @@ const useClipboardEvents = () => {
     const handleCut = (e) => {
       if (activeElement) return;
       if (selectedElements.length) {
-        const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
-        const _elements = page.elements.filter((element) => selectedElements.includes(element.id));
+        const page = getElementPage(selectedElements[0]);
+        const _elements = getPageElements(page.id).filter((element) => selectedElements.includes(element.id));
         e.clipboardData.setData('text/plain', JSON.stringify(_elements));
-        deleteElements(selectedElements, page.id);
+        deleteElements(page.id, selectedElements);
         e.preventDefault();
       }
     };
     const handlePaste = (e) => {
-      if (activeElement || !!openTool) return;
+      if (activeElement || !!tool) return;
       try {
         for (const item of e.clipboardData.items) {
           if (item.type === 'text/plain') {
@@ -46,11 +56,14 @@ const useClipboardEvents = () => {
               const payload = {
                 type: 'text',
                 text,
-                x: 10,
-                y: 10,
-                width: 300,
-                height: 20,
-                id: crypto.randomUUID(),
+                position: {
+                  x: 10,
+                  y: 10,
+                },
+                size: {
+                  width: 300,
+                  height: 20,
+                },
                 style: {
                   fontSize: 16,
                   fontWeight: 'normal',
@@ -68,15 +81,18 @@ const useClipboardEvents = () => {
               try {
                 const _elements = JSON.parse(text);
                 if (_elements.every((el) => isValidElement(el))) {
-                  addElements(
-                    _elements.map((el) => ({ ...el, id: crypto.randomUUID(), x: el.x + 10, y: el.y + 10 })),
-                    activePage
+                  createElements(
+                    activePage,
+                    _elements.map(({ _id, id, ...el }) => ({
+                      ...el,
+                      position: { x: el.position.x + 10, y: el.position.y + 10 },
+                    }))
                   );
                 } else {
-                  addElements([payload], activePage);
+                  createElements(activePage, [payload]);
                 }
               } catch (e) {
-                addElements([payload], activePage);
+                createElements(activePage, [payload]);
               }
               e.preventDefault();
             });
@@ -89,11 +105,14 @@ const useClipboardEvents = () => {
               const payload = {
                 type: 'image',
                 text: 'Image',
-                width: 400,
-                height: 300,
-                id: crypto.randomUUID(),
-                x: 0,
-                y: 0,
+                position: {
+                  x: 0,
+                  y: 0,
+                },
+                size: {
+                  width: 400,
+                  height: 300,
+                },
                 style: {
                   backgroundColor: '#eee',
                   borderWidth: 0,
@@ -107,24 +126,25 @@ const useClipboardEvents = () => {
               };
               const selected = selectedElements.length > 0 ? getElement(selectedElements[0]) : null;
               if (selected && selected.type.startsWith('frame')) {
-                updateElements(
-                  [
-                    {
-                      ...selected,
-                      children: [
-                        {
-                          ...payload,
-                          width: selected.width,
-                          height: selected.height,
-                        },
-                      ],
-                    },
-                  ],
-                  activePage,
-                  true
-                );
+                // TODO: Reimagine frame logic
+                // updateElements(
+                //   [
+                //     {
+                //       ...selected,
+                //       children: [
+                //         {
+                //           ...payload,
+                //           width: selected.width,
+                //           height: selected.height,
+                //         },
+                //       ],
+                //     },
+                //   ],
+                //   activePage,
+                //   true
+                // );
               } else {
-                addElements([payload], activePage);
+                createElements(activePage, [payload]);
               }
             };
             reader.readAsDataURL(file);
@@ -148,13 +168,12 @@ const useClipboardEvents = () => {
   }, [
     activeElement,
     activePage,
-    addElements,
+    createElements,
     deleteElements,
     getElement,
-    openTool,
-    pages,
+    getElementPage,
+    getPageElements,
     selectedElements,
-    updateElements,
   ]);
 };
 

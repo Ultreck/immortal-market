@@ -7,7 +7,7 @@ import Chart from '@/components/core/templates/create/sidebar/data/Charts.jsx';
 import Maps from '@/components/core/templates/create/sidebar/data/Maps.jsx';
 import Tables from '@/components/core/templates/create/sidebar/data/Tables.jsx';
 import { HiChevronRight } from 'react-icons/hi2';
-import Buttons from '@/components/core/templates/create/sidebar/components/design/Buttons.jsx';
+import InterfaceElements from '@/components/core/templates/create/sidebar/components/design/InterfaceElements.jsx';
 
 const items = [
   { name: 'Charts', view: 'charts', component: <Chart mini /> },
@@ -16,7 +16,7 @@ const items = [
   { name: 'Tables', view: 'tables', component: <Tables mini /> },
   { name: 'Icons', view: 'icons', component: <Icons mini /> },
   { name: 'Frames', view: 'frames', component: <Frames mini /> },
-  { name: 'Ui element', view: 'ui-element', component: <Buttons mini /> },
+  { name: 'UI elements', view: 'ui-elements', component: <InterfaceElements mini /> },
 ];
 
 const Elements = () => {
@@ -29,7 +29,7 @@ const Elements = () => {
     charts: <Chart onBack={() => setView('all')} />,
     maps: <Maps onBack={() => setView('all')} />,
     tables: <Tables onBack={() => setView('all')} />,
-    'ui-element': <Buttons onBack={() => setView('all')} />,
+    'ui-elements': <InterfaceElements onBack={() => setView('all')} />,
   };
 
   return (

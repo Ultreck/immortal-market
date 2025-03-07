@@ -5,12 +5,13 @@ import MapData from '@/components/core/templates/create/tools/elements/specific/
 import MapSettings from '@/components/core/templates/create/tools/elements/specific/map/MapSettings.jsx';
 import MapChart from '@/components/core/templates/create/tools/elements/specific/map/MapChart.jsx';
 import { TbSettings2 } from 'react-icons/tb';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const MapConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
@@ -18,8 +19,8 @@ const MapConfig = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[400px]' }}
-      isOpen={openTool === 'map'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'map' : null })}
+      isOpen={tool === 'map'}
+      onOpenChange={(v) => (v ? openTool('map') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Map config" className="text-base">

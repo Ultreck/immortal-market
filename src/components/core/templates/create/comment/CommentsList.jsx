@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Skeleton, Tooltip } from '@heroui/react';
 import useBusiness from '@/hooks/use-business';
-import useTemplateStore from '@/store/template';
+import useDesignStore from '@/store/design.js';
 import { useGetComments } from '@/api/business';
 import { LuListFilter } from 'react-icons/lu';
 import { HiChevronDown, HiOutlineEye } from 'react-icons/hi2';
@@ -13,19 +13,19 @@ import CommentItem from '@/components/core/templates/create/comment/CommentItem.
 const CommentsList = ({ onClose }) => {
   const { id: business } = useBusiness();
   const [filter, setFilter] = useState('pending');
-  const design = useTemplateStore((state) => state.template.id);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const activePage = useTemplateStore((state) => state.template.activePage);
+  const design = useDesignStore((state) => state.id);
+  const updateStore = useDesignStore((state) => state.updateStore);
+  const activePage = useDesignStore((state) => state.activePage);
   const { data: { comments = [] } = {}, isLoading: isCommentsLoading } = useGetComments({
     business,
     design,
     resolved: filter === 'resolved' ? true : filter === 'pending' ? false : null,
     page: filter === 'page' ? activePage : null,
   });
-  const isCommentsVisible = useTemplateStore((state) => state.template.isCommentsVisible);
+  const isCommentsVisible = useDesignStore((state) => state.isCommentsVisible);
 
   const handleClick = (comment) => {
-    updateTemplate({ activeComment: comment });
+    updateStore({ activeComment: comment });
   };
 
   return (
@@ -68,11 +68,7 @@ const CommentsList = ({ onClose }) => {
             </DropdownMenu>
           </Dropdown>
           <Tooltip content={isCommentsVisible ? 'Hide comments' : 'Show comments'}>
-            <Button
-              isIconOnly
-              variant="light"
-              onPress={() => updateTemplate({ isCommentsVisible: !isCommentsVisible })}
-            >
+            <Button isIconOnly variant="light" onPress={() => updateStore({ isCommentsVisible: !isCommentsVisible })}>
               {isCommentsVisible ? <HiOutlineEyeOff size="20" /> : <HiOutlineEye size="20" />}
             </Button>
           </Tooltip>

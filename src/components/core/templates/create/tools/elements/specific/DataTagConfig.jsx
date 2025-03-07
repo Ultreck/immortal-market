@@ -3,7 +3,7 @@ import { RiSettingsLine } from 'react-icons/ri';
 import { Controller, useForm } from 'react-hook-form';
 import NumberInput from '@/components/ui/NumberInput.jsx';
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import { useGenerateCombinationComparison } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
@@ -15,16 +15,17 @@ const units = [
 ];
 
 const DataTagConfig = ({ element, onChgange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'data-tag'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'data-tag' : null })}
+      isOpen={tool === 'data-tag'}
+      onOpenChange={(v) => (v ? openTool('data-tag') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Data config" className="text-base">
@@ -40,7 +41,8 @@ const DataTagConfig = ({ element, onChgange }) => {
 
 const DataTagConfigContent = ({ element, onChange }) => {
   const { id: business } = useBusiness();
-  const { source, analysis, design } = useCurrentDesign();
+  const id = useDesignStore((state) => state.id);
+  const { source, analysis } = useCurrentDesign();
   const { handleSubmit, control, watch } = useForm({
     defaultValues: {
       table: element.config?.table || '',
@@ -54,7 +56,7 @@ const DataTagConfigContent = ({ element, onChange }) => {
   });
   const { mutateAsync: generateComparison, isPending: isGenerateComparisonPending } = useGenerateCombinationComparison(
     business,
-    design.id
+    id
   );
 
   const tables = source?.tables.map((table) => ({ key: table.id, label: table.name })) || [];

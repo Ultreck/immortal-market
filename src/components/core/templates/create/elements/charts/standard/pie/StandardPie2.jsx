@@ -90,8 +90,8 @@ export const StandardPie2Content = ({ element, isChartWrapperDisabled = false })
       <div
         ref={ref}
         style={{
-          height: element.height,
-          width: element.width,
+          height: element.size.height,
+          width: element.size.width,
           opacity: element.style.opacity,
         }}
       />

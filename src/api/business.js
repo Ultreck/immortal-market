@@ -100,7 +100,7 @@ export const useCreateDesign = (business) => {
   });
 };
 
-export const useTemplate = (business) => {
+export const useUseTemplate = (business) => {
   return useMutation({
     mutationKey: ['businesses', business, 'designs'],
     mutationFn: (body) => {
@@ -120,6 +120,7 @@ export const useCreateProject = (business) => {
 
 export const useDeleteDesign = (business) => {
   return useMutation({
+    mutationKey: ['businesses', business, 'designs'],
     mutationFn: ({ id }) => {
       return http.immortal.delete(`/businesses/${business}/designs/${id}`);
     },

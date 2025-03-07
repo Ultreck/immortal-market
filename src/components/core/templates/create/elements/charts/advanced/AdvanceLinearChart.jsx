@@ -31,7 +31,7 @@ const AdvanceLinearChartContent = ({ element, isChartWrapperDisabled = false }) 
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <div
         className="flex h-28 rounded-2xl overflow-hidden"
-        style={{ width: element.width, height: element.height, maxHeight: element.height }}
+        style={{ width: element.size.width, height: element.size.height, maxheight: element.size.height }}
       >
         {element.config.data.map((item, i) => (
           <motion.div

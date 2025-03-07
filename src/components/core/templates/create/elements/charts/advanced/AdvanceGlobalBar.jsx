@@ -26,11 +26,11 @@ export const AdvanceGlobalBarContent = ({ element, isChartWrapperDisabled = fals
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
-      <div style={{ width: element.width }}>
+      <div style={{ width: element.size.width }}>
         <div
           className="flex"
           style={{
-            height: element.height,
+            height: element.size.height,
             gap: separated ? '10px' : '0',
           }}
         >

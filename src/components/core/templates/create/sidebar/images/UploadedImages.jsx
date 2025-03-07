@@ -38,8 +38,10 @@ const UploadedImages = ({ mini = false, onBack }) => {
     data: {
       type: 'image',
       text: 'Image',
-      width: 400,
-      height: 300,
+      size: {
+        width: 400,
+        height: 300,
+      },
       style: getElementDefaultStyle({ type: 'image' }),
       config: {
         src: getImageLink(upload.file),

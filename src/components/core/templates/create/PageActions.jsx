@@ -9,49 +9,53 @@ import {
   TbSquarePlus,
   TbTrash,
 } from 'react-icons/tb';
-import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import CreatePageBlockModal from '@/components/core/templates/create/CreatePageBlockModal.jsx';
-import { useActions } from '@/hooks/template/use-actions.js';
 import { CgMenuBoxed } from 'react-icons/cg';
+import useDesignStore from '@/store/design.js';
 
 const PageActions = ({ id }) => {
-  const { handleAction } = useActions({ id });
   const { isOpen: isSaveAsBlockOpen, onOpen: onSaveAsBlockOpen, onClose: onSaveAsBlockClose } = useDisclosure();
-  const index = useTemplateStore(({ template }) => template.pages.findIndex((p) => p.id === id));
-  const length = useTemplateStore(({ template }) => template.pages.length);
-  const page = useTemplateStore(({ template }) => template.pages.find((p) => p.id === id));
+  const page = useDesignStore((state) => state.pages.find((p) => p.id === id));
+  const index = useDesignStore((state) => state.pages.sort((a, b) => a.order - b.order).findIndex((p) => p.id === id));
+  const length = useDesignStore((state) => state.pages.length);
+  const movePageUp = useDesignStore((state) => state.movePageUp);
+  const movePageDown = useDesignStore((state) => state.movePageDown);
+  const duplicatePage = useDesignStore((state) => state.duplicatePage);
+  const deletePage = useDesignStore((state) => state.deletePage);
+  const createPageAfter = useDesignStore((state) => state.createPageAfter);
+  const updatePage = useDesignStore((state) => state.updatePage);
 
   return (
     <div className="flex items-center space-x-1">
       {index > 0 && (
         <Tooltip content="Move page up" showArrow>
-          <Button variant="light" isIconOnly onPress={() => handleAction('page-move-up')} size="sm">
+          <Button variant="light" isIconOnly onPress={() => movePageUp(id)} size="sm">
             <TbChevronUp size="18" />
           </Button>
         </Tooltip>
       )}
       {index < length - 1 && (
         <Tooltip content="Move page down" showArrow>
-          <Button variant="light" isIconOnly onPress={() => handleAction('page-move-down')} size="sm">
+          <Button variant="light" isIconOnly onPress={() => movePageDown(id)} size="sm">
             <TbChevronDown size="18" />
           </Button>
         </Tooltip>
       )}
       <Tooltip content="Duplicate page" showArrow>
-        <Button variant="light" isIconOnly onPress={() => handleAction('page-duplicate')} size="sm">
+        <Button variant="light" isIconOnly onPress={() => duplicatePage(id)} size="sm">
           <TbCopyPlus size="18" />
         </Button>
       </Tooltip>
       {length > 1 && (
         <Tooltip content="Delete page" showArrow>
-          <Button variant="light" isIconOnly onPress={() => handleAction('page-delete')} size="sm">
+          <Button variant="light" isIconOnly onPress={() => deletePage(id)} size="sm">
             <TbTrash size="18" />
           </Button>
         </Tooltip>
       )}
       <Tooltip content="Add page" showArrow>
-        <Button variant="light" isIconOnly onPress={() => handleAction('page-add')} size="sm">
+        <Button variant="light" isIconOnly onPress={() => createPageAfter(id)} size="sm">
           <TbSquarePlus size="18" />
         </Button>
       </Tooltip>
@@ -65,12 +69,16 @@ const PageActions = ({ id }) => {
           variant="faded"
           aria-label="Dropdown menu with description"
           onAction={async (key) => {
-            if (key === 'save') onSaveAsBlockOpen();
-            if (key === 'convert-to-modal') await handleAction('page-convert-to-modal');
-            if (key === 'convert-to-page') await handleAction('page-convert-to-page');
+            if (key === 'save-as-block') onSaveAsBlockOpen();
+            if (key === 'convert-to-modal') updatePage(id, { type: 'modal' });
+            if (key === 'convert-to-page') updatePage(id, { type: 'page' });
           }}
         >
-          <DropdownItem key="save" startContent={<TbFolderPlus size="20" className="ml-1" />} textValue="Save as block">
+          <DropdownItem
+            key="save-as-block"
+            startContent={<TbFolderPlus size="20" className="ml-1" />}
+            textValue="Save as block"
+          >
             <span className="text-base">Save as block</span>
           </DropdownItem>
           {page.type !== 'modal' ? (

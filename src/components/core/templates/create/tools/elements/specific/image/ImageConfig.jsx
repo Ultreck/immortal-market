@@ -1,15 +1,16 @@
 import { Button, Card, CardBody, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
 import { TbChevronRight, TbSettings2 } from 'react-icons/tb';
 import ImageEffect from '@/components/core/templates/create/tools/elements/specific/image/ImageEffect.jsx';
 import ImageSwap from '@/components/core/templates/create/tools/elements/specific/image/ImageSwap.jsx';
 import { useState } from 'react';
 import { IoSwapHorizontal } from 'react-icons/io5';
+import useDesignStore from '@/store/design.js';
 
 const ImageConfig = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
   const [view, setView] = useState('home');
 
   return (
@@ -17,8 +18,8 @@ const ImageConfig = ({ element, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'image'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'image' : null })}
+      isOpen={tool === 'image'}
+      onOpenChange={(v) => (v ? openTool('image') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Image config" className="text-base">

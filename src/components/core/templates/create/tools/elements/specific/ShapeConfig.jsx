@@ -1,14 +1,15 @@
 import { Button, Card, CardBody, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
 import { TbChevronRight, TbSettings2 } from 'react-icons/tb';
 import { IoSwapHorizontal } from 'react-icons/io5';
 import { useState } from 'react';
 import ShapeSwap from '@/components/core/templates/create/tools/elements/specific/shape/ShapeSwap.jsx';
+import useDesignStore from '@/store/design.js';
 
 const ShapeConfig = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
   const [view, setView] = useState('home');
 
   return (
@@ -16,11 +17,11 @@ const ShapeConfig = ({ element, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'shape'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'shape' : null })}
+      isOpen={tool === 'shape'}
+      onOpenChange={(v) => (v ? openTool('shape') : closeTool())}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Image config" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Shape config" className="text-base">
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>

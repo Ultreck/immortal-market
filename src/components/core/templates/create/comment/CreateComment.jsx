@@ -1,7 +1,7 @@
 import useBusiness from '@/hooks/use-business.js';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { useState } from 'react';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure, addToast } from '@heroui/react';
 import { useCreateComment } from '@/api/business.js';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
@@ -21,8 +21,8 @@ const CreateComment = ({
   const { id: business } = useBusiness();
   const { isDarkMode } = useTernaryDarkMode();
   const [content, setContent] = useState('');
-  const design = useTemplateStore((state) => state.template.id);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const design = useDesignStore((state) => state.id);
+  const updateStore = useDesignStore((state) => state.updateStore);
   const { isOpen: isEmojiOpen, onOpen: onEmojiOpen, onClose: onEmojiClose } = useDisclosure();
   const { mutateAsync: createComment, isPending: isCreateCommentLoading } = useCreateComment(business, design);
 
@@ -32,19 +32,19 @@ const CreateComment = ({
         addToast({
           title: 'Error',
           description: 'Comment cannot be empty',
-          color: 'danger'
+          color: 'danger',
         });
         return;
       }
       await createComment({ content, target, targetId, parent, page });
       setContent('');
       onDone?.();
-      updateTemplate({ isCommentsOpen: true });
+      updateStore({ isCommentsOpen: true });
     } catch (e) {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message ?? e.message ?? 'Something went wrong, please try again',
-        color: 'danger'
+        color: 'danger',
       });
     }
   };

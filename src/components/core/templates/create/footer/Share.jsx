@@ -11,13 +11,13 @@ import {
 import { TbDownload, TbShare, TbShare2 } from 'react-icons/tb';
 import { RiArrowRightSLine, RiLink, RiVideoLine } from 'react-icons/ri';
 import { useState } from 'react';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import Download from '@/components/core/templates/create/footer/Download.jsx';
 
 const Share = () => {
   const [view, setView] = useState('home');
   const { isOpen, onOpenChange } = useDisclosure();
-  const id = useTemplateStore((state) => state.template.id);
+  const id = useDesignStore((state) => state.id);
 
   const menu = [
     { key: 'download', label: 'Download', icon: <TbDownload size="18" /> },
@@ -74,15 +74,19 @@ const Share = () => {
                   </div>
                 </div>
               </div>
-              <Listbox aria-label="Actions" itemClasses={{ title: 'text-base' }} className="mt-4">
+              <Listbox
+                aria-label="Actions"
+                itemClasses={{ title: 'text-base' }}
+                className="mt-4"
+                disabledKeys={menu.filter((i) => i.isDisabled).map((i) => i.key)}
+              >
                 {menu.map((item) => (
                   <ListboxItem
                     key={item.key}
                     startContent={item.icon}
                     showDivider={item.showDivider}
                     endContent={<RiArrowRightSLine size="18" />}
-                    onClick={() => setView(item.key)}
-                    isDisabled={item.isDisabled}
+                    onPress={() => setView(item.key)}
                   >
                     {item.label}
                   </ListboxItem>

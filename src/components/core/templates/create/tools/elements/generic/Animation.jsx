@@ -1,6 +1,6 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Slider } from '@heroui/react';
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const animations = [
   { value: 'fade-in', text: 'Fade In' },
@@ -15,8 +15,9 @@ const animations = [
 ];
 
 const Animation = ({ elements, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   const animationValues = elements.map((e) => e?.style?.animationName ?? '');
   const same = animationValues.every((v) => v === animationValues[0]);
@@ -47,8 +48,8 @@ const Animation = ({ elements, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'animation'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'animation' : null })}
+      isOpen={tool === 'animation'}
+      onOpenChange={(v) => (v ? openTool('animation') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">

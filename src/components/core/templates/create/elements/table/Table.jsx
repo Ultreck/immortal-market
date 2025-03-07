@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { RiAddLine, RiArrowDownSLine } from 'react-icons/ri';
 import { cn } from '@/lib/utils.js';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
@@ -9,6 +9,7 @@ import DeleteOptions from '@/components/core/templates/create/elements/table/Del
 import FontOptions from '@/components/core/templates/create/elements/table/FontOptions.jsx';
 import BackgroundOptions from '@/components/core/templates/create/elements/table/BackgroundOptions.jsx';
 import { addToast, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
+import useDesignStore from '@/store/design';
 
 const getMaxColumns = (data) => {
   let max = 0;
@@ -40,7 +41,7 @@ const getCellPosition = (rows, rowIndex, cellIndex) => {
   return cellIndex;
 };
 
-export const Table = ({ element, onChange, active }) => {
+export const Table = ({ element, active }) => {
   const table = useRef(null);
   const rows = element.config.data;
   const [selection, setSelection] = useState(null);
@@ -51,12 +52,27 @@ export const Table = ({ element, onChange, active }) => {
   const [resizingColumn, setResizingColumn] = useState(null);
   const [startX, setStartX] = useState(0);
   const [columnWidths, setColumnWidths] = useState(() => {
-    return element.config.columnWidths || Array(maxCols).fill(Math.floor(element.width / maxCols));
+    return element.config.columnWidths || Array(maxCols).fill(Math.floor(element.size.width / maxCols));
   });
+  const updateElement = useDesignStore((state) => state.updateElement);
+
+  const onChange = useCallback(
+    (v) => {
+      updateElement(
+        element.id,
+        {
+          size: { ...element.size, width: v.size.width },
+          config: { ...element.config, ...v.config },
+        },
+        true
+      );
+    },
+    [updateElement, element]
+  );
 
   useEffect(() => {
     if (!element.config.columnWidths) {
-      const initialWidths = Array(maxCols).fill(Math.floor(element.width / maxCols));
+      const initialWidths = Array(maxCols).fill(Math.floor(element.size.width / maxCols));
       onChange({
         ...element,
         config: {

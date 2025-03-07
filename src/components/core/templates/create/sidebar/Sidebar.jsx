@@ -3,33 +3,28 @@ import { RiArrowLeftSLine, RiImage2Line, RiSettings2Line, RiShapesLine, RiStackL
 import { cn, getImageLink } from '@/lib/utils.js';
 import Elements from '@/components/core/templates/create/sidebar/components/Elements.jsx';
 import Texts from '@/components/core/templates/create/sidebar/components/design/Texts.jsx';
-import Pages from '@/components/core/templates/create/sidebar/pages/Pages.jsx';
-import Layers from '@/components/core/templates/create/sidebar/layers/Layers.jsx';
+import Layers from '@/components/core/templates/create/sidebar/layout/layers/Layers.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
-import { Avatar, Tooltip } from '@heroui/react';
+import { Tooltip } from '@heroui/react';
 import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
 import { TbAbc, TbChevronLeft, TbChevronRight, TbLayoutDistributeHorizontal, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
 import { useAuth } from '@/hooks/use-auth.jsx';
-import MyWork from './my-work/MyWork.jsx';
 import PropTypes from 'prop-types';
 import Project from '@/components/core/templates/create/sidebar/project/Project.jsx';
 import { useNavigate } from 'react-router-dom';
-import useTemplateStore from '@/store/template.js';
-import useBusiness from '@/hooks/use-business.js';
-import { useGetDesign } from '@/api/business.js';
 import Forms from '@/components/core/templates/create/sidebar/forms/Forms.jsx';
 import { FaWpforms } from 'react-icons/fa';
 import DataTags from './data/DataTags.jsx';
+import useDesignStore from '@/store/design.js';
+import Layout from './layout/Layout.jsx';
 
 const Sidebar = ({ className }) => {
   const navigate = useNavigate();
   const [tab, setTab] = useState('texts');
   const collapsed = !tab;
   const { user } = useAuth();
-  const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
-  const { data: { design = {} } = {} } = useGetDesign(business, id);
+  const design = useDesignStore((state) => state.design);
 
   return (
     <div
@@ -98,37 +93,35 @@ const Sidebar = ({ className }) => {
                 </Tooltip>
               );
             })}
+            <div className="space-y-4">
+              {[
+                { icon: RiStackLine, title: 'Layers', key: 'layers' },
+                { icon: FaWpforms, title: 'Forms', key: 'forms' },
+              ].map((element) => {
+                const active = tab === element.key;
+                return (
+                  <Tooltip key={element.key} content={element.title} showArrow placement="right">
+                    <div
+                      tabIndex={0}
+                      className={cn(
+                        'flex flex-col items-center justify-center py-[13px] px-3 w-full rounded-l-2xl overflow-hidden',
+                        {
+                          'bg-primary-500 text-white dark:bg-gray-800/50': active,
+                          'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer': !active,
+                          'rounded-2xl': collapsed,
+                        }
+                      )}
+                      onClick={() => setTab(element.key)}
+                    >
+                      {createElement(element.icon, { size: '20' })}
+                      <p className="text-sm mt-1 truncate overflow text-center w-full">{element.title}</p>
+                    </div>
+                  </Tooltip>
+                );
+              })}
+            </div>
             <div className="flex-1"></div>
-            {design?.type === 'template' && (
-              <div className="space-y-4">
-                {[
-                  { icon: RiStackLine, title: 'Layers', key: 'layers' },
-                  { icon: FaWpforms, title: 'Forms', key: 'forms' },
-                ].map((element) => {
-                  const active = tab === element.key;
-                  return (
-                    <Tooltip key={element.key} content={element.title} showArrow placement="right">
-                      <div
-                        tabIndex={0}
-                        className={cn(
-                          'flex flex-col items-center justify-center py-[13px] px-3 w-full rounded-l-2xl overflow-hidden',
-                          {
-                            'bg-primary-500 text-white dark:bg-gray-800/50': active,
-                            'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer': !active,
-                            'rounded-2xl': collapsed,
-                          }
-                        )}
-                        onClick={() => setTab(element.key)}
-                      >
-                        {createElement(element.icon, { size: '20' })}
-                        <p className="text-sm mt-1 truncate overflow text-center w-full">{element.title}</p>
-                      </div>
-                    </Tooltip>
-                  );
-                })}
-              </div>
-            )}
-            {design?.type === 'project' && (
+            {design.type === 'project' && (
               <div className="space-y-4">
                 {[{ icon: RiSettings2Line, title: 'Project', key: 'project' }].map((element) => {
                   const active = tab === element.key;
@@ -152,15 +145,6 @@ const Sidebar = ({ className }) => {
                     </Tooltip>
                   );
                 })}
-                <div className={cn('cursor-pointer flex items-center justify-center', className)}>
-                  <Avatar
-                    src={getImageLink(user.image)}
-                    radius="full"
-                    classNames={{ base: 'w-[32px] h-[32px] my-2' }}
-                    isBordered
-                    onClick={() => setTab('my-work')}
-                  />
-                </div>
               </div>
             )}
           </div>
@@ -182,9 +166,8 @@ const Sidebar = ({ className }) => {
             {tab === 'graphics' && <Svgs />}
             {tab === 'layers' && <Layers />}
             {tab === 'images' && <Images />}
-            {tab === 'my-work' && <MyWork />}
             {tab === 'project' && <Project />}
-            {tab === 'pages' && <Pages />}
+            {tab === 'pages' && <Layout />}
             {tab === 'forms' && <Forms />}
           </div>
         )}

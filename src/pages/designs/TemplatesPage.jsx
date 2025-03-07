@@ -24,8 +24,7 @@ const TemplatesPage = () => {
   const { isOpen: isTemplatesOpen, onOpen: onTemplatesOpen, onClose: onTemplatesClose } = useDisclosure();
   const [current, setCurrent] = useState(null);
 
-  const handlePreview = ({ _id, title, thumbnail, thumbnails }) => {
-    const template = { id: _id, title, thumbnail, thumbnails };
+  const handlePreview = (template) => {
     setCurrent(template);
     onTemplatesOpen();
   };
@@ -36,20 +35,7 @@ const TemplatesPage = () => {
         title: 'Untitled',
         description: '',
         type: 'template',
-        data: {
-          pages: [
-            {
-              id: crypto.randomUUID(),
-              title: 'Untitled',
-              width: 800,
-              height: 450,
-              style: {
-                background: '#ffffff',
-              },
-              elements: [],
-            },
-          ],
-        },
+        size: { width: 800, height: 450 },
       });
       navigate(`/designs/${res.data.design._id}/edit`);
     } catch (e) {
@@ -159,7 +145,7 @@ const TemplatesPage = () => {
                       key={i}
                       id={design._id}
                       title={design.title}
-                      thumbnail={design.thumbnails[0]}
+                      thumbnail={design.pages[0]?.thumbnail}
                       onClick={() => handlePreview(design)}
                     />
                   ))}

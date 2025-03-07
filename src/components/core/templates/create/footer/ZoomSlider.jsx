@@ -1,9 +1,9 @@
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { Slider } from '@heroui/react';
 
 const ZoomSlider = () => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const scale = useTemplateStore((state) => state.template.scale);
+  const scale = useDesignStore((state) => state.scale);
+  const updateStore = useDesignStore((state) => state.updateStore);
 
   return (
     <div className="flex items-center space-x-3">
@@ -12,7 +12,7 @@ const ZoomSlider = () => {
         color="foreground"
         className="w-40"
         value={scale * 100}
-        onChange={(v) => updateTemplate({ scale: v / 100 })}
+        onChange={(v) => updateStore({ scale: v / 100 })}
         maxValue={300}
         minValue={20}
         showOutline

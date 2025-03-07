@@ -1,5 +1,5 @@
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
 import { useUpdateDesignSource } from '@/api/business.js';
 import { Controller, useForm } from 'react-hook-form';
 import Title from '@/components/core/shared/Title.jsx';
@@ -9,7 +9,7 @@ import useCurrentDesign from '@/hooks/template/use-current-design.js';
 
 const CreateRelationship = ({ table, onClose }) => {
   const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
+  const id = useDesignStore((state) => state.id);
   const { source } = useCurrentDesign();
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
   const { handleSubmit, control, watch } = useForm();

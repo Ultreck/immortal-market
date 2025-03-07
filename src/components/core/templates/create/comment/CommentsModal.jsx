@@ -1,17 +1,17 @@
 import { AnimatePresence, motion } from 'motion/react';
 import CommentsList from './CommentsList.jsx';
 import CommentReplies from './CommentReplies.jsx';
-import useTemplateStore from '@/store/template';
+import useDesignStore from '@/store/design.js';
 import TargetComments from '@/components/core/templates/create/comment/TargetComments.jsx';
 
 const CommentsModal = () => {
-  const isCommentOpen = useTemplateStore((state) => state.template.isCommentsOpen);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const activeComment = useTemplateStore((state) => state.template.activeComment);
-  const commentsTargetId = useTemplateStore((state) => state.template.commentsTargetId);
+  const isCommentOpen = useDesignStore((state) => state.isCommentsOpen);
+  const updateStore = useDesignStore((state) => state.updateStore);
+  const activeComment = useDesignStore((state) => state.activeComment);
+  const commentsTargetId = useDesignStore((state) => state.commentsTargetId);
 
   const handleClose = () => {
-    updateTemplate({ isCommentsOpen: false, activeComment: null, commentsTargetId: null });
+    updateStore({ isCommentsOpen: false, activeComment: null, commentsTargetId: null });
   };
 
   return (
@@ -26,11 +26,11 @@ const CommentsModal = () => {
         >
           <div className="bg-white dark:bg-default-50 border border-default-200 dark:border-default-100 w-full max-h-[500px] rounded-2xl overflow-y-auto shadow">
             {activeComment ? (
-              <CommentReplies onBack={() => updateTemplate({ activeComment: null })} onClose={handleClose} />
+              <CommentReplies onBack={() => updateStore({ activeComment: null })} onClose={handleClose} />
             ) : (
               <>
                 {commentsTargetId ? (
-                  <TargetComments onBack={() => updateTemplate({ commentsTargetId: null })} onClose={handleClose} />
+                  <TargetComments onBack={() => updateStore({ commentsTargetId: null })} onClose={handleClose} />
                 ) : (
                   <CommentsList onClose={handleClose} />
                 )}

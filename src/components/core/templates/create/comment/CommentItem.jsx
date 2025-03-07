@@ -1,4 +1,13 @@
-import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tooltip, addToast } from '@heroui/react';
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Tooltip,
+  addToast,
+} from '@heroui/react';
 import { cn, getImageLink } from '@/lib/utils.js';
 import { formatDistanceToNow } from 'date-fns';
 import { HiDotsHorizontal, HiReply } from 'react-icons/hi';
@@ -6,7 +15,7 @@ import { HiCheck } from 'react-icons/hi2';
 import PropTypes from 'prop-types';
 import { useDeleteComment, useUpdateComment } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import EditComment from '@/components/core/templates/create/comment/EditComment.jsx';
@@ -14,8 +23,8 @@ import EditComment from '@/components/core/templates/create/comment/EditComment.
 const CommentItem = ({ comment, onClick, className }) => {
   const { user } = useAuth();
   const { id: business } = useBusiness();
-  const design = useTemplateStore((state) => state.template.id);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  const design = useDesignStore((state) => state.id);
+  const updateStore = useDesignStore((state) => state.updateStore);
   const [isEditing, setIsEditing] = useState(false);
   const { mutateAsync: deleteComment, isPending: isDeleteLoading } = useDeleteComment(business, design);
   const { mutateAsync: updateComment, isPending: isUpdateLoading } = useUpdateComment(business, design);
@@ -23,12 +32,12 @@ const CommentItem = ({ comment, onClick, className }) => {
   const handleDeleteComment = async () => {
     try {
       await deleteComment(comment._id);
-      updateTemplate({ activeComment: null });
+      updateStore({ activeComment: null });
     } catch (e) {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
-        color: 'danger'
+        color: 'danger',
       });
     }
   };
@@ -36,12 +45,12 @@ const CommentItem = ({ comment, onClick, className }) => {
   const handleResolveComment = async () => {
     try {
       await updateComment({ id: comment._id, data: { resolved: true } });
-      updateTemplate({ activeComment: null });
+      updateStore({ activeComment: null });
     } catch (e) {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
-        color: 'danger'
+        color: 'danger',
       });
     }
   };
@@ -49,12 +58,12 @@ const CommentItem = ({ comment, onClick, className }) => {
   const handleRestoreComment = async () => {
     try {
       await updateComment({ id: comment._id, data: { resolved: false } });
-      updateTemplate({ activeComment: null });
+      updateStore({ activeComment: null });
     } catch (e) {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
-        color: 'danger'
+        color: 'danger',
       });
     }
   };

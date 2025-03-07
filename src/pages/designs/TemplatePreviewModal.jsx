@@ -4,14 +4,14 @@ import Title from '@/components/core/shared/Title.jsx';
 import { Button, addToast } from '@heroui/react';
 import { TbPhotoCircle, TbX } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
-import { useTemplate } from '@/api/business.js';
+import { useUseTemplate } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import ThumbnailsCarousel from '@/pages/designs/ThumbnailsCarousel.jsx';
 
 const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
-  const { id: business } = useBusiness();
   const navigate = useNavigate();
-  const { mutateAsync: create, isPending: isCreateDesignLoading } = useTemplate(business);
+  const { id: business } = useBusiness();
+  const { mutateAsync: create, isPending: isCreateDesignLoading } = useUseTemplate(business);
 
   const handleEditTemplate = () => {
     onClose();
@@ -26,7 +26,7 @@ const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message || e?.message,
-        color: 'danger'
+        color: 'danger',
       });
     }
   };
@@ -56,8 +56,8 @@ const TemplatePreviewModal = ({ isOpen, onClose, template }) => {
               </div>
             </div>
             <div className="w-full overflow-hidden">
-              {template.thumbnails.length ? (
-                <ThumbnailsCarousel thumbnails={template.thumbnails} />
+              {template.pages.length ? (
+                <ThumbnailsCarousel thumbnails={template.pages.map((page) => page.thumbnail)} />
               ) : (
                 <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
                   <TbPhotoCircle size="32" className="opacity-50" />

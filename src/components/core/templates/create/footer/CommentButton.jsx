@@ -1,19 +1,19 @@
 import { Button } from '@heroui/react';
 import { LuMessageCircle } from 'react-icons/lu';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import useBusiness from '@/hooks/use-business';
 import { useGetComments } from '@/api/business';
 
 const CommentButton = () => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const activeComment = useTemplateStore((state) => state.template.activeComment);
   const { id: business } = useBusiness();
-  const design = useTemplateStore((state) => state.template.id);
-  const { data: { comments = [] } = {} } = useGetComments({ business, design, resolved: false });
+  const id = useDesignStore((state) => state.id);
+  const updateStore = useDesignStore((state) => state.updateStore);
+  const activeComment = useDesignStore((state) => state.activeComment);
+  const { data: { comments = [] } = {} } = useGetComments({ business, design: id, resolved: false });
 
   const handleClick = () => {
-    if (activeComment) updateTemplate({ activeComment: null, isCommentsOpen: true });
-    else updateTemplate({ isCommentsOpen: true });
+    if (activeComment) updateStore({ activeComment: null, isCommentsOpen: true });
+    else updateStore({ isCommentsOpen: true });
   };
 
   return (

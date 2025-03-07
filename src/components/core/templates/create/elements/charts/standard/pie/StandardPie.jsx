@@ -36,7 +36,7 @@ export const StandardPieContent = ({ element, isChartWrapperDisabled = false }) 
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <ChartContainer
         config={{}}
-        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+        style={{ height: element.size.height, width: element.size.width, opacity: element.style.opacity }}
       >
         <PieChart>
           <Pie

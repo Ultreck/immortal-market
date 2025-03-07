@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { RiShadowLine } from 'react-icons/ri';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const Shadow = ({ onChange, elements }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   const value = useResolveValue(elements.map((e) => e.style?.shadow));
 
@@ -21,11 +22,11 @@ const Shadow = ({ onChange, elements }) => {
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'shadow'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'shadow' : null })}
+      isOpen={tool === 'shadow'}
+      onOpenChange={(v) => (v ? openTool('shadow') : closeTool())}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Shadow" className="text-base">
           <RiShadowLine size="20" />
         </Button>
       </PopoverTrigger>

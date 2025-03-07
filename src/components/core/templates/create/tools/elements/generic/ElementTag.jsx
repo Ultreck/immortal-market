@@ -1,11 +1,12 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@heroui/react';
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
 import { HiOutlineTag, HiTag } from 'react-icons/hi2';
+import useDesignStore from '@/store/design.js';
 
 const ElementTag = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
@@ -13,10 +14,8 @@ const ElementTag = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[350px] !max-h-[550px] overflow-y-auto block' }}
-      isOpen={openTool === 'element-tag'}
-      onOpenChange={(isOpen) => {
-        updateTemplate({ openTool: isOpen ? 'element-tag' : null });
-      }}
+      isOpen={tool === 'element-tag'}
+      onOpenChange={(v) => (v ? openTool('element-tag') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size">

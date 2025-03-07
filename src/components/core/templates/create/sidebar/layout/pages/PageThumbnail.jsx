@@ -1,13 +1,16 @@
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { Card, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image } from '@heroui/react';
 import { cn, getImageLink } from '@/lib/utils.js';
 import { TbChevronDown, TbChevronUp, TbCopyPlus, TbDots, TbTrash } from 'react-icons/tb';
-import { useActions } from '@/hooks/template/use-actions.js';
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 
-const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props }) => {
-  const totalPages = useTemplateStore((state) => state.template.pages.length);
-  const { handleAction } = useActions({ id: page.id });
+const PageThumbnail = forwardRef(({ page, thumbnail, active, onClick, style, ...props }, ref) => {
+  const totalPages = useDesignStore((state) => state.pages.length);
+  const duplicatePage = useDesignStore((state) => state.duplicatePage);
+  const deletePage = useDesignStore((state) => state.deletePage);
+  const movePageDown = useDesignStore((state) => state.movePageDown);
+  const movePageUp = useDesignStore((state) => state.movePageUp);
 
   const options = [
     {
@@ -23,14 +26,14 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
   ];
 
   if (totalPages > 1) {
-    if (index < totalPages - 1) {
+    if (page.order < totalPages - 1) {
       options.unshift({
         key: 'page-move-down',
         label: 'Move down',
         icon: <TbChevronDown size="18" />,
       });
     }
-    if (index > 0) {
+    if (page.order > 0) {
       options.unshift({
         key: 'page-move-up',
         label: 'Move up ',
@@ -43,8 +46,10 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
     <Card
       as="div"
       {...props}
+      ref={ref}
+      style={style}
       className={cn(
-        'flex p-2 items-center relative w-full border-0 aspect-square justify-center bg-default-200/60 dark:bg-default-100 rounded-2xl cursor-pointer group ',
+        'flex p-2 items-center relative w-full border-0 h-[130px] justify-center bg-black/5 dark:bg-white/5 rounded-2xl cursor-pointer group ',
         { '!bg-primary-200': active }
       )}
       shadow="none"
@@ -60,10 +65,10 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
         </DropdownTrigger>
         <DropdownMenu
           onAction={(key) => {
-            if (key === 'page-move-down') handleAction('page-move-down');
-            if (key === 'page-move-up') handleAction('page-move-up');
-            if (key === 'page-duplicate') handleAction('page-duplicate');
-            if (key === 'page-delete') handleAction('page-delete');
+            if (key === 'page-move-down') movePageDown(page.id);
+            if (key === 'page-move-up') movePageUp(page.id);
+            if (key === 'page-duplicate') duplicatePage(page.id);
+            if (key === 'page-delete') deletePage(page.id);
           }}
         >
           {options.map((action) => (
@@ -84,18 +89,21 @@ const TabThumbnailItem = ({ page, thumbnail, active, index, onClick, ...props })
         <Image src={getImageLink(thumbnail)} removeWrapper className="object-cover rounded-xl h-full z-[1] w-full" />
       )}
       <Chip className="absolute bottom-1 left-2 z-[2] w-[5] h-[5] p-0" size="lg">
-        {index + 1}
+        {page.order}
       </Chip>
     </Card>
   );
-};
+});
 
-TabThumbnailItem.propTypes = {
+PageThumbnail.displayName = 'PageThumbnail';
+
+PageThumbnail.propTypes = {
   page: PropTypes.object.isRequired,
   thumbnail: PropTypes.string,
   active: PropTypes.bool,
   index: PropTypes.number,
   onClick: PropTypes.func,
+  style: PropTypes.object,
 };
 
-export default TabThumbnailItem;
+export default PageThumbnail;

@@ -1,4 +1,4 @@
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
 import { InView } from 'react-intersection-observer';
@@ -9,37 +9,35 @@ import PageCommentBadge from '@/components/core/templates/create/comment/PageCom
 import { Chip } from '@heroui/react';
 import { useEffect, useRef } from 'react';
 
-const Page = ({ id, showTitle = true }) => {
+const Page = ({ id }) => {
   const ref = useRef(null);
-  const type = useTemplateStore((state) => state.template.pages.find((p) => p.id === id).type);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const selected = useTemplateStore((state) => state.template.selectedPage === id);
-  const isCommentsVisible = useTemplateStore((state) => state.template.isCommentsVisible);
-  const activePage = useTemplateStore((state) => state.template.activePage);
-  const pendingActivePage = useTemplateStore((state) => state.template.pendingActivePage);
+  const page = useDesignStore((state) => state.pages.find((p) => p.id === id));
+  const updateStore = useDesignStore((state) => state.updateStore);
+  const selected = useDesignStore((state) => state.selectedPage === id);
+  const isCommentsVisible = useDesignStore((state) => state.isCommentsOpen);
+  const activePage = useDesignStore((state) => state.activePage);
+  const pendingActivePage = useDesignStore((state) => state.pendingActivePage);
 
   useEffect(() => {
     if (pendingActivePage === id && activePage !== id) {
       ref.current.scrollIntoView({ behavior: 'smooth' });
-      updateTemplate({ pendingActivePage: null });
+      updateStore({ pendingActivePage: null });
     }
-  }, [activePage, id, pendingActivePage, updateTemplate]);
+  }, [activePage, id, pendingActivePage, updateStore]);
 
   return (
     <div ref={ref}>
-      {showTitle && (
-        <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
-          <PageTitle id={id} />
-          <div className="flex items-center space-x-2">
-            {type === 'modal' && (
-              <Chip variant="solid" color="danger" classNames={{ content: 'font-semibold' }}>
-                Modal
-              </Chip>
-            )}
-            <PageActions id={id} />
-          </div>
+      <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
+        <PageTitle id={id} title={page.title} />
+        <div className="flex items-center space-x-2">
+          {page.type === 'modal' && (
+            <Chip variant="solid" color="danger" classNames={{ content: 'font-semibold' }}>
+              Modal
+            </Chip>
+          )}
+          <PageActions id={id} />
         </div>
-      )}
+      </div>
       <div
         className={cn('border-2 relative border-transparent p-0.5 w-max radius-5', {
           'border-primary-500': selected,
@@ -50,11 +48,11 @@ const Page = ({ id, showTitle = true }) => {
           as="div"
           threshold={0.5}
           onChange={(inView) => {
-            if (inView) updateTemplate({ activePage: id });
+            if (inView) updateStore({ activePage: id });
           }}
           className="border border-default-200"
         >
-          <PageContent id={id} />
+          <PageContent key={id} id={id} />
         </InView>
       </div>
     </div>
@@ -63,7 +61,6 @@ const Page = ({ id, showTitle = true }) => {
 
 Page.propTypes = {
   id: PropTypes.string.isRequired,
-  showTitle: PropTypes.bool,
 };
 
 export default Page;

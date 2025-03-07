@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 import { cn } from '@/lib/utils.js';
 import { Fragment } from 'react';
+import useDesignStore from '@/store/design';
 
-export const TextBasic = ({ element, onChange, active }) => {
+export const TextBasic = ({ element, active }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   if (active) {
     return (
       <AutoResizeTextArea
@@ -13,9 +16,12 @@ export const TextBasic = ({ element, onChange, active }) => {
           background: 'transparent',
           filter: `drop-shadow(${element.style.shadow})`,
         }}
-        value={element.text}
+        value={element.config.content}
         onChange={(v) => {
-          onChange({ ...element, text: v });
+          updateElement(element.id, { config: { ...element.config, content: v } });
+        }}
+        onBlur={() => {
+          updateElement(element.id, { config: { ...element.config, content: element.config.content } }, true);
         }}
       />
     );
@@ -27,7 +33,7 @@ export const TextBasic = ({ element, onChange, active }) => {
 export const TextBasicPreview = ({ element }) => {
   return (
     <div style={{ ...element.style, filter: `drop-shadow(${element.style?.shadow})` }} className="w-full h-max">
-      {element.text}
+      {element.config.content}
     </div>
   );
 };
@@ -41,7 +47,7 @@ export const TextBasicPresent = ({ element }) => {
     >
       {element.config?.effect ? (
         <>
-          {element.text.split(' ').map((word, i) => (
+          {element.config.content.split(' ').map((word, i) => (
             <Fragment key={i}>
               <span className="inline-block">
                 {word.split('').map((letter, j) => {
@@ -60,12 +66,12 @@ export const TextBasicPresent = ({ element }) => {
                   );
                 })}
               </span>
-              {element.text.split(' ').length === i ? '' : <span> </span>}
+              {element.config.content.split(' ').length === i ? '' : <span> </span>}
             </Fragment>
           ))}
         </>
       ) : (
-        element.text
+        element.config.content
       )}
     </div>
   );

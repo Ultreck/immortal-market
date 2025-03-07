@@ -4,23 +4,24 @@ import { TbSettings2 } from 'react-icons/tb';
 import { Controller, useForm } from 'react-hook-form';
 import { isValidJsonArray } from '@/lib/utils.js';
 import { useState } from 'react';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const TableConfig = ({ element, onChange }) => {
   const [tab, setTab] = useState('data');
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
   const { handleSubmit, control } = useForm({
     defaultValues: {
       json: JSON.stringify(element.config.data, null, 2),
     },
   });
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   const onSubmit = async (values) => {
     const { json } = values;
     const data = JSON.parse(json);
     onChange({ ...element, config: { ...(element?.config || {}), data } });
-    updateTemplate({ openTool: null });
+    closeTool();
   };
 
   return (
@@ -29,8 +30,8 @@ const TableConfig = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[400px]' }}
-      isOpen={openTool === 'table'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'table' : null })}
+      isOpen={tool === 'table'}
+      onOpenChange={(v) => (v ? openTool('table') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Table config" className="text-base">

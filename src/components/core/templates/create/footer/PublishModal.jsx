@@ -1,27 +1,13 @@
 import PropTypes from 'prop-types';
-import { Button, Modal, ModalBody, ModalContent, addToast } from '@heroui/react';
-import { useUpdateDesign } from '@/api/business.js';
-import useBusiness from '@/hooks/use-business.js';
+import { Button, Modal, ModalBody, ModalContent } from '@heroui/react';
+import useDesignStore from '@/store/design.js';
 
-const PublishModal = ({ id, isOpen, onClose }) => {
-  const { id: business } = useBusiness();
-  const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesign(business, id);
+const PublishModal = ({ isOpen, onClose }) => {
+  const updateDesign = useDesignStore((state) => state.updateDesign);
 
   const handlePublish = async () => {
-    try {
-      await update({ status: 'published' });
-      addToast({ 
-        title: 'Published',
-        color: 'success'
-      });
-      onClose();
-    } catch (e) {
-      addToast({
-        title: 'Error',
-        description: e?.response?.data?.message ?? e?.message ?? 'Something went wrong, please try again',
-        color: 'danger'
-      });
-    }
+    updateDesign({ status: 'published' });
+    onClose();
   };
 
   return (
@@ -30,23 +16,10 @@ const PublishModal = ({ id, isOpen, onClose }) => {
         <ModalBody className="px-8 py-5">
           <p>Are you sure you want to publish this template?</p>
           <div className="flex justify-end space-x-2">
-            <Button
-              color="default"
-              variant="light"
-              onPress={onClose}
-              isDisabled={isUpdateLoading}
-              className="text-base"
-              radius="full"
-            >
+            <Button color="default" variant="light" onPress={onClose} className="text-base" radius="full">
               No, cancel
             </Button>
-            <Button
-              color="success"
-              onPress={handlePublish}
-              isLoading={isUpdateLoading}
-              className="text-base"
-              radius="full"
-            >
+            <Button color="success" onPress={handlePublish} className="text-base" radius="full">
               Yes, publish
             </Button>
           </div>
@@ -57,7 +30,6 @@ const PublishModal = ({ id, isOpen, onClose }) => {
 };
 
 PublishModal.propTypes = {
-  id: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };

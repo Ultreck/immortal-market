@@ -1,18 +1,21 @@
 import React from 'react';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import useTemplateStore from '@/store/template';
+import useDesignStore from '@/store/design';
 import { options } from '@/lib/utils';
 import { Button } from '@heroui/react';
 import useBusiness from '@/hooks/use-business';
 import { useGetForms, useGetPolls } from '@/api/business';
+
 export const pollInitialData = {
   data: {
     type: 'form',
     text: 'poll',
     question: '"Guess the Answer", Add Question',
     options: options.map((_) => ({ ..._, id: crypto.randomUUID() })),
-    width: 350,
-    height: 200,
+    size: {
+      width: 350,
+      height: 200,
+    },
     config: {
       name: 'poll',
     },
@@ -27,6 +30,7 @@ export const pollInitialData = {
     },
   },
 };
+
 export const formInitialData = {
   id: crypto.randomUUID(),
   data: {
@@ -77,8 +81,8 @@ export const formInitialData = {
 
 export const ProjectPoll = ({ element }) => {
   const { id: business } = useBusiness();
-  const design = useTemplateStore((state) => state.template.id);
-  const { data: { polls = [] } = {} } = useGetPolls({ business, design, element: element });
+  const id = useDesignStore((state) => state.id);
+  const { data: { polls = [] } = {} } = useGetPolls({ business, design: id, element: element });
 
   return (
     <Button
@@ -92,8 +96,8 @@ export const ProjectPoll = ({ element }) => {
 
 export const ProjectForm = ({ element }) => {
   const { id: business } = useBusiness();
-  const design = useTemplateStore((state) => state.template.id);
-  const { data: { forms = [] } = {} } = useGetForms({ business, design, element: element });
+  const id = useDesignStore((state) => state.id);
+  const { data: { forms = [] } = {} } = useGetForms({ business, design: id, element: element });
   return (
     <Button
       radius="none"

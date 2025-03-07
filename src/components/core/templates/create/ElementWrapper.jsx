@@ -1,9 +1,10 @@
 import { cn } from '@/lib/utils.js';
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import ElementCommentBadge from '@/components/core/templates/create/comment/ElementCommentBadge.jsx';
 import ErrorBoundary from '@/components/ErrorBoundary.jsx';
 import { RiAlertLine } from 'react-icons/ri';
+import { memo } from 'react';
 
 const ElementWrapper = ({
   element,
@@ -16,23 +17,23 @@ const ElementWrapper = ({
   fit = false,
   className,
 }) => {
-  const isCommentsVisible = useTemplateStore((state) => state.template.isCommentsVisible);
+  const isCommentsVisible = useDesignStore((state) => state.isCommentsOpen);
 
   return (
     <div
       className={cn('w-max absolute top-0 left-0 group select-none pointer-events-auto', className)}
       style={{
-        transform: `translate(${element.x}px, ${element.y}px) rotate(${element.rotate}deg)`,
-        width: element.width,
-        height: !fit ? element.height : undefined,
+        transform: `translate(${element.position.x}px, ${element.position.y}px) rotate(${element.rotation}deg)`,
+        width: element.size.width,
+        height: !fit ? element.size.height : undefined,
       }}
       id={`element-${element.id}`}
     >
       <div
         className={cn(
-          'absolute inset-0 border border-yellow-500 border-transparent z-[1] pointer-events-auto',
-          { 'group-hover:border-primary-500 !border': !selected && !highlighted },
-          { 'border-primary-500': highlighted },
+          'absolute inset-0 border-2 border-transparent z-[1] pointer-events-auto',
+          { 'group-hover:border-primary-200 !border': !selected && !highlighted },
+          { 'border-primary-200': highlighted },
           { 'border-primary-500': selected },
           { 'border-purple-500 pointer-events-none': active }
         )}
@@ -68,4 +69,4 @@ ElementWrapper.propTypes = {
   active: PropTypes.bool,
 };
 
-export default ElementWrapper;
+export default memo(ElementWrapper);

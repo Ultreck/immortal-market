@@ -1,4 +1,4 @@
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import PropTypes from 'prop-types';
 import { TbClipboardCopy, TbCopyPlus, TbLink, TbLinkPlus, TbPlus, TbTrash } from 'react-icons/tb';
 import { Listbox, ListboxItem, useDisclosure } from '@heroui/react';
@@ -29,10 +29,8 @@ import CreateCommentModal from '@/components/core/templates/CreateCommentModal.j
 import { useActions } from '@/hooks/template/use-actions.js';
 
 const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
-  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
-  const pages = useTemplateStore(({ template }) => template.pages);
-  const page = pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
-  const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id)).filter(Boolean);
+  const selectedElements = useDesignStore((state) => state.selectedElements);
+  const elements = useDesignStore((state) => state.elements.filter((el) => selectedElements.includes(el.id)));
   const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
   const { isOpen: isCreateBlockOpen, onOpen: onCreateBlockOpen, onClose: onCreateBlockClose } = useDisclosure();
   const { isOpen: isCommentOpen, onOpen: onCommentOpen, onClose: onCommentClose } = useDisclosure();
@@ -66,8 +64,6 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
       if (selectedElements.length > 1) {
         if (!elements.every((el) => el.group && el.group === elements[0].group)) {
           items.push({ key: 'group', label: 'Group', icon: <LuGroup size="18" /> });
-        } else {
-          items.push({ key: 'ungroup', label: 'Ungroup', icon: <LuUngroup size="18" /> });
         }
         items.push({
           key: 'align',
@@ -82,16 +78,20 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
             { key: 'align-bottom', label: 'Align bottom', icon: <RiAlignItemBottomLine size="18" /> },
           ],
         });
+      } else {
+        if (elements[0]?.type === 'group') {
+          items.push({ key: 'ungroup', label: 'Ungroup', icon: <LuUngroup size="18" /> });
+        }
       }
       items.push({
         key: 'arrange',
         label: 'Arrange',
         icon: <LuBringToFront size="18" />,
         children: [
-          { key: 'move-top', label: 'Move to top', icon: <LuBringToFront size="18" /> },
-          { key: 'move-bottom', label: 'Move to bottom', icon: <LuSendToBack size="18" /> },
-          { key: 'move-up', label: 'Move up', icon: <LuChevronUp size="18" /> },
-          { key: 'move-down', label: 'Move down', icon: <LuChevronDown size="18" /> },
+          { key: 'bring-forward', label: 'Bring forward', icon: <LuChevronUp size="18" /> },
+          { key: 'bring-to-front', label: 'Bring to front', icon: <LuBringToFront size="18" /> },
+          { key: 'send-backward', label: 'Send backward', icon: <LuChevronDown size="18" /> },
+          { key: 'send-to-back', label: 'Send to back', icon: <LuSendToBack size="18" /> },
         ],
       });
       if (elements?.length && elements.every((el) => el.href)) {
@@ -179,7 +179,7 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
       <CreateCommentModal
         target="element"
         targetId={elements[0]?.id}
-        page={page?.id}
+        page={id}
         isOpen={isCommentOpen}
         onClose={onCommentClose}
       />

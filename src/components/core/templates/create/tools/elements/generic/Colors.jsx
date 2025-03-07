@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { TbCheck } from 'react-icons/tb';
 import { capitalize, cn, interpolateColor } from '@/lib/utils.js';
 import { HexColorPicker } from 'react-colorful';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import ColorPicker from '@/components/ui/ColorPicker';
 
 const options = [
@@ -35,8 +35,9 @@ const options = [
 
 const Colors = ({ element, onChange }) => {
   const [tab, setTab] = useState('palettes');
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   const config = {
     palettes: true,
@@ -62,8 +63,8 @@ const Colors = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[350px] !max-h-[500px] overflow-y-auto block' }}
-      isOpen={openTool === 'colors'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'colors' : null })}
+      isOpen={tool === 'colors'}
+      onOpenChange={(v) => (v ? openTool('colors') : closeTool())}
     >
       <PopoverTrigger>
         <button
@@ -74,7 +75,7 @@ const Colors = ({ element, onChange }) => {
           <div className="h-6 w-6 overflow-hidden rounded-full">
             <div className="grid h-12 w-12 -translate-x-1/4 -translate-y-1/4 grid-cols-2 overflow-hidden rounded-md transition-all ease-in-out group-hover:rotate-45 rotate-0 gap-[2px]">
               {element.config.colors?.slice(0, 4).map((color, index) => (
-                <span key={index} className="flex h-6 w-6 bg-red-500" style={{ backgroundColor: color }} />
+                <span key={index} className="flex h-6 w-6" style={{ backgroundColor: color }} />
               ))}
               {element.config.colors?.length < 4 &&
                 Array(4 - element.config.colors?.length)

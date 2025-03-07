@@ -4,7 +4,7 @@ import { useDeleteDesignBlock, useGetDesignBlocks } from '@/api/business.js';
 import { addToast, Button, Chip, Image, Skeleton } from '@heroui/react';
 import useBusiness from '@/hooks/use-business.js';
 import { cn, getImageLink } from '@/lib/utils.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
 import NoData from '@/components/ui/NoData.jsx';
 import { useState } from 'react';
 import { TbTrash } from 'react-icons/tb';
@@ -26,17 +26,10 @@ const PageBlocksModal = ({ isOpen, onClose }) => {
     type: 'page',
     category: category === 'all' ? undefined : category,
   });
-  const addPage = useTemplateStore((state) => state.addPage);
+  const createPageFromBlock = useDesignStore((state) => state.createPageFromBlock);
 
   const handleClick = (block) => {
-    addPage({
-      id: crypto.randomUUID(),
-      title: 'Untitled',
-      width: block.data.width,
-      height: block.data.height,
-      style: block.data.style,
-      elements: block.data.elements,
-    });
+    createPageFromBlock(block.id);
     onClose();
   };
 

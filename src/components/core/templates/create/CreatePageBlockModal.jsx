@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
 import {
   addToast,
   Autocomplete,
@@ -20,6 +19,7 @@ import useBusiness from '@/hooks/use-business.js';
 import { toBlob } from 'html-to-image';
 import { useState } from 'react';
 import { capitalize } from '@/lib/utils.js';
+import useDesignStore from '@/store/design.js';
 
 const sections = [
   { key: 'cover', label: 'Cover' },
@@ -54,9 +54,9 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
   const { id: business } = useBusiness();
   const { control, handleSubmit, reset } = useForm();
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
-  const pages = useTemplateStore(({ template }) => template.pages);
-  const index = pages.findIndex((p) => p.id === id);
+  const page = useDesignStore((state) => state.pages.find((page) => page.id === id));
+  const elements = useDesignStore((state) => state.elements.filter((e) => e.page === id));
+  const index = useDesignStore((state) => state.pages.sort((a, b) => a.order - b.order).findIndex((p) => p.id === id));
   const { mutateAsync: create, isPending: isCreateLoading } = useCreateDesignBlock(business);
   const [tag, setTag] = useState('');
   const [tags, setTags] = useState([]);
@@ -95,17 +95,15 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
       });
       const thumbnail = new File([blob], 'thumbnail.png', { type: 'image/png' });
       setIsThumbnailLoading(false);
+      const { _id, id, ...p } = page;
       const data = {
-        width: page.width,
-        height: page.height,
-        elements: page.elements,
-        style: page.style,
-        title: page.title,
+        page: p,
+        elements: elements.map(({ _id, id, ...el }) => ({ ...el })),
       };
       const payload = {
         ...values,
         tags,
-        elements: page.elements?.map((e) => {
+        elements: elements.map((e) => {
           let text = e.type;
           if (e.config.name || e.config.type) {
             text += `/${e.config.name || e.config.type}`;
@@ -138,7 +136,7 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
               <div className="px-4 py-2">
                 Page {index + 1} - {page.title}
               </div>
-              <div className="px-4 py-2">{page.elements.length} object(s)</div>
+              <div className="px-4 py-2">{elements.length} object(s)</div>
             </CardBody>
           </Card>
           <form onSubmit={handleSubmit(submit)}>

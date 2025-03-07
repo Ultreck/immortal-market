@@ -8,16 +8,16 @@ import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useGenerateCombinations } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
 import NoData from '@/components/ui/NoData.jsx';
 import { RiAlertLine } from 'react-icons/ri';
 
 const PreviewData = ({ onNext }) => {
-  const { source, isSourceLoading, isDesignLoading } = useCurrentDesign();
+  const { id: business } = useBusiness();
+  const id = useDesignStore((state) => state.id);
+  const { source, isSourceLoading } = useCurrentDesign();
   const [current, setCurrent] = useState(source?.tables?.[0]?.name);
   const table = source?.tables?.find((t) => t.name === current);
-  const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
   const { mutateAsync: generate, isPending: isGenerateLoading } = useGenerateCombinations(business, id);
   const { isOpen: isContinuePopover, onOpenChange: onContinuePopoverOpenChange } = useDisclosure();
 
@@ -41,7 +41,7 @@ const PreviewData = ({ onNext }) => {
 
   return (
     <>
-      {isDesignLoading || isSourceLoading ? (
+      {isSourceLoading ? (
         <div className="flex h-full flex-col items-center justify-center">
           <Spinner />
           <p className="mt-6">Loading data..</p>

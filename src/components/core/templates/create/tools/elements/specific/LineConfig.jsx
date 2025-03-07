@@ -1,23 +1,24 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@heroui/react';
 import PropTypes from 'prop-types';
 import NumberInput from '@/components/ui/NumberInput.jsx';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { TbBan, TbLine } from 'react-icons/tb';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import { HiArrowRight } from 'react-icons/hi2';
 import { useState } from 'react';
 
 const LineConfig = ({ elements, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'line'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'line' : null })}
+      isOpen={tool === 'line'}
+      onOpenChange={(v) => (v ? openTool('line') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">

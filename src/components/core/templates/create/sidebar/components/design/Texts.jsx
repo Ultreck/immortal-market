@@ -101,8 +101,10 @@ const texts = [
         data: {
           type: 'text',
           text: kebabToWords(name),
-          width: 200,
-          height: 36,
+          size: {
+            width: 200,
+            height: 36,
+          },
           style: {
             ...getElementDefaultStyle({ type: 'text', name }),
             ...(styles[name] || {}),

@@ -16,13 +16,14 @@ import AdvancedScatterLifeExpentancyConfig from '@/components/core/templates/cre
 import AdvancedPictogramShapesConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedPictogramShapesConfig.jsx';
 import AdvancedStackedCardConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedStackedCardConfig.jsx';
 import AdvancePercentageCardConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancePercentageCardConfig.jsx';
-import useTemplateStore from '@/store/template.js';
 import AdvanceLinearChartConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceLinearChartConfig.jsx';
 import AdvanceGlobalBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceGlobalBarConfig.jsx';
+import useDesignStore from '@/store/design.js';
 
 const AdvancedChartConfig = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
@@ -30,8 +31,8 @@ const AdvancedChartConfig = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[400px]' }}
-      isOpen={openTool === 'advanced-chart'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'advanced-chart' : null })}
+      isOpen={tool === 'advanced-chart'}
+      onOpenChange={(v) => (v ? openTool('advanced-chart') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Advance chart config" className="text-base">

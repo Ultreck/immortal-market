@@ -1,13 +1,9 @@
-import useTemplateStore from '@/store/template.js';
-import { useGetDesign } from '@/api/business.js';
-import useBusiness from '@/hooks/use-business.js';
 import { Chip } from '@heroui/react';
 import EditDesignTitleButton from '@/components/core/templates/create/footer/EditDesignTitleButton.jsx';
+import useDesignStore from '@/store/design.js';
 
 const DesignTitle = () => {
-  const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
-  const { data: { design = {} } = {} } = useGetDesign(business, id);
+  const design = useDesignStore((state) => state.design);
 
   return (
     <div className="flex items-center space-x-4">

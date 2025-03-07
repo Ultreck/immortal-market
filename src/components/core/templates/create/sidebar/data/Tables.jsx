@@ -248,8 +248,10 @@ const elements = [
     data: {
       type: 'table',
       text: 'Table',
-      width: 500,
-      height: 300,
+      size: {
+        width: 500,
+        height: 300,
+      },
       style: getElementDefaultStyle({ type: 'table' }),
       config: {
         scheme: item.scheme,

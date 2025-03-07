@@ -1,13 +1,14 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@heroui/react';
 import { TbAbc } from 'react-icons/tb';
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
 import { cn } from '@/lib/utils';
 import { LuMousePointerClick } from 'react-icons/lu';
+import useDesignStore from '@/store/design.js';
 
 const ElementTooltip = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
@@ -15,11 +16,11 @@ const ElementTooltip = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[400px] !max-h-[550px] overflow-y-auto block' }}
-      isOpen={openTool === 'tooltip'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'tooltip' : null })}
+      isOpen={tool === 'tooltip'}
+      onOpenChange={(v) => (v ? openTool('tooltip') : closeTool())}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Tooltip" className="text-base">
           <LuMousePointerClick size="24" />
         </Button>
       </PopoverTrigger>

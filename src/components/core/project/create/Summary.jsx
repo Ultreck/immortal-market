@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import { useUpdateDesignSource } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
 
 const Summary = ({ onPrev, onNext }) => {
+  const { id: business } = useBusiness();
+  const id = useDesignStore((state) => state.id);
   const { source } = useCurrentDesign();
   const [selection, setSelection] = useState(source?.selection?.summary || []);
-  const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
 
   const handleSubmit = async () => {

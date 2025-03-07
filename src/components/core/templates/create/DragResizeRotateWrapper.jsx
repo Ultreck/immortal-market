@@ -1,39 +1,46 @@
-import useTemplateStore from '@/store/template.js';
 import PropTypes from 'prop-types';
 import DragResizeRotate from '@/components/ui/DragResizeRotate.jsx';
 import { cn } from '@/lib/utils.js';
 import { useMemo, useState } from 'react';
 import { getElementConfig } from '@/lib/elements.js';
+import useDesignStore from '@/store/design.js';
 
 const DragResizeRotateWrapper = ({ id }) => {
   const [rotate, setRotate] = useState(0);
-  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === id));
-  const elements = page.elements.filter((el) => selectedElements.includes(el.id));
-  const updateElements = useTemplateStore((state) => state.updateElements);
-  const scale = useTemplateStore((state) => state.template.scale);
-  const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const activeElement = useTemplateStore((state) => state.template.activeElement);
+  const selectedElements = useDesignStore((state) => state.selectedElements);
+  const elements = useDesignStore((state) =>
+    state.elements.filter((el) => el.page === id && selectedElements.includes(el.id))
+  );
+  const updateElements = useDesignStore((state) => state.updateElements);
+  const updateStore = useDesignStore((state) => state.updateStore);
+  const scale = useDesignStore((state) => state.scale);
+  const activeElement = useDesignStore((state) => state.activeElement);
+
+  const disabled = useMemo(() => {
+    if (elements.length === 1) {
+      return !!elements[0].group;
+    }
+    return false;
+  }, [elements]);
 
   const { x, y, width, height } = useMemo(() => {
     if (!elements.length) return { x: 0, y: 0, width: 0, height: 0 };
-    const leftMostElement = elements.reduce((acc, el) => (el.x < acc.x ? el : acc), elements[0]);
-    const topMostElement = elements.reduce((acc, el) => (el.y < acc.y ? el : acc), elements[0]);
+    const leftMostElement = elements.reduce((acc, el) => (el.position.x < acc.position.x ? el : acc), elements[0]);
+    const topMostElement = elements.reduce((acc, el) => (el.position.y < acc.position.y ? el : acc), elements[0]);
     const rightMostElement = elements.reduce(
-      (acc, el) => (el.x + el.width > acc.x + acc.width ? el : acc),
+      (acc, el) => (el.position.x + el.size.width > acc.position.x + acc.size.width ? el : acc),
       elements[0]
     );
     const bottomMostElement = elements.reduce(
-      (acc, el) => (el.y + el.height > acc.y + acc.height ? el : acc),
+      (acc, el) => (el.position.y + el.size.height > acc.position.y + acc.size.height ? el : acc),
       elements[0]
     );
     const bottomMostElementHeight = document.getElementById(`element-${bottomMostElement?.id}`)?.scrollHeight || 0;
     return {
-      x: leftMostElement.x * scale,
-      y: topMostElement.y * scale,
-      width: (rightMostElement.x + rightMostElement.width - leftMostElement.x) * scale,
-      height: (bottomMostElement.y + bottomMostElementHeight - topMostElement.y) * scale,
+      x: leftMostElement.position.x * scale,
+      y: topMostElement.position.y * scale,
+      width: (rightMostElement.position.x + rightMostElement.size.width - leftMostElement.position.x) * scale,
+      height: (bottomMostElement.position.y + bottomMostElementHeight - topMostElement.position.y) * scale,
     };
   }, [elements, scale]);
 
@@ -47,16 +54,41 @@ const DragResizeRotateWrapper = ({ id }) => {
     };
     updateElements(
       elements.map((el) => ({
-        ...el,
-        x: el.x + diff.x,
-        y: el.y + diff.y,
-        width: el.width + diff.width,
-        height: el.height + diff.height,
-        rotate: el.rotate + diff.rotate,
-      })),
-      page.id
+        elementId: el.id,
+        updates: {
+          position: {
+            x: el.position.x + diff.x,
+            y: el.position.y + diff.y,
+          },
+          size: {
+            width: el.size.width + diff.width,
+            height: el.size.height + diff.height,
+          },
+          rotate: el.rotate + diff.rotate,
+        },
+      }))
     );
     setRotate(values.rotate);
+  };
+
+  const handleUpdate = () => {
+    updateElements(
+      elements.map((el) => ({
+        elementId: el.id,
+        updates: {
+          position: {
+            x: el.position.x,
+            y: el.position.y,
+          },
+          size: {
+            width: el.size.width,
+            height: el.size.height,
+          },
+          rotate: el.rotate,
+        },
+      })),
+      true
+    );
   };
 
   return (
@@ -68,23 +100,24 @@ const DragResizeRotateWrapper = ({ id }) => {
           onClick={() => {
             if (elements.length === 1) {
               const config = getElementConfig(elements[0]);
-              if (config.editable) updateTemplate({ activeElement: elements[0].id });
+              if (config.editable) updateStore({ activeElement: elements[0].id });
             }
           }}
-          // onDoubleClick={() => {
-          //   setIsDragDisabled(true);
-          // }}
-          resizable
-          rotatable
-          draggable={!activeElement}
+          visible={!disabled}
+          rotatable={!disabled && !activeElement}
+          draggable={!disabled && !activeElement}
+          resizable={!disabled && !activeElement}
           scale={scale}
           className={cn(
-            'w-max border-1 border-yellow-500 absolute top-0 left-0 group select-none pointer-events-auto',
+            'w-max border-2 border-transparent absolute top-0 left-0 group select-none pointer-events-auto',
             { 'pointer-events-none border-transparent': activeElement }
           )}
-          onDragStart={() => addUndoHistory()}
-          onResizeStart={() => addUndoHistory()}
-          onRotateStart={() => addUndoHistory()}
+          style={{
+            boxShadow: '0 0 0 2px rgba(0, 0, 0, 0.1)',
+          }}
+          onDragEnd={handleUpdate}
+          onResizeEnd={handleUpdate}
+          onRotateEnd={handleUpdate}
         >
           <div></div>
         </DragResizeRotate>

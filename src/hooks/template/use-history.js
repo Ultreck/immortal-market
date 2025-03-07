@@ -1,12 +1,12 @@
 import { useKey } from 'react-use';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const useHistory = () => {
-  const pages = useTemplateStore((state) => state.template.pages);
-  const undoHistory = useTemplateStore((state) => state.template.undoHistory);
-  const redoHistory = useTemplateStore((state) => state.template.redoHistory);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
+  const pages = useDesignStore((state) => state.pages);
+  const undoHistory = useDesignStore((state) => state.history.undoStack);
+  const redoHistory = useDesignStore((state) => state.history.redoStack);
+  const updateStore = useDesignStore((state) => state.updateStore);
+  const selectedElements = useDesignStore((state) => state.selectedElements);
 
   useKey(
     (e) => e.key.toLowerCase() === 'z' && e.ctrlKey && !e.shiftKey,
@@ -16,7 +16,7 @@ const useHistory = () => {
         const selectedElementsExists = last.some((page) =>
           page.elements.some((element) => selectedElements.includes(element.id))
         );
-        updateTemplate({
+        updateStore({
           pages: last,
           undoHistory: undoHistory.filter((item) => item !== last),
           redoHistory: [...redoHistory, pages],
@@ -24,7 +24,7 @@ const useHistory = () => {
         });
       }
     },
-    [undoHistory, redoHistory, updateTemplate, pages, selectedElements]
+    [undoHistory, redoHistory, updateStore, pages, selectedElements]
   );
 
   useKey(
@@ -35,7 +35,7 @@ const useHistory = () => {
         const selectedElementsExists = last.some((page) =>
           page.elements.some((element) => selectedElements.includes(element.id))
         );
-        updateTemplate({
+        updateStore({
           pages: last,
           undoHistory: [...undoHistory, pages],
           redoHistory: redoHistory.filter((item) => item !== last),
@@ -43,7 +43,7 @@ const useHistory = () => {
         });
       }
     },
-    [undoHistory, redoHistory, updateTemplate, pages, selectedElements]
+    [undoHistory, redoHistory, updateStore, pages, selectedElements]
   );
 };
 

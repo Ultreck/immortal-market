@@ -4,10 +4,12 @@ import { AnimatePresence, motion } from 'motion/react';
 import { cn } from '@/lib/utils.js';
 import { getElementConfig, getElementPresentComponent } from '@/lib/elements.js';
 import ElementWrapperPresent from '@/components/core/templates/create/ElementWrapperPresent.jsx';
+import useDesignStore from '@/store/design';
 
 const PagePresent = ({ page }) => {
   const el = useRef(null);
   const [scale, setScale] = useState(1);
+  const elements = useDesignStore((state) => state.elements.filter((el) => el.page === page.id));
 
   useEffect(() => {
     setTimeout(() => {
@@ -25,15 +27,15 @@ const PagePresent = ({ page }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       style={{
-        width: page.width,
-        height: page.height,
-        background: page.style.background || '#fff',
+        width: page.size.width,
+        height: page.size.height,
+        background: page.background.value,
         transform: `scale(${scale})`,
       }}
       className={cn('origin-top-left relative overflow-hidden')}
     >
       <AnimatePresence>
-        {page.elements.map((element) => {
+        {elements.map((element) => {
           const component = getElementPresentComponent(element);
           const config = getElementConfig(element);
 

@@ -40,7 +40,7 @@ export const StandardBarContent = ({ element, present = false, isChartWrapperDis
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <ChartContainer
         config={{}}
-        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+        style={{ height: element.size.height, width: element.size.width, opacity: element.style.opacity }}
       >
         <BarChart accessibilityLayer data={data} barGap={0} barCategoryGap={element.config.gap} layout={layout}>
           {element.config.tooltip.enabled && (

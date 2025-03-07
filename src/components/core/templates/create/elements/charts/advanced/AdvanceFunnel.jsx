@@ -96,8 +96,8 @@ export const AdvanceFunnelChartContent = ({ element, isChartWrapperDisabled = fa
       <div
         ref={chartRef}
         style={{
-          width: element.width,
-          height: element.height,
+          width: element.size.width,
+          height: element.size.height,
           opacity: element.style.opacity,
           paddingTop: element.config.styles.yPadding,
           paddingLeft: element.config.styles.xPadding,

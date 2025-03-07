@@ -24,8 +24,7 @@ import { SiAmazondynamodb, SiMariadb, SiOracle, SiPostgresql } from 'react-icons
 import { useNavigate } from 'react-router-dom';
 import useBusiness from '@/hooks/use-business.js';
 import { useCreateProject } from '@/api/business.js';
-import useTemplateStore from '@/store/template.js';
-import useCurrentDesign from '@/hooks/template/use-current-design.js';
+import useDesignStore from '@/store/design.js';
 
 const sources = [
   {
@@ -190,16 +189,39 @@ const sources = [
   },
 ];
 
+// Helper function to build FormData
+const buildFormData = (data, formData = new FormData(), parentKey = '') => {
+  if (data && typeof data === 'object' && !(data instanceof File)) {
+    Object.keys(data).forEach((key) => {
+      const value = data[key];
+      const formKey = parentKey ? `${parentKey}[${key}]` : key;
+
+      if (value instanceof File) {
+        formData.append(formKey, value);
+      } else if (Array.isArray(value)) {
+        value.forEach((val, index) => {
+          buildFormData(val, formData, `${formKey}[${index}]`);
+        });
+      } else if (value && typeof value === 'object') {
+        buildFormData(value, formData, formKey);
+      } else if (value !== null && value !== undefined) {
+        formData.append(formKey, value);
+      }
+    });
+  } else if (data !== null && data !== undefined) {
+    formData.append(parentKey, data);
+  }
+  return formData;
+};
+
 const SelectSource = ({ onNext, onPrev }) => {
   const navigate = useNavigate();
   const { id: business } = useBusiness();
   const updateData = useProjectStore((state) => state.updateData);
   const [view, setView] = useState('options');
   const { mutateAsync: create, isPending: isCreateDesignLoading } = useCreateProject(business);
-  const template = useProjectStore((state) => state.data.template);
   const files = useProjectStore((state) => state.data.files);
-  const updateTemplateStore = useTemplateStore((state) => state.updateTemplate);
-  const { design } = useCurrentDesign();
+  const design = useDesignStore((state) => state.design);
 
   const handleClick = (item) => {
     const payload = { source: item.key };
@@ -215,15 +237,17 @@ const SelectSource = ({ onNext, onPrev }) => {
 
   const handleCreateProject = async () => {
     try {
-      const fd = new FormData();
-      files.forEach((file) => fd.append('files', file));
-      fd.append('title', template ? template.title : 'Untitled');
-      fd.append('description', template ? template.description : '');
-      fd.append('template', template ? template._id : '');
-      if (design) fd.append('design', design._id);
+      const projectData = {
+        title: 'New project',
+        description: '',
+        size: { width: 800, height: 450 },
+        design: design?._id,
+        files,
+      };
+      const fd = buildFormData(projectData);
       const res = await create(fd);
       onNext();
-      updateTemplateStore({ id: res.data.design._id });
+      // TODO: test
       navigate(`/designs/${res.data.design._id}/edit`);
     } catch (e) {
       addToast({

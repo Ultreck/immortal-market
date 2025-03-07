@@ -17,9 +17,9 @@ const PageDimensions = ({ page, onChange }) => {
             <p className="text-base mb-2">Height</p>
             <NumberInput
               onChange={(v) => {
-                onChange({ height: v });
+                onChange({ size: { ...page.size, height: v } });
               }}
-              value={page.height}
+              value={page.size.height}
               min={200}
               step={10}
               ariaLabel="Page height"

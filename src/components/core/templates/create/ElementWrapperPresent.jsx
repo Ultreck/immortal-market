@@ -29,7 +29,12 @@ const ElementWrapperPresent = ({ element, children }) => {
           '!cursor-pointer transition-all duration-500': element.modal?.enabled || !!element.href,
         })}
         onClick={handleClick}
-        style={{ width: element.width, height: element.height, top: element.y, left: element.x }}
+        style={{
+          width: element.size.width,
+          height: element.size.height,
+          top: element.position.y,
+          left: element.position.x,
+        }}
       >
         <ErrorBoundary
           fallback={

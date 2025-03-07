@@ -1,8 +1,8 @@
-import { animated, useSpring } from '@react-spring/web';
+import { motion, useMotionValue, useTransform } from 'motion/react';
 import { useDrag } from '@use-gesture/react';
 import PropTypes from 'prop-types';
 import { TbRotate2 } from 'react-icons/tb';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils.js';
 
 const DragResizeRotate = ({
@@ -29,19 +29,23 @@ const DragResizeRotate = ({
   minHeight = 10,
   style = {},
   scale = 1,
+  visible = true,
   ...props
 }) => {
   const root = useRef(null);
-  const [{ x, y, width, height, rotate }, api] = useSpring(
-    () => ({
-      x: values.x,
-      y: values.y,
-      width: values.width,
-      height: values.height,
-      rotate: values.rotate || 0,
-    }),
-    [values]
-  );
+  const x = useMotionValue(values.x);
+  const y = useMotionValue(values.y);
+  const width = useMotionValue(values.width);
+  const height = useMotionValue(values.height);
+  const rotate = useMotionValue(values.rotate || 0);
+
+  useEffect(() => {
+    x.set(values.x);
+    y.set(values.y);
+    width.set(values.width);
+    height.set(values.height);
+    rotate.set(values.rotate || 0);
+  }, [values]);
 
   const handleChange = () => {
     onChange({
@@ -61,10 +65,8 @@ const DragResizeRotate = ({
     (state) => {
       if (state.tap) return;
       if (state.first) onDragStart?.();
-      api.set({
-        x: state.offset[0] / scale,
-        y: state.offset[1] / scale,
-      });
+      x.set(state.offset[0] / scale);
+      y.set(state.offset[1] / scale);
       handleChange();
       if (state.last) onDragEnd?.();
     },
@@ -101,66 +103,90 @@ const DragResizeRotate = ({
       const rx = rect.x;
       if (name === 'resize-se') {
         if (state.shiftKey) {
-          api.set({ width: resolveWidth(ox / scale), height: resolveWidth(ox / scale) });
+          width.set(resolveWidth(ox / scale));
+          height.set(resolveWidth(ox / scale));
         } else {
-          api.set({ width: resolveWidth(ox / scale), height: resolveHeight(oy / scale) });
+          width.set(resolveWidth(ox / scale));
+          height.set(resolveHeight(oy / scale));
         }
       } else if (name === 'resize-ne') {
         const _height = (oy - my - my) / scale;
         if (state.shiftKey) {
-          const y = (iy - mx - ry) / scale;
-          api.set({ width: resolveWidth(ox / scale), height: resolveWidth(ox / scale), y });
+          const newY = (iy - mx - ry) / scale;
+          width.set(resolveWidth(ox / scale));
+          height.set(resolveWidth(ox / scale));
+          y.set(newY);
         } else {
-          const y = (iy + my - ry) / scale;
-          api.set({ width: resolveWidth(ox / scale), height: resolveHeight(_height), y });
+          const newY = (iy + my - ry) / scale;
+          width.set(resolveWidth(ox / scale));
+          height.set(resolveHeight(_height));
+          y.set(newY);
         }
       } else if (name === 'resize-nw') {
         const _width = (ox - mx - mx) / scale;
         const _height = (oy - my - my) / scale;
-        const x = (ix + mx - rx) / scale;
+        const newX = (ix + mx - rx) / scale;
         if (state.shiftKey) {
-          const y = (iy + mx - ry) / scale;
-          api.set({ width: resolveWidth(_width), height: resolveWidth(_width), x, y });
+          const newY = (iy + mx - ry) / scale;
+          width.set(resolveWidth(_width));
+          height.set(resolveWidth(_width));
+          x.set(newX);
+          y.set(newY);
         } else {
-          const y = (iy + my - ry) / scale;
-          api.set({ width: resolveWidth(_width), height: resolveHeight(_height), x, y });
+          const newY = (iy + my - ry) / scale;
+          width.set(resolveWidth(_width));
+          height.set(resolveHeight(_height));
+          x.set(newX);
+          y.set(newY);
         }
       } else if (name === 'resize-sw') {
         const _width = (ox - mx - mx) / scale;
         const _height = oy / scale;
-        const x = (ix + mx - rx) / scale;
+        const newX = (ix + mx - rx) / scale;
         if (state.shiftKey) {
-          api.set({ width: resolveWidth(_width), height: resolveWidth(_width), x });
+          width.set(resolveWidth(_width));
+          height.set(resolveWidth(_width));
+          x.set(newX);
         } else {
-          api.set({ width: resolveWidth(_width), height: resolveHeight(_height), x });
+          width.set(resolveWidth(_width));
+          height.set(resolveHeight(_height));
+          x.set(newX);
         }
       } else if (name === 'resize-e') {
         if (state.shiftKey && handles.includes('w')) {
-          api.set({ width: resolveWidth(ox / scale), height: resolveWidth(ox / scale) });
+          width.set(resolveWidth(ox / scale));
+          height.set(resolveWidth(ox / scale));
         } else {
-          api.set({ width: resolveWidth(ox / scale) });
+          width.set(resolveWidth(ox / scale));
         }
       } else if (name === 'resize-w') {
         const _width = (ox - mx - mx) / scale;
-        const x = (ix + mx - rx) / scale;
+        const newX = (ix + mx - rx) / scale;
         if (state.shiftKey) {
-          api.set({ width: resolveWidth(_width), height: resolveWidth(_width), x });
+          width.set(resolveWidth(_width));
+          height.set(resolveWidth(_width));
+          x.set(newX);
         } else {
-          api.set({ width: resolveWidth(_width), x });
+          width.set(resolveWidth(_width));
+          x.set(newX);
         }
       } else if (name === 'resize-n') {
         const _height = (oy - my - my) / scale;
-        const y = (iy + my - ry) / scale;
+        const newY = (iy + my - ry) / scale;
         if (state.shiftKey) {
-          api.set({ width: resolveHeight(_height), height: resolveHeight(_height), y });
+          width.set(resolveHeight(_height));
+          height.set(resolveHeight(_height));
+          y.set(newY);
         } else {
-          api.set({ height: resolveHeight(_height), y });
+          height.set(resolveHeight(_height));
+          y.set(newY);
         }
       } else if (name === 'resize-s') {
         if (state.shiftKey) {
-          api.set({ width: resolveHeight(oy / scale), height: resolveHeight(oy / scale) });
+          width.set(resolveHeight(oy / scale));
+          height.set(resolveHeight(oy / scale));
         } else {
-          api.set({ height: resolveHeight(oy / scale) });
+          height.set(resolveHeight(oy / scale));
         }
       }
       handleChange();
@@ -182,7 +208,7 @@ const DragResizeRotate = ({
       const centerX = rect.left + (width.get() * scale) / 2;
       const centerY = rect.top + (height.get() * scale) / 2;
       const angle = Math.atan2(cy - centerY, cx - centerX) * (180 / Math.PI) - 90;
-      api.set({ rotate: angle });
+      rotate.set(angle);
       handleChange();
       if (state.last) onRotateEnd?.();
     },
@@ -194,101 +220,105 @@ const DragResizeRotate = ({
   );
 
   return (
-    <animated.div
-      className={cn('relative', className)}
-      ref={root}
-      style={{
-        x,
-        y,
-        width,
-        height,
-        rotate,
-        ...style,
-      }}
-      {...props}
-    >
-      <>
-        {children}
-        {draggable && (
-          <div
-            data-name="drag"
-            className="absolute inset-0 w-full h-full touch-none z-[2]"
-            {...bindDrag()}
-            onDoubleClick={onDoubleClick}
-            onClick={onClick}
-          />
-        )}
-        {!!resizable && (
+    <>
+      {visible && (
+        <motion.div
+          className={cn('relative', className)}
+          ref={root}
+          style={{
+            x,
+            y,
+            width,
+            height,
+            rotate,
+            ...style,
+          }}
+          {...props}
+        >
           <>
-            {!!handles.includes('se') && (
+            {children}
+            {draggable && (
               <div
-                data-name="resize-se"
-                className="cursor-se-resize absolute -bottom-2 -right-2 w-4 h-4 border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
-                {...bindResize()}
+                data-name="drag"
+                className="absolute inset-0 w-full h-full touch-none z-[2]"
+                {...bindDrag()}
+                onDoubleClick={onDoubleClick}
+                onClick={onClick}
               />
             )}
-            {!!handles.includes('ne') && (
-              <div
-                data-name="resize-ne"
-                className="cursor-ne-resize absolute -top-2 -right-2 w-4 h-4 border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
-                {...bindResize()}
-              />
+            {!!resizable && (
+              <>
+                {!!handles.includes('se') && (
+                  <div
+                    data-name="resize-se"
+                    className="cursor-se-resize absolute -bottom-2 -right-2 w-4 h-4 border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
+                    {...bindResize()}
+                  />
+                )}
+                {!!handles.includes('ne') && (
+                  <div
+                    data-name="resize-ne"
+                    className="cursor-ne-resize absolute -top-2 -right-2 w-4 h-4 border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
+                    {...bindResize()}
+                  />
+                )}
+                {!!handles.includes('nw') && (
+                  <div
+                    data-name="resize-nw"
+                    className="cursor-nw-resize absolute -top-2 -left-2 w-4 h-4 border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
+                    {...bindResize()}
+                  />
+                )}
+                {!!handles.includes('sw') && (
+                  <div
+                    data-name="resize-sw"
+                    className="cursor-sw-resize absolute -bottom-2 -left-2 w-4 h-4 border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
+                    {...bindResize()}
+                  />
+                )}
+                {!!handles.includes('e') && (
+                  <div
+                    data-name="resize-e"
+                    className="cursor-e-resize absolute top-1/2 -translate-y-1/2 -right-1 w-2 h-6 max-h-[98%] border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
+                    {...bindResize()}
+                  />
+                )}
+                {!!handles.includes('w') && (
+                  <div
+                    data-name="resize-w"
+                    className="cursor-e-resize absolute top-1/2 -translate-y-1/2 -left-1 w-2 h-6 max-h-[98%] border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
+                    {...bindResize()}
+                  />
+                )}
+                {!!handles.includes('n') && (
+                  <div
+                    data-name="resize-n"
+                    className="cursor-n-resize absolute -top-1 -translate-x-1/2 left-1/2 w-6 h-2 max-w-[98%] border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
+                    {...bindResize()}
+                  />
+                )}
+                {!!handles.includes('s') && (
+                  <div
+                    data-name="resize-s"
+                    className="cursor-s-resize absolute -bottom-1 -translate-x-1/2 left-1/2 w-6 h-2 max-w-[98%] border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
+                    {...bindResize()}
+                  />
+                )}
+              </>
             )}
-            {!!handles.includes('nw') && (
+            {!!rotatable && (
               <div
-                data-name="resize-nw"
-                className="cursor-nw-resize absolute -top-2 -left-2 w-4 h-4 border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
-                {...bindResize()}
-              />
-            )}
-            {!!handles.includes('sw') && (
-              <div
-                data-name="resize-sw"
-                className="cursor-sw-resize absolute -bottom-2 -left-2 w-4 h-4 border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
-                {...bindResize()}
-              />
-            )}
-            {!!handles.includes('e') && (
-              <div
-                data-name="resize-e"
-                className="cursor-e-resize absolute top-1/2 -translate-y-1/2 -right-1 w-2 h-6 max-h-[98%] border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
-                {...bindResize()}
-              />
-            )}
-            {!!handles.includes('w') && (
-              <div
-                data-name="resize-w"
-                className="cursor-e-resize absolute top-1/2 -translate-y-1/2 -left-1 w-2 h-6 max-h-[98%] border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
-                {...bindResize()}
-              />
-            )}
-            {!!handles.includes('n') && (
-              <div
-                data-name="resize-n"
-                className="cursor-n-resize absolute -top-1 -translate-x-1/2 left-1/2 w-6 h-2 max-w-[98%] border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
-                {...bindResize()}
-              />
-            )}
-            {!!handles.includes('s') && (
-              <div
-                data-name="resize-s"
-                className="cursor-s-resize absolute -bottom-1 -translate-x-1/2 left-1/2 w-6 h-2 max-w-[98%] border border-gray-400 bg-white shadow-sm rounded-full touch-none z-[10]"
-                {...bindResize()}
-              />
+                data-name="rotate"
+                className="absolute top-[calc(100%_+_20px)] left-1/2 -translate-x-1/2 cursor-grab w-7 h-7 bg-white border border-gray-400 text-gray-700 rounded-full flex items-center justify-center"
+                {...bindRotate()}
+              >
+                <TbRotate2 size="16" />
+              </div>
             )}
           </>
-        )}
-        {!!rotatable && (
-          <div
-            data-name="rotate"
-            className="absolute top-[calc(100%_+_20px)] left-1/2 -translate-x-1/2 cursor-grab w-7 h-7 bg-white border border-gray-400 text-gray-700 rounded-full flex items-center justify-center"
-            {...bindRotate()}
-          >
-            <TbRotate2 size="16" />
-          </div>
-        )}
-      </>
-    </animated.div>
+        </motion.div>
+      )}
+    </>
   );
 };
 

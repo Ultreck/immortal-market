@@ -1,14 +1,14 @@
 import { AnimatePresence, motion } from 'motion/react';
 import PageDimensions from '@/components/core/templates/create/tools/page/PageDimensions.jsx';
 import PageBackground from '@/components/core/templates/create/tools/page/PageBackground.jsx';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const PageTools = () => {
-  const page = useTemplateStore(({ template }) => template.pages.find((page) => page.id === template.selectedPage));
-  const updatePage = useTemplateStore((state) => state.updatePage);
+  const page = useDesignStore((state) => state.pages.find((page) => page.id === state.selectedPage));
+  const updatePage = useDesignStore((state) => state.updatePage);
 
   const handleUpdatePage = (data) => {
-    updatePage(data, page.id, true);
+    updatePage(page.id, data);
   };
 
   return (

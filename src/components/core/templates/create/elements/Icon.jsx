@@ -17,7 +17,7 @@ export const IconContent = ({ element }) => {
     <>
       {element.config?.name ? (
         <div className="!h-max" style={{ ...element.style, filter: `drop-shadow(${element.style.shadow})` }}>
-          {createElement(icons.find((icon) => icon.name === element.config.name)?.icon, { size: element.width })}
+          {createElement(icons.find((icon) => icon.name === element.config.name)?.icon, { size: element.size.width })}
         </div>
       ) : (
         <div className="h-full w-full flex flex-col text-center items-center justify-center px-4">

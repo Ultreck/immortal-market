@@ -1,16 +1,17 @@
 import { Button, Card, CardBody, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import PropTypes from 'prop-types';
-import useTemplateStore from '@/store/template.js';
 import { TbChevronRight, TbSettings2 } from 'react-icons/tb';
 import { IoSwapHorizontal } from 'react-icons/io5';
 import FrameSwap from '@/components/core/templates/create/tools/elements/specific/frame/FrameSwap.jsx';
 import { useState } from 'react';
 import FrameCarouselConfig from '@/components/core/templates/create/tools/elements/specific/frame/FrameCarouselConfig.jsx';
 import FrameTabsConfig from '@/components/core/templates/create/tools/elements/specific/frame/FrameTabsConfig.jsx';
+import useDesignStore from '@/store/design.js';
 
 const FrameConfig = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
   const [view, setView] = useState('home');
 
   return (
@@ -18,11 +19,11 @@ const FrameConfig = ({ element, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'frame'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'frame' : null })}
+      isOpen={tool === 'frame'}
+      onOpenChange={(v) => (v ? openTool('frame') : closeTool())}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Image config" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Frame config" className="text-base">
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>

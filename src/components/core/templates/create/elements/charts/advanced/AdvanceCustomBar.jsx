@@ -86,8 +86,8 @@ export const AdvancedCustomBarContent = ({ element, isChartWrapperDisabled = fal
             paddingLeft: element.config.styles.xPadding,
             paddingBottom: element.config.styles.yPadding,
             paddingRight: element.config.styles.xPadding,
-            width: element.width,
-            height: element.height,
+            width: element.size.width,
+            height: element.size.height,
           }}
           className="w-full h-full"
         >
@@ -171,8 +171,8 @@ export const AdvancedCustomBarContent = ({ element, isChartWrapperDisabled = fal
             paddingLeft: element.config.styles.xPadding,
             paddingBottom: element.config.styles.yPadding,
             paddingRight: element.config.styles.xPadding,
-            width: element.width,
-            height: element.height,
+            width: element.size.width,
+            height: element.size.height,
           }}
           className="flex flex-col items-start h-full space-y-2"
         >

@@ -20,8 +20,8 @@ export const AdvancePercentageCardContent = ({ element, isChartWrapperDisabled =
           paddingLeft: element.config.styles.xPadding,
           paddingBottom: element.config.styles.yPadding,
           paddingRight: element.config.styles.xPadding,
-          width: element.width,
-          height: element.height,
+          width: element.size.width,
+          height: element.size.height,
           opacity: element.style.opacity,
         }}
       >

@@ -101,7 +101,7 @@ const SelectTemplate = ({ onNext }) => {
                     key={design._id}
                     title={design.title}
                     id={design._id}
-                    thumbnail={design.thumbnails[0]}
+                    thumbnail={design.pages[0]?.thumbnail}
                   />
                 ))}
               </div>
@@ -120,8 +120,8 @@ const TemplateDetails = ({ onPrev, onNext }) => {
     <div className="h-full flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto px-12 py-10">
         <Title title="Preview Template" sub="Confirm your selection" className="mb-10" />
-        {template.thumbnails.length ? (
-          <ThumbnailsCarousel thumbnails={template.thumbnails} />
+        {template.pages.length ? (
+          <ThumbnailsCarousel thumbnails={template.pages.map((page) => page.thumbnail)} />
         ) : (
           <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
             <TbPhotoCircle size="32" className="opacity-50" />

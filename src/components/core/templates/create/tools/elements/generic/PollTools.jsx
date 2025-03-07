@@ -1,22 +1,23 @@
 import { Button, Input, Popover, PopoverContent, PopoverTrigger, Radio, RadioGroup, Textarea } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbMinus, TbPlus, TbSettings2 } from 'react-icons/tb';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const PollTools = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'poll'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'poll' : null })}
+      isOpen={tool === 'poll'}
+      onOpenChange={(v) => (v ? openTool('poll') : closeTool())}
     >
       <PopoverTrigger>
-        <Button isIconOnly variant="light" aria-label="Bullet text config" className="text-base">
+        <Button isIconOnly variant="light" aria-label="Poll config" className="text-base">
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>

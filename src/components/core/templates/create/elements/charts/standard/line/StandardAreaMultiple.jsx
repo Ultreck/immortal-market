@@ -30,7 +30,7 @@ export const StandardAreaMultipleContent = ({ element, isChartWrapperDisabled = 
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <ChartContainer
         config={{}}
-        style={{ height: element.height, width: element.width, opacity: element.style.opacity }}
+        style={{ height: element.size.height, width: element.size.width, opacity: element.style.opacity }}
       >
         <AreaChart accessibilityLayer data={data}>
           <CartesianGrid vertical={element.config.yAxis.grid} horizontal={element.config.xAxis.grid} />

@@ -1,19 +1,20 @@
 import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbMinus, TbPlus, TbSettings2 } from 'react-icons/tb';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const MarqueeTextConfig = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'marquee-text'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'marquee-text' : null })}
+      isOpen={tool === 'marquee-text'}
+      onOpenChange={(v) => (v ? openTool('marquee-text') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Marquee text config" className="text-base">

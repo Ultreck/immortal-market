@@ -63,7 +63,7 @@ const ProjectsPage = () => {
               </div>
             </button>
             {designs.map((design, i) => (
-              <DesignCard key={i} id={design._id} title={design.title} thumbnail={design.thumbnails[0]} />
+              <DesignCard key={i} id={design._id} title={design.title} thumbnail={design.pages[0]?.thumbnail} />
             ))}
           </div>
         )}

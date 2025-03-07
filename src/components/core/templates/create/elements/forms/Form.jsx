@@ -13,7 +13,7 @@ import {
   useRadio,
   VisuallyHidden,
 } from '@heroui/react';
-import useTemplateStore from '@/store/template';
+import useDesignStore from '@/store/design';
 import useBusiness from '@/hooks/use-business';
 import { useCreateForm } from '@/api/business';
 import { useState } from 'react';
@@ -28,8 +28,8 @@ export const Form = ({ element }) => {
 
 export const FormPresent = ({ element }) => {
   const { id: business } = useBusiness();
-  const design = useTemplateStore((state) => state.template.id);
-  const { mutateAsync: createForm, isPending: isCreateFormLoading } = useCreateForm(business, design);
+  const id = useDesignStore((state) => state.id);
+  const { mutateAsync: createForm, isPending: isCreateFormLoading } = useCreateForm(business, id);
   const [answers, setAnswers] = useState({});
 
   const onChange = (questionId, answer) => {
@@ -73,8 +73,8 @@ const FormContent = ({
     <div
       style={{
         ...element.style,
-        width: element.width,
-        height: element.height,
+        width: element.size.width,
+        height: element.size.height,
       }}
       className={cn('transition-all flex flex-col !p-5 duration-300', className)}
     >

@@ -6,9 +6,9 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-export const getImageLink = (path, timestamp = false) => {
+export const getImageLink = (path, { timestamp = false, bucket: _bucket = '' } = {}) => {
   if (!path) return null;
-  const bucket = import.meta.env.VITE_S3_BUCKET_NAME;
+  const bucket = _bucket || import.meta.env.VITE_S3_BUCKET_NAME;
   return `https://${bucket}.s3.amazonaws.com/${path}${timestamp ? `?timestamp=${Date.now()}` : ''}`;
 };
 

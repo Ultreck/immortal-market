@@ -12,8 +12,10 @@ const items = icons.map((icon) => ({
   data: {
     type: `icon`,
     text: `Icon ${icon.name}`,
-    width: 40,
-    height: 40,
+    size: {
+      width: 40,
+      height: 40,
+    },
     style: getElementDefaultStyle({ type: 'icon' }),
     config: {
       name: icon.name,

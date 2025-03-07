@@ -7,7 +7,7 @@ import NewConnection from '@/components/core/templates/create/tools/elements/spe
 import { cn } from '@/lib/utils.js';
 import ModifyAdvancedChart from './chart-data/ModifyAdvancedChart';
 import { useState } from 'react';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import DataSource from '@/components/core/templates/create/tools/elements/specific/chart-data/DataSource.jsx';
 
 const items = [
@@ -35,8 +35,9 @@ const items = [
 
 const ChartData = ({ element, onChange }) => {
   const [view, setView] = useState('home');
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
@@ -44,8 +45,8 @@ const ChartData = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[350px] !max-h-[550px] overflow-y-auto block' }}
-      isOpen={openTool === 'chart-data'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'chart-data' : null })}
+      isOpen={tool === 'chart-data'}
+      onOpenChange={(v) => (v ? openTool('chart-data') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Configure chart">

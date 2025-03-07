@@ -18,8 +18,8 @@ const ButtonContent = ({ element, className = '' }) => {
     <button
       style={{
         ...element.style,
-        width: element.width,
-        height: element.height,
+        width: element.size.width,
+        height: element.size.height,
         filter: element.style.shadow ? `drop-shadow(${element.style.shadow})` : '',
       }}
       className={cn('transition-all duration-300', className)}

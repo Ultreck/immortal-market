@@ -83,8 +83,8 @@ export const StandardSemiPie2Content = ({ element, isChartWrapperDisabled = fals
       <div
         ref={ref}
         style={{
-          width: element.width,
-          height: element.height,
+          width: element.size.width,
+          height: element.size.height,
           opacity: element.style.opacity,
         }}
       />

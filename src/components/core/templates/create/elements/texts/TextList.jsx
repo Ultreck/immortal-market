@@ -17,7 +17,7 @@ const ListContent = ({ element }) => {
         'list-disc': element.config.type === 'bullet',
         'list-decimal': element.config.type === 'number',
       })}
-      style={{ width: element.width, height: '100%' }}
+      style={{ width: element.size.width, height: '100%' }}
     >
       {element.config.texts.map((text, i) => (
         <li style={element.style} key={i}>

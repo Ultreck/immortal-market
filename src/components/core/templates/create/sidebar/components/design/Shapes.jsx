@@ -13,8 +13,10 @@ const items = [
     data: {
       type: 'line',
       text: 'Line',
-      width: 100,
-      height: 8,
+      size: {
+        width: 100,
+        height: 8,
+      },
       style: getElementDefaultStyle({ type: 'line' }),
       config: {
         x1: 10,
@@ -38,8 +40,10 @@ const items = [
     data: {
       type: 'shape',
       text: capitalize(name.replace('-', ' ')),
-      width: 120,
-      height: 120,
+      size: {
+        width: 120,
+        height: 120,
+      },
       style: getElementDefaultStyle({ type: 'shape', name }),
       config: { name },
       tooltip: {

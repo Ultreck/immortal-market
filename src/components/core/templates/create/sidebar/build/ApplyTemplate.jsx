@@ -1,4 +1,4 @@
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 import { useCreateDesign, useGetDesign } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 import PropTypes from 'prop-types';
@@ -11,22 +11,15 @@ import ThumbnailsCarousel from '@/pages/designs/ThumbnailsCarousel.jsx';
 const ApplyTemplate = ({ id, onClose }) => {
   const navigate = useNavigate();
   const { id: business } = useBusiness();
-  const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
+  // const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
+  const updateStore = useDesignStore((state) => state.updateStore);
   const { data: { design } = {}, isLoading: isDesignLoading } = useGetDesign(business, id);
   const { mutateAsync: create, isPending: isCreateTemplateLoading } = useCreateDesign(business);
+  const applyTemplate = useDesignStore((state) => state.applyTemplate);
 
-  const handleReplace = (design) => {
-    addUndoHistory();
-    updateTemplate({
-      pages: design.data.pages.map((page) => ({
-        ...page,
-        id: crypto.randomUUID(),
-        elements: page.elements.map((el) => ({
-          ...el,
-          id: crypto.randomUUID(),
-        })),
-      })),
+  const handleReplace = () => {
+    applyTemplate(design._id);
+    updateStore({
       selectedElements: [],
       selectedPage: null,
     });
@@ -36,19 +29,10 @@ const ApplyTemplate = ({ id, onClose }) => {
   const handleCreate = async (design) => {
     try {
       const payload = {
-        title: 'Untitled',
+        title: design.title,
         description: '',
         type: 'project',
-        data: {
-          pages: design.data.pages.map((page) => ({
-            ...page,
-            id: crypto.randomUUID(),
-            elements: page.elements.map((el) => ({
-              ...el,
-              id: crypto.randomUUID(),
-            })),
-          })),
-        },
+        template: design._id,
       };
       const res = await create(payload);
       navigate(`/templates/${res.data.design._id}/edit`);
@@ -77,10 +61,10 @@ const ApplyTemplate = ({ id, onClose }) => {
           {design ? (
             <div className="px-6 py-6 w-full">
               <h3 className="text-base font-medium leading-tight mb-4">
-                {design.title} ({design.data.pages.length} pages)
+                {design.title} ({design.pages.length} pages)
               </h3>
-              {design.thumbnails.length ? (
-                <ThumbnailsCarousel thumbnails={design.thumbnails} />
+              {design.pages.length ? (
+                <ThumbnailsCarousel thumbnails={design.pages.map((page) => page.thumbnail)} />
               ) : (
                 <div className="bg-white/10 hover:bg-white/15 cursor-pointer rounded-xl px-6 py-4 flex items-center justify-center aspect-square">
                   <TbPhotoCircle size="32" className="opacity-50" />

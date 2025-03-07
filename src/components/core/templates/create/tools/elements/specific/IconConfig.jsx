@@ -4,11 +4,12 @@ import { createElement } from 'react';
 import { TbSettings2 } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const IconConfig = ({ element, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   const handleSelectIcons = (icon) => {
     onChange({ ...element, config: icon });
@@ -20,8 +21,8 @@ const IconConfig = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[300px]' }}
-      isOpen={openTool === 'icon'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'icon' : null })}
+      isOpen={tool === 'icon'}
+      onOpenChange={(v) => (v ? openTool('icon') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Icon config" className="text-base">

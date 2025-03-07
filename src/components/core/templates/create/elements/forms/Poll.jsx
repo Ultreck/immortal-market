@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils.js';
 import useBusiness from '@/hooks/use-business';
-import useTemplateStore from '@/store/template';
+import useDesignStore from '@/store/design';
 import { useCreatePoll, useGetPolls } from '@/api/business.js';
 import { useAuth } from '@/hooks/use-auth.jsx';
 import { addToast } from '@heroui/react';
@@ -13,9 +13,9 @@ export const Poll = ({ element }) => {
 export const PollPresent = ({ element }) => {
   const { user } = useAuth();
   const { id: business } = useBusiness();
-  const design = useTemplateStore((state) => state.template.id);
-  const { data: { polls = [] } = {} } = useGetPolls({ business, design, element: element.id });
-  const { mutateAsync: createPoll, isPending: isCreatePollLoading } = useCreatePoll(business, design);
+  const id = useDesignStore((state) => state.id);
+  const { data: { polls = [] } = {} } = useGetPolls({ business, design: id, element: element.id });
+  const { mutateAsync: createPoll, isPending: isCreatePollLoading } = useCreatePoll(business, id);
   const hasVoted = polls.find((poll) => poll.user === user._id)?.option;
 
   const handleClick = async (pollId, optionId) => {
@@ -47,8 +47,8 @@ const PollContent = ({ element, className = '', onClick = () => {}, polls = [], 
     <div
       style={{
         ...element.style,
-        Width: element.width,
-        Height: element.height,
+        width: element.size.width,
+        height: element.size.height,
       }}
       className={cn('transition-all flex flex-col  !p-5 duration-300', className)}
     >

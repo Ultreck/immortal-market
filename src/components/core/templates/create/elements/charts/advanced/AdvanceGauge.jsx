@@ -96,8 +96,8 @@ export const AdvanceGaugeContent = ({ element, isChartWrapperDisabled = false })
         ref={chartRef}
         style={{
           padding: `${element.config.styles.yPadding}px ${element.config.styles.xPadding}px`,
-          width: element.width,
-          height: element.height,
+          width: element.size.width,
+          height: element.size.height,
         }}
       />
     </ElementChartWrapper>

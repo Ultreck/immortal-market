@@ -5,21 +5,22 @@ import NumberInput from '@/components/ui/NumberInput.jsx';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import { RiAlignCenter, RiAlignJustify, RiAlignLeft, RiAlignRight, RiFontFamily } from 'react-icons/ri';
-import { createElement } from 'react';
+import { createElement, useEffect } from 'react';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const Font = ({ elements, onChange }) => {
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   return (
     <Popover
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'font'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'font' : null })}
+      isOpen={tool === 'font'}
+      onOpenChange={(v) => (v ? openTool('font') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">

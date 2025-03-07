@@ -1,6 +1,6 @@
 import { useGetComments } from '@/api/business';
 import useBusiness from '@/hooks/use-business';
-import useTemplateStore from '@/store/template';
+import useDesignStore from '@/store/design.js';
 import { Button, Skeleton } from '@heroui/react';
 import { TbChevronLeft } from 'react-icons/tb';
 import PropTypes from 'prop-types';
@@ -11,9 +11,9 @@ import CommentItem from '@/components/core/templates/create/comment/CommentItem.
 import { HiX } from 'react-icons/hi';
 
 const CommentReplies = ({ onBack, onClose }) => {
-  const activeComment = useTemplateStore((state) => state.template.activeComment);
   const { id: business } = useBusiness();
-  const design = useTemplateStore((state) => state.template.id);
+  const design = useDesignStore((state) => state.id);
+  const activeComment = useDesignStore((state) => state.activeComment);
   const { data: { comments = [] } = {}, isLoading: isCommentsLoading } = useGetComments({
     business,
     design,

@@ -5,7 +5,7 @@ import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import { TbSettings2 } from 'react-icons/tb';
 import { HexColorPicker } from 'react-colorful';
 import { cn } from '@/lib/utils.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design.js';
 
 const extractColors = (svg) => {
   const fillRegex = /(#[A-Fa-f0-9]{6})/g;
@@ -21,8 +21,9 @@ const SvgConfig = ({ element, onChange }) => {
   const [colors, setColors] = useState({});
   const { data } = useGetSvgCodeFromUrl(element.config.src);
   const [selected, setSelected] = useState(Object.keys(colors)[0]);
-  const updateTemplate = useTemplateStore((state) => state.updateTemplate);
-  const openTool = useTemplateStore((state) => state.template.openTool);
+  const tool = useDesignStore((state) => state.tool);
+  const openTool = useDesignStore((state) => state.openTool);
+  const closeTool = useDesignStore((state) => state.closeTool);
 
   const handleChange = useCallback(
     (_colors) => {
@@ -57,8 +58,8 @@ const SvgConfig = ({ element, onChange }) => {
       placement="left"
       showArrow
       offset={10}
-      isOpen={openTool === 'infographic'}
-      onOpenChange={(v) => updateTemplate({ openTool: v ? 'infographic' : null })}
+      isOpen={tool === 'svg'}
+      onOpenChange={(v) => (v ? openTool('svg') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Svg config" className="text-base">

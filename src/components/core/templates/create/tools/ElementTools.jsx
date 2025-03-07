@@ -1,8 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react';
 import Background from './elements/generic/Background.jsx';
 import ChartConfig from './elements/specific/ChartConfig.jsx';
-import useTemplateStore from '@/store/template.js';
-import { createElement, Fragment, useMemo } from 'react';
+import { createElement, Fragment, memo, useMemo } from 'react';
 import Border from './elements/generic/Border.jsx';
 import Opacity from './elements/generic/Opacity.jsx';
 import TableConfig from '@/components/core/templates/create/tools/elements/specific/TableConfig.jsx';
@@ -28,8 +27,9 @@ import ChartData from './elements/specific/ChartData.jsx';
 import Layout from './elements/generic/Layout.jsx';
 import ElementTag from './elements/generic/ElementTag.jsx';
 import ElementTooltip from '@/components/core/templates/create/tools/elements/generic/Tooltip.jsx';
-import PollTools from "@/components/core/templates/create/tools/elements/generic/PollTools.jsx"
-import FormTools from "@/components/core/templates/create/tools/elements/generic/FormTools.jsx"
+import PollTools from '@/components/core/templates/create/tools/elements/generic/PollTools.jsx';
+import FormTools from '@/components/core/templates/create/tools/elements/generic/FormTools.jsx';
+import useDesignStore from '@/store/design.js';
 
 const mapping = {
   font: { type: 'multiple', component: Font },
@@ -63,15 +63,14 @@ const mapping = {
 };
 
 const ElementTools = () => {
-  const selectedElements = useTemplateStore((state) => state.template.selectedElements);
-  const updateElements = useTemplateStore((state) => state.updateElements);
-  const page = useTemplateStore(({ template }) => {
-    return template.pages.find((p) => p.elements.some((el) => selectedElements.includes(el.id)));
+  const selectedElements = useDesignStore((state) => state.selectedElements);
+  const updateElements = useDesignStore((state) => state.updateElements);
+  const elements = useDesignStore((state) => {
+    return state.elements.filter((el) => selectedElements.includes(el.id));
   });
-  const elements = selectedElements.map((id) => page?.elements.find((el) => el.id === id));
 
   const tools = useMemo(() => {
-    if (!page) return [];
+    if (!elements.length) return [];
     let _tools = elements.map((el) => getElementTools(el) || []);
     _tools = _tools.reduce((acc, tools) => acc.filter((tool) => tools.includes(tool)), _tools[0]);
     const singles = Object.keys(mapping).filter((tool) => mapping[tool].type === 'single');
@@ -79,10 +78,13 @@ const ElementTools = () => {
       return _tools.filter((tool) => !singles.includes(tool));
     }
     return _tools;
-  }, [elements, page, selectedElements.length]);
+  }, [elements, selectedElements.length]);
 
-  const handleUpdateElements = (elements) => {
-    updateElements(elements, page.id, true);
+  const handleUpdateElements = (els) => {
+    updateElements(
+      els.map(({ id, _id, ...el }) => ({ elementId: id, updates: el })),
+      true
+    );
   };
 
   return (
@@ -127,4 +129,4 @@ const ElementTools = () => {
   );
 };
 
-export default ElementTools;
+export default memo(ElementTools);

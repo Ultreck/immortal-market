@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import { camelCaseToWords, kebabToWords } from '@/lib/utils.js';
 import useBusiness from '@/hooks/use-business.js';
-import useTemplateStore from '@/store/template.js';
+import useDesignStore from '@/store/design';
 import { useDeleteTableColumn, useUpdateDesignSource } from '@/api/business.js';
 import { RiMore2Line } from 'react-icons/ri';
 
@@ -64,7 +64,7 @@ const TableColumns = ({ table }) => {
 const TableColumnItem = ({ table, column }) => {
   const { source } = useCurrentDesign();
   const { id: business } = useBusiness();
-  const id = useTemplateStore((state) => state.template.id);
+  const id = useDesignStore((state) => state.id);
   const { mutateAsync: update, isPending: isUpdateLoading } = useUpdateDesignSource(business, id);
   const { mutateAsync: deleteColumn, isPending: isDeleteColumnLoading } = useDeleteTableColumn(business, id);
   const relationship = source.relationships?.find((r) => r.column === column.key && r.table === table);
@@ -80,7 +80,7 @@ const TableColumnItem = ({ table, column }) => {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message || e.message,
-        color: 'danger'
+        color: 'danger',
       });
     }
   };
@@ -92,7 +92,7 @@ const TableColumnItem = ({ table, column }) => {
       addToast({
         title: 'Error',
         description: e?.response?.data?.message || e.message,
-        color: 'danger'
+        color: 'danger',
       });
     }
   };

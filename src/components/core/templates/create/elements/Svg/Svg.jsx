@@ -31,12 +31,12 @@ export const Svg = ({ element, onChange }) => {
         ref={el}
         className="w-full h-max"
         style={{
-          height: element.height,
-          width: element.width,
+          height: element.size.height,
+          width: element.size.width,
         }}
       >
         {isLoading ? (
-          <Skeleton className="w-full rounded-3xl" style={{ height: element.height }} />
+          <Skeleton className="w-full rounded-3xl" style={{ height: element.size.height }} />
         ) : (
           <div
             style={element.style}
@@ -58,7 +58,7 @@ const SvgContent = ({ element }) => {
   return (
     <div className="w-full h-max">
       {isLoading ? (
-        <div className="light w-full" style={{ height: element.height }}>
+        <div className="light w-full" style={{ height: element.size.height }}>
           <Skeleton className="rounded-2xl w-full h-full" />
         </div>
       ) : (
