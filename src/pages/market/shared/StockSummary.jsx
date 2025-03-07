@@ -1,5 +1,6 @@
-import { Button, Card } from '@heroui/react';
+import { Button, Card, useDisclosure } from '@heroui/react';
 import { generateRandomPercentage } from '@/lib/utils.js';
+import StockDetailsModal from '@/pages/market/StockDetailsModal.jsx';
 
 const data = [
   {
@@ -83,6 +84,8 @@ const data = [
 ];
 
 const StockSummary = () => {
+  const { isOpen: isDetailsOpen, onOpen: onDetailsOpen, onClose: onDetailsClose } = useDisclosure();
+
   return (
     <>
       {data.map((d, i) => (
@@ -106,17 +109,20 @@ const StockSummary = () => {
                   <div className="hidden group-hover:flex space-x-2 mt-2">
                     <Button
                       radius="full"
+                      onPress={onDetailsOpen}
                       className="w-min cursor-pointer transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1"
                     >
                       TESLA
                     </Button>
                     <Button
                       radius="full"
+                      onPress={onDetailsOpen}
                       className="w-min cursor-pointer transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1"
                     >
                       ACCESS
                     </Button>
                     <Button
+                      onPress={onDetailsOpen}
                       radius="full"
                       className="w-min cursor-pointer transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1"
                     >
@@ -135,6 +141,8 @@ const StockSummary = () => {
           </div>
         </Card>
       ))}
+
+      <StockDetailsModal isOpen={isDetailsOpen} onClose={onDetailsClose} id={'665867a2c6a35aab6119fea1'} />
     </>
   );
 };
