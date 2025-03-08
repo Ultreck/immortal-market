@@ -199,9 +199,15 @@ const buildFormData = (data, formData = new FormData(), parentKey = '') => {
       if (value instanceof File) {
         formData.append(formKey, value);
       } else if (Array.isArray(value)) {
-        value.forEach((val, index) => {
-          buildFormData(val, formData, `${formKey}[${index}]`);
-        });
+        if (value.length > 0 && value[0] instanceof File) {
+          value.forEach((file) => {
+            formData.append(key, file);
+          });
+        } else {
+          value.forEach((val, index) => {
+            buildFormData(val, formData, `${formKey}[${index}]`);
+          });
+        }
       } else if (value && typeof value === 'object') {
         buildFormData(value, formData, formKey);
       } else if (value !== null && value !== undefined) {
