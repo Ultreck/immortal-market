@@ -253,7 +253,6 @@ const SelectSource = ({ onNext, onPrev }) => {
       const fd = buildFormData(projectData);
       const res = await create(fd);
       onNext();
-      // TODO: test
       navigate(`/designs/${res.data.design._id}/edit`);
     } catch (e) {
       addToast({

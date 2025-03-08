@@ -9,8 +9,6 @@ import { Tooltip, Tabs, Tab } from '@heroui/react';
 import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
 import { TbAbc, TbChevronLeft, TbChevronRight, TbLayoutDistributeHorizontal, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
-import { useAuth } from '@/hooks/use-auth.jsx';
-import PropTypes from 'prop-types';
 import Project from '@/components/core/templates/create/sidebar/project/Project.jsx';
 import { useNavigate } from 'react-router-dom';
 import Forms from '@/components/core/templates/create/sidebar/forms/Forms.jsx';
@@ -19,11 +17,10 @@ import DataTags from './data/DataTags.jsx';
 import useDesignStore from '@/store/design.js';
 import Layout from './layout/Layout.jsx';
 
-const Sidebar = ({ className }) => {
+const Sidebar = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState('texts');
   const collapsed = !tab;
-  const { user } = useAuth();
   const design = useDesignStore((state) => state.design);
 
   return (
@@ -182,10 +179,6 @@ const Sidebar = ({ className }) => {
       </div>
     </div>
   );
-};
-
-Sidebar.propTypes = {
-  className: PropTypes.string,
 };
 
 export default Sidebar;
