@@ -4,6 +4,7 @@ import { useGetSvgCodeFromUrl } from '@/api/misc.js';
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ElementSvgWrapper from '@/components/core/templates/create/elements/Svg/helpers/ElementSvgWrapper.jsx';
+import useDesignStore from '@/store/design.js';
 
 const applyColors = (data, colors) => {
   if (!data) return data;
@@ -15,15 +16,16 @@ const applyColors = (data, colors) => {
   return coloredSvg;
 };
 
-export const Svg = ({ element, onChange }) => {
+export const Svg = ({ element }) => {
   const el = useRef(null);
   const { data, isLoading } = useGetSvgCodeFromUrl(element.config.src);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   useEffect(() => {
     if (!isLoading && data && el.current && element.height !== el.current.scrollHeight) {
-      onChange({ ...element, height: el.current.scrollHeight });
+      updateElement(element.id, { height: el.current.scrollHeight });
     }
-  }, [data, element, isLoading, onChange]);
+  }, [data, element, isLoading, updateElement]);
 
   return (
     <ElementSvgWrapper element={element}>
