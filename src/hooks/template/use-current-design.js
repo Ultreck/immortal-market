@@ -7,10 +7,10 @@ const useCurrentDesign = () => {
   const design = useDesignStore((state) => state.design);
   const { data: { source = {} } = {}, isLoading: isSourceLoading } = useGetDesignSource(
     business,
-    design.id,
-    design.type === 'project'
+    design?.id,
+    design?.type === 'project'
   );
-  const { data: { analysis = {} } = {}, isLoading: isAnalysisLoading } = useGetAnalysis(business, design.id);
+  const { data: { analysis = {} } = {}, isLoading: isAnalysisLoading } = useGetAnalysis(business, design?.id);
 
   return {
     source,
