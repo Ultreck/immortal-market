@@ -25,7 +25,12 @@ const TextStreamContent = ({ element, active = false }) => {
       {active ? (
         <AutoResizeTextArea
           value={element.config.content}
-          onChange={(v) => updateElement(element.id, { config: { ...element.config, content: v } })}
+          onChange={(v) => {
+            updateElement(element.id, { config: { ...element.config, content: v } });
+          }}
+          onBlur={() =>
+            updateElement(element.id, { config: { ...element.config, content: element.config.content } }, true)
+          }
           style={{
             ...element?.style,
             filter: `drop-shadow(${element?.style?.shadow})`,
