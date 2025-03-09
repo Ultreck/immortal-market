@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { useDrag } from '@use-gesture/react';
 import { motion, useMotionValue } from 'motion/react';
 import { cn } from '@/lib/utils.js';
+import useDesignStore from '@/store/design.js';
 
-export const Line = ({ element, selected, onClick, onChange }) => {
+export const Line = ({ element, selected, onClick }) => {
   const x1 = useMotionValue(element.config.x1);
   const y1 = useMotionValue(element.config.y1);
   const x2 = useMotionValue(element.config.x2);
   const y2 = useMotionValue(element.config.y2);
-  const translateX = useMotionValue(element.x);
-  const translateY = useMotionValue(element.y);
+  const translateX = useMotionValue(element.position.x);
+  const translateY = useMotionValue(element.position.y);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   const bindHandles = useDrag(
     ({ event, args: [i], offset: [x, y], ...args }) => {
@@ -23,7 +25,13 @@ export const Line = ({ element, selected, onClick, onChange }) => {
         y2.set(y);
       }
       if (args.last) {
-        onChange({ ...element, config: { ...element.config, [`x${i}`]: x, [`y${i}`]: y } });
+        updateElement(
+          element.id,
+          {
+            config: { ...element.config, [`x${i}`]: x, [`y${i}`]: y },
+          },
+          true
+        );
       }
     },
     {
@@ -37,7 +45,7 @@ export const Line = ({ element, selected, onClick, onChange }) => {
       if (args.tap) return;
       translateX.set(x);
       translateY.set(y);
-      if (args.last) onChange({ ...element, x, y });
+      if (args.last) updateElement(element.id, { position: { x, y, z: element.position.z || 0 } }, true);
     },
     { filterTaps: true }
   );
@@ -194,7 +202,10 @@ export const LinePresent = ({ element }) => {
 
   return (
     <svg className="absolute top-0 left-0 w-full h-full pointer-events-none">
-      <motion.g style={{ x: element.x, y: element.y }} className="pointer-events-auto touch-none group">
+      <motion.g
+        style={{ x: element.position.x, y: element.position.y }}
+        className="pointer-events-auto touch-none group"
+      >
         <motion.line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="10" stroke="transparent" />
         <motion.line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={strokeWidth} stroke={element.style.color} />
         <motion.line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="1" className="group-hover:stroke-primary-500" />
