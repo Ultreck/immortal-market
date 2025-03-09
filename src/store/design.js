@@ -46,7 +46,7 @@ const createDesignStore = () => {
       // Socket initialization
       initializeSocket: ({ onDesignNotFound }) => {
         if (socket) return;
-        socket = io('http://localhost:2000');
+        socket = io(import.meta.env.VITE_BASE_URL_IMMORTAL);
         socket.on('connect', () => {
           const { id, user } = get();
           if (id && user) {
