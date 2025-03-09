@@ -111,6 +111,7 @@ const texts = [
           },
           config: {
             name: name.match(/^heading|subheading|paragraph|caption$/) ? 'basic' : name,
+            content: kebabToWords(name),
             ...(configs[name] || {}),
           },
         },
