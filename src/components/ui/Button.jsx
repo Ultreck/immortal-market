@@ -1,4 +1,3 @@
-import { forwardRef } from 'react';
 import classNames from 'classnames';
 import Loader from './Loader.jsx';
 import PropTypes from 'prop-types';
@@ -83,72 +82,66 @@ const classes = {
   },
 };
 
-const Button = forwardRef(
-  (
+const Button = ({
+  variant = 'filled',
+  color = 'primary',
+  size = 'md',
+  type = 'button',
+  disabled = false,
+  loading = false,
+  rightIcon = null,
+  leftIcon = null,
+  block = false,
+  onClick,
+  className,
+  children,
+  ref,
+}) => {
+  const _className = classNames(
     {
-      variant = 'filled',
-      color = 'primary',
-      size = 'md',
-      type = 'button',
-      disabled = false,
-      loading = false,
-      rightIcon = null,
-      leftIcon = null,
-      block = false,
-      onClick,
-      className,
-      children,
+      'px-3 py-[2px] text-[.88rem]': size === 'xs',
+      'px-4 py-1 text-[.94rem]': size === 'sm',
+      'px-6 py-2': size === 'md',
+      'px-7 py-3': size === 'lg',
+      'px-10 py-3.5 text-[1.05]': size === 'xl',
+      'opacity-50 pointer-events-none cursor-not-allowed': disabled,
+      'opacity-80 pointer-events-none cursor-default': loading,
+      'flex w-full': block,
     },
-    ref
-  ) => {
-    const _className = classNames(
-      {
-        'px-3 py-[2px] text-[.88rem]': size === 'xs',
-        'px-4 py-1 text-[.94rem]': size === 'sm',
-        'px-6 py-2': size === 'md',
-        'px-7 py-3': size === 'lg',
-        'px-10 py-3.5 text-[1.05]': size === 'xl',
-        'opacity-50 pointer-events-none cursor-not-allowed': disabled,
-        'opacity-80 pointer-events-none cursor-default': loading,
-        'flex w-full': block,
-      },
-      classes[color][variant],
-      'rounded-full transition duration-100 inline-flex items-center whitespace-nowrap',
-      className
-    );
-    return (
-      <button
-        onClick={!disabled && !loading ? onClick : null}
-        type={type}
-        className={_className}
-        disabled={disabled || loading}
-        ref={ref}
-      >
-        {loading ? (
-          <span className="mx-auto">
-            <Loader size="sm" className={classNames(classes[color].loader[variant])} />
-          </span>
-        ) : (
-          <>
-            {!!leftIcon && (
-              <>
-                <span className="mr-3">{leftIcon}</span>
-              </>
-            )}
-            <span className="flex-1">{children}</span>
-            {!!rightIcon && (
-              <>
-                <span className="ml-3">{rightIcon}</span>
-              </>
-            )}
-          </>
-        )}
-      </button>
-    );
-  }
-);
-
-Button.displayName = 'Button';
+    classes[color][variant],
+    'rounded-full transition duration-100 inline-flex items-center whitespace-nowrap',
+    className
+  );
+  return (
+    <button
+      onClick={!disabled && !loading ? onClick : null}
+      type={type}
+      className={_className}
+      disabled={disabled || loading}
+      ref={ref}
+    >
+      {loading ? (
+        <span className="mx-auto">
+          <Loader size="sm" className={classNames(classes[color].loader[variant])} />
+        </span>
+      ) : (
+        <>
+          {!!leftIcon && (
+            <>
+              <span className="mr-3">{leftIcon}</span>
+            </>
+          )}
+          <span className="flex-1">{children}</span>
+          {!!rightIcon && (
+            <>
+              <span className="ml-3">{rightIcon}</span>
+            </>
+          )}
+        </>
+      )}
+    </button>
+  );
+};
 
 Button.propTypes = {
   variant: PropTypes.oneOf(['filled', 'outlined', 'subtle', 'text']),
@@ -163,6 +156,7 @@ Button.propTypes = {
   block: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.any,
+  ref: PropTypes.any,
 };
 
 export default Button;

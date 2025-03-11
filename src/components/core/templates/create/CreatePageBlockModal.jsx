@@ -95,9 +95,11 @@ const CreatePageBlockModal = ({ isOpen, onClose, id }) => {
       });
       const thumbnail = new File([blob], 'thumbnail.png', { type: 'image/png' });
       setIsThumbnailLoading(false);
+      // eslint-disable-next-line no-unused-vars
       const { _id, id, ...p } = page;
       const data = {
         page: p,
+        // eslint-disable-next-line no-unused-vars
         elements: elements.map(({ _id, id, ...el }) => ({ ...el })),
       };
       const payload = {

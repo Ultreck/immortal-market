@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { Image, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, useDisclosure } from '@heroui/react';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image, useDisclosure } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
-import { TbPhotoCircle, TbDots, TbTrash, TbPencil, TbPresentation, TbDotsVertical } from 'react-icons/tb';
+import { TbDotsVertical, TbPencil, TbPhotoCircle, TbPresentation, TbTrash } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import DeleteDesignModal from '../templates/create/footer/DeleteDesignModal';
 

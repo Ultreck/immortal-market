@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Select, SelectItem, Tooltip, useDisclosure, Button } from '@heroui/react';
+import { useState } from 'react';
+import { Button, Select, SelectItem, Tooltip, useDisclosure } from '@heroui/react';
 import DashboardHeader from '@/components/core/shared/DashboardHeader.jsx';
 import KeywordsList from '@/components/core/sentiment/KeywordsList.jsx';
 import SentimentMap from '../components/core/sentiment/SentimentMap';

@@ -82,6 +82,7 @@ const ElementTools = () => {
 
   const handleUpdateElements = (els) => {
     updateElements(
+      // eslint-disable-next-line no-unused-vars
       els.map(({ id, _id, ...el }) => ({ elementId: id, updates: el })),
       true
     );

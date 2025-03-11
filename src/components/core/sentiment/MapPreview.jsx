@@ -1,5 +1,4 @@
-import React from 'react';
-import { Modal, ModalContent, ModalBody } from '@heroui/react';
+import { Modal, ModalBody, ModalContent } from '@heroui/react';
 import PropTypes from 'prop-types';
 import SentimentMap from './SentimentMap';
 

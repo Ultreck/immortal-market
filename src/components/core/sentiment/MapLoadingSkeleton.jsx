@@ -1,5 +1,3 @@
-import React from 'react';
-
 const generateRandomCircles = (count) => {
   const circles = [];
   const sizes = {
@@ -33,7 +31,7 @@ const MapLoadingSkeleton = () => {
     <div className="flex items-center justify-center bg-white">
       <div className="relative w-full max-w-xl h-96 rounded-lg animate-pulse overflow-hidden">
         {circles.map((circle) => {
-          let sizeClass = '';
+          let sizeClass;
           if (circle.size === 0) {
             sizeClass = 'w-6 h-6';
           } else if (circle.size === 1) {

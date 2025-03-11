@@ -1,11 +1,10 @@
-import { forwardRef } from 'react';
 import { cn } from '@/lib/utils.js';
 import { Button } from '@heroui/react';
 import { RiCloseFill } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 import useDesignStore from '@/store/design';
 
-const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
+const LayerItem = ({ element, ref, ...props }) => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const selectElements = useDesignStore((state) => state.selectElements);
   const deleteElements = useDesignStore((state) => state.deleteElements);
@@ -30,13 +29,11 @@ const LayerItem = forwardRef(({ element, className, ...props }, ref) => {
       </div>
     </div>
   );
-});
-
-LayerItem.displayName = 'LayerItem';
+};
 
 LayerItem.propTypes = {
   element: PropTypes.object,
-  className: PropTypes.string,
+  ref: PropTypes.any,
 };
 
 export default LayerItem;

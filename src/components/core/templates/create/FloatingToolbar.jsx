@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { Button, useDisclosure, Tooltip, Divider } from '@heroui/react';
+import { Button, Divider, Tooltip, useDisclosure } from '@heroui/react';
 import { RiAddLine } from 'react-icons/ri';
 import { LuCopyPlus, LuGroup, LuUngroup } from 'react-icons/lu';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { TbTrash } from 'react-icons/tb';
 import CreateGroupBlockModal from '@/components/core/templates/CreateGroupBlockModal.jsx';
 import useDesignStore from '@/store/design.js';
@@ -16,7 +16,7 @@ const FloatingToolbar = ({ id }) => {
   });
   const { handleAction } = useActions({ id });
 
-  const isGrouped = !!elements[0]?.type === 'group';
+  const isGrouped = elements[0]?.type === 'group';
 
   return (
     <>

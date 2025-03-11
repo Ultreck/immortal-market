@@ -1,4 +1,4 @@
-import { Button, Input, Popover, PopoverContent, PopoverTrigger, Radio, RadioGroup, Textarea } from '@heroui/react';
+import { Button, Input, Popover, PopoverContent, PopoverTrigger, Textarea } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbMinus, TbPlus, TbSettings2 } from 'react-icons/tb';
 import useDesignStore from '@/store/design.js';
@@ -83,12 +83,7 @@ const PollTools = ({ element, onChange }) => {
 };
 
 PollTools.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      texts: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-  }),
+  element: PropTypes.object,
   onChange: PropTypes.func.isRequired,
 };
 

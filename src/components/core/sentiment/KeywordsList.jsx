@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Avatar, Button, Skeleton, Tooltip, useDisclosure } from '@heroui/react';
+import { useState } from 'react';
+import { Button, Skeleton, Tooltip, useDisclosure } from '@heroui/react';
 import PropTypes from 'prop-types';
 import KeywordChat from './KeywordChat';
 import KeywordInsightsList from './KeywordInsightsList';

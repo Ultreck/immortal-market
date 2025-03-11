@@ -31,6 +31,7 @@ const CreateGroupBlockModal = ({ isOpen, onClose, elements }) => {
       setIsThumbnailLoading(false);
       const group = crypto.randomUUID();
       const data = {
+        // eslint-disable-next-line no-unused-vars
         elements: elements.map(({ _id, id, ...el }) => ({ ...el, group })),
       };
       await create({ ...values, data, thumbnail, type: 'group' });

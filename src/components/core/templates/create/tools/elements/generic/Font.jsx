@@ -5,7 +5,7 @@ import NumberInput from '@/components/ui/NumberInput.jsx';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import { RiAlignCenter, RiAlignJustify, RiAlignLeft, RiAlignRight, RiFontFamily } from 'react-icons/ri';
-import { createElement, useEffect } from 'react';
+import { createElement } from 'react';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import useDesignStore from '@/store/design.js';
 

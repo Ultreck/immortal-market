@@ -1,11 +1,11 @@
 import { createElement, useState } from 'react';
 import { RiArrowLeftSLine, RiImage2Line, RiSettings2Line, RiShapesLine, RiStackLine } from 'react-icons/ri';
-import { cn, getImageLink } from '@/lib/utils.js';
+import { cn } from '@/lib/utils.js';
 import Elements from '@/components/core/templates/create/sidebar/components/Elements.jsx';
 import Texts from '@/components/core/templates/create/sidebar/components/design/Texts.jsx';
 import Layers from '@/components/core/templates/create/sidebar/layout/layers/Layers.jsx';
 import Build from '@/components/core/templates/create/sidebar/build/Build.jsx';
-import { Tooltip, Tabs, Tab } from '@heroui/react';
+import { Tab, Tabs, Tooltip } from '@heroui/react';
 import Svgs from '@/components/core/templates/create/sidebar/images/Svgs.jsx';
 import { TbAbc, TbChevronLeft, TbChevronRight, TbLayoutDistributeHorizontal, TbTemplate } from 'react-icons/tb';
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';

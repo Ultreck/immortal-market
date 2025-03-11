@@ -1,5 +1,4 @@
 import { clsx } from 'clsx';
-import { TbCheckbox } from 'react-icons/tb';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs) {
@@ -119,16 +118,6 @@ export const mergeRefs = (...refs) => {
   };
 };
 
-export const getKeysFromJson = (jsonString) => {
-  try {
-    const parsedValue = JSON.parse(jsonString);
-    return Array.isArray(parsedValue) ? Object.keys(parsedValue[0]) : [];
-    // eslint-disable-next-line no-unused-vars
-  } catch (error) {
-    return [];
-  }
-};
-
 export const isValidJsonArray = (jsonString) => {
   try {
     const parsedValue = JSON.parse(jsonString);
@@ -192,48 +181,6 @@ export const colors = [
   '#E6A333',
   '#AB52D9',
   '#D93566',
-];
-export const labelAndValueStyling = [
-  'scatter-life-expectancy',
-  'dynamic-sorting',
-  'circle-icons',
-  'speedometer',
-  'speedometer-simple',
-  'speedometer-multiple',
-  'percentage-card',
-  'lollipop',
-  'nested-circles',
-  'funnel',
-  'tree-map',
-  'column-card',
-  'percentage-card-2',
-  'pictogram-shapes',
-  'custom-bar',
-  'stacked-card',
-  // 'pie',
-  'semi-pie',
-  'doughnut-standard',
-  'doughnut-crazy',
-  'semi-circle',
-  'doughnut',
-  // "scatter",
-];
-export const gridAndLegendStyling = [
-  'scatter-life-expectancy',
-  'dynamic-sorting',
-  'bar',
-  'bar-stacked',
-  'bar-multiple',
-  'alt-bar',
-  'line',
-  'line-multiple',
-  'area',
-  'area-multiple',
-  'bubble',
-  'scatter',
-  'line-area',
-  'line-bar',
-  'pie',
 ];
 
 export const extractColorsFromGradient = (gradient) => {

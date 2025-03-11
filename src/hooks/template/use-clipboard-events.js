@@ -83,6 +83,7 @@ const useClipboardEvents = () => {
                 if (_elements.every((el) => isValidElement(el))) {
                   createElements(
                     activePage,
+                    // eslint-disable-next-line no-unused-vars
                     _elements.map(({ _id, id, ...el }) => ({
                       ...el,
                       position: { x: el.position.x + 10, y: el.position.y + 10 },
@@ -91,6 +92,7 @@ const useClipboardEvents = () => {
                 } else {
                   createElements(activePage, [payload]);
                 }
+                // eslint-disable-next-line no-unused-vars
               } catch (e) {
                 createElements(activePage, [payload]);
               }
@@ -174,6 +176,7 @@ const useClipboardEvents = () => {
     getElementPage,
     getPageElements,
     selectedElements,
+    tool,
   ]);
 };
 

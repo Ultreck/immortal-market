@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Radio, RadioGroup, Select, SelectItem } from '@heroui/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@heroui/react';
 import { RiSettingsLine } from 'react-icons/ri';
 import { Controller, useForm } from 'react-hook-form';
 import NumberInput from '@/components/ui/NumberInput.jsx';
@@ -14,7 +14,7 @@ const units = [
   { key: 'currency', label: 'Currency ($)' },
 ];
 
-const DataTagConfig = ({ element, onChgange }) => {
+const DataTagConfig = ({ element, onChange }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -33,7 +33,7 @@ const DataTagConfig = ({ element, onChgange }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="px-8 py-8 shadow border border-default-200 w-[350px] items-stretch">
-        <DataTagConfigContent key={element.id} element={element} onChange={onChgange} />
+        <DataTagConfigContent key={element.id} element={element} onChange={onChange} />
       </PopoverContent>
     </Popover>
   );

@@ -37,7 +37,7 @@ const createDesignStore = () => {
     tool: null,
   };
 
-  const store = createWithEqualityFn(
+  return createWithEqualityFn(
     (set, get) => ({
       ...initialState,
       updateStore: (state) => {
@@ -117,7 +117,7 @@ const createDesignStore = () => {
             cursors: Object.fromEntries(Object.entries(state.cursors).filter(([key]) => key !== user)),
           }));
         });
-        socket.on('error', ({ code, message, action }) => {
+        socket.on('error', ({ code, message }) => {
           console.error(`Design error: ${code} - ${message}`);
           if (code === 'design-not-found') {
             onDesignNotFound();
@@ -671,8 +671,6 @@ const createDesignStore = () => {
     }),
     shallow
   );
-
-  return store;
 };
 
 const useDesignStore = createDesignStore();

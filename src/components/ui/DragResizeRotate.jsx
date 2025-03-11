@@ -1,8 +1,8 @@
-import { motion, useMotionValue, useTransform } from 'motion/react';
+import { motion, useMotionValue } from 'motion/react';
 import { useDrag } from '@use-gesture/react';
 import PropTypes from 'prop-types';
 import { TbRotate2 } from 'react-icons/tb';
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils.js';
 
 const DragResizeRotate = ({
@@ -45,7 +45,7 @@ const DragResizeRotate = ({
     width.set(values.width);
     height.set(values.height);
     rotate.set(values.rotate || 0);
-  }, [values]);
+  }, [height, rotate, values, width, x, y]);
 
   const handleChange = () => {
     onChange({
@@ -352,6 +352,7 @@ DragResizeRotate.propTypes = {
   minWidth: PropTypes.number,
   minHeight: PropTypes.number,
   style: PropTypes.object,
+  visible: PropTypes.bool,
 };
 
 export default DragResizeRotate;

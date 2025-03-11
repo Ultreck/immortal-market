@@ -1,7 +1,7 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
-import { useSearchKeywords } from '../../../api/sentiment.js';
-import { Skeleton, Card, Chip, Image } from '@heroui/react';
+import { useSearchKeywords } from '@/api/sentiment.js';
+import { Card, Chip, Image, Skeleton } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 
 const KeywordInsightsList = ({ isOpen, onClose, keyword }) => {

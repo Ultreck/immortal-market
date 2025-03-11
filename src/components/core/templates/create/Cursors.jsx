@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import useDesignStore from '@/store/design';
 import { LuMousePointer2 } from 'react-icons/lu';
+import PropTypes from 'prop-types';
 
 const Cursors = ({ page }) => {
   const cursors = useDesignStore((state) => state.cursors);
@@ -29,6 +30,10 @@ const Cursors = ({ page }) => {
       })}
     </div>
   );
+};
+
+Cursors.propTypes = {
+  page: PropTypes.string.isRequired,
 };
 
 export default memo(Cursors);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Image, Skeleton, addToast } from '@heroui/react';
+import { addToast, Button, Image, Skeleton } from '@heroui/react';
 import DndFileInput from '@/components/ui/DndFileInput.jsx';
 import useBusiness from '@/hooks/use-business.js';
 import { useQueryClient } from '@tanstack/react-query';
@@ -8,6 +8,7 @@ import DraggableElementWrapper from '@/components/core/templates/create/sidebar/
 import { useAddInfographics, useGetInfographics } from '@/api/business.js';
 import { getElementDefaultStyle } from '@/lib/elements.js';
 import { TbChevronLeft } from 'react-icons/tb';
+import PropTypes from 'prop-types';
 
 const Svgs = ({ mini = false, onBack }) => {
   const qc = useQueryClient();
@@ -127,6 +128,11 @@ const Svgs = ({ mini = false, onBack }) => {
       )}
     </>
   );
+};
+
+Svgs.propTypes = {
+  mini: PropTypes.bool,
+  onBack: PropTypes.func,
 };
 
 export default Svgs;

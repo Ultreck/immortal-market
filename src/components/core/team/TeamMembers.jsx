@@ -54,7 +54,7 @@ const TeamMembers = () => {
                 radius="full"
                 className="text-base px-5"
                 color="success"
-                onClick={onInviteModalOpen}
+                onPress={onInviteModalOpen}
               >
                 Invite user
               </Button>

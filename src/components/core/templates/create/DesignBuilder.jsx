@@ -5,7 +5,6 @@ import { roundToNearestTen } from '@/lib/utils.js';
 import StatusBar from '@/components/core/templates/create/footer/StatusBar.jsx';
 import Sidebar from '@/components/core/templates/create/sidebar/Sidebar.jsx';
 import CommentModal from './comment/CommentsModal.jsx';
-import TransitionModal from '@/components/core/templates/create/transition/TransitionModal.jsx';
 import useDesignStore from '@/store/design.js';
 
 const getElementDistanceFromTop = (element) => {

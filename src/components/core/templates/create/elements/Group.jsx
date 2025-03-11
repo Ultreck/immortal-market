@@ -2,6 +2,7 @@ import useDesignStore from '@/store/design';
 import ElementWrapper from '../ElementWrapper';
 import { getElementConfig, getElementEditComponent } from '@/lib/elements';
 import { createElement, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 export const Group = ({ element, ...props }) => {
   return <GroupContent element={element} {...props} />;
@@ -76,4 +77,15 @@ const GroupContent = ({ element, selected }) => {
       })}
     </div>
   );
+};
+
+Group.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+GroupPresent.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+GroupContent.propTypes = {
+  element: PropTypes.object.isRequired,
+  selected: PropTypes.bool,
 };

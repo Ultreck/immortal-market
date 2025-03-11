@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Tooltip } from '@heroui/react';
 import { ComposableMap, Geographies, Geography, Marker, Sphere } from 'react-simple-maps';
 import PropTypes from 'prop-types';
-import { countries, colors } from '@/lib/sentiment.js';
+import { colors, countries } from '@/lib/sentiment.js';
 import MapLoadingSkeleton from './MapLoadingSkeleton';
 import { useGetSentiments } from '@/api/sentiment.js';
 import { cn } from '@/lib/utils';

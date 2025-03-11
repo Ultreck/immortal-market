@@ -230,7 +230,7 @@ const Form = ({ onPrev, onNext }) => {
           variant="bordered"
           className="text-base px-6"
           startContent={<TbChevronLeft size="20" />}
-          onClick={onPrev}
+          onPress={onPrev}
           isDisabled={isConnecting}
         >
           Back

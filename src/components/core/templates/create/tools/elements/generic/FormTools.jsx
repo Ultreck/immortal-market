@@ -1,8 +1,8 @@
-import { Button, Input, Popover, PopoverContent, PopoverTrigger, Select, SelectItem, Textarea } from '@heroui/react';
+import { Button, Input, Popover, PopoverContent, PopoverTrigger, Select, SelectItem } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbMinus, TbSettings2 } from 'react-icons/tb';
 import { RxCross2 } from 'react-icons/rx';
-import { cn, FORMFIELD, FORMFIELDTYPE, options } from '@/lib/utils';
+import { cn, FORMFIELD, options } from '@/lib/utils';
 import useDesignStore from '@/store/design.js';
 
 const dataType = {
@@ -191,12 +191,7 @@ const PollTools = ({ element, onChange }) => {
 };
 
 PollTools.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      texts: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-  }),
+  element: PropTypes.object,
   onChange: PropTypes.func.isRequired,
 };
 

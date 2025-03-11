@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, addToast } from '@heroui/react';
+import { addToast, Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { getImageLink } from '@/lib/utils.js';
 import { formatDistanceToNow } from 'date-fns';
 import { HiDotsHorizontal } from 'react-icons/hi';
@@ -59,8 +59,8 @@ const CommentReplyItem = ({ comment }) => {
               </DropdownTrigger>
               <DropdownMenu
                 aria-label="Static Actions"
-                onAction={(key) => {
-                  if (key === 'delete') handleDeleteComment(comment._id);
+                onAction={async (key) => {
+                  if (key === 'delete') await handleDeleteComment(comment._id);
                   if (key === 'edit') setIsEditing(true);
                 }}
               >

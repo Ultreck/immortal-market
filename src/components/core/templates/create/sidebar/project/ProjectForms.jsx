@@ -1,5 +1,3 @@
-import React from 'react';
-import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import useDesignStore from '@/store/design';
 import { options } from '@/lib/utils';
 import { Button } from '@heroui/react';

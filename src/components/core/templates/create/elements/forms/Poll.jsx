@@ -68,7 +68,7 @@ const PollContent = ({ element, className = '', onClick = () => {}, polls = [], 
               }}
               className={cn('flex p-3 rounded text-sm justify-between brightness-75 cursor text-start ', {
                 'hover:brightness-90': !hasVoted,
-                ' border ': hasVoted === option.id,
+                border: hasVoted === option.id,
               })}
             >
               <span>{option.text}</span>
@@ -89,4 +89,8 @@ PollPresent.propTypes = {
 PollContent.propTypes = {
   element: PropTypes.object.isRequired,
   className: PropTypes.string,
+  onClick: PropTypes.func,
+  polls: PropTypes.array,
+  isLoading: PropTypes.bool,
+  hasVoted: PropTypes.string,
 };

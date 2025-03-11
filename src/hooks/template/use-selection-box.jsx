@@ -65,7 +65,7 @@ const useSelectionBox = ({ id, node }) => {
         setHighlightedElements(highlighted.map((el) => el.id));
       }
     },
-    [elements, node, selectionBox]
+    [elements, id, node, selectionBox, updateCursor]
   );
 
   const handleMouseUp = useCallback(
@@ -100,12 +100,12 @@ const useSelectionBox = ({ id, node }) => {
         setHighlightedElements([]);
       }
     },
-    [elements, node, selectedElements, selectElements, selectPage, updateStore, selectionBox]
+    [selectionBox, elements, selectElements, selectedElements, node, selected, selectPage, id, updateStore]
   );
 
   const handleMouseLeave = useCallback(() => {
     removeCursor();
-  }, []);
+  }, [removeCursor]);
 
   const renderSelectionBox = useCallback(() => {
     if (!selectionBox) return null;

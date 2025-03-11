@@ -1,8 +1,7 @@
-import { getImageLink } from '@/lib/utils';
+import { cn, getImageLink } from '@/lib/utils';
 import useDesignStore from '@/store/design';
 import { Avatar, Tooltip } from '@heroui/react';
 import { TbCircleFilled } from 'react-icons/tb';
-import { cn } from '@/lib/utils';
 
 const CollaboratorsList = () => {
   const collaborators = useDesignStore((state) => state.collaborators);
@@ -12,7 +11,7 @@ const CollaboratorsList = () => {
     <div className="absolute top-3 left-4 px-3 bg-white shadow dark:bg-default-100 rounded-full py-1 z-10 flex items-center space-x-2">
       <TbCircleFilled size="10" className={cn('text-green-600', { 'text-red-600': !connected })} />
       <div className="flex items-center -space-x-2">
-        {collaborators.map((collaborator, i) => (
+        {collaborators.map((collaborator) => (
           <div key={collaborator._id}>
             <Tooltip content={`${collaborator.firstName} ${collaborator.lastName}`}>
               <Avatar

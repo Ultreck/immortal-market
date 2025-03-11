@@ -73,7 +73,7 @@ export const useContextMenu = ({ id, node }) => {
         }}
       />
     );
-  }, [contextMenu]);
+  }, [contextMenu.isOpen, contextMenu.position, contextMenu.type, id]);
 
   return {
     handleContextMenu,
