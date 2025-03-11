@@ -42,7 +42,8 @@ const PopularTemplates = () => {
           </Chip>
         </div>
         {isDesignsLoading ? (
-          <div className="grid grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-5 gap-4 md:gap-6">
+            <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
             <Skeleton className="aspect-square w-full rounded-2xl" />
@@ -51,7 +52,7 @@ const PopularTemplates = () => {
         ) : (
           <>
             {designs.length > 0 ? (
-              <div className="grid grid-cols-5 gap-4 md:gap-x-8 md:gap-y-6">
+              <div className="grid grid-cols-5 gap-4 md:gap-6">
                 {designs.map((design, i) => (
                   <DesignCard
                     onClick={() => handlePreview(design)}
