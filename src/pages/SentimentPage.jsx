@@ -71,7 +71,7 @@ const SentimentPage = () => {
                   </Select>
                 </div>
               </div>
-              <SentimentMap />
+              <SentimentMap category={category}/>
             </div>
             <MapLegend />
           </div>

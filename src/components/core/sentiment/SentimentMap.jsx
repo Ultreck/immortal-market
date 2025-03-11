@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Tooltip } from '@heroui/react';
+import { Spinner, Tooltip } from '@heroui/react';
 import { ComposableMap, Geographies, Geography, Marker, Sphere } from 'react-simple-maps';
 import PropTypes from 'prop-types';
 import { colors, countries } from '@/lib/sentiment.js';
-import MapLoadingSkeleton from './MapLoadingSkeleton';
 import { useGetSentiments } from '@/api/sentiment.js';
 import { cn } from '@/lib/utils';
 import { useTernaryDarkMode } from 'usehooks-ts';
@@ -23,7 +22,10 @@ const SentimentMap = ({ className, category }) => {
   return (
     <div className={cn(className)}>
       {isSentimentsLoading ? (
-        <MapLoadingSkeleton />
+        <div className="flex flex-col items-center justify-center h-[50vh]">
+          <Spinner variant="spinner" color="default" />
+          <p className="mt-4 opacity-70">Loading map..</p>
+        </div>
       ) : (
         <ComposableMap projectionConfig={{ scale: 180 }}>
           <Sphere strokeWidth={0.5} outline="none" fillOpacity={0.5} />
@@ -78,12 +80,6 @@ const SentimentMap = ({ className, category }) => {
             return (
               <Marker key={index} coordinates={[country.longitude, country.latitude]}>
                 <circle r={8} fill={color} stroke="#fff" strokeWidth={2} />
-                <Tooltip>
-                  <div className="p-3">
-                    <p>{sentiment.name}</p>
-                    <p>Sentiment: {sentiment.sentiment}</p>
-                  </div>
-                </Tooltip>
               </Marker>
             );
           })}
