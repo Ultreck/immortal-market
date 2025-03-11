@@ -28,7 +28,7 @@ const KeywordInsightsList = ({ isOpen, onClose, keyword }) => {
             </>
           ) : (
             insights.map((insight, index) => (
-              <Card key={index} shadow="none" className="card-shadow">
+              <Card key={index} shadow="none" className="border border-default-200">
                 <div className="flex flex-row items-start px-7 py-6 space-x-5">
                   {!!insight.media.length && (
                     <Image

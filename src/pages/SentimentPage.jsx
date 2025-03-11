@@ -22,7 +22,7 @@ const SentimentPage = () => {
     <>
       <DashboardHeader content={<h2 className="text-2xl font-semibold">Global Sentiments</h2>} />
       <div className="container pb-20">
-        <div className="grid grid-cols-[3fr_1fr] gap-4 items-start">
+        <div className="grid grid-cols-[3fr_1.2fr] gap-4 items-start">
           <div className="space-y-4">
             <div className="w-full border border-default-200 rounded-2xl p-4 relative">
               <div className="flex items-center justify-between px-4">

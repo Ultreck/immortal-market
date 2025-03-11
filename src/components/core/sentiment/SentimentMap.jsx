@@ -6,10 +6,12 @@ import { countries, colors } from '@/lib/sentiment.js';
 import MapLoadingSkeleton from './MapLoadingSkeleton';
 import { useGetSentiments } from '@/api/sentiment.js';
 import { cn } from '@/lib/utils';
+import { useTernaryDarkMode } from 'usehooks-ts';
 
 const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
 const SentimentMap = ({ className, category }) => {
+  const { isDarkMode } = useTernaryDarkMode();
   const [hoveredGeo, setHoveredGeo] = useState(null);
   const { data: { sentiments = [] } = {}, isLoading: isSentimentsLoading } = useGetSentiments(category);
 
@@ -24,13 +26,7 @@ const SentimentMap = ({ className, category }) => {
         <MapLoadingSkeleton />
       ) : (
         <ComposableMap projectionConfig={{ scale: 180 }}>
-          <Sphere
-            fill="transparent"
-            stroke="transparent"
-            strokeWidth={0.5}
-            outline="none"
-            fillOpacity={0.5}
-          />
+          <Sphere strokeWidth={0.5} outline="none" fillOpacity={0.5} />
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo, i) => (
@@ -52,20 +48,20 @@ const SentimentMap = ({ className, category }) => {
                     style={{
                       default: {
                         fill: 'transparent',
-                        stroke: '#000000',
+                        stroke: isDarkMode ? '#FFFFFF' : '#000000',
                         strokeWidth: 0.5,
                         outline: 'none',
                         transition: 'all 0.3s ease',
                       },
                       hover: {
-                        fill: '#E0E0E0',
-                        stroke: '#000000',
+                        fill: isDarkMode ? '#333333' : '#E0E0E0',
+                        stroke: isDarkMode ? '#FFFFFF' : '#000000',
                         strokeWidth: 0.5,
                         outline: 'none',
                       },
                       pressed: {
-                        fill: '#E0E0E0',
-                        stroke: '#000000',
+                        fill: isDarkMode ? '#333333' : '#E0E0E0',
+                        stroke: isDarkMode ? '#FFFFFF' : '#000000',
                         strokeWidth: 0.5,
                         outline: 'none',
                       },
