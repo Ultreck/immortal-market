@@ -5,4 +5,16 @@ const useChatAiStore = create((set) => ({
     setSelectedBot: (ai) => set({selectedBot: ai}),
 }));
 
-export default useChatAiStore;
+const useIsNewChatStore = create((set) => ({
+    isNewChat: false,
+    setIsNewChat: (ai) => set({isNewChat: ai}),
+  }));
+  
+  // User Store
+  const useUserStore = create((set) => ({
+    user: null,
+    setUser: (userData) => set({ user: userData }),
+    logout: () => set({ user: null }),
+  }));
+
+export  {useChatAiStore, useIsNewChatStore};

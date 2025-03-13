@@ -1,8 +1,8 @@
 import Drawer from '@/components/ui/Drawer.jsx';
 import PropTypes from 'prop-types';
-import { Avatar, Badge, Button, Input } from '@heroui/react';
+import { Avatar, Badge, Button, Input, Select, SelectItem, Tooltip } from '@heroui/react';
 import { dateFormatter, getImageLink } from '@/lib/utils.js';
-import { RiUser3Fill } from 'react-icons/ri';
+import { RiUploadCloud2Fill, RiUser3Fill } from 'react-icons/ri';
 import { TbDotsVertical, TbSend } from 'react-icons/tb';
 import {
   // useCreateAIBot,
@@ -10,21 +10,35 @@ import {
   useGetAIChats,
 } from '@/api/ai-chat';
 import AiDataSkeleton from '../components/AiDataSkeleton';
-import useChatAiStore from '@/store/bot';
+import {useChatAiStore, useIsNewChatStore} from '@/store/bot';
+import useIsOpenStore from '@/store/chat-sidebar';
 import { Controller, useForm } from 'react-hook-form';
-import { LuMessageSquareText } from 'react-icons/lu';
-import { FaPlus } from 'react-icons/fa6';
+// import { LuMessageSquareText } from 'react-icons/lu';
+import { FaGlobe, FaPlus } from 'react-icons/fa6';
 import HistoryDropdown from '../components/HistoryDropdown';
 import ChatAiOptionDropdown from '../components/ChatAiOptionDropdown';
+import { LuPanelLeftClose } from 'react-icons/lu';
+import { LuPanelRightClose } from 'react-icons/lu';
+import { LuMessageSquarePlus } from "react-icons/lu";
+import { useTernaryDarkMode } from 'usehooks-ts';
+import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
+import { HiPaperClip } from 'react-icons/hi';
+import { useRef, useState } from 'react';
+// import { Paperclip, UploadCloud, Globe } from "lucide-react";
 
 // import useChatStore from '@/sore/bot';
 
 const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
+  const textareaRef = useRef(null);
+  const [message, setMessage] = useState("");
   const { handleSubmit, control, setValue } = useForm();
+  const { isNewChat, setIsNewChat } = useIsNewChatStore();
   const { selectedBot, setSelectedBot } = useChatAiStore();
+  const { isSideBarOpen, setIsSideBarOpen } = useIsOpenStore();
   const { data: chats, isLoading: isChatLoading } = useGetAIChats();
+  const { isDarkMode } = useTernaryDarkMode();
   const { mutateAsync: createChat, isPending: isCreatingChatLoading } = useCreateAIChat(selectedBot?._id);
-  console.log(chats);
+  console.log(chats, isCreatingChatLoading, isNewChat);
 
   const onSubmit = async (chat) => {
     const data = {
@@ -39,15 +53,63 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
   };
   const handleRightClick = (e) => {
     e.preventDefault();
-    setIsChatOpen(true);
     console.log("It's right clicked");
+  };
+  const bots = [
+    { id: "deepthink", name: "DeepThink (R1)" },
+    { id: "neuralmind", name: "NeuralMind (X2)" },
+    { id: "aivoyager", name: "AI Voyager (Z3)" },
+    { id: "synthchat", name: "SynthChat (S1)" },
+    { id: "hypercore", name: "HyperCore (H5)" },
+  ];
+  const handleInput = (e) => {
+    const textarea = textareaRef.current;
+    textarea.style.height = "auto"; 
+    textarea.style.height = `${textarea.scrollHeight}px`;
+
+    if (textarea.scrollHeight > 80) {
+      textarea.style.height = "80px"; 
+      textarea.style.overflowY = "auto";
+    } else {
+      textarea.style.overflowY = "hidden";
+    }
   };
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} width={1200} padding={false}>
       <div className="grid grid-cols-[350px_1fr] h-screen max-w-[auto] p-0">
-        <div className="border-r border-default-200 dark:border-default-100 h-full bg-[#f4f5f6] dark:bg-[#0b161f] py-8">
-          <p className="mb-4 text-xl font-bold px-10">Chat with Immortal Agents</p>
+        <div
+          className={`border-r border-default-200 dark:border-default-100 ${!isSideBarOpen && 'w-24'} h-full bg-[#f4f5f6] dark:bg-[#212327] py-8`}
+        >
+          {!isSideBarOpen ? (
+            <div className="text-center space-y-12">
+              <div className="text flex justify-center items-center">
+                <Button variant="primary" onPress={() => setIsSideBarOpen(true)} className="border-0 hover:bg-inherit bg-transparent">
+                <LogoIcon light={isDarkMode} className="" />{' '}
+                </Button>
+              </div>
+              <Tooltip key="Open sidebar" showArrow color="success" content={'Open sidebar'} placement="top-start">
+                <Button onPress={() => setIsSideBarOpen(true)} variant="ghost" className="border-0 bg-transparent">
+                  <LuPanelRightClose size={30} />
+                </Button>
+              </Tooltip>
+              <Tooltip key="New chat" showArrow color="success" content={'New chat'} placement="top-start">
+                <Button onPress={() => setIsNewChat(true)} variant="ghost" className="border-0 bg-transparent">
+                  <LuMessageSquarePlus size={30}/>
+                </Button>
+              </Tooltip>
+            </div>
+          ) : (
+            <div className={`text flex items-center justify-around`}>
+              <p className="py-5 text-xl font-bold px-10">Chat AI Agents</p>
+              <Tooltip key="Close sidebar" showArrow color="success" content={'Close sidebar'} placement="bottom">
+
+              <Button onPress={() => setIsSideBarOpen(false)} variant="ghost" className="border-0 bg-transparent">
+                <LuPanelLeftClose size={30} />
+              </Button>
+              </Tooltip>
+            </div>
+          )}
           <div className="divide-y divide-default-200 dark:divide-default-100">
             {chats &&
               chats.chats?.map((bot, i) => (
@@ -103,52 +165,10 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
               </div>
               <div className="text flex items-center">
                 <Button title="Create new chat" className="rounded-full outline-none ring-0" variant="">
-                  <FaPlus className='text-gray-400' size={16} />
+                  <FaPlus className="text-gray-400" size={16} />
                 </Button>
                 <HistoryDropdown />
-               <ChatAiOptionDropdown/>
-              </div>
-            </div>
-            <div className="flex items-start gap-2.5 p-6 min-h-[85vh]">
-              <Badge content="AI" placement="bottom-right" size="sm">
-                <Avatar
-                  radius="full"
-                  src={getImageLink(selectedBot?.image)}
-                  showFallback
-                  fallback={<RiUser3Fill size="24" />}
-                  className="!h-[30px] !w-[30px]"
-                />
-              </Badge>
-              <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700 ml-4">
-                <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{selectedBot?.bot}</span>
-                  <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                    {dateFormatter(selectedBot?.updatedAt)}
-                  </span>
-                </div>
-                <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-                  That&#39;s awesome. I think our users will really appreciate the improvements.
-                </p>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
-              </div>
-              <div className="text">
-                <button
-                  id="dropdownMenuIconButton"
-                  data-dropdown-toggle="dropdownDots"
-                  data-dropdown-placement="bottom-start"
-                  className=" self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800"
-                  type="button"
-                >
-                  <svg
-                    className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 4 15"
-                  >
-                    <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                  </svg>
-                </button>
+                <ChatAiOptionDropdown />
               </div>
             </div>
             <div className="gap-4 absolute bottom-0 w-full px-6 py-4">
@@ -185,41 +205,70 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                   />
                 </div>
               </form>
-              {/* <div className="flex w-full items-center space-x-2 px-8 md:px-10">
-              <Input
-                radius="full"
-                color="default"
-                value={value}
-                onChange={(e) => {
-                  setValue(e.target.value);
-                  }}
-                  onKeyUp={(e) => {
-                    if (e.key.toLowerCase() === 'enter') {
-                      // Handle enter key press
-                      }
-                      }}
-                type="text"
-                variant="flat"
-                placeholder="Ask me anything.."
-                classNames={{ input: 'text-base px-4' }}
-              />
-              <div>
-                <Button isIconOnly radius="full" color="primary">
-                  <TbSend size="20" />
-                </Button>
-              </div>
-            </div> */}
             </div>
           </div>
         )}
-        {!selectedBot && (
-          <div className="flex items-center justify-center max-w-full h-screen">
-            <div className="text-center">
-              <LuMessageSquareText size={70} className="text-default-200 mx-auto" />
-              <p className="text-default-400">Start chatting with AIs</p>
-            </div>
-          </div>
-        )}
+        <div className="flex flex-col items-center justify-center min-h-screen text-white p-6">
+
+      <div className="text-center">
+        <div className="flex items-center justify-center space-x-2">
+          <img src="/logo.svg" alt="DeepSeek Logo" className="w-8 h-8" />
+          <h1 className="text-2xl font-bold">Hi, I'm DeepSeek.</h1>
+        </div>
+        <p className="text-gray-400 mt-2">How can I help you today?</p>
+      </div>
+
+      <div className="bg-gray-800 p-4 rounded-lg  mt-6 w-full max-w-2xl border border-gray-700">
+        <div className=" flex items-center space-x-3 ">
+          <textarea
+            ref={textareaRef}
+            placeholder="Message DeepSeek..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onInput={handleInput}
+            rows="1"
+            className="flex-1 bg-transparent text-white placeholder-gray-500 outline-none resize-none overflow-hidden min-h-[40px] max-h-48"
+          />
+
+          <button className="text-gray-400 hover:text-white">
+            <HiPaperClip className="w-5 h-5" />
+          </button>
+
+          <button
+            className={`text-gray-400 hover:text-white transition ${
+              message.trim() ? "text-blue-500 hover:text-blue-400" : ""
+            }`}
+            disabled={!message.trim()}
+          >
+            <RiUploadCloud2Fill className="w-5 h-5" />
+          </button>
+        </div>
+
+
+        <div className="mt-3 flex space-x-2">
+           <Select
+            label="Choose AI Bot"
+            className="w-56 h-12"
+            selectedKey={selectedBot}
+            onSelectionChange={setSelectedBot}
+            variant='bordered'
+            itemClasses={{
+              base: "flex items-center space-x-2 px-4 py-2 bg-gray-700 rounded-lg text-sm text-white hover:bg-gray-600 transition",
+            }}
+          >
+            {bots.map((bot) => (
+              <SelectItem key={bot.id} value={bot.id}>
+                {bot.name}
+              </SelectItem>
+            ))}
+          </Select>
+          <button className="flex items-center space-x-2 px-4 py-2 bg-gray-700 rounded-lg text-sm text-white hover:bg-gray-600 transition">
+            <FaGlobe className="w-4 h-4" />
+            <span>Search</span>
+          </button>
+        </div>
+      </div>
+    </div>
       </div>
     </Drawer>
   );

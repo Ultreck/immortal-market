@@ -6,6 +6,7 @@ export const useGetAIChats = () => {
       queryKey: ['chats', 'all'],
       queryFn: async () => {
         const res = await http.market.get(`/chats`);
+        console.log(res);
         return res.data;
       },
     });
