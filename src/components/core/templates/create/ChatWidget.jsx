@@ -9,7 +9,7 @@ const ChatWidget = () => {
   useEffect(() => {
     const el = document.getElementById('chatra');
     if (el) {
-      if (pathname.startsWith('/designs/')) {
+      if (pathname.match(/^\/designs\/[a-z0-9]+\/edit$/)) {
         el.style.display = 'block';
       } else {
         el.style.display = 'none';

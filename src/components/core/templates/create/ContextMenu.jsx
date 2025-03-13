@@ -26,7 +26,7 @@ import {
 import { useKey } from 'react-use';
 import CreateGroupBlockModal from '@/components/core/templates/CreateGroupBlockModal.jsx';
 import CreateCommentModal from '@/components/core/templates/CreateCommentModal.jsx';
-import { useActions } from '@/hooks/template/use-actions.js';
+import { useElementActions } from '@/hooks/template/use-element-actions.js';
 
 const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
@@ -35,7 +35,7 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
   const { isOpen: isCreateBlockOpen, onOpen: onCreateBlockOpen, onClose: onCreateBlockClose } = useDisclosure();
   const { isOpen: isCommentOpen, onOpen: onCommentOpen, onClose: onCommentClose } = useDisclosure();
   const { isOpen: isPageCommentOpen, onOpen: onPageCommentOpen, onClose: onPageCommentClose } = useDisclosure();
-  const { handleAction } = useActions({ id });
+  const { handleAction } = useElementActions({ id });
 
   useKey('Escape', () => onClose());
 

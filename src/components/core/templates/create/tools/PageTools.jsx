@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'motion/react';
 import PageDimensions from '@/components/core/templates/create/tools/page/PageDimensions.jsx';
 import PageBackground from '@/components/core/templates/create/tools/page/PageBackground.jsx';
+import PageForm from '@/components/core/templates/create/tools/page/form/PageForm.jsx';
+import PagePoll from '@/components/core/templates/create/tools/page/PagePoll.jsx';
 import useDesignStore from '@/store/design.js';
 
 const PageTools = () => {
@@ -23,6 +25,8 @@ const PageTools = () => {
           >
             <PageBackground page={page} onChange={handleUpdatePage} />
             <PageDimensions page={page} onChange={handleUpdatePage} />
+            <PageForm page={page.id} />
+            <PagePoll page={page} onChange={handleUpdatePage} />
           </motion.div>
         </div>
       )}

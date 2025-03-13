@@ -5,6 +5,7 @@ import { useAuth } from '@/hooks/use-auth';
 import useDesignStore from '@/store/design.js';
 import { useMount } from 'react-use';
 import { useUnmount } from 'usehooks-ts';
+import ChatWidget from '@/components/core/templates/create/ChatWidget';
 
 const EditDesignPage = () => {
   const params = useParams();
@@ -35,7 +36,12 @@ const EditDesignPage = () => {
     );
   }
 
-  return <DesignBuilder />;
+  return (
+    <>
+      <DesignBuilder />
+      <ChatWidget />
+    </>
+  );
 };
 
 export default EditDesignPage;

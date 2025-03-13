@@ -7,10 +7,11 @@ const createDesignStore = () => {
 
   const initialState = {
     // Socket
-    connected: false,
-    initialized: false,
+    id: null,
     design: null,
     user: null,
+    connected: false,
+    initialized: false,
     // Pages
     pages: [],
     activePage: null,

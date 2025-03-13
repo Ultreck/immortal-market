@@ -20,7 +20,7 @@ const useClipboardEvents = () => {
   const duplicateElements = useDesignStore((state) => state.duplicateElements);
 
   useKey(
-    (e) => e.key.toLowerCase() === 'd' && e.ctrlKey && !e.shiftKey,
+    (e) => e.key?.toLowerCase() === 'd' && e.ctrlKey && !e.shiftKey,
     async (e) => {
       e.preventDefault();
       await duplicateElements(selectedElements);

@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { TbTrash } from 'react-icons/tb';
 import CreateGroupBlockModal from '@/components/core/templates/CreateGroupBlockModal.jsx';
 import useDesignStore from '@/store/design.js';
-import { useActions } from '@/hooks/template/use-actions';
+import { useElementActions } from '@/hooks/template/use-element-actions';
 
 const FloatingToolbar = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -14,7 +14,7 @@ const FloatingToolbar = ({ id }) => {
   const elements = useDesignStore((state) => {
     return state.elements.filter((el) => selectedElements.includes(el.id));
   });
-  const { handleAction } = useActions({ id });
+  const { handleAction } = useElementActions({ id });
 
   const isGrouped = elements[0]?.type === 'group';
 

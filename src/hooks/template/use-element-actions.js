@@ -1,6 +1,6 @@
 import useDesignStore from '@/store/design.js';
 
-export const useActions = ({ id }) => {
+export const useElementActions = ({ id }) => {
   const deleteElements = useDesignStore((state) => state.deleteElements);
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const getPageElements = useDesignStore((state) => state.getPageElements);

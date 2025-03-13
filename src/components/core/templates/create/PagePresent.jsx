@@ -5,11 +5,20 @@ import { cn } from '@/lib/utils.js';
 import { getElementConfig, getElementPresentComponent } from '@/lib/elements.js';
 import ElementWrapperPresent from '@/components/core/templates/create/ElementWrapperPresent.jsx';
 import useDesignStore from '@/store/design';
+import useBusiness from '@/hooks/use-business';
+import { useGetForm } from '@/api/design';
+import { Button, useDisclosure } from '@heroui/react';
+import { TbForms } from 'react-icons/tb';
+import PageFormPresent from './tools/page/form/PageFormPresent';
 
 const PagePresent = ({ page }) => {
   const el = useRef(null);
   const [scale, setScale] = useState(1);
+  const { id: business } = useBusiness();
+  const id = useDesignStore((state) => state.id);
+  const { data: { form } = {} } = useGetForm(business, id, page.id);
   const elements = useDesignStore((state) => state.elements.filter((el) => el.page === page.id));
+  const { isOpen: isFormOpen, onOpen: onFormOpen, onClose: onFormClose } = useDisclosure();
 
   useEffect(() => {
     setTimeout(() => {
@@ -21,42 +30,62 @@ const PagePresent = ({ page }) => {
   }, [page]);
 
   return (
-    <motion.div
-      ref={el}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      style={{
-        width: page.size.width,
-        height: page.size.height,
-        background: page.background.value,
-        transform: `scale(${scale})`,
-      }}
-      className={cn('origin-top-left relative overflow-hidden')}
-    >
-      <AnimatePresence>
-        {elements.map((element) => {
-          const component = getElementPresentComponent(element);
-          const config = getElementConfig(element);
+    <div className="w-full relative">
+      {!!form && (
+        <div className="fixed bottom-4 right-12 z-10 animate-pulse">
+          <Button
+            onPress={onFormOpen}
+            variant="solid"
+            size="lg"
+            color="warning"
+            className="text-base"
+            startContent={<TbForms size="20" />}
+            radius="full"
+          >
+            Open form
+          </Button>
+        </div>
+      )}
+      <motion.div
+        ref={el}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        style={{
+          width: page.size.width,
+          height: page.size.height,
+          background: page.background.value,
+          transform: `scale(${scale})`,
+        }}
+        className={cn('origin-top-left relative overflow-hidden')}
+      >
+        <AnimatePresence>
+          {elements.map((element) => {
+            const component = getElementPresentComponent(element);
+            const config = getElementConfig(element);
+            return (
+              <motion.div
+                key={element.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="pointer-events-auto"
+              >
+                {config?.wrapper ? (
+                  <ElementWrapperPresent element={element}>
+                    {createElement(component, { element })}
+                  </ElementWrapperPresent>
+                ) : (
+                  createElement(component, { element })
+                )}
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </motion.div>
 
-          return (
-            <motion.div
-              key={element.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="pointer-events-auto"
-            >
-              {config?.wrapper ? (
-                <ElementWrapperPresent element={element}>{createElement(component, { element })}</ElementWrapperPresent>
-              ) : (
-                createElement(component, { element })
-              )}
-            </motion.div>
-          );
-        })}
-      </AnimatePresence>
-    </motion.div>
+      {!!form && <PageFormPresent page={page} isOpen={isFormOpen} onClose={onFormClose} />}
+    </div>
   );
 };
 

@@ -4,10 +4,11 @@ import { Button } from '@heroui/react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PageModal from '@/components/core/templates/create/PageModal.jsx';
 import PagePresent from '@/components/core/templates/create/PagePresent.jsx';
+import useDesignStore from '@/store/design';
 
-const Present = ({ pages = [] }) => {
+const Present = () => {
   const [index, setIndex] = useState(0);
-
+  const pages = useDesignStore((state) => state.pages);
   const _pages = pages.filter((p) => p.type !== 'modal');
   const page = _pages[index];
 
@@ -18,7 +19,7 @@ const Present = ({ pages = [] }) => {
           <PagePresent key={page} page={page} />
         </div>
         {!!pages.length && (
-          <div className="fixed bottom-4 left-1/2 -translate-x-1/2 rounded-full px-8 py-3 bg-default-100 dark text-white flex items-center justify-between space-x-4 max-w-[600px] w-full">
+          <div className="fixed bottom-4 left-1/2 -translate-x-1/2 rounded-full px-8 py-2.5 bg-default-100 dark text-white flex items-center justify-between space-x-4 max-w-[400px] w-full">
             <h1 className="text-base">{page.title}</h1>
             <div className="flex items-center space-x-2">
               <Button
@@ -27,6 +28,7 @@ const Present = ({ pages = [] }) => {
                 variant="flat"
                 onPress={() => setIndex((v) => Math.max(v - 1, 0))}
                 isDisabled={index === 0}
+                size="sm"
               >
                 <TbChevronLeft size="20" />
               </Button>
@@ -39,6 +41,7 @@ const Present = ({ pages = [] }) => {
                 variant="flat"
                 onPress={() => setIndex((v) => Math.min(v + 1, pages.length - 1))}
                 isDisabled={index === pages.length - 1}
+                size="sm"
               >
                 <TbChevronRight size="20" />
               </Button>

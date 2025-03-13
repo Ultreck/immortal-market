@@ -11,7 +11,6 @@ import ThumbnailsCarousel from '@/pages/designs/ThumbnailsCarousel.jsx';
 const ApplyTemplate = ({ id, onClose }) => {
   const navigate = useNavigate();
   const { id: business } = useBusiness();
-  // const addUndoHistory = useTemplateStore((state) => state.addUndoHistory);
   const updateStore = useDesignStore((state) => state.updateStore);
   const { data: { design } = {}, isLoading: isDesignLoading } = useGetDesign(business, id);
   const { mutateAsync: create, isPending: isCreateTemplateLoading } = useCreateDesign(business);
