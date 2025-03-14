@@ -8,12 +8,20 @@ import PropTypes from 'prop-types';
 import PollDetails from './PollDetails';
 
 const PagePoll = ({ page }) => {
+  const tool = useDesignStore((state) => state.tool);
+  const updateStore = useDesignStore((state) => state.updateStore);
   const { id: business } = useBusiness();
   const id = useDesignStore((state) => state.id);
   const { data: { poll } = {}, isLoading: isPollLoading } = useGetPoll(business, id, page);
 
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={tool === 'page-poll'}
+      onOpenChange={() => updateStore({ tool: tool === 'page-poll' ? null : 'page-poll' })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" color="default" aria-label="Adjust font size" className="text-base">
           <Badge

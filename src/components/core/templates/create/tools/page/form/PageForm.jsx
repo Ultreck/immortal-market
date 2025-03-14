@@ -8,12 +8,20 @@ import FormDetails from './FormDetails';
 import { TbForms } from 'react-icons/tb';
 
 const PageForm = ({ page }) => {
+  const tool = useDesignStore((state) => state.tool);
+  const updateStore = useDesignStore((state) => state.updateStore);
   const { id: business } = useBusiness();
   const id = useDesignStore((state) => state.id);
   const { data: { form } = {}, isLoading: isFormLoading } = useGetForm(business, id, page);
 
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={tool === 'page-form'}
+      onOpenChange={() => updateStore({ tool: tool === 'page-form' ? null : 'page-form' })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" color="default" aria-label="Adjust font size" className="text-base">
           <Badge

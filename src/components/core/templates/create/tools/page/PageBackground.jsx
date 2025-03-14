@@ -5,7 +5,7 @@ const PageBackground = ({ page, onChange }) => {
   return (
     <ColorPicker
       color={page.background.value}
-      onChange={(color) => onChange({ background: { ...page.background, color } })}
+      onChange={(color) => onChange({ background: { ...page.background, value: color } })}
       size="sm"
       trigger={
         <button

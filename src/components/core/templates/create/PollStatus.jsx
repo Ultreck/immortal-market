@@ -10,6 +10,7 @@ const PollStatus = ({ page }) => {
   const id = useDesignStore((state) => state.id);
   const { data: { poll } = {} } = useGetPoll(business, id, page);
   const { data: { responses } = {} } = useGetPollResponses(business, id, page, poll?.id);
+  const tool = useDesignStore((state) => state.tool);
   const updateStore = useDesignStore((state) => state.updateStore);
 
   return (
@@ -21,7 +22,13 @@ const PollStatus = ({ page }) => {
           color="default"
           size="sm"
           radius="full"
-          onPress={() => updateStore({ tool: 'poll' })}
+          onPress={() =>
+            updateStore({
+              selectedPage: page,
+              selectedElements: [],
+              tool: tool === 'page-poll' ? null : 'page-poll',
+            })
+          }
         >
           <CgPoll size={16} />
           {responses ? responses.length : null}

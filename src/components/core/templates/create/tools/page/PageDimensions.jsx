@@ -2,10 +2,20 @@ import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import { TbDimensions } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import NumberInput from '@/components/ui/NumberInput.jsx';
+import useDesignStore from '@/store/design';
 
 const PageDimensions = ({ page, onChange }) => {
+  const tool = useDesignStore((state) => state.tool);
+  const updateStore = useDesignStore((state) => state.updateStore);
+
   return (
-    <Popover placement="left" showArrow offset={10}>
+    <Popover
+      placement="left"
+      showArrow
+      offset={10}
+      isOpen={tool === 'page-dimensions'}
+      onOpenChange={() => updateStore({ tool: tool === 'page-dimensions' ? null : 'page-dimensions' })}
+    >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Adjust font size" className="text-base">
           <TbDimensions size="20" />

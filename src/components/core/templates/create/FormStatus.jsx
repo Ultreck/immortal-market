@@ -10,6 +10,7 @@ const FormStatus = ({ page }) => {
   const id = useDesignStore((state) => state.id);
   const { data: { form } = {} } = useGetForm(business, id, page);
   const { data: { responses } = {} } = useGetFormResponses(business, id, page, form?.id);
+  const tool = useDesignStore((state) => state.tool);
   const updateStore = useDesignStore((state) => state.updateStore);
 
   return (
@@ -21,7 +22,13 @@ const FormStatus = ({ page }) => {
           color="default"
           size="sm"
           radius="full"
-          onPress={() => updateStore({ tool: 'form' })}
+          onPress={() =>
+            updateStore({
+              selectedPage: page,
+              selectedElements: [],
+              tool: tool === 'page-form' ? null : 'page-form',
+            })
+          }
         >
           <TbForms size={16} />
           {responses ? responses.length : null}
