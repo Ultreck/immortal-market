@@ -38,7 +38,7 @@ const items = [
 
 const PredictVirtual = () => {
   return (
-    <div className="px-8 py-6 h-screen w-[350px] overflow-y-auto border-l border-default-200/50 dark:border-default-50 bg-default-50">
+    <div className="px-6 py-4 w-[350px] overflow-y-auto border-l border-default-200/50 dark:border-default-50 bg-default-50">
       <Tabs
         aria-label="Options"
         variant="bordered"

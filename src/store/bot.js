@@ -1,20 +1,24 @@
 import { create } from 'zustand';
+import { persist } from "zustand/middleware";
 
-const useChatAiStore = create((set) => ({
+const useChatAiStore = create(
+  (set) => ({
     selectedBot: null,
     setSelectedBot: (ai) => set({selectedBot: ai}),
-}));
+   }
+ )
+);
 
 const useIsNewChatStore = create((set) => ({
-    isNewChat: false,
+    isNewChat: true,
     setIsNewChat: (ai) => set({isNewChat: ai}),
   }));
   
-  // User Store
-  const useUserStore = create((set) => ({
-    user: null,
-    setUser: (userData) => set({ user: userData }),
-    logout: () => set({ user: null }),
-  }));
+  const useCurrentStore = create(
+      (set) => ({
+        currentChat: null,
+        setCurrentChat: (chatId) => set({ currentChat: chatId }),
+      })
+  );
 
-export  {useChatAiStore, useIsNewChatStore};
+export  {useChatAiStore, useIsNewChatStore, useCurrentStore};

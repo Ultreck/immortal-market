@@ -30,7 +30,10 @@ const StockDetails = ({ id, onClose }) => {
           <Skeleton className="h-[200px] rounded-2xl" />
         </div>
       ) : (
-        <div className="grid h-screen max-w-[auto] p-0">
+        <div className="grid grid-cols-[350px_1fr] h-screen max-w-[auto] p-0">
+          <div className="border-r border-default-200 dark:border-default-100 h-full bg-[#f4f5f6] dark:bg-[#0b161f] py-8 px-10">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspend
+          </div>
           <div className="py-9 px-10">
             {!!stock && (
               <>
@@ -52,14 +55,14 @@ const StockDetails = ({ id, onClose }) => {
                         </div>
                       }
                     />
-                    <Tab
-                      key="profile"
-                      title={
-                        <div className="flex items-center space-x-2 text-base">
-                          <span>Profile</span>
-                        </div>
-                      }
-                    />
+                    {/*<Tab*/}
+                    {/*  key="profile"*/}
+                    {/*  title={*/}
+                    {/*    <div className="flex items-center space-x-2 text-base">*/}
+                    {/*      <span>Profile</span>*/}
+                    {/*    </div>*/}
+                    {/*  }*/}
+                    {/*/>*/}
                     <Tab
                       key="financials"
                       title={
@@ -77,7 +80,12 @@ const StockDetails = ({ id, onClose }) => {
                       }
                     />
                   </Tabs>
-                  <WatchlistButton stock={stock} />
+                  <div className="space-x-4 flex items-center ">
+                    <WatchlistButton stock={stock} />
+                    <Button color="primary" radius="full" className="text-base">
+                      Trade
+                    </Button>
+                  </div>
                 </div>
                 {tab === 'overview' && <StockOverview stock={stock} />}
                 {tab === 'profile' && <StockCompanyProfile stock={stock} />}

@@ -1,8 +1,5 @@
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
-import StockQueryItem from '@/pages/market/components/Items.jsx';
-import { Button, Card, cn, Tab, Tabs, useDisclosure } from '@heroui/react';
-import { HiChevronDown } from 'react-icons/hi2';
-import StockQueries from '@/pages/market/modals/StockQueries.jsx';
+import { Button, Card, Tab, Tabs } from '@heroui/react';
 import { useState } from 'react';
 import {
   RiAlertLine,
@@ -36,15 +33,13 @@ import SearchStock from '@/pages/market/SearchStock.jsx';
 import { HiOutlineSwitchHorizontal } from 'react-icons/hi';
 import countries from '@/lib/countries.js';
 import Watchlist from '@/pages/market/Watchlist.jsx';
-import BullRunsStocks from '@/pages/market/components/BullRuns.jsx';
 import TopPerformingStocks from '@/pages/market/TopPerformingStocks.jsx';
 import BottomPerformingStocks from '@/pages/market/BottomPerformingStocks.jsx';
 import StocksList from '@/pages/market/StocksList.jsx';
-import { Link } from 'react-router-dom';
 import CountryList from '@/pages/market/shared/CountryList.jsx';
 import ChatWithImmortalAgentsCard from '@/pages/market/shared/ChatWithImmortalAgentsCard.jsx';
 import StockSummary from '@/pages/market/shared/StockSummary.jsx';
-import StockScreeners from '@/pages/market/modals/StockScreeners.jsx';
+import MarketNav from '@/pages/market/components/MarketNav.jsx';
 
 const stockQueriesList = [
   { key: 'on-a-bulls', name: 'On a bulls', icon: <RiLineChartLine size="20" /> },
@@ -82,35 +77,12 @@ const code = 'NG';
 const MarketAnalyticsPage = () => {
   const [summaryOrder, setSummaryOrder] = useState('top');
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
-  const { isOpen: isStockQueriesOpen, onOpen: onStockQueriesOpen, onClose: onStockQueriesClose } = useDisclosure();
-  const { isOpen: isScreenersOpen, onOpen: onScreenersOpen, onClose: onScreenersClose } = useDisclosure();
-  const [data, updateData] = useState({ key: 'on-a-bulls', name: 'On a bulls', icon: <RiLineChartLine size="20" /> });
 
   return (
     <>
       <MarketNavbar />
       <div className="container">
-        <div className={cn('flex items-stretch space-x-4')}>
-          {[
-            { key: 'research', name: 'Research', icon: <RiLineChartLine size="20" /> },
-            { key: 'trade', name: 'Trade', icon: <RiLineChartLine size="20" />, href: '/markets/analytics/trade' },
-            { key: 'orders', name: 'My Orders', icon: <RiLineChartLine size="20" /> },
-            { key: 'lorem', name: 'Lorem Ipsum', icon: <RiLineChartLine size="20" /> },
-            { key: 'lorem', name: 'Lorem Ipsum', icon: <RiLineChartLine size="20" /> },
-          ].map((c, i) => {
-            return (
-              <>
-                <Link key={i} to={c.href}>
-                  <StockQueryItem active={c.key === 'trade'} before={c.icon} name={c.name} />
-                </Link>
-              </>
-            );
-          })}
-          <StockQueryItem
-            name="Stock Screener"
-            onClick={onScreenersOpen}
-          />
-        </div>
+        <MarketNav />
         <div className="gap-8 lg:grid lg:grid-cols-[1fr_350px] mt-10">
           <div className="w-full overflow-hidden">
             <Card className="mb-6 w-full overflow-visible rounded-2xl border px-6 py-6 pb-8 shadow dark:border-0 dark:shadow-none md:px-8">
@@ -137,28 +109,8 @@ const MarketAnalyticsPage = () => {
             </Card>
             <div className="space-y-6">
               <StockSummary />
-              <div className={cn('flex items-stretch space-x-3')}>
-                {stockQueriesList.slice(0, 3).map((c) => {
-                  return (
-                    <>
-                      <StockQueryItem
-                        key={c.key}
-                        onClick={() => updateData(c)}
-                        active={c.key === data.key}
-                        before={c.icon}
-                        name={c.name}
-                      />
-                    </>
-                  );
-                })}
-                <StockQueryItem
-                  name="More"
-                  onClick={onStockQueriesOpen}
-                  after={<HiChevronDown className="h-[20px] w-[20px]" />}
-                />
-              </div>
               <Watchlist />
-              <BullRunsStocks selectedQuery={data} />
+              {/*<BullRunsStocks selectedQuery={data} />*/}
               <Card className="card-shadow px-8 py-7">
                 <Tabs
                   selectedKey={summaryOrder}
@@ -210,8 +162,6 @@ const MarketAnalyticsPage = () => {
           </div>
         </div>
       </div>
-      <StockScreeners isOpen={isScreenersOpen} onClose={onScreenersClose} />
-      <StockQueries isOpen={isStockQueriesOpen} onClose={onStockQueriesClose} stocks={stockQueriesList} />
     </>
   );
 };

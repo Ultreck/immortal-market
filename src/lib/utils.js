@@ -513,3 +513,5 @@ export const writers = [
     id: '65bc334c3c9594f510958497',
   },
 ];
+
+export const generateRandomPercentage = () => Math.floor(Math.random() * (100 - 10 + 1)) + 10;

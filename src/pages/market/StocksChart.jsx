@@ -32,6 +32,8 @@ const StocksChart = ({ stock }) => {
     }, []);
   }, [prices]);
 
+  console.log({ filtered, chart, prices });
+
   const positive = !!filtered.length && filtered[0].close < filtered[filtered.length - 1].close;
   const color = positive ? '#4691c5' : '#ea4335';
 
