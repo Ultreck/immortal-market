@@ -2,31 +2,12 @@ import { TbClock, TbDatabaseCog } from 'react-icons/tb';
 import { formatDistanceToNow } from 'date-fns';
 import useProjectStore from '@/store/project.js';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
-import { Button } from '@heroui/react';
 import useDesignStore from '@/store/design';
-import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
-import {
-  formInitialData,
-  pollInitialData,
-  ProjectForm,
-  ProjectPoll,
-} from '@/components/core/templates/create/sidebar/project/ProjectForms.jsx';
-
-import useBusiness from '@/hooks/use-business';
-import { useGetComments } from '@/api/business';
 
 const Project = () => {
   const { source } = useCurrentDesign();
   const design = useDesignStore((state) => state.design);
   const openProjectModal = useProjectStore((state) => state.openModal);
-  const { id: business } = useBusiness();
-  const activePage = useDesignStore((state) => state.activePage);
-  const { data: { comments = [] } = {} } = useGetComments({ business, design: design.id });
-  const _comments = comments.filter((comment) => comment.targetId === activePage && !comment.resolved);
-  const elements = useDesignStore((state) => state.elements.filter((element) => element.page === state.activePage));
-
-  const poll = elements?.find((e) => e.type === 'form' && e.config.name === 'poll');
-  const form = elements?.find((e) => e.type === 'form' && e.config.name === 'form');
 
   const handleModifyReport = () => {
     openProjectModal({ restore: true, source });
@@ -55,54 +36,6 @@ const Project = () => {
           </div>
           <span className="text-base text-left leading-[1.2]">Click here to finish setting up your data</span>
         </div>
-      </div>
-      <div className="space-y-3 mt-6">
-        <>
-          {poll ? (
-            <ProjectPoll element={poll.id} />
-          ) : (
-            <DraggableElementWrapper
-              element={{
-                ...pollInitialData,
-                id: crypto.randomUUID(),
-                preview: (
-                  <div className="border-2 text-sm w-full rounded-sm text-start justify-start bg-transparent border-default-300 py-[17px] px-3 ">
-                    Polls (0)
-                  </div>
-                ),
-              }}
-            />
-          )}
-        </>
-        <>
-          {form ? (
-            <ProjectForm element={form.id} />
-          ) : (
-            <DraggableElementWrapper
-              element={{
-                ...formInitialData,
-                id: crypto.randomUUID(),
-                preview: (
-                  <div className="border-2 text-sm w-full rounded-sm text-start justify-start bg-transparent border-default-300 py-[17px] px-3 ">
-                    Forms (0)
-                  </div>
-                ),
-              }}
-            />
-          )}
-        </>
-        <Button
-          radius="none"
-          className="border-2 w-full rounded-sm text-start justify-start bg-transparent border-default-300 py-7 px-3 "
-        >
-          Comments ({_comments.length})
-        </Button>
-        <Button
-          radius="none"
-          className="border-2 w-full rounded-sm text-start justify-start bg-transparent border-default-300 py-7 px-3 "
-        >
-          Transition (0)
-        </Button>
       </div>
     </div>
   );

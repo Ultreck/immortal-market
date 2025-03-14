@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import CreateForm from './CreateForm';
+import { CgPoll } from 'react-icons/cg';
+import CreatePoll from './CreatePoll';
 import { Button } from '@heroui/react';
 import PropTypes from 'prop-types';
-import { TbForms } from 'react-icons/tb';
 
-const NoForm = ({ page }) => {
+const NoPoll = ({ page }) => {
   const [view, setView] = useState('empty');
 
   return (
@@ -12,28 +12,28 @@ const NoForm = ({ page }) => {
       {view === 'empty' && (
         <div className="px-12 py-12">
           <div className="w-16 h-16 bg-primary-500 flex items-center justify-center rounded-full text-white">
-            <TbForms size="28" />
+            <CgPoll size="28" />
           </div>
           <div className="text-base mt-8">
-            <p className="mb-2">Create interactive forms to collect information:</p>
+            <p className="mb-2">Create interactive polls to gather opinions:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Each page can have its own form</li>
-              <li>Customize with various field types</li>
-              <li>Add validation rules as needed</li>
+              <li>Each page can have its own poll</li>
+              <li>Customize with various options</li>
+              <li>View real-time voting results</li>
             </ul>
           </div>
           <Button onPress={() => setView('create')} variant="solid" className="text-base px-4 mt-8" radius="full">
-            Setup form
+            Setup poll
           </Button>
         </div>
       )}
-      {view === 'create' && <CreateForm page={page} />}
+      {view === 'create' && <CreatePoll page={page} />}
     </div>
   );
 };
 
-NoForm.propTypes = {
+NoPoll.propTypes = {
   page: PropTypes.string.isRequired,
 };
 
-export default NoForm;
+export default NoPoll;

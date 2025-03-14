@@ -6,10 +6,12 @@ import { getElementConfig, getElementPresentComponent } from '@/lib/elements.js'
 import ElementWrapperPresent from '@/components/core/templates/create/ElementWrapperPresent.jsx';
 import useDesignStore from '@/store/design';
 import useBusiness from '@/hooks/use-business';
-import { useGetForm } from '@/api/design';
+import { useGetForm, useGetPoll } from '@/api/design';
 import { Button, useDisclosure } from '@heroui/react';
 import { TbForms } from 'react-icons/tb';
+import { CgPoll } from 'react-icons/cg';
 import PageFormPresent from './tools/page/form/PageFormPresent';
+import PagePollPresent from './tools/page/poll/PagePollPresent';
 
 const PagePresent = ({ page }) => {
   const el = useRef(null);
@@ -17,8 +19,10 @@ const PagePresent = ({ page }) => {
   const { id: business } = useBusiness();
   const id = useDesignStore((state) => state.id);
   const { data: { form } = {} } = useGetForm(business, id, page.id);
+  const { data: { poll } = {} } = useGetPoll(business, id, page.id);
   const elements = useDesignStore((state) => state.elements.filter((el) => el.page === page.id));
   const { isOpen: isFormOpen, onOpen: onFormOpen, onClose: onFormClose } = useDisclosure();
+  const { isOpen: isPollOpen, onOpen: onPollOpen, onClose: onPollClose } = useDisclosure();
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,21 +35,38 @@ const PagePresent = ({ page }) => {
 
   return (
     <div className="w-full relative">
-      {!!form && (
-        <div className="fixed bottom-4 right-12 z-10 animate-pulse">
-          <Button
-            onPress={onFormOpen}
-            variant="solid"
-            size="lg"
-            color="warning"
-            className="text-base"
-            startContent={<TbForms size="20" />}
-            radius="full"
-          >
-            Open form
-          </Button>
-        </div>
-      )}
+      <div className="fixed bottom-5 right-12 z-10 flex flex-row gap-3 items-end">
+        {!!form && (
+          <div>
+            <Button
+              onPress={onFormOpen}
+              variant="solid"
+              size="lg"
+              color="warning"
+              className="text-base"
+              startContent={<TbForms size="20" />}
+              radius="full"
+            >
+              Open form
+            </Button>
+          </div>
+        )}
+        {!!poll && (
+          <div>
+            <Button
+              onPress={onPollOpen}
+              variant="solid"
+              size="lg"
+              color="success"
+              className="text-base"
+              startContent={<CgPoll size="20" />}
+              radius="full"
+            >
+              Take poll
+            </Button>
+          </div>
+        )}
+      </div>
       <motion.div
         ref={el}
         initial={{ opacity: 0 }}
@@ -85,6 +106,7 @@ const PagePresent = ({ page }) => {
       </motion.div>
 
       {!!form && <PageFormPresent page={page} isOpen={isFormOpen} onClose={onFormClose} />}
+      {!!poll && <PagePollPresent page={page} isOpen={isPollOpen} onClose={onPollClose} />}
     </div>
   );
 };

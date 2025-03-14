@@ -11,8 +11,6 @@ import { TbAbc, TbChevronLeft, TbChevronRight, TbLayoutDistributeHorizontal, TbT
 import Images from '@/components/core/templates/create/sidebar/images/Images.jsx';
 import Project from '@/components/core/templates/create/sidebar/project/Project.jsx';
 import { useNavigate } from 'react-router-dom';
-import Forms from '@/components/core/templates/create/sidebar/forms/Forms.jsx';
-import { FaWpforms } from 'react-icons/fa';
 import DataTags from './data/DataTags.jsx';
 import useDesignStore from '@/store/design.js';
 import Layout from './layout/Layout.jsx';
@@ -90,33 +88,6 @@ const Sidebar = () => {
                 </Tooltip>
               );
             })}
-            <div className="space-y-4">
-              {[
-                { icon: RiStackLine, title: 'Layers', key: 'layers' },
-                { icon: FaWpforms, title: 'Forms', key: 'forms' },
-              ].map((element) => {
-                const active = tab === element.key;
-                return (
-                  <Tooltip key={element.key} content={element.title} showArrow placement="right">
-                    <div
-                      tabIndex={0}
-                      className={cn(
-                        'flex flex-col items-center justify-center py-[13px] px-3 w-full rounded-l-2xl overflow-hidden',
-                        {
-                          'bg-primary-500 text-white dark:bg-gray-800/50': active,
-                          'hover:bg-default-200 hover:dark:bg-gray-800/50 cursor-pointer': !active,
-                          'rounded-2xl': collapsed,
-                        }
-                      )}
-                      onClick={() => setTab(element.key)}
-                    >
-                      {createElement(element.icon, { size: '20' })}
-                      <p className="text-sm mt-1 truncate overflow text-center w-full">{element.title}</p>
-                    </div>
-                  </Tooltip>
-                );
-              })}
-            </div>
             <div className="flex-1"></div>
             {design.type === 'project' && (
               <div className="space-y-4">
@@ -169,11 +140,9 @@ const Sidebar = () => {
             {tab === 'elements' && <Elements />}
             {tab === 'templates' && <Build />}
             {tab === 'graphics' && <Svgs />}
-            {tab === 'layers' && <Layers />}
             {tab === 'images' && <Images />}
             {tab === 'project' && <Project />}
             {tab === 'pages' && <Layout />}
-            {tab === 'forms' && <Forms />}
           </div>
         )}
       </div>

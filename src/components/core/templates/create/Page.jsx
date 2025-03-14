@@ -8,6 +8,8 @@ import PageContent from '@/components/core/templates/create/PageContent.jsx';
 import PageCommentBadge from '@/components/core/templates/create/comment/PageCommentBadge.jsx';
 import { Chip } from '@heroui/react';
 import { useEffect, useRef } from 'react';
+import FormStatus from './FormStatus';
+import PollStatus from './PollStatus';
 
 const Page = ({ id }) => {
   const ref = useRef(null);
@@ -28,13 +30,17 @@ const Page = ({ id }) => {
   return (
     <div ref={ref}>
       <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
-        <PageTitle id={id} title={page.title} />
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center gap-1">
+          <PageTitle id={id} title={page.title} />
           {page.type === 'modal' && (
             <Chip variant="solid" color="danger" classNames={{ content: 'font-semibold' }}>
               Modal
             </Chip>
           )}
+        </div>
+        <div className="flex items-center gap-3">
+          <FormStatus page={id} />
+          <PollStatus page={id} />
           <PageActions id={id} />
         </div>
       </div>

@@ -4,9 +4,6 @@ import useDesignStore from '@/store/design';
 import {
   Button,
   Input,
-  Modal,
-  ModalBody,
-  ModalContent,
   NumberInput,
   Textarea,
   Checkbox,
@@ -15,6 +12,9 @@ import {
   Select,
   SelectItem,
   Spinner,
+  Drawer,
+  DrawerContent,
+  DrawerBody,
 } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
@@ -50,9 +50,9 @@ const PageFormPresent = ({ page, isOpen, onClose }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} hideCloseButton scrollBehavior="inside" size="xl">
-      <ModalContent>
-        <ModalBody className="px-10 py-8">
+    <Drawer isOpen={isOpen} onClose={onClose} hideCloseButton size="xl">
+      <DrawerContent>
+        <DrawerBody className="py-10 px-12">
           {isResponseLoading ? (
             <div className="flex flex-col justify-center items-center h-full py-20">
               <Spinner variant="default" />
@@ -434,9 +434,9 @@ const PageFormPresent = ({ page, isOpen, onClose }) => {
               )}
             </>
           )}
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+        </DrawerBody>
+      </DrawerContent>
+    </Drawer>
   );
 };
 

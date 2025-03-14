@@ -8,9 +8,9 @@ import useDesignStore from '@/store/design';
 
 const Present = () => {
   const [index, setIndex] = useState(0);
-  const pages = useDesignStore((state) => state.pages);
-  const _pages = pages.filter((p) => p.type !== 'modal');
-  const page = _pages[index];
+  const _pages = useDesignStore((state) => state.pages);
+  const pages = _pages.filter((p) => p.type !== 'modal').sort((a, b) => a.order - b.order);
+  const page = pages[index];
 
   return (
     <>
