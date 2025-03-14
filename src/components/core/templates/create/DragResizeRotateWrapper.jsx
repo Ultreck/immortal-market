@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import DragResizeRotate from '@/components/ui/DragResizeRotate.jsx';
 import { cn } from '@/lib/utils.js';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getElementConfig } from '@/lib/elements.js';
 import useDesignStore from '@/store/design.js';
 
@@ -35,7 +35,7 @@ const DragResizeRotateWrapper = ({ id }) => {
       (acc, el) => (el.position.y + el.size.height > acc.position.y + acc.size.height ? el : acc),
       elements[0]
     );
-    const bottomMostElementHeight = document.getElementById(`element-${bottomMostElement?.id}`)?.scrollHeight || 0;
+    const bottomMostElementHeight = bottomMostElement.size.height;
     return {
       x: leftMostElement.position.x * scale,
       y: topMostElement.position.y * scale,
