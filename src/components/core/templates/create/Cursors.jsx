@@ -17,7 +17,7 @@ const Cursors = ({ page }) => {
             key={user}
             style={{
               transform: `translate(${cursor.position.x}px, ${cursor.position.y}px)`,
-              transition: 'transform 0.3s ease-out',
+              transition: 'transform 0.1s ease-out',
             }}
             className="absolute top-0 left-0 pointer-events-none z-10"
           >
