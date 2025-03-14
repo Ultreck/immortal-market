@@ -11,7 +11,7 @@ import {
 } from '@/api/ai-chat';
 import AiDataSkeleton from '../components/AiDataSkeleton';
 import MessageSkeleton from '../components/MessageSkeleton';
-import { useChatAiStore, useCurrentStore, useIsNewChatStore } from '@/store/bot';
+import { useChatAiStore, useCurrentMessageSentStore, useCurrentStore, useIsNewChatStore } from '@/store/bot';
 import useIsOpenStore from '@/store/chat-sidebar';
 import { LuPanelLeftClose } from 'react-icons/lu';
 import { LuPanelRightClose } from 'react-icons/lu';
@@ -28,21 +28,54 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
   const { selectedBot, setSelectedBot } = useChatAiStore();
   const { isSideBarOpen, setIsSideBarOpen } = useIsOpenStore();
   const { currentChat, setCurrentChat } = useCurrentStore();
+  const { currentSentMessage, setCurrentSentMessage } = useCurrentMessageSentStore();
   const { isDarkMode } = useTernaryDarkMode();
   const { data: chats } = useGetAIChats();
   const { data: chatHistories, isLoading: isChatHistoriesLoading } = useGetAIChatsHistories(selectedBot?.username);
-  const { data: chatMessages, refetch, isLoading: isChatMessagesLoading } = useGetAIChatsMessages(currentChat);
+  const {
+    data: chatMessages,
+    refetch,
+    isFetching,
+    isLoading: isChatMessagesLoading,
+  } = useGetAIChatsMessages(currentChat);
   const { mutateAsync: addChats, isPending: isAddingChatLoading } = useCreateAIChat();
   const { mutateAsync: createChat, isPending: isCreatingChatLoading } = useCreateAIBot();
+  const [pendingMessage, setPendingMessage] = useState([]);
 
-  console.log(chatHistories?.chats, chatMessages);
+  console.log(pendingMessage);
 
   const onSubmit = async () => {
     if (!message.trim()) return;
+    setCurrentSentMessage(message);
+    const userMessage = {
+      _id: Date.now(),
+      role: 'user',
+      chat: '67d3a72fba5c33f55bd27de4',
+      content: message.trim(),
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      __v: 0,
+      id: Date.now(),
+    };
+    const botMessage = {
+      _id: Date.now(),
+      role: 'assistant',
+      chat: '67d3a72fba5c33f55bd27de4',
+      content: '',
+      isPending: true,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      __v: 0,
+      id: Date.now(),
+    };
     const data = {
       text: message.trim(),
       bot: selectedBot?.username,
     };
+    const pendingMsg = chatMessages?.messages?.map((chat) => {
+      return { ...chat };
+    });
+    setPendingMessage((prev) => [...prev, ...pendingMsg, userMessage, botMessage]);
     try {
       if (isNewChat) {
         const response = await createChat(data);
@@ -50,12 +83,12 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
         setMessage('');
         refetch();
       } else {
-        await addChats({ data, id: currentChat });
         setMessage('');
+        await addChats({ data, id: currentChat });
         refetch();
       }
     } catch (error) {
-      console.error("Error sending message:", error);
+      console.error('Error sending message: ', error);
     }
   };
 
@@ -64,10 +97,6 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [message, currentChat]);
-
-  useEffect(() => {
-    refetch();
-  }, [refetch, message]);
 
   useEffect(() => {
     if (chatHistories?.chats?.length === 0) {
@@ -175,8 +204,6 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                       <button
                         onClick={() => {
                           if (isNewChat) {
-                            console.log(chatHistories?.chats[0]?._id);
-
                             setCurrentChat(chatHistories?.chats[0]?._id);
                             setIsNewChat(false);
                           }
@@ -236,6 +263,12 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                       setMessage(e.target.value);
                     }}
                     onInput={handleInput}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        onSubmit();
+                      }
+                    }}
                     rows="1"
                     className="flex-1 bg-transparent text-white placeholder-gray-500 outline-none resize-none overflow-hidden min-h-[40px] max-h-48"
                   />
@@ -290,23 +323,42 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
           >
             <div className="overflow-x-auto w-full min-h-[70vh] h-full items-center justify-center space-x-2">
               <ScrollShadow className="w-full h-screen pt-10 pb-80" size={20}>
-                {chatMessages?.messages?.map((msg) => (
-                  <div key={msg._id}>
-                    {msg.role === 'user' ? (
-                      <div className="text-end w-2/3 mx-auto">
-                        <button className="text-xl text-start rounded-lg mx-auto bg-[#414158] p-3 ">
-                          {isChatMessagesLoading ? message : msg.content}
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="text-start w-2/3 mx-auto my-3">
-                        <button className="text-xl text-start rounded-lg mx-auto p-3 ">
-                          {isChatMessagesLoading ? <MessageSkeleton /> : msg.content}
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                {!isFetching &&
+                  chatMessages?.messages?.map((msg, index) => (
+                    <div key={index}>
+                      {msg.role === 'user' ? (
+                        <div className="text-end w-2/3 mx-auto">
+                          <button className="text-xl text-start rounded-lg mx-auto bg-[#414158] p-3 ">
+                            {msg.content}
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="text-start w-2/3 mx-auto my-3">
+                          <button className="text-xl text-start rounded-lg mx-auto p-3 ">
+                            {isChatMessagesLoading ? <MessageSkeleton /> : msg.content}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                {isFetching &&
+                  pendingMessage?.map((msg, index) => (
+                    <div key={index}>
+                      {msg.role === 'user' ? (
+                        <div className="text-end w-2/3 mx-auto">
+                          <button className="text-xl text-start rounded-lg mx-auto bg-[#414158] p-3 ">
+                            {msg.content}
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="text-start w-2/3 mx-auto my-3">
+                          <button className="text-xl text-start rounded-lg mx-auto p-3 ">
+                            {msg.isPending ? <MessageSkeleton /> : msg.content}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 <div ref={messagesEndRef} />
                 <div className="divide-y divide-default-200 dark:divide-default-100">
                   {isChatMessagesLoading && (
@@ -319,7 +371,7 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                 <div ref={messagesEndRef} />
               </ScrollShadow>
             </div>
-            <div className="text w-[97%] absolute bottom-[2px] pb-4 bg-[#f4f5f6] dark:bg-[#171717] flex justify-center">
+            <div className="text w-[97%] absolute bottom-[2px] pb-4 bg-[#f4f5f6] dark:bg-default-50 flex justify-center">
               <div className={`bg-[#f4f5f6] bottom-4 dark:bg-[#212327] p-4 rounded-lg mt-6 w-4/5 border-gray-700`}>
                 <div className=" flex items-center space-x-3">
                   <div className="w-full flex">
@@ -331,12 +383,14 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                           : 'Chat ai agent...'
                       }
                       value={message}
-                      onChange={(e) => setMessage(e.target.value)}
+                      onChange={(e) => {
+                        setMessage(e.target.value);
+                      }}
                       onInput={handleInput}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
-                          e.preventDefault(); // Prevents adding a new line
-                          onSubmit(); // Calls the submit function
+                          e.preventDefault();
+                          onSubmit();
                         }
                       }}
                       rows="1"
@@ -344,14 +398,14 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                     />
                     <div>
                       <Button
-                        disabled={isAddingChatLoading}
+                        disabled={isAddingChatLoading || isFetching}
                         onPress={onSubmit}
                         type="submit"
                         isIconOnly
                         radius="full"
                         color="primary"
                       >
-                        {isAddingChatLoading ? (
+                        {isAddingChatLoading || isFetching ? (
                           <LuLoaderCircle className="animate-spin" size={20} />
                         ) : (
                           <TbSend size="20" />

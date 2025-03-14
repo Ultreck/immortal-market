@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { persist } from "zustand/middleware";
 
 const useChatAiStore = create(
   (set) => ({
@@ -14,11 +13,15 @@ const useIsNewChatStore = create((set) => ({
     setIsNewChat: (ai) => set({isNewChat: ai}),
   }));
   
-  const useCurrentStore = create(
-      (set) => ({
+  const useCurrentStore = create((set) => ({
         currentChat: null,
         setCurrentChat: (chatId) => set({ currentChat: chatId }),
       })
   );
+  const useCurrentMessageSentStore = create((set) => ({
+        currentSentMessage: null,
+        setCurrentSentMessage: (chatId) => set({ currentSentMessage: chatId }),
+      })
+  );
 
-export  {useChatAiStore, useIsNewChatStore, useCurrentStore};
+export  {useChatAiStore, useIsNewChatStore, useCurrentStore, useCurrentMessageSentStore};
