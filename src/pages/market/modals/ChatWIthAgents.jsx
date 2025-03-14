@@ -11,7 +11,7 @@ import {
 } from '@/api/ai-chat';
 import AiDataSkeleton from '../components/AiDataSkeleton';
 import MessageSkeleton from '../components/MessageSkeleton';
-import { useChatAiStore, useCurrentMessageSentStore, useCurrentStore, useIsNewChatStore } from '@/store/bot';
+import { useChatAiStore, useCurrentStore, useIsNewChatStore } from '@/store/bot';
 import useIsOpenStore from '@/store/chat-sidebar';
 import { LuPanelLeftClose } from 'react-icons/lu';
 import { LuPanelRightClose } from 'react-icons/lu';
@@ -28,7 +28,6 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
   const { selectedBot, setSelectedBot } = useChatAiStore();
   const { isSideBarOpen, setIsSideBarOpen } = useIsOpenStore();
   const { currentChat, setCurrentChat } = useCurrentStore();
-  const { currentSentMessage, setCurrentSentMessage } = useCurrentMessageSentStore();
   const { isDarkMode } = useTernaryDarkMode();
   const { data: chats } = useGetAIChats();
   const { data: chatHistories, isLoading: isChatHistoriesLoading } = useGetAIChatsHistories(selectedBot?.username);
@@ -46,7 +45,6 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
 
   const onSubmit = async () => {
     if (!message.trim()) return;
-    setCurrentSentMessage(message);
     const userMessage = {
       _id: Date.now(),
       role: 'user',
@@ -178,6 +176,13 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                   startContent={<LuMessageSquarePlus size={24} className="text-white" />}
                 >
                   New Chat
+                  {selectedBot && (
+                    <div className="absolute bottom-[-3px] w-full overflow-hidden">
+                      <div className="whitespace-nowrap animate-marquee text-sm text-white">
+                        Assistant : {selectedBot?.firstName + ' ' + selectedBot?.lastName}
+                      </div>
+                    </div>
+                  )}
                 </Button>
                 <div className="text">
                   <Tooltip
@@ -339,6 +344,7 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                           </button>
                         </div>
                       )}
+                      <div ref={messagesEndRef} />
                     </div>
                   ))}
                 {isFetching &&
@@ -361,7 +367,7 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                   ))}
                 <div ref={messagesEndRef} />
                 <div className="divide-y divide-default-200 dark:divide-default-100">
-                  {isChatMessagesLoading && (
+                  {(isChatMessagesLoading || isFetching) && (
                     <div className="text">
                       {' '}
                       <MessageSkeleton />
@@ -398,14 +404,14 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                     />
                     <div>
                       <Button
-                        disabled={isAddingChatLoading || isFetching}
+                        disabled={isAddingChatLoading}
                         onPress={onSubmit}
                         type="submit"
                         isIconOnly
                         radius="full"
                         color="primary"
                       >
-                        {isAddingChatLoading || isFetching ? (
+                        {isAddingChatLoading ? (
                           <LuLoaderCircle className="animate-spin" size={20} />
                         ) : (
                           <TbSend size="20" />
