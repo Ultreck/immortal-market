@@ -23,13 +23,10 @@ export const useGetAIChatsMessages = (id) => {
     return useQuery({
       queryKey: ['chats', 'all', 'history', id],
       queryFn: async () => {
-        console.log(id);
         const res = await http.market.get(`/chats/${id}/messages`);
         return res.data;
       },
-      onSuccess: () => {
-        queryClient.invalidateQueries(['chats', 'all', 'history']); // Force refetch after message is sent
-    },
+      // refetchInterval: 3000,
     });
   };
   export const useCreateAIBot = () => {

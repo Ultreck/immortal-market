@@ -10,6 +10,7 @@ import {
   useGetAIChatsMessages,
 } from '@/api/ai-chat';
 import AiDataSkeleton from '../components/AiDataSkeleton';
+import MessageSkeleton from '../components/MessageSkeleton';
 import { useChatAiStore, useCurrentStore, useIsNewChatStore } from '@/store/bot';
 import useIsOpenStore from '@/store/chat-sidebar';
 import { LuPanelLeftClose } from 'react-icons/lu';
@@ -19,7 +20,6 @@ import { useTernaryDarkMode } from 'usehooks-ts';
 import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
 import { useEffect, useRef, useState } from 'react';
 import { LuLoaderCircle } from 'react-icons/lu';
-
 
 const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
   const textareaRef = useRef(null);
@@ -31,43 +31,53 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
   const { isDarkMode } = useTernaryDarkMode();
   const { data: chats } = useGetAIChats();
   const { data: chatHistories, isLoading: isChatHistoriesLoading } = useGetAIChatsHistories(selectedBot?.username);
-  const { data: chatMessages, refetch, isFetching, isLoading: isChatMessagesLoading } = useGetAIChatsMessages(currentChat, {
-    enabled: !!currentChat, 
-    refetchInterval: 5000,  
-  });
+  const { data: chatMessages, refetch, isLoading: isChatMessagesLoading } = useGetAIChatsMessages(currentChat);
   const { mutateAsync: addChats, isPending: isAddingChatLoading } = useCreateAIChat();
   const { mutateAsync: createChat, isPending: isCreatingChatLoading } = useCreateAIBot();
 
-  console.log(chatMessages);
-  
+  console.log(chatHistories?.chats, chatMessages);
+
   const onSubmit = async () => {
+    if (!message.trim()) return;
     const data = {
-      text: message,
+      text: message.trim(),
       bot: selectedBot?.username,
     };
     try {
       if (isNewChat) {
         const response = await createChat(data);
         await addChats({ data, id: response.data.chat._id });
+        setMessage('');
+        refetch();
       } else {
         await addChats({ data, id: currentChat });
+        setMessage('');
+        refetch();
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
 
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [message]);
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [message, currentChat]);
 
   useEffect(() => {
-      refetch();
+    refetch();
   }, [refetch, message]);
 
   useEffect(() => {
-    console.log("Fetching new messages:", isFetching);
-  }, [isFetching]);
+    if (chatHistories?.chats?.length === 0) {
+      setIsNewChat(true);
+      setCurrentChat(null);
+    } else {
+      setCurrentChat(chatHistories?.chats[0]?._id);
+      setIsNewChat(false);
+    }
+  }, [chatHistories, selectedBot]);
 
   const handleInput = () => {
     const textarea = textareaRef.current;
@@ -164,9 +174,9 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                     <div key={index} className="text-start space-y-6 w-full">
                       <button
                         onClick={() => {
-                          if(isNewChat){
+                          if (isNewChat) {
                             console.log(chatHistories?.chats[0]?._id);
-                            
+
                             setCurrentChat(chatHistories?.chats[0]?._id);
                             setIsNewChat(false);
                           }
@@ -189,7 +199,7 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
           )}
           <div className="divide-y divide-default-200 dark:divide-default-100">
             {isChatHistoriesLoading &&
-              Array.from({ length: 8 }, (_, index) => (
+              Array.from({ length: 5 }, (_, index) => (
                 <div className="text" key={index}>
                   <AiDataSkeleton />
                 </div>
@@ -257,6 +267,7 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                     onSelectionChange={(key) => {
                       const found = chats?.bots?.find((chat) => chat._id === key.currentKey);
                       setSelectedBot(found);
+                      setCurrentChat(null);
                     }}
                     variant="bordered"
                     itemClasses={{
@@ -278,34 +289,35 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
             className={`flex relative flex-col w-full ${isSideBarOpen ? '' : '-ml-40'}  mx-auto items-center justify-center min-h-screen text-white`}
           >
             <div className="overflow-x-auto w-full min-h-[70vh] h-full items-center justify-center space-x-2">
-              <ScrollShadow className="w-full h-screen pt-10 pb-72" size={20}>
+              <ScrollShadow className="w-full h-screen pt-10 pb-80" size={20}>
                 {chatMessages?.messages?.map((msg) => (
                   <div key={msg._id}>
                     {msg.role === 'user' ? (
                       <div className="text-end w-2/3 mx-auto">
                         <button className="text-xl text-start rounded-lg mx-auto bg-[#414158] p-3 ">
-                          {msg.content}
+                          {isChatMessagesLoading ? message : msg.content}
                         </button>
                       </div>
                     ) : (
                       <div className="text-start w-2/3 mx-auto my-3">
                         <button className="text-xl text-start rounded-lg mx-auto p-3 ">
-                          {msg.content}
+                          {isChatMessagesLoading ? <MessageSkeleton /> : msg.content}
                         </button>
                       </div>
                     )}
                   </div>
                 ))}
-                 <div ref={messagesEndRef} />
-              </ScrollShadow>
-              <div className="divide-y divide-default-200 dark:divide-default-100">
-            {isChatMessagesLoading &&
-              Array.from({ length: 3 }, (_, index) => (
-                <div className="text" key={index}>
-                  <AiDataSkeleton />
+                <div ref={messagesEndRef} />
+                <div className="divide-y divide-default-200 dark:divide-default-100">
+                  {isChatMessagesLoading && (
+                    <div className="text">
+                      {' '}
+                      <MessageSkeleton />
+                    </div>
+                  )}
                 </div>
-              ))}
-          </div>
+                <div ref={messagesEndRef} />
+              </ScrollShadow>
             </div>
             <div className="text w-[97%] absolute bottom-[2px] pb-4 bg-[#f4f5f6] dark:bg-[#171717] flex justify-center">
               <div className={`bg-[#f4f5f6] bottom-4 dark:bg-[#212327] p-4 rounded-lg mt-6 w-4/5 border-gray-700`}>
@@ -319,10 +331,14 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
                           : 'Chat ai agent...'
                       }
                       value={message}
-                      onChange={(e) => {
-                        setMessage(e.target.value);
-                      }}
+                      onChange={(e) => setMessage(e.target.value)}
                       onInput={handleInput}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault(); // Prevents adding a new line
+                          onSubmit(); // Calls the submit function
+                        }
+                      }}
                       rows="1"
                       className="flex-1 bg-transparent text-white placeholder-gray-500 outline-none resize-none overflow-hidden min-h-[40px] max-h-48"
                     />
