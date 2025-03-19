@@ -115,7 +115,7 @@ const TeamMembers = () => {
                       <User
                         avatarProps={{
                           radius: 'full',
-                          src: getImageLink(member.user.image),
+                          src: getImageLink(member.user.image, { bucket: 'statisense' }),
                           classNames: { base: '!w-9 !h-9' },
                         }}
                         description={member.user.email}

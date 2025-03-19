@@ -41,7 +41,7 @@ const PageCommentBadge = ({ id }) => {
               </div>
             ) : (
               <Avatar
-                src={getImageLink(filtered[0].author.image)}
+                src={getImageLink(filtered[0].author.image, { bucket: 'statisense' })}
                 name={`${filtered[0].author.firstName} ${filtered[0].author.lastName}`}
                 classNames={{
                   base: '!w-[24px] !h-[24px] text-lg relative z-[2] m-auto pointer-events-none',

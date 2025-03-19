@@ -17,7 +17,7 @@ const AuthDropdown = ({ className, mini = false }) => {
         {mini ? (
           <div className={cn('cursor-pointer w-max', className)}>
             <Avatar
-              src={getImageLink(user.image)}
+              src={getImageLink(user.image, { bucket: 'statisense' })}
               radius="full"
               classNames={{ base: 'w-[32px] h-[32px]' }}
               isBordered
@@ -28,7 +28,7 @@ const AuthDropdown = ({ className, mini = false }) => {
             className={cn('transition-transform')}
             description={`@${user.username}`}
             name={business.name}
-            avatarProps={{ radius: 'full', size: 'sm', src: getImageLink(user.image) }}
+            avatarProps={{ radius: 'full', size: 'sm', src: getImageLink(user.image, { bucket: 'statisense' }) }}
             classNames={{
               name: 'text-base leading-none font-medium',
               description: 'text-sm leading-none mt-1.5',

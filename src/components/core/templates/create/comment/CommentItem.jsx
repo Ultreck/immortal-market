@@ -85,7 +85,7 @@ const CommentItem = ({ comment, onClick, className }) => {
           >
             <div className="flex gap-x-4 items-start">
               <Avatar
-                src={getImageLink(comment.author?.image)}
+                src={getImageLink(comment.author?.image, { bucket: 'statisense' })}
                 name={`${comment.author.firstName}`}
                 className="text-lg"
                 size="sm"

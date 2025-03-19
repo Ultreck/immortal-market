@@ -36,7 +36,7 @@ const CommentReplyItem = ({ comment }) => {
           <div tabIndex="-1" className="w-full py-4 px-8">
             <div className="flex gap-x-4 items-start">
               <Avatar
-                src={getImageLink(comment.author?.image)}
+                src={getImageLink(comment.author?.image, { bucket: 'statisense' })}
                 name={`${comment.author.firstName} ${comment.author.lastName}`}
                 className="text-lg"
                 size="sm"
