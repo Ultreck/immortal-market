@@ -14,7 +14,7 @@ const useHistory = () => {
       const last = undoHistory.pop();
       if (last) {
         const selectedElementsExists = last.some((page) =>
-          page.elements.some((element) => selectedElements.includes(element.id))
+          page.elements.some((element) => selectedElements.includes(element.key))
         );
         updateStore({
           pages: last,
@@ -33,7 +33,7 @@ const useHistory = () => {
       const last = redoHistory.pop();
       if (last) {
         const selectedElementsExists = last.some((page) =>
-          page.elements.some((element) => selectedElements.includes(element.id))
+          page.elements.some((element) => selectedElements.includes(element.key))
         );
         updateStore({
           pages: last,

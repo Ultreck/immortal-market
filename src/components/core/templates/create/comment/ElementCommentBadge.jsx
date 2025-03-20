@@ -20,7 +20,7 @@ const ElementCommentBadge = ({ element }) => {
       isCommentsOpen: true,
       commentsTargetId: element.id,
     });
-    selectElements([element.id]);
+    selectElements([element.key]);
   };
 
   return (

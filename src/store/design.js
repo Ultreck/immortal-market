@@ -1,6 +1,7 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 import { io } from 'socket.io-client';
 import { shallow } from 'zustand/shallow';
+import { v4 as uuid } from 'uuid';
 
 const createDesignStore = () => {
   let socket = null;
@@ -34,8 +35,11 @@ const createDesignStore = () => {
     isCommentsOpen: false,
     activeComment: null,
     commentsTargetId: null,
+    isCommentsVisible: true,
     // Tools
     tool: null,
+    // Pending Updates
+    pendingUpdates: {},
   };
 
   return createWithEqualityFn(
@@ -59,7 +63,6 @@ const createDesignStore = () => {
           set({ connected: false });
         });
         socket.on('init', ({ state, collaborators }) => {
-          console.log('Initialized', state);
           set({
             initialized: true,
             pages: state.pages,
@@ -73,22 +76,63 @@ const createDesignStore = () => {
             },
           });
         });
-        socket.on('action', ({ action, result, user }) => {
-          console.log('Action', action, result);
-          const { state, elements } = result;
-          set({
-            pages: state.pages,
-            elements: state.elements,
-            design: state.design,
-            history: {
-              undoStack: state.history.slice(0, state.currentIndex + 1),
-              redoStack: state.history.slice(state.currentIndex + 1),
-            },
-          });
-          const actions = ['element:create', 'elements:create', 'elements:duplicate'];
-          if (actions.includes(action) && user === get().user && Array.isArray(elements) && elements.length > 0) {
+        socket.on('action', ({ action, result, oid }) => {
+          const _pendingUpdates = { ...get().pendingUpdates };
+          const operation = _pendingUpdates?.[oid];
+          const { state } = result;
+          console.log('Action', { action, operation });
+          if (operation) {
+            if (action === 'elements:create') {
+              const { elements } = result;
+              const updates = {
+                elements: get().elements.map(el => {
+                  const element = elements.find(e => e.key === el.key);
+                  if (element) {
+                    return { ...el, id: element.id, _id: element._id };
+                  }
+                  return el;
+                }),
+                pendingUpdates: _pendingUpdates,
+              }
+              set(updates);
+            } else if (action === 'element:delete') {
+              // Delete operation was successful, just remove from pending updates
+              // The element is already removed from the state
+            } else if (action === 'elements:delete') {
+              // Batch delete operation was successful, just remove from pending updates
+              // The elements are already removed from the state
+            } else if (action === 'elements:bring-forward') {
+              // Update with server state in case of conflicts
+              set({
+                elements: state.elements,
+                pendingUpdates: _pendingUpdates
+              });
+            } else if (action === 'elements:group') {
+              const { group, elements } = result;
+              const updatedElements = get().elements.map(el => {
+                if (el.key === operation.payload.key) {
+                  return { ...el, id: group.id, _id: group._id, };
+                }
+                const serverElement = elements.find(e => e.id === el.id);
+                if (serverElement) return serverElement;
+                return el;
+              });
+              set({
+                elements: updatedElements,
+                pendingUpdates: _pendingUpdates
+              });
+            }
+            delete _pendingUpdates[oid];
+          } else {
             set({
-              selectedElements: elements[0].group ? [elements[0].group] : elements.map((i) => i.id),
+              pages: state.pages,
+              elements: state.elements,
+              design: state.design,
+              pendingUpdates: _pendingUpdates,
+              history: {
+                undoStack: state.history.slice(0, state.currentIndex + 1),
+                redoStack: state.history.slice(state.currentIndex + 1),
+              },
             });
           }
         });
@@ -118,9 +162,24 @@ const createDesignStore = () => {
             cursors: Object.fromEntries(Object.entries(state.cursors).filter(([key]) => key !== user)),
           }));
         });
-        socket.on('error', ({ code, message }) => {
-          console.error(`Design error: ${code} - ${message}`);
-          if (code === 'design-not-found') {
+        socket.on('error', ({ code, message, action, oid }) => {
+          console.error(`Error ${code}: ${message}`, action);
+          // If this error is related to a pending update, mark it as failed
+          if (oid) {
+            const { pendingUpdates } = get();
+            if (pendingUpdates[oid]) {
+              set({
+                pendingUpdates: {
+                  ...pendingUpdates,
+                  [oid]: {
+                    ...pendingUpdates[oid],
+                    error: { code, message }
+                  }
+                }
+              });
+            }
+          }
+          if (code === 'DESIGN_NOT_FOUND' && typeof onDesignNotFound === 'function') {
             onDesignNotFound();
           }
         });
@@ -228,6 +287,14 @@ const createDesignStore = () => {
       updatePage: (pageId, updates) => {
         const { id, user } = get();
         if (!socket || !id || !user) return;
+        const pages = get().pages;
+        const updatedPages = pages.map((page) => {
+          if (page.id === pageId) {
+            return { ...page, ...updates };
+          }
+          return page;
+        });
+        set({ pages: updatedPages });
         socket.emit('action', {
           design: id,
           user,
@@ -323,31 +390,42 @@ const createDesignStore = () => {
           },
         });
       },
-      // Element actions
-      createElement: (pageId, payload) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
-        socket.emit('action', {
-          design: id,
-          user,
-          action: 'element:create',
-          payload: {
-            pageId,
-            data: payload,
+      createElements: (pageId, elements) => {
+        const _elements = elements.map((el, i) => {
+          const id = uuid();
+          const last = get().elements.sort((a, b) => a.order - b.order).at(-1);
+          return ({
+            ...el,
+            id,
+            _id: id,
+            key: id,
+            page: pageId,
+            order: (last?.order || 0) + i + 1,
+            rotation: 0,
+          });
+        });
+        const oid = `create-elements-${Date.now()}`;
+        set({
+          elements: [...get().elements, ..._elements],
+          selectedElements: [_elements.map((el) => el.key)],
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:create',
+              keys: _elements.map((el) => el.key),
+              timestamp: Date.now(),
+            },
           },
         });
-      },
-      createElements: (pageId, elements) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:create',
           payload: {
             pageId,
-            elements,
+            elements: _elements.map((el) => ({ ...el, id: undefined, _id: undefined })),
           },
+          oid,
         });
       },
       updateElement: (elementId, updates, emit = false) => {
@@ -395,197 +473,663 @@ const createDesignStore = () => {
           });
         }
       },
-      deleteElement: (elementId) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
-        socket.emit('action', {
-          design: id,
-          user,
-          action: 'element:delete',
-          payload: {
-            elementId,
-          },
+      deleteElements: (keys) => {
+        const elements = get().elements.filter(el => keys.includes(el.key));
+        const oid = `delete-elements-${Date.now()}`;
+        set({
+          elements: get().elements.filter(el => !keys.includes(el.key)),
+          selectedElements: [],
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:delete',
+              keys,
+              timestamp: Date.now()
+            }
+          }
         });
-      },
-      deleteElements: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:delete',
           payload: {
-            elementIds,
+            elementIds: elements.map(el => el.id),
           },
+          operationId: oid,
         });
       },
-      duplicateElements: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      duplicateElements: (keys) => {
+        const elementsToDuplicate = get().elements.filter(el => keys.includes(el.key));
+        const duplicatedElements = elementsToDuplicate.map(el => {
+          const newId = uuid();
+          return {
+            ...el,
+            id: newId,
+            _id: newId,
+            key: newId,
+            position: {
+              x: el.position.x + 10,
+              y: el.position.y + 10,
+            },
+            order: el.order + 1,
+          };
+        });
+        const oid = `create-elements-${Date.now()}`;
+        set({
+          elements: [...get().elements, ...duplicatedElements],
+          selectedElements: duplicatedElements.map(el => el.key),
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:create',
+              keys: duplicatedElements.map(el => el.key),
+              timestamp: Date.now()
+            }
+          }
+        });
         socket.emit('action', {
-          design: id,
-          user,
-          action: 'elements:duplicate',
+          design: get().id,
+          user: get().user,
+          action: 'elements:create',
           payload: {
-            elementIds,
+            pageId: elementsToDuplicate[0].page,
+            elements: duplicatedElements.map(el => ({
+              ...el,
+              id: undefined,
+              _id: undefined
+            })),
           },
+          oid,
         });
       },
-      moveElementTo: (elementId, targetOrder) => {
+      moveElementTo: (key, targetOrder) => {
         const { id, user } = get();
         if (!socket || !id || !user) return;
+        const element = get().elements.find(el => el.key === key);
+        if (!element) return;
         socket.emit('action', {
           design: id,
           user,
           action: 'element:move-to',
           payload: {
-            elementId,
+            elementId: element.id,
             targetOrder,
           },
         });
       },
-      bringElementsForward: (elementIds) => {
-        const { id, user } = get();
+      bringElementsForward: (keys) => {
+        const { id, user, elements, pendingUpdates } = get();
         if (!socket || !id || !user) return;
+        // Get the elements to bring forward
+        const elementsToMove = elements.filter(el => keys.includes(el.key));
+        if (elementsToMove.length === 0) return;
+        // Get all elements on the same page as the first element
+        const pageElements = elements.filter(el => el.page === elementsToMove[0].page);
+        // Sort by order
+        const sortedElements = [...pageElements].sort((a, b) => a.order - b.order);
+        // For each element to move, find the element with next highest order
+        const updatedElements = [...elements];
+        elementsToMove.forEach(element => {
+          const nextElement = sortedElements.find(el =>
+            el.order > element.order && !keys.includes(el.key)
+          );
+          if (nextElement) {
+            // Swap orders with the next element
+            const elementIndex = updatedElements.findIndex(el => el.key === element.key);
+            const nextIndex = updatedElements.findIndex(el => el.key === nextElement.key);
+            const tempOrder = updatedElements[elementIndex].order;
+            updatedElements[elementIndex].order = updatedElements[nextIndex].order;
+            updatedElements[nextIndex].order = tempOrder;
+          }
+        });
+        const oid = `bring-forward-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...pendingUpdates,
+            [oid]: {
+              type: 'elements:bring-forward',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
           design: id,
           user,
           action: 'elements:bring-forward',
           payload: {
-            elementIds,
+            elementIds: elementsToMove.map(el => el.id),
           },
+          oid,
         });
       },
-      sendElementsBackward: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      sendElementsBackward: (keys) => {
+        // Get the elements to send backward
+        const elementsToMove = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToMove.length === 0) return;
+        // Get all elements on the same page as the first element
+        const pageElements = get().elements.filter(el => el.page === elementsToMove[0].page);
+        // Sort by order
+        const sortedElements = [...pageElements].sort((a, b) => a.order - b.order);
+        // For each element to move, find the element with next lowest order
+        const updatedElements = [...get().elements];
+        elementsToMove.forEach(element => {
+          const prevElement = sortedElements.find(el =>
+            el.order < element.order && !keys.includes(el.key)
+          );
+          if (prevElement) {
+            // Swap orders with the previous element
+            const elementIndex = updatedElements.findIndex(el => el.key === element.key);
+            const prevIndex = updatedElements.findIndex(el => el.key === prevElement.key);
+            const tempOrder = updatedElements[elementIndex].order;
+            updatedElements[elementIndex].order = updatedElements[prevIndex].order;
+            updatedElements[prevIndex].order = tempOrder;
+          }
+        });
+        const oid = `send-backward-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:send-backward',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:send-backward',
           payload: {
-            elementIds,
+            elementIds: elementsToMove.map(el => el.id),
           },
+          oid,
         });
       },
-      bringElementsToFront: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      bringElementsToFront: (keys) => {
+        // Get the elements to bring to front
+        const elementsToMove = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToMove.length === 0) return;
+        // Get all elements on the same page as the first element
+        const pageElements = get().elements.filter(el => el.page === elementsToMove[0].page);
+        // Find the highest order among all elements
+        const maxOrder = Math.max(...pageElements.map(el => el.order));
+        // Create optimistic updates by moving selected elements to the front
+        const updatedElements = [...get().elements];
+        let currentOrder = maxOrder + 1;
+        // Move each selected element to the front
+        elementsToMove.forEach(element => {
+          const elementIndex = updatedElements.findIndex(el => el.key === element.key);
+          if (elementIndex !== -1) {
+            updatedElements[elementIndex] = {
+              ...updatedElements[elementIndex],
+              order: currentOrder++
+            };
+          }
+        });
+        const oid = `bring-to-front-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:bring-to-front',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:bring-to-front',
           payload: {
-            elementIds,
+            elementIds: elementsToMove.map(el => el.id),
           },
+          oid,
         });
       },
-      sendElementsToBack: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      sendElementsToBack: (keys) => {
+        // Get the elements to send to back
+        const elementsToMove = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToMove.length === 0) return;
+        // Get all elements on the same page as the first element
+        const pageElements = get().elements.filter(el => el.page === elementsToMove[0].page);
+        // Find the lowest order among all elements
+        const minOrder = Math.min(...pageElements.map(el => el.order));
+        // Create optimistic updates by moving selected elements to the back
+        const updatedElements = [...get().elements];
+        let currentOrder = minOrder - 1;
+        // Move each selected element to the back
+        elementsToMove.forEach(element => {
+          const elementIndex = updatedElements.findIndex(el => el.key === element.key);
+          if (elementIndex !== -1) {
+            updatedElements[elementIndex] = {
+              ...updatedElements[elementIndex],
+              order: currentOrder--
+            };
+          }
+        });
+        const oid = `send-to-back-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:send-to-back',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:send-to-back',
           payload: {
-            elementIds,
+            elementIds: elementsToMove.map(el => el.id),
           },
+          oid,
         });
       },
-      alignElementsLeft: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      alignElementsLeft: (keys) => {
+        // Get the elements to align
+        const elementsToAlign = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToAlign.length === 0) return;
+        // Find the leftmost position among selected elements
+        const leftmostPosition = Math.min(...elementsToAlign.map(el => el.position.x));
+        // Create optimistic updates
+        const updatedElements = get().elements.map(el => {
+          if (keys.includes(el.key)) {
+            return {
+              ...el,
+              position: {
+                ...el.position,
+                x: leftmostPosition
+              }
+            };
+          }
+          return el;
+        });
+        const oid = `align-left-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:align-left',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:align-left',
           payload: {
-            elementIds,
+            elementIds: elementsToAlign.map(el => el.id),
           },
+          oid,
         });
       },
-      alignElementsCenter: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      alignElementsCenter: (keys) => {
+        // Get the elements to align
+        const elementsToAlign = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToAlign.length === 0) return;
+        // Calculate the center position
+        // First find the leftmost and rightmost positions
+        const leftmostPosition = Math.min(...elementsToAlign.map(el => el.position.x));
+        const rightmostPosition = Math.max(...elementsToAlign.map(el => el.position.x + (el.size?.width || 0)));
+        const centerPosition = leftmostPosition + (rightmostPosition - leftmostPosition) / 2;
+        // Create optimistic updates
+        const updatedElements = get().elements.map(el => {
+          if (keys.includes(el.key)) {
+            return {
+              ...el,
+              position: {
+                ...el.position,
+                x: centerPosition - (el.size?.width || 0) / 2
+              }
+            };
+          }
+          return el;
+        });
+        const oid = `align-center-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:align-center',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:align-center',
           payload: {
-            elementIds,
+            elementIds: elementsToAlign.map(el => el.id),
           },
+          oid,
         });
       },
-      alignElementsRight: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      alignElementsRight: (keys) => {
+        // Get the elements to align
+        const elementsToAlign = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToAlign.length === 0) return;
+        // Find the rightmost position among selected elements
+        const rightmostPosition = Math.max(...elementsToAlign.map(el => el.position.x + (el.size?.width || 0)));
+        // Create optimistic updates
+        const updatedElements = get().elements.map(el => {
+          if (keys.includes(el.key)) {
+            return {
+              ...el,
+              position: {
+                ...el.position,
+                x: rightmostPosition - (el.size?.width || 0)
+              }
+            };
+          }
+          return el;
+        });
+        const oid = `align-right-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:align-right',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:align-right',
           payload: {
-            elementIds,
+            elementIds: elementsToAlign.map(el => el.id),
           },
+          oid,
         });
       },
-      alignElementsTop: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      alignElementsTop: (keys) => {
+        // Get the elements to align
+        const elementsToAlign = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToAlign.length === 0) return;
+        // Find the topmost position among selected elements
+        const topmostPosition = Math.min(...elementsToAlign.map(el => el.position.y));
+        // Create optimistic updates
+        const updatedElements = get().elements.map(el => {
+          if (keys.includes(el.key)) {
+            return {
+              ...el,
+              position: {
+                ...el.position,
+                y: topmostPosition
+              }
+            };
+          }
+          return el;
+        });
+        const oid = `align-top-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:align-top',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:align-top',
           payload: {
-            elementIds,
+            elementIds: elementsToAlign.map(el => el.id),
           },
+          oid,
         });
       },
-      alignElementsMiddle: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      alignElementsMiddle: (keys) => {
+        // Get the elements to align
+        const elementsToAlign = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToAlign.length === 0) return;
+        // Calculate the middle position
+        // First find the topmost and bottommost positions
+        const topmostPosition = Math.min(...elementsToAlign.map(el => el.position.y));
+        const bottommostPosition = Math.max(...elementsToAlign.map(el => el.position.y + (el.size?.height || 0)));
+        const middlePosition = topmostPosition + (bottommostPosition - topmostPosition) / 2;
+        // Create optimistic updates
+        const updatedElements = get().elements.map(el => {
+          if (keys.includes(el.key)) {
+            return {
+              ...el,
+              position: {
+                ...el.position,
+                y: middlePosition - (el.size?.height || 0) / 2
+              }
+            };
+          }
+          return el;
+        });
+        const oid = `align-middle-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:align-middle',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:align-middle',
           payload: {
-            elementIds,
+            elementIds: elementsToAlign.map(el => el.id),
           },
+          oid,
         });
       },
-      alignElementsBottom: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      alignElementsBottom: (keys) => {
+        // Get the elements to align
+        const elementsToAlign = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToAlign.length === 0) return;
+        // Find the bottommost position among selected elements
+        const bottommostPosition = Math.max(...elementsToAlign.map(el => el.position.y + (el.size?.height || 0)));
+        // Create optimistic updates
+        const updatedElements = get().elements.map(el => {
+          if (keys.includes(el.key)) {
+            return {
+              ...el,
+              position: {
+                ...el.position,
+                y: bottommostPosition - (el.size?.height || 0)
+              }
+            };
+          }
+          return el;
+        });
+        const oid = `align-bottom-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:align-bottom',
+              keys,
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:align-bottom',
           payload: {
-            elementIds,
+            elementIds: elementsToAlign.map(el => el.id),
           },
+          oid,
         });
       },
-      groupElements: (elementIds) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      groupElements: (keys) => {
+        // Get the elements to group
+        const elementsToGroup = get().elements.filter(el => keys.includes(el.key));
+        if (elementsToGroup.length < 2) return;
+        // Calculate the bounding box for the group
+        const minX = Math.min(...elementsToGroup.map(el => el.position.x));
+        const minY = Math.min(...elementsToGroup.map(el => el.position.y));
+        const maxX = Math.max(...elementsToGroup.map(el => el.position.x + (el.size?.width || 0)));
+        const maxY = Math.max(...elementsToGroup.map(el => el.position.y + (el.size?.height || 0)));
+        // Get the highest order to place the group on top
+        const pageElements = get().elements.filter(el => el.page === elementsToGroup[0].page);
+        const highestOrder = Math.max(...pageElements.map(el => el.order));
+        const groupOrder = highestOrder + 1;
+        // Create a new group ID
+        const key = uuid();
+        // Create the group element
+        const groupElement = {
+          id: key,
+          _id: key,
+          key,
+          type: 'group',
+          text: 'Group',
+          design: get().id,
+          page: elementsToGroup[0].page,
+          position: { x: minX, y: minY },
+          size: { width: maxX - minX, height: maxY - minY },
+          rotation: 0,
+          order: groupOrder,
+          children: elementsToGroup.map(el => el.id),
+          style: { opacity: 1 },
+        };
+        // Create optimistic updates by adding group information and adjusting positions
+        const updatedElements = get().elements.map(el => {
+          if (keys.includes(el.key)) {
+            return {
+              ...el,
+              parent: key,
+              position: {
+                ...el.position,
+                x: el.position.x - minX,
+                y: el.position.y - minY
+              }
+            };
+          }
+          return el;
+        });
+        const oid = `group-elements-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: [...updatedElements, groupElement],
+          selectedElements: [key],
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:group',
+              payload: {
+                key,
+                elementIds: elementsToGroup.map(el => el.id),
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:group',
           payload: {
-            elementIds,
+            key,
+            elementIds: elementsToGroup.map(el => el.id),
           },
+          oid,
         });
       },
-      ungroupElements: (groupId) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+      ungroupElements: (key) => {
+        // Find the group element and its children
+        const groupElement = get().elements.find(el => el.key === key);
+        if (!groupElement) return;
+        const childElements = get().elements.filter(el => el.parent === groupElement.id);
+        // Create optimistic updates by removing the group and restoring child positions
+        const filteredElements = get().elements.filter(el => el.key !== key);
+        const updatedElements = filteredElements.map(el => {
+          // Restore child elements' positions by adding the group's position
+          if (el.parent === groupElement.id) {
+            return {
+              ...el,
+              parent: null,
+              position: {
+                x: el.position.x + groupElement.position.x,
+                y: el.position.y + groupElement.position.y
+              }
+            };
+          }
+          return el;
+        });
+        const oid = `ungroup-elements-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          elements: updatedElements,
+          selectedElements: childElements.map(el => el.key),
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:ungroup',
+              payload: {
+                groupId: groupElement.id,
+                elementIds: childElements.map(el => el.id)
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'elements:ungroup',
           payload: {
-            groupId,
+            groupId: groupElement.id,
+            elementIds: childElements.map(el => el.id)
           },
+          oid,
         });
       },
       // History actions
@@ -636,10 +1180,14 @@ const createDesignStore = () => {
       },
       // Helpers
       getElement: (id) => {
-        return get().elements.find((element) => element.id === id);
+        return get().elements.find((element) => element.id === id || element.key === id);
+      },
+      getElements: (filter) => {
+        if (filter) return get().elements.filter(filter);
+        return get().elements;
       },
       getElementPage: (id) => {
-        const element = get().elements.find((element) => element.id === id);
+        const element = get().elements.find((element) => element.id === id || element.key === id);
         return get().pages.find((page) => page.id === element.page);
       },
       getPage: (id) => {
@@ -651,8 +1199,8 @@ const createDesignStore = () => {
       selectPage: (id) => {
         set({ selectedPage: id, selectedElements: [] });
       },
-      selectElements: (ids) => {
-        set({ selectedElements: ids, selectedPage: null, activeElement: null });
+      selectElements: (keys) => {
+        set({ selectedElements: keys, selectedPage: null, activeElement: null });
       },
       // Tool actions
       openTool: (tool) => {
@@ -668,6 +1216,67 @@ const createDesignStore = () => {
           socket = null;
         }
         set(initialState);
+      },
+      // Pending updates utilities
+      getPendingUpdates: () => {
+        return get().pendingUpdates;
+      },
+
+      hasPendingUpdates: () => {
+        return Object.keys(get().pendingUpdates).length > 0;
+      },
+
+      // Retry a failed operation
+      retryFailedOperation: (operationId) => {
+        const { pendingUpdates, id, user } = get();
+        const update = pendingUpdates[operationId];
+
+        if (!update || !update.error || !socket || !id || !user) return;
+
+        // Remove the error
+        set({
+          pendingUpdates: {
+            ...pendingUpdates,
+            [operationId]: {
+              ...update,
+              error: null
+            }
+          }
+        });
+
+        // Re-emit the action
+        if (update.type === 'element:create') {
+          socket.emit('action', {
+            design: id,
+            user,
+            action: 'element:create',
+            payload: {
+              pageId: update.pageId,
+              data: update.payload,
+            },
+            operationId,
+          });
+        } else if (update.type === 'element:delete') {
+          socket.emit('action', {
+            design: id,
+            user,
+            action: 'element:delete',
+            payload: {
+              elementId: update.elementId,
+            },
+            operationId,
+          });
+        } else if (update.type === 'elements:delete') {
+          socket.emit('action', {
+            design: id,
+            user,
+            action: 'elements:delete',
+            payload: {
+              elementIds: update.elementIds,
+            },
+            operationId,
+          });
+        }
       },
     }),
     shallow

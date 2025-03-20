@@ -15,7 +15,7 @@ export const GroupPresent = ({ element, ...props }) => {
 const GroupContent = ({ element, selected }) => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const activeElement = useDesignStore((state) => state.activeElement);
-  const elements = useDesignStore((state) => state.elements.filter((e) => e.group === element.id));
+  const elements = useDesignStore((state) => state.elements.filter((e) => e.parent === element.id));
   const sorted = elements.sort((a, b) => a.order - b.order);
   const selectElements = useDesignStore((state) => state.selectElements);
   const updateStore = useDesignStore((state) => state.updateStore);
@@ -32,19 +32,19 @@ const GroupContent = ({ element, selected }) => {
   const handleDoubleClick = () => {};
 
   return (
-    <div>
+    <div className="w-full h-full">
       {sorted.map((element) => {
         const component = getElementEditComponent(element);
         if (!component) {
           return (
-            <span key={element.id} className="border border-red-500 text-red-500 rounded-2xl px-6 py-2">
+            <span key={element.key} className="border border-red-500 text-red-500 rounded-2xl px-6 py-2">
               {element.type}
             </span>
           );
         }
         const config = getElementConfig(element);
-        const _selected = selectedElements.includes(element.id);
-        const active = activeElement === element.id;
+        const _selected = selectedElements.includes(element.key);
+        const active = activeElement === element.key;
 
         return config?.wrapper ? (
           <ElementWrapper
@@ -63,7 +63,7 @@ const GroupContent = ({ element, selected }) => {
             {createElement(component, { element, active, onChange: handleChange })}
           </ElementWrapper>
         ) : (
-          <span key={element.id} className="pointer-events-auto">
+          <span key={element.key} className="pointer-events-auto">
             {createElement(component, {
               element,
               active,

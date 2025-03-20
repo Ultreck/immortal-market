@@ -9,7 +9,7 @@ const FrameShape = ({ element, active, onChange }) => {
   return (
     <div className="w-full h-full" style={{ filter: `drop-shadow(${element.style.shadow})` }}>
       <FrameContents
-        id={`frame/0/${element.id}`}
+        id={`frame/0/${element.key}`}
         element={element}
         active={active}
         style={{ ...(!active ? shape : {}) }}

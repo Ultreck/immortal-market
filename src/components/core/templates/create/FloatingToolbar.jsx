@@ -12,7 +12,7 @@ const FloatingToolbar = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const elements = useDesignStore((state) => {
-    return state.elements.filter((el) => selectedElements.includes(el.id));
+    return state.elements.filter((el) => selectedElements.includes(el.key));
   });
   const { handleAction } = useElementActions({ id });
 

@@ -35,7 +35,7 @@ const Carousel = ({ element, active, onChange }) => {
         <SwiperSlide key={i}>
           <FrameContents
             key={i}
-            id={`frame/${i}/${element.id}`}
+            id={`frame/${i}/${element.key}`}
             element={element}
             onChange={onChange}
             active={active}

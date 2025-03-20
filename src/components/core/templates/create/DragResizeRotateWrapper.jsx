@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import DragResizeRotate from '@/components/ui/DragResizeRotate.jsx';
 import { cn } from '@/lib/utils.js';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { getElementConfig } from '@/lib/elements.js';
 import useDesignStore from '@/store/design.js';
 
@@ -9,7 +9,7 @@ const DragResizeRotateWrapper = ({ id }) => {
   const [rotate, setRotate] = useState(0);
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const elements = useDesignStore((state) =>
-    state.elements.filter((el) => el.page === id && selectedElements.includes(el.id))
+    state.elements.filter((el) => el.page === id && selectedElements.includes(el.key))
   );
   const updateElements = useDesignStore((state) => state.updateElements);
   const updateStore = useDesignStore((state) => state.updateStore);
@@ -18,7 +18,7 @@ const DragResizeRotateWrapper = ({ id }) => {
 
   const disabled = useMemo(() => {
     if (elements.length === 1) {
-      return !!elements[0].group;
+      return !!elements[0].parent;
     }
     return false;
   }, [elements]);
@@ -97,10 +97,10 @@ const DragResizeRotateWrapper = ({ id }) => {
         <DragResizeRotate
           values={{ x, y, width, height, rotate }}
           onChange={handleChange}
-          onClick={() => {
+          onDoubleClick={() => {
             if (elements.length === 1) {
               const config = getElementConfig(elements[0]);
-              if (config.editable) updateStore({ activeElement: elements[0].id });
+              if (config.editable) updateStore({ activeElement: elements[0].key });
             }
           }}
           visible={!disabled}

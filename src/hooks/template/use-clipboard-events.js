@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import useDesignStore from '@/store/design.js';
 import { useKey } from 'react-use';
+import { v4 as uuidv4 } from 'uuid';
 
 const isValidElement = (element) => {
   const validKeys = ['type', 'id', 'size', 'position'];
@@ -11,13 +12,12 @@ const useClipboardEvents = () => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const deleteElements = useDesignStore((state) => state.deleteElements);
   const getElement = useDesignStore((state) => state.getElement);
-  const getPageElements = useDesignStore((state) => state.getPageElements);
-  const getElementPage = useDesignStore((state) => state.getElementPage);
   const createElements = useDesignStore((state) => state.createElements);
   const activePage = useDesignStore((state) => state.activePage);
   const activeElement = useDesignStore((state) => state.activeElement);
   const tool = useDesignStore((state) => state.tool);
   const duplicateElements = useDesignStore((state) => state.duplicateElements);
+  const getElements = useDesignStore((state) => state.getElements);
 
   useKey(
     (e) => e.key?.toLowerCase() === 'd' && e.ctrlKey && !e.shiftKey,
@@ -31,8 +31,7 @@ const useClipboardEvents = () => {
     const handleCopy = (e) => {
       if (activeElement) return;
       if (selectedElements.length) {
-        const page = getElementPage(selectedElements[0]);
-        const _elements = getPageElements(page.id).filter((element) => selectedElements.includes(element.id));
+        const _elements = getElements((el) => selectedElements.includes(el.key));
         e.clipboardData.setData('text/plain', JSON.stringify(_elements));
         e.preventDefault();
       }
@@ -40,10 +39,9 @@ const useClipboardEvents = () => {
     const handleCut = (e) => {
       if (activeElement) return;
       if (selectedElements.length) {
-        const page = getElementPage(selectedElements[0]);
-        const _elements = getPageElements(page.id).filter((element) => selectedElements.includes(element.id));
+        const _elements = getElements((el) => selectedElements.includes(el.key));
         e.clipboardData.setData('text/plain', JSON.stringify(_elements));
-        deleteElements(page.id, selectedElements);
+        deleteElements(selectedElements);
         e.preventDefault();
       }
     };
@@ -86,6 +84,7 @@ const useClipboardEvents = () => {
                     // eslint-disable-next-line no-unused-vars
                     _elements.map(({ _id, id, ...el }) => ({
                       ...el,
+                      key: uuidv4(),
                       position: { x: el.position.x + 10, y: el.position.y + 10 },
                     }))
                   );
@@ -167,17 +166,7 @@ const useClipboardEvents = () => {
       window.removeEventListener('copy', handleCopy);
       window.removeEventListener('cut', handleCut);
     };
-  }, [
-    activeElement,
-    activePage,
-    createElements,
-    deleteElements,
-    getElement,
-    getElementPage,
-    getPageElements,
-    selectedElements,
-    tool,
-  ]);
+  }, [activeElement, activePage, createElements, deleteElements, getElement, getElements, selectedElements, tool]);
 };
 
 export default useClipboardEvents;

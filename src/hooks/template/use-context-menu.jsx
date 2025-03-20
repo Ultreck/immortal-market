@@ -52,7 +52,7 @@ export const useContextMenu = ({ id, node }) => {
             selectElements([]);
             return;
           }
-          if (!selectedElements.includes(targetElement.id)) selectElements([targetElement.id]);
+          if (!selectedElements.includes(targetElement.key)) selectElements([targetElement.key]);
           setContextMenu({ isOpen: true, position: { x: e.clientX, y: e.clientY }, type: 'element' });
         }
         e.preventDefault();

@@ -62,7 +62,7 @@ const ElementTools = () => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const updateElements = useDesignStore((state) => state.updateElements);
   const elements = useDesignStore((state) => {
-    return state.elements.filter((el) => selectedElements.includes(el.id));
+    return state.elements.filter((el) => selectedElements.includes(el.key));
   });
 
   const tools = useMemo(() => {

@@ -26,7 +26,7 @@ const FrameTabs = ({ element, active, onChange }) => {
             <Tab key={t.id} title={t.title}>
               <FrameContents
                 key={t.id}
-                id={`frame/${t.id}/${element.id}`}
+                id={`frame/${t.id}/${element.key}`}
                 element={element}
                 onChange={onChange}
                 active={active}

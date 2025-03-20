@@ -18,7 +18,7 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
     'Delete',
     () => {
       if (activeElement || !selectedElements.length) return;
-      const children = element.children.filter((el) => !selectedElements.includes(el.id));
+      const children = element.children.filter((el) => !selectedElements.includes(el.key));
       onChange({ ...element, children });
     },
     undefined,
@@ -55,20 +55,20 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
       {elements.length > 0 ? (
         <>
           {elements.map((el) => {
-            const selected = selectedElements.includes(el.id);
+            const selected = selectedElements.includes(el.key);
             const component = getElementEditComponent(el);
             const config = getElementConfig(el);
-            const _active = activeElement === el.id;
+            const _active = activeElement === el.key;
 
             const handleChange = (e) => {
               onChange({
                 ...element,
-                children: element.children.map((_el) => (_el.id === el.id ? e : _el)),
+                children: element.children.map((_el) => (_el.key === el.key ? e : _el)),
               });
             };
 
             return (
-              <Fragment key={el.id}>
+              <Fragment key={el.key}>
                 {component ? (
                   <ElementWrapper
                     element={el}
@@ -79,10 +79,10 @@ const FrameContents = ({ id, element, active, onChange, overlay, style = {} }) =
                     active={_active}
                     onClick={() => {
                       if (!active) return;
-                      setSelectedElements((old) => [...old, el.id]);
+                      setSelectedElements((old) => [...old, el.key]);
                     }}
                     onChange={handleChange}
-                    onDoubleClick={() => setActiveElement(el.id)}
+                    onDoubleClick={() => setActiveElement(el.key)}
                   >
                     {createElement(component, {
                       element: el,

@@ -16,7 +16,7 @@ const Page = ({ id }) => {
   const page = useDesignStore((state) => state.pages.find((p) => p.id === id));
   const updateStore = useDesignStore((state) => state.updateStore);
   const selected = useDesignStore((state) => state.selectedPage === id);
-  const isCommentsVisible = useDesignStore((state) => state.isCommentsOpen);
+  const isCommentsVisible = useDesignStore((state) => state.isCommentsVisible);
   const activePage = useDesignStore((state) => state.activePage);
   const pendingActivePage = useDesignStore((state) => state.pendingActivePage);
 

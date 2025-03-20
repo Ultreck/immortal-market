@@ -20,7 +20,7 @@ const PageContent = ({ id }) => {
   const page = useDesignStore((state) => state.pages.find((page) => page.id === id));
   const elements = useDesignStore((state) => state.elements.filter((e) => e.page === id));
   const selectedElements = useDesignStore((state) => state.selectedElements);
-  const isSelectionPage = elements.some((e) => e.id === selectedElements[0]);
+  const isSelectionPage = elements.some((e) => e.key === selectedElements[0]);
   const activeElement = useDesignStore((state) => state.activeElement);
   const { handleContextMenu, renderContextMenu } = useContextMenu({ id, node });
   const { handleMouseDown, handleMouseMove, handleMouseUp, handleMouseLeave, highlightedElements, renderSelectionBox } =
@@ -30,7 +30,7 @@ const PageContent = ({ id }) => {
     });
   const { handleClick, handleDoubleClick } = useElementHandlers({ id });
 
-  const filtered = elements.filter((e) => !e.group);
+  const filtered = elements.filter((e) => !e.parent);
   const sorted = filtered.sort((a, b) => a.order - b.order);
 
   return (
@@ -61,19 +61,19 @@ const PageContent = ({ id }) => {
           const component = getElementEditComponent(element);
           if (!component) {
             return (
-              <span key={element.id} className="border border-red-500 text-red-500 rounded-2xl px-6 py-2">
+              <span key={element.key} className="border border-red-500 text-red-500 rounded-2xl px-6 py-2">
                 {element.type}
               </span>
             );
           }
           const config = getElementConfig(element);
-          const selected = selectedElements.includes(element.id);
-          const highlighted = highlightedElements.includes(element.id);
-          const active = activeElement === element.id;
+          const selected = selectedElements.includes(element.key);
+          const highlighted = highlightedElements.includes(element.key);
+          const active = activeElement === element.key;
 
           return config?.wrapper ? (
             <ElementWrapper
-              key={element.id}
+              key={element.key}
               element={element}
               editable={!!config?.editable}
               fit={!!config?.fit}
@@ -87,7 +87,7 @@ const PageContent = ({ id }) => {
               {createElement(component, { element, active, selected })}
             </ElementWrapper>
           ) : (
-            <span key={element.id} className="pointer-events-auto">
+            <span key={element.key} className="pointer-events-auto">
               {createElement(component, {
                 element,
                 active,

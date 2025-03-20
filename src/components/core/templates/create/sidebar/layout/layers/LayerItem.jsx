@@ -8,12 +8,12 @@ const LayerItem = ({ element, ref, ...props }) => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const selectElements = useDesignStore((state) => state.selectElements);
   const deleteElements = useDesignStore((state) => state.deleteElements);
-  const selected = selectedElements.includes(element.id);
+  const selected = selectedElements.includes(element.key);
 
   return (
     <div ref={ref} {...props}>
       <div
-        onClick={() => selectElements([element.id])}
+        onClick={() => selectElements([element.key])}
         className={cn(
           'relative rounded-2xl pl-6 pr-4 py-2 flex items-center space-x-2 cursor-pointer justify-between',
           'bg-default-200/60 hover:bg-default-200 dark:bg-white/10 dark:hover:bg-white/15',
@@ -24,7 +24,7 @@ const LayerItem = ({ element, ref, ...props }) => {
           <span className="truncate">{element.text}</span>
         </div>
         <Button isIconOnly variant="light" size="sm" radius="full">
-          <RiCloseFill size={20} className="block" onClick={() => deleteElements([element.id])} />
+          <RiCloseFill size={20} className="block" onClick={() => deleteElements([element.key])} />
         </Button>
       </div>
     </div>

@@ -11,27 +11,15 @@ export const useElementHandlers = ({ id }) => {
   const activeElement = useDesignStore((state) => state.activeElement);
 
   const handleAddToSelection = useCallback(
-    (id) => {
-      if (selectedElements.includes(id)) {
-        const element = elements.find((el) => el.id === id);
-        if (element.group) {
-          const els = elements.filter((_el) => _el.group === element.group).map((el) => el.id);
-          selectElements(selectedElements.filter((_id) => !els.includes(_id)));
-        } else {
-          selectElements(selectedElements.filter((_id) => _id !== id));
-        }
+    (key) => {
+      if (selectedElements.includes(key)) {
+        selectElements(selectedElements.filter((_key) => _key !== key));
       } else {
-        const isSamePage = elements.find((el) => selectedElements.includes(el.id));
+        const isSamePage = elements.find((el) => selectedElements.includes(el.key));
         if (isSamePage) {
-          const el = elements.find((el) => el.id === id);
-          if (el.group) {
-            const els = elements.filter((_el) => _el.group === el.group).map((el) => el.id);
-            selectElements([...selectedElements, ...els]);
-          } else {
-            selectElements([...selectedElements, id]);
-          }
+          selectElements([...selectedElements, key]);
         } else {
-          selectElements([id]);
+          selectElements([key]);
         }
       }
     },
@@ -39,27 +27,19 @@ export const useElementHandlers = ({ id }) => {
   );
 
   const handleClick = useCallback(
-    (id, e) => {
-      if (activeElement === id) return;
-      const el = elements.find((el) => el.id === id);
-      if (e.shiftKey) handleAddToSelection(id);
-      else {
-        if (el.group) {
-          const els = elements.filter((_el) => _el.group === el.group).map((el) => el.id);
-          if (els.length) selectElements(els);
-        } else {
-          selectElements([id]);
-        }
-      }
+    (key, e) => {
+      if (activeElement === key) return;
+      if (e.shiftKey) handleAddToSelection(key);
+      else selectElements([key]);
       updateStore({ activeElement: null });
     },
-    [activeElement, handleAddToSelection, elements, selectElements, updateStore]
+    [activeElement, handleAddToSelection, updateStore, selectElements]
   );
 
-  const handleDoubleClick = (id) => {
-    const element = getElement(id);
+  const handleDoubleClick = (key) => {
+    const element = getElement(key);
     const config = getElementConfig(element);
-    if (config.editable) updateStore({ activeElement: id });
+    if (config.editable) updateStore({ activeElement: key });
   };
 
   return {

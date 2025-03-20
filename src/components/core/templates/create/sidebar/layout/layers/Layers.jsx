@@ -38,8 +38,8 @@ const Layers = () => {
       <SortableContext items={sortedElements.map((el) => el.id)} strategy={verticalListSortingStrategy}>
         {elements?.length > 0 ? (
           <div className="space-y-2.5">
-            {sortedElements.map((element) => (
-              <LayerElement key={element.id} element={element} />
+            {sortedElements.map((el) => (
+              <LayerElement key={el.id} element={el} />
             ))}
           </div>
         ) : (

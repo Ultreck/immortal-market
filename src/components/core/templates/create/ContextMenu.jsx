@@ -30,7 +30,7 @@ import { useElementActions } from '@/hooks/template/use-element-actions.js';
 
 const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
-  const elements = useDesignStore((state) => state.elements.filter((el) => selectedElements.includes(el.id)));
+  const elements = useDesignStore((state) => state.elements.filter((el) => selectedElements.includes(el.key)));
   const { isOpen: isLinkToolOpen, onOpen: onLinkToolOpen, onClose: onLinkToolClose } = useDisclosure();
   const { isOpen: isCreateBlockOpen, onOpen: onCreateBlockOpen, onClose: onCreateBlockClose } = useDisclosure();
   const { isOpen: isCommentOpen, onOpen: onCommentOpen, onClose: onCommentClose } = useDisclosure();
@@ -62,7 +62,7 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
         { key: 'comment', label: 'Comment', icon: <LuMessageSquarePlus size="18" /> },
       ];
       if (selectedElements.length > 1) {
-        if (!elements.every((el) => el.group && el.group === elements[0].group)) {
+        if (!elements.every((el) => el.parent && el.parent === elements[0].parent)) {
           items.push({ key: 'group', label: 'Group', icon: <LuGroup size="18" /> });
         }
         items.push({

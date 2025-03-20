@@ -4,7 +4,7 @@ import useDesignStore from '@/store/design.js';
 const useSelectionBox = ({ id, node }) => {
   const [selectionBox, setSelectionBox] = useState(null);
   const [highlightedElements, setHighlightedElements] = useState([]);
-  const elements = useDesignStore((state) => state.elements.filter((el) => el.page === id && !el.group));
+  const elements = useDesignStore((state) => state.elements.filter((el) => el.page === id && !el.parent));
   const selected = useDesignStore((state) => state.selectedPage === id);
   const selectPage = useDesignStore((state) => state.selectPage);
   const selectElements = useDesignStore((state) => state.selectElements);
@@ -62,7 +62,7 @@ const useSelectionBox = ({ id, node }) => {
           };
           return elRect.left < maxX && elRect.right > minX && elRect.top < maxY && elRect.bottom > minY;
         });
-        setHighlightedElements(highlighted.map((el) => el.id));
+        setHighlightedElements(highlighted.map((el) => el.key));
       }
     },
     [elements, id, node, selectionBox, updateCursor]
@@ -94,8 +94,8 @@ const useSelectionBox = ({ id, node }) => {
           };
           return elRect.left < maxX && elRect.right > minX && elRect.top < maxY && elRect.bottom > minY;
         });
-        if (e.shiftKey) selectElements([...selectedElements, ...highlighted.map((el) => el.id)]);
-        else selectElements(highlighted.map((el) => el.id));
+        if (e.shiftKey) selectElements([...selectedElements, ...highlighted.map((el) => el.key)]);
+        else selectElements(highlighted.map((el) => el.key));
         setSelectionBox(null);
         setHighlightedElements([]);
       }

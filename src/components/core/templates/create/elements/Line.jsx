@@ -149,7 +149,7 @@ export const Line = ({ element, selected, onClick }) => {
           {...bindTranslate()}
           style={{ x: translateX, y: translateY }}
           className="pointer-events-auto touch-none group"
-          onClick={(e) => onClick(element.id, e)}
+          onClick={(e) => onClick(element.key, e)}
         >
           <motion.line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="10" stroke="transparent" />
           <motion.line

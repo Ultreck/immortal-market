@@ -17,7 +17,7 @@ const ElementWrapper = ({
   fit = false,
   className,
 }) => {
-  const isCommentsVisible = useDesignStore((state) => state.isCommentsOpen);
+  const isCommentsVisible = useDesignStore((state) => state.isCommentsVisible);
 
   return (
     <div
@@ -27,7 +27,7 @@ const ElementWrapper = ({
         width: element.size.width,
         height: !fit ? element.size.height : undefined,
       }}
-      id={`element-${element.id}`}
+      id={`element-${element.key}`}
     >
       <div
         className={cn(
@@ -37,8 +37,8 @@ const ElementWrapper = ({
           { 'border-primary-500': selected },
           { 'border-purple-500 pointer-events-none': active }
         )}
-        onMouseDown={(e) => onClick(element.id, e)}
-        onDoubleClick={() => onDoubleClick(element.id)}
+        onMouseDown={(e) => onClick(element.key, e)}
+        onDoubleClick={() => onDoubleClick(element.key)}
       />
       <ErrorBoundary
         fallback={

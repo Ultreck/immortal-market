@@ -1,9 +1,9 @@
 import useDesignStore from '@/store/design.js';
 
-export const useElementActions = ({ id }) => {
+export const useElementActions = () => {
   const deleteElements = useDesignStore((state) => state.deleteElements);
   const selectedElements = useDesignStore((state) => state.selectedElements);
-  const getPageElements = useDesignStore((state) => state.getPageElements);
+  const getElements = useDesignStore((state) => state.getElements);
   const duplicateElements = useDesignStore((state) => state.duplicateElements);
   const bringElementsForward = useDesignStore((state) => state.bringElementsForward);
   const sendElementsBackward = useDesignStore((state) => state.sendElementsBackward);
@@ -19,9 +19,8 @@ export const useElementActions = ({ id }) => {
   const ungroupElements = useDesignStore((state) => state.ungroupElements);
 
   const handleCopy = async () => {
-    const elements = getPageElements(id);
-    const _elements = elements.filter((element) => selectedElements.includes(element.id));
-    const textBlob = new Blob([JSON.stringify(_elements)], { type: 'text/plain' });
+    const elements = getElements((el) => selectedElements.includes(el.key));
+    const textBlob = new Blob([JSON.stringify(elements)], { type: 'text/plain' });
     await navigator.clipboard.write([new ClipboardItem({ 'text/plain': textBlob })]);
   };
 

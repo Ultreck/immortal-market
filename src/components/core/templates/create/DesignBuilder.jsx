@@ -23,7 +23,6 @@ const DesignBuilder = () => {
   );
   const getElement = useDesignStore((state) => state.getElement);
   const createElements = useDesignStore((state) => state.createElements);
-  const createElement = useDesignStore((state) => state.createElement);
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent, collisions } = event;
@@ -68,7 +67,7 @@ const DesignBuilder = () => {
           ...active.data.current,
           position: { x, y },
         };
-        createElement(page, el);
+        createElements(page, [el]);
       }
     }
   };
