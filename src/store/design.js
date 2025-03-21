@@ -121,6 +121,74 @@ const createDesignStore = () => {
                 elements: updatedElements,
                 pendingUpdates: _pendingUpdates
               });
+            } else if (action === 'page:create') {
+              // Update the temporary page with the server's permanent ID
+              const { page } = result;
+              const updatedPages = get().pages.map(p => {
+                if (p.id === operation.payload.tempId) {
+                  return { ...p, id: page.id, _id: page._id };
+                }
+                return p;
+              });
+              set({
+                pages: updatedPages,
+                pendingUpdates: _pendingUpdates
+              });
+            } else if (action === 'page:create-after') {
+              // Update the temporary page with the server's permanent ID
+              const { page } = result;
+              const updatedPages = get().pages.map(p => {
+                if (p.id === operation.payload.tempId) {
+                  return { ...p, id: page.id, _id: page._id };
+                }
+                return p;
+              });
+              set({
+                pages: updatedPages,
+                selectedPage: page.id,
+                pendingUpdates: _pendingUpdates
+              });
+            } else if (action === 'page:delete') {
+              // Delete operation was successful, just remove from pending updates
+              // The page is already removed from the state
+            } else if (action === 'page:duplicate') {
+              // Update temporary IDs with permanent IDs from server
+              const { page, elements: serverElements } = result;
+              const { tempPageId } = operation.payload;
+              // Map temporary page ID to permanent ID
+              const updatedPages = get().pages.map(p => {
+                if (p.id === tempPageId) {
+                  return { ...p, id: page.id, _id: page._id };
+                }
+                return p;
+              });
+              // Map temporary element IDs to permanent IDs
+              const updatedElements = get().elements.map(el => {
+                if (el.page === tempPageId) {
+                  // Find the corresponding server element
+                  const serverElement = serverElements.find(se =>
+                    se.type === el.type &&
+                    se.page === page.id &&
+                    se.position.x === el.position.x &&
+                    se.position.y === el.position.y
+                  );
+                  if (serverElement) {
+                    return {
+                      ...el,
+                      id: serverElement.id,
+                      _id: serverElement._id,
+                      page: page.id
+                    };
+                  }
+                }
+                return el;
+              });
+              set({
+                pages: updatedPages,
+                elements: updatedElements,
+                selectedPage: page.id,
+                pendingUpdates: _pendingUpdates
+              });
             }
             delete _pendingUpdates[oid];
           } else {
@@ -234,25 +302,57 @@ const createDesignStore = () => {
       createPage: (payload) => {
         let p = payload;
         const design = get().design;
-        if (!payload) {
+        if (!p) {
           p = {
             title: 'New Page',
             thumbnail: null,
             size: design.size,
           };
         }
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+        const last = get().pages.sort((a, b) => a.order - b.order).at(-1);
+        // Generate a temporary ID for optimistic update
+        const id = `temp-${uuid()}`;
+        const page = {
+          id: id,
+          _id: id,
+          ...p,
+          order: last ? last.order + 1 : 0,
+          background: {
+            type: 'color',
+            value: '#fff',
+          }
+        };
+        // Create operation ID for tracking
+        const oid = `create-page-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          pages: [...get().pages, page],
+          selectedPage: id,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'page:create',
+              payload: {
+                tempId: id,
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'page:create',
           payload: p,
+          oid,
         });
       },
       createPageAfter: (pageId, payload) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+        // Find the reference page
+        const referencePage = get().pages.find(p => p.id === pageId);
+        if (!referencePage) return;
+        // Prepare the page data
         let p = payload;
         const design = get().design;
         if (!payload) {
@@ -262,14 +362,55 @@ const createDesignStore = () => {
             size: design.size,
           };
         }
+        // Generate a temporary ID for optimistic update
+        const tempId = `temp-${uuid()}`;
+        // Create a new page with temporary ID
+        const newPage = {
+          id: tempId,
+          _id: tempId,
+          ...p,
+          order: referencePage.order + 1,
+          background: {
+            type: 'color',
+            value: '#fff',
+          }
+        };
+        // Update orders of all pages that come after
+        const updatedPages = get().pages.map(page => {
+          if (page.order > referencePage.order) {
+            return { ...page, order: page.order + 1 };
+          }
+          return page;
+        });
+        // Insert the new page
+        updatedPages.push(newPage);
+        // Create operation ID for tracking
+        const oid = `create-page-after-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          pages: updatedPages,
+          selectedPage: tempId,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'page:create-after',
+              payload: {
+                pageId,
+                tempId
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'page:create-after',
           payload: {
             pageId,
             data: p,
           },
+          oid,
         });
       },
       createPageFromBlock: (blockId) => {
@@ -306,88 +447,268 @@ const createDesignStore = () => {
         });
       },
       deletePage: (pageId) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+        // Create operation ID for tracking
+        const oid = `delete-page-${Date.now()}`;
+        // Store the page being deleted for potential rollback
+        const page = get().pages.find(p => p.id === pageId);
+        if (!page) return;
+        // Optimistically update the state
+        set({
+          pages: get().pages.filter(p => p.id !== pageId),
+          selectedPage: null,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'page:delete',
+              payload: {
+                page,
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'page:delete',
           payload: {
             pageId,
           },
+          oid,
         });
       },
       duplicatePage: (pageId) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+        // Find the page to duplicate
+        const pageToDuplicate = get().pages.find(p => p.id === pageId);
+        if (!pageToDuplicate) return;
+        // Find the elements on the page
+        const pageElements = get().elements.filter(el => el.page === pageId);
+        // Generate temporary IDs for optimistic updates
+        const tempPageId = `temp-${uuid()}`;
+        // Create a duplicate page with new temp ID
+        const duplicatedPage = {
+          ...pageToDuplicate,
+          id: tempPageId,
+          _id: tempPageId,
+          title: `${pageToDuplicate.title} (Copy)`,
+          order: pageToDuplicate.order + 1
+        };
+        // Create duplicate elements with new temp IDs
+        const elementMap = {}; // To track parent-child relationships
+        const duplicatedElements = pageElements.map(el => {
+          const newId = uuid();
+          elementMap[el.id] = newId;
+          return {
+            ...el,
+            id: newId,
+            _id: newId,
+            key: newId,
+            page: tempPageId,
+            // For grouped elements, we'll update parents later
+            parent: el.parent
+          };
+        });
+        // Update parent references in grouped elements
+        duplicatedElements.forEach(el => {
+          if (el.parent && elementMap[el.parent]) {
+            el.parent = elementMap[el.parent];
+          }
+          if (el.type === 'group' && el.children) {
+            el.children = el.children.map(childId =>
+              elementMap[childId] || childId
+            );
+          }
+        });
+        // Create operation ID for tracking
+        const oid = `duplicate-page-${Date.now()}`;
+        // Insert the new page after the original page
+        const updatedPages = [...get().pages];
+        const index = updatedPages.findIndex(p => p.id === pageId);
+        updatedPages.splice(index + 1, 0, duplicatedPage);
+        // Adjust order of pages that come after
+        for (let i = index + 2; i < updatedPages.length; i++) {
+          updatedPages[i].order += 1;
+        }
+        // Optimistically update the state
+        set({
+          pages: updatedPages,
+          elements: [...get().elements, ...duplicatedElements],
+          selectedPage: tempPageId,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'page:duplicate',
+              payload: {
+                originalPageId: pageId,
+                tempPageId: tempPageId,
+                elementIds: duplicatedElements.map(el => el.id)
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send the action to the server
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'page:duplicate',
           payload: {
             pageId,
           },
+          oid,
         });
       },
       movePageUp: (pageId) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+        // Find the current page and the page above it
+        const sortedPages = [...get().pages].sort((a, b) => a.order - b.order);
+        const currentIndex = sortedPages.findIndex(p => p.id === pageId);
+        // Can't move up if it's already at the top
+        if (currentIndex <= 0) return;
+        // Get the page above
+        const prevPage = sortedPages[currentIndex - 1];
+        const currentPage = sortedPages[currentIndex];
+        // Swap the order of the pages
+        const updatedPages = get().pages.map(p => {
+          if (p.id === pageId) {
+            return { ...p, order: prevPage.order };
+          }
+          if (p.id === prevPage.id) {
+            return { ...p, order: currentPage.order };
+          }
+          return p;
+        });
+        // Create operation ID for tracking
+        const oid = `move-page-up-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          pages: updatedPages,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'page:move-up',
+              payload: {
+                pageId,
+                prevPageId: prevPage.id
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'page:move-up',
           payload: {
             pageId,
           },
+          oid,
         });
       },
       movePageDown: (pageId) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+        // Find the current page and the page below it
+        const sortedPages = [...get().pages].sort((a, b) => a.order - b.order);
+        const currentIndex = sortedPages.findIndex(p => p.id === pageId);
+        // Can't move down if it's already at the bottom
+        if (currentIndex < 0 || currentIndex >= sortedPages.length - 1) return;
+        // Get the page below
+        const nextPage = sortedPages[currentIndex + 1];
+        const currentPage = sortedPages[currentIndex];
+        // Swap the order of the pages
+        const updatedPages = get().pages.map(p => {
+          if (p.id === pageId) {
+            return { ...p, order: nextPage.order };
+          }
+          if (p.id === nextPage.id) {
+            return { ...p, order: currentPage.order };
+          }
+          return p;
+        });
+        // Create operation ID for tracking
+        const oid = `move-page-down-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          pages: updatedPages,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'page:move-down',
+              payload: {
+                pageId,
+                nextPageId: nextPage.id
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'page:move-down',
           payload: {
             pageId,
           },
-        });
-      },
-      movePageToTop: (pageId) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
-        socket.emit('action', {
-          design: id,
-          user,
-          action: 'page:move-to-top',
-          payload: {
-            pageId,
-          },
-        });
-      },
-      movePageToBottom: (pageId) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
-        socket.emit('action', {
-          design: id,
-          user,
-          action: 'page:move-to-bottom',
-          payload: {
-            pageId,
-          },
+          oid,
         });
       },
       movePageTo: (pageId, targetOrder) => {
-        const { id, user } = get();
-        if (!socket || !id || !user) return;
+        // Find the current page
+        const page = get().pages.find(p => p.id === pageId);
+        if (!page) return;
+        // If the target order is the same as the current order, do nothing
+        if (page.order === targetOrder) return;
+        // Calculate new orders for all pages
+        const updatedPages = get().pages.map(p => {
+          if (p.id === pageId) {
+            // Move this page to the target order
+            return { ...p, order: targetOrder };
+          } else if (
+            // If moving down, adjust pages between old position and new position
+            page.order < targetOrder &&
+            p.order > page.order &&
+            p.order <= targetOrder
+          ) {
+            // Shift these pages up (decrease order)
+            return { ...p, order: p.order - 1 };
+          } else if (
+            // If moving up, adjust pages between new position and old position
+            page.order > targetOrder &&
+            p.order >= targetOrder &&
+            p.order < page.order
+          ) {
+            // Shift these pages down (increase order)
+            return { ...p, order: p.order + 1 };
+          }
+          // Leave other pages unchanged
+          return p;
+        });
+        // Create operation ID for tracking
+        const oid = `move-page-to-${Date.now()}`;
+        // Optimistically update the state
+        set({
+          pages: updatedPages,
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'page:move-to',
+              payload: {
+                pageId,
+                previousOrder: page.order,
+                targetOrder
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
         socket.emit('action', {
-          design: id,
-          user,
+          design: get().id,
+          user: get().user,
           action: 'page:move-to',
           payload: {
             pageId,
             targetOrder,
           },
+          oid,
         });
       },
       createElements: (pageId, elements) => {
@@ -1273,6 +1594,27 @@ const createDesignStore = () => {
             action: 'elements:delete',
             payload: {
               elementIds: update.elementIds,
+            },
+            operationId,
+          });
+        } else if (update.type === 'page:delete') {
+          // Restore the page to the state before retrying
+          set({
+            pages: [...get().pages, update.payload.page],
+            pendingUpdates: {
+              ...pendingUpdates,
+              [operationId]: {
+                ...update,
+                error: null
+              }
+            }
+          });
+          socket.emit('action', {
+            design: id,
+            user,
+            action: 'page:delete',
+            payload: {
+              pageId: update.payload.pageId,
             },
             operationId,
           });

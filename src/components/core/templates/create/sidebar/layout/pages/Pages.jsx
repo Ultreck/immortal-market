@@ -12,7 +12,6 @@ import { DragOverlay } from '@dnd-kit/core';
 const Pages = () => {
   const pages = useDesignStore((state) => state.pages);
   const activePage = useDesignStore((state) => state.activePage);
-  const design = useDesignStore((state) => state.design);
   const createPage = useDesignStore((state) => state.createPage);
   const updateStore = useDesignStore((state) => state.updateStore);
   const movePageTo = useDesignStore((state) => state.movePageTo);
@@ -80,7 +79,7 @@ const Pages = () => {
           <PageThumbnail
             page={draggedPage}
             active={activePage === draggedPage.id}
-            thumbnail={design?.pages.find((p) => p.id === draggedPage.id)?.thumbnail}
+            thumbnail={pages.find((p) => p.id === draggedPage.id)?.thumbnail}
           />
         ) : null}
       </DragOverlay>

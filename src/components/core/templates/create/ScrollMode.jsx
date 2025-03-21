@@ -5,7 +5,7 @@ import { useRef } from 'react';
 
 const ScrollMode = () => {
   const root = useRef(null);
-  const pages = useDesignStore((state) => state.pages);
+  const pages = useDesignStore((state) => state.pages.sort((a, b) => a.order - b.order));
   const updateStore = useDesignStore((state) => state.updateStore);
 
   const handleParentClick = (e) => {

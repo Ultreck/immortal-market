@@ -28,7 +28,7 @@ export const useGetForm = (business, design, page) => {
       const res = await http.immortal.get(`/businesses/${business}/designs/${design}/pages/${page}/form`);
       return res.data;
     },
-    enabled: !!design && !!page,
+    enabled: !!design && !!page && !page.startsWith('temp-'),
   });
 };
 
@@ -75,7 +75,7 @@ export const useGetFormResponses = (business, design, page, form) => {
       const res = await http.immortal.get(`/businesses/${business}/designs/${design}/pages/${page}/form/${form}/responses`);
       return res.data;
     },
-    enabled: !!design && !!page && !!form,
+    enabled: !!design && !!page && !page.startsWith('temp-') && !!form,
   });
 };
 
@@ -86,7 +86,7 @@ export const useGetFormResponse = (business, design, page, form) => {
       const res = await http.immortal.get(`/businesses/${business}/designs/${design}/pages/${page}/form/${form}/response`);
       return res.data;
     },
-    enabled: !!design && !!page && !!form,
+    enabled: !!design && !!page && !page.startsWith('temp-') && !!form,
   });
 };
 
@@ -97,7 +97,7 @@ export const useGetPoll = (business, design, page) => {
       const res = await http.immortal.get(`/businesses/${business}/designs/${design}/pages/${page}/poll`);
       return res.data;
     },
-    enabled: !!design && !!page,
+    enabled: !!design && !!page && !page.startsWith('temp-'),
   });
 };
 
@@ -144,7 +144,7 @@ export const useGetPollResponses = (business, design, page, poll) => {
       const res = await http.immortal.get(`/businesses/${business}/designs/${design}/pages/${page}/poll/${poll}/responses`);
       return res.data;
     },
-    enabled: !!design && !!page && !!poll,
+    enabled: !!design && !!page && !page.startsWith('temp-') && !!poll,
   });
 };
 
@@ -155,6 +155,6 @@ export const useGetPollResponse = (business, design, page, poll) => {
       const res = await http.immortal.get(`/businesses/${business}/designs/${design}/pages/${page}/poll/${poll}/response`);
       return res.data;
     },
-    enabled: !!design && !!page && !!poll,
+    enabled: !!design && !!page && !page.startsWith('temp-') && !!poll,
   });
 };
