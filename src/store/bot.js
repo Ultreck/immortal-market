@@ -20,8 +20,13 @@ const useIsNewChatStore = create((set) => ({
   );
   const useCurrentMessageSentStore = create((set) => ({
         currentSentMessage: null,
-        setCurrentSentMessage: (chatId) => set({ currentSentMessage: chatId }),
+        setCurrentSentMessage: (chat) => set({ currentSentMessage: chat }),
+      })
+  );
+  const useGetCountryStocks = create((set) => ({
+        countryStocks: null,
+        setCountryStocks: (stock) => set({ countryStocks: stock }),
       })
   );
 
-export  {useChatAiStore, useIsNewChatStore, useCurrentStore, useCurrentMessageSentStore};
+export  {useChatAiStore, useIsNewChatStore, useCurrentStore, useCurrentMessageSentStore, useGetCountryStocks};

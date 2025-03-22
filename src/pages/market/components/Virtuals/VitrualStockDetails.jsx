@@ -1,22 +1,44 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import { Avatar, AvatarGroup, Button, Card, Skeleton, Tab, Tabs } from '@heroui/react';
 import { useGetStock } from '@/api/market.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import VirtualStockChart from '@/pages/market/components/Virtuals/VirtualStockChart.jsx';
 import VirtualStockSocket from '@/pages/market/components/Virtuals/VirtualSotckSocket.jsx';
 import VirtualStockTradeMarquee from '@/pages/market/components/Virtuals/VirtualStockTradeMarquee.jsx';
+import { useCreateVirtualStockDetails } from '@/api/ai-chat';
 
 const VirtualStockDetails = () => {
   const params = useParams();
   const { id } = params;
-  const [tab, setTab] = useState('overview');
+  const location = useLocation();
   const [summaryOrder, setSummaryOrder] = useState(null);
+  const [chartDatas, setChartDatas] = useState([]);
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
-
+  const [timeFrame, seTtimeFrame] = useState("full")
+  const { mutateAsync: getStockDetails,} = useCreateVirtualStockDetails();
+  
+  useEffect(() => {
+    handleGetStockDetails();
+    seTtimeFrame(JSON.parse(window.localStorage.getItem('time-function')) || 'full');
+  }, [timeFrame]);
+  
+  const handleGetStockDetails = async () => {
+    let data = {
+      stockId: id,
+      country: location.state.country,
+      sessionType: timeFrame,
+    };
+    const res = await getStockDetails(data);
+    setChartDatas(res.data.data);
+  };
+  const handleChange = (key) => {
+    window.localStorage.setItem('time-function', JSON.stringify(key));
+    seTtimeFrame(key);
+  };
   return (
     <>
-      {isStockLoading ? (
+      {isStockLoading ? (   
         <div className="container">
           <div className="grid grid-cols-[1fr_350px] items-start gap-8">
             <Skeleton className="min-h-[600px] rounded-2xl" />
@@ -46,15 +68,15 @@ const VirtualStockDetails = () => {
                             </div>
                             <div className="mt-6">
                               <Tabs
-                                selectedKey={tab}
-                                onSelectionChange={setTab}
+                                selectedKey={timeFrame}
+                                onSelectionChange={(e) => handleChange(e)}
                                 aria-label="Options"
                                 radius="full"
                                 color="primary"
                                 variant="bordered"
                               >
                                 <Tab
-                                  key="day"
+                                  key="full"
                                   title={
                                     <div className="flex items-center space-x-2">
                                       <span>Day</span>
@@ -62,7 +84,7 @@ const VirtualStockDetails = () => {
                                   }
                                 />
                                 <Tab
-                                  key="1hr"
+                                  key="1-hour"
                                   title={
                                     <div className="flex items-center space-x-2">
                                       <span>1hr</span>
@@ -70,7 +92,7 @@ const VirtualStockDetails = () => {
                                   }
                                 />
                                 <Tab
-                                  key="30min"
+                                  key="30-minutes"
                                   title={
                                     <div className="flex items-center space-x-2">
                                       <span>30min</span>
@@ -90,7 +112,7 @@ const VirtualStockDetails = () => {
                           </Button>
                         </div>
                       </div>
-                      <VirtualStockChart stock={stock} />
+                      <VirtualStockChart state={location.state} chartDatas={chartDatas} stock={stock} />
                     </div>
                   </Card>
                   <Card className="card-shadow px-10 py-10 border border-default-200 my-10">

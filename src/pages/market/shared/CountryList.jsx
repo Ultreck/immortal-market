@@ -5,11 +5,17 @@ import CountryFlag from '@/components/ui/CountryFlag.jsx';
 import { useState } from 'react';
 import { BsGlobeEuropeAfrica } from 'react-icons/bs';
 import { RiGlobalLine } from 'react-icons/ri';
+// import { useGetNigeriaVirtual } from '@/api/ai-chat';
+// import { useGetCountryStocks } from '@/store/bot';
 
-const CountryList = () => {
+const CountryList = ({setCountryName}) => {
   const [code, setCode] = useState('NG');
   const [tab, setTab] = useState('africa');
+  // const {setCountryStocks} = useGetCountryStocks();
 
+  const onSubmit = async (c) => {
+       setCountryName(c.name);
+  };
   return (
     <Card className="card-shadow rounded-2xl h-96">
       <SimpleBar style={{ maxHeight: 340 }}>
@@ -53,7 +59,10 @@ const CountryList = () => {
               <div key={c.code}>
                 <div
                   tabIndex={1}
-                  onClick={() => setCode(c.code)}
+                  onClick={() => {
+                    setCode(c.code);
+                    onSubmit(c);
+                  }}
                   className={cn(
                     'w-fit rounded-full border-2 transition-all duration-300',
                     code === c.code ? 'border-default-500 p-1' : 'border-transparent hover:brightness-50'

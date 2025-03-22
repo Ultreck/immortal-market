@@ -41,8 +41,6 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
   const { mutateAsync: createChat, isPending: isCreatingChatLoading } = useCreateAIBot();
   const [pendingMessage, setPendingMessage] = useState([]);
 
-  console.log(pendingMessage);
-
   const onSubmit = async () => {
     if (!message.trim()) return;
     const userMessage = {
@@ -89,9 +87,7 @@ const ChatWIthAgentsModal = ({ isOpen, onClose }) => {
       console.error('Error sending message: ', error);
     }
   };
-
   const messagesEndRef = useRef(null);
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [message, currentChat]);

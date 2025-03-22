@@ -1,6 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import http from '@/lib/http.js';
 
+
+// AI chart APIs endpoints
 export const useGetAIChats = () => {
     return useQuery({
       queryKey: ['chats', 'all', 'bots'],
@@ -34,18 +36,98 @@ export const useGetAIChatsMessages = (id) => {
       mutationKey: ['chats'],
       mutationFn: (data) => {
         return http.market.post('/chats', data);
-        },
+      },
     });
-};
+  };
 export const useCreateAIChat = () => {
     return useMutation({
       mutationKey: ['chats', "response"],
-        mutationFn: ({data, id}) => {
+      mutationFn: ({data, id}) => {
         return http.market.post(`/chats/${id}/response`, data);
+      },
+      onError: (error) => {
+        console.error("Mutation failed:", error);
+        alert("An error occurred: " + error.message);
+      },
+    });
+  };
+  
+  // Virtual APIs endpoints
+  export const useGetNigeriaVirtual = (country) => {
+    return useQuery({
+      queryKey: ['virtual', 'all', 'Nigeria', country],
+      queryFn: async () => {
+        const res = await http.markettest.get(`/virtual/${country}`);
+        return res.data;
+      },
+    });
+  };
+  export const useCreateVirtualStock = () => {
+    return useMutation({
+      mutationKey: ['virtual', "stocks"],
+        mutationFn: (data) => {
+          return http.markettest.post(`/virtual/stocks`, data);
         },
         onError: (error) => {
           console.error("Mutation failed:", error);
           alert("An error occurred: " + error.message);
         },
-    });
-};
+      });
+    };
+    export const useCreateVirtualPlaceOrder = () => {
+      return useMutation({
+        mutationKey: ['virtual', "order"],
+        mutationFn: (data) => {
+          return http.markettest.post(`/virtual/order`, data);
+        },
+        onError: (error) => {
+          console.error("Mutation failed:", error);
+          alert("An error occurred: " + error.message);
+        },
+      });
+    };
+    export const useGetVirtualOrder = () => {
+      return useQuery({
+        queryKey: ['virtual', 'all', 'orders',],
+        queryFn: async () => {
+          const res = await http.markettest.get(`/virtual/orders`);
+          return res.data;
+        },
+      });
+    };
+    export const useCreateVirtualAllTradersPerStock = () => {
+      return useMutation({
+        mutationKey: ['virtual', "order"],
+        mutationFn: (data) => {
+          return http.markettest.post(`/virtual/order`, data);
+        },
+        onError: (error) => {
+          console.error("Mutation failed:", error);
+          alert("An error occurred: " + error.message);
+        },
+      });
+    };
+    export const useCreateVirtualStockDetails = () => {
+      return useMutation({
+        mutationKey: ['virtual', "stock"],
+        mutationFn: (data) => {
+          return http.markettest.post(`/virtual/stock`, data);
+        },
+        onError: (error) => {
+          console.error("Mutation failed:", error);
+          alert("An error occurred: " + error.message);
+        },
+      });
+    };
+    export const useCreateVirtualStockOrders = () => {
+      return useMutation({
+        mutationKey: ['stock', "orders"],
+        mutationFn: (data) => {
+          return http.markettest.post(`/stock/orders`, data);
+        },
+        onError: (error) => {
+          console.error("Mutation failed:", error);
+          alert("An error occurred: " + error.message);
+        },
+      });
+    };
