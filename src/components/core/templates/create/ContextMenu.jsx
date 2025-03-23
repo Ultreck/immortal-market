@@ -42,12 +42,16 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
   useEffect(() => {
     if (isOpen) {
       const scrollable = document.getElementById('scrollable');
-      scrollable.style.overflow = 'hidden';
-    } else {
-      const scrollable = document.getElementById('scrollable');
-      scrollable.style.overflow = 'auto';
+      const handleScroll = () => {
+        onClose();
+      };
+      scrollable.addEventListener('scroll', handleScroll);
+
+      return () => {
+        scrollable.removeEventListener('scroll', handleScroll);
+      };
     }
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   const menu = useMemo(() => {
     if (type === 'page') {
