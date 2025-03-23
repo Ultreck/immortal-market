@@ -80,7 +80,6 @@ const createDesignStore = () => {
           const _pendingUpdates = { ...get().pendingUpdates };
           const operation = _pendingUpdates?.[oid];
           const { state } = result;
-          console.log('Action', { action, operation });
           if (operation) {
             if (action === 'elements:create') {
               const { elements } = result;
@@ -95,6 +94,37 @@ const createDesignStore = () => {
                 pendingUpdates: _pendingUpdates,
               }
               set(updates);
+            } else if (action === 'elements:create-and-group') {
+              const { elements, group } = result;
+              // Update element IDs from server and the group ID
+              const updatedElements = get().elements.map(el => {
+                // Update the group element with server ID
+                if (el.key === operation.payload.key) {
+                  return {
+                    ...group,
+                    id: group.id,
+                    _id: group._id,
+                    position: { x: group.position.x, y: group.position.y },
+                  };
+                }
+                // Update child elements with server IDs
+                if (operation.payload.elementKeys.includes(el.key)) {
+                  const serverEl = elements.find(e => e.key === el.key);
+                  if (serverEl) {
+                    return {
+                      ...serverEl,
+                      id: serverEl.id,
+                      _id: serverEl._id,
+                      position: { x: serverEl.position.x, y: serverEl.position.y },
+                    };
+                  }
+                }
+                return el;
+              });
+              set({
+                elements: updatedElements,
+                pendingUpdates: _pendingUpdates
+              });
             } else if (action === 'element:delete') {
               // Delete operation was successful, just remove from pending updates
               // The element is already removed from the state
@@ -745,6 +775,97 @@ const createDesignStore = () => {
           payload: {
             pageId,
             elements: _elements.map((el) => ({ ...el, id: undefined, _id: undefined })),
+          },
+          oid,
+        });
+      },
+      createElementsAndGroup: (pageId, elements) => {
+        // First create all elements with properly assigned IDs
+        const _elements = elements.map((el, i) => {
+          const id = uuid();
+          const last = get().elements.sort((a, b) => a.order - b.order).at(-1);
+          return ({
+            ...el,
+            id,
+            _id: id,
+            key: id,
+            page: pageId,
+            order: (last?.order || 0) + i + 1,
+            rotation: 0,
+          });
+        });
+        // Calculate the bounding box for all elements
+        const minX = Math.min(..._elements.map(el => el.position.x));
+        const minY = Math.min(..._elements.map(el => el.position.y));
+        const maxX = Math.max(..._elements.map(el => el.position.x + (el.size?.width || 0)));
+        const maxY = Math.max(..._elements.map(el => el.position.y + (el.size?.height || 0)));
+        console.log({ minX, minY, maxX, maxY });
+        // Get the highest order to place the group on top
+        const pageElements = get().elements.filter(el => el.page === pageId);
+        const highestOrder = Math.max(...[..._elements, ...pageElements].map(el => el.order));
+        const groupOrder = highestOrder + 1;
+        // Create group element
+        const key = uuid();
+        const groupElement = {
+          id: key,
+          _id: key,
+          key: key,
+          type: 'group',
+          text: 'Group',
+          design: get().id,
+          page: pageId,
+          position: { x: minX, y: minY },
+          size: { width: maxX - minX, height: maxY - minY },
+          rotation: 0,
+          order: groupOrder,
+          children: _elements.map(el => el.id),
+          style: { opacity: 1 },
+        };
+        // Adjust element positions relative to the group
+        const adjustedElements = _elements.map(el => ({
+          ...el,
+          parent: key,
+          position: {
+            x: el.position.x - minX,
+            y: el.position.y - minY
+          }
+        }));
+        // Create operation ID for tracking
+        const oid = `create-and-group-elements-${Date.now()}`;
+        // Update state with new elements and group
+        set({
+          elements: [...get().elements, ...adjustedElements, groupElement],
+          selectedElements: [key],
+          pendingUpdates: {
+            ...get().pendingUpdates,
+            [oid]: {
+              type: 'elements:create-and-group',
+              payload: {
+                key,
+                elementKeys: adjustedElements.map(el => el.key),
+              },
+              timestamp: Date.now()
+            }
+          }
+        });
+        // Send to server
+        socket.emit('action', {
+          design: get().id,
+          user: get().user,
+          action: 'elements:create-and-group',
+          payload: {
+            pageId,
+            elements: adjustedElements.map(el => ({
+              ...el,
+              id: undefined,
+              _id: undefined,
+              parent: undefined
+            })),
+            key,
+            position: {
+              x: minX,
+              y: minY
+            },
           },
           oid,
         });

@@ -23,6 +23,7 @@ const DesignBuilder = () => {
   );
   const getElement = useDesignStore((state) => state.getElement);
   const createElements = useDesignStore((state) => state.createElements);
+  const createElementsAndGroup = useDesignStore((state) => state.createElementsAndGroup);
 
   const handleDragEnd = (event) => {
     const { active, over, delta, activatorEvent, collisions } = event;
@@ -61,13 +62,24 @@ const DesignBuilder = () => {
       const x = Math.max(roundToNearestTen(activatorEvent.x + delta.x - canvasRect.left), 0);
       const y = Math.max(roundToNearestTen(activatorEvent.y + delta.y - distanceFromTop), 0);
       if (Array.isArray(active.data.current)) {
-        createElements(page, active.data.current);
+        createElementsAndGroup(
+          page,
+          active.data.current.map((i, index, arr) => {
+            const yPos = index === 0 ? y : y + arr.slice(0, index).reduce((sum, el) => sum + el.size.height, 0);
+            return {
+              ...i,
+              position: { x, y: yPos },
+              rotation: 0,
+            };
+          })
+        );
       } else {
-        const el = {
-          ...active.data.current,
-          position: { x, y },
-        };
-        createElements(page, [el]);
+        createElements(page, [
+          {
+            ...active.data.current,
+            position: { x, y },
+          },
+        ]);
       }
     }
   };
