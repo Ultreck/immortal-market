@@ -1,8 +1,11 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
+import useDesignStore from '@/store/design';
 
-export const DataTag = ({ element, onChange }) => {
+export const DataTag = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   return (
     <div
       className="overflow-hidden relative w-full h-full"
@@ -12,7 +15,10 @@ export const DataTag = ({ element, onChange }) => {
         style={{ ...(element?.style || {}), background: 'transparent' }}
         value={element.config.content}
         onChange={(v) => {
-          onChange({ ...element, config: { ...element.config, content: v } });
+          updateElement(element.id, { config: { ...element.config, content: v } });
+        }}
+        onBlur={() => {
+          updateElement(element.id, { config: { ...element.config, content: element.config.content } }, true);
         }}
         className="bg-transparent"
       />
