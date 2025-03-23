@@ -15,6 +15,7 @@ import { DataPresent, DataTag } from '@/components/core/templates/create/element
 import { Button, ButtonPresent } from '@/components/core/templates/create/elements/Button.jsx';
 import Forms, { FormPresents } from '@/components/core/templates/create/elements/forms/FormPresent.jsx';
 import { Group, GroupPresent } from '@/components/core/templates/create/elements/Group.jsx';
+import { Infographic, InfographicPresent } from '@/components/core/templates/create/elements/Infographic.jsx';
 
 export const elements = {
   button: {
@@ -219,6 +220,18 @@ export const elements = {
     config: {
       wrapper: true,
       fit: true,
+    },
+  },
+  infographic: {
+    tools: [],
+    components: {
+      edit: Infographic,
+      present: InfographicPresent,
+    },
+    config: {
+      wrapper: true,
+      fit: true,
+      editable: true,
     },
   },
 };

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import DraggableElementWrapper from '@/components/core/templates/create/sidebar/DraggableElementWrapper.jsx';
 import { Button } from '@heroui/react';
-import { TbCarouselHorizontalFilled, TbChevronLeft } from 'react-icons/tb';
+import { TbCarouselHorizontalFilled, TbChevronLeft, TbChartInfographic } from 'react-icons/tb';
 import { ButtonPreview } from '@/components/core/templates/create/elements/Button.jsx';
 import { getElementDefaultStyle } from '@/lib/elements';
 import { RiCheckboxMultipleBlankFill } from 'react-icons/ri';
@@ -49,6 +49,26 @@ const styles = [
     paddingRight: 25,
   },
 ];
+
+const buttons = styles.map((style, i) => {
+  return {
+    id: `button-${i}`,
+    data: {
+      type: 'button',
+      text: 'Button',
+      size: {
+        width: 120,
+        height: 48,
+      },
+      style,
+      config: {
+        text: 'Button',
+      },
+    },
+    preview: <ButtonPreview element={{ size: { width: '100%', height: 48 }, style, config: { text: 'Button' } }} />,
+  };
+});
+
 const sliders = [
   {
     id: 'frame-tabs',
@@ -111,25 +131,74 @@ const sliders = [
     ),
   },
 ];
-const buttons = styles.map((style, i) => {
-  return {
-    id: `button-${i}`,
+
+const infographics = [
+  {
+    id: 'infographic',
     data: {
-      type: 'button',
-      text: 'Button',
+      type: 'infographic',
+      text: 'Infographic',
       size: {
-        width: 120,
-        height: 48,
+        width: 400,
+        height: 400,
       },
-      style,
+      style: getElementDefaultStyle({ type: 'infographic', name: 'htd' }),
       config: {
-        text: 'Button',
+        name: 'htd',
+        dynamic: false,
+        data: {
+          title: "Apple's Quarterly Revenue Breakdown",
+          caption:
+            "Apple's revenue performance across key product segments, highlighting the decline in iPhone sales and the growth in services and iPad divisions.",
+          source: 'Company financial reports',
+          data: [
+            {
+              label: 'iPhone',
+              content:
+                'iPhone revenue declined by 10.5% year-over-year, reflecting the ongoing challenges in the smartphone market.',
+              icon: 'fa fa-mobile',
+              _id: '667453b0571833fd96f4f2fa',
+              id: '667453b0571833fd96f4f2fa',
+            },
+            {
+              label: 'Services',
+              content:
+                "Apple's services segment, including the App Store, Apple Music, and iCloud, saw a double-digit increase in revenue, showcasing the company's efforts to diversify its income streams.",
+              icon: 'fa fa-chart-line',
+              _id: '667453b0571833fd96f4f2fb',
+              id: '667453b0571833fd96f4f2fb',
+            },
+            {
+              label: 'iPad',
+              content:
+                'iPad sales also experienced a strong double-digit growth, as the company continues to innovate in the tablet market.',
+              icon: 'fa fa-tablet',
+              _id: '667453b0571833fd96f4f2fc',
+              id: '667453b0571833fd96f4f2fc',
+            },
+            {
+              label: 'iPhone',
+              content:
+                'iPhone revenue declined by 10.5% year-over-year, reflecting the ongoing challenges in the smartphone market.',
+              icon: 'fa fa-mobile',
+              _id: '667453b0571833fd96f4f2fa',
+              id: '667453b0571833fd96f4f2fa',
+            },
+          ],
+          _id: '667453b0571833fd96f4f2f9',
+          id: '667453b0571833fd96f4f2f9',
+        },
       },
     },
-    preview: <ButtonPreview element={{ size: { width: '100%', height: 48 }, style, config: { text: 'Button' } }} />,
-  };
-});
-const items = [...buttons, ...sliders];
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <TbChartInfographic className="w-full h-full" />
+      </div>
+    ),
+  },
+];
+
+const items = [...buttons, ...sliders, ...infographics];
 
 const InterfaceElements = ({ mini = false, onBack }) => {
   return (
