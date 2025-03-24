@@ -25,14 +25,16 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const startIndex = (currentPage - 1) * itemsPerPage;  
+  const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedData = allStocks.slice(startIndex, endIndex);
+  const paginatedData = allStocks?.slice(startIndex, endIndex);
   // const { data: { stocks = [] } = {}, isLoading } = useGetTopPerformingStocks({
-  //   country,
+  //   country: "Nigeria",
   //   period: '1y',
   //   limit: 10,
   // });
+
+  // console.log(stocks);
 
   return (
     <>
@@ -54,33 +56,46 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                 <TableColumn>Symbol</TableColumn>
                 <TableColumn>Current Price</TableColumn>
                 <TableColumn>Change (1D)</TableColumn>
-                {/*<TableColumn>Volume (1y)</TableColumn>*/}
-                <TableColumn>Active Users</TableColumn>
-                <TableColumn>Action</TableColumn>
+                <TableColumn className='flex justify-center items-center'>Active Users</TableColumn>
               </TableHeader>
               <TableBody>
                 {paginatedData?.map((c) => {
                   return (
-                    <TableRow key={c._id}>
+                    <TableRow
+                      onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
+                      className="dark:hover:bg-[#282829] hover:bg-gray-100 cursor-pointer rounded-xl"
+                      key={c._id}
+                    >
                       <TableCell>
-                        <Link to={`/markets/virtuals/${c._id}`}>
-                          <div
-                            tabIndex={1}
-                            className="w-min cursor-pointer rounded-2xl transition-all duration-300 hover:bg-primary-200 hover:px-3 hover:py-1"
-                          >
+                        <Button
+                          className="bg-transparent rounded-full hover:bg-default-100"
+                          onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
+                        >
+                          <div tabIndex={1} className="w-min cursor-pointer rounded-2xl transition-all duration-300">
                             {c.symbol}
                           </div>
-                        </Link>
+                        </Button>
                       </TableCell>
-                      <TableCell>{formatCurrency(c.price, c.currency)}</TableCell>
-                      <TableCell className={c.latestPrice >= 0 ? 'text-teal-500' : 'text-red-500'}>
-                        <div className="flex items-center space-x-1">
-                          {c.latestPrice >= 0 ? <RiArrowUpLine /> : <RiArrowDownLine />}
-                          <span>{c.latestPrice.toFixed(2)}%</span>
-                        </div>
-                      </TableCell>
-                      {/*<TableCell>{formatCurrency(c.volume, c.currency)}</TableCell>*/}
                       <TableCell>
+                        <Button
+                          className="bg-transparent rounded-full hover:bg-default-100"
+                          onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
+                        >
+                          {formatCurrency(c?.latestPrice.toFixed(2))}
+                        </Button>
+                      </TableCell>
+                      <TableCell className={c?.latestPrice >= 0 ? 'text-teal-500' : 'text-red-500'}>
+                        <Button
+                          className={`bg-transparent ${c?.latestPrice >= 0 ? 'text-teal-500' : 'text-red-500'} rounded-full hover:bg-default-100`}
+                          onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
+                        >
+                          <div className="flex items-center space-x-1">
+                            {c.change >= 0 ? <RiArrowUpLine /> : <RiArrowDownLine />}
+                            <span>{c.change.toFixed(2)}%</span>
+                          </div>
+                        </Button>
+                      </TableCell>
+                      <TableCell className="flex justify-center items-center">
                         <AvatarGroup isBordered max={3}>
                           <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
                           <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
@@ -89,14 +104,6 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                           <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
                           <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
                         </AvatarGroup>
-                      </TableCell>
-                      <TableCell>
-                        <Button
-                          onPress={() => navigate(`/markets/virtuals/${c._id}`, {state: c})}
-                          className="bg-transparent rounded-full hover:bg-default-100 hover:text-green-500"
-                        >
-                          View <FaChevronRight size={12} />
-                        </Button>
                       </TableCell>
                     </TableRow>
                   );

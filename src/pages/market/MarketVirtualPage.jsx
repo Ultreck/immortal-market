@@ -1,7 +1,7 @@
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
 import { Avatar, AvatarGroup, Card } from '@heroui/react';
-import countries from '@/lib/countries.js';
+// import countries from '@/lib/countries.js';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
 import CountryList from '@/pages/market/shared/CountryList.jsx';
@@ -51,7 +51,7 @@ const MarketVirtualPage = () => {
                         <TbArrowUpRight size={28} color="green" />
                         <p className="text-[1.7rem] font-semibold text-green-600">{getNgVirtuals?.data?.totalPrice.toFixed(2) || 0}</p>
                       </div>
-                      <p className="text-center opacity-70">Total Price</p>
+                      <p className="opacity-70">Total Price</p>
                     </div>
                   </Card>{' '}
                   <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
@@ -60,7 +60,7 @@ const MarketVirtualPage = () => {
                         <TbArrowUpRight size={28} color="green" />
                         <p className="text-[1.7rem] font-semibold text-green-600">{getNgVirtuals?.data?.totalVolume || 0}</p>
                       </div>
-                      <p className="text-center opacity-70">Total volume</p>
+                      <p className="opacity-70">Total volume</p>
                     </div>
                   </Card>
                   <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
@@ -81,7 +81,7 @@ const MarketVirtualPage = () => {
                         <TbArrowUpRight size={28} color="green" />
                         <p className="text-[1.7rem] font-semibold text-green-600">{getNgVirtuals?.data?.percentGain || 0}%</p>
                       </div>
-                      <p className="text-center opacity-70">Gain percentage</p>
+                      <p className="opacity-70">Percentage Gain</p>
                     </div>
                   </Card>{' '}
                   <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
@@ -90,7 +90,7 @@ const MarketVirtualPage = () => {
                         <TbArrowUpRight className='rotate-180' size={28} color="red" />
                         <p className="text-[1.7rem] font-semibold text-red-600">{getNgVirtuals?.data?.percentLoss || 0}%</p>
                       </div>
-                      <p className="text-center opacity-70">Loss percentage</p>
+                      <p className="opacity-70">Percentage Loss</p>
                     </div>
                   </Card>
                   <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">

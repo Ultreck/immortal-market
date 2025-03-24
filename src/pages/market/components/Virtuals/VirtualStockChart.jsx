@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTernaryDarkMode } from 'usehooks-ts';
-import { io } from "socket.io-client";
-
+import { io } from 'socket.io-client';
 
 const dateFormatter = (date) => {
   date = new Date(date);
@@ -14,7 +13,7 @@ const dateFormatter = (date) => {
 
 // custome decimal limit function
 function limitDecimals(num, decimals) {
-  if (num === undefined || num === null) return "0";  
+  if (num === undefined || num === null) return '0';
   const strNum = num.toString();
   const dotIndex = strNum.indexOf('.');
   if (dotIndex === -1) return strNum;
@@ -24,16 +23,13 @@ function limitDecimals(num, decimals) {
 // time formatter function
 const timeFormatter = (date, is24Hour = false) => {
   const validDate = date instanceof Date ? date : new Date(date);
-
   if (isNaN(validDate)) {
     console.error('Invalid date:', date);
     return 'Invalid Date';
   }
-
   let hours = validDate.getHours();
   let minutes = validDate.getMinutes();
   let seconds = validDate.getSeconds();
-
   if (!is24Hour) {
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12 || 12;
@@ -46,7 +42,7 @@ const timeFormatter = (date, is24Hour = false) => {
 const VirtualStockChart = ({ chartDatas, state }) => {
   const [data, setData] = useState(chartDatas[0]?.prices);
   const { isDarkMode } = useTernaryDarkMode();
-  const socket = io("https://market-msjv.onrender.com");
+  const socket = io('https://market-msjv.onrender.com');
 
   const retructuredData = chartDatas[0]?.prices?.map((value, index) => {
     return {
@@ -58,37 +54,32 @@ const VirtualStockChart = ({ chartDatas, state }) => {
       time: timeFormatter(value.createdAt),
     };
   });
-  // console.log(state);
-  // console.log(retructuredData);
+
   const timeFrame = JSON.parse(localStorage.getItem('time-function'));
   useEffect(() => {
     setData(retructuredData);
   }, [timeFrame, chartDatas]);
-  
-  useEffect(() => {
-    const timeInterval = setInterval(() => {
-      socket.on(`${state.symbol}-${timeFrame}`, (item) => {
-        console.log(item);
-        const newData ={
-          price: limitDecimals(item.stock.price, 4) || limitDecimals(1.29998376, 4),
-          close: limitDecimals(item.stock.close, 4) || limitDecimals(1.29998376, 4),
-          date: dateFormatter(item.stock.createdAt),
-          name: (data.length + 1) * 3,
-          time: timeFormatter(item.stock.createdAt),
-        };
-        console.log(newData);
-        setData((prev) => [...prev, data]);
-      });
 
-    }, 1000);
-    
-    return () => {
-      clearInterval(timeInterval);
-      socket.off(`${state.symbol}-${timeFrame}`);
+  useEffect(() => {
+    const handleNewData = (item) => {
+      console.log(item);
+      const newData = {
+        price: limitDecimals(item.stock.price, 4) || limitDecimals(1.29998376, 4),
+        close: limitDecimals(item.stock.close, 4) || limitDecimals(1.29998376, 4),
+        date: dateFormatter(item.stock.createdAt),
+        name: (data.length + 1) * 3,
+        time: timeFormatter(item.stock.createdAt),
+      };
+      console.log(newData);
+      setData((prev) => [...prev, newData]);
     };
     
-    
-  }, [data]);
+    socket.on(`${state.symbol}-${timeFrame}`, handleNewData);
+    return () => {
+      socket.off(`${state.symbol}-${timeFrame}`);
+    };
+  }, [state.symbol, timeFrame, data]);
+  
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -132,7 +123,14 @@ const VirtualStockChart = ({ chartDatas, state }) => {
           <YAxis domain={['auto', 'auto']} tickSize={3} strokeOpacity={0.5} orientation="right" />
           <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
           <Tooltip content={<CustomTooltip />} />
-          <Area type="monotone" dataKey="price" stroke="#4691c5" fillOpacity={1} fill="url(#priceGradient)" />
+          <Area
+            type="monotone"
+            dataKey="price"
+            isAnimationActive={false}
+            stroke="#4691c5"
+            fillOpacity={1}
+            fill="url(#priceGradient)"
+          />
         </AreaChart>
       </ResponsiveContainer>
 

@@ -15,18 +15,18 @@ const VirtualStockDetails = () => {
   const [summaryOrder, setSummaryOrder] = useState(null);
   const [chartDatas, setChartDatas] = useState([]);
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
-  const [timeFrame, seTtimeFrame] = useState("full")
-  const { mutateAsync: getStockDetails,} = useCreateVirtualStockDetails();
-  
+  const [timeFrame, seTtimeFrame] = useState(JSON.parse(window.localStorage.getItem('time-function')));
+  const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
+
   useEffect(() => {
     handleGetStockDetails();
-    seTtimeFrame(JSON.parse(window.localStorage.getItem('time-function')) || 'full');
-  }, [timeFrame]);
-  
+    seTtimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
+  }, [timeFrame, id]);
+
   const handleGetStockDetails = async () => {
     let data = {
       stockId: id,
-      country: location.state.country,
+      country: location?.state?.country,
       sessionType: timeFrame,
     };
     const res = await getStockDetails(data);
@@ -38,7 +38,7 @@ const VirtualStockDetails = () => {
   };
   return (
     <>
-      {isStockLoading ? (   
+      {isStockLoading ? (
         <div className="container">
           <div className="grid grid-cols-[1fr_350px] items-start gap-8">
             <Skeleton className="min-h-[600px] rounded-2xl" />
