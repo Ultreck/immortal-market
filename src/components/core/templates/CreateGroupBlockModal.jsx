@@ -6,19 +6,40 @@ import { Controller, useForm } from 'react-hook-form';
 import { toBlob } from 'html-to-image';
 import { useRef, useState } from 'react';
 import { useCreateDesignBlock } from '@/api/business.js';
+import useDesignStore from '@/store/design';
 
 const categories = [
-  { key: 'data', label: 'Data' },
   { key: 'text', label: 'Text' },
   { key: 'shapes', label: 'Shapes' },
+  { key: 'infographic', label: 'Infographic' },
+  { key: 'chart', label: 'Chart' },
 ];
 
-const CreateGroupBlockModal = ({ isOpen, onClose, elements }) => {
+const CreateGroupBlockModal = ({ isOpen, onClose, group }) => {
   const el = useRef(null);
   const { id: business } = useBusiness();
   const { control, handleSubmit, reset } = useForm();
   const [isThumbnailLoading, setIsThumbnailLoading] = useState(false);
   const { mutateAsync: create, isPending: isCreateLoading } = useCreateDesignBlock(business);
+  const elements = useDesignStore((state) => state.elements.filter((e) => e.parent === group.key));
+  const getElements = useDesignStore((state) => state.getElements);
+  for (const el of elements) {
+    if (el.type === 'group') {
+      const children = getElements((e) => e.parent === el.key);
+      elements.push(
+        ...children.map((c) => {
+          return {
+            ...c,
+            position: {
+              x: c.position.x + el.position.x,
+              y: c.position.y + el.position.y,
+            },
+          };
+        })
+      );
+    }
+  }
+  const sorted = elements.sort((a, b) => a.order - b.order);
 
   const submit = async (values) => {
     try {
@@ -29,12 +50,26 @@ const CreateGroupBlockModal = ({ isOpen, onClose, elements }) => {
       });
       const thumbnail = new File([blob], 'thumbnail.png', { type: 'image/png' });
       setIsThumbnailLoading(false);
-      const group = crypto.randomUUID();
+      // eslint-disable-next-line no-unused-vars
+      const { _id, id, ...group } = elements[0];
       const data = {
         // eslint-disable-next-line no-unused-vars
-        elements: elements.map(({ _id, id, ...el }) => ({ ...el, group })),
+        elements: sorted.map(({ _id, id, ...el }) => ({ ...el })).filter((e) => e.type !== 'group'),
       };
-      await create({ ...values, data, thumbnail, type: 'group' });
+      await create({
+        ...values,
+        data,
+        thumbnail,
+        type: 'group',
+        section: 'design',
+        elements: elements.map((e) => {
+          let text = e.type;
+          if (e.config?.name || e.config?.type) {
+            text += `/${e.config.name || e.config.type}`;
+          }
+          return text;
+        }),
+      });
       onClose();
       reset();
       addToast({ title: 'Block saved', color: 'success' });
@@ -52,7 +87,7 @@ const CreateGroupBlockModal = ({ isOpen, onClose, elements }) => {
       <ModalContent style={{ width: 'max-content', maxWidth: 'initial' }}>
         <ModalBody className="px-10 py-8 block">
           <h2 className="text-lg font-medium mb-4">Save as block</h2>
-          <ElementsPreview elements={elements} ref={el} />
+          <ElementsPreview elements={sorted} ref={el} />
           <form onSubmit={handleSubmit(submit)} className="flex flex-col mt-6">
             <Controller
               name="category"
@@ -103,7 +138,7 @@ const CreateGroupBlockModal = ({ isOpen, onClose, elements }) => {
 CreateGroupBlockModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  elements: PropTypes.arrayOf(PropTypes.object).isRequired,
+  group: PropTypes.object.isRequired,
 };
 
 export default CreateGroupBlockModal;

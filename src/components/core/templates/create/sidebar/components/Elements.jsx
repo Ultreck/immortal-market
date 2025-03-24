@@ -8,9 +8,11 @@ import Maps from '@/components/core/templates/create/sidebar/data/Maps.jsx';
 import Tables from '@/components/core/templates/create/sidebar/data/Tables.jsx';
 import { HiChevronRight } from 'react-icons/hi2';
 import InterfaceElements from '@/components/core/templates/create/sidebar/components/design/InterfaceElements.jsx';
+import ImmortalCharts from '../data/ImmortalCharts';
 
 const items = [
   { name: 'Charts', view: 'charts', component: <Chart mini /> },
+  { name: 'Immortal charts', view: 'immortal-charts', component: <ImmortalCharts mini /> },
   { name: 'Shapes', view: 'shapes', component: <Shapes mini /> },
   { name: 'Maps', view: 'maps', component: <Maps mini /> },
   { name: 'Tables', view: 'tables', component: <Tables mini /> },
@@ -27,6 +29,7 @@ const Elements = () => {
     frames: <Frames onBack={() => setView('all')} />,
     icons: <Icons onBack={() => setView('all')} />,
     charts: <Chart onBack={() => setView('all')} />,
+    'immortal-charts': <ImmortalCharts onBack={() => setView('all')} />,
     maps: <Maps onBack={() => setView('all')} />,
     tables: <Tables onBack={() => setView('all')} />,
     'ui-elements': <InterfaceElements onBack={() => setView('all')} />,

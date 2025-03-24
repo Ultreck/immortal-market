@@ -80,6 +80,10 @@ elements.push({
         width: 40,
         height: 40,
       },
+      position: {
+        x: 0,
+        y: 0,
+      },
       style: {
         ...getElementDefaultStyle({ type: 'icon' }),
       },
@@ -94,6 +98,10 @@ elements.push({
       size: {
         width: 150,
         height: 20,
+      },
+      position: {
+        x: 0,
+        y: 40,
       },
       style: {
         ...getElementDefaultStyle({ type: 'data-tag' }),
@@ -114,6 +122,10 @@ elements.push({
         width: 150,
         height: 20,
       },
+      position: {
+        x: 0,
+        y: 60,
+      },
       style: {
         ...getElementDefaultStyle({ type: 'data-tag' }),
         fontWeight: 'medium',
@@ -131,6 +143,10 @@ elements.push({
       size: {
         width: 200,
         height: 40,
+      },
+      position: {
+        x: 0,
+        y: 80,
       },
       style: {
         ...getElementDefaultStyle({ type: 'data-tag' }),

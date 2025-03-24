@@ -482,9 +482,20 @@ const createDesignStore = () => {
         // Store the page being deleted for potential rollback
         const page = get().pages.find(p => p.id === pageId);
         if (!page) return;
+        // Find the next page to set as active
+        const pages = get().pages;
+        const currentIndex = pages.findIndex(p => p.id === pageId);
+        let nextActivePageId = null;
+        // If there's a next page, use it, otherwise use previous page if available
+        if (currentIndex < pages.length - 1) {
+          nextActivePageId = pages[currentIndex + 1].id;
+        } else if (currentIndex > 0) {
+          nextActivePageId = pages[currentIndex - 1].id;
+        }
         // Optimistically update the state
         set({
           pages: get().pages.filter(p => p.id !== pageId),
+          activePage: nextActivePageId,
           selectedPage: null,
           pendingUpdates: {
             ...get().pendingUpdates,
@@ -779,30 +790,15 @@ const createDesignStore = () => {
           oid,
         });
       },
-      createElementsAndGroup: (pageId, elements) => {
-        // First create all elements with properly assigned IDs
-        const _elements = elements.map((el, i) => {
-          const id = uuid();
-          const last = get().elements.sort((a, b) => a.order - b.order).at(-1);
-          return ({
-            ...el,
-            id,
-            _id: id,
-            key: id,
-            page: pageId,
-            order: (last?.order || 0) + i + 1,
-            rotation: 0,
-          });
-        });
+      createElementsAndGroup: (pageId, elements, position) => {
         // Calculate the bounding box for all elements
-        const minX = Math.min(..._elements.map(el => el.position.x));
-        const minY = Math.min(..._elements.map(el => el.position.y));
-        const maxX = Math.max(..._elements.map(el => el.position.x + (el.size?.width || 0)));
-        const maxY = Math.max(..._elements.map(el => el.position.y + (el.size?.height || 0)));
-        console.log({ minX, minY, maxX, maxY });
+        const minX = Math.min(...elements.map(el => el.position.x));
+        const minY = Math.min(...elements.map(el => el.position.y));
+        const maxX = Math.max(...elements.map(el => el.position.x + (el.size?.width || 0)));
+        const maxY = Math.max(...elements.map(el => el.position.y + (el.size?.height || 0)));
         // Get the highest order to place the group on top
         const pageElements = get().elements.filter(el => el.page === pageId);
-        const highestOrder = Math.max(...[..._elements, ...pageElements].map(el => el.order));
+        const highestOrder = Math.max(...[...elements, ...pageElements].map(el => el.order));
         const groupOrder = highestOrder + 1;
         // Create group element
         const key = uuid();
@@ -814,22 +810,30 @@ const createDesignStore = () => {
           text: 'Group',
           design: get().id,
           page: pageId,
-          position: { x: minX, y: minY },
+          position,
           size: { width: maxX - minX, height: maxY - minY },
           rotation: 0,
           order: groupOrder,
-          children: _elements.map(el => el.id),
           style: { opacity: 1 },
         };
         // Adjust element positions relative to the group
-        const adjustedElements = _elements.map(el => ({
-          ...el,
-          parent: key,
-          position: {
-            x: el.position.x - minX,
-            y: el.position.y - minY
-          }
-        }));
+        const adjustedElements = elements.map((el, i) => {
+          const id = uuid();
+          return ({
+            ...el,
+            id,
+            _id: id,
+            key: id,
+            page: pageId,
+            order: (groupOrder + 1) + i,
+            parent: key,
+            position: {
+              x: el.position.x - minX,
+              y: el.position.y - minY
+            },
+            rotation: 0,
+          });
+        });
         // Create operation ID for tracking
         const oid = `create-and-group-elements-${Date.now()}`;
         // Update state with new elements and group
@@ -839,11 +843,8 @@ const createDesignStore = () => {
           pendingUpdates: {
             ...get().pendingUpdates,
             [oid]: {
-              type: 'elements:create-and-group',
-              payload: {
-                key,
-                elementKeys: adjustedElements.map(el => el.key),
-              },
+              type: 'elements:create',
+              keys: adjustedElements.map(el => el.key),
               timestamp: Date.now()
             }
           }
@@ -852,20 +853,21 @@ const createDesignStore = () => {
         socket.emit('action', {
           design: get().id,
           user: get().user,
-          action: 'elements:create-and-group',
+          action: 'elements:create',
           payload: {
             pageId,
-            elements: adjustedElements.map(el => ({
-              ...el,
-              id: undefined,
-              _id: undefined,
-              parent: undefined
-            })),
-            key,
-            position: {
-              x: minX,
-              y: minY
-            },
+            elements: [
+              {
+                ...groupElement,
+                id: undefined,
+                _id: undefined
+              },
+              ...adjustedElements.map(el => ({
+                ...el,
+                id: undefined,
+                _id: undefined,
+              })),
+            ],
           },
           oid,
         });
@@ -1477,7 +1479,6 @@ const createDesignStore = () => {
           size: { width: maxX - minX, height: maxY - minY },
           rotation: 0,
           order: groupOrder,
-          children: elementsToGroup.map(el => el.id),
           style: { opacity: 1 },
         };
         // Create optimistic updates by adding group information and adjusting positions
@@ -1513,12 +1514,13 @@ const createDesignStore = () => {
           }
         });
         // Send the action to the server
+        const _groupElement = { ...groupElement, id: undefined, _id: undefined };
         socket.emit('action', {
           design: get().id,
           user: get().user,
           action: 'elements:group',
           payload: {
-            key,
+            groupElement: _groupElement,
             elementIds: elementsToGroup.map(el => el.id),
           },
           oid,
@@ -1528,12 +1530,12 @@ const createDesignStore = () => {
         // Find the group element and its children
         const groupElement = get().elements.find(el => el.key === key);
         if (!groupElement) return;
-        const childElements = get().elements.filter(el => el.parent === groupElement.id);
+        const childElements = get().elements.filter(el => el.parent === groupElement.key);
         // Create optimistic updates by removing the group and restoring child positions
         const filteredElements = get().elements.filter(el => el.key !== key);
         const updatedElements = filteredElements.map(el => {
           // Restore child elements' positions by adding the group's position
-          if (el.parent === groupElement.id) {
+          if (el.parent === groupElement.key) {
             return {
               ...el,
               parent: null,
@@ -1555,8 +1557,7 @@ const createDesignStore = () => {
             [oid]: {
               type: 'elements:ungroup',
               payload: {
-                groupId: groupElement.id,
-                elementIds: childElements.map(el => el.id)
+                groupKey: groupElement.key,
               },
               timestamp: Date.now()
             }
@@ -1568,8 +1569,7 @@ const createDesignStore = () => {
           user: get().user,
           action: 'elements:ungroup',
           payload: {
-            groupId: groupElement.id,
-            elementIds: childElements.map(el => el.id)
+            groupKey: groupElement.key,
           },
           oid,
         });

@@ -62,24 +62,9 @@ const DesignBuilder = () => {
       const x = Math.max(roundToNearestTen(activatorEvent.x + delta.x - canvasRect.left), 0);
       const y = Math.max(roundToNearestTen(activatorEvent.y + delta.y - distanceFromTop), 0);
       if (Array.isArray(active.data.current)) {
-        createElementsAndGroup(
-          page,
-          active.data.current.map((i, index, arr) => {
-            const yPos = index === 0 ? y : y + arr.slice(0, index).reduce((sum, el) => sum + el.size.height, 0);
-            return {
-              ...i,
-              position: { x, y: yPos },
-              rotation: 0,
-            };
-          })
-        );
+        createElementsAndGroup(page, active.data.current, { x, y });
       } else {
-        createElements(page, [
-          {
-            ...active.data.current,
-            position: { x, y },
-          },
-        ]);
+        createElements(page, [{ ...active.data.current, position: { x, y } }]);
       }
     }
   };

@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
-import { Button, Divider, Tooltip, useDisclosure } from '@heroui/react';
-import { RiAddLine } from 'react-icons/ri';
+import { Button, Tooltip } from '@heroui/react';
 import { LuCopyPlus, LuGroup, LuUngroup } from 'react-icons/lu';
 import { AnimatePresence, motion } from 'motion/react';
 import { TbTrash } from 'react-icons/tb';
-import CreateGroupBlockModal from '@/components/core/templates/CreateGroupBlockModal.jsx';
 import useDesignStore from '@/store/design.js';
 import { useElementActions } from '@/hooks/template/use-element-actions';
 
 const FloatingToolbar = ({ id }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const elements = useDesignStore((state) => {
     return state.elements.filter((el) => selectedElements.includes(el.key));
@@ -26,7 +23,7 @@ const FloatingToolbar = ({ id }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute top-3 left-1/2 -translate-x-1/2 w-max px-1.5 py-1 z-10 bg-white shadow border border-default-100 dark:bg-default-100 rounded-full flex items-center"
+            className="absolute top-3 left-1/2 -translate-x-1/2 w-max px-1.5 py-1 z-10 gap-1 bg-white shadow border border-default-100 dark:bg-default-100 rounded-full flex items-center"
           >
             {elements.length > 1 && (
               <>
@@ -60,7 +57,7 @@ const FloatingToolbar = ({ id }) => {
                 </Button>
               </Tooltip>
             )}
-            <div className="flex items-center gap-2 h-full">
+            <div className="flex items-center gap-1 h-full">
               <Tooltip content="Duplicate">
                 <Button variant="light" radius="full" size="sm" isIconOnly onPress={() => handleAction('duplicate')}>
                   <LuCopyPlus size="18" />
@@ -79,24 +76,9 @@ const FloatingToolbar = ({ id }) => {
                 </Button>
               </Tooltip>
             </div>
-            <Divider orientation="vertical" className="h-[20px] border-2 border-default-100 mx-2" />
-            <Tooltip content="Save as block">
-              <Button
-                variant="light"
-                radius="full"
-                className="text-base px-2"
-                size="sm"
-                startContent={<RiAddLine size="18" />}
-                onPress={onOpen}
-              >
-                Save as block
-              </Button>
-            </Tooltip>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <CreateGroupBlockModal isOpen={isOpen} onClose={onClose} elements={elements} />
     </>
   );
 };

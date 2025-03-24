@@ -15,7 +15,7 @@ export const GroupPresent = ({ element, ...props }) => {
 const GroupContent = ({ element, selected }) => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
   const activeElement = useDesignStore((state) => state.activeElement);
-  const elements = useDesignStore((state) => state.elements.filter((e) => e.parent === element.id));
+  const elements = useDesignStore((state) => state.elements.filter((e) => e.parent === element.key));
   const sorted = elements.sort((a, b) => a.order - b.order);
   const selectElements = useDesignStore((state) => state.selectElements);
   const updateStore = useDesignStore((state) => state.updateStore);
@@ -48,7 +48,7 @@ const GroupContent = ({ element, selected }) => {
 
         return config?.wrapper ? (
           <ElementWrapper
-            key={element.id}
+            key={element.key}
             element={element}
             editable={!!config?.editable}
             fit={!!config?.fit}

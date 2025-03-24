@@ -7,20 +7,20 @@ import NoData from '@/components/ui/NoData.jsx';
 import PropTypes from 'prop-types';
 import { TbChevronLeft } from 'react-icons/tb';
 
-const DataBlocks = ({ mini = false, onBack }) => {
+const ImmortalCharts = ({ mini = false, onBack }) => {
   const { id: business } = useBusiness();
   const { data: { blocks = [] } = {}, isLoading: isBlocksLoading } = useGetDesignBlocks({
     business,
     type: 'group',
-    category: 'data',
+    category: 'chart',
   });
 
   const elements = blocks.map((b) => {
     return {
       id: b._id,
-      data: b.data.elements,
+      data: b.data.elements.sort((a, b) => a.order - b.order),
       preview: (
-        <div className="bg-white border border-default-200 rounded-2xl p-6">
+        <div className="bg-white border border-default-200 rounded-2xl p-[10%]">
           <Image src={getImageLink(b.thumbnail)} alt="Data" className="w-full rounded-2xl cursor-grab" />
         </div>
       ),
@@ -40,13 +40,13 @@ const DataBlocks = ({ mini = false, onBack }) => {
           {mini ? (
             <>
               {elements.length ? (
-                <div className="grid grid-cols-1 gap-4">
-                  {elements.map((element) => (
+                <div className="grid grid-cols-2 gap-4">
+                  {elements.slice(0, 4).map((element) => (
                     <DraggableElementWrapper key={element.id} element={element} />
                   ))}
                 </div>
               ) : (
-                <NoData text="No datablocks" />
+                <NoData text="No blocks" />
               )}
             </>
           ) : (
@@ -55,7 +55,7 @@ const DataBlocks = ({ mini = false, onBack }) => {
                 <Button onPress={onBack} variant="light" radius="full" isIconOnly size="sm">
                   <TbChevronLeft size="20" />
                 </Button>
-                <h2 className="text-base font-semibold">Data blocks</h2>
+                <h2 className="text-base font-semibold">Immortal charts</h2>
               </div>
               <>
                 {elements.length ? (
@@ -65,7 +65,7 @@ const DataBlocks = ({ mini = false, onBack }) => {
                     ))}
                   </div>
                 ) : (
-                  <NoData text="No datablocks" />
+                  <NoData text="No blocks" />
                 )}
               </>
             </>
@@ -76,9 +76,9 @@ const DataBlocks = ({ mini = false, onBack }) => {
   );
 };
 
-DataBlocks.propTypes = {
+ImmortalCharts.propTypes = {
   mini: PropTypes.bool,
   onBack: PropTypes.func,
 };
 
-export default DataBlocks;
+export default ImmortalCharts;

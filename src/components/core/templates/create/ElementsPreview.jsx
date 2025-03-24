@@ -1,9 +1,9 @@
-import { createElement, forwardRef, Fragment } from 'react';
+import { createElement, Fragment } from 'react';
 import ElementWrapperPresent from '@/components/core/templates/create/ElementWrapperPresent.jsx';
 import PropTypes from 'prop-types';
 import { getElementPresentComponent } from '@/lib/elements.js';
 
-const ElementsPreview = forwardRef(({ elements }, ref) => {
+const ElementsPreview = ({ elements, ref }) => {
   const maxRight = Math.max(...elements.map((el) => el.position.x + el.size.width));
   const minLeft = Math.min(...elements.map((el) => el.position.x));
   const minTop = Math.min(...elements.map((el) => el.position.y));
@@ -43,12 +43,11 @@ const ElementsPreview = forwardRef(({ elements }, ref) => {
       </div>
     </div>
   );
-});
-
-ElementsPreview.displayName = 'ElementsPreview';
+};
 
 ElementsPreview.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
+  ref: PropTypes.object,
 };
 
 export default ElementsPreview;

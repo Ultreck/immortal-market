@@ -103,7 +103,9 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
       } else {
         items.push({ key: 'link', label: 'Link', icon: <TbLink size="18" />, showDivider: true });
       }
-      items.push({ key: 'save-as-block', label: 'Save as block', icon: <TbPlus size="18" />, showDivider: true });
+      if (elements.length === 1 && elements[0].type === 'group') {
+        items.push({ key: 'save-as-block', label: 'Save as block', icon: <TbPlus size="18" />, showDivider: true });
+      }
       items.push(...[{ key: 'delete', label: 'Delete', icon: <TbTrash size="18" />, color: 'danger' }]);
       return items;
     }
@@ -179,7 +181,9 @@ const ContextMenu = ({ id, position, isOpen, onClose, type }) => {
       )}
 
       <LinkTool elements={elements} isOpen={isLinkToolOpen} onClose={onLinkToolClose} />
-      <CreateGroupBlockModal isOpen={isCreateBlockOpen} onClose={onCreateBlockClose} elements={elements} />
+      {elements?.length && elements?.at(0)?.type === 'group' && (
+        <CreateGroupBlockModal isOpen={isCreateBlockOpen} onClose={onCreateBlockClose} group={elements.at(0)} />
+      )}
       <CreateCommentModal
         target="element"
         targetId={elements[0]?.id}
