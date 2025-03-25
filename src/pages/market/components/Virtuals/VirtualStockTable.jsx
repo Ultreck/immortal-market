@@ -72,7 +72,7 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                           onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
                         >
                           <div tabIndex={1} className="w-min cursor-pointer rounded-2xl transition-all duration-300">
-                            {c.symbol}
+                            {c?.symbol}
                           </div>
                         </Button>
                       </TableCell>

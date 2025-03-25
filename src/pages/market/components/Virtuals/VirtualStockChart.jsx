@@ -63,19 +63,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
   }, [timeFrame, chartDatas]);
 
   useEffect(() => {
-    // const handleNewData = (item) => {
-    //   console.log(item);
-    //   const newData = {
-    //     price: limitDecimals(item.stock.price, 4) || limitDecimals(1.29998376, 4),
-    //     close: limitDecimals(item.stock.close, 4) || limitDecimals(1.29998376, 4),
-    //     date: dateFormatter(item.stock.createdAt),
-    //     name: (data?.length + 1) * 3,
-    //     time: timeFormatter(item.stock.createdAt),
-    //   };
-    //   console.log(newData);
-    //   setData((prev) => [...prev, newData]);
-    // };
-    socket.on(`${state.symbol}-${timeFrame}`, (msg) => {
+    socket.on(`${state?.symbol}-${timeFrame}`, (msg) => {
       setData((prev) => {
         return [...prev, {
           price: limitDecimals(msg?.stock?.price, 4) || limitDecimals(1.29998376, 4),
@@ -84,16 +72,12 @@ const VirtualStockChart = ({ chartDatas, state }) => {
           name: (prev?.length + 1) * 3,
           time: timeFormatter(msg?.stock?.createdAt),
         }];
-      });
-      console.log(msg);
-      
+      });      
     });
     return () => {
-      socket.off(`${state.symbol}-${timeFrame}`);
+      socket.off(`${state?.symbol}-${timeFrame}`);
     };
   }, [data, timeFrame]);
-
-  console.log(data?.length);
 
   useEffect(() => {
     if (chartContainerRef.current) {
@@ -128,7 +112,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     <div 
     ref={chartContainerRef} 
     className="overflow-x-auto w-full">
-      <ResponsiveContainer width={data?.length * 50} height={300}>
+      <ResponsiveContainer width={data?.length < 20 ? "100%" : data?.length * 50} height={300}>
         <AreaChart data={data} margin={{ top: 10, right: 5, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">

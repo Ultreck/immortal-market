@@ -8,6 +8,7 @@ import VirtualStockSocket from '@/pages/market/components/Virtuals/VirtualSotckS
 import VirtualStockTradeMarquee from '@/pages/market/components/Virtuals/VirtualStockTradeMarquee.jsx';
 import { useCreateVirtualStockDetails, useCreateVirtualStockOrders, useCreateVirtualSummary } from '@/api/ai-chat';
 import { formatCurrency } from '@/lib/utils';
+import PlaceOrder from '@/pages/market/modals/PlaceOrder.jsx';
 
 const VirtualStockDetails = () => {
   const params = useParams();
@@ -104,7 +105,7 @@ const VirtualStockDetails = () => {
                           <div>
                             <div className="flex items-center space-x-3">
                               <div>
-                                <h1 className="text-md">{stock.symbol}</h1>
+                                <h1 className="text-md">{stock?.symbol}</h1>
                                 <p className="mt-1 text-4xl font-bold">25%</p>
                               </div>
                             </div>
@@ -146,9 +147,10 @@ const VirtualStockDetails = () => {
                           </div>
                         </div>
                         <div className="space-x-2">
-                          <Button color="primary" radius="full">
+                          <PlaceOrder stock={stock} />
+                          {/* <Button color="primary" radius="full">
                             Buy
-                          </Button>
+                          </Button> */}
                           <Button variant="bordered" radius="full">
                             Sell
                           </Button>
