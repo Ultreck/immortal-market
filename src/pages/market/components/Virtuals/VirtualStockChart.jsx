@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { io } from 'socket.io-client';
@@ -43,7 +43,10 @@ const VirtualStockChart = ({ chartDatas, state }) => {
   const [data, setData] = useState(chartDatas[0]?.prices);
   const { isDarkMode } = useTernaryDarkMode();
   const socket = io('https://market-msjv.onrender.com');
+  const chartContainerRef = useRef(null);
+  const timeFrame = JSON.parse(localStorage.getItem('time-function'));
 
+  // Change the data to the format specified
   const retructuredData = chartDatas[0]?.prices?.map((value, index) => {
     return {
       ...value,
@@ -55,30 +58,49 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     };
   });
 
-  const timeFrame = JSON.parse(localStorage.getItem('time-function'));
   useEffect(() => {
     setData(retructuredData);
   }, [timeFrame, chartDatas]);
 
   useEffect(() => {
-    const handleNewData = (item) => {
-      console.log(item);
-      const newData = {
-        price: limitDecimals(item.stock.price, 4) || limitDecimals(1.29998376, 4),
-        close: limitDecimals(item.stock.close, 4) || limitDecimals(1.29998376, 4),
-        date: dateFormatter(item.stock.createdAt),
-        name: (data.length + 1) * 3,
-        time: timeFormatter(item.stock.createdAt),
-      };
-      console.log(newData);
-      setData((prev) => [...prev, newData]);
-    };
-    
-    socket.on(`${state.symbol}-${timeFrame}`, handleNewData);
+    // const handleNewData = (item) => {
+    //   console.log(item);
+    //   const newData = {
+    //     price: limitDecimals(item.stock.price, 4) || limitDecimals(1.29998376, 4),
+    //     close: limitDecimals(item.stock.close, 4) || limitDecimals(1.29998376, 4),
+    //     date: dateFormatter(item.stock.createdAt),
+    //     name: (data?.length + 1) * 3,
+    //     time: timeFormatter(item.stock.createdAt),
+    //   };
+    //   console.log(newData);
+    //   setData((prev) => [...prev, newData]);
+    // };
+    socket.on(`${state.symbol}-${timeFrame}`, (msg) => {
+      setData((prev) => {
+        return [...prev, {
+          price: limitDecimals(msg?.stock?.price, 4) || limitDecimals(1.29998376, 4),
+          close: limitDecimals(msg?.stock?.close, 4) || limitDecimals(1.29998376, 4),
+          date: dateFormatter(msg?.stock?.createdAt),
+          name: (prev?.length + 1) * 3,
+          time: timeFormatter(msg?.stock?.createdAt),
+        }];
+      });
+      console.log(msg);
+      
+    });
     return () => {
       socket.off(`${state.symbol}-${timeFrame}`);
     };
-  }, [state.symbol, timeFrame, data]);
+  }, [data, timeFrame]);
+
+  console.log(data?.length);
+
+  useEffect(() => {
+    if (chartContainerRef.current) {
+      chartContainerRef.current.scrollLeft = chartContainerRef.current.scrollWidth;
+    }
+  }, [data]);
+
   
 
   const CustomTooltip = ({ active, payload }) => {
@@ -103,8 +125,10 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     return null;
   };
   return (
-    <div className="w-full">
-      <ResponsiveContainer width="100%" height={300}>
+    <div 
+    ref={chartContainerRef} 
+    className="overflow-x-auto w-full">
+      <ResponsiveContainer width={data?.length * 50} height={300}>
         <AreaChart data={data} margin={{ top: 10, right: 5, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
@@ -112,7 +136,21 @@ const VirtualStockChart = ({ chartDatas, state }) => {
               <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
             </linearGradient>
           </defs>
-          {/* <CartesianGrid strokeDasharray="3 3" /> */}
+          <XAxis dataKey="name" tickSize={3} strokeOpacity={0.5} interval="preserveEnd" />
+          <YAxis domain={['auto', 'auto']} tickSize={3} strokeOpacity={0.5} orientation="right" />
+          <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
+          <Tooltip content={<CustomTooltip />} />
+          <Area type="monotone" dataKey="price" isAnimationActive={false} stroke="#4691c5" fill="url(#priceGradient)" />
+        </AreaChart>
+      </ResponsiveContainer>
+      {/* <ResponsiveContainer width="100%" height={300}>
+        <AreaChart data={data} margin={{ top: 10, right: 5, left: 0, bottom: 0 }}>
+          <defs>
+            <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
+            </linearGradient>
+          </defs>
           <XAxis
             dataKey="name"
             axisLine={{ opacity: isDarkMode && 'dark' ? 0.1 : 0.5 }}
@@ -131,28 +169,6 @@ const VirtualStockChart = ({ chartDatas, state }) => {
             fillOpacity={1}
             fill="url(#priceGradient)"
           />
-        </AreaChart>
-      </ResponsiveContainer>
-
-      {/* <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data}>
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis
-            dataKey="name"
-            tickSize={3}
-            strokeOpacity={0.5}
-            axisLine={{ opacity: isDarkMode && 'dark' ? 0.1 : 0.5 }}
-            interval="preserveEnd"
-          />
-          <YAxis tickSize={3} strokeOpacity={0.5} axisLine={false} orientation="left" />
-          <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
-          <Tooltip cursor={{ strokeDasharray: '5 5', opacity: isDarkMode && 'dark' ? 0.3 : 0.5 }} />
-          <Area type="monotone" dataKey="price" stroke="#4691c5" fillOpacity={1} fill="url(#colorUv)" />
         </AreaChart>
       </ResponsiveContainer> */}
     </div>

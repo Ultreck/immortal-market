@@ -121,9 +121,21 @@ export const useCreateAIChat = () => {
     };
     export const useCreateVirtualStockOrders = () => {
       return useMutation({
-        mutationKey: ['stock', "orders"],
+        mutationKey: ['virtual', 'stock', "orders"],
         mutationFn: (data) => {
-          return http.markettest.post(`/stock/orders`, data);
+          return http.markettest.post(`/virtual/stock/orders`, data);
+        },
+        onError: (error) => {
+          console.error("Mutation failed:", error);
+          alert("An error occurred: " + error.message);
+        },
+      });
+    };
+    export const useCreateVirtualSummary = () => {
+      return useMutation({
+        mutationKey: ['virtual', 'stock', "summary"],
+        mutationFn: (data) => {
+          return http.markettest.post(`/virtual/stock/summary`, data);
         },
         onError: (error) => {
           console.error("Mutation failed:", error);

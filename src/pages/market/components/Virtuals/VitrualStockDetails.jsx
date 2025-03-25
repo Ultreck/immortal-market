@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import VirtualStockChart from '@/pages/market/components/Virtuals/VirtualStockChart.jsx';
 import VirtualStockSocket from '@/pages/market/components/Virtuals/VirtualSotckSocket.jsx';
 import VirtualStockTradeMarquee from '@/pages/market/components/Virtuals/VirtualStockTradeMarquee.jsx';
-import { useCreateVirtualStockDetails } from '@/api/ai-chat';
+import { useCreateVirtualStockDetails, useCreateVirtualStockOrders, useCreateVirtualSummary } from '@/api/ai-chat';
+import { formatCurrency } from '@/lib/utils';
 
 const VirtualStockDetails = () => {
   const params = useParams();
@@ -14,12 +15,18 @@ const VirtualStockDetails = () => {
   const location = useLocation();
   const [summaryOrder, setSummaryOrder] = useState(null);
   const [chartDatas, setChartDatas] = useState([]);
+  const [stockOrders, setStockOrders] = useState([]);
+  const [stockSummary, setstockSummary] = useState({});
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
   const [timeFrame, seTtimeFrame] = useState(JSON.parse(window.localStorage.getItem('time-function')));
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
+  const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
+  const { mutateAsync: getStockSummary } = useCreateVirtualSummary();
 
   useEffect(() => {
     handleGetStockDetails();
+    handleGetStockOrders();
+    handleGetStockSummary();
     seTtimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [timeFrame, id]);
 
@@ -32,9 +39,44 @@ const VirtualStockDetails = () => {
     const res = await getStockDetails(data);
     setChartDatas(res.data.data);
   };
+
   const handleChange = (key) => {
     window.localStorage.setItem('time-function', JSON.stringify(key));
     seTtimeFrame(key);
+  };
+ 
+  const handleGetStockOrders = async () => {
+    try {
+      let stockOrders = {
+        stockId: id,
+        country: location?.state?.country,
+        sessionType: timeFrame,
+        page:1
+      };
+      const res = await getStockOrders(stockOrders);
+      setStockOrders(res.data.data);
+            
+    } catch (error) {
+      
+    }
+
+  };
+  const handleGetStockSummary = async () => {
+    try {
+      let stockSummary = {
+        stockId: id,
+        country: location?.state?.country,
+        sessionType: timeFrame,
+        page:1
+      };
+      const res = await getStockSummary(stockSummary);
+      setstockSummary(res.data.data);
+      
+    } catch (error) {
+      console.log(error);
+    };
+    
+    console.log(stockSummary);
   };
   return (
     <>
@@ -137,7 +179,7 @@ const VirtualStockDetails = () => {
                             <div>
                               <div className="grid grid-cols-2 gap-10">
                                 <div className="border-r dark:border-default-200 ">
-                                  <p className="text-2xl font-bold">N34.22</p>
+                                  <p className="text-2xl font-bold">{formatCurrency(stockSummary.maxPrice)}</p>
                                   <p className="text-sm opacity-70">High</p>
                                 </div>
                                 <div className="">
@@ -145,7 +187,7 @@ const VirtualStockDetails = () => {
                                   <p className="text-sm opacity-70">22,000 Units</p>
                                 </div>
                                 <div className="border-r dark:border-default-200 ">
-                                  <p className="text-2xl font-bold">N34.22</p>
+                                  <p className="text-2xl font-bold">{formatCurrency(stockSummary.minPrice)}</p>
                                   <p className="text-sm opacity-70">Low</p>
                                 </div>
                                 <div className="">
@@ -199,7 +241,7 @@ const VirtualStockDetails = () => {
                   </Card>
                 </div>
               </div>
-              <VirtualStockSocket stock={stock} />
+              <VirtualStockSocket stockOrders={stockOrders} stock={stock} />
             </div>
           )}
         </>
