@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { TbTrash } from 'react-icons/tb';
 import useDesignStore from '@/store/design.js';
 import { useElementActions } from '@/hooks/template/use-element-actions';
+import ElementQuickTools from './tools/ElementQuickTools';
 
 const FloatingToolbar = ({ id }) => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
@@ -23,8 +24,9 @@ const FloatingToolbar = ({ id }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute top-3 left-1/2 -translate-x-1/2 w-max px-1.5 py-1 z-10 gap-1 bg-white shadow border border-default-100 dark:bg-default-100 rounded-full flex items-center"
+            className="absolute top-3 left-1/2 -translate-x-1/2 w-max px-2 py-1 z-10 gap-2 bg-white shadow border border-default-100 dark:bg-default-100 rounded-full flex items-center"
           >
+            <ElementQuickTools />
             {elements.length > 1 && (
               <>
                 {!isGrouped && (
@@ -57,25 +59,23 @@ const FloatingToolbar = ({ id }) => {
                 </Button>
               </Tooltip>
             )}
-            <div className="flex items-center gap-1 h-full">
-              <Tooltip content="Duplicate">
-                <Button variant="light" radius="full" size="sm" isIconOnly onPress={() => handleAction('duplicate')}>
-                  <LuCopyPlus size="18" />
-                </Button>
-              </Tooltip>
-              <Tooltip content="Delete">
-                <Button
-                  variant="light"
-                  color="danger"
-                  radius="full"
-                  size="sm"
-                  isIconOnly
-                  onPress={() => handleAction('delete')}
-                >
-                  <TbTrash size="18" />
-                </Button>
-              </Tooltip>
-            </div>
+            <Tooltip content="Duplicate">
+              <Button variant="light" radius="full" size="sm" isIconOnly onPress={() => handleAction('duplicate')}>
+                <LuCopyPlus size="18" />
+              </Button>
+            </Tooltip>
+            <Tooltip content="Delete">
+              <Button
+                variant="light"
+                color="danger"
+                radius="full"
+                size="sm"
+                isIconOnly
+                onPress={() => handleAction('delete')}
+              >
+                <TbTrash size="18" />
+              </Button>
+            </Tooltip>
           </motion.div>
         )}
       </AnimatePresence>

@@ -28,7 +28,7 @@ const Page = ({ id }) => {
   }, [activePage, id, pendingActivePage, updateStore]);
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className="relative">
       <div className="flex items-center justify-between mb-2 px-1.5" style={{ minWidth: 200 }}>
         <div className="flex items-center gap-1">
           <PageTitle id={id} title={page.title} />

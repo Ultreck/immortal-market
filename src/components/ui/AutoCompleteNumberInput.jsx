@@ -3,7 +3,17 @@ import { TbMinus, TbPlus } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import { useRef } from 'react';
 
-const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel, min = 0, max = 100, step = 1 }) => {
+const AutoCompleteNumberInput = ({
+  variant = 'flat',
+  value,
+  onChange,
+  ariaLabel,
+  min = 0,
+  max = 100,
+  step = 1,
+  radius = 'md',
+  size = 'md',
+}) => {
   const interval = useRef(null);
 
   const handleChange = (v) => {
@@ -37,7 +47,7 @@ const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel,
   };
 
   return (
-    <div className="gap-2 flex items-center">
+    <div className="gap-1 flex items-center">
       <Button
         isIconOnly
         variant="bordered"
@@ -45,6 +55,8 @@ const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel,
         isDisabled={isNaN(value) || value <= min}
         onPressStart={() => handlePressStart('decrement')}
         onPressEnd={handlePressEnd}
+        radius={radius}
+        size={size}
       >
         <TbMinus size="20" />
       </Button>
@@ -60,6 +72,8 @@ const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel,
         onSelectionChange={(v) => handleChange(v)}
         menuTrigger="manual"
         variant={variant}
+        radius={radius}
+        size={size}
       >
         {Array.from({ length: max - min + 1 }, (_, i) => i + min).map((n) => (
           <AutocompleteItem key={n} value={n} textValue={n.toString()}>
@@ -74,6 +88,8 @@ const AutoCompleteNumberInput = ({ variant = 'flat', value, onChange, ariaLabel,
         isDisabled={isNaN(value) || value >= max}
         onPressStart={() => handlePressStart('increment')}
         onPressEnd={handlePressEnd}
+        radius={radius}
+        size={size}
       >
         <TbPlus size="20" />
       </Button>
@@ -89,6 +105,8 @@ AutoCompleteNumberInput.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   step: PropTypes.number,
+  radius: PropTypes.oneOf(['full', 'sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
 export default AutoCompleteNumberInput;

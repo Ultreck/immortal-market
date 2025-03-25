@@ -398,12 +398,12 @@ export const useCreatePoll = (business, design) => {
   });
 };
 
-export const useGetPolls = ({ business, design,element }) => {
+export const useGetPolls = ({ business, design, element }) => {
   return useQuery({
-    queryKey: ['businesses', business, 'designs', design, 'polls',element ],
+    queryKey: ['businesses', business, 'designs', design, 'polls', element],
     queryFn: async () => {
       const res = await http.immortal.get(`/businesses/${business}/designs/${design}/poll`, {
-        params: { element},
+        params: { element },
       });
       return res.data;
     },
@@ -419,12 +419,33 @@ export const useCreateForm = (business, design) => {
   });
 };
 
-export const useGetForms = ({ business, design,element }) => {
+export const useGetForms = ({ business, design, element }) => {
   return useQuery({
-    queryKey: ['businesses', business, 'designs', design, 'forms',element ],
+    queryKey: ['businesses', business, 'designs', design, 'forms', element],
     queryFn: async () => {
       const res = await http.immortal.get(`/businesses/${business}/designs/${design}/form`, {
-        params: { element},
+        params: { element },
+      });
+      return res.data;
+    },
+  });
+};
+
+export const useCreateDesignActivity = (business, design) => {
+  return useMutation({
+    mutationKey: ['businesses', business, 'designs', design, 'activity'],
+    mutationFn: (body) => {
+      return http.immortal.post(`/businesses/${business}/designs/${design}/activity`, body);
+    },
+  });
+};
+
+export const useGetDesignActivity = (business, design, page) => {
+  return useQuery({
+    queryKey: ['businesses', business, 'designs', design, 'activity', page],
+    queryFn: async () => {
+      const res = await http.immortal.get(`/businesses/${business}/designs/${design}/activity`, {
+        params: { page }
       });
       return res.data;
     },

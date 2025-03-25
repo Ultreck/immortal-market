@@ -1,3 +1,4 @@
+import { useCreateDesignActivity } from '@/api/business';
 import { useCreatePollResponse, useGetPoll, useGetPollResponse, useGetPollResponses } from '@/api/design';
 import useBusiness from '@/hooks/use-business';
 import { cn } from '@/lib/utils';
@@ -13,12 +14,14 @@ const PagePollPresent = ({ page, isOpen, onClose }) => {
   const { mutateAsync: vote, isPending: isVoting } = useCreatePollResponse(business, id, page.id, poll?.id);
   const { data: { response } = {}, isLoading: isResponseLoading } = useGetPollResponse(business, id, page.id, poll?.id);
   const { data: { responses } = {} } = useGetPollResponses(business, id, page.id, poll?.id);
+  const { mutateAsync: createActivity } = useCreateDesignActivity(business, id);
   const [selection, setSelection] = useState('');
 
   const handleVote = async () => {
     if (!selection || response) return;
     try {
       await vote({ poll: poll.id, selection });
+      await createActivity({ type: 'poll', page: page.id });
     } catch (error) {
       console.error(error);
     }
@@ -70,7 +73,7 @@ const PagePollPresent = ({ page, isOpen, onClose }) => {
                           >
                             <div className="flex justify-between items-center mb-1">
                               <div className="flex items-center gap-2">
-                                <span className={selected ? 'font-medium' : ''}>{option}</span>
+                                <span className={selected ? 'font-medium' : ''}> {option}</span>
                               </div>
                               <span className="text-sm font-medium">{percentage}%</span>
                             </div>

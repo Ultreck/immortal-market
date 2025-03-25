@@ -1,4 +1,4 @@
-import { useGetPoll, useDeletePoll } from '@/api/design';
+import { useGetPoll, useDeletePoll, useGetPollResponses } from '@/api/design';
 import useBusiness from '@/hooks/use-business';
 import useDesignStore from '@/store/design';
 import { Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, addToast } from '@heroui/react';
@@ -13,6 +13,7 @@ const PollDetails = ({ page }) => {
   const { id: business } = useBusiness();
   const id = useDesignStore((state) => state.id);
   const { data: { poll } = {} } = useGetPoll(business, id, page);
+  const { data: { responses } = {} } = useGetPollResponses(business, id, page, poll?.id);
   const { mutateAsync: deletePoll, isPending: isDeletingPoll } = useDeletePoll(business, id, page);
 
   const onDeletePoll = async () => {
@@ -25,6 +26,12 @@ const PollDetails = ({ page }) => {
         color: 'error',
       });
     }
+  };
+
+  const calculatePercentage = (option) => {
+    if (!responses || responses.length === 0) return 0;
+    const count = responses.filter((response) => response.selection === option).length;
+    return Math.round((count / responses.length) * 100);
   };
 
   return (
@@ -51,19 +58,28 @@ const PollDetails = ({ page }) => {
               </DropdownMenu>
             </Dropdown>
           </div>
-          <div className="border border-default-200 rounded-2xl p-4 text-base mb-6">
-            <p className="text-sm opacity-70 mb-2">Question</p>
-            <p className="font-medium">{poll.question}</p>
-          </div>
-          <div className="border border-default-200 rounded-2xl text-base">
-            <p className="text-sm opacity-70 px-4 pt-3 pb-2">Options</p>
-            <div className="divide-y divide-default-200">
-              {poll.options.map((option, index) => (
-                <div key={index} className="flex items-center px-4 py-2">
-                  <p className="opacity-70">{option}</p>
-                </div>
-              ))}
+          <div>
+            <h4 className="text-lg mb-4">{poll?.question}</h4>
+            <div className="space-y-3">
+              {poll?.options.map((option) => {
+                const percentage = calculatePercentage(option);
+                return (
+                  <div
+                    key={option}
+                    className="relative bg-default-100 rounded-2xl px-5 py-4 cursor-pointer transition-all border-default-200 hover:border-default-300"
+                  >
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-base">{option}</span>
+                      <span className="text-base font-medium">{percentage}%</span>
+                    </div>
+                    <div className="w-full h-2 bg-default-200 rounded-full overflow-hidden mt-2">
+                      <div className={`h-full bg-blue-500 rounded-full`} style={{ width: `${percentage}%` }} />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
+            <div className="text-default-500 text-sm mt-4">Total votes: {responses?.length || 0}</div>
           </div>
           <div className="mt-8">
             <Button

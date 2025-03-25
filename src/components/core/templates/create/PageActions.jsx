@@ -13,9 +13,12 @@ import PropTypes from 'prop-types';
 import CreatePageBlockModal from '@/components/core/templates/create/CreatePageBlockModal.jsx';
 import { CgMenuBoxed } from 'react-icons/cg';
 import useDesignStore from '@/store/design.js';
+import { LuSquareActivity } from 'react-icons/lu';
+import PageActivitiesModal from './ActivitiesModal';
 
 const PageActions = ({ id }) => {
   const { isOpen: isSaveAsBlockOpen, onOpen: onSaveAsBlockOpen, onClose: onSaveAsBlockClose } = useDisclosure();
+  const { isOpen: isActivitiesOpen, onOpen: onActivitiesOpen, onClose: onActivitiesClose } = useDisclosure();
   const page = useDesignStore((state) => state.pages.find((p) => p.id === id));
   const index = useDesignStore((state) => state.pages.sort((a, b) => a.order - b.order).findIndex((p) => p.id === id));
   const length = useDesignStore((state) => state.pages.length);
@@ -25,6 +28,7 @@ const PageActions = ({ id }) => {
   const deletePage = useDesignStore((state) => state.deletePage);
   const createPageAfter = useDesignStore((state) => state.createPageAfter);
   const updatePage = useDesignStore((state) => state.updatePage);
+  const updateStore = useDesignStore((state) => state.updateStore);
 
   return (
     <div className="flex items-center space-x-1">
@@ -72,6 +76,7 @@ const PageActions = ({ id }) => {
             if (key === 'save-as-block') onSaveAsBlockOpen();
             if (key === 'convert-to-modal') updatePage(id, { type: 'modal' });
             if (key === 'convert-to-page') updatePage(id, { type: 'page' });
+            if (key === 'activities') onActivitiesOpen();
           }}
         >
           <DropdownItem
@@ -80,6 +85,13 @@ const PageActions = ({ id }) => {
             textValue="Save as block"
           >
             <span className="text-base">Save as block</span>
+          </DropdownItem>
+          <DropdownItem
+            key="activities"
+            startContent={<LuSquareActivity size="20" className="ml-1" />}
+            textValue="Activities"
+          >
+            <span className="text-base"> Activities</span>
           </DropdownItem>
           {page.type !== 'modal' ? (
             <DropdownItem
@@ -102,6 +114,7 @@ const PageActions = ({ id }) => {
       </Dropdown>
 
       <CreatePageBlockModal isOpen={isSaveAsBlockOpen} onClose={onSaveAsBlockClose} id={id} />
+      <PageActivitiesModal page={id} isOpen={isActivitiesOpen} onClose={onActivitiesClose} />
     </div>
   );
 };

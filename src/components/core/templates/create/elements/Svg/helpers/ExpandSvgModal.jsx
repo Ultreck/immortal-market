@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import Drawer from '@/components/ui/Drawer.jsx';
 import { HiX } from 'react-icons/hi';
 import { Button } from '@heroui/react';
-
 import { SvgPresent } from '@/components/core/templates/create/elements/Svg/Svg.jsx';
 
 const ExpandChartModal = ({ element, isOpen, onClose }) => {
@@ -15,11 +14,8 @@ const ExpandChartModal = ({ element, isOpen, onClose }) => {
             <HiX size="20" />
           </Button>
         </div>
-        <div className="grid grid-cols-[auto_1fr] gap-10">
-          <div className="border border-default-200 bg-default-100/50 rounded-3xl px-10 py-10">
-            <SvgPresent element={{ ...element, width: 600, height: 400 }} isMapWrapperDisabled={true} />
-          </div>
-          <div className="py-2">
+        <div className="grid grid-cols-5 gap-10">
+          <div className="py-2 col-span-2">
             <h3 className="text-2xl font-semibold max-w-xs">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias consequatur illo impedit.
             </h3>
@@ -35,6 +31,9 @@ const ExpandChartModal = ({ element, isOpen, onClose }) => {
               </li>
               <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum incidunt qui repudiandae.</li>
             </ul>
+          </div>
+          <div className="border border-default-200 max-h-[500px] col-span-3 bg-default-100/50 rounded-3xl px-10 py-10">
+            <SvgPresent element={{ ...element, width: 600 }} isMapWrapperDisabled={true} />
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 import PageModal from '@/components/core/templates/create/PageModal.jsx';
 import PagePresent from '@/components/core/templates/create/PagePresent.jsx';
 import useDesignStore from '@/store/design';
+import PresentEmoji from '@/components/core/templates/create/PresentEmoji.jsx';
 
 const Present = () => {
   const [index, setIndex] = useState(0);
@@ -21,6 +22,7 @@ const Present = () => {
         {!!pages.length && (
           <div className="fixed bottom-4 left-1/2 -translate-x-1/2 rounded-full px-8 py-2.5 bg-default-100 dark text-white flex items-center justify-between space-x-4 max-w-[400px] w-full">
             <h1 className="text-base">{page.title}</h1>
+            <PresentEmoji page={page.id} />
             <div className="flex items-center space-x-2">
               <Button
                 isIconOnly

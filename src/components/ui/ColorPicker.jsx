@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 const colors = ['#000000', '#800000', '#808000', '#008080', '#808080', '#993366'];
 
-const ColorPicker = ({ color, onChange, size, trigger, isOpen, onOpenChange, onClose }) => {
+const ColorPicker = ({ color, onChange, size, trigger, isOpen, onOpenChange, onClose, radius = 'full', className }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpenChange = (v) => {
@@ -40,11 +40,12 @@ const ColorPicker = ({ color, onChange, size, trigger, isOpen, onOpenChange, onC
             isIconOnly
             variant="bordered"
             aria-label="Adjust font size"
-            className="text-base"
-            radius="full"
+            radius={radius}
             size={size}
+            style={{ background: color }}
+            className={cn('text-base', className)}
           >
-            <div tabIndex="0" className={cn('w-full h-full hover:brightness-105')} style={{ background: color }} />
+            <div tabIndex="0" />
           </Button>
         )}
       </PopoverTrigger>
@@ -96,6 +97,8 @@ ColorPicker.propTypes = {
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
   onOpenChange: PropTypes.func,
+  radius: PropTypes.oneOf(['full', 'sm', 'md', 'lg', 'xl']),
+  className: PropTypes.string,
 };
 
 export default ColorPicker;

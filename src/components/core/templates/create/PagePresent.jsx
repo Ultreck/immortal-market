@@ -12,6 +12,7 @@ import { TbForms } from 'react-icons/tb';
 import { CgPoll } from 'react-icons/cg';
 import PageFormPresent from './tools/page/form/PageFormPresent';
 import PagePollPresent from './tools/page/poll/PagePollPresent';
+import { useCreateDesignActivity } from '@/api/business';
 
 const PagePresent = ({ page }) => {
   const el = useRef(null);
@@ -23,15 +24,17 @@ const PagePresent = ({ page }) => {
   const elements = useDesignStore((state) => state.elements.filter((el) => el.page === page.id));
   const { isOpen: isFormOpen, onOpen: onFormOpen, onClose: onFormClose } = useDisclosure();
   const { isOpen: isPollOpen, onOpen: onPollOpen, onClose: onPollClose } = useDisclosure();
+  const { mutateAsync: createActivity } = useCreateDesignActivity(business, id);
 
   useEffect(() => {
+    if (page.id) createActivity({ type: 'view', page: page.id });
     setTimeout(() => {
       const pw = el.current.parentElement.clientWidth;
       const w = el.current.clientWidth;
       const scale = pw / w;
       setScale(scale);
     }, 50);
-  }, [page]);
+  }, [createActivity, page]);
 
   return (
     <div className="w-full relative">

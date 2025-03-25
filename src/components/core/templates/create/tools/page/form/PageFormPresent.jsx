@@ -1,3 +1,4 @@
+import { useCreateDesignActivity } from '@/api/business';
 import { useCreateFormResponse, useGetForm, useGetFormResponse } from '@/api/design';
 import useBusiness from '@/hooks/use-business';
 import useDesignStore from '@/store/design';
@@ -26,6 +27,7 @@ const PageFormPresent = ({ page, isOpen, onClose }) => {
   const { data: { form } = {} } = useGetForm(business, id, page.id);
   const { mutateAsync: create, isPending: isCreateLoading } = useCreateFormResponse(business, id, page.id, form.id);
   const { data: { response } = {}, isLoading: isResponseLoading } = useGetFormResponse(business, id, page.id, form.id);
+  const { mutateAsync: createActivity } = useCreateDesignActivity(business, id);
   const { control, handleSubmit } = useForm({
     defaultValues: form.fields.reduce((acc, f) => {
       if (f.type === 'checkbox') {
@@ -39,10 +41,8 @@ const PageFormPresent = ({ page, isOpen, onClose }) => {
 
   const onSubmit = async (values) => {
     try {
-      await create({
-        form: form.id,
-        values,
-      });
+      await create({ form: form.id, values });
+      await createActivity({ type: 'form', page: page.id });
       onClose();
     } catch (error) {
       console.error(error);
@@ -177,7 +177,6 @@ const PageFormPresent = ({ page, isOpen, onClose }) => {
                                         isDisabled={field.disabled}
                                         label={f.label}
                                         labelPlacement="outside"
-                                        classNames={{ input: 'px-1' }}
                                         placeholder={' '}
                                         value={field.value}
                                         onValueChange={(e) => field.onChange(e)}

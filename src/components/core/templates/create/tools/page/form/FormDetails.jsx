@@ -1,19 +1,46 @@
-import { useGetForm, useDeleteForm } from '@/api/design';
+import { useGetForm, useDeleteForm, useGetFormResponses } from '@/api/design';
 import useBusiness from '@/hooks/use-business';
 import useDesignStore from '@/store/design';
-import { Chip, Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, addToast } from '@heroui/react';
+import {
+  Button,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  addToast,
+  Avatar,
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Skeleton,
+} from '@heroui/react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { LuPencil } from 'react-icons/lu';
 import EditForm from './EditForm';
 import { TbDotsVertical, TbTrash } from 'react-icons/tb';
+import FormResponse from '@/components/core/templates/create/tools/page/form/FormResponse.jsx';
+import { getImageLink } from '@/lib/utils';
+import { formatDistanceToNow } from 'date-fns';
+import NoData from '@/components/ui/NoData';
 
 const FormDetails = ({ page }) => {
   const [view, setView] = useState('details');
+  const [result, setResult] = useState(null);
   const { id: business } = useBusiness();
   const id = useDesignStore((state) => state.id);
   const { data: { form } = {} } = useGetForm(business, id, page);
   const { mutateAsync: deleteForm, isPending: isDeletingForm } = useDeleteForm(business, id, page);
+  const { data: { responses = [] } = {}, isLoading: isResponsesLoading } = useGetFormResponses(
+    business,
+    id,
+    page,
+    form?.id
+  );
+  const response = responses.find((val) => val.id === result);
 
   const onDeleteForm = async () => {
     try {
@@ -56,24 +83,55 @@ const FormDetails = ({ page }) => {
               </DropdownMenu>
             </Dropdown>
           </div>
-          <div className="border border-default-200 rounded-2xl text-base">
-            <p className="text-sm opacity-70 px-4 pt-3 pb-2">Fields</p>
-            <div className="divide-y divide-default-200">
-              {form.fields.map((field) => (
-                <div key={field.id} className="flex items-center px-4 py-2 space-x-4">
-                  <p className="opacity-70">{field.label}</p>
-                  <div className="flex items-start gap-2">
-                    <Chip color="default" variant="flat" size="sm" className="text-md px-2 capitalize">
-                      {field.type}
-                    </Chip>
-                    <Chip color="default" variant="flat" size="sm" className="text-md px-2 capitalize">
-                      {field.required ? 'Required' : 'Optional'}
-                    </Chip>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          {isResponsesLoading ? (
+            <Skeleton className="rounded-2xl h-[150px] w-full" />
+          ) : (
+            <>
+              {responses.length > 0 ? (
+                <Table
+                  aria-label="Custom table"
+                  removeWrapper
+                  selectionMode="single"
+                  classNames={{ td: 'cursor-pointer' }}
+                >
+                  <TableHeader>
+                    <TableColumn>
+                      <span className="text-md">User</span>
+                    </TableColumn>
+                    <TableColumn>
+                      <span className="text-md">Date submitted</span>
+                    </TableColumn>
+                  </TableHeader>
+                  <TableBody items={responses}>
+                    {(response) => (
+                      <TableRow
+                        key={response.id}
+                        onClick={() => {
+                          setResult(response.id);
+                          setView('response');
+                        }}
+                      >
+                        <TableCell>
+                          <div className="flex items-center gap-x-2">
+                            <Avatar
+                              src={getImageLink(response.user.image, { bucket: 'statisense' })}
+                              name={`${response.user.firstName} ${response.user.lastName}`}
+                              size="sm"
+                              classNames={{ base: 'w-8 h-8 border-3 border-white dark:border-default-100' }}
+                            />
+                            <p className="text-base">{response.user.username}</p>
+                          </div>
+                        </TableCell>
+                        <TableCell>{formatDistanceToNow(new Date(response.createdAt))}</TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              ) : (
+                <NoData text="No responses yet" />
+              )}
+            </>
+          )}
           <div className="mt-8">
             <Button
               onPress={() => setView('edit')}
@@ -89,6 +147,7 @@ const FormDetails = ({ page }) => {
         </div>
       )}
       {view === 'edit' && <EditForm page={page} onBack={() => setView('details')} />}
+      {view === 'response' && <FormResponse form={form} response={response} onBack={() => setView('details')} />}
     </div>
   );
 };
