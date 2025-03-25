@@ -5,16 +5,12 @@ import CountryFlag from '@/components/ui/CountryFlag.jsx';
 import { useState } from 'react';
 import { BsGlobeEuropeAfrica } from 'react-icons/bs';
 import { RiGlobalLine } from 'react-icons/ri';
-// import { useGetNigeriaVirtual } from '@/api/ai-chat';
-// import { useGetCountryStocks } from '@/store/bot';
 
-const CountryList = ({setCountryName}) => {
+const CountryList = () => {
   const [code, setCode] = useState('NG');
   const [tab, setTab] = useState('africa');
-  // const {setCountryStocks} = useGetCountryStocks();
-
   const onSubmit = async (c) => {
-       setCountryName(c.name);
+    window.localStorage.setItem('country', JSON.stringify(c.name));
   };
   return (
     <Card className="card-shadow rounded-2xl h-96">

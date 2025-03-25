@@ -3,7 +3,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 
 const PlaceOrder = ({ stock }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  console.log(stock);
+//   console.log(stock);
   
   return (
     <>

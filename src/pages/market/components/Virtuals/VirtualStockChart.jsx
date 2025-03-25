@@ -85,6 +85,8 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     }
   }, [data]);
 
+  console.log(state?.symbol);
+  
   
 
   const CustomTooltip = ({ active, payload }) => {
@@ -112,15 +114,15 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     <div 
     ref={chartContainerRef} 
     className="overflow-x-auto w-full">
-      <ResponsiveContainer width={data?.length < 20 ? "100%" : data?.length * 50} height={300}>
-        <AreaChart data={data} margin={{ top: 10, right: 5, left: 0, bottom: 0 }}>
+      <ResponsiveContainer width={data?.length <= 30 ? "100%" : data?.length * 20} height={300}>
+        <AreaChart data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
               <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="name" tickSize={3} strokeOpacity={0.5} interval="preserveEnd" />
+          <XAxis dataKey="name" tickSize={5} strokeOpacity={0.5} interval="preserveEnd" />
           <YAxis domain={['auto', 'auto']} tickSize={3} strokeOpacity={0.5} orientation="right" />
           <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
           <Tooltip content={<CustomTooltip />} />

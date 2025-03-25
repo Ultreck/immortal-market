@@ -14,7 +14,7 @@ const code = 'NG';
 const MarketVirtualPage = () => {
    const [page, setPage] = useState(1);
    const [stocks, setStocks] = useState([]);
-   const [countryName, setCountryName] = useState("Nigeria");
+   const [countryName, setCountryName] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
    const {mutateAsync: createVirtualStocks, isPending: isStocksLoading} = useCreateVirtualStock({});
   // const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
   const { data: getNgVirtuals } = useGetNigeriaVirtual(countryName);

@@ -13,6 +13,7 @@ import PlaceOrder from '@/pages/market/modals/PlaceOrder.jsx';
 const VirtualStockDetails = () => {
   const params = useParams();
   const { id } = params;
+  const [country, setCountry] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
   const location = useLocation();
   const [summaryOrder, setSummaryOrder] = useState(null);
   const [chartDatas, setChartDatas] = useState([]);
@@ -23,7 +24,8 @@ const VirtualStockDetails = () => {
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
   const { mutateAsync: getStockSummary } = useCreateVirtualSummary();
-
+  
+  
   useEffect(() => {
     handleGetStockDetails();
     handleGetStockOrders();
@@ -34,7 +36,7 @@ const VirtualStockDetails = () => {
   const handleGetStockDetails = async () => {
     let data = {
       stockId: id,
-      country: location?.state?.country,
+      country: country,
       sessionType: timeFrame,
     };
     const res = await getStockDetails(data);
@@ -50,7 +52,7 @@ const VirtualStockDetails = () => {
     try {
       let stockOrders = {
         stockId: id,
-        country: location?.state?.country,
+        country: country,
         sessionType: timeFrame,
         page:1
       };
@@ -66,7 +68,7 @@ const VirtualStockDetails = () => {
     try {
       let stockSummary = {
         stockId: id,
-        country: location?.state?.country,
+        country: country,
         sessionType: timeFrame,
         page:1
       };
@@ -77,7 +79,6 @@ const VirtualStockDetails = () => {
       console.log(error);
     };
     
-    console.log(stockSummary);
   };
   return (
     <>
