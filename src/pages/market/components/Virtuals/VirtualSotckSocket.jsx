@@ -7,11 +7,11 @@ import { useEffect, useState } from 'react';
 const code = 'NG';
 
 const VirtualStockSocket = ({ stockOrders, stock }) => {
-  const [isClosed, setIsClosed] = useState(false);
+  // const [isClosed, setIsClosed] = useState(false);
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
   
   const marketOpenTime =  "09:30:00";
-  const marketCloseTime =  "14:10:00";
+  const marketCloseTime =  "16:00:00";
   
   const getTimeRemaining = () => {
     const now = new Date();
@@ -72,7 +72,7 @@ const VirtualStockSocket = ({ stockOrders, stock }) => {
       </div>
       <ScrollShadow className="w-full h-[480px]" size={20}>
         {stockOrders.length > 0 && (
-          <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-6">
+          <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-6">
             <p className="text-2xl font-bold text-green-600">N34.33</p>
             <div className="flex justify-between items-center mt-1">
               <p className="text-sm opacity-70">22,000 units</p>
@@ -80,42 +80,42 @@ const VirtualStockSocket = ({ stockOrders, stock }) => {
             </div>
           </Card>
         )}
-        <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-6">
+        <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-6">
           <p className="text-2xl font-bold text-green-600">N34.33</p>
           <div className="flex justify-between items-center mt-1">
             <p className="text-sm opacity-70">22,000 units</p>
             <div className="text-xs">10:02:00 am</div>
           </div>
         </Card>
-        <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-4">
+        <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-4">
           <p className="text-2xl font-bold text-green-600">N34.33</p>
           <div className="flex justify-between items-center mt-1">
             <p className="text-sm opacity-70">22,000 units</p>
             <div className="text-xs">10:02:00 am</div>
           </div>
         </Card>
-        <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-4">
+        <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-4">
           <p className="text-2xl font-bold text-red-600">N34.33</p>
           <div className="flex justify-between items-center mt-1">
             <p className="text-sm opacity-70">22,000 units</p>
             <div className="text-xs">10:02:00 am</div>
           </div>
         </Card>
-        <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-4">
+        <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-4">
           <p className="text-2xl font-bold text-yellow-300 dark:text-yellow-100">N34.33</p>
           <div className="flex justify-between items-center mt-1">
             <p className="text-sm opacity-70">22,000 units</p>
             <div className="text-xs">10:02:00 am</div>
           </div>
         </Card>
-        <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-4">
+        <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-4">
           <p className="text-2xl font-bold text-red-600">N34.33</p>
           <div className="flex justify-between items-center mt-1">
             <p className="text-sm opacity-70">22,000 units</p>
             <div className="text-xs">10:02:00 am</div>
           </div>
         </Card>
-        <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-4">
+        <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-4">
           <p className="text-2xl font-bold text-yellow-300 dark:text-yellow-100">N34.33</p>
           <div className="flex justify-between items-center mt-1">
             <p className="text-sm opacity-70">22,000 units</p>
@@ -123,7 +123,7 @@ const VirtualStockSocket = ({ stockOrders, stock }) => {
           </div>
         </Card>
       </ScrollShadow>
-      <Card className="card-shadow px-6 py-4 bg-default-100 border border-default-200 mt-5">
+      <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-5">
         {!timeRemaining?.isOpen? (
           <>
         <p className="text-base text-center font-semibold">Market opens in: </p>

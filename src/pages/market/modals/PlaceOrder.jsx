@@ -1,9 +1,10 @@
 import React from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from '@heroui/react';
-
+import { useGetCurrentPrice } from '@/store/bot';
 const PlaceOrder = ({ stock }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-//   console.log(stock);
+  const {currentPrice} = useGetCurrentPrice();
+  // console.log(currentPrice);
   
   return (
     <>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { io } from 'socket.io-client';
+import { useGetCurrentPrice } from '@/store/bot';
 
 const dateFormatter = (date) => {
   date = new Date(date);
@@ -45,6 +46,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
   const socket = io('https://market-msjv.onrender.com');
   const chartContainerRef = useRef(null);
   const timeFrame = JSON.parse(localStorage.getItem('time-function'));
+  const { setCurrentPrice } = useGetCurrentPrice();
 
   // Change the data to the format specified
   const retructuredData = chartDatas[0]?.prices?.map((value, index) => {
@@ -64,16 +66,21 @@ const VirtualStockChart = ({ chartDatas, state }) => {
 
   useEffect(() => {
     socket.on(`${state?.symbol}-${timeFrame}`, (msg) => {
+      console.log(msg);
       setData((prev) => {
-        return [...prev, {
-          price: limitDecimals(msg?.stock?.price, 4) || limitDecimals(1.29998376, 4),
-          close: limitDecimals(msg?.stock?.close, 4) || limitDecimals(1.29998376, 4),
-          date: dateFormatter(msg?.stock?.createdAt),
-          name: (prev?.length + 1) * 3,
-          time: timeFormatter(msg?.stock?.createdAt),
-        }];
-      });      
+        return [
+          ...prev,
+          {
+            price: limitDecimals(msg?.stock?.price, 4) || limitDecimals(1.29998376, 4),
+            close: limitDecimals(msg?.stock?.close, 4) || limitDecimals(1.29998376, 4),
+            date: dateFormatter(msg?.stock?.createdAt),
+            name: (prev?.length + 1) * 3,
+            time: timeFormatter(msg?.stock?.createdAt),
+          },
+        ];
+      });
     });
+    setCurrentPrice(data?.at(-1)?? null);
     return () => {
       socket.off(`${state?.symbol}-${timeFrame}`);
     };
@@ -85,25 +92,21 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     }
   }, [data]);
 
-  console.log(state?.symbol);
-  
-  
-
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="rounded-lg border border-gray-300 bg-white p-3 shadow-md">
-          <p className="text-sm text-gray-500">
-            Current Price: <span className="text-gray-800">{payload[0].payload.price}</span>
+        <div className="rounded-lg border border-gray-300 bg-white dark:bg-gray-800 p-3 shadow-md">
+          <p className="text-sm text-gray-500 dark:text-white">
+            Highest price: <span className="text-gray-800 dark:text-gray-300">{payload[0].payload.price}</span>
           </p>
-          <p className="text-sm text-gray-500">
-            Time: <span className="text-gray-800">{payload[0].payload.time}</span>
+          <p className="text-sm text-gray-500 dark:text-white">
+            Time: <span className="text-gray-800 dark:text-gray-300">{payload[0].payload.time}</span>
           </p>
-          <p className="text-sm text-gray-500">
-            Close Price: <span className="text-gray-800">{payload[0].payload.close}</span>
+          <p className="text-sm text-gray-500 dark:text-white">
+            Close Price: <span className="text-gray-800 dark:text-gray-300">{payload[0].payload.close}</span>
           </p>
-          <p className="text-sm text-gray-500">
-            Date: <span className="text-gray-800">{payload[0].payload.date}</span>
+          <p className="text-sm text-gray-500 dark:text-white">
+            Date: <span className="text-gray-800 dark:text-gray-300">{payload[0].payload.date}</span>
           </p>
         </div>
       );
@@ -111,11 +114,11 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     return null;
   };
   return (
-    <div 
-    ref={chartContainerRef} 
-    className="overflow-x-auto w-full">
-      <ResponsiveContainer width={data?.length <= 30 ? "100%" : data?.length * 20} height={300}>
-        <AreaChart data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+    <div ref={chartContainerRef} className="overflow-x-auto">
+      {/* <ResponsiveContainer width={'100%'} height={300} className={'overflow-x-auto'}> */}
+        <AreaChart  width={
+        data?.length <= 100 ? '100%' : data?.length * 15
+        } height={300} data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
@@ -128,35 +131,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
           <Tooltip content={<CustomTooltip />} />
           <Area type="monotone" dataKey="price" isAnimationActive={false} stroke="#4691c5" fill="url(#priceGradient)" />
         </AreaChart>
-      </ResponsiveContainer>
-      {/* <ResponsiveContainer width="100%" height={300}>
-        <AreaChart data={data} margin={{ top: 10, right: 5, left: 0, bottom: 0 }}>
-          <defs>
-            <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis
-            dataKey="name"
-            axisLine={{ opacity: isDarkMode && 'dark' ? 0.1 : 0.5 }}
-            tickSize={3}
-            strokeOpacity={0.5}
-            interval="preserveEnd"
-          />
-          <YAxis domain={['auto', 'auto']} tickSize={3} strokeOpacity={0.5} orientation="right" />
-          <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
-          <Tooltip content={<CustomTooltip />} />
-          <Area
-            type="monotone"
-            dataKey="price"
-            isAnimationActive={false}
-            stroke="#4691c5"
-            fillOpacity={1}
-            fill="url(#priceGradient)"
-          />
-        </AreaChart>
-      </ResponsiveContainer> */}
+      {/* </ResponsiveContainer> */}
     </div>
   );
 };
