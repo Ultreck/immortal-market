@@ -1,9 +1,7 @@
-import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import {
-  BreadcrumbItem,
-  Breadcrumbs,
   Button,
   Card,
+  Input,
   Select,
   SelectItem,
   Table,
@@ -13,9 +11,15 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/react';
-import { Link } from 'react-router-dom';
 import StocksChart from '@/pages/market/StocksChart.jsx';
-import { RiHome2Line } from 'react-icons/ri';
+import Drawer from '@/components/ui/Drawer.jsx';
+import PropTypes from 'prop-types';
+import { useCreateMeritradeOrder, useGetCardinalEquityList } from '@/api/trade.js';
+import { useForm } from 'react-hook-form';
+import { useToast } from '@/hooks/use-toast.jsx';
+import { useEffect } from 'react';
+import { useTradeStore } from '@/store/trade.js';
+import axios from 'axios';
 
 const s = {
   _id: '665867a2c6a35aab6119fea1',
@@ -27,198 +31,318 @@ const s = {
   price: 354.20001220703125,
 };
 
-const NewTrade = () => {
+const NewTrade = ({ isOpen, onClose, portfolio }) => {
+  const { platform } = useTradeStore();
+  const toast = useToast();
+  const { data: equityList, isLoading: isEquityListLoading } = useGetCardinalEquityList();
+  const { mutateAsync: createOrder, isPending: isCreateOrderLoading } = useCreateMeritradeOrder();
+
+  const {
+    watch,
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    setError,
+    clearErrors,
+  } = useForm();
+
+  const submit = async (data) => {
+    try {
+      console.log(data);
+      const value = {
+        instrumentType: 'EQUITY',
+        orderTerm: 'DAY',
+        quantity: 10,
+        orderType: 'BUY',
+        priceType: 'MARKET',
+        security: 'ABBEYBDS',
+      };
+      const res = await createOrder(data);
+      toast.success('Order created');
+      onClose();
+    } catch (e) {
+      toast.error(e?.response?.data?.message ?? e.message ?? 'An unknown error occurred, please try again later');
+    }
+  };
+
+  const selectedSecId = watch('secId');
+  const selectedSide = watch('side');
+
+  useEffect(() => {
+    if (selectedSide === 'SELL') {
+      const existsInPortfolio = portfolio.some((item) => item.secId === selectedSecId);
+      console.log(existsInPortfolio);
+      if (!existsInPortfolio) {
+        setError('secId', {
+          type: 'manual',
+          message: 'Symbol not found in your portfolio',
+        });
+        toast.error('Symbol not found in your portfolio');
+      } else {
+        clearErrors('secId');
+      }
+    }
+  }, [selectedSecId, selectedSide, setError, clearErrors, portfolio]);
+
+  const { token } = useTradeStore();
+  const handleEquityChange = async (e) => {
+    if (platform === 'cardinal') {
+      try {
+        const res = await axios.get(`https://market.api.statisense.co/${platform}/${e.target.value}?user=true`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      try {
+        const res = await axios.get(`https://market.api.statisense.co/${platform}/${e.target.value}?user=true`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   return (
     <>
-      <MarketNavbar />
-      <div className="container mt-5">
-        <div className="flex items-center justify-between mb-8">
-          <Breadcrumbs size="lg">
-            <BreadcrumbItem startContent={<RiHome2Line size="20" />}>Home</BreadcrumbItem>
-            <BreadcrumbItem>Analytics</BreadcrumbItem>
-            <BreadcrumbItem>Trade</BreadcrumbItem>
-          </Breadcrumbs>
-          <Link to="/markets/trade/new">
-            <Button color="primary" radius="full" className="text-base px-4">
-              Trade Now
-            </Button>
-          </Link>
-        </div>
-        <div className="space-y-6">
-          <div className="grid grid-cols-4 gap-6">
-            <Card className="px-8 py-6 card-shadow">
-              <p className="opacity-70">Market Status</p>
-              <p className="text-red-600 text-2xl font-semibold mt-1">Closed</p>
-            </Card>
-            <Card className="px-8 py-6 card-shadow">
-              <p className="opacity-70">Available balance</p>
-              <p className="text-2xl font-semibold mt-1">N 120,000.00</p>
-            </Card>
-            <Card className="px-8 py-6 card-shadow">
-              <p className="opacity-70">Uncleared Balance</p>
-              <p className="text-2xl font-semibold mt-1">N 12.00</p>
-            </Card>{' '}
-            <Card className="px-8 py-6 card-shadow">
-              <p className="opacity-70">Uncleared Balance</p>
-              <p className="text-2xl font-semibold mt-1">N 12.00</p>
-            </Card>
-          </div>
-          <Card className="px-8 py-6 card-shadow">
-            <p className="font-bold text-lg mb-6">Trade</p>
-            <div className="flex items-center space-x-3">
-              <Select
-                variant="bordered"
-                labelPlacement="outside"
-                aria-label="Instrument Type"
-                label="Instrument Type"
-                size="lg"
-                placeholder="Select..."
-                selectionMode="single"
-                disallowEmptySelection
-                classNames={{ label: 'leading-none opacity-70' }}
-              >
-                <SelectItem key="equity" value="equity">
-                  Equity
-                </SelectItem>
-                <SelectItem key="bond" value="bond">
-                  Bond
-                </SelectItem>
-              </Select>
-              <Select
-                variant="bordered"
-                labelPlacement="outside"
-                aria-label="Order Type"
-                label="Order Type"
-                size="lg"
-                placeholder="Select..."
-                selectionMode="single"
-                disallowEmptySelection
-                classNames={{ label: 'leading-none opacity-70' }}
-              >
-                <SelectItem key="buy" value="buy">
-                  Buy
-                </SelectItem>
-                <SelectItem key="sell" value="sell">
-                  Sell
-                </SelectItem>
-              </Select>
-              <Select
-                variant="bordered"
-                labelPlacement="outside"
-                aria-label="Symbol"
-                label="Symbol"
-                size="lg"
-                placeholder="Select..."
-                selectionMode="single"
-                disallowEmptySelection
-                classNames={{ label: 'leading-none opacity-70' }}
-              >
-                <SelectItem key="buy" value="buy">
-                  Access Bank
-                </SelectItem>
-              </Select>
-              <Select
-                variant="bordered"
-                labelPlacement="outside"
-                aria-label="Price Type"
-                label="Price Type"
-                size="lg"
-                placeholder="Select..."
-                selectionMode="single"
-                disallowEmptySelection
-                classNames={{ label: 'leading-none opacity-70' }}
-              >
-                <SelectItem key="buy" value="buy">
-                  Market
-                </SelectItem>
-                <SelectItem key="sell" value="sell">
-                  Limit
-                </SelectItem>
-              </Select>
-              <Select
-                variant="bordered"
-                labelPlacement="outside"
-                aria-label="Order Type"
-                label="Order Type"
-                size="lg"
-                placeholder="Select..."
-                selectionMode="single"
-                disallowEmptySelection
-                classNames={{ label: 'leading-none opacity-70' }}
-              >
-                <SelectItem key="buy" value="buy">
-                  Good for 7 days
-                </SelectItem>
-                <SelectItem key="buy" value="buy">
-                  Good for 8 days
-                </SelectItem>
-                <SelectItem key="buy" value="buy">
-                  Good for 10 days
-                </SelectItem>
-                <SelectItem key="sell" value="sell">
-                  Good for 14 day
-                </SelectItem>
-                <SelectItem key="sell" value="sell">
-                  Good for the day
-                </SelectItem>
-              </Select>
-            </div>
-          </Card>
-          <Card className="px-8 py-6 card-shadow">
-            <StocksChart stock={s} />
-          </Card>
-          <div className="grid grid-cols-2 gap-6">
+      <Drawer isOpen={isOpen} onClose={onClose} width={1200} title={'Place Orders'}>
+        <form onSubmit={handleSubmit(submit)}>
+          <div className="">
             <div className="space-y-10">
-              <Card className="px-10 py-8 card-shadow">
-                <p className="text-lg font-semibold mb-5 px-1">Offers</p>
-                <Table shadow="none" removeWrapper>
-                  <TableHeader>
-                    <TableColumn className="px-4 py-2 text-left text-md uppercase">Price</TableColumn>
-                    <TableColumn className="px-4 py-2 text-left text-md uppercase">Quantity</TableColumn>
-                    <TableColumn className="px-4 py-2 text-left text-md uppercase">Count</TableColumn>
-                    <TableColumn className="px-4 py-2 text-left text-md uppercase">Actions</TableColumn>
-                  </TableHeader>
-                  <TableBody>
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                      <TableRow key={i}>
-                        <TableCell className="px-4 py-2 text-left text-md">6.30</TableCell>
-                        <TableCell className="px-4 py-2 text-left text-md">166</TableCell>
-                        <TableCell className="px-4 py-2 text-left text-md">1</TableCell>
-                        <TableCell className="px-4 py-2 text-left text-md">
-                          <Button variant="bordered" size="sm" radius="full" className="text-base">
-                            Buy
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </Card>
+              <div className="grid grid-cols-3 gap-8 items-center">
+                {platform === 'cardinal' && (
+                  <div>
+                    <Select
+                      variant="bordered"
+                      labelPlacement="outside"
+                      aria-label="Symbol"
+                      label="Symbol"
+                      size="lg"
+                      placeholder="Select..."
+                      selectionMode="single"
+                      disallowEmptySelection
+                      classNames={{ label: 'leading-none opacity-70' }}
+                      {...register('secId', { required: 'Symbol is required' })}
+                      errorMessage={errors?.secId?.message}
+                    >
+                      {equityList?.data?.content?.map((equity) => (
+                        <SelectItem key={equity.secId} value={equity.secId}>
+                          {equity.secDesc}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                    <p className="text-red-500 text-xs mt-2">{errors?.secId?.message}</p>
+                  </div>
+                )}
+                {platform === 'meritrade' && (
+                  <>
+                    <div>
+                      <Select
+                        variant="bordered"
+                        labelPlacement="outside"
+                        aria-label="Symbol"
+                        label="Symbol"
+                        size="lg"
+                        placeholder="Select..."
+                        selectionMode="single"
+                        disallowEmptySelection
+                        classNames={{ label: 'leading-none opacity-70' }}
+                        {...register('secId', { required: 'Symbol is required' })}
+                        errorMessage={errors?.secId?.message}
+                        onChange={handleEquityChange}
+                      >
+                        {equityList?.data?.content?.map((equity) => (
+                          <SelectItem key={equity.secId} value={equity.secId}>
+                            {equity.secDesc}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                      <p className="text-red-500 text-xs mt-2">{errors?.secId?.message}</p>
+                    </div>
+                    <div>
+                      <Select
+                        variant="bordered"
+                        labelPlacement="outside"
+                        aria-label="Price Type"
+                        label="Price Tyoe"
+                        size="lg"
+                        placeholder="Select..."
+                        selectionMode="single"
+                        disallowEmptySelection
+                        classNames={{ label: 'leading-none opacity-70' }}
+                        {...register('secId', { required: 'Symbol is required' })}
+                        errorMessage={errors?.secId?.message}
+                      >
+                        <SelectItem key="MARKET" value="MARKET">
+                          Market
+                        </SelectItem>
+                        <SelectItem key="LIMIT" value="LIMIT">
+                          Limit
+                        </SelectItem>
+                      </Select>
+                      <p className="text-red-500 text-xs mt-2">{errors?.secId?.message}</p>
+                    </div>
+                  </>
+                )}
+                <Select
+                  variant="bordered"
+                  labelPlacement="outside"
+                  aria-label={platform === 'cardinal' ? 'Asset Type' : 'Instrument Type'}
+                  label={platform === 'cardinal' ? 'Asset Type' : 'Instrument Type'}
+                  size="lg"
+                  placeholder="Select..."
+                  selectionMode="single"
+                  disallowEmptySelection
+                  classNames={{ label: 'leading-none opacity-70' }}
+                  {...register('assetType', { required: 'Asset Type is required' })}
+                  errorMessage={errors?.assetType?.message}
+                >
+                  <SelectItem key="EQUITY" value="EQUITY">
+                    Equity
+                  </SelectItem>
+                  <SelectItem key="BOND" value="BOND">
+                    Bond
+                  </SelectItem>
+                </Select>
+                <Select
+                  variant="bordered"
+                  labelPlacement="outside"
+                  aria-label="Order Type"
+                  label="Order Type"
+                  size="lg"
+                  placeholder="Select..."
+                  selectionMode="single"
+                  disallowEmptySelection
+                  classNames={{ label: 'leading-none opacity-70' }}
+                  {...register('side', { required: 'Side is required' })}
+                  errorMessage={errors?.side?.message}
+                >
+                  <SelectItem key="BUY" value="BUY">
+                    Buy
+                  </SelectItem>
+                  <SelectItem key="SELL" value="SELL">
+                    Sell
+                  </SelectItem>
+                </Select>
+                <Input
+                  variant="bordered"
+                  labelPlacement="outside"
+                  aria-label=" Quantity"
+                  label="Quantity"
+                  size="lg"
+                  placeholder="0"
+                  selectionMode="single"
+                  disallowEmptySelection
+                  classNames={{ label: 'leading-none opacity-70' }}
+                  {...register('requestedQty', { required: 'Quantity is required' })}
+                  errorMessage={errors?.requestedQty?.message}
+                />
+                <Select
+                  variant="bordered"
+                  labelPlacement="outside"
+                  aria-label="Order Type"
+                  label="Order Type"
+                  size="lg"
+                  placeholder="Select..."
+                  selectionMode="single"
+                  disallowEmptySelection
+                  classNames={{ label: 'leading-none opacity-70' }}
+                  {...register('tif', { required: 'Order Type is required' })}
+                  errorMessage={errors?.tif?.message}
+                >
+                  <SelectItem key="DAY" value="DAY">
+                    Day
+                  </SelectItem>
+                  <SelectItem key="good-till-date" value="good-till-date">
+                    Good till date
+                  </SelectItem>
+                  <SelectItem key="good-till-canceled" value="good-till-canceled">
+                    Good till canceled
+                  </SelectItem>
+                </Select>
+              </div>
+              <div className="flex items-center !mt-6">
+                <Button
+                  color="primary"
+                  radius="full"
+                  className="text-base px-4"
+                  type="submit"
+                  isLoading={isCreateOrderLoading}
+                  isDisabled={!!errors.secId}
+                >
+                  Place Order
+                </Button>
+              </div>
+              <StocksChart stock={s} />
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-10">
+                  <Card className="card-shadow bg-default-100/50 px-10 py-8">
+                    <p className="text-lg font-semibold mb-5 px-1">Offers</p>
+                    <Table shadow="none" removeWrapper>
+                      <TableHeader>
+                        <TableColumn className="px-4 py-2 text-left text-md uppercase">Price</TableColumn>
+                        <TableColumn className="px-4 py-2 text-left text-md uppercase">Quantity</TableColumn>
+                        <TableColumn className="px-4 py-2 text-left text-md uppercase">Count</TableColumn>
+                        <TableColumn className="px-4 py-2 text-left text-md uppercase">Actions</TableColumn>
+                      </TableHeader>
+                      <TableBody>
+                        {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                          <TableRow key={i}>
+                            <TableCell className="px-4 py-2 text-left text-md">6.30</TableCell>
+                            <TableCell className="px-4 py-2 text-left text-md">166</TableCell>
+                            <TableCell className="px-4 py-2 text-left text-md">1</TableCell>
+                            <TableCell className="px-4 py-2 text-left text-md">
+                              <Button variant="bordered" size="sm" radius="full" className="text-base">
+                                Buy
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </Card>
+                </div>
+                <Card className="card-shadow bg-default-100/50 px-10 py-8">
+                  <p className="text-lg font-semibold mb-5 px-1">Bids</p>
+                  <Table shadow="none" removeWrapper>
+                    <TableHeader>
+                      <TableColumn className="px-4 py-2 text-left text-md uppercase">Price</TableColumn>
+                      <TableColumn className="px-4 py-2 text-left text-md uppercase">Quantity</TableColumn>
+                      <TableColumn className="px-4 py-2 text-left text-md uppercase">Count</TableColumn>
+                    </TableHeader>
+                    <TableBody>
+                      {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                        <TableRow key={i}>
+                          <TableCell className="px-4 py-2 text-left text-md">6.30</TableCell>
+                          <TableCell className="px-4 py-2 text-left text-md">166</TableCell>
+                          <TableCell className="px-4 py-2 text-left text-md">1</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </Card>
+              </div>
             </div>
-            <Card className="px-10 py-8 card-shadow">
-              <p className="text-lg font-semibold mb-5 px-1">Bids</p>
-              <Table shadow="none" removeWrapper>
-                <TableHeader>
-                  <TableColumn className="px-4 py-2 text-left text-md uppercase">Price</TableColumn>
-                  <TableColumn className="px-4 py-2 text-left text-md uppercase">Quantity</TableColumn>
-                  <TableColumn className="px-4 py-2 text-left text-md uppercase">Count</TableColumn>
-                </TableHeader>
-                <TableBody>
-                  {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                    <TableRow key={i}>
-                      <TableCell className="px-4 py-2 text-left text-md">6.30</TableCell>
-                      <TableCell className="px-4 py-2 text-left text-md">166</TableCell>
-                      <TableCell className="px-4 py-2 text-left text-md">1</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Card>
           </div>
-        </div>
-      </div>
+        </form>
+      </Drawer>
     </>
   );
+};
+
+NewTrade.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  portfolio: PropTypes.object.isRequired,
 };
 
 export default NewTrade;
