@@ -64,6 +64,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     setData(retructuredData);
   }, [timeFrame, chartDatas]);
 
+  console.log(state);
   useEffect(() => {
     socket.on(`${state?.symbol}-${timeFrame}`, (msg) => {
       console.log(msg);
@@ -95,18 +96,18 @@ const VirtualStockChart = ({ chartDatas, state }) => {
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="rounded-lg border border-gray-300 bg-white dark:bg-gray-800 p-3 shadow-md">
-          <p className="text-sm text-gray-500 dark:text-white">
-            Highest price: <span className="text-gray-800 dark:text-gray-300">{payload[0].payload.price}</span>
+        <div className="rounded-lg border border-gray-300 bg-white p-3 shadow-md">
+          <p className="text-sm text-gray-500">
+            Current Price: <span className="text-gray-800">{payload[0].payload.price}</span>
           </p>
-          <p className="text-sm text-gray-500 dark:text-white">
-            Time: <span className="text-gray-800 dark:text-gray-300">{payload[0].payload.time}</span>
+          <p className="text-sm text-gray-500">
+            Time: <span className="text-gray-800">{payload[0].payload.time}</span>
           </p>
-          <p className="text-sm text-gray-500 dark:text-white">
-            Close Price: <span className="text-gray-800 dark:text-gray-300">{payload[0].payload.close}</span>
+          <p className="text-sm text-gray-500">
+            Close Price: <span className="text-gray-800">{payload[0].payload.close}</span>
           </p>
-          <p className="text-sm text-gray-500 dark:text-white">
-            Date: <span className="text-gray-800 dark:text-gray-300">{payload[0].payload.date}</span>
+          <p className="text-sm text-gray-500">
+            Date: <span className="text-gray-800">{payload[0].payload.date}</span>
           </p>
         </div>
       );
@@ -114,8 +115,8 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     return null;
   };
   return (
-    <div ref={chartContainerRef} className="overflow-x-auto">
-      {/* <ResponsiveContainer width={'100%'} height={300} className={'overflow-x-auto'}> */}
+    <div ref={chartContainerRef} className="overflow-x-auto max-w-[100%]">
+      <ResponsiveContainer width={'100%'} height={300}>
         <AreaChart  width={
         data?.length <= 100 ? '100%' : data?.length * 15
         } height={300} data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
@@ -131,7 +132,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
           <Tooltip content={<CustomTooltip />} />
           <Area type="monotone" dataKey="price" isAnimationActive={false} stroke="#4691c5" fill="url(#priceGradient)" />
         </AreaChart>
-      {/* </ResponsiveContainer> */}
+      </ResponsiveContainer>
     </div>
   );
 };
