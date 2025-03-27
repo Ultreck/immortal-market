@@ -14,7 +14,7 @@ import { FaNairaSign } from 'react-icons/fa6';
 const PlaceOrder = ({ text, type }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { currentPrice } = useGetCurrentPrice();
-  const [marketName, setMarketName] = useState(JSON.parse(localStorage.getItem('market-name')))
+  const [marketName, setMarketName] = useState(JSON.parse(localStorage.getItem('market-name')) || '')
   const [data, setData] = useState({
     quantity: 1,
     price: currentPrice?.price,
