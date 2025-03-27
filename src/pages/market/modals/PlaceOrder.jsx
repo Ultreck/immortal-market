@@ -14,6 +14,7 @@ import { FaNairaSign } from 'react-icons/fa6';
 const PlaceOrder = ({ text, type }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { currentPrice } = useGetCurrentPrice();
+  const [marketName, setMarketName] = useState(JSON.parse(localStorage.getItem('market-name')))
   const [data, setData] = useState({
     quantity: 1,
     price: currentPrice?.price,
@@ -21,7 +22,6 @@ const PlaceOrder = ({ text, type }) => {
     orderPrice: 0,
     total: 0,
   });
-  const marketName = JSON.parse(localStorage.getItem('market-name'));
   
   useEffect(() => {
     setData({
@@ -29,14 +29,18 @@ const PlaceOrder = ({ text, type }) => {
       price: currentPrice?.price,
       charges: currentPrice?.price * (type === 'buy' ? 0.01 : 0.05),
       total: type === 'buy'
-       ? (data?.quantity * currentPrice?.price) 
-        : (data?.quantity * currentPrice?.price),
+      ? (data?.quantity * currentPrice?.price) 
+      : (data?.quantity * currentPrice?.price),
       orderPrice: type === 'buy'
-       ? (data?.quantity * currentPrice?.price) - data?.charges 
-        : (data?.quantity * currentPrice?.price) - data?.charges,
+      ? (data?.quantity * currentPrice?.price) - data?.charges 
+      : (data?.quantity * currentPrice?.price) - data?.charges,
     });
   }, [data?.quantity, currentPrice]);  
 
+  useEffect(() => {
+    setMarketName(JSON.parse(localStorage.getItem('market-name')));
+  }, [])
+  
   const onSubmit = (e) => {
     console.log(e);
     console.log(data);
