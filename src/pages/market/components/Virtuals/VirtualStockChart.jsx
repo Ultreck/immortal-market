@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, Bar, CartesianGrid, ComposedChart, Line, LineChart, Pie, ResponsiveContainer, Tooltip, XAxis, YAxis  } from 'recharts';
 import { useTernaryDarkMode } from 'usehooks-ts';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import { useGetCurrentPrice } from '@/store/bot';
 
 const dateFormatter = (date) => {
@@ -43,55 +43,48 @@ const timeFormatter = (date, is24Hour = false) => {
 const VirtualStockChart = ({ chartDatas, state }) => {
   const [data, setData] = useState(chartDatas[0]?.prices);
   const { isDarkMode } = useTernaryDarkMode();
-  const socket = io('https://market-msjv.onrender.com');
-  const chartContainerRef = useRef(null);
+  // const socket = io('https://market-msjv.onrender.com', { transports: ['websocket', 'polling'] });
   const timeFrame = JSON.parse(localStorage.getItem('time-function'));
   const { setCurrentPrice } = useGetCurrentPrice();
 
   // Change the data to the format specified
-  const retructuredData = chartDatas[0]?.prices?.map((value, index) => {
+  const restructuredData = chartDatas[0]?.prices?.map((value, index) => {
     return {
       ...value,
       price: limitDecimals(value.price, 4),
       close: limitDecimals(value.close, 4),
       date: dateFormatter(value.createdAt),
+      timestamp: dateFormatter(value.updatedAt),
       name: index * 3,
       time: timeFormatter(value.createdAt),
     };
   });
 
   useEffect(() => {
-    setData(retructuredData);
+    setData(restructuredData);
   }, [timeFrame, chartDatas]);
 
-  console.log(state);
   useEffect(() => {
-    socket.on(`${state?.symbol}-${timeFrame}`, (msg) => {
-      console.log(msg);
-      setData((prev) => {
-        return [
-          ...prev,
-          {
-            price: limitDecimals(msg?.stock?.price, 4) || limitDecimals(1.29998376, 4),
-            close: limitDecimals(msg?.stock?.close, 4) || limitDecimals(1.29998376, 4),
-            date: dateFormatter(msg?.stock?.createdAt),
-            name: (prev?.length + 1) * 3,
-            time: timeFormatter(msg?.stock?.createdAt),
-          },
-        ];
-      });
-    });
-    setCurrentPrice(data?.at(-1)?? null);
-    return () => {
-      socket.off(`${state?.symbol}-${timeFrame}`);
-    };
+    // socket.on(`${state?.symbol}-${timeFrame}`, (msg) => {
+    //   console.log(msg);
+    //   setData((prev) => {
+    //     return [
+    //       ...prev,
+    //       {
+    //         price: limitDecimals(msg?.stock?.price, 4) || limitDecimals(1.29998376, 4),
+    //         close: limitDecimals(msg?.stock?.close, 4) || limitDecimals(1.29998376, 4),
+    //         date: dateFormatter(msg?.stock?.createdAt),
+    //         name: (prev?.length + 1) * 3,
+    //         time: timeFormatter(msg?.stock?.createdAt),
+    //       },
+    //     ];
+    //   });
+    // });
+    // setCurrentPrice(data?.at(-1) ?? null);
+    // return () => {
+    //   socket.off(`${state?.symbol}-${timeFrame}`);
+    // };
   }, [data, timeFrame]);
-
-  useEffect(() => {
-    if (chartContainerRef.current) {
-      chartContainerRef.current.scrollLeft = chartContainerRef.current.scrollWidth;
-    }
-  }, [data]);
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -114,24 +107,94 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     }
     return null;
   };
+
+  const maxDataLength = timeFrame === '5-minutes' || timeFrame === '10-minutes'? 300 : timeFrame === '30-minutes'? 450 :  360;
+
+  const [info, setInfo] = useState(
+    Array.from({ length: 1 }, (_, i) => ({
+      name: `${i.toString()}s`,
+      price: 30 + Math.random() * 100,
+      sprice: (30 + Math.random() * 100)/5,
+    }))
+  );
+
+  const generateRandomPrice = (prevPrice) => {
+    const change = (Math.random() - 0.5) * 100;
+    return Math.max(100, prevPrice + change);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setInfo((prevData) => {
+        const lastPrice = prevData[prevData.length - 1].price;
+        const newPoint = {
+          name: `${(parseInt(prevData[prevData.length - 1].name) + 1).toString()}s`,
+          price: generateRandomPrice(lastPrice),
+          sprice: generateRandomPrice(lastPrice)/3,
+        };
+        return [...prevData, newPoint];
+      });
+    }, timeFrame === '5-minutes'? 1000 : timeFrame === '10-minutes'? 2000 : timeFrame === '30-minutes'? 4000 :  5000);
+    setCurrentPrice(info?.at(-1) ?? null);
+
+    return () => clearInterval(interval);
+  }, [info]);
+
+
+  const currentLength = info.length;
+
+  const paddedData = [...info, ...Array(maxDataLength - currentLength).fill(null)];
+
+  const customDot = ({ cx, cy, index, data }) => {    
+    if(index === data.length - 1){
+      return (
+        <circle cx={cx} cy={cy} fill='#4691c5' r={4} stroke='#fff' strokeWidth={2}/>
+      )
+    }
+    return null;
+  };
+
   return (
-    <div ref={chartContainerRef} className="overflow-x-auto max-w-[100%]">
+    <div className="overflow-x-auto max-w-[100%]">
       <ResponsiveContainer width={'100%'} height={300}>
-        <AreaChart  width={
-        data?.length <= 100 ? '100%' : data?.length * 15
-        } height={300} data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+        <ComposedChart data={paddedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
               <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="name" tickSize={5} strokeOpacity={0.5} interval="preserveEnd" />
+          <XAxis
+            dataKey="name"
+            domain={[0, maxDataLength - 1]}
+            tickSize={5}
+            strokeOpacity={0.5}
+            interval="preserveEnd"
+          />
           <YAxis domain={['auto', 'auto']} tickSize={3} strokeOpacity={0.5} orientation="right" />
           <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
           <Tooltip content={<CustomTooltip />} />
-          <Area type="monotone" dataKey="price" isAnimationActive={false} stroke="#4691c5" fill="url(#priceGradient)" />
-        </AreaChart>
+          <Area
+              dataKey="price"
+              dot={
+                (props) => <customDot {...props} data={paddedData} />
+              }
+              // dot={{
+              //   r: 4,
+              //   fill: "#4691c5",
+              //   stroke: "#fff",
+              //   strokeWidth: 2,
+              //   display: (props) => {                  
+              //     return props.index === props.data?.length - 1 ? 'block' : 'none';
+              //   }
+              // }}
+            type="monotone"
+            isAnimationActive={false}
+            stroke="#4691c5"
+            fill="url(#priceGradient)"
+          />
+            <Bar dataKey="sprice" barSize={10} fill="#4691c5" />
+        </ComposedChart>
       </ResponsiveContainer>
     </div>
   );

@@ -120,14 +120,6 @@ const VirtualStockDetails = () => {
                                 variant="bordered"
                               >
                                 <Tab
-                                  key="full"
-                                  title={
-                                    <div className="flex items-center space-x-2">
-                                      <span>Day</span>
-                                    </div>
-                                  }
-                                />
-                                <Tab
                                   key="1-hour"
                                   title={
                                     <div className="flex items-center space-x-2">
@@ -139,7 +131,23 @@ const VirtualStockDetails = () => {
                                   key="30-minutes"
                                   title={
                                     <div className="flex items-center space-x-2">
-                                      <span>30min</span>
+                                      <span>30mins</span>
+                                    </div>
+                                  }
+                                />
+                                <Tab
+                                  key="10-minutes"
+                                  title={
+                                    <div className="flex items-center space-x-2">
+                                      <span>10min</span>
+                                    </div>
+                                  }
+                                />
+                                <Tab
+                                  key="5-minutes"
+                                  title={
+                                    <div className="flex items-center space-x-2">
+                                      <span>5min</span>
                                     </div>
                                   }
                                 />
@@ -148,13 +156,8 @@ const VirtualStockDetails = () => {
                           </div>
                         </div>
                         <div className="space-x-2">
-                          <PlaceOrder stock={stock} />
-                          {/* <Button color="primary" radius="full">
-                            Buy
-                          </Button> */}
-                          <Button variant="bordered" radius="full">
-                            Sell
-                          </Button>
+                          <PlaceOrder text="Buy" type={"buy"} stock={stock} />
+                          <PlaceOrder text="Sell" type={"sell"} stock={stock} />
                         </div>
                       </div>
                       <VirtualStockChart state={location.state} chartDatas={chartDatas} stock={stock} />

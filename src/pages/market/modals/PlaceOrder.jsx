@@ -1,15 +1,51 @@
-import React from 'react';
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from '@heroui/react';
+import React, { useEffect, useState } from 'react';
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  Input,
+  Form,
+} from '@heroui/react';
 import { useGetCurrentPrice } from '@/store/bot';
-const PlaceOrder = ({ stock }) => {
+import { FaNairaSign } from 'react-icons/fa6';
+const PlaceOrder = ({ text, type }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const {currentPrice} = useGetCurrentPrice();
-  // console.log(currentPrice);
+  const { currentPrice } = useGetCurrentPrice();
+  const [data, setData] = useState({
+    quantity: 1,
+    price: currentPrice?.price,
+    charges: currentPrice?.price * (type === 'buy' ? 0.01 : 0.05),
+    orderPrice: 0,
+    total: 0,
+  });
   
+  useEffect(() => {
+    setData({
+      ...data,
+      price: currentPrice?.price,
+      charges: currentPrice?.price * (type === 'buy' ? 0.01 : 0.05),
+      total: type === 'buy'
+       ? (data?.quantity * currentPrice?.price) 
+        : (data?.quantity * currentPrice?.price),
+      orderPrice: type === 'buy'
+       ? (data?.quantity * currentPrice?.price) - data?.charges 
+        : (data?.quantity * currentPrice?.price) - data?.charges,
+    });
+  }, [data?.quantity, currentPrice]);
+  
+
+  const onSubmit = (e) => {
+    console.log(e);
+  };
+
   return (
     <>
-      <Button onPress={onOpen} color="primary" radius="full">
-        Buy
+      <Button onPress={onOpen} color={type === 'buy' ? 'primary' : 'danger'} radius="full">
+        {text}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
@@ -17,29 +53,105 @@ const PlaceOrder = ({ stock }) => {
             <>
               <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
               <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit
-                  venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit
-                  venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor adipisicing. Mollit
-                  dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim laboris
-                  do dolor eiusmod. Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+                <Form className="w-full grid" onSubmit={onSubmit}>
+                  <div className="grid relative grid-cols-3 my-auto">
+                    <p className="text flex items-center">Quantity</p>
+                    <Input
+                      disabled={type === 'sell'}
+                      className="col-span-2"
+                      value={data.quantity}
+                      min={1}
+                      onChange={(e) => {
+                        setData({ ...data, quantity: e.target.value });
+                      }}
+                      name='quantity'
+                      placeholder="0.00"
+                      type="number"
+                    />
+                  </div>
+                  <div className="grid relative mt-5 grid-cols-3 my-auto">
+                    <p className="text flex items-center">Market price</p>
+                    <Input
+                      endContent={
+                        <div className="pointer-events-none flex items-center">
+                          <span className="text-default-400 text-small">
+                            <FaNairaSign />
+                          </span>
+                        </div>
+                      }
+                      disabled
+                      name='price'
+                      className="col-span-2"
+                      value={data.quantity < 1 ? 0 : String(data.price).slice(0, 8)}
+                      placeholder="0.00"
+                      type="number"
+                    />
+                  </div>
+                  <div className="grid relative mt-5 grid-cols-3">
+                    <p className="text flex items-center">Estimated total</p>
+                    <Input
+                      endContent={
+                        <div className="pointer-events-none flex items-center">
+                          <span className="text-default-400 text-small">
+                            <FaNairaSign />
+                          </span>
+                        </div>
+                      }
+                      disabled
+                      name='total'
+                      value={data.quantity < 1 ? 0 : String(data.total).slice(0, 8)}
+                      className="col-span-2"
+                      placeholder="0.00"
+                      type="number"
+                    />
+                  </div>
+                  <div className="grid relative mt-5 grid-cols-3 my-auto">
+                    <p className="text flex items-center">Charges</p>
+                    <Input
+                      endContent={
+                        <div className="pointer-events-none flex items-center">
+                          <span className="text-default-400 text-small">
+                            <FaNairaSign />
+                          </span>
+                        </div>
+                      }
+                      disabled
+                      name='charges'
+                      value={data.quantity < 1 ? 0 : String(data.charges).slice(0, 6)}
+                      className="col-span-2"
+                      placeholder="0.00"
+                      type="number"
+                    />
+                  </div>
+                  <div className="grid relative my-5 grid-cols-3">
+                    <p className="text flex items-center">Order price</p>
+                    <Input
+                      endContent={
+                        <div className="pointer-events-none flex items-center">
+                          <span className="text-default-400 text-small">
+                            <FaNairaSign />
+                          </span>
+                        </div>
+                      }
+                      disabled
+                      name='orderPrice'
+                      value={data.quantity < 1 ? 0 : String(data.orderPrice).slice(0, 8)}
+                      className="col-span-2"
+                      placeholder="0.00"
+                      type="number"
+                    />
+                  </div>
+                  {type === 'buy' ? (
+                    <Button className="w-full font-semibold mb-5" color="primary" onPress={onClose}>
+                      Place order
+                    </Button>
+                  ) : (
+                    <Button className="w-full font-semibold mb-5" color="danger" onPress={onClose}>
+                      Sell order
+                    </Button>
+                  )}
+                </Form>
               </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>
