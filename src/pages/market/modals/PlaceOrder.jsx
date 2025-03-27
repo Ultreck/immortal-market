@@ -4,7 +4,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Button,
   useDisclosure,
   Input,
@@ -22,6 +21,7 @@ const PlaceOrder = ({ text, type }) => {
     orderPrice: 0,
     total: 0,
   });
+  const marketName = JSON.parse(localStorage.getItem('market-name'));
   
   useEffect(() => {
     setData({
@@ -35,11 +35,11 @@ const PlaceOrder = ({ text, type }) => {
        ? (data?.quantity * currentPrice?.price) - data?.charges 
         : (data?.quantity * currentPrice?.price) - data?.charges,
     });
-  }, [data?.quantity, currentPrice]);
-  
+  }, [data?.quantity, currentPrice]);  
 
   const onSubmit = (e) => {
     console.log(e);
+    console.log(data);
   };
 
   return (
@@ -51,7 +51,7 @@ const PlaceOrder = ({ text, type }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">{marketName}</ModalHeader>
               <ModalBody>
                 <Form className="w-full grid" onSubmit={onSubmit}>
                   <div className="grid relative grid-cols-3 my-auto">

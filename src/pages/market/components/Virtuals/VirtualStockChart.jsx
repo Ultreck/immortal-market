@@ -136,16 +136,29 @@ const VirtualStockChart = ({ chartDatas, state }) => {
       });
     }, timeFrame === '5-minutes'? 1000 : timeFrame === '10-minutes'? 2000 : timeFrame === '30-minutes'? 4000 :  5000);
     setCurrentPrice(info?.at(-1) ?? null);
-
+    checkForLength();
     return () => clearInterval(interval);
   }, [info]);
 
+  const checkForLength = () => {
+    if(maxDataLength === info?.length) {
+      setInfo(
+        Array.from({ length: 1 }, (_, i) => ({
+        name: `${i.toString()}s`,
+        price: 30 + Math.random() * 100,
+        sprice: (30 + Math.random() * 100)/5,
+      }))
+    );
+    };
+  };
 
   const currentLength = info.length;
 
   const paddedData = [...info, ...Array(maxDataLength - currentLength).fill(null)];
 
-  const customDot = ({ cx, cy, index, data }) => {    
+  const customDot = ({ cx, cy, index, data }) => { 
+    console.log(data, index);
+       
     if(index === data.length - 1){
       return (
         <circle cx={cx} cy={cy} fill='#4691c5' r={4} stroke='#fff' strokeWidth={2}/>
