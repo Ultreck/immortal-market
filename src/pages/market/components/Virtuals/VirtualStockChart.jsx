@@ -189,9 +189,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
           <Tooltip content={<CustomTooltip />} />
           <Area
               dataKey="price"
-              dot={
-                (props) => <customDot {...props} data={paddedData} />
-              }
+              dot={(props) => <customDot {...props} data={paddedData} />}
               // dot={{
               //   r: 4,
               //   fill: "#4691c5",

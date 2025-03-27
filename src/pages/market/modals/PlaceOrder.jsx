@@ -11,10 +11,9 @@ import {
 } from '@heroui/react';
 import { useGetCurrentPrice } from '@/store/bot';
 import { FaNairaSign } from 'react-icons/fa6';
-const PlaceOrder = ({ text, type }) => {
+const PlaceOrder = ({ text, type, state }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { currentPrice } = useGetCurrentPrice();
-  const [marketName, setMarketName] = useState(JSON.parse(localStorage.getItem('market-name')) || '')
   const [data, setData] = useState({
     quantity: 1,
     price: currentPrice?.price,
@@ -36,10 +35,6 @@ const PlaceOrder = ({ text, type }) => {
       : (data?.quantity * currentPrice?.price) - data?.charges,
     });
   }, [data?.quantity, currentPrice]);  
-
-  useEffect(() => {
-    setMarketName(JSON.parse(localStorage.getItem('market-name')));
-  }, [])
   
   const onSubmit = (e) => {
     console.log(e);
@@ -55,7 +50,7 @@ const PlaceOrder = ({ text, type }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">{!!marketName}</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">{state?.symbol}</ModalHeader>
               <ModalBody>
                 <Form className="w-full grid" onSubmit={onSubmit}>
                   <div className="grid relative grid-cols-3 my-auto">

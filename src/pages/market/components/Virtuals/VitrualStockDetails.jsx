@@ -24,14 +24,12 @@ const VirtualStockDetails = () => {
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
   const { mutateAsync: getStockSummary } = useCreateVirtualSummary();
-  
-  
+
   useEffect(() => {
     handleGetStockDetails();
     handleGetStockOrders();
     handleGetStockSummary();
     seTtimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
-    window.localStorage.setItem('market-name', JSON.stringify(location?.state?.symbol));
   }, [timeFrame, id]);
 
   const handleGetStockDetails = async () => {
@@ -48,22 +46,18 @@ const VirtualStockDetails = () => {
     window.localStorage.setItem('time-function', JSON.stringify(key));
     seTtimeFrame(key);
   };
- 
+
   const handleGetStockOrders = async () => {
     try {
       let stockOrders = {
         stockId: id,
         country: country,
         sessionType: timeFrame,
-        page:1
+        page: 1,
       };
       const res = await getStockOrders(stockOrders);
       setStockOrders(res.data.data);
-            
-    } catch (error) {
-      
-    }
-
+    } catch (error) {}
   };
   const handleGetStockSummary = async () => {
     try {
@@ -71,15 +65,13 @@ const VirtualStockDetails = () => {
         stockId: id,
         country: country,
         sessionType: timeFrame,
-        page:1
+        page: 1,
       };
       const res = await getStockSummary(stockSummary);
       setstockSummary(res.data.data);
-      
     } catch (error) {
       console.log(error);
-    };
-    
+    }
   };
   return (
     <>
@@ -157,8 +149,8 @@ const VirtualStockDetails = () => {
                           </div>
                         </div>
                         <div className="space-x-2">
-                          <PlaceOrder text="Buy" type={"buy"} stock={stock} />
-                          <PlaceOrder text="Sell" type={"sell"} stock={stock} />
+                          <PlaceOrder state={location.state} text="Buy" type={'buy'} stock={stock} />
+                          <PlaceOrder state={location.state} text="Sell" type={'sell'} stock={stock} />
                         </div>
                       </div>
                       <VirtualStockChart state={location.state} chartDatas={chartDatas} stock={stock} />
