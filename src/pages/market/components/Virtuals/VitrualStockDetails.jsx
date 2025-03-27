@@ -31,7 +31,7 @@ const VirtualStockDetails = () => {
     handleGetStockOrders();
     handleGetStockSummary();
     seTtimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
-    window.localStorage.setItem('market-name', JSON.stringify(location.state.symbol));
+    window.localStorage.setItem('market-name', JSON.stringify(location?.state?.symbol));
   }, [timeFrame, id]);
 
   const handleGetStockDetails = async () => {
