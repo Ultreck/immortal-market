@@ -55,7 +55,7 @@ const PlaceOrder = ({ text, type }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">{marketName}</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">{!!marketName}</ModalHeader>
               <ModalBody>
                 <Form className="w-full grid" onSubmit={onSubmit}>
                   <div className="grid relative grid-cols-3 my-auto">
