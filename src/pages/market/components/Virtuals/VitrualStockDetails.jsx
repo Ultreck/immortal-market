@@ -20,7 +20,10 @@ const VirtualStockDetails = () => {
   const [stockOrders, setStockOrders] = useState([]);
   const [stockSummary, setstockSummary] = useState({});
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
-  const [timeFrame, seTtimeFrame] = useState(JSON.parse(window.localStorage.getItem('time-function')));
+  const [timeFrame, setTimeFrame] = useState(() => {
+    const storedTimeFrame = window.localStorage.getItem('time-function');
+    return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-hour';
+  });  
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
   const { mutateAsync: getStockSummary } = useCreateVirtualSummary();
@@ -29,7 +32,7 @@ const VirtualStockDetails = () => {
     handleGetStockDetails();
     handleGetStockOrders();
     handleGetStockSummary();
-    seTtimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
+    setTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [timeFrame, id]);
 
   const handleGetStockDetails = async () => {
@@ -44,7 +47,7 @@ const VirtualStockDetails = () => {
 
   const handleChange = (key) => {
     window.localStorage.setItem('time-function', JSON.stringify(key));
-    seTtimeFrame(key);
+    setTimeFrame(key);
   };
 
   const handleGetStockOrders = async () => {

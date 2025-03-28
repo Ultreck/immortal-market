@@ -156,16 +156,16 @@ const VirtualStockChart = ({ chartDatas, state }) => {
 
   const paddedData = [...info, ...Array(maxDataLength - currentLength).fill(null)];
 
-  const customDot = ({ cx, cy, index, data }) => { 
-    console.log(data, index);
+  // const customDot = ({ cx, cy, index, data }) => { 
+  //   console.log(data, index);
        
-    if(index === data.length - 1){
-      return (
-        <circle cx={cx} cy={cy} fill='#4691c5' r={4} stroke='#fff' strokeWidth={2}/>
-      )
-    }
-    return null;
-  };
+  //   if(index === data.length - 1){
+  //     return (
+  //       <circle cx={cx} cy={cy} fill='#4691c5' r={4} stroke='#fff' strokeWidth={2}/>
+  //     )
+  //   }
+  //   return null;
+  // };
 
   return (
     <div className="overflow-x-auto max-w-[100%]">
@@ -189,7 +189,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
           <Tooltip content={<CustomTooltip />} />
           <Area
               dataKey="price"
-              dot={(props) => <customDot {...props} data={paddedData} />}
+              // dot={(props) => <customDot {...props} data={paddedData} />}
               // dot={{
               //   r: 4,
               //   fill: "#4691c5",
