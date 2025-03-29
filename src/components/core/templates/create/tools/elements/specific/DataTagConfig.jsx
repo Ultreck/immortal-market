@@ -251,7 +251,7 @@ const DataTagConfigContent = ({ element, onChange }) => {
                       variant="bordered"
                       value={field.value}
                       onChange={field.onChange}
-                      ariaLabel="No. of characters"
+                      aria-label="No. of characters"
                       min={1}
                       max={100}
                       step={1}
@@ -313,7 +313,7 @@ const DataTagConfigContent = ({ element, onChange }) => {
                       variant="bordered"
                       value={field.value}
                       onChange={field.onChange}
-                      ariaLabel="Decimal"
+                      aria-label="Decimal"
                       min={0}
                       max={10}
                       step={1}

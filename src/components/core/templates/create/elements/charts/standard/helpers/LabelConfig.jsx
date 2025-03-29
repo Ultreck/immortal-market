@@ -58,14 +58,14 @@ const LabelConfig = ({ element, onChange, type }) => {
               }
               min={1}
               max={30}
-              ariaLabel="labelFontSize"
+              aria-label="Label font size"
             />
           </div>
           <div className="flex items-center justify-between">
             <p className="text-base">Label position</p>
             <Select
               variant="bordered"
-              ariaLabel="Label position"
+              aria-label="Label position"
               classNames={{ base: 'w-[200px]', value: 'px-2 text-base' }}
               placeholder="Select one"
               selectedKeys={[element.config.label.position || 'top']}

@@ -84,7 +84,7 @@ function AdvanceLinearChartConfig({ element, onChange }) {
           value={element.config.fontSize}
           min={1}
           max={1000}
-          ariaLabel="fontSize"
+          aria-label="fontSize"
         />
       </div>
       <div className={'flex justify-between space-x-5'}>
@@ -94,7 +94,7 @@ function AdvanceLinearChartConfig({ element, onChange }) {
           value={element.config.labelFontSize}
           min={1}
           max={1000}
-          ariaLabel="fontSize"
+          aria-label="fontSize"
         />
       </div>
       <div className="border border-gray-700 p-4 rounded-2xl space-y-6">

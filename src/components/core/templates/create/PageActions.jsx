@@ -28,7 +28,6 @@ const PageActions = ({ id }) => {
   const deletePage = useDesignStore((state) => state.deletePage);
   const createPageAfter = useDesignStore((state) => state.createPageAfter);
   const updatePage = useDesignStore((state) => state.updatePage);
-  const updateStore = useDesignStore((state) => state.updateStore);
 
   return (
     <div className="flex items-center space-x-1">

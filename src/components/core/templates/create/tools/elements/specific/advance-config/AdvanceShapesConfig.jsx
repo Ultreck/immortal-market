@@ -216,7 +216,7 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
                   value={element.config.labelFontSize || 40}
                   min={1}
                   max={100}
-                  ariaLabel="labelFontSize"
+                  aria-label="labelFontSize"
                 />
               </div>
             </div>
@@ -234,7 +234,7 @@ const AdvanceShapesConfig = ({ element, onChange }) => {
               value={element.config.size}
               min={1}
               max={100}
-              ariaLabel="size"
+              aria-label="size"
             />
           </div>
         </div>

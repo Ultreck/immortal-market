@@ -240,7 +240,7 @@ const FontSize = ({ selectedCells, onStyleChange }) => {
   return (
     <div className="flex items-center justify-between space-x-4">
       <p className="text-base opacity-75">Font size:</p>
-      <AutoCompleteNumberInput onChange={handleChange} value={value} min={1} max={150} step={1} ariaLabel="Font size" />
+      <AutoCompleteNumberInput onChange={handleChange} value={value} min={1} max={150} step={1} aria-label="Font size" />
     </div>
   );
 };

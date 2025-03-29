@@ -16,7 +16,7 @@ export const ImageBorderWeight = ({ element, onChange }) => {
       value={value}
       min={0}
       max={50}
-      ariaLabel="fontSize"
+      aria-label="fontSize"
     />
   );
 };

@@ -21,7 +21,7 @@ export const FontSize = ({ element, onChange }) => {
         min={1}
         max={150}
         step={1}
-        ariaLabel="Font size"
+        aria-label="Font size"
         radius="full"
         size="sm"
       />
@@ -39,7 +39,7 @@ export const LineHeight = ({ element, onChange }) => {
 
   return (
     <div className="flex items-center justify-between space-x-4">
-      <NumberInput onChange={handleChange} value={value} min={0} max={10} step={0.1} ariaLabel="Line height" />
+      <NumberInput onChange={handleChange} value={value} min={0} max={10} step={0.1} aria-label="Line height" />
     </div>
   );
 };

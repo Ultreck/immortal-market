@@ -8,7 +8,6 @@ const NumberInput = ({
   variant = 'flat',
   value,
   onChange,
-  ariaLabel,
   min = 0,
   max = Infinity,
   step = 1,
@@ -62,7 +61,6 @@ const NumberInput = ({
         <TbMinus size="20" />
       </Button>
       <Input
-        aria-label={ariaLabel}
         type="number"
         variant={variant}
         step={step}
@@ -96,7 +94,6 @@ NumberInput.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onChange: PropTypes.func.isRequired,
-  ariaLabel: PropTypes.string.isRequired,
   min: PropTypes.number,
   max: PropTypes.number,
   step: PropTypes.number,

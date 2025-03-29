@@ -34,7 +34,7 @@ const LegendConfig = ({ element, onChange }) => {
               }
               min={1}
               max={30}
-              ariaLabel="labelFontSize"
+              aria-label="Legend font size"
             />
           </div>
           <div className="flex justify-between items-center">

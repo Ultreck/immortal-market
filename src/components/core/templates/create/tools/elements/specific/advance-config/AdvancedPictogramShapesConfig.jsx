@@ -197,7 +197,7 @@ const AdvancedPictogramShapesConfig = ({ element, onChange }) => {
               value={element.config.labelFontSize}
               min={1}
               max={1000}
-              ariaLabel="fontSize"
+              aria-label="fontSize"
             />
           </div>
         </div>
@@ -216,7 +216,7 @@ const AdvancedPictogramShapesConfig = ({ element, onChange }) => {
             value={element.config[`${icon}count`]}
             min={1}
             max={50}
-            ariaLabel={`Icons ${index + 1} Counts`}
+            aria-label={`Icons ${index + 1} Counts`}
           />
         </div>
       ))}

@@ -34,7 +34,7 @@ const XAxisConfig = ({ element, onChange }) => {
               }
               min={1}
               max={30}
-              ariaLabel="Font size"
+              aria-label="Font size"
             />
           </div>
           <div className="flex justify-between items-center">

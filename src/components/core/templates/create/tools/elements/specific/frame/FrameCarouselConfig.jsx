@@ -14,7 +14,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
         <NumberInput
           value={element.config.slides}
           onChange={(v) => handleChange({ slides: v })}
-          ariaLabel="No. of slides"
+          aria-label="No. of slides"
           min={1}
         />
       </div>
@@ -23,7 +23,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
         <NumberInput
           value={element.config.slidesPerView}
           onChange={(v) => handleChange({ slidesPerView: v })}
-          ariaLabel="Slides per view"
+          aria-label="Slides per view"
           min={1}
           step={0.1}
         />
@@ -33,7 +33,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
         <NumberInput
           value={element.config.speed}
           onChange={(v) => handleChange({ speed: v })}
-          ariaLabel="Slide speed"
+          aria-label="Slide speed"
           step={100}
           min={1}
         />
@@ -93,7 +93,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
               <NumberInput
                 value={element.config.autoplay?.delay}
                 onChange={(v) => handleChange({ autoplay: { ...element.config.autoplay, delay: v } })}
-                ariaLabel="Delay"
+                aria-label="Delay"
                 step={100}
                 min={0}
               />

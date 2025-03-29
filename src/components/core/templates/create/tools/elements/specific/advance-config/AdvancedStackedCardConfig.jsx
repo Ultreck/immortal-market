@@ -53,7 +53,7 @@ const AdvancedStackedCardConfig = ({ element, onChange }) => {
           value={element.config.bars}
           min={1}
           max={element.config.data.length}
-          ariaLabel="No of Bars to Show"
+          aria-label="No of Bars to Show"
         />
       </div>
 
@@ -180,7 +180,7 @@ const AdvancedStackedCardConfig = ({ element, onChange }) => {
               value={element.config.labelFontSize}
               min={1}
               max={1000}
-              ariaLabel="fontSize"
+              aria-label="fontSize"
             />
           </div>
         </div>

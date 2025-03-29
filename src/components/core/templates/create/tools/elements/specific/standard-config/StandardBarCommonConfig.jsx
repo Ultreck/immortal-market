@@ -29,7 +29,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
               value={element.config.points}
               min={1}
               max={element.config.data.length}
-              ariaLabel="No of points to show"
+              aria-label="No of points to show"
             />
           </div>
           {element.config.name.includes('bar') && (
@@ -47,7 +47,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                     value={element.config.barsPerGroup}
                     min={1}
                     max={5}
-                    ariaLabel="No of bars per group"
+                    aria-label="No of bars per group"
                   />
                 </div>
               )}
@@ -63,7 +63,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                   value={element.config.radius}
                   min={1}
                   max={100}
-                  ariaLabel="Border radius"
+                  aria-label="Border radius"
                 />
               </div>
               <div>

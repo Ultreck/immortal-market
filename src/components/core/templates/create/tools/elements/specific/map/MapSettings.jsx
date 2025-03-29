@@ -35,7 +35,7 @@ const MapSettings = ({ element, onChange }) => {
           variant="bordered"
           value={element.config.labelsCount}
           onChange={(v) => onChange({ ...element, config: { ...element.config, labelsCount: v } })}
-          ariaLabel="No. of labels to show"
+          aria-label="No. of labels to show"
           min={1}
           max={element.config.data.length}
           step={1}

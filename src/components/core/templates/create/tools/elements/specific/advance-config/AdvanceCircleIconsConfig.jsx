@@ -58,7 +58,7 @@ const AdvanceCircleIconsConfig = ({ element, onChange }) => {
           value={element.config.circles}
           min={1}
           max={element.config.data.length}
-          ariaLabel="No of Circles to Show"
+          aria-label="No of Circles to Show"
         />
       </div>
       <div className="flex items-center space-x-4">
@@ -162,7 +162,7 @@ const AdvanceCircleIconsConfig = ({ element, onChange }) => {
               value={element.config.labelFontSize}
               min={1}
               max={1000}
-              ariaLabel="fontSize"
+              aria-label="fontSize"
             />
           </div>
         </div>

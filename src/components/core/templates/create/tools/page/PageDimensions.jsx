@@ -32,7 +32,7 @@ const PageDimensions = ({ page, onChange }) => {
               value={page.size.height}
               min={200}
               step={10}
-              ariaLabel="Page height"
+              aria-label="Page height"
               fullWidth
             />
           </div>

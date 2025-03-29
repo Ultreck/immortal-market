@@ -44,7 +44,7 @@ const StrokeWidth = ({ elements, onChange }) => {
   return (
     <div className="flex items-center space-between space-x-8">
       <p className="text-base">Stroke width</p>
-      <NumberInput title="Stroke Width" value={value} onChange={handleChange} ariaLabel="Stoke width" />
+      <NumberInput title="Stroke Width" value={value} onChange={handleChange} aria-label="Stoke width" />
     </div>
   );
 };

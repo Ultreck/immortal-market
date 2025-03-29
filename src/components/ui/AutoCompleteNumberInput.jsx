@@ -7,12 +7,12 @@ const AutoCompleteNumberInput = ({
   variant = 'flat',
   value,
   onChange,
-  ariaLabel,
   min = 0,
   max = 100,
   step = 1,
   radius = 'md',
   size = 'md',
+  ...props
 }) => {
   const interval = useRef(null);
 
@@ -61,7 +61,6 @@ const AutoCompleteNumberInput = ({
         <TbMinus size="20" />
       </Button>
       <Autocomplete
-        aria-label={ariaLabel}
         type="number"
         step={step}
         isClearable={false}
@@ -74,6 +73,7 @@ const AutoCompleteNumberInput = ({
         variant={variant}
         radius={radius}
         size={size}
+        {...props}
       >
         {Array.from({ length: max - min + 1 }, (_, i) => i + min).map((n) => (
           <AutocompleteItem key={n} value={n} textValue={n.toString()}>
@@ -101,7 +101,6 @@ AutoCompleteNumberInput.propTypes = {
   variant: PropTypes.oneOf(['flat', 'bordered', 'faded', 'underlined']),
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   onChange: PropTypes.func.isRequired,
-  ariaLabel: PropTypes.string.isRequired,
   min: PropTypes.number,
   max: PropTypes.number,
   step: PropTypes.number,

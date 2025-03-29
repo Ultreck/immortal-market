@@ -105,7 +105,7 @@ const CountUpNumberConfig = ({ element, onChange }) => {
               onChange={(v) => {
                 onChange({ ...element, config: { ...element.config, start: v } });
               }}
-              ariaLabel="Start number"
+              aria-label="Start number"
               min={0}
               max={Infinity}
               step={1}
@@ -119,7 +119,7 @@ const CountUpNumberConfig = ({ element, onChange }) => {
               onChange={(v) => {
                 onChange({ ...element, config: { ...element.config, end: v } });
               }}
-              ariaLabel="End number"
+              aria-label="End number"
               min={0}
               max={Infinity}
               step={1}
@@ -135,7 +135,7 @@ const CountUpNumberConfig = ({ element, onChange }) => {
               onChange={(v) => {
                 onChange({ ...element, config: { ...element.config, duration: v } });
               }}
-              ariaLabel="Duration"
+              aria-label="Duration"
               min={1}
               max={20}
               step={1}

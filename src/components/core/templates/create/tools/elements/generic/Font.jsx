@@ -106,7 +106,14 @@ const FontSize = ({ elements, onChange }) => {
   return (
     <div className="flex items-center justify-between space-x-4">
       <p className="text-base opacity-75">Font size:</p>
-      <AutoCompleteNumberInput onChange={handleChange} value={value} min={1} max={150} step={1} ariaLabel="Font size" />
+      <AutoCompleteNumberInput
+        onChange={handleChange}
+        value={value}
+        min={1}
+        max={150}
+        step={1}
+        aria-label="Font size"
+      />
     </div>
   );
 };
@@ -122,7 +129,7 @@ const LetterSpacing = ({ elements, onChange }) => {
   return (
     <div className="flex items-center justify-between space-x-4">
       <p className="text-base opacity-75">Letter spacing:</p>
-      <NumberInput onChange={handleChange} value={value} min={-10} max={10} step={0.1} ariaLabel="Letter spacing" />
+      <NumberInput onChange={handleChange} value={value} min={-10} max={10} step={0.1} aria-label="Letter spacing" />
     </div>
   );
 };
@@ -138,7 +145,7 @@ const LineHeight = ({ elements, onChange }) => {
   return (
     <div className="flex items-center justify-between space-x-4">
       <p className="text-base opacity-75">Line height:</p>
-      <NumberInput onChange={handleChange} value={value} min={0} max={10} step={0.1} ariaLabel="Line height" />
+      <NumberInput onChange={handleChange} value={value} min={0} max={10} step={0.1} aria-label="Line height" />
     </div>
   );
 };

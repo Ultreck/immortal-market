@@ -31,7 +31,7 @@ export const StandardFontSize = ({ element, onChange }) => {
         min={1}
         max={150}
         step={1}
-        ariaLabel="Font size"
+        aria-label="Font size"
         radius="full"
       />
     </div>

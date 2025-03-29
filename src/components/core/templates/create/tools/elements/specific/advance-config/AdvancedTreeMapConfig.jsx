@@ -108,7 +108,7 @@ const AdvancedTreeMapConfig = ({ element, onChange }) => {
               value={element.config.labelFontSize}
               min={1}
               max={1000}
-              ariaLabel="fontSize"
+              aria-label="fontSize"
             />
           </div>
         </div>

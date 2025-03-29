@@ -22,5 +22,3 @@ InfographicPresent.propTypes = {
 InfographicContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
-
-export default Infographic;

@@ -14,7 +14,7 @@ const AdvancedFunnelConfig = ({ element, onChange }) => {
             value={element.config.noOfStacks}
             min={1}
             max={element.config.data.length}
-            ariaLabel="No of Stacks"
+            aria-label="No of Stacks"
           />
         </div>
       </div>
@@ -112,7 +112,7 @@ const AdvancedFunnelConfig = ({ element, onChange }) => {
               value={element.config.labelFontSize}
               min={1}
               max={1000}
-              ariaLabel="fontSize"
+              aria-label="fontSize"
             />
           </div>
         </div>

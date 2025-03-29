@@ -13,7 +13,6 @@ import { Table, TablePresent } from '@/components/core/templates/create/elements
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
 import { DataPresent, DataTag } from '@/components/core/templates/create/elements/DataTag.jsx';
 import { Button, ButtonPresent } from '@/components/core/templates/create/elements/Button.jsx';
-import Forms, { FormPresents } from '@/components/core/templates/create/elements/forms/FormPresent.jsx';
 import { Group, GroupPresent } from '@/components/core/templates/create/elements/Group.jsx';
 import { Infographic, InfographicPresent } from '@/components/core/templates/create/elements/Infographic.jsx';
 
@@ -204,22 +203,6 @@ export const elements = {
       editable: true,
       fit: true,
       resizeHandles: ['e'],
-    },
-  },
-  form: {
-    tools: (element) => {
-      if (element.config.name === 'poll') {
-        return ['poll', 'border'];
-      }
-      return ['form', 'border'];
-    },
-    components: {
-      edit: Forms,
-      present: FormPresents,
-    },
-    config: {
-      wrapper: true,
-      fit: true,
     },
   },
   infographic: {

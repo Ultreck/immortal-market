@@ -50,8 +50,6 @@ const CreateGroupBlockModal = ({ isOpen, onClose, group }) => {
       });
       const thumbnail = new File([blob], 'thumbnail.png', { type: 'image/png' });
       setIsThumbnailLoading(false);
-      // eslint-disable-next-line no-unused-vars
-      const { _id, id, ...group } = elements[0];
       const data = {
         // eslint-disable-next-line no-unused-vars
         elements: sorted.map(({ _id, id, ...el }) => ({ ...el })).filter((e) => e.type !== 'group'),

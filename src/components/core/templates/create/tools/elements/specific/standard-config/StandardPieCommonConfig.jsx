@@ -25,7 +25,7 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
             }
             min={1}
             max={element.config.data.length}
-            ariaLabel="No of points to show"
+            aria-label="No of points to show"
           />
         </div>
         {['pie', 'pie-2'].includes(element.config.name) && (

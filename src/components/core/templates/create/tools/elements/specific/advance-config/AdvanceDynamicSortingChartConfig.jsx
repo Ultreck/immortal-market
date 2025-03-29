@@ -69,7 +69,7 @@ const AdvanceDynamicSortingChartConfig = ({ element, onChange }) => {
               value={element.config.noOfBars}
               min={1}
               max={element.config.data.length}
-              ariaLabel="fontSize"
+              aria-label="fontSize"
             />
           </div>
           {element.config.showLabel && (
@@ -160,7 +160,7 @@ const AdvanceDynamicSortingChartConfig = ({ element, onChange }) => {
                   value={element.config.labelFontSize}
                   min={1}
                   max={1000}
-                  ariaLabel="fontSize"
+                  aria-label="fontSize"
                 />
               </div>
             </div>
