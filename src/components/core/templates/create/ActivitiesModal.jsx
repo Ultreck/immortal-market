@@ -12,7 +12,7 @@ import {
   SelectItem,
 } from '@heroui/react';
 import useBusiness from '@/hooks/use-business';
-import { useGetDesignActivity } from '@/api/business';
+import { useGetDesignActivity } from '@/api/design';
 import { useState } from 'react';
 import useDesignStore from '@/store/design.js';
 import PropTypes from 'prop-types';

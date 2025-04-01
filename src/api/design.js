@@ -76,6 +76,7 @@ export const useGetFormResponses = (business, design, page, form) => {
       return res.data;
     },
     enabled: !!design && !!page && !page.startsWith('temp-') && !!form,
+    staleTime: 5 * 60 * 1000,
   });
 };
 
@@ -87,6 +88,7 @@ export const useGetFormResponse = (business, design, page, form) => {
       return res.data;
     },
     enabled: !!design && !!page && !page.startsWith('temp-') && !!form,
+    staleTime: 5 * 60 * 1000,
   });
 };
 
@@ -98,6 +100,7 @@ export const useGetPoll = (business, design, page) => {
       return res.data;
     },
     enabled: !!design && !!page && !page.startsWith('temp-'),
+    staleTime: 5 * 60 * 1000,
   });
 };
 
@@ -145,6 +148,7 @@ export const useGetPollResponses = (business, design, page, poll) => {
       return res.data;
     },
     enabled: !!design && !!page && !page.startsWith('temp-') && !!poll,
+    staleTime: 5 * 60 * 1000,
   });
 };
 
@@ -156,5 +160,29 @@ export const useGetPollResponse = (business, design, page, poll) => {
       return res.data;
     },
     enabled: !!design && !!page && !page.startsWith('temp-') && !!poll,
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+export const useCreateDesignActivity = (business, design) => {
+  return useMutation({
+    mutationKey: ['businesses', business, 'designs', design, 'activity'],
+    mutationFn: (body) => {
+      return http.immortal.post(`/businesses/${business}/designs/${design}/activity`, body);
+    },
+  });
+};
+
+export const useGetDesignActivity = (business, design, page) => {
+  return useQuery({
+    queryKey: ['businesses', business, 'designs', design, 'activity', page],
+    queryFn: async () => {
+      const res = await http.immortal.get(`/businesses/${business}/designs/${design}/activity`, {
+        params: { page }
+      });
+      return res.data;
+    },
+    enabled: !!business && !!design && !page.startsWith('temp-'),
+    staleTime: 5 * 60 * 1000,
   });
 };

@@ -12,7 +12,7 @@ import { TbForms } from 'react-icons/tb';
 import { CgPoll } from 'react-icons/cg';
 import PageFormPresent from './tools/page/form/PageFormPresent';
 import PagePollPresent from './tools/page/poll/PagePollPresent';
-import { useCreateDesignActivity } from '@/api/business';
+import { useCreateDesignActivity } from '@/api/design';
 
 const PagePresent = ({ page }) => {
   const el = useRef(null);

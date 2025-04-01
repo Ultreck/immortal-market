@@ -1,4 +1,4 @@
-import { useCreateDesignActivity } from '@/api/business';
+import { useCreateDesignActivity } from '@/api/design';
 import { useCreatePollResponse, useGetPoll, useGetPollResponse, useGetPollResponses } from '@/api/design';
 import useBusiness from '@/hooks/use-business';
 import { cn } from '@/lib/utils';

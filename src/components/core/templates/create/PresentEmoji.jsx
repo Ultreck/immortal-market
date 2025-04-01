@@ -3,7 +3,7 @@ import { Popover, PopoverTrigger, PopoverContent, Button } from '@heroui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import useBusiness from '@/hooks/use-business';
 import useDesignStore from '@/store/design';
-import { useCreateDesignActivity } from '@/api/business';
+import { useCreateDesignActivity } from '@/api/design';
 import PropTypes from 'prop-types';
 
 const EMOJIS = [

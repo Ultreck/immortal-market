@@ -1,4 +1,4 @@
-import { useCreateDesignActivity } from '@/api/business';
+import { useCreateDesignActivity } from '@/api/design';
 import { useCreateFormResponse, useGetForm, useGetFormResponse } from '@/api/design';
 import useBusiness from '@/hooks/use-business';
 import useDesignStore from '@/store/design';
