@@ -16,6 +16,7 @@ import {
   SelectItem,
 } from '@heroui/react';
 import { HiX } from 'react-icons/hi';
+import AdvanceChartsPresent from '@/components/core/templates/create/elements/charts/advanced/AdvanceChartsPresent.jsx';
 
 const options = [
   { text: 'Bar', value: 'bar' },
@@ -38,10 +39,10 @@ const ChartInsightsModal = ({ element, isOpen, onClose }) => {
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} width={1200} padding={false}>
-      <div className="px-12 py-10">
+      <div className="px-12 py-8">
         <div className="mb-8 flex items-center justify-between">
           <h3 className="text-xl font-semibold max-w-lg">Chart insights</h3>
-          <Button onPress={onClose} isIconOnly radius="full" variant="bordered">
+          <Button onPress={onClose} isIconOnly radius="full" variant="bordered" size="sm">
             <HiX size="20" />
           </Button>
         </div>
@@ -117,7 +118,18 @@ const ChartInsightsModal = ({ element, isOpen, onClose }) => {
               </Button>
             </div>
             <div className="border border-default-200 bg-white rounded-3xl px-10 py-10">
-              <StandardChartsPresent element={{ ...element, width: 700, height: 400 }} isChartWrapperDisabled />
+              {element.type === 'chart-s' && (
+                <StandardChartsPresent
+                  element={{ ...element, size: { width: 700, height: 500 } }}
+                  isChartWrapperDisabled
+                />
+              )}
+              {element.type === 'chart-a' && (
+                <AdvanceChartsPresent
+                  element={{ ...element, size: { width: 700, height: 400 } }}
+                  isChartWrapperDisabled
+                />
+              )}
             </div>
           </div>
         </div>

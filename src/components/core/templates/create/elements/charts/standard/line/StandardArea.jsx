@@ -3,7 +3,7 @@ import { ChartContainer, ChartTooltip } from '@/components/ui/chart.jsx';
 import { capitalize } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 import CustomChartTooltipContent from '@/components/core/templates/create/elements/charts/standard/helpers/CustomChartTooltipContent.jsx';
 
 const StandardArea = ({ element }) => {

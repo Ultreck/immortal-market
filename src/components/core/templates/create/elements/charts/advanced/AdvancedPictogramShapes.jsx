@@ -2,7 +2,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
 import { formatChartValue } from '@/lib/utils.js';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvancedPictogramShapes = ({ element }) => {
   return <AdvancedPictogramShapesContent element={element} />;

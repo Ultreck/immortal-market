@@ -1,8 +1,9 @@
 import useDesignStore from '@/store/design';
-import ElementWrapper from '../ElementWrapper';
+import ElementWrapper from '../../ElementWrapper';
 import { getElementConfig, getElementEditComponent } from '@/lib/elements';
 import { createElement, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import GroupActions from './GroupActions';
 
 export const Group = ({ element, ...props }) => {
   return <GroupContent element={element} {...props} />;
@@ -75,6 +76,8 @@ const GroupContent = ({ element, selected }) => {
           </span>
         );
       })}
+
+      <GroupActions element={element} />
     </div>
   );
 };

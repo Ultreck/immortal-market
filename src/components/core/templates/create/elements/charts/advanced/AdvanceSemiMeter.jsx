@@ -1,6 +1,6 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import { motion } from 'motion/react';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 function AdvanceSemiMeter({ element, isChartWrapperDisabled = false }) {
   const radius = 50;

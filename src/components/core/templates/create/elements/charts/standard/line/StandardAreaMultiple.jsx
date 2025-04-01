@@ -2,7 +2,7 @@ import { Area, AreaChart, CartesianGrid, LabelList, Legend, XAxis, YAxis } from 
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const StandardAreaMultiple = ({ element }) => {
   return <StandardAreaMultipleContent element={element} />;

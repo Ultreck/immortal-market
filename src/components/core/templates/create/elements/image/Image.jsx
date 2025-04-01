@@ -1,9 +1,15 @@
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils.js';
+import ImageActions from './ImageActions';
 
 export const Image = ({ element }) => {
-  return <ImageContent element={element} />;
+  return (
+    <>
+      <ImageContent element={element} />
+      <ImageActions element={element} />
+    </>
+  );
 };
 
 export const ImagePresent = ({ element }) => {

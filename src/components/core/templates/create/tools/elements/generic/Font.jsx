@@ -9,7 +9,7 @@ import { createElement } from 'react';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import useDesignStore from '@/store/design.js';
 
-const Font = ({ elements, onChange }) => {
+const Font = ({ elements }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -30,17 +30,17 @@ const Font = ({ elements, onChange }) => {
       <PopoverContent className="p-0 shadow border border-default-200">
         <div className="px-6 py-6 w-full space-y-4">
           <div className="flex items-center space-x-2">
-            <Bold elements={elements} onChange={onChange} />
-            <Italic elements={elements} onChange={onChange} />
-            <Underline elements={elements} onChange={onChange} />
-            <TextAlign elements={elements} onChange={onChange} />
-            <TextColor elements={elements} onChange={onChange} />
+            <Bold elements={elements} />
+            <Italic elements={elements} />
+            <Underline elements={elements} />
+            <TextAlign elements={elements} />
+            <TextColor elements={elements} />
           </div>
-          <FontFamily elements={elements} onChange={onChange} />
-          <FontSize elements={elements} onChange={onChange} />
-          <LetterSpacing elements={elements} onChange={onChange} />
-          <LineHeight elements={elements} onChange={onChange} />
-          {elements.every((e) => e.config.name === 'basic') && <TextEffect elements={elements} onChange={onChange} />}
+          <FontFamily elements={elements} />
+          <FontSize elements={elements} />
+          <LetterSpacing elements={elements} />
+          <LineHeight elements={elements} />
+          {elements.every((e) => e.config.name === 'basic') && <TextEffect elements={elements} />}
         </div>
       </PopoverContent>
     </Popover>
@@ -70,11 +70,18 @@ const fonts = [
   { key: 'Hahmlet', label: 'Hahmlet' },
 ];
 
-const FontFamily = ({ elements, onChange }) => {
+export const FontFamily = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style?.fontFamily));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (event) => {
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, fontFamily: event.target.value } })));
+    updateElements(
+      elements.map((e) => ({
+        elementId: e.id,
+        updates: { style: { ...e.style, fontFamily: event.target.value } },
+      })),
+      true
+    );
   };
 
   return (
@@ -86,6 +93,8 @@ const FontFamily = ({ elements, onChange }) => {
         classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
         onChange={handleChange}
         defaultSelectedKeys={[value]}
+        radius="full"
+        size="sm"
       >
         {fonts.map((font) => (
           <SelectItem key={font.key}>{font.label}</SelectItem>
@@ -95,12 +104,19 @@ const FontFamily = ({ elements, onChange }) => {
   );
 };
 
-const FontSize = ({ elements, onChange }) => {
+export const FontSize = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style?.fontSize));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
     if (v === '') return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, fontSize: +v } })));
+    updateElements(
+      elements.map((e) => ({
+        elementId: e.id,
+        updates: { style: { ...e.style, fontSize: +v } },
+      })),
+      true
+    );
   };
 
   return (
@@ -113,51 +129,88 @@ const FontSize = ({ elements, onChange }) => {
         max={150}
         step={1}
         aria-label="Font size"
+        size="sm"
+        radius="full"
       />
     </div>
   );
 };
 
-const LetterSpacing = ({ elements, onChange }) => {
+export const LetterSpacing = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style?.letterSpacing));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
     if (v === '') return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, letterSpacing: +v } })));
+    updateElements(
+      elements.map((e) => ({
+        elementId: e.id,
+        updates: { style: { ...e.style, letterSpacing: +v } },
+      })),
+      true
+    );
   };
 
   return (
     <div className="flex items-center justify-between space-x-4">
       <p className="text-base opacity-75">Letter spacing:</p>
-      <NumberInput onChange={handleChange} value={value} min={-10} max={10} step={0.1} aria-label="Letter spacing" />
+      <NumberInput
+        onChange={handleChange}
+        value={value}
+        min={-10}
+        max={10}
+        step={0.1}
+        aria-label="Letter spacing"
+        size="sm"
+        radius="full"
+      />
     </div>
   );
 };
 
-const LineHeight = ({ elements, onChange }) => {
+export const LineHeight = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style?.lineHeight));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
     if (v === '') return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, lineHeight: +v } })));
+    updateElements(
+      elements.map((e) => ({
+        elementId: e.id,
+        updates: { style: { ...e.style, lineHeight: +v } },
+      })),
+      true
+    );
   };
 
   return (
     <div className="flex items-center justify-between space-x-4">
       <p className="text-base opacity-75">Line height:</p>
-      <NumberInput onChange={handleChange} value={value} min={0} max={10} step={0.1} aria-label="Line height" />
+      <NumberInput
+        onChange={handleChange}
+        value={value}
+        min={0}
+        max={10}
+        step={0.1}
+        aria-label="Line height"
+        size="sm"
+        radius="full"
+      />
     </div>
   );
 };
 
-const Bold = ({ elements, onChange }) => {
+export const Bold = ({ elements }) => {
   const value = useResolveValue(elements.map((el) => el.style?.fontWeight));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   return (
     <Button
       isIconOnly
-      variant={value === 'bold' ? 'solid' : 'text'}
+      variant={value === 'bold' ? 'solid' : 'light'}
       aria-label="Bold/unbold text"
+      radius="full"
+      size="sm"
       onPress={() => {
         const _elements = elements.map((el) => {
           if (!value) return { ...el, style: { ...el.style, fontWeight: 'bold' } };
@@ -165,7 +218,10 @@ const Bold = ({ elements, onChange }) => {
           style.fontWeight = style.fontWeight === 'bold' ? 'normal' : 'bold';
           return { ...el, style };
         });
-        onChange(_elements);
+        updateElements(
+          _elements.map((e) => ({ elementId: e.id, updates: { style: e.style } })),
+          true
+        );
       }}
     >
       <TbBold size="20" />
@@ -173,14 +229,17 @@ const Bold = ({ elements, onChange }) => {
   );
 };
 
-const Italic = ({ elements, onChange }) => {
+export const Italic = ({ elements }) => {
   const value = useResolveValue(elements.map((el) => el.style?.fontStyle));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   return (
     <Button
       isIconOnly
-      variant={value === 'italic' ? 'solid' : 'text'}
+      variant={value === 'italic' ? 'solid' : 'light'}
       aria-label="Italisize/unitalicize text"
+      radius="full"
+      size="sm"
       onPress={() => {
         const _elements = elements.map((el) => {
           if (!value) return { ...el, style: { ...el.style, fontStyle: 'italic' } };
@@ -188,7 +247,10 @@ const Italic = ({ elements, onChange }) => {
           style.fontStyle = style.fontStyle === 'italic' ? 'normal' : 'italic';
           return { ...el, style };
         });
-        onChange(_elements);
+        updateElements(
+          _elements.map((e) => ({ elementId: e.id, updates: { style: e.style } })),
+          true
+        );
       }}
     >
       <TbItalic size="20" />
@@ -196,14 +258,17 @@ const Italic = ({ elements, onChange }) => {
   );
 };
 
-const Underline = ({ elements, onChange }) => {
+export const Underline = ({ elements }) => {
   const value = useResolveValue(elements.map((el) => el.style?.textDecoration));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   return (
     <Button
       isIconOnly
-      variant={value === 'underline' ? 'solid' : 'text'}
-      aria-label="Underline/unbold text"
+      variant={value === 'underline' ? 'solid' : 'light'}
+      aria-label="Underline/ununderline text"
+      radius="full"
+      size="sm"
       onPress={() => {
         const _elements = elements.map((el) => {
           if (!value) return { ...el, style: { ...el.style, textDecoration: 'underline' } };
@@ -211,7 +276,10 @@ const Underline = ({ elements, onChange }) => {
           style.textDecoration = style.textDecoration === 'underline' ? 'none' : 'underline';
           return { ...el, style };
         });
-        onChange(_elements);
+        updateElements(
+          _elements.map((e) => ({ elementId: e.id, updates: { style: e.style } })),
+          true
+        );
       }}
     >
       <TbUnderline size="20" />
@@ -226,29 +294,37 @@ const options = [
   { value: 'justify', icon: RiAlignJustify },
 ];
 
-const TextAlign = ({ elements, onChange }) => {
+export const TextAlign = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style?.textAlign));
   const selected = options.find((option) => option.value === value) || options[0];
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = () => {
     const index = options.findIndex((option) => option.value === selected.value);
     const next = options[(index + 1) % options.length];
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, textAlign: next.value } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { style: { ...e.style, textAlign: next.value } } })),
+      true
+    );
   };
 
   return (
-    <Button variant="text" isIconOnly className="text-base" onPress={() => handleChange()}>
+    <Button variant="light" isIconOnly className="text-base" onPress={() => handleChange()} radius="full" size="sm">
       {createElement(selected.icon, { size: 20 })}
     </Button>
   );
 };
 
-const TextColor = ({ elements, onChange }) => {
+export const TextColor = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style?.color)) || '';
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
     if (!v) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, color: v } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { style: { ...e.style, color: v } } })),
+      true
+    );
   };
 
   return (
@@ -257,10 +333,10 @@ const TextColor = ({ elements, onChange }) => {
         color={value}
         onChange={(color) => handleChange(color)}
         trigger={
-          <Button variant="text" isIconOnly className="text-base">
+          <Button variant="light" isIconOnly className="text-base" radius="full" size="sm">
             <div className="w-6 flex flex-col items-center justify-center">
               <RiFontFamily size="16" />
-              <div className="rounded-2xl h-1.5 mt-0.5 w-full" style={{ background: value }}></div>
+              <div className="rounded-2xl h-1 mt-0.5 w-[80%]" style={{ background: value }}></div>
             </div>
           </Button>
         }
@@ -278,11 +354,15 @@ const effects = [
   { key: 'dropVanish', label: 'Drop vanish' },
 ];
 
-const TextEffect = ({ elements, onChange }) => {
+export const TextEffect = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.config?.effect)) || '';
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (event) => {
-    onChange(elements.map((e) => ({ ...e, config: { ...e.config, effect: event.target.value } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { config: { ...e.config, effect: event.target.value } } })),
+      true
+    );
   };
 
   return (
@@ -295,6 +375,8 @@ const TextEffect = ({ elements, onChange }) => {
         onChange={handleChange}
         defaultSelectedKeys={[value]}
         items={effects}
+        radius="full"
+        size="sm"
       >
         {(effect) => <SelectItem key={effect.key}>{effect.label}</SelectItem>}
       </Select>
@@ -304,7 +386,6 @@ const TextEffect = ({ elements, onChange }) => {
 
 const propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 Font.propTypes = propTypes;

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { motion } from 'motion/react';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvanceGlobalBar = ({ element, onChange }) => {
   return <AdvanceGlobalBarContent element={element} onChange={onChange} />;

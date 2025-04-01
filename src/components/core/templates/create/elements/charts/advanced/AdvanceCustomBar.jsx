@@ -5,7 +5,7 @@ import { Fragment, useMemo } from 'react';
 import { TbCircleFilled } from 'react-icons/tb';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvanceCustomBar = ({ element }) => {
   return <AdvancedCustomBarContent element={element} />;

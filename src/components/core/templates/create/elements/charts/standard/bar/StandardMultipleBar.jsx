@@ -2,7 +2,7 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import { Bar, BarChart, CartesianGrid, LabelList, Legend, XAxis, YAxis } from 'recharts';
 import { ChartContainer } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const StandardMultipleBar = ({ element }) => {
   return <StandardMultipleBarContent element={element} />;

@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { ElementPropTypes } from '@/lib/prop-types';
 import PropTypes from 'prop-types';
 import { formatChartValue } from '@/lib/utils.js';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvancedStackedCard = ({ element }) => {
   return <AdvancedStackedCardContent element={element} />;

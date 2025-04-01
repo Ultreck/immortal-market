@@ -2,7 +2,7 @@ import { ElementPropTypes } from '@/lib/prop-types';
 import { motion } from 'motion/react';
 import PropTypes from 'prop-types';
 import { formatChartValue } from '@/lib/utils';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvancePercentageCard = ({ element }) => {
   return <AdvancePercentageCardContent element={element} />;

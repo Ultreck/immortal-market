@@ -2,26 +2,30 @@ import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 import useDesignStore from '@/store/design';
+import TextActions from './texts/TextActions';
 
 export const DataTag = ({ element }) => {
   const updateElement = useDesignStore((state) => state.updateElement);
 
   return (
-    <div
-      className="overflow-hidden relative w-full h-full"
-      style={{ filter: `drop-shadow(${element?.style?.shadow})` }}
-    >
-      <AutoResizeTextArea
-        style={{ ...(element?.style || {}), background: 'transparent' }}
-        value={element.config.content}
-        onChange={(v) => {
-          updateElement(element.id, { config: { ...element.config, content: v } });
-        }}
-        onBlur={() => {
-          updateElement(element.id, { config: { ...element.config, content: element.config.content } }, true);
-        }}
-        className="bg-transparent"
-      />
+    <div>
+      <div
+        className="overflow-hidden relative w-full h-full"
+        style={{ filter: `drop-shadow(${element?.style?.shadow})` }}
+      >
+        <AutoResizeTextArea
+          style={{ ...(element?.style || {}), background: 'transparent' }}
+          value={element.config.content}
+          onChange={(v) => {
+            updateElement(element.id, { config: { ...element.config, content: v } });
+          }}
+          onBlur={() => {
+            updateElement(element.id, { config: { ...element.config, content: element.config.content } }, true);
+          }}
+          className="bg-transparent"
+        />
+      </div>
+      <TextActions element={element} />
     </div>
   );
 };

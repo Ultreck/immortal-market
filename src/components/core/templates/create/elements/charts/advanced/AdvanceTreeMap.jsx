@@ -2,7 +2,7 @@ import { Treemap } from 'recharts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvanceTreeMap = ({ element }) => {
   return <AdvanceTreeMapContent element={element} />;

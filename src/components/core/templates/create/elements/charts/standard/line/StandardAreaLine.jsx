@@ -2,7 +2,7 @@ import { Area, CartesianGrid, ComposedChart, LabelList, Legend, Line, XAxis, YAx
 import { ChartContainer } from '@/components/ui/chart.jsx';
 import PropTypes from 'prop-types';
 import { ElementPropTypes } from '@/lib/prop-types.js';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/standard/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const StandardAreaLine = ({ element }) => {
   return <StandardAreaLineContent element={element} />;

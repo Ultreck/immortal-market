@@ -1,26 +1,26 @@
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
-import { TbArrowsExchange, TbChartPie, TbEye, TbReplace } from 'react-icons/tb';
+import { TbReplace } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import ConfigureData from '@/components/core/templates/create/tools/elements/specific/chart-data/ConfigureData.jsx';
 import ChangeChart from '@/components/core/templates/create/tools/elements/specific/chart-data/ChangeChart.jsx';
 import NewConnection from '@/components/core/templates/create/tools/elements/specific/chart-data/NewConnection.jsx';
 import { cn } from '@/lib/utils.js';
 import ModifyAdvancedChart from './chart-data/ModifyAdvancedChart';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useDesignStore from '@/store/design.js';
-import DataSource from '@/components/core/templates/create/tools/elements/specific/chart-data/DataSource.jsx';
+import { LuDatabase, LuPlug2, LuTable } from 'react-icons/lu';
 
 const items = [
   {
     id: 'source',
     title: 'Data Source',
-    icon: <TbArrowsExchange size="24" />,
+    icon: <LuPlug2 size="24" />,
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
   },
   {
     id: 'data',
     title: 'View Data',
-    icon: <TbEye size="24" />,
+    icon: <LuTable size="24" />,
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     disabled: false,
   },
@@ -35,9 +35,14 @@ const items = [
 
 const ChartData = ({ element, onChange }) => {
   const [view, setView] = useState('home');
-  const tool = useDesignStore((state) => state.tool);
+  const tool = useDesignStore((state) => state.tool) || '';
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+
+  useEffect(() => {
+    if (tool.startsWith('chart-data/')) setView(tool.split('/')[1]);
+    else setView('home');
+  }, [tool]);
 
   return (
     <Popover
@@ -45,12 +50,12 @@ const ChartData = ({ element, onChange }) => {
       showArrow
       offset={10}
       classNames={{ content: 'w-[350px] !max-h-[550px] overflow-y-auto block' }}
-      isOpen={tool === 'chart-data'}
+      isOpen={tool.startsWith('chart-data')}
       onOpenChange={(v) => (v ? openTool('chart-data') : closeTool())}
     >
       <PopoverTrigger>
         <Button isIconOnly variant="light" aria-label="Configure chart">
-          <TbChartPie size="20" />
+          <LuDatabase size="20" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 shadow border border-default-200 w-[400px]">
@@ -64,7 +69,7 @@ const ChartData = ({ element, onChange }) => {
                     key={i}
                     onClick={() => setView(item.id)}
                     className={cn(
-                      'flex flex-col items-center justify-center text-center border border-default-300 rounded-2xl px-4 py-6 cursor-pointer',
+                      'flex flex-col items-center justify-center text-center bg-default-100 rounded-2xl px-4 py-6 cursor-pointer',
                       { 'opacity-50 cursor-not-allowed': item.disabled }
                     )}
                   >

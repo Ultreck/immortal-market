@@ -3,7 +3,7 @@ import * as echarts from 'echarts';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { starterLifeChartData } from '@/lib/design/chart-data.js';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvancedScatterLifeExpectancy = ({ element }) => {
   return <AdvanceDynamicSortingChartContent element={element} />;

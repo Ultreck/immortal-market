@@ -3,22 +3,27 @@ import PropTypes from 'prop-types';
 import { TbChevronRight, TbSettings2 } from 'react-icons/tb';
 import ImageEffect from '@/components/core/templates/create/tools/elements/specific/image/ImageEffect.jsx';
 import ImageSwap from '@/components/core/templates/create/tools/elements/specific/image/ImageSwap.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoSwapHorizontal } from 'react-icons/io5';
 import useDesignStore from '@/store/design.js';
 
 const ImageConfig = ({ element, onChange }) => {
-  const tool = useDesignStore((state) => state.tool);
+  const tool = useDesignStore((state) => state.tool) || '';
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
   const [view, setView] = useState('home');
+
+  useEffect(() => {
+    if (tool.startsWith('image/')) setView(tool.split('/')[1]);
+    else setView('home');
+  }, [tool]);
 
   return (
     <Popover
       placement="left"
       showArrow
       offset={10}
-      isOpen={tool === 'image'}
+      isOpen={tool.startsWith('image')}
       onOpenChange={(v) => (v ? openTool('image') : closeTool())}
     >
       <PopoverTrigger>

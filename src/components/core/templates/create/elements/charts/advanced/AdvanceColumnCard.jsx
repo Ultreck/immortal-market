@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Button, Tooltip } from '@heroui/react';
 import { ElementPropTypes } from '@/lib/prop-types';
 import PropTypes from 'prop-types';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvanceColumnCard = ({ element }) => {
   return <AdvanceColumnCardElementContent element={element} />;

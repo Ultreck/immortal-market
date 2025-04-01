@@ -11,7 +11,6 @@ import ElementWrapper from '@/components/core/templates/create/ElementWrapper.js
 import DragResizeRotateWrapper from '@/components/core/templates/create/DragResizeRotateWrapper.jsx';
 import DataNotConfiguredOverlay from '@/components/core/templates/create/DataNotConfiguredOverlay.jsx';
 import Cursors from './Cursors';
-import FloatingToolbar from './FloatingToolbar';
 
 const PageContent = ({ id }) => {
   const { setNodeRef, node } = useDroppable({ id: `canvas-${id}` });
@@ -20,7 +19,6 @@ const PageContent = ({ id }) => {
   const page = useDesignStore((state) => state.pages.find((page) => page.id === id));
   const elements = useDesignStore((state) => state.elements.filter((e) => e.page === id));
   const selectedElements = useDesignStore((state) => state.selectedElements);
-  const isSelectionPage = elements.some((e) => e.key === selectedElements[0]);
   const activeElement = useDesignStore((state) => state.activeElement);
   const { handleContextMenu, renderContextMenu } = useContextMenu({ id, node });
   const { handleMouseDown, handleMouseMove, handleMouseUp, handleMouseLeave, highlightedElements, renderSelectionBox } =
@@ -101,7 +99,6 @@ const PageContent = ({ id }) => {
       </div>
 
       <DragResizeRotateWrapper id={id} />
-      {isSelectionPage && <FloatingToolbar id={id} />}
       {renderSelectionBox()}
       {renderContextMenu()}
     </div>

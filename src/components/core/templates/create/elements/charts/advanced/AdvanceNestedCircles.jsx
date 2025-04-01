@@ -1,7 +1,7 @@
 import { cn, formatChartValue, getPercentagesMax } from '@/lib/utils';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
-import ElementChartWrapper from '@/components/core/templates/create/elements/charts/advanced/helpers/ElementChartWrapper.jsx';
+import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvanceNestedCircles = ({ element }) => {
   return <AdvanceNestedCirclesContent element={element} />;

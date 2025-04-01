@@ -4,12 +4,13 @@ import AutoResizeTextArea from '@/components/ui/AutoResizeTextArea.jsx';
 import { cn } from '@/lib/utils.js';
 import { Fragment } from 'react';
 import useDesignStore from '@/store/design';
+import TextActions from './TextActions';
 
-export const TextBasic = ({ element, active }) => {
+export const TextBasic = ({ element }) => {
   const updateElement = useDesignStore((state) => state.updateElement);
 
-  if (active) {
-    return (
+  return (
+    <div>
       <AutoResizeTextArea
         style={{
           ...(element?.style || {}),
@@ -24,10 +25,9 @@ export const TextBasic = ({ element, active }) => {
           updateElement(element.id, { config: { ...element.config, content: element.config.content } }, true);
         }}
       />
-    );
-  }
-
-  return <TextBasicPresent element={element} />;
+      <TextActions element={element} />
+    </div>
+  );
 };
 
 export const TextBasicPreview = ({ element }) => {
