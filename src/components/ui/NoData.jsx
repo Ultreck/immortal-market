@@ -9,7 +9,7 @@ const NoData = ({ icon, text, className }) => {
         className
       )}
     >
-      {!!icon && <span>icon</span>}
+      {!!icon && <span>{icon}</span>}
       <p className="max-w-sm">{text || 'No data'}</p>
     </div>
   );
