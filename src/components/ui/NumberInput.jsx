@@ -13,6 +13,7 @@ const NumberInput = ({
   step = 1,
   size = 'md',
   fullWidth = false,
+  radius = 'full',
   ...props
 }) => {
   const interval = useRef(null);
@@ -48,7 +49,7 @@ const NumberInput = ({
   };
 
   return (
-    <div className="gap-2 flex items-center">
+    <div className="gap-1 flex items-center">
       <Button
         isIconOnly
         variant="bordered"
@@ -57,6 +58,7 @@ const NumberInput = ({
         size={size}
         onPressStart={() => handlePressStart('decrement')}
         onPressEnd={handlePressEnd}
+        radius={radius}
       >
         <TbMinus size="20" />
       </Button>
@@ -66,12 +68,13 @@ const NumberInput = ({
         step={step}
         isClearable={false}
         classNames={{
-          base: cn('w-[80px] text-base', { 'w-[50px]': size === 'sm', 'w-full': fullWidth }),
+          base: cn('w-[80px] text-base', { 'w-[80px]': size === 'sm', 'w-full': fullWidth }),
           input: 'appearance-none',
         }}
         value={`${!isNaN(value) ? value : ''}`}
         onChange={(e) => handleChange(e.target.value)}
         size={size}
+        radius={radius}
         {...props}
       />
       <Button
@@ -82,6 +85,7 @@ const NumberInput = ({
         size={size}
         onPressStart={() => handlePressStart('increment')}
         onPressEnd={handlePressEnd}
+        radius={radius}
       >
         <TbPlus size="20" />
       </Button>
@@ -98,6 +102,7 @@ NumberInput.propTypes = {
   max: PropTypes.number,
   step: PropTypes.number,
   fullWidth: PropTypes.bool,
+  radius: PropTypes.oneOf(['full', 'sm', 'md', 'lg']),
 };
 
 export default NumberInput;
