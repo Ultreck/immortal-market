@@ -5,6 +5,7 @@ import ConfigureData from '@/components/core/templates/create/tools/elements/spe
 import ChangeChart from '@/components/core/templates/create/tools/elements/specific/chart-data/ChangeChart.jsx';
 import NewConnection from '@/components/core/templates/create/tools/elements/specific/chart-data/NewConnection.jsx';
 import { cn } from '@/lib/utils.js';
+import ConnectDataSource from './chart-data/ConnectDataSource';
 import ModifyAdvancedChart from './chart-data/ModifyAdvancedChart';
 import { useEffect, useState } from 'react';
 import useDesignStore from '@/store/design.js';
@@ -80,7 +81,9 @@ const ChartData = ({ element, onChange }) => {
               </div>
             </>
           )}
-          {view === 'source' && <DataSource element={element} onChange={onChange} onBack={() => setView('home')} />}
+          {view === 'source' && (
+            <ConnectDataSource element={element} onChange={onChange} onBack={() => setView('home')} />
+          )}
           {view === 'data' && <ConfigureData element={element} onChange={onChange} onBack={() => setView('home')} />}
           {view === 'data' && element.type === 'chart-a' && (
             <ModifyAdvancedChart element={element} onChange={onChange} onBack={() => setView('home')} />

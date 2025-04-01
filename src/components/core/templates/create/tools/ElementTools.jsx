@@ -28,6 +28,7 @@ import Layout from './elements/generic/Layout.jsx';
 import ElementTag from './elements/generic/ElementTag.jsx';
 import ElementTooltip from '@/components/core/templates/create/tools/elements/generic/Tooltip.jsx';
 import useDesignStore from '@/store/design.js';
+import DataGroupConfig from './elements/specific/DataGroupConfig.jsx';
 
 const mapping = {
   font: { type: 'multiple', component: Font },
@@ -56,6 +57,7 @@ const mapping = {
   layout: { type: 'single', component: Layout },
   'element-tag': { type: 'single', component: ElementTag },
   tooltip: { type: 'single', component: ElementTooltip },
+  'data-group': { type: 'single', component: DataGroupConfig },
 };
 
 const ElementTools = () => {

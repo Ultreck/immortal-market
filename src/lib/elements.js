@@ -1,5 +1,5 @@
 import { Text, TextPresent } from '@/components/core/templates/create/elements/texts/Text.jsx';
-import { Image, ImagePresent } from '@/components/core/templates/create/elements/Image.jsx';
+import { Image, ImagePresent } from '@/components/core/templates/create/elements/image/Image.jsx';
 import { Line, LinePresent } from '@/components/core/templates/create/elements/Line.jsx';
 import { Shape, ShapePresent } from '@/components/core/templates/create/elements/Shape.jsx';
 import AdvanceCharts from '@/components/core/templates/create/elements/charts/advanced/AdvanceCharts.jsx';
@@ -13,7 +13,7 @@ import { Table, TablePresent } from '@/components/core/templates/create/elements
 import Frame from '@/components/core/templates/create/elements/frames/Frame.jsx';
 import { DataPresent, DataTag } from '@/components/core/templates/create/elements/DataTag.jsx';
 import { Button, ButtonPresent } from '@/components/core/templates/create/elements/Button.jsx';
-import { Group, GroupPresent } from '@/components/core/templates/create/elements/Group.jsx';
+import { Group, GroupPresent } from '@/components/core/templates/create/elements/group/Group.jsx';
 import { Infographic, InfographicPresent } from '@/components/core/templates/create/elements/Infographic.jsx';
 
 export const elements = {
@@ -22,17 +22,6 @@ export const elements = {
     components: {
       edit: Button,
       present: ButtonPresent,
-    },
-    config: {
-      wrapper: true,
-      editable: true,
-    },
-  },
-  group: {
-    tools: [],
-    components: {
-      edit: Group,
-      present: GroupPresent,
     },
     config: {
       wrapper: true,
@@ -203,6 +192,28 @@ export const elements = {
       editable: true,
       fit: true,
       resizeHandles: ['e'],
+    },
+  },
+  group: {
+    tools: [],
+    components: {
+      edit: Group,
+      present: GroupPresent,
+    },
+    config: {
+      wrapper: true,
+      editable: true,
+    },
+  },
+  'data-group': {
+    tools: ['data-group'],
+    components: {
+      edit: Group,
+      present: GroupPresent,
+    },
+    config: {
+      wrapper: true,
+      editable: true,
     },
   },
   infographic: {

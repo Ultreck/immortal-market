@@ -5,7 +5,7 @@ import NumberInput from '@/components/ui/NumberInput.jsx';
 import PropTypes from 'prop-types';
 import useDesignStore from '@/store/design.js';
 import useCurrentDesign from '@/hooks/template/use-current-design.js';
-import { useGenerateCombinationComparison } from '@/api/business.js';
+import { useGenerateDataTagContent } from '@/api/business.js';
 import useBusiness from '@/hooks/use-business.js';
 
 const units = [
@@ -49,15 +49,12 @@ const DataTagConfigContent = ({ element, onChange }) => {
       type: element.config?.type || '',
       decimal: element.config?.decimal || 0,
       unit: element.config?.unit || '',
-      characters: element.config?.characters || 150,
+      words: element.config?.words || 50,
       combination: element.config?.combination || '',
       compare: element.config?.compare || [],
     },
   });
-  const { mutateAsync: generateComparison, isPending: isGenerateComparisonPending } = useGenerateCombinationComparison(
-    business,
-    id
-  );
+  const { mutateAsync: generateContent, isPending: isGenerateContentPending } = useGenerateDataTagContent(business, id);
 
   const tables = source?.tables.map((table) => ({ key: table.id, label: table.name })) || [];
   const table = source?.tables.find((table) => table.id === watch().table);
@@ -69,16 +66,15 @@ const DataTagConfigContent = ({ element, onChange }) => {
   }));
 
   const getContent = async (data) => {
-    if (!analysis.length) return 'Dynamic content here';
-    let content = '';
+    let content = 'N/A';
     if (data.type === 'number') {
       const combination = analysis.find((c) => c.combination === data.combination);
       if (combination) {
         content = combination.result[combination.metrics[0]];
       }
       content = Number(content).toLocaleString('en-US', { maximumFractionDigits: data.decimal });
-    } else if (data.type === 'text') {
-      const res = await generateComparison(data.compare.map((c) => c.combination).join(','));
+    } else if (data.type.match(/title|body/i)) {
+      const res = await generateContent({ type: data.type, combination: data.combination, max: data.words });
       content = res.data.content;
     }
     return content;
@@ -97,7 +93,7 @@ const DataTagConfigContent = ({ element, onChange }) => {
         compare: data.compare || element.config.compare,
         decimal: data.decimal,
         unit: data.unit,
-        characters: data.characters,
+        words: data.words,
         content,
       },
     });
@@ -137,10 +133,7 @@ const DataTagConfigContent = ({ element, onChange }) => {
                     Number
                   </SelectItem>
                   <SelectItem key="label" classNames={{ title: 'text-base px-2' }}>
-                    Label
-                  </SelectItem>
-                  <SelectItem key="description" classNames={{ title: 'text-base px-2' }}>
-                    Description
+                    Label value
                   </SelectItem>
                 </Select>
               );
@@ -175,11 +168,11 @@ const DataTagConfigContent = ({ element, onChange }) => {
             </div>
           )}
         />
-        {watch().type === 'body' && (
+        {watch().type.match(/title|body/i) && (
           <>
             <div className="space-y-2">
               <Controller
-                name="compare[0].combination"
+                name="combination"
                 control={control}
                 rules={{ required: 'Combination is required' }}
                 render={({ field, fieldState: { error } }) => (
@@ -205,8 +198,8 @@ const DataTagConfigContent = ({ element, onChange }) => {
                   </div>
                 )}
               />
-              <p className="text-center border border-default-200 rounded-full w-max px-3 py-1 mx-auto">VS</p>
-              <Controller
+              {/* <p className="text-center border border-default-200 rounded-full w-max px-3 py-1 mx-auto">VS</p> */}
+              {/* <Controller
                 name="compare[1].combination"
                 control={control}
                 rules={{ required: 'Combination is required' }}
@@ -232,26 +225,26 @@ const DataTagConfigContent = ({ element, onChange }) => {
                     </Select>
                   </div>
                 )}
-              />
+              /> */}
             </div>
             <hr className="border-default-200 dark:border-default-100" />
             <div className="flex flex-row justify-between items-center space-x-4">
-              <p className="text-base leading-tight">No. of characters:</p>
+              <p className="text-base leading-tight">No. of words:</p>
               <Controller
-                name="characters"
+                name="words"
                 control={control}
                 rules={{
-                  required: 'No. of characters is required',
+                  required: 'No. of words is required',
                   validate: (value) => value > 0,
                 }}
                 render={({ field, fieldState: { error } }) => {
-                  const message = error?.type === 'validate' ? 'No. of characters is required' : error?.message;
+                  const message = error?.type === 'validate' ? 'No. of words is required' : error?.message;
                   return (
                     <NumberInput
                       variant="bordered"
                       value={field.value}
                       onChange={field.onChange}
-                      aria-label="No. of characters"
+                      aria-label="No. of words"
                       min={1}
                       max={100}
                       step={1}
@@ -366,7 +359,7 @@ const DataTagConfigContent = ({ element, onChange }) => {
         variant="solid"
         radius="full"
         className="text-base px-4 mt-6"
-        isLoading={isGenerateComparisonPending}
+        isLoading={isGenerateContentPending}
       >
         Apply
       </Button>

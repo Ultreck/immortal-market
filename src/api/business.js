@@ -379,6 +379,26 @@ export const useDeleteTableColumn = (business, design) => {
   });
 };
 
+export const useGenerateDataTagContent = (business, design) => {
+  return useMutation({
+    mutationFn: ({ type, combination, max }) => {
+      return http.immortal.get(`/businesses/${business}/designs/${design}/generate`, {
+        params: { type, combination, max, mode: 'single' },
+      });
+    },
+  });
+};
+
+export const useGenerateDataGroupContent = (business, design) => {
+  return useMutation({
+    mutationFn: ({ tags, combination }) => {
+      return http.immortal.get(`/businesses/${business}/designs/${design}/generate`, {
+        params: { tags, combination, mode: 'group' },
+      });
+    },
+  });
+};
+
 export const useGenerateCombinationComparison = (business, design) => {
   return useMutation({
     mutationFn: (ids) => {
