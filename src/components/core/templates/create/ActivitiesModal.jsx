@@ -69,7 +69,7 @@ const PageActivitiesModal = ({ page: initialPage, isOpen, onClose }) => {
               <HiX size="20" />
             </Button>
           </div>
-          <div className="flex items-center gap-4 mb-4">
+          <div className="grid grid-cols-[1fr_auto] gap-4 mb-4">
             <Select
               variant="bordered"
               placeholder="Select Page"
@@ -108,7 +108,7 @@ const PageActivitiesModal = ({ page: initialPage, isOpen, onClose }) => {
                   if (e.size) setFilter(Array.from(e)[0]);
                 }}
               >
-                {['all', 'view', 'poll', 'form'].map((val) => (
+                {['all', 'view', 'poll', 'form', 'reaction'].map((val) => (
                   <DropdownItem key={val} textValue={val}>
                     <span className="text-base capitalize">{val}</span>
                   </DropdownItem>
@@ -126,7 +126,9 @@ const PageActivitiesModal = ({ page: initialPage, isOpen, onClose }) => {
               >
                 {icons[activity.type] || <BsCheckCircle />}
                 <div className="flex justify-between">
-                  <p className="text-base first-letter:capitalize">{texts[activity.type]?.(activity.user.username)}</p>
+                  <p className="text-base first-letter:capitalize">
+                    {texts[activity.type === 'reaction' ? activity.value : activity.type]?.(activity.user.username)}
+                  </p>
                   <span className="text-gray-500 text-[0.8rem]">
                     {formatDistanceToNow(new Date(activity.createdAt))}
                   </span>
