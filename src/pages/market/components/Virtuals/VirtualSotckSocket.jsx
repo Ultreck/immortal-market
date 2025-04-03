@@ -70,7 +70,7 @@ const VirtualStockSocket = ({ stockOrders, stock }) => {
           </div>
         </div>
       </div>
-      <ScrollShadow className="w-full h-[480px]" size={20}>
+      <ScrollShadow className="w-full h-screen" size={20}>
         {stockOrders.length > 0 && (
           <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-6">
             <p className="text-2xl font-bold text-green-600">N34.33</p>
@@ -123,7 +123,7 @@ const VirtualStockSocket = ({ stockOrders, stock }) => {
           </div>
         </Card>
       </ScrollShadow>
-      <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-5">
+      {/* <Card className="card-shadow px-6 py-2 bg-default-100 border border-default-200 mt-5">
         {!timeRemaining?.isOpen? (
           <>
         <p className="text-base text-center font-semibold">Market opens in: </p>
@@ -161,7 +161,7 @@ const VirtualStockSocket = ({ stockOrders, stock }) => {
         </div>
           </>
         )}
-      </Card>
+      </Card> */}
     </div>
   );
 };

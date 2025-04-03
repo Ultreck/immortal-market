@@ -4,29 +4,43 @@ import { Avatar, AvatarGroup, Button, Card, Skeleton, Tab, Tabs } from '@heroui/
 import { useGetStock } from '@/api/market.js';
 import { useEffect, useState } from 'react';
 import VirtualStockChart from '@/pages/market/components/Virtuals/VirtualStockChart.jsx';
+// import ListOfOrdersModalDialog from '@/pages/market/modals/ListOfOrdersModalDialog';
+import { Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, useDisclosure } from '@heroui/react'; //drawer content
 import VirtualStockSocket from '@/pages/market/components/Virtuals/VirtualSotckSocket.jsx';
 import VirtualStockTradeMarquee from '@/pages/market/components/Virtuals/VirtualStockTradeMarquee.jsx';
-import { useCreateVirtualStockDetails, useCreateVirtualStockOrders, useCreateVirtualSummary } from '@/api/ai-chat';
+import {
+  useCreateVirtualStockDetails,
+  useCreateVirtualStockOrders,
+  useCreateVirtualSummary,
+  useGetAllOrders,
+} from '@/api/ai-chat';
 import { formatCurrency } from '@/lib/utils';
 import PlaceOrder from '@/pages/market/modals/PlaceOrder.jsx';
+import { useGetCurrentPrice } from '@/store/bot';
+import ListOfOrdersModalDialog from '../../modals/ListOfOrdersModalDialog';
 
 const VirtualStockDetails = () => {
   const params = useParams();
   const { id } = params;
-  const [country, setCountry] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
+  const [country] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
   const location = useLocation();
   const [summaryOrder, setSummaryOrder] = useState(null);
   const [chartDatas, setChartDatas] = useState([]);
   const [stockOrders, setStockOrders] = useState([]);
   const [stockSummary, setstockSummary] = useState({});
+  const [stockAllOrders, setStockAllOrders] = useState([]);
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
   const [timeFrame, setTimeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('time-function');
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-hour';
-  });  
+  });
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
   const { mutateAsync: getStockSummary } = useCreateVirtualSummary();
+  const { mutateAsync: getStockAllOrders } = useGetAllOrders();
+  const { currentPrice } = useGetCurrentPrice();
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     handleGetStockDetails();
@@ -53,22 +67,20 @@ const VirtualStockDetails = () => {
   const handleGetStockOrders = async () => {
     try {
       let stockOrders = {
-        stockId: id,
-        country: country,
-        sessionType: timeFrame,
+        stock: chartDatas?.stock?._id,
+        session: chartDatas?._id,
         page: 1,
       };
       const res = await getStockOrders(stockOrders);
       setStockOrders(res.data.data);
+      console.log(res?.data?.data);
     } catch (error) {}
   };
   const handleGetStockSummary = async () => {
     try {
       let stockSummary = {
-        stockId: id,
-        country: country,
-        sessionType: timeFrame,
-        page: 1,
+        stock: chartDatas?.stock?._id,
+        session: chartDatas?._id,
       };
       const res = await getStockSummary(stockSummary);
       setstockSummary(res.data.data);
@@ -76,6 +88,21 @@ const VirtualStockDetails = () => {
       console.log(error);
     }
   };
+
+  const handleGetAllOrders = async () => {
+    try {
+      let stockAllOrders = {
+        stock: '6658677cc6a35aab6119fa08',
+        session: '67e59107721fa2473fc04b99',
+      };
+      const res = await getStockAllOrders(stockAllOrders);
+      setStockAllOrders(res?.data?.data);
+      console.log(res?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {isStockLoading ? (
@@ -127,7 +154,7 @@ const VirtualStockDetails = () => {
                                   key="30-minutes"
                                   title={
                                     <div className="flex items-center space-x-2">
-                                      <span>30mins</span>
+                                      <span>30min</span>
                                     </div>
                                   }
                                 />
@@ -152,11 +179,13 @@ const VirtualStockDetails = () => {
                           </div>
                         </div>
                         <div className="space-x-2">
-                          <PlaceOrder state={location.state} text="Buy" type={'buy'} stock={stock} />
-                          <PlaceOrder state={location.state} text="Sell" type={'sell'} stock={stock} />
+                          <PlaceOrder id={id} state={location.state} text="Buy" type={'buy'} stock={stock} />
+                          <ListOfOrdersModalDialog data={stockAllOrders} type={'sell'} />
+                          {/* <PlaceOrder id={id} state={location.state} text="Sell" type={'sell'} stock={stock} /> */}
                         </div>
                       </div>
-                      <VirtualStockChart state={location.state} chartDatas={chartDatas} stock={stock} />
+                      <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
+                      <VirtualStockChart state={location.state} id={id} chartDatas={chartDatas} stock={stock} />
                     </div>
                   </Card>
                   <Card className="card-shadow px-10 py-10 border border-default-200 my-10">
@@ -218,21 +247,69 @@ const VirtualStockDetails = () => {
                             </div>
                           }
                         >
-                          <div className="mt-4 flex justify-between">
-                            <div className="flex space-x-4">
-                              <img src="/images/accessbank.png" alt="" className="w-[50px]" />
-                              <div>
-                                <p className="text-2xl font-bold">Access Bank</p>
-                                <p className="text-sm">ACB</p>
+                          <div className="text">
+                            {stockAllOrders?.length > 0 ? (
+                              stockAllOrders?.map((order, index) => (
+                                <>
+                                  {index <= 5 && (
+                                    <div key={order?._id} className="mt-4 flex justify-between">
+                                      <div className="flex space-x-4">
+                                        <img src="/images/accessbank.png" alt="" className="w-[30px]" />
+                                        <div>
+                                          <p className="text-2xl font-bold">Access Bank</p>
+                                          <p className="text-sm">ACB</p>
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <p className="text-2xl font-bold">N34.22</p>
+                                        <p className="text-sm">22,000 Units</p>
+                                      </div>
+                                      <Button radius="full" color="">
+                                        View
+                                      </Button>
+                                    </div>
+                                  )}
+                                </>
+                              ))
+                            ) : (
+                              <>
+                              <div className="mt-4 flex justify-between">
+                                <div className="flex space-x-4">
+                                  <img src="/images/accessbank.png" alt="" className="w-[30px]" />
+                                  <div>
+                                    <p className="text-2xl font-bold">Access Bank</p>
+                                    <p className="text-sm">ACB</p>
+                                  </div>
+                                </div>
+                                <div>
+                                  <p className="text-2xl font-bold">N34.22</p>
+                                  <p className="text-sm">22,000 Units</p>
+                                </div>
+                                <Button radius="full" color="">
+                                  View
+                                </Button>
                               </div>
+                              <div className="mt-4 flex justify-between">
+                                <div className="flex space-x-4">
+                                  <img src="/images/accessbank.png" alt="" className="w-[30px]" />
+                                  <div>
+                                    <p className="text-2xl font-bold">Access Bank</p>
+                                    <p className="text-sm">ACB</p>
+                                  </div>
+                                </div>
+                                <div>
+                                  <p className="text-2xl font-bold">N34.22</p>
+                                  <p className="text-sm">22,000 Units</p>
+                                </div>
+                                <Button radius="full" color="">
+                                  View
+                                </Button>
+                              </div>
+                              </>
+                            )}
+                            <div className="text-end  ">
+                              <ListOfOrdersModalDialog data={stockAllOrders} />
                             </div>
-                            <div>
-                              <p className="text-2xl font-bold">N34.22</p>
-                              <p className="text-sm">22,000 Units</p>
-                            </div>
-                            <Button radius="full" color="primary">
-                              View Details
-                            </Button>
                           </div>
                         </Tab>
                       </Tabs>

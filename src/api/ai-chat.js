@@ -143,3 +143,39 @@ export const useCreateAIChat = () => {
         },
       });
     };
+    export const usePlaceOrder = () => {
+      return useMutation({
+        mutationKey: ['virtual', 'order'],
+        mutationFn: (data) => {
+          return http.markettest.post(`/virtual/order`, data);
+        },
+        onError: (error) => {
+          console.error("Mutation failed:", error);
+          alert("An error occurred: " + error.message);
+        },
+      });
+    };
+    export const useSellOrder = () => {
+      return useMutation({
+        mutationKey: ['virtual', 'sell'],
+        mutationFn: (data) => {
+          return http.markettest.put(`/virtual/sell`, data);
+        },
+        onError: (error) => {
+          console.error("Mutation failed:", error);
+          alert("An error occurred: " + error.message);
+        },
+      });
+    };
+    export const useGetAllOrders = () => {
+      return useMutation({
+        mutationKey: ['virtual', 'my_orders'],
+        mutationFn: (data) => {
+          return http.markettest.post(`/virtual/my_orders`, data);
+        },
+        onError: (error) => {
+          console.error("Mutation failed:", error);
+          alert("An error occurred: " + error.message);
+        },
+      });
+    };
