@@ -9,29 +9,22 @@ const AdvanceLinearChart = ({ element }) => {
 
 const AdvanceLinearChartContent = ({ element, isChartWrapperDisabled = false }) => {
   const formatChartValue = (value, element) => {
-    switch (element.config.labelFormat) {
-      case 'value':
-        return value.toLocaleString();
-      case 'percentage':
-        return `${value}%`;
-      case 'both':
-        return `${value.toLocaleString()} (${Math.round(value)}%)`;
-      case 'currency':
-        return `${element.config.selectedCurrency || 'N'} ${value.toLocaleString()}`;
-      case 'wholeNumber':
-        return Math.round(value).toLocaleString();
-      case 'decimal':
-        return value.toLocaleString();
-      default:
-        return value;
-    }
+    const formats = {
+      value: () => value.toLocaleString(),
+      percentage: () => `${value}%`,
+      both: () => `${value.toLocaleString()} (${Math.round(value)}%)`,
+      currency: () => `${element.config.label.currency || 'N'} ${value.toLocaleString()}`,
+      wholeNumber: () => Math.round(value).toLocaleString(),
+      decimal: () => value.toLocaleString(),
+    };
+    return formats[element.config.label.format]?.() || value;
   };
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <div
-        className="flex h-28 rounded-2xl overflow-hidden"
-        style={{ width: element.size.width, height: element.size.height, maxheight: element.size.height }}
+        className="flex rounded-3xl overflow-hidden"
+        style={{ width: element.size.width, height: element.size.height }}
       >
         {element.config.data.map((item, i) => (
           <motion.div
@@ -45,15 +38,23 @@ const AdvanceLinearChartContent = ({ element, isChartWrapperDisabled = false }) 
               backgroundColor: element.config.colors[i],
             }}
           >
-            <div className="ml-auto relative" style={{ color: element.config.labelFontColor }}>
-              <p style={{ fontSize: element.config.labelFontSize, lineHeight: '1' }} className="mt-2 mb-3 mr-2">
-                {item.label}
-              </p>
+            <div className="ml-auto relative px-2 h-full">
+              {element.config.label.enabled && (
+                <p
+                  style={{
+                    fontSize: element.config.label.fontSize,
+                    color: element.config.label.color,
+                  }}
+                  className="mt-2 mb-3 mr-2 leading-none"
+                >
+                  {item[element.config.keys.label]}
+                </p>
+              )}
               <p
-                style={{ fontSize: element.config.fontSize, lineHeight: '1' }}
-                className="font-extrabold absolute right-[-10px] -bottom-[80px]"
+                style={{ fontSize: element.config.fontSize }}
+                className="font-extrabold absolute right-[-10px] -bottom-[5%] leading-none text-white mix-blend-difference"
               >
-                {formatChartValue(item.value, element)}
+                {formatChartValue(item[element.config.keys.value], element)}
               </p>
             </div>
           </motion.div>

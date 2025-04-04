@@ -2,8 +2,8 @@ import { cn, formatChartValue } from '@/lib/utils.js';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import { createElement } from 'react';
-import { TbUser } from 'react-icons/tb';
 import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
+import icons from '@/lib/design/icons';
 
 const AdvanceCircleIcons = ({ element }) => {
   return <AdvanceCircleIconsContent element={element} />;
@@ -13,23 +13,23 @@ AdvanceCircleIcons.propTypes = ElementPropTypes;
 
 export const AdvanceCircleIconsContent = ({ element, isChartWrapperDisabled = false }) => {
   return (
-    <ElementChartWrapper element={element} className="w-full h-full" isDisabled={isChartWrapperDisabled}>
+    <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <div
-        style={{
-          padding: `${element.config.styles.yPadding || '96'}px ${element.config.styles.xPadding || '16'}px`,
-          width: element.size.width,
-          height: element.size.height,
-        }}
+        style={{ width: element.size.width, height: element.size.height }}
         className="flex items-center py-24 w-full px-4"
       >
         {element.config.data
-          .slice(0, element.config.circles)
+          .slice(0, element.config.count)
           .sort((a, b) => +b.value - +a.value)
-          .map((circle, index) => {
+          .map((item, index) => {
             const color = element.config.colors[index % element.config.colors.length];
+            const icon =
+              icons.find((i) => i.name === item[element.config.keys.icon]) ||
+              icons.find((i) => i.name === 'alert-circle');
+
             return (
               <div
-                key={`${circle.label}-${index}`}
+                key={`${item[element.config.keys.label]}-${index}`}
                 className={cn('flex flex-col items-center relative', { '-ml-4': index > 0 })}
                 style={{ flex: 10 - index }}
               >
@@ -40,67 +40,71 @@ export const AdvanceCircleIconsContent = ({ element, isChartWrapperDisabled = fa
                   )}
                   style={{ backgroundColor: color }}
                 >
-                  {createElement(circle.icon || TbUser, {
+                  {createElement(icon.icon, {
                     className: `scale-50 md:scale-100 text-red-500 mix-blend-difference`,
                     style: { fontSize: `${Math.max(16, 7 * (7 - index * 1.4))}px`, color: 'white' },
                   })}
                 </div>
-                {index % 2 === 0 ? (
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center text-center text-black">
-                    <div className="mb-2">
-                      <div
-                        style={{
-                          fontSize: `${element.config.labelFontSize}px`,
-                          fontWeight: element.config.styles.lFontWeight,
-                          fontStyle: element.config.styles.lFontStyle,
-                          color: element.config.labelFontColor,
-                        }}
-                        className={`font-bold leading-none`}
-                      >
-                        {element.config.showValue && formatChartValue(circle.value, element)}
+                {element.config.label.enabled && (
+                  <>
+                    {index % 2 === 0 ? (
+                      <div className="w-full absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center text-center text-black">
+                        <div className="mb-2">
+                          <div
+                            style={{
+                              fontSize: element.config.label.fontSize,
+                              fontWeight: element.config.label.fontWeight,
+                              fontStyle: element.config.label.fontStyle,
+                              color: element.config.label.color,
+                            }}
+                            className="font-bold leading-none"
+                          >
+                            {formatChartValue(item[element.config.keys.value], element)}
+                          </div>
+                          <p
+                            style={{
+                              fontSize: element.config.label.fontSize,
+                              fontWeight: element.config.label.fontWeight,
+                              fontStyle: element.config.label.fontStyle,
+                              color: element.config.label.color,
+                            }}
+                            className="leading-none mt-1"
+                          >
+                            {item[element.config.keys.label]}
+                          </p>
+                        </div>
+                        <div className="flex flex-col w-[1px] h-[20px] bg-red-900"></div>
                       </div>
-                      <p
-                        style={{
-                          fontSize: `${element.config.labelFontSize}px`,
-                          fontWeight: element.config.styles.lFontWeight,
-                          fontStyle: element.config.styles.lFontStyle,
-                          color: element.config.labelFontColor,
-                        }}
-                        className={`text-sm  leading-none mt-1`}
-                      >
-                        {element.config.showLabel && circle.label}
-                      </p>
-                    </div>
-                    <div className="flex flex-col w-[1px] h-[20px] bg-red-900"></div>
-                  </div>
-                ) : (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 flex flex-col items-center text-center text-black">
-                    <div className="flex flex-col w-[1px] h-[20px] bg-red-900"></div>
-                    <div className="mt-2">
-                      <div
-                        style={{
-                          fontSize: `${element.config.labelFontSize}px`,
-                          fontWeight: element.config.styles.lFontWeight,
-                          fontStyle: element.config.styles.lFontStyle,
-                          color: element.config.labelFontColor,
-                        }}
-                        className={`font-bold leading-none`}
-                      >
-                        {element.config.showValue && formatChartValue(circle.value, element)}
+                    ) : (
+                      <div className="w-full absolute top-full left-1/2 -translate-x-1/2 flex flex-col items-center text-center text-black">
+                        <div className="flex flex-col w-[1px] h-[20px] bg-red-900"></div>
+                        <div className="mt-2">
+                          <div
+                            style={{
+                              fontSize: element.config.label.fontSize,
+                              fontWeight: element.config.label.fontWeight,
+                              fontStyle: element.config.label.fontStyle,
+                              color: element.config.label.color,
+                            }}
+                            className="font-bold leading-none"
+                          >
+                            {formatChartValue(item[element.config.keys.value], element)}
+                          </div>
+                          <p
+                            style={{
+                              fontSize: element.config.label.fontSize,
+                              fontWeight: element.config.label.fontWeight,
+                              fontStyle: element.config.label.fontStyle,
+                              color: element.config.label.color,
+                            }}
+                            className="leading-none mt-1"
+                          >
+                            {item[element.config.keys.label]}
+                          </p>
+                        </div>
                       </div>
-                      <p
-                        style={{
-                          fontSize: `${element.config.labelFontSize}px`,
-                          fontWeight: element.config.styles.lFontWeight,
-                          fontStyle: element.config.styles.lFontStyle,
-                          color: element.config.labelFontColor,
-                        }}
-                        className={`text-sm leading-none mt-1`}
-                      >
-                        {element.config.showLabel && circle.label}
-                      </p>
-                    </div>
-                  </div>
+                    )}
+                  </>
                 )}
               </div>
             );

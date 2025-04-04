@@ -44,55 +44,49 @@ const AdvancedChartConfig = ({ element }) => {
           <TbSettings2 size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 border shadow border-default-200">
-        <div className="px-8 py-6 w-full !max-h-[500px] overflow-y-auto">
-          {element.config.name === 'shapes' && <AdvanceShapesConfig element={element} onChange={onChange} />}
-          {element.config.name === 'funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}
-          {element.config.name === 'circle-icons' && <AdvanceCircleIconsConfig element={element} onChange={onChange} />}
-          {element.config.name === 'stackedbar-advanced' && (
-            <AdvancedStackedBarConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
-          {element.config.name === 'linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
-          {element.config.name === 'semi-meter' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
-          {element.config.name === 'lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
-          {element.config.name === 'nested-circles' && (
-            <AdvancedNestedCirclesConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'tree-map' && <AdvancedTreeMapConfig element={element} onChange={onChange} />}
-          {element.config.name === 'dynamic-sorting' && (
-            <AdvanceDynamicSortingChartConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'speedometer-multiple' && (
-            <AdvanceSpeedometerConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'speedometer' && <AdvanceSpeedometerConfig element={element} onChange={onChange} />}
-          {element.config.name === 'speedometer-simple' && (
-            <AdvanceSpeedometerConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'scatter-life-expectancy' && (
-            <AdvancedScatterLifeExpentancyConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'pictogram-shapes' && (
-            <AdvancedPictogramShapesConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'stacked-card' && (
-            <AdvancedStackedCardConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'percentage-card' && (
-            <AdvancePercentageCardConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'column-card' && (
-            <AdvancePercentageCardConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'percentage-card-2' && (
-            <AdvancePercentageCardConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'linear-advanced-bar' && (
-            <AdvanceLinearChartConfig element={element} onChange={onChange} />
-          )}
-          {element.config.name === 'bar-global' && <AdvanceGlobalBarConfig element={element} onChange={onChange} />}
-        </div>
+      <PopoverContent className="px-8 py-6 border shadow border-default-200 !max-h-[500px] !w-[500px] overflow-y-auto block">
+        {element.config.name === 'shapes' && <AdvanceShapesConfig element={element} onChange={onChange} />}
+        {element.config.name === 'funnel' && <AdvancedFunnelConfig element={element} onChange={onChange} />}
+        {element.config.name === 'circle-icons' && <AdvanceCircleIconsConfig element={element} onChange={onChange} />}
+        {element.config.name === 'stackedbar-advanced' && (
+          <AdvancedStackedBarConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
+        {element.config.name === 'linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
+        {element.config.name === 'semi-meter' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
+        {element.config.name === 'lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
+        {element.config.name === 'nested-circles' && (
+          <AdvancedNestedCirclesConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'tree-map' && <AdvancedTreeMapConfig element={element} onChange={onChange} />}
+        {element.config.name === 'dynamic-sorting' && (
+          <AdvanceDynamicSortingChartConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'speedometer-multiple' && (
+          <AdvanceSpeedometerConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'speedometer' && <AdvanceSpeedometerConfig element={element} onChange={onChange} />}
+        {element.config.name === 'speedometer-simple' && (
+          <AdvanceSpeedometerConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'scatter-life-expectancy' && (
+          <AdvancedScatterLifeExpentancyConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'pictogram-shapes' && (
+          <AdvancedPictogramShapesConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'stacked-card' && <AdvancedStackedCardConfig element={element} onChange={onChange} />}
+        {element.config.name === 'percentage-card' && (
+          <AdvancePercentageCardConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'column-card' && <AdvancePercentageCardConfig element={element} onChange={onChange} />}
+        {element.config.name === 'percentage-card-2' && (
+          <AdvancePercentageCardConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'linear-advanced-bar' && (
+          <AdvanceLinearChartConfig element={element} onChange={onChange} />
+        )}
+        {element.config.name === 'bar-global' && <AdvanceGlobalBarConfig element={element} onChange={onChange} />}
       </PopoverContent>
     </Popover>
   );

@@ -33,16 +33,18 @@ const ChartActions = ({ element, onInsightsOpen }) => {
       >
         <LuSettings size="20" />
       </Button>
-      <Button
-        isIconOnly
-        variant="light"
-        radius="full"
-        size="sm"
-        onPress={() => openTool('chart-data/data')}
-        isDisabled={tool === 'chart-data/data'}
-      >
-        <LuTable size="18" />
-      </Button>
+      {!!element.config.data && (
+        <Button
+          isIconOnly
+          variant="light"
+          radius="full"
+          size="sm"
+          onPress={() => openTool('chart-data/data')}
+          isDisabled={tool === 'chart-data/data'}
+        >
+          <LuTable size="18" />
+        </Button>
+      )}
       <button
         type="button"
         className={cn(

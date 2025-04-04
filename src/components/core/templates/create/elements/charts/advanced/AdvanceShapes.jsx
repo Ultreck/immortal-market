@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { ElementPropTypes } from '@/lib/prop-types.js';
 import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons';
-import { createElement, useEffect } from 'react';
+import { createElement } from 'react';
 import ElementChartWrapper from '@/components/core/templates/create/ElementChartWrapper.jsx';
 
 const AdvanceShapes = ({ element }) => {
@@ -28,44 +28,33 @@ const classes = {
 };
 
 export const AdvanceShapesContent = ({ element, isChartWrapperDisabled = false }) => {
-  const { percentage, noOfShapes, isCountVisible, icon1 } = element.config;
-  const n = Math.floor((percentage / 100) * noOfShapes);
-  const icon = icons.find((icon) => icon.name === (icon1 || 'circle')).icon;
+  const { percentage, count, icon: _icon, label } = element.config;
+  const n = Math.floor((percentage / 100) * count);
+  const icon = icons.find((icon) => icon.name === _icon).icon;
 
-  useEffect(() => {}, [element]);
-
-  const formatChartValue = () => {
-    switch (element.config.labelFormat) {
-      case 'value':
-        return `${n} / ${noOfShapes}`;
-      case 'percentage':
-        return `${(n / noOfShapes) * 100}%`;
-      case 'both':
-        return `${n} / ${noOfShapes} (${Math.round((n / noOfShapes) * 100)}%)`;
-      case 'currency':
-        return `${element.config.selectedCurrency || 'N'} ${n}`;
-      case 'wholeNumber':
-        return Math.round(n).toLocaleString();
-      case 'decimal':
-        return n.toLocaleString();
-      default:
-        return `${n / noOfShapes}`;
-    }
+  const formatValue = () => {
+    const ratio = n / count;
+    const formats = {
+      value: `${n} / ${count}`,
+      percentage: `${ratio * 100}%`,
+      both: `${n} / ${count} (${Math.round(ratio * 100)}%)`,
+      currency: `${label.currency || 'N'} ${n}`,
+      wholeNumber: Math.round(n).toLocaleString(),
+      decimal: ratio.toFixed(1),
+    };
+    return formats[label.format] || `${formats.decimal}`;
   };
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <div className="space-y-6 w-full" style={{ width: element.size.width, height: element.size.height }}>
-        {isCountVisible && (
-          <p
-            className="font-bold px-2"
-            style={{ color: element.config.labelFontColor, fontSize: element.config.labelFontSize }}
-          >
-            {formatChartValue()}
+        {label.enabled && (
+          <p className="font-semibold leading-none px-2" style={{ color: label.color, fontSize: label.fontSize }}>
+            {formatValue()}
           </p>
         )}
-        <div className={`grid ${classes.grid[noOfShapes] || classes.grid.default} gap-${element.config.gap}`}>
-          {Array.from({ length: noOfShapes }, (_, i) => (
+        <div className={`grid ${classes.grid[count] || classes.grid.default} gap-${element.config.gap}`}>
+          {Array.from({ length: count }, (_, i) => (
             <motion.div
               key={i}
               className={`flex items-center justify-center`}
@@ -74,7 +63,7 @@ export const AdvanceShapesContent = ({ element, isChartWrapperDisabled = false }
               transition={{ duration: 0.5, delay: i * 0.02 }}
             >
               {createElement(icon, {
-                color: i < n ? element.config.color1 : '#ddd',
+                color: i < n ? element.config.color : '#ddd',
                 size: element.config.size,
               })}
             </motion.div>

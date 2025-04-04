@@ -10,7 +10,7 @@ const AutoCompleteNumberInput = ({
   min = 0,
   max = 100,
   step = 1,
-  radius = 'md',
+  radius = 'full',
   size = 'md',
   ...props
 }) => {
@@ -50,7 +50,7 @@ const AutoCompleteNumberInput = ({
     <div className="gap-1 flex items-center">
       <Button
         isIconOnly
-        variant="bordered"
+        variant="flat"
         className="text-base"
         isDisabled={isNaN(value) || value <= min}
         onPressStart={() => handlePressStart('decrement')}
@@ -83,7 +83,7 @@ const AutoCompleteNumberInput = ({
       </Autocomplete>
       <Button
         isIconOnly
-        variant="bordered"
+        variant="flat"
         className="text-base"
         isDisabled={isNaN(value) || value >= max}
         onPressStart={() => handlePressStart('increment')}

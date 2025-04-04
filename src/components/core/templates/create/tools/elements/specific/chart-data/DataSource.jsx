@@ -4,6 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button, Select, SelectItem } from '@heroui/react';
 import { capitalize } from '@/lib/utils.js';
 import useDesignStore from '@/store/design.js';
+import NoData from '@/components/ui/NoData';
 
 const keys = {
   'chart-s': {
@@ -12,6 +13,18 @@ const keys = {
       value: ['y'],
     },
     pie: {
+      label: 'name',
+      value: ['value'],
+    },
+    'pie-2': {
+      label: 'name',
+      value: ['value'],
+    },
+    'semi-pie': {
+      label: 'name',
+      value: ['value'],
+    },
+    'semi-pie-2': {
       label: 'name',
       value: ['value'],
     },
@@ -25,7 +38,7 @@ const keys = {
       value: ['y'],
       multiple: true,
     },
-    area: {
+    'alt-bar': {
       label: 'x',
       value: ['y'],
     },
@@ -33,14 +46,69 @@ const keys = {
       label: 'x',
       value: ['y'],
     },
+    'line-multiple': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
+    area: {
+      label: 'x',
+      value: ['y'],
+    },
+    'area-multiple': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
     scatter: {
       label: 'x',
       value: ['y'],
+    },
+    bubble: {
+      label: 'x',
+      value: ['y'],
+    },
+    'line-area': {
+      label: 'x',
+      value: ['yLine', 'yArea'],
+    },
+    'line-bar': {
+      label: 'x',
+      value: ['yLine', 'yBar'],
+    },
+  },
+  'chart-a': {
+    funnel: {
+      label: 'label',
+      value: ['value'],
+    },
+    'linear-advanced-bar': {
+      label: 'label',
+      value: ['value'],
+    },
+    'circle-icons': {
+      label: 'label',
+      value: ['value', 'icon'],
+      types: {
+        icon: 'string',
+      },
     },
   },
 };
 
 const DataSource = ({ element }) => {
+  return (
+    <>
+      {keys[element.type][element.config.name] ? (
+        <DataSourceContent element={element} />
+      ) : (
+        <NoData text="No keys found for this chart type" />
+      )}
+    </>
+  );
+};
+
+const DataSourceContent = ({ element }) => {
   const { source, analysis } = useCurrentDesign();
   const { handleSubmit, control, watch } = useForm({
     defaultValues: {
@@ -166,9 +234,15 @@ const DataSource = ({ element }) => {
                   rules={{ required: `${capitalize(key)} is required` }}
                   render={({ field, fieldState: { error } }) => {
                     const options = Object.keys(combination.result[0]).map((key) => ({ key, label: key }));
-                    const _options = options.filter((i) => {
+                    let _options = options.filter((i) => {
                       return typeof combination.result[0][i.key] === 'number';
                     });
+                    if (keys[element.type][element.config.name].types?.[key]) {
+                      _options = options.filter(
+                        (c) =>
+                          typeof combination.result[0][c.key] === keys[element.type][element.config.name].types[key]
+                      );
+                    }
                     return (
                       <div className="flex-1">
                         <Select
@@ -216,6 +290,10 @@ const DataSource = ({ element }) => {
 };
 
 DataSource.propTypes = {
+  element: PropTypes.object.isRequired,
+};
+
+DataSourceContent.propTypes = {
   element: PropTypes.object.isRequired,
 };
 

@@ -52,7 +52,7 @@ const NumberInput = ({
     <div className="gap-1 flex items-center">
       <Button
         isIconOnly
-        variant="bordered"
+        variant="flat"
         className="text-base"
         isDisabled={isNaN(value) || value <= min}
         size={size}
@@ -79,7 +79,7 @@ const NumberInput = ({
       />
       <Button
         isIconOnly
-        variant="bordered"
+        variant="flat"
         className="text-base"
         isDisabled={isNaN(value) || value >= max}
         size={size}

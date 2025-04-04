@@ -6,7 +6,6 @@ import ChangeChart from '@/components/core/templates/create/tools/elements/speci
 import NewConnection from '@/components/core/templates/create/tools/elements/specific/chart-data/NewConnection.jsx';
 import { cn } from '@/lib/utils.js';
 import ConnectDataSource from './chart-data/ConnectDataSource';
-import ModifyAdvancedChart from './chart-data/ModifyAdvancedChart';
 import { useEffect, useState } from 'react';
 import useDesignStore from '@/store/design.js';
 import { LuChevronRight, LuDatabase, LuPlug2, LuTable } from 'react-icons/lu';
@@ -23,14 +22,12 @@ const items = [
     title: 'View Data',
     icon: <LuTable size="24" />,
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    disabled: false,
   },
   {
     id: 'change',
     title: 'Change Chart',
     icon: <TbReplace size="24" />,
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    disabled: false,
   },
 ];
 
@@ -65,30 +62,35 @@ const ChartData = ({ element }) => {
             <>
               <h2 className="text-lg mb-6">Configure chart</h2>
               <div className="flex flex-col gap-3">
-                {items.map((item, i) => (
-                  <div
-                    key={i}
-                    onClick={() => setView(item.id)}
-                    className={cn(
-                      'flex items-center justify-between bg-default-100 rounded-2xl px-6 py-4 cursor-pointer hover:bg-default-200',
-                      { 'opacity-50 cursor-not-allowed': item.disabled }
-                    )}
-                  >
-                    <div className="flex items-center space-x-4">
-                      <div>{item.icon}</div>
-                      <div className="leading-[1.1] text-base">{item.title}</div>
-                    </div>
-                    <LuChevronRight size="20" />
-                  </div>
-                ))}
+                {items.map((item, i) => {
+                  const isDisabled = !element.config.data;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => setView(item.id)}
+                      className={cn(
+                        'flex items-center justify-between bg-default-100 rounded-2xl px-6 py-4',
+                        { 'opacity-50 cursor-not-allowed': isDisabled },
+                        { 'cursor-pointer hover:bg-default-200': view === item.id }
+                      )}
+                      disabled={isDisabled}
+                    >
+                      <span className="flex items-center space-x-4">
+                        <span className="text-default-500">{item.icon}</span>
+                        <span className="leading-[1.1] text-base">{item.title}</span>
+                      </span>
+                      <LuChevronRight size="20" />
+                    </button>
+                  );
+                })}
               </div>
             </>
           )}
           {view === 'source' && <ConnectDataSource element={element} onBack={() => setView('home')} />}
           {view === 'data' && <ConfigureData element={element} onBack={() => setView('home')} />}
-          {view === 'data' && element.type === 'chart-a' && (
+          {/* {view === 'data' && element.type === 'chart-a' && (
             <ModifyAdvancedChart element={element} onBack={() => setView('home')} />
-          )}
+          )} */}
           {view === 'change' && <ChangeChart element={element} onBack={() => setView('home')} />}
           {view === 'connection' && <NewConnection onBack={() => setView('home')} />}
         </div>

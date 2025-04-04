@@ -388,4 +388,5 @@ ModifyAdvancedChart.propTypes = {
   element: PropTypes.object.isRequired,
   onBack: PropTypes.func.isRequired,
 };
+
 export default ModifyAdvancedChart;

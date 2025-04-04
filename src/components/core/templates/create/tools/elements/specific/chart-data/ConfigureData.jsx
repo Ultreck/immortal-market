@@ -4,85 +4,7 @@ import { RiArrowLeftSLine, RiAddLine, RiDeleteBinLine } from 'react-icons/ri';
 import useDesignStore from '@/store/design.js';
 import { capitalize } from '@/lib/utils';
 import { cn } from '@/lib/utils';
-
-const keys = {
-  'chart-s': {
-    bar: {
-      label: 'x',
-      value: ['y'],
-    },
-    pie: {
-      label: 'name',
-      value: ['value'],
-    },
-    'pie-2': {
-      label: 'name',
-      value: ['value'],
-    },
-    'semi-pie': {
-      label: 'name',
-      value: ['value'],
-    },
-    'semi-pie-2': {
-      label: 'name',
-      value: ['value'],
-    },
-    'bar-stacked': {
-      label: 'x',
-      value: ['y'],
-      multiple: true,
-    },
-    'bar-multiple': {
-      label: 'x',
-      value: ['y'],
-      multiple: true,
-    },
-    'alt-bar': {
-      label: 'x',
-      value: ['y'],
-    },
-    line: {
-      label: 'x',
-      value: ['y'],
-    },
-    'line-multiple': {
-      label: 'x',
-      value: ['y'],
-      multiple: true,
-    },
-    area: {
-      label: 'x',
-      value: ['y'],
-    },
-    'area-multiple': {
-      label: 'x',
-      value: ['y'],
-      multiple: true,
-    },
-    scatter: {
-      label: 'x',
-      value: ['y'],
-    },
-    bubble: {
-      label: 'x',
-      value: ['y'],
-    },
-    'line-area': {
-      label: 'x',
-      value: ['yLine', 'yArea'],
-    },
-    'line-bar': {
-      label: 'x',
-      value: ['yLine', 'yBar'],
-    },
-  },
-  'chart-a': {
-    funnel: {
-      label: 'name',
-      value: ['value'],
-    },
-  },
-};
+import NoData from '@/components/ui/NoData';
 
 const ConfigureData = ({ element, onBack }) => {
   const updateElement = useDesignStore((state) => state.updateElement);
@@ -231,19 +153,119 @@ const ConfigureData = ({ element, onBack }) => {
           <RiAddLine size="16" />
         </button>
       </div>
-      <ChartKeys element={element} className="mt-6" />
+      <ChartKeys element={element} className="mt-8" />
     </div>
   );
 };
 
+const keys = {
+  'chart-s': {
+    bar: {
+      label: 'x',
+      value: ['y'],
+    },
+    pie: {
+      label: 'name',
+      value: ['value'],
+    },
+    'pie-2': {
+      label: 'name',
+      value: ['value'],
+    },
+    'semi-pie': {
+      label: 'name',
+      value: ['value'],
+    },
+    'semi-pie-2': {
+      label: 'name',
+      value: ['value'],
+    },
+    'bar-stacked': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
+    'bar-multiple': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
+    'alt-bar': {
+      label: 'x',
+      value: ['y'],
+    },
+    line: {
+      label: 'x',
+      value: ['y'],
+    },
+    'line-multiple': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
+    area: {
+      label: 'x',
+      value: ['y'],
+    },
+    'area-multiple': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
+    scatter: {
+      label: 'x',
+      value: ['y'],
+    },
+    bubble: {
+      label: 'x',
+      value: ['y'],
+    },
+    'line-area': {
+      label: 'x',
+      value: ['yLine', 'yArea'],
+    },
+    'line-bar': {
+      label: 'x',
+      value: ['yLine', 'yBar'],
+    },
+  },
+  'chart-a': {
+    funnel: {
+      label: 'label',
+      value: ['value'],
+    },
+    'linear-advanced-bar': {
+      label: 'label',
+      value: ['value'],
+    },
+    'circle-icons': {
+      label: 'label',
+      value: ['value', 'icon'],
+      types: {
+        icon: 'string',
+      },
+    },
+  },
+};
+
 const ChartKeys = ({ element, className }) => {
+  return (
+    <div className={cn('flex flex-col gap-4', className)}>
+      {keys[element.type][element.config.name] ? (
+        <ChartKeysContent element={element} />
+      ) : (
+        <NoData text="No keys found for this chart type" />
+      )}
+    </div>
+  );
+};
+
+const ChartKeysContent = ({ element }) => {
   const updateElement = useDesignStore((state) => state.updateElement);
   const labels = Object.keys(element.config.data[0]);
 
-  console.log(element.type, element.config.name, element.config);
-
   return (
-    <form className={cn('flex flex-col gap-4', className)}>
+    <form className="flex flex-col gap-4">
       {[keys[element.type][element.config.name].label].map((key) => {
         const value = element.config.keys[key];
         const isMultiple = keys[element.type][element.config.name].multiple;
@@ -283,7 +305,12 @@ const ChartKeys = ({ element, className }) => {
         if (isMultiple) {
           selectedKeys = Array.isArray(value) ? value.filter((k) => labels.includes(k)) : [value];
         }
-        const options = labels.filter((c) => !isNaN(element.config.data[0][c]));
+        let options = labels.filter((c) => !isNaN(element.config.data[0][c]));
+        if (keys[element.type][element.config.name].types?.[key]) {
+          options = labels.filter(
+            (c) => typeof element.config.data[0][c] === keys[element.type][element.config.name].types[key]
+          );
+        }
         return (
           <div className="flex-1" key={key}>
             <Select
@@ -322,6 +349,11 @@ ConfigureData.propTypes = {
 };
 
 ChartKeys.propTypes = {
+  element: PropTypes.object.isRequired,
+  className: PropTypes.string,
+};
+
+ChartKeysContent.propTypes = {
   element: PropTypes.object.isRequired,
   className: PropTypes.string,
 };

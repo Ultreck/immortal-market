@@ -56,9 +56,9 @@ export const AdvancedPictogramShapesContent = ({ element, isChartWrapperDisabled
     showLabel,
   } = element.config;
 
-  const Icon1 = icons.find((icon) => icon.name === icon1).filledIcon;
-  const Icon2 = icons.find((icon) => icon.name === icon2).filledIcon;
-  const Icon3 = icons.find((icon) => icon.name === icon3).filledIcon;
+  const Icon1 = icons.find((icon) => icon.name === icon1).icon;
+  const Icon2 = icons.find((icon) => icon.name === icon2).icon;
+  const Icon3 = icons.find((icon) => icon.name === icon3).icon;
   const numberOfIcons = icon1count + icon2count + icon3count;
 
   return (

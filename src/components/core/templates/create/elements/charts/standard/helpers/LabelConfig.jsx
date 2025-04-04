@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { fontFamily } from '@/lib/utils.js';
 import useDesignStore from '@/store/design';
 
-const LabelConfig = ({ element, type }) => {
+const LabelConfig = ({ element, type, remove = [] }) => {
   const updateElement = useDesignStore((state) => state.updateElement);
 
   const _positions = {
@@ -49,103 +49,106 @@ const LabelConfig = ({ element, type }) => {
       </div>
       {element.config.label.enabled && (
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <p className="text-base">Font size</p>
-            <AutoCompleteNumberInput
-              variant="bordered"
-              value={element.config.label.fontSize}
-              onChange={(v) =>
-                updateElement(
-                  element.id,
-                  { config: { ...element.config, label: { ...element.config.label, fontSize: Number(v) } } },
-                  true
-                )
-              }
-              min={1}
-              max={30}
-              aria-label="Label font size"
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <p className="text-base">Label position</p>
-            <Select
-              variant="bordered"
-              aria-label="Label position"
-              classNames={{ base: 'w-[200px]', value: 'px-2 text-base' }}
-              placeholder="Select one"
-              selectedKeys={[element.config.label.position || 'top']}
-              onChange={(e) =>
-                updateElement(
-                  element.id,
-                  { config: { ...element.config, label: { ...element.config.label, position: e.target.value } } },
-                  true
-                )
-              }
-              disableEmptySelection={true}
-            >
-              {(positions || _positions.bar.horizontal).map((type) => (
-                <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
-                  {type.name}
-                </SelectItem>
-              ))}
-            </Select>
-          </div>
-          <div className="flex justify-between items-center">
-            <p className="text-base">Font family</p>
-            <Select
-              variant="bordered"
-              aria-label="Font Family"
-              classNames={{ value: 'px-1 text-base', base: 'w-[220px]' }}
-              placeholder="Select one"
-              selectedKeys={element.config.label.fontFamily ? [element.config.label.fontFamily] : []}
-              onChange={(e) =>
-                updateElement(
-                  element.id,
-                  { config: { ...element.config, label: { ...element.config.label, fontFamily: e.target.value } } },
-                  true
-                )
-              }
-            >
-              {fontFamily.map((font) => (
-                <SelectItem key={font.key}>{font.label}</SelectItem>
-              ))}
-            </Select>
-          </div>
-          <div className="flex justify-between items-center">
-            <p className="text-base">Format</p>
-            <Select
-              variant="bordered"
-              aria-label="Label Format"
-              classNames={{ value: 'px-1 text-base', base: 'w-[220px]' }}
-              placeholder="Select format"
-              selectedKeys={element.config.label.format ? [element.config.label.format] : []}
-              onChange={(e) =>
-                updateElement(
-                  element.id,
-                  { config: { ...element.config, label: { ...element.config.label, format: e.target.value } } },
-                  true
-                )
-              }
-            >
-              {[
-                { key: 'value', name: 'Value' },
-                { key: 'percentage', name: 'Percentage (%)' },
-                { key: 'both', name: 'Both (Value, %)' },
-                { key: 'currency', name: 'Currency' },
-                { key: 'wholeNumber', name: 'Whole Number' },
-                { key: 'decimal', name: 'Decimal' },
-              ].map((type) => (
-                <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
-                  {type.name}
-                </SelectItem>
-              ))}
-            </Select>
-          </div>
+          {!remove.includes('font-size') && (
+            <div className="flex items-center justify-between">
+              <p className="text-base">Font size</p>
+              <AutoCompleteNumberInput
+                value={element.config.label.fontSize}
+                onChange={(v) =>
+                  updateElement(
+                    element.id,
+                    { config: { ...element.config, label: { ...element.config.label, fontSize: Number(v) } } },
+                    true
+                  )
+                }
+                min={1}
+                max={100}
+                aria-label="Label font size"
+              />
+            </div>
+          )}
+          {!remove.includes('position') && (
+            <div className="flex items-center justify-between">
+              <p className="text-base">Label position</p>
+              <Select
+                aria-label="Label position"
+                classNames={{ base: 'w-[200px]', value: 'px-2 text-base' }}
+                placeholder="Select one"
+                selectedKeys={[element.config.label.position || 'top']}
+                onChange={(e) =>
+                  updateElement(
+                    element.id,
+                    { config: { ...element.config, label: { ...element.config.label, position: e.target.value } } },
+                    true
+                  )
+                }
+                disableEmptySelection={true}
+              >
+                {(positions || _positions.bar.horizontal).map((type) => (
+                  <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                    {type.name}
+                  </SelectItem>
+                ))}
+              </Select>
+            </div>
+          )}
+          {!remove.includes('font-family') && (
+            <div className="flex justify-between items-center">
+              <p className="text-base">Font family</p>
+              <Select
+                aria-label="Font Family"
+                classNames={{ value: 'px-1 text-base', base: 'w-[220px]' }}
+                placeholder="Select one"
+                selectedKeys={element.config.label.fontFamily ? [element.config.label.fontFamily] : []}
+                onChange={(e) =>
+                  updateElement(
+                    element.id,
+                    { config: { ...element.config, label: { ...element.config.label, fontFamily: e.target.value } } },
+                    true
+                  )
+                }
+              >
+                {fontFamily.map((font) => (
+                  <SelectItem key={font.key}>{font.label}</SelectItem>
+                ))}
+              </Select>
+            </div>
+          )}
+          {!remove.includes('format') && (
+            <div className="flex justify-between items-center">
+              <p className="text-base">Format</p>
+              <Select
+                aria-label="Label Format"
+                classNames={{ value: 'px-1 text-base', base: 'w-[220px]' }}
+                placeholder="Select format"
+                selectedKeys={element.config.label.format ? [element.config.label.format] : []}
+                onChange={(e) =>
+                  updateElement(
+                    element.id,
+                    { config: { ...element.config, label: { ...element.config.label, format: e.target.value } } },
+                    true
+                  )
+                }
+              >
+                {[
+                  { key: 'value', name: 'Value' },
+                  { key: 'percentage', name: 'Percentage (%)' },
+                  { key: 'both', name: 'Both (Value, %)' },
+                  { key: 'currency', name: 'Currency' },
+                  { key: 'wholeNumber', name: 'Whole Number' },
+                  { key: 'decimal', name: 'Decimal' },
+                ].map((type) => (
+                  <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
+                    {type.name}
+                  </SelectItem>
+                ))}
+              </Select>
+            </div>
+          )}
           {element.config.label?.format === 'currency' && (
             <div className="flex items-center justify-between">
               <p className="text-base">Currency</p>
               <Select
-                variant="bordered"
                 aria-label="Currency"
                 classNames={{ value: 'px-1 text-base', base: 'w-[220px]' }}
                 placeholder="Choose currency"
@@ -164,27 +167,32 @@ const LabelConfig = ({ element, type }) => {
               </Select>
             </div>
           )}
-          <div className="flex justify-between items-center">
-            <p className="text-base">Color</p>
-            <ColorPicker
-              color={element.config.label.color}
-              onChange={(color) =>
-                updateElement(
-                  element.id,
-                  { config: { ...element.config, label: { ...element.config.label, color: color } } },
-                  true
-                )
-              }
-              trigger={
-                <div tabIndex="0" className="w-8 h-8 p-[3px] rounded-full border border-transparent border-default-200">
+          {!remove.includes('color') && (
+            <div className="flex justify-between items-center">
+              <p className="text-base">Color</p>
+              <ColorPicker
+                color={element.config.label.color}
+                onChange={(color) =>
+                  updateElement(
+                    element.id,
+                    { config: { ...element.config, label: { ...element.config.label, color: color } } },
+                    true
+                  )
+                }
+                trigger={
                   <div
-                    style={{ backgroundColor: element.config.label.color }}
-                    className="w-full h-full hover:brightness-125 rounded-full"
-                  />
-                </div>
-              }
-            />
-          </div>
+                    tabIndex="0"
+                    className="w-8 h-8 p-[3px] rounded-full border border-transparent border-default-200"
+                  >
+                    <div
+                      style={{ backgroundColor: element.config.label.color }}
+                      className="w-full h-full hover:brightness-125 rounded-full"
+                    />
+                  </div>
+                }
+              />
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -194,6 +202,7 @@ const LabelConfig = ({ element, type }) => {
 LabelConfig.propTypes = {
   element: PropTypes.object.isRequired,
   type: PropTypes.oneOf(['bar', 'pie']),
+  remove: PropTypes.arrayOf(PropTypes.oneOf(['font-size', 'position', 'font-family', 'format', 'color'])),
 };
 
 export default LabelConfig;
