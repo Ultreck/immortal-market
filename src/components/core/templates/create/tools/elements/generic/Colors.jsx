@@ -33,7 +33,7 @@ const options = [
   ['#0B132B', '#1C2541', '#3A506B', '#5BC0BE', '#6FFFE9', '#FC5185', '#364F6B', '#F73859', '#61C0BF', '#50514F'],
 ];
 
-const Colors = ({ element, onChange }) => {
+const Colors = ({ element }) => {
   const [tab, setTab] = useState('palettes');
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
@@ -104,9 +104,9 @@ const Colors = ({ element, onChange }) => {
               return <Tab key={key} title={capitalize(key)} className="text-base" />;
             })}
           </Tabs>
-          {tab === 'palettes' && <Palettes onChange={onChange} element={element} />}
-          {tab === 'manual' && <Manual onChange={onChange} element={element} />}
-          {tab === 'gradient' && <Gradient onChange={onChange} element={element} />}
+          {tab === 'palettes' && <Palettes element={element} />}
+          {tab === 'manual' && <Manual element={element} />}
+          {tab === 'gradient' && <Gradient element={element} />}
         </div>
       </PopoverContent>
     </Popover>
@@ -115,10 +115,11 @@ const Colors = ({ element, onChange }) => {
 
 Colors.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
-const Palettes = ({ element, onChange }) => {
+const Palettes = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   const isSameColors = (colors1, colors2) => {
     for (let i = 0; i < colors1.length; i++) {
       if (colors1[i] !== colors2[i]) return false;
@@ -128,12 +129,13 @@ const Palettes = ({ element, onChange }) => {
 
   const handleChange = useCallback(
     (_colors) => {
-      onChange({
-        ...element,
-        config: { ...element.config, colors: _colors.slice(0, element.config.colors.length) },
-      });
+      updateElement(
+        element.id,
+        { config: { ...element.config, colors: _colors.slice(0, element.config.colors.length) } },
+        true
+      );
     },
-    [element, onChange]
+    [element, updateElement]
   );
 
   return (
@@ -162,19 +164,17 @@ const Palettes = ({ element, onChange }) => {
   );
 };
 
-const Manual = ({ element, onChange }) => {
+const Manual = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
   const [colors, setColors] = useState([]);
   const [selected, setSelected] = useState(0);
 
   const handleChange = useCallback(
     (_colors) => {
       setColors((v) => ({ ...v, ..._colors }));
-      onChange({
-        ...element,
-        config: { ...element.config, colors: _colors },
-      });
+      updateElement(element.id, { config: { ...element.config, colors: _colors } }, true);
     },
-    [element, onChange]
+    [element, updateElement]
   );
 
   useEffect(() => {
@@ -219,19 +219,17 @@ const Manual = ({ element, onChange }) => {
   );
 };
 
-const Gradient = ({ element, onChange }) => {
+const Gradient = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
   const [colors, setColors] = useState([]);
   const [selected, setSelected] = useState(0);
 
   const handleChange = useCallback(
     (_colors) => {
       setColors((v) => ({ ...v, ..._colors }));
-      onChange({
-        ...element,
-        config: { ...element.config, colors: _colors },
-      });
+      updateElement(element.id, { config: { ...element.config, colors: _colors } }, true);
     },
-    [element, onChange]
+    [element, updateElement]
   );
 
   const handleGenerateGradient = () => {
@@ -243,10 +241,7 @@ const Gradient = ({ element, onChange }) => {
         return interpolateColor(element.config.gradientColor, '#FFFFFF', factor);
       });
 
-      onChange({
-        ...element,
-        config: { ...element.config, colors: chartData },
-      });
+      updateElement(element.id, { config: { ...element.config, colors: chartData } }, true);
       return;
     }
     if (element.config.name === 'dynamic-sorting') {
@@ -257,10 +252,7 @@ const Gradient = ({ element, onChange }) => {
         return interpolateColor(element.config.gradientColor, '#FFFFFF', factor);
       });
 
-      onChange({
-        ...element,
-        config: { ...element.config, colors: chartData },
-      });
+      updateElement(element.id, { config: { ...element.config, colors: chartData } }, true);
       return;
     }
 
@@ -279,7 +271,11 @@ const Gradient = ({ element, onChange }) => {
         return { ...item, fill: color };
       });
 
-    onChange({ ...element, config: { ...element.config, data: chartData, colors: chartData.map((d) => d.fill) } });
+    updateElement(
+      element.id,
+      { config: { ...element.config, data: chartData, colors: chartData.map((d) => d.fill) } },
+      true
+    );
   };
 
   useEffect(() => {
@@ -291,7 +287,7 @@ const Gradient = ({ element, onChange }) => {
     <>
       <HexColorPicker
         color={element.config.gradientColor}
-        onChange={(c) => onChange({ ...element, config: { ...element.config, gradientColor: c } })}
+        onChange={(c) => updateElement(element.id, { config: { ...element.config, gradientColor: c } }, true)}
         className="!w-full"
       />
       <Button className="mt-6 text-base" radius="full" onPress={handleGenerateGradient}>
@@ -303,17 +299,14 @@ const Gradient = ({ element, onChange }) => {
 
 Palettes.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 Manual.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 Gradient.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Colors;

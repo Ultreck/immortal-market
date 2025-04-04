@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { TbMinus, TbPlus, TbSettings2 } from 'react-icons/tb';
 import useDesignStore from '@/store/design.js';
 
-const BulletTextConfig = ({ element, onChange }) => {
+const BulletTextConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   return (
     <Popover
@@ -27,7 +28,7 @@ const BulletTextConfig = ({ element, onChange }) => {
           <RadioGroup
             orientation="horizontal"
             value={element.config.type}
-            onValueChange={(v) => onChange({ ...element, config: { ...element.config, type: v } })}
+            onValueChange={(v) => updateElement(element.id, { config: { ...element.config, type: v } })}
           >
             <Radio value="number">Number</Radio>
             <Radio value="bullet">Text</Radio>
@@ -41,7 +42,7 @@ const BulletTextConfig = ({ element, onChange }) => {
                 onChange={(e) => {
                   const texts = [...element.config.texts];
                   texts[i] = e.target.value;
-                  onChange({ ...element, config: { ...element.config, texts } });
+                  updateElement(element.id, { config: { ...element.config, texts } });
                 }}
               />
               <Button
@@ -51,7 +52,7 @@ const BulletTextConfig = ({ element, onChange }) => {
                 onPress={() => {
                   const texts = [...element.config.texts];
                   texts.splice(i, 1);
-                  onChange({ ...element, config: { ...element.config, texts } });
+                  updateElement(element.id, { config: { ...element.config, texts } });
                 }}
               >
                 <TbMinus size="20" />
@@ -65,7 +66,7 @@ const BulletTextConfig = ({ element, onChange }) => {
               className="text-base"
               onPress={() => {
                 const texts = [...element.config.texts, ''];
-                onChange({ ...element, config: { ...element.config, texts } });
+                updateElement(element.id, { config: { ...element.config, texts } });
               }}
             >
               <TbPlus size="20" />
@@ -78,13 +79,7 @@ const BulletTextConfig = ({ element, onChange }) => {
 };
 
 BulletTextConfig.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      texts: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }),
-  }),
-  onChange: PropTypes.func.isRequired,
+  element: PropTypes.object.isRequired,
 };
 
 export default BulletTextConfig;

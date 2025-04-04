@@ -62,7 +62,6 @@ const mapping = {
 
 const ElementTools = () => {
   const selectedElements = useDesignStore((state) => state.selectedElements);
-  const updateElements = useDesignStore((state) => state.updateElements);
   const elements = useDesignStore((state) => {
     return state.elements.filter((el) => selectedElements.includes(el.key));
   });
@@ -77,14 +76,6 @@ const ElementTools = () => {
     }
     return _tools;
   }, [elements, selectedElements.length]);
-
-  const handleUpdateElements = (els) => {
-    updateElements(
-      // eslint-disable-next-line no-unused-vars
-      els.map(({ id, _id, ...el }) => ({ elementId: id, updates: el })),
-      true
-    );
-  };
 
   return (
     <AnimatePresence>
@@ -105,7 +96,6 @@ const ElementTools = () => {
                       {createElement(component, {
                         key: tool,
                         element: elements[0],
-                        onChange: (el) => handleUpdateElements([el]),
                       })}
                     </>
                   )}
@@ -114,7 +104,6 @@ const ElementTools = () => {
                       {createElement(component, {
                         key: tool,
                         elements,
-                        onChange: (els) => handleUpdateElements(els),
                       })}
                     </>
                   )}

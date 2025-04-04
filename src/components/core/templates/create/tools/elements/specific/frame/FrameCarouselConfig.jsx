@@ -1,11 +1,10 @@
 import { cn, Switch } from '@heroui/react';
-import PropTypes from 'prop-types';
 import NumberInput from '@/components/ui/NumberInput.jsx';
+import useDesignStore from '@/store/design.js';
+import PropTypes from 'prop-types';
 
-const FrameCarouselConfig = ({ element, onChange }) => {
-  const handleChange = (config) => {
-    onChange({ ...element, config: { ...element.config, ...config } });
-  };
+const FrameCarouselConfig = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   return (
     <div className="space-y-4">
@@ -13,7 +12,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
         <p className="text-base">No. of slides</p>
         <NumberInput
           value={element.config.slides}
-          onChange={(v) => handleChange({ slides: v })}
+          onChange={(v) => updateElement(element.id, { config: { ...element.config, slides: v } }, true)}
           aria-label="No. of slides"
           min={1}
         />
@@ -22,7 +21,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
         <p className="text-base">Slides per view</p>
         <NumberInput
           value={element.config.slidesPerView}
-          onChange={(v) => handleChange({ slidesPerView: v })}
+          onChange={(v) => updateElement(element.id, { config: { ...element.config, slidesPerView: v } }, true)}
           aria-label="Slides per view"
           min={1}
           step={0.1}
@@ -32,7 +31,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
         <p className="text-base">Slide speed</p>
         <NumberInput
           value={element.config.speed}
-          onChange={(v) => handleChange({ speed: v })}
+          onChange={(v) => updateElement(element.id, { config: { ...element.config, speed: v } }, true)}
           aria-label="Slide speed"
           step={100}
           min={1}
@@ -42,7 +41,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
         <p className="text-base">Loop</p>
         <Switch
           isSelected={!!element.config?.loop}
-          onValueChange={(v) => handleChange({ loop: v })}
+          onValueChange={(v) => updateElement(element.id, { config: { ...element.config, loop: v } }, true)}
           classNames={{
             wrapper: 'p-0 h-4 overflow-visible',
             thumb: cn(
@@ -62,16 +61,19 @@ const FrameCarouselConfig = ({ element, onChange }) => {
           <Switch
             isSelected={!!element.config?.autoplay?.enabled}
             onValueChange={(v) => {
-              onChange({
-                ...element,
-                config: {
-                  ...element.config,
-                  autoplay: {
-                    ...(element?.config?.autoplay || {}),
-                    enabled: v,
+              updateElement(
+                element.id,
+                {
+                  config: {
+                    ...element.config,
+                    autoplay: {
+                      ...(element?.config?.autoplay || {}),
+                      enabled: v,
+                    },
                   },
                 },
-              });
+                true
+              );
             }}
             classNames={{
               wrapper: 'p-0 h-4 overflow-visible',
@@ -92,7 +94,13 @@ const FrameCarouselConfig = ({ element, onChange }) => {
               <p className="text-base">Delay</p>
               <NumberInput
                 value={element.config.autoplay?.delay}
-                onChange={(v) => handleChange({ autoplay: { ...element.config.autoplay, delay: v } })}
+                onChange={(v) =>
+                  updateElement(
+                    element.id,
+                    { config: { ...element.config, autoplay: { ...element.config.autoplay, delay: v } } },
+                    true
+                  )
+                }
                 aria-label="Delay"
                 step={100}
                 min={0}
@@ -106,10 +114,7 @@ const FrameCarouselConfig = ({ element, onChange }) => {
 };
 
 FrameCarouselConfig.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.object,
-  }),
-  onChange: PropTypes.func.isRequired,
+  element: PropTypes.object.isRequired,
 };
 
 export default FrameCarouselConfig;

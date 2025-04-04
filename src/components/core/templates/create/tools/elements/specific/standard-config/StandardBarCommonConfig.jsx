@@ -6,26 +6,24 @@ import XAxisConfig from '@/components/core/templates/create/elements/charts/stan
 import YAxisConfig from '@/components/core/templates/create/elements/charts/standard/helpers/YAxisConfig.jsx';
 import LegendConfig from '@/components/core/templates/create/elements/charts/standard/helpers/LegendConfig.jsx';
 import LabelConfig from '@/components/core/templates/create/elements/charts/standard/helpers/LabelConfig.jsx';
+import useDesignStore from '@/store/design';
 
-const StandardBarCommonConfig = ({ element, onChange }) => {
+const StandardBarCommonConfig = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   return (
     <div>
       <h3 className="text-lg font-semibold mb-6">Chart settings</h3>
       <div className="space-y-3">
-        <XAxisConfig element={element} onChange={onChange} />
-        <YAxisConfig element={element} onChange={onChange} />
-        <LegendConfig element={element} onChange={onChange} />
-        <LabelConfig element={element} onChange={onChange} type="bar" />
+        <XAxisConfig element={element} />
+        <YAxisConfig element={element} />
+        <LegendConfig element={element} />
+        <LabelConfig element={element} type="bar" />
         <div className="border border-default-200 px-6 py-5 rounded-2xl space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-base opacity-75 whitespace-nowrap">No. of points:</p>
             <NumberInput
-              onChange={(v) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, points: Number(v) },
-                })
-              }
+              onChange={(v) => updateElement(element.id, { config: { ...element.config, points: Number(v) } }, true)}
               value={element.config.points}
               min={1}
               max={element.config.data.length}
@@ -39,10 +37,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                   <p className="text-base opacity-75 whitespace-nowrap">No. of bars/group:</p>
                   <AutoCompleteNumberInput
                     onChange={(v) =>
-                      onChange({
-                        ...element,
-                        config: { ...element.config, barsPerGroup: Number(v) },
-                      })
+                      updateElement(element.id, { config: { ...element.config, barsPerGroup: Number(v) } }, true)
                     }
                     value={element.config.barsPerGroup}
                     min={1}
@@ -55,10 +50,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                 <p className="text-base opacity-75 whitespace-nowrap">Border radius</p>
                 <NumberInput
                   onChange={(v) =>
-                    onChange({
-                      ...element,
-                      config: { ...element.config, radius: Number(v) },
-                    })
+                    updateElement(element.id, { config: { ...element.config, radius: Number(v) } }, true)
                   }
                   value={element.config.radius}
                   min={1}
@@ -75,10 +67,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                   className="max-w-md"
                   classNames={{ label: 'text-base', value: 'text-base' }}
                   onChange={(e) =>
-                    onChange({
-                      ...element,
-                      config: { ...element.config, gap: Array.isArray(e) ? e[0] : e },
-                    })
+                    updateElement(element.id, { config: { ...element.config, gap: Array.isArray(e) ? e[0] : e } }, true)
                   }
                   value={element.config.gap || 0}
                 />
@@ -92,10 +81,7 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
                 orientation="horizontal"
                 value={element.config.type || 'natural'}
                 onValueChange={(value) =>
-                  onChange({
-                    ...element,
-                    config: { ...element.config, type: value },
-                  })
+                  updateElement(element.id, { config: { ...element.config, type: value } }, true)
                 }
               >
                 {[
@@ -118,7 +104,6 @@ const StandardBarCommonConfig = ({ element, onChange }) => {
 
 StandardBarCommonConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default StandardBarCommonConfig;

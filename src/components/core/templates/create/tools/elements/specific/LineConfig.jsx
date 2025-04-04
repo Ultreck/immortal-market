@@ -7,7 +7,7 @@ import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import { HiArrowRight } from 'react-icons/hi2';
 import { useState } from 'react';
 
-const LineConfig = ({ elements, onChange }) => {
+const LineConfig = ({ elements }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -26,19 +26,23 @@ const LineConfig = ({ elements, onChange }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="px-6 py-5 shadow border border-default-200 gap-y-4 flex flex-col items-stretch">
-        <StrokeWidth elements={elements} onChange={onChange} />
-        <StrokeLinecap elements={elements} onChange={onChange} />
-        <StrokeMarkers elements={elements} onChange={onChange} />
+        <StrokeWidth elements={elements} />
+        <StrokeLinecap elements={elements} />
+        <StrokeMarkers elements={elements} />
       </PopoverContent>
     </Popover>
   );
 };
 
-const StrokeWidth = ({ elements, onChange }) => {
+const StrokeWidth = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.config.strokeWidth || ''));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
-    onChange(elements.map((e) => ({ ...e, config: { ...e.config, strokeWidth: v } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { config: { ...e.config, strokeWidth: v } } })),
+      true
+    );
   };
 
   return (
@@ -49,11 +53,15 @@ const StrokeWidth = ({ elements, onChange }) => {
   );
 };
 
-const StrokeLinecap = ({ elements, onChange }) => {
+const StrokeLinecap = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.config?.strokeLinecap || ''));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
-    onChange(elements.map((e) => ({ ...e, config: { ...e.config, strokeLinecap: v } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { config: { ...e.config, strokeLinecap: v } } })),
+      true
+    );
   };
 
   const options = [
@@ -239,13 +247,17 @@ const markers = [
   },
 ];
 
-const StrokeMarkers = ({ elements, onChange }) => {
+const StrokeMarkers = ({ elements }) => {
   const [active, setActive] = useState('');
   const markerStart = useResolveValue(elements.map((e) => e.config.markerStart));
   const markerEnd = useResolveValue(elements.map((e) => e.config.markerEnd));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handelChange = (field, value) => {
-    onChange(elements.map((e) => ({ ...e, config: { ...e.config, [field]: value } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { config: { ...e.config, [field]: value } } })),
+      true
+    );
   };
 
   return (
@@ -321,19 +333,15 @@ const StrokeMarkers = ({ elements, onChange }) => {
 
 LineConfig.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object),
-  onChange: PropTypes.func.isRequired,
 };
 StrokeWidth.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object),
-  onChange: PropTypes.func.isRequired,
 };
 StrokeLinecap.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object),
-  onChange: PropTypes.func.isRequired,
 };
 StrokeMarkers.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object),
-  onChange: PropTypes.func.isRequired,
 };
 
 export default LineConfig;

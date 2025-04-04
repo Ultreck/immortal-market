@@ -3,15 +3,23 @@ import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import useDesignStore from '@/store/design.js';
 
-const Color = ({ elements, onChange }) => {
+const Color = ({ elements }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElements = useDesignStore((state) => state.updateElements);
   const value = useResolveValue(elements.map((e) => e.style.color));
 
   const handleChange = (v) => {
     if (!v) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, color: v } })));
+    updateElements(
+      elements.map((e) => {
+        return {
+          elementId: e.id,
+          updates: { style: { ...e.style, color: v } },
+        };
+      })
+    );
   };
 
   return (
@@ -34,7 +42,6 @@ const Color = ({ elements, onChange }) => {
 
 Color.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object),
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Color;

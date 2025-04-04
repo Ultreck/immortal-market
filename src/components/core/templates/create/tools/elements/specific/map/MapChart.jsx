@@ -1,15 +1,18 @@
 import { Checkbox } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbChartBar, TbChartLine, TbChartPie } from 'react-icons/tb';
+import useDesignStore from '@/store/design.js';
 
-const MapChart = ({ element, onChange }) => {
+const MapChart = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   return (
     <div className="space-y-4">
       <div>
         <Checkbox
           isSelected={element.config.showValues}
           classNames={{ base: 'py-0' }}
-          onValueChange={(v) => onChange({ ...element, config: { ...element.config, showValues: v } })}
+          onValueChange={(v) => updateElement(element.id, { config: { ...element.config, showValues: v } }, true)}
         >
           Select chart
         </Checkbox>
@@ -19,19 +22,19 @@ const MapChart = ({ element, onChange }) => {
           <div>
             <TbChartBar
               className="w-full h-full cursor-pointer"
-              onClick={() => onChange({ ...element, tooltip: { ...element.tooltip, type: 'bar' } })}
+              onClick={() => updateElement(element.id, { tooltip: { ...element.tooltip, type: 'bar' } }, true)}
             />
           </div>
           <div>
             <TbChartPie
               className="w-full h-full cursor-pointer"
-              onClick={() => onChange({ ...element, tooltip: { ...element.tooltip, type: 'pie' } })}
+              onClick={() => updateElement(element.id, { tooltip: { ...element.tooltip, type: 'pie' } }, true)}
             />
           </div>
           <div>
             <TbChartLine
               className="w-full h-full cursor-pointer"
-              onClick={() => onChange({ ...element, tooltip: { ...element.tooltip, type: 'line' } })}
+              onClick={() => updateElement(element.id, { tooltip: { ...element.tooltip, type: 'line' } }, true)}
             />
           </div>
         </div>
@@ -42,7 +45,6 @@ const MapChart = ({ element, onChange }) => {
 
 MapChart.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default MapChart;

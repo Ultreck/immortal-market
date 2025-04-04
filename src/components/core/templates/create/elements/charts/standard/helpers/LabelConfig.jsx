@@ -3,8 +3,11 @@ import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import PropTypes from 'prop-types';
 import { fontFamily } from '@/lib/utils.js';
+import useDesignStore from '@/store/design';
 
-const LabelConfig = ({ element, onChange, type }) => {
+const LabelConfig = ({ element, type }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   const _positions = {
     pie: [
       { key: 'inside', name: 'Inside' },
@@ -36,10 +39,11 @@ const LabelConfig = ({ element, onChange, type }) => {
           isSelected={!!element.config.label?.enabled}
           size="sm"
           onValueChange={(v) => {
-            onChange({
-              ...element,
-              config: { ...element.config, label: { ...element.config.label, enabled: v } },
-            });
+            updateElement(
+              element.id,
+              { config: { ...element.config, label: { ...element.config.label, enabled: v } } },
+              true
+            );
           }}
         />
       </div>
@@ -51,10 +55,11 @@ const LabelConfig = ({ element, onChange, type }) => {
               variant="bordered"
               value={element.config.label.fontSize}
               onChange={(v) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, label: { ...element.config.label, fontSize: Number(v) } },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, label: { ...element.config.label, fontSize: Number(v) } } },
+                  true
+                )
               }
               min={1}
               max={30}
@@ -70,10 +75,11 @@ const LabelConfig = ({ element, onChange, type }) => {
               placeholder="Select one"
               selectedKeys={[element.config.label.position || 'top']}
               onChange={(e) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, label: { ...element.config.label, position: e.target.value } },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, label: { ...element.config.label, position: e.target.value } } },
+                  true
+                )
               }
               disableEmptySelection={true}
             >
@@ -93,13 +99,11 @@ const LabelConfig = ({ element, onChange, type }) => {
               placeholder="Select one"
               selectedKeys={element.config.label.fontFamily ? [element.config.label.fontFamily] : []}
               onChange={(e) =>
-                onChange({
-                  ...element,
-                  config: {
-                    ...element.config,
-                    label: { ...element.config.label, fontFamily: e.target.value },
-                  },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, label: { ...element.config.label, fontFamily: e.target.value } } },
+                  true
+                )
               }
             >
               {fontFamily.map((font) => (
@@ -116,13 +120,11 @@ const LabelConfig = ({ element, onChange, type }) => {
               placeholder="Select format"
               selectedKeys={element.config.label.format ? [element.config.label.format] : []}
               onChange={(e) =>
-                onChange({
-                  ...element,
-                  config: {
-                    ...element.config,
-                    label: { ...element.config.label, format: e.target.value },
-                  },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, label: { ...element.config.label, format: e.target.value } } },
+                  true
+                )
               }
             >
               {[
@@ -149,13 +151,11 @@ const LabelConfig = ({ element, onChange, type }) => {
                 placeholder="Choose currency"
                 selectedKeys={element.config.label.currency ? [element.config.label.currency] : []}
                 onChange={(e) =>
-                  onChange({
-                    ...element,
-                    config: {
-                      ...element.config,
-                      label: { ...element.config.label, currency: e.target.value },
-                    },
-                  })
+                  updateElement(
+                    element.id,
+                    { config: { ...element.config, label: { ...element.config.label, currency: e.target.value } } },
+                    true
+                  )
                 }
               >
                 {['N', '$', '€', '¥', '£'].map((currency) => (
@@ -169,10 +169,11 @@ const LabelConfig = ({ element, onChange, type }) => {
             <ColorPicker
               color={element.config.label.color}
               onChange={(color) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, label: { ...element.config.label, color: color } },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, label: { ...element.config.label, color: color } } },
+                  true
+                )
               }
               trigger={
                 <div tabIndex="0" className="w-8 h-8 p-[3px] rounded-full border border-transparent border-default-200">
@@ -192,7 +193,6 @@ const LabelConfig = ({ element, onChange, type }) => {
 
 LabelConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
   type: PropTypes.oneOf(['bar', 'pie']),
 };
 

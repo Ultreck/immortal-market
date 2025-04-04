@@ -4,7 +4,7 @@ import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import useDesignStore from '@/store/design.js';
 
-const Border = ({ elements, onChange }) => {
+const Border = ({ elements }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -29,21 +29,25 @@ const Border = ({ elements, onChange }) => {
       </PopoverTrigger>
       <PopoverContent className="px-8 py-6 shadow border border-default-200 space-y-4">
         <div className="w-full flex items-center space-x-6">
-          <BorderWeight onChange={onChange} elements={elements} />
-          <BorderColor onChange={onChange} elements={elements} />
+          <BorderWeight elements={elements} />
+          <BorderColor elements={elements} />
         </div>
-        <BorderRadius onChange={onChange} elements={elements} />
+        <BorderRadius elements={elements} />
       </PopoverContent>
     </Popover>
   );
 };
 
-const BorderWeight = ({ elements, onChange }) => {
+const BorderWeight = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style.borderWidth)) || 0;
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleWidthChange = (v) => {
     if (isNaN(v)) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, borderWidth: v } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { style: { ...e.style, borderWidth: v } } })),
+      true
+    );
   };
 
   return (
@@ -67,23 +71,31 @@ const BorderWeight = ({ elements, onChange }) => {
   );
 };
 
-const BorderColor = ({ elements, onChange }) => {
+const BorderColor = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style.borderColor));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleColorChange = (v) => {
     if (!v) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, borderColor: v } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { style: { ...e.style, borderColor: v } } })),
+      true
+    );
   };
 
   return <ColorPicker color={value} onChange={(color) => handleColorChange(color)} />;
 };
 
-const BorderRadius = ({ elements, onChange }) => {
+const BorderRadius = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style.borderRadius));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
     if (isNaN(v)) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, borderRadius: v } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { style: { ...e.style, borderRadius: v } } })),
+      true
+    );
   };
 
   return (
@@ -109,7 +121,6 @@ const BorderRadius = ({ elements, onChange }) => {
 
 const propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 Border.propTypes = propTypes;

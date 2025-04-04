@@ -14,10 +14,11 @@ const animations = [
   { value: 'reveal', text: 'Reveal' },
 ];
 
-const Animation = ({ elements, onChange }) => {
+const Animation = ({ elements }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const animationValues = elements.map((e) => e?.style?.animationName ?? '');
   const same = animationValues.every((v) => v === animationValues[0]);
@@ -30,17 +31,22 @@ const Animation = ({ elements, onChange }) => {
   const handleChange = (e) => {
     let value = e.target.value;
     if (!value) return;
-    onChange(
+    updateElements(
       elements.map((element) => ({
-        ...element,
-        style: { ...element.style, animationName: value },
+        elementId: element.id,
+        updates: { style: { ...element.style, animationName: value } },
       }))
     );
   };
 
   const handleAnimationDurationChange = (v) => {
     if (!v) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, animationDuration: `${v}s` } })));
+    updateElements(
+      elements.map((e) => ({
+        elementId: e.id,
+        updates: { style: { ...e.style, animationDuration: `${v}s` } },
+      }))
+    );
   };
 
   return (
@@ -125,7 +131,6 @@ Animation.propTypes = {
       style: PropTypes.object,
     })
   ),
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Animation;

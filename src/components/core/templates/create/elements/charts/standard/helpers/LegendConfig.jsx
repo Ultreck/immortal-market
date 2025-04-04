@@ -2,8 +2,11 @@ import { Switch } from '@heroui/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import PropTypes from 'prop-types';
+import useDesignStore from '@/store/design';
 
-const LegendConfig = ({ element, onChange }) => {
+const LegendConfig = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   return (
     <div className="border border-default-200 px-6 py-5 rounded-2xl space-y-4">
       <div className="flex items-center justify-between">
@@ -12,10 +15,11 @@ const LegendConfig = ({ element, onChange }) => {
           isSelected={!!element.config.legend?.enabled}
           size="sm"
           onValueChange={(v) => {
-            onChange({
-              ...element,
-              config: { ...element.config, legend: { ...element.config.legend, enabled: v } },
-            });
+            updateElement(
+              element.id,
+              { config: { ...element.config, legend: { ...element.config.legend, enabled: v } } },
+              true
+            );
           }}
         />
       </div>
@@ -27,10 +31,11 @@ const LegendConfig = ({ element, onChange }) => {
               variant="bordered"
               value={element.config.legend.fontSize}
               onChange={(v) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, legend: { ...element.config.legend, fontSize: Number(v) } },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, legend: { ...element.config.legend, fontSize: Number(v) } } },
+                  true
+                )
               }
               min={1}
               max={30}
@@ -43,10 +48,11 @@ const LegendConfig = ({ element, onChange }) => {
               size="sm"
               color={element.config.legend.color}
               onChange={(color) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, legend: { ...element.config.legend, color: color } },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, legend: { ...element.config.legend, color: color } } },
+                  true
+                )
               }
             />
           </div>
@@ -58,7 +64,6 @@ const LegendConfig = ({ element, onChange }) => {
 
 LegendConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default LegendConfig;

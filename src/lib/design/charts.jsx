@@ -466,7 +466,7 @@ const _standard = [];
               [320, 302, 341, 374, 90, 450, 420],
               [-120, -132, -101, -134, -190, -230, -310],
             ],
-            keys: { x: 'browser', y: 'visitors' },
+            keys: { x: 'x', y: 'y' },
           },
           tools: {
             colors: {

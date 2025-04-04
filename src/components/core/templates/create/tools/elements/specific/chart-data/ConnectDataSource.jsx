@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import Title from '@/components/core/shared/Title';
 import { TbPlugConnectedX } from 'react-icons/tb';
 
-const ConnectDataSource = ({ element, onChange, onBack }) => {
+const ConnectDataSource = ({ element, onBack }) => {
   const { source, analysis } = useCurrentDesign();
 
   return (
     <div>
       <Title title="Data source" onBack={onBack} classNames={{ title: 'text-base font-medium', base: 'mb-6' }} />
       {!!source && !!analysis ? (
-        <DataSource element={element} onChange={onChange} />
+        <DataSource element={element} />
       ) : (
         <NoData icon={<TbPlugConnectedX size="28" />} text="No data source found" />
       )}
@@ -22,7 +22,6 @@ const ConnectDataSource = ({ element, onChange, onBack }) => {
 
 ConnectDataSource.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
 };
 

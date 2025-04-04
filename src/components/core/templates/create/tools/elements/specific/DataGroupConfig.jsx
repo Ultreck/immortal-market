@@ -7,7 +7,7 @@ import useCurrentDesign from '@/hooks/template/use-current-design';
 import { Controller, useForm } from 'react-hook-form';
 import { useGenerateDataGroupContent } from '@/api/business';
 
-const DataGroupConfig = ({ element, onChange }) => {
+const DataGroupConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -26,7 +26,7 @@ const DataGroupConfig = ({ element, onChange }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="px-8 py-8 shadow border border-default-200 w-[350px] items-stretch">
-        <DataGroupConfigContent key={element.id} element={element} onChange={onChange} />
+        <DataGroupConfigContent key={element.id} element={element} />
       </PopoverContent>
     </Popover>
   );

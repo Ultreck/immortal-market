@@ -6,7 +6,7 @@ import { useState } from 'react';
 import ShapeSwap from '@/components/core/templates/create/tools/elements/specific/shape/ShapeSwap.jsx';
 import useDesignStore from '@/store/design.js';
 
-const ShapeConfig = ({ element, onChange }) => {
+const ShapeConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -47,7 +47,7 @@ const ShapeConfig = ({ element, onChange }) => {
             </div>
           </div>
         )}
-        {view === 'swap' && <ShapeSwap element={element} onChange={onChange} onBack={() => setView('home')} />}
+        {view === 'swap' && <ShapeSwap element={element} onBack={() => setView('home')} />}
       </PopoverContent>
     </Popover>
   );
@@ -55,7 +55,6 @@ const ShapeConfig = ({ element, onChange }) => {
 
 ShapeConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default ShapeConfig;

@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { IoSwapHorizontal } from 'react-icons/io5';
 import useDesignStore from '@/store/design.js';
 
-const ImageConfig = ({ element, onChange }) => {
+const ImageConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool) || '';
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -50,11 +50,11 @@ const ImageConfig = ({ element, onChange }) => {
                   <TbChevronRight size="20" />
                 </CardBody>
               </Card>
-              <ImageEffect elements={[element]} onChange={onChange} />
+              <ImageEffect elements={[element]} />
             </div>
           </div>
         )}
-        {view === 'swap' && <ImageSwap element={element} onChange={onChange} onBack={() => setView('home')} />}
+        {view === 'swap' && <ImageSwap element={element} onBack={() => setView('home')} />}
       </PopoverContent>
     </Popover>
   );
@@ -62,7 +62,6 @@ const ImageConfig = ({ element, onChange }) => {
 
 ImageConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default ImageConfig;

@@ -3,8 +3,11 @@ import { standard } from '@/lib/design/charts.jsx';
 import PropTypes from 'prop-types';
 import { Button, addToast } from '@heroui/react';
 import { RiArrowLeftSLine } from 'react-icons/ri';
+import useDesignStore from '@/store/design.js';
 
-const ChangeChart = ({ element, onChange, onBack }) => {
+const ChangeChart = ({ element, onBack }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   const filteredCharts = useMemo(() => {
     const areKeysEqual = (keys1, keys2) => {
       if (!keys1 || !keys2) return false;
@@ -36,10 +39,11 @@ const ChangeChart = ({ element, onChange, onBack }) => {
             className="cursor-pointer rounded-2xl"
             key={e.id}
             onClick={() => {
-              onChange({ ...element, config: { ...element.config, name: e.data.config.name } });
-              addToast({ 
+              updateElement(element.id, { config: { ...element.config, name: e.data.config.name } }, true);
+              addToast({
                 title: 'Chart updated',
-                color: 'success'
+                description: 'The chart has been updated successfully',
+                color: 'success',
               });
             }}
           >
@@ -54,7 +58,6 @@ const ChangeChart = ({ element, onChange, onBack }) => {
 
 ChangeChart.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
 };
 

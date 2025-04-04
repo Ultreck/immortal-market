@@ -6,13 +6,14 @@ import PropTypes from 'prop-types';
 import icons from '@/lib/design/icons.js';
 import useDesignStore from '@/store/design.js';
 
-const IconConfig = ({ element, onChange }) => {
+const IconConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   const handleSelectIcons = (icon) => {
-    onChange({ ...element, config: icon });
+    updateElement(element.id, { config: icon }, true);
   };
 
   return (
@@ -67,7 +68,6 @@ IconConfig.propTypes = {
     style: PropTypes.object,
     config: PropTypes.object,
   }),
-  onChange: PropTypes.func.isRequired,
 };
 
 export default IconConfig;

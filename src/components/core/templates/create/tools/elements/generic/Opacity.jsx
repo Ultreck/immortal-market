@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import useDesignStore from '@/store/design.js';
 
-const Opacity = ({ elements, onChange }) => {
+const Opacity = ({ elements }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
   const value = useResolveValue(elements.map((e) => e?.style?.opacity ?? 1));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
     if (isNaN(v)) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, opacity: v } })));
+    updateElements(
+      elements.map((e) => ({ elementId: e.id, updates: { style: { ...e.style, opacity: v } } })),
+      true
+    );
   };
 
   return (
@@ -71,7 +75,6 @@ const Opacity = ({ elements, onChange }) => {
 
 Opacity.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Opacity;

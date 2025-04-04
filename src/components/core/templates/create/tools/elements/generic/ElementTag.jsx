@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import { HiOutlineTag, HiTag } from 'react-icons/hi2';
 import useDesignStore from '@/store/design.js';
 
-const ElementTag = ({ element, onChange }) => {
+const ElementTag = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElement = useDesignStore((state) => state.updateElement);
+
+  const onChange = ({ tag }) => {
+    updateElement(element.id, { tag }, true);
+  };
 
   return (
     <Popover
@@ -29,7 +34,7 @@ const ElementTag = ({ element, onChange }) => {
             <Switch
               isSelected={!!element.tag?.enabled}
               onValueChange={(v) => {
-                onChange({ ...element, tag: { ...element.tooltip, enabled: v } });
+                onChange({ tag: { ...element.tag, enabled: v } });
               }}
             />
           </div>
@@ -41,7 +46,6 @@ const ElementTag = ({ element, onChange }) => {
 
 ElementTag.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default ElementTag;

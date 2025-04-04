@@ -2,8 +2,11 @@ import { Switch } from '@heroui/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import PropTypes from 'prop-types';
+import useDesignStore from '@/store/design';
 
-const YAxisConfig = ({ element, onChange }) => {
+const YAxisConfig = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   return (
     <div className="border border-default-200 px-6 py-5 rounded-2xl space-y-4">
       <div className="flex items-center justify-between">
@@ -12,10 +15,11 @@ const YAxisConfig = ({ element, onChange }) => {
           isSelected={!!element.config.yAxis?.enabled}
           size="sm"
           onValueChange={(v) => {
-            onChange({
-              ...element,
-              config: { ...element.config, yAxis: { ...element.config.yAxis, enabled: v } },
-            });
+            updateElement(
+              element.id,
+              { config: { ...element.config, yAxis: { ...element.config.yAxis, enabled: v } } },
+              true
+            );
           }}
         />
       </div>
@@ -27,10 +31,11 @@ const YAxisConfig = ({ element, onChange }) => {
               variant="bordered"
               value={element.config.yAxis.fontSize}
               onChange={(v) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, yAxis: { ...element.config.yAxis, fontSize: Number(v) } },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, yAxis: { ...element.config.yAxis, fontSize: Number(v) } } },
+                  true
+                )
               }
               min={1}
               max={30}
@@ -43,10 +48,11 @@ const YAxisConfig = ({ element, onChange }) => {
               size="sm"
               color={element.config.yAxis.color}
               onChange={(color) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, yAxis: { ...element.config.yAxis, color: color } },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, yAxis: { ...element.config.yAxis, color: color } } },
+                  true
+                )
               }
             />
           </div>
@@ -57,10 +63,11 @@ const YAxisConfig = ({ element, onChange }) => {
               color="default"
               isSelected={!!element.config.yAxis?.grid}
               onValueChange={(v) => {
-                onChange({
-                  ...element,
-                  config: { ...element.config, yAxis: { ...element.config.yAxis, grid: v } },
-                });
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, yAxis: { ...element.config.yAxis, grid: v } } },
+                  true
+                );
               }}
             />
           </div>
@@ -72,7 +79,6 @@ const YAxisConfig = ({ element, onChange }) => {
 
 YAxisConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default YAxisConfig;

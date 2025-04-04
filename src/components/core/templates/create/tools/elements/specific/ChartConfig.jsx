@@ -6,7 +6,7 @@ import StandardPieCommonConfig from '@/components/core/templates/create/tools/el
 import useDesignStore from '@/store/design.js';
 import ErrorBoundary from '@/components/ErrorBoundary.jsx';
 
-const ChartConfig = ({ element, onChange }) => {
+const ChartConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -28,7 +28,7 @@ const ChartConfig = ({ element, onChange }) => {
       <PopoverContent className="p-0 shadow border border-default-200 h-full max-h-[500px] overflow-y-auto block">
         <div className="px-8 py-6 w-full">
           <ErrorBoundary>
-            <ChartData element={element} onChange={onChange} onClose={() => closeTool()} />
+            <ChartData element={element} onClose={() => closeTool()} />
           </ErrorBoundary>
         </div>
       </PopoverContent>
@@ -36,11 +36,11 @@ const ChartConfig = ({ element, onChange }) => {
   );
 };
 
-const ChartData = ({ element, onChange }) => {
+const ChartData = ({ element }) => {
   return (
     <div>
       {['pie', 'pie-2', 'semi-pie', 'semi-pie-2'].includes(element.config.name) && (
-        <StandardPieCommonConfig element={element} onChange={onChange} />
+        <StandardPieCommonConfig element={element} />
       )}
       {[
         'bar',
@@ -55,7 +55,7 @@ const ChartData = ({ element, onChange }) => {
         'alt-bar',
         'bubble',
         'scatter',
-      ].includes(element.config.name) && <StandardBarCommonConfig element={element} onChange={onChange} />}
+      ].includes(element.config.name) && <StandardBarCommonConfig element={element} />}
     </div>
   );
 };
@@ -72,11 +72,10 @@ const propTypes = {
     style: PropTypes.object,
     config: PropTypes.object,
   }),
-  onChange: PropTypes.func.isRequired,
 };
 
 ChartConfig.propTypes = propTypes;
 
-ChartData.propTypes = { ...propTypes, onBack: PropTypes.func, onClose: PropTypes.func };
+ChartData.propTypes = { ...propTypes, onClose: PropTypes.func };
 
 export default ChartConfig;

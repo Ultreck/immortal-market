@@ -6,7 +6,7 @@ import { isValidJsonArray } from '@/lib/utils.js';
 import { useState } from 'react';
 import useDesignStore from '@/store/design.js';
 
-const TableConfig = ({ element, onChange }) => {
+const TableConfig = ({ element }) => {
   const [tab, setTab] = useState('data');
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -16,11 +16,12 @@ const TableConfig = ({ element, onChange }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   const onSubmit = async (values) => {
     const { json } = values;
     const data = JSON.parse(json);
-    onChange({ ...element, config: { ...(element?.config || {}), data } });
+    updateElement(element.id, { config: { ...(element?.config || {}), data } }, true);
     closeTool();
   };
 
@@ -103,7 +104,6 @@ TableConfig.propTypes = {
     config: PropTypes.object,
     theme: PropTypes.string,
   }),
-  onChange: PropTypes.func.isRequired,
 };
 
 export default TableConfig;

@@ -7,7 +7,7 @@ import MapChart from '@/components/core/templates/create/tools/elements/specific
 import { TbSettings2 } from 'react-icons/tb';
 import useDesignStore from '@/store/design.js';
 
-const MapConfig = ({ element, onChange }) => {
+const MapConfig = ({ element }) => {
   const [tab, setTab] = useState('data');
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
@@ -42,13 +42,13 @@ const MapConfig = ({ element, onChange }) => {
             onSelectionChange={setTab}
           >
             <Tab key="data" title="Data" className="text-base">
-              <MapData element={element} onChange={onChange} />
+              <MapData element={element} />
             </Tab>
             <Tab key="setting" title="Setting" className="text-base">
-              <MapSettings element={element} onChange={onChange} />
+              <MapSettings element={element} />
             </Tab>
             <Tab key="chart" title="Chart" className="text-base">
-              <MapChart element={element} onChange={onChange} />
+              <MapChart element={element} />
             </Tab>
           </Tabs>
         </div>
@@ -59,7 +59,6 @@ const MapConfig = ({ element, onChange }) => {
 
 MapConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default MapConfig;

@@ -3,6 +3,7 @@ import { Button } from '@heroui/react';
 import { HiChevronLeft } from 'react-icons/hi';
 import PropTypes from 'prop-types';
 import { capitalize } from '@/lib/utils.js';
+import useDesignStore from '@/store/design.js';
 
 const items = Object.keys(shapes).map((name) => ({
   id: name,
@@ -16,9 +17,11 @@ const items = Object.keys(shapes).map((name) => ({
   ),
 }));
 
-const ShapeSwap = ({ element, onChange, onBack }) => {
+const ShapeSwap = ({ element, onBack }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   const handleChange = (shape) => {
-    onChange({ ...element, config: { ...element.config, name: shape.name }, text: shape.text });
+    updateElement(element.id, { config: { ...element.config, name: shape.name }, text: shape.text }, true);
   };
 
   return (
@@ -42,7 +45,6 @@ const ShapeSwap = ({ element, onChange, onBack }) => {
 
 ShapeSwap.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
 };
 

@@ -8,7 +8,7 @@ import FrameCarouselConfig from '@/components/core/templates/create/tools/elemen
 import FrameTabsConfig from '@/components/core/templates/create/tools/elements/specific/frame/FrameTabsConfig.jsx';
 import useDesignStore from '@/store/design.js';
 
-const FrameConfig = ({ element, onChange }) => {
+const FrameConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -48,12 +48,12 @@ const FrameConfig = ({ element, onChange }) => {
                   </CardBody>
                 </Card>
               )}
-              {element.config.name === 'carousel' && <FrameCarouselConfig element={element} onChange={onChange} />}
-              {element.config.name === 'tabs' && <FrameTabsConfig element={element} onChange={onChange} />}
+              {element.config.name === 'carousel' && <FrameCarouselConfig element={element} />}
+              {element.config.name === 'tabs' && <FrameTabsConfig element={element} />}
             </div>
           </div>
         )}
-        {view === 'swap' && <FrameSwap element={element} onChange={onChange} onBack={() => setView('home')} />}
+        {view === 'swap' && <FrameSwap element={element} onBack={() => setView('home')} />}
       </PopoverContent>
     </Popover>
   );

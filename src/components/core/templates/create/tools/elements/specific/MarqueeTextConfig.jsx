@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { TbMinus, TbPlus, TbSettings2 } from 'react-icons/tb';
 import useDesignStore from '@/store/design.js';
 
-const MarqueeTextConfig = ({ element, onChange }) => {
+const MarqueeTextConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   return (
     <Popover
@@ -32,7 +33,10 @@ const MarqueeTextConfig = ({ element, onChange }) => {
                 onChange={(e) => {
                   const texts = [...element.config.texts];
                   texts[i] = e.target.value;
-                  onChange({ ...element, config: { ...element.config, texts } });
+                  updateElement(element.id, { config: { ...element.config, texts } });
+                }}
+                onBlur={() => {
+                  updateElement(element.id, { config: { ...element.config } }, true);
                 }}
               />
               <Button
@@ -42,7 +46,7 @@ const MarqueeTextConfig = ({ element, onChange }) => {
                 onPress={() => {
                   const texts = [...element.config.texts];
                   texts.splice(i, 1);
-                  onChange({ ...element, config: { ...element.config, texts } });
+                  updateElement(element.id, { config: { ...element.config, texts } }, true);
                 }}
               >
                 <TbMinus size="20" />
@@ -56,7 +60,7 @@ const MarqueeTextConfig = ({ element, onChange }) => {
               className="text-base"
               onPress={() => {
                 const texts = [...element.config.texts, ''];
-                onChange({ ...element, config: { ...element.config, texts } });
+                updateElement(element.id, { config: { ...element.config, texts } }, true);
               }}
             >
               <TbPlus size="20" />
@@ -69,10 +73,7 @@ const MarqueeTextConfig = ({ element, onChange }) => {
 };
 
 MarqueeTextConfig.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.object,
-  }),
-  onChange: PropTypes.func.isRequired,
+  element: PropTypes.object.isRequired,
 };
 
 export default MarqueeTextConfig;

@@ -2,8 +2,10 @@ import { Input } from '@heroui/react';
 import PropTypes from 'prop-types';
 import fields from '@/lib/design/map.js';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
+import useDesignStore from '@/store/design.js';
 
-const MapData = ({ element, onChange }) => {
+const MapData = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
   const keys = fields[element.config.name]?.sort();
 
   return (
@@ -23,10 +25,7 @@ const MapData = ({ element, onChange }) => {
           } else {
             data = [...element.config.data, { label: key, ...changes }];
           }
-          onChange({
-            ...element,
-            config: { ...element.config, data, labelsCount: data.length },
-          });
+          updateElement(element.id, { config: { ...element.config, data, labelsCount: data.length } }, true);
         };
 
         return (
@@ -48,7 +47,6 @@ const MapData = ({ element, onChange }) => {
 
 MapData.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default MapData;

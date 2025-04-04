@@ -77,10 +77,11 @@ const options = [
   { value: '∑', text: 'Summation', type: 'prefix' },
 ];
 
-const CountUpNumberConfig = ({ element, onChange }) => {
+const CountUpNumberConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   return (
     <Popover
@@ -103,7 +104,7 @@ const CountUpNumberConfig = ({ element, onChange }) => {
               variant="bordered"
               value={element.config.start}
               onChange={(v) => {
-                onChange({ ...element, config: { ...element.config, start: v } });
+                updateElement(element.id, { config: { ...element.config, start: v } }, true);
               }}
               aria-label="Start number"
               min={0}
@@ -117,7 +118,7 @@ const CountUpNumberConfig = ({ element, onChange }) => {
               variant="bordered"
               value={element.config.end}
               onChange={(v) => {
-                onChange({ ...element, config: { ...element.config, end: v } });
+                updateElement(element.id, { config: { ...element.config, end: v } }, true);
               }}
               aria-label="End number"
               min={0}
@@ -133,7 +134,7 @@ const CountUpNumberConfig = ({ element, onChange }) => {
               variant="bordered"
               value={element.config.duration}
               onChange={(v) => {
-                onChange({ ...element, config: { ...element.config, duration: v } });
+                updateElement(element.id, { config: { ...element.config, duration: v } }, true);
               }}
               aria-label="Duration"
               min={1}
@@ -154,7 +155,7 @@ const CountUpNumberConfig = ({ element, onChange }) => {
                   suffix: value.type === 'suffix' ? value.value : undefined,
                   prefix: value.type === 'prefix' ? value.value : undefined,
                 };
-                onChange({ ...element, config: { ...element.config, ...suffixAndPrefix } });
+                updateElement(element.id, { config: { ...element.config, ...suffixAndPrefix } }, true);
               }}
             >
               {options.map((_) => (
@@ -169,14 +170,7 @@ const CountUpNumberConfig = ({ element, onChange }) => {
 };
 
 CountUpNumberConfig.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.shape({
-      start: PropTypes.number.isRequired,
-      end: PropTypes.number.isRequired,
-      duration: PropTypes.number.isRequired,
-    }),
-  }),
-  onChange: PropTypes.func.isRequired,
+  element: PropTypes.object.isRequired,
 };
 
 export default CountUpNumberConfig;

@@ -17,23 +17,21 @@ const extractColors = (svg) => {
   return uniqueColors;
 };
 
-const SvgConfig = ({ element, onChange }) => {
+const SvgConfig = ({ element }) => {
   const [colors, setColors] = useState({});
   const { data } = useGetSvgCodeFromUrl(element.config.src);
   const [selected, setSelected] = useState(Object.keys(colors)[0]);
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   const handleChange = useCallback(
     (_colors) => {
       setColors((v) => ({ ...v, ..._colors }));
-      onChange({
-        ...element,
-        config: { ...element.config, colors: _colors },
-      });
+      updateElement(element.id, { config: { ...element.config, colors: _colors } }, true);
     },
-    [element, onChange]
+    [element, updateElement]
   );
 
   useEffect(() => {
@@ -101,10 +99,7 @@ const SvgConfig = ({ element, onChange }) => {
 };
 
 SvgConfig.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.object,
-  }),
-  onChange: PropTypes.func.isRequired,
+  element: PropTypes.object.isRequired,
 };
 
 export default SvgConfig;

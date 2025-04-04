@@ -10,7 +10,7 @@ const Layout = ({ element }) => {
   const updateElement = useDesignStore((state) => state.updateElement);
 
   const onChange = (updates) => {
-    updateElement(element.id, updates);
+    updateElement(element.id, updates, true);
   };
 
   return (
@@ -89,7 +89,6 @@ const Layout = ({ element }) => {
 
 Layout.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Layout;

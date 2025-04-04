@@ -5,10 +5,11 @@ import { cn } from '@/lib/utils';
 import { LuMousePointerClick } from 'react-icons/lu';
 import useDesignStore from '@/store/design.js';
 
-const ElementTooltip = ({ element, onChange }) => {
+const ElementTooltip = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   return (
     <Popover
@@ -78,7 +79,7 @@ const ElementTooltip = ({ element, onChange }) => {
                 <div
                   className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60"
                   onClick={() => {
-                    onChange({ ...element, tooltip: { ...element.tooltip, type: 'text' } });
+                    updateElement(element.id, { tooltip: { ...element.tooltip, type: 'text' } }, true);
                   }}
                 >
                   <TbAbc className="w-full h-full" />
@@ -95,7 +96,6 @@ const ElementTooltip = ({ element, onChange }) => {
 
 ElementTooltip.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default ElementTooltip;

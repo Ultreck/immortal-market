@@ -2,8 +2,11 @@ import { Switch } from '@heroui/react';
 import AutoCompleteNumberInput from '@/components/ui/AutoCompleteNumberInput.jsx';
 import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import PropTypes from 'prop-types';
+import useDesignStore from '@/store/design';
 
-const XAxisConfig = ({ element, onChange }) => {
+const XAxisConfig = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   return (
     <div className="border border-default-200 px-6 py-5 rounded-2xl space-y-4">
       <div className="flex items-center justify-between">
@@ -12,10 +15,11 @@ const XAxisConfig = ({ element, onChange }) => {
           isSelected={!!element.config.xAxis?.enabled}
           size="sm"
           onValueChange={(v) => {
-            onChange({
-              ...element,
-              config: { ...element.config, xAxis: { ...element.config.xAxis, enabled: v } },
-            });
+            updateElement(
+              element.id,
+              { config: { ...element.config, xAxis: { ...element.config.xAxis, enabled: v } } },
+              true
+            );
           }}
         />
       </div>
@@ -27,10 +31,11 @@ const XAxisConfig = ({ element, onChange }) => {
               variant="bordered"
               value={element.config.xAxis.fontSize}
               onChange={(v) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, xAxis: { ...element.config.xAxis, fontSize: Number(v) } },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, xAxis: { ...element.config.xAxis, fontSize: Number(v) } } },
+                  true
+                )
               }
               min={1}
               max={30}
@@ -43,10 +48,11 @@ const XAxisConfig = ({ element, onChange }) => {
               size="sm"
               color={element.config.xAxis.color}
               onChange={(color) =>
-                onChange({
-                  ...element,
-                  config: { ...element.config, xAxis: { ...element.config.xAxis, color: color } },
-                })
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, xAxis: { ...element.config.xAxis, color: color } } },
+                  true
+                )
               }
             />
           </div>
@@ -57,10 +63,11 @@ const XAxisConfig = ({ element, onChange }) => {
               color="default"
               isSelected={!!element.config.xAxis?.grid}
               onValueChange={(v) => {
-                onChange({
-                  ...element,
-                  config: { ...element.config, xAxis: { ...element.config.xAxis, grid: v } },
-                });
+                updateElement(
+                  element.id,
+                  { config: { ...element.config, xAxis: { ...element.config.xAxis, grid: v } } },
+                  true
+                );
               }}
             />
           </div>
@@ -72,7 +79,6 @@ const XAxisConfig = ({ element, onChange }) => {
 
 XAxisConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default XAxisConfig;

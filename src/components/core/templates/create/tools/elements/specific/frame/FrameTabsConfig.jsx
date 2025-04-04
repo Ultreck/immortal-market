@@ -1,36 +1,48 @@
+import useDesignStore from '@/store/design';
 import { Button, Input } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { TbPlus, TbX } from 'react-icons/tb';
 
-const FrameTabsConfig = ({ element, onChange }) => {
+const FrameTabsConfig = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   const handleChange = (e, id) => {
-    onChange({
-      ...element,
-      config: {
-        ...element.config,
-        tabs: element.config.tabs.map((t) => (t.id === id ? { ...t, title: e.target.value } : t)),
+    updateElement(
+      element.id,
+      {
+        config: {
+          ...element.config,
+          tabs: element.config.tabs.map((t) => (t.id === id ? { ...t, title: e.target.value } : t)),
+        },
       },
-    });
+      true
+    );
   };
 
   const handleRemove = (id) => {
-    onChange({
-      ...element,
-      config: {
-        ...element.config,
-        tabs: element.config.tabs.filter((t) => id !== t.id),
+    updateElement(
+      element.id,
+      {
+        config: {
+          ...element.config,
+          tabs: element.config.tabs.filter((t) => id !== t.id),
+        },
       },
-    });
+      true
+    );
   };
 
   const handleAdd = () => {
-    onChange({
-      ...element,
-      config: {
-        ...element.config,
-        tabs: [...element.config.tabs, { id: element.config.tabs.length + 1, title: 'New tab' }],
+    updateElement(
+      element.id,
+      {
+        config: {
+          ...element.config,
+          tabs: [...element.config.tabs, { id: element.config.tabs.length + 1, title: 'New tab' }],
+        },
       },
-    });
+      true
+    );
   };
 
   return (
@@ -61,10 +73,7 @@ const FrameTabsConfig = ({ element, onChange }) => {
 };
 
 FrameTabsConfig.propTypes = {
-  element: PropTypes.shape({
-    config: PropTypes.object,
-  }),
-  onChange: PropTypes.func.isRequired,
+  element: PropTypes.object.isRequired,
 };
 
 export default FrameTabsConfig;

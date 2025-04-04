@@ -2,6 +2,7 @@ import { Button } from '@heroui/react';
 import { HiChevronLeft } from 'react-icons/hi';
 import PropTypes from 'prop-types';
 import shapes from '@/lib/design/shapes.js';
+import useDesignStore from '@/store/design';
 
 const items = Object.keys(shapes).map((name) => ({
   id: `frame-${name}`,
@@ -15,9 +16,11 @@ const items = Object.keys(shapes).map((name) => ({
   ),
 }));
 
-const FrameSwap = ({ element, onChange, onBack }) => {
+const FrameSwap = ({ element, onBack }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   const handleChange = (frame) => {
-    onChange({ ...element, config: { ...element.config, name: frame.name }, text: frame.text });
+    updateElement(element.id, { config: { ...element.config, name: frame.name }, text: frame.text }, true);
   };
 
   return (
@@ -41,7 +44,6 @@ const FrameSwap = ({ element, onChange, onBack }) => {
 
 FrameSwap.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
 };
 

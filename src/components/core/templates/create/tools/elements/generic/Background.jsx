@@ -12,12 +12,13 @@ import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { RiAddLine, RiCloseLine } from 'react-icons/ri';
 import useDesignStore from '@/store/design.js';
 
-const Background = ({ elements, onChange }) => {
+const Background = ({ elements }) => {
   const [tab, setTab] = useState('solid');
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
   const value = useResolveValue(elements.map((e) => e.style.background));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   useEffect(() => {
     if (value.includes('gradient')) setTab('gradient');
@@ -28,7 +29,11 @@ const Background = ({ elements, onChange }) => {
     let color;
     if (v === 'solid') color = '#000';
     if (v === 'gradient' && !colors.includes('gradient')) color = 'linear-gradient(to right, #000000, #ffffff)';
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, background: color } })));
+    updateElements(
+      elements.map((e) => {
+        return { elementId: e.id, updates: { style: { ...e.style, background: color } } };
+      })
+    );
     setTab(v);
   };
 
@@ -62,10 +67,10 @@ const Background = ({ elements, onChange }) => {
           onSelectionChange={handleTabChange}
         >
           <Tab key="solid" title="Solid">
-            <Solid elements={elements} onChange={onChange} />
+            <Solid elements={elements} />
           </Tab>
           <Tab key="gradient" title="Gradient">
-            <Gradient elements={elements} onChange={onChange} />
+            <Gradient elements={elements} />
           </Tab>
         </Tabs>
       </PopoverContent>
@@ -88,12 +93,18 @@ const colors = [
   '#2b3793',
 ];
 
-const Solid = ({ elements, onChange }) => {
+const Solid = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style.background));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
     if (!v) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, background: v } })));
+    updateElements(
+      elements.map((e) => {
+        return { elementId: e.id, updates: { style: { ...e.style, background: v } } };
+      }),
+      true
+    );
   };
 
   const handleInputChange = (e) => {
@@ -150,13 +161,19 @@ const gradients = [
   'linear-gradient(to right, #ff512f, #dd2476) no-repeat',
 ];
 
-const Gradient = ({ elements, onChange }) => {
+const Gradient = ({ elements }) => {
   const value = useResolveValue(elements.map((e) => e.style.background));
   const [colors, setColors] = useState(extractColorsFromGradient(value));
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const handleChange = (v) => {
     if (!v) return;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, background: v } })));
+    updateElements(
+      elements.map((e) => {
+        return { elementId: e.id, updates: { style: { ...e.style, background: v } } };
+      }),
+      true
+    );
   };
 
   const handleGradientColorChange = (index, c) => {
@@ -167,7 +184,12 @@ const Gradient = ({ elements, onChange }) => {
 
   useDeepCompareEffect(() => {
     const gradient = `linear-gradient(to right, ${colors.join(', ')}) no-repeat`;
-    onChange(elements.map((e) => ({ ...e, style: { ...e.style, background: gradient } })));
+    updateElements(
+      elements.map((e) => {
+        return { elementId: e.id, updates: { style: { ...e.style, background: gradient } } };
+      }),
+      true
+    );
   }, [colors]);
 
   return (
@@ -229,7 +251,6 @@ const Gradient = ({ elements, onChange }) => {
 
 const propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 Background.propTypes = propTypes;

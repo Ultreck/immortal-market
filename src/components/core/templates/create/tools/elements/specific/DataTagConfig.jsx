@@ -14,7 +14,7 @@ const units = [
   { key: 'currency', label: 'Currency ($)' },
 ];
 
-const DataTagConfig = ({ element, onChange }) => {
+const DataTagConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
@@ -33,13 +33,13 @@ const DataTagConfig = ({ element, onChange }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="px-8 py-8 shadow border border-default-200 w-[350px] items-stretch">
-        <DataTagConfigContent key={element.id} element={element} onChange={onChange} />
+        <DataTagConfigContent key={element.id} element={element} />
       </PopoverContent>
     </Popover>
   );
 };
 
-const DataTagConfigContent = ({ element, onChange }) => {
+const DataTagConfigContent = ({ element }) => {
   const { id: business } = useBusiness();
   const id = useDesignStore((state) => state.id);
   const { source, analysis } = useCurrentDesign();
@@ -55,6 +55,7 @@ const DataTagConfigContent = ({ element, onChange }) => {
     },
   });
   const { mutateAsync: generateContent, isPending: isGenerateContentPending } = useGenerateDataTagContent(business, id);
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   const tables = source?.tables.map((table) => ({ key: table.id, label: table.name })) || [];
   const table = source?.tables.find((table) => table.id === watch().table);
@@ -82,21 +83,24 @@ const DataTagConfigContent = ({ element, onChange }) => {
 
   const onSubmit = async (data) => {
     const content = await getContent(data);
-    onChange({
-      ...element,
-      config: {
-        ...element.config,
-        table: data.table,
-        column: data.column,
-        type: data.type,
-        combination: data.combination || element.config.combination,
-        compare: data.compare || element.config.compare,
-        decimal: data.decimal,
-        unit: data.unit,
-        words: data.words,
-        content,
+    updateElement(
+      element.id,
+      {
+        config: {
+          ...element.config,
+          table: data.table,
+          column: data.column,
+          type: data.type,
+          combination: data.combination || element.config.combination,
+          compare: data.compare || element.config.compare,
+          decimal: data.decimal,
+          unit: data.unit,
+          words: data.words,
+          content,
+        },
       },
-    });
+      true
+    );
   };
 
   return (
@@ -198,34 +202,6 @@ const DataTagConfigContent = ({ element, onChange }) => {
                   </div>
                 )}
               />
-              {/* <p className="text-center border border-default-200 rounded-full w-max px-3 py-1 mx-auto">VS</p> */}
-              {/* <Controller
-                name="compare[1].combination"
-                control={control}
-                rules={{ required: 'Combination is required' }}
-                render={({ field, fieldState: { error } }) => (
-                  <div className="flex-1">
-                    <Select
-                      label="Combination"
-                      labelPlacement="outside"
-                      variant="bordered"
-                      placeholder="Select one"
-                      selectedKeys={combinations.find((c) => c.key === field.value)?.key ? [field.value] : []}
-                      onChange={(e) => field.onChange(e)}
-                      errorMessage={error?.message}
-                      isInvalid={!!error?.message}
-                      classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
-                      disableEmptySelection={true}
-                    >
-                      {combinations.map((role) => (
-                        <SelectItem key={role.key} classNames={{ title: 'text-base px-2' }}>
-                          {role.label}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  </div>
-                )}
-              /> */}
             </div>
             <hr className="border-default-200 dark:border-default-100" />
             <div className="flex flex-row justify-between items-center space-x-4">
@@ -369,11 +345,9 @@ const DataTagConfigContent = ({ element, onChange }) => {
 
 DataTagConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 DataTagConfigContent.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default DataTagConfig;

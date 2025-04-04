@@ -1,7 +1,10 @@
 import { Switch } from '@heroui/react';
 import PropTypes from 'prop-types';
+import useDesignStore from '@/store/design';
 
-const TooltipConfig = ({ element, onChange }) => {
+const TooltipConfig = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   return (
     <div className="border border-default-200 px-6 py-5 rounded-2xl space-y-4">
       <div className="flex items-center justify-between">
@@ -10,10 +13,11 @@ const TooltipConfig = ({ element, onChange }) => {
           isSelected={!!element.config.tooltip?.enabled}
           size="sm"
           onValueChange={(v) => {
-            onChange({
-              ...element,
-              config: { ...element.config, tooltip: { ...element.config.tooltip, enabled: v } },
-            });
+            updateElement(
+              element.id,
+              { config: { ...element.config, tooltip: { ...element.config.tooltip, enabled: v } } },
+              true
+            );
           }}
         />
       </div>
@@ -23,7 +27,6 @@ const TooltipConfig = ({ element, onChange }) => {
 
 TooltipConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default TooltipConfig;

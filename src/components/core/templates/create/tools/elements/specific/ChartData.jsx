@@ -9,7 +9,7 @@ import ConnectDataSource from './chart-data/ConnectDataSource';
 import ModifyAdvancedChart from './chart-data/ModifyAdvancedChart';
 import { useEffect, useState } from 'react';
 import useDesignStore from '@/store/design.js';
-import { LuDatabase, LuPlug2, LuTable } from 'react-icons/lu';
+import { LuChevronRight, LuDatabase, LuPlug2, LuTable } from 'react-icons/lu';
 
 const items = [
   {
@@ -34,7 +34,7 @@ const items = [
   },
 ];
 
-const ChartData = ({ element, onChange }) => {
+const ChartData = ({ element }) => {
   const [view, setView] = useState('home');
   const tool = useDesignStore((state) => state.tool) || '';
   const openTool = useDesignStore((state) => state.openTool);
@@ -59,36 +59,37 @@ const ChartData = ({ element, onChange }) => {
           <LuDatabase size="20" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 shadow border border-default-200 w-[400px]">
+      <PopoverContent className="p-0 shadow border border-default-200 w-[450px]">
         <div className="px-8 py-6 w-full">
           {view === 'home' && (
             <>
               <h2 className="text-lg mb-6">Configure chart</h2>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="flex flex-col gap-3">
                 {items.map((item, i) => (
                   <div
                     key={i}
                     onClick={() => setView(item.id)}
                     className={cn(
-                      'flex flex-col items-center justify-center text-center bg-default-100 rounded-2xl px-4 py-6 cursor-pointer',
+                      'flex items-center justify-between bg-default-100 rounded-2xl px-6 py-4 cursor-pointer hover:bg-default-200',
                       { 'opacity-50 cursor-not-allowed': item.disabled }
                     )}
                   >
-                    <div>{item.icon}</div>
-                    <div className="leading-[1.1] text-base mt-2">{item.title}</div>
+                    <div className="flex items-center space-x-4">
+                      <div>{item.icon}</div>
+                      <div className="leading-[1.1] text-base">{item.title}</div>
+                    </div>
+                    <LuChevronRight size="20" />
                   </div>
                 ))}
               </div>
             </>
           )}
-          {view === 'source' && (
-            <ConnectDataSource element={element} onChange={onChange} onBack={() => setView('home')} />
-          )}
-          {view === 'data' && <ConfigureData element={element} onChange={onChange} onBack={() => setView('home')} />}
+          {view === 'source' && <ConnectDataSource element={element} onBack={() => setView('home')} />}
+          {view === 'data' && <ConfigureData element={element} onBack={() => setView('home')} />}
           {view === 'data' && element.type === 'chart-a' && (
-            <ModifyAdvancedChart element={element} onChange={onChange} onBack={() => setView('home')} />
+            <ModifyAdvancedChart element={element} onBack={() => setView('home')} />
           )}
-          {view === 'change' && <ChangeChart element={element} onChange={onChange} onBack={() => setView('home')} />}
+          {view === 'change' && <ChangeChart element={element} onBack={() => setView('home')} />}
           {view === 'connection' && <NewConnection onBack={() => setView('home')} />}
         </div>
       </PopoverContent>

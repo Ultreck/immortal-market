@@ -4,25 +4,23 @@ import NumberInput from '@/components/ui/NumberInput.jsx';
 import LabelConfig from '@/components/core/templates/create/elements/charts/standard/helpers/LabelConfig.jsx';
 import LegendConfig from '@/components/core/templates/create/elements/charts/standard/helpers/LegendConfig.jsx';
 import TooltipConfig from '@/components/core/templates/create/elements/charts/standard/helpers/TooltipConfig.jsx';
+import useDesignStore from '@/store/design';
 
-const StandardPieCommonConfig = ({ element, onChange }) => {
+const StandardPieCommonConfig = ({ element }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
   return (
     <div className="flex flex-col gap-2 space-y-2">
-      <LabelConfig element={element} onChange={onChange} type="pie" />
-      <LegendConfig element={element} onChange={onChange} />
-      <TooltipConfig element={element} onChange={onChange} />
+      <LabelConfig element={element} type="pie" />
+      <LegendConfig element={element} />
+      <TooltipConfig element={element} />
       <div className="border border-default-200 px-6 py-5 rounded-2xl space-y-6">
         <div className="flex items-center justify-between">
           <p className="text-base">No. of points</p>
           <NumberInput
             variant="bordered"
             value={element.config.points}
-            onChange={(v) =>
-              onChange({
-                ...element,
-                config: { ...element.config, points: Number(v) },
-              })
-            }
+            onChange={(v) => updateElement(element.id, { config: { ...element.config, points: Number(v) } }, true)}
             min={1}
             max={element.config.data.length}
             aria-label="No of points to show"
@@ -50,7 +48,7 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
               ]}
               className="max-w-md"
               classNames={{ label: 'text-base', value: 'text-base' }}
-              onChange={(e) => onChange({ ...element, config: { ...element.config, innerRadius: e } })}
+              onChange={(e) => updateElement(element.id, { config: { ...element.config, innerRadius: e } }, true)}
               value={element.config.innerRadius}
             />
           </div>
@@ -62,7 +60,6 @@ const StandardPieCommonConfig = ({ element, onChange }) => {
 
 StandardPieCommonConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default StandardPieCommonConfig;

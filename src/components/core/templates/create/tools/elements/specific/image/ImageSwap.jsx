@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import { HiChevronLeft } from 'react-icons/hi';
 import ExternalImages from '@/components/core/templates/create/tools/elements/specific/image/ExternalImages.jsx';
 import UploadedImages from '@/components/core/templates/create/tools/elements/specific/image/UploadedImages.jsx';
+import useDesignStore from '@/store/design.js';
 
-const ImageSwap = ({ element, onChange, onBack }) => {
+const ImageSwap = ({ element, onBack }) => {
   const [tab, setTab] = useState('uploads');
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   const handleClick = (src) => {
-    onChange({ ...element, config: { ...element.config, src } });
+    updateElement(element.id, { config: { ...element.config, src } }, true);
   };
 
   return (

@@ -3,6 +3,7 @@ import useCurrentDesign from '@/hooks/template/use-current-design.js';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Select, SelectItem } from '@heroui/react';
 import { capitalize } from '@/lib/utils.js';
+import useDesignStore from '@/store/design.js';
 
 const keys = {
   'chart-s': {
@@ -39,7 +40,7 @@ const keys = {
   },
 };
 
-const DataSource = ({ element, onChange }) => {
+const DataSource = ({ element }) => {
   const { source, analysis } = useCurrentDesign();
   const { handleSubmit, control, watch } = useForm({
     defaultValues: {
@@ -55,6 +56,7 @@ const DataSource = ({ element, onChange }) => {
           : {}),
     },
   });
+  const updateElement = useDesignStore((state) => state.updateElement);
 
   const tables = source.tables.map((table) => ({ key: table.id, label: table.name })) || [];
   const table = source.tables.find((table) => table.id === watch().table);
@@ -91,7 +93,7 @@ const DataSource = ({ element, onChange }) => {
       const _field = fields.filter((field) => typeof combination.result[0][field] === 'string');
       config.keys[_keys.label] = _field.length > 0 ? _field[0] : 'band';
     }
-    onChange({ ...element, config });
+    updateElement(element.id, { config }, true);
   };
 
   return (
@@ -215,7 +217,6 @@ const DataSource = ({ element, onChange }) => {
 
 DataSource.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default DataSource;

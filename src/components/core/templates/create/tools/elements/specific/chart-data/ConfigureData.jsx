@@ -1,195 +1,329 @@
-import { Button, Input } from '@heroui/react';
-import { TbCirclePlus } from 'react-icons/tb';
+import { Button, Input, Select, SelectItem } from '@heroui/react';
 import PropTypes from 'prop-types';
-import { RiArrowLeftSLine } from 'react-icons/ri';
+import { RiArrowLeftSLine, RiAddLine, RiDeleteBinLine } from 'react-icons/ri';
+import useDesignStore from '@/store/design.js';
+import { capitalize } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
-const ConfigureData = ({ element, onChange, onBack }) => {
-  const handleChange = (updatedItem) => {
-    const updatedData = element.config.data.map((item, idx) =>
-      idx === updatedItem.index ? { ...item, ...updatedItem } : item
-    );
-    onChange({ ...element, config: { ...element.config, data: updatedData } });
+const keys = {
+  'chart-s': {
+    bar: {
+      label: 'x',
+      value: ['y'],
+    },
+    pie: {
+      label: 'name',
+      value: ['value'],
+    },
+    'pie-2': {
+      label: 'name',
+      value: ['value'],
+    },
+    'semi-pie': {
+      label: 'name',
+      value: ['value'],
+    },
+    'semi-pie-2': {
+      label: 'name',
+      value: ['value'],
+    },
+    'bar-stacked': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
+    'bar-multiple': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
+    'alt-bar': {
+      label: 'x',
+      value: ['y'],
+    },
+    line: {
+      label: 'x',
+      value: ['y'],
+    },
+    'line-multiple': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
+    area: {
+      label: 'x',
+      value: ['y'],
+    },
+    'area-multiple': {
+      label: 'x',
+      value: ['y'],
+      multiple: true,
+    },
+    scatter: {
+      label: 'x',
+      value: ['y'],
+    },
+    bubble: {
+      label: 'x',
+      value: ['y'],
+    },
+    'line-area': {
+      label: 'x',
+      value: ['yLine', 'yArea'],
+    },
+    'line-bar': {
+      label: 'x',
+      value: ['yLine', 'yBar'],
+    },
+  },
+  'chart-a': {
+    funnel: {
+      label: 'name',
+      value: ['value'],
+    },
+  },
+};
+
+const ConfigureData = ({ element, onBack }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+  const labels = Object.keys(element.config.data[0]);
+
+  const handleDataChange = (rowIndex, key, value) => {
+    const newData = [...element.config.data];
+    const parsedValue = !isNaN(parseFloat(value)) && isFinite(value) ? parseFloat(value) : value;
+    newData[rowIndex] = {
+      ...newData[rowIndex],
+      [key]: parsedValue,
+    };
+    updateElement(element.id, { config: { ...element.config, data: newData } });
   };
 
-  const handleDataChange = (index, subIndex, newValue) => {
-    const updatedData = [...element.config.data];
-    updatedData[index][subIndex] = newValue;
-    onChange({
-      ...element,
-      config: {
-        ...element.config,
-        data: updatedData,
-      },
+  const handleLabelChange = (oldKey, newKey) => {
+    const newData = element.config.data.map((row) => {
+      const newRow = { ...row };
+      newRow[newKey] = newRow[oldKey];
+      delete newRow[oldKey];
+      return newRow;
     });
+    updateElement(element.id, { config: { ...element.config, data: newData } });
   };
 
-  const getConfig = () => {
-    const { y } = element.config.keys;
-    if (typeof y === 'string' || element.config.name === 'pie') {
-      return (
-        <>
-          <div className="flex flex-col space-y-3">
-            {element.config.data.map((item, index) =>
-              Array.isArray(item) && element.config.name === 'bubble' ? (
-                <div key={index} className="grid grid-cols-2 gap-2">
-                  <Input
-                    value={item[0]}
-                    placeholder="Number of visitors"
-                    required
-                    type="number"
-                    variant="bordered"
-                    onChange={(e) => handleDataChange(index, 0, parseFloat(e.target.value))}
-                  />
-                  <Input
-                    value={item[1]}
-                    placeholder="Number of visitors"
-                    required
-                    type="number"
-                    variant="bordered"
-                    onChange={(e) => handleDataChange(index, 1, parseFloat(e.target.value))}
-                  />
-                </div>
-              ) : element.config.name !== 'scatter' ? (
-                <div key={index} className="grid grid-cols-2 gap-2">
-                  <Input
-                    value={item[element.config.keys.x]}
-                    placeholder="Browser name"
-                    required
-                    variant="bordered"
-                    classNames={{ input: 'text-base capitalize' }}
-                    onChange={(e) => {
-                      handleChange({ ...item, [element.config.keys.x]: e.target.value, index });
-                    }}
-                  />
-                  <Input
-                    value={item[element.config.keys.y]}
-                    placeholder="Number of visitors"
-                    required
-                    type="number"
-                    variant="bordered"
-                    onChange={(e) => {
-                      handleChange({ ...item, [element.config.keys.y]: Number(e.target.value), index });
-                    }}
-                  />
-                </div>
-              ) : (
-                <div key={index} className="grid grid-cols-2 gap-2">
-                  <Input
-                    value={item[3]}
-                    placeholder="name"
-                    required
-                    variant="bordered"
-                    classNames={{ input: 'text-base capitalize' }}
-                    onChange={(e) => handleDataChange(index, 3, e.target.value)}
-                  />
-                  <Input
-                    value={item[2]}
-                    placeholder="Number of visitors"
-                    required
-                    type="number"
-                    variant="bordered"
-                    onChange={(e) => handleDataChange(index, 2, Number(e.target.value))}
-                  />
-                </div>
-              )
-            )}
-            <TbCirclePlus
-              size={30}
-              onClick={() => {
-                onChange({
-                  ...element,
-                  config: {
-                    ...element.config,
-                    data: [...element.config.data, { name: 'Immortal', value: 500 }],
-                    colors: [...element.config.colors, '#000000'],
-                    bars: element.config.bars + 1,
-                    pies: element.config.pies + 1,
-                  },
-                });
-              }}
-            />
-          </div>
-        </>
-      );
-    } else if (Array.isArray(y)) {
-      return (
-        <>
-          <div className="flex flex-col space-y-3">
-            {element.config.data.map((item, index) => (
-              <div key={index} className="grid grid-cols-3 gap-2">
-                <Input
-                  value={item.month || item.name}
-                  placeholder="Month name"
-                  required
-                  variant="bordered"
-                  classNames={{ input: 'capitalize' }}
-                  onChange={(e) => {
-                    handleChange({ ...item, month: e.target.value, index });
-                  }}
-                />
-                <>
-                  {element.config.keys.y
-                    .slice(
-                      0,
-                      element.config.noOfLines || element.config.noOfBarsPerGroup || element.config.keys.y.length
-                    )
-                    .map((key, i) => (
-                      <Input
-                        key={i}
-                        value={item[key]}
-                        placeholder={key}
-                        required
-                        variant="bordered"
-                        classNames={{ input: 'text-base capitalize' }}
-                        onChange={(e) => {
-                          handleChange({ ...item, [key]: e.target.value, index });
-                        }}
-                      />
-                    ))}
-                </>
-              </div>
-            ))}
-            <TbCirclePlus
-              size={30}
-              onClick={() => {
-                onChange({
-                  ...element,
-                  config: {
-                    ...element.config,
-                    data: [
-                      ...element.config.data,
-                      { month: 'January', ...element.config.keys.y.reduce((acc, key) => ({ ...acc, [key]: 50 }), {}) },
-                    ],
-                    colors: [...element.config.colors, '#000000'],
-                    bars: element.config.bars + 1,
-                    pies: element.config.pies + 1,
-                  },
-                });
-              }}
-            />
-          </div>
-        </>
-      );
-    }
+  const handleAddColumn = () => {
+    const newColumnName = `Column ${labels.length + 1}`;
+    const newData = element.config.data.map((row) => ({
+      ...row,
+      [newColumnName]: '',
+    }));
+    updateElement(element.id, { config: { ...element.config, data: newData } });
+  };
+
+  const handleAddRow = () => {
+    const newRow = labels.reduce((acc, key) => {
+      acc[key] = '';
+      return acc;
+    }, {});
+    const newData = [...element.config.data, newRow];
+    updateElement(element.id, { config: { ...element.config, data: newData } });
+  };
+
+  const handleDeleteColumn = (columnKey) => {
+    const newData = element.config.data.map((row) => {
+      const newRow = { ...row };
+      delete newRow[columnKey];
+      return newRow;
+    });
+    updateElement(element.id, { config: { ...element.config, data: newData } });
+  };
+
+  const handleDeleteRow = (rowIndex) => {
+    const newData = element.config.data.filter((_, index) => index !== rowIndex);
+    updateElement(element.id, { config: { ...element.config, data: newData } });
   };
 
   return (
     <div>
       <div className="flex items-center space-x-1 mb-6">
-        <Button onPress={onBack} variant="bordered" className="mr-2" radius="full" isIconOnly size="sm">
+        <Button onPress={onBack} variant="flat" className="mr-2" radius="full" isIconOnly size="sm">
           <RiArrowLeftSLine size="20" />
         </Button>
         <h2 className="text-lg">Chart Data</h2>
       </div>
-      {getConfig()}
+      <div className="relative">
+        <div className="border border-default-200 rounded-xl max-h-[360px] overflow-y-auto overflow-x-auto divide-y divide-default-200">
+          <div
+            className="grid divide-x divide-default-200"
+            style={{ gridTemplateColumns: `repeat(${labels.length}, 1fr)` }}
+          >
+            {labels.map((key, index) => (
+              <div key={index} className="relative group">
+                <div className="flex items-center relative">
+                  <Input
+                    variant="flat"
+                    value={key}
+                    radius="none"
+                    classNames={{ input: 'text-base' }}
+                    onChange={(e) => handleLabelChange(key, e.target.value)}
+                  />
+                  <Button
+                    onPress={() => handleDeleteColumn(key)}
+                    variant="solid"
+                    radius="2xl"
+                    isIconOnly
+                    size="sm"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity size-min py-1.5 px-1.5 min-w-max"
+                  >
+                    <RiDeleteBinLine size="14" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+          {element.config.data.map((item, rowIndex) => (
+            <div
+              key={rowIndex}
+              className="grid divide-x divide-default-200 group"
+              style={{ gridTemplateColumns: `repeat(${labels.length}, 1fr)` }}
+            >
+              {labels.map((key, colIndex) => (
+                <div key={colIndex} className="relative">
+                  <Input
+                    variant="flat"
+                    value={item[key]}
+                    radius="none"
+                    classNames={{ input: 'text-base' }}
+                    onChange={(e) => handleDataChange(rowIndex, key, e.target.value)}
+                  />
+                  {colIndex === 0 && (
+                    <Button
+                      onPress={() => handleDeleteRow(rowIndex)}
+                      variant="solid"
+                      radius="2xl"
+                      isIconOnly
+                      size="sm"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity size-min py-1.5 px-1.5 min-w-max"
+                    >
+                      <RiDeleteBinLine size="14" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+            </div>
+          ))}
+          <div
+            className="grid divide-x divide-default-200"
+            style={{ gridTemplateColumns: `repeat(${labels.length + 1}, 1fr)` }}
+          >
+            {labels.map((_, index) => (
+              <div key={index} className="border-l border-default-200" />
+            ))}
+          </div>
+        </div>
+        <button
+          onClick={handleAddRow}
+          className="absolute top-[calc(100%-6px)] left-1/2 -translate-x-1/2 flex items-center justify-center bg-default-100 border border-default-200 rounded-lg py-0.5 px-6 w-max hover:bg-default-100 transition-colors"
+        >
+          <RiAddLine size="16" />
+        </button>
+        <button
+          onClick={handleAddColumn}
+          className="absolute left-[calc(100%-6px)] top-1/2 -translate-y-1/2 flex items-center justify-center bg-default-100 border border-default-200 rounded-lg px-0.5 py-6 h-max hover:bg-default-100 transition-colors"
+        >
+          <RiAddLine size="16" />
+        </button>
+      </div>
+      <ChartKeys element={element} className="mt-6" />
     </div>
+  );
+};
+
+const ChartKeys = ({ element, className }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+  const labels = Object.keys(element.config.data[0]);
+
+  console.log(element.type, element.config.name, element.config);
+
+  return (
+    <form className={cn('flex flex-col gap-4', className)}>
+      {[keys[element.type][element.config.name].label].map((key) => {
+        const value = element.config.keys[key];
+        const isMultiple = keys[element.type][element.config.name].multiple;
+        const options = labels.filter((c) => isNaN(element.config.data[0][c]));
+        return (
+          <div className="flex-1" key={key}>
+            <Select
+              label={capitalize(key)}
+              labelPlacement="outside"
+              placeholder={isMultiple ? 'Select one or more' : 'Select one'}
+              selectionMode={isMultiple ? 'multiple' : 'single'}
+              selectedKeys={labels.find((c) => c === value) ? [value] : []}
+              onSelectionChange={(e) => {
+                updateElement(element.id, {
+                  config: {
+                    ...element.config,
+                    keys: { ...element.config.keys, [key]: isMultiple ? Array.from(e) : Array.from(e)[0] },
+                  },
+                });
+              }}
+              classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+              disableEmptySelection={true}
+            >
+              {options.map((l) => (
+                <SelectItem key={l} classNames={{ title: 'text-base px-2' }}>
+                  {l}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
+        );
+      })}
+      {keys[element.type][element.config.name].value.map((key) => {
+        const value = element.config.keys[key];
+        const isMultiple = keys[element.type][element.config.name].multiple;
+        let selectedKeys = labels.find((c) => c === value) ? [value] : [];
+        if (isMultiple) {
+          selectedKeys = Array.isArray(value) ? value.filter((k) => labels.includes(k)) : [value];
+        }
+        const options = labels.filter((c) => !isNaN(element.config.data[0][c]));
+        return (
+          <div className="flex-1" key={key}>
+            <Select
+              label={capitalize(key)}
+              labelPlacement="outside"
+              placeholder={isMultiple ? 'Select one or more' : 'Select one'}
+              selectionMode={isMultiple ? 'multiple' : 'single'}
+              selectedKeys={selectedKeys}
+              onSelectionChange={(e) => {
+                updateElement(element.id, {
+                  config: {
+                    ...element.config,
+                    keys: { ...element.config.keys, [key]: isMultiple ? Array.from(e) : Array.from(e)[0] },
+                  },
+                });
+              }}
+              classNames={{ value: 'text-base px-2', popoverContent: 'bg-default-100' }}
+              disableEmptySelection={true}
+            >
+              {options.map((l) => (
+                <SelectItem key={l} classNames={{ title: 'text-base px-2' }}>
+                  {l}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
+        );
+      })}
+    </form>
   );
 };
 
 ConfigureData.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
+};
+
+ChartKeys.propTypes = {
+  element: PropTypes.object.isRequired,
+  className: PropTypes.string,
 };
 
 export default ConfigureData;

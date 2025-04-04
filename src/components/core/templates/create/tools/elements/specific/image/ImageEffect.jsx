@@ -1,6 +1,7 @@
 import { Select, SelectItem } from '@heroui/react';
 import useResolveValue from '@/hooks/template/use-resolve-value.js';
 import PropTypes from 'prop-types';
+import useDesignStore from '@/store/design.js';
 
 const options = [
   {
@@ -41,16 +42,17 @@ const options = [
   },
 ];
 
-const ImageEffect = ({ elements, onChange }) => {
+const ImageEffect = ({ elements }) => {
+  const updateElements = useDesignStore((state) => state.updateElements);
   const animation = useResolveValue(elements.map((e) => e?.config?.hover ?? ''));
 
   const handleChange = (e) => {
     let value = e.target.value;
     if (!value) return;
-    onChange(
+    updateElements(
       elements.map((element) => ({
-        ...element,
-        config: { ...element.config, hover: value },
+        elementId: element.id,
+        updates: { config: { ...element.config, hover: value } },
       }))
     );
   };
@@ -78,7 +80,6 @@ const ImageEffect = ({ elements, onChange }) => {
 
 ImageEffect.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default ImageEffect;

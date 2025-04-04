@@ -20,10 +20,15 @@ import AdvanceLinearChartConfig from '@/components/core/templates/create/tools/e
 import AdvanceGlobalBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceGlobalBarConfig.jsx';
 import useDesignStore from '@/store/design.js';
 
-const AdvancedChartConfig = ({ element, onChange }) => {
+const AdvancedChartConfig = ({ element }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElement = useDesignStore((state) => state.updateElement);
+
+  const onChange = ({ config }) => {
+    updateElement(element.id, { config }, true);
+  };
 
   return (
     <Popover
@@ -94,11 +99,7 @@ const AdvancedChartConfig = ({ element, onChange }) => {
 };
 
 AdvancedChartConfig.propTypes = {
-  element: PropTypes.shape({
-    type: PropTypes.string,
-    config: PropTypes.any,
-  }).isRequired,
-  onChange: PropTypes.func.isRequired,
+  element: PropTypes.object.isRequired,
 };
 
 export default AdvancedChartConfig;

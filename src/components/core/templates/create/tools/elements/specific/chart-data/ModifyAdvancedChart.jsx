@@ -2,8 +2,15 @@ import { Button, Input } from '@heroui/react';
 import PropTypes from 'prop-types';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { TbCirclePlus } from 'react-icons/tb';
+import useDesignStore from '@/store/design.js';
 
-const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
+const ModifyAdvancedChart = ({ element, onBack }) => {
+  const updateElement = useDesignStore((state) => state.updateElement);
+
+  const onChange = ({ config }) => {
+    updateElement(element.id, { config }, true);
+  };
+
   const handleChange = (updatedItem) => {
     const updatedData = element.config.data.map((item, idx) =>
       idx === updatedItem.index ? { ...item, ...updatedItem } : item
@@ -379,7 +386,6 @@ const ModifyAdvancedChart = ({ element, onChange, onBack }) => {
 
 ModifyAdvancedChart.propTypes = {
   element: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
 };
 export default ModifyAdvancedChart;

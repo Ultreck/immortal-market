@@ -5,10 +5,11 @@ import ColorPicker from '@/components/ui/ColorPicker.jsx';
 import { RiShadowLine } from 'react-icons/ri';
 import useDesignStore from '@/store/design.js';
 
-const Shadow = ({ onChange, elements }) => {
+const Shadow = ({ elements }) => {
   const tool = useDesignStore((state) => state.tool);
   const openTool = useDesignStore((state) => state.openTool);
   const closeTool = useDesignStore((state) => state.closeTool);
+  const updateElements = useDesignStore((state) => state.updateElements);
 
   const value = useResolveValue(elements.map((e) => e.style?.shadow));
 
@@ -37,11 +38,14 @@ const Shadow = ({ onChange, elements }) => {
             <ColorPicker
               color={color}
               onChange={(c) =>
-                onChange(
+                updateElements(
                   elements.map((e) => ({
-                    ...e,
-                    style: { ...e.style, shadow: `${x}px ${y}px ${blur}px ${c}` },
-                  }))
+                    elementId: e.id,
+                    updates: {
+                      style: { ...e.style, shadow: `${x}px ${y}px ${blur}px ${c}` },
+                    },
+                  })),
+                  true
                 )
               }
             />
@@ -50,11 +54,14 @@ const Shadow = ({ onChange, elements }) => {
             color="foreground"
             value={x}
             onChange={(v) =>
-              onChange(
+              updateElements(
                 elements.map((e) => ({
-                  ...e,
-                  style: { ...e.style, shadow: `${v}px ${y}px ${blur}px ${color}` },
-                }))
+                  elementId: e.id,
+                  updates: {
+                    style: { ...e.style, shadow: `${v}px ${y}px ${blur}px ${color}` },
+                  },
+                })),
+                true
               )
             }
             label="Horizontal Offset"
@@ -77,11 +84,14 @@ const Shadow = ({ onChange, elements }) => {
             color="foreground"
             value={y}
             onChange={(v) =>
-              onChange(
+              updateElements(
                 elements.map((e) => ({
-                  ...e,
-                  style: { ...e.style, shadow: `${x}px ${v}px ${blur}px ${color}` },
-                }))
+                  elementId: e.id,
+                  updates: {
+                    style: { ...e.style, shadow: `${x}px ${v}px ${blur}px ${color}` },
+                  },
+                })),
+                true
               )
             }
             label="Vertical Offset"
@@ -104,11 +114,14 @@ const Shadow = ({ onChange, elements }) => {
             color="foreground"
             value={blur}
             onChange={(v) =>
-              onChange(
+              updateElements(
                 elements.map((e) => ({
-                  ...e,
-                  style: { ...e.style, shadow: `${x}px ${y}px ${v}px ${color}` },
-                }))
+                  elementId: e.id,
+                  updates: {
+                    style: { ...e.style, shadow: `${x}px ${y}px ${v}px ${color}` },
+                  },
+                })),
+                true
               )
             }
             label="Blur Radius"
@@ -133,7 +146,6 @@ const Shadow = ({ onChange, elements }) => {
 
 Shadow.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Shadow;
