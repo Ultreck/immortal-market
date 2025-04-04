@@ -63,23 +63,13 @@ export const AdvancedPictogramShapesContent = ({ element, isChartWrapperDisabled
 
   return (
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
-      <div
-        style={{
-          paddingTop: element.config.styles.yPadding,
-          paddingLeft: element.config.styles.xPadding,
-          paddingBottom: element.config.styles.yPadding,
-          paddingRight: element.config.styles.xPadding,
-          width: element.size.width,
-          height: element.size.height,
-        }}
-        className="space-y-6 w-full"
-      >
+      <div style={{ width: element.size.width, height: element.size.height }} className="space-y-6 w-full">
         {showLabel && (
           <div
             style={{
               fontSize: element.config.labelFontSize,
-              fontWeight: element.config.styles.lFontWeight,
-              fontStyle: element.config.styles.lFontStyle,
+              fontWeight: element.config?.styles.lFontWeight,
+              fontStyle: element.config?.styles.lFontStyle,
               color: element.config.labelFontColor,
             }}
             className="flex space-x-3 capitalize"
