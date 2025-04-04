@@ -129,11 +129,7 @@ const Palettes = ({ element }) => {
 
   const handleChange = useCallback(
     (_colors) => {
-      updateElement(
-        element.id,
-        { config: { ...element.config, colors: _colors.slice(0, element.config.colors.length) } },
-        true
-      );
+      updateElement(element.id, { config: { ...element.config, colors: _colors } }, true);
     },
     [element, updateElement]
   );
@@ -178,9 +174,9 @@ const Manual = ({ element }) => {
   );
 
   useEffect(() => {
-    if (element.config.colors?.length) setColors(element.config.colors);
+    if (element.config.colors?.length) setColors(element.config.colors.slice(0, element.config.data.length));
     if (isNaN(selected)) setSelected(0);
-  }, [colors, element.config.colors, handleChange, selected]);
+  }, [colors, element.config.colors, element.config.data.length, handleChange, selected]);
 
   const onColorChange = (newColor) => {
     handleChange(element.config.colors.map((c, i) => (i === selected ? newColor : c)));
