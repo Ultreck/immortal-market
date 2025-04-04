@@ -12,15 +12,18 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  Tooltip,
 } from '@heroui/react';
-import { formatCurrency } from '@/lib/utils.js';
+import { cn, formatCurrency } from '@/lib/utils.js';
 import { RiArrowDownLine, RiArrowUpLine } from 'react-icons/ri';
 import NoData from '@/components/ui/NoData.jsx';
 import PropTypes from 'prop-types';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaChevronRight } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
+import countries from '@/lib/countries.js';
+import CountryFlag from '@/components/ui/CountryFlag.jsx';
+// import { Navigation, Scrollbar, A11y,  } from 'swiper/modules';
+// import { Swiper, SwiperSlide } from 'swiper/react';
 const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +37,8 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
   //   limit: 10,
   // });
 
-  // console.log(stocks);
+  console.log(countries);
+  console.log(CountryFlag);
 
   return (
     <>
@@ -42,8 +46,46 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
         <Skeleton className="min-h-[200px] rounded-2xl" />
       ) : (
         <Card className="card-shadow px-8 py-7">
-          <div className="mb-8 flex items-center space-x-3">
-            <h3 className="text-lg font-semibold">Stocks</h3>
+          <div className="mb-8 flex items-center space-x-3 justify-between">
+            <h3 className="text-lg font-semibold w-1/2">Stocks</h3>
+            <div className="text flex">
+              {/* <Swiper
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                spaceBetween={10}
+                slidesPerView={8}
+                navigation
+                scrollbar={{ draggable: true }}
+                onSwiper={(swiper) => console.log(swiper)}
+                onSlideChange={() => console.log('slide change')}
+              > */}
+                {countries['africa'].map((c, i) => (
+                  // <SwiperSlide key={c} virtualIndex={i}>
+                  <>
+                  {i <= 6 && 
+                    <div key={c.code}>
+                      <div
+                        tabIndex={1}
+                        onClick={() => {
+                          // setCode(c.code);
+                          onSubmit(c);
+                        }}
+                        className={cn('w-fit mx-2 rounded-full border-2 transition-all duration-300')}
+                      >
+                        <Tooltip content={<span className="capitalize">{c.name}</span>} placement="bottom">
+                          <Avatar
+                            size="md"
+                            className="aspect-square h-10 w-10"
+                            icon={<CountryFlag code={c.code} className="h-full w-full cursor-pointer" rounded />}
+                            />
+                        </Tooltip>
+                      </div>
+                    </div>
+                          }
+                            </>
+                  // </SwiperSlide>
+                ))}
+              {/* </Swiper> */}
+            </div>
           </div>
           {allStocks?.length ? (
             <Table
@@ -56,7 +98,7 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                 <TableColumn>Symbol</TableColumn>
                 <TableColumn>Current Price</TableColumn>
                 <TableColumn>Change (1D)</TableColumn>
-                <TableColumn className='flex justify-center items-center'>Active Users</TableColumn>
+                <TableColumn className="flex justify-center items-center">Active Users</TableColumn>
               </TableHeader>
               <TableBody>
                 {paginatedData?.map((c) => {

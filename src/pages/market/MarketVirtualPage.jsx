@@ -1,13 +1,18 @@
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
-import { Avatar, AvatarGroup, Card } from '@heroui/react';
+import { Avatar, AvatarGroup, Button, Card } from '@heroui/react';
 // import countries from '@/lib/countries.js';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
 import CountryList from '@/pages/market/shared/CountryList.jsx';
 import { useCreateVirtualStock, useGetNigeriaVirtual } from '@/api/ai-chat';
 import { useEffect, useState } from 'react';
-
+import VirtualSideNavbar from '@/pages/market/components/Virtuals/VirtualSideNavbar.jsx'
+import VirtualStockChart from './components/Virtuals/VirtualStockChart';
+import useStocks from '@/hooks/useStocks';
+import { formatCurrency } from '@/lib/utils';
+import { useGetCurrentPrice } from '@/store/bot';
+import { useNavigate } from 'react-router-dom';
 
 const code = 'NG';
 
@@ -18,6 +23,9 @@ const MarketVirtualPage = () => {
    const {mutateAsync: createVirtualStocks, isPending: isStocksLoading} = useCreateVirtualStock({});
   // const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
   const { data: getNgVirtuals } = useGetNigeriaVirtual(countryName);
+  const {chartDatas} = useStocks({id: '6658678cc6a35aab6119fbd2'});
+  const {currentPrice} = useGetCurrentPrice();
+  const navigation = useNavigate();
   
   useEffect( () => {
    handleFetchStocks();
@@ -107,21 +115,33 @@ const MarketVirtualPage = () => {
                   </Card>
                 </div>
             </Card>
-            <Card className="card-shadow px-8 py-6 mb-6">
-              <div className="mb-4 flex items-center space-x-3">
-                <h3 className="text-lg font-semibold">Summary</h3>
-              </div>
-              <p className="opacity-80">
-                Stocks are versatile financial assets that allow traders to potentially profit from the company&#39;s
-                growth through rising share prices or dividend payments. Whether you&#39;re a seasoned investor or just
-                starting out, exploring the diverse range of Nigerian stocks can open up new opportunities. Take a look
-                at the alphabetically sorted list below to discover companies that align with your interests and
-                investment goals. Happy investing!
-              </p>
-            </Card>
+            <Card className="card-shadow px-10 my-10 py-8">
+                    <div className="space-y-5">
+                      <div className="flex justify-between">
+                        <div className="flex space-x-4">
+                          <div>
+                            <div className="flex items-center space-x-3">
+                              <div>
+                                <h1 className="text-md">{chartDatas?.stock?.symbol}</h1>
+                                <p className="mt-1 text-4xl font-bold">25%</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-x-2">
+                         <Button onPress={() => navigation('/markets/virtuals/665867a9c6a35aab6119ff78')} className="bg-green-600" color='' >Explore</Button>
+                        </div>
+                      </div>
+                      <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
+                      <VirtualStockChart state={location.state} id={'6658678cc6a35aab6119fbd2'} chartDatas={chartDatas} />
+                    </div>
+                  </Card>
             <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks}/>
           </div>
-          <CountryList setCountryName={setCountryName} />
+          {/* <CountryList setCountryName={setCountryName} /> */}
+          <div className="text relative">
+          <VirtualSideNavbar/>
+          </div>
         </div>
       </div>
     </>

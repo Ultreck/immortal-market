@@ -5,8 +5,6 @@ import PlaceOrder from './PlaceOrder';
 const ListOfOrdersModalDialog = ({ data, type = '' }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [tab, seTtab] = useState('current-orders');
-  console.log(data);
-
   return (
     <>
       {type === 'sell' ? (

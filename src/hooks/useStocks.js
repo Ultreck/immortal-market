@@ -16,7 +16,7 @@ const useStocks = ({id}) => {
   const handleGetStockDetails = async () => {
     let data = {
       stockId: id,
-      country: country,
+      country: "Nigeria",
       sessionType: timeFrame,
     };
     const res = await getStockDetails(data);
@@ -50,11 +50,10 @@ const useStocks = ({id}) => {
       };
       const res = await getStockSummary(stockSummary);
       setstockSummary(res.data.data);
-      console.log(res.data.data);
     } catch (error) {
       console.log(error);
     }
-  };
+  };  
   return {
     getStockSummary,
     getStockDetails,
@@ -70,4 +69,4 @@ const useStocks = ({id}) => {
   };
 };
 
-// export default useStocks;
+export default useStocks;

@@ -26,6 +26,10 @@ const useGetCurrentPrice = create((set) => ({
   currentPrice: null,
   setCurrentPrice: (price) => set({ currentPrice: price }),
 }));
+const useGetMarkets = create((set) => ({
+  homeMarket: '1min',
+  setHomeMarket: (mkType) => set({ homeMarket: mkType }),
+}));
 
 export {
   useChatAiStore,
@@ -34,4 +38,5 @@ export {
   useCurrentMessageSentStore,
   useGetCountryStocks,
   useGetCurrentPrice,
+  useGetMarkets,
 };
