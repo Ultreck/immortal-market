@@ -26,16 +26,20 @@ const options = [
 ];
 
 const ChartInsightsModal = ({ element, isOpen, onClose }) => {
-  const columns = Object.keys(element.config.data[0]).map((key) => ({ key, label: key }));
-  const rows = element.config.data.map((row, i) => {
-    return {
-      key: i,
-      ...columns.reduce((acc, c) => {
-        acc[c.key] = row[c.key];
-        return acc;
-      }, {}),
-    };
-  });
+  let columns = [];
+  let rows = [];
+  if (element.config.data?.length > 1) {
+    columns = Object.keys(element.config.data[0]).map((key) => ({ key, label: key }));
+    rows = element.config.data.map((row, i) => {
+      return {
+        key: i,
+        ...columns.reduce((acc, c) => {
+          acc[c.key] = row[c.key];
+          return acc;
+        }, {}),
+      };
+    });
+  }
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} width={1200} padding={false}>
