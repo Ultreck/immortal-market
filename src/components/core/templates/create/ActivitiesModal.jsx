@@ -71,6 +71,7 @@ const PageActivitiesModal = ({ page: initialPage, isOpen, onClose }) => {
           </div>
           <div className="grid grid-cols-[1fr_auto] gap-4 mb-4">
             <Select
+              aria-label="Select Page"
               variant="bordered"
               placeholder="Select Page"
               selectedKeys={[selectedPage]}
@@ -86,7 +87,7 @@ const PageActivitiesModal = ({ page: initialPage, isOpen, onClose }) => {
                 </SelectItem>
               ))}
             </Select>
-            <Dropdown placement="bottom-start">
+            <Dropdown placement="bottom-start" aria-label="Filter">
               <DropdownTrigger>
                 <Button
                   variant="bordered"
