@@ -11,7 +11,7 @@ const StandardPieCommonConfig = ({ element }) => {
 
   return (
     <div className="flex flex-col gap-2 space-y-2">
-      <LabelConfig element={element} type="pie" />
+      <LabelConfig element={element} positions={['inside', 'outside']} />
       <LegendConfig element={element} />
       <TooltipConfig element={element} />
       <div className="border border-default-200 px-6 py-5 rounded-2xl space-y-6">
@@ -46,10 +46,17 @@ const StandardPieCommonConfig = ({ element }) => {
                 { value: 90, label: '90' },
                 { value: 100, label: '100' },
               ]}
-              className="max-w-md"
-              classNames={{ label: 'text-base', value: 'text-base' }}
               onChange={(e) => updateElement(element.id, { config: { ...element.config, innerRadius: e } }, true)}
               value={element.config.innerRadius}
+              classNames={{
+                thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+                track: 'border-s-default-300',
+                filler: 'bg-gradient-to-r from-default-300 to-default-400',
+                label: 'text-base',
+                value: 'text-base opacity-60',
+              }}
+              size="sm"
+              showOutline
             />
           </div>
         )}

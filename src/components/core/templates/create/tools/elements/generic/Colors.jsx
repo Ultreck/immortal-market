@@ -174,9 +174,9 @@ const Manual = ({ element }) => {
   );
 
   useEffect(() => {
-    if (element.config.colors?.length) setColors(element.config.colors.slice(0, element.config.data.length));
+    if (element.config.colors?.length) setColors(element.config.colors.slice(0, element.config?.data?.length || 10));
     if (isNaN(selected)) setSelected(0);
-  }, [colors, element.config.colors, element.config.data.length, handleChange, selected]);
+  }, [colors, element.config.colors, element.config?.data?.length, handleChange, selected]);
 
   const onColorChange = (newColor) => {
     handleChange(element.config.colors.map((c, i) => (i === selected ? newColor : c)));

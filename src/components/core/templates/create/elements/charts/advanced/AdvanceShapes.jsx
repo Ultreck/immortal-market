@@ -49,7 +49,10 @@ export const AdvanceShapesContent = ({ element, isChartWrapperDisabled = false }
     <ElementChartWrapper element={element} isDisabled={isChartWrapperDisabled}>
       <div className="space-y-6 w-full" style={{ width: element.size.width, height: element.size.height }}>
         {label.enabled && (
-          <p className="font-semibold leading-none px-2" style={{ color: label.color, fontSize: label.fontSize }}>
+          <p
+            className="font-semibold leading-none px-2"
+            style={{ color: element.config.colors[0], fontSize: label.fontSize }}
+          >
             {formatValue()}
           </p>
         )}
@@ -63,7 +66,7 @@ export const AdvanceShapesContent = ({ element, isChartWrapperDisabled = false }
               transition={{ duration: 0.5, delay: i * 0.02 }}
             >
               {createElement(icon, {
-                color: i < n ? element.config.color : '#ddd',
+                color: i < n ? element.config.colors[1] : '#ddd',
                 size: element.config.size,
               })}
             </motion.div>

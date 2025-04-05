@@ -99,7 +99,7 @@ const AdvanceShapesConfig = ({ element }) => {
           showOutline
         />
       </div>
-      <LabelConfig element={element} remove={['position']} />
+      <LabelConfig element={element} remove={['position', 'color', 'font-family']} />
     </div>
   );
 };

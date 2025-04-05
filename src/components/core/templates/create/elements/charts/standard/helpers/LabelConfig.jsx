@@ -5,31 +5,8 @@ import PropTypes from 'prop-types';
 import { fontFamily } from '@/lib/utils.js';
 import useDesignStore from '@/store/design';
 
-const LabelConfig = ({ element, type, remove = [] }) => {
+const LabelConfig = ({ element, remove = [], positions = [] }) => {
   const updateElement = useDesignStore((state) => state.updateElement);
-
-  const _positions = {
-    pie: [
-      { key: 'inside', name: 'Inside' },
-      { key: 'outside', name: 'Outside' },
-    ],
-    bar: {
-      vertical: [
-        { key: 'top', name: 'Outside End' },
-        { key: 'insideTop', name: 'Inside Base' },
-        { key: 'insideBottom', name: 'Inside End' },
-        { key: 'center', name: 'Inside Center' },
-      ],
-      horizontal: [
-        { key: 'top', name: 'Top' },
-        { key: 'insideTop', name: 'Inside Top' },
-        { key: 'insideBottom', name: 'Inside Bottom' },
-        { key: 'center', name: 'Center' },
-      ],
-    },
-  };
-
-  const positions = type === 'pie' ? _positions.pie : _positions[element.config.layout || 'horizontal'];
 
   return (
     <div className="border border-default-200 px-6 py-5 rounded-2xl space-y-4">
@@ -67,7 +44,7 @@ const LabelConfig = ({ element, type, remove = [] }) => {
               />
             </div>
           )}
-          {!remove.includes('position') && (
+          {!remove.includes('position') && positions.length > 0 && (
             <div className="flex items-center justify-between">
               <p className="text-base">Label position</p>
               <Select
@@ -84,9 +61,9 @@ const LabelConfig = ({ element, type, remove = [] }) => {
                 }
                 disableEmptySelection={true}
               >
-                {(positions || _positions.bar.horizontal).map((type) => (
-                  <SelectItem key={type.key} classNames={{ title: 'px-2 text-base' }}>
-                    {type.name}
+                {positions.map((p) => (
+                  <SelectItem key={p} classNames={{ title: 'px-2 text-base' }}>
+                    {p}
                   </SelectItem>
                 ))}
               </Select>
@@ -201,8 +178,8 @@ const LabelConfig = ({ element, type, remove = [] }) => {
 
 LabelConfig.propTypes = {
   element: PropTypes.object.isRequired,
-  type: PropTypes.oneOf(['bar', 'pie']),
   remove: PropTypes.arrayOf(PropTypes.oneOf(['font-size', 'position', 'font-family', 'format', 'color'])),
+  positions: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default LabelConfig;

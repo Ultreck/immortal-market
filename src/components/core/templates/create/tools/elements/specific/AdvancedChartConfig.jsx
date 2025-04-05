@@ -3,7 +3,7 @@ import { TbSettings2 } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 import AdvancedStackedBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedStackedBarConfig.jsx';
 import AdvancedFunnelConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedFunnelConfig.jsx';
-import AdvancedCustomBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedCustomBarConfig.jsx';
+import AdvancedBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedBarConfig.jsx';
 import AdvancedLinearBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedLinearBarConfig.jsx';
 import AdvancedLollipopConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedLollipopConfig.jsx';
 import AdvanceCircleIconsConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceCircleIconsConfig.jsx';
@@ -17,7 +17,7 @@ import AdvancedPictogramShapesConfig from '@/components/core/templates/create/to
 import AdvancedStackedCardConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancedStackedCardConfig.jsx';
 import AdvancePercentageCardConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvancePercentageCardConfig.jsx';
 import AdvanceLinearChartConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceLinearChartConfig.jsx';
-import AdvanceGlobalBarConfig from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceGlobalBarConfig.jsx';
+import AdvanceBar2Config from '@/components/core/templates/create/tools/elements/specific/advance-config/AdvanceBar2Config.jsx';
 import useDesignStore from '@/store/design.js';
 
 const AdvancedChartConfig = ({ element }) => {
@@ -51,7 +51,8 @@ const AdvancedChartConfig = ({ element }) => {
         {element.config.name === 'stackedbar-advanced' && (
           <AdvancedStackedBarConfig element={element} onChange={onChange} />
         )}
-        {element.config.name === 'custom-bar' && <AdvancedCustomBarConfig element={element} onChange={onChange} />}
+        {element.config.name === 'bar' && <AdvancedBarConfig element={element} onChange={onChange} />}
+        {element.config.name === 'bar-2' && <AdvanceBar2Config element={element} onChange={onChange} />}
         {element.config.name === 'linear-bar' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
         {element.config.name === 'semi-meter' && <AdvancedLinearBarConfig element={element} onChange={onChange} />}
         {element.config.name === 'lollipop' && <AdvancedLollipopConfig element={element} onChange={onChange} />}
@@ -86,7 +87,6 @@ const AdvancedChartConfig = ({ element }) => {
         {element.config.name === 'linear-advanced-bar' && (
           <AdvanceLinearChartConfig element={element} onChange={onChange} />
         )}
-        {element.config.name === 'bar-global' && <AdvanceGlobalBarConfig element={element} onChange={onChange} />}
       </PopoverContent>
     </Popover>
   );

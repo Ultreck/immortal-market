@@ -1,4 +1,3 @@
-import AdvanceCustomBar from './AdvanceCustomBar.jsx';
 import AdvanceFunnel from './AdvanceFunnel.jsx';
 import AdvanceLinearBar from './AdvanceLinearBar.jsx';
 import AdvanceLollipop from './AdvanceLollipop.jsx';
@@ -19,14 +18,16 @@ import AdvancePercentageCard from './AdvancePercentageCard.jsx';
 import AdvanceColumnCard from './AdvanceColumnCard.jsx';
 import AdvancePercentageCardTwo from './AdvancePercentageCardTwo.jsx';
 import AdvanceLinearChart from '@/components/core/templates/create/elements/charts/advanced/AdvanceLinearChart.jsx';
-import AdvanceGlobalBar from '@/components/core/templates/create/elements/charts/advanced/AdvanceGlobalBar.jsx';
 import AdvanceSemiMeter from '@/components/core/templates/create/elements/charts/advanced/AdvanceSemiMeter.jsx';
+import { AdvanceBar } from './AdvanceBar.jsx';
+import { AdvanceBar2 } from './AdvanceBar2.jsx';
 
 const AdvanceCharts = ({ element, active, onChange }) => {
   const components = {
     shapes: AdvanceShapes,
     'linear-bar': AdvanceLinearBar,
-    'custom-bar': AdvanceCustomBar,
+    bar: AdvanceBar,
+    'bar-2': AdvanceBar2,
     lollipop: AdvanceLollipop,
     funnel: AdvanceFunnel,
     'tree-map': AdvanceTreeMap,
@@ -43,7 +44,6 @@ const AdvanceCharts = ({ element, active, onChange }) => {
     'column-card': AdvanceColumnCard,
     'percentage-card-2': AdvancePercentageCardTwo,
     'linear-advanced-bar': AdvanceLinearChart,
-    'bar-global': AdvanceGlobalBar,
     'semi-meter': AdvanceSemiMeter,
   };
 

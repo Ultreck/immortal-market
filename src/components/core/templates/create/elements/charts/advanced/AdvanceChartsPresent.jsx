@@ -1,5 +1,4 @@
 import { createElement } from 'react';
-import { AdvancedCustomBarContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceCustomBar.jsx';
 import { AdvanceCircleIconsContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceCircleIcons.jsx';
 import PropTypes from 'prop-types';
 import { AdvanceFunnelChartContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceFunnel.jsx';
@@ -19,13 +18,15 @@ import { AdvancePercentageCardContent } from './AdvancePercentageCard.jsx';
 import { AdvanceColumnCardElementContent } from './AdvanceColumnCard.jsx';
 import { AdvancePercentageCardTwoElementContent } from './AdvancePercentageCardTwo';
 import { AdvanceDynamicSortingChartContent } from './AdvancedScatterLifeExpectancy.jsx';
-import { AdvanceGlobalBarContent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceGlobalBar.jsx';
+import { AdvanceBarPresent } from '@/components/core/templates/create/elements/charts/advanced/AdvanceBar.jsx';
+import { AdvanceBar2Present } from '@/components/core/templates/create/elements/charts/advanced/AdvanceBar2.jsx';
 
 const AdvanceChartsPresent = ({ element, ...props }) => {
   const components = {
     shapes: AdvanceShapesContent,
     'linear-bar': AdvanceLinearBarContent,
-    'custom-bar': AdvancedCustomBarContent,
+    bar: AdvanceBarPresent,
+    'bar-2': AdvanceBar2Present,
     lollipop: AdvanceLollipopContent,
     funnel: AdvanceFunnelChartContent,
     'tree-map': AdvanceTreeMapContent,
@@ -42,7 +43,6 @@ const AdvanceChartsPresent = ({ element, ...props }) => {
     'column-card': AdvanceColumnCardElementContent,
     'percentage-card-2': AdvancePercentageCardTwoElementContent,
     'linear-advanced-bar': AdvanceLinearBarContent,
-    'bar-global': AdvanceGlobalBarContent,
     'semi-meter': AdvanceSemiMeter,
   };
 

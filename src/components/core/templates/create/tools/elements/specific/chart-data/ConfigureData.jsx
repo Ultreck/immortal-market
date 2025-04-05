@@ -245,6 +245,14 @@ const keys = {
         icon: 'string',
       },
     },
+    bar: {
+      label: 'label',
+      value: ['value'],
+    },
+    'bar-2': {
+      label: 'label',
+      value: ['value'],
+    },
   },
 };
 

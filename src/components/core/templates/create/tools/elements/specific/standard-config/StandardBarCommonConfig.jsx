@@ -10,6 +10,12 @@ import useDesignStore from '@/store/design';
 
 const StandardBarCommonConfig = ({ element }) => {
   const updateElement = useDesignStore((state) => state.updateElement);
+  const { orientation } = element.config;
+
+  const positions = {
+    vertical: ['top', 'insideTop', 'insideBottom', 'center'],
+    horizontal: ['start', 'insideStart', 'insideEnd', 'center'],
+  };
 
   return (
     <div>
@@ -18,7 +24,7 @@ const StandardBarCommonConfig = ({ element }) => {
         <XAxisConfig element={element} />
         <YAxisConfig element={element} />
         <LegendConfig element={element} />
-        <LabelConfig element={element} type="bar" />
+        <LabelConfig element={element} positions={positions[orientation] || []} />
         <div className="border border-default-200 px-6 py-5 rounded-2xl space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-base opacity-75 whitespace-nowrap">No. of points:</p>
@@ -64,12 +70,19 @@ const StandardBarCommonConfig = ({ element }) => {
                   step={1}
                   maxValue={30}
                   minValue={0}
-                  className="max-w-md"
-                  classNames={{ label: 'text-base', value: 'text-base' }}
                   onChange={(e) =>
                     updateElement(element.id, { config: { ...element.config, gap: Array.isArray(e) ? e[0] : e } }, true)
                   }
                   value={element.config.gap || 0}
+                  classNames={{
+                    thumb: 'before:hidden after:hidden bg-default-700 w-[16px] h-[16px] rounded-full',
+                    track: 'border-s-default-300',
+                    filler: 'bg-gradient-to-r from-default-300 to-default-400',
+                    label: 'text-base',
+                    value: 'text-base opacity-60',
+                  }}
+                  size="sm"
+                  showOutline
                 />
               </div>
             </>

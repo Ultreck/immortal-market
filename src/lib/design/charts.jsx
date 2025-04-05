@@ -917,19 +917,56 @@ export const advanced = [
     ),
   },
   {
-    id: 'chart-a-bar-global',
+    id: 'chart-a-bar',
     category: 'general',
     data: {
       type: 'chart-a',
-      text: 'Bar Chart Global',
+      text: 'Bar Chart',
       size: {
         width: 500,
         height: 400,
       },
-      style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-global' }),
+      style: getElementDefaultStyle({ type: 'chart-a', name: 'bar' }),
       config: {
-        name: 'bar-global',
-        styles: getChartsDefaultStyle({ type: 'chart-a', name: 'bar-global' }),
+        name: 'bar',
+        orientation: 'horizontal',
+        data: [
+          { label: 'Bubble one', value: 30, icon: 'fa fa-user' },
+          { label: 'Bubble two', value: 50, icon: 'fa fa-house' },
+          { label: 'Bubble three', value: 20, icon: 'fa fa-check' },
+          { label: 'Bubble four', value: 40, icon: 'fa fa-bell' },
+          { label: 'Bubble five', value: 60, icon: 'fa fa-star' },
+          { label: 'Bubble six', value: 10, icon: 'fa fa-asterisk' },
+          { label: 'Bubble seven', value: 70, icon: 'fa fa-gamepad' },
+          { label: 'Bubble eight', value: 15, icon: 'fa fa-film' },
+        ],
+        keys: { label: 'label', value: 'value' },
+        colors,
+        bars: 5,
+        gap: 0,
+        label: { enabled: true, fontSize: 16, color: '#000', position: 'start' },
+        alignment: 'default',
+      },
+    },
+    preview: (
+      <div className="text-black/40 dark:text-white/70 hover:text-black/50 dark:hover:text-white/60 aspect-square">
+        <TbChartBar className="w-full h-full" />
+      </div>
+    ),
+  },
+  {
+    id: 'chart-a-bar-2',
+    category: 'general',
+    data: {
+      type: 'chart-a',
+      text: 'Bar Chart',
+      size: {
+        width: 500,
+        height: 400,
+      },
+      style: getElementDefaultStyle({ type: 'chart-a', name: 'bar-2' }),
+      config: {
+        name: 'bar-2',
         data: [
           { label: 'Bubble', value: 30, icon: 'fa fa-user' },
           { label: 'Bubble', value: 50, icon: 'fa fa-house' },
@@ -940,12 +977,12 @@ export const advanced = [
           { label: 'Bubble', value: 70, icon: 'fa fa-gamepad' },
           { label: 'Bubble', value: 15, icon: 'fa fa-film' },
         ],
-        keys: { name: 'label', data: 'value' },
+        keys: { label: 'label', value: 'value' },
         colors,
         bars: 5,
-        separated: false,
-        labelPosition: 'below',
+        label: { enabled: true, fontSize: 16, color: '#000', position: 'below' },
         alignment: 'default',
+        gap: 0,
       },
     },
     preview: (
