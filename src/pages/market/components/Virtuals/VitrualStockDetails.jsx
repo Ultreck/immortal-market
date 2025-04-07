@@ -32,7 +32,7 @@ const VirtualStockDetails = () => {
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
   const [timeFrame, setTimeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('time-function');
-    return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-hour';
+    return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
@@ -143,18 +143,18 @@ const VirtualStockDetails = () => {
                                 variant="bordered"
                               >
                                 <Tab
-                                  key="1-hour"
+                                  key="1-minute"
                                   title={
                                     <div className="flex items-center space-x-2">
-                                      <span>1hr</span>
+                                      <span>1min</span>
                                     </div>
                                   }
                                 />
                                 <Tab
-                                  key="30-minutes"
+                                  key="3-minutes"
                                   title={
                                     <div className="flex items-center space-x-2">
-                                      <span>30min</span>
+                                      <span>3mins</span>
                                     </div>
                                   }
                                 />
@@ -162,15 +162,23 @@ const VirtualStockDetails = () => {
                                   key="10-minutes"
                                   title={
                                     <div className="flex items-center space-x-2">
-                                      <span>10min</span>
+                                      <span>10mins</span>
                                     </div>
                                   }
                                 />
                                 <Tab
-                                  key="5-minutes"
+                                  key="30-minutes"
                                   title={
                                     <div className="flex items-center space-x-2">
-                                      <span>5min</span>
+                                      <span>30mins</span>
+                                    </div>
+                                  }
+                                />
+                                <Tab
+                                  key="no-time"
+                                  title={
+                                    <div className="flex items-center space-x-2">
+                                      <span>No-time</span>
                                     </div>
                                   }
                                 />

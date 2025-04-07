@@ -36,10 +36,6 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
   //   period: '1y',
   //   limit: 10,
   // });
-
-  console.log(countries);
-  console.log(CountryFlag);
-
   return (
     <>
       {isStocksLoading ? (

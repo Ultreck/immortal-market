@@ -16,7 +16,7 @@ import {
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { io } from 'socket.io-client';
 import { useGetCurrentPrice } from '@/store/bot';
-import { useCreateVirtualStockDetails } from '@/api/ai-chat';
+// import { useCreateVirtualStockDetails } from '@/api/ai-chat';
 
 const dateFormatter = (date) => {
   date = new Date(date);
@@ -39,7 +39,7 @@ function limitDecimals(num, decimals) {
 const timeFormatter = (date, is24Hour = false) => {
   const validDate = date instanceof Date ? date : new Date(date);
   if (isNaN(validDate)) {
-    console.error('Invalid date:', date);
+    // console.error('Invalid date:', date);
     return 'Invalid Date';
   }
   let hours = validDate.getHours();
@@ -82,7 +82,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     });
     const handleNewSession = (msg) => {
-      console.log(msg);
+      // console.log(msg);
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
       setData((prev) => {
@@ -110,10 +110,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     return () => {
       socket.off('newSession', handleNewSession);
     };
-  }, []);
-
-  console.log(data);
-  
+  }, []);  
 
   const maxDataLength = chartDatas?.noOfRunning;
   const currentLength = data?.length ? data?.length : chartDatas?.prices?.length;

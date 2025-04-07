@@ -1,13 +1,11 @@
 import { Avatar, AvatarGroup, Card, CardBody, CardHeader } from '@heroui/react';
-import { useGetMarkets } from '@/store/bot.js';
 import { useEffect, useState } from 'react';
-import { useCreateVirtualStockDetails } from '@/api/ai-chat';
-const VirtualSideNavbar = () => {
-  const { setHomeMarket, homeMarket } = useGetMarkets();
-  const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
+// import { useCreateVirtualStockDetails } from '@/api/ai-chat';
+const VirtualSideNavbar = ({country, setHomeMarket, homeMarket}) => {
+  // const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const [timeFrame, setTimeFrame] = useState(() => {
-    const storedTimeFrame = window.localStorage.getItem('time-function');
-    return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-hour';
+    const storedTimeFrame = window.localStorage.getItem('dash-time-function');
+    return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
   useEffect(() => {
     handleGetStockDetails();
@@ -15,37 +13,47 @@ const VirtualSideNavbar = () => {
 
   const handleGetStockDetails = async () => {
     let data = {
-      stockId: '6658678cc6a35aab6119fbd2',
-      country: 'nigeria',
-      sessionType: '5-minutes',
-    };
-    const res = await getStockDetails(data);
-    setChartDatas(res.data.data);
+      "country": country,
+      "sessionType": timeFrame,
+  }
+    // const res = await getStockDetails(data);
+    // setChartDatas(res.data.data);
+  };
+
+  const handleChange = (key) => {
+    window.localStorage.setItem('dash-time-function', JSON.stringify(key));
+    setTimeFrame(key);
   };
 
   return (
     <Card className="card-shadow rounded-2xl h-[450px] sticky top-0">
       <CardHeader className="sticky top-0 px-7 pb-3 pt-6">Markets</CardHeader>
       <CardBody className="px-5 pb-5 pt-0">
-        {['1min', '3mins', '10mins', '30mins', 'No time']?.map((v, i) => (
+        {[
+          { name: '1min', value: '1-minute' },
+          { name: '3mins', value: '3-minutes' },
+          { name: '10mins', value: '10-minutes' },
+          { name: '30mins', value: '30-minutes' },
+          { name: 'No time', value: 'no-time' },
+        ]?.map((v, i) => (
           <Card
-            className={`flex hover:bg-default-100 cursor-pointer border-2 my-1 rounded-none px-3 py-2 ${v === homeMarket ? 'border-green-600 dark:border-green-700 ' : 'border-default-200 dark:border-default-100 '}`}
+            className={`flex hover:bg-default-100 cursor-pointer border-2 my-1 rounded-none px-3 py-2 ${v.name === homeMarket ? 'border-green-600 dark:border-green-700 ' : 'border-default-200 dark:border-default-100 '}`}
             shadow="none"
             key={i}
           >
             <div
               className="w-full h-full"
               onClick={() => {
-                console.log("Yo I'm clicked! Has onPress deprecated?");
-                setHomeMarket(v);
+                window.localStorage.setItem('dash-time-function', JSON.stringify(v.value));
+                setHomeMarket(v.name);                
               }}
             >
               <CardBody className="px-5 pb-5 pt-0">
                 <div className="text flex justify-between">
                   <div className="text">
-                    <div className="text-lg">{v}</div>
-                    <div className={` ${v === '10mins' || v === '3mins' ? 'text-red-600' : 'text-green-600'}`}>
-                      {v === '10mins' || v === '3mins' ? '2% Loss' : '7% gained'}
+                    <div className="text-lg">{v.name}</div>
+                    <div className={` ${v.name === '10mins' || v.name === '3mins' ? 'text-red-600' : 'text-green-600'}`}>
+                      {v.name === '10mins' || v.name === '3mins' ? '2% Loss' : '7% gained'}
                     </div>
                   </div>
                   <div className="flex items-center justify-end">

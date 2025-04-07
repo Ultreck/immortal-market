@@ -53,12 +53,15 @@ export const useCreateAIChat = () => {
   };
   
   // Virtual APIs endpoints
-  export const useGetNigeriaVirtual = (country) => {
-    return useQuery({
-      queryKey: ['virtual', 'all', 'Nigeria', country],
-      queryFn: async () => {
-        const res = await http.markettest.get(`/virtual/${country}`);
-        return res.data;
+  export const useGetStocksPerCountry = () => {
+    return useMutation({
+      mutationKey: ['virtual'],
+      mutationFn: (data) => {
+        return http.markettest.post(`/virtual`, data);
+      },
+      onError: (error) => {
+        console.error("Mutation failed:", error);
+        alert("An error occurred: " + error.message);
       },
     });
   };
