@@ -76,7 +76,6 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     });
     setData(structured);
   }, [timeFrame]);
-  
 
   useEffect(() => {
     const getSessionFunct = () => {
@@ -106,8 +105,8 @@ const VirtualStockChart = ({ chartDatas, state }) => {
       });
       setCurrentPrice(data?.at(-1) ?? null);
     };
-    socket.on('newSession', handleNewSession);
     socket.on(timeFrame, getSessionFunct);
+    socket.on('newSession', handleNewSession);
 
     return () => {
       socket.off(timeFrame, getSessionFunct);
@@ -117,7 +116,8 @@ const VirtualStockChart = ({ chartDatas, state }) => {
 
   const maxDataLength = chartDatas?.noOfRunning;
   const currentLength = data?.length ? data?.length : chartDatas?.prices?.length;
-console.log(data);
+  console.log(data);
+  console.log(chartDatas?.prices);
 
   let paddedData;
   if (data?.length > 0) {

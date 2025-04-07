@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 const code = 'NG';
 
 const VirtualStockSocket = ({ chartDatas }) => {
-  console.log(chartDatas?.startTime?.split('T')[1].split('.')[0]);
+  // console.log(chartDatas?.startTime?.split('T')[1].split('.')[0]);
   
   // const [isClosed, setIsClosed] = useState(false);
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);

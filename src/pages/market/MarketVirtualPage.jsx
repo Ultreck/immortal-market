@@ -36,12 +36,11 @@ const MarketVirtualPage = () => {
 
   useEffect(() => {
     handleFetchStocks();
-    handleGetStockDetails();
     handleGetVirtualDashboardData();
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('dash-time-function')));
   }, [countryName, dashboardTimeFrame, homeMarket]);
   useEffect(() => {
-    handleGetStockDetails();
+    handleGetVirtualDashboardData();
   }, []);
 
   const handleGetVirtualDashboardData = async () => {
@@ -52,19 +51,18 @@ const MarketVirtualPage = () => {
       };
       const res = await getVirtualDashboard(data);
       setDashData(res?.data?.data);
+      if (res) {
+        let dataChart = {
+          stockId: res?.data?.data?.mostBoughtStock?.id,
+          country: countryName,
+          sessionType: dashboardTimeFrame,
+        };
+        const chartRes = await getStockDetails(dataChart);
+        setChartDatas(chartRes.data.data);
+      }
     } catch (error) {
       console.error('Error fetching virtual dashboard data:', error);
     }
-  };
-
-  const handleGetStockDetails = async () => {
-    let data = {
-      stockId: dashData?.mostBoughtStock?.id,
-      country: countryName,
-      sessionType: dashboardTimeFrame,
-    };
-    const res = await getStockDetails(data);
-    setChartDatas(res.data.data);
   };
 
   const handleFetchStocks = async () => {
@@ -75,8 +73,6 @@ const MarketVirtualPage = () => {
     const res = await createVirtualStocks(payload);
     setStocks(res?.data?.data);
   };
-console.log(chartDatas);
-
   return (
     <>
       <MarketNavbar />
@@ -93,7 +89,9 @@ console.log(chartDatas);
                   <div>
                     <div className="flex items-center space-x-2">
                       <TbArrowUpRight size={28} color="green" />
-                      <p className="text-[1.3rem] font-semibold text-green-600">{dashData?.totalGain.toFixed(3) || 0}%</p>
+                      <p className="text-[1.3rem] font-semibold text-green-600">
+                        {dashData?.totalGain.toFixed(3) || 0}%
+                      </p>
                     </div>
                     <p className="opacity-70">Total Gained</p>
                   </div>
@@ -127,7 +125,7 @@ console.log(chartDatas);
                         </AnimatePresence>
                       </div>
                     </div>
-                      <p className="opacity-70">Top 5 companies</p>
+                    <p className="opacity-70">Top 5 companies</p>
                   </div>
                 </Card>
                 <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">

@@ -53,7 +53,7 @@ const VirtualSideNavbar = ({country, setHomeMarket, homeMarket}) => {
                   <div className="text">
                     <div className="text-lg">{v.name}</div>
                     <div className={` ${v.name === '10mins' || v.name === '3mins' ? 'text-red-600' : 'text-green-600'}`}>
-                      {v.name === '10mins' || v.name === '3mins' ? '2% Loss' : '7% gained'}
+                      {v.name === '10mins' || v.name === '3mins' ? '2% Loss' : '7% gain'}
                     </div>
                   </div>
                   <div className="flex items-center justify-end">
