@@ -4,15 +4,16 @@ import { Avatar, AvatarGroup, Button, Card } from '@heroui/react';
 // import countries from '@/lib/countries.js';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
-import CountryList from '@/pages/market/shared/CountryList.jsx';
-import { useCreateVirtualStock, useGetStocksPerCountry } from '@/api/ai-chat';
+// import CountryList from '@/pages/market/shared/CountryList.jsx';
+import { useCreateVirtualStock, useCreateVirtualStockDetails, useGetStocksPerCountry } from '@/api/ai-chat';
 import { useEffect, useState } from 'react';
 import VirtualSideNavbar from '@/pages/market/components/Virtuals/VirtualSideNavbar.jsx';
 import VirtualStockChart from './components/Virtuals/VirtualStockChart';
-import useStocks from '@/hooks/useStocks';
+// import useStocks from '@/hooks/useStocks';
 import { formatCurrency } from '@/lib/utils';
 import { useGetCurrentPrice, useGetMarkets } from '@/store/bot';
 import { useNavigate } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const code = 'NG';
 
@@ -23,6 +24,7 @@ const MarketVirtualPage = () => {
   const [countryName] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
   const { mutateAsync: createVirtualStocks, isPending: isStocksLoading } = useCreateVirtualStock({});
   const { mutateAsync: getVirtualDashboard } = useGetStocksPerCountry();
+  const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const [dashData, setDashData] = useState();
   const [chartDatas, setChartDatas] = useState([]);
   const { currentPrice } = useGetCurrentPrice();
@@ -33,11 +35,14 @@ const MarketVirtualPage = () => {
   });
 
   useEffect(() => {
-    handleGetVirtualDashboardData();
     handleFetchStocks();
     handleGetStockDetails();
+    handleGetVirtualDashboardData();
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('dash-time-function')));
   }, [countryName, dashboardTimeFrame, homeMarket]);
+  useEffect(() => {
+    handleGetStockDetails();
+  }, []);
 
   const handleGetVirtualDashboardData = async () => {
     try {
@@ -46,7 +51,6 @@ const MarketVirtualPage = () => {
         sessionType: dashboardTimeFrame,
       };
       const res = await getVirtualDashboard(data);
-      console.log(res?.data?.data);
       setDashData(res?.data?.data);
     } catch (error) {
       console.error('Error fetching virtual dashboard data:', error);
@@ -55,9 +59,9 @@ const MarketVirtualPage = () => {
 
   const handleGetStockDetails = async () => {
     let data = {
-      stockId: id,
-      country: country,
-      sessionType: timeFrame,
+      stockId: dashData?.mostBoughtStock?.id,
+      country: countryName,
+      sessionType: dashboardTimeFrame,
     };
     const res = await getStockDetails(data);
     setChartDatas(res.data.data);
@@ -71,6 +75,7 @@ const MarketVirtualPage = () => {
     const res = await createVirtualStocks(payload);
     setStocks(res?.data?.data);
   };
+console.log(chartDatas);
 
   return (
     <>
@@ -88,9 +93,7 @@ const MarketVirtualPage = () => {
                   <div>
                     <div className="flex items-center space-x-2">
                       <TbArrowUpRight size={28} color="green" />
-                      <p className="text-[1.7rem] font-semibold text-green-600">
-                        {dashData?.data?.totalPrice.toFixed(2) || 0}%
-                      </p>
+                      <p className="text-[1.3rem] font-semibold text-green-600">{dashData?.totalGain.toFixed(3) || 0}%</p>
                     </div>
                     <p className="opacity-70">Total Gained</p>
                   </div>
@@ -99,9 +102,32 @@ const MarketVirtualPage = () => {
                   <div>
                     <div className="flex items-center space-x-2">
                       <TbArrowUpRight size={28} color="green" />
-                      <p className="text-[1.7rem] font-semibold text-green-600">{dashData?.data?.totalVolume || 0}</p>
+                      <div className="text-[1.2rem] font-semibold text-green-600">
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            className="flex gap-5 w-max overflow-hidden"
+                            initial={{ y: 0, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -100, opacity: 0 }}
+                            transition={{
+                              repeat: Infinity,
+                              repeatType: 'loop',
+                              duration: 50,
+                              ease: 'linear',
+                              delay: 50,
+                            }}
+                          >
+                            {dashData?.activeCompanies?.map((company, index) => (
+                              <div key={index} className="flex items-center gap-3">
+                                <span className="text-white">{index + 1}.</span>
+                                <span className="text">{company.name.slice(0, 15) + '...'}</span>
+                              </div>
+                            ))}
+                          </motion.div>
+                        </AnimatePresence>
+                      </div>
                     </div>
-                    <p className="opacity-70">Total volume</p>
+                      <p className="opacity-70">Top 5 companies</p>
                   </div>
                 </Card>
                 <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
@@ -120,7 +146,7 @@ const MarketVirtualPage = () => {
                   <div>
                     <div className="flex items-center space-x-2">
                       <TbArrowUpRight size={28} color="green" />
-                      <p className="text-[1.7rem] font-semibold text-green-600">{dashData?.data?.percentGain || 0}</p>
+                      <p className="text-[1.3rem] font-semibold text-green-600">{dashData?.totalTrades || 0}</p>
                     </div>
                     <p className="opacity-70">Total Trade</p>
                   </div>
@@ -128,8 +154,15 @@ const MarketVirtualPage = () => {
                 <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
                   <div>
                     <div className="flex items-center space-x-2">
-                      <TbArrowUpRight className="" size={28} color="green" />
-                      <p className="text-[1.7rem] font-semibold text-green-600">{dashData?.data?.percentLoss || 0}</p>
+                      <TbArrowUpRight
+                        className={`${Math.sign(dashData?.tradedProfit24h) === 1 ? 'text-green-600' : 'text-red-600 rotate-180'}`}
+                        size={28}
+                      />
+                      <p
+                        className={`text-[1.3rem] font-semibold ${Math.sign(dashData?.tradedProfit24h) === 1 ? 'text-green-600' : 'text-red-600'} `}
+                      >
+                        {formatCurrency(dashData?.tradedProfit24h) || 0}
+                      </p>
                     </div>
                     <p className="opacity-70">Trade Profit</p>
                   </div>
@@ -155,7 +188,7 @@ const MarketVirtualPage = () => {
                     <div>
                       <div className="flex items-center space-x-3">
                         <div>
-                          <h1 className="text-md">{chartDatas?.stock?.symbol}</h1>
+                          <h1 className="text-md">{dashData?.mostBoughtStock?.name}</h1>
                           <p className="mt-1 text-4xl font-bold">25%</p>
                         </div>
                       </div>

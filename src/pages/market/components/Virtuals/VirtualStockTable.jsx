@@ -58,7 +58,7 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                   // <SwiperSlide key={c} virtualIndex={i}>
                   <>
                   {i <= 6 && 
-                    <div key={c.code}>
+                    <div key={i}>
                       <div
                         tabIndex={1}
                         onClick={() => {

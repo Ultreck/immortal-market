@@ -76,13 +76,14 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     });
     setData(structured);
   }, [timeFrame]);
+  
 
   useEffect(() => {
-    socket.on('priceUpdate', () => {
+    const getSessionFunct = () => {
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
-    });
+    };
     const handleNewSession = (msg) => {
-      // console.log(msg);
+      console.log(msg);
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
       setData((prev) => {
@@ -105,12 +106,14 @@ const VirtualStockChart = ({ chartDatas, state }) => {
       });
       setCurrentPrice(data?.at(-1) ?? null);
     };
-    socket.on(timeFrame, handleNewSession);
+    socket.on('newSession', handleNewSession);
+    socket.on(timeFrame, getSessionFunct);
 
     return () => {
+      socket.off(timeFrame, getSessionFunct);
       socket.off('newSession', handleNewSession);
     };
-  }, []);  
+  }, []);
 
   const maxDataLength = chartDatas?.noOfRunning;
   const currentLength = data?.length ? data?.length : chartDatas?.prices?.length;
