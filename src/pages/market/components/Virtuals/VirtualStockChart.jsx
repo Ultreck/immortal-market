@@ -121,7 +121,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
   let paddedData;
   if (data?.length > 0) {
     const lengthDiff = Math.max(0, maxDataLength - currentLength);
-    paddedData = [...data, ...Array(lengthDiff).fill(null)];
+    paddedData = [...Array.isArray(data), ...Array.isArray(lengthDiff).fill(null)];
   }
 
   const CustomTooltip = ({ active, payload }) => {
