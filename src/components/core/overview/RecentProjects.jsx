@@ -44,7 +44,7 @@ const RecentProjects = () => {
           {designs.length > 0 ? (
             <div className="grid grid-cols-5 gap-4 md:gap-6">
               {designs.map((design, i) => (
-                <DesignCard key={i} id={design._id} title={design.title} thumbnail={design.pages[0]?.thumbnail} />
+                <DesignCard key={i} id={design._id} title={design.title} thumbnail={design.thumbnails?.[0]} />
               ))}
             </div>
           ) : (

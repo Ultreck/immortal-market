@@ -1,12 +1,12 @@
 import CreateDropdown from '@/components/core/project/CreateDropdown.jsx';
 import { useTernaryDarkMode } from 'usehooks-ts';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { TbChevronLeft, TbChevronRight, TbCrown, TbSettings2, TbUsers } from 'react-icons/tb';
 import { cn } from '@/lib/utils.js';
 import Logo from '@/components/core/shared/Logo.jsx';
 import LogoIcon from '@/components/core/shared/LogoIcon.jsx';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiOutlineTemplate, HiOutlineViewGrid, HiViewList } from 'react-icons/hi';
 import { HiOutlineViewColumns } from 'react-icons/hi2';
 
@@ -38,6 +38,11 @@ NavItem.propTypes = {
 const Sidebar = () => {
   const { isDarkMode } = useTernaryDarkMode();
   const [mini, setMini] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.startsWith('/markets')) setMini(true);
+  }, [location.pathname]);
 
   return (
     <div className={cn('w-[260px] relative group transition-width', { 'w-[90px]': mini })}>
@@ -85,6 +90,10 @@ const Sidebar = () => {
       </div>
     </div>
   );
+};
+
+Sidebar.propTypes = {
+  source: PropTypes.string,
 };
 
 export default Sidebar;

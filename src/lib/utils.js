@@ -219,6 +219,15 @@ export const camelCaseToWords = (str) => {
     .trim();
 };
 
+export const dateFormatter = (date) => {
+  date =  new Date(date);
+  const day = String(date.getDay()).padStart(2, '0');
+  const month = String(date.getMonth()+ 1).padStart(2, '0');
+  const year = date.getFullYear();
+  console.log( `${day}/${month}/${year}`);
+  return `${day}/${month}/${year}`;
+};
+
 export const formatChartValue = (value, element) => {
   if (!value) return null;
   let total;
@@ -247,3 +256,204 @@ export const formatChartValue = (value, element) => {
   }
 };
 
+<<<<<<< HEAD
+=======
+export const currencyToSymbol = (currencyText) => {
+  const currencySymbols = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    JPY: '¥',
+    NGN: '₦',
+    INR: '₹',
+    AUD: 'A$',
+    CAD: 'C$',
+    CHF: '₣',
+    CNY: '¥',
+    HKD: 'HK$',
+    SGD: 'S$',
+    KRW: '₩',
+    RUB: '₽',
+    BRL: 'R$',
+    ZAR: 'R',
+    AED: 'د.إ',
+    SAR: '﷼',
+    MXN: 'Mex$',
+  };
+  const symbol = currencySymbols[currencyText.toUpperCase()];
+  return symbol || currencyText;
+};
+
+export const writers = [
+  {
+    verification: {
+      email: false,
+      phone: false,
+    },
+    _id: '65bc33463c9594f51095848e',
+    firstName: 'Rachel',
+    lastName: 'Okojie',
+    username: 'rachel',
+    email: 'rachel@statisense.com.ng',
+    image: 'users/65bc33463c9594f51095848e',
+    type: 'ai',
+    bio: 'Rachel specializes in analyzing global political landscapes, providing in-depth insights on diplomatic relations, elections, and policy changes. Known for her serious demeanor and meticulous research.',
+    status: 'unverified',
+    role: 'writer',
+    lastLogin: '2024-02-02T00:11:50.367Z',
+    createdAt: '2024-02-02T00:11:50.371Z',
+    updatedAt: '2024-02-11T19:43:00.596Z',
+    __v: 0,
+    id: '65bc33463c9594f51095848e',
+  },
+  {
+    verification: {
+      email: false,
+      phone: false,
+    },
+    _id: '65bc33493c9594f510958491',
+    firstName: 'Joey',
+    lastName: 'Lambo',
+    username: 'joey',
+    email: 'joey@statisense.com.ng',
+    image: 'users/65bc33493c9594f510958491',
+    type: 'ai',
+    bio: 'Joey brings humor and wit to his political commentary, offering insightful analysis with a lighthearted touch. His articles entertain as much as they inform, injecting laughter into the often serious world of politics.',
+    status: 'unverified',
+    role: 'writer',
+    lastLogin: '2024-02-02T00:11:53.081Z',
+    createdAt: '2024-02-02T00:11:53.082Z',
+    updatedAt: '2024-02-11T19:43:12.264Z',
+    __v: 0,
+    id: '65bc33493c9594f510958491',
+  },
+  {
+    verification: {
+      email: false,
+      phone: false,
+    },
+    _id: '65bc334a3c9594f510958494',
+    firstName: 'Maxi',
+    lastName: 'Darocha',
+    username: 'maxsport',
+    email: 'livelymax@statisense.com.ng',
+    image: 'users/65bc334a3c9594f510958494',
+    type: 'ai',
+    bio: 'Max Rodriguez is a lively and enthusiastic writer focusing on sports news and analysis. Max brings energy and humor to his articles, offering colorful commentary on games, players, and trends in the sports world.',
+    status: 'unverified',
+    role: 'writer',
+    lastLogin: '2024-02-02T00:11:54.929Z',
+    createdAt: '2024-02-02T00:11:54.930Z',
+    updatedAt: '2024-02-11T19:42:32.754Z',
+    __v: 0,
+    id: '65bc334a3c9594f510958494',
+  },
+  {
+    verification: {
+      email: false,
+      phone: false,
+    },
+    _id: '65bc334c3c9594f510958497',
+    firstName: 'Seyi',
+    lastName: 'Mensah',
+    username: 'seyimensah',
+    email: 'seyi@statisense.com.ng',
+    image: 'users/65bc334c3c9594f510958497',
+    type: 'ai',
+    bio: 'Seyi Mensah delivers sports news and analysis in a lively pidgin style, making even the most intense matches and rivalries hilarious and entertaining. His articles resonate with fans who appreciate a good laugh while keeping up with their favorite teams.',
+    status: 'unverified',
+    role: 'writer',
+    lastLogin: '2024-02-02T00:11:56.673Z',
+    createdAt: '2024-02-02T00:11:56.674Z',
+    updatedAt: '2024-02-06T12:41:53.104Z',
+    __v: 0,
+    id: '65bc334c3c9594f510958497',
+  },
+  {
+    verification: {
+      email: false,
+      phone: false,
+    },
+    _id: '65bc33463c9594f51095848e',
+    firstName: 'Rachel',
+    lastName: 'Okojie',
+    username: 'rachel',
+    email: 'rachel@statisense.com.ng',
+    image: 'users/65bc33463c9594f51095848e',
+    type: 'ai',
+    bio: 'Rachel specializes in analyzing global political landscapes, providing in-depth insights on diplomatic relations, elections, and policy changes. Known for her serious demeanor and meticulous research.',
+    status: 'unverified',
+    role: 'writer',
+    lastLogin: '2024-02-02T00:11:50.367Z',
+    createdAt: '2024-02-02T00:11:50.371Z',
+    updatedAt: '2024-02-11T19:43:00.596Z',
+    __v: 0,
+    id: '65bc33463c9594f51095848e',
+  },
+  {
+    verification: {
+      email: false,
+      phone: false,
+    },
+    _id: '65bc33493c9594f510958491',
+    firstName: 'Joey',
+    lastName: 'Lambo',
+    username: 'joey',
+    email: 'joey@statisense.com.ng',
+    image: 'users/65bc33493c9594f510958491',
+    type: 'ai',
+    bio: 'Joey brings humor and wit to his political commentary, offering insightful analysis with a lighthearted touch. His articles entertain as much as they inform, injecting laughter into the often serious world of politics.',
+    status: 'unverified',
+    role: 'writer',
+    lastLogin: '2024-02-02T00:11:53.081Z',
+    createdAt: '2024-02-02T00:11:53.082Z',
+    updatedAt: '2024-02-11T19:43:12.264Z',
+    __v: 0,
+    id: '65bc33493c9594f510958491',
+  },
+  {
+    verification: {
+      email: false,
+      phone: false,
+    },
+    _id: '65bc334a3c9594f510958494',
+    firstName: 'Maxi',
+    lastName: 'Darocha',
+    username: 'maxsport',
+    email: 'livelymax@statisense.com.ng',
+    image: 'users/65bc334a3c9594f510958494',
+    type: 'ai',
+    bio: 'Max Rodriguez is a lively and enthusiastic writer focusing on sports news and analysis. Max brings energy and humor to his articles, offering colorful commentary on games, players, and trends in the sports world.',
+    status: 'unverified',
+    role: 'writer',
+    lastLogin: '2024-02-02T00:11:54.929Z',
+    createdAt: '2024-02-02T00:11:54.930Z',
+    updatedAt: '2024-02-11T19:42:32.754Z',
+    __v: 0,
+    id: '65bc334a3c9594f510958494',
+  },
+  {
+    verification: {
+      email: false,
+      phone: false,
+    },
+    _id: '65bc334c3c9594f510958497',
+    firstName: 'Seyi',
+    lastName: 'Mensah',
+    username: 'seyimensah',
+    email: 'seyi@statisense.com.ng',
+    image: 'users/65bc334c3c9594f510958497',
+    type: 'ai',
+    bio: 'Seyi Mensah delivers sports news and analysis in a lively pidgin style, making even the most intense matches and rivalries hilarious and entertaining. His articles resonate with fans who appreciate a good laugh while keeping up with their favorite teams.',
+    status: 'unverified',
+    role: 'writer',
+    lastLogin: '2024-02-02T00:11:56.673Z',
+    createdAt: '2024-02-02T00:11:56.674Z',
+    updatedAt: '2024-02-06T12:41:53.104Z',
+    __v: 0,
+    id: '65bc334c3c9594f510958497',
+  },
+];
+
+export const generateRandomPercentage = () => Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+>>>>>>> ccca95c844e1cc19fa830e0b3067f3336a58e8da

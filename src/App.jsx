@@ -39,6 +39,15 @@ import PresentDesignPage from '@/pages/designs/PresentDesignPage.jsx';
 import SvgShapes from '@/components/core/SvgShapes.jsx';
 import ProjectsPage from '@/pages/ProjectsPage.jsx';
 import AppsPage from '@/pages/AppsPage.jsx';
+import ChatWidget from '@/components/core/templates/create/ChatWidget.jsx';
+import MarketPage from '@/pages/market/MarketPage.jsx';
+import MarketAnalyticsPage from '@/pages/market/MarketAnalyticsPage.jsx';
+import MarketVirtualPage from '@/pages/market/MarketVirtualPage.jsx';
+import MarketGamingPage from '@/pages/market/MarketGamingPage.jsx';
+import MarketGamingDetailsPage from '@/pages/market/MarketGamingDetailsPage.jsx';
+import VirtualStockDetails from '@/pages/market/components/Virtuals/VitrualStockDetails.jsx';
+import Trade from '@/pages/market/components/analytics/Trade.jsx';
+import NewTrade from '@/pages/market/components/analytics/NewTrade.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -82,6 +91,70 @@ const App = () => {
             <Route path="notifications" element={<></>} />
             <Route path="security" element={<SecuritySettingsPage />} />
           </Route>
+          <Route
+            path="markets"
+            element={
+              <RequireAuthBusiness>
+                <MarketPage />
+              </RequireAuthBusiness>
+            }
+          />
+          <Route
+            path="markets/analytics"
+            element={
+              <RequireAuthBusiness>
+                <MarketAnalyticsPage />
+              </RequireAuthBusiness>
+            }
+          />
+          <Route
+            path="markets/analytics/trade"
+            element={
+              <RequireAuthBusiness>
+                <Trade />
+              </RequireAuthBusiness>
+            }
+          />
+          <Route
+            path="markets/trade/new"
+            element={
+              <RequireAuthBusiness>
+                <NewTrade />
+              </RequireAuthBusiness>
+            }
+          />
+          <Route
+            path="markets/virtuals"
+            element={
+              <RequireAuthBusiness>
+                <MarketVirtualPage />
+              </RequireAuthBusiness>
+            }
+          />
+          <Route
+            path="markets/gaming"
+            element={
+              <RequireAuthBusiness>
+                <MarketGamingPage />
+              </RequireAuthBusiness>
+            }
+          />
+          <Route
+            path="markets/gaming/:id"
+            element={
+              <RequireAuthBusiness>
+                <MarketGamingDetailsPage />
+              </RequireAuthBusiness>
+            }
+          />
+          <Route
+            path="markets/virtuals/:id"
+            element={
+              <RequireAuthBusiness>
+                <VirtualStockDetails />
+              </RequireAuthBusiness>
+            }
+          />
         </Route>
         <Route
           path="designs/:id/edit"

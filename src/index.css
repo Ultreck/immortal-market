@@ -10,6 +10,21 @@
   outline: transparent;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  appearance: auto;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 5s linear infinite;
+}
+
 ::selection {
   @apply bg-cyan-600 text-white;
 }
