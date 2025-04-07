@@ -106,13 +106,13 @@ const VirtualStockSocket = ({ chartDatas }) => {
           <>
             <div className="text-2xl font-mono text-[#4691c5] flex mt-1">
               <div className=" ">
-                <div className="">{timeRemaining?.hours}:</div>
+                <div className="">{chartDatas.price? (timeRemaining?.hours): '00'} :</div>
               </div>
               <div className="">
-                <div className="">{timeRemaining?.minutes}:</div>
+                <div className="">{chartDatas.price? timeRemaining?.minutes : '00'}:</div>
               </div>
               <div className="">
-                <div className="">{timeRemaining?.seconds}</div>
+                <div className="">{chartDatas.price? timeRemaining?.seconds: '00'}</div>
               </div>
             </div>
             <p className="text-base text-gray-400 font-normal">Time remaining</p>
