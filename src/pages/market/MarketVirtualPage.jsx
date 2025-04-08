@@ -229,7 +229,7 @@ const MarketVirtualPage = () => {
                   </div>
                 </div>
                 <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
-                <VirtualStockChart state={location.state} chartDatas={chartDatas} />
+                <VirtualStockChart state={location.state} chartDatas={chartDatas} dashboardTimeFrame={dashboardTimeFrame} setshouldStart={setshouldStart} setendTime={setendTime} shouldStart={shouldStart}/>
               </div>
             </Card>
             <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks} />
