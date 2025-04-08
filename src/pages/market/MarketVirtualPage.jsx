@@ -214,6 +214,9 @@ const MarketVirtualPage = () => {
                         </div>
                       </div>
                     </div>
+                    <div className={`absolute right-0`}>
+                     <TimeoutComponent endTime={endTime} startIn={startIn} setstartIn={setstartIn} shouldStart={shouldStart} setshouldStart={setshouldStart}/>
+                    </div>
                     <div className={`absolute right-0 bottom-2`}>
                       <Button
                         onPress={() => navigation(`/markets/virtuals/${dashData?.mostBoughtStock?.id}`)}
