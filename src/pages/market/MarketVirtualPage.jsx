@@ -75,8 +75,10 @@ const MarketVirtualPage = () => {
         };
         const chartRes = await getStockDetails(dataChart);
         setChartDatas(chartRes.data.data);
-        if (!chartRes.data.data.isRunning) {
-          setendTime(chartRes.data.data.endTime)
+        if (chartRes.data.data && (!chartRes.data.data.isRunning)) {
+          const endingIn = chartRes.data.data.endTime ?chartRes.data.data.endTime:0
+          console.log(chartRes.data.data.endTime );
+          setendTime(endingIn)
           setshouldStart(true)
         }
       }
