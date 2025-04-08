@@ -14,6 +14,7 @@ import { formatCurrency } from '@/lib/utils';
 import { useGetCurrentPrice, useGetMarkets } from '@/store/bot';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import TimeoutComponent from '@/hooks/use-timeOut';
 
 const code = 'NG';
 
@@ -21,6 +22,11 @@ const MarketVirtualPage = () => {
   const [page, setPage] = useState(1);
   const { setHomeMarket, homeMarket } = useGetMarkets();
   const [stocks, setStocks] = useState([]);
+  const [startIn, setstartIn] = useState(0);
+  const [shouldStart, setshouldStart] = useState(false);
+  const [endTime, setendTime] = useState(new Date());
+
+
   const [countryName] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
   const { mutateAsync: createVirtualStocks, isPending: isStocksLoading } = useCreateVirtualStock({});
   const { mutateAsync: getVirtualDashboard } = useGetStocksPerCountry();
@@ -46,6 +52,11 @@ const MarketVirtualPage = () => {
   useEffect(() => {
     handleGetVirtualDashboardData();
   }, []);
+  useEffect(() => {
+    if (shouldStart === false) {
+      handleGetVirtualDashboardData();
+    }
+  }, [shouldStart]);
 
   const handleGetVirtualDashboardData = async () => {
     try {
@@ -63,6 +74,10 @@ const MarketVirtualPage = () => {
         };
         const chartRes = await getStockDetails(dataChart);
         setChartDatas(chartRes.data.data);
+        if (!chartRes.data.data.isRunning) {
+          setendTime(chartRes.data.data.endTime)
+          setshouldStart(true)
+        }
       }
     } catch (error) {
       console.error('Error fetching virtual dashboard data:', error);
@@ -188,7 +203,7 @@ const MarketVirtualPage = () => {
                 <div className="flex justify-between">
                   <div className="flex w-full justify-between relative">
                     <div>
-                      <div className="text-2xl my-5">Trending Market</div>
+                      <div className="text-2xl my-5">Trending Market </div>
                       <div className="flex items-center space-x-3 cursor-default">
                         <div>
                           <Tooltip placement='right' content={dashData?.mostBoughtStock?.name}>
@@ -197,6 +212,9 @@ const MarketVirtualPage = () => {
                           <p className="mt-1 text-green-600 text-4xl font-bold">+25%</p>
                         </div>
                       </div>
+                    </div>
+                    <div className={`absolute right-0`}>
+                     <TimeoutComponent endTime={endTime} startIn={startIn} setstartIn={setstartIn} shouldStart={shouldStart} setshouldStart={setshouldStart}/>
                     </div>
                     <div className={`absolute right-0 bottom-2`}>
                       <Button
@@ -210,7 +228,7 @@ const MarketVirtualPage = () => {
                   </div>
                 </div>
                 <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
-                <VirtualStockChart state={location.state} chartDatas={chartDatas} dashboardTimeFrame={dashboardTimeFrame} />
+                <VirtualStockChart state={location.state} chartDatas={chartDatas} dashboardTimeFrame={dashboardTimeFrame} setshouldStart={setshouldStart} setendTime={setendTime} shouldStart={shouldStart}/>
               </div>
             </Card>
             <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks} />

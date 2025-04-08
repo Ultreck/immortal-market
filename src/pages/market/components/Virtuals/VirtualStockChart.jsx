@@ -55,7 +55,7 @@ const timeFormatter = (date, is24Hour = false) => {
   }
 };
 
-const VirtualStockChart = ({ chartDatas, state, dashboardTimeFrame}) => {
+const VirtualStockChart = ({ chartDatas, state, setshouldStart, shouldStart, setendTime}) => {
   const [data, setData] = useState(chartDatas?.prices);
   // const [maxDataLength, SetmaxDataLength ] = useState(20);
   const { isDarkMode } = useTernaryDarkMode();
@@ -89,7 +89,11 @@ const VirtualStockChart = ({ chartDatas, state, dashboardTimeFrame}) => {
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     };
     const handleNewSession = (msg) => {
-      // console.log(msg);
+      
+      if (!msg.isRunning && !shouldStart) {
+        setendTime(msg.endTime)
+        setshouldStart(true)
+      }
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
       setData((prev) => {
