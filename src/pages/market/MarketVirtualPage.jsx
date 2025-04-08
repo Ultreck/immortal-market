@@ -1,6 +1,6 @@
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
-import { Avatar, AvatarGroup, Button, Card, Tooltip } from '@heroui/react';
+import { Avatar, AvatarGroup, Button, Card, Chip, Tab, Tabs, Tooltip } from '@heroui/react';
 // import countries from '@/lib/countries.js';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
@@ -14,12 +14,13 @@ import { formatCurrency } from '@/lib/utils';
 import { useGetCurrentPrice, useGetMarkets } from '@/store/bot';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-
+import PlaceOrder from '../market/modals/PlaceOrder.jsx';
 const code = 'NG';
 
 const MarketVirtualPage = () => {
   const [page, setPage] = useState(1);
   const { setHomeMarket, homeMarket } = useGetMarkets();
+  const [tab, seTtab] = useState('virtual-home');
   const [stocks, setStocks] = useState([]);
   const [countryName] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
   const { mutateAsync: createVirtualStocks, isPending: isStocksLoading } = useCreateVirtualStock({});
@@ -77,145 +78,236 @@ const MarketVirtualPage = () => {
     <>
       <MarketNavbar />
       <div className="container">
-        <div className="gap-8 lg:grid lg:grid-cols-[1fr_350px]">
-          <div className="w-full overflow-hidden">
-            <Card className="mb-6 w-full overflow-visible rounded-2xl border px-6 py-6 pb-8 shadow dark:border-0 dark:shadow-none md:px-8">
-              <h3 className="mb-6 flex justify-between items-center space-x-3 px-1 text-lg font-semibold">
-                <div className="text-2xl font-bold">Virtual Market</div>
-                <CountryFlag code={code} rounded />
-              </h3>
-              <div className="grid grid-cols-3 gap-x-4 gap-y-10">
-                <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <TbArrowUpRight size={28} color="green" />
-                      <p className="text-[1.3rem] font-semibold text-green-600">
-                        {dashData?.totalGain.toFixed(3) || 0}%
-                      </p>
-                    </div>
-                    <p className="opacity-70">Total Gained</p>
-                  </div>
-                </Card>{' '}
-                <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <TbArrowUpRight size={28} color="green" />
-                      <div className="text-[1.2rem] font-semibold text-green-600">
-                        <AnimatePresence mode="wait">
-                          <motion.div
-                            className="flex gap-5 w-max overflow-hidden"
-                            initial={{ y: 0, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -100, opacity: 0 }}
-                            transition={{
-                              repeat: Infinity,
-                              repeatType: 'loop',
-                              duration: 50,
-                              ease: 'linear',
-                              delay: 50,
-                            }}
-                          >
-                            {dashData?.activeCompanies?.map((company, index) => (
-                              <div key={index} className="flex items-center gap-3">
-                                <span className="text-white">{index + 1}.</span>
-                                <span className="text">{company.name.slice(0, 15) + '...'}</span>
-                              </div>
-                            ))}
-                          </motion.div>
-                        </AnimatePresence>
-                      </div>
-                    </div>
-                    <p className="opacity-70">Top 5 companies</p>
-                  </div>
-                </Card>
-                <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
-                  <div className="flex items-center mt-3">
-                    <AvatarGroup isBordered max={3} size="sm">
-                      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-                    </AvatarGroup>
-                  </div>
-                </Card>
-                <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <TbArrowUpRight size={28} color="green" />
-                      <p className="text-[1.3rem] font-semibold text-green-600">{dashData?.totalTrades || 0}</p>
-                    </div>
-                    <p className="opacity-70">Total Trade</p>
-                  </div>
-                </Card>{' '}
-                <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <TbArrowUpRight
-                        className={`${Math.sign(dashData?.tradedProfit24h) === 1 ? 'text-green-600' : 'text-red-600 rotate-180'}`}
-                        size={28}
-                      />
-                      <p
-                        className={`text-[1.3rem] font-semibold ${Math.sign(dashData?.tradedProfit24h) === 1 ? 'text-green-600' : 'text-red-600'} `}
-                      >
-                        {formatCurrency(dashData?.tradedProfit24h) || 0}
-                      </p>
-                    </div>
-                    <p className="opacity-70">Trade Profit</p>
-                  </div>
-                </Card>
-                <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
-                  <div className="flex items-center mt-3">
-                    <AvatarGroup isBordered max={3} size="sm">
-                      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-                    </AvatarGroup>
-                  </div>
-                </Card>
+        <Tabs
+          aria-label="Options"
+          selectedKey={tab}
+          onSelectionChange={(e) => seTtab(e)}
+          classNames={{
+            tabList: 'gap-6 w-full relative rounded-none p-0',
+            cursor: 'w-full bg-[#22d3ee]',
+            tab: 'max-xl text-xl px-3 h-12 ml-12',
+            tabContent: 'group-data-[selected=true]:text-[#06b6d4]',
+          }}
+          color="primary"
+          variant="underlined"
+        >
+          <Tab
+            key="virtual-home"
+            title={
+              <div className="flex items-center space-x-2">
+                <span>Dashboard</span>
               </div>
-            </Card>
-            <Card className="card-shadow px-10 my-10 py-2">
-              <div className="space-y-5">
-                <div className="flex justify-between">
-                  <div className="flex w-full justify-between relative">
-                    <div>
-                      <div className="text-2xl my-5">Trending Market</div>
-                      <div className="flex items-center space-x-3 cursor-default">
+            }
+          >
+            <div className="container mt-8">
+              <div className="gap-8 lg:grid lg:grid-cols-[1fr_350px]">
+                <div className="w-full overflow-hidden">
+                  <Card className="mb-6 w-full overflow-visible rounded-2xl border px-6 py-6 pb-8 shadow dark:border-0 dark:shadow-none md:px-8">
+                    <h3 className="mb-6 flex justify-between items-center space-x-3 px-1 text-lg font-semibold">
+                      <div className="text-2xl font-bold">Virtual Market</div>
+                      <CountryFlag code={code} rounded />
+                    </h3>
+                    <div className="grid grid-cols-3 gap-x-4 gap-y-10">
+                      <Card
+                        className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5"
+                        shadow="none"
+                      >
                         <div>
-                          <Tooltip placement='right' content={dashData?.mostBoughtStock?.name}>
-                            <h1 className="text-md">{dashData?.mostBoughtStock?.name.slice(0, 15) + '...'}</h1>
-                          </Tooltip>
-                          <p className="mt-1 text-green-600 text-4xl font-bold">+25%</p>
+                          <div className="flex items-center space-x-2">
+                            <TbArrowUpRight size={28} color="green" />
+                            <p className="text-[1.3rem] font-semibold text-green-600">
+                              {dashData?.totalGain.toFixed(3) || 0}%
+                            </p>
+                          </div>
+                          <p className="opacity-70">Total Gained</p>
+                        </div>
+                      </Card>{' '}
+                      <Card
+                        className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5"
+                        shadow="none"
+                      >
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <TbArrowUpRight size={28} color="green" />
+                            <div className="text-[1.2rem] font-semibold text-green-600">
+                              <AnimatePresence mode="wait">
+                                <motion.div
+                                  className="flex gap-5 w-max overflow-hidden"
+                                  initial={{ y: 0, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  exit={{ y: -100, opacity: 0 }}
+                                  transition={{
+                                    repeat: Infinity,
+                                    repeatType: 'loop',
+                                    duration: 50,
+                                    ease: 'linear',
+                                    delay: 50,
+                                  }}
+                                >
+                                  {dashData?.activeCompanies?.map((company, index) => (
+                                    <div key={index} className="flex items-center gap-3">
+                                      <span className="text-white">{index + 1}.</span>
+                                      <span className="text">{company.name.slice(0, 15) + '...'}</span>
+                                    </div>
+                                  ))}
+                                </motion.div>
+                              </AnimatePresence>
+                            </div>
+                          </div>
+                          <p className="opacity-70">Top 5 companies</p>
+                        </div>
+                      </Card>
+                      <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
+                        <div className="flex items-center mt-3">
+                          <AvatarGroup isBordered max={3} size="sm">
+                            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
+                          </AvatarGroup>
+                        </div>
+                      </Card>
+                      <Card
+                        className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5"
+                        shadow="none"
+                      >
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <TbArrowUpRight size={28} color="green" />
+                            <p className="text-[1.3rem] font-semibold text-green-600">{dashData?.totalTrades || 0}</p>
+                          </div>
+                          <p className="opacity-70">Total Trade</p>
+                        </div>
+                      </Card>{' '}
+                      <Card
+                        className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5"
+                        shadow="none"
+                      >
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <TbArrowUpRight
+                              className={`${Math.sign(dashData?.tradedProfit24h) === 1 ? 'text-green-600' : 'text-red-600 rotate-180'}`}
+                              size={28}
+                            />
+                            <p
+                              className={`text-[1.3rem] font-semibold ${Math.sign(dashData?.tradedProfit24h) === 1 ? 'text-green-600' : 'text-red-600'} `}
+                            >
+                              {formatCurrency(dashData?.tradedProfit24h) || 0}
+                            </p>
+                          </div>
+                          <p className="opacity-70">Trade Profit</p>
+                        </div>
+                      </Card>
+                      <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
+                        <div className="flex items-center mt-3">
+                          <AvatarGroup isBordered max={3} size="sm">
+                            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
+                          </AvatarGroup>
+                        </div>
+                      </Card>
+                    </div>
+                  </Card>
+                  <Card className="card-shadow px-10 my-10 py-2">
+                    <div className="space-y-5">
+                      <div className="flex justify-between">
+                        <div className="flex w-full justify-between relative">
+                          <div>
+                            <div className="text-2xl my-5">Trending Market</div>
+                            <div className="flex items-center space-x-3 cursor-default">
+                              <div>
+                                <Tooltip placement="right" content={dashData?.mostBoughtStock?.name}>
+                                  <h1 className="text-md">{dashData?.mostBoughtStock?.name.slice(0, 15) + '...'}</h1>
+                                </Tooltip>
+                                <p className="mt-1 text-green-600 text-4xl font-bold">+25%</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className={`absolute right-0 bottom-2`}>
+                            <Button
+                              onPress={() => navigation(`/markets/virtuals/${dashData?.mostBoughtStock?.id}`)}
+                              className="bg-green-600 w-32 font-semibold"
+                              color=""
+                            >
+                              Explore
+                            </Button>
+                          </div>
                         </div>
                       </div>
+                      <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
+                      <VirtualStockChart state={location.state} chartDatas={chartDatas} />
                     </div>
-                    <div className={`absolute right-0 bottom-2`}>
-                      <Button
-                        onPress={() => navigation(`/markets/virtuals/${dashData?.mostBoughtStock?.id}`)}
-                        className="bg-green-600 w-32 font-semibold"
-                        color=""
-                      >
-                        Explore
-                      </Button>
-                    </div>
+                  </Card>
+                  <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks} />
+                </div>
+                {/* <CountryList setCountryName={setCountryName} /> */}
+                <div className="text relative">
+                  <VirtualSideNavbar country={countryName} setHomeMarket={setHomeMarket} homeMarket={homeMarket} />
+                </div>
+              </div>
+            </div>
+          </Tab>
+          <Tab
+            key="active-orders"
+            title={
+              <div className="flex items-center space-x-2">
+                <span>Active Orders</span>
+                <Chip size="sm" variant="faded">
+                  7
+                </Chip>
+              </div>
+            }
+          >
+            {Array.from({ length: 10 }, (_, index) => (
+              <Card key={index} className='my-5' >
+              <div className="border-b border-default-50 py-3 container flex justify-between">
+                <div className="flex space-x-4">
+                  <img src="/images/accessbank.png" alt="" className="w-[30px]" />
+                  <div>
+                    <p className="text-2xl font-bold">Access Bank</p>
+                    <p className="text-sm">ACB</p>
                   </div>
                 </div>
-                <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
-                <VirtualStockChart state={location.state} chartDatas={chartDatas} />
+                <div>
+                  <p className="text-2xl font-bold">N34.22</p>
+                  <p className="text-sm">22,000 Units</p>
+                </div>
+                <PlaceOrder type="sell" text="Sell" radius="full" color="">
+                  View
+                </PlaceOrder>
               </div>
-            </Card>
-            <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks} />
-          </div>
-          {/* <CountryList setCountryName={setCountryName} /> */}
-          <div className="text relative">
-            <VirtualSideNavbar country={countryName} setHomeMarket={setHomeMarket} homeMarket={homeMarket} />
-          </div>
-        </div>
+              </Card>
+            ))}
+          </Tab>
+          <Tab
+            key="pending-orders"
+            title={
+              <div className="flex items-center space-x-2">
+                <span>Pending Orders</span>
+                <Chip size="sm" variant="faded">
+                  1
+                </Chip>
+              </div>
+            }
+          ></Tab>
+          <Tab
+            key="completed-orders"
+            title={
+              <div className="flex items-center space-x-2">
+                <span>Completed Orders</span>
+                <Chip size="sm" variant="faded">
+                  3
+                </Chip>
+              </div>
+            }
+          />
+        </Tabs>
       </div>
     </>
   );
