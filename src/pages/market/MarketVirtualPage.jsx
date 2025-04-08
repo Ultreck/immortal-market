@@ -236,7 +236,7 @@ const MarketVirtualPage = () => {
           </div>
           {/* <CountryList setCountryName={setCountryName} /> */}
           <div className="text relative">
-            <VirtualSideNavbar country={countryName} setHomeMarket={setHomeMarket} homeMarket={homeMarket} />
+          <VirtualSideNavbar country={countryName} setHomeMarket={setHomeMarket} homeMarket={homeMarket} setDashboardTimeFrame={setDashboardTimeFrame} />
           </div>
         </div>
       </div>
