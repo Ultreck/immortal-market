@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import { io } from 'socket.io-client';
+import useSocket from './use-socket';
 
 const useVirtualHook = () => {
-      const [chartDatas, setChartDatas] = useState([]);
-      const [data, setData] = useState([]);
-      const socket = io('https://market-msjv.onrender.com'); // Socket connection
-
-
+  const [chartDatas, setChartDatas] = useState([]);
+  const [data, setData] = useState([]);
+  // const socket = io('https://market-msjv.onrender.com'); // Socket connection
+     const socket = useSocket()
      useEffect(() => {
+
         const getSessionFunct = () => {
           socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
         };

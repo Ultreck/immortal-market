@@ -256,8 +256,6 @@ export const formatChartValue = (value, element) => {
   }
 };
 
-<<<<<<< HEAD
-=======
 export const currencyToSymbol = (currencyText) => {
   const currencySymbols = {
     USD: '$',
@@ -456,4 +454,3 @@ export const writers = [
 ];
 
 export const generateRandomPercentage = () => Math.floor(Math.random() * (100 - 10 + 1)) + 10;
->>>>>>> ccca95c844e1cc19fa830e0b3067f3336a58e8da

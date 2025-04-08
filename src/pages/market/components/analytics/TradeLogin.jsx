@@ -24,10 +24,10 @@ const TradeLogin = ({ isOpen, onClose }) => {
       const res = await login(data);
       if (res.status === 200) {
         setUser(res.data.data.user, res.data.data.token, data.platform);
-        toast.success('Login successful');
+        // toast.success('Login successful');
         onClose();
       } else {
-        toast.error(res.data.message);
+        // toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
