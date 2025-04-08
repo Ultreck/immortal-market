@@ -1,6 +1,6 @@
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
-import { Avatar, AvatarGroup, Button, Card, Tooltip } from '@heroui/react';
+import { Avatar, AvatarGroup, Button, Card, Chip, Tab, Tabs, Tooltip } from '@heroui/react';
 // import countries from '@/lib/countries.js';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
@@ -15,12 +15,13 @@ import { useGetCurrentPrice, useGetMarkets } from '@/store/bot';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import TimeoutComponent from '@/hooks/use-timeOut';
-
+import PlaceOrder from '../market/modals/PlaceOrder.jsx';
 const code = 'NG';
 
 const MarketVirtualPage = () => {
   const [page, setPage] = useState(1);
   const { setHomeMarket, homeMarket } = useGetMarkets();
+  const [tab, seTtab] = useState('virtual-home');
   const [stocks, setStocks] = useState([]);
   const [startIn, setstartIn] = useState(0);
   const [shouldStart, setshouldStart] = useState(false);
@@ -203,7 +204,7 @@ const MarketVirtualPage = () => {
                 <div className="flex justify-between">
                   <div className="flex w-full justify-between relative">
                     <div>
-                      <div className="text-2xl my-5">Trending Market </div>
+                      <div className="text-2xl my-5">Trending Market</div>
                       <div className="flex items-center space-x-3 cursor-default">
                         <div>
                           <Tooltip placement='right' content={dashData?.mostBoughtStock?.name}>
@@ -212,9 +213,6 @@ const MarketVirtualPage = () => {
                           <p className="mt-1 text-green-600 text-4xl font-bold">+25%</p>
                         </div>
                       </div>
-                    </div>
-                    <div className={`absolute right-0`}>
-                     <TimeoutComponent endTime={endTime} startIn={startIn} setstartIn={setstartIn} shouldStart={shouldStart} setshouldStart={setshouldStart}/>
                     </div>
                     <div className={`absolute right-0 bottom-2`}>
                       <Button
@@ -228,14 +226,14 @@ const MarketVirtualPage = () => {
                   </div>
                 </div>
                 <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
-                <VirtualStockChart state={location.state} chartDatas={chartDatas} dashboardTimeFrame={dashboardTimeFrame} setshouldStart={setshouldStart} setendTime={setendTime} shouldStart={shouldStart}/>
+                <VirtualStockChart state={location.state} chartDatas={chartDatas} />
               </div>
             </Card>
             <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks} />
           </div>
           {/* <CountryList setCountryName={setCountryName} /> */}
           <div className="text relative">
-            <VirtualSideNavbar country={countryName} setHomeMarket={setHomeMarket} homeMarket={homeMarket} setDashboardTimeFrame={setDashboardTimeFrame} />
+            <VirtualSideNavbar country={countryName} setHomeMarket={setHomeMarket} homeMarket={homeMarket} />
           </div>
         </div>
       </div>
