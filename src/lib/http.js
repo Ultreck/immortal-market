@@ -13,8 +13,8 @@ const market = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL_MARKET,
 });
 const markettest = axios.create({
-  baseURL: "https://market-msjv.onrender.com/",
-  // baseURL: "https://sunbeam-enabled-definitely.ngrok-free.app",
+  // baseURL: "http://localhost:2000",
+  baseURL: "https://market-msjv.onrender.com",
   // headers: {
   //   "Content-Type": "application/json",
   //   "ngrok-skip-browser-warning": "true",

@@ -1,7 +1,7 @@
 import { Avatar, AvatarGroup, Card, CardBody, CardHeader } from '@heroui/react';
 import { useEffect, useState } from 'react';
 // import { useCreateVirtualStockDetails } from '@/api/ai-chat';
-const VirtualSideNavbar = ({country, setHomeMarket, homeMarket}) => {
+const VirtualSideNavbar = ({country, setHomeMarket, homeMarket, setDashboardTimeFrame}) => {
   // const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const [timeFrame, setTimeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('dash-time-function');
@@ -20,9 +20,10 @@ const VirtualSideNavbar = ({country, setHomeMarket, homeMarket}) => {
     // setChartDatas(res.data.data);
   };
 
-  const handleChange = (key) => {
-    window.localStorage.setItem('dash-time-function', JSON.stringify(key));
-    setTimeFrame(key);
+  const handleChange = (data) => {
+    window.localStorage.setItem('dash-time-function', JSON.stringify(data.value));
+    setHomeMarket(data.name);    
+    setDashboardTimeFrame(data.value)
   };
 
   return (
@@ -43,10 +44,7 @@ const VirtualSideNavbar = ({country, setHomeMarket, homeMarket}) => {
           >
             <div
               className="w-full h-full"
-              onClick={() => {
-                window.localStorage.setItem('dash-time-function', JSON.stringify(v.value));
-                setHomeMarket(v.name);                
-              }}
+              onClick={() => {handleChange(v)}}
             >
               <CardBody className="px-5 pb-5 pt-0">
                 <div className="text flex justify-between">

@@ -34,11 +34,15 @@ const MarketVirtualPage = () => {
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
 
+  // console.log(dashboardTimeFrame);
+
+
   useEffect(() => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('dash-time-function')));
   }, [countryName, dashboardTimeFrame, homeMarket]);
+  
   useEffect(() => {
     handleGetVirtualDashboardData();
   }, []);
@@ -203,14 +207,14 @@ const MarketVirtualPage = () => {
                   </div>
                 </div>
                 <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
-                <VirtualStockChart state={location.state} chartDatas={chartDatas} />
+                <VirtualStockChart state={location.state} chartDatas={chartDatas} dashboardTimeFrame={dashboardTimeFrame} />
               </div>
             </Card>
             <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks} />
           </div>
           {/* <CountryList setCountryName={setCountryName} /> */}
           <div className="text relative">
-            <VirtualSideNavbar country={countryName} setHomeMarket={setHomeMarket} homeMarket={homeMarket} />
+            <VirtualSideNavbar country={countryName} setHomeMarket={setHomeMarket} homeMarket={homeMarket} setDashboardTimeFrame={setDashboardTimeFrame} />
           </div>
         </div>
       </div>

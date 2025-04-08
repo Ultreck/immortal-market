@@ -16,6 +16,7 @@ import {
 import { useTernaryDarkMode } from 'usehooks-ts';
 import { io } from 'socket.io-client';
 import { useGetCurrentPrice } from '@/store/bot';
+import useSocket from '@/hooks/use-socket';
 // import { useCreateVirtualStockDetails } from '@/api/ai-chat';
 
 const dateFormatter = (date) => {
@@ -54,13 +55,16 @@ const timeFormatter = (date, is24Hour = false) => {
   }
 };
 
-const VirtualStockChart = ({ chartDatas, state }) => {
+const VirtualStockChart = ({ chartDatas, state, dashboardTimeFrame}) => {
   const [data, setData] = useState(chartDatas?.prices);
+  // const [maxDataLength, SetmaxDataLength ] = useState(20);
   const { isDarkMode } = useTernaryDarkMode();
-  const socket = io('https://market-msjv.onrender.com');
-  const timeFrame = JSON.parse(localStorage.getItem('time-function'));
-  const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
+  // const socket = io('https://market-msjv.onrender.com', { transports: ['websocket'], autoConnect: false });
+  const socket = useSocket();
 
+  // console.log(ecternalSocket);
+  // const timeFrame = JSON.parse(localStorage.getItem('time-function'));
+  const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
   useEffect(() => {
     const structured = chartDatas?.prices?.map((value, index) => {
       return {
@@ -75,19 +79,22 @@ const VirtualStockChart = ({ chartDatas, state }) => {
       };
     });
     setData(structured);
-  }, [timeFrame]);
+  }, [chartDatas]);
+
+
 
   useEffect(() => {
+    if (!socket) return;
     const getSessionFunct = () => {
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     };
     const handleNewSession = (msg) => {
-      console.log(msg);
+      // console.log(msg);
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
       setData((prev) => {
         const newData = Array.isArray(prev) ? prev : [];
-        if (newPrice === lastPrice) {
+        if (newPrice === lastPrice || !msg.isRunning) {
           return newData;
         }
         return [
@@ -105,19 +112,20 @@ const VirtualStockChart = ({ chartDatas, state }) => {
       });
       setCurrentPrice(data?.at(-1) ?? null);
     };
-    socket.on(timeFrame, getSessionFunct);
+    socket.on("priceUpdate",  getSessionFunct);
     socket.on('newSession', handleNewSession);
 
     return () => {
-      socket.off(timeFrame, getSessionFunct);
+      socket.off("priceUpdate", getSessionFunct);
       socket.off('newSession', handleNewSession);
     };
-  }, []);
+  }, [socket, chartDatas]);
 
   const maxDataLength = chartDatas?.noOfRunning;
   const currentLength = data?.length ? data?.length : chartDatas?.prices?.length;
-  console.log(data);
-  console.log(chartDatas?.prices);
+  // console.log("maxDataLength::", maxDataLength);
+  // console.log(chartDatas?.prices);
+  // console.log(timeFrame);
 
   let paddedData;
   if (data?.length > 0) {
@@ -129,7 +137,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
     if (active && payload && payload.length) {
       return (
         <div className="rounded-lg border border-gray-300 bg-white p-3 shadow-md">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500 text-brown-700">
             Current Price: <span className="text-gray-800">{payload[0].payload.price}</span>
           </p>
           <p className="text-sm text-gray-500">
@@ -184,7 +192,7 @@ const VirtualStockChart = ({ chartDatas, state }) => {
             stroke="#4691c5"
             fill="url(#priceGradient)"
           />
-          <Bar dataKey="sprice" barSize={10} fill="#4691c5" />
+          <Bar dataKey="sprice" barSize={10} fill="orange" />
         </ComposedChart>
       </ResponsiveContainer>
     </div>
