@@ -57,7 +57,7 @@ const timeFormatter = (date, is24Hour = false) => {
 const VirtualStockChart = ({ chartDatas, state }) => {
   const [data, setData] = useState(chartDatas?.prices);
   const { isDarkMode } = useTernaryDarkMode();
-  const socket = io('https://market-msjv.onrender.com');
+  const socket = io('https://market-msjv.onrender.com', { transports: ['websocket'], autoConnect: false });
   const timeFrame = JSON.parse(localStorage.getItem('time-function'));
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
 
