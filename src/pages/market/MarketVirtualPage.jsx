@@ -1,6 +1,6 @@
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
-import { Avatar, AvatarGroup, Button, Card } from '@heroui/react';
+import { Avatar, AvatarGroup, Button, Card, Tooltip } from '@heroui/react';
 // import countries from '@/lib/countries.js';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
@@ -31,7 +31,7 @@ const MarketVirtualPage = () => {
   const navigation = useNavigate();
   const [dashboardTimeFrame, setDashboardTimeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('dash-time-function');
-    return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
+    return JSON.parse(storedTimeFrame);
   });
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const MarketVirtualPage = () => {
         let dataChart = {
           stockId: res?.data?.data?.mostBoughtStock?.id,
           country: countryName,
-          sessionType: dashboardTimeFrame,
+          sessionType: dashboardTimeFrame || '1-minute',
         };
         const chartRes = await getStockDetails(dataChart);
         setChartDatas(chartRes.data.data);
@@ -179,27 +179,30 @@ const MarketVirtualPage = () => {
                 </Card>
               </div>
             </Card>
-            <Card className="card-shadow px-10 my-10 py-8">
+            <Card className="card-shadow px-10 my-10 py-2">
               <div className="space-y-5">
                 <div className="flex justify-between">
-                  <div className="flex space-x-4">
+                  <div className="flex w-full justify-between relative">
                     <div>
-                      <div className="flex items-center space-x-3">
+                      <div className="text-2xl my-5">Trending Market</div>
+                      <div className="flex items-center space-x-3 cursor-default">
                         <div>
-                          <h1 className="text-md">{dashData?.mostBoughtStock?.name}</h1>
-                          <p className="mt-1 text-4xl font-bold">25%</p>
+                          <Tooltip placement='right' content={dashData?.mostBoughtStock?.name}>
+                            <h1 className="text-md">{dashData?.mostBoughtStock?.name.slice(0, 15) + '...'}</h1>
+                          </Tooltip>
+                          <p className="mt-1 text-green-600 text-4xl font-bold">+25%</p>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="space-x-2">
-                    <Button
-                      onPress={() => navigation('/markets/virtuals/665867a9c6a35aab6119ff78')}
-                      className="bg-green-600"
-                      color=""
-                    >
-                      Explore
-                    </Button>
+                    <div className={`absolute right-0 bottom-2`}>
+                      <Button
+                        onPress={() => navigation(`/markets/virtuals/${dashData?.mostBoughtStock?.id}`)}
+                        className="bg-green-600 w-32 font-semibold"
+                        color=""
+                      >
+                        Explore
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
