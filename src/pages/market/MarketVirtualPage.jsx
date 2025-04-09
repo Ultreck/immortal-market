@@ -56,6 +56,8 @@ const MarketVirtualPage = () => {
 
   const handleGetVirtualDashboardData = async () => {
     try {
+      setshouldStart(false)
+      setstartIn(0)
       const data = {
         country: countryName,
         sessionType: dashboardTimeFrame,
@@ -70,11 +72,17 @@ const MarketVirtualPage = () => {
         };
         const chartRes = await getStockDetails(dataChart);
         setChartDatas(chartRes.data.data);
+<<<<<<< HEAD
         if (chartRes.data.data && !chartRes.data.data.isRunning) {
           const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
           console.log(chartRes.data.data.endTime);
           setendTime(endingIn);
           setshouldStart(true);
+=======
+        if (!chartRes.data.data.isRunning) {
+          setendTime(chartRes.data.data.endTime)
+          setshouldStart(true)
+>>>>>>> 25e8a1057d3884da070230fb775267f848f5e6c3
         }
       }
     } catch (error) {

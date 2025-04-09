@@ -89,8 +89,9 @@ const VirtualStockChart = ({ chartDatas, state, setshouldStart, shouldStart, set
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     };
     const handleNewSession = (msg) => {
-      
+
       if (!msg.isRunning && !shouldStart) {
+        console.log(msg);
         setendTime(msg.endTime)
         setshouldStart(true)
       }

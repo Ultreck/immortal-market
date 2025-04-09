@@ -23,7 +23,7 @@ function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshould
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, [shouldStart]);
+  }, [shouldStart, endTime]);
 
   return (
     <div className="flex gap-2">
