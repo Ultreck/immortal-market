@@ -91,6 +91,7 @@ const VirtualStockChart = ({ chartDatas, state, setshouldStart, shouldStart, set
     const handleNewSession = (msg) => {
       
       if (!msg.isRunning && !shouldStart) {
+        console.log(msg);
         setendTime(msg.endTime)
         setshouldStart(true)
       }

@@ -4,6 +4,8 @@ function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshould
   const intervalRef = useRef(null);
 
   useEffect(() => {
+    console.log(shouldStart);
+
     if (shouldStart) {
       intervalRef.current = setInterval(() => {
         const now = new Date();
@@ -22,7 +24,7 @@ function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshould
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, [shouldStart]);
+  }, [shouldStart, endTime]);
 
   return (
     <>
