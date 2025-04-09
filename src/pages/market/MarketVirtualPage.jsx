@@ -27,7 +27,6 @@ const MarketVirtualPage = () => {
   const [shouldStart, setshouldStart] = useState(false);
   const [endTime, setendTime] = useState(new Date());
 
-
   const [countryName] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
   const { mutateAsync: createVirtualStocks, isPending: isStocksLoading } = useCreateVirtualStock({});
   const { mutateAsync: getVirtualDashboard } = useGetStocksPerCountry();
@@ -41,15 +40,12 @@ const MarketVirtualPage = () => {
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
 
-  // console.log(dashboardTimeFrame);
-
-
   useEffect(() => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('dash-time-function')));
   }, [countryName, dashboardTimeFrame, homeMarket]);
-  
+
   useEffect(() => {
     handleGetVirtualDashboardData();
   }, []);
@@ -202,24 +198,32 @@ const MarketVirtualPage = () => {
               </div>
             </Card>
             <Card className="card-shadow px-10 my-10 py-2">
-              <div className="space-y-5">
+              <div className="space-y-2">
                 <div className="flex justify-between">
                   <div className="flex w-full justify-between relative">
-                    <div>
-                      <div className="text-2xl my-5">Trending Market</div>
+                    <div className="w-full">
+                      <div className=" w-full flex justify-between items-center">
+                        <div className="text-2xl my-5">Trending Market</div>
+                        <div className={``}>
+                          <TimeoutComponent
+                            endTime={endTime}
+                            startIn={startIn}
+                            setstartIn={setstartIn}
+                            shouldStart={shouldStart}
+                            setshouldStart={setshouldStart}
+                          />
+                        </div>
+                      </div>
                       <div className="flex items-center space-x-3 cursor-default">
                         <div>
-                          <Tooltip placement='right' content={dashData?.mostBoughtStock?.name}>
+                          <Tooltip placement="right" content={dashData?.mostBoughtStock?.name}>
                             <h1 className="text-md">{dashData?.mostBoughtStock?.name.slice(0, 15) + '...'}</h1>
                           </Tooltip>
                           <p className="mt-1 text-green-600 text-4xl font-bold">+25%</p>
                         </div>
                       </div>
                     </div>
-                    <div className={`absolute right-0`}>
-                     <TimeoutComponent endTime={endTime} startIn={startIn} setstartIn={setstartIn} shouldStart={shouldStart} setshouldStart={setshouldStart}/>
-                    </div>
-                    <div className={`absolute right-0 bottom-2`}>
+                    <div className={`absolute right-0 bottom-0`}>
                       <Button
                         onPress={() => navigation(`/markets/virtuals/${dashData?.mostBoughtStock?.id}`)}
                         className="bg-green-600 w-32 font-semibold"
@@ -230,15 +234,37 @@ const MarketVirtualPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
-                <VirtualStockChart state={location.state} chartDatas={chartDatas} dashboardTimeFrame={dashboardTimeFrame} setshouldStart={setshouldStart} setendTime={setendTime} shouldStart={shouldStart}/>
+                {currentPrice?.price ? (
+                  <div className="text-green-600 ml-2 font-mono text-2xl">
+                    {formatCurrency(currentPrice?.price)}
+                  </div>
+                ) : (
+                  <div className="text-gray-600 ml-2 font-mono text-2xl">
+                    {formatCurrency(0.0)}
+                  </div>
+                )}
+                <div className="text">
+                  <VirtualStockChart
+                    state={location.state}
+                    chartDatas={chartDatas}
+                    dashboardTimeFrame={dashboardTimeFrame}
+                    setshouldStart={setshouldStart}
+                    setendTime={setendTime}
+                    shouldStart={shouldStart}
+                  />
+                </div>
               </div>
             </Card>
             <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks} />
           </div>
           {/* <CountryList setCountryName={setCountryName} /> */}
           <div className="text relative">
-          <VirtualSideNavbar country={countryName} setHomeMarket={setHomeMarket} homeMarket={homeMarket} setDashboardTimeFrame={setDashboardTimeFrame} />
+            <VirtualSideNavbar
+              country={countryName}
+              setHomeMarket={setHomeMarket}
+              homeMarket={homeMarket}
+              setDashboardTimeFrame={setDashboardTimeFrame}
+            />
           </div>
         </div>
       </div>
