@@ -25,9 +25,19 @@ function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshould
   }, [shouldStart]);
 
   return (
-    <>
-      Starting in: {startIn}
-    </>
+    <div className="flex gap-2">
+      <div className='flex flex-col items-center'>
+            <div className="text-2xl text-center font-mono text-[#4691c5] flex mt-1">
+              <div className="">
+                <div className="">{'00'}:</div>
+              </div>
+              <div className="">
+                <div className="">{String(startIn).padStart(2, '0')}</div>
+              </div>
+            </div>
+            <p className="text-base text-gray-400 font-normal">Time remaining</p>
+          </div>
+    </div>
   );
 }
 

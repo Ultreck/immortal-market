@@ -116,6 +116,8 @@ export const useCreateAIChat = () => {
         mutationFn: (data) => {
           return http.markettest.post(`/virtual/stock`, data);
         },
+        refetchOnMount: true,
+        staleTime: 0,
         onError: (error) => {
           console.error("Mutation failed:", error);
           alert("An error occurred: " + error.message);
@@ -128,6 +130,8 @@ export const useCreateAIChat = () => {
         mutationFn: (data) => {
           return http.markettest.post(`/virtual/stock/orders`, data);
         },
+        refetchOnMount: true,
+        staleTime: 0,
         onError: (error) => {
           console.error("Mutation failed:", error);
           alert("An error occurred: " + error.message);

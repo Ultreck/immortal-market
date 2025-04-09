@@ -78,6 +78,7 @@ const VirtualStockDetails = () => {
       const res = await getStockOrders(stockOrders);
       setStockOrders(res.data.data);
       console.log(res?.data?.data);
+      console.log(stockOrders);
     } catch (error) {}
   };
   const handleGetStockSummary = async () => {

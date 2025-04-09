@@ -68,35 +68,35 @@ const VirtualStockSocket = ({ chartDatas }) => {
         </CardHeader>
         <CardBody className="px-4 pt-0 overflow-hidden grid grid-cols-2 gap-2">
           <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar size="24" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <p className="text-lg font-bold text-green-600">N34.33</p>
           </div>
           <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar size="24" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <p className="text-lg font-bold text-red-600">N34.33</p>
           </div>
           <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar size="24" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <p className="text-lg font-bold text-green-600">N34.33</p>
           </div>
           <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar size="24" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <p className="text-lg font-bold text-green-600">N34.33</p>
           </div>
           <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar size="24" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <p className="text-lg font-bold text-green-600">N34.33</p>
           </div>
           <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar size="24" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <p className="text-lg font-bold text-green-600">N34.33</p>
           </div>
           <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar size="24" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <p className="text-lg font-bold text-green-600">N34.33</p>
           </div>
           <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar size="24" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <p className="text-lg font-bold text-yellow-600">N34.33</p>
           </div>
         </CardBody>

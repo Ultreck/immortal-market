@@ -160,8 +160,8 @@ const VirtualStockChart = ({ chartDatas, state, setshouldStart, shouldStart, set
   };
 
   return (
-    <div className="overflow-x-auto max-w-[100%]">
-      <ResponsiveContainer width={'100%'} height={300}>
+    <div className="w-full h-72">
+      <ResponsiveContainer width={'100%'} height={'100%'}>
         <ComposedChart data={paddedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
