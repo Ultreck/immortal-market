@@ -18,6 +18,7 @@ import { formatCurrency } from '@/lib/utils';
 import PlaceOrder from '@/pages/market/modals/PlaceOrder.jsx';
 import { useGetCurrentPrice } from '@/store/bot';
 import ListOfOrdersModalDialog from '../../modals/ListOfOrdersModalDialog';
+import useInterval from '@/hooks/use-interval';
 
 const VirtualStockDetails = () => {
   const params = useParams();
@@ -29,6 +30,7 @@ const VirtualStockDetails = () => {
   const [stockOrders, setStockOrders] = useState([]);
   const [stockSummary, setstockSummary] = useState({});
   const [stockAllOrders, setStockAllOrders] = useState([]);
+  const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
   const [timeFrame, setTimeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('time-function');
@@ -41,6 +43,7 @@ const VirtualStockDetails = () => {
   const { currentPrice } = useGetCurrentPrice();
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const handleGetStockDetails = async () => {
     let data = {
       stockId: id,
@@ -56,17 +59,23 @@ const VirtualStockDetails = () => {
     handleGetStockOrders();
     handleGetStockSummary();
     setTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
-    console.log('chartDatas', chartDatas);
+    // console.log('chartDatas', chartDatas);
   }, [timeFrame, id]);
   useEffect(() => {
     handleGetStockDetails();
-    console.log('chartDatas', chartDatas);
+    // console.log('chartDatas', chartDatas);
   }, []);
 
   const handleChange = (key) => {
     window.localStorage.setItem('time-function', JSON.stringify(key));
     setTimeFrame(key);
   };
+
+  useEffect(() => {
+    if (shouldStart === false) {
+      handleGetStockDetails();
+    }
+  }, [shouldStart]);
 
   const handleGetStockOrders = async () => {
     try {
@@ -77,8 +86,8 @@ const VirtualStockDetails = () => {
       };
       const res = await getStockOrders(stockOrders);
       setStockOrders(res.data.data);
-      console.log(res?.data?.data);
-      console.log(stockOrders);
+      // console.log(res?.data?.data);
+      // console.log(stockOrders);
     } catch (error) {}
   };
   const handleGetStockSummary = async () => {
@@ -193,13 +202,16 @@ const VirtualStockDetails = () => {
                             </div>
                           </div>
                           <div className="space-x-2">
-                            <PlaceOrder id={id} state={location.state} text="Buy" type={'buy'} stock={stock} />
+                            <PlaceOrder id={id} state={location.state} text="Buy" type={'buy'} stock={stock} dissable={shouldStart} />
                             <ListOfOrdersModalDialog data={stockAllOrders} type={'sell'} />
                             {/* <PlaceOrder id={id} state={location.state} text="Sell" type={'sell'} stock={stock} /> */}
                           </div>
                         </div>
                         <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
-                        <VirtualStockChart state={location.state} chartDatas={chartDatas} />
+                        <VirtualStockChart state={location.state} chartDatas={chartDatas} 
+                            setshouldStart={setshouldStart}
+                            setendTime={setendTime}
+                            shouldStart={shouldStart} />
                       </div>
                     </Card>
                     <Card className="card-shadow px-10 py-10 border border-default-200 my-10">
@@ -335,7 +347,7 @@ const VirtualStockDetails = () => {
                   </div>
                 </div>
                 <div className="mt-28 text relative">
-                <VirtualStockSocket chartDatas={chartDatas} />
+                <VirtualStockSocket chartDatas={chartDatas} startIn={startIn} setstartIn={setstartIn} shouldStart={shouldStart} setshouldStart={setshouldStart} endTime={endTime} setendTime={setendTime} />
                 </div>
               </div>
             </div>

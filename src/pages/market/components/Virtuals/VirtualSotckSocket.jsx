@@ -3,10 +3,12 @@ import { Avatar, Card, CardBody, CardHeader } from '@heroui/react';
 import countries from '@/lib/countries.js';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import TimeoutComponent from '@/hooks/use-timeOut';
 
 const code = 'NG';
 
-const VirtualStockSocket = ({ chartDatas }) => {
+const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime }) => {
+
   // console.log(chartDatas?.startTime?.split('T')[1].split('.')[0]);
   
   // const [isClosed, setIsClosed] = useState(false);
@@ -104,7 +106,16 @@ const VirtualStockSocket = ({ chartDatas }) => {
       <Card radius="none" className="px-6 py-2 border border-default-100 mt-5">
         {!timeRemaining?.isOpen ? (
           <>
-            <div className="text-2xl font-mono text-[#4691c5] flex mt-1">
+           <div className={``}>
+              <TimeoutComponent
+                endTime={endTime}
+                startIn={startIn}
+                setstartIn={setstartIn}
+                shouldStart={shouldStart}
+                setshouldStart={setshouldStart}
+              />
+            </div>
+            {/* <div className="text-2xl font-mono text-[#4691c5] flex mt-1">
               <div className=" ">
                 <div className="">{chartDatas.price? (timeRemaining?.hours): '00'}:</div>
               </div>
@@ -114,8 +125,8 @@ const VirtualStockSocket = ({ chartDatas }) => {
               <div className="">
                 <div className="">{chartDatas.price? timeRemaining?.seconds: '00'}</div>
               </div>
-            </div>
-            <p className="text-base text-gray-400 font-normal">Time remaining</p>
+            </div> */}
+            {/* <p className="text-base text-gray-400 font-normal">Time remaining</p> */}
           </>
         ) : (
           <>

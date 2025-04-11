@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import TimeoutComponent from '@/hooks/use-timeOut';
 import PlaceOrder from '../market/modals/PlaceOrder.jsx';
+import useInterval from '@/hooks/use-interval';
 const code = 'NG';
 
 const MarketVirtualPage = () => {
@@ -23,9 +24,10 @@ const MarketVirtualPage = () => {
   const { setHomeMarket, homeMarket } = useGetMarkets();
   const [tab, seTtab] = useState('virtual-home');
   const [stocks, setStocks] = useState([]);
-  const [startIn, setstartIn] = useState(0);
-  const [shouldStart, setshouldStart] = useState(false);
-  const [endTime, setendTime] = useState(new Date());
+  const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
+  // const [startIn, setstartIn] = useState(0);
+  // const [shouldStart, setshouldStart] = useState(false);
+  // const [endTime, setendTime] = useState(new Date());
 
   const [countryName] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
   const { mutateAsync: createVirtualStocks, isPending: isStocksLoading } = useCreateVirtualStock({});
