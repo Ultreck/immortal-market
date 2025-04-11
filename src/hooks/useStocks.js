@@ -34,13 +34,16 @@ const useStocks = ({id}) => {
     try {
       let stockOrders = {
         stockId: id,
-        country: country,
+        // country: country,
         sessionType: timeFrame,
         page: 1,
       };
       const res = await getStockOrders(stockOrders);
       setStockOrders(res.data.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      
+    }
   };
   const handleGetStockSummary = async () => {
     try {

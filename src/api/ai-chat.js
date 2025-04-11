@@ -46,8 +46,7 @@ export const useCreateAIChat = () => {
         return http.market.post(`/chats/${id}/response`, data);
       },
       onError: (error) => {
-        console.error("Mutation failed:", error);
-        alert("An error occurred: " + error.message);
+        console.error("Mutation failed:", error)
       },
     });
   };
@@ -60,8 +59,7 @@ export const useCreateAIChat = () => {
         return http.markettest.post(`/virtual`, data);
       },
       onError: (error) => {
-        console.error("Mutation failed:", error);
-        alert("An error occurred: " + error.message);
+        console.error("Mutation failed:", error)
       },
     });
   };
@@ -73,7 +71,6 @@ export const useCreateAIChat = () => {
         },
         onError: (error) => {
           console.error("Mutation failed:", error);
-          alert("An error occurred: " + error.message);
         },
       });
     };
@@ -85,7 +82,6 @@ export const useCreateAIChat = () => {
         },
         onError: (error) => {
           console.error("Mutation failed:", error);
-          alert("An error occurred: " + error.message);
         },
       });
     };
@@ -98,6 +94,15 @@ export const useCreateAIChat = () => {
         },
       });
     };
+    export const useGetVirtualSession = (country) => {
+      return useQuery({
+        queryKey: ['virtual', 'all', 'orders', country],
+        queryFn: async () => {
+          const res = await http.markettest.get(`/virtual/${country}`);
+          return res.data;
+        },
+      });
+    };
     export const useCreateVirtualAllTradersPerStock = () => {
       return useMutation({
         mutationKey: ['virtual', "order"],
@@ -106,7 +111,6 @@ export const useCreateAIChat = () => {
         },
         onError: (error) => {
           console.error("Mutation failed:", error);
-          alert("An error occurred: " + error.message);
         },
       });
     };
@@ -120,7 +124,6 @@ export const useCreateAIChat = () => {
         staleTime: 0,
         onError: (error) => {
           console.error("Mutation failed:", error);
-          alert("An error occurred: " + error.message);
         },
       });
     };
@@ -134,7 +137,6 @@ export const useCreateAIChat = () => {
         staleTime: 0,
         onError: (error) => {
           console.error("Mutation failed:", error);
-          alert("An error occurred: " + error.message);
         },
       });
     };
@@ -146,7 +148,6 @@ export const useCreateAIChat = () => {
         },
         onError: (error) => {
           console.error("Mutation failed:", error);
-          alert("An error occurred: " + error.message);
         },
       });
     };
@@ -158,7 +159,6 @@ export const useCreateAIChat = () => {
         },
         onError: (error) => {
           console.error("Mutation failed:", error);
-          alert("An error occurred: " + error.message);
         },
       });
     };
@@ -170,7 +170,6 @@ export const useCreateAIChat = () => {
         },
         onError: (error) => {
           console.error("Mutation failed:", error);
-          alert("An error occurred: " + error.message);
         },
       });
     };
@@ -182,7 +181,6 @@ export const useCreateAIChat = () => {
         },
         onError: (error) => {
           console.error("Mutation failed:", error);
-          alert("An error occurred: " + error.message);
         },
       });
     };

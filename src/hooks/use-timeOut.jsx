@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
 function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshouldStart }) {
   const intervalRef = useRef(null);
@@ -26,19 +27,28 @@ function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshould
 
   return (
     <div className="flex gap-2">
-      <div className='flex flex-col items-center'>
-            <div className="text-2xl text-center font-mono text-[#4691c5] flex mt-1">
-              <div className="">
-                <div className="">{'00'}:</div>
-              </div>
-              <div className="">
-                <div className="">{String(startIn).padStart(2, '0')}</div>
-              </div>
+      {startIn > 0 && (
+        <div className="flex flex-col items-center">
+          <div className="text-2xl text-center font-mono text-[#4691c5] flex mt-1">
+            <div className="">
+              <div className="">{'00'}:</div>
             </div>
-            <p className="text-base text-gray-400 font-normal">Time remaining</p>
+            <div className="">
+              <div className="">{String(startIn).padStart(2, '0')}</div>
+            </div>
           </div>
+          <p className="text-base text-gray-400 font-normal">Time remaining</p>
+        </div>
+      )}
     </div>
   );
 }
+TimeoutComponent.propTypes = {
+  endTime: PropTypes.string.isRequired,
+  startIn: PropTypes.number.isRequired,
+  setstartIn: PropTypes.func.isRequired,
+  shouldStart: PropTypes.bool.isRequired,
+  setshouldStart: PropTypes.func.isRequired,
+};
 
 export default TimeoutComponent;

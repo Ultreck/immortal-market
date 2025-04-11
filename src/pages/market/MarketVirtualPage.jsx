@@ -1,11 +1,11 @@
 import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
-import { Avatar, AvatarGroup, Button, Card, Chip, Tab, Tabs, Tooltip } from '@heroui/react';
+import { Avatar, AvatarGroup, Button, Card, Tooltip } from '@heroui/react';
 // import countries from '@/lib/countries.js';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
 // import CountryList from '@/pages/market/shared/CountryList.jsx';
-import { useCreateVirtualStock, useCreateVirtualStockDetails, useGetStocksPerCountry } from '@/api/ai-chat';
+import { useCreateVirtualStock, useCreateVirtualStockDetails, useGetStocksPerCountry, useGetVirtualSession } from '@/api/ai-chat';
 import { useEffect, useState } from 'react';
 import VirtualSideNavbar from '@/pages/market/components/Virtuals/VirtualSideNavbar.jsx';
 import VirtualStockChart from './components/Virtuals/VirtualStockChart';
@@ -13,16 +13,15 @@ import VirtualStockChart from './components/Virtuals/VirtualStockChart';
 import { formatCurrency } from '@/lib/utils';
 import { useGetCurrentPrice, useGetMarkets } from '@/store/bot';
 import { useNavigate } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import TimeoutComponent from '@/hooks/use-timeOut';
 import PlaceOrder from '../market/modals/PlaceOrder.jsx';
 import useInterval from '@/hooks/use-interval';
 const code = 'NG';
 
 const MarketVirtualPage = () => {
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const { setHomeMarket, homeMarket } = useGetMarkets();
-  const [tab, seTtab] = useState('virtual-home');
   const [stocks, setStocks] = useState([]);
   const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
   // const [startIn, setstartIn] = useState(0);
@@ -33,6 +32,7 @@ const MarketVirtualPage = () => {
   const { mutateAsync: createVirtualStocks, isPending: isStocksLoading } = useCreateVirtualStock({});
   const { mutateAsync: getVirtualDashboard } = useGetStocksPerCountry();
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
+  const {data: virtualSession} = useGetVirtualSession(countryName);
   const [dashData, setDashData] = useState();
   const [chartDatas, setChartDatas] = useState([]);
   const { currentPrice } = useGetCurrentPrice();
@@ -41,7 +41,7 @@ const MarketVirtualPage = () => {
     const storedTimeFrame = window.localStorage.getItem('dash-time-function');
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
-
+   
   useEffect(() => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
@@ -75,9 +75,11 @@ const MarketVirtualPage = () => {
         };
         const chartRes = await getStockDetails(dataChart);
         setChartDatas(chartRes.data.data);
-        if (!chartRes.data.data.isRunning) {
-          setendTime(chartRes.data.data.endTime)
-          setshouldStart(true)
+        if (chartRes.data.data && !chartRes.data.data.isRunning) {
+          const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
+          console.log(chartRes.data.data.endTime);
+          setendTime(endingIn);
+          setshouldStart(true);
         }
       }
     } catch (error) {
@@ -93,6 +95,8 @@ const MarketVirtualPage = () => {
     const res = await createVirtualStocks(payload);
     setStocks(res?.data?.data);
   };
+
+  const scrollHeight = dashData?.activeCompanies.length * 40;
   return (
     <>
       <MarketNavbar />
@@ -119,30 +123,27 @@ const MarketVirtualPage = () => {
                 <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
                   <div>
                     <div className="flex items-center space-x-2">
-                      <TbArrowUpRight size={28} color="green" />
-                      <div className="text-[1.2rem] font-semibold text-green-600">
-                        <AnimatePresence mode="wait">
-                          <motion.div
-                            className="flex gap-5 w-max overflow-hidden"
-                            initial={{ y: 0, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -100, opacity: 0 }}
-                            transition={{
-                              repeat: Infinity,
-                              repeatType: 'loop',
-                              duration: 50,
-                              ease: 'linear',
-                              delay: 50,
-                            }}
-                          >
-                            {dashData?.activeCompanies?.map((company, index) => (
-                              <div key={index} className="flex items-center gap-3">
-                                <span className="text-white">{index + 1}.</span>
-                                <span className="text">{company.name.slice(0, 15) + '...'}</span>
-                              </div>
-                            ))}
-                          </motion.div>
-                        </AnimatePresence>
+                      <div className="overflow-hidden h-7">
+                        <motion.div
+                          className="grid gap-3"
+                          initial={{ y: `0%` }}
+                          exit={{ y: `0%` }}
+                          animate={{ y: [`0%`, `-${scrollHeight}px`] }}
+                          transition={{
+                            duration: 10,
+                            delay: 1,
+                            ease: 'linear',
+                            repeat: Infinity,
+                          }}
+                        >
+                          {/* Duplicate the data to allow seamless looping */}
+                          {dashData?.activeCompanies.map((company, index) => (
+                            <div key={index} className="flex text-xl items-center gap-3">
+                              <span className="text-white">{index + 1}.</span>
+                              <span className="text-green-600">{company.name.slice(0, 7) + '...'}</span>
+                            </div>
+                          ))}
+                        </motion.div>
                       </div>
                     </div>
                     <p className="opacity-70">Top 5 companies</p>
@@ -237,13 +238,9 @@ const MarketVirtualPage = () => {
                   </div>
                 </div>
                 {currentPrice?.price ? (
-                  <div className="text-green-600 ml-2 font-mono text-2xl">
-                    {formatCurrency(currentPrice?.price)}
-                  </div>
+                  <div className="text-green-600 ml-2 font-mono text-2xl">{formatCurrency(currentPrice?.price)}</div>
                 ) : (
-                  <div className="text-gray-600 ml-2 font-mono text-2xl">
-                    {formatCurrency(0.0)}
-                  </div>
+                  <div className="text-gray-600 ml-2 font-mono text-2xl">{formatCurrency(0.0)}</div>
                 )}
                 <div className="text">
                   <VirtualStockChart
@@ -253,7 +250,7 @@ const MarketVirtualPage = () => {
                     setshouldStart={setshouldStart}
                     setendTime={setendTime}
                     shouldStart={shouldStart}
-                  />
+                    />
                 </div>
               </div>
             </Card>
@@ -266,6 +263,7 @@ const MarketVirtualPage = () => {
               setHomeMarket={setHomeMarket}
               homeMarket={homeMarket}
               setDashboardTimeFrame={setDashboardTimeFrame}
+              virtualSession={virtualSession}
             />
           </div>
         </div>

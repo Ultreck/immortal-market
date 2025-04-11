@@ -5,14 +5,12 @@ import { useGetStock } from '@/api/market.js';
 import { useEffect, useState } from 'react';
 import VirtualStockChart from '@/pages/market/components/Virtuals/VirtualStockChart.jsx';
 // import ListOfOrdersModalDialog from '@/pages/market/modals/ListOfOrdersModalDialog';
-import { Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, useDisclosure } from '@heroui/react'; //drawer content
 import VirtualStockSocket from '@/pages/market/components/Virtuals/VirtualSotckSocket.jsx';
 import VirtualStockTradeMarquee from '@/pages/market/components/Virtuals/VirtualStockTradeMarquee.jsx';
 import {
   useCreateVirtualStockDetails,
   useCreateVirtualStockOrders,
   useCreateVirtualSummary,
-  useGetAllOrders,
 } from '@/api/ai-chat';
 import { formatCurrency } from '@/lib/utils';
 import PlaceOrder from '@/pages/market/modals/PlaceOrder.jsx';
@@ -27,7 +25,7 @@ const VirtualStockDetails = () => {
   const location = useLocation();
   const [summaryOrder, setSummaryOrder] = useState(null);
   const [chartDatas, setChartDatas] = useState([]);
-  const [stockOrders, setStockOrders] = useState([]);
+  // Removed unused stockOrders state
   const [stockSummary, setstockSummary] = useState({});
   const [stockAllOrders, setStockAllOrders] = useState([]);
   const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
@@ -39,10 +37,8 @@ const VirtualStockDetails = () => {
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
   const { mutateAsync: getStockSummary } = useCreateVirtualSummary();
-  const { mutateAsync: getStockAllOrders } = useGetAllOrders();
+  // const { mutateAsync: getStockAllOrders } = useGetAllOrders();
   const { currentPrice } = useGetCurrentPrice();
-
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const handleGetStockDetails = async () => {
     let data = {
@@ -79,10 +75,9 @@ const VirtualStockDetails = () => {
 
   const handleGetStockOrders = async () => {
     try {
-      let stockOrders = {
+      let stockOrdersPayload = {
         stock: chartDatas?.stock?._id,
-        session: chartDatas?._id,
-        page: 1,
+        sessionType: timeFrame,
       };
       const res = await getStockOrders(stockOrders);
       setStockOrders(res.data.data);
@@ -92,30 +87,32 @@ const VirtualStockDetails = () => {
   };
   const handleGetStockSummary = async () => {
     try {
-      let stockSummary = {
-        stock: chartDatas?.stock?._id,
-        session: chartDatas?._id,
+      if (chartDatas?.stock?._id){
+        let stockSummary = {
+          stock: chartDatas?.stock?._id,
+          session: chartDatas?._id,
+        };
+        const res = await getStockSummary(stockSummary);
+        setstockSummary(res.data.data);
       };
-      const res = await getStockSummary(stockSummary);
-      setstockSummary(res.data.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleGetAllOrders = async () => {
-    try {
-      let stockAllOrders = {
-        stock: '6658677cc6a35aab6119fa08',
-        session: '67e59107721fa2473fc04b99',
-      };
-      const res = await getStockAllOrders(stockAllOrders);
-      setStockAllOrders(res?.data?.data);
-      console.log(res?.data?.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleGetAllOrders = async () => {
+  //   try {
+  //     let stockAllOrders = {
+  //       stock: '6658677cc6a35aab6119fa08',
+  //       session: '67e59107721fa2473fc04b99',
+  //     };
+  //     const res = await getStockAllOrders(stockAllOrders);
+  //     setStockAllOrders(res?.data?.data);
+  //     console.log(res?.data?.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
