@@ -55,7 +55,7 @@ const timeFormatter = (date, is24Hour = false) => {
   }
 };
 
-const VirtualStockChart = ({ chartDatas, state, setshouldStart, shouldStart, setendTime}) => {
+const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime}) => {
   const [data, setData] = useState(chartDatas?.prices);
   // const [maxDataLength, SetmaxDataLength ] = useState(20);
   const { isDarkMode } = useTernaryDarkMode();

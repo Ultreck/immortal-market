@@ -8,6 +8,8 @@ const VirtualSideNavbar = ({country, setHomeMarket, homeMarket, setDashboardTime
     const storedTimeFrame = window.localStorage.getItem('dash-time-function');
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
+  console.log(virtualSession);
+  
   useEffect(() => {
     console.log(virtualSession?.data);
     handleGetStockDetails();
@@ -19,27 +21,13 @@ const VirtualSideNavbar = ({country, setHomeMarket, homeMarket, setDashboardTime
     "sessionType": timeFrame,
   };
   
-  VirtualSideNavbar.propTypes = {
-    country: PropTypes.string.isRequired,
-    setHomeMarket: PropTypes.func.isRequired,
-    homeMarket: PropTypes.string.isRequired,
-    setDashboardTimeFrame: PropTypes.func.isRequired,
-    virtualSession: PropTypes.shape({
-      data: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          value: PropTypes.string,
-        })
-      ),
-    }),
-  };
   console.log(data); // Use the data variable (or uncomment the API call below)
   // const res = await getStockDetails(data);
-    // const res = await getStockDetails(data);
-    // setChartDatas(res.data.data);
-  };
+  // const res = await getStockDetails(data);
+  // setChartDatas(res.data.data);
+};
 
-  const handleChange = (data) => {
+const handleChange = (data) => {
     window.localStorage.setItem('dash-time-function', JSON.stringify(data.sessionType));
     setHomeMarket(data.sessionType);    
     setDashboardTimeFrame(data.sessionType)
@@ -58,7 +46,7 @@ const VirtualSideNavbar = ({country, setHomeMarket, homeMarket, setDashboardTime
             <div
               className="w-full h-full"
               onClick={() => {handleChange(v)}}
-            >
+              >
               <CardBody className="px-5 pb-5 pt-0">
                 <div className="text flex justify-between">
                   <div className="text">
@@ -72,11 +60,6 @@ const VirtualSideNavbar = ({country, setHomeMarket, homeMarket, setDashboardTime
                       {v?.users?.map((user) => (
                         <Avatar key={user} src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
                       ))}
-                      {/* <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" /> */}
                     </AvatarGroup>
                   </div>
                 </div>
@@ -93,6 +76,14 @@ VirtualSideNavbar.propTypes = {
   setHomeMarket: PropTypes.func.isRequired,
   homeMarket: PropTypes.string.isRequired,
   setDashboardTimeFrame: PropTypes.func.isRequired,
+  virtualSession: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        value: PropTypes.string,
+      })
+    ),
+  }),
 };
 
 export default VirtualSideNavbar;
