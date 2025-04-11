@@ -46,11 +46,13 @@ const MarketVirtualPage = () => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('dash-time-function')));
-  }, [countryName, dashboardTimeFrame, homeMarket]);
+  }, [countryName, homeMarket]);
+// }, [countryName, dashboardTimeFrame, homeMarket]);
 
   useEffect(() => {
     handleGetVirtualDashboardData();
   }, []);
+  
   useEffect(() => {
     if (shouldStart === false) {
       handleGetVirtualDashboardData();
@@ -73,11 +75,13 @@ const MarketVirtualPage = () => {
           country: countryName,
           sessionType: dashboardTimeFrame || '1-minute',
         };
+        console.log(dataChart);
+
         const chartRes = await getStockDetails(dataChart);
         setChartDatas(chartRes.data.data);
+
         if (chartRes.data.data && !chartRes.data.data.isRunning) {
           const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
-          console.log(chartRes.data.data.endTime);
           setendTime(endingIn);
           setshouldStart(true);
         }

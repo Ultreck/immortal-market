@@ -2,8 +2,8 @@
 import { useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 
-// const SOCKET_URL = 'https://market-msjv.onrender.com'; // Your WebSocket URL
-const SOCKET_URL = 'http://localhost:2000'; // Your WebSocket URL
+const SOCKET_URL = 'https://market-msjv.onrender.com'; // Your WebSocket URL
+// const SOCKET_URL = 'http://localhost:2000'; // Your WebSocket URL
 
 
 
