@@ -15,15 +15,18 @@ import { useGetCurrentPrice, useGetMarkets } from '@/store/bot';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import TimeoutComponent from '@/hooks/use-timeOut';
+import PlaceOrder from '../market/modals/PlaceOrder.jsx';
+import useInterval from '@/hooks/use-interval';
 const code = 'NG';
 
 const MarketVirtualPage = () => {
   const [page] = useState(1);
   const { setHomeMarket, homeMarket } = useGetMarkets();
   const [stocks, setStocks] = useState([]);
-  const [startIn, setstartIn] = useState(0);
-  const [shouldStart, setshouldStart] = useState(false);
-  const [endTime, setendTime] = useState(new Date());
+  const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
+  // const [startIn, setstartIn] = useState(0);
+  // const [shouldStart, setshouldStart] = useState(false);
+  // const [endTime, setendTime] = useState(new Date());
 
   const [countryName] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
   const { mutateAsync: createVirtualStocks, isPending: isStocksLoading } = useCreateVirtualStock({});
@@ -43,11 +46,13 @@ const MarketVirtualPage = () => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('dash-time-function')));
-  }, [countryName, dashboardTimeFrame, homeMarket]);
+  }, [countryName, homeMarket]);
+// }, [countryName, dashboardTimeFrame, homeMarket]);
 
   useEffect(() => {
     handleGetVirtualDashboardData();
   }, []);
+  
   useEffect(() => {
     if (shouldStart === false) {
       handleGetVirtualDashboardData();
@@ -70,11 +75,13 @@ const MarketVirtualPage = () => {
           country: countryName,
           sessionType: dashboardTimeFrame || '1-minute',
         };
+        console.log(dataChart);
+
         const chartRes = await getStockDetails(dataChart);
         setChartDatas(chartRes.data.data);
+
         if (chartRes.data.data && !chartRes.data.data.isRunning) {
           const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
-          console.log(chartRes.data.data.endTime);
           setendTime(endingIn);
           setshouldStart(true);
         }

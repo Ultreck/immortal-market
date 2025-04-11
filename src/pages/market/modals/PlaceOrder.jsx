@@ -4,7 +4,7 @@ import { useGetCurrentPrice } from '@/store/bot';
 import { FaNairaSign } from 'react-icons/fa6';
 import { usePlaceOrder, useSellOrder } from '@/api/ai-chat';
 
-const PlaceOrder = ({ id, text, type, state }) => {
+const PlaceOrder = ({ id, text, type, state, dissable }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { currentPrice } = useGetCurrentPrice();
   const { mutateAsync: placeOrder } = usePlaceOrder();
@@ -60,7 +60,7 @@ const PlaceOrder = ({ id, text, type, state }) => {
 
   return (
     <>
-      <Button onPress={onOpen} color={type === 'buy' ? 'primary' : 'danger'} radius="full">
+      <Button onPress={!dissable && onOpen} color={type === 'buy' ? 'primary' : 'danger'} radius="full">
         {text}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

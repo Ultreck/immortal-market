@@ -61,7 +61,6 @@ const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime
   const { isDarkMode } = useTernaryDarkMode();
   // const socket = io('https://market-msjv.onrender.com', { transports: ['websocket'], autoConnect: false });
   const socket = useSocket();
-
   // console.log(ecternalSocket);
   // const timeFrame = JSON.parse(localStorage.getItem('time-function'));
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
@@ -91,7 +90,7 @@ const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime
     const handleNewSession = (msg) => {
 
       if (!msg.isRunning && !shouldStart) {
-        console.log(msg);
+        console.log(shouldStart);
         setendTime(msg.endTime)
         setshouldStart(true)
       }
@@ -133,10 +132,13 @@ const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime
   // console.log(timeFrame);
 
   let paddedData;
-  if (data && (data?.length > 0)) {
-    const lengthDiff = Math.max(0, maxDataLength - currentLength);
-    paddedData = [...data, ...Array(lengthDiff).fill(null)];
+  if (data) {
+    if (data?.length > 0) {
+      const lengthDiff = Math.max(0, maxDataLength - currentLength);
+      paddedData = [...data, ...Array(lengthDiff).fill(null)];
+    }
   }
+
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
