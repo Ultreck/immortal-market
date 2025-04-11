@@ -11,7 +11,6 @@ import {
   useCreateVirtualStockDetails,
   useCreateVirtualStockOrders,
   useCreateVirtualSummary,
-  useGetAllOrders,
 } from '@/api/ai-chat';
 import { formatCurrency } from '@/lib/utils';
 import PlaceOrder from '@/pages/market/modals/PlaceOrder.jsx';
@@ -27,7 +26,7 @@ const VirtualStockDetails = () => {
   const [chartDatas, setChartDatas] = useState([]);
   // Removed unused stockOrders state
   const [stockSummary, setstockSummary] = useState({});
-  const [stockAllOrders, setStockAllOrders] = useState([]);
+  const [stockAllOrders ] = useState([]);
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
   const [timeFrame, setTimeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('time-function');

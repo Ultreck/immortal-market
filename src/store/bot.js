@@ -27,7 +27,7 @@ const useGetCurrentPrice = create((set) => ({
   setCurrentPrice: (price) => set({ currentPrice: price }),
 }));
 const useGetMarkets = create((set) => ({
-  homeMarket: '1min',
+  homeMarket: '1-minute',
   setHomeMarket: (mkType) => set({ homeMarket: mkType }),
 }));
 
