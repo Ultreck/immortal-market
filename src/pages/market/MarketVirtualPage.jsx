@@ -38,15 +38,15 @@ const MarketVirtualPage = () => {
   const { currentPrice } = useGetCurrentPrice();
   const navigation = useNavigate();
   const [dashboardTimeFrame, setDashboardTimeFrame] = useState(() => {
-    const storedTimeFrame = window.localStorage.getItem('dash-time-function');
+    const storedTimeFrame = window.localStorage.getItem('time-function');
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
    
   useEffect(() => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
-    setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('dash-time-function')));
-  }, [countryName, homeMarket]);
+    setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
+  }, [countryName, homeMarket, dashboardTimeFrame]);
 // }, [countryName, dashboardTimeFrame, homeMarket]);
 
   useEffect(() => {
@@ -69,17 +69,18 @@ const MarketVirtualPage = () => {
       };
       const res = await getVirtualDashboard(data);
       setDashData(res?.data?.data);
+      console.log('Dashboard data'+res?.data?.data);
+      
       if (res) {
         let dataChart = {
           stockId: res?.data?.data?.mostBoughtStock?.id,
           country: countryName,
           sessionType: dashboardTimeFrame || '1-minute',
         };
-        console.log(dataChart);
-
         const chartRes = await getStockDetails(dataChart);
         setChartDatas(chartRes.data.data);
-
+        console.log('chart data'+chartRes?.data?.data);
+        
         if (chartRes.data.data && !chartRes.data.data.isRunning) {
           const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
           setendTime(endingIn);
@@ -169,7 +170,7 @@ const MarketVirtualPage = () => {
                   <div>
                     <div className="flex items-center space-x-2">
                       <TbArrowUpRight size={28} color="green" />
-                      <p className="text-[1.3rem] font-semibold text-green-600">{dashData?.totalTrades || 0}</p>
+                      <p className="text-[1.3rem] font-semibold text-green-600">{String(dashData?.totalTrades).padStart(2, '0') || 0}</p>
                     </div>
                     <p className="opacity-70">Total Trade</p>
                   </div>

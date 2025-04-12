@@ -10,7 +10,7 @@ function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshould
         const now = new Date();
         const end = new Date(endTime);
         const diffInSeconds = Math.floor((now.getTime() - end.getTime()) / 1000);
-        const countdown = 60 - diffInSeconds;
+        const countdown = 30 - diffInSeconds;
         setstartIn(countdown);
         if (countdown <= 0 || countdown > 60) {
           clearInterval(intervalRef.current);

@@ -60,7 +60,7 @@ const PlaceOrder = ({ id, text, type, state, dissable }) => {
 
   return (
     <>
-      <Button onPress={!dissable && onOpen} color={type === 'buy' ? 'primary' : 'danger'} radius="full">
+      <Button onPress={!dissable && onOpen} color={type === 'buy' ? 'primary' : 'danger'} radius="full" className='w-32'>
         {text}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

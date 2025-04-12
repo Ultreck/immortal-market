@@ -7,11 +7,7 @@ import VirtualStockChart from '@/pages/market/components/Virtuals/VirtualStockCh
 // import ListOfOrdersModalDialog from '@/pages/market/modals/ListOfOrdersModalDialog';
 import VirtualStockSocket from '@/pages/market/components/Virtuals/VirtualSotckSocket.jsx';
 import VirtualStockTradeMarquee from '@/pages/market/components/Virtuals/VirtualStockTradeMarquee.jsx';
-import {
-  useCreateVirtualStockDetails,
-  useCreateVirtualStockOrders,
-  useCreateVirtualSummary,
-} from '@/api/ai-chat';
+import { useCreateVirtualStockDetails, useCreateVirtualStockOrders, useCreateVirtualSummary } from '@/api/ai-chat';
 import { formatCurrency } from '@/lib/utils';
 import PlaceOrder from '@/pages/market/modals/PlaceOrder.jsx';
 import { useGetCurrentPrice } from '@/store/bot';
@@ -28,7 +24,7 @@ const VirtualStockDetails = () => {
   // Removed unused stockOrders state
   const [stockSummary, setstockSummary] = useState({});
   const [stockAllOrders, setStockAllOrders] = useState([]);
-  const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
+  const { startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime } = useInterval();
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
   const [timeFrame, setTimeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('time-function');
@@ -49,7 +45,6 @@ const VirtualStockDetails = () => {
     const res = await getStockDetails(data);
     setChartDatas(res.data.data);
   };
-
   useEffect(() => {
     handleGetStockDetails();
     handleGetStockOrders();
@@ -78,41 +73,26 @@ const VirtualStockDetails = () => {
       let stockOrdersPayload = {
         stock: chartDatas?.stock?._id,
         sessionType: timeFrame,
-      };
-      const res = await getStockOrders(stockOrders);
-      setStockOrders(res.data.data);
-      // console.log(res?.data?.data);
-      // console.log(stockOrders);
+      };      
+      const res = await getStockOrders(stockOrdersPayload);
+      console.log(res?.data?.data);
+      
     } catch (error) {}
   };
   const handleGetStockSummary = async () => {
     try {
-      if (chartDatas?.stock?._id){
+      if (chartDatas?.stock?._id) {
         let stockSummary = {
           stock: chartDatas?.stock?._id,
           session: chartDatas?._id,
         };
         const res = await getStockSummary(stockSummary);
         setstockSummary(res.data.data);
-      };
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  // const handleGetAllOrders = async () => {
-  //   try {
-  //     let stockAllOrders = {
-  //       stock: '6658677cc6a35aab6119fa08',
-  //       session: '67e59107721fa2473fc04b99',
-  //     };
-  //     const res = await getStockAllOrders(stockAllOrders);
-  //     setStockAllOrders(res?.data?.data);
-  //     console.log(res?.data?.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <>
@@ -137,78 +117,41 @@ const VirtualStockDetails = () => {
                     <Card className="card-shadow px-10 py-10">
                       <div className="space-y-10">
                         <div className="flex justify-between">
-                          <div className="flex space-x-4">
-                            <div>
+                          <div className="flex space-x-4 w-2/5">
+                            <div className="w-full flex justify-between items-center">
                               <div className="flex items-center space-x-3">
                                 <div>
                                   <h1 className="text-md">{stock?.symbol}</h1>
                                   <p className="mt-1 text-4xl font-bold">25%</p>
                                 </div>
                               </div>
-                              <div className="mt-6">
-                                <Tabs
-                                  selectedKey={timeFrame}
-                                  onSelectionChange={(e) => handleChange(e)}
-                                  aria-label="Options"
-                                  radius="full"
-                                  color="primary"
-                                  variant="bordered"
-                                >
-                                  <Tab
-                                    key="1-minute"
-                                    title={
-                                      <div className="flex items-center space-x-2">
-                                        <span>1min</span>
-                                      </div>
-                                    }
-                                  />
-                                  <Tab
-                                    key="3-minutes"
-                                    title={
-                                      <div className="flex items-center space-x-2">
-                                        <span>3mins</span>
-                                      </div>
-                                    }
-                                  />
-                                  <Tab
-                                    key="10-minutes"
-                                    title={
-                                      <div className="flex items-center space-x-2">
-                                        <span>10mins</span>
-                                      </div>
-                                    }
-                                  />
-                                  <Tab
-                                    key="30-minutes"
-                                    title={
-                                      <div className="flex items-center space-x-2">
-                                        <span>30mins</span>
-                                      </div>
-                                    }
-                                  />
-                                  <Tab
-                                    key="no-time"
-                                    title={
-                                      <div className="flex items-center space-x-2">
-                                        <span>No-time</span>
-                                      </div>
-                                    }
-                                  />
-                                </Tabs>
+                              <div className="">
+                                <h1 className="text-md">Your wining</h1>
+                                <p className="mt-1 text-green-600 text-4xl font-bold">
+                                  <span className="text-3xl">X</span>1.25
+                                </p>
                               </div>
                             </div>
                           </div>
                           <div className="space-x-2">
-                            <PlaceOrder id={id} state={location.state} text="Buy" type={'buy'} stock={stock} dissable={shouldStart} />
+                            <PlaceOrder
+                              id={id}
+                              state={location.state}
+                              text="Buy"
+                              type={'buy'}
+                              stock={stock}
+                              dissable={shouldStart}
+                            />
                             <ListOfOrdersModalDialog data={stockAllOrders} type={'sell'} />
-                            {/* <PlaceOrder id={id} state={location.state} text="Sell" type={'sell'} stock={stock} /> */}
                           </div>
                         </div>
-                        <div className="text-green-600 text-2xl">{formatCurrency(currentPrice?.price)}</div>
-                        <VirtualStockChart state={location.state} chartDatas={chartDatas} 
-                            setshouldStart={setshouldStart}
-                            setendTime={setendTime}
-                            shouldStart={shouldStart} />
+                        <VirtualStockChart
+                          state={location.state}
+                          chartDatas={chartDatas}
+                          setshouldStart={setshouldStart}
+                          setendTime={setendTime}
+                          shouldStart={shouldStart}
+                        />
                       </div>
                     </Card>
                     <Card className="card-shadow px-10 py-10 border border-default-200 my-10">
@@ -344,7 +287,15 @@ const VirtualStockDetails = () => {
                   </div>
                 </div>
                 <div className="mt-28 text relative">
-                <VirtualStockSocket chartDatas={chartDatas} startIn={startIn} setstartIn={setstartIn} shouldStart={shouldStart} setshouldStart={setshouldStart} endTime={endTime} setendTime={setendTime} />
+                  <VirtualStockSocket
+                    chartDatas={chartDatas}
+                    startIn={startIn}
+                    setstartIn={setstartIn}
+                    shouldStart={shouldStart}
+                    setshouldStart={setshouldStart}
+                    endTime={endTime}
+                    setendTime={setendTime}
+                  />
                 </div>
               </div>
             </div>

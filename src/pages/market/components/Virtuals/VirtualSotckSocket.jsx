@@ -103,7 +103,7 @@ const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, sets
           </div>
         </CardBody>
       </Card>
-      <Card radius="none" className="px-6 py-2 border border-default-100 mt-5">
+      {/* <Card radius="none" className="px-6 py-2 border border-default-100 mt-5">
         {!timeRemaining?.isOpen ? (
           <>
            <div className={``}>
@@ -115,7 +115,7 @@ const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, sets
                 setshouldStart={setshouldStart}
               />
             </div>
-            {/* <div className="text-2xl font-mono text-[#4691c5] flex mt-1">
+            <div className="text-2xl font-mono text-[#4691c5] flex mt-1">
               <div className=" ">
                 <div className="">{chartDatas.price? (timeRemaining?.hours): '00'}:</div>
               </div>
@@ -125,8 +125,8 @@ const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, sets
               <div className="">
                 <div className="">{chartDatas.price? timeRemaining?.seconds: '00'}</div>
               </div>
-            </div> */}
-            {/* <p className="text-base text-gray-400 font-normal">Time remaining</p> */}
+            </div>
+            <p className="text-base text-gray-400 font-normal">Time remaining</p>
           </>
         ) : (
           <>
@@ -151,7 +151,7 @@ const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, sets
             </div>
           </>
         )}
-      </Card>
+      </Card> */}
     </div>
   );
 };

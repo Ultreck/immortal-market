@@ -128,8 +128,8 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                           onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
                         >
                           <div className="flex items-center space-x-1">
-                            {c.change >= 0 ? <RiArrowUpLine /> : <RiArrowDownLine />}
-                            <span>{c.change.toFixed(2)}%</span>
+                            {c.change >= 0 ? <RiArrowUpLine className='text-green-600' /> : <RiArrowDownLine className='text-red-600' />}
+                            <span className={`${Math.sign(c.change) === -1 ? 'text-red-600': 'text-green-600'}`}>{c.change.toFixed(2)}%</span>
                           </div>
                         </Button>
                       </TableCell>

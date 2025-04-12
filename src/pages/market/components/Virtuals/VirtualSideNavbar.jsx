@@ -7,9 +7,7 @@ const VirtualSideNavbar = ({country, setHomeMarket, homeMarket, setDashboardTime
   const [timeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('dash-time-function');
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
-  });
-  console.log(virtualSession);
-  
+  });  
   useEffect(() => {
     console.log(virtualSession?.data);
     handleGetStockDetails();
@@ -28,7 +26,7 @@ const VirtualSideNavbar = ({country, setHomeMarket, homeMarket, setDashboardTime
 };
 
 const handleChange = (data) => {
-    window.localStorage.setItem('dash-time-function', JSON.stringify(data.sessionType));
+    window.localStorage.setItem('time-function', JSON.stringify(data.sessionType));
     setHomeMarket(data.sessionType);    
     setDashboardTimeFrame(data.sessionType)
   };

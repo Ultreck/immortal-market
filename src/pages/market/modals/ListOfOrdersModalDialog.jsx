@@ -8,7 +8,7 @@ const ListOfOrdersModalDialog = ({ data, type = '' }) => {
   return (
     <>
       {type === 'sell' ? (
-        <Button onPress={onOpen} color="danger" radius="full">
+        <Button onPress={onOpen} color="danger" radius="full" className='w-32'>
           Sell
         </Button>
       ) : (
