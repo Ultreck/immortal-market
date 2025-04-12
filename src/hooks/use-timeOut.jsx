@@ -12,7 +12,7 @@ function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshould
         const diffInSeconds = Math.floor((now.getTime() - end.getTime()) / 1000);
         const countdown = 30 - diffInSeconds;
         setstartIn(countdown);
-        if (countdown <= 0 || countdown > 60) {
+        if (countdown <= 0 || countdown > 30) {
           clearInterval(intervalRef.current);
           setshouldStart(false);
           setstartIn(0);
