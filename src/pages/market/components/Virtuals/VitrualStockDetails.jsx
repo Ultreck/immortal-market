@@ -7,12 +7,13 @@ import VirtualStockChart from '@/pages/market/components/Virtuals/VirtualStockCh
 // import ListOfOrdersModalDialog from '@/pages/market/modals/ListOfOrdersModalDialog';
 import VirtualStockSocket from '@/pages/market/components/Virtuals/VirtualSotckSocket.jsx';
 import VirtualStockTradeMarquee from '@/pages/market/components/Virtuals/VirtualStockTradeMarquee.jsx';
-import { useCreateVirtualStockDetails, useCreateVirtualStockOrders, useCreateVirtualSummary } from '@/api/ai-chat';
+import { useCreateVirtualStockDetails, useCreateVirtualStockOrders, useCreateVirtualSummary, useGetAllOrders } from '@/api/ai-chat';
 import { formatCurrency } from '@/lib/utils';
 import PlaceOrder from '@/pages/market/modals/PlaceOrder.jsx';
 import { useGetCurrentPrice } from '@/store/bot';
 import ListOfOrdersModalDialog from '../../modals/ListOfOrdersModalDialog';
 import useInterval from '@/hooks/use-interval';
+import { get } from 'react-hook-form';
 
 const VirtualStockDetails = () => {
   const params = useParams();
@@ -33,7 +34,7 @@ const VirtualStockDetails = () => {
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
   const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
   const { mutateAsync: getStockSummary } = useCreateVirtualSummary();
-  // const { mutateAsync: getStockAllOrders } = useGetAllOrders();
+  const { mutateAsync: getStockAllOrders } = useGetAllOrders();
   const { currentPrice } = useGetCurrentPrice();
 
   const handleGetStockDetails = async () => {
@@ -49,18 +50,13 @@ const VirtualStockDetails = () => {
     handleGetStockDetails();
     handleGetStockOrders();
     handleGetStockSummary();
+    handleAllStockOrders();
     setTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
-    // console.log('chartDatas', chartDatas);
   }, [timeFrame, id]);
+
   useEffect(() => {
     handleGetStockDetails();
-    // console.log('chartDatas', chartDatas);
   }, []);
-
-  const handleChange = (key) => {
-    window.localStorage.setItem('time-function', JSON.stringify(key));
-    setTimeFrame(key);
-  };
 
   useEffect(() => {
     if (shouldStart === false) {
@@ -73,10 +69,9 @@ const VirtualStockDetails = () => {
       let stockOrdersPayload = {
         stock: chartDatas?.stock?._id,
         sessionType: timeFrame,
-      };      
+      };
       const res = await getStockOrders(stockOrdersPayload);
       console.log(res?.data?.data);
-      
     } catch (error) {}
   };
   const handleGetStockSummary = async () => {
@@ -93,7 +88,21 @@ const VirtualStockDetails = () => {
       console.log(error);
     }
   };
-
+  const handleAllStockOrders = async () => {
+    try {
+      if (chartDatas?.stock?._id) {
+        let allOrderData = {
+          page: 1,
+          status: [false, true],
+        };
+        const res = await getStockAllOrders(allOrderData);
+        console.log(res?.data?.data)
+      }
+    } catch (error) {
+      console.log(error);
+    };
+  };
+  
   return (
     <>
       {isStockLoading ? (

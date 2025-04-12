@@ -21,9 +21,9 @@ const code = 'NG';
 
 const MarketVirtualPage = () => {
   const [page] = useState(1);
-  const { setHomeMarket, homeMarket } = useGetMarkets();
   const [stocks, setStocks] = useState([]);
   const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
+  const { setHomeMarket, homeMarket } = useGetMarkets();
   // const [startIn, setstartIn] = useState(0);
   // const [shouldStart, setshouldStart] = useState(false);
   // const [endTime, setendTime] = useState(new Date());
@@ -47,7 +47,6 @@ const MarketVirtualPage = () => {
     handleGetVirtualDashboardData();
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [countryName, homeMarket, dashboardTimeFrame]);
-// }, [countryName, dashboardTimeFrame, homeMarket]);
 
   useEffect(() => {
     handleGetVirtualDashboardData();

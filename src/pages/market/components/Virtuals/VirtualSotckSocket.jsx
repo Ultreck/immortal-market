@@ -8,9 +8,8 @@ import TimeoutComponent from '@/hooks/use-timeOut';
 const code = 'NG';
 
 const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime }) => {
-
   // console.log(chartDatas?.startTime?.split('T')[1].split('.')[0]);
-  
+
   // const [isClosed, setIsClosed] = useState(false);
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
 
@@ -62,8 +61,8 @@ const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, sets
   }, []);
 
   return (
-    <div className="sticky top-0">
-      <Card radius='none' className="rounded-2xl h-[300px] ">
+    <div className="sticky top-20">
+      <Card radius="none" className="rounded-2xl h-[300px]">
         <CardHeader className="sticky grid  top-0 px-7 pb-3 pt-6">
           <h1 className="text-3xl text-green-600">N45M</h1>
           <h3 className="text">Winnings</h3>
@@ -103,55 +102,6 @@ const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, sets
           </div>
         </CardBody>
       </Card>
-      {/* <Card radius="none" className="px-6 py-2 border border-default-100 mt-5">
-        {!timeRemaining?.isOpen ? (
-          <>
-           <div className={``}>
-              <TimeoutComponent
-                endTime={endTime}
-                startIn={startIn}
-                setstartIn={setstartIn}
-                shouldStart={shouldStart}
-                setshouldStart={setshouldStart}
-              />
-            </div>
-            <div className="text-2xl font-mono text-[#4691c5] flex mt-1">
-              <div className=" ">
-                <div className="">{chartDatas.price? (timeRemaining?.hours): '00'}:</div>
-              </div>
-              <div className="">
-                <div className="">{chartDatas.price? timeRemaining?.minutes : '00'}:</div>
-              </div>
-              <div className="">
-                <div className="">{chartDatas.price? timeRemaining?.seconds: '00'}</div>
-              </div>
-            </div>
-            <p className="text-base text-gray-400 font-normal">Time remaining</p>
-          </>
-        ) : (
-          <>
-            <p className="text-base text-center font-semibold">Market closes in: </p>
-            <div className="grid grid-cols-3 mt-1">
-              <div className="mr-2 ">
-                <div className="text-red-600 bg-red-200/5 text-5xl p-5 rounded-tl-lg rounded-bl-lg">
-                  {timeRemaining?.hours}
-                </div>
-                <div className="text-gray-500 text-center">Hours</div>
-              </div>
-              <div className="mr-2">
-                <div className="text-red-600 bg-red-200/5 text-5xl p-5">{timeRemaining?.minutes}</div>
-                <div className="text-gray-500 text-center">Minutes</div>
-              </div>
-              <div className="mr-2">
-                <div className="text-red-600 bg-red-200/5 text-5xl p-5 rounded-tr-lg rounded-br-lg">
-                  {timeRemaining?.seconds}
-                </div>
-                <div className="text-gray-500 text-center">Seconds</div>
-              </div>
-            </div>
-          </>
-        )}
-      </Card> */}
     </div>
   );
 };

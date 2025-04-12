@@ -1,34 +1,12 @@
 import { Avatar, AvatarGroup, Card, CardBody, CardHeader } from '@heroui/react';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import { useCreateVirtualStockDetails } from '@/api/ai-chat';
 const VirtualSideNavbar = ({country, setHomeMarket, homeMarket, setDashboardTimeFrame, virtualSession}) => {
-  // const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
-  const [timeFrame] = useState(() => {
-    const storedTimeFrame = window.localStorage.getItem('dash-time-function');
-    return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
-  });  
-  useEffect(() => {
-    console.log(virtualSession?.data);
-    handleGetStockDetails();
-  }, []);
-
-  const handleGetStockDetails = async () => {
-  const data = {
-    "country": country,
-    "sessionType": timeFrame,
-  };
-  
-  console.log(data); // Use the data variable (or uncomment the API call below)
-  // const res = await getStockDetails(data);
-  // const res = await getStockDetails(data);
-  // setChartDatas(res.data.data);
-};
-
-const handleChange = (data) => {
+  const handleChange = (data) => {
     window.localStorage.setItem('time-function', JSON.stringify(data.sessionType));
     setHomeMarket(data.sessionType);    
     setDashboardTimeFrame(data.sessionType)
+    setTimeFrame(JSON.parse(localStorage.getItem('time-function')));
   };
 
   return (
