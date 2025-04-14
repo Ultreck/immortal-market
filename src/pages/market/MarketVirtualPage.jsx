@@ -24,6 +24,7 @@ const MarketVirtualPage = () => {
   const [stocks, setStocks] = useState([]);
   const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
   const { setHomeMarket, homeMarket } = useGetMarkets();
+    const [isRunning, setIsRunning] = useState(true);
   // const [startIn, setstartIn] = useState(0);
   // const [shouldStart, setshouldStart] = useState(false);
   // const [endTime, setendTime] = useState(new Date());
@@ -100,7 +101,7 @@ const MarketVirtualPage = () => {
     setStocks(res?.data?.data);
   };
 
-  const scrollHeight = dashData?.activeCompanies.length * 40;
+  const scrollHeight = dashData?.activeCompanies?.length * 40;
   return (
     <>
       <MarketNavbar />
@@ -141,7 +142,7 @@ const MarketVirtualPage = () => {
                           }}
                         >
                           {/* Duplicate the data to allow seamless looping */}
-                          {dashData?.activeCompanies.map((company, index) => (
+                          {dashData?.activeCompanies?.map((company, index) => (
                             <div key={index} className="flex text-xl items-center gap-3">
                               <span className="text-white">{index + 1}.</span>
                               <span className="text-green-600">{company.name.slice(0, 7) + '...'}</span>
@@ -247,14 +248,19 @@ const MarketVirtualPage = () => {
                   <div className="text-gray-600 ml-2 font-mono text-2xl">{formatCurrency(0.0)}</div>
                 )}
                 <div className="text">
-                  <VirtualStockChart
-                    state={location.state}
-                    chartDatas={chartDatas}
-                    dashboardTimeFrame={dashboardTimeFrame}
-                    setshouldStart={setshouldStart}
-                    setendTime={setendTime}
-                    shouldStart={shouldStart}
-                    />
+                  {isRunning? (
+                    <VirtualStockChart
+                      shouldStart={shouldStart}
+                      chartDatas={chartDatas}
+                      setendTime={setendTime}
+                      setIsRunning={setIsRunning}
+                      setshouldStart={setshouldStart}
+                      />
+                  ) : (
+                    <div className="text" width='100%' height='300'>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint laboriosam, voluptatem, quo cupiditate omnis nesciunt nobis aspernatur, architecto a blanditiis quisquam? Minus soluta illum unde! Molestiae odio praesentium nostrum aliquid.
+                    </div>
+                  )}
                 </div>
               </div>
             </Card>

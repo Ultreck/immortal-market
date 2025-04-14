@@ -1,19 +1,18 @@
 import { Avatar, AvatarGroup, Card, CardBody, CardHeader } from '@heroui/react';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-const VirtualSideNavbar = ({country, setHomeMarket, homeMarket, setDashboardTimeFrame, virtualSession}) => {
+const VirtualSideNavbar = ({setHomeMarket, homeMarket, setDashboardTimeFrame, virtualSession}) => {
   const handleChange = (data) => {
     window.localStorage.setItem('time-function', JSON.stringify(data.sessionType));
     setHomeMarket(data.sessionType);    
     setDashboardTimeFrame(data.sessionType)
-    setTimeFrame(JSON.parse(localStorage.getItem('time-function')));
   };
 
   return (
     <Card className="card-shadow rounded-2xl h-[450px] sticky top-0">
       <CardHeader className="sticky top-0 px-7 pb-3 pt-6">Markets</CardHeader>
       <CardBody className="px-5 pb-5 pt-0">
-        {virtualSession?.data?.map((v, i) => (
+        {virtualSession?.length && virtualSession?.data?.map((v, i) => (
           <Card
             className={`flex hover:bg-default-100 cursor-pointer border-2 my-1 rounded-none px-3 py-2 ${v.sessionType === homeMarket ? 'border-green-600 dark:border-green-700 ' : 'border-default-200 dark:border-default-100 '}`}
             shadow="none"

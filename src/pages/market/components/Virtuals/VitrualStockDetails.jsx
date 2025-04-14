@@ -14,6 +14,7 @@ import { useGetCurrentPrice } from '@/store/bot';
 import ListOfOrdersModalDialog from '../../modals/ListOfOrdersModalDialog';
 import useInterval from '@/hooks/use-interval';
 import { get } from 'react-hook-form';
+import CountdownModalDialog from '../../modals/CountdownModalDialog';
 
 const VirtualStockDetails = () => {
   const params = useParams();
@@ -22,6 +23,7 @@ const VirtualStockDetails = () => {
   const location = useLocation();
   const [summaryOrder, setSummaryOrder] = useState(null);
   const [chartDatas, setChartDatas] = useState([]);
+  const [isRunning, setIsRunning] = useState(true);
   // Removed unused stockOrders state
   const [stockSummary, setstockSummary] = useState({});
   const [stockAllOrders, setStockAllOrders] = useState([]);
@@ -154,12 +156,13 @@ const VirtualStockDetails = () => {
                             <ListOfOrdersModalDialog data={stockAllOrders} type={'sell'} />
                           </div>
                         </div>
+                         <CountdownModalDialog isRunning={isRunning} />
                         <VirtualStockChart
-                          state={location.state}
-                          chartDatas={chartDatas}
-                          setshouldStart={setshouldStart}
-                          setendTime={setendTime}
                           shouldStart={shouldStart}
+                          chartDatas={chartDatas}
+                          setendTime={setendTime}
+                          setIsRunning={setIsRunning}
+                          setshouldStart={setshouldStart}
                         />
                       </div>
                     </Card>
