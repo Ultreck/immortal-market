@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+const timeFrame = JSON.parse(localStorage.getItem('time-function'));
 
 const useChatAiStore = create((set) => ({
   selectedBot: null,
@@ -27,7 +28,7 @@ const useGetCurrentPrice = create((set) => ({
   setCurrentPrice: (price) => set({ currentPrice: price }),
 }));
 const useGetMarkets = create((set) => ({
-  homeMarket: '1-minute',
+  homeMarket: timeFrame,
   setHomeMarket: (mkType) => set({ homeMarket: mkType }),
 }));
 

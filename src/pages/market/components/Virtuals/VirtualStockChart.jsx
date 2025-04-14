@@ -17,6 +17,7 @@ import { useTernaryDarkMode } from 'usehooks-ts';
 import { io } from 'socket.io-client';
 import { useGetCurrentPrice } from '@/store/bot';
 import useSocket from '@/hooks/use-socket';
+import CountdownModalDialog from '../../modals/CountdownModalDialog';
 // import { useCreateVirtualStockDetails } from '@/api/ai-chat';
 
 const dateFormatter = (date) => {
@@ -55,30 +56,30 @@ const timeFormatter = (date, is24Hour = false) => {
   }
 };
 
-const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime}) => {
-  const [data, setData] = useState(chartDatas?.prices);
-  // const [maxDataLength, SetmaxDataLength ] = useState(20);
-  const { isDarkMode } = useTernaryDarkMode();
-  // const socket = io('https://market-msjv.onrender.com', { transports: ['websocket'], autoConnect: false });
+const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime, startTime, setstartTime }) => {
   const socket = useSocket();
+  const [data, setData] = useState([]);
+  const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
+  const { isDarkMode } = useTernaryDarkMode();
+  // const [maxDataLength, SetmaxDataLength ] = useState(20);
+  // const socket = io('https://market-msjv.onrender.com', { transports: ['websocket'], autoConnect: false });
   // console.log(ecternalSocket);
   // const timeFrame = JSON.parse(localStorage.getItem('time-function'));
-  const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
-  useEffect(() => {
-    const structured = chartDatas?.prices?.map((value, index) => {
-      return {
-        ...value,
-        price: limitDecimals(value?.price, 4),
-        sprice: limitDecimals(value?.price, 4) / 5,
-        close: limitDecimals(value?.close, 4),
-        date: dateFormatter(value?.updatedAt),
-        timestamp: dateFormatter(value?.updatedAt),
-        name: index,
-        time: timeFormatter(value?.updatedAt),
-      };
-    });
-    setData(structured);
-  }, [chartDatas]);
+  // useEffect(() => {
+  //   const structured = chartDatas?.prices?.map((value, index) => {
+  //     return {
+  //       ...value,
+  //       price: limitDecimals(value?.price, 4),
+  //       sprice: limitDecimals(value?.price, 4) / 5,
+  //       close: limitDecimals(value?.close, 4),
+  //       date: dateFormatter(value?.updatedAt),
+  //       timestamp: dateFormatter(value?.updatedAt),
+  //       name: index,
+  //       time: timeFormatter(value?.updatedAt),
+  //     };
+  //   });
+  //   setData(structured);
+  // }, [chartDatas]);
 
 
 
@@ -90,19 +91,24 @@ const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime
     const handleNewSession = (msg) => {
       console.log(msg);
       if (!msg.isRunning && !shouldStart) {
-        setendTime(msg.endTime)
-        setshouldStart(true)
+        setendTime(msg.endTime);
+        setshouldStart(true);
+      }else if(!msg.isRunning && !shouldStart){
+        setendTime(msg.endTime);
+        setshouldStart(false);
+        setstartTime(msg.startTime)
       }
+      // console.log(msg);
+      // console.log(msg?.isRunning);
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
-      setData((prev) => {
-        const newData = Array.isArray(prev) ? prev : [];
-        if (newPrice === lastPrice || !msg.isRunning) {
-          return newData;
-        }
-        return [
-          ...newData,
-          {
+      if(msg?.isRunning){
+        setData((prev) => {
+          const newData = Array.isArray(prev) ? prev : [];
+          if (newPrice === lastPrice || !msg.isRunning || !msg.price) {
+            return newData;
+          }
+         const newDSocketData = {
             ...msg,
             price: limitDecimals(msg?.price, 4),
             sprice: limitDecimals(msg?.price, 4) / 5,
@@ -110,25 +116,29 @@ const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime
             date: dateFormatter(msg?.updatedAt),
             name: newData?.length + 1,
             time: timeFormatter(msg?.updatedAt),
-          },
-        ];
-      });
-      setCurrentPrice(data?.at(-1) ?? null);
+          };
+  
+          setCurrentPrice(newDSocketData);
+          return [
+            ...newData,
+            newDSocketData
+          ];
+        });
+      }else {
+         setData([]);
+      }
     };
-    socket.on("priceUpdate",  getSessionFunct);
+    socket.on('priceUpdate', getSessionFunct);
     socket.on('newSession', handleNewSession);
-
+    
     return () => {
-      socket.off("priceUpdate", getSessionFunct);
+      socket.off('priceUpdate', getSessionFunct);
       socket.off('newSession', handleNewSession);
     };
   }, [socket, chartDatas]);
 
   const maxDataLength = chartDatas?.noOfRunning;
   const currentLength = data?.length ? data?.length : chartDatas?.prices?.length;
-  // console.log("maxDataLength::", maxDataLength);
-  // console.log(chartDatas?.prices);
-  // console.log(timeFrame);
 
   let paddedData;
   if (data) {
@@ -137,7 +147,6 @@ const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime
       paddedData = [...data, ...Array(lengthDiff).fill(null)];
     }
   }
-
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -162,8 +171,8 @@ const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime
   };
 
   return (
-    <div className="w-full h-72">
-      <ResponsiveContainer width={'100%'} height={'100%'}>
+    <div className="w-full">
+      <ResponsiveContainer width={'100%'} height={400}>
         <ComposedChart data={paddedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
@@ -201,6 +210,7 @@ const VirtualStockChart = ({ chartDatas, setshouldStart, shouldStart, setendTime
           <Bar dataKey="sprice" barSize={10} fill="orange" />
         </ComposedChart>
       </ResponsiveContainer>
+      <CountdownModalDialog isRunning={currentPrice?.isRunning}/>
     </div>
   );
 };

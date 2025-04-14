@@ -21,9 +21,9 @@ const code = 'NG';
 
 const MarketVirtualPage = () => {
   const [page] = useState(1);
-  const { setHomeMarket, homeMarket } = useGetMarkets();
   const [stocks, setStocks] = useState([]);
-  const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
+  const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime, startTime, setstartTime} = useInterval();
+  const { setHomeMarket, homeMarket } = useGetMarkets();
   // const [startIn, setstartIn] = useState(0);
   // const [shouldStart, setshouldStart] = useState(false);
   // const [endTime, setendTime] = useState(new Date());
@@ -47,7 +47,6 @@ const MarketVirtualPage = () => {
     handleGetVirtualDashboardData();
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [countryName, homeMarket, dashboardTimeFrame]);
-// }, [countryName, dashboardTimeFrame, homeMarket]);
 
   useEffect(() => {
     handleGetVirtualDashboardData();
@@ -83,8 +82,16 @@ const MarketVirtualPage = () => {
         
         if (chartRes.data.data && !chartRes.data.data.isRunning) {
           const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
+          const startAt = chartRes.data.data.endTime ? chartRes.data.data.startTime : 0;
           setendTime(endingIn);
+          setstartTime(startAt);
           setshouldStart(true);
+        }else{
+          const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
+          const startAt = chartRes.data.data.endTime ? chartRes.data.data.startTime : 0;
+          setendTime(endingIn);
+          setstartTime(startAt);
+          setshouldStart(false);
         }
       }
     } catch (error) {
@@ -212,15 +219,7 @@ const MarketVirtualPage = () => {
                     <div className="w-full">
                       <div className=" w-full flex justify-between items-center">
                         <div className="text-2xl my-5">Trending Market</div>
-                        <div className={``}>
-                          <TimeoutComponent
-                            endTime={endTime}
-                            startIn={startIn}
-                            setstartIn={setstartIn}
-                            shouldStart={shouldStart}
-                            setshouldStart={setshouldStart}
-                          />
-                        </div>
+                      
                       </div>
                       <div className="flex items-center space-x-3 cursor-default">
                         <div>
@@ -231,6 +230,16 @@ const MarketVirtualPage = () => {
                         </div>
                       </div>
                     </div>
+                    <div className={``} hidden={startIn > 0}>
+                          <TimeoutComponent
+                            endTime={endTime}
+                            startTime={startTime}
+                            startIn={startIn}
+                            setstartIn={setstartIn}
+                            shouldStart={shouldStart}
+                            setshouldStart={setshouldStart}
+                          />
+                        </div>
                     <div className={`absolute right-0 bottom-0`}>
                       <Button
                         onPress={() => navigation(`/markets/virtuals/${dashData?.mostBoughtStock?.id}`)}
@@ -247,7 +256,31 @@ const MarketVirtualPage = () => {
                 ) : (
                   <div className="text-gray-600 ml-2 font-mono text-2xl">{formatCurrency(0.0)}</div>
                 )}
-                <div className="text">
+                  {/* {startIn > 0 && (
+                      <div className={``}>
+                          <TimeoutComponent
+                            endTime={endTime}
+                            startIn={startIn}
+                            setstartIn={setstartIn}
+                            shouldStart={shouldStart}
+                            setshouldStart={setshouldStart}
+                          />
+                        </div>
+
+                  )} */}
+ 
+                        <div className={``} hidden={startIn <= 0}>
+                          <TimeoutComponent
+                            endTime={endTime}
+                            startTime={startTime}
+                            startIn={startIn}
+                            setstartIn={setstartIn}
+                            shouldStart={shouldStart}
+                            setshouldStart={setshouldStart}
+                          />
+                        </div>
+
+                <div className="text" hidden={startIn > 0}>
                   <VirtualStockChart
                     state={location.state}
                     chartDatas={chartDatas}

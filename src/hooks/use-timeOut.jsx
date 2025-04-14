@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+import { addHours, differenceInSeconds } from 'date-fns';
 import PropTypes from 'prop-types';
 
-function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshouldStart }) {
+function TimeoutComponent({ endTime, startTime, startIn, setstartIn, shouldStart, setshouldStart }) {
   const intervalRef = useRef(null);
+  const [remainingTime, setRemainingSeconds] = useState(0);
 
   useEffect(() => {
+
     if (shouldStart) {
       intervalRef.current = setInterval(() => {
         const now = new Date();
@@ -19,27 +22,59 @@ function TimeoutComponent({ endTime, startIn, setstartIn, shouldStart, setshould
           console.log('Interval stopped');
         }
       }, 1000);
+    }else{
+      const updateRemaining = () => {
+        const nowUTC = new Date()
+        const start = new Date(startTime);
+        const end = new Date(endTime);
+        if (nowUTC < start) {
+          setRemainingSeconds(differenceInSeconds(end, start));
+        } else if (nowUTC >= start && nowUTC <= end) {
+          setRemainingSeconds(differenceInSeconds(end, nowUTC));
+        } else {
+          setRemainingSeconds(0);
+        }
+      };
+  
+      updateRemaining(); // Initial call
+      const interval = setInterval(updateRemaining, 1000);
+  
+      return () => clearInterval(interval); // Cleanup
     }
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, [shouldStart, endTime]);
+  }, [shouldStart, endTime, startTime]);
 
+  const formatTime = (secs) => {
+    const hours = Math.floor(secs / 3600);
+    const minutes = Math.floor((secs % 3600) / 60);
+    const seconds = secs % 60;
+
+    return `${hours > 0 ? `${String(hours).padStart(2, '0')}:` : ''}${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  };
+  
   return (
-    <div className="flex gap-2">
-      {startIn > 0 && (
+    <div className="flex gap-2 pb-5">
         <div className="flex flex-col items-center">
           <div className="text-2xl text-center font-mono text-[#4691c5] flex mt-1">
             <div className="">
               <div className="">{'00'}:</div>
             </div>
-            <div className="">
+            {startIn > 0 ?(
+              <div className="">
               <div className="">{String(startIn).padStart(2, '0')}</div>
-            </div>
+              </div>
+              )
+            :(
+              <div className="">
+              <div className="">{formatTime(remainingTime)}</div>
+              </div>
+            )}
+           
           </div>
           <p className="text-base text-gray-400 font-normal">Time remaining</p>
         </div>
-      )}
     </div>
   );
 }

@@ -6,7 +6,10 @@ const useInterval = () => {
 
     const [startIn, setstartIn] = useState(0);
     const [shouldStart, setshouldStart] = useState(false);
-    const [endTime, setendTime] = useState(new Date());
+    const [endTime, setendTime] = useState("");
+    const [startTime, setstartTime] = useState("");
+
+    
 
   return {
     startIn,
@@ -14,7 +17,9 @@ const useInterval = () => {
     shouldStart,
     setshouldStart,
     endTime,
-    setendTime
+    setendTime,
+    startTime,
+    setstartTime
   }
 }
 
