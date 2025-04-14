@@ -2,21 +2,22 @@ import React, { useEffect } from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure } from '@heroui/react';
 import { useNavigate } from 'react-router-dom';
 import { IoChevronBackSharp } from 'react-icons/io5';
+import TimeoutComponent from '@/hooks/use-timeOut';
 
-const CountdownModalDialog = ({ isRunning }) => {
+const CountdownModalDialog = ({ endTime, shouldStart, startTime, startIn, setstartIn, setshouldStart }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const timeFrame = JSON.parse(localStorage.getItem('time-function'));
   const session = timeFrame.split('-')[0];
   const navigate = useNavigate();
 
-   
   useEffect(() => {
-    if (isRunning === false) {
+    onClose();
+    if (shouldStart) {
       onOpen();
-    } else if (isRunning === true) {
+    } else {
       onClose();
     }
-  }, []);
+  }, [shouldStart]);
 
   return (
     <>
@@ -36,26 +37,26 @@ const CountdownModalDialog = ({ isRunning }) => {
             <>
               <ModalHeader className="flex flex-col gap-1">
                 <div className="text">
-                  <div className="text">{`Your ${session} minute session has ended`}</div>
-                  <Button color="" className="text-sky-500" onPress={() => navigate(`/markets/virtuals`)}>
+                  <div className="text-center">{`Your ${session} ${session > 1 ? 'minutes' : 'minute'} session has ended`}</div>
+                  <div className="text-center">
+                  <Button color="" className="text-sky-500 text-center" onPress={() => navigate(`/markets/virtuals`)}>
                     <IoChevronBackSharp /> try new session
                   </Button>
+                  </div>
                 </div>
               </ModalHeader>
               <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit
-                  venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus hendrerit
-                  venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor adipisicing. Mollit
-                  dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim laboris
-                  do dolor eiusmod. Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
+                <p className={`w-full h-full flex justify-center items-center`}>
+                  <TimeoutComponent
+                    text={'new session Starts in:'}
+                    className="text-5xl text-[#4691c5]"
+                    endTime={endTime}
+                    startTime={startTime}
+                    startIn={startIn}
+                    setstartIn={setstartIn}
+                    shouldStart={shouldStart}
+                    setshouldStart={setshouldStart}
+                  />
                 </p>
               </ModalBody>
             </>

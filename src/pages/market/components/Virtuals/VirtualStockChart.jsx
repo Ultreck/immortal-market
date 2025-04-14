@@ -40,7 +40,6 @@ function limitDecimals(num, decimals) {
 const timeFormatter = (date, is24Hour = false) => {
   const validDate = date instanceof Date ? date : new Date(date);
   if (isNaN(validDate)) {
-    // console.error('Invalid date:', date);
     return 'Invalid Date';
   }
   let hours = validDate.getHours();
@@ -55,30 +54,20 @@ const timeFormatter = (date, is24Hour = false) => {
   }
 };
 
-const VirtualStockChart = ({ setIsRunning, chartDatas, setshouldStart, shouldStart, setendTime }) => {
+const VirtualStockChart = ({
+  chartDatas,
+  setshouldStart,
+  shouldStart,
+  setendTime,
+  startTime,
+  setstartTime,
+  setIsRunning,
+  setStockPercentage,
+}) => {
   const socket = useSocket();
   const [data, setData] = useState([]);
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
   const { isDarkMode } = useTernaryDarkMode();
-  // const [maxDataLength, SetmaxDataLength ] = useState(20);
-  // const socket = io('https://market-msjv.onrender.com', { transports: ['websocket'], autoConnect: false });
-  // console.log(ecternalSocket);
-  // const timeFrame = JSON.parse(localStorage.getItem('time-function'));
-  // useEffect(() => {
-  //   const structured = chartDatas?.prices?.map((value, index) => {
-  //     return {
-  //       ...value,
-  //       price: limitDecimals(value?.price, 4),
-  //       sprice: limitDecimals(value?.price, 4) / 5,
-  //       close: limitDecimals(value?.close, 4),
-  //       date: dateFormatter(value?.updatedAt),
-  //       timestamp: dateFormatter(value?.updatedAt),
-  //       name: index,
-  //       time: timeFormatter(value?.updatedAt),
-  //     };
-  //   });
-  //   setData(structured);
-  // }, [chartDatas]);
 
   useEffect(() => {
     if (!socket) return;
@@ -89,11 +78,13 @@ const VirtualStockChart = ({ setIsRunning, chartDatas, setshouldStart, shouldSta
       if (!msg.isRunning && !shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(true);
+      } else if (!msg.isRunning && !shouldStart) {
+        setendTime(msg.endTime);
+        setshouldStart(false);
+        setstartTime(msg.startTime);
       }
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
-      console.log(msg);
-      console.log(msg?.isRunning);
       setIsRunning(msg?.isRunning);
       if (msg?.isRunning) {
         setData((prev) => {
@@ -127,6 +118,14 @@ const VirtualStockChart = ({ setIsRunning, chartDatas, setshouldStart, shouldSta
       socket.off('newSession', handleNewSession);
     };
   }, [socket, chartDatas]);
+
+  const initialPrice = data[0]?.price;
+  const nowPrice = currentPrice?.price;
+  if (initialPrice && nowPrice) {
+    const diffPrice = nowPrice - initialPrice;
+    const percent = (diffPrice / initialPrice) * 100;
+    setStockPercentage(percent);
+  }
 
   const maxDataLength = chartDatas?.noOfRunning;
   const currentLength = data?.length ? data?.length : chartDatas?.prices?.length;

@@ -7,58 +7,10 @@ import TimeoutComponent from '@/hooks/use-timeOut';
 
 const code = 'NG';
 
-const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime }) => {
-  // console.log(chartDatas?.startTime?.split('T')[1].split('.')[0]);
-
-  // const [isClosed, setIsClosed] = useState(false);
+const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstartIn, setshouldStart }) => {
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
+console.log(startIn);
 
-  const marketOpenTime = chartDatas?.startTime?.split('T')[1].split('.')[0];
-  const marketCloseTime = chartDatas?.endTime?.split('T')[1].split('.')[0];
-
-  const getTimeRemaining = () => {
-    const now = new Date();
-    const marketOpen = new Date(now.toDateString() + ' ' + marketOpenTime);
-    const marketClose = new Date(now.toDateString() + ' ' + marketCloseTime);
-    let targetTime;
-    let status;
-    let isOpen;
-
-    if (now < marketOpen) {
-      targetTime = marketOpen;
-      status = 'Market opens in: ';
-      isOpen = false;
-    } else if (now < marketClose) {
-      targetTime = marketClose;
-      status = 'Market Closes in: ';
-      isOpen = true;
-    } else {
-      targetTime = new Date(marketOpen);
-      targetTime.setDate(targetTime.getDate() + 1);
-      status = 'Market opens in: ';
-      isOpen = false;
-    }
-    const pad = (num) => String(num).padStart(2, '0');
-    let diff = targetTime - now;
-    return {
-      status,
-      isOpen,
-      hours: pad(Math.floor((diff / (1000 * 60 * 60)) % 24)),
-      minutes: pad(Math.floor((diff / (1000 * 60)) % 60)),
-      seconds: pad(Math.floor((diff / 1000) % 60)),
-    };
-  };
-  const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeRemaining(getTimeRemaining());
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   return (
     <div className="sticky top-20">
@@ -99,6 +51,22 @@ const VirtualStockSocket = ({ chartDatas, startIn, setstartIn, shouldStart, sets
           <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
             <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
             <p className="text-lg font-bold text-yellow-600">N34.33</p>
+          </div>
+        </CardBody>
+      </Card>
+      <Card>
+        <CardBody>
+          <div className="text">
+            <TimeoutComponent
+              text={'Session ends in:'}
+              className="text-red-500"
+              endTime={endTime}
+              startTime={startTime}
+              startIn={startIn}
+              setstartIn={setstartIn}
+              shouldStart={shouldStart}
+              setshouldStart={setshouldStart}
+            />
           </div>
         </CardBody>
       </Card>

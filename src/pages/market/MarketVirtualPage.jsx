@@ -5,7 +5,12 @@ import { Avatar, AvatarGroup, Button, Card, Tooltip } from '@heroui/react';
 import VirtualStockTable from '@/pages/market/components/Virtuals/VirtualStockTable.jsx';
 import { TbArrowUpRight } from 'react-icons/tb';
 // import CountryList from '@/pages/market/shared/CountryList.jsx';
-import { useCreateVirtualStock, useCreateVirtualStockDetails, useGetStocksPerCountry, useGetVirtualSession } from '@/api/ai-chat';
+import {
+  useCreateVirtualStock,
+  useCreateVirtualStockDetails,
+  useGetStocksPerCountry,
+  useGetVirtualSession,
+} from '@/api/ai-chat';
 import { useEffect, useState } from 'react';
 import VirtualSideNavbar from '@/pages/market/components/Virtuals/VirtualSideNavbar.jsx';
 import VirtualStockChart from './components/Virtuals/VirtualStockChart';
@@ -22,9 +27,11 @@ const code = 'NG';
 const MarketVirtualPage = () => {
   const [page] = useState(1);
   const [stocks, setStocks] = useState([]);
-  const {startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime} = useInterval();
+  const { startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime, startTime, setstartTime } =
+    useInterval();
   const { setHomeMarket, homeMarket } = useGetMarkets();
-    const [isRunning, setIsRunning] = useState(true);
+  const [isRunning, setIsRunning] = useState(true);
+  const [stockPercentage, setStockPercentage] = useState(0);
   // const [startIn, setstartIn] = useState(0);
   // const [shouldStart, setshouldStart] = useState(false);
   // const [endTime, setendTime] = useState(new Date());
@@ -33,7 +40,7 @@ const MarketVirtualPage = () => {
   const { mutateAsync: createVirtualStocks, isPending: isStocksLoading } = useCreateVirtualStock({});
   const { mutateAsync: getVirtualDashboard } = useGetStocksPerCountry();
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
-  const {data: virtualSession} = useGetVirtualSession(countryName);
+  const { data: virtualSession } = useGetVirtualSession(countryName);
   const [dashData, setDashData] = useState();
   const [chartDatas, setChartDatas] = useState([]);
   const { currentPrice } = useGetCurrentPrice();
@@ -42,7 +49,7 @@ const MarketVirtualPage = () => {
     const storedTimeFrame = window.localStorage.getItem('time-function');
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
-   
+
   useEffect(() => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
@@ -52,7 +59,7 @@ const MarketVirtualPage = () => {
   useEffect(() => {
     handleGetVirtualDashboardData();
   }, []);
-  
+
   useEffect(() => {
     if (shouldStart === false) {
       handleGetVirtualDashboardData();
@@ -61,16 +68,14 @@ const MarketVirtualPage = () => {
 
   const handleGetVirtualDashboardData = async () => {
     try {
-      setshouldStart(false)
-      setstartIn(0)
+      setshouldStart(false);
+      setstartIn(0);
       const data = {
         country: countryName,
         sessionType: dashboardTimeFrame,
       };
       const res = await getVirtualDashboard(data);
       setDashData(res?.data?.data);
-      console.log('Dashboard data'+res?.data?.data);
-      
       if (res) {
         let dataChart = {
           stockId: res?.data?.data?.mostBoughtStock?.id,
@@ -79,12 +84,19 @@ const MarketVirtualPage = () => {
         };
         const chartRes = await getStockDetails(dataChart);
         setChartDatas(chartRes.data.data);
-        console.log('chart data'+chartRes?.data?.data);
-        
+
         if (chartRes.data.data && !chartRes.data.data.isRunning) {
           const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
+          const startAt = chartRes.data.data.endTime ? chartRes.data.data.startTime : 0;
           setendTime(endingIn);
+          setstartTime(startAt);
           setshouldStart(true);
+        } else {
+          const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
+          const startAt = chartRes.data.data.endTime ? chartRes.data.data.startTime : 0;
+          setendTime(endingIn);
+          setstartTime(startAt);
+          setshouldStart(false);
         }
       }
     } catch (error) {
@@ -141,13 +153,13 @@ const MarketVirtualPage = () => {
                             repeat: Infinity,
                           }}
                         >
-                          {/* Duplicate the data to allow seamless looping */}
-                          {dashData?.activeCompanies?.map((company, index) => (
-                            <div key={index} className="flex text-xl items-center gap-3">
-                              <span className="text-white">{index + 1}.</span>
-                              <span className="text-green-600">{company.name.slice(0, 7) + '...'}</span>
-                            </div>
-                          ))}
+                          {dashData?.activeCompanies.length &&
+                            dashData?.activeCompanies?.map((company, index) => (
+                              <div key={index} className="flex text-xl items-center gap-3">
+                                <span className="text-white">{index + 1}.</span>
+                                <span className="text-green-600">{company.name.slice(0, 7) + '...'}</span>
+                              </div>
+                            ))}
                         </motion.div>
                       </div>
                     </div>
@@ -170,7 +182,9 @@ const MarketVirtualPage = () => {
                   <div>
                     <div className="flex items-center space-x-2">
                       <TbArrowUpRight size={28} color="green" />
-                      <p className="text-[1.3rem] font-semibold text-green-600">{String(dashData?.totalTrades).padStart(2, '0') || 0}</p>
+                      <p className="text-[1.3rem] font-semibold text-green-600">
+                        {String(dashData?.totalTrades).padStart(2, '0') || 0}
+                      </p>
                     </div>
                     <p className="opacity-70">Total Trade</p>
                   </div>
@@ -212,27 +226,35 @@ const MarketVirtualPage = () => {
                     <div className="w-full">
                       <div className=" w-full flex justify-between items-center">
                         <div className="text-2xl my-5">Trending Market</div>
-                        <div className={``}>
-                          <TimeoutComponent
-                            endTime={endTime}
-                            startIn={startIn}
-                            setstartIn={setstartIn}
-                            shouldStart={shouldStart}
-                            setshouldStart={setshouldStart}
-                          />
-                        </div>
                       </div>
                       <div className="flex items-center space-x-3 cursor-default">
                         <div>
                           <Tooltip placement="right" content={dashData?.mostBoughtStock?.name}>
                             <h1 className="text-md">{dashData?.mostBoughtStock?.name.slice(0, 15) + '...'}</h1>
                           </Tooltip>
-                          <p className="mt-1 text-green-600 text-4xl font-bold">+25%</p>
+                          <p
+                            className={`mt-2 ${Math.sign(stockPercentage) === 1 ? 'text-green-600' : 'text-red-600'}  text-4xl font-bold`}
+                          >
+                            {Math.round(stockPercentage)}%
+                          </p>
                         </div>
                       </div>
                     </div>
+                    <div className={``} hidden={startIn > 0}>
+                      <TimeoutComponent
+                        text={'Session ends in:'}
+                        className="text-red-500"
+                        endTime={endTime}
+                        startTime={startTime}
+                        startIn={startIn}
+                        setstartIn={setstartIn}
+                        shouldStart={shouldStart}
+                        setshouldStart={setshouldStart}
+                      />
+                    </div>
                     <div className={`absolute right-0 bottom-0`}>
                       <Button
+                        isDisabled={startIn > 0}
                         onPress={() => navigation(`/markets/virtuals/${dashData?.mostBoughtStock?.id}`)}
                         className="bg-green-600 w-32 font-semibold"
                         color=""
@@ -247,26 +269,34 @@ const MarketVirtualPage = () => {
                 ) : (
                   <div className="text-gray-600 ml-2 font-mono text-2xl">{formatCurrency(0.0)}</div>
                 )}
-                <div className="text">
-                  {isRunning? (
-                    <VirtualStockChart
-                      shouldStart={shouldStart}
-                      chartDatas={chartDatas}
-                      setendTime={setendTime}
-                      setIsRunning={setIsRunning}
-                      setshouldStart={setshouldStart}
-                      />
-                  ) : (
-                    <div className="text" width='100%' height='300'>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint laboriosam, voluptatem, quo cupiditate omnis nesciunt nobis aspernatur, architecto a blanditiis quisquam? Minus soluta illum unde! Molestiae odio praesentium nostrum aliquid.
-                    </div>
-                  )}
+                <div className={`w-full h-[300px] flex justify-center items-center ${startIn <= 0 && 'hidden'}`}>
+                  <TimeoutComponent
+                    text={'new session Starts in:'}
+                    className="text-5xl text-[#4691c5]"
+                    endTime={endTime}
+                    startTime={startTime}
+                    startIn={startIn}
+                    setstartIn={setstartIn}
+                    shouldStart={shouldStart}
+                    setshouldStart={setshouldStart}
+                  />
+                </div>
+
+                <div className={`${startIn > 0 && 'hidden'}`}>
+                  <VirtualStockChart
+                    setStockPercentage={setStockPercentage}
+                    chartDatas={chartDatas}
+                    dashboardTimeFrame={dashboardTimeFrame}
+                    setshouldStart={setshouldStart}
+                    setendTime={setendTime}
+                    shouldStart={shouldStart}
+                    setIsRunning={setIsRunning}
+                  />
                 </div>
               </div>
             </Card>
             <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks} />
           </div>
-          {/* <CountryList setCountryName={setCountryName} /> */}
           <div className="text relative">
             <VirtualSideNavbar
               country={countryName}

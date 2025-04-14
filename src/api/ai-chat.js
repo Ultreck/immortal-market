@@ -188,6 +188,7 @@ export const useGetWalletBalance = () => {
     queryKey: ['virtual', 'wallet', 'balance'],
     queryFn: async () => {
       const res = await http.markettest.get(`/virtual/wallet/balance`);
+      console.log(res);
       return res.data;
     },
   });

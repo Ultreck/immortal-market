@@ -7,13 +7,19 @@ import VirtualStockChart from '@/pages/market/components/Virtuals/VirtualStockCh
 // import ListOfOrdersModalDialog from '@/pages/market/modals/ListOfOrdersModalDialog';
 import VirtualStockSocket from '@/pages/market/components/Virtuals/VirtualSotckSocket.jsx';
 import VirtualStockTradeMarquee from '@/pages/market/components/Virtuals/VirtualStockTradeMarquee.jsx';
-import { useCreateVirtualStockDetails, useCreateVirtualStockOrders, useCreateVirtualSummary, useGetAllOrders } from '@/api/ai-chat';
+import {
+  useCreateVirtualStockDetails,
+  useCreateVirtualStockOrders,
+  useCreateVirtualSummary,
+  useGetAllOrders,
+} from '@/api/ai-chat';
 import { formatCurrency } from '@/lib/utils';
 import PlaceOrder from '@/pages/market/modals/PlaceOrder.jsx';
 import { useGetCurrentPrice } from '@/store/bot';
 import ListOfOrdersModalDialog from '../../modals/ListOfOrdersModalDialog';
 import useInterval from '@/hooks/use-interval';
 import { get } from 'react-hook-form';
+import TimeoutComponent from '@/hooks/use-timeOut';
 import CountdownModalDialog from '../../modals/CountdownModalDialog';
 
 const VirtualStockDetails = () => {
@@ -24,10 +30,14 @@ const VirtualStockDetails = () => {
   const [summaryOrder, setSummaryOrder] = useState(null);
   const [chartDatas, setChartDatas] = useState([]);
   const [isRunning, setIsRunning] = useState(true);
+  const [stockPercentage, setStockPercentage] = useState(0);
   // Removed unused stockOrders state
   const [stockSummary, setstockSummary] = useState({});
+  const [winning, setWinning] = useState(0);
+
   const [stockAllOrders, setStockAllOrders] = useState([]);
-  const { startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime } = useInterval();
+  const { startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime, startTime, setstartTime } =
+    useInterval();
   const { data: { stock } = {}, isLoading: isStockLoading } = useGetStock({ id });
   const [timeFrame, setTimeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('time-function');
@@ -66,6 +76,17 @@ const VirtualStockDetails = () => {
     }
   }, [shouldStart]);
 
+  const handlegetbalance = async () => {
+    try {
+      let stockOrdersPayload = {
+        stock: chartDatas?.stock?._id,
+        sessionType: timeFrame,
+      };
+      const res = await getStockOrders(stockOrdersPayload);
+      // console.log(res?.data?.data);
+    } catch (error) {}
+  };
+
   const handleGetStockOrders = async () => {
     try {
       let stockOrdersPayload = {
@@ -73,7 +94,7 @@ const VirtualStockDetails = () => {
         sessionType: timeFrame,
       };
       const res = await getStockOrders(stockOrdersPayload);
-      console.log(res?.data?.data);
+      // console.log(res?.data?.data);
     } catch (error) {}
   };
   const handleGetStockSummary = async () => {
@@ -98,13 +119,13 @@ const VirtualStockDetails = () => {
           status: [false, true],
         };
         const res = await getStockAllOrders(allOrderData);
-        console.log(res?.data?.data)
+        // console.log(res?.data?.data);
       }
     } catch (error) {
       console.log(error);
-    };
+    }
   };
-  
+
   return (
     <>
       {isStockLoading ? (
@@ -133,13 +154,24 @@ const VirtualStockDetails = () => {
                               <div className="flex items-center space-x-3">
                                 <div>
                                   <h1 className="text-md">{stock?.symbol}</h1>
-                                  <p className="mt-1 text-4xl font-bold">25%</p>
+                                  <p
+                                    className={`mt-2 ${Math.sign(stockPercentage) === 1 ? 'text-green-600' : 'text-red-600'}  text-4xl font-bold`}
+                                  >
+                                    {Math.round(stockPercentage)}%
+                                  </p>
                                 </div>
                               </div>
                               <div className="">
                                 <h1 className="text-md">Your wining</h1>
-                                <p className="mt-1 text-green-600 text-4xl font-bold">
-                                  <span className="text-3xl">X</span>1.25
+                                <p
+                                  className={
+                                    winning.toString().startsWith('-')
+                                      ? 'mt-1 text-red-600 text-4xl font-bold'
+                                      : 'mt-1  text-green-600 text-4xl font-bold'
+                                  }
+                                >
+                                  <span className="text-3xl">X</span>
+                                  {winning}
                                 </p>
                               </div>
                             </div>
@@ -152,18 +184,49 @@ const VirtualStockDetails = () => {
                               type={'buy'}
                               stock={stock}
                               dissable={shouldStart}
+                              setWinning={setWinning}
+                              shouldStart={shouldStart}
                             />
-                            <ListOfOrdersModalDialog data={stockAllOrders} type={'sell'} />
+                            <PlaceOrder
+                              id={id}
+                              state={location.state}
+                              text="Sell"
+                              type={'sell'}
+                              stock={stock}
+                              dissable={shouldStart}
+                              setWinning={setWinning}
+                              shouldStart={shouldStart}
+                            />
                           </div>
                         </div>
-                         <CountdownModalDialog isRunning={isRunning} />
-                        <VirtualStockChart
-                          shouldStart={shouldStart}
-                          chartDatas={chartDatas}
-                          setendTime={setendTime}
-                          setIsRunning={setIsRunning}
-                          setshouldStart={setshouldStart}
-                        />
+                        <div className={``} hidden={startIn <= 0}>
+                          <TimeoutComponent
+                            endTime={endTime}
+                            startTime={startTime}
+                            startIn={startIn}
+                            setstartIn={setstartIn}
+                            shouldStart={shouldStart}
+                            setshouldStart={setshouldStart}
+                          />
+                        </div>
+                        <div hidden={startIn > 0}>
+                          <CountdownModalDialog
+                            endTime={endTime}
+                            startTime={startTime}
+                            startIn={startIn}
+                            setstartIn={setstartIn}
+                            shouldStart={shouldStart}
+                            setshouldStart={setshouldStart}
+                          />
+                          <VirtualStockChart
+                            setStockPercentage={setStockPercentage}
+                            shouldStart={shouldStart}
+                            chartDatas={chartDatas}
+                            setendTime={setendTime}
+                            setIsRunning={setIsRunning}
+                            setshouldStart={setshouldStart}
+                          />
+                        </div>
                       </div>
                     </Card>
                     <Card className="card-shadow px-10 py-10 border border-default-200 my-10">
@@ -300,13 +363,12 @@ const VirtualStockDetails = () => {
                 </div>
                 <div className="mt-28 text relative">
                   <VirtualStockSocket
-                    chartDatas={chartDatas}
+                    endTime={endTime}
+                    startTime={startTime}
                     startIn={startIn}
                     setstartIn={setstartIn}
                     shouldStart={shouldStart}
                     setshouldStart={setshouldStart}
-                    endTime={endTime}
-                    setendTime={setendTime}
                   />
                 </div>
               </div>
