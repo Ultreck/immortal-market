@@ -153,7 +153,7 @@ const MarketVirtualPage = () => {
                             repeat: Infinity,
                           }}
                         >
-                          {dashData?.activeCompanies.length &&
+                          {dashData?.activeCompanies?.length &&
                             dashData?.activeCompanies?.map((company, index) => (
                               <div key={index} className="flex text-xl items-center gap-3">
                                 <span className="text-white">{index + 1}.</span>

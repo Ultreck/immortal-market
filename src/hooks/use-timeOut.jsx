@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 function TimeoutComponent({className, text, endTime, startTime, startIn, setstartIn, shouldStart, setshouldStart }) {
   const intervalRef = useRef(null);
   const [remainingTime, setRemainingSeconds] = useState(0);
-  const sessionType = JSON.parse(localStorage.getItem('time-function')).split('-')[0];
+  const sessionType = JSON.parse(localStorage.getItem('time-function'))?.split('-')[0];
   
 
   useEffect(() => {
