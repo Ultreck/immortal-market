@@ -4,7 +4,7 @@ import { useGetCurrentPrice } from '@/store/bot';
 import { FaNairaSign } from 'react-icons/fa6';
 import { usePlaceOrder, useSellOrder, useGetWalletBalance, useGetAllOrders } from '@/api/ai-chat';
 
-const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart }) => {
+const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) => {
   // const [balance, setBalance] = useState(0)
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const { currentPrice } = useGetCurrentPrice();

@@ -9,8 +9,6 @@ const code = 'NG';
 
 const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstartIn, setshouldStart }) => {
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
-console.log(startIn);
-
 
   return (
     <div className="sticky top-20">

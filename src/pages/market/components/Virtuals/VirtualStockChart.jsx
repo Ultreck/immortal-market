@@ -68,13 +68,16 @@ const VirtualStockChart = ({
   const [data, setData] = useState([]);
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
   const { isDarkMode } = useTernaryDarkMode();
-
+  
   useEffect(() => {
     if (!socket) return;
     const getSessionFunct = () => {
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     };
     const handleNewSession = (msg) => {
+      // console.log(msg);
+      // console.log(msg?.isRunning);
+      
       if (!msg.isRunning && !shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(true);

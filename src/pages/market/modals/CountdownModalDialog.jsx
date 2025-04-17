@@ -28,7 +28,7 @@ const CountdownModalDialog = ({ endTime, shouldStart, startTime, startIn, setsta
         isDismissable={false}
         isKeyboardDismissDisabled={true}
         isOpen={isOpen}
-        size="2xl"
+        size="xl"
         backdrop={'blur'}
         placement="center"
       >

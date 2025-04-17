@@ -48,6 +48,7 @@ import MarketGamingDetailsPage from '@/pages/market/MarketGamingDetailsPage.jsx'
 import VirtualStockDetails from '@/pages/market/components/Virtuals/VitrualStockDetails.jsx';
 import Trade from '@/pages/market/components/analytics/Trade.jsx';
 import NewTrade from '@/pages/market/components/analytics/NewTrade.jsx';
+import MarketVirtulaOrderPage from './pages/market/MarketVirtulaOrderPage.jsx';
 
 const App = () => {
   const { isDarkMode } = useTernaryDarkMode();
@@ -152,6 +153,14 @@ const App = () => {
             element={
               <RequireAuthBusiness>
                 <VirtualStockDetails />
+              </RequireAuthBusiness>
+            }
+          />
+          <Route
+            path="markets/virtuals/orders"
+            element={
+              <RequireAuthBusiness>
+                <MarketVirtulaOrderPage />
               </RequireAuthBusiness>
             }
           />

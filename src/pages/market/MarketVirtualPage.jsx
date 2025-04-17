@@ -1,4 +1,3 @@
-import MarketNavbar from '@/pages/market/components/MarketNavbar.jsx';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
 import { Avatar, AvatarGroup, Button, Card, Tooltip } from '@heroui/react';
 // import countries from '@/lib/countries.js';
@@ -22,6 +21,7 @@ import { motion } from 'framer-motion';
 import TimeoutComponent from '@/hooks/use-timeOut';
 import PlaceOrder from '../market/modals/PlaceOrder.jsx';
 import useInterval from '@/hooks/use-interval';
+import VirtualNavbar from './components/VirtualNavbar';
 const code = 'NG';
 
 const MarketVirtualPage = () => {
@@ -76,14 +76,14 @@ const MarketVirtualPage = () => {
       };
       const res = await getVirtualDashboard(data);
       setDashData(res?.data?.data);
-      if (res) {
+      if (res?.data?.data) {
         let dataChart = {
           stockId: res?.data?.data?.mostBoughtStock?.id,
           country: countryName,
           sessionType: dashboardTimeFrame || '1-minute',
         };
         const chartRes = await getStockDetails(dataChart);
-        setChartDatas(chartRes.data.data);
+        setChartDatas(chartRes?.data?.data);
 
         if (chartRes.data.data && !chartRes.data.data.isRunning) {
           const endingIn = chartRes.data.data.endTime ? chartRes.data.data.endTime : 0;
@@ -116,7 +116,7 @@ const MarketVirtualPage = () => {
   const scrollHeight = dashData?.activeCompanies?.length * 40;
   return (
     <>
-      <MarketNavbar />
+      <VirtualNavbar/>
       <div className="container">
         <div className="gap-8 lg:grid lg:grid-cols-[1fr_350px]">
           <div className="w-full overflow-hidden">
@@ -153,7 +153,7 @@ const MarketVirtualPage = () => {
                             repeat: Infinity,
                           }}
                         >
-                          {dashData?.activeCompanies.length &&
+                          {dashData?.activeCompanies?.length &&
                             dashData?.activeCompanies?.map((company, index) => (
                               <div key={index} className="flex text-xl items-center gap-3">
                                 <span className="text-white">{index + 1}.</span>
@@ -233,7 +233,7 @@ const MarketVirtualPage = () => {
                             <h1 className="text-md">{dashData?.mostBoughtStock?.name.slice(0, 15) + '...'}</h1>
                           </Tooltip>
                           <p
-                            className={`mt-2 ${Math.sign(stockPercentage) === 1 ? 'text-green-600' : 'text-red-600'}  text-4xl font-bold`}
+                            className={`mt-2 ${stockPercentage === 0? 'text-white' : Math.sign(stockPercentage) === 1 ? 'text-green-600' : 'text-red-600'}  text-4xl font-bold`}
                           >
                             {Math.round(stockPercentage)}%
                           </p>
