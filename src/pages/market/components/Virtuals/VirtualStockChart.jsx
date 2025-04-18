@@ -63,6 +63,7 @@ const VirtualStockChart = ({
   setstartTime,
   setIsRunning,
   setStockPercentage,
+  handleGetVirtualDashboardData
 }) => {
   const socket = useSocket();
   const [data, setData] = useState([]);
@@ -81,10 +82,11 @@ const VirtualStockChart = ({
       if (!msg.isRunning && !shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(true);
-      } else if (!msg.isRunning && !shouldStart) {
+        // handleGetVirtualDashboardData()
+      } else if (msg.isRunning && shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(false);
-        setstartTime(msg.startTime);
+        // setstartTime(msg.startTime);
       }
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;

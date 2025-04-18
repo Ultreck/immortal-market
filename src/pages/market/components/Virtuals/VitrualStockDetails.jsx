@@ -159,10 +159,10 @@ const VirtualStockDetails = () => {
         </div>
       ) : (
         <>
-          {!!stocks.length &&
+          {!!stocks?.length &&
             stocks
               ?.filter((filtered) => filtered._id === id)
-              .map((stock) =>
+              ?.map((stock) =>
                  <div className="container">
                   <div className="gap-5 lg:grid lg:grid-cols-[1fr_350px]">
                     <div className="">
