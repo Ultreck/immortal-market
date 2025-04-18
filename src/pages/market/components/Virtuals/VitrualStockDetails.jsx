@@ -90,7 +90,6 @@ const VirtualStockDetails = () => {
     };
     const res = await createVirtualStocks(payload);
     setStocks(res?.data?.data);
-    console.log(res?.data?.data);
   };
 
   const handlegetbalance = async () => {
