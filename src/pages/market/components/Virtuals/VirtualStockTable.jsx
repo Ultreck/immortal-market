@@ -54,11 +54,13 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
               > */}
-                {countries['africa'].map((c, i) => (
+                {countries['africa'].map((c, i) => {
+                  console.log(c);
+                  (
                   // <SwiperSlide key={c} virtualIndex={i}>
-                  <>
+                  <div key={c}> 
                   {i <= 6 && 
-                    <div key={i}>
+                    <div>
                       <div
                         tabIndex={1}
                         onClick={() => {
@@ -77,9 +79,9 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                       </div>
                     </div>
                           }
-                            </>
+                            </div>
                   // </SwiperSlide>
-                ))}
+                )})}
               {/* </Swiper> */}
             </div>
           </div>
