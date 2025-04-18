@@ -92,12 +92,12 @@ const VirtualStockChart = ({
       const lastPrice = currentPrice?.price;
       setIsRunning(msg?.isRunning);
       if (msg?.isRunning) {
+        console.log(msg);
         setData((prev) => {
           const newData = Array.isArray(prev) ? prev : [];
           if (newPrice === lastPrice || !msg.isRunning || !msg.price) {
             return newData;
           }
-
           const newDSocketData = {
             ...msg,
             price: limitDecimals(msg?.price, 4),
@@ -122,7 +122,7 @@ const VirtualStockChart = ({
       socket.off('priceUpdate', getSessionFunct);
       socket.off('newSession', handleNewSession);
     };
-  }, [chartDatas]);
+  }, [socket, chartDatas]);
 
   const initialPrice = data[0]?.price;
   const nowPrice = currentPrice?.price;

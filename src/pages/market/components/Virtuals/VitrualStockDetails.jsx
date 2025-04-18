@@ -236,6 +236,7 @@ const VirtualStockDetails = () => {
                                 shouldStart={shouldStart}
                                 chartDatas={chartDatas}
                                 setendTime={setendTime}
+                                setstartTime={setstartTime}
                                 setIsRunning={setIsRunning}
                                 setshouldStart={setshouldStart}
                               />
