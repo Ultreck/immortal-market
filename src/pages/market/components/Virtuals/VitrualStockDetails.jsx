@@ -34,6 +34,7 @@ const VirtualStockDetails = () => {
   const [chartDatas, setChartDatas] = useState([]);
   const [isRunning, setIsRunning] = useState(true);
   const [stockPercentage, setStockPercentage] = useState(0);
+  const [stockWinners, setStockWinners] = useState([]);
   // Removed unused stockOrders state
   const [stockSummary, setstockSummary] = useState({});
   const [winning, setWinning] = useState(0);
@@ -47,7 +48,7 @@ const VirtualStockDetails = () => {
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
-  const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
+  const { mutateAsync: getStockWinners } = useCreateVirtualStockOrders();
   const { mutateAsync: getStockSummary } = useCreateVirtualSummary();
   const { mutateAsync: getStockAllOrders } = useGetAllOrders();
   const { mutateAsync: createVirtualStocks, isPending: isStockPending } = useCreateVirtualStock({});
@@ -75,16 +76,18 @@ const VirtualStockDetails = () => {
     handleAllStockOrders();
     setTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [timeFrame, id]);
-
+  
   useEffect(() => {
     handleGetStockDetails();
     handleFetchStocks();
+    handleGetStockOrders();
   }, []);
-
+  
   useEffect(() => {
     if (shouldStart === false) {
       handleGetStockDetails();
       handleFetchStocks();
+      handleGetStockOrders();
     }
   }, [shouldStart]);
 
@@ -97,26 +100,20 @@ const VirtualStockDetails = () => {
     setStocks(res?.data?.data);
   };
 
-  const handlegetbalance = async () => {
-    try {
-      let stockOrdersPayload = {
-        stock: chartDatas?.stock?._id,
-        sessionType: timeFrame,
-      };
-      const res = await getStockOrders(stockOrdersPayload);
-      // console.log(res?.data?.data);
-    } catch (error) {}
-  };
-
   const handleGetStockOrders = async () => {
     try {
-      let stockOrdersPayload = {
-        stock: chartDatas?.stock?._id,
-        sessionType: timeFrame,
-      };
-      const res = await getStockOrders(stockOrdersPayload);
-      // console.log(res?.data?.data);
-    } catch (error) {}
+      if(chartDatas?.stock?._id){
+        let stockOrdersPayload = {
+          stock: chartDatas?.stock?._id,
+          sessionType: timeFrame,
+        };
+        const res = await getStockWinners(stockOrdersPayload);
+        setStockWinners(res?.data?.data);
+        console.log(res?.data?.data);
+      }
+    } catch (error) {
+      console.log('Error occured: ', error);
+    }
   };
 
   const handleGetStockSummary = async () => {
@@ -367,7 +364,7 @@ const VirtualStockDetails = () => {
                                     </>
                                   )}
                                   <div className="text-end  ">
-                                    <ListOfOrdersModalDialog data={stockAllOrders} />
+                                    <ListOfOrdersModalDialog setWinning={setWinning} data={stockAllOrders} />
                                   </div>
                                 </div>
                               </Tab>

@@ -8,8 +8,6 @@ function TimeoutComponent({className, text, endTime, startTime, startIn, setstar
   const [remainingTime, setRemainingSeconds] = useState(0);
   const sessionType = JSON.parse(localStorage.getItem('time-function'))?.split('-')[0];
   
-console.log(shouldStart, endTime, startTime);
-
   useEffect(() => {
     if (shouldStart) {
       intervalRef.current = setInterval(() => {

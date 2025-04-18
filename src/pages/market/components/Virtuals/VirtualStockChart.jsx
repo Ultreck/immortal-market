@@ -62,35 +62,34 @@ const VirtualStockChart = ({
   startTime,
   setstartTime,
   setIsRunning,
-  setStockPercentage
+  setStockPercentage,
+  dashboardTimeFrame
 }) => {
   const socket = useSocket();
   const [data, setData] = useState([]);
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
   const { isDarkMode } = useTernaryDarkMode();
+  
+  const currentSessionId = data[0]?._id;
+  
   useEffect(() => {
     if (!socket) return;
     const getSessionFunct = () => {
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     };
-    const handleNewSession = (msg) => {
-      // console.log(msg);
-      // console.log(msg?.isRunning);
-      
+    const handleNewSession = (msg) => {      
       if (!msg.isRunning && !shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(true);
-        // handleGetVirtualDashboardData()
       } else if (msg.isRunning && shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(false);
-        // setstartTime(msg.startTime);
       }
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
       setIsRunning(msg?.isRunning);
+      
       if (msg?.isRunning) {
-        console.log(msg);
         setData((prev) => {
           const newData = Array.isArray(prev) ? prev : [];
           if (newPrice === lastPrice || !msg.isRunning || !msg.price) {
@@ -105,7 +104,7 @@ const VirtualStockChart = ({
             name: newData?.length + 1,
             time: timeFormatter(msg?.updatedAt),
           };
-
+          
           setCurrentPrice(newDSocketData);
           return [...newData, newDSocketData];
         });
@@ -115,12 +114,18 @@ const VirtualStockChart = ({
     };
     socket.on('priceUpdate', getSessionFunct);
     socket.on('newSession', handleNewSession);
-
+    
     return () => {
       socket.off('priceUpdate', getSessionFunct);
       socket.off('newSession', handleNewSession);
     };
   }, [socket, chartDatas]);
+  
+  useEffect(() => {
+    if(currentSessionId !== currentPrice?._id){
+      setData([]);
+    };
+  }, [dashboardTimeFrame, currentPrice, currentSessionId]);
 
   const initialPrice = data[0]?.price;
   const nowPrice = currentPrice?.price;
@@ -137,7 +142,6 @@ const VirtualStockChart = ({
   if (data) {
     if (data?.length > 0) {
       const lengthDiff = Math.max(0, maxDataLength - currentLength);
-      console.log("lengthDiff: ", lengthDiff);
       paddedData = [...data, ...Array(lengthDiff).fill(null)];
     }
   }

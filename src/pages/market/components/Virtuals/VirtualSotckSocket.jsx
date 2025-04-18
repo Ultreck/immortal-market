@@ -52,7 +52,7 @@ const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstar
           </div>
         </CardBody>
       </Card>
-      <Card>
+      <Card className='mt-5'>
         <CardBody>
           <div className="text">
             <TimeoutComponent

@@ -292,6 +292,7 @@ const MarketVirtualPage = () => {
                     shouldStart={shouldStart}
                     setstartTime={setstartTime}
                     setIsRunning={setIsRunning}
+                    dashboardTimeFrame={dashboardTimeFrame}
                   />
                 </div>
               </div>
