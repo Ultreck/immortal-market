@@ -287,13 +287,11 @@ const MarketVirtualPage = () => {
                   <VirtualStockChart
                     setStockPercentage={setStockPercentage}
                     chartDatas={chartDatas}
-                    dashboardTimeFrame={dashboardTimeFrame}
                     setshouldStart={setshouldStart}
                     setendTime={setendTime}
                     shouldStart={shouldStart}
                     setstartTime={setstartTime}
                     setIsRunning={setIsRunning}
-                    handleGetVirtualDashboardData={handleGetVirtualDashboardData}
                   />
                 </div>
               </div>

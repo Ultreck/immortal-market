@@ -62,14 +62,12 @@ const VirtualStockChart = ({
   startTime,
   setstartTime,
   setIsRunning,
-  setStockPercentage,
-  handleGetVirtualDashboardData
+  setStockPercentage
 }) => {
   const socket = useSocket();
   const [data, setData] = useState([]);
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
   const { isDarkMode } = useTernaryDarkMode();
-  
   useEffect(() => {
     if (!socket) return;
     const getSessionFunct = () => {

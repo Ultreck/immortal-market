@@ -11,6 +11,7 @@ const CountdownModalDialog = ({ endTime, shouldStart, startTime, startIn, setsta
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(shouldStart);
     onClose();
     if (shouldStart) {
       onOpen();
