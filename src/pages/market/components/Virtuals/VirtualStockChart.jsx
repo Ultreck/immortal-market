@@ -74,8 +74,6 @@ const VirtualStockChart = ({
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     };
     const handleNewSession = (msg) => {
-      // console.log(msg);
-      // console.log(msg?.isRunning);
       
       if (!msg.isRunning && !shouldStart) {
         setendTime(msg.endTime);
@@ -90,7 +88,6 @@ const VirtualStockChart = ({
       const lastPrice = currentPrice?.price;
       setIsRunning(msg?.isRunning);
       if (msg?.isRunning) {
-        console.log(msg);
         setData((prev) => {
           const newData = Array.isArray(prev) ? prev : [];
           if (newPrice === lastPrice || !msg.isRunning || !msg.price) {
@@ -137,7 +134,6 @@ const VirtualStockChart = ({
   if (data) {
     if (data?.length > 0) {
       const lengthDiff = Math.max(0, maxDataLength - currentLength);
-      console.log("lengthDiff: ", lengthDiff);
       paddedData = [...data, ...Array(lengthDiff).fill(null)];
     }
   }

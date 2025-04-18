@@ -75,6 +75,7 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
       const total = res.data.order.reduce((sum, item) => {
         return sum + (item.quantity - item.quantitySold) * currentPrice?.price;
       }, 0);
+      console.log("total:: ", total);
       settotalOrders(total);
     }
   };
@@ -88,9 +89,9 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
           initialPrice: data?.price,
           quantity: data?.quantity,
         };
-        const res = await placeOrder(orderData);
-        // console.log(res);
-        
+        if(orderData.quantity >0){
+          const res = await placeOrder(orderData);
+        }
       } else {
         const sellData = {
           sessionId: currentPrice?._id,
@@ -100,7 +101,6 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
           quantity: data.quantity,
         };
         const res = await sellOrder(sellData);
-        // console.log(res);
       }
       myOrder();
     } catch (error) {
@@ -117,6 +117,7 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
         radius="full"
         className="w-32"
       >
+        {/* {totalOrder} */}
         {text}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
