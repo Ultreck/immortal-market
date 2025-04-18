@@ -137,11 +137,13 @@ const VirtualStockChart = ({
 
   let paddedData;
   if (data) {
-    if (data?.length > 0) {
-      const lengthDiff = Math.max(0, maxDataLength - currentLength);
-      console.log("lengthDiff: ", lengthDiff);
-      paddedData = [...data, ...Array(lengthDiff).fill(null)];
-    }
+    console.log("lengthDiff: ", data);
+
+    // if (data?.length > 0) {
+    //   const lengthDiff = Math.max(0, maxDataLength - currentLength);
+    //   console.log("lengthDiff: ", lengthDiff);
+    //   paddedData = [...data, ...Array(lengthDiff).fill(null)];
+    // }
   }
 
   const CustomTooltip = ({ active, payload }) => {
