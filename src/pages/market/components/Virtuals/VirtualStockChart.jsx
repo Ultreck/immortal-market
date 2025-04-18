@@ -122,7 +122,7 @@ const VirtualStockChart = ({
       socket.off('priceUpdate', getSessionFunct);
       socket.off('newSession', handleNewSession);
     };
-  }, [socket, chartDatas]);
+  }, [chartDatas]);
 
   const initialPrice = data[0]?.price;
   const nowPrice = currentPrice?.price;
@@ -133,17 +133,15 @@ const VirtualStockChart = ({
   }
 
   const maxDataLength = chartDatas?.noOfRunning;
-  const currentLength = data?.length ? data?.length : chartDatas?.prices?.length;
+  const currentLength = data.length;
 
   let paddedData;
   if (data) {
-    console.log("lengthDiff: ", data);
-
-    // if (data?.length > 0) {
-    //   const lengthDiff = Math.max(0, maxDataLength - currentLength);
-    //   console.log("lengthDiff: ", lengthDiff);
-    //   paddedData = [...data, ...Array(lengthDiff).fill(null)];
-    // }
+    if (data?.length > 0) {
+      const lengthDiff = Math.max(0, maxDataLength - currentLength);
+      console.log("lengthDiff: ", lengthDiff);
+      paddedData = [...data, ...Array(lengthDiff).fill(null)];
+    }
   }
 
   const CustomTooltip = ({ active, payload }) => {
