@@ -47,7 +47,7 @@ const CountdownModalDialog = ({ endTime, shouldStart, startTime, startIn, setsta
                 </div>
               </ModalHeader>
               <ModalBody>
-                <p className={`w-full h-full flex justify-center items-center`}>
+                <div className={`w-full h-full flex justify-center items-center`}>
                   <TimeoutComponent
                     text={'new session Starts in:'}
                     className="text-5xl text-[#4691c5]"
@@ -58,7 +58,7 @@ const CountdownModalDialog = ({ endTime, shouldStart, startTime, startIn, setsta
                     shouldStart={shouldStart}
                     setshouldStart={setshouldStart}
                   />
-                </p>
+                </div>
               </ModalBody>
             </>
           )}

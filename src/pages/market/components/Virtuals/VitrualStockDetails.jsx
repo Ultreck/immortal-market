@@ -152,7 +152,7 @@ const VirtualStockDetails = () => {
 
   return (
     <>
-      {isStockPending ? (
+      {chartDatas.length === 0 ? (
         <div className="container">
           <div className="grid grid-cols-[1fr_350px] items-start gap-8">
             <Skeleton className="min-h-[600px] rounded-2xl" />

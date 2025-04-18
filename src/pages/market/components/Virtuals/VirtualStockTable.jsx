@@ -58,7 +58,7 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                   console.log(c);
                   (
                   // <SwiperSlide key={c} virtualIndex={i}>
-                  <div key={c}> 
+                  <div key={i}>
                   {i <= 6 && 
                     <div>
                       <div

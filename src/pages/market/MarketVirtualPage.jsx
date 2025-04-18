@@ -158,7 +158,7 @@ const MarketVirtualPage = () => {
                             dashData?.activeCompanies?.map((company, index) => (
                               <div key={index} className="flex text-xl items-center gap-3">
                                 <span className="text-white">{index + 1}.</span>
-                                <span className="text-green-600">{company.name.slice(0, 7) + '...'}</span>
+                                <span className="text-green-600">{company?.name?.slice(0, 7) + '...'}</span>
                               </div>
                             ))}
                         </motion.div>
