@@ -56,9 +56,9 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
               > */}
                 {countries['africa'].map((c, i) => (
                   // <SwiperSlide key={c} virtualIndex={i}>
-                  <>
+                  <div key={i}>
                   {i <= 6 && 
-                    <div key={i}>
+                    <div>
                       <div
                         tabIndex={1}
                         onClick={() => {
@@ -77,7 +77,7 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                       </div>
                     </div>
                           }
-                            </>
+                            </div>
                   // </SwiperSlide>
                 ))}
               {/* </Swiper> */}

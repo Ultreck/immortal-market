@@ -142,7 +142,7 @@ const VirtualStockChart = ({
   }
 
   const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
+    if (active && payload && payload?.length) {
       return (
         <div className="rounded-lg border border-gray-300 bg-white p-3 shadow-md">
           <p className="text-sm text-gray-500 text-brown-700">
@@ -165,7 +165,7 @@ const VirtualStockChart = ({
 
   return (
     <div style={{ width: '100%', height: 300 }}>
-      <ResponsiveContainer>
+      <ResponsiveContainer width={'100%'} height={'100%'}>
         <ComposedChart data={paddedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
