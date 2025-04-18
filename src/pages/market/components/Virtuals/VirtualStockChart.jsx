@@ -139,6 +139,7 @@ const VirtualStockChart = ({
   if (data) {
     if (data?.length > 0) {
       const lengthDiff = Math.max(0, maxDataLength - currentLength);
+      console.log("lengthDiff: ", lengthDiff);
       paddedData = [...data, ...Array(lengthDiff).fill(null)];
     }
   }
