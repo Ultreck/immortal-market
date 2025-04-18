@@ -59,8 +59,13 @@ const VirtualStockDetails = () => {
       country: country,
       sessionType: timeFrame,
     };
+    
     const res = await getStockDetails(data);
     setChartDatas(res.data.data);
+    const endingIn = res.data.data.endTime ? res.data.data.endTime : 0;
+    const startAt = res.data.data.endTime ? res.data.data.startTime : 0;
+    setendTime(endingIn);
+    setstartTime(startAt);
   };
   useEffect(() => {
     handleFetchStocks();

@@ -50,7 +50,6 @@ const DesignBuilder = () => {
             },
           ],
         };
-        console.log(el);
         // TODO: Handle dragging into frame
       }
     } else if (over && collisions.some((i) => i.id.startsWith('canvas'))) {
