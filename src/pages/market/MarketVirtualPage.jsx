@@ -53,6 +53,7 @@ const MarketVirtualPage = () => {
   useEffect(() => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
+      console.log("shouldStart");
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [countryName, homeMarket, dashboardTimeFrame]);
 
@@ -290,7 +291,9 @@ const MarketVirtualPage = () => {
                     setshouldStart={setshouldStart}
                     setendTime={setendTime}
                     shouldStart={shouldStart}
+                    setstartTime={setstartTime}
                     setIsRunning={setIsRunning}
+                    handleGetVirtualDashboardData={handleGetVirtualDashboardData}
                   />
                 </div>
               </div>

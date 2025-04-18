@@ -63,6 +63,7 @@ const VirtualStockChart = ({
   setstartTime,
   setIsRunning,
   setStockPercentage,
+  handleGetVirtualDashboardData
 }) => {
   const socket = useSocket();
   const [data, setData] = useState([]);
@@ -81,21 +82,22 @@ const VirtualStockChart = ({
       if (!msg.isRunning && !shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(true);
-      } else if (!msg.isRunning && !shouldStart) {
+        // handleGetVirtualDashboardData()
+      } else if (msg.isRunning && shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(false);
-        setstartTime(msg.startTime);
+        // setstartTime(msg.startTime);
       }
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
       setIsRunning(msg?.isRunning);
       if (msg?.isRunning) {
+        console.log(msg);
         setData((prev) => {
           const newData = Array.isArray(prev) ? prev : [];
           if (newPrice === lastPrice || !msg.isRunning || !msg.price) {
             return newData;
           }
-
           const newDSocketData = {
             ...msg,
             price: limitDecimals(msg?.price, 4),
@@ -131,12 +133,13 @@ const VirtualStockChart = ({
   }
 
   const maxDataLength = chartDatas?.noOfRunning;
-  const currentLength = data?.length ? data?.length : chartDatas?.prices?.length;
+  const currentLength = data.length;
 
   let paddedData;
   if (data) {
     if (data?.length > 0) {
       const lengthDiff = Math.max(0, maxDataLength - currentLength);
+      console.log("lengthDiff: ", lengthDiff);
       paddedData = [...data, ...Array(lengthDiff).fill(null)];
     }
   }
