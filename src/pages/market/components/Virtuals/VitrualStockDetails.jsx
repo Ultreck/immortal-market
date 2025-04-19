@@ -139,12 +139,12 @@ const VirtualStockDetails = () => {
           status: [false, true],
         };
         const res = await getStockAllOrders(allOrderData);
-        // console.log(res?.data?.data);
       }
     } catch (error) {
       console.log(error);
     }
   };
+  // console.log(stockWinners);
 
   return (
     <>
@@ -384,6 +384,7 @@ const VirtualStockDetails = () => {
                         setstartIn={setstartIn}
                         shouldStart={shouldStart}
                         setshouldStart={setshouldStart}
+                        stockWinners={stockWinners}
                       />
                     </div>
                   </div>

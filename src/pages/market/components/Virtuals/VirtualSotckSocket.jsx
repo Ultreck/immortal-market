@@ -7,7 +7,7 @@ import TimeoutComponent from '@/hooks/use-timeOut';
 
 const code = 'NG';
 
-const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstartIn, setshouldStart }) => {
+const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstartIn, setshouldStart, stockWinners }) => {
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
 
   return (

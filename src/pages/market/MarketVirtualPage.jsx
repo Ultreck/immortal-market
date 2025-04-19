@@ -132,7 +132,7 @@ const MarketVirtualPage = () => {
                     <div className="flex items-center space-x-2">
                       <TbArrowUpRight size={28} color="green" />
                       <p className="text-[1.3rem] font-semibold text-green-600">
-                        {dashData?.totalGain.toFixed(3) || 0}%
+                        {dashData?.percentGain|| 0}%
                       </p>
                     </div>
                     <p className="opacity-70">Total Gained</p>
