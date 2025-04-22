@@ -164,6 +164,22 @@ const App = () => {
               </RequireAuthBusiness>
             }
           />
+          <Route
+            path="markets/virtuals/crypto"
+            element={
+              <RequireAuthBusiness>
+                <MarketVirtulaOrderPage />
+              </RequireAuthBusiness>
+            }
+          />
+          <Route
+            path="markets/virtuals/fx"
+            element={
+              <RequireAuthBusiness>
+                <MarketVirtulaOrderPage />
+              </RequireAuthBusiness>
+            }
+          />
         </Route>
         <Route
           path="designs/:id/edit"

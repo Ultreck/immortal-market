@@ -41,47 +41,35 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
       {isStocksLoading ? (
         <Skeleton className="min-h-[200px] rounded-2xl" />
       ) : (
-        <Card className="card-shadow px-8 py-7">
+        <Card className="card-shadow px-5 py-7">
           <div className="mb-8 flex items-center space-x-3 justify-between">
             <h3 className="text-lg font-semibold w-1/2">Stocks</h3>
             <div className="text flex">
-              {/* <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y]}
-                spaceBetween={10}
-                slidesPerView={8}
-                navigation
-                scrollbar={{ draggable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
-              > */}
-                {countries['africa'].map((c, i) => {
-                  (
-                  // <SwiperSlide key={c} virtualIndex={i}>
+              {countries['special'].map((c, i) => {
+                return (
                   <div key={i}>
-                  {i <= 6 && 
-                    <div>
-                      <div
-                        tabIndex={1}
-                        onClick={() => {
-                          // setCode(c.code);
-                          onSubmit(c);
-                        }}
-                        className={cn('w-fit mx-2 rounded-full border-2 transition-all duration-300')}
-                      >
-                        <Tooltip content={<span className="capitalize">{c.name}</span>} placement="bottom">
-                          <Avatar
-                            size="md"
-                            className="aspect-square h-10 w-10"
-                            icon={<CountryFlag code={c.code} className="h-full w-full cursor-pointer" rounded />}
+                    {i <= 5 && (
+                      <div className="w-full">
+                        <div
+                          tabIndex={1}
+                          onClick={() => {
+                            onSubmit(c);
+                          }}
+                          className={cn('w-fit mx-2 rounded-full border-2 transition-all duration-300')}
+                        >
+                          <Tooltip content={<span className="capitalize">{c.name}</span>} placement="bottom">
+                            <Avatar
+                              size="md"
+                              className="aspect-square h-10 w-10"
+                              icon={<CountryFlag code={c.code} className="h-full w-full cursor-pointer" rounded />}
                             />
-                        </Tooltip>
+                          </Tooltip>
+                        </div>
                       </div>
-                    </div>
-                          }
-                            </div>
-                  // </SwiperSlide>
-                )})}
-              {/* </Swiper> */}
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
           {allStocks?.length ? (
@@ -95,7 +83,9 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                 <TableColumn>Symbol</TableColumn>
                 <TableColumn>Current Price</TableColumn>
                 <TableColumn>Change (1D)</TableColumn>
-                <TableColumn className="flex justify-center items-center">Active Users</TableColumn>
+                <TableColumn>Gained</TableColumn>
+                <TableColumn>Profit</TableColumn>
+                <TableColumn className="flex justify-center items-center">Traders</TableColumn>
               </TableHeader>
               <TableBody>
                 {paginatedData?.map((c) => {
@@ -129,13 +119,43 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                           onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
                         >
                           <div className="flex items-center space-x-1">
-                            {c.change >= 0 ? <RiArrowUpLine className='text-green-600' /> : <RiArrowDownLine className='text-red-600' />}
-                            <span className={`${Math.sign(c.change) === -1 ? 'text-red-600': 'text-green-600'}`}>{c.change.toFixed(2)}%</span>
+                            {c.change >= 0 ? (
+                              <RiArrowUpLine className="text-green-600" />
+                            ) : (
+                              <RiArrowDownLine className="text-red-600" />
+                            )}
+                            <span className={`${Math.sign(c.change) === -1 ? 'text-red-600' : 'text-green-600'}`}>
+                              {c.change.toFixed(2)}%
+                            </span>
+                          </div>
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          className="bg-transparent rounded-full hover:bg-default-100"
+                          onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
+                        >
+                          <div tabIndex={1} className="w-min cursor-pointer rounded-2xl transition-all duration-300">
+                            <span className={`${Math.sign(c.totalGain) === -1 ? 'text-red-600' : 'text-green-600'}`}>
+                              {formatCurrency(c?.totalGain)}
+                            </span>
+                          </div>
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          className="bg-transparent rounded-full hover:bg-default-100"
+                          onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
+                        >
+                          <div tabIndex={1} className="w-min cursor-pointer rounded-2xl transition-all duration-300">
+                            <span className={`${Math.sign(c?.profit) === -1 ? 'text-red-600' : 'text-green-600'}`}>
+                              {formatCurrency(c?.profit)}
+                            </span>
                           </div>
                         </Button>
                       </TableCell>
                       <TableCell className="flex justify-center items-center">
-                        <AvatarGroup isBordered max={3}>
+                        <AvatarGroup isBordered max={1}>
                           <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
                           <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
                           <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />

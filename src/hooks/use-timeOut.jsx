@@ -3,11 +3,19 @@ import { addHours, differenceInSeconds } from 'date-fns';
 import PropTypes from 'prop-types';
 import { cn } from '@/lib/utils';
 
-function TimeoutComponent({className, text, endTime, startTime, startIn, setstartIn, shouldStart, setshouldStart }) {
+function TimeoutComponent({
+  text,
+  endTime,
+  startTime,
+  startIn,
+  setstartIn,
+  shouldStart,
+  setshouldStart,
+}) {
   const intervalRef = useRef(null);
   const [remainingTime, setRemainingSeconds] = useState(0);
   const sessionType = JSON.parse(localStorage.getItem('time-function'))?.split('-')[0];
-  
+
   useEffect(() => {
     if (shouldStart) {
       intervalRef.current = setInterval(() => {
@@ -50,30 +58,31 @@ function TimeoutComponent({className, text, endTime, startTime, startIn, setstar
   const formatTime = (secs) => {
     const hours = Math.floor(secs / 3600);
     const minutes = Math.floor((secs % 3600) / 60);
-    const seconds = secs % 60;    
+    const seconds = secs % 60;
     return `${hours > 0 ? `${String(hours).padStart(2, '0')}:` : ''}${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
-
   return (
     <div className="flex gap-2 pb-5 w-64 justify-end mt-3">
       <div className="flex flex-col items-center">
         <p className="text-base font-semibold text-gray-400">{`${sessionType} ${sessionType > 1 ? 'minutes' : 'minute'} ${text}`}</p>
-        <div className={cn("text-3xl text-center font-mono text-[#4691c5] flex mt-1", className)}>
-          <div className="">
+        <div className={cn('text-3xl text-center font-mono  flex mt-1')}>
+          {/* <div className={remainingTime >= 30 && 'text-[#4691c5]'}>
             <div className="">{'00'}:</div>
-          </div>
+          </div> */}
           {startIn > 0 ? (
-            <div className="">
+            <div className="flex text-5xl text-[#4691c5] ">
+              <div className="">{'00'}:</div>
               <div className="">{formatTime(startIn)}</div>
             </div>
           ) : (
-            <div className="">
+            <div className={`${remainingTime > 0 && remainingTime <= 30 ? 'text-red-500' : 'text-[#4691c5]'} flex`}>
+              <div className="">{'00'}:</div>
               <div className="">{formatTime(remainingTime)}</div>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </div>    
   );
 }
 TimeoutComponent.propTypes = {

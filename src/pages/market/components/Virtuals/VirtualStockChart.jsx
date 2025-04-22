@@ -63,10 +63,11 @@ const VirtualStockChart = ({
   setstartTime,
   setIsRunning,
   setStockPercentage,
-  dashboardTimeFrame
+  dashboardTimeFrame,
+  data,
+  setData,
 }) => {
   const socket = useSocket();
-  const [data, setData] = useState([]);
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
   const { isDarkMode } = useTernaryDarkMode();
   
@@ -125,7 +126,7 @@ const VirtualStockChart = ({
     if(currentSessionId !== currentPrice?._id){
       setData([]);
     };
-  }, [dashboardTimeFrame, currentPrice, currentSessionId]);
+  }, [dashboardTimeFrame, currentPrice, currentSessionId, chartDatas]);
 
   const initialPrice = data[0]?.price;
   const nowPrice = currentPrice?.price;

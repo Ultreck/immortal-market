@@ -22,6 +22,7 @@ import TimeoutComponent from '@/hooks/use-timeOut';
 import PlaceOrder from '../market/modals/PlaceOrder.jsx';
 import useInterval from '@/hooks/use-interval';
 import VirtualNavbar from './components/VirtualNavbar';
+import { IconArrowUp } from '@tabler/icons-react';
 const code = 'NG';
 
 const MarketVirtualPage = () => {
@@ -43,7 +44,9 @@ const MarketVirtualPage = () => {
   const { data: virtualSession } = useGetVirtualSession(countryName);
   const [dashData, setDashData] = useState();
   const [chartDatas, setChartDatas] = useState([]);
+  const [data, setData] = useState([]);
   const { currentPrice } = useGetCurrentPrice();
+  const [winning, setWinning] = useState(0);
   const navigation = useNavigate();
   const [dashboardTimeFrame, setDashboardTimeFrame] = useState(() => {
     const storedTimeFrame = window.localStorage.getItem('time-function');
@@ -53,7 +56,7 @@ const MarketVirtualPage = () => {
   useEffect(() => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
-      console.log("shouldStart");
+    console.log('shouldStart');
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [countryName, homeMarket, dashboardTimeFrame]);
 
@@ -115,15 +118,16 @@ const MarketVirtualPage = () => {
   };
 
   const scrollHeight = dashData?.activeCompanies?.length * 40;
+
   return (
     <>
-      <VirtualNavbar/>
+      <VirtualNavbar />
       <div className="container">
         <div className="gap-8 lg:grid lg:grid-cols-[1fr_350px]">
           <div className="w-full overflow-hidden">
             <Card className="mb-6 w-full overflow-visible rounded-2xl border px-6 py-6 pb-8 shadow dark:border-0 dark:shadow-none md:px-8">
               <h3 className="mb-6 flex justify-between items-center space-x-3 px-1 text-lg font-semibold">
-                <div className="text-2xl font-bold">Virtual Market</div>
+                <div className="text-2xl font-bold">Market Summary</div>
                 <CountryFlag code={code} rounded />
               </h3>
               <div className="grid grid-cols-3 gap-x-4 gap-y-10">
@@ -131,11 +135,9 @@ const MarketVirtualPage = () => {
                   <div>
                     <div className="flex items-center space-x-2">
                       <TbArrowUpRight size={28} color="green" />
-                      <p className="text-[1.3rem] font-semibold text-green-600">
-                        {dashData?.percentGain|| 0}%
-                      </p>
+                      <p className="text-[1.3rem] font-semibold text-green-600">{dashData?.percentGain || 0}%</p>
                     </div>
-                    <p className="opacity-70">Total Gained</p>
+                    <p className="opacity-70">Gainers</p>
                   </div>
                 </Card>{' '}
                 <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
@@ -167,16 +169,19 @@ const MarketVirtualPage = () => {
                     <p className="opacity-70">Top 5 companies</p>
                   </div>
                 </Card>
-                <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
-                  <div className="flex items-center mt-3">
-                    <AvatarGroup isBordered max={3} size="sm">
-                      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-                    </AvatarGroup>
+                <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
+                  <div className="text gap-3">
+                    <div className="flex items-center mt-3">
+                      <AvatarGroup isBordered max={3} size="sm">
+                        <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                        <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+                        <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+                        <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+                        <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+                        <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
+                      </AvatarGroup>
+                    </div>
+                    <p className="opacity-70">Active traders</p>
                   </div>
                 </Card>
                 <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
@@ -187,7 +192,7 @@ const MarketVirtualPage = () => {
                         {String(dashData?.totalTrades).padStart(2, '0') || 0}
                       </p>
                     </div>
-                    <p className="opacity-70">Total Trade</p>
+                    <p className="opacity-70">Total Trades</p>
                   </div>
                 </Card>{' '}
                 <Card className="flex px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
@@ -207,26 +212,30 @@ const MarketVirtualPage = () => {
                   </div>
                 </Card>
                 <Card className="px-6 py-4 border border-default-200 dark:border-default-100 mb-5" shadow="none">
-                  <div className="flex items-center mt-3">
-                    <AvatarGroup isBordered max={3} size="sm">
-                      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-                      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-                    </AvatarGroup>
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <TbArrowUpRight
+                        className={`${Math.sign(2000) === 1 ? 'text-green-600' : 'text-red-600 rotate-180'}`}
+                        size={28}
+                      />
+                      <p
+                        className={`text-[1.3rem] font-semibold ${Math.sign(2000) === 1 ? 'text-green-600' : 'text-red-600'} `}
+                      >
+                        {formatCurrency(2000) || 0}
+                      </p>
+                    </div>
+                    <p className="opacity-70">Average Price</p>
                   </div>
                 </Card>
               </div>
             </Card>
             <Card className="card-shadow px-10 my-10 py-2">
               <div className="space-y-2">
-                <div className="flex justify-between">
+                <div className={`flex justify-between ${shouldStart && 'hidden'}`}>
                   <div className="flex w-full justify-between relative">
                     <div className="w-full">
                       <div className=" w-full flex justify-between items-center">
-                        <div className="text-2xl my-5">Trending Market</div>
+                        <div className="text-2xl my-5">Trending Stocks</div>
                       </div>
                       <div className="flex items-center space-x-3 cursor-default">
                         <div>
@@ -234,7 +243,7 @@ const MarketVirtualPage = () => {
                             <h1 className="text-md">{dashData?.mostBoughtStock?.name.slice(0, 15) + '...'}</h1>
                           </Tooltip>
                           <p
-                            className={`mt-2 ${stockPercentage === 0? 'text-white' : Math.sign(stockPercentage) === 1 ? 'text-green-600' : 'text-red-600'}  text-4xl font-bold`}
+                            className={`mt-2 ${stockPercentage === 0 ? 'text-white' : Math.sign(stockPercentage) === 1 ? 'text-green-600' : 'text-red-600'}  text-4xl font-bold`}
                           >
                             {Math.round(stockPercentage)}%
                           </p>
@@ -266,21 +275,74 @@ const MarketVirtualPage = () => {
                   </div>
                 </div>
                 {currentPrice?.price ? (
-                  <div className="text-green-600 ml-2 font-mono text-2xl">{formatCurrency(currentPrice?.price)}</div>
+                  <div className={`text-green-600 ml-2 font-mono text-2xl ${shouldStart && 'hidden'}`}>
+                    {formatCurrency(currentPrice?.price)}
+                  </div>
                 ) : (
-                  <div className="text-gray-600 ml-2 font-mono text-2xl">{formatCurrency(0.0)}</div>
+                  <div className={`text-gray-600 ml-2 font-mono text-2xl ${shouldStart && 'hidden'}`}>
+                    {formatCurrency(0.0)}
+                  </div>
                 )}
-                <div className={`w-full h-[300px] flex justify-center items-center ${startIn <= 0 && 'hidden'}`}>
-                  <TimeoutComponent
-                    text={'new session Starts in:'}
-                    className="text-5xl text-[#4691c5]"
-                    endTime={endTime}
-                    startTime={startTime}
-                    startIn={startIn}
-                    setstartIn={setstartIn}
-                    shouldStart={shouldStart}
-                    setshouldStart={setshouldStart}
-                  />
+                <div
+                  className={`w-full h-[400px] relative flex justify-center items-center ${shouldStart <= 0 && 'hidden'}`}
+                >
+                  {/* <div className="text flex justify-end absolute top-5 w-full">
+                    <PlaceOrder
+                      id={dashData?.mostBoughtStock?.id}
+                      state={dashData?.mostBoughtStock}
+                      text="Buy"
+                      type={'buy'}
+                      dissable={shouldStart}
+                      setWinning={setWinning}
+                    />
+                  </div> */}
+                  <div className="text">
+                    <div className="text flex justify-center">
+                      <TimeoutComponent
+                        more={true}
+                        text={'New session Starts in:'}
+                        className="text-5xl text-[#4691c5]"
+                        endTime={endTime}
+                        startTime={startTime}
+                        startIn={startIn}
+                        setstartIn={setstartIn}
+                        shouldStart={shouldStart}
+                        setshouldStart={setshouldStart}
+                      />
+                    </div>
+                    <div className="mt-16">
+                      <p className="text-xl font-semibold my-2">Recommended stocks: </p>
+                      <div className="text grid grid-cols-2 gap-5 ">
+                        {dashData?.activeCompanies?.map((item, index) => (
+                          <Card className="p-2">
+                            <div key={index} className="flex items-center gap-3">
+                              <Avatar
+                                className="h-[30px] w-[30px] p-2 font-bold bg-success-100/50 text-green-600"
+                                icon={<IconArrowUp size="10" />}
+                              />
+                              <div className="text w-full flex justify-between">
+                                <div className="text-sm">
+                                  <p className="font-semibold text-gray-800 dark:text-gray-200">
+                                    {item?.name?.slice(0, 10) + '...'}
+                                  </p>
+                                  <p className="text-gray-500 text-xs">Trades: {item?.trades}</p>
+                                </div>
+                                <Button
+                                  onPress={() => navigation(`/markets/virtuals/${item?.id}`)}
+                                  size="sm"
+                                  radius="full"
+                                  className="ml-5 text-sm bg-[#4691c5]"
+                                  variant="flat"
+                                >
+                                  Trade
+                                </Button>
+                              </div>
+                            </div>
+                          </Card>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className={`${startIn > 0 && 'hidden'}`}>
@@ -293,6 +355,8 @@ const MarketVirtualPage = () => {
                     setstartTime={setstartTime}
                     setIsRunning={setIsRunning}
                     dashboardTimeFrame={dashboardTimeFrame}
+                    data={data}
+                    setData={setData}
                   />
                 </div>
               </div>

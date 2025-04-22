@@ -124,7 +124,7 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
           {(onClose) => (
             <>
               <ModalHeader className="flex gap-1 justify-around mr-6">
-                <span>{state?.symbol}</span>
+                <span>{state}</span>
                 <div>
                   {type === 'buy' ? (
                     <>

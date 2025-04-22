@@ -38,6 +38,7 @@ const VirtualStockDetails = () => {
   // Removed unused stockOrders state
   const [stockSummary, setstockSummary] = useState({});
   const [winning, setWinning] = useState(0);
+  const [data, setData] = useState([]);
 
   const [stockAllOrders, setStockAllOrders] = useState([]);
   const { startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime, startTime, setstartTime } =
@@ -60,7 +61,7 @@ const VirtualStockDetails = () => {
       country: country,
       sessionType: timeFrame,
     };
-    
+
     const res = await getStockDetails(data);
     setChartDatas(res.data.data);
     const endingIn = res.data.data.endTime ? res.data.data.endTime : 0;
@@ -76,13 +77,13 @@ const VirtualStockDetails = () => {
     handleAllStockOrders();
     setTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [timeFrame, id]);
-  
+
   useEffect(() => {
     handleGetStockDetails();
     handleFetchStocks();
     handleGetStockOrders();
   }, []);
-  
+
   useEffect(() => {
     if (shouldStart === false) {
       handleGetStockDetails();
@@ -102,7 +103,7 @@ const VirtualStockDetails = () => {
 
   const handleGetStockOrders = async () => {
     try {
-      if(chartDatas?.stock?._id){
+      if (chartDatas?.stock?._id) {
         let stockOrdersPayload = {
           stock: chartDatas?.stock?._id,
           sessionType: timeFrame,
@@ -144,7 +145,7 @@ const VirtualStockDetails = () => {
       console.log(error);
     }
   };
-  // console.log(stockWinners);
+  console.log(startIn, 'startIn');
 
   return (
     <>
@@ -163,8 +164,8 @@ const VirtualStockDetails = () => {
           {!!stocks?.length &&
             stocks
               ?.filter((filtered) => filtered._id === id)
-              ?.map((stock) =>
-                 <div className="container">
+              ?.map((stock) => (
+                <div className="container">
                   <div className="gap-5 lg:grid lg:grid-cols-[1fr_350px]">
                     <div className="">
                       <VirtualNavbar />
@@ -202,36 +203,53 @@ const VirtualStockDetails = () => {
                               <div className="space-x-2">
                                 <PlaceOrder
                                   id={id}
-                                  state={location.state}
+                                  state={location?.state?.symbol}
                                   text="Buy"
                                   type={'buy'}
-                                  stock={stock}
                                   dissable={shouldStart}
                                   setWinning={setWinning}
                                   shouldStart={shouldStart}
                                 />
                                 <PlaceOrder
                                   id={id}
-                                  state={location.state}
+                                  state={location?.state?.symbol}
                                   text="Sell"
                                   type={'sell'}
-                                  stock={stock}
                                   dissable={shouldStart}
                                   setWinning={setWinning}
                                   shouldStart={shouldStart}
                                 />
                               </div>
                             </div>
-                            <div className={`w-full h-[300px]`} hidden={startIn <= 0}></div>
+                              <div
+                                className={`w-full h-[400px] relative flex justify-center items-center ${shouldStart <= 0 && 'hidden'}`}
+                              >
+                                <div className="text">
+                                  <div className="text flex justify-center">
+                                    <TimeoutComponent
+                                      more={true}
+                                      text={'New session Starts in:'}
+                                      className="text-5xl text-[#4691c5]"
+                                      endTime={endTime}
+                                      startTime={startTime}
+                                      startIn={startIn}
+                                      setstartIn={setstartIn}
+                                      shouldStart={shouldStart}
+                                      setshouldStart={setshouldStart}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
                             <div hidden={startIn > 0}>
-                              <CountdownModalDialog
+                              {/* <CountdownModalDialog
                                 endTime={endTime}
                                 startTime={startTime}
                                 startIn={startIn}
                                 setstartIn={setstartIn}
                                 shouldStart={shouldStart}
                                 setshouldStart={setshouldStart}
-                              />
+                              /> */}
+
                               <VirtualStockChart
                                 setStockPercentage={setStockPercentage}
                                 shouldStart={shouldStart}
@@ -240,6 +258,8 @@ const VirtualStockDetails = () => {
                                 setstartTime={setstartTime}
                                 setIsRunning={setIsRunning}
                                 setshouldStart={setshouldStart}
+                                data={data}
+                                setData={setData}
                               />
                             </div>
                           </div>
@@ -299,7 +319,7 @@ const VirtualStockDetails = () => {
                                 key="orders"
                                 title={
                                   <div className="flex items-center space-x-2">
-                                    <span>Orders</span>
+                                    <span>My Orders</span>
                                   </div>
                                 }
                               >
@@ -389,7 +409,7 @@ const VirtualStockDetails = () => {
                     </div>
                   </div>
                 </div>
-              )}
+              ))}
         </>
       )}
       <VirtualStockTradeMarquee />
