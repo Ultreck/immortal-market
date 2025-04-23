@@ -179,7 +179,7 @@ const VirtualStockChart = ({
             </linearGradient>
           </defs>
           <XAxis
-            dataKey="prise"
+            dataKey="price"
             domain={[0, maxDataLength - 1]}
             tickSize={5}
             strokeOpacity={0.5}
