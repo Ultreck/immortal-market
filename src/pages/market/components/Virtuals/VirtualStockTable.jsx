@@ -22,8 +22,6 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import countries from '@/lib/countries.js';
 import CountryFlag from '@/components/ui/CountryFlag.jsx';
-// import { Navigation, Scrollbar, A11y,  } from 'swiper/modules';
-// import { Swiper, SwiperSlide } from 'swiper/react';
 const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
