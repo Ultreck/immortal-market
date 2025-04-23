@@ -136,7 +136,7 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                           onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
                         >
                           <div tabIndex={1} className="w-min cursor-pointer rounded-2xl transition-all duration-300">
-                            <span className={`${Math.sign(c.totalGain) === -1 ? 'text-red-600' : 'text-green-600'}`}>
+                            <span className={`${c.totalGain === 0 ? 'text-white' : Math.sign(c.totalGain) === -1 ? 'text-red-600' : 'text-green-600'}`}>
                               {formatCurrency(c?.totalGain)}
                             </span>
                           </div>
@@ -148,7 +148,7 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                           onPress={() => navigate(`/markets/virtuals/${c._id}`, { state: c })}
                         >
                           <div tabIndex={1} className="w-min cursor-pointer rounded-2xl transition-all duration-300">
-                            <span className={`${Math.sign(c?.profit) === -1 ? 'text-red-600' : 'text-green-600'}`}>
+                            <span className={`${c.profit === 0 ? 'text-white' : Math.sign(c?.profit) === -1 ? 'text-red-600' : 'text-green-600'}`}>
                               {formatCurrency(c?.profit)}
                             </span>
                           </div>

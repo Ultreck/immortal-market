@@ -56,17 +56,19 @@ const MarketVirtualPage = () => {
   useEffect(() => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
-    console.log('shouldStart');
+    setData([]);
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [countryName, homeMarket, dashboardTimeFrame]);
-
+  
   useEffect(() => {
     handleGetVirtualDashboardData();
+    setData([]);
   }, []);
-
+  
   useEffect(() => {
     if (shouldStart === false) {
       handleGetVirtualDashboardData();
+      setData([]);
     }
   }, [shouldStart]);
 
@@ -286,16 +288,6 @@ const MarketVirtualPage = () => {
                 <div
                   className={`w-full h-[400px] relative flex justify-center items-center ${shouldStart <= 0 && 'hidden'}`}
                 >
-                  {/* <div className="text flex justify-end absolute top-5 w-full">
-                    <PlaceOrder
-                      id={dashData?.mostBoughtStock?.id}
-                      state={dashData?.mostBoughtStock}
-                      text="Buy"
-                      type={'buy'}
-                      dissable={shouldStart}
-                      setWinning={setWinning}
-                    />
-                  </div> */}
                   <div className="text">
                     <div className="text flex justify-center">
                       <TimeoutComponent
@@ -311,7 +303,7 @@ const MarketVirtualPage = () => {
                       />
                     </div>
                     <div className="mt-16">
-                      <p className="text-xl font-semibold my-2">Recommended stocks: </p>
+                      {/* <p className="text-xl font-semibold my-2">Recommended stocks: </p> */}
                       <div className="text grid grid-cols-2 gap-5 ">
                         {dashData?.activeCompanies?.map((item, index) => (
                           <Card className="p-2">

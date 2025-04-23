@@ -100,7 +100,6 @@ const VirtualStockChart = ({
             ...msg,
             price: limitDecimals(msg?.price, 4),
             sprice: limitDecimals(msg?.price, 4) / 5,
-            close: limitDecimals(msg?.close, 4),
             date: dateFormatter(msg?.updatedAt),
             name: newData?.length + 1,
             time: timeFormatter(msg?.updatedAt),

@@ -23,6 +23,7 @@ import { get } from 'react-hook-form';
 import TimeoutComponent from '@/hooks/use-timeOut';
 import CountdownModalDialog from '../../modals/CountdownModalDialog';
 import VirtualNavbar from '../VirtualNavbar';
+import VirtualPlaceOrderWalletModal from '../../modals/VirtualPlaceOrderWalletModal';
 
 const VirtualStockDetails = () => {
   const params = useParams();
@@ -145,8 +146,6 @@ const VirtualStockDetails = () => {
       console.log(error);
     }
   };
-  console.log(startIn, 'startIn');
-
   return (
     <>
       {chartDatas.length === 0 ? (
@@ -166,15 +165,15 @@ const VirtualStockDetails = () => {
               ?.filter((filtered) => filtered._id === id)
               ?.map((stock) => (
                 <div className="container">
+                      <VirtualNavbar />
                   <div className="gap-5 lg:grid lg:grid-cols-[1fr_350px]">
                     <div className="">
-                      <VirtualNavbar />
                       <div className="">
                         <Card className="card-shadow px-10 py-10">
                           <div className="space-y-10">
                             <div className="flex justify-between">
                               <div className="flex space-x-4 w-2/5">
-                                <div className="w-full flex justify-between items-center">
+                                <div className={`w-full flex justify-between items-center ${shouldStart && 'hidden'}`}>
                                   <div className="flex items-center space-x-3">
                                     <div>
                                       <h1 className="text-md">{stock?.symbol}</h1>
@@ -200,56 +199,69 @@ const VirtualStockDetails = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="space-x-2">
-                                <PlaceOrder
-                                  id={id}
-                                  state={location?.state?.symbol}
-                                  text="Buy"
-                                  type={'buy'}
-                                  dissable={shouldStart}
-                                  setWinning={setWinning}
-                                  shouldStart={shouldStart}
-                                />
-                                <PlaceOrder
-                                  id={id}
-                                  state={location?.state?.symbol}
-                                  text="Sell"
-                                  type={'sell'}
-                                  dissable={shouldStart}
-                                  setWinning={setWinning}
-                                  shouldStart={shouldStart}
-                                />
+                              <div className={`space-x-2 flex ${shouldStart && 'hidden'}`}>
+                              <div className="text flex justify-center">
+                                    <VirtualPlaceOrderWalletModal
+                                      id={id}
+                                      state={location?.state?.symbol}
+                                      text="Buy"
+                                      type={'buy'}
+                                      dissable={shouldStart}
+                                      setWinning={setWinning}
+                                      shouldStart={shouldStart}
+                                      data={stockAllOrders}
+                                    />
+                                  </div>
+                                <div>
+                                  <PlaceOrder
+                                    id={id}
+                                    state={location?.state?.symbol}
+                                    text="Sell"
+                                    type={'sell'}
+                                    dissable={shouldStart}
+                                    setWinning={setWinning}
+                                    shouldStart={shouldStart}
+                                  />
+                                </div>
                               </div>
                             </div>
-                              <div
-                                className={`w-full h-[400px] relative flex justify-center items-center ${shouldStart <= 0 && 'hidden'}`}
-                              >
-                                <div className="text">
+                            <div
+                              className={`w-full h-[350px] mt-10 relative flex justify-center items-center ${shouldStart <= 0 && 'hidden'}`}
+                            >
+                              <div className="text gap-5">
+                                <div className="text flex justify-center">
+                                  <TimeoutComponent
+                                    more={true}
+                                    text={'New session Starts in:'}
+                                    className="text-5xl text-[#4691c5]"
+                                    endTime={endTime}
+                                    startTime={startTime}
+                                    startIn={startIn}
+                                    setstartIn={setstartIn}
+                                    shouldStart={shouldStart}
+                                    setshouldStart={setshouldStart}
+                                  />
+                                </div>
+                                <div className="text mt-10">
+                                  <p className="text flex justify-center mb-2">You can place your order now</p>
                                   <div className="text flex justify-center">
-                                    <TimeoutComponent
-                                      more={true}
-                                      text={'New session Starts in:'}
-                                      className="text-5xl text-[#4691c5]"
-                                      endTime={endTime}
-                                      startTime={startTime}
-                                      startIn={startIn}
-                                      setstartIn={setstartIn}
+                                    <VirtualPlaceOrderWalletModal
+                                      id={id}
+                                      state={location?.state?.symbol}
+                                      text="Buy"
+                                      type={'buy'}
+                                      dissable={shouldStart}
+                                      setWinning={setWinning}
                                       shouldStart={shouldStart}
-                                      setshouldStart={setshouldStart}
+                                      data={stockAllOrders}
                                     />
                                   </div>
                                 </div>
                               </div>
-                            <div hidden={startIn > 0}>
-                              {/* <CountdownModalDialog
-                                endTime={endTime}
-                                startTime={startTime}
-                                startIn={startIn}
-                                setstartIn={setstartIn}
-                                shouldStart={shouldStart}
-                                setshouldStart={setshouldStart}
-                              /> */}
-
+                            </div>
+                            <div
+                              className={`w-full relative flex justify-center items-center ${shouldStart > 0 && 'hidden'}`}
+                            >
                               <VirtualStockChart
                                 setStockPercentage={setStockPercentage}
                                 shouldStart={shouldStart}
@@ -396,7 +408,7 @@ const VirtualStockDetails = () => {
                         </Card>
                       </div>
                     </div>
-                    <div className="mt-28 text relative">
+                    <div className="mt- text relative">
                       <VirtualStockSocket
                         endTime={endTime}
                         startTime={startTime}
