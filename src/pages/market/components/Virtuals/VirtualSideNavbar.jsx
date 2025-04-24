@@ -13,8 +13,6 @@ const VirtualSideNavbar = ({ country, setHomeMarket, homeMarket, setDashboardTim
     setHomeMarket(data.sessionType);
     setDashboardTimeFrame(data.sessionType);
   };
-console.log(virtualSession);
-
   return (
     <div className="sticky top-8">
       {virtualSession?.data?.length === 0 ? (

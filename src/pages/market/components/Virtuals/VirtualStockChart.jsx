@@ -70,15 +70,15 @@ const VirtualStockChart = ({
   const socket = useSocket();
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
   const { isDarkMode } = useTernaryDarkMode();
-  
+
   const currentSessionId = data[0]?._id;
-  
+
   useEffect(() => {
     if (!socket) return;
     const getSessionFunct = () => {
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     };
-    const handleNewSession = (msg) => {      
+    const handleNewSession = (msg) => {
       if (!msg.isRunning && !shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(true);
@@ -90,7 +90,7 @@ const VirtualStockChart = ({
       const lastPrice = currentPrice?.price;
       setIsRunning(msg?.isRunning);
       // console.log(msg);
-      
+
       if (msg?.isRunning) {
         setData((prev) => {
           const newData = Array.isArray(prev) ? prev : [];
@@ -105,7 +105,7 @@ const VirtualStockChart = ({
             name: newData?.length + 1,
             time: timeFormatter(msg?.updatedAt),
           };
-          
+
           setCurrentPrice(newDSocketData);
           return [...newData, newDSocketData];
         });
@@ -115,17 +115,17 @@ const VirtualStockChart = ({
     };
     socket.on('priceUpdate', getSessionFunct);
     socket.on('newSession', handleNewSession);
-    
+
     return () => {
       socket.off('priceUpdate', getSessionFunct);
       socket.off('newSession', handleNewSession);
     };
   }, [socket, chartDatas]);
-  
+
   useEffect(() => {
-    if(currentSessionId !== currentPrice?._id){
+    if (currentSessionId !== currentPrice?._id) {
       setData([]);
-    };
+    }
   }, [dashboardTimeFrame, currentPrice, currentSessionId, chartDatas]);
 
   const initialPrice = data[0]?.price;
@@ -144,19 +144,21 @@ const VirtualStockChart = ({
     sprice: limitDecimals(currentPrice?.close, 4) / 5,
     name: currentPrice?.noOfRuned,
   };
-  
+
   let paddedData;
   if (data) {
     if (data?.length > 0) {
-      const lengthDiff = Math.max(0, maxDataLength - ( currentLength + chartDatas?.noOfRuned));
+      const lengthDiff = Math.max(0, maxDataLength - (currentLength + chartDatas?.noOfRuned));
       paddedData = [...Array(chartDatas?.noOfRuned).fill(newDSocketData), ...data, ...Array(lengthDiff).fill(null)];
     }
   }
   const constructedData = paddedData?.map((con, ind) => {
-    return {...con, x_base: con?.price? ind + 1 : null}
+    return { ...con, x_base: con?.price ? ind + 1 : null };
   });
 
-  
+  const allValues = data?.flatMap((d) => [d.price, d.sprice]);
+  const max = Math.max(...allValues);
+
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload?.length) {
       return (
@@ -196,7 +198,7 @@ const VirtualStockChart = ({
             strokeOpacity={0.5}
             interval="preserveEnd"
           />
-          <YAxis domain={['auto', 'auto']} tickSize={3} strokeOpacity={0.5} orientation="right" />
+          <YAxis domain={[0, max + 5]} tickSize={3} strokeOpacity={0.5} orientation="right" />
           <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
           <Tooltip content={<CustomTooltip />} />
           <Area
