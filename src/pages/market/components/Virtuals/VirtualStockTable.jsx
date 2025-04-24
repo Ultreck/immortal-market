@@ -135,7 +135,7 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                         >
                           <div tabIndex={1} className="w-min cursor-pointer rounded-2xl transition-all duration-300">
                             <span className={`${c.totalGain === 0 ? 'text-white' : Math.sign(c.totalGain) === -1 ? 'text-red-600' : 'text-green-600'}`}>
-                              {formatCurrency(c?.totalGain)}
+                              {(c?.totalGain.toFixed(2))+'%'}
                             </span>
                           </div>
                         </Button>
@@ -147,7 +147,7 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                         >
                           <div tabIndex={1} className="w-min cursor-pointer rounded-2xl transition-all duration-300">
                             <span className={`${c.profit === 0 ? 'text-white' : Math.sign(c?.profit) === -1 ? 'text-red-600' : 'text-green-600'}`}>
-                              {formatCurrency(c?.profit)}
+                              {c?.profit.toFixed(2)+'%'}
                             </span>
                           </div>
                         </Button>

@@ -13,9 +13,14 @@ const VirtualSideNavbar = ({ country, setHomeMarket, homeMarket, setDashboardTim
     setHomeMarket(data.sessionType);
     setDashboardTimeFrame(data.sessionType);
   };
+console.log(virtualSession);
 
   return (
     <div className="sticky top-8">
+      {virtualSession?.data?.length === 0 ? (
+          <DashboardSidebarSkeleton />
+      ):
+      (
       <Card className="card-shadow rounded-2xl h-[450px] ">
         <Tabs
           aria-label="Options"
@@ -86,6 +91,7 @@ const VirtualSideNavbar = ({ country, setHomeMarket, homeMarket, setDashboardTim
           </Tab>
         </Tabs>
       </Card>
+      )}
       <Card className="mt-5 ">
         <CardBody>
           <div className="text-center py-5">

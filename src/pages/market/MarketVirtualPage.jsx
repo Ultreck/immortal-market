@@ -368,9 +368,6 @@ const MarketVirtualPage = () => {
             <VirtualStockTable isStocksLoading={isStocksLoading} allStocks={stocks} />
           </div>
           <div className="text relative">
-            {virtualSession?.data?.length === 0 ? (
-              <DashboardSidebarSkeleton />
-            ) : (
               <VirtualSideNavbar
                 country={countryName}
                 setHomeMarket={setHomeMarket}
@@ -378,7 +375,6 @@ const MarketVirtualPage = () => {
                 setDashboardTimeFrame={setDashboardTimeFrame}
                 virtualSession={virtualSession}
               />
-            )}
           </div>
         </div>
       </div>

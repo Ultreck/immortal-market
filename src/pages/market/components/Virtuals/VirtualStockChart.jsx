@@ -89,7 +89,7 @@ const VirtualStockChart = ({
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
       setIsRunning(msg?.isRunning);
-      console.log(msg);
+      // console.log(msg);
       
       if (msg?.isRunning) {
         setData((prev) => {
@@ -139,14 +139,24 @@ const VirtualStockChart = ({
   const maxDataLength = chartDatas?.noOfRunning;
   const currentLength = data.length;
 
+  const newDSocketData = {
+    price: limitDecimals(currentPrice?.close, 4),
+    sprice: limitDecimals(currentPrice?.close, 4) / 5,
+    name: currentPrice?.noOfRuned,
+  };
+  
   let paddedData;
   if (data) {
     if (data?.length > 0) {
-      const lengthDiff = Math.max(0, maxDataLength - currentLength);
-      paddedData = [...data, ...Array(lengthDiff).fill(null)];
+      const lengthDiff = Math.max(0, maxDataLength - ( currentLength + chartDatas?.noOfRuned));
+      paddedData = [...Array(chartDatas?.noOfRuned).fill(newDSocketData), ...data, ...Array(lengthDiff).fill(null)];
     }
   }
+  const constructedData = paddedData?.map((con, ind) => {
+    return {...con, x_base: con?.price? ind + 1 : null}
+  });
 
+  
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload?.length) {
       return (
@@ -172,7 +182,7 @@ const VirtualStockChart = ({
   return (
     <div style={{ width: '100%', height: 300 }}>
       <ResponsiveContainer width={'100%'} height={'100%'}>
-        <ComposedChart data={paddedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+        <ComposedChart data={constructedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
@@ -180,7 +190,7 @@ const VirtualStockChart = ({
             </linearGradient>
           </defs>
           <XAxis
-            dataKey="name"
+            dataKey="x_base"
             domain={[0, maxDataLength - 1]}
             tickSize={5}
             strokeOpacity={0.5}
