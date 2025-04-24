@@ -89,6 +89,7 @@ const VirtualStockChart = ({
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
       setIsRunning(msg?.isRunning);
+      console.log(msg);
       
       if (msg?.isRunning) {
         setData((prev) => {
@@ -179,7 +180,7 @@ const VirtualStockChart = ({
             </linearGradient>
           </defs>
           <XAxis
-            dataKey="price"
+            dataKey="name"
             domain={[0, maxDataLength - 1]}
             tickSize={5}
             strokeOpacity={0.5}

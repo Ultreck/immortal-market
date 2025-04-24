@@ -124,7 +124,6 @@ const MarketVirtualPage = () => {
 
   const scrollHeight = dashData?.activeCompanies?.length * 40;
 
-  console.log(virtualSession);
 
   return (
     <>
