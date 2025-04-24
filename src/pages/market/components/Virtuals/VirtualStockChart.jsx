@@ -157,7 +157,11 @@ const VirtualStockChart = ({
   });
 
   const allValues = data?.flatMap((d) => [d.price, d.sprice]);
+  const min = Math.max(...allValues);
   const max = Math.max(...allValues);
+  const range = max - min || 1;
+  const buffer = range * 0.2; 
+  const domainMax = max + buffer;
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload?.length) {
@@ -198,7 +202,7 @@ const VirtualStockChart = ({
             strokeOpacity={0.5}
             interval="preserveEnd"
           />
-          <YAxis domain={[0, max + 5]} tickSize={3} strokeOpacity={0.5} orientation="right" />
+          <YAxis domain={[0, domainMax]} tickSize={3} strokeOpacity={0.5} orientation="right" />
           <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
           <Tooltip content={<CustomTooltip />} />
           <Area
