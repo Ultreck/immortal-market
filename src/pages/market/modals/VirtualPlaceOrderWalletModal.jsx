@@ -1,52 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, Input, Form } from '@heroui/react';
+import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, Input, Form, Drawer, DrawerContent, DrawerHeader, DrawerBody } from '@heroui/react';
 import { useGetCurrentPrice } from '@/store/bot';
 import { FaNairaSign } from 'react-icons/fa6';
 import { usePlaceOrder, useSellOrder, useGetWalletBalance, useGetAllOrders } from '@/api/ai-chat';
+import { formatCurrency } from '@/lib/utils';
 
-const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) => {
-  // const [balance, setBalance] = useState(0)
+const VirtualPlaceOrderWalletModal = ({ id, text, type, state, setWinning, shouldStart = false  }) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const [tab, seTtab] = useState('current-orders');
+
   const { currentPrice } = useGetCurrentPrice();
   const { mutateAsync: placeOrder } = usePlaceOrder();
   const { mutateAsync: sellOrder } = useSellOrder();
   const { mutateAsync: MyOrder } = useGetAllOrders();
   const { data: walletBalance } = useGetWalletBalance();
+  const [pToSell, setPToSell] = useState(0)
   const [Order, setOrders] = useState([]);
   const [totalOrder, settotalOrders] = useState(0);
   const [max, setMax] = useState(false);
 
   const [data, setData] = useState({
-    quantity: 1,
+    quantity: 0,
     amount: 0,
-    price: currentPrice?.price,
-    charges: currentPrice?.price * (type === 'buy' ? 0.01 : 0.05),
+    price: shouldStart? currentPrice?.close : currentPrice?.price,
     orderPrice: 0,
     total: 0,
   });
 
   useEffect(() => {
+
     setData({
       ...data,
-      price: currentPrice?.price,
-      charges: currentPrice?.price * (type === 'buy' ? 0.01 : 0.05),
-      quantity: String(data.amount / currentPrice?.price).slice(0, 1),
+      price: shouldStart? currentPrice?.close : currentPrice?.price,
+      quantity: (currentPrice?.price / data?.amount).toFixed(2),
       amount: max ? totalOrder : data.amount,
     });
-    const total = Order.reduce((sum, item) => {
-      return sum + (item?.quantity - item?.quantitySold) * currentPrice?.price;
-    }, 0);
-    settotalOrders(total);
-
-    const boughtOrderPrice = Order.reduce((sum, item) => {
-      return sum + (item?.quantity - item?.quantitySold) * item.initialPrice;
-    }, 0);
-    const currentOrderPrice = Order.reduce((sum, item) => {
-      return sum + (item?.quantity - item?.quantitySold) * currentPrice?.price;
-    }, 0);
-    const change = ((currentOrderPrice - boughtOrderPrice) / boughtOrderPrice) * 100;
+    const change = ((data.price - Order?.initialPrice) / Order?.initialPrice) * 100;
     setWinning(change ? change.toFixed(2) : 0);
-    // console.log(totalOrder);
     if (shouldStart) {
       setWinning(0);
       settotalOrders(0);
@@ -68,15 +58,13 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
     const res = await MyOrder({
       page: 1,
       status: [false],
+      stockId:id,
       sessionId: currentPrice?._id,
     });
     if (res) {
-      setOrders(res.data.order);
-      const total = res.data.order.reduce((sum, item) => {
-        return sum + (item.quantity - item.quantitySold) * currentPrice?.price;
-      }, 0);
-      console.log("total:: ", total);
-      settotalOrders(total);
+      setOrders(res?.data?.order[0]);
+      const investment = res?.data?.order[0]?.amount
+      settotalOrders(investment);
     }
   };
   const onSubmit = async () => {
@@ -89,56 +77,66 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
           initialPrice: data?.price,
           quantity: data?.quantity,
         };
-        if(orderData.quantity >0){
-          const res = await placeOrder(orderData);
-        }
+        const res = await placeOrder(orderData);
+        // console.log(res);
       } else {
         const sellData = {
-          sessionId: currentPrice?._id,
-          stockId: id,
-          amount: data.amount,
+          id: Order._id,
           price: data.price,
-          quantity: data.quantity,
+          sellPercentage: pToSell,
         };
         const res = await sellOrder(sellData);
+        setOrders(res.data.order)
       }
       myOrder();
     } catch (error) {
       console.log('Something is wrong somewhere', error);
     }
   };
-
+  
   return (
     <>
-      <Button
-        onPress={onOpen}
-        isDisabled={(type === 'sell' && (totalOrder <= 0 || shouldStart))}
-        color={type === 'buy' ? 'primary' : 'danger'}
-        radius="full"
-        className="w-32"
-      >
-        {/* {totalOrder} */}
+      <Button onPress={onOpen} color={type === 'buy' ? 'primary' : 'danger'} radius="full" className="w-32">
         {text}
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex gap-1 justify-around mr-6">
-                <span>{state}</span>
-                <div>
+      <Drawer
+        isOpen={isOpen}
+        size={'lg'}
+        backdrop={'opaque'}
+        motionProps={{
+          variants: {
+            enter: {
+              opacity: 1,
+              x: 0,
+              duration: 0.3,
+            },
+            exit: {
+              x: 100,
+              opacity: 0,
+              duration: 0.3,
+            },
+          },
+        }}
+        onOpenChange={onOpenChange}
+      >
+        <DrawerContent className='pt-10'>
+          <>
+            <DrawerHeader className="flex flex-col gap-1">
+            <span>{state}</span>
+                <div className='flex justify-between pr-5'>
                   {type === 'buy' ? (
                     <>
-                      Balance <strong>₦{walletBalance?.balance || 0}</strong>
+                      Balance <strong>{formatCurrency(walletBalance?.balance || 0)}</strong>
                     </>
                   ) : (
                     <>
-                      Total order <strong>₦{totalOrder?.toFixed(2)}</strong>
+                      Total investment <strong>₦{totalOrder?.toFixed(2)}</strong>
                     </>
                   )}
                 </div>
-              </ModalHeader>
-              <ModalBody>
+            </DrawerHeader>
+            <DrawerBody>
+              <div className="flex w-full flex-col">
                 <Form className="w-full grid" onSubmit={onSubmit}>
                   <div className="grid relative grid-cols-3 my-auto">
                     <p className="text flex items-center">How much</p>
@@ -159,11 +157,21 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
                       name="amount"
                       placeholder="0.00"
                       type="number"
-                    />
+                      />
                   </div>
                   <button className="col-12" onClick={() => setMax(!max)} hidden={type === 'buy'}>
                     <p className="text-right">max</p>
                   </button>
+                    {type === 'sell' &&
+                    <div className="grid relative grid-cols-3 my-2">
+                      <p className="text flex items-center">Sell percentage</p>
+                     <div className="text-center grid grid-cols-4 space-x-1 h-10 col-span-2">
+                      {[{name: '25%', value: 0.25, radius: 'rounded-tl-lg rounded-bl-lg rounded-none'}, {name: '50%', value: 0.50, radius: 'rounded-none'}, {name: '75%', value: 0.75, radius: 'rounded-none'}, {name: '100%', value: 1.00, radius: 'rounded-tr-lg rounded-br-lg rounded-none'}].map((p, i) => {
+                       return <div onClick={() => setPToSell(p.value)} key={i} className={` flex items-center justify-center cursor-pointer ${ p.value <= pToSell ? 'bg-gray-300 text-black' : 'bg-default-100 text-gray-500'} ${p.radius}`}>{p.name}</div>
+                      })}
+                     </div>
+                    </div>
+                    }
                   <div className="grid relative mt-5 grid-cols-3 my-auto">
                     <p className="text flex items-center">Market price</p>
                     <Input
@@ -177,26 +185,25 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
                       disabled
                       name="price"
                       className="col-span-2"
-                      value={String(data.price).slice(0, 8)}
+                      value={(data.price)}
                       placeholder="0.00"
                       type="number"
-                    />
+                      />
                   </div>
                   <div className="grid relative mt-5 grid-cols-3 my-auto" hidden={type == 'sell'}>
                     <p className="text flex items-center">Quantity</p>
                     <Input
                       disabled
-                      name="price"
+                      name="quantity"
                       className="col-span-2"
-                      value={String(data?.amount / data?.price).slice(0, 1)}
+                      value={(data?.amount / data?.price).toFixed(2)}
                       placeholder="0"
                       type="number"
                     />
                   </div>
                   {type === 'buy' ? (
                     <Button
-                      isDisabled={shouldStart}
-                      className="w-full font-semibold mb-5"
+                      className="w-full mt-5 font-semibold mb-5"
                       color="primary"
                       onPress={() => {
                         onClose();
@@ -208,7 +215,7 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
                   ) : (
                     <Button
                       isDisabled={shouldStart}
-                      className="w-full font-semibold mb-5"
+                      className="w-full mt-5 font-semibold mb-5"
                       color="danger"
                       onPress={() => {
                         onClose();
@@ -219,13 +226,13 @@ const PlaceOrder = ({ id, text, type, state, setWinning, shouldStart = false }) 
                     </Button>
                   )}
                 </Form>
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+              </div>
+            </DrawerBody>
+          </>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };
 
-export default PlaceOrder;
+export default VirtualPlaceOrderWalletModal;

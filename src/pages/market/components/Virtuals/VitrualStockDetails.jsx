@@ -23,6 +23,7 @@ import { get } from 'react-hook-form';
 import TimeoutComponent from '@/hooks/use-timeOut';
 import CountdownModalDialog from '../../modals/CountdownModalDialog';
 import VirtualNavbar from '../VirtualNavbar';
+import VirtualPlaceOrderWalletModal from '../../modals/VirtualPlaceOrderWalletModal';
 
 const VirtualStockDetails = () => {
   const params = useParams();
@@ -34,9 +35,11 @@ const VirtualStockDetails = () => {
   const [chartDatas, setChartDatas] = useState([]);
   const [isRunning, setIsRunning] = useState(true);
   const [stockPercentage, setStockPercentage] = useState(0);
+  const [stockWinners, setStockWinners] = useState([]);
   // Removed unused stockOrders state
   const [stockSummary, setstockSummary] = useState({});
   const [winning, setWinning] = useState(0);
+  const [data, setData] = useState([]);
 
   const [stockAllOrders, setStockAllOrders] = useState([]);
   const { startIn, setstartIn, shouldStart, setshouldStart, endTime, setendTime, startTime, setstartTime } =
@@ -47,7 +50,7 @@ const VirtualStockDetails = () => {
     return storedTimeFrame ? JSON.parse(storedTimeFrame) : '1-minute';
   });
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
-  const { mutateAsync: getStockOrders } = useCreateVirtualStockOrders();
+  const { mutateAsync: getStockWinners } = useCreateVirtualStockOrders();
   const { mutateAsync: getStockSummary } = useCreateVirtualSummary();
   const { mutateAsync: getStockAllOrders } = useGetAllOrders();
   const { mutateAsync: createVirtualStocks, isPending: isStockPending } = useCreateVirtualStock({});
@@ -59,7 +62,7 @@ const VirtualStockDetails = () => {
       country: country,
       sessionType: timeFrame,
     };
-    
+
     const res = await getStockDetails(data);
     setChartDatas(res.data.data);
     const endingIn = res.data.data.endTime ? res.data.data.endTime : 0;
@@ -79,12 +82,14 @@ const VirtualStockDetails = () => {
   useEffect(() => {
     handleGetStockDetails();
     handleFetchStocks();
+    handleGetStockOrders();
   }, []);
 
   useEffect(() => {
     if (shouldStart === false) {
       handleGetStockDetails();
       handleFetchStocks();
+      handleGetStockOrders();
     }
   }, [shouldStart]);
 
@@ -95,29 +100,22 @@ const VirtualStockDetails = () => {
     };
     const res = await createVirtualStocks(payload);
     setStocks(res?.data?.data);
-    console.log(res?.data?.data);
-  };
-
-  const handlegetbalance = async () => {
-    try {
-      let stockOrdersPayload = {
-        stock: chartDatas?.stock?._id,
-        sessionType: timeFrame,
-      };
-      const res = await getStockOrders(stockOrdersPayload);
-      // console.log(res?.data?.data);
-    } catch (error) {}
   };
 
   const handleGetStockOrders = async () => {
     try {
-      let stockOrdersPayload = {
-        stock: chartDatas?.stock?._id,
-        sessionType: timeFrame,
-      };
-      const res = await getStockOrders(stockOrdersPayload);
-      // console.log(res?.data?.data);
-    } catch (error) {}
+      if (chartDatas?.stock?._id) {
+        let stockOrdersPayload = {
+          stock: chartDatas?.stock?._id,
+          sessionType: timeFrame,
+        };
+        const res = await getStockWinners(stockOrdersPayload);
+        setStockWinners(res?.data?.data);
+        console.log(res?.data?.data);
+      }
+    } catch (error) {
+      console.log('Error occured: ', error);
+    }
   };
 
   const handleGetStockSummary = async () => {
@@ -143,13 +141,11 @@ const VirtualStockDetails = () => {
           status: [false, true],
         };
         const res = await getStockAllOrders(allOrderData);
-        // console.log(res?.data?.data);
       }
     } catch (error) {
       console.log(error);
     }
   };
-
   return (
     <>
       {chartDatas.length === 0 ? (
@@ -167,17 +163,17 @@ const VirtualStockDetails = () => {
           {!!stocks?.length &&
             stocks
               ?.filter((filtered) => filtered._id === id)
-              ?.map((stock) =>
-                 <div className="container">
+              ?.map((stock) => (
+                <div className="container">
+                      <VirtualNavbar />
                   <div className="gap-5 lg:grid lg:grid-cols-[1fr_350px]">
                     <div className="">
-                      <VirtualNavbar />
                       <div className="">
                         <Card className="card-shadow px-10 py-10">
                           <div className="space-y-10">
                             <div className="flex justify-between">
                               <div className="flex space-x-4 w-2/5">
-                                <div className="w-full flex justify-between items-center">
+                                <div className={`w-full flex justify-between items-center ${shouldStart && 'hidden'}`}>
                                   <div className="flex items-center space-x-3">
                                     <div>
                                       <h1 className="text-md">{stock?.symbol}</h1>
@@ -203,39 +199,70 @@ const VirtualStockDetails = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="space-x-2">
-                                <PlaceOrder
-                                  id={id}
-                                  state={location.state}
-                                  text="Buy"
-                                  type={'buy'}
-                                  stock={stock}
-                                  dissable={shouldStart}
-                                  setWinning={setWinning}
-                                  shouldStart={shouldStart}
-                                />
-                                <PlaceOrder
-                                  id={id}
-                                  state={location.state}
-                                  text="Sell"
-                                  type={'sell'}
-                                  stock={stock}
-                                  dissable={shouldStart}
-                                  setWinning={setWinning}
-                                  shouldStart={shouldStart}
-                                />
+                              <div className={`space-x-2 flex ${shouldStart && 'hidden'}`}>
+                              <div className="text flex justify-center">
+                                    <VirtualPlaceOrderWalletModal
+                                      id={id}
+                                      state={location?.state?.symbol}
+                                      text="Place order"
+                                      type={'buy'}
+                                      dissable={shouldStart}
+                                      setWinning={setWinning}
+                                      shouldStart={shouldStart}
+                                      data={stockAllOrders}
+                                      />
+                                  </div>
+                                <div>
+                                  <VirtualPlaceOrderWalletModal
+                                    id={id}
+                                    state={location?.state?.symbol}
+                                    text="Sell order"
+                                    type={'sell'}
+                                    dissable={shouldStart}
+                                    setWinning={setWinning}
+                                    shouldStart={shouldStart}
+                                    data={stockAllOrders}
+                                  />
+                                </div>
                               </div>
                             </div>
-                            <div className={`w-full h-[300px]`} hidden={startIn <= 0}></div>
-                            <div hidden={startIn > 0}>
-                              <CountdownModalDialog
-                                endTime={endTime}
-                                startTime={startTime}
-                                startIn={startIn}
-                                setstartIn={setstartIn}
-                                shouldStart={shouldStart}
-                                setshouldStart={setshouldStart}
-                              />
+                            <div
+                              className={`w-full h-[350px] mt-10 relative flex justify-center items-center ${shouldStart <= 0 && 'hidden'}`}
+                            >
+                              <div className="text gap-5">
+                                <div className="text flex justify-center">
+                                  <TimeoutComponent
+                                    more={true}
+                                    text={'New session Starts in:'}
+                                    className="text-5xl text-[#4691c5]"
+                                    endTime={endTime}
+                                    startTime={startTime}
+                                    startIn={startIn}
+                                    setstartIn={setstartIn}
+                                    shouldStart={shouldStart}
+                                    setshouldStart={setshouldStart}
+                                  />
+                                </div>
+                                <div className="text mt-10">
+                                  <p className="text flex justify-center mb-2">You can place your order now</p>
+                                  <div className="text flex justify-center">
+                                    <VirtualPlaceOrderWalletModal
+                                      id={id}
+                                      state={location?.state?.symbol}
+                                      text="Buy"
+                                      type={'buy'}
+                                      dissable={shouldStart}
+                                      setWinning={setWinning}
+                                      shouldStart={shouldStart}
+                                      data={stockAllOrders}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className={`w-full relative flex justify-center items-center ${shouldStart > 0 && 'hidden'}`}
+                            >
                               <VirtualStockChart
                                 setStockPercentage={setStockPercentage}
                                 shouldStart={shouldStart}
@@ -244,6 +271,8 @@ const VirtualStockDetails = () => {
                                 setstartTime={setstartTime}
                                 setIsRunning={setIsRunning}
                                 setshouldStart={setshouldStart}
+                                data={data}
+                                setData={setData}
                               />
                             </div>
                           </div>
@@ -303,7 +332,7 @@ const VirtualStockDetails = () => {
                                 key="orders"
                                 title={
                                   <div className="flex items-center space-x-2">
-                                    <span>Orders</span>
+                                    <span>My Orders</span>
                                   </div>
                                 }
                               >
@@ -368,7 +397,7 @@ const VirtualStockDetails = () => {
                                     </>
                                   )}
                                   <div className="text-end  ">
-                                    <ListOfOrdersModalDialog data={stockAllOrders} />
+                                    <ListOfOrdersModalDialog setWinning={setWinning} data={stockAllOrders} />
                                   </div>
                                 </div>
                               </Tab>
@@ -380,7 +409,7 @@ const VirtualStockDetails = () => {
                         </Card>
                       </div>
                     </div>
-                    <div className="mt-28 text relative">
+                    <div className="mt- text relative">
                       <VirtualStockSocket
                         endTime={endTime}
                         startTime={startTime}
@@ -388,11 +417,12 @@ const VirtualStockDetails = () => {
                         setstartIn={setstartIn}
                         shouldStart={shouldStart}
                         setshouldStart={setshouldStart}
+                        stockWinners={stockWinners}
                       />
                     </div>
                   </div>
                 </div>
-              )}
+              ))}
         </>
       )}
       <VirtualStockTradeMarquee />

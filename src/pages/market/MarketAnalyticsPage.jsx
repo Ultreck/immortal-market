@@ -82,7 +82,7 @@ const MarketAnalyticsPage = () => {
     <>
       <MarketNavbar />
       <div className="container">
-        <MarketNav />
+        {/* <MarketNav /> */}
         <div className="gap-8 lg:grid lg:grid-cols-[1fr_350px] mt-10">
           <div className="w-full overflow-hidden">
             <Card className="mb-6 w-full overflow-visible rounded-2xl border px-6 py-6 pb-8 shadow dark:border-0 dark:shadow-none md:px-8">

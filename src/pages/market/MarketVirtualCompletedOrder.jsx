@@ -16,10 +16,13 @@ const MarketVirtualCompletedOrder = ({ shouldStart, setWinning, data}) => {
                 <div>
                   <div className="flex justify-between items-start">
                     <div>
-                      <h2 className="text-xl  font-semibold text-gray-400">{order.stock.name}</h2>
+                      <h2 className="text-xl  font-semibold text-gray-400">{order.stockData.name}</h2>
                       <p className="text-sm text-gray-300 mt-1">
-                        {order.stock.symbol} • {order.stock.exchange} • {order.stock.currency}
+                        {order.stockData.symbol} • {order.stockData.exchange} • {order.stockData.currency}
                       </p>
+                    </div>
+                    <div>
+                    <p>{order?.sessionData.sessionType}</p>
                     </div>
                     <div className="text-right">
                       <p className="text-gray-400 text-sm">

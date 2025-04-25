@@ -4,11 +4,15 @@ import countries from '@/lib/countries.js';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import TimeoutComponent from '@/hooks/use-timeOut';
+import { useGetWalletBalance } from '@/api/ai-chat';
+import { formatCurrency } from '@/lib/utils';
 
 const code = 'NG';
 
-const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstartIn, setshouldStart }) => {
+const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstartIn, setshouldStart, stockWinners }) => {
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
+    const { data: walletBalance } = useGetWalletBalance();
+    
 
   return (
     <div className="sticky top-20">
@@ -52,8 +56,9 @@ const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstar
           </div>
         </CardBody>
       </Card>
-      <Card>
+      <Card className='mt-5'>
         <CardBody>
+          {!shouldStart ? 
           <div className="text">
             <TimeoutComponent
               text={'Session ends in:'}
@@ -65,7 +70,12 @@ const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstar
               shouldStart={shouldStart}
               setshouldStart={setshouldStart}
             />
+          </div>:
+          <div className="text-center py-5">
+            <p className="text-gray-300">Wallet Balance</p>
+            <h2 className="text-green-600 font-semibold text-4xl">{formatCurrency(walletBalance?.balance)}</h2>
           </div>
+          }
         </CardBody>
       </Card>
     </div>

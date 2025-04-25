@@ -7,7 +7,7 @@ import TimeoutComponent from '@/hooks/use-timeOut';
 const CountdownModalDialog = ({ endTime, shouldStart, startTime, startIn, setstartIn, setshouldStart }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const timeFrame = JSON.parse(localStorage.getItem('time-function'));
-  const session = timeFrame.split('-')[0];
+  const session = timeFrame?.split('-')[0];
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,9 +39,9 @@ const CountdownModalDialog = ({ endTime, shouldStart, startTime, startIn, setsta
                 <div className="text">
                   <div className="text-center">{`Your ${session} ${session > 1 ? 'minutes' : 'minute'} session has ended`}</div>
                   <div className="text-center">
-                  <Button color="" className="text-sky-500 text-center" onPress={() => navigate(`/markets/virtuals`)}>
-                    <IoChevronBackSharp /> try new session
-                  </Button>
+                    <Button color="" className="text-sky-500 text-center" onPress={() => navigate(`/markets/virtuals`)}>
+                      <IoChevronBackSharp /> try new session
+                    </Button>
                   </div>
                 </div>
               </ModalHeader>
@@ -68,3 +68,4 @@ const CountdownModalDialog = ({ endTime, shouldStart, startTime, startIn, setsta
 };
 
 export default CountdownModalDialog;
+

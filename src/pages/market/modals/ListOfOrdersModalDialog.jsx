@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Drawer, DrawerContent, DrawerHeader, DrawerBody, Button, useDisclosure, Tabs, Tab, Chip } from '@heroui/react';
 import PlaceOrder from './PlaceOrder';
 
-const ListOfOrdersModalDialog = ({ data, type = '' }) => {
+const ListOfOrdersModalDialog = ({ data, setWinning, type = '' }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [tab, seTtab] = useState('current-orders');
   return (
@@ -77,7 +77,7 @@ const ListOfOrdersModalDialog = ({ data, type = '' }) => {
                         <p className="text-2xl font-bold">N34.22</p>
                         <p className="text-sm">22,000 Units</p>
                       </div>
-                      <PlaceOrder type="sell" text="Sell" radius="full" color="">
+                      <PlaceOrder setWinning={setWinning} type="sell" text="Sell" radius="full" color="">
                         View
                       </PlaceOrder>
                     </div>
@@ -93,7 +93,7 @@ const ListOfOrdersModalDialog = ({ data, type = '' }) => {
                         <p className="text-2xl font-bold">N34.22</p>
                         <p className="text-sm">22,000 Units</p>
                       </div>
-                      <PlaceOrder type="sell" text="Sell" radius="full" color="">
+                      <PlaceOrder setWinning={setWinning} type="sell" text="Sell" radius="full" color="">
                         View
                       </PlaceOrder>
                     </div>

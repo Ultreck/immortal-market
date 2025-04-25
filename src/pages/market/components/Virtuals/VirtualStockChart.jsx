@@ -1,20 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import {
-  Area,
-  AreaChart,
-  Bar,
-  CartesianGrid,
-  ComposedChart,
-  Line,
-  LineChart,
-  Pie,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { useEffect, useRef } from 'react';
+import { Area, Bar, CartesianGrid, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTernaryDarkMode } from 'usehooks-ts';
-import { io } from 'socket.io-client';
 import { useGetCurrentPrice } from '@/store/bot';
 import useSocket from '@/hooks/use-socket';
 // import { useCreateVirtualStockDetails } from '@/api/ai-chat';
@@ -59,15 +45,18 @@ const VirtualStockChart = ({
   setshouldStart,
   shouldStart,
   setendTime,
-  startTime,
-  setstartTime,
   setIsRunning,
-  setStockPercentage
+  setStockPercentage,
+  dashboardTimeFrame,
+  data,
+  setData,
 }) => {
   const socket = useSocket();
-  const [data, setData] = useState([]);
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
   const { isDarkMode } = useTernaryDarkMode();
+
+  const currentSessionId = data[0]?._id;
+
   useEffect(() => {
     if (!socket) return;
     const getSessionFunct = () => {
@@ -78,16 +67,17 @@ const VirtualStockChart = ({
       if (!msg.isRunning && !shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(true);
-        // handleGetVirtualDashboardData()
       } else if (msg.isRunning && shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(false);
-        // setstartTime(msg.startTime);
       }
       const newPrice = limitDecimals(msg?.price, 4);
       const lastPrice = currentPrice?.price;
       setIsRunning(msg?.isRunning);
-      if (msg?.isRunning) {
+      // console.log(msg);
+      // console.log(chartDatas);
+
+      if (msg?.isRunning && msg?._id === chartDatas?._id) {
         setData((prev) => {
           const newData = Array.isArray(prev) ? prev : [];
           if (newPrice === lastPrice || !msg.isRunning || !msg.price) {
@@ -97,7 +87,6 @@ const VirtualStockChart = ({
             ...msg,
             price: limitDecimals(msg?.price, 4),
             sprice: limitDecimals(msg?.price, 4) / 5,
-            close: limitDecimals(msg?.close, 4),
             date: dateFormatter(msg?.updatedAt),
             name: newData?.length + 1,
             time: timeFormatter(msg?.updatedAt),
@@ -119,7 +108,13 @@ const VirtualStockChart = ({
     };
   }, [socket, chartDatas]);
 
-  const initialPrice = data[0]?.price;
+  useEffect(() => {
+    if (shouldStart) {
+      setData([]);
+    }
+  }, [dashboardTimeFrame, shouldStart, currentPrice]);
+
+  const initialPrice = currentPrice?.close;
   const nowPrice = currentPrice?.price;
   if (initialPrice && nowPrice) {
     const diffPrice = nowPrice - initialPrice;
@@ -130,13 +125,38 @@ const VirtualStockChart = ({
   const maxDataLength = chartDatas?.noOfRunning;
   const currentLength = data.length;
 
+  const newDSocketData = {
+    price: limitDecimals(currentPrice?.close, 4),
+    sprice: limitDecimals(currentPrice?.close, 4) / 5,
+    name: currentPrice?.noOfRuned,
+  };
+
   let paddedData;
   if (data) {
     if (data?.length > 0) {
-      const lengthDiff = Math.max(0, maxDataLength - currentLength);
-      paddedData = [...data, ...Array(lengthDiff).fill(null)];
+      const lengthDiff = Math.max(0, maxDataLength - (currentLength + chartDatas?.noOfRuned));
+      paddedData = [...Array(chartDatas?.noOfRuned).fill(newDSocketData), ...data, ...Array(lengthDiff).fill(null)];
     }
   }
+  const constructedData = paddedData?.map((con, ind) => {
+    return { ...con, x_base: con?.price ? ind + 1 : null };
+  });
+
+  // This part is to calculate the min and max values for the Y-axis
+  const allValues = data?.flatMap((d) => [d.price, d.sprice]);
+  const min = Math.max(...allValues);
+  const max = Math.max(...allValues);
+  const range = max - min || 1;
+  const buffer = range * 0.1;
+  const domainMax = Math.floor(max + buffer);
+
+  // Auto scroll to the right when data changes
+  const scrollContainerRef = useRef(null);
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+    }
+  }, [data]);
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload?.length) {
@@ -161,47 +181,56 @@ const VirtualStockChart = ({
   };
 
   return (
-    <div style={{ width: '100%', height: 300 }}>
-      <ResponsiveContainer width={'100%'} height={'100%'}>
-        <ComposedChart data={paddedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
-          <defs>
-            <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis
-            dataKey="name"
-            domain={[0, maxDataLength - 1]}
-            tickSize={5}
-            strokeOpacity={0.5}
-            interval="preserveEnd"
-          />
-          <YAxis domain={['auto', 'auto']} tickSize={3} strokeOpacity={0.5} orientation="right" />
-          <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
-          <Tooltip content={<CustomTooltip />} />
-          <Area
-            dataKey="price"
-            // dot={(props) => <customDot {...props} data={paddedData} />}
-            // dot={{
-            //   r: 4,
-            //   fill: "#4691c5",
-            //   stroke: "#fff",
-            //   strokeWidth: 2,
-            //   display: (props) => {
-            //     return props.index === props.data?.length - 1 ? 'block' : 'none';
-            //   }
-            // }}
-            type="monotone"
-            isAnimationActive={false}
-            stroke="#4691c5"
-            fill="url(#priceGradient)"
-          />
-          <Bar dataKey="sprice" barSize={10} fill="orange" />
-        </ComposedChart>
-      </ResponsiveContainer>
+    <div ref={scrollContainerRef} className="overflow-x-auto w-full">
+      <div style={{ width: '100%', height: '300px' }}>
+        <ResponsiveContainer width={'100%'} height={300}>
+          <ComposedChart data={constructedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+            <defs>
+              <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <XAxis
+              dataKey="x_base"
+              domain={[0, maxDataLength - 1]}
+              tickSize={5}
+              strokeOpacity={0.5}
+              interval="preserveEnd"
+            />
+            <YAxis
+              domain={[0, domainMax]}
+              tickFormatter={(value) => Math.round(value)}
+              tickSize={3}
+              strokeOpacity={0.5}
+              orientation="right"
+            />
+            <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
+            <Tooltip content={<CustomTooltip />} />
+            <Area
+              dataKey="price"
+              // dot={(props) => <customDot {...props} data={paddedData} />}
+              // dot={{
+              //   r: 4,
+              //   fill: "#4691c5",
+              //   stroke: "#fff",
+              //   strokeWidth: 2,
+              //   display: (props) => {
+              //     return props.index === props.data?.length - 1 ? 'block' : 'none';
+              //   }
+              // }}
+              type="monotone"
+              isAnimationActive={false}
+              stroke="#4691c5"
+              fill="url(#priceGradient)"
+            />
+            <Bar dataKey="sprice" barSize={10} fill="orange" />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
 
 export default VirtualStockChart;
+
