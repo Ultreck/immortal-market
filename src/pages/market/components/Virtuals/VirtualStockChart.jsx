@@ -71,10 +71,10 @@ const VirtualStockChart = ({
   useEffect(() => {
     if (!socket) return;
     const getSessionFunct = () => {
+      console.log("getSession");
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     };
     const handleNewSession = (msg) => {
-      
       if (!msg.isRunning && !shouldStart) {
         setendTime(msg.endTime);
         setshouldStart(true);

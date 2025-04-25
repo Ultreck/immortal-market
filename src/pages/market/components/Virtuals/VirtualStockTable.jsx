@@ -55,7 +55,6 @@ const VirtualStockTable = ({ isStocksLoading, allStocks }) => {
                 onSlideChange={() => console.log('slide change')}
               > */}
                 {countries['africa'].map((c, i) => {
-                  console.log(c);
                   (
                   // <SwiperSlide key={c} virtualIndex={i}>
                   <div key={i}>
