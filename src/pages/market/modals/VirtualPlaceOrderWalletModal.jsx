@@ -155,16 +155,6 @@ const VirtualPlaceOrderWalletModal = ({ id, text, type, state, setWinning, shoul
             <DrawerBody>
               <div className="flex w-full flex-col">
                 <Form className="w-full grid" onSubmit={onSubmit}>
-                  {type === 'sell' &&
-                  <div className="grid relative grid-cols-3 my-5">
-                    <p className="text flex items-center">Sell percentage</p>
-                   <div className="text-center grid grid-cols-4 space-x-1 h-10 col-span-2">
-                    {[{name: '25%', value: 0.25, radius: 'rounded-tl-lg rounded-bl-lg rounded-none'}, {name: '50%', value: 0.50, radius: 'rounded-none'}, {name: '75%', value: 0.75, radius: 'rounded-none'}, {name: '100%', value: 1.00, radius: 'rounded-tr-lg rounded-br-lg rounded-none'}].map((p, i) => {
-                     return <div onClick={() => setPToSell(p.value)} key={i} className={` flex items-center justify-center cursor-pointer ${ p.value <= pToSell ? 'bg-green-600 text-white' : 'bg-default-100 text-gray-500'} ${p.radius}`}>{p.name}</div>
-                    })}
-                   </div>
-                  </div>
-                  }
                   <div className="grid relative grid-cols-3 my-auto">
                     <p className="text flex items-center">How much</p>
                     <Input
@@ -184,11 +174,21 @@ const VirtualPlaceOrderWalletModal = ({ id, text, type, state, setWinning, shoul
                       name="amount"
                       placeholder="0.00"
                       type="number"
-                    />
+                      />
                   </div>
                   <button className="col-12" onClick={() => setMax(!max)} hidden={type === 'buy'}>
                     <p className="text-right">max</p>
                   </button>
+                    {type === 'sell' &&
+                    <div className="grid relative grid-cols-3 my-2">
+                      <p className="text flex items-center">Sell percentage</p>
+                     <div className="text-center grid grid-cols-4 space-x-1 h-10 col-span-2">
+                      {[{name: '25%', value: 0.25, radius: 'rounded-tl-lg rounded-bl-lg rounded-none'}, {name: '50%', value: 0.50, radius: 'rounded-none'}, {name: '75%', value: 0.75, radius: 'rounded-none'}, {name: '100%', value: 1.00, radius: 'rounded-tr-lg rounded-br-lg rounded-none'}].map((p, i) => {
+                       return <div onClick={() => setPToSell(p.value)} key={i} className={` flex items-center justify-center cursor-pointer ${ p.value <= pToSell ? 'bg-gray-300 text-black' : 'bg-default-100 text-gray-500'} ${p.radius}`}>{p.name}</div>
+                      })}
+                     </div>
+                    </div>
+                    }
                   <div className="grid relative mt-5 grid-cols-3 my-auto">
                     <p className="text flex items-center">Market price</p>
                     <Input
@@ -205,7 +205,7 @@ const VirtualPlaceOrderWalletModal = ({ id, text, type, state, setWinning, shoul
                       value={(data.price)}
                       placeholder="0.00"
                       type="number"
-                    />
+                      />
                   </div>
                   <div className="grid relative mt-5 grid-cols-3 my-auto" hidden={type == 'sell'}>
                     <p className="text flex items-center">Quantity</p>
