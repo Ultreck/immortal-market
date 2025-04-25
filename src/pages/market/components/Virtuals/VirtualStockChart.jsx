@@ -90,8 +90,9 @@ const VirtualStockChart = ({
       const lastPrice = currentPrice?.price;
       setIsRunning(msg?.isRunning);
       // console.log(msg);
+      // console.log(chartDatas);
 
-      if (msg?.isRunning) {
+      if (msg?.isRunning && msg?._id === chartDatas?._id) {
         setData((prev) => {
           const newData = Array.isArray(prev) ? prev : [];
           if (newPrice === lastPrice || !msg.isRunning || !msg.price) {
@@ -123,12 +124,12 @@ const VirtualStockChart = ({
   }, [socket, chartDatas]);
 
   useEffect(() => {
-    if (currentSessionId !== currentPrice?._id) {
+    if (shouldStart) {
       setData([]);
     }
-  }, [dashboardTimeFrame, currentPrice, currentSessionId, chartDatas]);
+  }, [dashboardTimeFrame, shouldStart, currentPrice]);
 
-  const initialPrice = data[0]?.price;
+  const initialPrice = currentPrice?.close;
   const nowPrice = currentPrice?.price;
   if (initialPrice && nowPrice) {
     const diffPrice = nowPrice - initialPrice;
@@ -156,12 +157,21 @@ const VirtualStockChart = ({
     return { ...con, x_base: con?.price ? ind + 1 : null };
   });
 
+  // This part is to calculate the min and max values for the Y-axis
   const allValues = data?.flatMap((d) => [d.price, d.sprice]);
   const min = Math.max(...allValues);
   const max = Math.max(...allValues);
   const range = max - min || 1;
-  const buffer = range * 0.2; 
-  const domainMax = max + buffer;
+  const buffer = range * 0.1;
+  const domainMax = Math.floor(max + buffer);
+
+  // Auto scroll to the right when data changes
+  const scrollContainerRef = useRef(null);
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+    }
+  }, [data]);
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload?.length) {
@@ -186,45 +196,53 @@ const VirtualStockChart = ({
   };
 
   return (
-    <div style={{ width: '100%', height: 300 }}>
-      <ResponsiveContainer width={'100%'} height={'100%'}>
-        <ComposedChart data={constructedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
-          <defs>
-            <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis
-            dataKey="x_base"
-            domain={[0, maxDataLength - 1]}
-            tickSize={5}
-            strokeOpacity={0.5}
-            interval="preserveEnd"
-          />
-          <YAxis domain={[0, domainMax]} tickSize={3} strokeOpacity={0.5} orientation="right" />
-          <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
-          <Tooltip content={<CustomTooltip />} />
-          <Area
-            dataKey="price"
-            // dot={(props) => <customDot {...props} data={paddedData} />}
-            // dot={{
-            //   r: 4,
-            //   fill: "#4691c5",
-            //   stroke: "#fff",
-            //   strokeWidth: 2,
-            //   display: (props) => {
-            //     return props.index === props.data?.length - 1 ? 'block' : 'none';
-            //   }
-            // }}
-            type="monotone"
-            isAnimationActive={false}
-            stroke="#4691c5"
-            fill="url(#priceGradient)"
-          />
-          <Bar dataKey="sprice" barSize={10} fill="orange" />
-        </ComposedChart>
-      </ResponsiveContainer>
+    <div ref={scrollContainerRef} className="overflow-x-auto w-full">
+      <div style={{ width: '100%', height: '300px' }}>
+        <ResponsiveContainer width={'100%'} height={300}>
+          <ComposedChart data={constructedData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+            <defs>
+              <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#4691c5" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#4691c5" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <XAxis
+              dataKey="x_base"
+              domain={[0, maxDataLength - 1]}
+              tickSize={5}
+              strokeOpacity={0.5}
+              interval="preserveEnd"
+            />
+            <YAxis
+              domain={[0, domainMax]}
+              tickFormatter={(value) => Math.round(value)}
+              tickSize={3}
+              strokeOpacity={0.5}
+              orientation="right"
+            />
+            <CartesianGrid strokeOpacity={isDarkMode && 'dark' ? 0.1 : 0.5} vertical={false} />
+            <Tooltip content={<CustomTooltip />} />
+            <Area
+              dataKey="price"
+              // dot={(props) => <customDot {...props} data={paddedData} />}
+              // dot={{
+              //   r: 4,
+              //   fill: "#4691c5",
+              //   stroke: "#fff",
+              //   strokeWidth: 2,
+              //   display: (props) => {
+              //     return props.index === props.data?.length - 1 ? 'block' : 'none';
+              //   }
+              // }}
+              type="monotone"
+              isAnimationActive={false}
+              stroke="#4691c5"
+              fill="url(#priceGradient)"
+            />
+            <Bar dataKey="sprice" barSize={10} fill="orange" />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

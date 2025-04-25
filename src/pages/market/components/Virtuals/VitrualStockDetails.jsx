@@ -204,23 +204,24 @@ const VirtualStockDetails = () => {
                                     <VirtualPlaceOrderWalletModal
                                       id={id}
                                       state={location?.state?.symbol}
-                                      text="Buy"
+                                      text="Place order"
                                       type={'buy'}
                                       dissable={shouldStart}
                                       setWinning={setWinning}
                                       shouldStart={shouldStart}
                                       data={stockAllOrders}
-                                    />
+                                      />
                                   </div>
                                 <div>
-                                  <PlaceOrder
+                                  <VirtualPlaceOrderWalletModal
                                     id={id}
                                     state={location?.state?.symbol}
-                                    text="Sell"
+                                    text="Sell order"
                                     type={'sell'}
                                     dissable={shouldStart}
                                     setWinning={setWinning}
                                     shouldStart={shouldStart}
+                                    data={stockAllOrders}
                                   />
                                 </div>
                               </div>

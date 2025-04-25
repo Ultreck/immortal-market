@@ -59,19 +59,16 @@ const MarketVirtualPage = () => {
   useEffect(() => {
     handleFetchStocks();
     handleGetVirtualDashboardData();
-    setData([]);
     setDashboardTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [countryName, homeMarket, dashboardTimeFrame]);
 
   useEffect(() => {
     handleGetVirtualDashboardData();
-    setData([]);
   }, []);
 
   useEffect(() => {
     if (shouldStart === false) {
       handleGetVirtualDashboardData();
-      setData([]);
     }
   }, [shouldStart]);
 
