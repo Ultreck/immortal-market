@@ -28,19 +28,21 @@ const MarketGamingPage = () => {
     <>
       <MarketNavbar />
       <div className="container">
-        <div className="flex flex-wrap gap-6">
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              className={cn('opacity-70 cursor-pointer', selectedCategory === category && 'opacity-100 font-bold')}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category}
-            </div>
-          ))}
+        <div className="sticky top-0 z-10 py-4">
+          <div className="flex flex-wrap gap-6">
+            {categories.map((category, index) => (
+              <div
+                key={index}
+                className={cn('opacity-70 cursor-pointer', selectedCategory === category && 'opacity-100 font-bold')}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-[1fr_3.5fr] gap-10 mt-10 items-start">
-          <div>
+        <div className="grid grid-cols-[1fr_3.5fr] gap-10 mt-4">
+          <div className="sticky top-[120px] h-[calc(100vh-120px)]">
             <div className="flex items-center gap-2">
               <Input
                 startContent={<IconSearch size={18} className="opacity-50" />}
@@ -48,7 +50,7 @@ const MarketGamingPage = () => {
                 placeholder="Search..."
               />
             </div>
-            <div className="mt-4 space-y-1">
+            <div className="mt-4 space-y-1 overflow-y-auto">
               {categories.map((category, index) => (
                 <div
                   key={index}
@@ -63,7 +65,7 @@ const MarketGamingPage = () => {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4 overflow-y-auto h-[calc(100vh-120px)]">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((m) => (
               <Link to={`/markets/gaming/${m}`} key={m} onClick={() => console.log('error')}>
                 <Card className="card-shadow px-8 py-6 cursor-pointer">
@@ -80,3 +82,4 @@ const MarketGamingPage = () => {
 };
 
 export default MarketGamingPage;
+
