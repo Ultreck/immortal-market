@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import http from '@/lib/http.js';
 
-// AI chart APIs endpoints
 export const useGetAIChats = () => {
   return useQuery({
     queryKey: ['chats', 'all', 'bots'],
