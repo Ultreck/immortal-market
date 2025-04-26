@@ -10,7 +10,7 @@ const linkItems = [
   { name: 'Crypto', href: '/markets/analytics' },
   { name: 'My Orders', href: '/markets/analytics' },
   // { name: 'Virtuals', href: '/markets/virtuals' },
-  // { name: 'Gaming', href: '/markets/gaming' },
+  { name: 'Gaming', href: '/markets/gaming' },
 ];
 
 const MarketNavbar = () => {

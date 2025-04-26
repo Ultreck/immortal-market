@@ -28,28 +28,15 @@ const VirtualPlaceOrderWalletModal = ({ id, text, type, state, setWinning, shoul
   });
 
   useEffect(() => {
+
     setData({
       ...data,
       price: shouldStart? currentPrice?.close : currentPrice?.price,
       quantity: (currentPrice?.price / data?.amount).toFixed(2),
       amount: max ? totalOrder : data.amount,
     });
-    // console.log(data);
-    
-    const total = Order.reduce((sum, item) => {
-      return sum + (item?.quantity - item?.quantitySold) * currentPrice?.price;
-    }, 0);
-    settotalOrders(total);
-
-    const boughtOrderPrice = Order.reduce((sum, item) => {
-      return sum + (item?.quantity - item?.quantitySold) * item.initialPrice;
-    }, 0);
-    const currentOrderPrice = Order.reduce((sum, item) => {
-      return sum + (item?.quantity - item?.quantitySold) * currentPrice?.price;
-    }, 0);
-    const change = ((currentOrderPrice - boughtOrderPrice) / boughtOrderPrice) * 100;
+    const change = ((data.price - Order?.initialPrice) / Order?.initialPrice) * 100;
     setWinning(change ? change.toFixed(2) : 0);
-
     if (shouldStart) {
       setWinning(0);
       settotalOrders(0);
@@ -71,14 +58,13 @@ const VirtualPlaceOrderWalletModal = ({ id, text, type, state, setWinning, shoul
     const res = await MyOrder({
       page: 1,
       status: [false],
+      stockId:id,
       sessionId: currentPrice?._id,
     });
     if (res) {
-      setOrders(res.data.order);
-      const total = res.data.order.reduce((sum, item) => {
-        return sum + (item.quantity - item.quantitySold) * currentPrice?.price;
-      }, 0);
-      settotalOrders(total);
+      setOrders(res?.data?.order[0]);
+      const investment = res?.data?.order[0]?.amount
+      settotalOrders(investment);
     }
   };
   const onSubmit = async () => {
@@ -95,20 +81,19 @@ const VirtualPlaceOrderWalletModal = ({ id, text, type, state, setWinning, shoul
         // console.log(res);
       } else {
         const sellData = {
-          sessionId: currentPrice?._id,
-          stockId: id,
-          amount: data.amount,
+          id: Order._id,
           price: data.price,
-          quantity: data.quantity,
+          sellPercentage: pToSell,
         };
         const res = await sellOrder(sellData);
-        // console.log(res);
+        setOrders(res.data.order)
       }
       myOrder();
     } catch (error) {
       console.log('Something is wrong somewhere', error);
     }
-  };  
+  };
+  
   return (
     <>
       <Button onPress={onOpen} color={type === 'buy' ? 'primary' : 'danger'} radius="full" className="w-32">
@@ -145,7 +130,7 @@ const VirtualPlaceOrderWalletModal = ({ id, text, type, state, setWinning, shoul
                     </>
                   ) : (
                     <>
-                      Total order <strong>₦{totalOrder?.toFixed(2)}</strong>
+                      Total investment <strong>₦{totalOrder?.toFixed(2)}</strong>
                     </>
                   )}
                 </div>

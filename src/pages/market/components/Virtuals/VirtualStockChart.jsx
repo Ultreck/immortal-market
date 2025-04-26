@@ -1,20 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import {
-  Area,
-  AreaChart,
-  Bar,
-  CartesianGrid,
-  ComposedChart,
-  Line,
-  LineChart,
-  Pie,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { useEffect, useRef } from 'react';
+import { Area, Bar, CartesianGrid, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTernaryDarkMode } from 'usehooks-ts';
-import { io } from 'socket.io-client';
 import { useGetCurrentPrice } from '@/store/bot';
 import useSocket from '@/hooks/use-socket';
 // import { useCreateVirtualStockDetails } from '@/api/ai-chat';
@@ -59,8 +45,6 @@ const VirtualStockChart = ({
   setshouldStart,
   shouldStart,
   setendTime,
-  startTime,
-  setstartTime,
   setIsRunning,
   setStockPercentage,
   dashboardTimeFrame,
@@ -77,6 +61,7 @@ const VirtualStockChart = ({
   useEffect(() => {
     if (!socket) return;
     const getSessionFunct = () => {
+      console.log("getSession");
       socket.emit('getSession', { stock: chartDatas?.stock?._id, session: chartDatas?._id });
     };
     const handleNewSession = (msg) => {
@@ -249,3 +234,4 @@ const VirtualStockChart = ({
 };
 
 export default VirtualStockChart;
+
