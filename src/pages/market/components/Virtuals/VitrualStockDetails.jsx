@@ -78,20 +78,31 @@ const VirtualStockDetails = () => {
     handleAllStockOrders();
     setTimeFrame(JSON.parse(window.localStorage.getItem('time-function')));
   }, [timeFrame, id]);
-
+  
   useEffect(() => {
     handleGetStockDetails();
     handleFetchStocks();
     handleGetStockOrders();
+    handleAllStockOrders();
   }, []);
-
+  
   useEffect(() => {
     if (shouldStart === false) {
       handleGetStockDetails();
       handleFetchStocks();
       handleGetStockOrders();
+      handleAllStockOrders();
     }
   }, [shouldStart]);
+  
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      handleGetStockOrders();
+    }, 1000);
+
+    return () => clearInterval(timeInterval);
+  }, []);
+
 
   const handleFetchStocks = async () => {
     const payload = {
@@ -101,13 +112,12 @@ const VirtualStockDetails = () => {
     const res = await createVirtualStocks(payload);
     setStocks(res?.data?.data);
   };
-
   const handleGetStockOrders = async () => {
     try {
-      if (chartDatas?.stock?._id) {
+      if (chartDatas?.stock?._id ) {
         let stockOrdersPayload = {
-          stock: chartDatas?.stock?._id,
-          sessionType: timeFrame,
+          stockId: chartDatas?.stock?._id,
+          sessionId: chartDatas?._id,
         };
         const res = await getStockWinners(stockOrdersPayload);
         setStockWinners(res?.data?.data);
@@ -140,7 +150,7 @@ const VirtualStockDetails = () => {
           page: 1,
           status: [false, true],
         };
-        const res = await getStockAllOrders(allOrderData);
+        const res = await getStockAllOrders(allOrderData);        
       }
     } catch (error) {
       console.log(error);
@@ -273,6 +283,7 @@ const VirtualStockDetails = () => {
                                 setshouldStart={setshouldStart}
                                 data={data}
                                 setData={setData}
+                                id={id}
                               />
                             </div>
                           </div>

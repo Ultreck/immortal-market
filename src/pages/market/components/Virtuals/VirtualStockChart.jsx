@@ -66,6 +66,7 @@ const VirtualStockChart = ({
   dashboardTimeFrame,
   data,
   setData,
+  id
 }) => {
   const socket = useSocket();
   const { setCurrentPrice, currentPrice } = useGetCurrentPrice();
@@ -121,13 +122,13 @@ const VirtualStockChart = ({
       socket.off('priceUpdate', getSessionFunct);
       socket.off('newSession', handleNewSession);
     };
-  }, [socket, chartDatas]);
+  }, [socket, chartDatas, id]);
 
   useEffect(() => {
     if (shouldStart) {
       setData([]);
     }
-  }, [dashboardTimeFrame, shouldStart, currentPrice]);
+  }, [dashboardTimeFrame, shouldStart, currentPrice, id]);
 
   const initialPrice = currentPrice?.close;
   const nowPrice = currentPrice?.price;

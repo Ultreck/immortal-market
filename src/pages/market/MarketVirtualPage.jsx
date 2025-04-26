@@ -36,11 +36,13 @@ const MarketVirtualPage = () => {
   const { setHomeMarket, homeMarket } = useGetMarkets();
   const [isRunning, setIsRunning] = useState(true);
   const [stockPercentage, setStockPercentage] = useState(0);
-  // const [startIn, setstartIn] = useState(0);
-  // const [shouldStart, setshouldStart] = useState(false);
-  // const [endTime, setendTime] = useState(new Date());
 
-  const [countryName] = useState(JSON.parse(window.localStorage.getItem('country')) || 'Nigeria');
+  const [countryName] = useState(() => {
+    if(typeof window !== 'undefined'){
+      return JSON.parse(window.localStorage.getItem('country')) || 'Nigeria';
+    }
+    return 'Nigeria';
+  });
   const { mutateAsync: createVirtualStocks, isPending: isStocksLoading } = useCreateVirtualStock({});
   const { mutateAsync: getVirtualDashboard } = useGetStocksPerCountry();
   const { mutateAsync: getStockDetails } = useCreateVirtualStockDetails();
@@ -314,8 +316,8 @@ const MarketVirtualPage = () => {
                         {/* <p className="text-xl font-semibold my-2">Recommended stocks: </p> */}
                         <div className="text grid grid-cols-2 gap-5 ">
                           {dashData?.activeCompanies?.map((item, index) => (
-                            <Card className="p-2">
-                              <div key={index} className="flex items-center gap-3">
+                            <Card key={index} className="p-2">
+                              <div className="flex items-center gap-3">
                                 <Avatar
                                   className="h-[30px] w-[30px] p-2 font-bold bg-success-100/50 text-green-600"
                                   icon={<IconArrowUp size="10" />}

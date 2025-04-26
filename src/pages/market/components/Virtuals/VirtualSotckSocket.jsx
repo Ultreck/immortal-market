@@ -12,6 +12,11 @@ const code = 'NG';
 const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstartIn, setshouldStart, stockWinners }) => {
   const country = [...countries.africa, ...countries.global].find((c) => c.code === code);
     const { data: walletBalance } = useGetWalletBalance();
+    let sumData = 0;
+    if(stockWinners?.length){
+      sumData = stockWinners?.reduce((acc, obj) => acc + obj?.totalInvestment, 0);
+    }
+    console.log(sumData);
     
 
   return (
@@ -22,38 +27,12 @@ const VirtualStockSocket = ({  endTime, shouldStart, startTime, startIn, setstar
           <h3 className="text">Winnings</h3>
         </CardHeader>
         <CardBody className="px-4 pt-0 overflow-hidden grid grid-cols-2 gap-2">
-          <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
+          {stockWinners?.map((val, ind) => (
+          <div key={ind} className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
             <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            <p className="text-lg font-bold text-green-600">N34.33</p>
+            <p className="text-lg font-bold text-green-600">{formatCurrency(val?.totalInvestment)}</p>
           </div>
-          <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            <p className="text-lg font-bold text-red-600">N34.33</p>
-          </div>
-          <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            <p className="text-lg font-bold text-green-600">N34.33</p>
-          </div>
-          <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            <p className="text-lg font-bold text-green-600">N34.33</p>
-          </div>
-          <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            <p className="text-lg font-bold text-green-600">N34.33</p>
-          </div>
-          <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            <p className="text-lg font-bold text-green-600">N34.33</p>
-          </div>
-          <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            <p className="text-lg font-bold text-green-600">N34.33</p>
-          </div>
-          <div className="h-11 rounded-full flex pl-1 pr-5 justify-between items-center py-2 border border-default-400">
-            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            <p className="text-lg font-bold text-yellow-600">N34.33</p>
-          </div>
+          ))}
         </CardBody>
       </Card>
       <Card className='mt-5'>

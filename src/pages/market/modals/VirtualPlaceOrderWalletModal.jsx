@@ -108,9 +108,7 @@ const VirtualPlaceOrderWalletModal = ({ id, text, type, state, setWinning, shoul
     } catch (error) {
       console.log('Something is wrong somewhere', error);
     }
-  };
-  console.log(pToSell);
-  
+  };  
   return (
     <>
       <Button onPress={onOpen} color={type === 'buy' ? 'primary' : 'danger'} radius="full" className="w-32">
